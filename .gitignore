@@ -1,0 +1,6 @@
+# Downloads, game files, builds, dumps. Game files are Iron Gate's and must never be committed.
+.cache/
+bin/
+obj/
+*.dll
+.DS_Store

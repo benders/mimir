@@ -1,0 +1,45 @@
+<Project Sdk="Microsoft.NET.Sdk" InitialTargets="ValidateGamePaths">
+
+  <!--
+    BepInEx 5 plugin that dumps Valheim game data to JSON from a headless dedicated server.
+
+    References Iron Gate's assemblies, which must never be committed or redistributed. They come
+    from the server install that scripts/fetch-server.sh downloads; `make plugin` passes the paths:
+
+      dotnet build -c Release -p:ValheimManaged=<server>/valheim_server_Data/Managed -p:BepInExCore=<pack>/BepInEx/core
+  -->
+
+  <PropertyGroup>
+    <TargetFramework>net472</TargetFramework>
+    <LangVersion>latest</LangVersion>
+    <AssemblyName>Mimir.Dumper</AssemblyName>
+    <RootNamespace>Mimir.Dumper</RootNamespace>
+    <Version>0.1.0</Version>
+    <Nullable>disable</Nullable>
+    <ImplicitUsings>disable</ImplicitUsings>
+    <DebugType>none</DebugType>
+    <CopyLocalLockFileAssemblies>false</CopyLocalLockFileAssemblies>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+  </PropertyGroup>
+
+  <Target Name="ValidateGamePaths">
+    <Error Condition="!Exists('$(ValheimManaged)/assembly_valheim.dll')"
+           Text="ValheimManaged='$(ValheimManaged)' has no assembly_valheim.dll. Run `make server` first." />
+    <Error Condition="!Exists('$(BepInExCore)/BepInEx.dll')"
+           Text="BepInExCore='$(BepInExCore)' has no BepInEx.dll. Run `make bepinex` first." />
+  </Target>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.NETFramework.ReferenceAssemblies" Version="1.0.3" PrivateAssets="all" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="BepInEx" HintPath="$(BepInExCore)/BepInEx.dll" Private="false" />
+    <Reference Include="assembly_valheim" HintPath="$(ValheimManaged)/assembly_valheim.dll" Private="false" />
+    <Reference Include="assembly_utils" HintPath="$(ValheimManaged)/assembly_utils.dll" Private="false" />
+    <Reference Include="assembly_guiutils" HintPath="$(ValheimManaged)/assembly_guiutils.dll" Private="false" />
+    <Reference Include="UnityEngine" HintPath="$(ValheimManaged)/UnityEngine.dll" Private="false" />
+    <Reference Include="UnityEngine.CoreModule" HintPath="$(ValheimManaged)/UnityEngine.CoreModule.dll" Private="false" />
+  </ItemGroup>
+
+</Project>
