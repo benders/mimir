@@ -21,7 +21,12 @@ verify.py        invariant checks on the raw dump + icons
 normalize.py     raw dump -> data/*.json (compact, English text resolved, committed)
 verify_data.py   counts, referential integrity, known content in data/ (+ icons)
 build-site.py    data/ + icons -> .cache/site/<branch>/ (static HTML + search.json; fails on broken links)
+steam-buildid.sh steamcmd (container, x86_64) -> current public Steam build id
 ```
+
+CI: `.github/workflows/update.yml` polls the build id every 6 h; when it differs from `data/meta.json`
+`steamBuildId` it runs `make check-local`, commits `data/` as github-actions[bot], and deploys the site to
+GitHub Pages. Pushes to `data/`, `site/` or `build-site.py` redeploy. Only the public branch is tracked.
 
 ## Commands (all non-interactive; non-zero exit = failure)
 
@@ -30,6 +35,8 @@ build-site.py    data/ + icons -> .cache/site/<branch>/ (static HTML + search.js
 - `make remote-extract`, `make verify`, `make data`, `make verify-data` — the individual steps.
 - `make data verify-data` — re-normalize from the existing local dump (no remote needed); use this when
   changing `normalize.py`.
+- `make check-local` — the same plus the site, on this host (x86_64 Linux only; what CI runs).
+- `make buildid` — print the current public Steam build id.
 - `make site` / `make serve` — build the static site (offline, from `data/` + local icons); serve on :8000.
 - `make icons` — icons only; runs anywhere with python3 (needs the server download in `.cache/server`).
 - `make dump` — run the server locally. Only practical on x86_64 Linux; on macOS it uses a qemu x86_64 VM and is very slow.
@@ -89,5 +96,5 @@ page; creatures list them under `attacks` (weapons) and `equipment`.
 
 Tracked in [GitHub Issues](https://github.com/benders/mimir/issues), labelled by area (`site`, `ci`, `data`,
 `tests`, `mechanics`). File new findings (e.g. data bugs found while spot-checking) as issues, not in docs.
-Top items: static site generator + search (#1), CI on Steam build-id change (#2), data-correctness fixes
-(`data` label), `make test` with offline unit tests (#11).
+Top items: data-correctness fixes (`data` label), `make test` with offline unit tests (#11), mechanics
+pages (`mechanics` label).

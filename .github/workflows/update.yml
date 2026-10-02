@@ -1,0 +1,135 @@
+# Unattended data updates and site deploys (issue #2). Only the public Steam branch is tracked.
+#
+#   poll    steamcmd: current Steam build id vs data/meta.json steamBuildId
+#   update  if it changed: download server, dump, icons, normalize, verify, build site; commit data/
+#   site    build the site from data/ + icons (icons from the cache, or re-extracted on a miss)
+#   deploy  publish to GitHub Pages
+#
+# Schedules stop after 60 days without repo activity (GitHub emails first); re-enable in the Actions tab.
+name: update
+
+on:
+  schedule:
+    - cron: "41 */6 * * *"
+  workflow_dispatch:
+    inputs:
+      force:
+        description: Re-extract even if the Steam build id is unchanged
+        type: boolean
+        default: false
+  push:
+    branches: [main]
+    paths: [data/**, site/**, scripts/build-site.py, .github/workflows/update.yml]
+
+concurrency:
+  group: update
+  cancel-in-progress: false
+
+permissions:
+  contents: read
+
+jobs:
+  poll:
+    runs-on: ubuntu-24.04
+    outputs:
+      build: ${{ steps.poll.outputs.build }}
+      changed: ${{ steps.poll.outputs.changed }}
+    steps:
+      - uses: actions/checkout@v7
+      - id: poll
+        env:
+          FORCE: ${{ inputs.force || false }}
+        run: |
+          build="$(make -s buildid)"
+          have="$(python3 -c 'import json; print(json.load(open("data/meta.json")).get("steamBuildId", ""))')"
+          changed=false
+          if [[ "$build" != "$have" || "$FORCE" == true ]]; then changed=true; fi
+          echo "build=$build" >>"$GITHUB_OUTPUT"
+          echo "changed=$changed" >>"$GITHUB_OUTPUT"
+          echo "Steam build **$build**, data/ has **${have:-none}** → update: $changed" >>"$GITHUB_STEP_SUMMARY"
+
+  update:
+    needs: poll
+    if: needs.poll.outputs.changed == 'true'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 60
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v7
+      - name: Extract, normalize, verify, build site
+        env:
+          MIMIR_STEAM_BUILDID: ${{ needs.poll.outputs.build }}
+        run: make check-local
+      - name: Upload logs
+        if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: logs
+          path: |
+            .cache/dump/public/server.log
+            .cache/dump/public/bepinex.log
+            .cache/dump/public/raw/manifest.json
+          if-no-files-found: ignore
+      - name: Cache icons
+        uses: actions/cache/save@v6
+        with:
+          path: .cache/dump/public/icons
+          key: icons-${{ needs.poll.outputs.build }}
+      - name: Commit data/
+        env:
+          BUILD: ${{ needs.poll.outputs.build }}
+        run: |
+          git add data
+          if git diff --cached --quiet; then echo "data/ unchanged"; exit 0; fi
+          version="$(python3 -c 'import json; print(json.load(open("data/meta.json"))["gameVersion"])')"
+          git -c user.name="github-actions[bot]" -c user.email="41898282+github-actions[bot]@users.noreply.github.com" \
+            commit -q -m "Data: Valheim $version (Steam build $BUILD)"
+          git pull -q --rebase origin "$GITHUB_REF_NAME"
+          git push -q origin "HEAD:$GITHUB_REF_NAME"
+          git diff --stat HEAD~1 -- data >>"$GITHUB_STEP_SUMMARY"
+
+  site:
+    needs: [poll, update]
+    # After an update; on pushes and manual runs even without one. Scheduled no-op polls deploy nothing.
+    if: >-
+      always() && needs.poll.result == 'success' &&
+      (needs.update.result == 'success' || (needs.update.result == 'skipped' && github.event_name != 'schedule'))
+    runs-on: ubuntu-24.04
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          ref: ${{ github.ref_name }}  # includes the data commit just pushed by update
+      - id: icons
+        uses: actions/cache/restore@v6
+        with:
+          path: .cache/dump/public/icons
+          key: icons-${{ needs.poll.outputs.build }}
+      - name: Re-extract icons (cache miss)
+        if: steps.icons.outputs.cache-hit != 'true'
+        run: make extract
+      - name: Save icons
+        if: steps.icons.outputs.cache-hit != 'true'
+        uses: actions/cache/save@v6
+        with:
+          path: .cache/dump/public/icons
+          key: icons-${{ needs.poll.outputs.build }}
+      - run: make site
+      - uses: actions/upload-pages-artifact@v5
+        with:
+          path: .cache/site/public
+
+  deploy:
+    needs: site
+    if: always() && needs.site.result == 'success'
+    runs-on: ubuntu-24.04
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deploy.outputs.page_url }}
+    steps:
+      - id: deploy
+        uses: actions/deploy-pages@v5

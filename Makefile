@@ -9,13 +9,16 @@ BRANCH ?= public
 REMOTE ?= nic@mini
 export MIMIR_BRANCH := $(BRANCH)
 
-.PHONY: help server bepinex plugin dump icons extract remote-extract verify data verify-data site serve check clean decompile
+.PHONY: help server buildid bepinex plugin dump icons extract remote-extract verify data verify-data site serve check check-local clean decompile
 
 help:
 	@grep -E '^[a-z-]+:.*## ' $(MAKEFILE_LIST) | awk -F':.*## ' '{printf "  %-12s %s\n", $$1, $$2}'
 
 server: ## Download/update the dedicated server (anonymous Steam)
 	scripts/fetch-server.sh
+
+buildid: ## Print the Steam build id of the public server (steamcmd; needs x86_64)
+	@scripts/steam-buildid.sh
 
 bepinex: ## Download the pinned BepInExPack_Valheim
 	scripts/fetch-bepinex.sh >/dev/null
@@ -54,6 +57,8 @@ serve: site ## Build the site and serve it on http://localhost:8000
 	python3 -m http.server -d $(SITE_DIR) 8000
 
 check: remote-extract verify data verify-data ## Full end-to-end on $(REMOTE): extract, verify, normalize, verify
+
+check-local: extract verify data verify-data site ## Full end-to-end on this x86_64 Linux host, plus the site (CI)
 
 decompile: ## Decompile game assemblies to .cache/decompiled (reference only, never commit)
 	dotnet tool restore

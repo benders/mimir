@@ -46,7 +46,7 @@ flowchart TB
         MK[make check] --> R[scripts/remote.sh]
         V[verify.py / normalize.py / verify_data.py<br/>python3, stdlib]
     end
-    subgraph Runner["x86_64 Linux runner (nic@mini; later CI)"]
+    subgraph Runner["x86_64 Linux runner (nic@mini)"]
         T[tools container<br/>dotnet SDK, unzip, python3-venv]
         RT[runtime container<br/>ubuntu + server + BepInEx]
     end
@@ -58,6 +58,28 @@ flowchart TB
 
 The runner only needs Docker and SSH. Any script whose tools are missing on the host (`in_tools` in
 `scripts/lib.sh`) re-runs itself inside the tools container, with the repo mounted at the same path.
+
+### CI (GitHub Actions)
+
+`.github/workflows/update.yml` runs the same pipeline unattended on `ubuntu-24.04` (real x86_64, Docker,
+free for public repos). Only the public Steam branch is tracked.
+
+```mermaid
+flowchart LR
+    S[schedule 6h /<br/>push / manual] --> P[poll<br/>steamcmd build id]
+    P -->|differs from<br/>data/meta.json steamBuildId| U[update<br/>make check-local<br/>commit data/]
+    U --> B[site<br/>data/ + cached icons]
+    P -->|push / manual,<br/>no new build| B
+    B --> D[deploy<br/>GitHub Pages]
+```
+
+- The build id comes from Valve's `steamcmd` (anonymous `app_info_print`, `scripts/steam-buildid.sh`); normalize
+  stores it as `steamBuildId` in `meta.json` (from `$MIMIR_STEAM_BUILDID`, otherwise carried over).
+- Icons are cached per build id (`actions/cache`, evicted after 7 days unused); on a miss the site job
+  re-extracts them. They are deployed with the site, never committed.
+- Commits made with `GITHUB_TOKEN` don't trigger workflows, so the deploy runs in the same workflow run.
+- GitHub disables scheduled workflows after 60 days without repo activity (it emails first); re-enable in the
+  Actions tab.
 
 ## The dump (plugin)
 

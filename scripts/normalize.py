@@ -13,6 +13,7 @@ Conventions in the output:
   - "icon" is a file name stem in the icons dir (<icon>.png).
 """
 import json
+import os
 import re
 import sys
 from collections import defaultdict
@@ -470,6 +471,15 @@ def write(name: str, data) -> None:
     print(f"  {name}: {len(data) if isinstance(data, list) else 'ok'}")
 
 
+def steam_build_id() -> str:
+    """Steam build id of the dumped server: $MIMIR_STEAM_BUILDID (set by CI from scripts/steam-buildid.sh).
+    Without it (local runs), keep the id already in meta.json; CI's next poll corrects a stale one."""
+    if build := os.environ.get("MIMIR_STEAM_BUILDID", "").strip():
+        return build
+    old = OUT / "meta.json"
+    return json.loads(old.read_text()).get("steamBuildId", "") if old.exists() else ""
+
+
 def main() -> int:
     print(f"normalizing {RAW} -> {OUT}")
     OUT.mkdir(parents=True, exist_ok=True)
@@ -505,6 +515,7 @@ def main() -> int:
         write(name, v)
     write("meta.json", {
         "gameVersion": m["gameVersion"], "networkVersion": m["networkVersion"], "dumperVersion": m["dumperVersion"],
+        "steamBuildId": steam_build_id(),
         "counts": {k.removesuffix(".json"): len(v) for k, v in data.items()},
         "unresolvedTokens": sorted(unresolved),
         "skippedRefs": sorted(skipped_refs),
