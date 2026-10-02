@@ -2,7 +2,9 @@
 
 Companion website for Valheim. Game data is extracted automatically from the **dedicated server**
 (Steam app 896660, anonymous download, no game license) by running it headless with a BepInEx
-plugin that dumps everything to JSON.
+plugin that dumps everything to JSON. Humans: see [README.md](README.md). Design and diagrams:
+[Architecture.md](Architecture.md). Work queue: [TODO.md](TODO.md) (check items off in the commit that
+completes them). Game mechanics notes: [docs/mechanics.md](docs/mechanics.md).
 
 ## Pipeline
 
@@ -66,7 +68,19 @@ Logs after a dump: `.cache/dump/<branch>/server.log` (Unity) and `bepinex.log` (
 `becomes` for multi-stage objects), `status_effects`. Ids are prefab names; references are ids. Empty, zero,
 false and "Normal" values are omitted. Derived relations (used in, dropped by) are left to the site build.
 
+## Working on this repo
+
+- After changing `normalize.py`: `make data verify-data` (offline, uses the local dump), then review and commit
+  the `data/` diff together with the code. `data/` must always be regenerated, never hand-edited.
+- After changing the plugin: bump `PluginVersion` in `Plugin.cs`, then `make check` (needs the runner).
+- Answering game-mechanics questions: read the decompiled code (`make decompile`, `.cache/decompiled/`) and
+  cite file/method. Record verified findings in `docs/mechanics.md`. Data values come from `data/`, behavior
+  from code; say so when something is inferred rather than verified in-game.
+- Raw field meanings: look at the raw prefab JSON, then the C# field in `.cache/decompiled/assembly_valheim`.
+- Spot-check new data against known vanilla content, and add the check to `verify_data.py`.
+- On the dev Mac, `grep` is aliased to ugrep with extra flags; use `/usr/bin/grep -e ...` in shell commands.
+
 ## Status / next steps
 
-1. Static site generator + search (reads `data/`, copies icons).
-2. CI: GitHub Actions (x86_64) on Steam build-id change: `make check`, commit the `data/` diff, deploy.
+See [TODO.md](TODO.md). Top items: static site generator + search, CI on Steam build-id change,
+data-correctness fixes found while spot-checking, `make test` with offline unit tests.
