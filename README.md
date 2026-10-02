@@ -4,7 +4,7 @@ A companion website for [Valheim](https://www.valheimgame.com/): item and creatu
 building pieces, and how the game's mechanics actually work. The data comes straight from the game's
 dedicated server, so the site follows game updates without anyone editing pages by hand.
 
-**Status:** data extraction works end to end, and the site itself is next. See [TODO.md](TODO.md).
+**Status:** data extraction works end to end, and the site itself is next. See [issues](https://github.com/benders/mimir/issues).
 
 ## What's here
 

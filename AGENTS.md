@@ -3,8 +3,9 @@
 Companion website for Valheim. Game data is extracted automatically from the **dedicated server**
 (Steam app 896660, anonymous download, no game license) by running it headless with a BepInEx
 plugin that dumps everything to JSON. Humans: see [README.md](README.md). Design and diagrams:
-[Architecture.md](Architecture.md). Work queue: [TODO.md](TODO.md) (check items off in the commit that
-completes them). Game mechanics notes: [docs/mechanics.md](docs/mechanics.md).
+[Architecture.md](Architecture.md). Work queue: [GitHub Issues](https://github.com/benders/mimir/issues)
+(`gh issue list`; close them from the commit that completes them with `Fixes #N`). Game mechanics
+notes: [docs/mechanics.md](docs/mechanics.md).
 
 ## Pipeline
 
@@ -82,5 +83,7 @@ false and "Normal" values are omitted. Derived relations (used in, dropped by) a
 
 ## Status / next steps
 
-See [TODO.md](TODO.md). Top items: static site generator + search, CI on Steam build-id change,
-data-correctness fixes found while spot-checking, `make test` with offline unit tests.
+Tracked in [GitHub Issues](https://github.com/benders/mimir/issues), labelled by area (`site`, `ci`, `data`,
+`tests`, `mechanics`). File new findings (e.g. data bugs found while spot-checking) as issues, not in docs.
+Top items: static site generator + search (#1), CI on Steam build-id change (#2), data-correctness fixes
+(`data` label), `make test` with offline unit tests (#11).
