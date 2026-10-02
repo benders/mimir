@@ -443,11 +443,15 @@ def header(e: dict, kind: str, subtitle: str, desc: str = "") -> str:
             f'<p class="sub">{subtitle}</p>{d}</div></div>')
 
 
-def modifiers_table(mods: dict) -> str:
+def modifiers_table(mods: dict, hide_tools: bool = False) -> str:
+    """Ignore means zero damage (HitData.ApplyModifier), shown as Immune. Nearly every creature ignores chop and
+    pickaxe (tool damage, irrelevant in combat), so creature pages drop those rows."""
+    mods = {k: v for k, v in (mods or {}).items() if not (hide_tools and v == "Ignore" and k in ("chop", "pickaxe"))}
     if not mods:
         return ""
     return '<ul class="mods">' + "".join(
-        f'<li class="m-{esc(v.lower())}"><span>{esc(k)}</span>{esc(words(v))}</li>' for k, v in mods.items()) + "</ul>"
+        f'<li class="m-{esc(v.lower())}"><span>{esc(k)}</span>{esc(words("Immune" if v == "Ignore" else v))}</li>'
+        for k, v in mods.items()) + "</ul>"
 
 
 def damages(d: dict) -> str:
@@ -617,7 +621,7 @@ def creature_page(c: dict) -> None:
              ("Avoids water", "yes" if c.get("avoidWater") else None),
              ("Group", esc(c["group"]) if c.get("group") else None)]
     body = header(c, "creature", sub) + kv(facts)
-    body += section("Resistances", modifiers_table(c.get("damageModifiers")))
+    body += section("Resistances", modifiers_table(c.get("damageModifiers"), hide_tools=True))
     attacks = []
     for a in c.get("attacks", []):
         w = ITEMS[a]

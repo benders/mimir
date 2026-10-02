@@ -59,6 +59,13 @@ class Site(unittest.TestCase):
         self.assertIn("summoned with", chief)
         self.assertIn('href="items/Ore.html"', chief)
 
+    def test_ignore_modifiers(self):
+        raider = (self.out / "creatures/Raider.html").read_text(encoding="utf-8")
+        self.assertIn("<span>spirit</span>Immune", raider)
+        self.assertNotIn("<span>chop</span>", raider)
+        self.assertNotIn("<span>pickaxe</span>", raider)
+        self.assertNotIn("Ignore", raider)
+
     def test_creatures_by_biome(self):
         index = (self.out / "creatures/index.html").read_text(encoding="utf-8")
         heads = re.findall(r'<h2 id="(\w+)">', index)

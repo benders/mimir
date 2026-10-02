@@ -148,7 +148,8 @@ TRANSLATIONS = {
 def raider(name, **kw):
     return prefab(name,
                   character(**{**dict(name="$enemy_raider", health=150, defaultItems=[R("Bite"), R("FW_Helmet")],
-                                      damageModifiers={"m_blunt": "Weak", "m_slash": "Normal", "m_fire": "Immune"}),
+                                      damageModifiers={"m_blunt": "Weak", "m_slash": "Normal", "m_fire": "Immune",
+                                                       "m_spirit": "Ignore", "m_chop": "Ignore", "m_pickaxe": "Ignore"}),
                                **kw}),
                   comp("CharacterDrop", {"m_drops": [char_drop("Ore", amountMax=3, chance=0.5),
                                                       char_drop("vfx_Poof")]}),  # effect prefab: skipped ref
