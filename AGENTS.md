@@ -27,6 +27,7 @@ steam-buildid.sh steamcmd (container, x86_64) -> current public Steam build id
 CI: `.github/workflows/update.yml` polls the build id every 6 h; when it differs from `data/meta.json`
 `steamBuildId` it runs `make check-local`, commits `data/` as github-actions[bot], and deploys the site to
 GitHub Pages. Pushes to `data/`, `site/` or `build-site.py` redeploy. Only the public branch is tracked.
+`.github/workflows/test.yml` runs `make test` on every push and pull request.
 
 ## Commands (all non-interactive; non-zero exit = failure)
 
@@ -37,7 +38,7 @@ GitHub Pages. Pushes to `data/`, `site/` or `build-site.py` redeploy. Only the p
   changing `normalize.py`.
 - `make test` — offline unit + golden-file tests (`tests/`, stdlib `unittest`), site smoke test, `verify_data.py`
   on committed `data/`. Seconds; run it after any script change. `MIMIR_UPDATE_GOLDEN=1` to accept output changes.
-- `make check-local` — the same plus the site, on this host (x86_64 Linux only; what CI runs).
+- `make check-local` — `make test`, then the same plus the site, on this host (x86_64 Linux only; what CI runs).
 - `make buildid` — print the current public Steam build id.
 - `make site` / `make serve` — build the static site (offline, from `data/` + local icons); serve on :8000.
 - `make icons` — icons only; runs anywhere with python3 (needs the server download in `.cache/server`).
@@ -99,5 +100,4 @@ page; creatures list them under `attacks` (weapons) and `equipment`.
 
 Tracked in [GitHub Issues](https://github.com/benders/mimir/issues), labelled by area (`site`, `ci`, `data`,
 `tests`, `mechanics`). File new findings (e.g. data bugs found while spot-checking) as issues, not in docs.
-Top items: data-correctness fixes (`data` label), `make test` in CI on every push (#12), mechanics pages
-(`mechanics` label).
+Top items: data-correctness fixes (`data` label), mechanics pages (`mechanics` label), tech tree (#25).

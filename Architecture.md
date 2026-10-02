@@ -153,3 +153,5 @@ The checks test invariants rather than exact values, so balance patches pass but
 compares a full normalize run with `tests/golden/`, `tests/test_site.py` builds the site from the golden output,
 and `verify_data.py` re-checks the committed `data/`. After a deliberate output change, regenerate the golden
 files with `MIMIR_UPDATE_GOLDEN=1 python3 -m unittest tests/test_normalize.py` and review their diff.
+CI runs `make test` on every push and pull request (`.github/workflows/test.yml`), and first thing in
+`make check-local`, so a data update is never committed by code that fails its tests.

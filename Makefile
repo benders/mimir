@@ -62,7 +62,7 @@ test: ## Offline tests: unit + golden files (tests/), site smoke test, verify co
 
 check: remote-extract verify data verify-data ## Full end-to-end on $(REMOTE): extract, verify, normalize, verify
 
-check-local: extract verify data verify-data site ## Full end-to-end on this x86_64 Linux host, plus the site (CI)
+check-local: test extract verify data verify-data site ## Tests, then full end-to-end on this x86_64 Linux host + site (CI)
 
 decompile: ## Decompile game assemblies to .cache/decompiled (reference only, never commit)
 	dotnet tool restore

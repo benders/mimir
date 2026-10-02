@@ -1,0 +1,19 @@
+# Offline tests on every push and pull request (issue #12): unit + golden-file tests, site smoke test,
+# verify_data.py on the committed data/. No game download; `make check-local` runs only in update.yml.
+name: test
+
+on:
+  push:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v7
+      - run: python3 --version
+      - run: make test
