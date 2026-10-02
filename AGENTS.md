@@ -85,7 +85,8 @@ Logs after a dump: `.cache/dump/<branch>/server.log` (Unity) and `bepinex.log` (
 `becomes` for multi-stage objects), `status_effects`. Each `spawns` entry has a `source`: `world` (SpawnSystem),
 `raid` (RandEventSystem; the event's biomes), `location` / `dungeon` (spawners and boss altars in a location or its
 dungeon rooms; the location's biomes), `offspring` (`parent` creature) or `egg` (`item` that hatches).
-Ids are prefab names; references are ids. Empty, zero, false and "Normal" values are omitted. Derived relations (used in, dropped by) are left to the site build.
+Ids are prefab names; references are ids. Empty, zero, false and "Normal" values are omitted. Text is plain: Unity
+rich-text tags are stripped; creatures whose name was colored (Hildir's minibosses) are flagged `named`. Derived relations (used in, dropped by) are left to the site build.
 Items flagged `internal` (creature attack items) or `enemyOnly` (FW_/SP_ gear copies, Dvergr crossbow) get no site
 page; creatures list them under `attacks` (weapons) and `equipment`.
 

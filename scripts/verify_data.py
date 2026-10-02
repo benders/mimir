@@ -103,6 +103,11 @@ def main() -> int:
     unplaced = sorted(c["id"] for c in bosses if not any(s["creature"] == c["id"] for s in spawns))
     check(unplaced == ["Hive", "TheHive"], f"every boss but the Queen's hives has a location (unplaced: {unplaced})")
     check(creatures.get("Eikthyr", {}).get("boss") is True, "Eikthyr: boss")
+    check(creatures.get("Skeleton_Hildir", {}).get("name") == "Brenna" and creatures["Skeleton_Hildir"].get("named"),
+          "Brenna: plain name, flagged named")
+    tagged = [e["id"] for coll in (items, creatures, pieces) for e in coll.values()
+              if "<" in (e.get("name") or "") + (e.get("description") or "")]
+    check(not tagged, f"no rich-text tags in names or descriptions ({tagged[:5]})")
     check("Hammer" in pieces.get("piece_workbench", {}).get("tools", []), "workbench built with Hammer")
     check(any(p["from"] == "CopperOre" and p["to"] == "Copper" for p in procs), "smelting CopperOre -> Copper")
     check(any(d["item"] == "CopperOre" for s in sources for d in (s.get("drops") or {}).get("items", [])), "CopperOre has a world source")

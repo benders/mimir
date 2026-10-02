@@ -4,10 +4,10 @@
  "dumperVersion": "test",
  "steamBuildId": "1",
  "counts": {
-  "items": 14,
+  "items": 16,
   "recipes": 3,
-  "creatures": 3,
-  "spawns": 9,
+  "creatures": 5,
+  "spawns": 12,
   "pieces": 3,
   "processing": 1,
   "sources": 2,

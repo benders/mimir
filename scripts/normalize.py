@@ -24,6 +24,7 @@ RAW = ROOT / ".cache/dump/public/raw"
 OUT = ROOT / "data"
 
 TOKEN = re.compile(r"\$([A-Za-z0-9_]+)")
+RICH_TEXT = re.compile(r"</?(?:color|b|i|size)\b[^>]*>", re.I)  # Unity rich-text tags
 unresolved: set[str] = set()
 skipped_refs: set[str] = set()  # references to prefabs that aren't items/creatures (projectiles, ambient fx)
 
@@ -51,7 +52,17 @@ def setup(raw: Path, out: Path = OUT) -> None:
 
 
 def text(s: str | None) -> str | None:
-    """Resolve $tokens to English, the way the game's Localization.Localize does."""
+    """Resolve $tokens to English, the way the game's Localization.Localize does, as plain text."""
+    t = localize(s)
+    return RICH_TEXT.sub("", t).strip() or None if t else None
+
+
+def styled(s: str | None) -> bool:
+    """Whether the English text carries rich-text styling (named minibosses: <color=orange>Brenna</color>)."""
+    return bool(RICH_TEXT.search(localize(s) or ""))
+
+
+def localize(s: str | None) -> str | None:
     if not s:
         return None
 
@@ -284,6 +295,7 @@ def creature(name: str, p: dict) -> dict | None:
     return {
         "id": name,
         "name": text(c["m_name"]),
+        "named": styled(c["m_name"]),
         "faction": c["m_faction"],
         "group": c["m_group"],
         "boss": c["m_boss"],

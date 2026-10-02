@@ -97,7 +97,7 @@
  {
   "id": "Amber",
   "name": "Amber",
-  "description": "<color=yellow>Valuable</color>",
+  "description": "Valuable",
   "type": "Material",
   "icon": "amber",
   "weight": 0.1,
@@ -115,7 +115,7 @@
  {
   "id": "AmberPearl",
   "name": "Amber Pearl",
-  "description": "<color=yellow>Valuable</color>",
+  "description": "Valuable",
   "type": "Material",
   "icon": "AmberPearl",
   "weight": 0.1,
@@ -7532,7 +7532,7 @@
  {
   "id": "Coins",
   "name": "Coins",
-  "description": "<color=yellow>Valuable</color>",
+  "description": "Valuable",
   "type": "Material",
   "icon": "coins",
   "weight": 0.1,
@@ -11350,7 +11350,7 @@
  {
   "id": "Feaster",
   "name": "Serving Tray",
-  "description": "Set the table with whatever food and drink you fancy, and impress your guests with a delicious feast.\n\n<color=yellow>Once a feast has been eaten of, it won't return any resources if dismantled.</color>",
+  "description": "Set the table with whatever food and drink you fancy, and impress your guests with a delicious feast.\n\nOnce a feast has been eaten of, it won't return any resources if dismantled.",
   "type": "Tool",
   "icon": "feaster",
   "weight": 2,
@@ -23686,7 +23686,7 @@
  {
   "id": "Ruby",
   "name": "Ruby",
-  "description": "<color=yellow>Valuable</color>",
+  "description": "Valuable",
   "type": "Material",
   "icon": "ruby",
   "weight": 0.1,
@@ -26252,7 +26252,7 @@
  {
   "id": "SilverNecklace",
   "name": "Silver Necklace",
-  "description": "<color=yellow>Valuable</color>",
+  "description": "Valuable",
   "type": "Material",
   "icon": "silvernecklace",
   "weight": 0.1,

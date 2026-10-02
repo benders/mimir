@@ -141,8 +141,20 @@ TRANSLATIONS = {
     "item_hammer": "Mallet", "item_bite": "Bite",
     "enemy_raider": "Raider", "piece_bench": "Bench", "piece_anvil": "Anvil", "piece_kiln": "Kiln",
     "piece_bush": "Twig Bush", "piece_orerock": "Ore Rock", "se_fizz": "Fizzy",
-    "enemy_pup": "Pup", "enemy_chief": "Chief", "item_egg": "Egg", "event_test": "Something stirs",
+    "enemy_pup": "Pup", "enemy_chief": "<color=orange>Chief</color>", "item_egg": "Egg", "event_test": "Something stirs",
 }
+
+
+def raider(name, **kw):
+    return prefab(name,
+                  character(**{**dict(name="$enemy_raider", health=150, defaultItems=[R("Bite"), R("FW_Helmet")],
+                                      damageModifiers={"m_blunt": "Weak", "m_slash": "Normal", "m_fire": "Immune"}),
+                               **kw}),
+                  comp("CharacterDrop", {"m_drops": [char_drop("Ore", amountMax=3, chance=0.5),
+                                                      char_drop("vfx_Poof")]}),  # effect prefab: skipped ref
+                  comp("Tameable", m(fedDuration=600, tamingTime=1800, commandable=True)),
+                  comp("MonsterAI", m(consumeItems=[R("Fish")], afraidOfFire=True, avoidWater=False)),
+                  comp("Procreation", m(offspring=R("Pup"))))
 
 
 def prefabs():
@@ -158,6 +170,8 @@ def prefabs():
                               {"m_type": "Pierce", "m_modifier": "Normal"}],
              setName="tester", setSize=2, setStatusEffect=R("SE_Fizz")),
         item("Helmet", name="$item_helmet", itemType="Helmet", icons=[S("Helmet")], armor=4, armorPerLevel=2),
+        item("HelmetFem", name="$item_helmet", itemType="Helmet", icons=[S("Helmet")], armor=5),  # "Pot Helm (female)"
+        item("WoodOld", name="$item_wood", description="$item_wood_desc", icons=[S("Wood")], maxStackSize=50),  # copy
         item("FW_Helmet", name="$item_helmet", itemType="Helmet", icons=[S("Helmet")], armor=8),  # carried copy
         item("SP_Helmet", name="$item_helmet", itemType="Helmet", icons=[S("Helmet")]),  # unused copy
         item("SP_Sword", name="Other Sword", itemType="OneHandedWeapon", icons=[S("Sword")]),  # renamed: not a copy
@@ -167,14 +181,9 @@ def prefabs():
         item("Bite", name="$item_bite", itemType="OneHandedWeapon", attack=attack(attackStamina=0),
              damages=damages(pierce=12)),  # no icon: internal attack item
         item("Mystery", name="$item_missing"),  # unresolved token
-        prefab("Raider",
-               character(name="$enemy_raider", health=150, defaultItems=[R("Bite"), R("FW_Helmet")],
-                         damageModifiers={"m_blunt": "Weak", "m_slash": "Normal", "m_fire": "Immune"}),
-               comp("CharacterDrop", {"m_drops": [char_drop("Ore", amountMax=3, chance=0.5),
-                                                   char_drop("vfx_Poof")]}),  # effect prefab: skipped ref
-               comp("Tameable", m(fedDuration=600, tamingTime=1800, commandable=True)),
-               comp("MonsterAI", m(consumeItems=[R("Fish")], afraidOfFire=True, avoidWater=False)),
-               comp("Procreation", m(offspring=R("Pup")))),
+        raider("Raider"),
+        raider("Raider_sleeping"),  # identical copy: merged into Raider's page
+        raider("Raider_Ranged", health=120),  # differs: "Raider (archer)"
         prefab("Pup", character(name="$enemy_pup", health=20)),
         prefab("Chief", character(name="$enemy_chief", health=900, boss=True)),
         with_components(item("Egg", name="$item_egg", icons=[S("Egg")]), comp("EggGrow", m(grownPrefab=R("Pup")))),
@@ -242,6 +251,7 @@ def write_dump(raw: Path) -> Path:
         spawner("Raider", devDisabled=True),
         spawner("vfx_Poof"),
         spawner("Spawner_Raider", biome="-1"),  # places a spawner, everywhere
+        spawner("Raider_sleeping", biome="Meadows"),  # shown on Raider's page
     ]}}])
     dump("world/RandEventSystem.json", [{"name": "_GameMain", "type": "RandEventSystem", "fields": {"m_events": [
         event("army_test", "Meadows, Swamp", spawner("Raider", biome="1023", minLevel=2, maxLevel=1), spawner("vfx_Poof")),

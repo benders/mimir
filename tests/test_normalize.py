@@ -46,6 +46,14 @@ class Helpers(FixtureCase):
         self.assertEqual(N.text("  A $item_ore lump "), "A Rustore lump")
         self.assertEqual(N.unresolved, set())
 
+    def test_text_strips_rich_text(self):
+        self.assertEqual(N.text("$enemy_chief"), "Chief")
+        self.assertTrue(N.styled("$enemy_chief"))
+        self.assertFalse(N.styled("$enemy_pup"))
+        self.assertEqual(N.text("<b>bold</b> and <size=20>big</size>"), "bold and big")
+        self.assertEqual(N.text("a <3 b"), "a <3 b")  # not a tag
+        self.assertTrue(N.creature("Chief", N.PREFABS["Chief"])["named"])
+
     def test_text_keeps_and_records_unknown_tokens(self):
         self.assertEqual(N.text("$item_nope"), "$item_nope")
         self.assertEqual(N.unresolved, {"item_nope"})
@@ -169,7 +177,7 @@ class Entities(FixtureCase):
 
     def test_world_spawns(self):
         s = self.spawns("world")
-        self.assertEqual(len(s), 2)  # disabled, devDisabled and non-creature spawners dropped
+        self.assertEqual(len(s), 3)  # disabled, devDisabled and non-creature spawners dropped
         self.assertEqual((s[0]["creature"], s[0]["biomes"]), ("Raider", ["Meadows", "BlackForest"]))
         self.assertEqual(s[1]["creature"], "Raider")  # placed via Spawner_Raider
         self.assertEqual(len(s[1]["biomes"]), len(N.BIOME_BITS))
@@ -194,7 +202,7 @@ class Entities(FixtureCase):
         self.assertEqual((d["creature"], d["location"], d["biomes"], d["levels"]), ("Pup", "Lair", ["Mountain"], [1, 2]))
 
     def test_offspring(self):
-        self.assertEqual(self.spawns("offspring"), [{"creature": "Pup", "source": "offspring", "parent": "Raider"}])
+        self.assertEqual([s["parent"] for s in self.spawns("offspring")], ["Raider", "Raider_Ranged", "Raider_sleeping"])
         self.assertEqual(self.spawns("egg"), [{"creature": "Pup", "source": "egg", "item": "Egg"}])
 
 

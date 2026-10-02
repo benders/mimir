@@ -62,7 +62,7 @@ class Site(unittest.TestCase):
     def test_creatures_by_biome(self):
         index = (self.out / "creatures/index.html").read_text(encoding="utf-8")
         heads = re.findall(r'<h2 id="(\w+)">', index)
-        self.assertEqual(heads, ["Meadows", "Mountain"])  # progression order; empty biomes left out
+        self.assertEqual(heads, ["Meadows", "Mountain", "Other"])  # progression order; empty biomes left out
         mountain = index[index.index('id="Mountain"'):]
         self.assertLess(mountain.index("Chief"), mountain.index("Pup"))  # bosses first
         # Raider: world spawns in Meadows/Black Forest tie with a location in Swamp/Plains; earliest wins
@@ -70,6 +70,22 @@ class Site(unittest.TestCase):
         pup = (self.out / "creatures/Pup.html").read_text(encoding="utf-8")
         self.assertRegex(pup, r"<dt>Biome</dt><dd>Swamp, Mountain, Plains</dd>")  # dungeon outweighs the camp
         self.assertRegex(pup, r"<dt>Faction</dt><dd>Forest monsters</dd>")
+
+    def test_variants(self):
+        # identical copies merge into one page; links and spawns go there
+        self.assertFalse((self.out / "creatures/Raider_sleeping.html").exists())
+        self.assertFalse((self.out / "items/WoodOld.html").exists())
+        raider = (self.out / "creatures/Raider.html").read_text(encoding="utf-8")
+        self.assertIn("as sleeping", raider)
+        self.assertIn("<h1>Raider</h1>", raider)
+        # the rest get a qualifier from their ids
+        self.assertIn("<h1>Raider (archer)</h1>", (self.out / "creatures/Raider_Ranged.html").read_text(encoding="utf-8"))
+        self.assertIn("<h1>Pot Helm (female)</h1>", (self.out / "items/HelmetFem.html").read_text(encoding="utf-8"))
+        self.assertIn("<h1>Pot Helm</h1>", (self.out / "items/Helmet.html").read_text(encoding="utf-8"))
+        names = [e[0] for e in json.loads((self.out / "search.json").read_text(encoding="utf-8"))]
+        self.assertEqual(names.count("Raider"), 1)
+        self.assertIn("Raider (archer)", names)
+        self.assertIn("<h1>Chief</h1>", (self.out / "creatures/Chief.html").read_text(encoding="utf-8"))
 
     def test_search_index(self):
         index = json.loads((self.out / "search.json").read_text(encoding="utf-8"))

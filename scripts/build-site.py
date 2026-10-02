@@ -119,7 +119,8 @@ def entity(kind: str, id_: str):
 
 def has_page(kind: str, id_: str) -> bool:
     e = entity(kind, id_)
-    return e is not None and not (kind == "item" and (e.get("internal") or e.get("enemyOnly")))
+    return e is not None and not (kind == "item" and (e.get("internal") or e.get("enemyOnly"))) \
+        and id_ not in MERGED[kind]
 
 
 def original(item_id: str) -> str:
@@ -130,9 +131,15 @@ def original(item_id: str) -> str:
     return item_id
 
 
-def name_of(kind: str, id_: str) -> str:
+def base_name(kind: str, id_: str) -> str:
     e = entity(kind, id_)
     return clean(e.get("name")) if e and e.get("name") else pretty_id(id_)
+
+
+def name_of(kind: str, id_: str) -> str:
+    id_ = MERGED[kind].get(id_, id_)
+    q = QUALIFIED[kind].get(id_)
+    return f"{base_name(kind, id_)} ({q})" if q else base_name(kind, id_)
 
 
 def href(kind: str, id_: str) -> str:
@@ -146,6 +153,7 @@ def icon(name, cls="ico") -> str:
 
 
 def link(kind: str, id_: str, qty=None) -> str:
+    id_ = MERGED[kind].get(id_, id_)
     e = entity(kind, id_)
     q = f'<span class="qty">×{esc(str(qty))}</span>' if qty is not None else ""
     label = f'{icon(icon_of(kind, e) if e else None)}<span>{esc(name_of(kind, id_))}</span>{q}'
@@ -167,6 +175,77 @@ def source_name(s: dict) -> str:
 
 crafted_by = defaultdict(list)       # item -> recipes producing it
 used_in_recipe = defaultdict(list)   # item -> recipes consuming it
+# --- variants: prefabs sharing a display name ------------------------------------------------
+# Identical copies (Troll / Troll_sleeping, FishRaw / FishAnglerRaw) merge into one page; the rest get a qualifier
+# derived from the words their ids don't share: "Skeleton (Swamp, no bow)", "Kall Fimbulbringer (phase 2)".
+
+ID_WORDS = {"NoArcher": "noarcher", "NonSleeping": "nonsleeping", "DualWield": "dualwield", "DeepNorth": "deepnorth"}
+QUALIFIERS = {  # id word -> label; "" drops the word
+    "sleeping": "sleeping", "nonsleeping": "awake", "nochest": "raid", "ranged": "archer", "noarcher": "no bow",
+    "deepnorth": "Deep North", "meadows": "Meadows", "mountains": "Mountain", "mountain": "Mountain",
+    "swamps": "Swamp", "swamp": "Swamp", "ashlands": "Ashlands", "dualwield": "dual-wield", "p2": "phase 2",
+    "p3": "phase 3", "fem": "female", "tenta": "",
+}
+
+
+def id_words(id_: str) -> list[str]:
+    for k, v in ID_WORDS.items():
+        id_ = id_.replace(k, f"_{v}_")
+    return [w.lower() for part in id_.split("_") for w in re.findall(r"[A-Z]?[a-z0-9]+|[A-Z]+(?![a-z])", part)]
+
+
+def qualifier(id_: str, others: list[str], name: str) -> str:
+    """Words of the id that the other ids (or the display name) don't have, as labels."""
+    common = set.intersection(*(set(id_words(o)) for o in [id_, *others]))
+    named = set(re.findall(r"[a-z0-9]+", name.lower()))
+    labels = [QUALIFIERS.get(w, w) for w in id_words(id_) if w not in common and w not in named]
+    return ", ".join(dict.fromkeys(x for x in labels if x))
+
+
+def variants(kind: str, coll: dict, shown) -> tuple[dict, dict]:
+    """(merged id -> page id, page id -> qualifier) for entities whose display names collide."""
+    groups = defaultdict(list)
+    for id_ in sorted(coll):
+        if shown(id_):
+            groups[base_name(kind, id_)].append(id_)
+    merged, qualified = {}, {}
+    for name, ids in groups.items():
+        if len(ids) < 2:
+            continue
+        pages = []
+        for id_ in sorted(ids, key=lambda x: (len(x), x)):  # the shortest id of identical copies keeps the page
+            same = {k: v for k, v in coll[id_].items() if k != "id"}
+            twin = next((p for p in pages if {k: v for k, v in coll[p].items() if k != "id"} == same), None)
+            if twin:
+                merged[id_] = twin
+            else:
+                pages.append(id_)
+        for id_ in pages:
+            q = qualifier(id_, [o for o in pages if o != id_], name) if len(pages) > 1 else ""
+            if q:
+                qualified[id_] = q
+        labels = defaultdict(list)
+        for id_ in pages:
+            labels[qualified.get(id_, "")].append(id_)
+        for ids_ in labels.values():  # still ambiguous: fall back to the id
+            if len(ids_) > 1:
+                for id_ in ids_:
+                    qualified[id_] = pretty_id(id_)
+    return merged, qualified
+
+
+MERGED, QUALIFIED = {k: {} for k in KINDS}, {k: {} for k in KINDS}
+MERGED["item"], QUALIFIED["item"] = variants(
+    "item", ITEMS, lambda i: not (ITEMS[i].get("internal") or ITEMS[i].get("enemyOnly")))
+MERGED["creature"], QUALIFIED["creature"] = variants("creature", CREATURES, lambda c: True)
+
+
+def variant_note(kind: str, id_: str) -> str:
+    """For an entry of a merged copy shown on its page: what sets the copy apart ("sleeping")."""
+    page_id = MERGED[kind].get(id_)
+    return qualifier(id_, [page_id], base_name(kind, id_)) or pretty_id(id_) if page_id else ""
+
+
 used_in_piece = defaultdict(list)    # item -> pieces built with it
 crafted_at = defaultdict(list)       # station piece -> recipes
 built_at = defaultdict(list)         # station piece -> pieces needing it nearby
@@ -226,6 +305,13 @@ for i in ITEMS.values():
             effect_users[i["set"]["effect"]].append((i["id"], f"set of {i['set']['size']}"))
 for s in SPAWNS:
     spawns_of[s["creature"]].append(s)
+for kind, rels in {"item": [crafted_by, used_in_recipe, used_in_piece, process_from, process_to, dropped_by,
+                            found_in, tool_pieces],
+                   "creature": [spawns_of]}.items():
+    for variant, page_id in MERGED[kind].items():  # a merged copy's relations show on its page
+        for rel in rels:
+            if variant in rel:
+                rel[page_id].extend(rel.pop(variant))
 
 BIOMES = {  # game progression order (creatures index)
     "Meadows": "Meadows", "BlackForest": "Black Forest", "Swamp": "Swamp", "Mountain": "Mountain",
@@ -546,10 +632,14 @@ def spawn_sections(spawns: list[dict]) -> str:
         by[s.get("source", "world")].append(s)
     out = ""
 
+    def as_variant(s):  # spawns of a merged copy (Troll_sleeping on the Troll page)
+        note = variant_note("creature", s["creature"])
+        return [f"as {esc(note)}"] if note else []
+
     rows = []
     for s in by["world"]:
         when = "day and night" if s.get("day") and s.get("night") else "day" if s.get("day") else "night"
-        extra = []
+        extra = as_variant(s)
         if s.get("requiredGlobalKey"):
             extra.append(f"after {esc(s['requiredGlobalKey'])}")
         if s.get("requiredEnvironments"):
@@ -561,7 +651,7 @@ def spawn_sections(spawns: list[dict]) -> str:
 
     rows = []
     for s in by["location"] + by["dungeon"]:
-        notes = []
+        notes = as_variant(s)
         if s["source"] == "dungeon":
             notes.append("in the dungeon")
         if s.get("respawning"):
@@ -573,8 +663,8 @@ def spawn_sections(spawns: list[dict]) -> str:
                      "; ".join(notes)])
     out += section("Locations", table(["Location", "Biome", "Level", "Notes"], rows))
 
-    rows = [[esc(pretty_id(s["event"])), biome_list(s), rng(*s["levels"]), rng(*s["groupSize"]),
-             esc(s.get("message") or "")] for s in by["raid"]]
+    rows = [[esc(pretty_id(s["event"])) + "".join(f" ({n})" for n in as_variant(s)), biome_list(s), rng(*s["levels"]),
+             rng(*s["groupSize"]), esc(s.get("message") or "")] for s in by["raid"]]
     out += section("Raids", table(["Event", "Biome", "Level", "Group", "Message"], rows))
 
     born = [link("creature", s["parent"]) for s in by["offspring"]] + [link("item", s["item"]) for s in by["egg"]]
@@ -659,7 +749,8 @@ def index_pages() -> None:
 
     groups = defaultdict(list)
     for c in CREATURES.values():
-        groups[home_biome(c["id"]) or "Other"].append(c["id"])
+        if has_page("creature", c["id"]):
+            groups[home_biome(c["id"]) or "Other"].append(c["id"])
     labels = {**BIOMES, "Other": "Other"}  # Other: boss phases, summons, prefabs worldgen never places
     order = [g for g in labels if g in groups]
     toc = " · ".join(f'<a href="creatures/index.html#{g}">{esc(labels[g])}</a>' for g in order)
@@ -743,7 +834,8 @@ def main() -> int:
         if has_page("item", i["id"]):
             item_page(i)
     for c in CREATURES.values():
-        creature_page(c)
+        if has_page("creature", c["id"]):
+            creature_page(c)
     for p in PIECES.values():
         piece_page(p)
     for e in EFFECTS.values():
