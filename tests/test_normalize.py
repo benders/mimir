@@ -1,0 +1,229 @@
+"""Unit and golden-file tests for scripts/normalize.py, on the synthetic dump in fixture.py.
+
+    python3 -m unittest discover -s tests                         # or: make test
+    MIMIR_UPDATE_GOLDEN=1 python3 -m unittest tests/test_normalize.py   # rewrite tests/golden/ after a deliberate change
+"""
+import importlib.util
+import json
+import os
+import sys
+import tempfile
+import unittest
+from pathlib import Path
+from unittest import mock
+
+TESTS = Path(__file__).resolve().parent
+ROOT = TESTS.parent
+GOLDEN = TESTS / "golden"
+sys.path.insert(0, str(TESTS))
+import fixture  # noqa: E402
+
+spec = importlib.util.spec_from_file_location("normalize", ROOT / "scripts/normalize.py")
+N = importlib.util.module_from_spec(spec)
+spec.loader.exec_module(N)
+
+
+class FixtureCase(unittest.TestCase):
+    @classmethod
+    def setUpClass(cls):
+        cls.tmp = tempfile.TemporaryDirectory()
+        cls.raw = fixture.write_dump(Path(cls.tmp.name) / "raw")
+        cls.out = Path(cls.tmp.name) / "out"
+        N.setup(cls.raw, cls.out)
+
+    @classmethod
+    def tearDownClass(cls):
+        cls.tmp.cleanup()
+
+    def setUp(self):
+        N.unresolved.clear()
+        N.skipped_refs.clear()
+
+
+class Helpers(FixtureCase):
+    def test_text_resolves_tokens(self):
+        self.assertEqual(N.text("$item_wood"), "Twig")
+        self.assertEqual(N.text("  A $item_ore lump "), "A Rustore lump")
+        self.assertEqual(N.unresolved, set())
+
+    def test_text_keeps_and_records_unknown_tokens(self):
+        self.assertEqual(N.text("$item_nope"), "$item_nope")
+        self.assertEqual(N.unresolved, {"item_nope"})
+
+    def test_text_empty(self):
+        self.assertIsNone(N.text(None))
+        self.assertIsNone(N.text(""))
+        self.assertIsNone(N.text("   "))
+
+    def test_ref_and_icon(self):
+        self.assertEqual(N.ref({"$ref": "Wood"}), "Wood")
+        self.assertEqual(N.ref({"$asset": "Mat"}), "Mat")
+        self.assertIsNone(N.ref("Wood"))
+        self.assertIsNone(N.ref(None))
+        self.assertEqual(N.icon({"$sprite": "Sword (gold)"}), "Sword__gold_")
+        self.assertIsNone(N.icon({"$ref": "Wood"}))
+
+    def test_prune(self):
+        self.assertEqual(N.prune({"a": 0, "b": 0.0, "c": False, "d": "", "e": [], "f": {}, "g": None,
+                                  "h": {"x": 0}, "keep": 1, "t": True, "s": "x"}),
+                         {"keep": 1, "t": True, "s": "x"})
+        # list elements are pruned inside but never dropped, so ranges like [0, 1000] survive
+        self.assertEqual(N.prune({"r": [0, 1000], "l": [{"a": 0, "b": 2}]}), {"r": [0, 1000], "l": [{"b": 2}]})
+
+    def test_damage_maps(self):
+        self.assertEqual(N.damages({"m_slash": 5, "m_fire": 0}), {"slash": 5})
+        self.assertEqual(N.damages(None), {})
+        self.assertEqual(N.modifiers({"m_fire": "Weak", "m_frost": "Normal"}), {"fire": "Weak"})
+        self.assertEqual(N.modifier_list([{"m_type": "Fire", "m_modifier": "Resistant"},
+                                          {"m_type": "Pierce", "m_modifier": "Normal"}]), {"fire": "Resistant"})
+
+    def test_drop_table(self):
+        self.assertIsNone(N.drop_table(None))
+        self.assertIsNone(N.drop_table(fixture.drop_table()))
+        t = N.drop_table(fixture.drop_table(("Ore", 1, 2, 1), ("vfx_Poof", 1, 1, 1), dropMax=3))
+        self.assertEqual(t["max"], 3)
+        self.assertEqual([d["item"] for d in t["items"]], ["Ore"])
+        self.assertEqual(N.skipped_refs, {"vfx_Poof"})
+
+    def test_requirements(self):
+        r = N.requirements([fixture.req("Ingot", 4, 2, recover=False), fixture.req("Fish", upgrader=True),
+                            {**fixture.req("x"), "m_resItem": None}])
+        self.assertEqual([x["item"] for x in r], ["Ingot", "Fish"])
+        self.assertTrue(r[0]["noRecover"])
+        self.assertTrue(r[1]["upgrader"])
+
+    def test_has_component_without_fields(self):
+        p = fixture.prefab("P", fixture.comp("Player", {}), fixture.comp("Player", {"m_x": 1}, path="child"))
+        self.assertTrue(N.has(p, "Player"))
+        self.assertEqual(N.comp(p, "Player"), {})  # falsy: why has() exists
+        self.assertFalse(N.has(fixture.prefab("Q", fixture.comp("Player", {}, path="child")), "Player"))
+
+
+class Entities(FixtureCase):
+    def test_item_fields(self):
+        i = N.item("Sword", N.PREFABS["Sword"])
+        self.assertEqual(i["name"], "Test Sword")
+        self.assertEqual(i["variants"], ["Sword", "Sword__gold_"])
+        self.assertFalse(i["internal"])
+        self.assertEqual(i["damages"], {"slash": 30, "fire": 5})
+        self.assertEqual(i["modifiers"], {"movement": -0.05})
+        self.assertEqual(i["set"], {"name": "tester", "size": 2, "effect": "SE_Fizz"})
+        self.assertEqual(i["durability"]["max"], 100)
+        self.assertIsNone(i["secondaryAttack"])  # no animation = no attack
+
+    def test_item_without_icon_is_internal(self):
+        self.assertTrue(N.item("Bite", N.PREFABS["Bite"])["internal"])
+
+    def test_creature_splits_attacks_and_equipment(self):
+        c = N.creature("Raider", N.PREFABS["Raider"])
+        self.assertEqual(c["attacks"], ["Bite"])
+        self.assertEqual(c["equipment"], ["FW_Helmet"])
+        self.assertEqual([d["item"] for d in c["drops"]], ["Ore"])
+        self.assertIn("vfx_Poof", N.skipped_refs)
+        self.assertEqual(c["tameable"]["food"], ["Fish"])
+
+    def test_player_is_not_a_creature(self):
+        self.assertIsNone(N.creature("Player", N.PREFABS["Player"]))
+        self.assertFalse(N.is_creature("Player"))
+        self.assertTrue(N.is_creature("Raider"))
+
+    def test_station_extension(self):
+        tools = N.piece_tools()
+        a = N.piece("Anvil", N.PREFABS["Anvil"], tools)
+        self.assertEqual((a["extends"], a["station"], a["tools"]), ("Bench", "Bench", ["Hammer"]))
+        b = N.piece("Bench", N.PREFABS["Bench"], tools)
+        self.assertIsNone(b["extends"])
+        self.assertEqual(b["craftingStation"]["buildRange"], 20)
+
+    def test_processing_skips_incomplete_conversions(self):
+        p = N.processing("Kiln", N.PREFABS["Kiln"])
+        self.assertEqual([(x["from"], x["to"], x["fuel"]) for x in p], [("Ore", "Ingot", "Wood")])
+
+    def test_sources(self):
+        self.assertIsNone(N.source("Boulder", N.PREFABS["Boulder"]))  # yields nothing
+        self.assertIsNone(N.source("Wood", N.PREFABS["Wood"]))
+        bush = N.source("Bush", N.PREFABS["Bush"])
+        self.assertEqual((bush["kind"], bush["name"], bush["pickable"]["item"]), ("pickable", "Twig Bush", "Wood"))
+        rock = N.source("OreRock", N.PREFABS["OreRock"])
+        self.assertEqual(rock["minToolTier"], 2)
+
+    def test_status_effect_diffs_against_defaults(self):
+        defaults = {d["type"]: d["fields"] for d in N.load("status_effect_defaults.json")}
+        e = N.status_effect(N.load("status_effects.json")[0], defaults)
+        self.assertEqual(e["name"], "Fizzy")
+        self.assertEqual(e["duration"], 300)
+        # changed gameplay fields only; presentation (startMessage, icon, name) never in stats
+        self.assertEqual(set(e["stats"]), {"mods", "healthRegenMultiplier", "percentigeDamageModifiers"})
+        self.assertEqual(e["stats"]["mods"], {"poison": "Resistant"})
+        self.assertEqual(e["stats"]["percentigeDamageModifiers"], {"fire": 0.1})
+
+    def test_spawns_filtered(self):
+        s = N.spawns()
+        self.assertEqual(len(s), 1)  # disabled, devDisabled and non-creature spawners dropped
+        self.assertEqual((s[0]["creature"], s[0]["biomes"]), ("Raider", ["Meadows", "BlackForest"]))
+
+
+class EnemyOnly(FixtureCase):
+    def flags(self):
+        items = [i for n, p in N.PREFABS.items() if p["isItem"] and (i := N.item(n, p))]
+        creatures = [c for n, p in N.PREFABS.items() if (c := N.creature(n, p))]
+        recipes = [N.recipe(r) for r in N.load("recipes.json")]
+        procs = [x for n, p in N.PREFABS.items() for x in N.processing(n, p)]
+        sources = [s for n, p in N.PREFABS.items() if not p["isItem"] and (s := N.source(n, p))]
+        pieces = [x for n, p in N.PREFABS.items() if (x := N.piece(n, p, {}))]
+        N.mark_enemy_only(items, creatures, recipes, procs, sources, pieces)
+        return {i["id"] for i in items if i.get("enemyOnly")}
+
+    def test_flags(self):
+        flagged = self.flags()
+        self.assertIn("FW_Helmet", flagged)    # carried by Raider, unobtainable
+        self.assertIn("SP_Helmet", flagged)    # prefixed copy of craftable Helmet, same name
+        self.assertNotIn("SP_Sword", flagged)  # different name: not a copy
+        self.assertNotIn("Fish", flagged)      # unobtainable here, but not enemy gear
+        self.assertNotIn("Bite", flagged)      # internal, handled separately
+        self.assertNotIn("Helmet", flagged)
+
+
+class BuildId(FixtureCase):
+    def test_env_wins(self):
+        with mock.patch.dict(os.environ, {"MIMIR_STEAM_BUILDID": " 42 "}):
+            self.assertEqual(N.steam_build_id(), "42")
+
+    def test_carried_over_from_meta(self):
+        with mock.patch.dict(os.environ, {"MIMIR_STEAM_BUILDID": ""}):
+            self.out.mkdir(parents=True, exist_ok=True)
+            (self.out / "meta.json").write_text('{"steamBuildId": "7"}')
+            try:
+                self.assertEqual(N.steam_build_id(), "7")
+            finally:
+                (self.out / "meta.json").unlink()
+            self.assertEqual(N.steam_build_id(), "")
+
+
+class Golden(unittest.TestCase):
+    """normalize.main on the fixture must reproduce tests/golden/ exactly (and be deterministic)."""
+
+    def test_golden(self):
+        with tempfile.TemporaryDirectory() as tmp, mock.patch.dict(os.environ, {"MIMIR_STEAM_BUILDID": "1"}):
+            raw = fixture.write_dump(Path(tmp) / "raw")
+            out = Path(tmp) / "out"
+            with mock.patch("sys.stdout"):
+                self.assertEqual(N.main([str(raw), str(out)]), 0)
+            got = {f.name: f.read_text(encoding="utf-8") for f in sorted(out.glob("*.json"))}
+        if os.environ.get("MIMIR_UPDATE_GOLDEN"):
+            GOLDEN.mkdir(exist_ok=True)
+            for f in GOLDEN.glob("*.json"):
+                f.unlink()
+            for name, body in got.items():
+                (GOLDEN / name).write_text(body, encoding="utf-8")
+            self.skipTest("golden files rewritten")
+        want = {f.name: f.read_text(encoding="utf-8") for f in sorted(GOLDEN.glob("*.json"))}
+        self.assertEqual(sorted(got), sorted(want), "output files differ from tests/golden/")
+        for name in want:
+            with self.subTest(file=name):
+                self.assertEqual(json.loads(got[name]), json.loads(want[name]))
+                self.assertEqual(got[name], want[name])  # formatting too: data/ diffs must stay readable
+
+
+if __name__ == "__main__":
+    unittest.main()

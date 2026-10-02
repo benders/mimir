@@ -1,0 +1,196 @@
+[
+ {
+  "id": "Bite",
+  "name": "Bite",
+  "type": "OneHandedWeapon",
+  "internal": true,
+  "weight": 1.0,
+  "stack": 1,
+  "maxQuality": 1,
+  "damages": {
+   "pierce": 12
+  },
+  "backstab": 1,
+  "parryBonus": 1,
+  "attack": {
+   "type": "Horizontal"
+  }
+ },
+ {
+  "id": "FW_Helmet",
+  "name": "Pot Helm",
+  "type": "Helmet",
+  "icon": "Helmet",
+  "weight": 1.0,
+  "stack": 1,
+  "maxQuality": 1,
+  "backstab": 1,
+  "armor": 8,
+  "parryBonus": 1,
+  "enemyOnly": true
+ },
+ {
+  "id": "Fish",
+  "name": "Glimfish",
+  "type": "Material",
+  "icon": "Fish",
+  "weight": 1.0,
+  "stack": 1,
+  "maxQuality": 1,
+  "backstab": 1,
+  "parryBonus": 1
+ },
+ {
+  "id": "Hammer",
+  "name": "Mallet",
+  "type": "Tool",
+  "icon": "Hammer",
+  "weight": 1.0,
+  "stack": 1,
+  "maxQuality": 1,
+  "backstab": 1,
+  "parryBonus": 1,
+  "buildTable": "_HammerTable"
+ },
+ {
+  "id": "Helmet",
+  "name": "Pot Helm",
+  "type": "Helmet",
+  "icon": "Helmet",
+  "weight": 1.0,
+  "stack": 1,
+  "maxQuality": 1,
+  "backstab": 1,
+  "armor": 4,
+  "armorPerLevel": 2,
+  "parryBonus": 1
+ },
+ {
+  "id": "Ingot",
+  "name": "Ingot",
+  "type": "Material",
+  "icon": "Ingot",
+  "weight": 1.0,
+  "stack": 30,
+  "maxQuality": 1,
+  "backstab": 1,
+  "parryBonus": 1
+ },
+ {
+  "id": "Mead",
+  "name": "Fizz Mead",
+  "type": "Consumable",
+  "icon": "Mead",
+  "weight": 1.0,
+  "stack": 1,
+  "maxQuality": 1,
+  "backstab": 1,
+  "parryBonus": 1,
+  "consumeEffect": "SE_Fizz"
+ },
+ {
+  "id": "Mystery",
+  "name": "$item_missing",
+  "type": "Material",
+  "internal": true,
+  "weight": 1.0,
+  "stack": 1,
+  "maxQuality": 1,
+  "backstab": 1,
+  "parryBonus": 1
+ },
+ {
+  "id": "Ore",
+  "name": "Rustore",
+  "type": "Material",
+  "icon": "Ore",
+  "weight": 1.0,
+  "stack": 30,
+  "maxQuality": 1,
+  "noTeleport": true,
+  "backstab": 1,
+  "parryBonus": 1
+ },
+ {
+  "id": "SP_Helmet",
+  "name": "Pot Helm",
+  "type": "Helmet",
+  "icon": "Helmet",
+  "weight": 1.0,
+  "stack": 1,
+  "maxQuality": 1,
+  "backstab": 1,
+  "parryBonus": 1,
+  "enemyOnly": true
+ },
+ {
+  "id": "SP_Sword",
+  "name": "Other Sword",
+  "type": "OneHandedWeapon",
+  "icon": "Sword",
+  "weight": 1.0,
+  "stack": 1,
+  "maxQuality": 1,
+  "backstab": 1,
+  "parryBonus": 1
+ },
+ {
+  "id": "Sword",
+  "name": "Test Sword",
+  "description": "Sharp <b>enough</b>.",
+  "type": "OneHandedWeapon",
+  "icon": "Sword",
+  "variants": [
+   "Sword",
+   "Sword__gold_"
+  ],
+  "weight": 1.0,
+  "stack": 1,
+  "maxQuality": 4,
+  "skill": "Swords",
+  "damages": {
+   "slash": 30,
+   "fire": 5
+  },
+  "damagesPerLevel": {
+   "slash": 6
+  },
+  "backstab": 1,
+  "block": 10,
+  "blockPerLevel": 0.5,
+  "parryBonus": 1,
+  "durability": {
+   "max": 100,
+   "perLevel": 50,
+   "drain": 1,
+   "repairable": true
+  },
+  "attack": {
+   "type": "Horizontal",
+   "stamina": 10
+  },
+  "modifiers": {
+   "movement": -0.05
+  },
+  "damageModifiers": {
+   "fire": "Resistant"
+  },
+  "set": {
+   "name": "tester",
+   "size": 2,
+   "effect": "SE_Fizz"
+  }
+ },
+ {
+  "id": "Wood",
+  "name": "Twig",
+  "description": "A stick.",
+  "type": "Material",
+  "icon": "Wood",
+  "weight": 1.0,
+  "stack": 50,
+  "maxQuality": 1,
+  "backstab": 1,
+  "parryBonus": 1
+ }
+]

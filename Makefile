@@ -9,7 +9,7 @@ BRANCH ?= public
 REMOTE ?= nic@mini
 export MIMIR_BRANCH := $(BRANCH)
 
-.PHONY: help server buildid bepinex plugin dump icons extract remote-extract verify data verify-data site serve check check-local clean decompile
+.PHONY: help server buildid bepinex plugin dump icons extract remote-extract verify data verify-data site serve test check check-local clean decompile
 
 help:
 	@grep -E '^[a-z-]+:.*## ' $(MAKEFILE_LIST) | awk -F':.*## ' '{printf "  %-12s %s\n", $$1, $$2}'
@@ -55,6 +55,10 @@ site: ## Build the static site from $(DATA_DIR) + icons -> .cache/site/$(BRANCH)
 
 serve: site ## Build the site and serve it on http://localhost:8000
 	python3 -m http.server -d $(SITE_DIR) 8000
+
+test: ## Offline tests: unit + golden files (tests/), site smoke test, verify committed data/
+	python3 -m unittest discover -s tests
+	scripts/verify_data.py data .cache/no-icons
 
 check: remote-extract verify data verify-data ## Full end-to-end on $(REMOTE): extract, verify, normalize, verify
 

@@ -1,0 +1,78 @@
+[
+ {
+  "id": "Anvil",
+  "name": "Anvil",
+  "icon": "Anvil",
+  "enabled": true,
+  "category": "Crafting",
+  "tools": [
+   "Hammer"
+  ],
+  "station": "Bench",
+  "resources": [
+   {
+    "item": "Ingot",
+    "amount": 4,
+    "noRecover": true
+   }
+  ],
+  "health": 400,
+  "material": "Wood",
+  "damageModifiers": {
+   "fire": "Weak"
+  },
+  "extends": "Bench"
+ },
+ {
+  "id": "Bench",
+  "name": "Bench",
+  "icon": "Bench",
+  "enabled": true,
+  "category": "Crafting",
+  "tools": [
+   "Hammer"
+  ],
+  "resources": [
+   {
+    "item": "Wood",
+    "amount": 10
+   }
+  ],
+  "health": 400,
+  "material": "Wood",
+  "damageModifiers": {
+   "fire": "Weak"
+  },
+  "craftingStation": {
+   "name": "Bench",
+   "buildRange": 20,
+   "requiresRoof": true
+  }
+ },
+ {
+  "id": "Kiln",
+  "name": "Kiln",
+  "icon": "Kiln",
+  "enabled": true,
+  "category": "Misc",
+  "tools": [
+   "Hammer"
+  ],
+  "station": "Bench",
+  "resources": [
+   {
+    "item": "Wood",
+    "amount": 5
+   }
+  ],
+  "comfort": {
+   "value": 1,
+   "group": "Fire"
+  },
+  "health": 400,
+  "material": "Wood",
+  "damageModifiers": {
+   "fire": "Weak"
+  }
+ }
+]

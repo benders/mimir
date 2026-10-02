@@ -35,6 +35,8 @@ GitHub Pages. Pushes to `data/`, `site/` or `build-site.py` redeploy. Only the p
 - `make remote-extract`, `make verify`, `make data`, `make verify-data` — the individual steps.
 - `make data verify-data` — re-normalize from the existing local dump (no remote needed); use this when
   changing `normalize.py`.
+- `make test` — offline unit + golden-file tests (`tests/`, stdlib `unittest`), site smoke test, `verify_data.py`
+  on committed `data/`. Seconds; run it after any script change. `MIMIR_UPDATE_GOLDEN=1` to accept output changes.
 - `make check-local` — the same plus the site, on this host (x86_64 Linux only; what CI runs).
 - `make buildid` — print the current public Steam build id.
 - `make site` / `make serve` — build the static site (offline, from `data/` + local icons); serve on :8000.
@@ -82,8 +84,9 @@ page; creatures list them under `attacks` (weapons) and `equipment`.
 
 ## Working on this repo
 
-- After changing `normalize.py`: `make data verify-data` (offline, uses the local dump), then review and commit
-  the `data/` diff together with the code. `data/` must always be regenerated, never hand-edited.
+- After changing `normalize.py`: `make test`, then `make data verify-data` (offline, uses the local dump), then
+  review and commit the `data/` diff together with the code. New normalize behaviour gets a case in
+  `tests/fixture.py` (invented values only, never real game data) and a unit test. `data/` must always be regenerated, never hand-edited.
 - After changing the plugin: bump `PluginVersion` in `Plugin.cs`, then `make check` (needs the runner).
 - Answering game-mechanics questions: read the decompiled code (`make decompile`, `.cache/decompiled/`) and
   cite file/method. Record verified findings in `docs/mechanics.md`. Data values come from `data/`, behavior
@@ -96,5 +99,5 @@ page; creatures list them under `attacks` (weapons) and `equipment`.
 
 Tracked in [GitHub Issues](https://github.com/benders/mimir/issues), labelled by area (`site`, `ci`, `data`,
 `tests`, `mechanics`). File new findings (e.g. data bugs found while spot-checking) as issues, not in docs.
-Top items: data-correctness fixes (`data` label), `make test` with offline unit tests (#11), mechanics
-pages (`mechanics` label).
+Top items: data-correctness fixes (`data` label), `make test` in CI on every push (#12), mechanics pages
+(`mechanics` label).

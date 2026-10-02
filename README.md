@@ -13,6 +13,7 @@ dedicated server, so the site follows game updates without anyone editing pages 
 | `data/` | The extracted game data as compact JSON (items, recipes, creatures, spawns, pieces, ...). Browse it or diff it between game versions. |
 | `plugin/` | A small BepInEx plugin that dumps game data from inside a running server. |
 | `scripts/` | The pipeline: download, run, extract icons, normalize, verify, build the site. |
+| `tests/` | Offline tests (`make test`): a tiny synthetic dump, golden output, site smoke test. |
 | `site/` | Stylesheet and search script copied into the built site. |
 | `docs/mechanics.md` | Notes on game mechanics (blocking, drop rates, ...) taken from the game code. |
 | [Architecture.md](Architecture.md) | How it all fits together, with diagrams. |

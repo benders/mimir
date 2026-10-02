@@ -1,0 +1,27 @@
+[
+ {
+  "creature": "Raider",
+  "list": "Spawns",
+  "biomes": [
+   "Meadows",
+   "BlackForest"
+  ],
+  "biomeArea": "Everything",
+  "maxSpawned": 2,
+  "interval": 90,
+  "chance": 50,
+  "groupSize": [
+   1,
+   1
+  ],
+  "levels": [
+   1,
+   2
+  ],
+  "night": true,
+  "altitude": [
+   0,
+   1000
+  ]
+ }
+]

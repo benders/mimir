@@ -1,0 +1,22 @@
+{
+ "gameVersion": "0.0.1",
+ "networkVersion": 1,
+ "dumperVersion": "test",
+ "steamBuildId": "1",
+ "counts": {
+  "items": 13,
+  "recipes": 3,
+  "creatures": 1,
+  "spawns": 1,
+  "pieces": 3,
+  "processing": 1,
+  "sources": 2,
+  "status_effects": 1
+ },
+ "unresolvedTokens": [
+  "item_missing"
+ ],
+ "skippedRefs": [
+  "vfx_Poof"
+ ]
+}

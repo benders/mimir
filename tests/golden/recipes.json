@@ -1,0 +1,56 @@
+[
+ {
+  "id": "Recipe_Sword",
+  "item": "Sword",
+  "amount": 1,
+  "enabled": true,
+  "station": "Bench",
+  "stationLevel": 2,
+  "resources": [
+   {
+    "item": "Ingot",
+    "amount": 4,
+    "perLevel": 2
+   },
+   {
+    "item": "Wood",
+    "amount": 2,
+    "perLevel": 1
+   },
+   {
+    "item": "Fish",
+    "amount": 1,
+    "perLevel": 1,
+    "upgrader": true
+   }
+  ]
+ },
+ {
+  "id": "Recipe_Helmet",
+  "item": "Helmet",
+  "amount": 1,
+  "enabled": true,
+  "station": "Bench",
+  "stationLevel": 1,
+  "resources": [
+   {
+    "item": "Ingot",
+    "amount": 2,
+    "perLevel": 1
+   }
+  ]
+ },
+ {
+  "id": "Recipe_Mead",
+  "item": "Mead",
+  "amount": 3,
+  "enabled": true,
+  "stationLevel": 1,
+  "resources": [
+   {
+    "item": "Fish",
+    "amount": 1
+   }
+  ]
+ }
+]

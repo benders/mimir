@@ -1,0 +1,217 @@
+"""A tiny synthetic raw dump, in the plugin's output layout, for the normalize tests.
+
+Every name and number here is invented: no game data is checked in. Builders fill in the fields
+normalize.py reads with neutral defaults; keyword arguments override them (m_ prefix added).
+
+    write_dump(Path("/tmp/raw"))   # manifest.json, prefabs/, recipes.json, localization/, ...
+"""
+import json
+from pathlib import Path
+
+
+def R(name):
+    return {"$ref": name}
+
+
+def S(name):
+    return {"$sprite": name}
+
+
+def m(**kw):
+    return {f"m_{k}": v for k, v in kw.items()}
+
+
+def comp(type_, fields, path=None):
+    c = {"type": type_, "fields": fields}
+    if path:
+        c["path"] = path
+    return c
+
+
+def prefab(name, *components, is_item=False):
+    return {"name": name, "isItem": is_item, "components": [comp("ZNetView", {}), *components]}
+
+
+DAMAGES = {f"m_{k}": 0 for k in
+           ("damage", "blunt", "slash", "pierce", "chop", "pickaxe", "fire", "frost", "lightning", "poison", "spirit")}
+
+
+def damages(**kw):
+    return {**DAMAGES, **m(**kw)}
+
+
+def attack(**kw):
+    return {**m(attackAnimation="swing", attackType="Horizontal", attackStamina=10, attackEitr=0, attackHealth=0,
+                attackHealthPercentage=0, damageMultiplier=1, attackProjectile=None, projectiles=1), **m(**kw)}
+
+
+def shared(**kw):
+    return {**m(
+        name="", description="", itemType="Material", icons=[], weight=1.0, value=0, maxStackSize=1, maxQuality=1,
+        teleportable=True, dlc="", skillType="None", toolTier=0, damages=damages(), damagesPerLevel=damages(),
+        attackForce=0, backstabBonus=1, armor=0, armorPerLevel=0, blockPower=0, blockPowerPerLevel=0,
+        deflectionForce=0, deflectionForcePerLevel=0, timedBlockBonus=1, useDurability=False, maxDurability=100,
+        durabilityPerLevel=50, useDurabilityDrain=1, canBeReparied=True, attack=attack(attackAnimation=""),
+        secondaryAttack=attack(attackAnimation=""), ammoType="", food=0, foodStamina=0, foodEitr=0, foodBurnTime=0,
+        foodRegen=0, isDrink=False, movementModifier=0, damageModifiers=[], equipStatusEffect=None,
+        consumeStatusEffect=None, setName="", setSize=0, setStatusEffect=None, buildPieces=None), **m(**kw)}
+
+
+def item(name, /, **kw):
+    return prefab(name, comp("ItemDrop", {"m_itemData": {"m_shared": shared(**kw)}}), is_item=True)
+
+
+def character(type_="Humanoid", **kw):
+    return comp(type_, {**m(
+        name="", faction="ForestMonsters", group="", boss=False, defeatSetGlobalKey="", health=100,
+        damageModifiers={f"m_{k}": "Normal" for k in ("blunt", "slash", "pierce", "fire", "frost", "poison")},
+        walkSpeed=2, runSpeed=5, swimSpeed=2, canSwim=True, flyFastSpeed=0, flying=False, defaultItems=[],
+        randomWeapon=[], randomShield=[], randomArmor=[], randomSets=[], randomItems=[]), **m(**kw)})
+
+
+def char_drop(item, **kw):
+    return {**m(prefab=R(item), amountMin=1, amountMax=1, chance=1, onePerPlayer=False, levelMultiplier=True), **m(**kw)}
+
+
+def req(item, amount=1, per_level=0, recover=True, upgrader=None):
+    r = m(resItem=R(item), amount=amount, amountPerLevel=per_level, recover=recover)
+    if upgrader is not None:
+        r["m_upgraderResource"] = upgrader
+    return r
+
+
+def piece(name, /, *extra, **kw):
+    return prefab(name, comp("Piece", {**m(
+        name="", description="", icon=None, enabled=True, category="Misc", craftingStation=None, resources=[],
+        comfort=0, comfortGroup="None", onlyInBiome="None", dlc=""), **m(**kw)}),
+        comp("WearNTear", m(health=400, materialType="Wood", damages={"m_fire": "Weak", "m_chop": "Normal"})),
+        *extra)
+
+
+def drop_table(*drops, **kw):
+    return {**m(dropMin=1, dropMax=1, dropChance=1, oneOfEach=False,
+                drops=[m(item=R(i), stackMin=lo, stackMax=hi, weight=w) for i, lo, hi, w in drops]), **m(**kw)}
+
+
+def recipe(name, item, station=None, level=1, resources=(), /, **kw):
+    return {"name": name, "type": "Recipe", "fields": {**m(
+        item=R(item), amount=1, enabled=True, craftingStation=R(station) if station else None,
+        minStationLevel=level, repairStation=None, noCraftOnlyUpgrade=False, requireOnlyOneIngredient=False,
+        resources=list(resources)), **m(**kw)}}
+
+
+def spawner(creature, **kw):
+    return {**m(prefab=R(creature), enabled=True, devDisabled=False, biome="Meadows", biomeArea="Everything",
+                maxSpawned=2, spawnInterval=90, spawnChance=50, groupSizeMin=1, groupSizeMax=1, minLevel=1, maxLevel=3,
+                spawnAtDay=True, spawnAtNight=True, minAltitude=0, maxAltitude=1000, requiredGlobalKey="",
+                requiredEnvironments=[], huntPlayer=False), **m(**kw)}
+
+
+SE_DEFAULTS = m(name="", tooltip="", icon=None, category="", ttl=0, cooldown=0, startMessage="", mods=[],
+                healthRegenMultiplier=1, staminaRegenMultiplier=1, percentigeDamageModifiers=damages(),
+                runStaminaDrainModifier=0)
+
+TRANSLATIONS = {
+    "item_wood": "Twig", "item_wood_desc": "A stick.",
+    "item_ore": "Rustore", "item_ingot": "Ingot",
+    "item_sword": "Test Sword", "item_sword_desc": "Sharp <b>enough</b>.",
+    "item_helmet": "Pot Helm", "item_fish": "Glimfish", "item_mead": "Fizz Mead",
+    "item_hammer": "Mallet", "item_bite": "Bite",
+    "enemy_raider": "Raider", "piece_bench": "Bench", "piece_anvil": "Anvil", "piece_kiln": "Kiln",
+    "piece_bush": "Twig Bush", "piece_orerock": "Ore Rock", "se_fizz": "Fizzy",
+}
+
+
+def prefabs():
+    return [
+        item("Wood", name="$item_wood", description="$item_wood_desc", icons=[S("Wood")], maxStackSize=50),
+        item("Ore", name="$item_ore", icons=[S("Ore")], maxStackSize=30, teleportable=False),
+        item("Ingot", name="$item_ingot", icons=[S("Ingot")], maxStackSize=30),
+        item("Sword", name="$item_sword", description="$item_sword_desc", itemType="OneHandedWeapon",
+             icons=[S("Sword"), S("Sword (gold)")], maxQuality=4, skillType="Swords",
+             damages=damages(slash=30, fire=5), damagesPerLevel=damages(slash=6), blockPower=10,
+             blockPowerPerLevel=0.5, useDurability=True, attack=attack(), movementModifier=-0.05,
+             damageModifiers=[{"m_type": "Fire", "m_modifier": "Resistant"},
+                              {"m_type": "Pierce", "m_modifier": "Normal"}],
+             setName="tester", setSize=2, setStatusEffect=R("SE_Fizz")),
+        item("Helmet", name="$item_helmet", itemType="Helmet", icons=[S("Helmet")], armor=4, armorPerLevel=2),
+        item("FW_Helmet", name="$item_helmet", itemType="Helmet", icons=[S("Helmet")], armor=8),  # carried copy
+        item("SP_Helmet", name="$item_helmet", itemType="Helmet", icons=[S("Helmet")]),  # unused copy
+        item("SP_Sword", name="Other Sword", itemType="OneHandedWeapon", icons=[S("Sword")]),  # renamed: not a copy
+        item("Fish", name="$item_fish", icons=[S("Fish")]),  # no source modelled: stays visible
+        item("Mead", name="$item_mead", itemType="Consumable", icons=[S("Mead")], consumeStatusEffect=R("SE_Fizz")),
+        item("Hammer", name="$item_hammer", itemType="Tool", icons=[S("Hammer")], buildPieces=R("_HammerTable")),
+        item("Bite", name="$item_bite", itemType="OneHandedWeapon", attack=attack(attackStamina=0),
+             damages=damages(pierce=12)),  # no icon: internal attack item
+        item("Mystery", name="$item_missing"),  # unresolved token
+        prefab("Raider",
+               character(name="$enemy_raider", health=150, defaultItems=[R("Bite"), R("FW_Helmet")],
+                         damageModifiers={"m_blunt": "Weak", "m_slash": "Normal", "m_fire": "Immune"}),
+               comp("CharacterDrop", {"m_drops": [char_drop("Ore", amountMax=3, chance=0.5),
+                                                   char_drop("vfx_Poof")]}),  # effect prefab: skipped ref
+               comp("Tameable", m(fedDuration=600, tamingTime=1800, commandable=True)),
+               comp("MonsterAI", m(consumeItems=[R("Fish")], afraidOfFire=True, avoidWater=False))),
+        prefab("Player", character(name="Player"), comp("Player", {})),
+        piece("Bench", comp("CraftingStation", m(name="$piece_bench", rangeBuild=20, craftRequireRoof=True,
+                                                 craftRequireFire=False)),
+              name="$piece_bench", icon=S("Bench"), category="Crafting", resources=[req("Wood", 10)]),
+        piece("Anvil", comp("StationExtension", m(craftingStation=R("Bench"))),
+              name="$piece_anvil", icon=S("Anvil"), category="Crafting", craftingStation=R("Bench"),
+              resources=[req("Ingot", 4, recover=False)]),
+        piece("Kiln", comp("Smelter", m(conversion=[m(**{"from": R("Ore"), "to": R("Ingot")}),
+                                                    m(**{"from": R("Ore"), "to": None})],
+                                        secPerProduct=30, fuelItem=R("Wood"), fuelPerProduct=2, maxOre=10)),
+              name="$piece_kiln", icon=S("Kiln"), craftingStation=R("Bench"), resources=[req("Wood", 5)],
+              comfort=1, comfortGroup="Fire"),
+        prefab("Bush", comp("Pickable", m(overrideName="$piece_bush", itemPrefab=R("Wood"), amount=2,
+                                          respawnTimeMinutes=240, extraDrops=drop_table())),
+               comp("HoverText", m(text="ignored, Pickable has a name"))),
+        prefab("OreRock", comp("MineRock", m(name="$piece_orerock", health=50, minToolTier=2,
+                                             damageModifiers={"m_chop": "Immune", "m_pickaxe": "Normal"},
+                                             dropItems=drop_table(("Ore", 1, 2, 1), ("Wood", 1, 1, 0.25),
+                                                                  ("vfx_Poof", 1, 1, 1), dropMax=3)))),
+        prefab("Boulder", comp("MineRock", m(name="Boulder", health=50, minToolTier=0, damageModifiers={},
+                                             dropItems=drop_table()))),  # yields nothing: not a source
+        prefab("vfx_Poof"),
+    ]
+
+
+def recipes():
+    return [
+        recipe("Recipe_Sword", "Sword", "Bench", 2, [req("Ingot", 4, 2), req("Wood", 2, 1),
+                                                     req("Fish", 1, 1, upgrader=True)]),
+        recipe("Recipe_Helmet", "Helmet", "Bench", resources=[req("Ingot", 2, 1)]),
+        recipe("Recipe_Mead", "Mead", amount=3, resources=[req("Fish", 1)]),
+    ]
+
+
+def status_effects():
+    return [{"name": "SE_Fizz", "type": "SE_Stats", "fields": {**SE_DEFAULTS, **m(
+        name="$se_fizz", tooltip="Bubbly.", icon=S("Mead"), category="mead", ttl=300, startMessage="ignored",
+        mods=[{"m_type": "Poison", "m_modifier": "Resistant"}], healthRegenMultiplier=1.5,
+        percentigeDamageModifiers=damages(fire=0.1), runStaminaDrainModifier=0)}}]
+
+
+def write_dump(raw: Path) -> Path:
+    def dump(rel, data):
+        f = raw / rel
+        f.parent.mkdir(parents=True, exist_ok=True)
+        f.write_text(json.dumps(data, indent=1), encoding="utf-8")
+
+    dump("manifest.json", {"gameVersion": "0.0.1", "networkVersion": 1, "dumperVersion": "test",
+                           "generatedAt": "2000-01-01T00:00:00Z", "counts": {}, "warnings": []})
+    dump("localization/English.json", TRANSLATIONS)
+    for p in prefabs():
+        dump(f"prefabs/{p['name']}.json", p)
+    dump("recipes.json", recipes())
+    dump("status_effects.json", status_effects())
+    dump("status_effect_defaults.json", [{"name": "SE_Stats", "type": "SE_Stats", "fields": SE_DEFAULTS}])
+    dump("piece_tables.json", [{"name": "_HammerTable", "type": "PieceTable",
+                                "fields": {"m_pieces": [R("Bench"), R("Anvil"), R("Kiln")]}}])
+    dump("world/SpawnSystemList.json", [{"name": "Spawns", "type": "SpawnSystemList", "fields": {"m_spawners": [
+        spawner("Raider", biome="Meadows, BlackForest", minLevel=1, maxLevel=2, spawnAtDay=False),
+        spawner("Raider", enabled=False),
+        spawner("Raider", devDisabled=True),
+        spawner("vfx_Poof"),
+    ]}}])
+    return raw

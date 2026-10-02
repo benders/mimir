@@ -4,3 +4,4 @@ bin/
 obj/
 *.dll
 .DS_Store
+__pycache__/

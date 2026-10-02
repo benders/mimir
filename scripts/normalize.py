@@ -20,8 +20,8 @@ from collections import defaultdict
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
-RAW = Path(sys.argv[1]) if len(sys.argv) > 1 else ROOT / ".cache/dump/public/raw"
-OUT = Path(sys.argv[2]) if len(sys.argv) > 2 else ROOT / "data"
+RAW = ROOT / ".cache/dump/public/raw"
+OUT = ROOT / "data"
 
 TOKEN = re.compile(r"\$([A-Za-z0-9_]+)")
 unresolved: set[str] = set()
@@ -32,7 +32,22 @@ def load(rel: str):
     return json.loads((RAW / rel).read_text(encoding="utf-8"))
 
 
-TRANSLATIONS: dict[str, str] = load("localization/English.json")
+TRANSLATIONS: dict[str, str] = {}
+PREFABS: dict[str, dict] = {}
+
+
+def setup(raw: Path, out: Path = OUT) -> None:
+    """Point the module at a raw dump and load the shared tables (also used by the tests)."""
+    global RAW, OUT
+    RAW, OUT = Path(raw), Path(out)
+    TRANSLATIONS.clear()
+    TRANSLATIONS.update(load("localization/English.json"))
+    PREFABS.clear()
+    for f in sorted((RAW / "prefabs").glob("*.json")):
+        p = json.loads(f.read_text(encoding="utf-8"))
+        PREFABS[p["name"]] = p
+    unresolved.clear()
+    skipped_refs.clear()
 
 
 def text(s: str | None) -> str | None:
@@ -116,19 +131,13 @@ def requirements(lst: list | None) -> list:
 # ---------------------------------------------------------------------------------------------
 # Prefabs
 
-PREFABS: dict[str, dict] = {}
-for f in sorted((RAW / "prefabs").glob("*.json")):
-    p = json.loads(f.read_text(encoding="utf-8"))
-    PREFABS[p["name"]] = p
-
-
 def is_item(name: str | None) -> bool:
     return name in PREFABS and PREFABS[name]["isItem"]
 
 
 def is_creature(name: str | None) -> bool:
     p = PREFABS.get(name)
-    return p is not None and bool(comp(p, "Humanoid") or comp(p, "Character")) and not comp(p, "Player")
+    return p is not None and (has(p, "Humanoid") or has(p, "Character")) and not has(p, "Player")
 
 
 def keep(name: str | None, *preds) -> bool:
@@ -139,6 +148,11 @@ def keep(name: str | None, *preds) -> bool:
         return True
     skipped_refs.add(name)
     return False
+
+
+def has(p: dict, type_name: str) -> bool:
+    """Whether the prefab's root object has the component (comp() is falsy for one without fields)."""
+    return comp(p, type_name) is not None
 
 
 def comp(p: dict, type_name: str) -> dict | None:
@@ -249,7 +263,7 @@ def mark_enemy_only(items: list, creatures: list, recipes: list, procs: list, so
 
 def creature(name: str, p: dict) -> dict | None:
     c = comp(p, "Humanoid") or comp(p, "Character")
-    if not c or comp(p, "Player"):
+    if c is None or has(p, "Player"):
         return None
     carried = set()
     for v in (c.get("m_defaultItems") or []) + (c.get("m_randomWeapon") or []) + (c.get("m_randomShield") or []) \
@@ -480,7 +494,8 @@ def steam_build_id() -> str:
     return json.loads(old.read_text()).get("steamBuildId", "") if old.exists() else ""
 
 
-def main() -> int:
+def main(argv: list[str]) -> int:
+    setup(argv[0] if argv else RAW, argv[1] if len(argv) > 1 else OUT)
     print(f"normalizing {RAW} -> {OUT}")
     OUT.mkdir(parents=True, exist_ok=True)
     m = load("manifest.json")
@@ -496,7 +511,7 @@ def main() -> int:
         if pc := piece(name, p, tools):
             pieces.append(pc)
         procs.extend(processing(name, p))
-        if not p["isItem"] and not comp(p, "Piece") and (s := source(name, p)):
+        if not p["isItem"] and not has(p, "Piece") and (s := source(name, p)):
             sources.append(s)
 
     recipes = [recipe(r) for r in load("recipes.json")]
@@ -524,4 +539,4 @@ def main() -> int:
 
 
 if __name__ == "__main__":
-    sys.exit(main())
+    sys.exit(main(sys.argv[1:]))

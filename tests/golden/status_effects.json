@@ -1,0 +1,20 @@
+[
+ {
+  "id": "SE_Fizz",
+  "type": "SE_Stats",
+  "name": "Fizzy",
+  "tooltip": "Bubbly.",
+  "icon": "Mead",
+  "category": "mead",
+  "duration": 300,
+  "stats": {
+   "mods": {
+    "poison": "Resistant"
+   },
+   "healthRegenMultiplier": 1.5,
+   "percentigeDamageModifiers": {
+    "fire": 0.1
+   }
+  }
+ }
+]

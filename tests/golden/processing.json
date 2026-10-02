@@ -1,0 +1,13 @@
+[
+ {
+  "station": "Kiln",
+  "kind": "smelter",
+  "from": "Ore",
+  "to": "Ingot",
+  "amount": 1,
+  "time": 30,
+  "fuel": "Wood",
+  "fuelPerProduct": 2,
+  "capacity": 10
+ }
+]

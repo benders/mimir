@@ -144,5 +144,12 @@ Each stage has an invariant check that fails loudly, so an agent can run the who
 | dump | `MIMIR_DUMP_OK` in the log, `manifest.json` present, no warnings, no skipped or unsupported fields |
 | raw dump | `verify.py`: counts, known vanilla content (Bronze Sword recipe, Troll drops, Eikthyr boss, ...), icons |
 | data | `verify_data.py`: counts, every reference resolves, every icon exists, known content |
+| site | `build-site.py` fails on any broken internal link |
 
 The checks test invariants rather than exact values, so balance patches pass but broken extraction fails.
+
+`make test` covers the code without a dump or the network: `tests/fixture.py` builds a tiny synthetic raw dump
+(invented names and numbers, no game data), `tests/test_normalize.py` unit-tests the normalize helpers on it and
+compares a full normalize run with `tests/golden/`, `tests/test_site.py` builds the site from the golden output,
+and `verify_data.py` re-checks the committed `data/`. After a deliberate output change, regenerate the golden
+files with `MIMIR_UPDATE_GOLDEN=1 python3 -m unittest tests/test_normalize.py` and review their diff.
