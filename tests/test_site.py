@@ -85,6 +85,8 @@ class Site(unittest.TestCase):
         names = [e[0] for e in json.loads((self.out / "search.json").read_text(encoding="utf-8"))]
         self.assertEqual(names.count("Raider"), 1)
         self.assertIn("Raider (archer)", names)
+        self.assertIn("<h1>Bench</h1>", (self.out / "pieces/Bench.html").read_text(encoding="utf-8"))  # buildable
+        self.assertIn("<h1>Bench (world)</h1>", (self.out / "pieces/piece_bench.html").read_text(encoding="utf-8"))
         self.assertIn("<h1>Chief</h1>", (self.out / "creatures/Chief.html").read_text(encoding="utf-8"))
 
     def test_search_index(self):

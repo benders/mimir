@@ -143,11 +143,12 @@ Each world, location or dungeon spawn spreads one unit of weight over its biomes
 earliest on a tie. Raids and spawns everywhere don't count, offspring and hatchlings inherit from their parents, and
 creatures with no biome (boss phases, summons, unplaced prefabs) go under Other. Bosses list first in their biome.
 
-Creatures and items that share a display name are told apart in the site build. Identical copies (same data apart
+Creatures, items and pieces that share a display name are told apart in the site build. Identical copies (same data apart
 from the id, e.g. `Troll` / `Troll_sleeping`, `FishRaw` / `FishAnglerRaw`) merge into the page of the shortest id;
 links, relations and spawns of the copy go there. The rest get a qualifier from the id words they don't share,
 mapped through `QUALIFIERS` in `build-site.py`: "Skeleton (Swamp, no bow)", "Kall Fimbulbringer (phase 2)",
-"Plains Pie Picnic (material)".
+"Plains Pie Picnic (material)". For pieces, the one buildable piece of a group keeps the plain name; other pieces
+whose ids add nothing are labelled "(world)".
 
 ## Verification
 

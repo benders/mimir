@@ -179,12 +179,14 @@ used_in_recipe = defaultdict(list)   # item -> recipes consuming it
 # Identical copies (Troll / Troll_sleeping, FishRaw / FishAnglerRaw) merge into one page; the rest get a qualifier
 # derived from the words their ids don't share: "Skeleton (Swamp, no bow)", "Kall Fimbulbringer (phase 2)".
 
-ID_WORDS = {"NoArcher": "noarcher", "NonSleeping": "nonsleeping", "DualWield": "dualwield", "DeepNorth": "deepnorth"}
+ID_WORDS = {"NoArcher": "noarcher", "NonSleeping": "nonsleeping", "DualWield": "dualwield", "DeepNorth": "deepnorth",
+            "deepNorth": "deepnorth"}
 QUALIFIERS = {  # id word -> label; "" drops the word
     "sleeping": "sleeping", "nonsleeping": "awake", "nochest": "raid", "ranged": "archer", "noarcher": "no bow",
     "deepnorth": "Deep North", "meadows": "Meadows", "mountains": "Mountain", "mountain": "Mountain",
     "swamps": "Swamp", "swamp": "Swamp", "ashlands": "Ashlands", "dualwield": "dual-wield", "p2": "phase 2",
-    "p3": "phase 3", "fem": "female", "tenta": "",
+    "p3": "phase 3", "fem": "female", "tenta": "", "piece": "", "treasure": "", "loot": "", "notext": "no text",
+    "itemstand": "", "itemstandh": "horizontal",
 }
 
 
@@ -198,12 +200,18 @@ def qualifier(id_: str, others: list[str], name: str) -> str:
     """Words of the id that the other ids (or the display name) don't have, as labels."""
     common = set.intersection(*(set(id_words(o)) for o in [id_, *others]))
     named = set(re.findall(r"[a-z0-9]+", name.lower()))
-    labels = [QUALIFIERS.get(w, w) for w in id_words(id_) if w not in common and w not in named]
+    stems = {re.sub(r"\d+$", "", w) for o in others for w in id_words(o)}
+
+    def label(w):
+        m = re.fullmatch(r"([a-z]+?)0*(\d+)", w)  # corner2 next to corner, gift1 next to gift2: just the number
+        return m.group(2) if m and m.group(1) in stems else QUALIFIERS.get(w, w)
+    labels = [label(w) for w in id_words(id_) if w not in common and w not in named]
     return ", ".join(dict.fromkeys(x for x in labels if x))
 
 
-def variants(kind: str, coll: dict, shown) -> tuple[dict, dict]:
-    """(merged id -> page id, page id -> qualifier) for entities whose display names collide."""
+def variants(kind: str, coll: dict, shown, primary=lambda id_: False, other="") -> tuple[dict, dict]:
+    """(merged id -> page id, page id -> qualifier) for entities whose display names collide. When exactly one
+    of a group is `primary` (the buildable piece), it keeps the plain name, and the others are at least `other`."""
     groups = defaultdict(list)
     for id_ in sorted(coll):
         if shown(id_):
@@ -220,8 +228,13 @@ def variants(kind: str, coll: dict, shown) -> tuple[dict, dict]:
                 merged[id_] = twin
             else:
                 pages.append(id_)
+        main = [p for p in pages if primary(p)]
         for id_ in pages:
+            if len(main) == 1 and id_ == main[0]:
+                continue
             q = qualifier(id_, [o for o in pages if o != id_], name) if len(pages) > 1 else ""
+            if len(main) == 1 and not q:
+                q = other
             if q:
                 qualified[id_] = q
         labels = defaultdict(list)
@@ -238,6 +251,8 @@ MERGED, QUALIFIED = {k: {} for k in KINDS}, {k: {} for k in KINDS}
 MERGED["item"], QUALIFIED["item"] = variants(
     "item", ITEMS, lambda i: not (ITEMS[i].get("internal") or ITEMS[i].get("enemyOnly")))
 MERGED["creature"], QUALIFIED["creature"] = variants("creature", CREATURES, lambda c: True)
+MERGED["piece"], QUALIFIED["piece"] = variants("piece", PIECES, lambda p: True, lambda p: bool(PIECES[p].get("tools")),
+                                                    "world")
 
 
 def variant_note(kind: str, id_: str) -> str:
@@ -307,7 +322,8 @@ for s in SPAWNS:
     spawns_of[s["creature"]].append(s)
 for kind, rels in {"item": [crafted_by, used_in_recipe, used_in_piece, process_from, process_to, dropped_by,
                             found_in, tool_pieces],
-                   "creature": [spawns_of]}.items():
+                   "creature": [spawns_of],
+                   "piece": [crafted_at, built_at, extensions, process_at]}.items():
     for variant, page_id in MERGED[kind].items():  # a merged copy's relations show on its page
         for rel in rels:
             if variant in rel:
@@ -764,7 +780,8 @@ def index_pages() -> None:
 
     groups = defaultdict(list)
     for p in PIECES.values():
-        groups[words(p.get("category", "Misc"))].append(p["id"])
+        if has_page("piece", p["id"]):
+            groups[words(p.get("category", "Misc"))].append(p["id"])
     body = "<h1>Pieces</h1>" + "".join(f"<h2>{esc(g)}</h2>{grid('piece', groups[g])}" for g in sorted(groups))
     page("pieces/index.html", "Pieces", body)
 
@@ -837,7 +854,8 @@ def main() -> int:
         if has_page("creature", c["id"]):
             creature_page(c)
     for p in PIECES.values():
-        piece_page(p)
+        if has_page("piece", p["id"]):
+            piece_page(p)
     for e in EFFECTS.values():
         effect_page(e)
     index_pages()

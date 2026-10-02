@@ -74,5 +74,20 @@
   "damageModifiers": {
    "fire": "Weak"
   }
+ },
+ {
+  "id": "piece_bench",
+  "name": "Bench",
+  "icon": "Bench",
+  "enabled": true,
+  "category": "Misc",
+  "comfort": {
+   "value": 2
+  },
+  "health": 400,
+  "material": "Wood",
+  "damageModifiers": {
+   "fire": "Weak"
+  }
  }
 ]

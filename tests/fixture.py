@@ -192,6 +192,7 @@ def prefabs():
         piece("Bench", comp("CraftingStation", m(name="$piece_bench", rangeBuild=20, craftRequireRoof=True,
                                                  craftRequireFire=False)),
               name="$piece_bench", icon=S("Bench"), category="Crafting", resources=[req("Wood", 10)]),
+        piece("piece_bench", name="$piece_bench", icon=S("Bench"), comfort=2),  # not buildable: "Bench (world)"
         piece("Anvil", comp("StationExtension", m(craftingStation=R("Bench"))),
               name="$piece_anvil", icon=S("Anvil"), category="Crafting", craftingStation=R("Bench"),
               resources=[req("Ingot", 4, recover=False)]),
