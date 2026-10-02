@@ -1,0 +1,6548 @@
+[
+ {
+  "id": "Abomination",
+  "name": "Abomination",
+  "faction": "Undead",
+  "health": 800,
+  "damageModifiers": {
+   "blunt": "Resistant",
+   "pierce": "VeryResistant",
+   "chop": "Ignore",
+   "pickaxe": "Ignore",
+   "fire": "Weak",
+   "frost": "Immune",
+   "poison": "Immune",
+   "spirit": "Immune"
+  },
+  "speed": {
+   "walk": 4,
+   "run": 5,
+   "swim": 3
+  },
+  "attacks": [
+   "Abomination_attack1",
+   "Abomination_attack2",
+   "Abomination_attack3"
+  ],
+  "drops": [
+   {
+    "item": "TrophyAbomination",
+    "min": 1,
+    "max": 1,
+    "chance": 0.5
+   },
+   {
+    "item": "Root",
+    "min": 5,
+    "max": 5,
+    "chance": 1
+   },
+   {
+    "item": "Guck",
+    "min": 3,
+    "max": 5,
+    "chance": 1
+   }
+  ]
+ },
+ {
+  "id": "Asksvin",
+  "name": "Asksvin",
+  "faction": "Demon",
+  "group": "asksvin",
+  "health": 800,
+  "damageModifiers": {
+   "chop": "Ignore",
+   "pickaxe": "Ignore",
+   "fire": "Resistant",
+   "poison": "Resistant",
+   "spirit": "Immune"
+  },
+  "speed": {
+   "walk": 3,
+   "run": 9,
+   "swim": 3
+  },
+  "attacks": [
+   "Asksvin_Bite",
+   "Asksvin_Headbutt",
+   "Asksvin_Pounce"
+  ],
+  "drops": [
+   {
+    "item": "TrophyAsksvin",
+    "min": 1,
+    "max": 1,
+    "chance": 0.1
+   },
+   {
+    "item": "AskBladder",
+    "min": 1,
+    "max": 1,
+    "chance": 1,
+    "levelMultiplier": true
+   },
+   {
+    "item": "AskHide",
+    "min": 2,
+    "max": 3,
+    "chance": 1,
+    "levelMultiplier": true
+   },
+   {
+    "item": "AsksvinMeat",
+    "min": 2,
+    "max": 3,
+    "chance": 1,
+    "levelMultiplier": true
+   }
+  ],
+  "tameable": {
+   "fedDuration": 600,
+   "tamingTime": 1800,
+   "food": [
+    "Fiddleheadfern",
+    "MushroomSmokePuff",
+    "Vineberry"
+   ]
+  },
+  "avoidWater": true
+ },
+ {
+  "id": "Asksvin_hatchling",
+  "name": "Asksvin Hatchling",
+  "faction": "Undead",
+  "group": "asksvin",
+  "health": 400,
+  "damageModifiers": {
+   "chop": "Ignore",
+   "pickaxe": "Ignore",
+   "fire": "Resistant",
+   "poison": "Resistant",
+   "spirit": "Immune"
+  },
+  "speed": {
+   "walk": 3,
+   "run": 9
+  },
+  "drops": [
+   {
+    "item": "AskBladder",
+    "min": 1,
+    "max": 1,
+    "chance": 0.2,
+    "levelMultiplier": true
+   },
+   {
+    "item": "AskHide",
+    "min": 1,
+    "max": 1,
+    "chance": 0.2,
+    "levelMultiplier": true
+   },
+   {
+    "item": "AsksvinMeat",
+    "min": 1,
+    "max": 1,
+    "chance": 0.2,
+    "levelMultiplier": true
+   }
+  ],
+  "avoidWater": true
+ },
+ {
+  "id": "Aspect_Bonemass",
+  "name": "Aspect of the Writhing Dead",
+  "faction": "Boss",
+  "health": 1600,
+  "damageModifiers": {
+   "blunt": "Weak",
+   "slash": "Resistant",
+   "pierce": "VeryResistant",
+   "chop": "Ignore",
+   "pickaxe": "Ignore",
+   "fire": "VeryResistant",
+   "frost": "Weak",
+   "poison": "Immune",
+   "nonPlayer": "Immune"
+  },
+  "speed": {
+   "walk": 5,
+   "run": 4,
+   "swim": 2
+  },
+  "attacks": [
+   "aspect_bonemass_attack_aoe",
+   "aspect_bonemass_attack_punch",
+   "aspect_bonemass_attack_throw"
+  ],
+  "avoidWater": true
+ },
+ {
+  "id": "Aspect_Eikthyr",
+  "name": "Aspect of the Lightning Stag",
+  "faction": "Boss",
+  "health": 3000,
+  "damageModifiers": {
+   "chop": "Ignore",
+   "pickaxe": "Ignore",
+   "nonPlayer": "Immune"
+  },
+  "speed": {
+   "walk": 5,
+   "run": 8,
+   "swim": 4
+  },
+  "attacks": [
+   "aspect_Eikthyr_antler",
+   "aspect_Eikthyr_charge",
+   "aspect_Eikthyr_stomp"
+  ],
+  "avoidWater": true
+ },
+ {
+  "id": "Aspect_Elder",
+  "name": "Aspect of the Living Forest",
+  "faction": "Boss",
+  "health": 1600,
+  "damageModifiers": {
+   "chop": "Ignore",
+   "pickaxe": "Ignore",
+   "fire": "VeryWeak",
+   "poison": "Immune",
+   "spirit": "Immune",
+   "nonPlayer": "Immune"
+  },
+  "speed": {
+   "walk": 5,
+   "run": 6
+  },
+  "attacks": [
+   "aspect_gd_king_rootspawn",
+   "aspect_gd_king_scream",
+   "aspect_gd_king_shoot",
+   "aspect_gd_king_stomp"
+  ],
+  "avoidWater": true
+ },
+ {
+  "id": "Aspect_Fader",
+  "name": "Aspect of the Emerald Flame",
+  "faction": "Boss",
+  "health": 1700,
+  "damageModifiers": {
+   "pierce": "Resistant",
+   "chop": "Ignore",
+   "pickaxe": "Ignore",
+   "fire": "Immune",
+   "spirit": "Immune",
+   "nonPlayer": "Immune"
+  },
+  "speed": {
+   "walk": 4,
+   "run": 8,
+   "swim": 4
+  },
+  "attacks": [
+   "aspect_Fader_Bite",
+   "aspect_Fader_Claw_Left",
+   "aspect_Fader_Claw_Right",
+   "aspect_Fader_Fissure",
+   "aspect_Fader_Flamebreath",
+   "aspect_Fader_Spin",
+   "aspect_Fader_WallOfFire"
+  ],
+  "avoidWater": true
+ },
+ {
+  "id": "Aspect_Moder",
+  "name": "Aspect of the Dragon Mother",
+  "faction": "Boss",
+  "health": 1500,
+  "damageModifiers": {
+   "chop": "Ignore",
+   "pickaxe": "Ignore",
+   "fire": "Weak",
+   "frost": "Immune",
+   "spirit": "Immune",
+   "nonPlayer": "Immune"
+  },
+  "speed": {
+   "walk": 5,
+   "run": 6,
+   "swim": 4,
+   "fly": 20
+  },
+  "attacks": [
+   "aspect_dragon_bite",
+   "aspect_dragon_claw_left",
+   "aspect_dragon_claw_right",
+   "aspect_dragon_coldbreath",
+   "aspect_dragon_spit_shotgun",
+   "aspect_dragon_taunt"
+  ],
+  "avoidWater": true
+ },
+ {
+  "id": "Aspect_SeekerQueen",
+  "name": "Aspect of the Crawling Matriarch",
+  "faction": "Boss",
+  "health": 1700,
+  "damageModifiers": {
+   "pierce": "Resistant",
+   "chop": "Ignore",
+   "pickaxe": "Ignore",
+   "spirit": "Immune",
+   "nonPlayer": "Immune"
+  },
+  "speed": {
+   "walk": 2,
+   "run": 8,
+   "swim": 4
+  },
+  "attacks": [
+   "aspect_SeekerQueen_Bite",
+   "aspect_SeekerQueen_PierceAOE",
+   "aspect_SeekerQueen_Rush",
+   "aspect_SeekerQueen_Slap",
+   "aspect_SeekerQueen_Spit"
+  ],
+  "avoidWater": true
+ },
+ {
+  "id": "Aspect_TentaRoot",
+  "name": "Root",
+  "faction": "Boss",
+  "health": 20,
+  "damageModifiers": {
+   "chop": "Ignore",
+   "pickaxe": "Ignore",
+   "fire": "Weak",
+   "frost": "Resistant",
+   "poison": "Immune",
+   "nonPlayer": "Immune"
+  },
+  "attacks": [
+   "tentaroot_attack"
+  ],
+  "avoidWater": true
+ },
+ {
+  "id": "Aspect_Yagluth",
+  "name": "Aspect of the Twisted Soul",
+  "faction": "Boss",
+  "health": 1700,
+  "damageModifiers": {
+   "pierce": "VeryResistant",
+   "chop": "Ignore",
+   "pickaxe": "Ignore",
+   "fire": "Resistant",
+   "poison": "Immune",
+   "nonPlayer": "Immune"
+  },
+  "speed": {
+   "walk": 5,
+   "run": 4,
+   "swim": 1.5
+  },
+  "attacks": [
+   "aspect_GoblinKing_Beam",
+   "aspect_GoblinKing_Nova",
+   "aspect_GoblinKing_Taunt"
+  ],
+  "avoidWater": true
+ },
+ {
+  "id": "Barka",
+  "name": "Barka",
+  "faction": "DeepNorth",
+  "health": 2200,
+  "damageModifiers": {
+   "blunt": "Resistant",
+   "slash": "Resistant",
+   "pierce": "Resistant",
+   "pickaxe": "Ignore",
+   "fire": "Weak",
+   "frost": "Resistant",
+   "lightning": "Resistant",
+   "poison": "Immune",
+   "spirit": "Immune"
+  },
+  "speed": {
+   "walk": 4,
+   "run": 6
+  },
+  "attacks": [
+   "Barka_Backslam",
+   "Barka_HeavySwing",
+   "Barka_SlamDrive",
+   "Barka_WhipFlurry",
+   "Barka_WhipSlam"
+  ],
+  "drops": [
+   {
+    "item": "TrophyBarka",
+    "min": 1,
+    "max": 1,
+    "chance": 0.1
+   },
+   {
+    "item": "BarkaBranch",
+    "min": 1,
+    "max": 1,
+    "chance": 1
+   }
+  ],
+  "avoidWater": true
+ },
+ {
+  "id": "Bat",
+  "name": "Bat",
+  "faction": "MountainMonsters",
+  "defeatKey": "KilledBat",
+  "health": 10,
+  "damageModifiers": {
+   "blunt": "Resistant",
+   "slash": "Resistant",
+   "pierce": "Resistant",
+   "chop": "Ignore",
+   "pickaxe": "Ignore",
+   "fire": "Weak",
+   "frost": "Immune",
+   "poison": "Immune",
+   "spirit": "Weak"
+  },
+  "speed": {
+   "walk": 5,
+   "run": 5,
+   "fly": 10
+  },
+  "attacks": [
+   "bat_melee"
+  ],
+  "drops": [
+   {
+    "item": "LeatherScraps",
+    "min": 1,
+    "max": 1,
+    "chance": 0.5
+   }
+  ],
+  "avoidWater": true
+ },
+ {
+  "id": "Bat_Swamp",
+  "name": "Bat",
+  "faction": "Undead",
+  "defeatKey": "KilledBat",
+  "health": 10,
+  "damageModifiers": {
+   "blunt": "Resistant",
+   "slash": "Resistant",
+   "pierce": "Resistant",
+   "chop": "Ignore",
+   "pickaxe": "Ignore",
+   "fire": "Weak",
+   "frost": "Immune",
+   "poison": "Immune",
+   "spirit": "Weak"
+  },
+  "speed": {
+   "walk": 5,
+   "run": 5,
+   "fly": 10
+  },
+  "attacks": [
+   "bat_melee"
+  ],
+  "drops": [
+   {
+    "item": "LeatherScraps",
+    "min": 1,
+    "max": 1,
+    "chance": 0.5
+   }
+  ],
+  "avoidWater": true
+ },
+ {
+  "id": "Bjorn",
+  "name": "Bear",
+  "faction": "ForestMonsters",
+  "group": "bjorn",
+  "health": 500,
+  "damageModifiers": {
+   "blunt": "Resistant",
+   "pierce": "Resistant",
+   "chop": "Ignore",
+   "pickaxe": "Ignore",
+   "fire": "Weak",
+   "frost": "Resistant",
+   "spirit": "Immune"
+  },
+  "speed": {
+   "walk": 1.5,
+   "run": 7,
+   "swim": 3
+  },
+  "attacks": [
+   "bjorn_bite",
+   "bjorn_claws",
+   "bjorn_slam",
+   "bjorn_swipe_combo",
+   "bjorn_swipe_l",
+   "bjorn_swipe_r"
+  ],
+  "drops": [
+   {
+    "item": "BjornPaw",
+    "min": 1,
+    "max": 1,
+    "chance": 1,
+    "levelMultiplier": true
+   },
+   {
+    "item": "BjornMeat",
+    "min": 2,
+    "max": 3,
+    "chance": 1,
+    "levelMultiplier": true
+   },
+   {
+    "item": "BjornHide",
+    "min": 4,
+    "max": 5,
+    "chance": 1,
+    "levelMultiplier": true
+   },
+   {
+    "item": "TrophyBjorn",
+    "min": 1,
+    "max": 1,
+    "chance": 0.1
+   }
+  ],
+  "avoidWater": true
+ },
+ {
+  "id": "Bjorn_sleeping",
+  "name": "Bear",
+  "faction": "ForestMonsters",
+  "group": "bjorn",
+  "health": 500,
+  "damageModifiers": {
+   "blunt": "Resistant",
+   "pierce": "Resistant",
+   "chop": "Ignore",
+   "pickaxe": "Ignore",
+   "fire": "Weak",
+   "frost": "Resistant",
+   "spirit": "Immune"
+  },
+  "speed": {
+   "walk": 1.5,
+   "run": 7,
+   "swim": 3
+  },
+  "attacks": [
+   "bjorn_bite",
+   "bjorn_claws",
+   "bjorn_slam",
+   "bjorn_swipe_combo",
+   "bjorn_swipe_l",
+   "bjorn_swipe_r"
+  ],
+  "drops": [
+   {
+    "item": "BjornPaw",
+    "min": 1,
+    "max": 1,
+    "chance": 1,
+    "levelMultiplier": true
+   },
+   {
+    "item": "BjornMeat",
+    "min": 2,
+    "max": 3,
+    "chance": 1,
+    "levelMultiplier": true
+   },
+   {
+    "item": "BjornHide",
+    "min": 4,
+    "max": 5,
+    "chance": 1,
+    "levelMultiplier": true
+   },
+   {
+    "item": "TrophyBjorn",
+    "min": 1,
+    "max": 1,
+    "chance": 0.1
+   }
+  ],
+  "avoidWater": true
+ },
+ {
+  "id": "Bjorn_spiritcaller",
+  "faction": "Players",
+  "health": 1500,
+  "damageModifiers": {
+   "blunt": "Resistant",
+   "pierce": "Resistant",
+   "chop": "Ignore",
+   "pickaxe": "Ignore",
+   "fire": "Weak",
+   "frost": "Resistant",
+   "spirit": "Immune"
+  },
+  "speed": {
+   "walk": 1.5,
+   "run": 7,
+   "swim": 3
+  },
+  "attacks": [
+   "bjorn_swipe_l",
+   "spiritbjorn_bite",
+   "spiritbjorn_claws",
+   "spiritbjorn_slam",
+   "spiritbjorn_swipe_combo",
+   "spiritbjorn_swipe_r"
+  ],
+  "tameable": {
+   "fedDuration": 600,
+   "tamingTime": 1800,
+   "food": [
+    "Blueberries"
+   ]
+  },
+  "avoidWater": true
+ },
+ {
+  "id": "Blob",
+  "name": "Blob",
+  "faction": "Undead",
+  "health": 50,
+  "damageModifiers": {
+   "blunt": "Weak",
+   "slash": "Resistant",
+   "pierce": "Resistant",
+   "chop": "Ignore",
+   "pickaxe": "Ignore",
+   "fire": "Resistant",
+   "frost": "Weak",
+   "lightning": "Weak",
+   "poison": "Immune"
+  },
+  "speed": {
+   "walk": 5,
+   "run": 2
+  },
+  "attacks": [
+   "blob_attack_aoe"
+  ],
+  "drops": [
+   {
+    "item": "TrophyBlob",
+    "min": 1,
+    "max": 1,
+    "chance": 0.1
+   },
+   {
+    "item": "Ooze",
+    "min": 1,
+    "max": 2,
+    "chance": 1,
+    "levelMultiplier": true
+   }
+  ],
+  "avoidWater": true
+ },
+ {
+  "id": "BlobAspect",
+  "name": "Blob",
+  "faction": "Undead",
+  "health": 50,
+  "damageModifiers": {
+   "blunt": "Weak",
+   "slash": "Resistant",
+   "pierce": "Resistant",
+   "chop": "Ignore",
+   "pickaxe": "Ignore",
+   "fire": "Resistant",
+   "frost": "Weak",
+   "lightning": "Weak",
+   "poison": "Immune"
+  },
+  "speed": {
+   "walk": 5,
+   "run": 2
+  },
+  "attacks": [
+   "blob_attack_aoe"
+  ],
+  "drops": [
+   {
+    "item": "TrophyBlob",
+    "min": 1,
+    "max": 1,
+    "chance": 0.1
+   },
+   {
+    "item": "Ooze",
+    "min": 1,
+    "max": 2,
+    "chance": 1,
+    "levelMultiplier": true
+   }
+  ],
+  "avoidWater": true
+ },
+ {
+  "id": "BlobElite",
+  "name": "Oozer",
+  "faction": "Undead",
+  "health": 150,
+  "damageModifiers": {
+   "blunt": "Weak",
+   "slash": "Resistant",
+   "pierce": "Resistant",
+   "chop": "Ignore",
+   "pickaxe": "Ignore",
+   "fire": "Resistant",
+   "frost": "Weak",
+   "lightning": "Weak",
+   "poison": "Immune"
+  },
+  "speed": {
+   "walk": 5,
+   "run": 2
+  },
+  "attacks": [
+   "blobelite_attack_aoe"
+  ],
+  "drops": [
+   {
+    "item": "Ooze",
+    "min": 2,
+    "max": 3,
+    "chance": 1,
+    "levelMultiplier": true
+   },
+   {
+    "item": "IronScrap",
+    "min": 1,
+    "max": 1,
+    "chance": 0.33,
+    "levelMultiplier": true
+   },
+   {
+    "item": "TrophyBlob",
+    "min": 1,
+    "max": 1,
+    "chance": 0.1
+   },
+   {
+    "item": "Blob",
+    "min": 2,
+    "max": 2,
+    "chance": 1,
+    "levelMultiplier": true
+   }
+  ],
+  "avoidWater": true
+ },
+ {
+  "id": "BlobFrost",
+  "name": "Frost Blob",
+  "faction": "MountainMonsters",
+  "health": 50,
+  "damageModifiers": {
+   "blunt": "Weak",
+   "slash": "Resistant",
+   "pierce": "Resistant",
+   "chop": "Ignore",
+   "pickaxe": "Ignore",
+   "fire": "Weak",
+   "frost": "VeryResistant",
+   "lightning": "Weak",
+   "poison": "Immune"
+  },
+  "speed": {
+   "walk": 5,
+   "run": 2
+  },
+  "attacks": [
+   "blob_frost_attack_aoe"
+  ],
+  "drops": [
+   {
+    "item": "Crystal",
+    "min": 1,
+    "max": 2,
+    "chance": 1,
+    "levelMultiplier": true
+   },
+   {
+    "item": "TrophyBlob_Frost",
+    "min": 1,
+    "max": 1,
+    "chance": 0.1
+   }
+  ],
+  "avoidWater": true
+ },
+ {
+  "id": "BlobLava",
+  "name": "Lava Blob",
+  "faction": "Demon",
+  "health": 300,
+  "damageModifiers": {
+   "blunt": "Weak",
+   "pierce": "Resistant",
+   "chop": "Ignore",
+   "pickaxe": "Ignore",
+   "fire": "Immune",
+   "frost": "Weak",
+   "lightning": "Weak",
+   "poison": "Resistant"
+  },
+  "speed": {
+   "walk": 5,
+   "run": 2
+  },
+  "attacks": [
+   "blobLava_attack_aoe"
+  ],
+  "drops": [
+   {
+    "item": "ProustitePowder",
+    "min": 1,
+    "max": 2,
+    "chance": 1,
+    "levelMultiplier": true
+   },
+   {
+    "item": "SulfurStone",
+    "min": 1,
+    "max": 2,
+    "chance": 1,
+    "levelMultiplier": true
+   },
+   {
+    "item": "TrophyBlob_Lava",
+    "min": 1,
+    "max": 1,
+    "chance": 0.1
+   }
+  ],
+  "avoidWater": true
+ },
+ {
+  "id": "BlobMork",
+  "name": "Shapeless Pulp",
+  "faction": "DeepNorth",
+  "health": 150,
+  "damageModifiers": {
+   "blunt": "Weak",
+   "slash": "Resistant",
+   "pierce": "Resistant",
+   "chop": "Ignore",
+   "pickaxe": "Ignore",
+   "fire": "Resistant",
+   "frost": "Weak",
+   "lightning": "Weak",
+   "poison": "Immune"
+  },
+  "speed": {
+   "walk": 5,
+   "run": 2
+  },
+  "attacks": [
+   "blobmork_attack_aoe"
+  ],
+  "drops": [
+   {
+    "item": "TrophyBlob_Morkhalla",
+    "min": 1,
+    "max": 1,
+    "chance": 0.1
+   },
+   {
+    "item": "BlobMorkMini",
+    "min": 1,
+    "max": 2,
+    "chance": 1,
+    "levelMultiplier": true
+   },
+   {
+    "item": "OozeMork",
+    "min": 1,
+    "max": 1,
+    "chance": 0.5
+   }
+  ],
+  "avoidWater": true
+ },
+ {
+  "id": "BlobMorkMini",
+  "name": "Tiny Pulp",
+  "faction": "DeepNorth",
+  "health": 50,
+  "damageModifiers": {
+   "blunt": "Weak",
+   "slash": "Resistant",
+   "pierce": "Resistant",
+   "chop": "Ignore",
+   "pickaxe": "Ignore",
+   "fire": "Resistant",
+   "frost": "Weak",
+   "lightning": "Weak",
+   "poison": "Immune"
+  },
+  "speed": {
+   "walk": 10,
+   "run": 4
+  },
+  "drops": [
+   {
+    "item": "OozeMork",
+    "min": 1,
+    "max": 1,
+    "chance": 0.25,
+    "levelMultiplier": true
+   }
+  ],
+  "avoidWater": true
+ },
+ {
+  "id": "BlobTar",
+  "name": "Growth",
+  "faction": "Undead",
+  "health": 100,
+  "damageModifiers": {
+   "blunt": "Weak",
+   "slash": "Resistant",
+   "pierce": "Resistant",
+   "chop": "Ignore",
+   "pickaxe": "Ignore",
+   "fire": "Weak",
+   "frost": "Resistant",
+   "poison": "Immune"
+  },
+  "speed": {
+   "walk": 5,
+   "run": 3,
+   "swim": 4
+  },
+  "attacks": [
+   "blobtar_attack"
+  ],
+  "drops": [
+   {
+    "item": "TrophyGrowth",
+    "min": 1,
+    "max": 1,
+    "chance": 0.1
+   },
+   {
+    "item": "Tar",
+    "min": 1,
+    "max": 1,
+    "chance": 1,
+    "levelMultiplier": true
+   }
+  ],
+  "avoidWater": true
+ },
+ {
+  "id": "Boar",
+  "name": "Boar",
+  "faction": "ForestMonsters",
+  "group": "boar",
+  "health": 10,
+  "damageModifiers": {
+   "chop": "Ignore",
+   "pickaxe": "Ignore",
+   "spirit": "Immune"
+  },
+  "speed": {
+   "walk": 5,
+   "run": 8,
+   "swim": 2
+  },
+  "attacks": [
+   "boar_base_attack"
+  ],
+  "drops": [
+   {
+    "item": "RawMeat",
+    "min": 1,
+    "max": 1,
+    "chance": 1,
+    "levelMultiplier": true
+   },
+   {
+    "item": "LeatherScraps",
+    "min": 1,
+    "max": 1,
+    "chance": 1,
+    "levelMultiplier": true
+   },
+   {
+    "item": "TrophyBoar",
+    "min": 1,
+    "max": 1,
+    "chance": 0.15
+   }
+  ],
+  "tameable": {
+   "fedDuration": 600,
+   "tamingTime": 1800,
+   "food": [
+    "Blueberries",
+    "Carrot",
+    "Mushroom",
+    "Onion",
+    "Raspberry",
+    "Turnip"
+   ]
+  },
+  "afraidOfFire": true,
+  "avoidWater": true
+ },
+ {
+  "id": "Boar_piggy",
+  "name": "Piggy",
+  "faction": "ForestMonsters",
+  "group": "boar",
+  "health": 10,
+  "damageModifiers": {
+   "chop": "Ignore",
+   "pickaxe": "Ignore",
+   "spirit": "Immune"
+  },
+  "speed": {
+   "walk": 5,
+   "run": 6,
+   "swim": 2
+  },
+  "afraidOfFire": true,
+  "avoidWater": true
+ },
+ {
+  "id": "Boar_spiritcaller",
+  "faction": "Players",
+  "health": 1000,
+  "damageModifiers": {
+   "chop": "Ignore",
+   "pickaxe": "Ignore",
+   "spirit": "Immune"
+  },
+  "speed": {
+   "walk": 5,
+   "run": 8,
+   "swim": 2
+  },
+  "attacks": [
+   "spiritboar_base_attack"
+  ],
+  "tameable": {
+   "fedDuration": 600,
+   "tamingTime": 1800,
+   "food": [
+    "Blueberries",
+    "Carrot",
+    "Mushroom",
+    "Onion",
+    "Raspberry",
+    "Turnip"
+   ]
+  },
+  "afraidOfFire": true,
+  "avoidWater": true
+ },
+ {
+  "id": "BogWitchKvastur",
+  "name": "Kvastur",
+  "faction": "Dverger",
+  "health": 700,
+  "damageModifiers": {
+   "chop": "Weak",
+   "pickaxe": "Ignore",
+   "fire": "VeryWeak",
+   "poison": "Immune",
+   "spirit": "Immune"
+  },
+  "speed": {
+   "walk": 5,
+   "run": 6,
+   "swim": 1.5
+  },
+  "attacks": [
+   "BogWitchKvastur_attack"
+  ],
+  "drops": [
+   {
+    "item": "Wood",
+    "min": 1,
+    "max": 1,
+    "chance": 1,
+    "levelMultiplier": true
+   },
+   {
+    "item": "Resin",
+    "min": 1,
+    "max": 1,
+    "chance": 1,
+    "levelMultiplier": true
+   },
+   {
+    "item": "TrophyKvastur",
+    "min": 1,
+    "max": 1,
+    "chance": 1
+   }
+  ],
+  "avoidWater": true
+ },
+ {
+  "id": "Bonemass",
+  "name": "Bonemass",
+  "faction": "Boss",
+  "boss": true,
+  "defeatKey": "defeated_bonemass",
+  "health": 5000,
+  "damageModifiers": {
+   "blunt": "Weak",
+   "slash": "Resistant",
+   "pierce": "VeryResistant",
+   "chop": "Ignore",
+   "pickaxe": "Ignore",
+   "fire": "VeryResistant",
+   "frost": "Weak",
+   "poison": "Immune"
+  },
+  "speed": {
+   "walk": 5,
+   "run": 4,
+   "swim": 2
+  },
+  "attacks": [
+   "bonemass_attack_aoe",
+   "bonemass_attack_punch",
+   "bonemass_attack_throw"
+  ],
+  "drops": [
+   {
+    "item": "TrophyBonemass",
+    "min": 1,
+    "max": 1,
+    "chance": 1
+   },
+   {
+    "item": "Wishbone",
+    "min": 1,
+    "max": 1,
+    "chance": 1,
+    "onePerPlayer": true
+   }
+  ],
+  "avoidWater": true
+ },
+ {
+  "id": "BonemawSerpent",
+  "name": "Bonemaw",
+  "faction": "Demon",
+  "health": 1100,
+  "damageModifiers": {
+   "chop": "Ignore",
+   "pickaxe": "Ignore",
+   "fire": "Immune",
+   "frost": "Weak",
+   "poison": "Resistant",
+   "spirit": "Immune"
+  },
+  "speed": {
+   "walk": 5,
+   "run": 8,
+   "swim": 12
+  },
+  "attacks": [
+   "BonemawSerpent_bite",
+   "BonemawSerpent_spit",
+   "BonemawSerpent_taunt"
+  ],
+  "drops": [
+   {
+    "item": "TrophyBonemawSerpent",
+    "min": 1,
+    "max": 1,
+    "chance": 0.33
+   },
+   {
+    "item": "BoneMawSerpentMeat",
+    "min": 6,
+    "max": 8,
+    "chance": 1,
+    "levelMultiplier": true
+   },
+   {
+    "item": "BonemawSerpentTooth",
+    "min": 8,
+    "max": 10,
+    "chance": 1,
+    "levelMultiplier": true
+   }
+  ]
+ },
+ {
+  "id": "Charred_Archer",
+  "name": "Charred Marksman",
+  "faction": "Demon",
+  "health": 200,
+  "damageModifiers": {
+   "pierce": "Resistant",
+   "chop": "Ignore",
+   "pickaxe": "Ignore",
+   "fire": "VeryResistant",
+   "poison": "Immune",
+   "spirit": "Weak"
+  },
+  "speed": {
+   "walk": 1.5,
+   "run": 4
+  },
+  "attacks": [
+   "Charred_HipCloth",
+   "charred_bow",
+   "charred_bow_volley"
+  ],
+  "drops": [
+   {
+    "item": "CharredBone",
+    "min": 1,
+    "max": 3,
+    "chance": 1,
+    "levelMultiplier": true
+   },
+   {
+    "item": "TrophyCharredArcher",
+    "min": 1,
+    "max": 1,
+    "chance": 0.05
+   }
+  ],
+  "avoidWater": true
+ },
+ {
+  "id": "Charred_Archer_Fader",
+  "name": "Summoned Charred Warrior",
+  "faction": "Demon",
+  "health": 50,
+  "damageModifiers": {
+   "pierce": "Resistant",
+   "chop": "Ignore",
+   "pickaxe": "Ignore",
+   "fire": "Immune",
+   "poison": "Immune",
+   "spirit": "Weak"
+  },
+  "speed": {
+   "walk": 1.5,
+   "run": 4
+  },
+  "attacks": [
+   "Charred_HipCloth",
+   "charred_bow_Fader",
+   "charred_bow_volley_Fader"
+  ],
+  "avoidWater": true
+ },
+ {
+  "id": "Charred_Mage",
+  "name": "Charred Warlock",
+  "faction": "Demon",
+  "health": 600,
+  "damageModifiers": {
+   "pierce": "Resistant",
+   "chop": "Ignore",
+   "pickaxe": "Ignore",
+   "fire": "VeryResistant",
+   "frost": "Resistant",
+   "poison": "Immune",
+   "spirit": "Weak"
+  },
+  "speed": {
+   "walk": 1.5,
+   "run": 4
+  },
+  "attacks": [
+   "Charred_HipCloth",
+   "Charred_MageCloths",
+   "charred_magestaff_fire",
+   "charred_magestaff_summon"
+  ],
+  "drops": [
+   {
+    "item": "CharredBone",
+    "min": 1,
+    "max": 3,
+    "chance": 1,
+    "levelMultiplier": true
+   },
+   {
+    "item": "TrophyCharredMage",
+    "min": 1,
+    "max": 1,
+    "chance": 0.05
+   }
+  ],
+  "avoidWater": true
+ },
+ {
+  "id": "Charred_Melee",
+  "name": "Charred Warrior",
+  "faction": "Demon",
+  "health": 600,
+  "damageModifiers": {
+   "pierce": "Resistant",
+   "chop": "Ignore",
+   "pickaxe": "Ignore",
+   "fire": "VeryResistant",
+   "poison": "Immune",
+   "spirit": "Weak"
+  },
+  "speed": {
+   "walk": 1.5,
+   "run": 4
+  },
+  "attacks": [
+   "Charred_HipCloth",
+   "charred_greatsword_feint",
+   "charred_greatsword_swing",
+   "charred_greatsword_thrust",
+   "charred_greatsword_thrustfeint"
+  ],
+  "drops": [
+   {
+    "item": "CharredBone",
+    "min": 1,
+    "max": 3,
+    "chance": 1,
+    "levelMultiplier": true
+   },
+   {
+    "item": "TrophyCharredMelee",
+    "min": 1,
+    "max": 1,
+    "chance": 0.05
+   }
+  ],
+  "avoidWater": true
+ },
+ {
+  "id": "Charred_Melee_Dyrnwyn",
+  "name": "<color=orange>Lord Reto</color>",
+  "faction": "Demon",
+  "health": 2500,
+  "damageModifiers": {
+   "pierce": "Resistant",
+   "chop": "Ignore",
+   "pickaxe": "Ignore",
+   "fire": "Resistant",
+   "frost": "Resistant",
+   "poison": "Immune",
+   "spirit": "Weak"
+  },
+  "speed": {
+   "walk": 1.5,
+   "run": 4
+  },
+  "attacks": [
+   "Charred_Breastplate",
+   "Charred_Helmet",
+   "Charred_HipCloth",
+   "charred_dyrnwyn_greatsword_feint",
+   "charred_dyrnwyn_greatsword_swing",
+   "charred_dyrnwyn_greatsword_thrust",
+   "charred_dyrnwyn_greatsword_thrustfeint"
+  ],
+  "drops": [
+   {
+    "item": "DyrnwynHiltFragment",
+    "min": 1,
+    "max": 1,
+    "chance": 1
+   }
+  ],
+  "avoidWater": true
+ },
+ {
+  "id": "Charred_Melee_Fader",
+  "name": "Summoned Charred Warrior",
+  "faction": "Demon",
+  "health": 50,
+  "damageModifiers": {
+   "pierce": "Resistant",
+   "chop": "Ignore",
+   "pickaxe": "Ignore",
+   "fire": "Immune",
+   "poison": "Immune",
+   "spirit": "Weak"
+  },
+  "speed": {
+   "walk": 1.5,
+   "run": 4
+  },
+  "attacks": [
+   "Charred_HipCloth",
+   "charred_fader_greatsword_feint",
+   "charred_fader_greatsword_swing",
+   "charred_fader_greatsword_thrust",
+   "charred_fader_greatsword_thrustfeint"
+  ],
+  "avoidWater": true
+ },
+ {
+  "id": "Charred_Twitcher",
+  "name": "Charred Twitcher",
+  "faction": "Demon",
+  "health": 220,
+  "damageModifiers": {
+   "pierce": "Resistant",
+   "chop": "Ignore",
+   "pickaxe": "Ignore",
+   "fire": "VeryResistant",
+   "poison": "Immune",
+   "spirit": "Weak"
+  },
+  "speed": {
+   "walk": 1,
+   "run": 6
+  },
+  "attacks": [
+   "charred_twitcher_scratch_l",
+   "charred_twitcher_scratch_r",
+   "charred_twitcher_throw"
+  ],
+  "drops": [
+   {
+    "item": "CharredBone",
+    "min": 1,
+    "max": 2,
+    "chance": 1,
+    "levelMultiplier": true
+   }
+  ],
+  "avoidWater": true
+ },
+ {
+  "id": "Charred_Twitcher_Summoned",
+  "name": "Summoned Twitcher",
+  "faction": "Demon",
+  "health": 50,
+  "damageModifiers": {
+   "pierce": "Resistant",
+   "chop": "Ignore",
+   "pickaxe": "Ignore",
+   "fire": "VeryResistant",
+   "poison": "Immune",
+   "spirit": "Weak"
+  },
+  "speed": {
+   "walk": 1,
+   "run": 6
+  },
+  "attacks": [
+   "charred_twitcher_scratch_l",
+   "charred_twitcher_scratch_r",
+   "charred_twitcher_throw"
+  ],
+  "drops": [
+   {
+    "item": "CharredBone",
+    "min": 1,
+    "max": 2,
+    "chance": 1,
+    "levelMultiplier": true
+   }
+  ],
+  "avoidWater": true
+ },
+ {
+  "id": "Chicken",
+  "name": "Chicken",
+  "faction": "ForestMonsters",
+  "group": "chicken",
+  "health": 10,
+  "damageModifiers": {
+   "chop": "Ignore",
+   "pickaxe": "Ignore",
+   "spirit": "Immune"
+  },
+  "speed": {
+   "walk": 5,
+   "run": 6,
+   "swim": 2
+  },
+  "drops": [
+   {
+    "item": "ChickenMeat",
+    "min": 1,
+    "max": 1,
+    "chance": 0.25,
+    "levelMultiplier": true
+   },
+   {
+    "item": "Feathers",
+    "min": 1,
+    "max": 2,
+    "chance": 0.5,
+    "levelMultiplier": true
+   }
+  ],
+  "afraidOfFire": true,
+  "avoidWater": true
+ },
+ {
+  "id": "Deathsquito",
+  "name": "Deathsquito",
+  "faction": "PlainsMonsters",
+  "health": 10,
+  "damageModifiers": {
+   "chop": "Ignore",
+   "pickaxe": "Ignore",
+   "spirit": "Immune"
+  },
+  "speed": {
+   "walk": 5,
+   "run": 5,
+   "fly": 10
+  },
+  "attacks": [
+   "Deathsquito_sting"
+  ],
+  "drops": [
+   {
+    "item": "Needle",
+    "min": 1,
+    "max": 1,
+    "chance": 1
+   },
+   {
+    "item": "TrophyDeathsquito",
+    "min": 1,
+    "max": 1,
+    "chance": 0.05
+   }
+  ],
+  "avoidWater": true
+ },
+ {
+  "id": "Deer",
+  "name": "Deer",
+  "faction": "ForestMonsters",
+  "health": 10,
+  "damageModifiers": {
+   "chop": "Ignore",
+   "pickaxe": "Ignore",
+   "spirit": "Immune"
+  },
+  "speed": {
+   "walk": 5,
+   "run": 7,
+   "swim": 2
+  },
+  "drops": [
+   {
+    "item": "DeerMeat",
+    "min": 2,
+    "max": 2,
+    "chance": 1,
+    "levelMultiplier": true
+   },
+   {
+    "item": "DeerHide",
+    "min": 1,
+    "max": 3,
+    "chance": 1,
+    "levelMultiplier": true
+   },
+   {
+    "item": "TrophyDeer",
+    "min": 1,
+    "max": 1,
+    "chance": 0.5
+   }
+  ],
+  "afraidOfFire": true,
+  "avoidWater": true
+ },
+ {
+  "id": "Deer_White",
+  "name": "$enemy_deerwhite",
+  "faction": "ForestMonsters",
+  "health": 30,
+  "damageModifiers": {
+   "chop": "Ignore",
+   "pickaxe": "Ignore",
+   "spirit": "Immune"
+  },
+  "speed": {
+   "walk": 5,
+   "run": 10,
+   "swim": 2
+  },
+  "drops": [
+   {
+    "item": "DeerMeat",
+    "min": 2,
+    "max": 2,
+    "chance": 1,
+    "levelMultiplier": true
+   },
+   {
+    "item": "TrophyDeerWhite",
+    "min": 1,
+    "max": 1,
+    "chance": 1
+   }
+  ],
+  "afraidOfFire": true,
+  "avoidWater": true
+ },
+ {
+  "id": "Dragon",
+  "name": "Moder",
+  "faction": "Boss",
+  "boss": true,
+  "defeatKey": "defeated_dragon",
+  "health": 7500,
+  "damageModifiers": {
+   "chop": "Ignore",
+   "pickaxe": "Ignore",
+   "fire": "Weak",
+   "frost": "Immune",
+   "spirit": "Immune"
+  },
+  "speed": {
+   "walk": 5,
+   "run": 6,
+   "swim": 4,
+   "fly": 20
+  },
+  "attacks": [
+   "dragon_bite",
+   "dragon_claw_left",
+   "dragon_claw_right",
+   "dragon_coldbreath",
+   "dragon_spit_shotgun",
+   "dragon_taunt"
+  ],
+  "drops": [
+   {
+    "item": "TrophyDragonQueen",
+    "min": 1,
+    "max": 1,
+    "chance": 1
+   },
+   {
+    "item": "DragonTear",
+    "min": 10,
+    "max": 10,
+    "chance": 1
+   }
+  ],
+  "avoidWater": true
+ },
+ {
+  "id": "Draugr",
+  "name": "Draugr",
+  "faction": "Undead",
+  "health": 100,
+  "damageModifiers": {
+   "chop": "Ignore",
+   "pickaxe": "Ignore",
+   "fire": "Resistant",
+   "poison": "Immune"
+  },
+  "speed": {
+   "walk": 5,
+   "run": 5
+  },
+  "attacks": [
+   "draugr_axe",
+   "draugr_bow"
+  ],
+  "drops": [
+   {
+    "item": "Entrails",
+    "min": 1,
+    "max": 1,
+    "chance": 1,
+    "levelMultiplier": true
+   },
+   {
+    "item": "TrophyDraugr",
+    "min": 1,
+    "max": 1,
+    "chance": 0.1
+   }
+  ],
+  "avoidWater": true
+ },
+ {
+  "id": "Draugr_Elite",
+  "name": "Draugr Elite",
+  "faction": "Undead",
+  "health": 200,
+  "damageModifiers": {
+   "chop": "Ignore",
+   "pickaxe": "Ignore",
+   "fire": "Resistant",
+   "poison": "Immune"
+  },
+  "speed": {
+   "walk": 5,
+   "run": 6
+  },
+  "attacks": [
+   "draugr_sword"
+  ],
+  "drops": [
+   {
+    "item": "Entrails",
+    "min": 2,
+    "max": 3,
+    "chance": 1,
+    "levelMultiplier": true
+   },
+   {
+    "item": "TrophyDraugrElite",
+    "min": 1,
+    "max": 1,
+    "chance": 0.1
+   }
+  ],
+  "avoidWater": true
+ },
+ {
+  "id": "Draugr_Elite_sleeping",
+  "name": "Draugr Elite",
+  "faction": "Undead",
+  "health": 200,
+  "damageModifiers": {
+   "chop": "Ignore",
+   "pickaxe": "Ignore",
+   "fire": "Resistant",
+   "poison": "Immune"
+  },
+  "speed": {
+   "walk": 5,
+   "run": 6
+  },
+  "attacks": [
+   "draugr_sword"
+  ],
+  "drops": [
+   {
+    "item": "Entrails",
+    "min": 2,
+    "max": 3,
+    "chance": 1,
+    "levelMultiplier": true
+   },
+   {
+    "item": "TrophyDraugrElite",
+    "min": 1,
+    "max": 1,
+    "chance": 0.1
+   }
+  ],
+  "avoidWater": true
+ },
+ {
+  "id": "Draugr_Ranged",
+  "name": "Draugr",
+  "faction": "Undead",
+  "health": 100,
+  "damageModifiers": {
+   "chop": "Ignore",
+   "pickaxe": "Ignore",
+   "fire": "Resistant",
+   "poison": "Immune"
+  },
+  "speed": {
+   "walk": 5,
+   "run": 5
+  },
+  "attacks": [
+   "draugr_bow"
+  ],
+  "drops": [
+   {
+    "item": "Entrails",
+    "min": 1,
+    "max": 1,
+    "chance": 1,
+    "levelMultiplier": true
+   },
+   {
+    "item": "TrophyDraugr",
+    "min": 1,
+    "max": 1,
+    "chance": 0.1
+   }
+  ],
+  "avoidWater": true
+ },
+ {
+  "id": "Draugr_Ranged_sleeping",
+  "name": "Draugr",
+  "faction": "Undead",
+  "health": 100,
+  "damageModifiers": {
+   "chop": "Ignore",
+   "pickaxe": "Ignore",
+   "fire": "Resistant",
+   "poison": "Immune"
+  },
+  "speed": {
+   "walk": 5,
+   "run": 5
+  },
+  "attacks": [
+   "draugr_bow"
+  ],
+  "drops": [
+   {
+    "item": "Entrails",
+    "min": 1,
+    "max": 1,
+    "chance": 1,
+    "levelMultiplier": true
+   },
+   {
+    "item": "TrophyDraugr",
+    "min": 1,
+    "max": 1,
+    "chance": 0.1
+   }
+  ],
+  "avoidWater": true
+ },
+ {
+  "id": "Draugr_sleeping",
+  "name": "Draugr",
+  "faction": "Undead",
+  "health": 100,
+  "damageModifiers": {
+   "chop": "Ignore",
+   "pickaxe": "Ignore",
+   "fire": "Resistant",
+   "poison": "Immune"
+  },
+  "speed": {
+   "walk": 5,
+   "run": 5
+  },
+  "attacks": [
+   "draugr_axe",
+   "draugr_bow"
+  ],
+  "drops": [
+   {
+    "item": "Entrails",
+    "min": 1,
+    "max": 1,
+    "chance": 1,
+    "levelMultiplier": true
+   },
+   {
+    "item": "TrophyDraugr",
+    "min": 1,
+    "max": 1,
+    "chance": 0.1
+   }
+  ],
+  "avoidWater": true
+ },
+ {
+  "id": "Dverger",
+  "name": "Dvergr Rogue",
+  "faction": "Dverger",
+  "health": 350,
+  "damageModifiers": {
+   "chop": "Ignore",
+   "pickaxe": "Ignore",
+   "spirit": "Immune"
+  },
+  "speed": {
+   "walk": 2,
+   "run": 7,
+   "swim": 1.5
+  },
+  "attacks": [
+   "DvergerArbalest",
+   "DvergerArbalest_shoot",
+   "DvergerSuitArbalest",
+   "Dverger_melee"
+  ],
+  "drops": [
+   {
+    "item": "Softtissue",
+    "min": 1,
+    "max": 2,
+    "chance": 0.25
+   },
+   {
+    "item": "BlackMarble",
+    "min": 1,
+    "max": 2,
+    "chance": 0.5
+   },
+   {
+    "item": "Coins",
+    "min": 2,
+    "max": 15,
+    "chance": 1
+   },
+   {
+    "item": "TrophyDvergr",
+    "min": 1,
+    "max": 1,
+    "chance": 0.05
+   }
+  ],
+  "avoidWater": true
+ },
+ {
+  "id": "DvergerAshlands",
+  "name": "Dvergr Rogue",
+  "faction": "Dverger",
+  "health": 1000,
+  "damageModifiers": {
+   "chop": "Ignore",
+   "pickaxe": "Ignore",
+   "spirit": "Immune"
+  },
+  "speed": {
+   "walk": 2,
+   "run": 7,
+   "swim": 1.5
+  },
+  "attacks": [
+   "DvergerArbalest",
+   "DvergerArbalest_shootAshlands",
+   "DvergerSuitArbalest_Ashlands",
+   "Dverger_meleeAshlands"
+  ],
+  "drops": [
+   {
+    "item": "Softtissue",
+    "min": 1,
+    "max": 2,
+    "chance": 0.25
+   },
+   {
+    "item": "BlackMarble",
+    "min": 1,
+    "max": 2,
+    "chance": 0.5
+   },
+   {
+    "item": "Coins",
+    "min": 2,
+    "max": 15,
+    "chance": 1
+   },
+   {
+    "item": "TrophyDvergr",
+    "min": 1,
+    "max": 1,
+    "chance": 0.05
+   }
+  ],
+  "avoidWater": true
+ },
+ {
+  "id": "DvergerDeepNorth",
+  "name": "Imprisoned Dvergr",
+  "faction": "Dverger",
+  "health": 1500,
+  "damageModifiers": {
+   "chop": "Ignore",
+   "pickaxe": "Ignore",
+   "spirit": "Immune"
+  },
+  "speed": {
+   "walk": 2,
+   "run": 7,
+   "swim": 1.5
+  },
+  "attacks": [
+   "DvergerArbalest",
+   "DvergerArbalest_shootDeepNorth",
+   "DvergerSuitArbalest_Ashlands",
+   "Dverger_meleeDeepNorth"
+  ],
+  "drops": [
+   {
+    "item": "Coins",
+    "min": 10,
+    "max": 20,
+    "chance": 1,
+    "levelMultiplier": true
+   },
+   {
+    "item": "TrophyDvergr",
+    "min": 1,
+    "max": 1,
+    "chance": 0.05
+   },
+   {
+    "item": "AncientGemstoneBlack",
+    "min": 1,
+    "max": 1,
+    "chance": 0.1,
+    "levelMultiplier": true
+   },
+   {
+    "item": "AncientGemstoneGreen",
+    "min": 1,
+    "max": 1,
+    "chance": 0.1,
+    "levelMultiplier": true
+   },
+   {
+    "item": "AncientGemstoneOrange",
+    "min": 1,
+    "max": 1,
+    "chance": 0.1,
+    "levelMultiplier": true
+   },
+   {
+    "item": "AncientGemstonePurple",
+    "min": 1,
+    "max": 1,
+    "chance": 0.1,
+    "levelMultiplier": true
+   }
+  ],
+  "avoidWater": true
+ },
+ {
+  "id": "DvergerMage",
+  "name": "Dvergr Mage",
+  "faction": "Dverger",
+  "health": 350,
+  "damageModifiers": {
+   "chop": "Ignore",
+   "pickaxe": "Ignore",
+   "fire": "Resistant",
+   "frost": "Resistant",
+   "spirit": "Immune"
+  },
+  "speed": {
+   "walk": 2,
+   "run": 4,
+   "swim": 1.5
+  },
+  "attacks": [
+   "DvergerMistile",
+   "DvergerStaffFire",
+   "DvergerStaffFire_clusterbomb",
+   "DvergerStaffFire_fireball",
+   "DvergerStaffHeal",
+   "DvergerStaffHeal_heal",
+   "DvergerStaffIce",
+   "DvergerStaffIce_icebolt",
+   "DvergerStaffNova",
+   "DvergerStaffSupport_buff",
+   "DvergerSuitFire",
+   "DvergerSuitIce",
+   "DvergerSuitSupport",
+   "Dverger_melee"
+  ],
+  "drops": [
+   {
+    "item": "Softtissue",
+    "min": 1,
+    "max": 2,
+    "chance": 0.25
+   },
+   {
+    "item": "BlackMarble",
+    "min": 1,
+    "max": 2,
+    "chance": 0.5
+   },
+   {
+    "item": "Coins",
+    "min": 2,
+    "max": 15,
+    "chance": 1
+   },
+   {
+    "item": "TrophyDvergr",
+    "min": 1,
+    "max": 1,
+    "chance": 0.05
+   }
+  ],
+  "avoidWater": true
+ },
+ {
+  "id": "DvergerMageFire",
+  "name": "Dvergr Mage",
+  "faction": "Dverger",
+  "health": 350,
+  "damageModifiers": {
+   "chop": "Ignore",
+   "pickaxe": "Ignore",
+   "fire": "Resistant",
+   "frost": "Resistant",
+   "spirit": "Immune"
+  },
+  "speed": {
+   "walk": 2,
+   "run": 4,
+   "swim": 1.5
+  },
+  "attacks": [
+   "DvergerStaffFire",
+   "DvergerStaffFire_clusterbomb",
+   "DvergerStaffFire_fireball",
+   "DvergerSuitFire",
+   "Dverger_melee"
+  ],
+  "drops": [
+   {
+    "item": "Softtissue",
+    "min": 1,
+    "max": 2,
+    "chance": 0.25
+   },
+   {
+    "item": "BlackMarble",
+    "min": 1,
+    "max": 2,
+    "chance": 0.5
+   },
+   {
+    "item": "Coins",
+    "min": 2,
+    "max": 15,
+    "chance": 1
+   },
+   {
+    "item": "TrophyDvergr",
+    "min": 1,
+    "max": 1,
+    "chance": 0.05
+   }
+  ],
+  "avoidWater": true
+ },
+ {
+  "id": "DvergerMageIce",
+  "name": "Dvergr Mage",
+  "faction": "Dverger",
+  "health": 350,
+  "damageModifiers": {
+   "chop": "Ignore",
+   "pickaxe": "Ignore",
+   "fire": "Resistant",
+   "frost": "Resistant",
+   "spirit": "Immune"
+  },
+  "speed": {
+   "walk": 2,
+   "run": 4,
+   "swim": 1.5
+  },
+  "attacks": [
+   "DvergerStaffIce",
+   "DvergerStaffIce_icebolt",
+   "DvergerStaffNova",
+   "DvergerSuitIce",
+   "Dverger_melee"
+  ],
+  "drops": [
+   {
+    "item": "Softtissue",
+    "min": 1,
+    "max": 2,
+    "chance": 0.25
+   },
+   {
+    "item": "BlackMarble",
+    "min": 1,
+    "max": 2,
+    "chance": 0.5
+   },
+   {
+    "item": "Coins",
+    "min": 2,
+    "max": 15,
+    "chance": 1
+   },
+   {
+    "item": "TrophyDvergr",
+    "min": 1,
+    "max": 1,
+    "chance": 0.05
+   }
+  ],
+  "avoidWater": true
+ },
+ {
+  "id": "DvergerMageSupport",
+  "name": "Dvergr Mage",
+  "faction": "Dverger",
+  "health": 350,
+  "damageModifiers": {
+   "chop": "Ignore",
+   "pickaxe": "Ignore",
+   "fire": "Resistant",
+   "frost": "Resistant",
+   "spirit": "Immune"
+  },
+  "speed": {
+   "walk": 2,
+   "run": 4,
+   "swim": 1.5
+  },
+  "attacks": [
+   "DvergerMistile",
+   "DvergerStaffHeal",
+   "DvergerStaffHeal_heal",
+   "DvergerStaffSupport_buff",
+   "DvergerSuitSupport"
+  ],
+  "drops": [
+   {
+    "item": "Softtissue",
+    "min": 1,
+    "max": 2,
+    "chance": 0.25
+   },
+   {
+    "item": "BlackMarble",
+    "min": 1,
+    "max": 2,
+    "chance": 0.5
+   },
+   {
+    "item": "Coins",
+    "min": 2,
+    "max": 15,
+    "chance": 1
+   },
+   {
+    "item": "TrophyDvergr",
+    "min": 1,
+    "max": 1,
+    "chance": 0.05
+   }
+  ],
+  "avoidWater": true
+ },
+ {
+  "id": "DvergerTest",
+  "name": "$enemy_dverger",
+  "faction": "Dverger",
+  "health": 100,
+  "damageModifiers": {
+   "chop": "Ignore",
+   "pickaxe": "Ignore",
+   "spirit": "Immune"
+  },
+  "speed": {
+   "walk": 1,
+   "run": 2,
+   "swim": 1.5
+  },
+  "attacks": [
+   "GoblinShaman_Headdress_antlers",
+   "GoblinShaman_Headdress_feathers",
+   "GoblinShaman_Staff_Bones",
+   "GoblinShaman_Staff_Feathers",
+   "GoblinShaman_attack_fireball",
+   "GoblinShaman_attack_poke"
+  ],
+  "drops": [
+   {
+    "item": "Coins",
+    "min": 20,
+    "max": 40,
+    "chance": 0.25,
+    "levelMultiplier": true
+   },
+   {
+    "item": "BlackMetalScrap",
+    "min": 1,
+    "max": 2,
+    "chance": 1,
+    "levelMultiplier": true
+   },
+   {
+    "item": "Pukeberries",
+    "min": 1,
+    "max": 2,
+    "chance": 1,
+    "levelMultiplier": true
+   },
+   {
+    "item": "TrophyGoblinShaman",
+    "min": 1,
+    "max": 1,
+    "chance": 0.1
+   }
+  ],
+  "avoidWater": true
+ },
+ {
+  "id": "Eikthyr",
+  "name": "Eikthyr",
+  "faction": "Boss",
+  "boss": true,
+  "defeatKey": "defeated_eikthyr",
+  "health": 500,
+  "damageModifiers": {
+   "chop": "Ignore",
+   "pickaxe": "Ignore"
+  },
+  "speed": {
+   "walk": 5,
+   "run": 8,
+   "swim": 4
+  },
+  "attacks": [
+   "Eikthyr_antler",
+   "Eikthyr_charge",
+   "Eikthyr_stomp"
+  ],
+  "drops": [
+   {
+    "item": "TrophyEikthyr",
+    "min": 1,
+    "max": 1,
+    "chance": 1
+   },
+   {
+    "item": "HardAntler",
+    "min": 3,
+    "max": 3,
+    "chance": 1
+   }
+  ],
+  "avoidWater": true
+ },
+ {
+  "id": "Elaking",
+  "name": "Elaking",
+  "faction": "DeepNorth",
+  "health": 350,
+  "damageModifiers": {
+   "chop": "Ignore",
+   "pickaxe": "Ignore",
+   "fire": "Weak",
+   "frost": "Resistant",
+   "spirit": "Immune"
+  },
+  "speed": {
+   "walk": 1.6,
+   "run": 6,
+   "swim": 1.5
+  },
+  "attacks": [
+   "Elaking_AttackClaw",
+   "Elaking_AttackJump"
+  ],
+  "drops": [
+   {
+    "item": "ElakingHairBundle",
+    "min": 1,
+    "max": 2,
+    "chance": 1,
+    "levelMultiplier": true
+   },
+   {
+    "item": "TrophyElaking",
+    "min": 1,
+    "max": 1,
+    "chance": 0.1
+   },
+   {
+    "item": "MoldKeys",
+    "min": 1,
+    "max": 1,
+    "chance": 0.2
+   }
+  ],
+  "avoidWater": true
+ },
+ {
+  "id": "ElakingLantern",
+  "name": "Elaking",
+  "faction": "DeepNorth",
+  "health": 350,
+  "damageModifiers": {
+   "chop": "Ignore",
+   "pickaxe": "Ignore",
+   "fire": "Weak",
+   "frost": "Resistant",
+   "spirit": "Immune"
+  },
+  "speed": {
+   "walk": 1.6,
+   "run": 6,
+   "swim": 1.5
+  },
+  "attacks": [
+   "Elaking_AttackLantern"
+  ],
+  "drops": [
+   {
+    "item": "ElakingHairBundle",
+    "min": 1,
+    "max": 2,
+    "chance": 1,
+    "levelMultiplier": true
+   },
+   {
+    "item": "TrophyElaking",
+    "min": 1,
+    "max": 1,
+    "chance": 0.1
+   }
+  ],
+  "avoidWater": true
+ },
+ {
+  "id": "ElakingMole",
+  "name": "Eyeless One",
+  "faction": "DeepNorth",
+  "defeatKey": "elakingmole_defeated",
+  "health": 1400,
+  "damageModifiers": {
+   "chop": "Ignore",
+   "pickaxe": "Ignore",
+   "frost": "Resistant",
+   "spirit": "Immune"
+  },
+  "speed": {
+   "walk": 1.5,
+   "run": 2,
+   "swim": 1.5
+  },
+  "attacks": [
+   "ElakingMole_AttackClaw",
+   "ElakingMole_AttackClaw2",
+   "ElakingMole_AttackSandcloud"
+  ],
+  "drops": [
+   {
+    "item": "TrophyMole",
+    "min": 1,
+    "max": 1,
+    "chance": 0.1
+   },
+   {
+    "item": "MoleClaws",
+    "min": 1,
+    "max": 2,
+    "chance": 1,
+    "levelMultiplier": true
+   },
+   {
+    "item": "MoldKeys",
+    "min": 1,
+    "max": 1,
+    "chance": 0.5
+   }
+  ],
+  "avoidWater": true
+ },
+ {
+  "id": "Fader",
+  "name": "Fader",
+  "faction": "Boss",
+  "boss": true,
+  "defeatKey": "defeated_fader",
+  "health": 25000,
+  "damageModifiers": {
+   "pierce": "Resistant",
+   "chop": "Ignore",
+   "pickaxe": "Ignore",
+   "fire": "Immune",
+   "spirit": "Immune"
+  },
+  "speed": {
+   "walk": 4,
+   "run": 8,
+   "swim": 4
+  },
+  "attacks": [
+   "Fader_Bite",
+   "Fader_Claw_Left",
+   "Fader_Claw_Right",
+   "Fader_Fissure",
+   "Fader_Fissure_Intense",
+   "Fader_Flamebreath",
+   "Fader_Meteors",
+   "Fader_Meteors_Intense",
+   "Fader_Roar",
+   "Fader_Roar_Intense",
+   "Fader_Spin",
+   "Fader_WallOfFire"
+  ],
+  "drops": [
+   {
+    "item": "TrophyFader",
+    "min": 1,
+    "max": 1,
+    "chance": 1
+   },
+   {
+    "item": "FaderDrop",
+    "min": 5,
+    "max": 5,
+    "chance": 1
+   }
+  ],
+  "avoidWater": true
+ },
+ {
+  "id": "FallenValkyrie",
+  "name": "Fallen Valkyrie",
+  "faction": "Demon",
+  "health": 1500,
+  "damageModifiers": {
+   "chop": "Ignore",
+   "pickaxe": "Ignore",
+   "fire": "Resistant",
+   "poison": "Immune",
+   "spirit": "Weak"
+  },
+  "speed": {
+   "walk": 10,
+   "run": 20,
+   "fly": 15
+  },
+  "attacks": [
+   "fallenvalkyrie_claws",
+   "fallenvalkyrie_spin",
+   "fallenvalkyrie_spit",
+   "fallenvalkyrie_taunt"
+  ],
+  "drops": [
+   {
+    "item": "CelestialFeather",
+    "min": 2,
+    "max": 4,
+    "chance": 1,
+    "levelMultiplier": true
+   },
+   {
+    "item": "TrophyFallenValkyrie",
+    "min": 1,
+    "max": 1,
+    "chance": 0.05
+   }
+  ],
+  "avoidWater": true
+ },
+ {
+  "id": "FallenWarrior",
+  "name": "Fallen Warrior",
+  "faction": "Undead",
+  "health": 750,
+  "damageModifiers": {
+   "blunt": "Resistant",
+   "slash": "Resistant",
+   "pierce": "Resistant",
+   "chop": "Ignore",
+   "pickaxe": "Ignore",
+   "fire": "Resistant",
+   "poison": "Immune",
+   "spirit": "Weak"
+  },
+  "speed": {
+   "walk": 1.6,
+   "run": 7,
+   "swim": 2
+  },
+  "attacks": [
+   "FW_ArmorBronzeChest",
+   "FW_ArmorBronzeLegs",
+   "FW_ArmorFenringChest",
+   "FW_ArmorFenringLegs",
+   "FW_ArmorMageChest",
+   "FW_ArmorMageChest_Ashlands",
+   "FW_ArmorMageLegs",
+   "FW_ArmorMageLegs_Ashlands",
+   "FW_ArmorPaddedCuirass",
+   "FW_ArmorPaddedGreaves",
+   "FW_ArmorTrollLeatherChest",
+   "FW_ArmorTrollLeatherLegs",
+   "FW_AxeBronze",
+   "FW_BattleaxeCrystal",
+   "FW_BowDraugrFang",
+   "FW_CapeLinen",
+   "FW_CapeTrollHide",
+   "FW_CapeWolf",
+   "FW_HelmetBronze",
+   "FW_KnifeSilver",
+   "FW_KnifeSkollAndHati",
+   "FW_ShieldBlackmetalTower",
+   "FW_StaffFireball",
+   "FW_StaffLightning",
+   "FW_SwordBlackmetal"
+  ],
+  "drops": [
+   {
+    "item": "OrbFrostFire",
+    "min": 1,
+    "max": 1,
+    "chance": 0.5
+   },
+   {
+    "item": "OrbThunderBlood",
+    "min": 1,
+    "max": 1,
+    "chance": 0.5
+   }
+  ]
+ },
+ {
+  "id": "Fenring",
+  "name": "Fenring",
+  "faction": "MountainMonsters",
+  "health": 300,
+  "damageModifiers": {
+   "chop": "Ignore",
+   "pickaxe": "Ignore",
+   "fire": "Weak",
+   "poison": "Resistant"
+  },
+  "speed": {
+   "walk": 5,
+   "run": 7,
+   "swim": 2
+  },
+  "attacks": [
+   "Fenring_attack_claw",
+   "Fenring_attack_jump",
+   "Fenring_taunt"
+  ],
+  "drops": [
+   {
+    "item": "WolfFang",
+    "min": 1,
+    "max": 2,
+    "chance": 1,
+    "levelMultiplier": true
+   },
+   {
+    "item": "TrophyFenring",
+    "min": 1,
+    "max": 1,
+    "chance": 0.1
+   }
+  ],
+  "avoidWater": true
+ },
+ {
+  "id": "Fenring_Cultist",
+  "name": "Cultist",
+  "faction": "MountainMonsters",
+  "health": 200,
+  "damageModifiers": {
+   "chop": "Ignore",
+   "pickaxe": "Ignore",
+   "fire": "Immune",
+   "poison": "Weak"
+  },
+  "speed": {
+   "walk": 5,
+   "run": 5,
+   "swim": 2
+  },
+  "attacks": [
+   "Fenring_attack_fireclaw",
+   "Fenring_attack_fireclaw_double",
+   "Fenring_attack_flames"
+  ],
+  "drops": [
+   {
+    "item": "JuteRed",
+    "min": 1,
+    "max": 3,
+    "chance": 1,
+    "levelMultiplier": true
+   },
+   {
+    "item": "TrophyCultist",
+    "min": 1,
+    "max": 1,
+    "chance": 0.1
+   }
+  ],
+  "avoidWater": true
+ },
+ {
+  "id": "Fenring_Cultist_Hildir",
+  "name": "<color=orange>Geirrhafa</color>",
+  "faction": "MountainMonsters",
+  "defeatKey": "BossHildir2",
+  "health": 3700,
+  "damageModifiers": {
+   "chop": "Ignore",
+   "pickaxe": "Ignore",
+   "fire": "Weak",
+   "frost": "Immune"
+  },
+  "speed": {
+   "walk": 5,
+   "run": 5,
+   "swim": 2
+  },
+  "attacks": [
+   "Fenring_attack_IceNova",
+   "Fenring_attack_frost",
+   "Fenring_attack_iceclaw",
+   "Fenring_attack_iceclaw_double"
+  ],
+  "drops": [
+   {
+    "item": "chest_hildir2",
+    "min": 1,
+    "max": 1,
+    "chance": 1
+   },
+   {
+    "item": "TrophyCultist_Hildir",
+    "min": 1,
+    "max": 1,
+    "chance": 1
+   }
+  ],
+  "avoidWater": true
+ },
+ {
+  "id": "Fenring_Cultist_Hildir_nochest",
+  "name": "<color=orange>Geirrhafa</color>",
+  "faction": "MountainMonsters",
+  "defeatKey": "BossHildir2",
+  "health": 1850,
+  "damageModifiers": {
+   "chop": "Ignore",
+   "pickaxe": "Ignore",
+   "fire": "Weak",
+   "frost": "Immune"
+  },
+  "speed": {
+   "walk": 5,
+   "run": 5,
+   "swim": 2
+  },
+  "attacks": [
+   "Fenring_attack_IceNova",
+   "Fenring_attack_frost",
+   "Fenring_attack_iceclaw",
+   "Fenring_attack_iceclaw_double"
+  ],
+  "drops": [
+   {
+    "item": "TrophyCultist_Hildir",
+    "min": 1,
+    "max": 1,
+    "chance": 1
+   }
+  ],
+  "avoidWater": true
+ },
+ {
+  "id": "FrostWisp",
+  "name": "$enemy_frostwisp",
+  "faction": "TrainingDummy",
+  "health": 100,
+  "damageModifiers": {
+   "blunt": "Resistant",
+   "slash": "Resistant",
+   "pierce": "Resistant",
+   "chop": "Ignore",
+   "pickaxe": "Ignore",
+   "fire": "Weak",
+   "frost": "Immune",
+   "poison": "Immune",
+   "spirit": "Weak"
+  },
+  "speed": {
+   "walk": 5,
+   "run": 5,
+   "fly": 8
+  },
+  "drops": [
+   {
+    "item": "LeatherScraps",
+    "min": 1,
+    "max": 1,
+    "chance": 0.5
+   }
+  ],
+  "avoidWater": true
+ },
+ {
+  "id": "FrozenKing",
+  "name": "Kall Fimbulbringer",
+  "faction": "Boss",
+  "boss": true,
+  "defeatKey": "defeated_frozenking",
+  "health": 10000,
+  "damageModifiers": {
+   "pierce": "Resistant",
+   "chop": "Ignore",
+   "pickaxe": "Ignore",
+   "fire": "Resistant",
+   "frost": "Resistant",
+   "lightning": "Resistant",
+   "spirit": "Immune"
+  },
+  "speed": {
+   "walk": 5,
+   "run": 8
+  },
+  "attacks": [
+   "FrozenKing_ChainRush",
+   "FrozenKing_ChainSlam_L",
+   "FrozenKing_ChainSlam_L_double",
+   "FrozenKing_ChainSlam_R",
+   "FrozenKing_ChainSlam_R_double",
+   "FrozenKing_ChainWhirl",
+   "FrozenKing_DoubleSweep"
+  ],
+  "avoidWater": true
+ },
+ {
+  "id": "FrozenKing_p2",
+  "name": "Kall Fimbulbringer",
+  "faction": "Boss",
+  "boss": true,
+  "health": 7000,
+  "damageModifiers": {
+   "blunt": "Immune",
+   "slash": "Immune",
+   "pierce": "Immune",
+   "chop": "Ignore",
+   "pickaxe": "Ignore",
+   "fire": "Immune",
+   "frost": "Immune",
+   "lightning": "Immune",
+   "poison": "Immune",
+   "spirit": "Immune"
+  }
+ },
+ {
+  "id": "FrozenKing_p3",
+  "name": "Kall Fimbulbringer",
+  "faction": "Boss",
+  "boss": true,
+  "defeatKey": "defeated_frozenking_p3",
+  "health": 30000,
+  "damageModifiers": {
+   "pierce": "Resistant",
+   "chop": "Ignore",
+   "pickaxe": "Ignore",
+   "fire": "Resistant",
+   "frost": "Resistant",
+   "lightning": "Resistant",
+   "spirit": "Immune",
+   "nonPlayer": "Immune"
+  },
+  "speed": {
+   "walk": 5,
+   "run": 8
+  },
+  "attacks": [
+   "FrozenKing_ChainFlurry",
+   "FrozenKing_DoubleSweep",
+   "FrozenKing_P3_ChainSlam_L_double",
+   "FrozenKing_P3_ChainSlam_R_double",
+   "FrozenKing_P3_ChainWhirl",
+   "FrozenKing_Punch_AOE",
+   "FrozenKing_SpikeRain",
+   "FrozenKing_tendrilspawn"
+  ],
+  "drops": [
+   {
+    "item": "FrozenKingDrop",
+    "min": 1,
+    "max": 1,
+    "chance": 1
+   },
+   {
+    "item": "CrownJewel",
+    "min": 1,
+    "max": 1,
+    "chance": 1
+   }
+  ],
+  "avoidWater": true
+ },
+ {
+  "id": "Frysling",
+  "name": "Frysling",
+  "faction": "TrainingDummy",
+  "defeatKey": "killed_frysling",
+  "health": 100,
+  "damageModifiers": {
+   "chop": "Ignore",
+   "pickaxe": "Ignore",
+   "fire": "Immune",
+   "frost": "Weak",
+   "poison": "Immune",
+   "spirit": "Immune"
+  },
+  "speed": {
+   "walk": 5,
+   "run": 6
+  },
+  "attacks": [
+   "frysling_snowball_attack"
+  ],
+  "drops": [
+   {
+    "item": "FrostCore",
+    "min": 1,
+    "max": 1,
+    "chance": 1,
+    "levelMultiplier": true
+   }
+  ],
+  "avoidWater": true
+ },
+ {
+  "id": "Ghost",
+  "name": "Ghost",
+  "faction": "Undead",
+  "health": 60,
+  "damageModifiers": {
+   "blunt": "Resistant",
+   "slash": "Resistant",
+   "pierce": "Resistant",
+   "chop": "Ignore",
+   "pickaxe": "Ignore",
+   "poison": "Immune",
+   "spirit": "Weak"
+  },
+  "speed": {
+   "walk": 5,
+   "run": 4
+  },
+  "attacks": [
+   "Ghost_attack"
+  ],
+  "drops": [
+   {
+    "item": "Ectoplasm",
+    "min": 1,
+    "max": 5,
+    "chance": 1
+   },
+   {
+    "item": "TrophyGhost",
+    "min": 1,
+    "max": 1,
+    "chance": 0.1
+   }
+  ],
+  "avoidWater": true
+ },
+ {
+  "id": "Ghost_Void",
+  "name": "The Void",
+  "faction": "Undead",
+  "health": 600,
+  "damageModifiers": {
+   "blunt": "Resistant",
+   "slash": "Resistant",
+   "pierce": "Resistant",
+   "chop": "Ignore",
+   "pickaxe": "Ignore",
+   "poison": "Immune",
+   "spirit": "Weak"
+  },
+  "speed": {
+   "walk": 5,
+   "run": 4
+  },
+  "attacks": [
+   "Ghost_attack"
+  ],
+  "drops": [
+   {
+    "item": "KnifeVoid",
+    "min": 1,
+    "max": 1,
+    "chance": 1
+   }
+  ],
+  "avoidWater": true
+ },
+ {
+  "id": "Ghost_old",
+  "name": "The Void",
+  "faction": "Undead",
+  "health": 60,
+  "damageModifiers": {
+   "blunt": "Resistant",
+   "slash": "Resistant",
+   "pierce": "Resistant",
+   "chop": "Ignore",
+   "pickaxe": "Ignore",
+   "poison": "Immune",
+   "spirit": "Weak"
+  },
+  "speed": {
+   "walk": 5,
+   "run": 4
+  },
+  "attacks": [
+   "Ghost_attack"
+  ],
+  "drops": [
+   {
+    "item": "Ectoplasm",
+    "min": 1,
+    "max": 2,
+    "chance": 0.5
+   }
+  ],
+  "avoidWater": true
+ },
+ {
+  "id": "Ghost_sleeping",
+  "name": "Ghost",
+  "faction": "Undead",
+  "health": 60,
+  "damageModifiers": {
+   "blunt": "Resistant",
+   "slash": "Resistant",
+   "pierce": "Resistant",
+   "chop": "Ignore",
+   "pickaxe": "Ignore",
+   "poison": "Immune",
+   "spirit": "Weak"
+  },
+  "speed": {
+   "walk": 5,
+   "run": 4
+  },
+  "attacks": [
+   "Ghost_attack"
+  ],
+  "drops": [
+   {
+    "item": "Ectoplasm",
+    "min": 1,
+    "max": 5,
+    "chance": 1
+   },
+   {
+    "item": "TrophyGhost",
+    "min": 1,
+    "max": 1,
+    "chance": 0.1
+   }
+  ],
+  "avoidWater": true
+ },
+ {
+  "id": "Gjall",
+  "name": "Gjall",
+  "faction": "MistlandsMonsters",
+  "health": 1500,
+  "damageModifiers": {
+   "chop": "Ignore",
+   "pickaxe": "Ignore",
+   "fire": "Resistant",
+   "spirit": "Immune"
+  },
+  "speed": {
+   "walk": 5,
+   "run": 2,
+   "fly": 3
+  },
+  "attacks": [
+   "gjall_attack_egg",
+   "gjall_attack_shake",
+   "gjall_attack_spit",
+   "gjall_attack_taunt"
+  ],
+  "drops": [
+   {
+    "item": "Bilebag",
+    "min": 1,
+    "max": 1,
+    "chance": 1
+   },
+   {
+    "item": "TrophyGjall",
+    "min": 1,
+    "max": 1,
+    "chance": 0.3
+   }
+  ],
+  "avoidWater": true
+ },
+ {
+  "id": "Goblin",
+  "name": "Fuling",
+  "faction": "PlainsMonsters",
+  "health": 175,
+  "damageModifiers": {
+   "chop": "Ignore",
+   "pickaxe": "Ignore",
+   "spirit": "Immune"
+  },
+  "speed": {
+   "walk": 5,
+   "run": 6,
+   "swim": 1.5
+  },
+  "attacks": [
+   "GoblinClub",
+   "GoblinLoin",
+   "GoblinSpear",
+   "GoblinSword",
+   "GoblinTorch"
+  ],
+  "drops": [
+   {
+    "item": "Coins",
+    "min": 5,
+    "max": 10,
+    "chance": 0.25,
+    "levelMultiplier": true
+   },
+   {
+    "item": "BlackMetalScrap",
+    "min": 1,
+    "max": 2,
+    "chance": 1,
+    "levelMultiplier": true
+   },
+   {
+    "item": "TrophyGoblin",
+    "min": 1,
+    "max": 1,
+    "chance": 0.1
+   }
+  ],
+  "avoidWater": true
+ },
+ {
+  "id": "GoblinArcher",
+  "name": "Fuling",
+  "faction": "PlainsMonsters",
+  "health": 175,
+  "damageModifiers": {
+   "chop": "Ignore",
+   "pickaxe": "Ignore",
+   "spirit": "Immune"
+  },
+  "speed": {
+   "walk": 5,
+   "run": 6,
+   "swim": 1.5
+  },
+  "attacks": [
+   "GoblinLoin",
+   "GoblinSpear"
+  ],
+  "drops": [
+   {
+    "item": "Coins",
+    "min": 5,
+    "max": 10,
+    "chance": 0.25,
+    "levelMultiplier": true
+   },
+   {
+    "item": "BlackMetalScrap",
+    "min": 1,
+    "max": 2,
+    "chance": 1,
+    "levelMultiplier": true
+   },
+   {
+    "item": "TrophyGoblin",
+    "min": 1,
+    "max": 1,
+    "chance": 0.1
+   }
+  ],
+  "avoidWater": true
+ },
+ {
+  "id": "GoblinBrute",
+  "name": "Fuling Berserker",
+  "faction": "PlainsMonsters",
+  "health": 800,
+  "damageModifiers": {
+   "chop": "Ignore",
+   "pickaxe": "Ignore",
+   "spirit": "Immune"
+  },
+  "speed": {
+   "walk": 5,
+   "run": 5,
+   "swim": 1.5
+  },
+  "attacks": [
+   "GoblinBrute_ArmGuard",
+   "GoblinBrute_Attack",
+   "GoblinBrute_Backbones",
+   "GoblinBrute_ExecutionerCap",
+   "GoblinBrute_HipCloth",
+   "GoblinBrute_LegBones",
+   "GoblinBrute_RageAttack",
+   "GoblinBrute_ShoulderGuard",
+   "GoblinBrute_Taunt"
+  ],
+  "drops": [
+   {
+    "item": "Coins",
+    "min": 5,
+    "max": 20,
+    "chance": 1,
+    "levelMultiplier": true
+   },
+   {
+    "item": "BlackMetalScrap",
+    "min": 3,
+    "max": 5,
+    "chance": 1,
+    "levelMultiplier": true
+   },
+   {
+    "item": "GoblinTotem",
+    "min": 1,
+    "max": 1,
+    "chance": 0.1
+   },
+   {
+    "item": "TrophyGoblinBrute",
+    "min": 1,
+    "max": 1,
+    "chance": 0.05
+   }
+  ],
+  "avoidWater": true
+ },
+ {
+  "id": "GoblinBruteBros",
+  "name": "<color=orange>Zil & Thungr</color>",
+  "faction": "PlainsMonsters",
+  "defeatKey": "BossHildir3",
+  "health": 4200,
+  "damageModifiers": {
+   "chop": "Ignore",
+   "pickaxe": "Ignore",
+   "spirit": "Immune"
+  },
+  "speed": {
+   "walk": 5,
+   "run": 5,
+   "swim": 1.5
+  },
+  "attacks": [
+   "GoblinBruteBros_Attack",
+   "GoblinBruteBros_RageAttack",
+   "GoblinBrute_HipCloth",
+   "GoblinBrute_ShoulderGuard",
+   "GoblinBrute_Taunt",
+   "GoblinShaman_attack_fireball_hildir",
+   "GoblinShaman_attack_protect_hildir"
+  ],
+  "drops": [
+   {
+    "item": "GoblinShaman_Hildir",
+    "min": 1,
+    "max": 1,
+    "chance": 1
+   },
+   {
+    "item": "TrophyGoblinBruteBrosBrute",
+    "min": 1,
+    "max": 1,
+    "chance": 1
+   }
+  ],
+  "avoidWater": true
+ },
+ {
+  "id": "GoblinBruteBros_nochest",
+  "name": "<color=orange>Zil & Thungr</color>",
+  "faction": "PlainsMonsters",
+  "defeatKey": "BossHildir3",
+  "health": 2100,
+  "damageModifiers": {
+   "chop": "Ignore",
+   "pickaxe": "Ignore",
+   "spirit": "Immune"
+  },
+  "speed": {
+   "walk": 5,
+   "run": 5,
+   "swim": 1.5
+  },
+  "attacks": [
+   "GoblinBruteBros_Attack",
+   "GoblinBruteBros_RageAttack",
+   "GoblinBrute_HipCloth",
+   "GoblinBrute_ShoulderGuard",
+   "GoblinBrute_Taunt",
+   "GoblinShaman_attack_fireball_hildir",
+   "GoblinShaman_attack_protect_hildir"
+  ],
+  "drops": [
+   {
+    "item": "GoblinShaman_Hildir_nochest",
+    "min": 1,
+    "max": 1,
+    "chance": 1
+   },
+   {
+    "item": "TrophyGoblinBruteBrosBrute",
+    "min": 1,
+    "max": 1,
+    "chance": 1
+   }
+  ],
+  "avoidWater": true
+ },
+ {
+  "id": "GoblinBrute_Hildir",
+  "name": "<color=orange>Thungr</color>",
+  "faction": "PlainsMonsters",
+  "health": 800,
+  "damageModifiers": {
+   "chop": "Ignore",
+   "pickaxe": "Ignore",
+   "spirit": "Immune"
+  },
+  "speed": {
+   "walk": 5,
+   "run": 5,
+   "swim": 1.5
+  },
+  "attacks": [
+   "GoblinBrute_Attack",
+   "GoblinBrute_HipCloth",
+   "GoblinBrute_RageAttack",
+   "GoblinBrute_ShoulderGuard",
+   "GoblinBrute_Taunt"
+  ],
+  "drops": [
+   {
+    "item": "chest_hildir3",
+    "min": 1,
+    "max": 1,
+    "chance": 1
+   }
+  ],
+  "avoidWater": true
+ },
+ {
+  "id": "GoblinDeepNorth",
+  "name": "Captive Fuling",
+  "faction": "PlainsMonsters",
+  "health": 250,
+  "damageModifiers": {
+   "chop": "Ignore",
+   "pickaxe": "Ignore",
+   "spirit": "Immune"
+  },
+  "speed": {
+   "walk": 5,
+   "run": 6,
+   "swim": 1.5
+  },
+  "attacks": [
+   "GoblinClubDeepNorth",
+   "GoblinLoin",
+   "GoblinSpearDeepNorth",
+   "GoblinSwordDeepNorth",
+   "GoblinTorchDeepNorth"
+  ],
+  "drops": [
+   {
+    "item": "Coins",
+    "min": 20,
+    "max": 40,
+    "chance": 0.25,
+    "levelMultiplier": true
+   },
+   {
+    "item": "AncientCoin",
+    "min": 1,
+    "max": 2,
+    "chance": 1,
+    "levelMultiplier": true
+   },
+   {
+    "item": "Lingonberry",
+    "min": 1,
+    "max": 10,
+    "chance": 0.2,
+    "levelMultiplier": true
+   }
+  ],
+  "avoidWater": true
+ },
+ {
+  "id": "GoblinKing",
+  "name": "Yagluth",
+  "faction": "Boss",
+  "boss": true,
+  "defeatKey": "defeated_goblinking",
+  "health": 10000,
+  "damageModifiers": {
+   "pierce": "VeryResistant",
+   "chop": "Ignore",
+   "pickaxe": "Ignore",
+   "fire": "Resistant",
+   "poison": "Immune"
+  },
+  "speed": {
+   "walk": 5,
+   "run": 4,
+   "swim": 1.5
+  },
+  "attacks": [
+   "GoblinKing_Beam",
+   "GoblinKing_Meteors",
+   "GoblinKing_Nova",
+   "GoblinKing_Taunt"
+  ],
+  "drops": [
+   {
+    "item": "TrophyGoblinKing",
+    "min": 1,
+    "max": 1,
+    "chance": 1
+   },
+   {
+    "item": "YagluthDrop",
+    "min": 3,
+    "max": 3,
+    "chance": 1
+   }
+  ],
+  "avoidWater": true
+ },
+ {
+  "id": "GoblinShaman",
+  "name": "Fuling Shaman",
+  "faction": "PlainsMonsters",
+  "health": 100,
+  "damageModifiers": {
+   "chop": "Ignore",
+   "pickaxe": "Ignore",
+   "spirit": "Immune"
+  },
+  "speed": {
+   "walk": 1,
+   "run": 2,
+   "swim": 1.5
+  },
+  "attacks": [
+   "GoblinShaman_Headdress_antlers",
+   "GoblinShaman_Headdress_feathers",
+   "GoblinShaman_Staff_Bones",
+   "GoblinShaman_Staff_Feathers",
+   "GoblinShaman_attack_fireball",
+   "GoblinShaman_attack_poke",
+   "GoblinShaman_attack_protect"
+  ],
+  "drops": [
+   {
+    "item": "Coins",
+    "min": 20,
+    "max": 40,
+    "chance": 0.25,
+    "levelMultiplier": true
+   },
+   {
+    "item": "BlackMetalScrap",
+    "min": 1,
+    "max": 2,
+    "chance": 1,
+    "levelMultiplier": true
+   },
+   {
+    "item": "Pukeberries",
+    "min": 1,
+    "max": 2,
+    "chance": 1,
+    "levelMultiplier": true
+   },
+   {
+    "item": "TrophyGoblinShaman",
+    "min": 1,
+    "max": 1,
+    "chance": 0.1
+   }
+  ],
+  "avoidWater": true
+ },
+ {
+  "id": "GoblinShaman_Hildir",
+  "name": "<color=orange>Zil</color>",
+  "faction": "PlainsMonsters",
+  "health": 2400,
+  "damageModifiers": {
+   "chop": "Ignore",
+   "pickaxe": "Ignore",
+   "spirit": "Immune"
+  },
+  "speed": {
+   "walk": 1,
+   "run": 2,
+   "swim": 1.5
+  },
+  "attacks": [
+   "GoblinShaman_Staff_Hildir",
+   "GoblinShaman_attack_fireball",
+   "GoblinShaman_attack_poke",
+   "GoblinShaman_attack_protect"
+  ],
+  "drops": [
+   {
+    "item": "chest_hildir3",
+    "min": 1,
+    "max": 1,
+    "chance": 1
+   },
+   {
+    "item": "TrophyGoblinBruteBrosShaman",
+    "min": 1,
+    "max": 1,
+    "chance": 1
+   }
+  ],
+  "avoidWater": true
+ },
+ {
+  "id": "GoblinShaman_Hildir_nochest",
+  "name": "<color=orange>Zil</color>",
+  "faction": "PlainsMonsters",
+  "health": 1200,
+  "damageModifiers": {
+   "chop": "Ignore",
+   "pickaxe": "Ignore",
+   "spirit": "Immune"
+  },
+  "speed": {
+   "walk": 1,
+   "run": 2,
+   "swim": 1.5
+  },
+  "attacks": [
+   "GoblinShaman_Staff_Hildir",
+   "GoblinShaman_attack_fireball",
+   "GoblinShaman_attack_poke",
+   "GoblinShaman_attack_protect"
+  ],
+  "drops": [
+   {
+    "item": "TrophyGoblinBruteBrosShaman",
+    "min": 1,
+    "max": 1,
+    "chance": 1
+   }
+  ],
+  "avoidWater": true
+ },
+ {
+  "id": "Goblin_Gem",
+  "name": "Riktig Fuling",
+  "faction": "ForestMonsters",
+  "health": 1000,
+  "damageModifiers": {
+   "chop": "Ignore",
+   "pickaxe": "Ignore",
+   "spirit": "Immune"
+  },
+  "speed": {
+   "walk": 5,
+   "run": 12,
+   "swim": 2
+  },
+  "drops": [
+   {
+    "item": "GemstoneBlue",
+    "min": 2,
+    "max": 4,
+    "chance": 1,
+    "levelMultiplier": true
+   },
+   {
+    "item": "GemstoneGreen",
+    "min": 2,
+    "max": 4,
+    "chance": 1,
+    "levelMultiplier": true
+   },
+   {
+    "item": "GemstoneRed",
+    "min": 2,
+    "max": 4,
+    "chance": 1,
+    "levelMultiplier": true
+   }
+  ],
+  "afraidOfFire": true,
+  "avoidWater": true
+ },
+ {
+  "id": "Greydwarf",
+  "name": "Greydwarf",
+  "faction": "ForestMonsters",
+  "health": 40,
+  "damageModifiers": {
+   "chop": "Ignore",
+   "pickaxe": "Ignore",
+   "fire": "VeryWeak",
+   "poison": "Resistant",
+   "spirit": "Immune"
+  },
+  "speed": {
+   "walk": 5,
+   "run": 6,
+   "swim": 1.5
+  },
+  "attacks": [
+   "Greydwarf_attack",
+   "Greydwarf_throw"
+  ],
+  "drops": [
+   {
+    "item": "GreydwarfEye",
+    "min": 1,
+    "max": 1,
+    "chance": 0.5,
+    "levelMultiplier": true
+   },
+   {
+    "item": "Stone",
+    "min": 1,
+    "max": 1,
+    "chance": 1,
+    "levelMultiplier": true
+   },
+   {
+    "item": "Wood",
+    "min": 1,
+    "max": 1,
+    "chance": 1,
+    "levelMultiplier": true
+   },
+   {
+    "item": "Resin",
+    "min": 1,
+    "max": 1,
+    "chance": 1,
+    "levelMultiplier": true
+   },
+   {
+    "item": "TrophyGreydwarf",
+    "min": 1,
+    "max": 1,
+    "chance": 0.05
+   }
+  ],
+  "avoidWater": true
+ },
+ {
+  "id": "Greydwarf_Elite",
+  "name": "Greydwarf Brute",
+  "faction": "ForestMonsters",
+  "health": 150,
+  "damageModifiers": {
+   "chop": "Ignore",
+   "pickaxe": "Ignore",
+   "fire": "VeryWeak",
+   "poison": "Resistant",
+   "spirit": "Immune"
+  },
+  "speed": {
+   "walk": 5,
+   "run": 5,
+   "swim": 1
+  },
+  "attacks": [
+   "Greydwarf_elite_attack"
+  ],
+  "drops": [
+   {
+    "item": "GreydwarfEye",
+    "min": 2,
+    "max": 2,
+    "chance": 0.5,
+    "levelMultiplier": true
+   },
+   {
+    "item": "Stone",
+    "min": 2,
+    "max": 2,
+    "chance": 1,
+    "levelMultiplier": true
+   },
+   {
+    "item": "Wood",
+    "min": 3,
+    "max": 5,
+    "chance": 1,
+    "levelMultiplier": true
+   },
+   {
+    "item": "Dandelion",
+    "min": 1,
+    "max": 1,
+    "chance": 1,
+    "levelMultiplier": true
+   },
+   {
+    "item": "AncientSeed",
+    "min": 1,
+    "max": 1,
+    "chance": 0.33,
+    "levelMultiplier": true
+   },
+   {
+    "item": "TrophyGreydwarfBrute",
+    "min": 1,
+    "max": 1,
+    "chance": 0.1
+   }
+  ],
+  "avoidWater": true
+ },
+ {
+  "id": "Greydwarf_Frozen",
+  "name": "Greydwarf",
+  "faction": "DeepNorth",
+  "health": 100,
+  "damageModifiers": {
+   "chop": "Ignore",
+   "pickaxe": "Ignore",
+   "fire": "VeryWeak",
+   "poison": "Resistant",
+   "spirit": "Immune"
+  },
+  "speed": {
+   "walk": 5,
+   "run": 6,
+   "swim": 1.5
+  },
+  "attacks": [
+   "Greydwarf_attack_frozen",
+   "Greydwarf_throw_frozen"
+  ],
+  "drops": [
+   {
+    "item": "GreydwarfEye",
+    "min": 1,
+    "max": 1,
+    "chance": 0.5,
+    "levelMultiplier": true
+   },
+   {
+    "item": "Wood",
+    "min": 1,
+    "max": 1,
+    "chance": 1,
+    "levelMultiplier": true
+   },
+   {
+    "item": "Resin",
+    "min": 1,
+    "max": 1,
+    "chance": 1,
+    "levelMultiplier": true
+   },
+   {
+    "item": "TrophyGreydwarf",
+    "min": 1,
+    "max": 1,
+    "chance": 0.05
+   },
+   {
+    "item": "Snowball",
+    "min": 1,
+    "max": 1,
+    "chance": 1,
+    "levelMultiplier": true
+   },
+   {
+    "item": "Ice",
+    "min": 1,
+    "max": 2,
+    "chance": 1,
+    "levelMultiplier": true
+   }
+  ],
+  "avoidWater": true
+ },
+ {
+  "id": "Greydwarf_Shaman",
+  "name": "Greydwarf Shaman",
+  "faction": "ForestMonsters",
+  "health": 60,
+  "damageModifiers": {
+   "chop": "Ignore",
+   "pickaxe": "Ignore",
+   "fire": "VeryWeak",
+   "poison": "Resistant",
+   "spirit": "Immune"
+  },
+  "speed": {
+   "walk": 5,
+   "run": 4,
+   "swim": 1.5
+  },
+  "attacks": [
+   "Greydwarf_attack",
+   "Greydwarf_shaman_attack",
+   "Greydwarf_shaman_heal"
+  ],
+  "drops": [
+   {
+    "item": "GreydwarfEye",
+    "min": 1,
+    "max": 1,
+    "chance": 0.5,
+    "levelMultiplier": true
+   },
+   {
+    "item": "Wood",
+    "min": 1,
+    "max": 1,
+    "chance": 1,
+    "levelMultiplier": true
+   },
+   {
+    "item": "Resin",
+    "min": 1,
+    "max": 2,
+    "chance": 1,
+    "levelMultiplier": true
+   },
+   {
+    "item": "TrophyGreydwarfShaman",
+    "min": 1,
+    "max": 1,
+    "chance": 0.1
+   },
+   {
+    "item": "Pukeberries",
+    "min": 1,
+    "max": 2,
+    "chance": 1,
+    "levelMultiplier": true
+   }
+  ],
+  "avoidWater": true
+ },
+ {
+  "id": "Greydwarf_Shaman_Frozen",
+  "name": "Greydwarf Shaman",
+  "faction": "DeepNorth",
+  "health": 120,
+  "damageModifiers": {
+   "chop": "Ignore",
+   "pickaxe": "Ignore",
+   "fire": "VeryWeak",
+   "poison": "Resistant",
+   "spirit": "Immune"
+  },
+  "speed": {
+   "walk": 5,
+   "run": 4,
+   "swim": 1.5
+  },
+  "attacks": [
+   "Greydwarf_attack_frozen",
+   "Greydwarf_shaman_attack_frozen",
+   "Greydwarf_shaman_heal_frozen"
+  ],
+  "drops": [
+   {
+    "item": "GreydwarfEye",
+    "min": 1,
+    "max": 1,
+    "chance": 0.5,
+    "levelMultiplier": true
+   },
+   {
+    "item": "Wood",
+    "min": 1,
+    "max": 1,
+    "chance": 1,
+    "levelMultiplier": true
+   },
+   {
+    "item": "Resin",
+    "min": 1,
+    "max": 2,
+    "chance": 1,
+    "levelMultiplier": true
+   },
+   {
+    "item": "TrophyGreydwarfShaman",
+    "min": 1,
+    "max": 1,
+    "chance": 0.1
+   },
+   {
+    "item": "Pukeberries",
+    "min": 1,
+    "max": 2,
+    "chance": 1,
+    "levelMultiplier": true
+   },
+   {
+    "item": "Ice",
+    "min": 1,
+    "max": 2,
+    "chance": 1,
+    "levelMultiplier": true
+   }
+  ],
+  "avoidWater": true
+ },
+ {
+  "id": "Greyling",
+  "name": "Greyling",
+  "faction": "ForestMonsters",
+  "health": 20,
+  "damageModifiers": {
+   "chop": "Ignore",
+   "pickaxe": "Ignore",
+   "fire": "VeryWeak",
+   "poison": "Resistant",
+   "spirit": "Immune"
+  },
+  "speed": {
+   "walk": 5,
+   "run": 4,
+   "swim": 1.5
+  },
+  "attacks": [
+   "Greyling_attack"
+  ],
+  "drops": [
+   {
+    "item": "Resin",
+    "min": 1,
+    "max": 1,
+    "chance": 1,
+    "levelMultiplier": true
+   }
+  ],
+  "avoidWater": true
+ },
+ {
+  "id": "Hare",
+  "name": "Hare",
+  "faction": "AnimalsVeg",
+  "health": 10,
+  "damageModifiers": {
+   "chop": "Ignore",
+   "pickaxe": "Ignore",
+   "spirit": "Immune"
+  },
+  "speed": {
+   "walk": 1,
+   "run": 7,
+   "swim": 2
+  },
+  "drops": [
+   {
+    "item": "HareMeat",
+    "min": 1,
+    "max": 1,
+    "chance": 1,
+    "levelMultiplier": true
+   },
+   {
+    "item": "ScaleHide",
+    "min": 1,
+    "max": 3,
+    "chance": 1,
+    "levelMultiplier": true
+   },
+   {
+    "item": "TrophyHare",
+    "min": 1,
+    "max": 1,
+    "chance": 0.05
+   }
+  ],
+  "afraidOfFire": true,
+  "avoidWater": true
+ },
+ {
+  "id": "Hatchling",
+  "name": "Drake",
+  "faction": "MountainMonsters",
+  "health": 100,
+  "damageModifiers": {
+   "chop": "Ignore",
+   "pickaxe": "Ignore",
+   "fire": "Weak",
+   "frost": "Immune",
+   "spirit": "Immune"
+  },
+  "speed": {
+   "walk": 5,
+   "run": 3,
+   "fly": 12
+  },
+  "attacks": [
+   "hatchling_spit_cold"
+  ],
+  "drops": [
+   {
+    "item": "TrophyHatchling",
+    "min": 1,
+    "max": 1,
+    "chance": 0.1
+   },
+   {
+    "item": "FreezeGland",
+    "min": 1,
+    "max": 2,
+    "chance": 1,
+    "levelMultiplier": true
+   }
+  ],
+  "avoidWater": true
+ },
+ {
+  "id": "Hen",
+  "name": "Hen",
+  "faction": "ForestMonsters",
+  "group": "chicken",
+  "health": 10,
+  "damageModifiers": {
+   "chop": "Ignore",
+   "pickaxe": "Ignore",
+   "spirit": "Immune"
+  },
+  "speed": {
+   "walk": 3,
+   "run": 6,
+   "swim": 2
+  },
+  "attacks": [
+   "boar_base_attack"
+  ],
+  "drops": [
+   {
+    "item": "ChickenMeat",
+    "min": 1,
+    "max": 1,
+    "chance": 1,
+    "levelMultiplier": true
+   },
+   {
+    "item": "Feathers",
+    "min": 1,
+    "max": 3,
+    "chance": 1,
+    "levelMultiplier": true
+   }
+  ],
+  "tameable": {
+   "fedDuration": 600,
+   "tamingTime": 1800,
+   "food": [
+    "Barley",
+    "BeechSeeds",
+    "BirchSeeds",
+    "CarrotSeeds",
+    "Dandelion",
+    "OnionSeeds",
+    "TurnipSeeds"
+   ]
+  },
+  "afraidOfFire": true,
+  "avoidWater": true
+ },
+ {
+  "id": "Hive",
+  "name": "$enemy_hive",
+  "faction": "Boss",
+  "boss": true,
+  "defeatKey": "defeated_hive",
+  "health": 10000,
+  "damageModifiers": {
+   "blunt": "Weak",
+   "slash": "Resistant",
+   "pierce": "VeryResistant",
+   "chop": "Ignore",
+   "pickaxe": "Ignore",
+   "fire": "VeryResistant",
+   "frost": "Weak",
+   "poison": "Immune"
+  },
+  "speed": {
+   "swim": 2
+  },
+  "attacks": [
+   "hive_attack_aoe",
+   "hive_attack_punch",
+   "hive_attack_ranged",
+   "hive_attack_throw"
+  ],
+  "drops": [
+   {
+    "item": "TrophySeekerQueen",
+    "min": 1,
+    "max": 1,
+    "chance": 1
+   },
+   {
+    "item": "QueenDrop",
+    "min": 1,
+    "max": 1,
+    "chance": 1,
+    "onePerPlayer": true
+   }
+  ],
+  "avoidWater": true
+ },
+ {
+  "id": "JotunWarrior",
+  "name": "Krigen",
+  "faction": "DeepNorth",
+  "defeatKey": "jotun_killed",
+  "health": 1300,
+  "damageModifiers": {
+   "pierce": "Resistant",
+   "chop": "Ignore",
+   "pickaxe": "Ignore",
+   "frost": "VeryResistant",
+   "poison": "Immune",
+   "spirit": "Ignore"
+  },
+  "speed": {
+   "walk": 2,
+   "run": 4,
+   "swim": 1
+  },
+  "attacks": [
+   "JotunWarrior2HAxe_attack_charge",
+   "JotunWarrior2HAxe_attack_cleave",
+   "JotunWarrior2HAxe_attack_dodge",
+   "JotunWarrior2HAxe_attack_slash",
+   "JotunWarrior2HSword_attack_charge",
+   "JotunWarrior2HSword_attack_cleave",
+   "JotunWarrior2HSword_attack_dodge",
+   "JotunWarrior2HSword_attack_slash"
+  ],
+  "drops": [
+   {
+    "item": "MoldArmormediumChest",
+    "min": 1,
+    "max": 1,
+    "chance": 0.03,
+    "levelMultiplier": true
+   },
+   {
+    "item": "MoldArmorMediumHelmet",
+    "min": 1,
+    "max": 1,
+    "chance": 0.03,
+    "levelMultiplier": true
+   },
+   {
+    "item": "MoldArmorMediumLegs",
+    "min": 1,
+    "max": 1,
+    "chance": 0.03,
+    "levelMultiplier": true
+   },
+   {
+    "item": "MemorialCoal",
+    "min": 1,
+    "max": 1,
+    "chance": 0.2,
+    "levelMultiplier": true
+   },
+   {
+    "item": "TrophyJotunWarrior",
+    "min": 1,
+    "max": 1,
+    "chance": 0.1
+   },
+   {
+    "item": "Leatherstraps",
+    "min": 1,
+    "max": 3,
+    "chance": 1,
+    "levelMultiplier": true
+   },
+   {
+    "item": "MoldArmorGoldLegs",
+    "min": 1,
+    "max": 1,
+    "chance": 0.03,
+    "levelMultiplier": true
+   },
+   {
+    "item": "MoldArmorGoldChest",
+    "min": 1,
+    "max": 1,
+    "chance": 0.03,
+    "levelMultiplier": true
+   },
+   {
+    "item": "MoldArmorGoldHelmet",
+    "min": 1,
+    "max": 1,
+    "chance": 0.03,
+    "levelMultiplier": true
+   }
+  ],
+  "avoidWater": true
+ },
+ {
+  "id": "JotunWarriorDualWield",
+  "name": "Krigen",
+  "faction": "DeepNorth",
+  "defeatKey": "jotun_killed",
+  "health": 1300,
+  "damageModifiers": {
+   "pierce": "Resistant",
+   "chop": "Ignore",
+   "pickaxe": "Ignore",
+   "frost": "VeryResistant",
+   "poison": "Immune",
+   "spirit": "Ignore"
+  },
+  "speed": {
+   "walk": 2,
+   "run": 4,
+   "swim": 1
+  },
+  "attacks": [
+   "JotunWarrior1HAxe_attack_cleave",
+   "JotunWarrior1HAxe_attack_dodge",
+   "JotunWarrior1HAxe_attack_dodger",
+   "JotunWarrior1HAxe_attack_slash",
+   "JotunWarrior1HAxe_attack_slashdw"
+  ],
+  "drops": [
+   {
+    "item": "MoldArmormediumChest",
+    "min": 1,
+    "max": 1,
+    "chance": 0.03,
+    "levelMultiplier": true
+   },
+   {
+    "item": "MoldArmorMediumHelmet",
+    "min": 1,
+    "max": 1,
+    "chance": 0.03,
+    "levelMultiplier": true
+   },
+   {
+    "item": "MoldArmorMediumLegs",
+    "min": 1,
+    "max": 1,
+    "chance": 0.03,
+    "levelMultiplier": true
+   },
+   {
+    "item": "MemorialCoal",
+    "min": 1,
+    "max": 1,
+    "chance": 0.2,
+    "levelMultiplier": true
+   },
+   {
+    "item": "TrophyJotunWarrior",
+    "min": 1,
+    "max": 1,
+    "chance": 0.1
+   },
+   {
+    "item": "Leatherstraps",
+    "min": 1,
+    "max": 3,
+    "chance": 1,
+    "levelMultiplier": true
+   },
+   {
+    "item": "MoldArmorGoldLegs",
+    "min": 1,
+    "max": 1,
+    "chance": 0.03,
+    "levelMultiplier": true
+   },
+   {
+    "item": "MoldArmorGoldChest",
+    "min": 1,
+    "max": 1,
+    "chance": 0.03,
+    "levelMultiplier": true
+   },
+   {
+    "item": "MoldArmorGoldHelmet",
+    "min": 1,
+    "max": 1,
+    "chance": 0.03,
+    "levelMultiplier": true
+   }
+  ],
+  "avoidWater": true
+ },
+ {
+  "id": "JotunWitch",
+  "name": "Hexen",
+  "faction": "DeepNorth",
+  "defeatKey": "jotun_killed",
+  "health": 800,
+  "damageModifiers": {
+   "chop": "Ignore",
+   "pickaxe": "Ignore",
+   "fire": "Weak",
+   "frost": "VeryResistant",
+   "poison": "Immune",
+   "spirit": "Immune"
+  },
+  "speed": {
+   "walk": 1.5,
+   "run": 4,
+   "fly": 12
+  },
+  "attacks": [
+   "JotunWitch_attack_dodge",
+   "JotunWitch_attack_dodge2",
+   "JotunWitch_attack_dodge_down",
+   "JotunWitch_attack_dodge_up",
+   "JotunWitch_attack_lightningbolt",
+   "JotunWitch_attack_magicblast"
+  ],
+  "drops": [
+   {
+    "item": "NornThread",
+    "min": 1,
+    "max": 3,
+    "chance": 1,
+    "levelMultiplier": true
+   },
+   {
+    "item": "TrophyJotunWitch",
+    "min": 1,
+    "max": 1,
+    "chance": 0.1
+   },
+   {
+    "item": "BloodGoldKey",
+    "min": 1,
+    "max": 1,
+    "chance": 0.1
+   },
+   {
+    "item": "MoldArmorMageChest",
+    "min": 1,
+    "max": 1,
+    "chance": 0.05
+   },
+   {
+    "item": "MoldArmorMageHelmet",
+    "min": 1,
+    "max": 1,
+    "chance": 0.05
+   },
+   {
+    "item": "MoldArmorMageLegs",
+    "min": 1,
+    "max": 1,
+    "chance": 0.05
+   }
+  ],
+  "avoidWater": true
+ },
+ {
+  "id": "Leech",
+  "name": "Leech",
+  "faction": "Undead",
+  "health": 60,
+  "damageModifiers": {
+   "chop": "Ignore",
+   "pickaxe": "Ignore",
+   "fire": "Immune",
+   "poison": "Resistant",
+   "spirit": "Immune"
+  },
+  "speed": {
+   "walk": 5,
+   "run": 2,
+   "swim": 3
+  },
+  "attacks": [
+   "Leech_BiteAttack"
+  ],
+  "drops": [
+   {
+    "item": "TrophyLeech",
+    "min": 1,
+    "max": 1,
+    "chance": 0.1
+   },
+   {
+    "item": "Bloodbag",
+    "min": 1,
+    "max": 1,
+    "chance": 1,
+    "levelMultiplier": true
+   }
+  ]
+ },
+ {
+  "id": "Leech_cave",
+  "name": "Leech",
+  "faction": "Undead",
+  "health": 60,
+  "damageModifiers": {
+   "chop": "Ignore",
+   "pickaxe": "Ignore",
+   "fire": "Immune",
+   "poison": "Resistant",
+   "spirit": "Immune"
+  },
+  "speed": {
+   "walk": 5,
+   "run": 2,
+   "swim": 3
+  },
+  "attacks": [
+   "Leech_BiteAttack"
+  ],
+  "drops": [
+   {
+    "item": "TrophyLeech",
+    "min": 1,
+    "max": 1,
+    "chance": 0.1
+   },
+   {
+    "item": "Bloodbag",
+    "min": 1,
+    "max": 1,
+    "chance": 1,
+    "levelMultiplier": true
+   }
+  ]
+ },
+ {
+  "id": "Lox",
+  "name": "Lox",
+  "faction": "PlainsMonsters",
+  "group": "lox",
+  "health": 1000,
+  "damageModifiers": {
+   "blunt": "Resistant",
+   "slash": "Resistant",
+   "chop": "Ignore",
+   "pickaxe": "Ignore",
+   "fire": "Weak",
+   "frost": "Resistant",
+   "spirit": "Immune"
+  },
+  "speed": {
+   "walk": 2,
+   "run": 7,
+   "swim": 3
+  },
+  "attacks": [
+   "lox_bite",
+   "lox_stomp"
+  ],
+  "drops": [
+   {
+    "item": "LoxMeat",
+    "min": 4,
+    "max": 6,
+    "chance": 1,
+    "levelMultiplier": true
+   },
+   {
+    "item": "TrophyLox",
+    "min": 1,
+    "max": 1,
+    "chance": 0.1
+   },
+   {
+    "item": "LoxPelt",
+    "min": 2,
+    "max": 3,
+    "chance": 1,
+    "levelMultiplier": true
+   }
+  ],
+  "tameable": {
+   "fedDuration": 600,
+   "tamingTime": 1800,
+   "food": [
+    "Barley",
+    "Cloudberry",
+    "Flax"
+   ]
+  },
+  "avoidWater": true
+ },
+ {
+  "id": "Lox_Calf",
+  "name": "Lox Calf",
+  "faction": "PlainsMonsters",
+  "group": "lox",
+  "health": 100,
+  "damageModifiers": {
+   "blunt": "Resistant",
+   "slash": "Resistant",
+   "chop": "Ignore",
+   "pickaxe": "Ignore",
+   "fire": "Weak",
+   "frost": "Resistant",
+   "spirit": "Immune"
+  },
+  "speed": {
+   "walk": 2,
+   "run": 6,
+   "swim": 3
+  },
+  "drops": [
+   {
+    "item": "LoxMeat",
+    "min": 1,
+    "max": 1,
+    "chance": 1
+   }
+  ],
+  "avoidWater": true
+ },
+ {
+  "id": "Mistile",
+  "name": "Mistile",
+  "faction": "Dverger",
+  "health": 1,
+  "damageModifiers": {
+   "chop": "Ignore",
+   "pickaxe": "Ignore",
+   "spirit": "Immune"
+  },
+  "speed": {
+   "walk": 4,
+   "run": 4,
+   "fly": 5
+  },
+  "attacks": [
+   "Mistile_kamikaze"
+  ],
+  "avoidWater": true
+ },
+ {
+  "id": "Moose",
+  "name": "Moose",
+  "faction": "DeepNorth",
+  "group": "moose",
+  "health": 1000,
+  "damageModifiers": {
+   "blunt": "Resistant",
+   "slash": "Resistant",
+   "chop": "Ignore",
+   "pickaxe": "Ignore",
+   "fire": "Weak",
+   "frost": "Resistant",
+   "spirit": "Immune"
+  },
+  "speed": {
+   "walk": 2.22,
+   "run": 12.6,
+   "swim": 3
+  },
+  "attacks": [
+   "moose_hooves",
+   "moose_horns",
+   "moose_horns_sweep"
+  ],
+  "drops": [
+   {
+    "item": "MooseMeat",
+    "min": 4,
+    "max": 6,
+    "chance": 1,
+    "levelMultiplier": true
+   },
+   {
+    "item": "TrophyMoose",
+    "min": 1,
+    "max": 1,
+    "chance": 0.1
+   },
+   {
+    "item": "MooseHide",
+    "min": 2,
+    "max": 3,
+    "chance": 1,
+    "levelMultiplier": true
+   },
+   {
+    "item": "MooseSinew",
+    "min": 2,
+    "max": 3,
+    "chance": 1,
+    "levelMultiplier": true
+   }
+  ],
+  "tameable": {
+   "fedDuration": 600,
+   "tamingTime": 1800,
+   "food": [
+    "Lingonberry"
+   ]
+  },
+  "avoidWater": true
+ },
+ {
+  "id": "Moose_calf",
+  "name": "Moose Calf",
+  "faction": "DeepNorth",
+  "group": "moose",
+  "health": 1000,
+  "damageModifiers": {
+   "blunt": "Resistant",
+   "slash": "Resistant",
+   "chop": "Ignore",
+   "pickaxe": "Ignore",
+   "fire": "Weak",
+   "frost": "Resistant",
+   "spirit": "Immune"
+  },
+  "speed": {
+   "walk": 2.22,
+   "run": 12.6,
+   "swim": 3
+  },
+  "attacks": [
+   "moose_hooves",
+   "moose_horns"
+  ],
+  "avoidWater": true
+ },
+ {
+  "id": "Moose_spiritcaller",
+  "faction": "Players",
+  "health": 1100,
+  "damageModifiers": {
+   "blunt": "Resistant",
+   "slash": "Resistant",
+   "chop": "Ignore",
+   "pickaxe": "Ignore",
+   "fire": "Weak",
+   "frost": "Resistant",
+   "spirit": "Immune"
+  },
+  "speed": {
+   "walk": 2.22,
+   "run": 12.6,
+   "swim": 3
+  },
+  "attacks": [
+   "spiritmoose_hooves",
+   "spiritmoose_horns",
+   "spiritmoose_horns_sweep"
+  ],
+  "tameable": {
+   "fedDuration": 600,
+   "tamingTime": 1800,
+   "food": [
+    "Lingonberry"
+   ]
+  },
+  "avoidWater": true
+ },
+ {
+  "id": "Morgen",
+  "name": "Morgen",
+  "faction": "Demon",
+  "health": 1600,
+  "damageModifiers": {
+   "blunt": "Resistant",
+   "slash": "Resistant",
+   "pierce": "Resistant",
+   "chop": "Ignore",
+   "pickaxe": "Ignore",
+   "fire": "Resistant",
+   "lightning": "Weak"
+  },
+  "speed": {
+   "walk": 3,
+   "run": 8.6
+  },
+  "attacks": [
+   "Morgen_bite",
+   "Morgen_bodyslam",
+   "Morgen_roll_left",
+   "Morgen_roll_right",
+   "Morgen_swipe_1",
+   "Morgen_swipe_2",
+   "Morgen_swipe_3",
+   "Morgen_swipe_4"
+  ],
+  "drops": [
+   {
+    "item": "MorgenSinew",
+    "min": 1,
+    "max": 2,
+    "chance": 1,
+    "levelMultiplier": true
+   },
+   {
+    "item": "MorgenHeart",
+    "min": 1,
+    "max": 1,
+    "chance": 0.8,
+    "levelMultiplier": true
+   },
+   {
+    "item": "TrophyMorgen",
+    "min": 1,
+    "max": 1,
+    "chance": 0.05
+   }
+  ],
+  "avoidWater": true
+ },
+ {
+  "id": "Morgen_NonSleeping",
+  "name": "Morgen",
+  "faction": "Demon",
+  "health": 1600,
+  "damageModifiers": {
+   "blunt": "Resistant",
+   "slash": "Resistant",
+   "pierce": "Resistant",
+   "chop": "Ignore",
+   "pickaxe": "Ignore",
+   "fire": "Resistant",
+   "lightning": "Weak"
+  },
+  "speed": {
+   "walk": 3,
+   "run": 8.6
+  },
+  "attacks": [
+   "Morgen_bite",
+   "Morgen_bodyslam",
+   "Morgen_roll_left",
+   "Morgen_roll_right",
+   "Morgen_swipe_1",
+   "Morgen_swipe_2",
+   "Morgen_swipe_3",
+   "Morgen_swipe_4"
+  ],
+  "drops": [
+   {
+    "item": "MorgenSinew",
+    "min": 1,
+    "max": 2,
+    "chance": 1,
+    "levelMultiplier": true
+   },
+   {
+    "item": "MorgenHeart",
+    "min": 1,
+    "max": 1,
+    "chance": 0.8,
+    "levelMultiplier": true
+   },
+   {
+    "item": "TrophyMorgen",
+    "min": 1,
+    "max": 1,
+    "chance": 0.05
+   }
+  ],
+  "avoidWater": true
+ },
+ {
+  "id": "Neck",
+  "name": "Neck",
+  "faction": "ForestMonsters",
+  "health": 5,
+  "damageModifiers": {
+   "chop": "Ignore",
+   "pickaxe": "Ignore",
+   "fire": "Weak",
+   "poison": "Resistant",
+   "spirit": "Immune"
+  },
+  "speed": {
+   "walk": 5,
+   "run": 5,
+   "swim": 2
+  },
+  "attacks": [
+   "Neck_BiteAttack"
+  ],
+  "drops": [
+   {
+    "item": "NeckTail",
+    "min": 1,
+    "max": 1,
+    "chance": 0.7,
+    "levelMultiplier": true
+   },
+   {
+    "item": "TrophyNeck",
+    "min": 1,
+    "max": 1,
+    "chance": 0.05
+   }
+  ],
+  "afraidOfFire": true
+ },
+ {
+  "id": "Seal",
+  "name": "Seal",
+  "faction": "DeepNorth",
+  "health": 400,
+  "damageModifiers": {
+   "chop": "Ignore",
+   "pickaxe": "Ignore",
+   "fire": "Weak",
+   "spirit": "Immune"
+  },
+  "speed": {
+   "walk": 2,
+   "run": 3,
+   "swim": 2
+  },
+  "drops": [
+   {
+    "item": "SealHide",
+    "min": 2,
+    "max": 3,
+    "chance": 1,
+    "levelMultiplier": true
+   },
+   {
+    "item": "TrophySeal",
+    "min": 1,
+    "max": 1,
+    "chance": 0.1
+   },
+   {
+    "item": "SealBlubber",
+    "min": 2,
+    "max": 3,
+    "chance": 1,
+    "levelMultiplier": true
+   }
+  ],
+  "afraidOfFire": true
+ },
+ {
+  "id": "Seal_Pup",
+  "name": "Baby Seal",
+  "faction": "DeepNorth",
+  "health": 200,
+  "damageModifiers": {
+   "chop": "Ignore",
+   "pickaxe": "Ignore",
+   "spirit": "Immune"
+  },
+  "speed": {
+   "walk": 0.5,
+   "run": 1,
+   "swim": 2
+  },
+  "drops": [
+   {
+    "item": "SealBlubber",
+    "min": 1,
+    "max": 1,
+    "chance": 0.1,
+    "levelMultiplier": true
+   }
+  ],
+  "afraidOfFire": true,
+  "avoidWater": true
+ },
+ {
+  "id": "Seeker",
+  "name": "Seeker",
+  "faction": "MistlandsMonsters",
+  "health": 200,
+  "damageModifiers": {
+   "blunt": "Resistant",
+   "slash": "Resistant",
+   "pierce": "Resistant",
+   "chop": "Ignore",
+   "pickaxe": "Ignore",
+   "spirit": "Immune"
+  },
+  "speed": {
+   "walk": 5,
+   "run": 6,
+   "swim": 4
+  },
+  "attacks": [
+   "seeker_claw_left",
+   "seeker_claw_right",
+   "seeker_groundslam",
+   "seeker_groundslam_flying",
+   "seeker_land",
+   "seeker_pincers",
+   "seeker_takeoff"
+  ],
+  "drops": [
+   {
+    "item": "BugMeat",
+    "min": 1,
+    "max": 2,
+    "chance": 1,
+    "levelMultiplier": true
+   },
+   {
+    "item": "Carapace",
+    "min": 1,
+    "max": 2,
+    "chance": 1,
+    "levelMultiplier": true
+   },
+   {
+    "item": "TrophySeeker",
+    "min": 1,
+    "max": 1,
+    "chance": 0.05
+   }
+  ],
+  "avoidWater": true
+ },
+ {
+  "id": "SeekerBrood",
+  "name": "Seeker Brood",
+  "faction": "MistlandsMonsters",
+  "health": 20,
+  "damageModifiers": {
+   "blunt": "Resistant",
+   "slash": "Resistant",
+   "pierce": "Resistant",
+   "chop": "Ignore",
+   "pickaxe": "Ignore",
+   "spirit": "Immune"
+  },
+  "speed": {
+   "walk": 1,
+   "run": 3,
+   "swim": 4
+  },
+  "attacks": [
+   "babyseeker_attack"
+  ],
+  "drops": [
+   {
+    "item": "RoyalJelly",
+    "min": 1,
+    "max": 1,
+    "chance": 0.5
+   }
+  ],
+  "avoidWater": true
+ },
+ {
+  "id": "SeekerBrute",
+  "name": "Seeker Soldier",
+  "faction": "MistlandsMonsters",
+  "health": 1500,
+  "damageModifiers": {
+   "blunt": "Resistant",
+   "slash": "Resistant",
+   "pierce": "Resistant",
+   "chop": "Ignore",
+   "pickaxe": "Ignore",
+   "spirit": "Immune"
+  },
+  "speed": {
+   "walk": 2,
+   "run": 6,
+   "swim": 4
+  },
+  "attacks": [
+   "SeekerBrute_Taunt",
+   "SeekerBrute_bite",
+   "SeekerBrute_groundslam",
+   "SeekerBrute_ram"
+  ],
+  "drops": [
+   {
+    "item": "BugMeat",
+    "min": 1,
+    "max": 2,
+    "chance": 1,
+    "levelMultiplier": true
+   },
+   {
+    "item": "Carapace",
+    "min": 2,
+    "max": 4,
+    "chance": 1,
+    "levelMultiplier": true
+   },
+   {
+    "item": "TrophySeekerBrute",
+    "min": 1,
+    "max": 1,
+    "chance": 0.05
+   },
+   {
+    "item": "Mandible",
+    "min": 1,
+    "max": 2,
+    "chance": 1
+   }
+  ],
+  "avoidWater": true
+ },
+ {
+  "id": "SeekerQueen",
+  "name": "The Queen",
+  "faction": "Boss",
+  "boss": true,
+  "defeatKey": "defeated_queen",
+  "health": 12500,
+  "damageModifiers": {
+   "pierce": "Resistant",
+   "chop": "Ignore",
+   "pickaxe": "Ignore",
+   "spirit": "Immune"
+  },
+  "speed": {
+   "walk": 2,
+   "run": 8,
+   "swim": 4
+  },
+  "attacks": [
+   "SeekerQueen_Bite",
+   "SeekerQueen_Call",
+   "SeekerQueen_PierceAOE",
+   "SeekerQueen_Rush",
+   "SeekerQueen_Slap",
+   "SeekerQueen_Spit",
+   "SeekerQueen_Teleport"
+  ],
+  "drops": [
+   {
+    "item": "TrophySeekerQueen",
+    "min": 1,
+    "max": 1,
+    "chance": 1
+   },
+   {
+    "item": "QueenDrop",
+    "min": 5,
+    "max": 5,
+    "chance": 1
+   }
+  ],
+  "avoidWater": true
+ },
+ {
+  "id": "Serpent",
+  "name": "Serpent",
+  "faction": "SeaMonsters",
+  "defeatKey": "defeated_serpent",
+  "health": 400,
+  "damageModifiers": {
+   "chop": "Ignore",
+   "pickaxe": "Ignore",
+   "fire": "Immune",
+   "frost": "Weak",
+   "poison": "Resistant",
+   "spirit": "Immune"
+  },
+  "speed": {
+   "walk": 5,
+   "run": 4,
+   "swim": 10
+  },
+  "attacks": [
+   "Serpent_attack",
+   "Serpent_taunt"
+  ],
+  "drops": [
+   {
+    "item": "TrophySerpent",
+    "min": 1,
+    "max": 1,
+    "chance": 0.33
+   },
+   {
+    "item": "SerpentMeat",
+    "min": 6,
+    "max": 8,
+    "chance": 1,
+    "levelMultiplier": true
+   },
+   {
+    "item": "SerpentScale",
+    "min": 8,
+    "max": 10,
+    "chance": 1,
+    "levelMultiplier": true
+   }
+  ]
+ },
+ {
+  "id": "ShadowPerson",
+  "name": "Shadow",
+  "faction": "DeepNorth",
+  "health": 750,
+  "damageModifiers": {
+   "blunt": "Ignore",
+   "slash": "Ignore",
+   "pierce": "Ignore",
+   "chop": "Ignore",
+   "pickaxe": "Ignore",
+   "fire": "Ignore",
+   "frost": "Ignore",
+   "lightning": "Ignore",
+   "poison": "Ignore",
+   "spirit": "Ignore",
+   "nonPlayer": "Ignore"
+  },
+  "speed": {
+   "walk": 1.6,
+   "run": 7,
+   "swim": 2
+  },
+  "attacks": [
+   "SP_ArmorBronzeChest",
+   "SP_ArmorBronzeLegs",
+   "SP_ArmorFenringLegs",
+   "SP_ArmorTrollLeatherLegs",
+   "SP_ArmorTunic5",
+   "SP_AxeBronze",
+   "SP_BattleaxeCrystal",
+   "SP_CapeLinen",
+   "SP_CapeWolf",
+   "SP_HelmetBronze",
+   "SP_KnifeSkollAndHati",
+   "SP_ShieldBlackmetalTower",
+   "SP_SwordBlackmetal"
+  ],
+  "afraidOfFire": true,
+  "avoidWater": true
+ },
+ {
+  "id": "Skeleton",
+  "name": "Skeleton",
+  "faction": "Undead",
+  "health": 40,
+  "damageModifiers": {
+   "blunt": "Weak",
+   "pierce": "Resistant",
+   "chop": "Ignore",
+   "pickaxe": "Ignore",
+   "fire": "Weak",
+   "frost": "Resistant",
+   "poison": "Immune"
+  },
+  "speed": {
+   "walk": 0.5,
+   "run": 4
+  },
+  "attacks": [
+   "skeleton_bow",
+   "skeleton_sword"
+  ],
+  "drops": [
+   {
+    "item": "TrophySkeleton",
+    "min": 1,
+    "max": 1,
+    "chance": 0.1
+   },
+   {
+    "item": "BoneFragments",
+    "min": 1,
+    "max": 1,
+    "chance": 1,
+    "levelMultiplier": true
+   }
+  ],
+  "avoidWater": true
+ },
+ {
+  "id": "Skeleton_DeepNorth",
+  "name": "Skeleton",
+  "faction": "DeepNorth",
+  "health": 100,
+  "damageModifiers": {
+   "blunt": "Weak",
+   "pierce": "Resistant",
+   "chop": "Ignore",
+   "pickaxe": "Ignore",
+   "fire": "Weak",
+   "frost": "Resistant",
+   "poison": "Immune"
+  },
+  "speed": {
+   "walk": 0.5,
+   "run": 4
+  },
+  "attacks": [
+   "skeleton_mace_DeepNorth"
+  ],
+  "drops": [
+   {
+    "item": "TrophySkeleton",
+    "min": 1,
+    "max": 1,
+    "chance": 0.1
+   },
+   {
+    "item": "BoneFragments",
+    "min": 1,
+    "max": 1,
+    "chance": 1,
+    "levelMultiplier": true
+   },
+   {
+    "item": "Ice",
+    "min": 1,
+    "max": 1,
+    "chance": 1,
+    "levelMultiplier": true
+   }
+  ],
+  "avoidWater": true
+ },
+ {
+  "id": "Skeleton_Friendly",
+  "name": "Skelett",
+  "faction": "Players",
+  "health": 400,
+  "damageModifiers": {
+   "blunt": "Weak",
+   "pierce": "Resistant",
+   "chop": "Ignore",
+   "pickaxe": "Ignore",
+   "fire": "Weak",
+   "frost": "Resistant",
+   "poison": "Immune"
+  },
+  "speed": {
+   "walk": 0.5,
+   "run": 4
+  },
+  "attacks": [
+   "skeleton_bow2",
+   "skeleton_sword2"
+  ],
+  "tameable": {
+   "fedDuration": 30,
+   "tamingTime": 1800
+  },
+  "avoidWater": true
+ },
+ {
+  "id": "Skeleton_Hildir",
+  "name": "<color=orange>Brenna</color>",
+  "faction": "Undead",
+  "defeatKey": "BossHildir1",
+  "health": 1200,
+  "damageModifiers": {
+   "blunt": "Weak",
+   "pierce": "Resistant",
+   "chop": "Ignore",
+   "pickaxe": "Ignore",
+   "fire": "Immune",
+   "frost": "Weak",
+   "poison": "Immune"
+  },
+  "speed": {
+   "walk": 0.5,
+   "run": 4
+  },
+  "attacks": [
+   "skeleton_hildir_firenova",
+   "skeleton_sword_hildir"
+  ],
+  "drops": [
+   {
+    "item": "chest_hildir1",
+    "min": 1,
+    "max": 1,
+    "chance": 1
+   },
+   {
+    "item": "TrophySkeletonHildir",
+    "min": 1,
+    "max": 1,
+    "chance": 1
+   }
+  ],
+  "avoidWater": true
+ },
+ {
+  "id": "Skeleton_Hildir_nochest",
+  "name": "<color=orange>Brenna</color>",
+  "faction": "Undead",
+  "defeatKey": "BossHildir1",
+  "health": 600,
+  "damageModifiers": {
+   "blunt": "Weak",
+   "pierce": "Resistant",
+   "chop": "Ignore",
+   "pickaxe": "Ignore",
+   "fire": "Immune",
+   "frost": "Weak",
+   "poison": "Immune"
+  },
+  "speed": {
+   "walk": 0.5,
+   "run": 4
+  },
+  "attacks": [
+   "skeleton_hildir_firenova",
+   "skeleton_sword_hildir"
+  ],
+  "drops": [
+   {
+    "item": "TrophySkeletonHildir",
+    "min": 1,
+    "max": 1,
+    "chance": 1
+   }
+  ],
+  "avoidWater": true
+ },
+ {
+  "id": "Skeleton_Meadows",
+  "name": "Skeleton",
+  "faction": "Undead",
+  "health": 30,
+  "damageModifiers": {
+   "blunt": "Weak",
+   "pierce": "Resistant",
+   "chop": "Ignore",
+   "pickaxe": "Ignore",
+   "fire": "Weak",
+   "frost": "Resistant",
+   "poison": "Immune"
+  },
+  "speed": {
+   "walk": 0.5,
+   "run": 4
+  },
+  "attacks": [
+   "skeleton_bow_meadows",
+   "skeleton_sword_meadows"
+  ],
+  "drops": [
+   {
+    "item": "TrophySkeleton",
+    "min": 1,
+    "max": 1,
+    "chance": 0.1
+   },
+   {
+    "item": "BoneFragments",
+    "min": 1,
+    "max": 1,
+    "chance": 1,
+    "levelMultiplier": true
+   }
+  ],
+  "avoidWater": true
+ },
+ {
+  "id": "Skeleton_Meadows_noarcher",
+  "name": "Skeleton",
+  "faction": "Undead",
+  "health": 30,
+  "damageModifiers": {
+   "blunt": "Weak",
+   "pierce": "Resistant",
+   "chop": "Ignore",
+   "pickaxe": "Ignore",
+   "fire": "Weak",
+   "frost": "Resistant",
+   "poison": "Immune"
+  },
+  "speed": {
+   "walk": 0.5,
+   "run": 4
+  },
+  "attacks": [
+   "skeleton_sword_meadows"
+  ],
+  "drops": [
+   {
+    "item": "TrophySkeleton",
+    "min": 1,
+    "max": 1,
+    "chance": 0.1
+   },
+   {
+    "item": "BoneFragments",
+    "min": 1,
+    "max": 1,
+    "chance": 1,
+    "levelMultiplier": true
+   }
+  ],
+  "avoidWater": true
+ },
+ {
+  "id": "Skeleton_Mountains",
+  "name": "Skeleton",
+  "faction": "Undead",
+  "health": 75,
+  "damageModifiers": {
+   "blunt": "Weak",
+   "pierce": "Resistant",
+   "chop": "Ignore",
+   "pickaxe": "Ignore",
+   "fire": "Weak",
+   "frost": "Resistant",
+   "poison": "Immune"
+  },
+  "speed": {
+   "walk": 0.5,
+   "run": 4
+  },
+  "attacks": [
+   "skeleton_bow_mountains",
+   "skeleton_sword_mountains"
+  ],
+  "drops": [
+   {
+    "item": "TrophySkeleton",
+    "min": 1,
+    "max": 1,
+    "chance": 0.1
+   },
+   {
+    "item": "BoneFragments",
+    "min": 1,
+    "max": 1,
+    "chance": 1,
+    "levelMultiplier": true
+   }
+  ],
+  "avoidWater": true
+ },
+ {
+  "id": "Skeleton_Mountains_noarcher",
+  "name": "Skeleton",
+  "faction": "Undead",
+  "health": 75,
+  "damageModifiers": {
+   "blunt": "Weak",
+   "pierce": "Resistant",
+   "chop": "Ignore",
+   "pickaxe": "Ignore",
+   "fire": "Weak",
+   "frost": "Resistant",
+   "poison": "Immune"
+  },
+  "speed": {
+   "walk": 0.5,
+   "run": 4
+  },
+  "attacks": [
+   "skeleton_sword_mountains"
+  ],
+  "drops": [
+   {
+    "item": "TrophySkeleton",
+    "min": 1,
+    "max": 1,
+    "chance": 0.1
+   },
+   {
+    "item": "BoneFragments",
+    "min": 1,
+    "max": 1,
+    "chance": 1,
+    "levelMultiplier": true
+   }
+  ],
+  "avoidWater": true
+ },
+ {
+  "id": "Skeleton_NoArcher",
+  "name": "Skeleton",
+  "faction": "Undead",
+  "health": 40,
+  "damageModifiers": {
+   "blunt": "Weak",
+   "pierce": "Resistant",
+   "chop": "Ignore",
+   "pickaxe": "Ignore",
+   "fire": "Weak",
+   "frost": "Resistant",
+   "poison": "Immune"
+  },
+  "speed": {
+   "walk": 0.5,
+   "run": 4
+  },
+  "attacks": [
+   "skeleton_sword"
+  ],
+  "drops": [
+   {
+    "item": "TrophySkeleton",
+    "min": 1,
+    "max": 1,
+    "chance": 0.1
+   },
+   {
+    "item": "BoneFragments",
+    "min": 1,
+    "max": 1,
+    "chance": 1,
+    "levelMultiplier": true
+   }
+  ],
+  "avoidWater": true
+ },
+ {
+  "id": "Skeleton_Poison",
+  "name": "Rancid Remains",
+  "faction": "Undead",
+  "health": 100,
+  "damageModifiers": {
+   "blunt": "Weak",
+   "pierce": "Resistant",
+   "chop": "Ignore",
+   "pickaxe": "Ignore",
+   "fire": "Weak",
+   "frost": "Resistant",
+   "poison": "Immune"
+  },
+  "speed": {
+   "walk": 0.5,
+   "run": 4
+  },
+  "attacks": [
+   "skeleton_mace"
+  ],
+  "drops": [
+   {
+    "item": "TrophySkeletonPoison",
+    "min": 1,
+    "max": 1,
+    "chance": 0.1
+   },
+   {
+    "item": "BoneFragments",
+    "min": 3,
+    "max": 3,
+    "chance": 1,
+    "levelMultiplier": true
+   }
+  ],
+  "avoidWater": true
+ },
+ {
+  "id": "Skeleton_Swamps",
+  "name": "Skeleton",
+  "faction": "Undead",
+  "health": 60,
+  "damageModifiers": {
+   "blunt": "Weak",
+   "pierce": "Resistant",
+   "chop": "Ignore",
+   "pickaxe": "Ignore",
+   "fire": "Weak",
+   "frost": "Resistant",
+   "poison": "Immune"
+  },
+  "speed": {
+   "walk": 0.5,
+   "run": 4
+  },
+  "attacks": [
+   "skeleton_bow_swamps",
+   "skeleton_sword_swamps"
+  ],
+  "drops": [
+   {
+    "item": "TrophySkeleton",
+    "min": 1,
+    "max": 1,
+    "chance": 0.1
+   },
+   {
+    "item": "BoneFragments",
+    "min": 1,
+    "max": 1,
+    "chance": 1,
+    "levelMultiplier": true
+   }
+  ],
+  "avoidWater": true
+ },
+ {
+  "id": "Skeleton_Swamps_noarcher",
+  "name": "Skeleton",
+  "faction": "Undead",
+  "health": 60,
+  "damageModifiers": {
+   "blunt": "Weak",
+   "pierce": "Resistant",
+   "chop": "Ignore",
+   "pickaxe": "Ignore",
+   "fire": "Weak",
+   "frost": "Resistant",
+   "poison": "Immune"
+  },
+  "speed": {
+   "walk": 0.5,
+   "run": 4
+  },
+  "attacks": [
+   "skeleton_sword_swamps"
+  ],
+  "drops": [
+   {
+    "item": "TrophySkeleton",
+    "min": 1,
+    "max": 1,
+    "chance": 0.1
+   },
+   {
+    "item": "BoneFragments",
+    "min": 1,
+    "max": 1,
+    "chance": 1,
+    "levelMultiplier": true
+   }
+  ],
+  "avoidWater": true
+ },
+ {
+  "id": "Skeleton_aspect",
+  "name": "Skeleton",
+  "faction": "Undead",
+  "health": 40,
+  "damageModifiers": {
+   "blunt": "Weak",
+   "pierce": "Resistant",
+   "chop": "Ignore",
+   "pickaxe": "Ignore",
+   "fire": "Weak",
+   "frost": "Resistant",
+   "poison": "Immune"
+  },
+  "speed": {
+   "walk": 0.5,
+   "run": 4
+  },
+  "attacks": [
+   "skeleton_bow",
+   "skeleton_sword"
+  ],
+  "drops": [
+   {
+    "item": "TrophySkeleton",
+    "min": 1,
+    "max": 1,
+    "chance": 0.1
+   },
+   {
+    "item": "BoneFragments",
+    "min": 1,
+    "max": 1,
+    "chance": 1,
+    "levelMultiplier": true
+   }
+  ],
+  "avoidWater": true
+ },
+ {
+  "id": "StoneGolem",
+  "name": "Stone Golem",
+  "faction": "ForestMonsters",
+  "health": 800,
+  "damageModifiers": {
+   "slash": "Resistant",
+   "pierce": "Resistant",
+   "chop": "Ignore",
+   "pickaxe": "VeryWeak",
+   "fire": "Immune",
+   "frost": "Immune",
+   "poison": "Immune",
+   "spirit": "Immune"
+  },
+  "speed": {
+   "walk": 5,
+   "run": 4,
+   "swim": 1.5
+  },
+  "attacks": [
+   "StoneGolem_clubs",
+   "StoneGolem_spikes",
+   "stonegolem_attack1_spike",
+   "stonegolem_attack2_left_groundslam",
+   "stonegolem_attack3_spikesweep",
+   "stonegolem_attack_doublesmash"
+  ],
+  "drops": [
+   {
+    "item": "TrophySGolem",
+    "min": 1,
+    "max": 1,
+    "chance": 0.05
+   },
+   {
+    "item": "Stone",
+    "min": 5,
+    "max": 10,
+    "chance": 1,
+    "levelMultiplier": true
+   },
+   {
+    "item": "Crystal",
+    "min": 8,
+    "max": 12,
+    "chance": 1,
+    "levelMultiplier": true
+   }
+  ],
+  "avoidWater": true
+ },
+ {
+  "id": "Surtling",
+  "name": "Surtling",
+  "faction": "Demon",
+  "defeatKey": "killed_surtling",
+  "health": 20,
+  "damageModifiers": {
+   "chop": "Ignore",
+   "pickaxe": "Ignore",
+   "fire": "Immune",
+   "frost": "Weak",
+   "poison": "Immune",
+   "spirit": "Immune"
+  },
+  "speed": {
+   "walk": 5,
+   "run": 6
+  },
+  "attacks": [
+   "imp_fireball_attack"
+  ],
+  "drops": [
+   {
+    "item": "Coal",
+    "min": 4,
+    "max": 5,
+    "chance": 1,
+    "levelMultiplier": true
+   },
+   {
+    "item": "SurtlingCore",
+    "min": 1,
+    "max": 1,
+    "chance": 0.5,
+    "levelMultiplier": true
+   },
+   {
+    "item": "TrophySurtling",
+    "min": 1,
+    "max": 1,
+    "chance": 0.05
+   }
+  ],
+  "avoidWater": true
+ },
+ {
+  "id": "Tendril",
+  "name": "Tendril",
+  "faction": "Boss",
+  "health": 80,
+  "damageModifiers": {
+   "chop": "Ignore",
+   "pickaxe": "Ignore",
+   "fire": "Weak",
+   "frost": "Resistant",
+   "poison": "Immune",
+   "nonPlayer": "Immune"
+  },
+  "attacks": [
+   "tendril_attack"
+  ],
+  "avoidWater": true
+ },
+ {
+  "id": "Tendril_back",
+  "name": "Root",
+  "faction": "Boss",
+  "health": 1000,
+  "damageModifiers": {
+   "blunt": "Immune",
+   "slash": "Immune",
+   "pierce": "Immune",
+   "chop": "Ignore",
+   "pickaxe": "Ignore",
+   "fire": "Immune",
+   "frost": "Immune",
+   "lightning": "Immune",
+   "poison": "Immune",
+   "spirit": "Immune",
+   "nonPlayer": "Weak"
+  },
+  "attacks": [
+   "tentaroot_attack"
+  ],
+  "avoidWater": true
+ },
+ {
+  "id": "TentaRoot",
+  "name": "Root",
+  "faction": "Boss",
+  "health": 20,
+  "damageModifiers": {
+   "chop": "Ignore",
+   "pickaxe": "Ignore",
+   "fire": "Weak",
+   "frost": "Resistant",
+   "poison": "Immune",
+   "nonPlayer": "Immune"
+  },
+  "attacks": [
+   "tentaroot_attack"
+  ],
+  "avoidWater": true
+ },
+ {
+  "id": "TentaRoot_wild",
+  "name": "Root",
+  "faction": "ForestMonsters",
+  "health": 30,
+  "damageModifiers": {
+   "chop": "Ignore",
+   "pickaxe": "Ignore",
+   "fire": "Weak",
+   "frost": "Resistant",
+   "poison": "Immune",
+   "nonPlayer": "Immune"
+  },
+  "attacks": [
+   "tentaroot_attack"
+  ],
+  "avoidWater": true
+ },
+ {
+  "id": "TheHive",
+  "name": "$enemy_thehive",
+  "faction": "MistlandsMonsters",
+  "boss": true,
+  "health": 5000,
+  "damageModifiers": {
+   "blunt": "Immune",
+   "slash": "Immune",
+   "pierce": "Immune",
+   "chop": "Ignore",
+   "pickaxe": "Ignore",
+   "fire": "Immune",
+   "frost": "Immune",
+   "lightning": "Immune",
+   "poison": "Immune",
+   "spirit": "Immune"
+  },
+  "speed": {
+   "walk": 5,
+   "run": 3,
+   "fly": 1
+  },
+  "attacks": [
+   "gjall_attack_egg",
+   "gjall_attack_spit"
+  ],
+  "drops": [
+   {
+    "item": "TrophyHatchling",
+    "min": 1,
+    "max": 1,
+    "chance": 0.1
+   },
+   {
+    "item": "FreezeGland",
+    "min": 1,
+    "max": 2,
+    "chance": 1,
+    "levelMultiplier": true
+   }
+  ],
+  "avoidWater": true
+ },
+ {
+  "id": "Tick",
+  "name": "Tick",
+  "faction": "MistlandsMonsters",
+  "health": 50,
+  "damageModifiers": {
+   "pierce": "Weak",
+   "chop": "Ignore",
+   "pickaxe": "Ignore",
+   "spirit": "Immune"
+  },
+  "speed": {
+   "walk": 5,
+   "run": 8
+  },
+  "attacks": [
+   "tick_attack_attach"
+  ],
+  "drops": [
+   {
+    "item": "GiantBloodSack",
+    "min": 1,
+    "max": 1,
+    "chance": 1
+   },
+   {
+    "item": "TrophyTick",
+    "min": 1,
+    "max": 1,
+    "chance": 0.05
+   }
+  ],
+  "avoidWater": true
+ },
+ {
+  "id": "TrainingDummy",
+  "name": "TrainingDummy",
+  "faction": "Undead",
+  "health": 40000,
+  "damageModifiers": {
+   "chop": "Immune",
+   "pickaxe": "Immune"
+  },
+  "attacks": [
+   "TrainingDummy_attack",
+   "TrainingDummy_throw"
+  ],
+  "drops": [
+   {
+    "item": "Entrails",
+    "min": 1,
+    "max": 1,
+    "chance": 0.5,
+    "levelMultiplier": true
+   },
+   {
+    "item": "TrophyDraugr",
+    "min": 1,
+    "max": 1,
+    "chance": 0.1,
+    "levelMultiplier": true
+   }
+  ],
+  "avoidWater": true
+ },
+ {
+  "id": "Troll",
+  "name": "Troll",
+  "faction": "ForestMonsters",
+  "defeatKey": "KilledTroll",
+  "health": 600,
+  "damageModifiers": {
+   "blunt": "Resistant",
+   "pierce": "Weak",
+   "chop": "Ignore",
+   "pickaxe": "Ignore",
+   "spirit": "Immune"
+  },
+  "speed": {
+   "walk": 5,
+   "run": 6,
+   "swim": 1.5
+  },
+  "attacks": [
+   "troll_groundslam",
+   "troll_log_swing_h",
+   "troll_log_swing_v",
+   "troll_punch",
+   "troll_throw"
+  ],
+  "drops": [
+   {
+    "item": "Coins",
+    "min": 20,
+    "max": 30,
+    "chance": 1,
+    "levelMultiplier": true
+   },
+   {
+    "item": "TrophyFrostTroll",
+    "min": 1,
+    "max": 1,
+    "chance": 0.5
+   },
+   {
+    "item": "TrollHide",
+    "min": 5,
+    "max": 5,
+    "chance": 1,
+    "levelMultiplier": true
+   }
+  ],
+  "avoidWater": true
+ },
+ {
+  "id": "TrollFrost",
+  "name": "Gammeltroll",
+  "faction": "DeepNorth",
+  "health": 3000,
+  "damageModifiers": {
+   "blunt": "Resistant",
+   "slash": "Resistant",
+   "pierce": "Resistant",
+   "chop": "Ignore",
+   "pickaxe": "Weak",
+   "fire": "Immune",
+   "frost": "Resistant",
+   "spirit": "Immune"
+  },
+  "speed": {
+   "walk": 2,
+   "run": 3
+  },
+  "attacks": [
+   "trollsnow_groundslam",
+   "trollsnow_groundslam_r",
+   "trollsnow_punch",
+   "trollsnow_punch_r",
+   "trollsnow_throw"
+  ],
+  "avoidWater": true
+ },
+ {
+  "id": "Troll_Summoned",
+  "name": "Summoned Troll",
+  "faction": "PlayerSpawned",
+  "defeatKey": "KilledTroll",
+  "health": 2000,
+  "damageModifiers": {
+   "blunt": "Resistant",
+   "chop": "Ignore",
+   "pickaxe": "Ignore",
+   "fire": "Immune",
+   "frost": "Weak",
+   "spirit": "Immune"
+  },
+  "speed": {
+   "walk": 5,
+   "run": 6,
+   "swim": 1.5
+  },
+  "attacks": [
+   "troll_summoned_groundslam",
+   "troll_summoned_log_swing_h",
+   "troll_summoned_log_swing_v",
+   "troll_summoned_punch",
+   "troll_summoned_throw"
+  ],
+  "avoidWater": true
+ },
+ {
+  "id": "Troll_sleeping",
+  "name": "Troll",
+  "faction": "ForestMonsters",
+  "defeatKey": "KilledTroll",
+  "health": 600,
+  "damageModifiers": {
+   "blunt": "Resistant",
+   "pierce": "Weak",
+   "chop": "Ignore",
+   "pickaxe": "Ignore",
+   "spirit": "Immune"
+  },
+  "speed": {
+   "walk": 5,
+   "run": 6,
+   "swim": 1.5
+  },
+  "attacks": [
+   "troll_groundslam",
+   "troll_log_swing_h",
+   "troll_log_swing_v",
+   "troll_punch",
+   "troll_throw"
+  ],
+  "drops": [
+   {
+    "item": "Coins",
+    "min": 20,
+    "max": 30,
+    "chance": 1,
+    "levelMultiplier": true
+   },
+   {
+    "item": "TrophyFrostTroll",
+    "min": 1,
+    "max": 1,
+    "chance": 0.5
+   },
+   {
+    "item": "TrollHide",
+    "min": 5,
+    "max": 5,
+    "chance": 1,
+    "levelMultiplier": true
+   }
+  ],
+  "avoidWater": true
+ },
+ {
+  "id": "Ulv",
+  "name": "Ulv",
+  "faction": "MountainMonsters",
+  "health": 50,
+  "damageModifiers": {
+   "chop": "Ignore",
+   "pickaxe": "Ignore",
+   "fire": "VeryResistant",
+   "poison": "Weak"
+  },
+  "speed": {
+   "walk": 5,
+   "run": 8,
+   "swim": 2
+  },
+  "attacks": [
+   "Ulv_attack1_bite",
+   "Ulv_attack2_slash"
+  ],
+  "drops": [
+   {
+    "item": "WolfFang",
+    "min": 1,
+    "max": 2,
+    "chance": 0.5
+   },
+   {
+    "item": "TrophyUlv",
+    "min": 1,
+    "max": 1,
+    "chance": 0.1
+   }
+  ],
+  "avoidWater": true
+ },
+ {
+  "id": "Unbjorn",
+  "name": "Vile",
+  "faction": "PlainsMonsters",
+  "group": "bjorn",
+  "health": 1200,
+  "damageModifiers": {
+   "blunt": "Resistant",
+   "slash": "Resistant",
+   "pierce": "Resistant",
+   "chop": "Ignore",
+   "pickaxe": "Ignore",
+   "fire": "Weak",
+   "frost": "Resistant",
+   "poison": "Immune",
+   "spirit": "Weak"
+  },
+  "speed": {
+   "walk": 1.5,
+   "run": 7,
+   "swim": 3
+  },
+  "attacks": [
+   "unbjorn_bite",
+   "unbjorn_claws",
+   "unbjorn_slam",
+   "unbjorn_swipe_combo",
+   "unbjorn_swipe_l",
+   "unbjorn_swipe_r"
+  ],
+  "drops": [
+   {
+    "item": "TrophyBjornUndead",
+    "min": 1,
+    "max": 1,
+    "chance": 0.1,
+    "levelMultiplier": true
+   },
+   {
+    "item": "BjornMeat",
+    "min": 2,
+    "max": 3,
+    "chance": 1,
+    "levelMultiplier": true
+   },
+   {
+    "item": "RottenMeat",
+    "min": 1,
+    "max": 2,
+    "chance": 0.8,
+    "levelMultiplier": true
+   },
+   {
+    "item": "UndeadBjornRibcage",
+    "min": 1,
+    "max": 3,
+    "chance": 1,
+    "levelMultiplier": true
+   },
+   {
+    "item": "BjornHide",
+    "min": 1,
+    "max": 2,
+    "chance": 1,
+    "levelMultiplier": true
+   }
+  ],
+  "avoidWater": true
+ },
+ {
+  "id": "Volture",
+  "name": "Volture",
+  "faction": "Demon",
+  "health": 200,
+  "damageModifiers": {
+   "chop": "Ignore",
+   "pickaxe": "Ignore",
+   "frost": "Weak",
+   "poison": "Immune"
+  },
+  "speed": {
+   "walk": 1,
+   "run": 3,
+   "fly": 13
+  },
+  "attacks": [
+   "volture_talons"
+  ],
+  "drops": [
+   {
+    "item": "TrophyVolture",
+    "min": 1,
+    "max": 1,
+    "chance": 0.1
+   },
+   {
+    "item": "VoltureMeat",
+    "min": 1,
+    "max": 1,
+    "chance": 1
+   },
+   {
+    "item": "Feathers",
+    "min": 2,
+    "max": 3,
+    "chance": 0.5
+   },
+   {
+    "item": "VoltureEgg",
+    "min": 1,
+    "max": 2,
+    "chance": 0.5
+   }
+  ],
+  "avoidWater": true
+ },
+ {
+  "id": "Wolf",
+  "name": "Wolf",
+  "faction": "MountainMonsters",
+  "group": "wolf",
+  "health": 80,
+  "damageModifiers": {
+   "chop": "Ignore",
+   "pickaxe": "Ignore",
+   "spirit": "Immune"
+  },
+  "speed": {
+   "walk": 5,
+   "run": 8,
+   "swim": 2
+  },
+  "attacks": [
+   "Wolf_Attack1",
+   "Wolf_Attack2",
+   "Wolf_Attack3"
+  ],
+  "drops": [
+   {
+    "item": "TrophyWolf",
+    "min": 1,
+    "max": 1,
+    "chance": 0.1
+   },
+   {
+    "item": "WolfMeat",
+    "min": 1,
+    "max": 1,
+    "chance": 1,
+    "levelMultiplier": true
+   },
+   {
+    "item": "WolfPelt",
+    "min": 1,
+    "max": 2,
+    "chance": 1,
+    "levelMultiplier": true
+   },
+   {
+    "item": "WolfFang",
+    "min": 1,
+    "max": 1,
+    "chance": 0.4,
+    "levelMultiplier": true
+   }
+  ],
+  "tameable": {
+   "fedDuration": 600,
+   "tamingTime": 1800,
+   "commandable": true,
+   "food": [
+    "ChickenMeat",
+    "DeerMeat",
+    "FishRaw",
+    "LoxMeat",
+    "NeckTail",
+    "RawMeat",
+    "Sausages"
+   ]
+  },
+  "avoidWater": true
+ },
+ {
+  "id": "Wolf_cub",
+  "name": "Wolf Cub",
+  "faction": "MountainMonsters",
+  "group": "wolf",
+  "health": 10,
+  "damageModifiers": {
+   "chop": "Ignore",
+   "pickaxe": "Ignore",
+   "spirit": "Immune"
+  },
+  "speed": {
+   "walk": 5,
+   "run": 4,
+   "swim": 2
+  },
+  "avoidWater": true
+ },
+ {
+  "id": "Wolf_spiritcaller",
+  "faction": "Players",
+  "health": 800,
+  "damageModifiers": {
+   "chop": "Ignore",
+   "pickaxe": "Ignore",
+   "spirit": "Immune"
+  },
+  "speed": {
+   "walk": 5,
+   "run": 8,
+   "swim": 2
+  },
+  "attacks": [
+   "SpiritWolf_Attack1",
+   "SpiritWolf_Attack2",
+   "SpiritWolf_Attack3"
+  ],
+  "tameable": {
+   "fedDuration": 600,
+   "tamingTime": 1800,
+   "food": [
+    "ChickenMeat",
+    "DeerMeat",
+    "FishRaw",
+    "LoxMeat",
+    "NeckTail",
+    "RawMeat",
+    "Sausages"
+   ]
+  },
+  "avoidWater": true
+ },
+ {
+  "id": "Wraith",
+  "name": "Wraith",
+  "faction": "Undead",
+  "health": 100,
+  "damageModifiers": {
+   "blunt": "Resistant",
+   "slash": "Resistant",
+   "pierce": "Resistant",
+   "chop": "Ignore",
+   "pickaxe": "Ignore",
+   "fire": "Weak",
+   "frost": "Immune",
+   "poison": "Immune",
+   "spirit": "Weak"
+  },
+  "speed": {
+   "walk": 5,
+   "run": 5,
+   "fly": 5
+  },
+  "attacks": [
+   "wraith_melee"
+  ],
+  "drops": [
+   {
+    "item": "TrophyWraith",
+    "min": 1,
+    "max": 1,
+    "chance": 0.05
+   },
+   {
+    "item": "Chain",
+    "min": 1,
+    "max": 1,
+    "chance": 1,
+    "levelMultiplier": true
+   }
+  ],
+  "avoidWater": true
+ },
+ {
+  "id": "Writhan",
+  "name": "Writhan",
+  "faction": "Undead",
+  "defeatKey": "defeated_writhan",
+  "health": 400,
+  "damageModifiers": {
+   "blunt": "Resistant",
+   "slash": "Weak",
+   "chop": "Ignore",
+   "pickaxe": "Ignore",
+   "fire": "Resistant",
+   "poison": "Immune"
+  },
+  "speed": {
+   "walk": 1,
+   "run": 2
+  },
+  "attacks": [
+   "writhan_bite",
+   "writhan_explode_aoe"
+  ],
+  "drops": [
+   {
+    "item": "TrophyWrithan",
+    "min": 1,
+    "max": 1,
+    "chance": 0.1
+   },
+   {
+    "item": "WrithanRoots",
+    "min": 1,
+    "max": 2,
+    "chance": 1,
+    "levelMultiplier": true
+   }
+  ],
+  "avoidWater": true
+ },
+ {
+  "id": "gd_king",
+  "name": "The Elder",
+  "faction": "Boss",
+  "boss": true,
+  "defeatKey": "defeated_gdking",
+  "health": 2500,
+  "damageModifiers": {
+   "chop": "Ignore",
+   "pickaxe": "Ignore",
+   "fire": "VeryWeak",
+   "poison": "Immune",
+   "spirit": "Immune"
+  },
+  "speed": {
+   "walk": 5,
+   "run": 6
+  },
+  "attacks": [
+   "gd_king_rootspawn",
+   "gd_king_scream",
+   "gd_king_shoot",
+   "gd_king_stomp"
+  ],
+  "drops": [
+   {
+    "item": "TrophyTheElder",
+    "min": 1,
+    "max": 1,
+    "chance": 1
+   },
+   {
+    "item": "CryptKey",
+    "min": 1,
+    "max": 1,
+    "chance": 1,
+    "onePerPlayer": true
+   }
+  ],
+  "avoidWater": true
+ },
+ {
+  "id": "piece_TrainingDummy",
+  "name": "T.W.I.G.",
+  "faction": "TrainingDummy",
+  "health": 2500,
+  "attacks": [
+   "TrainingDummy_attack",
+   "TrainingDummy_attack2",
+   "TrainingDummy_attack3",
+   "TrainingDummy_throw"
+  ],
+  "avoidWater": true
+ },
+ {
+  "id": "staff_greenroots_tentaroot",
+  "name": "Summoned Root",
+  "faction": "Players",
+  "health": 250,
+  "damageModifiers": {
+   "chop": "Ignore",
+   "pickaxe": "Ignore",
+   "fire": "Resistant",
+   "poison": "Immune"
+  },
+  "attacks": [
+   "staff_greenroots_tentaroot_attack"
+  ],
+  "avoidWater": true
+ }
+]

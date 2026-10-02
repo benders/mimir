@@ -49,6 +49,7 @@ ensure_docker() {
 in_tools() {
   local missing=""
   for c in "$@"; do command -v "$c" >/dev/null || missing+=" $c"; done
+  [[ -n "${MIMIR_NEED_TOOLS:-}" && -z "${MIMIR_IN_TOOLS:-}" ]] && missing+=" ($MIMIR_NEED_TOOLS)"
   [[ -z "$missing" ]] && return 0
   [[ -n "${MIMIR_IN_TOOLS:-}" ]] && die "missing inside tools container:$missing"
   log "missing:$missing — re-running $(basename "$0") in tools container"

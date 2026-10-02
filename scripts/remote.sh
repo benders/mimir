@@ -12,7 +12,9 @@ REMOTE_DIR="${MIMIR_REMOTE_DIR:-mimir}"   # relative to the remote home
 STEP="${1:?usage: remote.sh <script name without .sh> (e.g. dump)}"
 [[ -f "$ROOT/scripts/$STEP.sh" ]] || die "no such script: scripts/$STEP.sh"
 
-SSH=(ssh -o BatchMode=yes -o ConnectTimeout=10)
+# One shared connection for every ssh/rsync below: a single key-agent approval per run.
+SSH=(ssh -o BatchMode=yes -o ConnectTimeout=10
+  -o ControlMaster=auto -o "ControlPath=/tmp/mimir-ssh-%C" -o ControlPersist=120)
 
 log "syncing repo -> $REMOTE:$REMOTE_DIR"
 rsync -a --delete -e "${SSH[*]}" \

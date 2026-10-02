@@ -9,7 +9,7 @@ BRANCH ?= public
 REMOTE ?= nic@mini
 export MIMIR_BRANCH := $(BRANCH)
 
-.PHONY: help server bepinex plugin dump remote-dump verify check clean decompile
+.PHONY: help server bepinex plugin dump icons extract remote-extract verify data verify-data check clean decompile
 
 help:
 	@grep -E '^[a-z-]+:.*## ' $(MAKEFILE_LIST) | awk -F':.*## ' '{printf "  %-12s %s\n", $$1, $$2}'
@@ -26,13 +26,26 @@ plugin: ## Build the Mimir.Dumper plugin
 dump: ## Run the server headless here and write .cache/dump/$(BRANCH)/raw
 	scripts/dump.sh
 
-remote-dump: ## Run the dump on $(REMOTE) and pull it back
-	MIMIR_REMOTE=$(REMOTE) scripts/remote.sh dump
+icons: ## Extract icons referenced by the dump -> .cache/dump/$(BRANCH)/icons
+	scripts/icons.sh
 
-verify: ## Check the dump in .cache/dump/$(BRANCH)/raw
+extract: dump icons ## dump + icons on this host
+
+remote-extract: ## Run dump + icons on $(REMOTE) and pull the results back
+	MIMIR_REMOTE=$(REMOTE) scripts/remote.sh extract
+
+verify: ## Check the dump (and icons) in .cache/dump/$(BRANCH)
 	scripts/verify.py
 
-check: remote-dump verify ## Full end-to-end: dump on $(REMOTE), then verify
+DATA_DIR := $(if $(filter public,$(BRANCH)),data,.cache/data/$(BRANCH))
+
+data: ## Normalize the raw dump -> data/ (public) or .cache/data/$(BRANCH)
+	scripts/normalize.py .cache/dump/$(BRANCH)/raw $(DATA_DIR)
+
+verify-data: ## Check normalized data (+ icons, if extracted)
+	scripts/verify_data.py $(DATA_DIR) .cache/dump/$(BRANCH)/icons
+
+check: remote-extract verify data verify-data ## Full end-to-end on $(REMOTE): extract, verify, normalize, verify
 
 decompile: ## Decompile game assemblies to .cache/decompiled (reference only, never commit)
 	dotnet tool restore

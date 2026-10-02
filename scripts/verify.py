@@ -45,8 +45,9 @@ def main() -> int:
     check(bool(m["gameVersion"]), "gameVersion set")
     check(not m["warnings"], f"no dumper warnings {m['warnings'] or ''}")
     check(c["skippedFields"] == 0, "no fields skipped by serializer")
-    for key, lo in {"prefabs": 3000, "items": 800, "recipes": 300, "statusEffects": 50, "translations": 3000}.items():
-        check(c[key] >= lo, f"{key}: {c[key]} >= {lo}")
+    for key, lo in {"prefabs": 3000, "items": 800, "recipes": 300, "statusEffects": 50, "pieceTables": 3,
+                    "translations": 3000}.items():
+        check(c.get(key, 0) >= lo, f"{key}: {c.get(key, 0)} >= {lo}")
 
     prefab_files = list((DUMP / "prefabs").glob("*.json"))
     check(len(prefab_files) == c["prefabs"], f"prefab files ({len(prefab_files)}) match manifest")
@@ -82,9 +83,22 @@ def main() -> int:
     spawns = load("world/SpawnSystemList.json")
     check(sum(len(s["fields"].get("m_spawners", [])) for s in spawns) > 50, "spawn lists populated")
 
+    tables = {t["name"]: t["fields"] for t in load("piece_tables.json")}
+    hammer = tables.get("_HammerPieceTable", {}).get("m_pieces") or []
+    check(any(p and p.get("$ref") == "piece_workbench" for p in hammer), "hammer piece table has the workbench")
+    defaults = {d["type"] for d in load("status_effect_defaults.json")}
+    check({e["type"] for e in load("status_effects.json")} <= defaults, "defaults for every status effect type")
+
     loc = load("localization/English.json")
     check((loc.get("item_sword_bronze") or "").lower() == "bronze sword", "localization: item_sword_bronze")
     check("enemy_troll" in loc, "localization: enemy_troll")
+
+    icons = DUMP.parent / "icons"
+    if icons.is_dir():
+        check(len(list(icons.glob("*.png"))) >= 1000, "icons extracted (>= 1000)")
+        check((icons / "SwordBronze.png").is_file(), "icon SwordBronze.png")
+    else:
+        print(f"  skip  icons (no {icons})")
 
     print()
     if failures:

@@ -1,0 +1,11331 @@
+[
+ {
+  "id": "AshCrow",
+  "kind": "destructible",
+  "health": 1,
+  "drops": {
+   "min": 1,
+   "max": 1,
+   "chance": 1,
+   "items": [
+    {
+     "item": "Feathers",
+     "min": 3,
+     "max": 3,
+     "weight": 1
+    }
+   ]
+  }
+ },
+ {
+  "id": "AshlandsBranch1",
+  "kind": "destructible",
+  "health": 80,
+  "damageModifiers": {
+   "blunt": "Immune",
+   "slash": "Immune",
+   "pierce": "Immune",
+   "fire": "Immune",
+   "frost": "Immune",
+   "lightning": "Immune",
+   "poison": "Immune",
+   "spirit": "Immune"
+  },
+  "drops": {
+   "min": 3,
+   "max": 4,
+   "chance": 1,
+   "items": [
+    {
+     "item": "Blackwood",
+     "min": 1,
+     "max": 1,
+     "weight": 1
+    }
+   ]
+  },
+  "name": "Log"
+ },
+ {
+  "id": "AshlandsBranch2",
+  "kind": "destructible",
+  "health": 80,
+  "damageModifiers": {
+   "blunt": "Immune",
+   "slash": "Immune",
+   "pierce": "Immune",
+   "fire": "Immune",
+   "frost": "Immune",
+   "lightning": "Immune",
+   "poison": "Immune",
+   "spirit": "Immune"
+  },
+  "drops": {
+   "min": 1,
+   "max": 2,
+   "chance": 1,
+   "items": [
+    {
+     "item": "Blackwood",
+     "min": 1,
+     "max": 1,
+     "weight": 1
+    }
+   ]
+  },
+  "name": "Branch"
+ },
+ {
+  "id": "AshlandsBranch3",
+  "kind": "destructible",
+  "health": 80,
+  "damageModifiers": {
+   "blunt": "Immune",
+   "slash": "Immune",
+   "pierce": "Immune",
+   "fire": "Immune",
+   "frost": "Immune",
+   "lightning": "Immune",
+   "poison": "Immune",
+   "spirit": "Immune"
+  },
+  "drops": {
+   "min": 3,
+   "max": 4,
+   "chance": 1,
+   "items": [
+    {
+     "item": "Blackwood",
+     "min": 1,
+     "max": 1,
+     "weight": 1
+    }
+   ]
+  },
+  "name": "Log"
+ },
+ {
+  "id": "AshlandsBush1",
+  "kind": "destructible",
+  "health": 80,
+  "damageModifiers": {
+   "blunt": "Immune",
+   "slash": "Immune",
+   "pierce": "Immune",
+   "fire": "Immune",
+   "frost": "Immune",
+   "lightning": "Immune",
+   "poison": "Immune",
+   "spirit": "Immune"
+  },
+  "drops": {
+   "min": 1,
+   "max": 2,
+   "chance": 1,
+   "items": [
+    {
+     "item": "Blackwood",
+     "min": 1,
+     "max": 1,
+     "weight": 1
+    }
+   ]
+  }
+ },
+ {
+  "id": "AshlandsBush2",
+  "kind": "destructible",
+  "health": 80,
+  "damageModifiers": {
+   "poison": "Immune",
+   "spirit": "Immune"
+  },
+  "drops": {
+   "max": 2,
+   "chance": 1,
+   "items": [
+    {
+     "item": "CharredBone",
+     "min": 1,
+     "max": 1,
+     "weight": 1
+    }
+   ]
+  }
+ },
+ {
+  "id": "AshlandsTree1",
+  "kind": "tree",
+  "health": 200,
+  "damageModifiers": {
+   "blunt": "Immune",
+   "slash": "Immune",
+   "pierce": "Immune",
+   "pickaxe": "Immune",
+   "fire": "Immune",
+   "frost": "Immune",
+   "lightning": "Immune",
+   "poison": "Immune",
+   "spirit": "Immune"
+  },
+  "drops": {
+   "min": 1,
+   "max": 2,
+   "chance": 0.5,
+   "items": [
+    {
+     "item": "Blackwood",
+     "min": 2,
+     "max": 1,
+     "weight": 1
+    },
+    {
+     "item": "CharcoalResin",
+     "min": 1,
+     "max": 1,
+     "weight": 0.5
+    }
+   ]
+  },
+  "becomes": "AshlandsTreeLog1",
+  "name": "Scorched Tree"
+ },
+ {
+  "id": "AshlandsTree3",
+  "kind": "tree",
+  "health": 200,
+  "damageModifiers": {
+   "blunt": "Immune",
+   "slash": "Immune",
+   "pierce": "Immune",
+   "pickaxe": "Immune",
+   "fire": "Immune",
+   "frost": "Immune",
+   "lightning": "Immune",
+   "poison": "Immune",
+   "spirit": "Immune"
+  },
+  "drops": {
+   "min": 1,
+   "max": 2,
+   "chance": 0.5,
+   "items": [
+    {
+     "item": "Blackwood",
+     "min": 2,
+     "max": 1,
+     "weight": 1
+    },
+    {
+     "item": "CharcoalResin",
+     "min": 1,
+     "max": 1,
+     "weight": 0.5
+    }
+   ]
+  },
+  "becomes": "AshlandsTreeLog1",
+  "name": "Scorched Tree"
+ },
+ {
+  "id": "AshlandsTree4",
+  "kind": "tree",
+  "health": 200,
+  "damageModifiers": {
+   "blunt": "Immune",
+   "slash": "Immune",
+   "pierce": "Immune",
+   "pickaxe": "Immune",
+   "fire": "Immune",
+   "frost": "Immune",
+   "lightning": "Immune",
+   "poison": "Immune",
+   "spirit": "Immune"
+  },
+  "drops": {
+   "min": 1,
+   "max": 2,
+   "chance": 0.5,
+   "items": [
+    {
+     "item": "Blackwood",
+     "min": 2,
+     "max": 1,
+     "weight": 1
+    },
+    {
+     "item": "CharcoalResin",
+     "min": 1,
+     "max": 1,
+     "weight": 0.5
+    }
+   ]
+  },
+  "becomes": "AshlandsTreeLog1",
+  "name": "Scorched Tree"
+ },
+ {
+  "id": "AshlandsTree5",
+  "kind": "tree",
+  "health": 200,
+  "damageModifiers": {
+   "blunt": "Immune",
+   "slash": "Immune",
+   "pierce": "Immune",
+   "pickaxe": "Immune",
+   "fire": "Immune",
+   "frost": "Immune",
+   "lightning": "Immune",
+   "poison": "Immune",
+   "spirit": "Immune"
+  },
+  "drops": {
+   "min": 1,
+   "max": 2,
+   "chance": 0.5,
+   "items": [
+    {
+     "item": "Blackwood",
+     "min": 2,
+     "max": 1,
+     "weight": 1
+    },
+    {
+     "item": "CharcoalResin",
+     "min": 1,
+     "max": 1,
+     "weight": 0.5
+    }
+   ]
+  },
+  "becomes": "AshlandsTreeLog1",
+  "name": "Scorched Tree"
+ },
+ {
+  "id": "AshlandsTree6",
+  "kind": "tree",
+  "health": 200,
+  "damageModifiers": {
+   "blunt": "Immune",
+   "slash": "Immune",
+   "pierce": "Immune",
+   "pickaxe": "Immune",
+   "fire": "Immune",
+   "frost": "Immune",
+   "lightning": "Immune",
+   "poison": "Immune",
+   "spirit": "Immune"
+  },
+  "drops": {
+   "min": 1,
+   "max": 2,
+   "chance": 0.5,
+   "items": [
+    {
+     "item": "Blackwood",
+     "min": 2,
+     "max": 1,
+     "weight": 1
+    },
+    {
+     "item": "CharcoalResin",
+     "min": 1,
+     "max": 1,
+     "weight": 0.5
+    }
+   ]
+  },
+  "becomes": "AshlandsTreeLog2",
+  "name": "Scorched Tree"
+ },
+ {
+  "id": "AshlandsTree6_big",
+  "kind": "tree",
+  "health": 200,
+  "damageModifiers": {
+   "blunt": "Immune",
+   "slash": "Immune",
+   "pierce": "Immune",
+   "pickaxe": "Immune",
+   "fire": "Immune",
+   "frost": "Immune",
+   "lightning": "Immune",
+   "poison": "Immune",
+   "spirit": "Immune"
+  },
+  "drops": {
+   "min": 1,
+   "max": 2,
+   "chance": 0.5,
+   "items": [
+    {
+     "item": "Blackwood",
+     "min": 2,
+     "max": 1,
+     "weight": 1
+    },
+    {
+     "item": "CharcoalResin",
+     "min": 1,
+     "max": 1,
+     "weight": 0.25
+    }
+   ]
+  },
+  "becomes": "AshlandsTreeLog2",
+  "name": "Scorched Tree"
+ },
+ {
+  "id": "AshlandsTreeLog1",
+  "kind": "log",
+  "health": 90,
+  "damageModifiers": {
+   "blunt": "Immune",
+   "slash": "Immune",
+   "pierce": "Immune",
+   "pickaxe": "Immune",
+   "fire": "Immune",
+   "frost": "Immune",
+   "lightning": "Immune",
+   "poison": "Immune",
+   "spirit": "Immune"
+  },
+  "becomes": "AshlandsTreeLogHalf1",
+  "name": "Log"
+ },
+ {
+  "id": "AshlandsTreeLog2",
+  "kind": "log",
+  "health": 90,
+  "damageModifiers": {
+   "blunt": "Immune",
+   "slash": "Immune",
+   "pierce": "Immune",
+   "pickaxe": "Immune",
+   "fire": "Immune",
+   "frost": "Immune",
+   "lightning": "Immune",
+   "poison": "Immune",
+   "spirit": "Immune"
+  },
+  "becomes": "AshlandsTreeLogHalf2",
+  "name": "Log"
+ },
+ {
+  "id": "AshlandsTreeLogHalf1",
+  "kind": "log",
+  "health": 90,
+  "damageModifiers": {
+   "blunt": "Immune",
+   "slash": "Immune",
+   "pierce": "Immune",
+   "pickaxe": "Immune",
+   "fire": "Immune",
+   "frost": "Immune",
+   "lightning": "Immune",
+   "poison": "Immune",
+   "spirit": "Immune"
+  },
+  "drops": {
+   "min": 10,
+   "max": 10,
+   "chance": 1,
+   "items": [
+    {
+     "item": "Blackwood",
+     "min": 1,
+     "max": 1,
+     "weight": 1
+    },
+    {
+     "item": "Wood",
+     "min": 1,
+     "max": 1,
+     "weight": 0.5
+    }
+   ]
+  },
+  "name": "Log"
+ },
+ {
+  "id": "AshlandsTreeLogHalf2",
+  "kind": "log",
+  "health": 90,
+  "damageModifiers": {
+   "blunt": "Immune",
+   "slash": "Immune",
+   "pierce": "Immune",
+   "pickaxe": "Immune",
+   "fire": "Immune",
+   "frost": "Immune",
+   "lightning": "Immune",
+   "poison": "Immune",
+   "spirit": "Immune"
+  },
+  "drops": {
+   "min": 10,
+   "max": 10,
+   "chance": 1,
+   "items": [
+    {
+     "item": "Blackwood",
+     "min": 1,
+     "max": 1,
+     "weight": 1
+    },
+    {
+     "item": "Wood",
+     "min": 1,
+     "max": 1,
+     "weight": 0.5
+    }
+   ]
+  },
+  "name": "Log"
+ },
+ {
+  "id": "AshlandsTreeStump1",
+  "kind": "destructible",
+  "health": 80,
+  "damageModifiers": {
+   "blunt": "Immune",
+   "slash": "Immune",
+   "pierce": "Immune",
+   "fire": "Immune",
+   "frost": "Immune",
+   "lightning": "Immune",
+   "poison": "Immune",
+   "spirit": "Immune"
+  },
+  "drops": {
+   "min": 2,
+   "max": 2,
+   "chance": 1,
+   "items": [
+    {
+     "item": "Blackwood",
+     "min": 1,
+     "max": 1,
+     "weight": 1
+    }
+   ]
+  },
+  "name": "Stump"
+ },
+ {
+  "id": "AshlandsTreeStump2",
+  "kind": "destructible",
+  "health": 80,
+  "damageModifiers": {
+   "blunt": "Immune",
+   "slash": "Immune",
+   "pierce": "Immune",
+   "fire": "Immune",
+   "frost": "Immune",
+   "lightning": "Immune",
+   "poison": "Immune",
+   "spirit": "Immune"
+  },
+  "drops": {
+   "min": 2,
+   "max": 2,
+   "chance": 1,
+   "items": [
+    {
+     "item": "Blackwood",
+     "min": 1,
+     "max": 1,
+     "weight": 1
+    }
+   ]
+  },
+  "name": "Stump"
+ },
+ {
+  "id": "AshlandsTreeStump3",
+  "kind": "destructible",
+  "health": 80,
+  "damageModifiers": {
+   "blunt": "Immune",
+   "slash": "Immune",
+   "pierce": "Immune",
+   "fire": "Immune",
+   "frost": "Immune",
+   "lightning": "Immune",
+   "poison": "Immune",
+   "spirit": "Immune"
+  },
+  "drops": {
+   "min": 2,
+   "max": 2,
+   "chance": 1,
+   "items": [
+    {
+     "item": "Blackwood",
+     "min": 1,
+     "max": 1,
+     "weight": 1
+    }
+   ]
+  },
+  "name": "Stump"
+ },
+ {
+  "id": "Ashlands_Fortress_Wall_Pillar",
+  "kind": "destructible",
+  "health": 1,
+  "minToolTier": 5,
+  "damageModifiers": {
+   "blunt": "Immune",
+   "slash": "Immune",
+   "pierce": "Immune",
+   "chop": "Immune",
+   "fire": "Immune",
+   "frost": "Immune",
+   "lightning": "Immune",
+   "poison": "Ignore",
+   "spirit": "Ignore"
+  },
+  "becomes": "Ashlands_Fortress_Wall_Pillar_frac"
+ },
+ {
+  "id": "Ashlands_Fortress_Wall_PillarTop",
+  "kind": "destructible",
+  "health": 1,
+  "minToolTier": 5,
+  "damageModifiers": {
+   "blunt": "Immune",
+   "slash": "Immune",
+   "pierce": "Immune",
+   "chop": "Immune",
+   "fire": "Immune",
+   "frost": "Immune",
+   "lightning": "Immune",
+   "poison": "Ignore",
+   "spirit": "Ignore"
+  },
+  "becomes": "Ashlands_Fortress_Wall_PillarTop_frac"
+ },
+ {
+  "id": "Ashlands_Fortress_Wall_PillarTopStone",
+  "kind": "destructible",
+  "health": 1,
+  "minToolTier": 5,
+  "damageModifiers": {
+   "blunt": "Immune",
+   "slash": "Immune",
+   "pierce": "Immune",
+   "chop": "Immune",
+   "fire": "Immune",
+   "frost": "Immune",
+   "lightning": "Immune",
+   "poison": "Ignore",
+   "spirit": "Ignore"
+  },
+  "becomes": "Ashlands_Fortress_Wall_PillarTopStone_frac"
+ },
+ {
+  "id": "Ashlands_Fortress_Wall_PillarTopStone_frac",
+  "kind": "rock",
+  "health": 500,
+  "minToolTier": 5,
+  "damageModifiers": {
+   "blunt": "Immune",
+   "slash": "Immune",
+   "pierce": "Immune",
+   "chop": "Immune",
+   "fire": "Immune",
+   "frost": "Immune",
+   "lightning": "Immune",
+   "poison": "Ignore",
+   "spirit": "Ignore"
+  },
+  "drops": {
+   "min": 4,
+   "max": 8,
+   "chance": 1,
+   "items": [
+    {
+     "item": "Stone",
+     "min": 1,
+     "max": 1
+    }
+   ]
+  }
+ },
+ {
+  "id": "Ashlands_Fortress_Wall_PillarTop_frac",
+  "kind": "rock",
+  "health": 500,
+  "minToolTier": 5,
+  "damageModifiers": {
+   "blunt": "Immune",
+   "slash": "Immune",
+   "pierce": "Immune",
+   "chop": "Immune",
+   "fire": "Immune",
+   "frost": "Immune",
+   "lightning": "Immune",
+   "poison": "Ignore",
+   "spirit": "Ignore"
+  },
+  "drops": {
+   "min": 4,
+   "max": 8,
+   "chance": 1,
+   "items": [
+    {
+     "item": "Stone",
+     "min": 1,
+     "max": 1
+    }
+   ]
+  }
+ },
+ {
+  "id": "Ashlands_Fortress_Wall_Pillar_base",
+  "kind": "destructible",
+  "health": 1,
+  "minToolTier": 5,
+  "damageModifiers": {
+   "blunt": "Immune",
+   "slash": "Immune",
+   "pierce": "Immune",
+   "chop": "Immune",
+   "fire": "Immune",
+   "frost": "Immune",
+   "lightning": "Immune",
+   "poison": "Ignore",
+   "spirit": "Ignore"
+  },
+  "becomes": "Ashlands_Fortress_Wall_Pillar_frac"
+ },
+ {
+  "id": "Ashlands_Fortress_Wall_Pillar_base_frac",
+  "kind": "rock",
+  "health": 500,
+  "minToolTier": 5,
+  "damageModifiers": {
+   "blunt": "Immune",
+   "slash": "Immune",
+   "pierce": "Immune",
+   "chop": "Immune",
+   "fire": "Immune",
+   "frost": "Immune",
+   "lightning": "Immune",
+   "poison": "Ignore",
+   "spirit": "Ignore"
+  },
+  "drops": {
+   "min": 4,
+   "max": 8,
+   "chance": 1,
+   "items": [
+    {
+     "item": "Stone",
+     "min": 1,
+     "max": 1
+    }
+   ]
+  }
+ },
+ {
+  "id": "Ashlands_Fortress_Wall_Pillar_frac",
+  "kind": "rock",
+  "health": 500,
+  "minToolTier": 5,
+  "damageModifiers": {
+   "blunt": "Immune",
+   "slash": "Immune",
+   "pierce": "Immune",
+   "chop": "Immune",
+   "fire": "Immune",
+   "frost": "Immune",
+   "lightning": "Immune",
+   "poison": "Ignore",
+   "spirit": "Ignore"
+  },
+  "drops": {
+   "min": 4,
+   "max": 8,
+   "chance": 1,
+   "items": [
+    {
+     "item": "Stone",
+     "min": 1,
+     "max": 1
+    }
+   ]
+  }
+ },
+ {
+  "id": "Ashlands_floor_large",
+  "kind": "destructible",
+  "health": 1,
+  "damageModifiers": {
+   "chop": "Immune",
+   "fire": "Immune",
+   "frost": "Resistant",
+   "lightning": "Ignore",
+   "poison": "Ignore",
+   "spirit": "Ignore"
+  },
+  "becomes": "Ashlands_floor_large_fractured"
+ },
+ {
+  "id": "Ashlands_floor_large_fractured",
+  "kind": "rock",
+  "health": 1,
+  "damageModifiers": {
+   "blunt": "Immune",
+   "slash": "Immune",
+   "pierce": "Immune",
+   "chop": "Immune",
+   "fire": "Immune",
+   "frost": "Immune",
+   "lightning": "Immune",
+   "poison": "Ignore",
+   "spirit": "Ignore"
+  },
+  "drops": {
+   "min": 2,
+   "max": 3,
+   "chance": 1,
+   "items": [
+    {
+     "item": "Grausten",
+     "min": 1,
+     "max": 1,
+     "weight": 1
+    }
+   ]
+  }
+ },
+ {
+  "id": "Ashlands_rock1",
+  "kind": "destructible",
+  "health": 1,
+  "damageModifiers": {
+   "blunt": "Immune",
+   "slash": "Immune",
+   "pierce": "Immune",
+   "chop": "Immune",
+   "fire": "Immune",
+   "frost": "Immune",
+   "lightning": "Immune",
+   "poison": "Immune",
+   "spirit": "Immune"
+  },
+  "becomes": "Rock_3_frac"
+ },
+ {
+  "id": "Ashlands_rock2",
+  "kind": "destructible",
+  "health": 1,
+  "damageModifiers": {
+   "blunt": "Immune",
+   "slash": "Immune",
+   "pierce": "Immune",
+   "chop": "Immune",
+   "fire": "Immune",
+   "frost": "Immune",
+   "lightning": "Immune",
+   "poison": "Immune",
+   "spirit": "Immune"
+  },
+  "becomes": "rock4_ashlands_frac"
+ },
+ {
+  "id": "Beech1",
+  "kind": "tree",
+  "health": 80,
+  "damageModifiers": {
+   "blunt": "Immune",
+   "slash": "Immune",
+   "pierce": "Immune",
+   "pickaxe": "Immune",
+   "fire": "Immune",
+   "frost": "Immune",
+   "lightning": "Immune",
+   "poison": "Immune",
+   "spirit": "Immune"
+  },
+  "drops": {
+   "min": 2,
+   "max": 2,
+   "chance": 0.5,
+   "items": [
+    {
+     "item": "Resin",
+     "min": 1,
+     "max": 2,
+     "weight": 0.25
+    },
+    {
+     "item": "Feathers",
+     "min": 1,
+     "max": 2,
+     "weight": 0.25
+    },
+    {
+     "item": "BeechSeeds",
+     "min": 2,
+     "max": 3,
+     "weight": 1
+    }
+   ]
+  },
+  "becomes": "beech_log",
+  "name": "Beech"
+ },
+ {
+  "id": "Beech_Stub",
+  "kind": "destructible",
+  "health": 80,
+  "damageModifiers": {
+   "blunt": "Immune",
+   "slash": "Immune",
+   "pierce": "Immune",
+   "fire": "Immune",
+   "frost": "Immune",
+   "lightning": "Immune",
+   "poison": "Immune",
+   "spirit": "Immune"
+  },
+  "drops": {
+   "min": 2,
+   "max": 2,
+   "chance": 1,
+   "items": [
+    {
+     "item": "Wood",
+     "min": 1,
+     "max": 1,
+     "weight": 1
+    }
+   ]
+  },
+  "name": "Stump"
+ },
+ {
+  "id": "Beech_small1",
+  "kind": "destructible",
+  "health": 20,
+  "damageModifiers": {
+   "poison": "Immune",
+   "spirit": "Immune"
+  },
+  "drops": {
+   "min": 2,
+   "max": 3,
+   "chance": 1,
+   "items": [
+    {
+     "item": "Wood",
+     "min": 1,
+     "max": 1,
+     "weight": 1
+    },
+    {
+     "item": "Resin",
+     "min": 1,
+     "max": 2,
+     "weight": 0.2
+    }
+   ]
+  },
+  "name": "Beech"
+ },
+ {
+  "id": "Beech_small2",
+  "kind": "destructible",
+  "health": 20,
+  "damageModifiers": {
+   "poison": "Immune",
+   "spirit": "Immune"
+  },
+  "drops": {
+   "min": 2,
+   "max": 3,
+   "chance": 1,
+   "items": [
+    {
+     "item": "Wood",
+     "min": 1,
+     "max": 1,
+     "weight": 1
+    },
+    {
+     "item": "Resin",
+     "min": 1,
+     "max": 2,
+     "weight": 0.2
+    }
+   ]
+  },
+  "name": "Beech"
+ },
+ {
+  "id": "BigBranch",
+  "kind": "destructible",
+  "health": 100,
+  "damageModifiers": {
+   "blunt": "Immune",
+   "slash": "Immune",
+   "pierce": "Immune",
+   "fire": "Immune",
+   "frost": "Immune",
+   "lightning": "Immune",
+   "poison": "Immune",
+   "spirit": "Immune"
+  },
+  "drops": {
+   "min": 2,
+   "max": 2,
+   "chance": 1,
+   "items": [
+    {
+     "item": "Wood",
+     "min": 1,
+     "max": 1,
+     "weight": 1
+    }
+   ]
+  }
+ },
+ {
+  "id": "BigRock",
+  "kind": "destructible",
+  "health": 1,
+  "damageModifiers": {
+   "blunt": "Immune",
+   "slash": "Immune",
+   "pierce": "Immune",
+   "chop": "Immune",
+   "fire": "Immune",
+   "frost": "Immune",
+   "lightning": "Immune",
+   "poison": "Immune",
+   "spirit": "Immune"
+  },
+  "becomes": "rock4_bigrock_frac"
+ },
+ {
+  "id": "Birch1",
+  "kind": "tree",
+  "health": 80,
+  "minToolTier": 2,
+  "damageModifiers": {
+   "blunt": "Immune",
+   "slash": "Immune",
+   "pierce": "Immune",
+   "pickaxe": "Immune",
+   "fire": "Immune",
+   "frost": "Immune",
+   "lightning": "Immune",
+   "poison": "Immune",
+   "spirit": "Immune"
+  },
+  "drops": {
+   "min": 2,
+   "max": 2,
+   "chance": 0.5,
+   "items": [
+    {
+     "item": "Resin",
+     "min": 1,
+     "max": 2,
+     "weight": 0.5
+    },
+    {
+     "item": "Feathers",
+     "min": 1,
+     "max": 2,
+     "weight": 0.5
+    },
+    {
+     "item": "BirchSeeds",
+     "min": 1,
+     "max": 2,
+     "weight": 1
+    }
+   ]
+  },
+  "becomes": "Birch_log",
+  "name": "Birch"
+ },
+ {
+  "id": "Birch1_aut",
+  "kind": "tree",
+  "health": 80,
+  "minToolTier": 2,
+  "damageModifiers": {
+   "blunt": "Immune",
+   "slash": "Immune",
+   "pierce": "Immune",
+   "pickaxe": "Immune",
+   "fire": "Immune",
+   "frost": "Immune",
+   "lightning": "Immune",
+   "poison": "Immune",
+   "spirit": "Immune"
+  },
+  "drops": {
+   "min": 1,
+   "max": 2,
+   "chance": 0.5,
+   "items": [
+    {
+     "item": "Resin",
+     "min": 1,
+     "max": 2,
+     "weight": 0.5
+    },
+    {
+     "item": "Feathers",
+     "min": 1,
+     "max": 2,
+     "weight": 0.5
+    },
+    {
+     "item": "BirchSeeds",
+     "min": 1,
+     "max": 2,
+     "weight": 1
+    }
+   ]
+  },
+  "becomes": "Birch_log",
+  "name": "Birch"
+ },
+ {
+  "id": "Birch2",
+  "kind": "tree",
+  "health": 80,
+  "minToolTier": 2,
+  "damageModifiers": {
+   "blunt": "Immune",
+   "slash": "Immune",
+   "pierce": "Immune",
+   "pickaxe": "Immune",
+   "fire": "Immune",
+   "frost": "Immune",
+   "lightning": "Immune",
+   "poison": "Immune",
+   "spirit": "Immune"
+  },
+  "drops": {
+   "min": 1,
+   "max": 2,
+   "chance": 0.5,
+   "items": [
+    {
+     "item": "Resin",
+     "min": 1,
+     "max": 2,
+     "weight": 0.5
+    },
+    {
+     "item": "Feathers",
+     "min": 1,
+     "max": 2,
+     "weight": 0.5
+    },
+    {
+     "item": "BirchSeeds",
+     "min": 1,
+     "max": 2,
+     "weight": 1
+    }
+   ]
+  },
+  "becomes": "Birch_log",
+  "name": "Birch"
+ },
+ {
+  "id": "Birch2_aut",
+  "kind": "tree",
+  "health": 80,
+  "minToolTier": 2,
+  "damageModifiers": {
+   "blunt": "Immune",
+   "slash": "Immune",
+   "pierce": "Immune",
+   "pickaxe": "Immune",
+   "fire": "Immune",
+   "frost": "Immune",
+   "lightning": "Immune",
+   "poison": "Immune",
+   "spirit": "Immune"
+  },
+  "drops": {
+   "min": 1,
+   "max": 2,
+   "chance": 0.5,
+   "items": [
+    {
+     "item": "Resin",
+     "min": 1,
+     "max": 2,
+     "weight": 0.5
+    },
+    {
+     "item": "Feathers",
+     "min": 1,
+     "max": 2,
+     "weight": 0.5
+    },
+    {
+     "item": "BirchSeeds",
+     "min": 1,
+     "max": 2,
+     "weight": 1
+    }
+   ]
+  },
+  "becomes": "Birch_log",
+  "name": "Birch"
+ },
+ {
+  "id": "BirchStub",
+  "kind": "destructible",
+  "health": 80,
+  "minToolTier": 2,
+  "damageModifiers": {
+   "blunt": "Immune",
+   "slash": "Immune",
+   "pierce": "Immune",
+   "fire": "Immune",
+   "frost": "Immune",
+   "lightning": "Immune",
+   "poison": "Immune",
+   "spirit": "Immune"
+  },
+  "drops": {
+   "min": 2,
+   "max": 2,
+   "chance": 1,
+   "items": [
+    {
+     "item": "Wood",
+     "min": 1,
+     "max": 1,
+     "weight": 1
+    }
+   ]
+  },
+  "name": "Stump"
+ },
+ {
+  "id": "Birch_log",
+  "kind": "log",
+  "health": 60,
+  "minToolTier": 2,
+  "damageModifiers": {
+   "blunt": "Immune",
+   "slash": "Immune",
+   "pierce": "Immune",
+   "pickaxe": "Immune",
+   "fire": "Immune",
+   "frost": "Immune",
+   "lightning": "Immune",
+   "poison": "Immune",
+   "spirit": "Immune"
+  },
+  "becomes": "Birch_log_half",
+  "name": "Log"
+ },
+ {
+  "id": "Birch_log_half",
+  "kind": "log",
+  "health": 60,
+  "minToolTier": 2,
+  "damageModifiers": {
+   "blunt": "Immune",
+   "slash": "Immune",
+   "pierce": "Immune",
+   "pickaxe": "Immune",
+   "fire": "Immune",
+   "frost": "Immune",
+   "lightning": "Immune",
+   "poison": "Immune",
+   "spirit": "Immune"
+  },
+  "drops": {
+   "min": 10,
+   "max": 10,
+   "chance": 1,
+   "items": [
+    {
+     "item": "Wood",
+     "min": 1,
+     "max": 1,
+     "weight": 1
+    },
+    {
+     "item": "FineWood",
+     "min": 1,
+     "max": 1,
+     "weight": 1
+    }
+   ]
+  },
+  "name": "Log"
+ },
+ {
+  "id": "BlackIceShard_01",
+  "kind": "destructible",
+  "health": 50,
+  "damageModifiers": {
+   "chop": "Weak",
+   "pickaxe": "Weak",
+   "fire": "Weak",
+   "frost": "Resistant",
+   "lightning": "Resistant",
+   "poison": "Immune"
+  },
+  "drops": {
+   "min": 1,
+   "max": 2,
+   "chance": 1,
+   "items": [
+    {
+     "item": "Ice",
+     "min": 1,
+     "max": 1,
+     "weight": 1
+    }
+   ]
+  }
+ },
+ {
+  "id": "BlackIceShard_02",
+  "kind": "destructible",
+  "health": 50,
+  "damageModifiers": {
+   "chop": "Weak",
+   "pickaxe": "Weak",
+   "fire": "Weak",
+   "frost": "Resistant",
+   "lightning": "Resistant",
+   "poison": "Immune"
+  },
+  "drops": {
+   "min": 1,
+   "max": 2,
+   "chance": 1,
+   "items": [
+    {
+     "item": "Ice",
+     "min": 1,
+     "max": 3,
+     "weight": 1
+    }
+   ]
+  }
+ },
+ {
+  "id": "BlackIce_Core",
+  "kind": "destructible",
+  "health": 1000,
+  "damageModifiers": {
+   "chop": "Weak",
+   "pickaxe": "Weak",
+   "fire": "Weak",
+   "frost": "Resistant",
+   "lightning": "Resistant",
+   "poison": "Immune"
+  },
+  "becomes": "HatefulBlood",
+  "name": "Malicious Ice"
+ },
+ {
+  "id": "BlobMorkBig",
+  "kind": "destructible",
+  "health": 600,
+  "damageModifiers": {
+   "pierce": "Resistant",
+   "pickaxe": "Resistant",
+   "fire": "Weak",
+   "frost": "Weak",
+   "poison": "Immune",
+   "spirit": "Resistant"
+  },
+  "drops": {
+   "min": 2,
+   "max": 3,
+   "chance": 1,
+   "items": [
+    {
+     "item": "IronScrap",
+     "min": 1,
+     "max": 1,
+     "weight": 0.5
+    },
+    {
+     "item": "Frostwood",
+     "min": 1,
+     "max": 1,
+     "weight": 0.5
+    },
+    {
+     "item": "Lingonberry",
+     "min": 1,
+     "max": 1,
+     "weight": 1
+    },
+    {
+     "item": "OozeMork",
+     "min": 1,
+     "max": 1,
+     "weight": 1
+    }
+   ]
+  },
+  "becomes": "vfx_BigBlob_destroyed",
+  "name": "Hexahedric Pulp"
+ },
+ {
+  "id": "BlueberryBush",
+  "kind": "pickable",
+  "pickable": {
+   "item": "Blueberries",
+   "amount": 1,
+   "respawnMinutes": 300
+  }
+ },
+ {
+  "id": "Bush01",
+  "kind": "destructible",
+  "health": 30,
+  "damageModifiers": {
+   "pierce": "Resistant",
+   "chop": "Weak",
+   "poison": "Immune",
+   "spirit": "Immune"
+  },
+  "drops": {
+   "min": 1,
+   "max": 2,
+   "chance": 1,
+   "items": [
+    {
+     "item": "Wood",
+     "min": 1,
+     "max": 1
+    }
+   ]
+  }
+ },
+ {
+  "id": "Bush01_deepnorth",
+  "kind": "destructible",
+  "health": 30,
+  "damageModifiers": {
+   "pierce": "Resistant",
+   "chop": "Weak",
+   "poison": "Immune",
+   "spirit": "Immune"
+  },
+  "drops": {
+   "min": 1,
+   "max": 2,
+   "chance": 1,
+   "items": [
+    {
+     "item": "Wood",
+     "min": 1,
+     "max": 1
+    }
+   ]
+  }
+ },
+ {
+  "id": "Bush01_heath",
+  "kind": "destructible",
+  "health": 30,
+  "damageModifiers": {
+   "pierce": "Resistant",
+   "chop": "Weak",
+   "poison": "Immune",
+   "spirit": "Immune"
+  },
+  "drops": {
+   "min": 1,
+   "max": 2,
+   "chance": 1,
+   "items": [
+    {
+     "item": "Wood",
+     "min": 1,
+     "max": 1
+    }
+   ]
+  }
+ },
+ {
+  "id": "Bush02_en",
+  "kind": "destructible",
+  "health": 100,
+  "damageModifiers": {
+   "pierce": "Resistant",
+   "chop": "Weak",
+   "poison": "Immune",
+   "spirit": "Immune"
+  },
+  "drops": {
+   "min": 2,
+   "max": 3,
+   "chance": 1,
+   "items": [
+    {
+     "item": "Wood",
+     "min": 1,
+     "max": 1
+    }
+   ]
+  }
+ },
+ {
+  "id": "CastleKit_brazier",
+  "kind": "destructible",
+  "health": 50,
+  "damageModifiers": {
+   "fire": "Resistant",
+   "frost": "Weak",
+   "lightning": "Immune",
+   "poison": "Immune",
+   "spirit": "Immune"
+  },
+  "drops": {
+   "min": 1,
+   "max": 2,
+   "chance": 1,
+   "items": [
+    {
+     "item": "Bronze",
+     "min": 1,
+     "max": 1,
+     "weight": 0.5
+    },
+    {
+     "item": "Coal",
+     "min": 1,
+     "max": 2,
+     "weight": 1
+    },
+    {
+     "item": "Coal",
+     "min": 1,
+     "max": 1,
+     "weight": 1
+    }
+   ]
+  }
+ },
+ {
+  "id": "Charred_altar_bellfragment",
+  "kind": "destructible",
+  "health": 10,
+  "drops": {
+   "min": 2,
+   "max": 4,
+   "chance": 1,
+   "items": [
+    {
+     "item": "BellFragment",
+     "min": 1,
+     "max": 1,
+     "weight": 1
+    }
+   ]
+  }
+ },
+ {
+  "id": "CloudberryBush",
+  "kind": "pickable",
+  "pickable": {
+   "item": "Cloudberry",
+   "amount": 1,
+   "respawnMinutes": 300
+  }
+ },
+ {
+  "id": "CreepProp_egg_hanging01",
+  "kind": "destructible",
+  "health": 1,
+  "drops": {
+   "min": 1,
+   "max": 1,
+   "chance": 0.5,
+   "items": [
+    {
+     "item": "SeekerBrood",
+     "min": 1,
+     "max": 1,
+     "weight": 1
+    }
+   ]
+  },
+  "becomes": "CreepProp_egg_hanging02"
+ },
+ {
+  "id": "Crow",
+  "kind": "destructible",
+  "health": 1,
+  "drops": {
+   "min": 1,
+   "max": 1,
+   "chance": 1,
+   "items": [
+    {
+     "item": "Feathers",
+     "min": 3,
+     "max": 3,
+     "weight": 1
+    }
+   ]
+  }
+ },
+ {
+  "id": "EvilHeart_Forest",
+  "kind": "destructible",
+  "health": 100,
+  "damageModifiers": {
+   "chop": "Immune",
+   "pickaxe": "Immune"
+  },
+  "drops": {
+   "min": 1,
+   "max": 1,
+   "chance": 1,
+   "items": [
+    {
+     "item": "AncientSeed",
+     "min": 1,
+     "max": 1,
+     "weight": 1
+    }
+   ]
+  }
+ },
+ {
+  "id": "EvilHeart_Swamp",
+  "kind": "destructible",
+  "health": 100,
+  "damageModifiers": {
+   "chop": "Immune",
+   "pickaxe": "Immune"
+  },
+  "drops": {
+   "min": 1,
+   "max": 1,
+   "chance": 1,
+   "items": [
+    {
+     "item": "AncientSeed",
+     "min": 1,
+     "max": 1
+    }
+   ]
+  }
+ },
+ {
+  "id": "FernFiddleHeadAshlands",
+  "kind": "destructible",
+  "health": 30,
+  "damageModifiers": {
+   "pierce": "Resistant",
+   "chop": "Weak",
+   "fire": "Immune",
+   "poison": "Immune",
+   "spirit": "Immune"
+  },
+  "drops": {
+   "min": 1,
+   "max": 2,
+   "chance": 1,
+   "items": [
+    {
+     "item": "Wood",
+     "min": 1,
+     "max": 1
+    }
+   ]
+  }
+ },
+ {
+  "id": "FirTree",
+  "kind": "tree",
+  "health": 80,
+  "damageModifiers": {
+   "blunt": "Immune",
+   "slash": "Immune",
+   "pierce": "Immune",
+   "pickaxe": "Immune",
+   "fire": "Immune",
+   "frost": "Immune",
+   "lightning": "Immune",
+   "poison": "Immune",
+   "spirit": "Immune"
+  },
+  "drops": {
+   "min": 1,
+   "max": 2,
+   "chance": 0.5,
+   "items": [
+    {
+     "item": "FirCone",
+     "min": 1,
+     "max": 1,
+     "weight": 1
+    },
+    {
+     "item": "Feathers",
+     "min": 1,
+     "max": 1,
+     "weight": 0.25
+    },
+    {
+     "item": "Resin",
+     "min": 1,
+     "max": 1,
+     "weight": 0.25
+    }
+   ]
+  },
+  "becomes": "FirTree_log",
+  "name": "Fir"
+ },
+ {
+  "id": "FirTree_Big_log",
+  "kind": "log",
+  "health": 60,
+  "damageModifiers": {
+   "blunt": "Immune",
+   "slash": "Immune",
+   "pierce": "Immune",
+   "pickaxe": "Immune",
+   "fire": "Immune",
+   "frost": "Immune",
+   "lightning": "Immune",
+   "poison": "Immune",
+   "spirit": "Immune"
+  },
+  "becomes": "FirTree_big_log_half",
+  "name": "Log"
+ },
+ {
+  "id": "FirTree_Big_plantable_Stub",
+  "kind": "destructible",
+  "health": 100,
+  "damageModifiers": {
+   "blunt": "Immune",
+   "slash": "Immune",
+   "pierce": "Immune",
+   "fire": "Immune",
+   "frost": "Immune",
+   "lightning": "Immune",
+   "poison": "Immune",
+   "spirit": "Immune"
+  },
+  "drops": {
+   "min": 2,
+   "max": 2,
+   "chance": 1,
+   "items": [
+    {
+     "item": "Wood",
+     "min": 1,
+     "max": 1,
+     "weight": 1
+    }
+   ]
+  },
+  "name": "Stump"
+ },
+ {
+  "id": "FirTree_Snow_Stub",
+  "kind": "destructible",
+  "health": 100,
+  "damageModifiers": {
+   "blunt": "Immune",
+   "slash": "Immune",
+   "pierce": "Immune",
+   "fire": "Immune",
+   "frost": "Immune",
+   "lightning": "Immune",
+   "poison": "Immune",
+   "spirit": "Immune"
+  },
+  "drops": {
+   "min": 2,
+   "max": 2,
+   "chance": 1,
+   "items": [
+    {
+     "item": "Wood",
+     "min": 1,
+     "max": 1,
+     "weight": 1
+    }
+   ]
+  },
+  "name": "Stump"
+ },
+ {
+  "id": "FirTree_Snow_log",
+  "kind": "log",
+  "health": 60,
+  "damageModifiers": {
+   "blunt": "Immune",
+   "slash": "Immune",
+   "pierce": "Immune",
+   "pickaxe": "Immune",
+   "fire": "Immune",
+   "frost": "Immune",
+   "lightning": "Immune",
+   "poison": "Immune",
+   "spirit": "Immune"
+  },
+  "becomes": "FirTree_Snow_log_half",
+  "name": "Log"
+ },
+ {
+  "id": "FirTree_Snow_log_half",
+  "kind": "log",
+  "health": 40,
+  "damageModifiers": {
+   "blunt": "Immune",
+   "slash": "Immune",
+   "pierce": "Immune",
+   "pickaxe": "Immune",
+   "fire": "Immune",
+   "frost": "Immune",
+   "lightning": "Immune",
+   "poison": "Immune",
+   "spirit": "Immune"
+  },
+  "drops": {
+   "min": 10,
+   "max": 10,
+   "chance": 1,
+   "items": [
+    {
+     "item": "Frostwood",
+     "min": 1,
+     "max": 1,
+     "weight": 0.5
+    },
+    {
+     "item": "Wood",
+     "min": 1,
+     "max": 1,
+     "weight": 1
+    },
+    {
+     "item": "FirConeFrost",
+     "min": 1,
+     "max": 1,
+     "weight": 1
+    }
+   ]
+  },
+  "name": "Log"
+ },
+ {
+  "id": "FirTree_Stub",
+  "kind": "destructible",
+  "health": 100,
+  "damageModifiers": {
+   "blunt": "Immune",
+   "slash": "Immune",
+   "pierce": "Immune",
+   "fire": "Immune",
+   "frost": "Immune",
+   "lightning": "Immune",
+   "poison": "Immune",
+   "spirit": "Immune"
+  },
+  "drops": {
+   "min": 2,
+   "max": 2,
+   "chance": 1,
+   "items": [
+    {
+     "item": "Wood",
+     "min": 1,
+     "max": 1,
+     "weight": 1
+    }
+   ]
+  },
+  "name": "Stump"
+ },
+ {
+  "id": "FirTree_big",
+  "kind": "tree",
+  "health": 200,
+  "damageModifiers": {
+   "blunt": "Immune",
+   "slash": "Immune",
+   "pierce": "Immune",
+   "pickaxe": "Immune",
+   "fire": "Immune",
+   "frost": "Immune",
+   "lightning": "Immune",
+   "poison": "Immune",
+   "spirit": "Immune"
+  },
+  "drops": {
+   "min": 1,
+   "max": 2,
+   "chance": 0.5,
+   "items": [
+    {
+     "item": "FirCone",
+     "min": 1,
+     "max": 1,
+     "weight": 1
+    },
+    {
+     "item": "Feathers",
+     "min": 1,
+     "max": 1,
+     "weight": 0.25
+    },
+    {
+     "item": "Resin",
+     "min": 1,
+     "max": 1,
+     "weight": 0.25
+    }
+   ]
+  },
+  "becomes": "FirTree_Big_log",
+  "name": "Timber Tree"
+ },
+ {
+  "id": "FirTree_big_log_half",
+  "kind": "log",
+  "health": 40,
+  "damageModifiers": {
+   "blunt": "Immune",
+   "slash": "Immune",
+   "pierce": "Immune",
+   "pickaxe": "Immune",
+   "fire": "Immune",
+   "frost": "Immune",
+   "lightning": "Immune",
+   "poison": "Immune",
+   "spirit": "Immune"
+  },
+  "drops": {
+   "min": 10,
+   "max": 10,
+   "chance": 1,
+   "items": [
+    {
+     "item": "Frostwood",
+     "min": 1,
+     "max": 1,
+     "weight": 0.5
+    },
+    {
+     "item": "Wood",
+     "min": 1,
+     "max": 1,
+     "weight": 1
+    },
+    {
+     "item": "FirConeFrost",
+     "min": 1,
+     "max": 1,
+     "weight": 1
+    }
+   ]
+  },
+  "name": "Log"
+ },
+ {
+  "id": "FirTree_log",
+  "kind": "log",
+  "health": 60,
+  "damageModifiers": {
+   "blunt": "Immune",
+   "slash": "Immune",
+   "pierce": "Immune",
+   "pickaxe": "Immune",
+   "fire": "Immune",
+   "frost": "Immune",
+   "lightning": "Immune",
+   "poison": "Immune",
+   "spirit": "Immune"
+  },
+  "becomes": "FirTree_log_half",
+  "name": "Log"
+ },
+ {
+  "id": "FirTree_log_half",
+  "kind": "log",
+  "health": 40,
+  "damageModifiers": {
+   "blunt": "Immune",
+   "slash": "Immune",
+   "pierce": "Immune",
+   "pickaxe": "Immune",
+   "fire": "Immune",
+   "frost": "Immune",
+   "lightning": "Immune",
+   "poison": "Immune",
+   "spirit": "Immune"
+  },
+  "drops": {
+   "min": 10,
+   "max": 10,
+   "chance": 1,
+   "items": [
+    {
+     "item": "Wood",
+     "min": 1,
+     "max": 1,
+     "weight": 1
+    }
+   ]
+  },
+  "name": "Log"
+ },
+ {
+  "id": "FirTree_oldLog",
+  "kind": "destructible",
+  "health": 40,
+  "damageModifiers": {
+   "blunt": "Immune",
+   "slash": "Immune",
+   "pierce": "Immune",
+   "pickaxe": "Immune",
+   "fire": "Immune",
+   "frost": "Immune",
+   "lightning": "Immune",
+   "poison": "Immune",
+   "spirit": "Immune"
+  },
+  "drops": {
+   "min": 5,
+   "max": 7,
+   "chance": 1,
+   "items": [
+    {
+     "item": "Wood",
+     "min": 1,
+     "max": 1,
+     "weight": 1
+    }
+   ]
+  },
+  "name": "Log"
+ },
+ {
+  "id": "FirTree_oldLog_deepnorth",
+  "kind": "destructible",
+  "health": 150,
+  "damageModifiers": {
+   "blunt": "Immune",
+   "slash": "Immune",
+   "pierce": "Immune",
+   "pickaxe": "Immune",
+   "fire": "Immune",
+   "frost": "Immune",
+   "lightning": "Immune",
+   "poison": "Immune",
+   "spirit": "Immune"
+  },
+  "drops": {
+   "min": 4,
+   "max": 6,
+   "chance": 1,
+   "items": [
+    {
+     "item": "Frostwood",
+     "min": 1,
+     "max": 1,
+     "weight": 1
+    }
+   ]
+  },
+  "name": "Log"
+ },
+ {
+  "id": "FirTree_small",
+  "kind": "destructible",
+  "health": 40,
+  "damageModifiers": {
+   "blunt": "Immune",
+   "slash": "Immune",
+   "pierce": "Immune",
+   "pickaxe": "Immune",
+   "fire": "Immune",
+   "frost": "Immune",
+   "lightning": "Immune",
+   "poison": "Immune",
+   "spirit": "Immune"
+  },
+  "drops": {
+   "min": 4,
+   "max": 5,
+   "chance": 1,
+   "items": [
+    {
+     "item": "Wood",
+     "min": 1,
+     "max": 1,
+     "weight": 1
+    },
+    {
+     "item": "FirCone",
+     "min": 1,
+     "max": 1,
+     "weight": 0.1
+    },
+    {
+     "item": "Resin",
+     "min": 1,
+     "max": 1,
+     "weight": 0.1
+    }
+   ]
+  },
+  "name": "Fir"
+ },
+ {
+  "id": "FirTree_small_dead",
+  "kind": "destructible",
+  "health": 40,
+  "damageModifiers": {
+   "blunt": "Immune",
+   "slash": "Immune",
+   "pierce": "Immune",
+   "pickaxe": "Immune",
+   "fire": "Immune",
+   "frost": "Immune",
+   "lightning": "Immune",
+   "poison": "Immune",
+   "spirit": "Immune"
+  },
+  "drops": {
+   "min": 4,
+   "max": 5,
+   "chance": 1,
+   "items": [
+    {
+     "item": "Wood",
+     "min": 1,
+     "max": 1,
+     "weight": 1
+    }
+   ]
+  },
+  "name": "Fir"
+ },
+ {
+  "id": "FlametalRockstand",
+  "kind": "destructible",
+  "health": 1,
+  "damageModifiers": {
+   "blunt": "Immune",
+   "slash": "Immune",
+   "pierce": "Immune",
+   "chop": "Immune",
+   "fire": "Immune",
+   "frost": "Immune",
+   "lightning": "Immune",
+   "poison": "Immune",
+   "spirit": "Immune"
+  },
+  "becomes": "FlametalRockstand_frac"
+ },
+ {
+  "id": "FlametalRockstand_frac",
+  "kind": "rock",
+  "health": 70,
+  "damageModifiers": {
+   "blunt": "Immune",
+   "slash": "Immune",
+   "pierce": "Immune",
+   "chop": "Immune",
+   "fire": "Immune",
+   "frost": "Immune",
+   "lightning": "Immune",
+   "poison": "Immune",
+   "spirit": "Immune"
+  },
+  "drops": {
+   "min": 4,
+   "max": 8,
+   "chance": 1,
+   "items": [
+    {
+     "item": "Coal",
+     "min": 1,
+     "max": 1
+    }
+   ]
+  }
+ },
+ {
+  "id": "FrozenGD",
+  "kind": "destructible",
+  "health": 30,
+  "damageModifiers": {
+   "pierce": "Resistant",
+   "chop": "Weak",
+   "poison": "Immune",
+   "spirit": "Immune"
+  },
+  "drops": {
+   "min": 1,
+   "max": 3,
+   "chance": 1,
+   "oneOfEach": true,
+   "items": [
+    {
+     "item": "Ice",
+     "min": 1,
+     "max": 1,
+     "weight": 1
+    },
+    {
+     "item": "Ice",
+     "min": 1,
+     "max": 2,
+     "weight": 1
+    },
+    {
+     "item": "Resin",
+     "min": 1,
+     "max": 1,
+     "weight": 1
+    }
+   ]
+  },
+  "becomes": "Ice"
+ },
+ {
+  "id": "FrozenSkeleton_Pose1",
+  "kind": "destructible",
+  "health": 30,
+  "damageModifiers": {
+   "pierce": "Resistant",
+   "chop": "Weak",
+   "poison": "Immune",
+   "spirit": "Immune"
+  },
+  "drops": {
+   "min": 1,
+   "max": 3,
+   "chance": 1,
+   "oneOfEach": true,
+   "items": [
+    {
+     "item": "Ice",
+     "min": 1,
+     "max": 1,
+     "weight": 1
+    },
+    {
+     "item": "Ice",
+     "min": 1,
+     "max": 2,
+     "weight": 1
+    },
+    {
+     "item": "Resin",
+     "min": 1,
+     "max": 1,
+     "weight": 1
+    }
+   ]
+  },
+  "becomes": "Ice"
+ },
+ {
+  "id": "FrozenSkeleton_Pose2",
+  "kind": "destructible",
+  "health": 30,
+  "damageModifiers": {
+   "pierce": "Resistant",
+   "chop": "Weak",
+   "poison": "Immune",
+   "spirit": "Immune"
+  },
+  "drops": {
+   "min": 1,
+   "max": 3,
+   "chance": 1,
+   "oneOfEach": true,
+   "items": [
+    {
+     "item": "Ice",
+     "min": 1,
+     "max": 1,
+     "weight": 1
+    },
+    {
+     "item": "Ice",
+     "min": 1,
+     "max": 2,
+     "weight": 1
+    },
+    {
+     "item": "Resin",
+     "min": 1,
+     "max": 1,
+     "weight": 1
+    }
+   ]
+  },
+  "becomes": "Ice"
+ },
+ {
+  "id": "GraveStone_Broken_CharredTwitcherNest",
+  "kind": "destructible",
+  "health": 20,
+  "damageModifiers": {
+   "blunt": "Resistant",
+   "slash": "Resistant",
+   "pierce": "Resistant",
+   "fire": "Immune",
+   "frost": "Resistant",
+   "lightning": "Resistant",
+   "poison": "Ignore",
+   "spirit": "Ignore"
+  },
+  "drops": {
+   "min": 1,
+   "max": 1,
+   "chance": 1,
+   "items": [
+    {
+     "item": "Grausten",
+     "min": 1,
+     "max": 1,
+     "weight": 1
+    }
+   ]
+  }
+ },
+ {
+  "id": "GraveStone_Broken_World",
+  "kind": "destructible",
+  "health": 20,
+  "damageModifiers": {
+   "blunt": "Resistant",
+   "slash": "Resistant",
+   "pierce": "Resistant",
+   "fire": "Immune",
+   "frost": "Resistant",
+   "lightning": "Resistant",
+   "poison": "Ignore",
+   "spirit": "Ignore"
+  },
+  "drops": {
+   "min": 1,
+   "max": 1,
+   "chance": 1,
+   "items": [
+    {
+     "item": "Grausten",
+     "min": 1,
+     "max": 1,
+     "weight": 1
+    }
+   ]
+  }
+ },
+ {
+  "id": "GraveStone_CharredTwitcherNest",
+  "kind": "destructible",
+  "health": 20,
+  "damageModifiers": {
+   "blunt": "Resistant",
+   "slash": "Resistant",
+   "pierce": "Resistant",
+   "fire": "Immune",
+   "frost": "Immune",
+   "lightning": "Immune",
+   "poison": "Ignore",
+   "spirit": "Ignore"
+  },
+  "drops": {
+   "min": 1,
+   "max": 1,
+   "chance": 1,
+   "items": [
+    {
+     "item": "Grausten",
+     "min": 1,
+     "max": 1,
+     "weight": 1
+    }
+   ]
+  }
+ },
+ {
+  "id": "GraveStone_Elite_Broken_CharredTwitcherNest",
+  "kind": "destructible",
+  "health": 20,
+  "damageModifiers": {
+   "blunt": "Resistant",
+   "slash": "Resistant",
+   "pierce": "Resistant",
+   "fire": "Immune",
+   "frost": "Resistant",
+   "lightning": "Resistant",
+   "poison": "Ignore",
+   "spirit": "Ignore"
+  },
+  "drops": {
+   "min": 1,
+   "max": 1,
+   "chance": 1,
+   "items": [
+    {
+     "item": "Grausten",
+     "min": 1,
+     "max": 1,
+     "weight": 1
+    }
+   ]
+  }
+ },
+ {
+  "id": "GraveStone_Elite_CharredTwitcherNest",
+  "kind": "destructible",
+  "health": 20,
+  "damageModifiers": {
+   "blunt": "Resistant",
+   "slash": "Resistant",
+   "pierce": "Resistant",
+   "fire": "Immune",
+   "frost": "Immune",
+   "lightning": "Immune",
+   "poison": "Ignore",
+   "spirit": "Ignore"
+  },
+  "drops": {
+   "min": 1,
+   "max": 1,
+   "chance": 1,
+   "items": [
+    {
+     "item": "Grausten",
+     "min": 1,
+     "max": 1,
+     "weight": 1
+    }
+   ]
+  }
+ },
+ {
+  "id": "Greydwarf_Root",
+  "kind": "destructible",
+  "health": 100,
+  "damageModifiers": {
+   "blunt": "Resistant",
+   "pierce": "Resistant",
+   "pickaxe": "Ignore",
+   "fire": "Weak",
+   "frost": "Immune",
+   "poison": "Immune",
+   "spirit": "Ignore"
+  },
+  "drops": {
+   "min": 2,
+   "max": 4,
+   "chance": 1,
+   "items": [
+    {
+     "item": "Wood",
+     "min": 1,
+     "max": 1,
+     "weight": 1
+    },
+    {
+     "item": "Resin",
+     "min": 1,
+     "max": 1,
+     "weight": 1
+    }
+   ]
+  }
+ },
+ {
+  "id": "Greydwarf_Surprise",
+  "kind": "destructible",
+  "health": 10,
+  "drops": {
+   "min": 1,
+   "max": 3,
+   "chance": 1,
+   "items": [
+    {
+     "item": "BoneFragments",
+     "min": 1,
+     "max": 1
+    }
+   ]
+  },
+  "name": "Large Bone"
+ },
+ {
+  "id": "GuckSack",
+  "kind": "destructible",
+  "health": 30,
+  "damageModifiers": {
+   "blunt": "Immune",
+   "slash": "Immune",
+   "pierce": "Immune",
+   "fire": "Immune",
+   "frost": "Immune",
+   "lightning": "Immune",
+   "poison": "Immune",
+   "spirit": "Immune"
+  },
+  "drops": {
+   "min": 4,
+   "max": 7,
+   "chance": 1,
+   "items": [
+    {
+     "item": "Guck",
+     "min": 1,
+     "max": 1,
+     "weight": 1
+    }
+   ]
+  },
+  "name": "Guck Sack"
+ },
+ {
+  "id": "GuckSack_small",
+  "kind": "destructible",
+  "health": 30,
+  "damageModifiers": {
+   "blunt": "Immune",
+   "slash": "Immune",
+   "pierce": "Immune",
+   "fire": "Immune",
+   "frost": "Immune",
+   "lightning": "Immune",
+   "poison": "Immune",
+   "spirit": "Immune"
+  },
+  "drops": {
+   "min": 1,
+   "max": 2,
+   "chance": 1,
+   "items": [
+    {
+     "item": "Guck",
+     "min": 1,
+     "max": 1,
+     "weight": 1
+    }
+   ]
+  },
+  "name": "Guck Sack"
+ },
+ {
+  "id": "HeathRockPillar",
+  "kind": "destructible",
+  "health": 1,
+  "damageModifiers": {
+   "blunt": "Immune",
+   "slash": "Immune",
+   "pierce": "Immune",
+   "chop": "Immune",
+   "fire": "Immune",
+   "frost": "Immune",
+   "lightning": "Immune",
+   "poison": "Immune",
+   "spirit": "Immune"
+  },
+  "becomes": "HeathRockPillar_frac"
+ },
+ {
+  "id": "HeathRockPillar_frac",
+  "kind": "rock",
+  "health": 60,
+  "damageModifiers": {
+   "blunt": "Immune",
+   "slash": "Immune",
+   "pierce": "Immune",
+   "chop": "Immune",
+   "fire": "Immune",
+   "frost": "Immune",
+   "lightning": "Immune",
+   "poison": "Immune",
+   "spirit": "Immune"
+  },
+  "drops": {
+   "min": 1,
+   "max": 3,
+   "chance": 1,
+   "items": [
+    {
+     "item": "Stone",
+     "min": 1,
+     "max": 1
+    }
+   ]
+  }
+ },
+ {
+  "id": "HoleRock_root1",
+  "kind": "destructible",
+  "health": 5,
+  "drops": {
+   "min": 1,
+   "max": 1,
+   "chance": 0.5,
+   "items": [
+    {
+     "item": "Frostwood",
+     "min": 1,
+     "max": 1,
+     "weight": 1
+    }
+   ]
+  },
+  "becomes": "HoleRock_root1_destruction"
+ },
+ {
+  "id": "HoleRock_rootBush1",
+  "kind": "destructible",
+  "health": 20,
+  "drops": {
+   "min": 1,
+   "max": 1,
+   "chance": 0.5,
+   "items": [
+    {
+     "item": "Frostwood",
+     "min": 1,
+     "max": 1,
+     "weight": 1
+    }
+   ]
+  },
+  "becomes": "HoleRock_root1_destruction"
+ },
+ {
+  "id": "HoleRock_rootFloor1",
+  "kind": "destructible",
+  "health": 100,
+  "damageModifiers": {
+   "fire": "Weak",
+   "frost": "Resistant",
+   "lightning": "Resistant",
+   "poison": "Immune",
+   "spirit": "Immune"
+  },
+  "drops": {
+   "min": 1,
+   "max": 1,
+   "chance": 0.5,
+   "items": [
+    {
+     "item": "Frostwood",
+     "min": 1,
+     "max": 1,
+     "weight": 1
+    }
+   ]
+  },
+  "becomes": "HoleRock_rootWall1_destruction"
+ },
+ {
+  "id": "HoleRock_rootWall1",
+  "kind": "destructible",
+  "health": 150,
+  "damageModifiers": {
+   "fire": "Weak",
+   "frost": "Resistant",
+   "lightning": "Resistant",
+   "poison": "Immune",
+   "spirit": "Immune"
+  },
+  "drops": {
+   "min": 1,
+   "max": 1,
+   "chance": 0.5,
+   "items": [
+    {
+     "item": "Frostwood",
+     "min": 1,
+     "max": 1,
+     "weight": 1
+    }
+   ]
+  },
+  "becomes": "HoleRock_rootWall1_destruction"
+ },
+ {
+  "id": "HugeRoot1",
+  "kind": "destructible",
+  "health": 100,
+  "damageModifiers": {
+   "blunt": "Immune",
+   "slash": "Immune",
+   "pierce": "Immune",
+   "chop": "Immune",
+   "pickaxe": "Resistant",
+   "fire": "Immune",
+   "frost": "Immune",
+   "poison": "Immune",
+   "spirit": "Immune"
+  },
+  "drops": {
+   "min": 2,
+   "max": 2,
+   "chance": 1,
+   "items": [
+    {
+     "item": "Wood",
+     "min": 1,
+     "max": 1,
+     "weight": 1
+    }
+   ]
+  },
+  "name": "Ancient Root"
+ },
+ {
+  "id": "IcePond_rock",
+  "kind": "destructible",
+  "health": 1,
+  "damageModifiers": {
+   "blunt": "Immune",
+   "slash": "Immune",
+   "pierce": "Immune",
+   "chop": "Immune",
+   "fire": "Immune",
+   "frost": "Immune",
+   "lightning": "Immune",
+   "poison": "Immune",
+   "spirit": "Immune"
+  },
+  "becomes": "IcePond_rock_frac"
+ },
+ {
+  "id": "IcePond_rock_frac",
+  "kind": "rock",
+  "health": 50,
+  "damageModifiers": {
+   "blunt": "Immune",
+   "slash": "Immune",
+   "pierce": "Immune",
+   "chop": "Immune",
+   "fire": "Immune",
+   "frost": "Immune",
+   "lightning": "Immune",
+   "poison": "Immune",
+   "spirit": "Immune"
+  },
+  "drops": {
+   "min": 1,
+   "max": 3,
+   "chance": 1,
+   "items": [
+    {
+     "item": "Ice",
+     "min": 1,
+     "max": 1,
+     "weight": 1
+    }
+   ]
+  }
+ },
+ {
+  "id": "IceShard_01",
+  "kind": "destructible",
+  "health": 30,
+  "damageModifiers": {
+   "blunt": "Immune",
+   "slash": "Immune",
+   "pierce": "Immune",
+   "chop": "Immune",
+   "fire": "Immune",
+   "frost": "Immune",
+   "lightning": "Immune",
+   "poison": "Immune",
+   "spirit": "Immune"
+  },
+  "drops": {
+   "min": 1,
+   "max": 2,
+   "chance": 1,
+   "items": [
+    {
+     "item": "Ice",
+     "min": 3,
+     "max": 5,
+     "weight": 1
+    }
+   ]
+  }
+ },
+ {
+  "id": "IceShard_02",
+  "kind": "destructible",
+  "health": 30,
+  "damageModifiers": {
+   "blunt": "Immune",
+   "slash": "Immune",
+   "pierce": "Immune",
+   "chop": "Immune",
+   "fire": "Immune",
+   "frost": "Immune",
+   "lightning": "Immune",
+   "poison": "Immune",
+   "spirit": "Immune"
+  },
+  "drops": {
+   "min": 1,
+   "max": 2,
+   "chance": 1,
+   "items": [
+    {
+     "item": "Ice",
+     "min": 3,
+     "max": 5,
+     "weight": 1
+    }
+   ]
+  }
+ },
+ {
+  "id": "IceShard_03",
+  "kind": "destructible",
+  "health": 30,
+  "damageModifiers": {
+   "blunt": "Immune",
+   "slash": "Immune",
+   "pierce": "Immune",
+   "chop": "Immune",
+   "fire": "Immune",
+   "frost": "Immune",
+   "lightning": "Immune",
+   "poison": "Immune",
+   "spirit": "Immune"
+  },
+  "drops": {
+   "min": 1,
+   "max": 2,
+   "chance": 1,
+   "items": [
+    {
+     "item": "Ice",
+     "min": 3,
+     "max": 5,
+     "weight": 1
+    }
+   ]
+  }
+ },
+ {
+  "id": "IceShard_04",
+  "kind": "destructible",
+  "health": 10,
+  "damageModifiers": {
+   "blunt": "Immune",
+   "slash": "Immune",
+   "pierce": "Immune",
+   "chop": "Immune",
+   "fire": "Immune",
+   "frost": "Immune",
+   "lightning": "Immune",
+   "poison": "Immune",
+   "spirit": "Immune"
+  },
+  "drops": {
+   "min": 1,
+   "max": 2,
+   "chance": 1,
+   "items": [
+    {
+     "item": "Ice",
+     "min": 1,
+     "max": 1,
+     "weight": 1
+    }
+   ]
+  }
+ },
+ {
+  "id": "IceShard_05",
+  "kind": "destructible",
+  "health": 20,
+  "damageModifiers": {
+   "blunt": "Immune",
+   "slash": "Immune",
+   "pierce": "Immune",
+   "chop": "Immune",
+   "fire": "Immune",
+   "frost": "Immune",
+   "lightning": "Immune",
+   "poison": "Immune",
+   "spirit": "Immune"
+  },
+  "drops": {
+   "min": 1,
+   "max": 2,
+   "chance": 1,
+   "items": [
+    {
+     "item": "Ice",
+     "min": 1,
+     "max": 3,
+     "weight": 1
+    }
+   ]
+  }
+ },
+ {
+  "id": "IceShard_06",
+  "kind": "destructible",
+  "health": 20,
+  "damageModifiers": {
+   "blunt": "Immune",
+   "slash": "Immune",
+   "pierce": "Immune",
+   "chop": "Immune",
+   "fire": "Immune",
+   "frost": "Immune",
+   "lightning": "Immune",
+   "poison": "Immune",
+   "spirit": "Immune"
+  },
+  "drops": {
+   "min": 1,
+   "max": 2,
+   "chance": 1,
+   "items": [
+    {
+     "item": "Ice",
+     "min": 1,
+     "max": 3,
+     "weight": 1
+    }
+   ]
+  }
+ },
+ {
+  "id": "IceShore",
+  "kind": "rock",
+  "health": 25,
+  "damageModifiers": {
+   "blunt": "Immune",
+   "slash": "Immune",
+   "pierce": "Immune",
+   "chop": "Immune",
+   "fire": "Immune",
+   "frost": "Immune",
+   "lightning": "Immune",
+   "poison": "Immune",
+   "spirit": "Immune"
+  },
+  "drops": {
+   "min": 1,
+   "max": 1,
+   "chance": 1
+  }
+ },
+ {
+  "id": "IceShore_1",
+  "kind": "destructible",
+  "health": 1,
+  "minToolTier": 2,
+  "damageModifiers": {
+   "blunt": "Immune",
+   "slash": "Immune",
+   "pierce": "Immune",
+   "chop": "Immune",
+   "fire": "Immune",
+   "frost": "Immune",
+   "lightning": "Immune",
+   "poison": "Immune",
+   "spirit": "Immune"
+  },
+  "becomes": "IceShore_frac"
+ },
+ {
+  "id": "IceShore_frac",
+  "kind": "rock",
+  "health": 50,
+  "minToolTier": 2,
+  "damageModifiers": {
+   "blunt": "Immune",
+   "slash": "Immune",
+   "pierce": "Immune",
+   "chop": "Immune",
+   "fire": "Immune",
+   "frost": "Immune",
+   "lightning": "Immune",
+   "poison": "Immune",
+   "spirit": "Immune"
+  },
+  "drops": {
+   "min": 2,
+   "max": 3,
+   "chance": 1,
+   "items": [
+    {
+     "item": "Ice",
+     "min": 1,
+     "max": 1,
+     "weight": 1
+    }
+   ]
+  }
+ },
+ {
+  "id": "LargeBone",
+  "kind": "destructible",
+  "health": 10,
+  "drops": {
+   "min": 1,
+   "max": 3,
+   "chance": 1,
+   "items": [
+    {
+     "item": "BoneFragments",
+     "min": 1,
+     "max": 1
+    }
+   ]
+  },
+  "name": "Large Bone"
+ },
+ {
+  "id": "LargeBone_half01",
+  "kind": "destructible",
+  "health": 10,
+  "drops": {
+   "min": 1,
+   "max": 3,
+   "chance": 1,
+   "items": [
+    {
+     "item": "BoneFragments",
+     "min": 1,
+     "max": 1
+    }
+   ]
+  },
+  "name": "Large Bone"
+ },
+ {
+  "id": "LargeBone_half02",
+  "kind": "destructible",
+  "health": 10,
+  "drops": {
+   "min": 1,
+   "max": 3,
+   "chance": 1,
+   "items": [
+    {
+     "item": "BoneFragments",
+     "min": 1,
+     "max": 1
+    }
+   ]
+  },
+  "name": "Large Bone"
+ },
+ {
+  "id": "Leviathan",
+  "kind": "rock",
+  "health": 40,
+  "damageModifiers": {
+   "blunt": "Ignore",
+   "slash": "Ignore",
+   "pierce": "Ignore",
+   "chop": "Ignore",
+   "fire": "Ignore",
+   "frost": "Ignore",
+   "poison": "Ignore",
+   "spirit": "Ignore"
+  },
+  "drops": {
+   "min": 3,
+   "max": 4,
+   "chance": 1,
+   "items": [
+    {
+     "item": "Chitin",
+     "min": 1,
+     "max": 1,
+     "weight": 1
+    }
+   ]
+  }
+ },
+ {
+  "id": "LeviathanLava",
+  "kind": "rock",
+  "name": "Flametal Ore",
+  "health": 100,
+  "minToolTier": 3,
+  "damageModifiers": {
+   "blunt": "Ignore",
+   "slash": "Ignore",
+   "pierce": "Ignore",
+   "chop": "Ignore",
+   "fire": "Ignore",
+   "frost": "Ignore",
+   "lightning": "Ignore",
+   "poison": "Ignore",
+   "spirit": "Ignore"
+  },
+  "drops": {
+   "min": 2,
+   "max": 4,
+   "chance": 1,
+   "items": [
+    {
+     "item": "FlametalOreNew",
+     "min": 1,
+     "max": 1,
+     "weight": 1
+    }
+   ]
+  }
+ },
+ {
+  "id": "LingonberryBush",
+  "kind": "pickable",
+  "pickable": {
+   "item": "Lingonberry",
+   "amount": 1,
+   "respawnMinutes": 300
+  }
+ },
+ {
+  "id": "LuredFaderEmber",
+  "kind": "pickable",
+  "pickable": {
+   "item": "FaderEmber",
+   "amount": 1
+  }
+ },
+ {
+  "id": "LuredWisp",
+  "kind": "pickable",
+  "pickable": {
+   "item": "Wisp",
+   "amount": 1
+  }
+ },
+ {
+  "id": "MemorialStone_Large",
+  "kind": "destructible",
+  "health": 20,
+  "damageModifiers": {
+   "blunt": "Resistant",
+   "slash": "Resistant",
+   "pierce": "Resistant",
+   "fire": "Immune",
+   "frost": "Resistant",
+   "lightning": "Resistant",
+   "poison": "Ignore",
+   "spirit": "Ignore"
+  },
+  "drops": {
+   "min": 1,
+   "max": 1,
+   "chance": 1,
+   "items": [
+    {
+     "item": "Stone",
+     "min": 1,
+     "max": 1,
+     "weight": 1
+    }
+   ]
+  },
+  "name": "$memorial_stone"
+ },
+ {
+  "id": "MemorialStone_Medium",
+  "kind": "destructible",
+  "health": 200,
+  "damageModifiers": {
+   "blunt": "Resistant",
+   "slash": "Resistant",
+   "pierce": "Resistant",
+   "fire": "Immune",
+   "frost": "Resistant",
+   "lightning": "Resistant",
+   "poison": "Ignore",
+   "spirit": "Ignore"
+  },
+  "drops": {
+   "min": 1,
+   "max": 1,
+   "chance": 1,
+   "items": [
+    {
+     "item": "Stone",
+     "min": 1,
+     "max": 1,
+     "weight": 1
+    }
+   ]
+  },
+  "name": "Ancestral Memorial"
+ },
+ {
+  "id": "MemorialStone_Small",
+  "kind": "destructible",
+  "health": 200,
+  "damageModifiers": {
+   "blunt": "Resistant",
+   "slash": "Resistant",
+   "pierce": "Resistant",
+   "fire": "Immune",
+   "frost": "Resistant",
+   "lightning": "Resistant",
+   "poison": "Ignore",
+   "spirit": "Ignore"
+  },
+  "drops": {
+   "min": 1,
+   "max": 1,
+   "chance": 1,
+   "items": [
+    {
+     "item": "Stone",
+     "min": 1,
+     "max": 1,
+     "weight": 1
+    }
+   ]
+  },
+  "name": "Ancestral Memorial"
+ },
+ {
+  "id": "MineRock_Copper",
+  "kind": "rock",
+  "name": "Copper vein",
+  "health": 20,
+  "damageModifiers": {
+   "blunt": "Immune",
+   "slash": "Immune",
+   "pierce": "Immune",
+   "chop": "Immune",
+   "fire": "Immune",
+   "frost": "Immune",
+   "lightning": "Immune",
+   "poison": "Immune",
+   "spirit": "Immune"
+  },
+  "drops": {
+   "min": 1,
+   "max": 2,
+   "chance": 1,
+   "items": [
+    {
+     "item": "CopperOre",
+     "min": 1,
+     "max": 1,
+     "weight": 0.5
+    },
+    {
+     "item": "Stone",
+     "min": 1,
+     "max": 1,
+     "weight": 1
+    }
+   ]
+  }
+ },
+ {
+  "id": "MineRock_Iron",
+  "kind": "rock",
+  "name": "Iron vein",
+  "health": 40,
+  "minToolTier": 1,
+  "damageModifiers": {
+   "blunt": "Immune",
+   "slash": "Immune",
+   "pierce": "Immune",
+   "chop": "Immune",
+   "fire": "Immune",
+   "frost": "Immune",
+   "lightning": "Immune",
+   "poison": "Immune",
+   "spirit": "Immune"
+  },
+  "drops": {
+   "min": 1,
+   "max": 2,
+   "chance": 1,
+   "items": [
+    {
+     "item": "IronOre",
+     "min": 1,
+     "max": 1,
+     "weight": 0.5
+    },
+    {
+     "item": "Stone",
+     "min": 1,
+     "max": 1,
+     "weight": 1
+    }
+   ]
+  }
+ },
+ {
+  "id": "MineRock_Meteorite",
+  "kind": "rock",
+  "name": "Flametal Ore",
+  "health": 100,
+  "minToolTier": 3,
+  "damageModifiers": {
+   "blunt": "Immune",
+   "slash": "Immune",
+   "pierce": "Immune",
+   "chop": "Immune",
+   "fire": "Immune",
+   "frost": "Immune",
+   "lightning": "Immune",
+   "poison": "Immune",
+   "spirit": "Immune"
+  },
+  "drops": {
+   "min": 2,
+   "max": 2,
+   "chance": 1,
+   "oneOfEach": true,
+   "items": [
+    {
+     "item": "FlametalOreNew",
+     "min": 3,
+     "max": 8,
+     "weight": 1
+    },
+    {
+     "item": "Stone",
+     "min": 1,
+     "max": 3,
+     "weight": 0.5
+    }
+   ]
+  }
+ },
+ {
+  "id": "MineRock_Obsidian",
+  "kind": "destructible",
+  "health": 30,
+  "minToolTier": 2,
+  "damageModifiers": {
+   "blunt": "Immune",
+   "slash": "Immune",
+   "pierce": "Immune",
+   "chop": "Immune",
+   "fire": "Immune",
+   "frost": "Immune",
+   "lightning": "Immune",
+   "poison": "Immune",
+   "spirit": "Immune"
+  },
+  "drops": {
+   "min": 5,
+   "max": 8,
+   "chance": 1,
+   "items": [
+    {
+     "item": "Obsidian",
+     "min": 1,
+     "max": 1,
+     "weight": 1
+    }
+   ]
+  },
+  "name": "Obsidian Deposit"
+ },
+ {
+  "id": "MineRock_Stone",
+  "kind": "rock",
+  "name": "Rock",
+  "health": 20,
+  "damageModifiers": {
+   "blunt": "Immune",
+   "slash": "Immune",
+   "pierce": "Immune",
+   "chop": "Immune",
+   "fire": "Immune",
+   "frost": "Immune",
+   "lightning": "Immune",
+   "poison": "Immune",
+   "spirit": "Immune"
+  },
+  "drops": {
+   "min": 1,
+   "max": 2,
+   "chance": 1,
+   "items": [
+    {
+     "item": "Stone",
+     "min": 1,
+     "max": 1,
+     "weight": 1
+    }
+   ]
+  }
+ },
+ {
+  "id": "MineRock_Tin",
+  "kind": "destructible",
+  "health": 30,
+  "damageModifiers": {
+   "blunt": "Immune",
+   "slash": "Immune",
+   "pierce": "Immune",
+   "chop": "Immune",
+   "fire": "Immune",
+   "frost": "Immune",
+   "lightning": "Immune",
+   "poison": "Immune",
+   "spirit": "Immune"
+  },
+  "drops": {
+   "min": 3,
+   "max": 4,
+   "chance": 1,
+   "items": [
+    {
+     "item": "TinOre",
+     "min": 1,
+     "max": 1,
+     "weight": 1
+    }
+   ]
+  },
+  "name": "Tin Deposit"
+ },
+ {
+  "id": "Morkhalla_Bedroll1",
+  "kind": "destructible",
+  "health": 200,
+  "damageModifiers": {
+   "pierce": "Resistant",
+   "pickaxe": "Resistant",
+   "fire": "Weak",
+   "frost": "Immune",
+   "lightning": "Resistant",
+   "poison": "Immune",
+   "spirit": "Immune"
+  },
+  "drops": {
+   "min": 1,
+   "max": 3,
+   "chance": 1,
+   "items": [
+    {
+     "item": "LoxPelt",
+     "min": 1,
+     "max": 1,
+     "weight": 1
+    },
+    {
+     "item": "WolfPelt",
+     "min": 1,
+     "max": 1,
+     "weight": 1
+    },
+    {
+     "item": "MooseHide",
+     "min": 1,
+     "max": 1,
+     "weight": 1
+    },
+    {
+     "item": "AskHide",
+     "min": 1,
+     "max": 1,
+     "weight": 1
+    }
+   ]
+  },
+  "becomes": "vfx_SawDust"
+ },
+ {
+  "id": "Morkhalla_Bedroll2",
+  "kind": "destructible",
+  "health": 200,
+  "damageModifiers": {
+   "pierce": "Resistant",
+   "pickaxe": "Resistant",
+   "fire": "Weak",
+   "frost": "Immune",
+   "lightning": "Resistant",
+   "poison": "Immune",
+   "spirit": "Immune"
+  },
+  "drops": {
+   "min": 1,
+   "max": 3,
+   "chance": 1,
+   "items": [
+    {
+     "item": "LoxPelt",
+     "min": 1,
+     "max": 1,
+     "weight": 1
+    },
+    {
+     "item": "WolfPelt",
+     "min": 1,
+     "max": 1,
+     "weight": 1
+    },
+    {
+     "item": "MooseHide",
+     "min": 1,
+     "max": 1,
+     "weight": 1
+    },
+    {
+     "item": "AskHide",
+     "min": 1,
+     "max": 1,
+     "weight": 1
+    }
+   ]
+  },
+  "becomes": "vfx_SawDust"
+ },
+ {
+  "id": "Morkhalla_Eye1",
+  "kind": "pickable",
+  "pickable": {
+   "item": "AncientGemstoneBlack",
+   "amount": 1
+  }
+ },
+ {
+  "id": "Morkhalla_Eye2",
+  "kind": "pickable",
+  "pickable": {
+   "item": "AncientGemstoneGreen",
+   "amount": 1
+  }
+ },
+ {
+  "id": "Morkhalla_Eye3",
+  "kind": "pickable",
+  "pickable": {
+   "item": "AncientGemstoneOrange",
+   "amount": 1
+  }
+ },
+ {
+  "id": "Morkhalla_Eye4",
+  "kind": "pickable",
+  "pickable": {
+   "item": "AncientGemstonePurple",
+   "amount": 1
+  }
+ },
+ {
+  "id": "Morkhalla_Eye5_gemstone",
+  "kind": "pickable",
+  "pickable": {
+   "item": "GemstoneBlue",
+   "amount": 1
+  }
+ },
+ {
+  "id": "Morkhalla_Eye6_gemstone",
+  "kind": "pickable",
+  "pickable": {
+   "item": "GemstoneGreen",
+   "amount": 1
+  }
+ },
+ {
+  "id": "Morkhalla_Eye7_gemstone",
+  "kind": "pickable",
+  "pickable": {
+   "item": "GemstoneRed",
+   "amount": 1
+  }
+ },
+ {
+  "id": "Morkhalla_GateDoor",
+  "kind": "destructible",
+  "health": 225,
+  "damageModifiers": {
+   "pierce": "Resistant",
+   "pickaxe": "Resistant",
+   "fire": "Resistant",
+   "frost": "Resistant",
+   "poison": "Immune",
+   "spirit": "Immune"
+  },
+  "becomes": "vfx_morkhalla_gatedoor_destroyed"
+ },
+ {
+  "id": "Morkhalla_GateDoor02",
+  "kind": "destructible",
+  "health": 150,
+  "damageModifiers": {
+   "pierce": "Resistant",
+   "chop": "Weak",
+   "pickaxe": "Resistant",
+   "fire": "Weak",
+   "frost": "Resistant",
+   "lightning": "Resistant",
+   "poison": "Immune",
+   "spirit": "Immune"
+  },
+  "becomes": "vfx_morkhalla_gatedoor02_destroyed"
+ },
+ {
+  "id": "Morkhalla_GateDoor03",
+  "kind": "destructible",
+  "health": 300,
+  "damageModifiers": {
+   "slash": "Resistant",
+   "pierce": "Resistant",
+   "pickaxe": "Resistant",
+   "frost": "Resistant",
+   "lightning": "Resistant",
+   "poison": "Immune",
+   "spirit": "Immune"
+  },
+  "becomes": "vfx_morkhalla_gatedoor03_destroyed"
+ },
+ {
+  "id": "Morkhalla_Rubble1",
+  "kind": "destructible",
+  "health": 100,
+  "damageModifiers": {
+   "pierce": "Resistant",
+   "pickaxe": "Weak",
+   "fire": "Resistant",
+   "frost": "Resistant",
+   "lightning": "Resistant",
+   "poison": "Immune",
+   "spirit": "Immune"
+  },
+  "drops": {
+   "min": 1,
+   "max": 5,
+   "chance": 1,
+   "items": [
+    {
+     "item": "Grausten",
+     "min": 1,
+     "max": 1,
+     "weight": 1
+    },
+    {
+     "item": "AncientCoin",
+     "min": 1,
+     "max": 1,
+     "weight": 1
+    }
+   ]
+  },
+  "becomes": "Morkhalla_Rubble_Destroyed"
+ },
+ {
+  "id": "Morkhalla_Rubble1_fall",
+  "kind": "destructible",
+  "health": 50,
+  "damageModifiers": {
+   "pierce": "Resistant",
+   "pickaxe": "Weak",
+   "fire": "Resistant",
+   "frost": "Resistant",
+   "lightning": "Resistant",
+   "poison": "Immune",
+   "spirit": "Immune"
+  },
+  "becomes": "Morkhalla_Rubble_Destroyed"
+ },
+ {
+  "id": "Morkhalla_Rubble2",
+  "kind": "destructible",
+  "health": 50,
+  "damageModifiers": {
+   "pierce": "Resistant",
+   "pickaxe": "Weak",
+   "fire": "Resistant",
+   "frost": "Resistant",
+   "lightning": "Resistant",
+   "poison": "Immune",
+   "spirit": "Immune"
+  },
+  "drops": {
+   "min": 1,
+   "max": 5,
+   "chance": 1,
+   "items": [
+    {
+     "item": "Grausten",
+     "min": 1,
+     "max": 1,
+     "weight": 1
+    },
+    {
+     "item": "AncientCoin",
+     "min": 1,
+     "max": 1,
+     "weight": 1
+    }
+   ]
+  },
+  "becomes": "Morkhalla_Rubble_Destroyed"
+ },
+ {
+  "id": "Morkhalla_Rubble2_fall",
+  "kind": "destructible",
+  "health": 50,
+  "damageModifiers": {
+   "pierce": "Resistant",
+   "pickaxe": "Weak",
+   "fire": "Resistant",
+   "frost": "Resistant",
+   "lightning": "Resistant",
+   "poison": "Immune",
+   "spirit": "Immune"
+  },
+  "becomes": "Morkhalla_Rubble_Destroyed"
+ },
+ {
+  "id": "Morkhalla_Rubble3",
+  "kind": "destructible",
+  "health": 150,
+  "damageModifiers": {
+   "pierce": "Resistant",
+   "pickaxe": "Weak",
+   "fire": "Resistant",
+   "frost": "Resistant",
+   "lightning": "Resistant",
+   "poison": "Immune",
+   "spirit": "Immune"
+  },
+  "drops": {
+   "min": 1,
+   "max": 5,
+   "chance": 1,
+   "items": [
+    {
+     "item": "Grausten",
+     "min": 1,
+     "max": 1,
+     "weight": 1
+    },
+    {
+     "item": "AncientCoin",
+     "min": 1,
+     "max": 1,
+     "weight": 1
+    }
+   ]
+  },
+  "becomes": "Morkhalla_Rubble_Destroyed"
+ },
+ {
+  "id": "Morkhalla_Rubble4",
+  "kind": "destructible",
+  "health": 150,
+  "damageModifiers": {
+   "pierce": "Resistant",
+   "pickaxe": "Weak",
+   "fire": "Resistant",
+   "frost": "Resistant",
+   "lightning": "Resistant",
+   "poison": "Immune",
+   "spirit": "Immune"
+  },
+  "drops": {
+   "min": 1,
+   "max": 5,
+   "chance": 1,
+   "items": [
+    {
+     "item": "Grausten",
+     "min": 1,
+     "max": 1,
+     "weight": 1
+    },
+    {
+     "item": "AncientCoin",
+     "min": 1,
+     "max": 1,
+     "weight": 1
+    }
+   ]
+  },
+  "becomes": "Morkhalla_Rubble_Destroyed"
+ },
+ {
+  "id": "Morkhalla_Rug_corner",
+  "kind": "destructible",
+  "health": 200,
+  "damageModifiers": {
+   "pierce": "Resistant",
+   "pickaxe": "Resistant",
+   "fire": "Weak",
+   "frost": "Resistant",
+   "lightning": "Resistant",
+   "poison": "Immune",
+   "spirit": "Immune"
+  },
+  "drops": {
+   "min": 1,
+   "max": 2,
+   "chance": 1,
+   "items": [
+    {
+     "item": "JuteRed",
+     "min": 1,
+     "max": 1,
+     "weight": 1
+    }
+   ]
+  },
+  "becomes": "vfx_SawDust"
+ },
+ {
+  "id": "Morkhalla_Rug_end1",
+  "kind": "destructible",
+  "health": 200,
+  "damageModifiers": {
+   "pierce": "Resistant",
+   "pickaxe": "Resistant",
+   "fire": "Weak",
+   "frost": "Resistant",
+   "lightning": "Resistant",
+   "poison": "Immune",
+   "spirit": "Immune"
+  },
+  "drops": {
+   "min": 1,
+   "max": 2,
+   "chance": 1,
+   "items": [
+    {
+     "item": "JuteRed",
+     "min": 1,
+     "max": 1,
+     "weight": 1
+    }
+   ]
+  },
+  "becomes": "vfx_SawDust"
+ },
+ {
+  "id": "Morkhalla_Rug_end2",
+  "kind": "destructible",
+  "health": 200,
+  "damageModifiers": {
+   "pierce": "Resistant",
+   "pickaxe": "Resistant",
+   "fire": "Weak",
+   "frost": "Resistant",
+   "lightning": "Resistant",
+   "poison": "Immune",
+   "spirit": "Immune"
+  },
+  "drops": {
+   "min": 1,
+   "max": 2,
+   "chance": 1,
+   "items": [
+    {
+     "item": "JuteRed",
+     "min": 1,
+     "max": 1,
+     "weight": 1
+    }
+   ]
+  },
+  "becomes": "vfx_SawDust"
+ },
+ {
+  "id": "Morkhalla_Rug_middle",
+  "kind": "destructible",
+  "health": 200,
+  "damageModifiers": {
+   "pierce": "Resistant",
+   "pickaxe": "Resistant",
+   "fire": "Weak",
+   "frost": "Resistant",
+   "lightning": "Resistant",
+   "poison": "Immune",
+   "spirit": "Immune"
+  },
+  "drops": {
+   "min": 1,
+   "max": 2,
+   "chance": 1,
+   "items": [
+    {
+     "item": "JuteRed",
+     "min": 1,
+     "max": 1,
+     "weight": 1
+    }
+   ]
+  },
+  "becomes": "vfx_SawDust"
+ },
+ {
+  "id": "Morkhalla_Rug_stair",
+  "kind": "destructible",
+  "health": 200,
+  "damageModifiers": {
+   "pierce": "Resistant",
+   "pickaxe": "Resistant",
+   "fire": "Weak",
+   "frost": "Resistant",
+   "lightning": "Resistant",
+   "poison": "Immune",
+   "spirit": "Immune"
+  },
+  "drops": {
+   "min": 1,
+   "max": 2,
+   "chance": 1,
+   "items": [
+    {
+     "item": "JuteRed",
+     "min": 1,
+     "max": 1,
+     "weight": 1
+    }
+   ]
+  },
+  "becomes": "vfx_SawDust"
+ },
+ {
+  "id": "Morkhalla_WeaponStand",
+  "kind": "destructible",
+  "health": 200,
+  "damageModifiers": {
+   "pierce": "Resistant",
+   "pickaxe": "Resistant",
+   "fire": "Weak",
+   "frost": "Resistant",
+   "lightning": "Resistant",
+   "poison": "Immune",
+   "spirit": "Immune"
+  },
+  "drops": {
+   "min": 2,
+   "max": 3,
+   "chance": 1,
+   "items": [
+    {
+     "item": "Frostwood",
+     "min": 1,
+     "max": 3,
+     "weight": 1
+    },
+    {
+     "item": "IronScrap",
+     "min": 1,
+     "max": 1,
+     "weight": 0.2
+    },
+    {
+     "item": "MoldAtgeir",
+     "min": 1,
+     "max": 1,
+     "weight": 0.1
+    },
+    {
+     "item": "MoldAxe",
+     "min": 1,
+     "max": 1,
+     "weight": 0.1
+    },
+    {
+     "item": "MoldAxe2H",
+     "min": 1,
+     "max": 1,
+     "weight": 0.1
+    },
+    {
+     "item": "MoldBow",
+     "min": 1,
+     "max": 1,
+     "weight": 0.1
+    },
+    {
+     "item": "MoldCrossbow",
+     "min": 1,
+     "max": 1,
+     "weight": 0.1
+    },
+    {
+     "item": "MoldFistweapon",
+     "min": 1,
+     "max": 1,
+     "weight": 0.1
+    },
+    {
+     "item": "MoldKnife",
+     "min": 1,
+     "max": 1,
+     "weight": 0.1
+    },
+    {
+     "item": "MoldMace",
+     "min": 1,
+     "max": 1,
+     "weight": 0.1
+    },
+    {
+     "item": "MoldMace2H",
+     "min": 1,
+     "max": 1,
+     "weight": 0.1
+    },
+    {
+     "item": "MoldShieldBuckler",
+     "min": 1,
+     "max": 1,
+     "weight": 0.1
+    },
+    {
+     "item": "MoldShieldRound",
+     "min": 1,
+     "max": 1,
+     "weight": 0.1
+    },
+    {
+     "item": "MoldShieldTower",
+     "min": 1,
+     "max": 1,
+     "weight": 0.1
+    },
+    {
+     "item": "MoldSpear",
+     "min": 1,
+     "max": 1,
+     "weight": 0.1
+    },
+    {
+     "item": "MoldSword",
+     "min": 1,
+     "max": 1,
+     "weight": 0.1
+    },
+    {
+     "item": "MoldSword2H",
+     "min": 1,
+     "max": 1,
+     "weight": 0.1
+    },
+    {
+     "item": "MoldStafffrostorbs",
+     "min": 1,
+     "max": 1,
+     "weight": 0.1
+    },
+    {
+     "item": "MoldStaffOrbofAhri",
+     "min": 1,
+     "max": 1,
+     "weight": 0.1
+    },
+    {
+     "item": "MoldStaffspiritcaller",
+     "min": 1,
+     "max": 1,
+     "weight": 0.1
+    },
+    {
+     "item": "MoldStaffthunderblood",
+     "min": 1,
+     "max": 1,
+     "weight": 0.1
+    }
+   ]
+  },
+  "becomes": "vfx_morkhalla_weaponstand_destroyed"
+ },
+ {
+  "id": "Morkhalla_WoodBoards",
+  "kind": "destructible",
+  "health": 100,
+  "damageModifiers": {
+   "blunt": "Resistant",
+   "pierce": "Resistant",
+   "chop": "Weak",
+   "pickaxe": "Resistant",
+   "fire": "Weak",
+   "frost": "Immune",
+   "poison": "Immune",
+   "spirit": "Immune"
+  },
+  "becomes": "Morkhalla_woodboards_Destroyed"
+ },
+ {
+  "id": "Morkhalla_rubble_trashpile",
+  "kind": "destructible",
+  "health": 100,
+  "damageModifiers": {
+   "blunt": "Resistant",
+   "pierce": "Resistant",
+   "chop": "Weak",
+   "pickaxe": "Resistant",
+   "fire": "Weak",
+   "frost": "Immune",
+   "lightning": "Resistant",
+   "poison": "Immune",
+   "spirit": "Immune"
+  },
+  "drops": {
+   "min": 2,
+   "max": 3,
+   "chance": 1,
+   "items": [
+    {
+     "item": "Wood",
+     "min": 1,
+     "max": 1,
+     "weight": 1
+    }
+   ]
+  },
+  "becomes": "Morkhalla_rubble_trashpile_destruction"
+ },
+ {
+  "id": "MountainGraveStone01",
+  "kind": "destructible",
+  "health": 30,
+  "damageModifiers": {
+   "blunt": "Immune",
+   "slash": "Immune",
+   "pierce": "Immune",
+   "chop": "Immune",
+   "fire": "Immune",
+   "frost": "Immune",
+   "poison": "Immune",
+   "spirit": "Immune"
+  },
+  "drops": {
+   "min": 3,
+   "max": 6,
+   "chance": 1,
+   "items": [
+    {
+     "item": "Stone",
+     "min": 1,
+     "max": 1,
+     "weight": 1
+    }
+   ]
+  }
+ },
+ {
+  "id": "MountainKit_brazier",
+  "kind": "destructible",
+  "health": 50,
+  "damageModifiers": {
+   "fire": "Resistant",
+   "frost": "Weak",
+   "lightning": "Immune",
+   "poison": "Immune",
+   "spirit": "Immune"
+  },
+  "drops": {
+   "min": 1,
+   "max": 2,
+   "chance": 1,
+   "items": [
+    {
+     "item": "Bronze",
+     "min": 1,
+     "max": 1,
+     "weight": 0.5
+    },
+    {
+     "item": "Coal",
+     "min": 1,
+     "max": 2,
+     "weight": 1
+    },
+    {
+     "item": "Coal",
+     "min": 1,
+     "max": 1,
+     "weight": 1
+    }
+   ]
+  }
+ },
+ {
+  "id": "MountainKit_brazier_blue",
+  "kind": "destructible",
+  "health": 50,
+  "damageModifiers": {
+   "fire": "Resistant",
+   "frost": "Weak",
+   "lightning": "Immune",
+   "poison": "Immune",
+   "spirit": "Immune"
+  },
+  "drops": {
+   "min": 1,
+   "max": 2,
+   "chance": 1,
+   "items": [
+    {
+     "item": "Bronze",
+     "min": 1,
+     "max": 1,
+     "weight": 0.5
+    },
+    {
+     "item": "Coal",
+     "min": 1,
+     "max": 2,
+     "weight": 1
+    },
+    {
+     "item": "Coal",
+     "min": 1,
+     "max": 1,
+     "weight": 1
+    }
+   ]
+  }
+ },
+ {
+  "id": "MountainKit_wood_gate",
+  "kind": "destructible",
+  "health": 100,
+  "damageModifiers": {
+   "fire": "Weak",
+   "frost": "Resistant",
+   "lightning": "Immune",
+   "poison": "Immune",
+   "spirit": "Immune"
+  },
+  "drops": {
+   "min": 1,
+   "max": 2,
+   "chance": 1,
+   "items": [
+    {
+     "item": "Wood",
+     "min": 1,
+     "max": 1,
+     "weight": 1
+    },
+    {
+     "item": "Wood",
+     "min": 1,
+     "max": 1,
+     "weight": 0.5
+    },
+    {
+     "item": "Iron",
+     "min": 1,
+     "max": 1,
+     "weight": 0.5
+    }
+   ]
+  }
+ },
+ {
+  "id": "Oak1",
+  "kind": "tree",
+  "health": 200,
+  "minToolTier": 2,
+  "damageModifiers": {
+   "blunt": "Immune",
+   "slash": "Immune",
+   "pierce": "Immune",
+   "pickaxe": "Immune",
+   "fire": "Immune",
+   "frost": "Immune",
+   "lightning": "Immune",
+   "poison": "Immune",
+   "spirit": "Immune"
+  },
+  "drops": {
+   "min": 2,
+   "max": 3,
+   "chance": 0.5,
+   "items": [
+    {
+     "item": "Resin",
+     "min": 2,
+     "max": 4,
+     "weight": 1
+    },
+    {
+     "item": "Acorn",
+     "min": 2,
+     "max": 3,
+     "weight": 1
+    },
+    {
+     "item": "Feathers",
+     "min": 2,
+     "max": 3,
+     "weight": 0.5
+    }
+   ]
+  },
+  "becomes": "Oak_log",
+  "name": "Oak"
+ },
+ {
+  "id": "OakStub",
+  "kind": "destructible",
+  "health": 160,
+  "minToolTier": 2,
+  "damageModifiers": {
+   "blunt": "Immune",
+   "slash": "Immune",
+   "pierce": "Immune",
+   "fire": "Immune",
+   "frost": "Immune",
+   "lightning": "Immune",
+   "poison": "Immune",
+   "spirit": "Immune"
+  },
+  "drops": {
+   "min": 2,
+   "max": 2,
+   "chance": 1,
+   "items": [
+    {
+     "item": "Wood",
+     "min": 1,
+     "max": 1,
+     "weight": 1
+    }
+   ]
+  },
+  "name": "Stump"
+ },
+ {
+  "id": "Oak_log",
+  "kind": "log",
+  "health": 160,
+  "minToolTier": 2,
+  "damageModifiers": {
+   "blunt": "Immune",
+   "slash": "Immune",
+   "pierce": "Immune",
+   "pickaxe": "Immune",
+   "fire": "Immune",
+   "frost": "Immune",
+   "lightning": "Immune",
+   "poison": "Immune",
+   "spirit": "Immune"
+  },
+  "becomes": "Oak_log_half",
+  "name": "Log"
+ },
+ {
+  "id": "Oak_log_half",
+  "kind": "log",
+  "health": 140,
+  "minToolTier": 2,
+  "damageModifiers": {
+   "blunt": "Immune",
+   "slash": "Immune",
+   "pierce": "Immune",
+   "pickaxe": "Immune",
+   "fire": "Immune",
+   "frost": "Immune",
+   "lightning": "Immune",
+   "poison": "Immune",
+   "spirit": "Immune"
+  },
+  "drops": {
+   "min": 25,
+   "max": 25,
+   "chance": 1,
+   "items": [
+    {
+     "item": "Wood",
+     "min": 1,
+     "max": 1,
+     "weight": 1
+    },
+    {
+     "item": "FineWood",
+     "min": 1,
+     "max": 1,
+     "weight": 1
+    }
+   ]
+  },
+  "name": "Log"
+ },
+ {
+  "id": "Pickable_Ashstone",
+  "kind": "pickable",
+  "pickable": {
+   "item": "Grausten",
+   "amount": 1
+  }
+ },
+ {
+  "id": "Pickable_Barley",
+  "kind": "pickable",
+  "pickable": {
+   "item": "Barley",
+   "amount": 2
+  }
+ },
+ {
+  "id": "Pickable_Barley_Wild",
+  "kind": "pickable",
+  "pickable": {
+   "item": "Barley",
+   "amount": 2
+  }
+ },
+ {
+  "id": "Pickable_BlackCoreStand",
+  "kind": "pickable",
+  "pickable": {
+   "item": "BlackCore",
+   "amount": 1
+  }
+ },
+ {
+  "id": "Pickable_BogIronOre",
+  "kind": "pickable",
+  "name": "Bog Iron",
+  "pickable": {
+   "item": "IronOre",
+   "amount": 1
+  }
+ },
+ {
+  "id": "Pickable_Branch",
+  "kind": "pickable",
+  "name": "Branch",
+  "pickable": {
+   "item": "Wood",
+   "amount": 1,
+   "respawnMinutes": 240
+  }
+ },
+ {
+  "id": "Pickable_Branch_Snow",
+  "kind": "pickable",
+  "name": "Branch",
+  "pickable": {
+   "item": "Frostwood",
+   "amount": 1,
+   "respawnMinutes": 240
+  }
+ },
+ {
+  "id": "Pickable_Carrot",
+  "kind": "pickable",
+  "pickable": {
+   "item": "Carrot",
+   "amount": 1
+  }
+ },
+ {
+  "id": "Pickable_Charredskull",
+  "kind": "pickable",
+  "pickable": {
+   "item": "Charredskull",
+   "amount": 1
+  }
+ },
+ {
+  "id": "Pickable_Dandelion",
+  "kind": "pickable",
+  "pickable": {
+   "item": "Dandelion",
+   "amount": 1,
+   "respawnMinutes": 240
+  }
+ },
+ {
+  "id": "Pickable_DragonEgg",
+  "kind": "pickable",
+  "pickable": {
+   "item": "DragonEgg",
+   "amount": 1,
+   "respawnMinutes": 480
+  }
+ },
+ {
+  "id": "Pickable_DvergerThing",
+  "kind": "pickable",
+  "pickable": {
+   "item": "Turnip",
+   "amount": 1
+  }
+ },
+ {
+  "id": "Pickable_DvergrLantern",
+  "kind": "pickable",
+  "pickable": {
+   "item": "Lantern",
+   "amount": 1
+  }
+ },
+ {
+  "id": "Pickable_DvergrMineTreasure",
+  "kind": "pickable",
+  "name": "Coin Pile",
+  "pickable": {
+   "item": "Coins",
+   "amount": 1
+  },
+  "drops": {
+   "min": 1,
+   "max": 4,
+   "chance": 1,
+   "items": [
+    {
+     "item": "Coins",
+     "min": 11,
+     "max": 99,
+     "weight": 1
+    }
+   ]
+  }
+ },
+ {
+  "id": "Pickable_DvergrStein",
+  "kind": "pickable",
+  "pickable": {
+   "item": "Tankard_dvergr",
+   "amount": 1
+  }
+ },
+ {
+  "id": "Pickable_Fiddlehead",
+  "kind": "pickable",
+  "pickable": {
+   "item": "Fiddleheadfern",
+   "amount": 1,
+   "respawnMinutes": 300
+  },
+  "drops": {
+   "min": 2,
+   "max": 2,
+   "chance": 1,
+   "items": [
+    {
+     "item": "Fiddleheadfern",
+     "min": 1,
+     "max": 1
+    }
+   ]
+  }
+ },
+ {
+  "id": "Pickable_Fishingrod",
+  "kind": "pickable",
+  "name": "Fishing Rod",
+  "pickable": {
+   "item": "FishingRod",
+   "amount": 1
+  },
+  "drops": {
+   "min": 1,
+   "max": 1,
+   "chance": 1,
+   "items": [
+    {
+     "item": "FishingBait",
+     "min": 2,
+     "max": 4
+    }
+   ]
+  }
+ },
+ {
+  "id": "Pickable_Flax",
+  "kind": "pickable",
+  "pickable": {
+   "item": "Flax",
+   "amount": 2
+  }
+ },
+ {
+  "id": "Pickable_Flax_Wild",
+  "kind": "pickable",
+  "pickable": {
+   "item": "Flax",
+   "amount": 2
+  }
+ },
+ {
+  "id": "Pickable_Flint",
+  "kind": "pickable",
+  "pickable": {
+   "item": "Flint",
+   "amount": 1,
+   "respawnMinutes": 240
+  }
+ },
+ {
+  "id": "Pickable_ForestCryptRemains01",
+  "kind": "pickable",
+  "name": "Skeletal Remains",
+  "pickable": {
+   "item": "BoneFragments",
+   "amount": 1
+  }
+ },
+ {
+  "id": "Pickable_ForestCryptRemains02",
+  "kind": "pickable",
+  "name": "Skeletal Remains",
+  "pickable": {
+   "item": "BoneFragments",
+   "amount": 1
+  }
+ },
+ {
+  "id": "Pickable_ForestCryptRemains03",
+  "kind": "pickable",
+  "name": "Skeletal Remains",
+  "pickable": {
+   "item": "BoneFragments",
+   "amount": 1
+  }
+ },
+ {
+  "id": "Pickable_ForestCryptRemains04",
+  "kind": "pickable",
+  "name": "Skeletal Remains",
+  "pickable": {
+   "item": "BoneFragments",
+   "amount": 1
+  }
+ },
+ {
+  "id": "Pickable_FrostCoreHanger",
+  "kind": "pickable",
+  "pickable": {
+   "item": "FrostCore",
+   "amount": 1
+  }
+ },
+ {
+  "id": "Pickable_GlowWorm",
+  "kind": "pickable",
+  "pickable": {
+   "item": "GlowWorm",
+   "amount": 1,
+   "respawnMinutes": 240
+  }
+ },
+ {
+  "id": "Pickable_Hairstrands01",
+  "kind": "pickable",
+  "name": "Fenris Hair",
+  "pickable": {
+   "item": "WolfHairBundle",
+   "amount": 1
+  }
+ },
+ {
+  "id": "Pickable_Hairstrands02",
+  "kind": "pickable",
+  "name": "Fenris Hair",
+  "pickable": {
+   "item": "WolfHairBundle",
+   "amount": 1
+  }
+ },
+ {
+  "id": "Pickable_HardRockOffspring",
+  "kind": "pickable",
+  "pickable": {
+   "item": "Stone",
+   "amount": 1
+  }
+ },
+ {
+  "id": "Pickable_Kale",
+  "kind": "pickable",
+  "pickable": {
+   "item": "Kale",
+   "amount": 3
+  }
+ },
+ {
+  "id": "Pickable_MeatPile",
+  "kind": "pickable",
+  "name": "Meat Pile",
+  "pickable": {
+   "item": "Entrails",
+   "amount": 1
+  },
+  "drops": {
+   "min": 1,
+   "max": 3,
+   "chance": 0.5,
+   "items": [
+    {
+     "item": "Coins",
+     "min": 9,
+     "max": 41,
+     "weight": 0.5
+    },
+    {
+     "item": "Entrails",
+     "min": 1,
+     "max": 1,
+     "weight": 0.5
+    },
+    {
+     "item": "SilverNecklace",
+     "min": 1,
+     "max": 1,
+     "weight": 0.1
+    }
+   ]
+  }
+ },
+ {
+  "id": "Pickable_Meteorite",
+  "kind": "pickable",
+  "name": "Meteorite",
+  "pickable": {
+   "item": "IronOre",
+   "amount": 6
+  }
+ },
+ {
+  "id": "Pickable_MoltenCoreStand",
+  "kind": "pickable",
+  "pickable": {
+   "item": "MoltenCore",
+   "amount": 1
+  }
+ },
+ {
+  "id": "Pickable_MountainCaveCrystal",
+  "kind": "pickable",
+  "name": "Crystal",
+  "pickable": {
+   "item": "Crystal",
+   "amount": 1
+  }
+ },
+ {
+  "id": "Pickable_MountainCaveObsidian",
+  "kind": "pickable",
+  "name": "Obsidian",
+  "pickable": {
+   "item": "Obsidian",
+   "amount": 1
+  },
+  "drops": {
+   "min": 1,
+   "max": 1,
+   "chance": 1,
+   "items": [
+    {
+     "item": "Obsidian",
+     "min": 1,
+     "max": 2
+    }
+   ]
+  }
+ },
+ {
+  "id": "Pickable_MountainRemains01_buried",
+  "kind": "pickable",
+  "name": "Skeletal Remains",
+  "pickable": {
+   "item": "BoneFragments",
+   "amount": 1
+  },
+  "drops": {
+   "min": 1,
+   "max": 1,
+   "chance": 0.506,
+   "items": [
+    {
+     "item": "SilverNecklace",
+     "min": 1,
+     "max": 1
+    }
+   ]
+  }
+ },
+ {
+  "id": "Pickable_Mushroom",
+  "kind": "pickable",
+  "pickable": {
+   "item": "Mushroom",
+   "amount": 1,
+   "respawnMinutes": 240
+  }
+ },
+ {
+  "id": "Pickable_Mushroom_JotunPuffs",
+  "kind": "pickable",
+  "pickable": {
+   "item": "MushroomJotunPuffs",
+   "amount": 1
+  },
+  "drops": {
+   "min": 2,
+   "max": 2,
+   "chance": 1,
+   "items": [
+    {
+     "item": "MushroomJotunPuffs",
+     "min": 1,
+     "max": 1
+    }
+   ]
+  }
+ },
+ {
+  "id": "Pickable_Mushroom_Magecap",
+  "kind": "pickable",
+  "pickable": {
+   "item": "MushroomMagecap",
+   "amount": 1
+  },
+  "drops": {
+   "min": 2,
+   "max": 2,
+   "chance": 1,
+   "items": [
+    {
+     "item": "MushroomMagecap",
+     "min": 1,
+     "max": 1
+    }
+   ]
+  }
+ },
+ {
+  "id": "Pickable_Mushroom_blue",
+  "kind": "pickable",
+  "pickable": {
+   "item": "MushroomBlue",
+   "amount": 1,
+   "respawnMinutes": 240
+  }
+ },
+ {
+  "id": "Pickable_Mushroom_yellow",
+  "kind": "pickable",
+  "pickable": {
+   "item": "MushroomYellow",
+   "amount": 1,
+   "respawnMinutes": 240
+  }
+ },
+ {
+  "id": "Pickable_Oat",
+  "kind": "pickable",
+  "pickable": {
+   "item": "OatSeeds",
+   "amount": 3
+  }
+ },
+ {
+  "id": "Pickable_Obsidian",
+  "kind": "pickable",
+  "name": "Obsidian",
+  "pickable": {
+   "item": "Obsidian",
+   "amount": 1
+  }
+ },
+ {
+  "id": "Pickable_Onion",
+  "kind": "pickable",
+  "pickable": {
+   "item": "Onion",
+   "amount": 1
+  }
+ },
+ {
+  "id": "Pickable_Pot_Shard",
+  "kind": "pickable",
+  "pickable": {
+   "item": "Pot_Shard_Green",
+   "amount": 1
+  }
+ },
+ {
+  "id": "Pickable_Poteitr",
+  "kind": "pickable",
+  "pickable": {
+   "item": "Poteitr",
+   "amount": 3
+  },
+  "drops": {
+   "min": 1,
+   "max": 1,
+   "chance": 1,
+   "items": [
+    {
+     "item": "PoteitrSeeds",
+     "min": 1,
+     "max": 2
+    }
+   ]
+  }
+ },
+ {
+  "id": "Pickable_RoyalJelly",
+  "kind": "pickable",
+  "pickable": {
+   "item": "RoyalJelly",
+   "amount": 5,
+   "respawnMinutes": 240
+  }
+ },
+ {
+  "id": "Pickable_SeedCarrot",
+  "kind": "pickable",
+  "pickable": {
+   "item": "CarrotSeeds",
+   "amount": 3
+  }
+ },
+ {
+  "id": "Pickable_SeedKale",
+  "kind": "pickable",
+  "pickable": {
+   "item": "KaleSeeds",
+   "amount": 3
+  }
+ },
+ {
+  "id": "Pickable_SeedOnion",
+  "kind": "pickable",
+  "pickable": {
+   "item": "OnionSeeds",
+   "amount": 3
+  }
+ },
+ {
+  "id": "Pickable_SeedTurnip",
+  "kind": "pickable",
+  "pickable": {
+   "item": "TurnipSeeds",
+   "amount": 3
+  }
+ },
+ {
+  "id": "Pickable_SmokePuff",
+  "kind": "pickable",
+  "pickable": {
+   "item": "MushroomSmokePuff",
+   "amount": 1,
+   "respawnMinutes": 240
+  }
+ },
+ {
+  "id": "Pickable_Snowball",
+  "kind": "pickable",
+  "pickable": {
+   "item": "Snowball",
+   "amount": 1
+  }
+ },
+ {
+  "id": "Pickable_Stone",
+  "kind": "pickable",
+  "pickable": {
+   "item": "Stone",
+   "amount": 1
+  }
+ },
+ {
+  "id": "Pickable_StoneRock",
+  "kind": "pickable",
+  "pickable": {
+   "item": "StoneRock",
+   "amount": 1
+  }
+ },
+ {
+  "id": "Pickable_SulfurRock",
+  "kind": "pickable",
+  "name": "Sulfur Rock",
+  "pickable": {
+   "item": "SulfurStone",
+   "amount": 1
+  },
+  "drops": {
+   "min": 2,
+   "max": 3,
+   "chance": 1,
+   "items": [
+    {
+     "item": "SulfurStone",
+     "min": 1,
+     "max": 1
+    }
+   ]
+  }
+ },
+ {
+  "id": "Pickable_SurtlingCoreStand",
+  "kind": "pickable",
+  "pickable": {
+   "item": "SurtlingCore",
+   "amount": 1
+  }
+ },
+ {
+  "id": "Pickable_Swordpiece1",
+  "kind": "pickable",
+  "pickable": {
+   "item": "DyrnwynHiltFragment",
+   "amount": 1
+  }
+ },
+ {
+  "id": "Pickable_Swordpiece2",
+  "kind": "pickable",
+  "pickable": {
+   "item": "DyrnwynBladeFragment",
+   "amount": 1
+  }
+ },
+ {
+  "id": "Pickable_Swordpiece3",
+  "kind": "pickable",
+  "pickable": {
+   "item": "DyrnwynTipFragment",
+   "amount": 1
+  }
+ },
+ {
+  "id": "Pickable_Tar",
+  "kind": "pickable",
+  "pickable": {
+   "item": "Tar",
+   "amount": 4
+  }
+ },
+ {
+  "id": "Pickable_TarBig",
+  "kind": "pickable",
+  "pickable": {
+   "item": "Tar",
+   "amount": 15
+  }
+ },
+ {
+  "id": "Pickable_Thistle",
+  "kind": "pickable",
+  "pickable": {
+   "item": "Thistle",
+   "amount": 1,
+   "respawnMinutes": 240
+  }
+ },
+ {
+  "id": "Pickable_Tin",
+  "kind": "pickable",
+  "pickable": {
+   "item": "TinOre",
+   "amount": 1
+  }
+ },
+ {
+  "id": "Pickable_Turnip",
+  "kind": "pickable",
+  "pickable": {
+   "item": "Turnip",
+   "amount": 1
+  }
+ },
+ {
+  "id": "Pickable_VoltureEgg",
+  "kind": "pickable",
+  "pickable": {
+   "item": "VoltureEgg",
+   "amount": 1
+  }
+ },
+ {
+  "id": "PineTree",
+  "kind": "tree",
+  "health": 120,
+  "damageModifiers": {
+   "blunt": "Immune",
+   "slash": "Immune",
+   "pierce": "Immune",
+   "pickaxe": "Immune",
+   "fire": "Immune",
+   "frost": "Immune",
+   "poison": "Immune",
+   "spirit": "Immune"
+  },
+  "becomes": "PineTree_logOLD"
+ },
+ {
+  "id": "PineTree_Snow_log",
+  "kind": "log",
+  "health": 60,
+  "damageModifiers": {
+   "blunt": "Immune",
+   "slash": "Immune",
+   "pierce": "Immune",
+   "pickaxe": "Immune",
+   "fire": "Immune",
+   "frost": "Immune",
+   "lightning": "Immune",
+   "poison": "Immune",
+   "spirit": "Immune"
+  },
+  "becomes": "PineTree_Snow_log_half",
+  "name": "Log"
+ },
+ {
+  "id": "PineTree_Snow_log_XL",
+  "kind": "log",
+  "health": 60,
+  "damageModifiers": {
+   "blunt": "Immune",
+   "slash": "Immune",
+   "pierce": "Immune",
+   "pickaxe": "Immune",
+   "fire": "Immune",
+   "frost": "Immune",
+   "lightning": "Immune",
+   "poison": "Immune",
+   "spirit": "Immune"
+  },
+  "becomes": "PineTree_Snow_log_XL_half",
+  "name": "Log"
+ },
+ {
+  "id": "PineTree_Snow_log_XL_half",
+  "kind": "log",
+  "health": 40,
+  "damageModifiers": {
+   "blunt": "Immune",
+   "slash": "Immune",
+   "pierce": "Immune",
+   "pickaxe": "Immune",
+   "fire": "Immune",
+   "frost": "Immune",
+   "lightning": "Immune",
+   "poison": "Immune",
+   "spirit": "Immune"
+  },
+  "drops": {
+   "min": 15,
+   "max": 15,
+   "chance": 1,
+   "items": [
+    {
+     "item": "Wood",
+     "min": 1,
+     "max": 1,
+     "weight": 1
+    },
+    {
+     "item": "Frostwood",
+     "min": 1,
+     "max": 1,
+     "weight": 0.5
+    }
+   ]
+  },
+  "name": "Log"
+ },
+ {
+  "id": "PineTree_Snow_log_half",
+  "kind": "log",
+  "health": 40,
+  "damageModifiers": {
+   "blunt": "Immune",
+   "slash": "Immune",
+   "pierce": "Immune",
+   "pickaxe": "Immune",
+   "fire": "Immune",
+   "frost": "Immune",
+   "lightning": "Immune",
+   "poison": "Immune",
+   "spirit": "Immune"
+  },
+  "drops": {
+   "min": 15,
+   "max": 15,
+   "chance": 1,
+   "items": [
+    {
+     "item": "Wood",
+     "min": 1,
+     "max": 1,
+     "weight": 1
+    },
+    {
+     "item": "Frostwood",
+     "min": 1,
+     "max": 1,
+     "weight": 0.5
+    }
+   ]
+  },
+  "name": "Log"
+ },
+ {
+  "id": "PineTree_Snow_log_half_frost_troll",
+  "kind": "log",
+  "health": 40,
+  "damageModifiers": {
+   "blunt": "Immune",
+   "slash": "Immune",
+   "pierce": "Immune",
+   "pickaxe": "Immune",
+   "fire": "Immune",
+   "frost": "Immune",
+   "lightning": "Immune",
+   "poison": "Immune",
+   "spirit": "Immune"
+  },
+  "drops": {
+   "min": 3,
+   "max": 3,
+   "chance": 1,
+   "items": [
+    {
+     "item": "Wood",
+     "min": 1,
+     "max": 1,
+     "weight": 1
+    },
+    {
+     "item": "Frostwood",
+     "min": 1,
+     "max": 1,
+     "weight": 0.5
+    }
+   ]
+  },
+  "name": "Log"
+ },
+ {
+  "id": "PineTree_log",
+  "kind": "log",
+  "health": 60,
+  "damageModifiers": {
+   "blunt": "Immune",
+   "slash": "Immune",
+   "pierce": "Immune",
+   "pickaxe": "Immune",
+   "fire": "Immune",
+   "frost": "Immune",
+   "lightning": "Immune",
+   "poison": "Immune",
+   "spirit": "Immune"
+  },
+  "becomes": "PineTree_log_half",
+  "name": "Log"
+ },
+ {
+  "id": "PineTree_logOLD",
+  "kind": "log",
+  "health": 60,
+  "damageModifiers": {
+   "blunt": "Immune",
+   "slash": "Immune",
+   "pierce": "Immune",
+   "pickaxe": "Immune",
+   "fire": "Immune",
+   "frost": "Immune",
+   "poison": "Immune"
+  },
+  "becomes": "PineTree_log_halfOLD"
+ },
+ {
+  "id": "PineTree_log_half",
+  "kind": "log",
+  "health": 40,
+  "damageModifiers": {
+   "blunt": "Immune",
+   "slash": "Immune",
+   "pierce": "Immune",
+   "pickaxe": "Immune",
+   "fire": "Immune",
+   "frost": "Immune",
+   "lightning": "Immune",
+   "poison": "Immune",
+   "spirit": "Immune"
+  },
+  "drops": {
+   "min": 15,
+   "max": 15,
+   "chance": 1,
+   "items": [
+    {
+     "item": "Wood",
+     "min": 1,
+     "max": 1,
+     "weight": 1
+    },
+    {
+     "item": "RoundLog",
+     "min": 1,
+     "max": 1,
+     "weight": 1
+    }
+   ]
+  },
+  "name": "Log"
+ },
+ {
+  "id": "PineTree_log_halfOLD",
+  "kind": "log",
+  "health": 60,
+  "damageModifiers": {
+   "blunt": "Immune",
+   "slash": "Immune",
+   "pierce": "Immune",
+   "pickaxe": "Immune",
+   "fire": "Immune",
+   "frost": "Immune",
+   "poison": "Immune"
+  },
+  "drops": {
+   "min": 10,
+   "max": 10,
+   "chance": 1,
+   "items": [
+    {
+     "item": "Wood",
+     "min": 1,
+     "max": 1,
+     "weight": 1
+    }
+   ]
+  }
+ },
+ {
+  "id": "Pinetree_01",
+  "kind": "tree",
+  "health": 120,
+  "damageModifiers": {
+   "blunt": "Immune",
+   "slash": "Immune",
+   "pierce": "Immune",
+   "pickaxe": "Immune",
+   "fire": "Immune",
+   "frost": "Immune",
+   "lightning": "Immune",
+   "poison": "Immune",
+   "spirit": "Immune"
+  },
+  "drops": {
+   "min": 1,
+   "max": 2,
+   "chance": 0.5,
+   "items": [
+    {
+     "item": "Resin",
+     "min": 1,
+     "max": 1,
+     "weight": 1
+    },
+    {
+     "item": "Feathers",
+     "min": 1,
+     "max": 1,
+     "weight": 0.25
+    },
+    {
+     "item": "PineCone",
+     "min": 1,
+     "max": 1,
+     "weight": 1
+    }
+   ]
+  },
+  "becomes": "PineTree_log",
+  "name": "Pine"
+ },
+ {
+  "id": "Pinetree_01_Stub",
+  "kind": "destructible",
+  "health": 120,
+  "damageModifiers": {
+   "blunt": "Immune",
+   "slash": "Immune",
+   "pierce": "Immune",
+   "fire": "Immune",
+   "frost": "Immune",
+   "lightning": "Immune",
+   "poison": "Immune",
+   "spirit": "Immune"
+  },
+  "drops": {
+   "min": 2,
+   "max": 2,
+   "chance": 1,
+   "items": [
+    {
+     "item": "Wood",
+     "min": 1,
+     "max": 1,
+     "weight": 1
+    }
+   ]
+  },
+  "name": "Stump"
+ },
+ {
+  "id": "Pinetree_Snow",
+  "kind": "tree",
+  "health": 120,
+  "damageModifiers": {
+   "blunt": "Immune",
+   "slash": "Immune",
+   "pierce": "Immune",
+   "pickaxe": "Immune",
+   "fire": "Immune",
+   "frost": "Immune",
+   "lightning": "Immune",
+   "poison": "Immune",
+   "spirit": "Immune"
+  },
+  "drops": {
+   "min": 1,
+   "max": 2,
+   "chance": 0.5,
+   "items": [
+    {
+     "item": "Resin",
+     "min": 1,
+     "max": 1,
+     "weight": 1
+    },
+    {
+     "item": "Feathers",
+     "min": 1,
+     "max": 1,
+     "weight": 0.25
+    },
+    {
+     "item": "PineCone",
+     "min": 1,
+     "max": 1,
+     "weight": 1
+    }
+   ]
+  },
+  "becomes": "PineTree_Snow_log",
+  "name": "Timber Tree"
+ },
+ {
+  "id": "Pinetree_Snow_Stub",
+  "kind": "destructible",
+  "health": 120,
+  "damageModifiers": {
+   "blunt": "Immune",
+   "slash": "Immune",
+   "pierce": "Immune",
+   "fire": "Immune",
+   "frost": "Immune",
+   "lightning": "Immune",
+   "poison": "Immune",
+   "spirit": "Immune"
+  },
+  "drops": {
+   "min": 2,
+   "max": 2,
+   "chance": 1,
+   "items": [
+    {
+     "item": "Frostwood",
+     "min": 1,
+     "max": 1,
+     "weight": 1
+    }
+   ]
+  },
+  "name": "Stump"
+ },
+ {
+  "id": "Pinetree_Snow_dead",
+  "kind": "tree",
+  "health": 120,
+  "damageModifiers": {
+   "blunt": "Immune",
+   "slash": "Immune",
+   "pierce": "Immune",
+   "pickaxe": "Immune",
+   "fire": "Immune",
+   "frost": "Immune",
+   "lightning": "Immune",
+   "poison": "Immune",
+   "spirit": "Immune"
+  },
+  "drops": {
+   "min": 1,
+   "max": 2,
+   "chance": 0.5,
+   "items": [
+    {
+     "item": "Resin",
+     "min": 1,
+     "max": 1,
+     "weight": 1
+    },
+    {
+     "item": "Feathers",
+     "min": 1,
+     "max": 1,
+     "weight": 0.25
+    },
+    {
+     "item": "PineCone",
+     "min": 1,
+     "max": 1,
+     "weight": 1
+    }
+   ]
+  },
+  "becomes": "PineTree_Snow_log",
+  "name": "Timber Tree"
+ },
+ {
+  "id": "RaspberryBush",
+  "kind": "pickable",
+  "pickable": {
+   "item": "Raspberry",
+   "amount": 1,
+   "respawnMinutes": 300
+  }
+ },
+ {
+  "id": "RockDolmen_1",
+  "kind": "destructible",
+  "health": 30,
+  "damageModifiers": {
+   "blunt": "Immune",
+   "slash": "Immune",
+   "pierce": "Immune",
+   "chop": "Immune",
+   "fire": "Immune",
+   "frost": "Immune",
+   "lightning": "Immune",
+   "poison": "Immune",
+   "spirit": "Immune"
+  },
+  "drops": {
+   "min": 2,
+   "max": 4,
+   "chance": 1,
+   "items": [
+    {
+     "item": "Stone",
+     "min": 1,
+     "max": 1,
+     "weight": 1
+    }
+   ]
+  }
+ },
+ {
+  "id": "RockDolmen_2",
+  "kind": "destructible",
+  "health": 30,
+  "damageModifiers": {
+   "blunt": "Immune",
+   "slash": "Immune",
+   "pierce": "Immune",
+   "chop": "Immune",
+   "fire": "Immune",
+   "frost": "Immune",
+   "lightning": "Immune",
+   "poison": "Immune",
+   "spirit": "Immune"
+  },
+  "drops": {
+   "min": 2,
+   "max": 4,
+   "chance": 1,
+   "items": [
+    {
+     "item": "Stone",
+     "min": 1,
+     "max": 1,
+     "weight": 1
+    }
+   ]
+  }
+ },
+ {
+  "id": "RockDolmen_3",
+  "kind": "destructible",
+  "health": 30,
+  "damageModifiers": {
+   "blunt": "Immune",
+   "slash": "Immune",
+   "pierce": "Immune",
+   "chop": "Immune",
+   "fire": "Immune",
+   "frost": "Immune",
+   "lightning": "Immune",
+   "poison": "Immune",
+   "spirit": "Immune"
+  },
+  "drops": {
+   "min": 2,
+   "max": 4,
+   "chance": 1,
+   "items": [
+    {
+     "item": "Stone",
+     "min": 1,
+     "max": 1,
+     "weight": 1
+    }
+   ]
+  }
+ },
+ {
+  "id": "RockFinger",
+  "kind": "destructible",
+  "health": 1,
+  "damageModifiers": {
+   "blunt": "Immune",
+   "slash": "Immune",
+   "pierce": "Immune",
+   "chop": "Immune",
+   "fire": "Immune",
+   "frost": "Immune",
+   "lightning": "Immune",
+   "poison": "Immune",
+   "spirit": "Immune"
+  },
+  "becomes": "RockFinger_frac"
+ },
+ {
+  "id": "RockFingerBroken",
+  "kind": "destructible",
+  "health": 1,
+  "damageModifiers": {
+   "blunt": "Immune",
+   "slash": "Immune",
+   "pierce": "Immune",
+   "chop": "Immune",
+   "fire": "Immune",
+   "frost": "Immune",
+   "lightning": "Immune",
+   "poison": "Immune",
+   "spirit": "Immune"
+  },
+  "becomes": "RockFingerBroken_frac"
+ },
+ {
+  "id": "RockFingerBroken_frac",
+  "kind": "rock",
+  "health": 15,
+  "damageModifiers": {
+   "blunt": "Immune",
+   "slash": "Immune",
+   "pierce": "Immune",
+   "chop": "Immune",
+   "fire": "Immune",
+   "frost": "Immune",
+   "lightning": "Immune",
+   "poison": "Immune",
+   "spirit": "Immune"
+  },
+  "drops": {
+   "min": 1,
+   "max": 1,
+   "chance": 1,
+   "items": [
+    {
+     "item": "Stone",
+     "min": 1,
+     "max": 1
+    }
+   ]
+  }
+ },
+ {
+  "id": "RockFinger_frac",
+  "kind": "rock",
+  "health": 15,
+  "damageModifiers": {
+   "blunt": "Immune",
+   "slash": "Immune",
+   "pierce": "Immune",
+   "chop": "Immune",
+   "fire": "Immune",
+   "frost": "Immune",
+   "lightning": "Immune",
+   "poison": "Immune",
+   "spirit": "Immune"
+  },
+  "drops": {
+   "min": 1,
+   "max": 1,
+   "chance": 1,
+   "items": [
+    {
+     "item": "Stone",
+     "min": 1,
+     "max": 1
+    }
+   ]
+  }
+ },
+ {
+  "id": "RockThumb",
+  "kind": "destructible",
+  "health": 1,
+  "damageModifiers": {
+   "blunt": "Immune",
+   "slash": "Immune",
+   "pierce": "Immune",
+   "chop": "Immune",
+   "fire": "Immune",
+   "frost": "Immune",
+   "poison": "Immune",
+   "spirit": "Immune"
+  },
+  "becomes": "RockThumb_frac"
+ },
+ {
+  "id": "RockThumb_frac",
+  "kind": "rock",
+  "health": 15,
+  "damageModifiers": {
+   "blunt": "Immune",
+   "slash": "Immune",
+   "pierce": "Immune",
+   "chop": "Immune",
+   "fire": "Immune",
+   "frost": "Immune",
+   "lightning": "Immune",
+   "poison": "Immune",
+   "spirit": "Immune"
+  },
+  "drops": {
+   "min": 1,
+   "max": 1,
+   "chance": 1,
+   "items": [
+    {
+     "item": "Stone",
+     "min": 1,
+     "max": 1
+    }
+   ]
+  }
+ },
+ {
+  "id": "Rock_3",
+  "kind": "destructible",
+  "health": 1,
+  "damageModifiers": {
+   "blunt": "Immune",
+   "slash": "Immune",
+   "pierce": "Immune",
+   "chop": "Immune",
+   "fire": "Immune",
+   "frost": "Immune",
+   "lightning": "Immune",
+   "poison": "Immune",
+   "spirit": "Immune"
+  },
+  "becomes": "Rock_3_frac"
+ },
+ {
+  "id": "Rock_3_deepnorth",
+  "kind": "destructible",
+  "health": 1,
+  "damageModifiers": {
+   "blunt": "Immune",
+   "slash": "Immune",
+   "pierce": "Immune",
+   "chop": "Immune",
+   "fire": "Immune",
+   "frost": "Immune",
+   "lightning": "Immune",
+   "poison": "Immune",
+   "spirit": "Immune"
+  },
+  "becomes": "Rock_3_deepnorth_frac"
+ },
+ {
+  "id": "Rock_3_deepnorth_frac",
+  "kind": "rock",
+  "health": 30,
+  "damageModifiers": {
+   "blunt": "Immune",
+   "slash": "Immune",
+   "pierce": "Immune",
+   "chop": "Immune",
+   "fire": "Immune",
+   "frost": "Immune",
+   "lightning": "Immune",
+   "poison": "Immune",
+   "spirit": "Immune"
+  },
+  "drops": {
+   "min": 3,
+   "max": 6,
+   "chance": 1,
+   "items": [
+    {
+     "item": "Stone",
+     "min": 1,
+     "max": 1,
+     "weight": 1
+    }
+   ]
+  }
+ },
+ {
+  "id": "Rock_3_frac",
+  "kind": "rock",
+  "health": 30,
+  "damageModifiers": {
+   "blunt": "Immune",
+   "slash": "Immune",
+   "pierce": "Immune",
+   "chop": "Immune",
+   "fire": "Immune",
+   "frost": "Immune",
+   "lightning": "Immune",
+   "poison": "Immune",
+   "spirit": "Immune"
+  },
+  "drops": {
+   "min": 3,
+   "max": 6,
+   "chance": 1,
+   "items": [
+    {
+     "item": "Stone",
+     "min": 1,
+     "max": 1,
+     "weight": 1
+    }
+   ]
+  }
+ },
+ {
+  "id": "Rock_4",
+  "kind": "destructible",
+  "health": 30,
+  "damageModifiers": {
+   "blunt": "Immune",
+   "slash": "Immune",
+   "pierce": "Immune",
+   "chop": "Immune",
+   "fire": "Immune",
+   "frost": "Immune",
+   "lightning": "Immune",
+   "poison": "Immune",
+   "spirit": "Immune"
+  },
+  "drops": {
+   "min": 3,
+   "max": 6,
+   "chance": 1,
+   "items": [
+    {
+     "item": "Stone",
+     "min": 1,
+     "max": 1,
+     "weight": 1
+    }
+   ]
+  }
+ },
+ {
+  "id": "Rock_4_deepnorth",
+  "kind": "destructible",
+  "health": 30,
+  "damageModifiers": {
+   "blunt": "Immune",
+   "slash": "Immune",
+   "pierce": "Immune",
+   "chop": "Immune",
+   "fire": "Immune",
+   "frost": "Immune",
+   "lightning": "Immune",
+   "poison": "Immune",
+   "spirit": "Immune"
+  },
+  "drops": {
+   "min": 3,
+   "max": 6,
+   "chance": 1,
+   "items": [
+    {
+     "item": "Stone",
+     "min": 1,
+     "max": 1,
+     "weight": 1
+    }
+   ]
+  }
+ },
+ {
+  "id": "Rock_4_plains",
+  "kind": "destructible",
+  "health": 30,
+  "damageModifiers": {
+   "blunt": "Immune",
+   "slash": "Immune",
+   "pierce": "Immune",
+   "chop": "Immune",
+   "fire": "Immune",
+   "frost": "Immune",
+   "lightning": "Immune",
+   "poison": "Immune",
+   "spirit": "Immune"
+  },
+  "drops": {
+   "min": 3,
+   "max": 6,
+   "chance": 1,
+   "items": [
+    {
+     "item": "Stone",
+     "min": 1,
+     "max": 1,
+     "weight": 1
+    }
+   ]
+  }
+ },
+ {
+  "id": "Rock_7",
+  "kind": "destructible",
+  "health": 30,
+  "damageModifiers": {
+   "blunt": "Immune",
+   "slash": "Immune",
+   "pierce": "Immune",
+   "chop": "Immune",
+   "fire": "Immune",
+   "frost": "Immune",
+   "lightning": "Immune",
+   "poison": "Immune",
+   "spirit": "Immune"
+  },
+  "drops": {
+   "min": 3,
+   "max": 6,
+   "chance": 1,
+   "items": [
+    {
+     "item": "Stone",
+     "min": 1,
+     "max": 1,
+     "weight": 1
+    }
+   ]
+  }
+ },
+ {
+  "id": "Rock_7_deepnorth",
+  "kind": "destructible",
+  "health": 200,
+  "damageModifiers": {
+   "blunt": "Immune",
+   "slash": "Immune",
+   "pierce": "Immune",
+   "chop": "Immune",
+   "fire": "Immune",
+   "frost": "Immune",
+   "lightning": "Immune",
+   "poison": "Immune",
+   "spirit": "Immune"
+  },
+  "drops": {
+   "min": 3,
+   "max": 6,
+   "chance": 1,
+   "items": [
+    {
+     "item": "Stone",
+     "min": 1,
+     "max": 1,
+     "weight": 1
+    }
+   ]
+  }
+ },
+ {
+  "id": "Rock_7_meadows",
+  "kind": "destructible",
+  "health": 200,
+  "damageModifiers": {
+   "blunt": "Immune",
+   "slash": "Immune",
+   "pierce": "Immune",
+   "chop": "Immune",
+   "fire": "Immune",
+   "frost": "Immune",
+   "lightning": "Immune",
+   "poison": "Immune",
+   "spirit": "Immune"
+  },
+  "drops": {
+   "min": 3,
+   "max": 6,
+   "chance": 1,
+   "items": [
+    {
+     "item": "Stone",
+     "min": 1,
+     "max": 1,
+     "weight": 1
+    }
+   ]
+  }
+ },
+ {
+  "id": "Rock_destructible_test",
+  "kind": "rock",
+  "health": 20,
+  "damageModifiers": {
+   "blunt": "Immune",
+   "slash": "Immune",
+   "pierce": "Immune",
+   "chop": "Immune",
+   "fire": "Immune",
+   "frost": "Immune",
+   "lightning": "Immune",
+   "poison": "Immune",
+   "spirit": "Immune"
+  },
+  "drops": {
+   "min": 1,
+   "max": 3,
+   "chance": 1,
+   "items": [
+    {
+     "item": "Iron",
+     "min": 1,
+     "max": 1,
+     "weight": 0.01
+    },
+    {
+     "item": "Stone",
+     "min": 1,
+     "max": 1,
+     "weight": 1
+    }
+   ]
+  }
+ },
+ {
+  "id": "Seagal",
+  "kind": "destructible",
+  "health": 1,
+  "drops": {
+   "min": 1,
+   "max": 1,
+   "chance": 1,
+   "items": [
+    {
+     "item": "Feathers",
+     "min": 3,
+     "max": 3,
+     "weight": 1
+    }
+   ]
+  }
+ },
+ {
+  "id": "SeekerEgg",
+  "kind": "destructible",
+  "health": 1,
+  "damageModifiers": {
+   "spirit": "Ignore"
+  },
+  "drops": {
+   "min": 1,
+   "max": 1,
+   "chance": 0.5,
+   "items": [
+    {
+     "item": "SeekerBrood",
+     "min": 1,
+     "max": 1,
+     "weight": 1
+    }
+   ]
+  }
+ },
+ {
+  "id": "SeekerEgg_alwayshatch",
+  "kind": "destructible",
+  "health": 1,
+  "damageModifiers": {
+   "spirit": "Ignore"
+  },
+  "drops": {
+   "min": 1,
+   "max": 1,
+   "chance": 1,
+   "items": [
+    {
+     "item": "SeekerBrood",
+     "min": 1,
+     "max": 1,
+     "weight": 1
+    }
+   ]
+  }
+ },
+ {
+  "id": "ShimmeringSand_rock",
+  "kind": "destructible",
+  "health": 1,
+  "damageModifiers": {
+   "blunt": "Immune",
+   "slash": "Immune",
+   "pierce": "Immune",
+   "chop": "Immune",
+   "fire": "Immune",
+   "frost": "Immune",
+   "lightning": "Immune",
+   "poison": "Immune",
+   "spirit": "Immune"
+  },
+  "becomes": "ShimmeringSand_rock_frac"
+ },
+ {
+  "id": "ShimmeringSand_rock_frac",
+  "kind": "rock",
+  "health": 50,
+  "damageModifiers": {
+   "blunt": "Immune",
+   "slash": "Immune",
+   "pierce": "Immune",
+   "chop": "Immune",
+   "fire": "Immune",
+   "frost": "Immune",
+   "lightning": "Immune",
+   "poison": "Immune",
+   "spirit": "Immune"
+  },
+  "drops": {
+   "min": 1,
+   "max": 3,
+   "chance": 1,
+   "items": [
+    {
+     "item": "Ice",
+     "min": 1,
+     "max": 1,
+     "weight": 1
+    }
+   ]
+  }
+ },
+ {
+  "id": "ShootStump",
+  "kind": "destructible",
+  "health": 80,
+  "damageModifiers": {
+   "blunt": "Immune",
+   "slash": "Immune",
+   "pierce": "Immune",
+   "fire": "Immune",
+   "frost": "Immune",
+   "lightning": "Immune",
+   "poison": "Immune",
+   "spirit": "Immune"
+  },
+  "drops": {
+   "min": 2,
+   "max": 2,
+   "chance": 1,
+   "items": [
+    {
+     "item": "Wood",
+     "min": 1,
+     "max": 1,
+     "weight": 1
+    }
+   ]
+  },
+  "name": "Stump"
+ },
+ {
+  "id": "SnowFirTree",
+  "kind": "tree",
+  "health": 200,
+  "damageModifiers": {
+   "blunt": "Immune",
+   "slash": "Immune",
+   "pierce": "Immune",
+   "pickaxe": "Immune",
+   "fire": "Immune",
+   "frost": "Immune",
+   "lightning": "Immune",
+   "poison": "Immune",
+   "spirit": "Immune"
+  },
+  "drops": {
+   "min": 1,
+   "max": 2,
+   "chance": 0.5,
+   "items": [
+    {
+     "item": "FirCone",
+     "min": 1,
+     "max": 1,
+     "weight": 1
+    },
+    {
+     "item": "Feathers",
+     "min": 1,
+     "max": 1,
+     "weight": 0.25
+    },
+    {
+     "item": "Resin",
+     "min": 1,
+     "max": 1,
+     "weight": 0.25
+    }
+   ]
+  },
+  "becomes": "FirTree_Snow_log",
+  "name": "Timber Tree"
+ },
+ {
+  "id": "SnowFirTree 2",
+  "kind": "tree",
+  "health": 200,
+  "damageModifiers": {
+   "blunt": "Immune",
+   "slash": "Immune",
+   "pierce": "Immune",
+   "pickaxe": "Immune",
+   "fire": "Immune",
+   "frost": "Immune",
+   "lightning": "Immune",
+   "poison": "Immune",
+   "spirit": "Immune"
+  },
+  "drops": {
+   "min": 1,
+   "max": 2,
+   "chance": 0.5,
+   "items": [
+    {
+     "item": "FirCone",
+     "min": 1,
+     "max": 1,
+     "weight": 1
+    },
+    {
+     "item": "Feathers",
+     "min": 1,
+     "max": 1,
+     "weight": 0.25
+    },
+    {
+     "item": "Resin",
+     "min": 1,
+     "max": 1,
+     "weight": 0.25
+    }
+   ]
+  },
+  "becomes": "FirTree_Snow_log",
+  "name": "Timber Tree"
+ },
+ {
+  "id": "SnowFirTree_small",
+  "kind": "destructible",
+  "health": 80,
+  "damageModifiers": {
+   "blunt": "Immune",
+   "slash": "Immune",
+   "pierce": "Immune",
+   "fire": "Immune",
+   "frost": "Immune",
+   "lightning": "Immune",
+   "poison": "Immune",
+   "spirit": "Immune"
+  },
+  "drops": {
+   "min": 1,
+   "max": 3,
+   "chance": 1,
+   "items": [
+    {
+     "item": "Frostwood",
+     "min": 1,
+     "max": 1,
+     "weight": 1
+    }
+   ]
+  }
+ },
+ {
+  "id": "Spawner_CharredStone",
+  "kind": "destructible",
+  "health": 400,
+  "damageModifiers": {
+   "blunt": "Resistant",
+   "slash": "Resistant",
+   "pierce": "Resistant",
+   "fire": "Immune",
+   "frost": "Resistant",
+   "lightning": "Resistant",
+   "poison": "Ignore",
+   "spirit": "Ignore"
+  },
+  "drops": {
+   "min": 2,
+   "max": 5,
+   "chance": 1,
+   "items": [
+    {
+     "item": "Grausten",
+     "min": 1,
+     "max": 1,
+     "weight": 1
+    },
+    {
+     "item": "Charredskull",
+     "min": 1,
+     "max": 1,
+     "weight": 0.5
+    }
+   ]
+  },
+  "name": "Monument of Torment"
+ },
+ {
+  "id": "Spawner_CharredStone_Elite",
+  "kind": "destructible",
+  "health": 400,
+  "damageModifiers": {
+   "blunt": "Resistant",
+   "slash": "Resistant",
+   "pierce": "Resistant",
+   "fire": "Immune",
+   "frost": "Resistant",
+   "lightning": "Resistant",
+   "poison": "Ignore",
+   "spirit": "Ignore"
+  },
+  "drops": {
+   "min": 2,
+   "max": 5,
+   "chance": 1,
+   "items": [
+    {
+     "item": "Grausten",
+     "min": 1,
+     "max": 1,
+     "weight": 1
+    },
+    {
+     "item": "Charredskull",
+     "min": 1,
+     "max": 1,
+     "weight": 0.5
+    }
+   ]
+  },
+  "name": "Monument of Torment"
+ },
+ {
+  "id": "Spawner_CharredStone_event",
+  "kind": "destructible",
+  "health": 400,
+  "damageModifiers": {
+   "blunt": "Resistant",
+   "slash": "Resistant",
+   "pierce": "Resistant",
+   "fire": "Immune",
+   "frost": "Resistant",
+   "lightning": "Resistant",
+   "poison": "Ignore",
+   "spirit": "Ignore"
+  },
+  "drops": {
+   "min": 2,
+   "max": 5,
+   "chance": 1,
+   "items": [
+    {
+     "item": "Grausten",
+     "min": 1,
+     "max": 1,
+     "weight": 1
+    },
+    {
+     "item": "Charredskull",
+     "min": 1,
+     "max": 1,
+     "weight": 0.5
+    }
+   ]
+  },
+  "name": "Monument of Torment"
+ },
+ {
+  "id": "Spawner_GreydwarfNest",
+  "kind": "destructible",
+  "health": 100,
+  "damageModifiers": {
+   "blunt": "Resistant",
+   "pierce": "Resistant",
+   "pickaxe": "Ignore",
+   "fire": "Weak",
+   "frost": "Immune",
+   "poison": "Immune",
+   "spirit": "Ignore"
+  },
+  "drops": {
+   "min": 1,
+   "max": 1,
+   "chance": 1,
+   "items": [
+    {
+     "item": "AncientSeed",
+     "min": 1,
+     "max": 1
+    }
+   ]
+  },
+  "name": "Greydwarf Nest"
+ },
+ {
+  "id": "Spawner_Hole",
+  "kind": "destructible",
+  "health": 300,
+  "damageModifiers": {
+   "pickaxe": "Weak",
+   "fire": "Resistant",
+   "frost": "Resistant",
+   "lightning": "Resistant",
+   "poison": "Immune",
+   "spirit": "Immune"
+  },
+  "drops": {
+   "min": 1,
+   "max": 3,
+   "chance": 1,
+   "oneOfEach": true,
+   "items": [
+    {
+     "item": "Frostwood",
+     "min": 1,
+     "max": 3,
+     "weight": 1
+    },
+    {
+     "item": "IronScrap",
+     "min": 1,
+     "max": 1,
+     "weight": 0.2
+    },
+    {
+     "item": "SilverNecklace",
+     "min": 1,
+     "max": 1,
+     "weight": 0.2
+    },
+    {
+     "item": "MoldAtgeir",
+     "min": 1,
+     "max": 1,
+     "weight": 0.1
+    },
+    {
+     "item": "MoldAxe",
+     "min": 1,
+     "max": 1,
+     "weight": 0.1
+    },
+    {
+     "item": "MoldAxe2H",
+     "min": 1,
+     "max": 1,
+     "weight": 0.1
+    },
+    {
+     "item": "MoldBow",
+     "min": 1,
+     "max": 1,
+     "weight": 0.1
+    },
+    {
+     "item": "MoldCrossbow",
+     "min": 1,
+     "max": 1,
+     "weight": 0.1
+    },
+    {
+     "item": "MoldFistweapon",
+     "min": 1,
+     "max": 1,
+     "weight": 0.1
+    },
+    {
+     "item": "MoldKnife",
+     "min": 1,
+     "max": 1,
+     "weight": 0.1
+    },
+    {
+     "item": "MoldMace",
+     "min": 1,
+     "max": 1,
+     "weight": 0.1
+    },
+    {
+     "item": "MoldMace2H",
+     "min": 1,
+     "max": 1,
+     "weight": 0.1
+    },
+    {
+     "item": "MoldShieldBuckler",
+     "min": 1,
+     "max": 1,
+     "weight": 0.1
+    },
+    {
+     "item": "MoldShieldRound",
+     "min": 1,
+     "max": 1,
+     "weight": 0.1
+    },
+    {
+     "item": "MoldShieldTower",
+     "min": 1,
+     "max": 1,
+     "weight": 0.1
+    },
+    {
+     "item": "MoldSpear",
+     "min": 1,
+     "max": 1,
+     "weight": 0.1
+    },
+    {
+     "item": "MoldSword",
+     "min": 1,
+     "max": 1,
+     "weight": 0.1
+    },
+    {
+     "item": "MoldSword2H",
+     "min": 1,
+     "max": 1,
+     "weight": 0.1
+    },
+    {
+     "item": "MoldKeys",
+     "min": 1,
+     "max": 1,
+     "weight": 0.2
+    }
+   ]
+  },
+  "becomes": "Frostwood",
+  "name": "Wardrobe Shaft"
+ },
+ {
+  "id": "Spawner_Hole_double",
+  "kind": "destructible",
+  "health": 300,
+  "damageModifiers": {
+   "pickaxe": "Weak",
+   "fire": "Resistant",
+   "frost": "Resistant",
+   "lightning": "Resistant",
+   "poison": "Immune",
+   "spirit": "Immune"
+  },
+  "drops": {
+   "min": 1,
+   "max": 3,
+   "chance": 1,
+   "oneOfEach": true,
+   "items": [
+    {
+     "item": "Frostwood",
+     "min": 1,
+     "max": 3,
+     "weight": 1
+    },
+    {
+     "item": "IronScrap",
+     "min": 1,
+     "max": 1,
+     "weight": 0.2
+    },
+    {
+     "item": "SilverNecklace",
+     "min": 1,
+     "max": 1,
+     "weight": 0.2
+    },
+    {
+     "item": "MoldAtgeir",
+     "min": 1,
+     "max": 1,
+     "weight": 0.1
+    },
+    {
+     "item": "MoldAxe",
+     "min": 1,
+     "max": 1,
+     "weight": 0.1
+    },
+    {
+     "item": "MoldAxe2H",
+     "min": 1,
+     "max": 1,
+     "weight": 0.1
+    },
+    {
+     "item": "MoldBow",
+     "min": 1,
+     "max": 1,
+     "weight": 0.1
+    },
+    {
+     "item": "MoldCrossbow",
+     "min": 1,
+     "max": 1,
+     "weight": 0.1
+    },
+    {
+     "item": "MoldFistweapon",
+     "min": 1,
+     "max": 1,
+     "weight": 0.1
+    },
+    {
+     "item": "MoldKnife",
+     "min": 1,
+     "max": 1,
+     "weight": 0.1
+    },
+    {
+     "item": "MoldMace",
+     "min": 1,
+     "max": 1,
+     "weight": 0.1
+    },
+    {
+     "item": "MoldMace2H",
+     "min": 1,
+     "max": 1,
+     "weight": 0.1
+    },
+    {
+     "item": "MoldShieldBuckler",
+     "min": 1,
+     "max": 1,
+     "weight": 0.1
+    },
+    {
+     "item": "MoldShieldRound",
+     "min": 1,
+     "max": 1,
+     "weight": 0.1
+    },
+    {
+     "item": "MoldShieldTower",
+     "min": 1,
+     "max": 1,
+     "weight": 0.1
+    },
+    {
+     "item": "MoldSpear",
+     "min": 1,
+     "max": 1,
+     "weight": 0.1
+    },
+    {
+     "item": "MoldSword",
+     "min": 1,
+     "max": 1,
+     "weight": 0.1
+    },
+    {
+     "item": "MoldSword2H",
+     "min": 1,
+     "max": 1,
+     "weight": 0.1
+    },
+    {
+     "item": "MoldKeys",
+     "min": 1,
+     "max": 1,
+     "weight": 0.2
+    }
+   ]
+  },
+  "becomes": "Frostwood",
+  "name": "Wardrobe Shaft"
+ },
+ {
+  "id": "StumpHole",
+  "kind": "destructible",
+  "health": 200,
+  "damageModifiers": {
+   "blunt": "Immune",
+   "slash": "Immune",
+   "pierce": "Immune",
+   "fire": "Immune",
+   "frost": "Immune",
+   "lightning": "Immune",
+   "poison": "Immune",
+   "spirit": "Immune"
+  },
+  "drops": {
+   "min": 4,
+   "max": 6,
+   "chance": 1,
+   "items": [
+    {
+     "item": "Frostwood",
+     "min": 1,
+     "max": 1,
+     "weight": 1
+    }
+   ]
+  },
+  "becomes": "StumpHole_destroyed"
+ },
+ {
+  "id": "StumpHut",
+  "kind": "destructible",
+  "health": 1,
+  "damageModifiers": {
+   "blunt": "Immune",
+   "slash": "Immune",
+   "pierce": "Immune",
+   "frost": "Immune",
+   "lightning": "Immune",
+   "poison": "Immune",
+   "spirit": "Immune"
+  },
+  "becomes": "StumpHut_frac"
+ },
+ {
+  "id": "StumpHut_frac",
+  "kind": "rock",
+  "health": 100,
+  "damageModifiers": {
+   "blunt": "Immune",
+   "slash": "Immune",
+   "pierce": "Immune",
+   "frost": "Immune",
+   "lightning": "Immune",
+   "poison": "Immune",
+   "spirit": "Immune"
+  },
+  "drops": {
+   "min": 1,
+   "max": 3,
+   "chance": 1,
+   "items": [
+    {
+     "item": "Frostwood",
+     "min": 1,
+     "max": 1,
+     "weight": 1
+    }
+   ]
+  }
+ },
+ {
+  "id": "StumpLog",
+  "kind": "destructible",
+  "health": 200,
+  "damageModifiers": {
+   "blunt": "Immune",
+   "slash": "Immune",
+   "pierce": "Immune",
+   "fire": "Immune",
+   "frost": "Immune",
+   "lightning": "Immune",
+   "poison": "Immune",
+   "spirit": "Immune"
+  },
+  "drops": {
+   "min": 4,
+   "max": 6,
+   "chance": 1,
+   "items": [
+    {
+     "item": "Frostwood",
+     "min": 1,
+     "max": 1,
+     "weight": 1
+    }
+   ]
+  }
+ },
+ {
+  "id": "SwampTree1",
+  "kind": "tree",
+  "health": 80,
+  "minToolTier": 2,
+  "damageModifiers": {
+   "blunt": "Immune",
+   "slash": "Immune",
+   "pierce": "Immune",
+   "pickaxe": "Immune",
+   "fire": "Immune",
+   "frost": "Immune",
+   "lightning": "Immune",
+   "poison": "Immune",
+   "spirit": "Immune"
+  },
+  "becomes": "SwampTree1_log",
+  "name": "Ancient Tree"
+ },
+ {
+  "id": "SwampTree1_Stub",
+  "kind": "destructible",
+  "health": 100,
+  "damageModifiers": {
+   "blunt": "Immune",
+   "slash": "Immune",
+   "pierce": "Immune",
+   "fire": "Immune",
+   "frost": "Immune",
+   "lightning": "Immune",
+   "poison": "Immune",
+   "spirit": "Immune"
+  },
+  "drops": {
+   "min": 2,
+   "max": 2,
+   "chance": 1,
+   "items": [
+    {
+     "item": "Wood",
+     "min": 1,
+     "max": 1,
+     "weight": 1
+    }
+   ]
+  },
+  "name": "Stump"
+ },
+ {
+  "id": "SwampTree1_log",
+  "kind": "log",
+  "health": 60,
+  "damageModifiers": {
+   "blunt": "Immune",
+   "slash": "Immune",
+   "pierce": "Immune",
+   "pickaxe": "Immune",
+   "fire": "Immune",
+   "frost": "Immune",
+   "lightning": "Immune",
+   "poison": "Immune",
+   "spirit": "Immune"
+  },
+  "drops": {
+   "min": 10,
+   "max": 10,
+   "chance": 1,
+   "items": [
+    {
+     "item": "Wood",
+     "min": 1,
+     "max": 1,
+     "weight": 1
+    },
+    {
+     "item": "ElderBark",
+     "min": 1,
+     "max": 1,
+     "weight": 1
+    }
+   ]
+  },
+  "name": "Log"
+ },
+ {
+  "id": "TrollFrost_Dead",
+  "kind": "destructible",
+  "health": 1,
+  "minToolTier": 6,
+  "damageModifiers": {
+   "blunt": "Immune",
+   "slash": "Immune",
+   "pierce": "Immune",
+   "chop": "Immune",
+   "fire": "Immune",
+   "frost": "Immune",
+   "lightning": "Immune",
+   "poison": "Immune",
+   "spirit": "Immune"
+  },
+  "becomes": "TrollFrost_Frac",
+  "name": "Petrified Gammeltroll"
+ },
+ {
+  "id": "TrollFrost_Frac",
+  "kind": "rock",
+  "name": "Petrified Gammeltroll",
+  "health": 50,
+  "minToolTier": 6,
+  "damageModifiers": {
+   "blunt": "Immune",
+   "slash": "Immune",
+   "pierce": "Immune",
+   "chop": "Immune",
+   "fire": "Immune",
+   "frost": "Immune",
+   "lightning": "Immune",
+   "poison": "Immune",
+   "spirit": "Immune"
+  },
+  "drops": {
+   "min": 2,
+   "max": 3,
+   "chance": 1,
+   "items": [
+    {
+     "item": "Stone",
+     "min": 1,
+     "max": 1,
+     "weight": 1
+    },
+    {
+     "item": "GoldOre",
+     "min": 1,
+     "max": 1,
+     "weight": 0.5
+    }
+   ]
+  }
+ },
+ {
+  "id": "TrollFrost_Frac_arm",
+  "kind": "rock",
+  "name": "Petrified Gammeltroll",
+  "health": 50,
+  "minToolTier": 6,
+  "damageModifiers": {
+   "blunt": "Immune",
+   "slash": "Immune",
+   "pierce": "Immune",
+   "chop": "Immune",
+   "fire": "Immune",
+   "frost": "Immune",
+   "lightning": "Immune",
+   "poison": "Immune",
+   "spirit": "Immune"
+  },
+  "drops": {
+   "min": 2,
+   "max": 3,
+   "chance": 1,
+   "items": [
+    {
+     "item": "Stone",
+     "min": 1,
+     "max": 1,
+     "weight": 1
+    },
+    {
+     "item": "GoldOre",
+     "min": 1,
+     "max": 1,
+     "weight": 0.5
+    }
+   ]
+  }
+ },
+ {
+  "id": "TrollFrost_Frac_legs",
+  "kind": "rock",
+  "name": "Petrified Gammeltroll",
+  "health": 50,
+  "minToolTier": 6,
+  "damageModifiers": {
+   "blunt": "Immune",
+   "slash": "Immune",
+   "pierce": "Immune",
+   "chop": "Immune",
+   "fire": "Immune",
+   "frost": "Immune",
+   "lightning": "Immune",
+   "poison": "Immune",
+   "spirit": "Immune"
+  },
+  "drops": {
+   "min": 2,
+   "max": 3,
+   "chance": 1,
+   "items": [
+    {
+     "item": "Stone",
+     "min": 1,
+     "max": 1,
+     "weight": 1
+    },
+    {
+     "item": "GoldOre",
+     "min": 1,
+     "max": 1,
+     "weight": 0.5
+    }
+   ]
+  }
+ },
+ {
+  "id": "UnstableLavaRock",
+  "kind": "destructible",
+  "health": 50,
+  "damageModifiers": {
+   "blunt": "Resistant",
+   "slash": "Resistant",
+   "pierce": "Resistant",
+   "chop": "Resistant",
+   "pickaxe": "Weak",
+   "fire": "Immune",
+   "poison": "Resistant",
+   "spirit": "Resistant"
+  },
+  "drops": {
+   "min": 4,
+   "max": 7,
+   "chance": 1,
+   "items": [
+    {
+     "item": "ProustitePowder",
+     "min": 1,
+     "max": 1,
+     "weight": 1
+    }
+   ]
+  },
+  "name": "Unstable Lava Rock"
+ },
+ {
+  "id": "VineAsh",
+  "kind": "pickable",
+  "pickable": {
+   "item": "Vineberry",
+   "amount": 3,
+   "respawnMinutes": 200
+  },
+  "drops": {
+   "min": 1,
+   "max": 3,
+   "chance": 0.2,
+   "items": [
+    {
+     "item": "VineberrySeeds",
+     "min": 1,
+     "max": 3,
+     "weight": 1
+    }
+   ]
+  }
+ },
+ {
+  "id": "VineGreen",
+  "kind": "pickable",
+  "pickable": {
+   "item": "Vineberry",
+   "amount": 3,
+   "respawnMinutes": 200
+  },
+  "drops": {
+   "min": 1,
+   "max": 3,
+   "chance": 0.2,
+   "items": [
+    {
+     "item": "VineGreenSeeds",
+     "min": 1,
+     "max": 3,
+     "weight": 1
+    }
+   ]
+  }
+ },
+ {
+  "id": "YggaShoot1",
+  "kind": "tree",
+  "health": 100,
+  "minToolTier": 4,
+  "damageModifiers": {
+   "blunt": "Immune",
+   "slash": "Immune",
+   "pierce": "Immune",
+   "pickaxe": "Immune",
+   "fire": "Immune",
+   "frost": "Immune",
+   "lightning": "Immune",
+   "poison": "Immune",
+   "spirit": "Immune"
+  },
+  "drops": {
+   "min": 2,
+   "max": 2,
+   "chance": 0.5,
+   "items": [
+    {
+     "item": "Resin",
+     "min": 1,
+     "max": 2,
+     "weight": 0.25
+    },
+    {
+     "item": "Feathers",
+     "min": 1,
+     "max": 2,
+     "weight": 0.25
+    }
+   ]
+  },
+  "becomes": "yggashoot_log",
+  "name": "Yggdrasil Shoot"
+ },
+ {
+  "id": "YggaShoot2",
+  "kind": "tree",
+  "health": 100,
+  "minToolTier": 4,
+  "damageModifiers": {
+   "blunt": "Immune",
+   "slash": "Immune",
+   "pierce": "Immune",
+   "pickaxe": "Immune",
+   "fire": "Immune",
+   "frost": "Immune",
+   "lightning": "Immune",
+   "poison": "Immune",
+   "spirit": "Immune"
+  },
+  "drops": {
+   "min": 2,
+   "max": 2,
+   "chance": 0.5,
+   "items": [
+    {
+     "item": "Resin",
+     "min": 1,
+     "max": 2,
+     "weight": 0.25
+    },
+    {
+     "item": "Feathers",
+     "min": 1,
+     "max": 2,
+     "weight": 0.25
+    }
+   ]
+  },
+  "becomes": "yggashoot_log",
+  "name": "Yggdrasil Shoot"
+ },
+ {
+  "id": "YggaShoot3",
+  "kind": "tree",
+  "health": 100,
+  "minToolTier": 4,
+  "damageModifiers": {
+   "blunt": "Immune",
+   "slash": "Immune",
+   "pierce": "Immune",
+   "pickaxe": "Immune",
+   "fire": "Immune",
+   "frost": "Immune",
+   "lightning": "Immune",
+   "poison": "Immune",
+   "spirit": "Immune"
+  },
+  "drops": {
+   "min": 2,
+   "max": 2,
+   "chance": 0.5,
+   "items": [
+    {
+     "item": "Resin",
+     "min": 1,
+     "max": 2,
+     "weight": 0.25
+    },
+    {
+     "item": "Feathers",
+     "min": 1,
+     "max": 2,
+     "weight": 0.25
+    }
+   ]
+  },
+  "becomes": "yggashoot_log",
+  "name": "Yggdrasil Shoot"
+ },
+ {
+  "id": "YggaShoot_small1",
+  "kind": "destructible",
+  "health": 20,
+  "minToolTier": 4,
+  "damageModifiers": {
+   "poison": "Immune",
+   "spirit": "Immune"
+  },
+  "drops": {
+   "min": 2,
+   "max": 3,
+   "chance": 1,
+   "items": [
+    {
+     "item": "Wood",
+     "min": 1,
+     "max": 1,
+     "weight": 1
+    },
+    {
+     "item": "YggdrasilWood",
+     "min": 1,
+     "max": 1,
+     "weight": 0.2
+    }
+   ]
+  },
+  "name": "Yggdrasil Shoot"
+ },
+ {
+  "id": "ancient_skull",
+  "kind": "destructible",
+  "health": 1,
+  "damageModifiers": {
+   "blunt": "Immune",
+   "slash": "Immune",
+   "pierce": "Immune",
+   "chop": "Immune",
+   "fire": "Immune",
+   "frost": "Immune",
+   "lightning": "Immune",
+   "poison": "Immune",
+   "spirit": "Immune"
+  },
+  "becomes": "rock4_forest_frac"
+ },
+ {
+  "id": "barrell",
+  "kind": "destructible",
+  "health": 10,
+  "damageModifiers": {
+   "pierce": "Resistant",
+   "chop": "Weak",
+   "poison": "Immune",
+   "spirit": "Immune"
+  },
+  "drops": {
+   "min": 2,
+   "max": 3,
+   "chance": 1,
+   "oneOfEach": true,
+   "items": [
+    {
+     "item": "Blueberries",
+     "min": 2,
+     "max": 4,
+     "weight": 1
+    },
+    {
+     "item": "DeerHide",
+     "min": 2,
+     "max": 3,
+     "weight": 1
+    },
+    {
+     "item": "Flint",
+     "min": 2,
+     "max": 3,
+     "weight": 1
+    },
+    {
+     "item": "Coal",
+     "min": 5,
+     "max": 8,
+     "weight": 1
+    },
+    {
+     "item": "GreydwarfEye",
+     "min": 2,
+     "max": 4,
+     "weight": 1
+    },
+    {
+     "item": "Resin",
+     "min": 3,
+     "max": 6,
+     "weight": 1
+    },
+    {
+     "item": "LeatherScraps",
+     "min": 2,
+     "max": 3,
+     "weight": 1
+    },
+    {
+     "item": "TinOre",
+     "min": 2,
+     "max": 3,
+     "weight": 1
+    }
+   ]
+  }
+ },
+ {
+  "id": "beech_log",
+  "kind": "log",
+  "health": 60,
+  "damageModifiers": {
+   "blunt": "Immune",
+   "slash": "Immune",
+   "pierce": "Immune",
+   "pickaxe": "Immune",
+   "fire": "Immune",
+   "frost": "Immune",
+   "lightning": "Immune",
+   "poison": "Immune",
+   "spirit": "Immune"
+  },
+  "becomes": "beech_log_half",
+  "name": "Log"
+ },
+ {
+  "id": "beech_log_half",
+  "kind": "log",
+  "health": 60,
+  "damageModifiers": {
+   "blunt": "Immune",
+   "slash": "Immune",
+   "pierce": "Immune",
+   "pickaxe": "Immune",
+   "fire": "Immune",
+   "frost": "Immune",
+   "lightning": "Immune",
+   "poison": "Immune",
+   "spirit": "Immune"
+  },
+  "drops": {
+   "min": 10,
+   "max": 10,
+   "chance": 1,
+   "items": [
+    {
+     "item": "Wood",
+     "min": 1,
+     "max": 1,
+     "weight": 1
+    }
+   ]
+  },
+  "name": "Log"
+ },
+ {
+  "id": "blackmarble_altar_crystal",
+  "kind": "destructible",
+  "health": 10,
+  "becomes": "DvergrKeyFragment"
+ },
+ {
+  "id": "blackmarble_altar_crystal_broken",
+  "kind": "destructible",
+  "health": 1,
+  "damageModifiers": {
+   "fire": "Weak",
+   "frost": "Weak",
+   "lightning": "Weak",
+   "spirit": "Weak"
+  },
+  "drops": {
+   "min": 1,
+   "max": 1,
+   "chance": 1
+  }
+ },
+ {
+  "id": "blackmarble_post01",
+  "kind": "destructible",
+  "health": 2000,
+  "damageModifiers": {
+   "blunt": "Resistant",
+   "slash": "Resistant",
+   "pierce": "Resistant",
+   "chop": "Resistant",
+   "pickaxe": "Resistant",
+   "fire": "Immune",
+   "frost": "Immune",
+   "lightning": "Immune",
+   "poison": "Immune",
+   "spirit": "Immune"
+  },
+  "drops": {
+   "min": 3,
+   "max": 4,
+   "chance": 1,
+   "items": [
+    {
+     "item": "BlackMarble",
+     "min": 1,
+     "max": 1,
+     "weight": 1
+    }
+   ]
+  },
+  "becomes": "vfx_dvergpost_destroyed"
+ },
+ {
+  "id": "caverock_ice_pillar_wall",
+  "kind": "destructible",
+  "health": 50,
+  "damageModifiers": {
+   "blunt": "Weak",
+   "slash": "Weak",
+   "pierce": "Weak",
+   "chop": "Weak",
+   "pickaxe": "Weak",
+   "fire": "Weak",
+   "frost": "Resistant",
+   "lightning": "Weak",
+   "poison": "Immune",
+   "spirit": "Immune"
+  },
+  "becomes": "caverock_ice_wall_destruction"
+ },
+ {
+  "id": "caverock_ice_stalagmite",
+  "kind": "destructible",
+  "health": 10,
+  "damageModifiers": {
+   "blunt": "Weak",
+   "slash": "Weak",
+   "pierce": "Weak",
+   "chop": "Weak",
+   "pickaxe": "Weak",
+   "fire": "Weak",
+   "frost": "Resistant",
+   "lightning": "Weak",
+   "poison": "Immune",
+   "spirit": "Immune"
+  },
+  "becomes": "caverock_ice_stalagmite_destruction"
+ },
+ {
+  "id": "caverock_ice_stalagtite",
+  "kind": "destructible",
+  "health": 1,
+  "damageModifiers": {
+   "blunt": "Weak",
+   "slash": "Weak",
+   "pierce": "Weak",
+   "chop": "Weak",
+   "pickaxe": "Weak",
+   "fire": "Weak",
+   "frost": "Resistant",
+   "lightning": "Weak",
+   "poison": "Immune",
+   "spirit": "Immune"
+  },
+  "becomes": "caverock_ice_stalagtite_falling"
+ },
+ {
+  "id": "cliff_ashlands1",
+  "kind": "destructible",
+  "health": 1,
+  "damageModifiers": {
+   "blunt": "Resistant",
+   "slash": "Resistant",
+   "pierce": "Resistant",
+   "chop": "Immune",
+   "pickaxe": "Weak",
+   "fire": "Immune",
+   "frost": "Resistant",
+   "lightning": "Ignore",
+   "poison": "Ignore",
+   "spirit": "Ignore"
+  },
+  "becomes": "cliff_ashlands1_frac"
+ },
+ {
+  "id": "cliff_ashlands1_frac",
+  "kind": "rock",
+  "health": 10000,
+  "damageModifiers": {
+   "blunt": "Immune",
+   "slash": "Immune",
+   "pierce": "Immune",
+   "chop": "Immune",
+   "fire": "Immune",
+   "frost": "Immune",
+   "lightning": "Immune",
+   "poison": "Immune",
+   "spirit": "Immune"
+  },
+  "drops": {
+   "min": 2,
+   "max": 4,
+   "chance": 1,
+   "items": [
+    {
+     "item": "Stone",
+     "min": 1,
+     "max": 1,
+     "weight": 0.2
+    },
+    {
+     "item": "Grausten",
+     "min": 1,
+     "max": 1,
+     "weight": 1
+    }
+   ]
+  }
+ },
+ {
+  "id": "cliff_ashlands2",
+  "kind": "destructible",
+  "health": 1,
+  "damageModifiers": {
+   "blunt": "Immune",
+   "slash": "Immune",
+   "pierce": "Immune",
+   "chop": "Immune",
+   "fire": "Immune",
+   "frost": "Immune",
+   "lightning": "Immune",
+   "poison": "Immune",
+   "spirit": "Immune"
+  },
+  "becomes": "cliff_ashlands2_frac"
+ },
+ {
+  "id": "cliff_ashlands2_frac",
+  "kind": "rock",
+  "health": 70,
+  "damageModifiers": {
+   "blunt": "Immune",
+   "slash": "Immune",
+   "pierce": "Immune",
+   "chop": "Immune",
+   "fire": "Immune",
+   "frost": "Immune",
+   "lightning": "Immune",
+   "poison": "Immune",
+   "spirit": "Immune"
+  },
+  "drops": {
+   "min": 4,
+   "max": 8,
+   "chance": 1,
+   "items": [
+    {
+     "item": "Stone",
+     "min": 1,
+     "max": 1,
+     "weight": 0.2
+    },
+    {
+     "item": "Grausten",
+     "min": 1,
+     "max": 1,
+     "weight": 1
+    }
+   ]
+  }
+ },
+ {
+  "id": "cliff_ashlands3_Arch_1",
+  "kind": "destructible",
+  "health": 1,
+  "damageModifiers": {
+   "blunt": "Immune",
+   "slash": "Immune",
+   "pierce": "Immune",
+   "chop": "Immune",
+   "fire": "Immune",
+   "frost": "Immune",
+   "lightning": "Immune",
+   "poison": "Immune",
+   "spirit": "Immune"
+  },
+  "becomes": "cliff_ashlands_Arch_frac"
+ },
+ {
+  "id": "cliff_ashlands4",
+  "kind": "destructible",
+  "health": 1,
+  "damageModifiers": {
+   "blunt": "Resistant",
+   "slash": "Resistant",
+   "pierce": "Resistant",
+   "chop": "Immune",
+   "pickaxe": "Weak",
+   "fire": "Immune",
+   "frost": "Resistant",
+   "lightning": "Ignore",
+   "poison": "Ignore",
+   "spirit": "Ignore"
+  },
+  "becomes": "cliff_ashlands4_frac"
+ },
+ {
+  "id": "cliff_ashlands4_frac",
+  "kind": "rock",
+  "health": 100,
+  "damageModifiers": {
+   "blunt": "Immune",
+   "slash": "Immune",
+   "pierce": "Immune",
+   "chop": "Immune",
+   "fire": "Immune",
+   "frost": "Immune",
+   "lightning": "Immune",
+   "poison": "Immune",
+   "spirit": "Immune"
+  },
+  "drops": {
+   "min": 2,
+   "max": 4,
+   "chance": 1,
+   "items": [
+    {
+     "item": "Stone",
+     "min": 1,
+     "max": 1,
+     "weight": 0.2
+    },
+    {
+     "item": "Grausten",
+     "min": 1,
+     "max": 1,
+     "weight": 1
+    }
+   ]
+  }
+ },
+ {
+  "id": "cliff_ashlands5",
+  "kind": "destructible",
+  "health": 1,
+  "damageModifiers": {
+   "blunt": "Immune",
+   "slash": "Immune",
+   "pierce": "Immune",
+   "chop": "Immune",
+   "fire": "Immune",
+   "frost": "Immune",
+   "lightning": "Immune",
+   "poison": "Immune",
+   "spirit": "Immune"
+  },
+  "becomes": "cliff_ashlandsflowrock_frac"
+ },
+ {
+  "id": "cliff_ashlands6",
+  "kind": "destructible",
+  "health": 1,
+  "damageModifiers": {
+   "blunt": "Immune",
+   "slash": "Immune",
+   "pierce": "Immune",
+   "chop": "Immune",
+   "fire": "Immune",
+   "frost": "Immune",
+   "lightning": "Immune",
+   "poison": "Immune",
+   "spirit": "Immune"
+  },
+  "becomes": "cliff_ashlands6_frac"
+ },
+ {
+  "id": "cliff_ashlands6_frac",
+  "kind": "rock",
+  "health": 50,
+  "damageModifiers": {
+   "blunt": "Immune",
+   "slash": "Immune",
+   "pierce": "Immune",
+   "chop": "Immune",
+   "fire": "Immune",
+   "frost": "Immune",
+   "lightning": "Immune",
+   "poison": "Immune",
+   "spirit": "Immune"
+  },
+  "drops": {
+   "min": 2,
+   "max": 4,
+   "chance": 1,
+   "items": [
+    {
+     "item": "Stone",
+     "min": 1,
+     "max": 1,
+     "weight": 0.2
+    },
+    {
+     "item": "Grausten",
+     "min": 1,
+     "max": 1,
+     "weight": 1
+    }
+   ]
+  }
+ },
+ {
+  "id": "cliff_ashlands7_HalfArch",
+  "kind": "destructible",
+  "health": 1,
+  "damageModifiers": {
+   "blunt": "Immune",
+   "slash": "Immune",
+   "pierce": "Immune",
+   "chop": "Immune",
+   "fire": "Immune",
+   "frost": "Immune",
+   "lightning": "Immune",
+   "poison": "Immune",
+   "spirit": "Immune"
+  },
+  "becomes": "cliff_ashlands7_HalfArch_frac"
+ },
+ {
+  "id": "cliff_ashlands7_HalfArch_frac",
+  "kind": "rock",
+  "health": 70,
+  "damageModifiers": {
+   "blunt": "Immune",
+   "slash": "Immune",
+   "pierce": "Immune",
+   "chop": "Immune",
+   "fire": "Immune",
+   "frost": "Immune",
+   "lightning": "Immune",
+   "poison": "Immune",
+   "spirit": "Immune"
+  },
+  "drops": {
+   "min": 2,
+   "max": 4,
+   "chance": 1,
+   "items": [
+    {
+     "item": "Stone",
+     "min": 1,
+     "max": 1,
+     "weight": 0.2
+    },
+    {
+     "item": "Grausten",
+     "min": 1,
+     "max": 1,
+     "weight": 1
+    }
+   ]
+  }
+ },
+ {
+  "id": "cliff_ashlands8",
+  "kind": "destructible",
+  "health": 1,
+  "damageModifiers": {
+   "blunt": "Immune",
+   "slash": "Immune",
+   "pierce": "Immune",
+   "chop": "Immune",
+   "fire": "Immune",
+   "frost": "Immune",
+   "lightning": "Immune",
+   "poison": "Immune",
+   "spirit": "Immune"
+  },
+  "becomes": "cliff_ashlands2_frac"
+ },
+ {
+  "id": "cliff_ashlands_Arch_frac",
+  "kind": "rock",
+  "health": 70,
+  "damageModifiers": {
+   "blunt": "Immune",
+   "slash": "Immune",
+   "pierce": "Immune",
+   "chop": "Immune",
+   "fire": "Immune",
+   "frost": "Immune",
+   "lightning": "Immune",
+   "poison": "Immune",
+   "spirit": "Immune"
+  },
+  "drops": {
+   "min": 2,
+   "max": 4,
+   "chance": 1,
+   "items": [
+    {
+     "item": "Stone",
+     "min": 1,
+     "max": 1,
+     "weight": 0.2
+    },
+    {
+     "item": "Grausten",
+     "min": 1,
+     "max": 1,
+     "weight": 1
+    }
+   ]
+  }
+ },
+ {
+  "id": "cliff_ashlandsflowrock_frac",
+  "kind": "rock",
+  "health": 70,
+  "damageModifiers": {
+   "blunt": "Immune",
+   "slash": "Immune",
+   "pierce": "Immune",
+   "chop": "Immune",
+   "fire": "Immune",
+   "frost": "Immune",
+   "lightning": "Immune",
+   "poison": "Immune",
+   "spirit": "Immune"
+  },
+  "drops": {
+   "min": 4,
+   "max": 8,
+   "chance": 1,
+   "items": [
+    {
+     "item": "Stone",
+     "min": 1,
+     "max": 1,
+     "weight": 0.2
+    },
+    {
+     "item": "Grausten",
+     "min": 1,
+     "max": 1,
+     "weight": 1
+    }
+   ]
+  }
+ },
+ {
+  "id": "cliff_mistlands1",
+  "kind": "destructible",
+  "health": 1,
+  "damageModifiers": {
+   "blunt": "Immune",
+   "slash": "Immune",
+   "pierce": "Immune",
+   "chop": "Immune",
+   "fire": "Immune",
+   "frost": "Immune",
+   "lightning": "Immune",
+   "poison": "Immune",
+   "spirit": "Immune"
+  },
+  "becomes": "cliff_mistlands1_frac"
+ },
+ {
+  "id": "cliff_mistlands1_creep",
+  "kind": "destructible",
+  "health": 1,
+  "damageModifiers": {
+   "blunt": "Immune",
+   "slash": "Immune",
+   "pierce": "Immune",
+   "chop": "Immune",
+   "fire": "Immune",
+   "frost": "Immune",
+   "lightning": "Immune",
+   "poison": "Immune",
+   "spirit": "Immune"
+  },
+  "becomes": "cliff_mistlands1_creep_frac"
+ },
+ {
+  "id": "cliff_mistlands1_creep_frac",
+  "kind": "rock",
+  "health": 50,
+  "damageModifiers": {
+   "blunt": "Immune",
+   "slash": "Immune",
+   "pierce": "Immune",
+   "chop": "Immune",
+   "fire": "Immune",
+   "frost": "Immune",
+   "lightning": "Immune",
+   "poison": "Immune",
+   "spirit": "Immune"
+  },
+  "drops": {
+   "min": 4,
+   "max": 8,
+   "chance": 1,
+   "items": [
+    {
+     "item": "Stone",
+     "min": 1,
+     "max": 1
+    }
+   ]
+  }
+ },
+ {
+  "id": "cliff_mistlands1_frac",
+  "kind": "rock",
+  "health": 70,
+  "damageModifiers": {
+   "blunt": "Immune",
+   "slash": "Immune",
+   "pierce": "Immune",
+   "chop": "Immune",
+   "fire": "Immune",
+   "frost": "Immune",
+   "lightning": "Immune",
+   "poison": "Immune",
+   "spirit": "Immune"
+  },
+  "drops": {
+   "min": 4,
+   "max": 8,
+   "chance": 1,
+   "items": [
+    {
+     "item": "Stone",
+     "min": 1,
+     "max": 1
+    }
+   ]
+  }
+ },
+ {
+  "id": "cliff_mistlands2",
+  "kind": "destructible",
+  "health": 1,
+  "damageModifiers": {
+   "blunt": "Immune",
+   "slash": "Immune",
+   "pierce": "Immune",
+   "chop": "Immune",
+   "fire": "Immune",
+   "frost": "Immune",
+   "lightning": "Immune",
+   "poison": "Immune",
+   "spirit": "Immune"
+  },
+  "becomes": "cliff_mistlands2_frac"
+ },
+ {
+  "id": "cliff_mistlands2_frac",
+  "kind": "rock",
+  "health": 70,
+  "damageModifiers": {
+   "blunt": "Immune",
+   "slash": "Immune",
+   "pierce": "Immune",
+   "chop": "Immune",
+   "fire": "Immune",
+   "frost": "Immune",
+   "lightning": "Immune",
+   "poison": "Immune",
+   "spirit": "Immune"
+  },
+  "drops": {
+   "min": 4,
+   "max": 8,
+   "chance": 1,
+   "items": [
+    {
+     "item": "Stone",
+     "min": 1,
+     "max": 1
+    }
+   ]
+  }
+ },
+ {
+  "id": "cloth_hanging_door",
+  "kind": "destructible",
+  "health": 10,
+  "damageModifiers": {
+   "blunt": "Resistant",
+   "fire": "Weak",
+   "frost": "Resistant",
+   "lightning": "Immune",
+   "poison": "Immune",
+   "spirit": "Immune"
+  },
+  "drops": {
+   "min": 1,
+   "max": 1,
+   "chance": 0.2,
+   "items": [
+    {
+     "item": "JuteRed",
+     "min": 1,
+     "max": 1,
+     "weight": 1
+    }
+   ]
+  },
+  "becomes": "vfx_cloth_hanging_destroyed"
+ },
+ {
+  "id": "cloth_hanging_door_double",
+  "kind": "destructible",
+  "health": 10,
+  "damageModifiers": {
+   "blunt": "Resistant",
+   "fire": "Weak",
+   "frost": "Resistant",
+   "lightning": "Immune",
+   "poison": "Immune",
+   "spirit": "Immune"
+  },
+  "drops": {
+   "min": 1,
+   "max": 2,
+   "chance": 0.2,
+   "items": [
+    {
+     "item": "JuteRed",
+     "min": 1,
+     "max": 1,
+     "weight": 1
+    }
+   ]
+  },
+  "becomes": "vfx_cloth_hanging_destroyed"
+ },
+ {
+  "id": "cloth_hanging_long",
+  "kind": "destructible",
+  "health": 10,
+  "damageModifiers": {
+   "blunt": "Resistant",
+   "fire": "Weak",
+   "frost": "Resistant",
+   "lightning": "Immune",
+   "poison": "Immune",
+   "spirit": "Immune"
+  },
+  "drops": {
+   "min": 1,
+   "max": 2,
+   "chance": 0.5,
+   "items": [
+    {
+     "item": "JuteRed",
+     "min": 1,
+     "max": 1
+    }
+   ]
+  },
+  "becomes": "vfx_cloth_hanging_destroyed"
+ },
+ {
+  "id": "crypt_skeleton_chest",
+  "kind": "destructible",
+  "health": 50,
+  "damageModifiers": {
+   "lightning": "Resistant",
+   "poison": "Ignore",
+   "spirit": "Ignore"
+  },
+  "drops": {
+   "min": 1,
+   "max": 1,
+   "chance": 1,
+   "items": [
+    {
+     "item": "Skeleton",
+     "min": 1,
+     "max": 1,
+     "weight": 1
+    }
+   ]
+  },
+  "name": "Ancient Coffin"
+ },
+ {
+  "id": "dvergrprops_barrel",
+  "kind": "destructible",
+  "health": 800,
+  "damageModifiers": {
+   "pierce": "Resistant",
+   "chop": "Weak",
+   "poison": "Immune",
+   "spirit": "Immune"
+  },
+  "drops": {
+   "min": 3,
+   "max": 6,
+   "chance": 1,
+   "oneOfEach": true,
+   "items": [
+    {
+     "item": "FineWood",
+     "min": 1,
+     "max": 1,
+     "weight": 0.5
+    },
+    {
+     "item": "CopperScrap",
+     "min": 1,
+     "max": 1,
+     "weight": 0.5
+    },
+    {
+     "item": "MeadTasty",
+     "min": 1,
+     "max": 1,
+     "weight": 0.5
+    }
+   ]
+  }
+ },
+ {
+  "id": "dvergrprops_pickaxe",
+  "kind": "destructible",
+  "health": 1,
+  "drops": {
+   "min": 1,
+   "max": 1,
+   "chance": 0.5,
+   "items": [
+    {
+     "item": "IronScrap",
+     "min": 1,
+     "max": 1,
+     "weight": 1
+    }
+   ]
+  }
+ },
+ {
+  "id": "dvergrtown_wood_beam",
+  "kind": "destructible",
+  "health": 300,
+  "damageModifiers": {
+   "pierce": "Resistant",
+   "chop": "Weak",
+   "lightning": "Immune",
+   "poison": "Immune",
+   "spirit": "Immune"
+  },
+  "drops": {
+   "min": 1,
+   "max": 1,
+   "chance": 1,
+   "items": [
+    {
+     "item": "Wood",
+     "min": 1,
+     "max": 1,
+     "weight": 1
+    }
+   ]
+  },
+  "becomes": "vfx_dvergrcreep_beam_destroyed"
+ },
+ {
+  "id": "dvergrtown_wood_pole",
+  "kind": "destructible",
+  "health": 800,
+  "damageModifiers": {
+   "pierce": "Resistant",
+   "chop": "Weak",
+   "lightning": "Immune",
+   "poison": "Immune",
+   "spirit": "Immune"
+  },
+  "drops": {
+   "min": 1,
+   "max": 2,
+   "chance": 1,
+   "items": [
+    {
+     "item": "Wood",
+     "min": 1,
+     "max": 1,
+     "weight": 1
+    },
+    {
+     "item": "CopperScrap",
+     "min": 1,
+     "max": 1,
+     "weight": 0.5
+    }
+   ]
+  },
+  "becomes": "vfx_dvergrcreep_pole_destroyed"
+ },
+ {
+  "id": "dvergrtown_wood_support",
+  "kind": "destructible",
+  "health": 500,
+  "damageModifiers": {
+   "pierce": "Resistant",
+   "chop": "Weak",
+   "lightning": "Immune",
+   "poison": "Immune",
+   "spirit": "Immune"
+  },
+  "drops": {
+   "min": 1,
+   "max": 2,
+   "chance": 1,
+   "items": [
+    {
+     "item": "Wood",
+     "min": 1,
+     "max": 1,
+     "weight": 1
+    }
+   ]
+  },
+  "becomes": "vfx_dvergrcreep_support_destroyed"
+ },
+ {
+  "id": "dvergrtown_wood_wall01",
+  "kind": "destructible",
+  "health": 200,
+  "damageModifiers": {
+   "pierce": "Resistant",
+   "chop": "Weak",
+   "poison": "Immune",
+   "spirit": "Immune"
+  },
+  "drops": {
+   "min": 1,
+   "max": 3,
+   "chance": 1,
+   "items": [
+    {
+     "item": "Wood",
+     "min": 1,
+     "max": 1,
+     "weight": 1
+    },
+    {
+     "item": "CopperScrap",
+     "min": 1,
+     "max": 1,
+     "weight": 0.5
+    }
+   ]
+  },
+  "becomes": "vfx_dvergrcreep_wood_wall03_destroyed"
+ },
+ {
+  "id": "dvergrtown_wood_wall02",
+  "kind": "destructible",
+  "health": 200,
+  "damageModifiers": {
+   "pierce": "Resistant",
+   "chop": "Weak",
+   "poison": "Immune",
+   "spirit": "Immune"
+  },
+  "drops": {
+   "min": 1,
+   "max": 2,
+   "chance": 1,
+   "items": [
+    {
+     "item": "Wood",
+     "min": 1,
+     "max": 1,
+     "weight": 1
+    }
+   ]
+  },
+  "becomes": "vfx_dvergrcreep_wood_wall02_destroyed"
+ },
+ {
+  "id": "dvergrtown_wood_wall03",
+  "kind": "destructible",
+  "health": 100,
+  "damageModifiers": {
+   "pierce": "Resistant",
+   "chop": "Weak",
+   "poison": "Immune",
+   "spirit": "Immune"
+  },
+  "drops": {
+   "min": 1,
+   "max": 2,
+   "chance": 1,
+   "items": [
+    {
+     "item": "Wood",
+     "min": 1,
+     "max": 1,
+     "weight": 1
+    }
+   ]
+  },
+  "becomes": "vfx_dvergr_wood_wall04_destroyed"
+ },
+ {
+  "id": "elaking_trashpile",
+  "kind": "destructible",
+  "health": 1,
+  "drops": {
+   "min": 1,
+   "max": 3,
+   "chance": 1,
+   "oneOfEach": true,
+   "items": [
+    {
+     "item": "Frostwood",
+     "min": 1,
+     "max": 3,
+     "weight": 1
+    },
+    {
+     "item": "IronScrap",
+     "min": 1,
+     "max": 1,
+     "weight": 0.2
+    },
+    {
+     "item": "SilverNecklace",
+     "min": 1,
+     "max": 1,
+     "weight": 0.2
+    },
+    {
+     "item": "MoldAtgeir",
+     "min": 1,
+     "max": 1,
+     "weight": 0.1
+    },
+    {
+     "item": "MoldAxe",
+     "min": 1,
+     "max": 1,
+     "weight": 0.1
+    },
+    {
+     "item": "MoldAxe2H",
+     "min": 1,
+     "max": 1,
+     "weight": 0.1
+    },
+    {
+     "item": "MoldBow",
+     "min": 1,
+     "max": 1,
+     "weight": 0.1
+    },
+    {
+     "item": "MoldCrossbow",
+     "min": 1,
+     "max": 1,
+     "weight": 0.1
+    },
+    {
+     "item": "MoldFistweapon",
+     "min": 1,
+     "max": 1,
+     "weight": 0.1
+    },
+    {
+     "item": "MoldKnife",
+     "min": 1,
+     "max": 1,
+     "weight": 0.1
+    },
+    {
+     "item": "MoldMace",
+     "min": 1,
+     "max": 1,
+     "weight": 0.1
+    },
+    {
+     "item": "MoldMace2H",
+     "min": 1,
+     "max": 1,
+     "weight": 0.1
+    },
+    {
+     "item": "MoldShieldBuckler",
+     "min": 1,
+     "max": 1,
+     "weight": 0.1
+    },
+    {
+     "item": "MoldShieldRound",
+     "min": 1,
+     "max": 1,
+     "weight": 0.1
+    },
+    {
+     "item": "MoldShieldTower",
+     "min": 1,
+     "max": 1,
+     "weight": 0.1
+    },
+    {
+     "item": "MoldSpear",
+     "min": 1,
+     "max": 1,
+     "weight": 0.1
+    },
+    {
+     "item": "MoldSword",
+     "min": 1,
+     "max": 1,
+     "weight": 0.1
+    },
+    {
+     "item": "MoldSword2H",
+     "min": 1,
+     "max": 1,
+     "weight": 0.1
+    },
+    {
+     "item": "MoldKeys",
+     "min": 1,
+     "max": 1,
+     "weight": 0.2
+    },
+    {
+     "item": "MoldStafffrostorbs",
+     "min": 1,
+     "max": 1,
+     "weight": 0.1
+    },
+    {
+     "item": "MoldStaffOrbofAhri",
+     "min": 1,
+     "max": 1,
+     "weight": 0.1
+    },
+    {
+     "item": "MoldStaffspiritcaller",
+     "min": 1,
+     "max": 1,
+     "weight": 0.1
+    },
+    {
+     "item": "MoldStaffthunderblood",
+     "min": 1,
+     "max": 1,
+     "weight": 0.1
+    }
+   ]
+  },
+  "becomes": "Frostwood",
+  "name": "Pile of Rubble"
+ },
+ {
+  "id": "fenrirhide_hanging",
+  "kind": "destructible",
+  "health": 10,
+  "damageModifiers": {
+   "blunt": "Resistant",
+   "pickaxe": "Resistant",
+   "fire": "Weak",
+   "frost": "Resistant",
+   "lightning": "Ignore",
+   "poison": "Ignore",
+   "spirit": "Ignore"
+  },
+  "drops": {
+   "min": 1,
+   "max": 1,
+   "chance": 1,
+   "items": [
+    {
+     "item": "WolfHairBundle",
+     "min": 1,
+     "max": 2,
+     "weight": 1
+    }
+   ]
+  },
+  "name": "Fenris Hair"
+ },
+ {
+  "id": "fenrirhide_hanging_door",
+  "kind": "destructible",
+  "health": 20,
+  "damageModifiers": {
+   "blunt": "Resistant",
+   "fire": "Weak",
+   "frost": "Resistant",
+   "lightning": "Immune",
+   "poison": "Immune",
+   "spirit": "Immune"
+  },
+  "becomes": "fenrirhide_hanging_door"
+ },
+ {
+  "id": "flying_core",
+  "kind": "destructible",
+  "health": 100,
+  "damageModifiers": {
+   "blunt": "Immune",
+   "slash": "Immune",
+   "pierce": "Immune",
+   "chop": "Immune",
+   "fire": "Immune",
+   "frost": "Immune",
+   "lightning": "Immune",
+   "poison": "Immune",
+   "spirit": "Immune"
+  },
+  "becomes": "rock4_forest_frac"
+ },
+ {
+  "id": "giant_arm",
+  "kind": "destructible",
+  "health": 1,
+  "minToolTier": 3,
+  "damageModifiers": {
+   "blunt": "Immune",
+   "slash": "Immune",
+   "pierce": "Immune",
+   "chop": "Immune",
+   "fire": "Immune",
+   "frost": "Immune",
+   "lightning": "Immune",
+   "poison": "Immune",
+   "spirit": "Immune"
+  },
+  "becomes": "rock4_forest_frac"
+ },
+ {
+  "id": "giant_brain",
+  "kind": "destructible",
+  "health": 1,
+  "minToolTier": 3,
+  "damageModifiers": {
+   "blunt": "Immune",
+   "slash": "Immune",
+   "pierce": "Immune",
+   "chop": "Immune",
+   "fire": "Immune",
+   "frost": "Immune",
+   "lightning": "Immune",
+   "poison": "Immune",
+   "spirit": "Immune"
+  },
+  "becomes": "giant_brain_frac",
+  "name": "Soft Tissue"
+ },
+ {
+  "id": "giant_brain_frac",
+  "kind": "rock",
+  "name": "Soft Tissue",
+  "health": 5,
+  "minToolTier": 3,
+  "damageModifiers": {
+   "blunt": "Immune",
+   "slash": "Immune",
+   "pierce": "Immune",
+   "chop": "Immune",
+   "fire": "Immune",
+   "frost": "Immune",
+   "lightning": "Immune",
+   "poison": "Immune",
+   "spirit": "Immune"
+  },
+  "drops": {
+   "min": 1,
+   "max": 1,
+   "chance": 0.5,
+   "items": [
+    {
+     "item": "Softtissue",
+     "min": 1,
+     "max": 1
+    }
+   ]
+  }
+ },
+ {
+  "id": "giant_helmet1",
+  "kind": "destructible",
+  "health": 1,
+  "minToolTier": 3,
+  "damageModifiers": {
+   "blunt": "Immune",
+   "slash": "Immune",
+   "pierce": "Immune",
+   "chop": "Immune",
+   "fire": "Immune",
+   "frost": "Immune",
+   "lightning": "Immune",
+   "poison": "Immune",
+   "spirit": "Immune"
+  },
+  "becomes": "giant_helmet1_destruction",
+  "name": "Ancient Armour"
+ },
+ {
+  "id": "giant_helmet1_destruction",
+  "kind": "rock",
+  "name": "Ancient Armour",
+  "health": 150,
+  "minToolTier": 3,
+  "damageModifiers": {
+   "blunt": "Immune",
+   "slash": "Immune",
+   "pierce": "Immune",
+   "chop": "Immune",
+   "fire": "Immune",
+   "frost": "Immune",
+   "lightning": "Immune",
+   "poison": "Immune",
+   "spirit": "Immune"
+  },
+  "drops": {
+   "min": 1,
+   "max": 1,
+   "chance": 1,
+   "items": [
+    {
+     "item": "IronScrap",
+     "min": 1,
+     "max": 1,
+     "weight": 1
+    },
+    {
+     "item": "CopperScrap",
+     "min": 1,
+     "max": 1,
+     "weight": 1
+    }
+   ]
+  }
+ },
+ {
+  "id": "giant_helmet2",
+  "kind": "destructible",
+  "health": 1,
+  "minToolTier": 3,
+  "damageModifiers": {
+   "blunt": "Immune",
+   "slash": "Immune",
+   "pierce": "Immune",
+   "chop": "Immune",
+   "fire": "Immune",
+   "frost": "Immune",
+   "lightning": "Immune",
+   "poison": "Immune",
+   "spirit": "Immune"
+  },
+  "becomes": "giant_helmet2_destruction",
+  "name": "Ancient Armour"
+ },
+ {
+  "id": "giant_helmet2_destruction",
+  "kind": "rock",
+  "name": "Ancient Armour",
+  "health": 150,
+  "minToolTier": 3,
+  "damageModifiers": {
+   "blunt": "Immune",
+   "slash": "Immune",
+   "pierce": "Immune",
+   "chop": "Immune",
+   "fire": "Immune",
+   "frost": "Immune",
+   "lightning": "Immune",
+   "poison": "Immune",
+   "spirit": "Immune"
+  },
+  "drops": {
+   "min": 1,
+   "max": 1,
+   "chance": 1,
+   "items": [
+    {
+     "item": "IronScrap",
+     "min": 1,
+     "max": 1,
+     "weight": 1
+    },
+    {
+     "item": "CopperScrap",
+     "min": 1,
+     "max": 1,
+     "weight": 1
+    }
+   ]
+  }
+ },
+ {
+  "id": "giant_ribs",
+  "kind": "destructible",
+  "health": 1,
+  "minToolTier": 3,
+  "damageModifiers": {
+   "blunt": "Immune",
+   "slash": "Immune",
+   "pierce": "Immune",
+   "chop": "Immune",
+   "fire": "Immune",
+   "frost": "Immune",
+   "lightning": "Immune",
+   "poison": "Immune",
+   "spirit": "Immune"
+  },
+  "becomes": "giant_ribs_frac",
+  "name": "Petrified Bone"
+ },
+ {
+  "id": "giant_ribs_frac",
+  "kind": "rock",
+  "name": "Petrified Bone",
+  "health": 100,
+  "minToolTier": 3,
+  "damageModifiers": {
+   "blunt": "Immune",
+   "slash": "Immune",
+   "pierce": "Immune",
+   "chop": "Immune",
+   "fire": "Immune",
+   "frost": "Immune",
+   "lightning": "Immune",
+   "poison": "Immune",
+   "spirit": "Immune"
+  },
+  "drops": {
+   "min": 2,
+   "max": 4,
+   "chance": 1,
+   "items": [
+    {
+     "item": "BlackMarble",
+     "min": 1,
+     "max": 1
+    }
+   ]
+  }
+ },
+ {
+  "id": "giant_skull",
+  "kind": "destructible",
+  "health": 1,
+  "minToolTier": 3,
+  "damageModifiers": {
+   "blunt": "Immune",
+   "slash": "Immune",
+   "pierce": "Immune",
+   "chop": "Immune",
+   "fire": "Immune",
+   "frost": "Immune",
+   "lightning": "Immune",
+   "poison": "Immune",
+   "spirit": "Immune"
+  },
+  "becomes": "giant_skull_frac",
+  "name": "Petrified Bone"
+ },
+ {
+  "id": "giant_skull_frac",
+  "kind": "rock",
+  "name": "Petrified Bone",
+  "health": 100,
+  "minToolTier": 3,
+  "damageModifiers": {
+   "blunt": "Immune",
+   "slash": "Immune",
+   "pierce": "Immune",
+   "chop": "Immune",
+   "fire": "Immune",
+   "frost": "Immune",
+   "lightning": "Immune",
+   "poison": "Immune",
+   "spirit": "Immune"
+  },
+  "drops": {
+   "min": 2,
+   "max": 4,
+   "chance": 1,
+   "items": [
+    {
+     "item": "BlackMarble",
+     "min": 1,
+     "max": 1
+    }
+   ]
+  }
+ },
+ {
+  "id": "giant_sword1",
+  "kind": "destructible",
+  "health": 1,
+  "minToolTier": 3,
+  "damageModifiers": {
+   "blunt": "Immune",
+   "slash": "Immune",
+   "pierce": "Immune",
+   "chop": "Immune",
+   "fire": "Immune",
+   "frost": "Immune",
+   "lightning": "Immune",
+   "poison": "Immune",
+   "spirit": "Immune"
+  },
+  "becomes": "giant_sword1_destruction",
+  "name": "Ancient Sword"
+ },
+ {
+  "id": "giant_sword1_destruction",
+  "kind": "rock",
+  "name": "Ancient Sword",
+  "health": 150,
+  "minToolTier": 3,
+  "damageModifiers": {
+   "blunt": "Immune",
+   "slash": "Immune",
+   "pierce": "Immune",
+   "chop": "Immune",
+   "fire": "Immune",
+   "frost": "Immune",
+   "lightning": "Immune",
+   "poison": "Immune",
+   "spirit": "Immune"
+  },
+  "drops": {
+   "min": 1,
+   "max": 1,
+   "chance": 1,
+   "items": [
+    {
+     "item": "IronScrap",
+     "min": 1,
+     "max": 1,
+     "weight": 1
+    },
+    {
+     "item": "CopperScrap",
+     "min": 1,
+     "max": 1,
+     "weight": 1
+    }
+   ]
+  }
+ },
+ {
+  "id": "giant_sword2",
+  "kind": "destructible",
+  "health": 1,
+  "minToolTier": 3,
+  "damageModifiers": {
+   "blunt": "Immune",
+   "slash": "Immune",
+   "pierce": "Immune",
+   "chop": "Immune",
+   "fire": "Immune",
+   "frost": "Immune",
+   "lightning": "Immune",
+   "poison": "Immune",
+   "spirit": "Immune"
+  },
+  "becomes": "giant_sword2_destruction",
+  "name": "Ancient Sword"
+ },
+ {
+  "id": "giant_sword2_destruction",
+  "kind": "rock",
+  "name": "Ancient Sword",
+  "health": 150,
+  "minToolTier": 3,
+  "damageModifiers": {
+   "blunt": "Immune",
+   "slash": "Immune",
+   "pierce": "Immune",
+   "chop": "Immune",
+   "fire": "Immune",
+   "frost": "Immune",
+   "lightning": "Immune",
+   "poison": "Immune",
+   "spirit": "Immune"
+  },
+  "drops": {
+   "min": 1,
+   "max": 1,
+   "chance": 1,
+   "items": [
+    {
+     "item": "IronScrap",
+     "min": 1,
+     "max": 1,
+     "weight": 1
+    },
+    {
+     "item": "CopperScrap",
+     "min": 1,
+     "max": 1,
+     "weight": 1
+    }
+   ]
+  }
+ },
+ {
+  "id": "goblin_totempole",
+  "kind": "pickable",
+  "pickable": {
+   "item": "GoblinTotem",
+   "amount": 1
+  }
+ },
+ {
+  "id": "goblin_trashpile",
+  "kind": "destructible",
+  "health": 1,
+  "drops": {
+   "min": 2,
+   "max": 3,
+   "chance": 1,
+   "oneOfEach": true,
+   "items": [
+    {
+     "item": "Wood",
+     "min": 1,
+     "max": 1,
+     "weight": 1
+    },
+    {
+     "item": "Wood",
+     "min": 1,
+     "max": 1,
+     "weight": 1
+    },
+    {
+     "item": "Upgrader4Armor",
+     "min": 1,
+     "max": 1,
+     "weight": 0.025
+    },
+    {
+     "item": "Upgrader4Weapon",
+     "min": 1,
+     "max": 1,
+     "weight": 0.0125
+    },
+    {
+     "item": "Upgrader5Armor",
+     "min": 1,
+     "max": 1,
+     "weight": 0.01
+    },
+    {
+     "item": "Upgrader5Weapon",
+     "min": 1,
+     "max": 1,
+     "weight": 0.01
+    }
+   ]
+  }
+ },
+ {
+  "id": "goldvein",
+  "kind": "destructible",
+  "health": 1,
+  "minToolTier": 5,
+  "damageModifiers": {
+   "blunt": "Immune",
+   "slash": "Immune",
+   "pierce": "Immune",
+   "chop": "Immune",
+   "fire": "Immune",
+   "frost": "Immune",
+   "lightning": "Immune",
+   "poison": "Immune",
+   "spirit": "Immune"
+  },
+  "becomes": "goldvein_frac",
+  "name": "Petrified Gammeltroll"
+ },
+ {
+  "id": "goldvein_frac",
+  "kind": "rock",
+  "name": "Petrified Gammeltroll",
+  "health": 50,
+  "minToolTier": 5,
+  "damageModifiers": {
+   "blunt": "Immune",
+   "slash": "Immune",
+   "pierce": "Immune",
+   "chop": "Immune",
+   "fire": "Immune",
+   "frost": "Immune",
+   "lightning": "Immune",
+   "poison": "Immune",
+   "spirit": "Immune"
+  },
+  "drops": {
+   "min": 2,
+   "max": 3,
+   "chance": 1,
+   "items": [
+    {
+     "item": "Stone",
+     "min": 1,
+     "max": 1,
+     "weight": 1
+    },
+    {
+     "item": "GoldOre",
+     "min": 1,
+     "max": 1,
+     "weight": 0.5
+    }
+   ]
+  }
+ },
+ {
+  "id": "hanging_hairstrands",
+  "kind": "pickable",
+  "pickable": {
+   "item": "WolfHairBundle",
+   "amount": 1
+  }
+ },
+ {
+  "id": "highstone",
+  "kind": "destructible",
+  "health": 1,
+  "damageModifiers": {
+   "blunt": "Immune",
+   "slash": "Immune",
+   "pierce": "Immune",
+   "chop": "Immune",
+   "fire": "Immune",
+   "frost": "Immune",
+   "lightning": "Immune",
+   "poison": "Immune",
+   "spirit": "Immune"
+  },
+  "becomes": "highstone_frac"
+ },
+ {
+  "id": "highstone_2",
+  "kind": "destructible",
+  "health": 1,
+  "damageModifiers": {
+   "blunt": "Immune",
+   "slash": "Immune",
+   "pierce": "Immune",
+   "chop": "Immune",
+   "fire": "Immune",
+   "frost": "Immune",
+   "lightning": "Immune",
+   "poison": "Immune",
+   "spirit": "Immune"
+  },
+  "becomes": "highstone_frac"
+ },
+ {
+  "id": "highstone_2_frac",
+  "kind": "rock",
+  "name": "Rock",
+  "health": 30,
+  "damageModifiers": {
+   "blunt": "Immune",
+   "slash": "Immune",
+   "pierce": "Immune",
+   "chop": "Immune",
+   "fire": "Immune",
+   "frost": "Immune",
+   "lightning": "Immune",
+   "poison": "Immune",
+   "spirit": "Immune"
+  },
+  "drops": {
+   "min": 2,
+   "max": 3,
+   "chance": 1,
+   "items": [
+    {
+     "item": "Stone",
+     "min": 1,
+     "max": 1,
+     "weight": 1
+    }
+   ]
+  }
+ },
+ {
+  "id": "highstone_frac",
+  "kind": "rock",
+  "name": "Rock",
+  "health": 30,
+  "damageModifiers": {
+   "blunt": "Immune",
+   "slash": "Immune",
+   "pierce": "Immune",
+   "chop": "Immune",
+   "fire": "Immune",
+   "frost": "Immune",
+   "lightning": "Immune",
+   "poison": "Immune",
+   "spirit": "Immune"
+  },
+  "drops": {
+   "min": 2,
+   "max": 3,
+   "chance": 1,
+   "items": [
+    {
+     "item": "Stone",
+     "min": 1,
+     "max": 1,
+     "weight": 1
+    }
+   ]
+  }
+ },
+ {
+  "id": "ice1",
+  "kind": "destructible",
+  "health": 20,
+  "damageModifiers": {
+   "slash": "Resistant",
+   "pierce": "Resistant",
+   "chop": "Immune",
+   "fire": "Resistant",
+   "frost": "Immune",
+   "poison": "Immune"
+  },
+  "drops": {
+   "min": 3,
+   "max": 5,
+   "chance": 1,
+   "items": [
+    {
+     "item": "Ice",
+     "min": 1,
+     "max": 1
+    }
+   ]
+  }
+ },
+ {
+  "id": "ice_rock1",
+  "kind": "destructible",
+  "health": 1,
+  "damageModifiers": {
+   "slash": "Resistant",
+   "pierce": "Resistant",
+   "chop": "Immune",
+   "fire": "Resistant",
+   "frost": "Immune",
+   "poison": "Immune",
+   "spirit": "Immune"
+  },
+  "becomes": "ice_rock1_frac"
+ },
+ {
+  "id": "lavarock_ashlands1",
+  "kind": "destructible",
+  "health": 1,
+  "damageModifiers": {
+   "blunt": "Immune",
+   "slash": "Immune",
+   "pierce": "Immune",
+   "chop": "Immune",
+   "fire": "Immune",
+   "frost": "Immune",
+   "lightning": "Immune",
+   "poison": "Immune",
+   "spirit": "Immune"
+  },
+  "becomes": "cliff_ashlands2_frac"
+ },
+ {
+  "id": "marker01",
+  "kind": "destructible",
+  "health": 30,
+  "damageModifiers": {
+   "blunt": "Immune",
+   "slash": "Immune",
+   "pierce": "Immune",
+   "chop": "Immune",
+   "fire": "Immune",
+   "frost": "Immune",
+   "poison": "Immune",
+   "spirit": "Immune"
+  },
+  "drops": {
+   "min": 3,
+   "max": 6,
+   "chance": 1,
+   "items": [
+    {
+     "item": "Stone",
+     "min": 1,
+     "max": 1,
+     "weight": 1
+    }
+   ]
+  }
+ },
+ {
+  "id": "marker02",
+  "kind": "destructible",
+  "health": 30,
+  "damageModifiers": {
+   "blunt": "Immune",
+   "slash": "Immune",
+   "pierce": "Immune",
+   "chop": "Immune",
+   "fire": "Immune",
+   "frost": "Immune",
+   "poison": "Immune",
+   "spirit": "Immune"
+  },
+  "drops": {
+   "min": 3,
+   "max": 6,
+   "chance": 1,
+   "items": [
+    {
+     "item": "Stone",
+     "min": 1,
+     "max": 1,
+     "weight": 1
+    }
+   ]
+  }
+ },
+ {
+  "id": "morgenhole_pile",
+  "kind": "destructible",
+  "health": 100,
+  "damageModifiers": {
+   "poison": "Ignore",
+   "spirit": "Ignore"
+  },
+  "drops": {
+   "min": 3,
+   "max": 4,
+   "chance": 1,
+   "items": [
+    {
+     "item": "RottenMeat",
+     "min": 1,
+     "weight": 1
+    },
+    {
+     "item": "BoneFragments",
+     "min": 5,
+     "max": 15,
+     "weight": 1
+    },
+    {
+     "item": "Softtissue",
+     "min": 1,
+     "max": 2,
+     "weight": 1
+    },
+    {
+     "item": "Upgrader5Armor",
+     "min": 1,
+     "max": 1,
+     "weight": 0.05
+    },
+    {
+     "item": "Upgrader5Weapon",
+     "min": 1,
+     "max": 1,
+     "weight": 0.025
+    }
+   ]
+  }
+ },
+ {
+  "id": "mountainkit_chair",
+  "kind": "destructible",
+  "health": 10,
+  "damageModifiers": {
+   "poison": "Resistant",
+   "spirit": "Resistant"
+  },
+  "drops": {
+   "min": 1,
+   "max": 1,
+   "chance": 1,
+   "items": [
+    {
+     "item": "FineWood",
+     "min": 1,
+     "max": 1,
+     "weight": 1
+    }
+   ]
+  },
+  "becomes": "vfx_mountainkit_chair_destroyed"
+ },
+ {
+  "id": "mountainkit_table",
+  "kind": "destructible",
+  "health": 10,
+  "damageModifiers": {
+   "poison": "Resistant",
+   "spirit": "Resistant"
+  },
+  "drops": {
+   "min": 1,
+   "max": 1,
+   "chance": 1,
+   "items": [
+    {
+     "item": "FineWood",
+     "min": 1,
+     "max": 3,
+     "weight": 1
+    }
+   ]
+  },
+  "becomes": "vfx_mountainkit_table_destroyed"
+ },
+ {
+  "id": "mudpile",
+  "kind": "destructible",
+  "health": 1,
+  "damageModifiers": {
+   "blunt": "Immune",
+   "slash": "Immune",
+   "pierce": "Immune",
+   "chop": "Immune",
+   "fire": "Immune",
+   "frost": "Immune",
+   "lightning": "Immune",
+   "poison": "Immune",
+   "spirit": "Immune"
+  },
+  "becomes": "mudpile_frac",
+  "name": "Muddy Scrap Pile"
+ },
+ {
+  "id": "mudpile2",
+  "kind": "destructible",
+  "health": 1,
+  "damageModifiers": {
+   "blunt": "Immune",
+   "slash": "Immune",
+   "pierce": "Immune",
+   "chop": "Immune",
+   "fire": "Immune",
+   "frost": "Immune",
+   "lightning": "Immune",
+   "poison": "Immune",
+   "spirit": "Immune"
+  },
+  "becomes": "mudpile2_frac",
+  "name": "Muddy Scrap Pile"
+ },
+ {
+  "id": "mudpile2_frac",
+  "kind": "rock",
+  "name": "Muddy Scrap Pile",
+  "health": 5,
+  "damageModifiers": {
+   "blunt": "Immune",
+   "slash": "Immune",
+   "pierce": "Immune",
+   "chop": "Immune",
+   "fire": "Immune",
+   "frost": "Immune",
+   "lightning": "Immune",
+   "poison": "Immune",
+   "spirit": "Immune"
+  },
+  "drops": {
+   "min": 1,
+   "max": 1,
+   "chance": 0.2,
+   "items": [
+    {
+     "item": "IronScrap",
+     "min": 1,
+     "max": 1,
+     "weight": 5
+    },
+    {
+     "item": "WitheredBone",
+     "min": 1,
+     "max": 1,
+     "weight": 1
+    },
+    {
+     "item": "LeatherScraps",
+     "min": 1,
+     "max": 1,
+     "weight": 1
+    }
+   ]
+  }
+ },
+ {
+  "id": "mudpile_beacon",
+  "kind": "destructible",
+  "health": 1,
+  "damageModifiers": {
+   "blunt": "Immune",
+   "slash": "Immune",
+   "pierce": "Immune",
+   "chop": "Immune",
+   "fire": "Immune",
+   "frost": "Immune",
+   "lightning": "Immune",
+   "poison": "Immune",
+   "spirit": "Immune"
+  },
+  "becomes": "mudpile_frac",
+  "name": "Muddy Scrap Pile"
+ },
+ {
+  "id": "mudpile_frac",
+  "kind": "rock",
+  "name": "Muddy Scrap Pile",
+  "health": 5,
+  "damageModifiers": {
+   "blunt": "Immune",
+   "slash": "Immune",
+   "pierce": "Immune",
+   "chop": "Immune",
+   "fire": "Immune",
+   "frost": "Immune",
+   "lightning": "Immune",
+   "poison": "Immune",
+   "spirit": "Immune"
+  },
+  "drops": {
+   "min": 1,
+   "max": 1,
+   "chance": 0.3,
+   "items": [
+    {
+     "item": "IronScrap",
+     "min": 1,
+     "max": 1,
+     "weight": 1
+    },
+    {
+     "item": "WitheredBone",
+     "min": 1,
+     "max": 1,
+     "weight": 0.01
+    }
+   ]
+  }
+ },
+ {
+  "id": "mudpile_old",
+  "kind": "rock",
+  "name": "Muddy Scrap Pile",
+  "health": 5,
+  "damageModifiers": {
+   "blunt": "Immune",
+   "slash": "Immune",
+   "pierce": "Immune",
+   "chop": "Immune",
+   "fire": "Immune",
+   "frost": "Immune",
+   "lightning": "Immune",
+   "poison": "Immune",
+   "spirit": "Immune"
+  },
+  "drops": {
+   "min": 1,
+   "max": 1,
+   "chance": 0.5,
+   "items": [
+    {
+     "item": "IronScrap",
+     "min": 1,
+     "max": 1,
+     "weight": 1
+    },
+    {
+     "item": "WitheredBone",
+     "min": 1,
+     "max": 1,
+     "weight": 0.1
+    }
+   ]
+  }
+ },
+ {
+  "id": "prop_FeastAshlands",
+  "kind": "destructible",
+  "health": 30,
+  "drops": {
+   "min": 1,
+   "max": 2,
+   "chance": 1,
+   "items": [
+    {
+     "item": "Wood",
+     "min": 1,
+     "max": 2
+    },
+    {
+     "item": "Blackwood",
+     "min": 1,
+     "max": 2
+    }
+   ]
+  }
+ },
+ {
+  "id": "prop_FeastMeadows",
+  "kind": "destructible",
+  "health": 30,
+  "drops": {
+   "min": 1,
+   "max": 1,
+   "chance": 1,
+   "items": [
+    {
+     "item": "Wood",
+     "min": 1,
+     "max": 2
+    }
+   ]
+  }
+ },
+ {
+  "id": "prop_Tankard",
+  "kind": "destructible",
+  "health": 10,
+  "drops": {
+   "min": 1,
+   "max": 1,
+   "chance": 1,
+   "items": [
+    {
+     "item": "FineWood",
+     "min": 1,
+     "max": 1
+    }
+   ]
+  }
+ },
+ {
+  "id": "prop_ashwood_bed",
+  "kind": "destructible",
+  "health": 50,
+  "damageModifiers": {
+   "chop": "Weak"
+  },
+  "drops": {
+   "min": 1,
+   "max": 1,
+   "chance": 1,
+   "items": [
+    {
+     "item": "Blackwood",
+     "min": 1,
+     "max": 5
+    }
+   ]
+  }
+ },
+ {
+  "id": "prop_bed02",
+  "kind": "destructible",
+  "health": 50,
+  "damageModifiers": {
+   "chop": "Weak"
+  },
+  "drops": {
+   "min": 1,
+   "max": 1,
+   "chance": 1,
+   "items": [
+    {
+     "item": "FineWood",
+     "min": 1,
+     "max": 5
+    }
+   ]
+  }
+ },
+ {
+  "id": "prop_bonfire",
+  "kind": "destructible",
+  "health": 30,
+  "drops": {
+   "min": 1,
+   "max": 1,
+   "chance": 1,
+   "items": [
+    {
+     "item": "Coal",
+     "min": 1,
+     "max": 5
+    }
+   ]
+  }
+ },
+ {
+  "id": "prop_cauldron_ext1_spice",
+  "kind": "destructible",
+  "health": 10,
+  "damageModifiers": {
+   "chop": "Weak"
+  },
+  "drops": {
+   "min": 1,
+   "max": 1,
+   "chance": 1,
+   "items": [
+    {
+     "item": "FineWood",
+     "min": 1,
+     "max": 1
+    }
+   ]
+  }
+ },
+ {
+  "id": "prop_cauldron_ext3_butchertable",
+  "kind": "destructible",
+  "health": 30,
+  "drops": {
+   "min": 1,
+   "max": 2,
+   "chance": 1,
+   "items": [
+    {
+     "item": "FineWood",
+     "min": 1,
+     "max": 5
+    },
+    {
+     "item": "RoundLog",
+     "min": 1,
+     "max": 5
+    }
+   ]
+  }
+ },
+ {
+  "id": "prop_cauldron_ext5_mortarandpestle",
+  "kind": "destructible",
+  "health": 30,
+  "drops": {
+   "min": 1,
+   "max": 1,
+   "chance": 1,
+   "items": [
+    {
+     "item": "BlackMarble",
+     "min": 1,
+     "max": 2
+    }
+   ]
+  }
+ },
+ {
+  "id": "prop_cauldron_ext6_rollingpins",
+  "kind": "destructible",
+  "health": 30,
+  "drops": {
+   "min": 1,
+   "max": 1,
+   "chance": 1,
+   "items": [
+    {
+     "item": "Blackwood",
+     "min": 1,
+     "max": 2
+    }
+   ]
+  }
+ },
+ {
+  "id": "prop_chest_warderobe",
+  "kind": "destructible",
+  "health": 30,
+  "drops": {
+   "min": 1,
+   "max": 1,
+   "chance": 1,
+   "items": [
+    {
+     "item": "Frostwood",
+     "min": 1,
+     "max": 5
+    }
+   ]
+  }
+ },
+ {
+  "id": "prop_forge_ext2",
+  "kind": "destructible",
+  "health": 30,
+  "drops": {
+   "min": 1,
+   "max": 1,
+   "chance": 1,
+   "items": [
+    {
+     "item": "Wood",
+     "min": 1,
+     "max": 5
+    }
+   ]
+  }
+ },
+ {
+  "id": "prop_forge_ext5",
+  "kind": "destructible",
+  "health": 30,
+  "drops": {
+   "min": 1,
+   "max": 1,
+   "chance": 1,
+   "items": [
+    {
+     "item": "FineWood",
+     "min": 1,
+     "max": 5
+    }
+   ]
+  }
+ },
+ {
+  "id": "prop_hearth",
+  "kind": "destructible",
+  "health": 50,
+  "drops": {
+   "min": 1,
+   "max": 1,
+   "chance": 1,
+   "items": [
+    {
+     "item": "Stone",
+     "min": 1,
+     "max": 5
+    }
+   ]
+  }
+ },
+ {
+  "id": "prop_itemstand",
+  "kind": "destructible",
+  "health": 10,
+  "drops": {
+   "min": 1,
+   "max": 1,
+   "chance": 1,
+   "items": [
+    {
+     "item": "FineWood",
+     "min": 1,
+     "max": 1
+    }
+   ]
+  }
+ },
+ {
+  "id": "prop_itemstand_TrophyDraugrElite",
+  "kind": "destructible",
+  "health": 10,
+  "drops": {
+   "min": 1,
+   "max": 1,
+   "chance": 1,
+   "items": [
+    {
+     "item": "FineWood",
+     "min": 1,
+     "max": 1,
+     "weight": 0.9
+    },
+    {
+     "item": "TrophyDraugrElite",
+     "min": 1,
+     "max": 1,
+     "weight": 0.05
+    }
+   ]
+  }
+ },
+ {
+  "id": "prop_itemstand_TrophyGoblinBrute",
+  "kind": "destructible",
+  "health": 10,
+  "drops": {
+   "min": 1,
+   "max": 1,
+   "chance": 1,
+   "items": [
+    {
+     "item": "FineWood",
+     "min": 1,
+     "max": 1,
+     "weight": 0.9
+    },
+    {
+     "item": "TrophyGoblinBrute",
+     "min": 1,
+     "max": 1,
+     "weight": 0.01
+    }
+   ]
+  }
+ },
+ {
+  "id": "prop_itemstand_TrophyGoblinShaman",
+  "kind": "destructible",
+  "health": 10,
+  "drops": {
+   "min": 1,
+   "max": 1,
+   "chance": 1,
+   "items": [
+    {
+     "item": "FineWood",
+     "min": 1,
+     "max": 1,
+     "weight": 0.9
+    },
+    {
+     "item": "TrophyGoblinShaman",
+     "min": 1,
+     "max": 1,
+     "weight": 0.05
+    }
+   ]
+  }
+ },
+ {
+  "id": "prop_itemstand_TrophyGreydwarf",
+  "kind": "destructible",
+  "health": 10,
+  "drops": {
+   "min": 1,
+   "max": 1,
+   "chance": 1,
+   "items": [
+    {
+     "item": "FineWood",
+     "min": 1,
+     "max": 1,
+     "weight": 0.9
+    },
+    {
+     "item": "TrophyGreydwarf",
+     "min": 1,
+     "max": 1,
+     "weight": 0.1
+    }
+   ]
+  }
+ },
+ {
+  "id": "prop_itemstand_TrophyGreydwarfBrute",
+  "kind": "destructible",
+  "health": 10,
+  "drops": {
+   "min": 1,
+   "max": 1,
+   "chance": 1,
+   "items": [
+    {
+     "item": "FineWood",
+     "min": 1,
+     "max": 1,
+     "weight": 0.9
+    },
+    {
+     "item": "TrophyGreydwarfBrute",
+     "min": 1,
+     "max": 1,
+     "weight": 0.05
+    }
+   ]
+  }
+ },
+ {
+  "id": "prop_itemstand_TrophySeekerBrute",
+  "kind": "destructible",
+  "health": 10,
+  "drops": {
+   "min": 1,
+   "max": 1,
+   "chance": 1,
+   "items": [
+    {
+     "item": "FineWood",
+     "min": 1,
+     "max": 1,
+     "weight": 0.9
+    },
+    {
+     "item": "TrophySeekerBrute",
+     "min": 1,
+     "max": 1,
+     "weight": 0.05
+    }
+   ]
+  }
+ },
+ {
+  "id": "prop_piece_MeadCauldron",
+  "kind": "destructible",
+  "health": 30,
+  "drops": {
+   "min": 1,
+   "max": 1,
+   "chance": 1,
+   "items": [
+    {
+     "item": "BronzeScrap",
+     "min": 1,
+     "max": 5
+    }
+   ]
+  }
+ },
+ {
+  "id": "prop_piece_bench_runed",
+  "kind": "destructible",
+  "health": 30,
+  "drops": {
+   "min": 1,
+   "max": 1,
+   "chance": 1,
+   "items": [
+    {
+     "item": "Frostwood",
+     "min": 1,
+     "max": 5
+    }
+   ]
+  }
+ },
+ {
+  "id": "prop_piece_brazierfloor01",
+  "kind": "destructible",
+  "health": 30,
+  "drops": {
+   "min": 1,
+   "max": 1,
+   "chance": 1,
+   "items": [
+    {
+     "item": "BronzeScrap",
+     "min": 1,
+     "max": 5
+    }
+   ]
+  }
+ },
+ {
+  "id": "prop_piece_cauldron",
+  "kind": "destructible",
+  "health": 30,
+  "drops": {
+   "min": 1,
+   "max": 1,
+   "chance": 1,
+   "items": [
+    {
+     "item": "TinOre",
+     "min": 1,
+     "max": 5
+    }
+   ]
+  }
+ },
+ {
+  "id": "prop_piece_chair03",
+  "kind": "destructible",
+  "health": 30,
+  "drops": {
+   "min": 1,
+   "max": 1,
+   "chance": 1,
+   "items": [
+    {
+     "item": "FineWood",
+     "min": 1,
+     "max": 2
+    }
+   ]
+  }
+ },
+ {
+  "id": "prop_piece_cookingstation",
+  "kind": "destructible",
+  "health": 30,
+  "drops": {
+   "min": 1,
+   "max": 1,
+   "chance": 1,
+   "items": [
+    {
+     "item": "Wood",
+     "min": 1,
+     "max": 2
+    }
+   ]
+  }
+ },
+ {
+  "id": "prop_piece_workbench_ext1",
+  "kind": "destructible",
+  "health": 30,
+  "drops": {
+   "min": 1,
+   "max": 1,
+   "chance": 1,
+   "items": [
+    {
+     "item": "Wood",
+     "min": 1,
+     "max": 5
+    }
+   ]
+  }
+ },
+ {
+  "id": "prop_piece_workbench_ext2",
+  "kind": "destructible",
+  "health": 30,
+  "drops": {
+   "min": 1,
+   "max": 1,
+   "chance": 1,
+   "items": [
+    {
+     "item": "Wood",
+     "min": 1,
+     "max": 5
+    }
+   ]
+  }
+ },
+ {
+  "id": "prop_piece_workbench_ext3",
+  "kind": "destructible",
+  "health": 30,
+  "drops": {
+   "min": 1,
+   "max": 1,
+   "chance": 1,
+   "items": [
+    {
+     "item": "FineWood",
+     "min": 1,
+     "max": 5
+    }
+   ]
+  }
+ },
+ {
+  "id": "prop_piece_workbench_ext4",
+  "kind": "destructible",
+  "health": 30,
+  "drops": {
+   "min": 1,
+   "max": 1,
+   "chance": 1,
+   "items": [
+    {
+     "item": "FineWood",
+     "min": 1,
+     "max": 5
+    }
+   ]
+  }
+ },
+ {
+  "id": "prop_preptable",
+  "kind": "destructible",
+  "health": 30,
+  "drops": {
+   "min": 1,
+   "max": 1,
+   "chance": 1,
+   "items": [
+    {
+     "item": "FineWood",
+     "min": 1,
+     "max": 10
+    }
+   ]
+  }
+ },
+ {
+  "id": "prop_wood_stack",
+  "kind": "destructible",
+  "health": 30,
+  "drops": {
+   "min": 1,
+   "max": 1,
+   "chance": 1,
+   "items": [
+    {
+     "item": "Wood",
+     "min": 3,
+     "max": 10
+    }
+   ]
+  }
+ },
+ {
+  "id": "rock1_mistlands",
+  "kind": "destructible",
+  "health": 1,
+  "damageModifiers": {
+   "blunt": "Immune",
+   "slash": "Immune",
+   "pierce": "Immune",
+   "chop": "Immune",
+   "fire": "Immune",
+   "frost": "Immune",
+   "lightning": "Immune",
+   "poison": "Immune",
+   "spirit": "Immune"
+  },
+  "becomes": "rock1_mountain_frac"
+ },
+ {
+  "id": "rock1_mountain",
+  "kind": "destructible",
+  "health": 1,
+  "damageModifiers": {
+   "blunt": "Immune",
+   "slash": "Immune",
+   "pierce": "Immune",
+   "chop": "Immune",
+   "fire": "Immune",
+   "frost": "Immune",
+   "lightning": "Immune",
+   "poison": "Immune",
+   "spirit": "Immune"
+  },
+  "becomes": "rock1_mountain_frac"
+ },
+ {
+  "id": "rock1_mountain_frac",
+  "kind": "rock",
+  "health": 50,
+  "damageModifiers": {
+   "blunt": "Immune",
+   "slash": "Immune",
+   "pierce": "Immune",
+   "chop": "Immune",
+   "fire": "Immune",
+   "frost": "Immune",
+   "lightning": "Immune",
+   "poison": "Immune",
+   "spirit": "Immune"
+  },
+  "drops": {
+   "min": 4,
+   "max": 8,
+   "chance": 1,
+   "items": [
+    {
+     "item": "Stone",
+     "min": 1,
+     "max": 1
+    }
+   ]
+  }
+ },
+ {
+  "id": "rock2_heath",
+  "kind": "destructible",
+  "health": 1,
+  "damageModifiers": {
+   "blunt": "Immune",
+   "slash": "Immune",
+   "pierce": "Immune",
+   "chop": "Immune",
+   "fire": "Immune",
+   "frost": "Immune",
+   "lightning": "Immune",
+   "poison": "Immune",
+   "spirit": "Immune"
+  },
+  "becomes": "rock2_heath_frac"
+ },
+ {
+  "id": "rock2_heath_frac",
+  "kind": "rock",
+  "health": 50,
+  "damageModifiers": {
+   "blunt": "Immune",
+   "slash": "Immune",
+   "pierce": "Immune",
+   "chop": "Immune",
+   "fire": "Immune",
+   "frost": "Immune",
+   "lightning": "Immune",
+   "poison": "Immune",
+   "spirit": "Immune"
+  },
+  "drops": {
+   "min": 4,
+   "max": 8,
+   "chance": 1,
+   "items": [
+    {
+     "item": "Stone",
+     "min": 1,
+     "max": 1
+    }
+   ]
+  }
+ },
+ {
+  "id": "rock2_mountain",
+  "kind": "destructible",
+  "health": 1,
+  "damageModifiers": {
+   "blunt": "Immune",
+   "slash": "Immune",
+   "pierce": "Immune",
+   "chop": "Immune",
+   "fire": "Immune",
+   "frost": "Immune",
+   "lightning": "Immune",
+   "poison": "Immune",
+   "spirit": "Immune"
+  },
+  "becomes": "rock2_mountain_frac"
+ },
+ {
+  "id": "rock2_mountain_frac",
+  "kind": "rock",
+  "health": 50,
+  "damageModifiers": {
+   "blunt": "Immune",
+   "slash": "Immune",
+   "pierce": "Immune",
+   "chop": "Immune",
+   "fire": "Immune",
+   "frost": "Immune",
+   "lightning": "Immune",
+   "poison": "Immune",
+   "spirit": "Immune"
+  },
+  "drops": {
+   "min": 4,
+   "max": 8,
+   "chance": 1,
+   "items": [
+    {
+     "item": "Stone",
+     "min": 1,
+     "max": 1
+    }
+   ]
+  }
+ },
+ {
+  "id": "rock3_ice",
+  "kind": "destructible",
+  "health": 1,
+  "damageModifiers": {
+   "slash": "Resistant",
+   "pierce": "Resistant",
+   "chop": "Immune",
+   "fire": "Resistant",
+   "frost": "Immune",
+   "poison": "Immune",
+   "spirit": "Immune"
+  },
+  "becomes": "rock3_ice_frac"
+ },
+ {
+  "id": "rock3_mountain",
+  "kind": "destructible",
+  "health": 1,
+  "damageModifiers": {
+   "blunt": "Immune",
+   "slash": "Immune",
+   "pierce": "Immune",
+   "chop": "Immune",
+   "fire": "Immune",
+   "frost": "Immune",
+   "lightning": "Immune",
+   "poison": "Immune",
+   "spirit": "Immune"
+  },
+  "becomes": "rock3_mountain_frac"
+ },
+ {
+  "id": "rock3_mountain_1",
+  "kind": "destructible",
+  "health": 1,
+  "damageModifiers": {
+   "blunt": "Immune",
+   "slash": "Immune",
+   "pierce": "Immune",
+   "chop": "Immune",
+   "fire": "Immune",
+   "frost": "Immune",
+   "lightning": "Immune",
+   "poison": "Immune",
+   "spirit": "Immune"
+  },
+  "becomes": "rock3_mountain_1_frac"
+ },
+ {
+  "id": "rock3_mountain_1_frac",
+  "kind": "rock",
+  "health": 50,
+  "damageModifiers": {
+   "blunt": "Immune",
+   "slash": "Immune",
+   "pierce": "Immune",
+   "chop": "Immune",
+   "fire": "Immune",
+   "frost": "Immune",
+   "lightning": "Immune",
+   "poison": "Immune",
+   "spirit": "Immune"
+  },
+  "drops": {
+   "min": 4,
+   "max": 8,
+   "chance": 1,
+   "items": [
+    {
+     "item": "Stone",
+     "min": 1,
+     "max": 1
+    }
+   ]
+  }
+ },
+ {
+  "id": "rock3_mountain_frac",
+  "kind": "rock",
+  "health": 50,
+  "damageModifiers": {
+   "blunt": "Immune",
+   "slash": "Immune",
+   "pierce": "Immune",
+   "chop": "Immune",
+   "fire": "Immune",
+   "frost": "Immune",
+   "lightning": "Immune",
+   "poison": "Immune",
+   "spirit": "Immune"
+  },
+  "drops": {
+   "min": 4,
+   "max": 8,
+   "chance": 1,
+   "items": [
+    {
+     "item": "Stone",
+     "min": 1,
+     "max": 1
+    }
+   ]
+  }
+ },
+ {
+  "id": "rock3_silver",
+  "kind": "destructible",
+  "health": 1,
+  "minToolTier": 2,
+  "damageModifiers": {
+   "blunt": "Immune",
+   "slash": "Immune",
+   "pierce": "Immune",
+   "chop": "Immune",
+   "fire": "Immune",
+   "frost": "Immune",
+   "lightning": "Immune",
+   "poison": "Immune",
+   "spirit": "Immune"
+  },
+  "becomes": "rock3_silver_frac",
+  "name": "Silver Deposit"
+ },
+ {
+  "id": "rock3_silver_frac",
+  "kind": "rock",
+  "name": "Silver Deposit",
+  "health": 50,
+  "minToolTier": 2,
+  "damageModifiers": {
+   "blunt": "Immune",
+   "slash": "Immune",
+   "pierce": "Immune",
+   "chop": "Immune",
+   "fire": "Immune",
+   "frost": "Immune",
+   "lightning": "Immune",
+   "poison": "Immune",
+   "spirit": "Immune"
+  },
+  "drops": {
+   "min": 2,
+   "max": 3,
+   "chance": 1,
+   "items": [
+    {
+     "item": "Stone",
+     "min": 1,
+     "max": 1,
+     "weight": 1
+    },
+    {
+     "item": "SilverOre",
+     "min": 1,
+     "max": 1,
+     "weight": 0.5
+    }
+   ]
+  }
+ },
+ {
+  "id": "rock4_ashlands_frac",
+  "kind": "rock",
+  "health": 50,
+  "damageModifiers": {
+   "blunt": "Immune",
+   "slash": "Immune",
+   "pierce": "Immune",
+   "chop": "Immune",
+   "fire": "Immune",
+   "frost": "Immune",
+   "lightning": "Immune",
+   "poison": "Immune",
+   "spirit": "Immune"
+  },
+  "drops": {
+   "min": 3,
+   "max": 6,
+   "chance": 1,
+   "items": [
+    {
+     "item": "Stone",
+     "min": 1,
+     "max": 1,
+     "weight": 0.2
+    },
+    {
+     "item": "Grausten",
+     "min": 1,
+     "max": 1,
+     "weight": 1
+    }
+   ]
+  }
+ },
+ {
+  "id": "rock4_bigrock_frac",
+  "kind": "rock",
+  "health": 30,
+  "damageModifiers": {
+   "blunt": "Immune",
+   "slash": "Immune",
+   "pierce": "Immune",
+   "chop": "Immune",
+   "fire": "Immune",
+   "frost": "Immune",
+   "lightning": "Immune",
+   "poison": "Immune",
+   "spirit": "Immune"
+  },
+  "drops": {
+   "min": 2,
+   "max": 3,
+   "chance": 1,
+   "items": [
+    {
+     "item": "Stone",
+     "min": 1,
+     "max": 1
+    }
+   ]
+  }
+ },
+ {
+  "id": "rock4_coast",
+  "kind": "destructible",
+  "health": 1,
+  "damageModifiers": {
+   "blunt": "Immune",
+   "slash": "Immune",
+   "pierce": "Immune",
+   "chop": "Immune",
+   "fire": "Immune",
+   "frost": "Immune",
+   "lightning": "Immune",
+   "poison": "Immune",
+   "spirit": "Immune"
+  },
+  "becomes": "rock4_coast_frac"
+ },
+ {
+  "id": "rock4_coast_frac",
+  "kind": "rock",
+  "health": 50,
+  "damageModifiers": {
+   "blunt": "Immune",
+   "slash": "Immune",
+   "pierce": "Immune",
+   "chop": "Immune",
+   "fire": "Immune",
+   "frost": "Immune",
+   "lightning": "Immune",
+   "poison": "Immune",
+   "spirit": "Immune"
+  },
+  "drops": {
+   "min": 4,
+   "max": 8,
+   "chance": 1,
+   "items": [
+    {
+     "item": "Stone",
+     "min": 1,
+     "max": 1
+    }
+   ]
+  }
+ },
+ {
+  "id": "rock4_copper",
+  "kind": "destructible",
+  "health": 1,
+  "damageModifiers": {
+   "blunt": "Immune",
+   "slash": "Immune",
+   "pierce": "Immune",
+   "chop": "Immune",
+   "fire": "Immune",
+   "frost": "Immune",
+   "lightning": "Immune",
+   "poison": "Immune",
+   "spirit": "Immune"
+  },
+  "becomes": "rock4_copper_frac",
+  "name": "Copper Deposit"
+ },
+ {
+  "id": "rock4_copper_frac",
+  "kind": "rock",
+  "name": "Copper Deposit",
+  "health": 50,
+  "damageModifiers": {
+   "blunt": "Immune",
+   "slash": "Immune",
+   "pierce": "Immune",
+   "chop": "Immune",
+   "fire": "Immune",
+   "frost": "Immune",
+   "lightning": "Immune",
+   "poison": "Immune",
+   "spirit": "Immune"
+  },
+  "drops": {
+   "min": 2,
+   "max": 4,
+   "chance": 1,
+   "items": [
+    {
+     "item": "Stone",
+     "min": 1,
+     "max": 1,
+     "weight": 1
+    },
+    {
+     "item": "CopperOre",
+     "min": 1,
+     "max": 1,
+     "weight": 0.5
+    }
+   ]
+  }
+ },
+ {
+  "id": "rock4_forest",
+  "kind": "destructible",
+  "health": 1,
+  "damageModifiers": {
+   "blunt": "Immune",
+   "slash": "Immune",
+   "pierce": "Immune",
+   "chop": "Immune",
+   "fire": "Immune",
+   "frost": "Immune",
+   "lightning": "Immune",
+   "poison": "Immune",
+   "spirit": "Immune"
+  },
+  "becomes": "rock4_forest_frac"
+ },
+ {
+  "id": "rock4_forest_frac",
+  "kind": "rock",
+  "health": 50,
+  "damageModifiers": {
+   "blunt": "Immune",
+   "slash": "Immune",
+   "pierce": "Immune",
+   "chop": "Immune",
+   "fire": "Immune",
+   "frost": "Immune",
+   "lightning": "Immune",
+   "poison": "Immune",
+   "spirit": "Immune"
+  },
+  "drops": {
+   "min": 4,
+   "max": 8,
+   "chance": 1,
+   "items": [
+    {
+     "item": "Stone",
+     "min": 1,
+     "max": 1
+    }
+   ]
+  }
+ },
+ {
+  "id": "rock4_heath",
+  "kind": "destructible",
+  "health": 1,
+  "damageModifiers": {
+   "blunt": "Immune",
+   "slash": "Immune",
+   "pierce": "Immune",
+   "chop": "Immune",
+   "fire": "Immune",
+   "frost": "Immune",
+   "lightning": "Immune",
+   "poison": "Immune",
+   "spirit": "Immune"
+  },
+  "becomes": "rock4_heath_frac"
+ },
+ {
+  "id": "rock4_heath_frac",
+  "kind": "rock",
+  "health": 50,
+  "damageModifiers": {
+   "blunt": "Immune",
+   "slash": "Immune",
+   "pierce": "Immune",
+   "chop": "Immune",
+   "fire": "Immune",
+   "frost": "Immune",
+   "lightning": "Immune",
+   "poison": "Immune",
+   "spirit": "Immune"
+  },
+  "drops": {
+   "min": 4,
+   "max": 8,
+   "chance": 1,
+   "items": [
+    {
+     "item": "Stone",
+     "min": 1,
+     "max": 1
+    }
+   ]
+  }
+ },
+ {
+  "id": "rock_mistlands1",
+  "kind": "destructible",
+  "health": 1,
+  "damageModifiers": {
+   "blunt": "Immune",
+   "slash": "Immune",
+   "pierce": "Immune",
+   "chop": "Immune",
+   "fire": "Immune",
+   "frost": "Immune",
+   "lightning": "Immune",
+   "poison": "Immune",
+   "spirit": "Immune"
+  },
+  "becomes": "rock_mistlands1_frac"
+ },
+ {
+  "id": "rock_mistlands1_frac",
+  "kind": "rock",
+  "health": 50,
+  "damageModifiers": {
+   "blunt": "Immune",
+   "slash": "Immune",
+   "pierce": "Immune",
+   "chop": "Immune",
+   "fire": "Immune",
+   "frost": "Immune",
+   "lightning": "Immune",
+   "poison": "Immune",
+   "spirit": "Immune"
+  },
+  "drops": {
+   "min": 4,
+   "max": 8,
+   "chance": 1,
+   "items": [
+    {
+     "item": "Stone",
+     "min": 1,
+     "max": 1
+    }
+   ]
+  }
+ },
+ {
+  "id": "rock_mistlands2",
+  "kind": "destructible",
+  "health": 1,
+  "damageModifiers": {
+   "blunt": "Immune",
+   "slash": "Immune",
+   "pierce": "Immune",
+   "chop": "Immune",
+   "fire": "Immune",
+   "frost": "Immune",
+   "lightning": "Immune",
+   "poison": "Immune",
+   "spirit": "Immune"
+  },
+  "becomes": "rock4_forest_frac"
+ },
+ {
+  "id": "root07",
+  "kind": "destructible",
+  "health": 100,
+  "damageModifiers": {
+   "pierce": "Resistant",
+   "poison": "Immune",
+   "spirit": "Immune"
+  },
+  "drops": {
+   "min": 1,
+   "max": 1,
+   "chance": 1,
+   "items": [
+    {
+     "item": "Wood",
+     "min": 1,
+     "max": 2,
+     "weight": 1
+    }
+   ]
+  }
+ },
+ {
+  "id": "root08",
+  "kind": "destructible",
+  "health": 100,
+  "damageModifiers": {
+   "pierce": "Resistant",
+   "poison": "Immune",
+   "spirit": "Immune"
+  },
+  "drops": {
+   "min": 1,
+   "max": 1,
+   "chance": 1,
+   "items": [
+    {
+     "item": "Wood",
+     "min": 1,
+     "max": 2,
+     "weight": 1
+    }
+   ]
+  }
+ },
+ {
+  "id": "root11",
+  "kind": "destructible",
+  "health": 100,
+  "damageModifiers": {
+   "pierce": "Resistant",
+   "poison": "Immune",
+   "spirit": "Immune"
+  },
+  "drops": {
+   "min": 1,
+   "max": 1,
+   "chance": 1,
+   "items": [
+    {
+     "item": "Wood",
+     "min": 1,
+     "max": 2,
+     "weight": 1
+    }
+   ]
+  }
+ },
+ {
+  "id": "root12",
+  "kind": "destructible",
+  "health": 100,
+  "damageModifiers": {
+   "pierce": "Resistant",
+   "poison": "Immune",
+   "spirit": "Immune"
+  },
+  "drops": {
+   "min": 1,
+   "max": 1,
+   "chance": 1,
+   "items": [
+    {
+     "item": "Wood",
+     "min": 1,
+     "max": 2,
+     "weight": 1
+    }
+   ]
+  }
+ },
+ {
+  "id": "shrub_2",
+  "kind": "destructible",
+  "health": 30,
+  "damageModifiers": {
+   "pierce": "Resistant",
+   "chop": "Weak",
+   "poison": "Immune",
+   "spirit": "Immune"
+  },
+  "drops": {
+   "min": 1,
+   "max": 2,
+   "chance": 1,
+   "items": [
+    {
+     "item": "Wood",
+     "min": 1,
+     "max": 1
+    }
+   ]
+  }
+ },
+ {
+  "id": "shrub_2_heath",
+  "kind": "destructible",
+  "health": 30,
+  "damageModifiers": {
+   "pierce": "Resistant",
+   "chop": "Weak",
+   "poison": "Immune",
+   "spirit": "Immune"
+  },
+  "drops": {
+   "min": 1,
+   "max": 2,
+   "chance": 1,
+   "items": [
+    {
+     "item": "Wood",
+     "min": 1,
+     "max": 1
+    }
+   ]
+  }
+ },
+ {
+  "id": "silvervein",
+  "kind": "destructible",
+  "health": 1,
+  "minToolTier": 2,
+  "damageModifiers": {
+   "blunt": "Immune",
+   "slash": "Immune",
+   "pierce": "Immune",
+   "chop": "Immune",
+   "fire": "Immune",
+   "frost": "Immune",
+   "lightning": "Immune",
+   "poison": "Immune",
+   "spirit": "Immune"
+  },
+  "becomes": "silvervein_frac",
+  "name": "Silver Vein"
+ },
+ {
+  "id": "silvervein_frac",
+  "kind": "rock",
+  "name": "Silver Vein",
+  "health": 50,
+  "minToolTier": 2,
+  "damageModifiers": {
+   "blunt": "Immune",
+   "slash": "Immune",
+   "pierce": "Immune",
+   "chop": "Immune",
+   "fire": "Immune",
+   "frost": "Immune",
+   "lightning": "Immune",
+   "poison": "Immune",
+   "spirit": "Immune"
+  },
+  "drops": {
+   "min": 2,
+   "max": 3,
+   "chance": 1,
+   "items": [
+    {
+     "item": "Stone",
+     "min": 1,
+     "max": 1,
+     "weight": 1
+    },
+    {
+     "item": "SilverOre",
+     "min": 1,
+     "max": 1,
+     "weight": 0.5
+    }
+   ]
+  }
+ },
+ {
+  "id": "stonewall_2",
+  "kind": "destructible",
+  "health": 30,
+  "damageModifiers": {
+   "blunt": "Immune",
+   "slash": "Immune",
+   "pierce": "Immune",
+   "chop": "Immune",
+   "fire": "Immune",
+   "frost": "Immune",
+   "lightning": "Immune",
+   "poison": "Immune",
+   "spirit": "Immune"
+  },
+  "drops": {
+   "min": 2,
+   "max": 4,
+   "chance": 1,
+   "items": [
+    {
+     "item": "Stone",
+     "min": 1,
+     "max": 1,
+     "weight": 1
+    }
+   ]
+  }
+ },
+ {
+  "id": "stonewall_3",
+  "kind": "destructible",
+  "health": 30,
+  "damageModifiers": {
+   "blunt": "Immune",
+   "slash": "Immune",
+   "pierce": "Immune",
+   "chop": "Immune",
+   "fire": "Immune",
+   "frost": "Immune",
+   "lightning": "Immune",
+   "poison": "Immune",
+   "spirit": "Immune"
+  },
+  "drops": {
+   "min": 2,
+   "max": 4,
+   "chance": 1,
+   "items": [
+    {
+     "item": "Stone",
+     "min": 1,
+     "max": 1,
+     "weight": 1
+    }
+   ]
+  }
+ },
+ {
+  "id": "stubbe",
+  "kind": "destructible",
+  "health": 40,
+  "damageModifiers": {
+   "blunt": "Immune",
+   "slash": "Immune",
+   "pierce": "Immune",
+   "pickaxe": "Immune",
+   "fire": "Immune",
+   "frost": "Immune",
+   "lightning": "Immune",
+   "poison": "Immune",
+   "spirit": "Immune"
+  },
+  "drops": {
+   "min": 3,
+   "max": 4,
+   "chance": 1,
+   "items": [
+    {
+     "item": "Wood",
+     "min": 1,
+     "max": 1,
+     "weight": 1
+    }
+   ]
+  }
+ },
+ {
+  "id": "stubbe_deepnorth",
+  "kind": "destructible",
+  "health": 100,
+  "damageModifiers": {
+   "blunt": "Immune",
+   "slash": "Immune",
+   "pierce": "Immune",
+   "frost": "Immune",
+   "lightning": "Immune",
+   "poison": "Immune",
+   "spirit": "Immune"
+  },
+  "drops": {
+   "min": 3,
+   "max": 4,
+   "chance": 1,
+   "items": [
+    {
+     "item": "Frostwood",
+     "min": 1,
+     "max": 1,
+     "weight": 1
+    }
+   ]
+  }
+ },
+ {
+  "id": "stubbe_spawner",
+  "kind": "destructible",
+  "health": 40,
+  "damageModifiers": {
+   "blunt": "Immune",
+   "slash": "Immune",
+   "pierce": "Immune",
+   "pickaxe": "Immune",
+   "fire": "Immune",
+   "frost": "Immune",
+   "poison": "Immune",
+   "spirit": "Immune"
+  },
+  "drops": {
+   "min": 3,
+   "max": 4,
+   "chance": 1,
+   "items": [
+    {
+     "item": "Wood",
+     "min": 1,
+     "max": 1,
+     "weight": 1
+    }
+   ]
+  }
+ },
+ {
+  "id": "tarlump1",
+  "kind": "destructible",
+  "health": 1,
+  "damageModifiers": {
+   "blunt": "Immune",
+   "slash": "Immune",
+   "pierce": "Immune",
+   "chop": "Immune",
+   "fire": "Immune",
+   "frost": "Immune",
+   "lightning": "Immune",
+   "poison": "Immune",
+   "spirit": "Immune"
+  },
+  "becomes": "tarlump1_frac"
+ },
+ {
+  "id": "tarlump1_frac",
+  "kind": "rock",
+  "health": 1,
+  "damageModifiers": {
+   "blunt": "Immune",
+   "slash": "Immune",
+   "pierce": "Immune",
+   "chop": "Immune",
+   "fire": "Immune",
+   "frost": "Immune",
+   "lightning": "Immune",
+   "poison": "Immune",
+   "spirit": "Immune"
+  },
+  "drops": {
+   "min": 4,
+   "max": 8,
+   "chance": 1,
+   "items": [
+    {
+     "item": "Stone",
+     "min": 1,
+     "max": 1
+    }
+   ]
+  }
+ },
+ {
+  "id": "trader_wagon_destructable",
+  "kind": "destructible",
+  "health": 400,
+  "damageModifiers": {
+   "pierce": "Resistant",
+   "pickaxe": "Resistant",
+   "fire": "Weak",
+   "frost": "Resistant",
+   "lightning": "Resistant",
+   "poison": "Immune",
+   "spirit": "Immune"
+  },
+  "drops": {
+   "min": 3,
+   "max": 5,
+   "chance": 1,
+   "items": [
+    {
+     "item": "FineWood",
+     "min": 1,
+     "max": 1
+    }
+   ]
+  },
+  "becomes": "vfx_wagon_destroyed"
+ },
+ {
+  "id": "veg_skull_Ashlands",
+  "kind": "destructible",
+  "health": 80,
+  "damageModifiers": {
+   "fire": "Immune",
+   "poison": "Immune",
+   "spirit": "Immune"
+  },
+  "drops": {
+   "max": 2,
+   "chance": 1,
+   "items": [
+    {
+     "item": "CharredBone",
+     "min": 1,
+     "max": 1,
+     "weight": 1
+    }
+   ]
+  }
+ },
+ {
+  "id": "widestone",
+  "kind": "destructible",
+  "health": 1,
+  "damageModifiers": {
+   "blunt": "Immune",
+   "slash": "Immune",
+   "pierce": "Immune",
+   "chop": "Immune",
+   "fire": "Immune",
+   "frost": "Immune",
+   "lightning": "Immune",
+   "poison": "Immune",
+   "spirit": "Immune"
+  },
+  "becomes": "widestone_frac"
+ },
+ {
+  "id": "widestone_2",
+  "kind": "destructible",
+  "health": 1,
+  "damageModifiers": {
+   "blunt": "Immune",
+   "slash": "Immune",
+   "pierce": "Immune",
+   "chop": "Immune",
+   "fire": "Immune",
+   "frost": "Immune",
+   "lightning": "Immune",
+   "poison": "Immune",
+   "spirit": "Immune"
+  },
+  "becomes": "widestone_2_frac"
+ },
+ {
+  "id": "widestone_2_frac",
+  "kind": "rock",
+  "name": "Rock",
+  "health": 30,
+  "damageModifiers": {
+   "blunt": "Immune",
+   "slash": "Immune",
+   "pierce": "Immune",
+   "chop": "Immune",
+   "fire": "Immune",
+   "frost": "Immune",
+   "lightning": "Immune",
+   "poison": "Immune",
+   "spirit": "Immune"
+  },
+  "drops": {
+   "min": 2,
+   "max": 3,
+   "chance": 1,
+   "items": [
+    {
+     "item": "Stone",
+     "min": 1,
+     "max": 1,
+     "weight": 1
+    }
+   ]
+  }
+ },
+ {
+  "id": "widestone_frac",
+  "kind": "rock",
+  "name": "Rock",
+  "health": 30,
+  "damageModifiers": {
+   "blunt": "Immune",
+   "slash": "Immune",
+   "pierce": "Immune",
+   "chop": "Immune",
+   "fire": "Immune",
+   "frost": "Immune",
+   "lightning": "Immune",
+   "poison": "Immune",
+   "spirit": "Immune"
+  },
+  "drops": {
+   "min": 2,
+   "max": 3,
+   "chance": 1,
+   "items": [
+    {
+     "item": "Stone",
+     "min": 1,
+     "max": 1,
+     "weight": 1
+    }
+   ]
+  }
+ },
+ {
+  "id": "yggashoot_log",
+  "kind": "log",
+  "health": 100,
+  "minToolTier": 4,
+  "damageModifiers": {
+   "blunt": "Immune",
+   "slash": "Immune",
+   "pierce": "Immune",
+   "pickaxe": "Immune",
+   "fire": "Immune",
+   "frost": "Immune",
+   "lightning": "Immune",
+   "poison": "Immune",
+   "spirit": "Immune"
+  },
+  "becomes": "yggashoot_log_half",
+  "name": "Log"
+ },
+ {
+  "id": "yggashoot_log_half",
+  "kind": "log",
+  "health": 100,
+  "minToolTier": 4,
+  "damageModifiers": {
+   "blunt": "Immune",
+   "slash": "Immune",
+   "pierce": "Immune",
+   "pickaxe": "Immune",
+   "fire": "Immune",
+   "frost": "Immune",
+   "lightning": "Immune",
+   "poison": "Immune",
+   "spirit": "Immune"
+  },
+  "drops": {
+   "min": 10,
+   "max": 10,
+   "chance": 1,
+   "items": [
+    {
+     "item": "Wood",
+     "min": 1,
+     "max": 1,
+     "weight": 1
+    },
+    {
+     "item": "YggdrasilWood",
+     "min": 1,
+     "max": 1,
+     "weight": 1
+    }
+   ]
+  },
+  "name": "Log"
+ }
+]

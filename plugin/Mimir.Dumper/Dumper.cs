@@ -16,6 +16,8 @@ namespace Mimir.Dumper
     ///   prefabs/&lt;name&gt;.json        every networked prefab + every ObjectDB item, game components only
     ///   recipes.json                   ObjectDB.m_recipes
     ///   status_effects.json            ObjectDB.m_StatusEffects
+    ///   status_effect_defaults.json    a fresh instance of each status effect type (to tell set fields from defaults)
+    ///   piece_tables.json              build menus of tools (hammer, hoe, ...), not networked prefabs
     ///   world/&lt;Type&gt;.json            world-level systems (zones, environments, spawns, events)
     ///   localization/English.json      $token -> text
     ///   manifest.json                  written last; its presence marks a complete dump
@@ -33,7 +35,7 @@ namespace Mimir.Dumper
 
         public sealed class Result
         {
-            public int Prefabs, Items, Recipes, StatusEffects, WorldObjects, Translations;
+            public int Prefabs, Items, Recipes, StatusEffects, PieceTables, WorldObjects, Translations;
             public List<string> Warnings = new List<string>();
         }
 
@@ -46,6 +48,12 @@ namespace Mimir.Dumper
             DumpPrefabs(Path.Combine(outDir, "prefabs"), r);
             r.Recipes = DumpObjects(Path.Combine(outDir, "recipes.json"), ObjectDB.instance.m_recipes.Cast<Object>());
             r.StatusEffects = DumpObjects(Path.Combine(outDir, "status_effects.json"), ObjectDB.instance.m_StatusEffects.Cast<Object>());
+            DumpObjects(Path.Combine(outDir, "status_effect_defaults.json"), ObjectDB.instance.m_StatusEffects
+                .Where(e => e != null).Select(e => e.GetType()).Distinct().Select(NewInstance).Cast<Object>());
+            r.PieceTables = DumpObjects(Path.Combine(outDir, "piece_tables.json"), ObjectDB.instance.m_items
+                .Select(i => i != null ? i.GetComponent<ItemDrop>() : null)
+                .Select(d => d != null ? d.m_itemData.m_shared.m_buildPieces : null)
+                .Where(t => t != null).Distinct().Cast<Object>());
             DumpWorld(Path.Combine(outDir, "world"), r);
             r.Translations = DumpLocalization(Path.Combine(outDir, "localization"), r);
             WriteManifest(outDir, r);
@@ -119,6 +127,13 @@ namespace Mimir.Dumper
             return list.Count;
         }
 
+        private static ScriptableObject NewInstance(Type t)
+        {
+            var o = ScriptableObject.CreateInstance(t);
+            o.name = t.Name;
+            return o;
+        }
+
         private static void DumpWorld(string dir, Result r)
         {
             Directory.CreateDirectory(dir);
@@ -166,50 +181,17 @@ namespace Mimir.Dumper
             w.Key("items"); w.Value(r.Items);
             w.Key("recipes"); w.Value(r.Recipes);
             w.Key("statusEffects"); w.Value(r.StatusEffects);
+            w.Key("pieceTables"); w.Value(r.PieceTables);
             w.Key("worldObjects"); w.Value(r.WorldObjects);
             w.Key("translations"); w.Value(r.Translations);
             w.Key("skippedFields"); w.Value(Serializer.SkippedFields);
             w.EndObject();
-            w.Key("iconProbe"); WriteIconProbe(w);
             w.Key("warnings");
             w.BeginArray();
             foreach (var s in r.Warnings) w.Value(s);
             w.EndArray();
             w.EndObject();
             Write(Path.Combine(outDir, "manifest.json"), w);
-        }
-
-        /// <summary>
-        /// Diagnostic: does the headless server have usable icon textures? Decides whether icons can
-        /// come from this dump or need a separate extraction path.
-        /// </summary>
-        private static void WriteIconProbe(JsonWriter w)
-        {
-            w.BeginObject();
-            try
-            {
-                var drop = ObjectDB.instance.GetItemPrefab("SwordBronze")?.GetComponent<ItemDrop>();
-                var sprite = drop?.m_itemData?.m_shared?.m_icons?.FirstOrDefault();
-                w.Key("sprite"); w.Value(sprite != null ? sprite.name : null);
-                var tex = sprite != null ? sprite.texture : null;
-                w.Key("texture"); w.Value(tex != null ? tex.name : null);
-                if (tex != null)
-                {
-                    w.Key("size"); w.Value($"{tex.width}x{tex.height}");
-                    w.Key("format"); w.Value(tex.format.ToString());
-                    w.Key("isReadable"); w.Value(tex.isReadable);
-                    w.Key("rect"); w.Value(sprite.textureRect.ToString());
-                    w.Key("graphicsDevice"); w.Value(SystemInfo.graphicsDeviceType.ToString());
-                    try
-                    {
-                        var px = tex.GetPixel((int)sprite.textureRect.center.x, (int)sprite.textureRect.center.y);
-                        w.Key("centerPixel"); w.Value(px.ToString());
-                    }
-                    catch (Exception e) { w.Key("getPixelError"); w.Value(e.Message); }
-                }
-            }
-            catch (Exception e) { w.Key("error"); w.Value(e.Message); }
-            w.EndObject();
         }
 
         private static bool IsGameType(Type t) => t.Assembly.GetName().Name.StartsWith("assembly_", StringComparison.Ordinal);

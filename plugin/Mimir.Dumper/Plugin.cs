@@ -20,7 +20,7 @@ namespace Mimir.Dumper
     {
         public const string Guid = "dev.mimir.dumper";
         public const string Name = "Mimir.Dumper";
-        public const string PluginVersion = "0.1.0";
+        public const string PluginVersion = "0.2.0";
 
         // Frames to wait after everything reports ready, so late Start() initialisation settles.
         private const int SettleFrames = 120;

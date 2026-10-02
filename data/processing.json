@@ -1,0 +1,960 @@
+[
+ {
+  "station": "blastfurnace",
+  "kind": "smelter",
+  "from": "BlackMetalScrap",
+  "to": "BlackMetal",
+  "amount": 1,
+  "time": 30,
+  "fuel": "Coal",
+  "fuelPerProduct": 2,
+  "capacity": 10
+ },
+ {
+  "station": "blastfurnace",
+  "kind": "smelter",
+  "from": "FlametalOreNew",
+  "to": "FlametalNew",
+  "amount": 1,
+  "time": 30,
+  "fuel": "Coal",
+  "fuelPerProduct": 2,
+  "capacity": 10
+ },
+ {
+  "station": "blastfurnace",
+  "kind": "smelter",
+  "from": "FlametalOreNew",
+  "to": "FlametalNew",
+  "amount": 1,
+  "time": 30,
+  "fuel": "Coal",
+  "fuelPerProduct": 2,
+  "capacity": 10
+ },
+ {
+  "station": "blastfurnace",
+  "kind": "smelter",
+  "from": "GoldOre",
+  "to": "Gold",
+  "amount": 1,
+  "time": 30,
+  "fuel": "Coal",
+  "fuelPerProduct": 2,
+  "capacity": 10
+ },
+ {
+  "station": "charcoal_kiln",
+  "kind": "smelter",
+  "from": "FineWood",
+  "to": "Coal",
+  "amount": 1,
+  "time": 15,
+  "capacity": 25
+ },
+ {
+  "station": "charcoal_kiln",
+  "kind": "smelter",
+  "from": "RoundLog",
+  "to": "Coal",
+  "amount": 1,
+  "time": 15,
+  "capacity": 25
+ },
+ {
+  "station": "charcoal_kiln",
+  "kind": "smelter",
+  "from": "Wood",
+  "to": "Coal",
+  "amount": 1,
+  "time": 15,
+  "capacity": 25
+ },
+ {
+  "station": "eitrrefinery",
+  "kind": "smelter",
+  "from": "Softtissue",
+  "to": "Eitr",
+  "amount": 1,
+  "time": 40,
+  "fuel": "Sap",
+  "fuelPerProduct": 1,
+  "capacity": 20
+ },
+ {
+  "station": "fermenter",
+  "kind": "fermenter",
+  "from": "BarleyWineBase",
+  "to": "BarleyWine",
+  "amount": 6,
+  "time": 2400
+ },
+ {
+  "station": "fermenter",
+  "kind": "fermenter",
+  "from": "MeadBaseBugRepellent",
+  "to": "MeadBugRepellent",
+  "amount": 6,
+  "time": 2400
+ },
+ {
+  "station": "fermenter",
+  "kind": "fermenter",
+  "from": "MeadBaseBzerker",
+  "to": "MeadBzerker",
+  "amount": 3,
+  "time": 2400
+ },
+ {
+  "station": "fermenter",
+  "kind": "fermenter",
+  "from": "MeadBaseEitrLingering",
+  "to": "MeadEitrLingering",
+  "amount": 6,
+  "time": 2400
+ },
+ {
+  "station": "fermenter",
+  "kind": "fermenter",
+  "from": "MeadBaseEitrMinor",
+  "to": "MeadEitrMinor",
+  "amount": 6,
+  "time": 2400
+ },
+ {
+  "station": "fermenter",
+  "kind": "fermenter",
+  "from": "MeadBaseFrostResist",
+  "to": "MeadFrostResist",
+  "amount": 6,
+  "time": 2400
+ },
+ {
+  "station": "fermenter",
+  "kind": "fermenter",
+  "from": "MeadBaseHasty",
+  "to": "MeadHasty",
+  "amount": 6,
+  "time": 2400
+ },
+ {
+  "station": "fermenter",
+  "kind": "fermenter",
+  "from": "MeadBaseHealthLingering",
+  "to": "MeadHealthLingering",
+  "amount": 6,
+  "time": 2400
+ },
+ {
+  "station": "fermenter",
+  "kind": "fermenter",
+  "from": "MeadBaseHealthMajor",
+  "to": "MeadHealthMajor",
+  "amount": 6,
+  "time": 2400
+ },
+ {
+  "station": "fermenter",
+  "kind": "fermenter",
+  "from": "MeadBaseHealthMedium",
+  "to": "MeadHealthMedium",
+  "amount": 6,
+  "time": 2400
+ },
+ {
+  "station": "fermenter",
+  "kind": "fermenter",
+  "from": "MeadBaseHealthMinor",
+  "to": "MeadHealthMinor",
+  "amount": 6,
+  "time": 2400
+ },
+ {
+  "station": "fermenter",
+  "kind": "fermenter",
+  "from": "MeadBaseLightFoot",
+  "to": "MeadLightfoot",
+  "amount": 6,
+  "time": 2400
+ },
+ {
+  "station": "fermenter",
+  "kind": "fermenter",
+  "from": "MeadBasePoisonResist",
+  "to": "MeadPoisonResist",
+  "amount": 6,
+  "time": 2400
+ },
+ {
+  "station": "fermenter",
+  "kind": "fermenter",
+  "from": "MeadBaseStaminaLingering",
+  "to": "MeadStaminaLingering",
+  "amount": 6,
+  "time": 2400
+ },
+ {
+  "station": "fermenter",
+  "kind": "fermenter",
+  "from": "MeadBaseStaminaMedium",
+  "to": "MeadStaminaMedium",
+  "amount": 6,
+  "time": 2400
+ },
+ {
+  "station": "fermenter",
+  "kind": "fermenter",
+  "from": "MeadBaseStaminaMinor",
+  "to": "MeadStaminaMinor",
+  "amount": 6,
+  "time": 2400
+ },
+ {
+  "station": "fermenter",
+  "kind": "fermenter",
+  "from": "MeadBaseStrength",
+  "to": "MeadStrength",
+  "amount": 6,
+  "time": 2400
+ },
+ {
+  "station": "fermenter",
+  "kind": "fermenter",
+  "from": "MeadBaseSwimmer",
+  "to": "MeadSwimmer",
+  "amount": 6,
+  "time": 2400
+ },
+ {
+  "station": "fermenter",
+  "kind": "fermenter",
+  "from": "MeadBaseTamer",
+  "to": "MeadTamer",
+  "amount": 6,
+  "time": 2400
+ },
+ {
+  "station": "fermenter",
+  "kind": "fermenter",
+  "from": "MeadBaseTasty",
+  "to": "MeadTasty",
+  "amount": 6,
+  "time": 2400
+ },
+ {
+  "station": "piece_FrostFoundry",
+  "kind": "cooking",
+  "from": "ArmorGoldHeavyChestUncooked",
+  "to": "ArmorDeepNorthHeavyChest",
+  "amount": 1,
+  "time": 50,
+  "fuel": "FrozenFuel"
+ },
+ {
+  "station": "piece_FrostFoundry",
+  "kind": "cooking",
+  "from": "ArmorGoldHeavyHelmetUncooked",
+  "to": "HelmetDNHeavy",
+  "amount": 1,
+  "time": 50,
+  "fuel": "FrozenFuel"
+ },
+ {
+  "station": "piece_FrostFoundry",
+  "kind": "cooking",
+  "from": "ArmorGoldHeavyLegsUncooked",
+  "to": "ArmorDeepNorthHeavylegs",
+  "amount": 1,
+  "time": 50,
+  "fuel": "FrozenFuel"
+ },
+ {
+  "station": "piece_FrostFoundry",
+  "kind": "cooking",
+  "from": "ArmorGoldMageChestUncooked",
+  "to": "ArmorDeepNorthMageChest",
+  "amount": 1,
+  "time": 50,
+  "fuel": "FrozenFuel"
+ },
+ {
+  "station": "piece_FrostFoundry",
+  "kind": "cooking",
+  "from": "ArmorGoldMageHelmetUncooked",
+  "to": "HelmetDNMage",
+  "amount": 1,
+  "time": 50,
+  "fuel": "FrozenFuel"
+ },
+ {
+  "station": "piece_FrostFoundry",
+  "kind": "cooking",
+  "from": "ArmorGoldMageLegsUncooked",
+  "to": "ArmorDeepNorthMagelegs",
+  "amount": 1,
+  "time": 50,
+  "fuel": "FrozenFuel"
+ },
+ {
+  "station": "piece_FrostFoundry",
+  "kind": "cooking",
+  "from": "ArmorGoldMediumChestUncooked",
+  "to": "ArmorDeepNorthMediumChest",
+  "amount": 1,
+  "time": 50,
+  "fuel": "FrozenFuel"
+ },
+ {
+  "station": "piece_FrostFoundry",
+  "kind": "cooking",
+  "from": "ArmorGoldMediumHelmetUncooked",
+  "to": "HelmetDNMediumHood",
+  "amount": 1,
+  "time": 50,
+  "fuel": "FrozenFuel"
+ },
+ {
+  "station": "piece_FrostFoundry",
+  "kind": "cooking",
+  "from": "ArmorGoldMediumLegsUncooked",
+  "to": "ArmorDeepNorthMediumlegs",
+  "amount": 1,
+  "time": 50,
+  "fuel": "FrozenFuel"
+ },
+ {
+  "station": "piece_FrostFoundry",
+  "kind": "cooking",
+  "from": "AtgeirGoldUncooked",
+  "to": "AtgeirGold",
+  "amount": 1,
+  "time": 50,
+  "fuel": "FrozenFuel"
+ },
+ {
+  "station": "piece_FrostFoundry",
+  "kind": "cooking",
+  "from": "AxeGoldUncooked",
+  "to": "AxeGold",
+  "amount": 1,
+  "time": 50,
+  "fuel": "FrozenFuel"
+ },
+ {
+  "station": "piece_FrostFoundry",
+  "kind": "cooking",
+  "from": "BattleaxeGoldUncooked",
+  "to": "BattleaxeGold",
+  "amount": 1,
+  "time": 50,
+  "fuel": "FrozenFuel"
+ },
+ {
+  "station": "piece_FrostFoundry",
+  "kind": "cooking",
+  "from": "BowGoldUncooked",
+  "to": "BowGold",
+  "amount": 1,
+  "time": 50,
+  "fuel": "FrozenFuel"
+ },
+ {
+  "station": "piece_FrostFoundry",
+  "kind": "cooking",
+  "from": "CrossbowGoldUncooked",
+  "to": "CrossbowGold",
+  "amount": 1,
+  "time": 50,
+  "fuel": "FrozenFuel"
+ },
+ {
+  "station": "piece_FrostFoundry",
+  "kind": "cooking",
+  "from": "FistGoldUncooked",
+  "to": "FistGold",
+  "amount": 1,
+  "time": 50,
+  "fuel": "FrozenFuel"
+ },
+ {
+  "station": "piece_FrostFoundry",
+  "kind": "cooking",
+  "from": "KeysGoldUncooked",
+  "to": "BloodGoldKey",
+  "amount": 1,
+  "time": 50,
+  "fuel": "FrozenFuel"
+ },
+ {
+  "station": "piece_FrostFoundry",
+  "kind": "cooking",
+  "from": "KnifeGoldUncooked",
+  "to": "KnifeGold",
+  "amount": 1,
+  "time": 50,
+  "fuel": "FrozenFuel"
+ },
+ {
+  "station": "piece_FrostFoundry",
+  "kind": "cooking",
+  "from": "MaceGoldUncooked",
+  "to": "MaceGold",
+  "amount": 1,
+  "time": 50,
+  "fuel": "FrozenFuel"
+ },
+ {
+  "station": "piece_FrostFoundry",
+  "kind": "cooking",
+  "from": "ShieldBucklerGoldUncooked",
+  "to": "ShieldGoldBuckler",
+  "amount": 1,
+  "time": 50,
+  "fuel": "FrozenFuel"
+ },
+ {
+  "station": "piece_FrostFoundry",
+  "kind": "cooking",
+  "from": "ShieldRoundGoldUncooked",
+  "to": "ShieldGold",
+  "amount": 1,
+  "time": 50,
+  "fuel": "FrozenFuel"
+ },
+ {
+  "station": "piece_FrostFoundry",
+  "kind": "cooking",
+  "from": "ShieldTowerGoldUncooked",
+  "to": "ShieldGoldTower",
+  "amount": 1,
+  "time": 50,
+  "fuel": "FrozenFuel"
+ },
+ {
+  "station": "piece_FrostFoundry",
+  "kind": "cooking",
+  "from": "SledgeGoldUncooked",
+  "to": "SledgeGold",
+  "amount": 1,
+  "time": 50,
+  "fuel": "FrozenFuel"
+ },
+ {
+  "station": "piece_FrostFoundry",
+  "kind": "cooking",
+  "from": "SpearGoldUncooked",
+  "to": "SpearGold",
+  "amount": 1,
+  "time": 50,
+  "fuel": "FrozenFuel"
+ },
+ {
+  "station": "piece_FrostFoundry",
+  "kind": "cooking",
+  "from": "StaffFrostOrbsUncooked",
+  "to": "StaffFrostOrbs",
+  "amount": 1,
+  "time": 50,
+  "fuel": "FrozenFuel"
+ },
+ {
+  "station": "piece_FrostFoundry",
+  "kind": "cooking",
+  "from": "StaffOrbofAhriUncooked",
+  "to": "StaffOrbofAhri",
+  "amount": 1,
+  "time": 50,
+  "fuel": "FrozenFuel"
+ },
+ {
+  "station": "piece_FrostFoundry",
+  "kind": "cooking",
+  "from": "StaffSpiritCallerUncooked",
+  "to": "StaffSpiritCaller",
+  "amount": 1,
+  "time": 50,
+  "fuel": "FrozenFuel"
+ },
+ {
+  "station": "piece_FrostFoundry",
+  "kind": "cooking",
+  "from": "StaffSpiritCallerUncooked",
+  "to": "StaffSpiritCaller",
+  "amount": 1,
+  "time": 50,
+  "fuel": "FrozenFuel"
+ },
+ {
+  "station": "piece_FrostFoundry",
+  "kind": "cooking",
+  "from": "StaffThunderbloodUncooked",
+  "to": "StaffThunderBlood",
+  "amount": 1,
+  "time": 50,
+  "fuel": "FrozenFuel"
+ },
+ {
+  "station": "piece_FrostFoundry",
+  "kind": "cooking",
+  "from": "SwordGoldUncooked",
+  "to": "SwordGold",
+  "amount": 1,
+  "time": 50,
+  "fuel": "FrozenFuel"
+ },
+ {
+  "station": "piece_FrostFoundry",
+  "kind": "cooking",
+  "from": "THSwordGoldUncooked",
+  "to": "THSwordGold",
+  "amount": 1,
+  "time": 50,
+  "fuel": "FrozenFuel"
+ },
+ {
+  "station": "piece_cookingstation",
+  "kind": "cooking",
+  "from": "BjornMeat",
+  "to": "CookedBjornMeat",
+  "amount": 1,
+  "time": 25,
+  "requiresFire": true
+ },
+ {
+  "station": "piece_cookingstation",
+  "kind": "cooking",
+  "from": "ChickenMeat",
+  "to": "CookedChickenMeat",
+  "amount": 1,
+  "time": 25,
+  "requiresFire": true
+ },
+ {
+  "station": "piece_cookingstation",
+  "kind": "cooking",
+  "from": "DeerMeat",
+  "to": "CookedDeerMeat",
+  "amount": 1,
+  "time": 25,
+  "requiresFire": true
+ },
+ {
+  "station": "piece_cookingstation",
+  "kind": "cooking",
+  "from": "FishRaw",
+  "to": "FishCooked",
+  "amount": 1,
+  "time": 25,
+  "requiresFire": true
+ },
+ {
+  "station": "piece_cookingstation",
+  "kind": "cooking",
+  "from": "HareMeat",
+  "to": "CookedHareMeat",
+  "amount": 1,
+  "time": 25,
+  "requiresFire": true
+ },
+ {
+  "station": "piece_cookingstation",
+  "kind": "cooking",
+  "from": "NeckTail",
+  "to": "NeckTailGrilled",
+  "amount": 1,
+  "time": 25,
+  "requiresFire": true
+ },
+ {
+  "station": "piece_cookingstation",
+  "kind": "cooking",
+  "from": "RawMeat",
+  "to": "CookedMeat",
+  "amount": 1,
+  "time": 25,
+  "requiresFire": true
+ },
+ {
+  "station": "piece_cookingstation",
+  "kind": "cooking",
+  "from": "WolfMeat",
+  "to": "CookedWolfMeat",
+  "amount": 1,
+  "time": 25,
+  "requiresFire": true
+ },
+ {
+  "station": "piece_cookingstation_iron",
+  "kind": "cooking",
+  "from": "AsksvinMeat",
+  "to": "CookedAsksvinMeat",
+  "amount": 1,
+  "time": 25,
+  "requiresFire": true
+ },
+ {
+  "station": "piece_cookingstation_iron",
+  "kind": "cooking",
+  "from": "BjornMeat",
+  "to": "CookedBjornMeat",
+  "amount": 1,
+  "time": 25,
+  "requiresFire": true
+ },
+ {
+  "station": "piece_cookingstation_iron",
+  "kind": "cooking",
+  "from": "BoneMawSerpentMeat",
+  "to": "CookedBoneMawSerpentMeat",
+  "amount": 1,
+  "time": 60,
+  "requiresFire": true
+ },
+ {
+  "station": "piece_cookingstation_iron",
+  "kind": "cooking",
+  "from": "BugMeat",
+  "to": "CookedBugMeat",
+  "amount": 1,
+  "time": 60,
+  "requiresFire": true
+ },
+ {
+  "station": "piece_cookingstation_iron",
+  "kind": "cooking",
+  "from": "ChickenMeat",
+  "to": "CookedChickenMeat",
+  "amount": 1,
+  "time": 25,
+  "requiresFire": true
+ },
+ {
+  "station": "piece_cookingstation_iron",
+  "kind": "cooking",
+  "from": "DeerMeat",
+  "to": "CookedDeerMeat",
+  "amount": 1,
+  "time": 25,
+  "requiresFire": true
+ },
+ {
+  "station": "piece_cookingstation_iron",
+  "kind": "cooking",
+  "from": "FishRaw",
+  "to": "FishCooked",
+  "amount": 1,
+  "time": 25,
+  "requiresFire": true
+ },
+ {
+  "station": "piece_cookingstation_iron",
+  "kind": "cooking",
+  "from": "HareMeat",
+  "to": "CookedHareMeat",
+  "amount": 1,
+  "time": 25,
+  "requiresFire": true
+ },
+ {
+  "station": "piece_cookingstation_iron",
+  "kind": "cooking",
+  "from": "LoxMeat",
+  "to": "CookedLoxMeat",
+  "amount": 1,
+  "time": 60,
+  "requiresFire": true
+ },
+ {
+  "station": "piece_cookingstation_iron",
+  "kind": "cooking",
+  "from": "MooseMeat",
+  "to": "CookedMooseMeat",
+  "amount": 1,
+  "time": 25,
+  "requiresFire": true
+ },
+ {
+  "station": "piece_cookingstation_iron",
+  "kind": "cooking",
+  "from": "NeckTail",
+  "to": "NeckTailGrilled",
+  "amount": 1,
+  "time": 25,
+  "requiresFire": true
+ },
+ {
+  "station": "piece_cookingstation_iron",
+  "kind": "cooking",
+  "from": "RawMeat",
+  "to": "CookedMeat",
+  "amount": 1,
+  "time": 25,
+  "requiresFire": true
+ },
+ {
+  "station": "piece_cookingstation_iron",
+  "kind": "cooking",
+  "from": "SerpentMeat",
+  "to": "SerpentMeatCooked",
+  "amount": 1,
+  "time": 60,
+  "requiresFire": true
+ },
+ {
+  "station": "piece_cookingstation_iron",
+  "kind": "cooking",
+  "from": "VoltureMeat",
+  "to": "CookedVoltureMeat",
+  "amount": 1,
+  "time": 25,
+  "requiresFire": true
+ },
+ {
+  "station": "piece_cookingstation_iron",
+  "kind": "cooking",
+  "from": "WolfMeat",
+  "to": "CookedWolfMeat",
+  "amount": 1,
+  "time": 25,
+  "requiresFire": true
+ },
+ {
+  "station": "piece_oven",
+  "kind": "cooking",
+  "from": "BakedPoteitrUncooked",
+  "to": "BakedPoteitr",
+  "amount": 1,
+  "time": 50,
+  "fuel": "Wood"
+ },
+ {
+  "station": "piece_oven",
+  "kind": "cooking",
+  "from": "BreadDough",
+  "to": "Bread",
+  "amount": 1,
+  "time": 50,
+  "fuel": "Wood"
+ },
+ {
+  "station": "piece_oven",
+  "kind": "cooking",
+  "from": "FishAndBreadUncooked",
+  "to": "FishAndBread",
+  "amount": 1,
+  "time": 50,
+  "fuel": "Wood"
+ },
+ {
+  "station": "piece_oven",
+  "kind": "cooking",
+  "from": "HoneyGlazedChickenUncooked",
+  "to": "HoneyGlazedChicken",
+  "amount": 1,
+  "time": 50,
+  "fuel": "Wood"
+ },
+ {
+  "station": "piece_oven",
+  "kind": "cooking",
+  "from": "KaleChipsUncooked",
+  "to": "KaleChips",
+  "amount": 1,
+  "time": 50,
+  "fuel": "Wood"
+ },
+ {
+  "station": "piece_oven",
+  "kind": "cooking",
+  "from": "LoxPieUncooked",
+  "to": "LoxPie",
+  "amount": 1,
+  "time": 50,
+  "fuel": "Wood"
+ },
+ {
+  "station": "piece_oven",
+  "kind": "cooking",
+  "from": "MagicallyStuffedShroomUncooked",
+  "to": "MagicallyStuffedShroom",
+  "amount": 1,
+  "time": 50,
+  "fuel": "Wood"
+ },
+ {
+  "station": "piece_oven",
+  "kind": "cooking",
+  "from": "MeatPlatterUncooked",
+  "to": "MeatPlatter",
+  "amount": 1,
+  "time": 50,
+  "fuel": "Wood"
+ },
+ {
+  "station": "piece_oven",
+  "kind": "cooking",
+  "from": "MisthareSupremeUncooked",
+  "to": "MisthareSupreme",
+  "amount": 1,
+  "time": 50,
+  "fuel": "Wood"
+ },
+ {
+  "station": "piece_oven",
+  "kind": "cooking",
+  "from": "OvenPancakeUncooked",
+  "to": "OvenPancake",
+  "amount": 1,
+  "time": 50,
+  "fuel": "Wood"
+ },
+ {
+  "station": "piece_oven",
+  "kind": "cooking",
+  "from": "PiquantPieUncooked",
+  "to": "PiquantPie",
+  "amount": 1,
+  "time": 50,
+  "fuel": "Wood"
+ },
+ {
+  "station": "piece_oven",
+  "kind": "cooking",
+  "from": "RoastedCrustPieUncooked",
+  "to": "RoastedCrustPie",
+  "amount": 1,
+  "time": 50,
+  "fuel": "Wood"
+ },
+ {
+  "station": "piece_oven",
+  "kind": "cooking",
+  "from": "SealBlubber",
+  "to": "CookedSealBlubber",
+  "amount": 1,
+  "time": 50,
+  "fuel": "Wood"
+ },
+ {
+  "station": "piece_oven",
+  "kind": "cooking",
+  "from": "VikingCupcakeUncooked",
+  "to": "VikingCupcake",
+  "amount": 1,
+  "time": 50,
+  "fuel": "Wood"
+ },
+ {
+  "station": "piece_spinningwheel",
+  "kind": "smelter",
+  "from": "Flax",
+  "to": "LinenThread",
+  "amount": 1,
+  "time": 30,
+  "capacity": 40
+ },
+ {
+  "station": "smelter",
+  "kind": "smelter",
+  "from": "BronzeScrap",
+  "to": "Bronze",
+  "amount": 1,
+  "time": 30,
+  "fuel": "Coal",
+  "fuelPerProduct": 2,
+  "capacity": 10
+ },
+ {
+  "station": "smelter",
+  "kind": "smelter",
+  "from": "CopperOre",
+  "to": "Copper",
+  "amount": 1,
+  "time": 30,
+  "fuel": "Coal",
+  "fuelPerProduct": 2,
+  "capacity": 10
+ },
+ {
+  "station": "smelter",
+  "kind": "smelter",
+  "from": "CopperScrap",
+  "to": "Copper",
+  "amount": 1,
+  "time": 30,
+  "fuel": "Coal",
+  "fuelPerProduct": 2,
+  "capacity": 10
+ },
+ {
+  "station": "smelter",
+  "kind": "smelter",
+  "from": "IronOre",
+  "to": "Iron",
+  "amount": 1,
+  "time": 30,
+  "fuel": "Coal",
+  "fuelPerProduct": 2,
+  "capacity": 10
+ },
+ {
+  "station": "smelter",
+  "kind": "smelter",
+  "from": "IronScrap",
+  "to": "Iron",
+  "amount": 1,
+  "time": 30,
+  "fuel": "Coal",
+  "fuelPerProduct": 2,
+  "capacity": 10
+ },
+ {
+  "station": "smelter",
+  "kind": "smelter",
+  "from": "SilverOre",
+  "to": "Silver",
+  "amount": 1,
+  "time": 30,
+  "fuel": "Coal",
+  "fuelPerProduct": 2,
+  "capacity": 10
+ },
+ {
+  "station": "smelter",
+  "kind": "smelter",
+  "from": "TinOre",
+  "to": "Tin",
+  "amount": 1,
+  "time": 30,
+  "fuel": "Coal",
+  "fuelPerProduct": 2,
+  "capacity": 10
+ },
+ {
+  "station": "windmill",
+  "kind": "smelter",
+  "from": "Barley",
+  "to": "BarleyFlour",
+  "amount": 1,
+  "time": 10,
+  "capacity": 50
+ },
+ {
+  "station": "windmill",
+  "kind": "smelter",
+  "from": "Oat",
+  "to": "OatFlour",
+  "amount": 1,
+  "time": 10,
+  "capacity": 50
+ },
+ {
+  "station": "windmill",
+  "kind": "smelter",
+  "from": "OatSeeds",
+  "to": "Oat",
+  "amount": 1,
+  "time": 10,
+  "capacity": 50
+ }
+]

@@ -1,0 +1,2293 @@
+[
+ {
+  "creature": "Seal",
+  "list": "_SpawnList_DeepNorth",
+  "biomes": [
+   "DeepNorth"
+  ],
+  "biomeArea": "Everything",
+  "maxSpawned": 5,
+  "interval": 100,
+  "chance": 50,
+  "groupSize": [
+   1,
+   2
+  ],
+  "levels": [
+   1,
+   3
+  ],
+  "day": true,
+  "night": true,
+  "altitude": [
+   -2,
+   5
+  ]
+ },
+ {
+  "creature": "ShadowPerson",
+  "list": "_SpawnList_DeepNorth",
+  "biomes": [
+   "DeepNorth"
+  ],
+  "biomeArea": "Everything",
+  "maxSpawned": 5,
+  "interval": 300,
+  "chance": 10,
+  "groupSize": [
+   2,
+   4
+  ],
+  "levels": [
+   1,
+   3
+  ],
+  "night": true,
+  "altitude": [
+   10,
+   1000
+  ]
+ },
+ {
+  "creature": "Greydwarf_Frozen",
+  "list": "_SpawnList_DeepNorth",
+  "biomes": [
+   "DeepNorth"
+  ],
+  "biomeArea": "Everything",
+  "maxSpawned": 5,
+  "interval": 600,
+  "chance": 10,
+  "groupSize": [
+   2,
+   4
+  ],
+  "levels": [
+   1,
+   3
+  ],
+  "day": true,
+  "night": true,
+  "altitude": [
+   10,
+   1000
+  ]
+ },
+ {
+  "creature": "Greydwarf_Shaman_Frozen",
+  "list": "_SpawnList_DeepNorth",
+  "biomes": [
+   "DeepNorth"
+  ],
+  "biomeArea": "Everything",
+  "maxSpawned": 1,
+  "interval": 600,
+  "chance": 10,
+  "groupSize": [
+   2,
+   4
+  ],
+  "levels": [
+   1,
+   3
+  ],
+  "day": true,
+  "night": true,
+  "altitude": [
+   10,
+   1000
+  ]
+ },
+ {
+  "creature": "Skeleton_DeepNorth",
+  "list": "_SpawnList_DeepNorth",
+  "biomes": [
+   "DeepNorth"
+  ],
+  "biomeArea": "Everything",
+  "maxSpawned": 5,
+  "interval": 600,
+  "chance": 10,
+  "groupSize": [
+   2,
+   4
+  ],
+  "levels": [
+   1,
+   3
+  ],
+  "day": true,
+  "night": true,
+  "altitude": [
+   10,
+   1000
+  ]
+ },
+ {
+  "creature": "Seal_Pup",
+  "list": "_SpawnList_DeepNorth",
+  "biomes": [
+   "DeepNorth"
+  ],
+  "biomeArea": "Everything",
+  "maxSpawned": 3,
+  "interval": 200,
+  "chance": 50,
+  "groupSize": [
+   1,
+   3
+  ],
+  "levels": [
+   1,
+   1
+  ],
+  "day": true,
+  "night": true,
+  "altitude": [
+   -2,
+   5
+  ]
+ },
+ {
+  "creature": "Elaking",
+  "list": "_SpawnList_DeepNorth",
+  "biomes": [
+   "DeepNorth"
+  ],
+  "biomeArea": "7",
+  "maxSpawned": 2,
+  "interval": 120,
+  "chance": 15,
+  "groupSize": [
+   2,
+   3
+  ],
+  "levels": [
+   1,
+   2
+  ],
+  "night": true,
+  "altitude": [
+   0,
+   1000
+  ]
+ },
+ {
+  "creature": "ElakingLantern",
+  "list": "_SpawnList_DeepNorth",
+  "biomes": [
+   "DeepNorth"
+  ],
+  "biomeArea": "7",
+  "maxSpawned": 1,
+  "interval": 120,
+  "chance": 10,
+  "groupSize": [
+   1,
+   2
+  ],
+  "levels": [
+   1,
+   2
+  ],
+  "night": true,
+  "altitude": [
+   0,
+   1000
+  ]
+ },
+ {
+  "creature": "JotunWarrior",
+  "list": "_SpawnList_DeepNorth",
+  "biomes": [
+   "DeepNorth"
+  ],
+  "biomeArea": "7",
+  "maxSpawned": 2,
+  "interval": 3000,
+  "chance": 5,
+  "groupSize": [
+   1,
+   2
+  ],
+  "levels": [
+   1,
+   1
+  ],
+  "day": true,
+  "altitude": [
+   0,
+   1000
+  ],
+  "requiredGlobalKey": "jotun_killed",
+  "huntPlayer": true
+ },
+ {
+  "creature": "JotunWitch",
+  "list": "_SpawnList_DeepNorth",
+  "biomes": [
+   "DeepNorth"
+  ],
+  "biomeArea": "7",
+  "maxSpawned": 2,
+  "interval": 3000,
+  "chance": 5,
+  "groupSize": [
+   1,
+   1
+  ],
+  "levels": [
+   1,
+   1
+  ],
+  "day": true,
+  "altitude": [
+   0,
+   1000
+  ],
+  "requiredGlobalKey": "jotun_killed",
+  "huntPlayer": true
+ },
+ {
+  "creature": "Barka",
+  "list": "_SpawnList_DeepNorth",
+  "biomes": [
+   "DeepNorth"
+  ],
+  "biomeArea": "7",
+  "maxSpawned": 1,
+  "interval": 1000,
+  "chance": 12,
+  "groupSize": [
+   1,
+   1
+  ],
+  "levels": [
+   1,
+   1
+  ],
+  "day": true,
+  "night": true,
+  "altitude": [
+   0,
+   1000
+  ]
+ },
+ {
+  "creature": "Moose",
+  "list": "_SpawnList_DeepNorth",
+  "biomes": [
+   "DeepNorth"
+  ],
+  "biomeArea": "Everything",
+  "maxSpawned": 3,
+  "interval": 1200,
+  "chance": 10,
+  "groupSize": [
+   1,
+   1
+  ],
+  "levels": [
+   1,
+   3
+  ],
+  "day": true,
+  "night": true,
+  "altitude": [
+   3,
+   1000
+  ]
+ },
+ {
+  "creature": "JotunWarrior",
+  "list": "_SpawnList_DeepNorth",
+  "biomes": [
+   "-1"
+  ],
+  "biomeArea": "Everything",
+  "maxSpawned": 4,
+  "interval": 500,
+  "chance": 100,
+  "groupSize": [
+   1,
+   2
+  ],
+  "levels": [
+   1,
+   1
+  ],
+  "day": true,
+  "night": true,
+  "altitude": [
+   -1000,
+   1000
+  ]
+ },
+ {
+  "creature": "JotunWitch",
+  "list": "_SpawnList_DeepNorth",
+  "biomes": [
+   "-1"
+  ],
+  "biomeArea": "Everything",
+  "maxSpawned": 2,
+  "interval": 500,
+  "chance": 100,
+  "groupSize": [
+   1,
+   1
+  ],
+  "levels": [
+   1,
+   1
+  ],
+  "day": true,
+  "night": true,
+  "altitude": [
+   -1000,
+   1000
+  ]
+ },
+ {
+  "creature": "Elaking",
+  "list": "_SpawnList_DeepNorth",
+  "biomes": [
+   "-1"
+  ],
+  "biomeArea": "Everything",
+  "maxSpawned": 6,
+  "interval": 1000,
+  "chance": 100,
+  "groupSize": [
+   1,
+   3
+  ],
+  "levels": [
+   1,
+   1
+  ],
+  "day": true,
+  "night": true,
+  "altitude": [
+   -1000,
+   1000
+  ]
+ },
+ {
+  "creature": "BonemawSerpent",
+  "list": "_SpawnList_ashlands",
+  "biomes": [
+   "AshLands"
+  ],
+  "biomeArea": "-1",
+  "maxSpawned": 1,
+  "interval": 1000,
+  "chance": 20,
+  "groupSize": [
+   1,
+   1
+  ],
+  "levels": [
+   1,
+   1
+  ],
+  "day": true,
+  "night": true,
+  "altitude": [
+   -1000,
+   -5
+  ]
+ },
+ {
+  "creature": "FallenValkyrie",
+  "list": "_SpawnList_ashlands",
+  "biomes": [
+   "AshLands"
+  ],
+  "biomeArea": "Everything",
+  "maxSpawned": 1,
+  "interval": 4000,
+  "chance": 15,
+  "groupSize": [
+   1,
+   1
+  ],
+  "levels": [
+   1,
+   1
+  ],
+  "day": true,
+  "night": true,
+  "altitude": [
+   15,
+   1000
+  ]
+ },
+ {
+  "creature": "Morgen_NonSleeping",
+  "list": "_SpawnList_ashlands",
+  "biomes": [
+   "AshLands"
+  ],
+  "biomeArea": "Everything",
+  "maxSpawned": 1,
+  "interval": 4000,
+  "chance": 5,
+  "groupSize": [
+   1,
+   1
+  ],
+  "levels": [
+   1,
+   1
+  ],
+  "day": true,
+  "night": true,
+  "altitude": [
+   0,
+   1000
+  ]
+ },
+ {
+  "creature": "Asksvin",
+  "list": "_SpawnList_ashlands",
+  "biomes": [
+   "AshLands"
+  ],
+  "biomeArea": "Median",
+  "maxSpawned": 2,
+  "interval": 220,
+  "chance": 20,
+  "groupSize": [
+   1,
+   3
+  ],
+  "levels": [
+   1,
+   2
+  ],
+  "day": true,
+  "altitude": [
+   9,
+   1000
+  ]
+ },
+ {
+  "creature": "Asksvin",
+  "list": "_SpawnList_ashlands",
+  "biomes": [
+   "AshLands"
+  ],
+  "biomeArea": "Median",
+  "maxSpawned": 3,
+  "interval": 220,
+  "chance": 30,
+  "groupSize": [
+   1,
+   3
+  ],
+  "levels": [
+   1,
+   3
+  ],
+  "night": true,
+  "altitude": [
+   9,
+   1000
+  ]
+ },
+ {
+  "creature": "Volture",
+  "list": "_SpawnList_ashlands",
+  "biomes": [
+   "AshLands"
+  ],
+  "biomeArea": "Everything",
+  "maxSpawned": 3,
+  "interval": 120,
+  "chance": 15,
+  "groupSize": [
+   1,
+   2
+  ],
+  "levels": [
+   1,
+   1
+  ],
+  "day": true,
+  "night": true,
+  "altitude": [
+   -20,
+   -2
+  ]
+ },
+ {
+  "creature": "Charred_Twitcher",
+  "list": "_SpawnList_ashlands",
+  "biomes": [
+   "AshLands"
+  ],
+  "biomeArea": "-1",
+  "maxSpawned": 3,
+  "interval": 400,
+  "chance": 20,
+  "groupSize": [
+   2,
+   4
+  ],
+  "levels": [
+   1,
+   2
+  ],
+  "day": true,
+  "altitude": [
+   1,
+   1000
+  ]
+ },
+ {
+  "creature": "Charred_Twitcher",
+  "list": "_SpawnList_ashlands",
+  "biomes": [
+   "AshLands"
+  ],
+  "biomeArea": "-1",
+  "maxSpawned": 4,
+  "interval": 200,
+  "chance": 40,
+  "groupSize": [
+   3,
+   6
+  ],
+  "levels": [
+   1,
+   3
+  ],
+  "night": true,
+  "altitude": [
+   2,
+   1000
+  ]
+ },
+ {
+  "creature": "Charred_Archer",
+  "list": "_SpawnList_ashlands",
+  "biomes": [
+   "AshLands"
+  ],
+  "biomeArea": "-1",
+  "maxSpawned": 4,
+  "interval": 700,
+  "chance": 15,
+  "groupSize": [
+   1,
+   2
+  ],
+  "levels": [
+   1,
+   2
+  ],
+  "day": true,
+  "night": true,
+  "altitude": [
+   1,
+   1000
+  ]
+ },
+ {
+  "creature": "Charred_Melee",
+  "list": "_SpawnList_ashlands",
+  "biomes": [
+   "AshLands"
+  ],
+  "biomeArea": "Everything",
+  "maxSpawned": 4,
+  "interval": 700,
+  "chance": 15,
+  "groupSize": [
+   1,
+   2
+  ],
+  "levels": [
+   1,
+   3
+  ],
+  "day": true,
+  "night": true,
+  "altitude": [
+   1,
+   1000
+  ]
+ },
+ {
+  "creature": "BlobLava",
+  "list": "_SpawnList_ashlands",
+  "biomes": [
+   "AshLands"
+  ],
+  "biomeArea": "-1",
+  "maxSpawned": 2,
+  "interval": 400,
+  "chance": 15,
+  "groupSize": [
+   1,
+   2
+  ],
+  "levels": [
+   1,
+   1
+  ],
+  "day": true,
+  "night": true,
+  "altitude": [
+   2,
+   1000
+  ]
+ },
+ {
+  "creature": "DvergerAshlands",
+  "list": "_SpawnList_ashlands",
+  "biomes": [
+   "AshLands"
+  ],
+  "biomeArea": "Median",
+  "maxSpawned": 2,
+  "interval": 1000,
+  "chance": 10,
+  "groupSize": [
+   1,
+   2
+  ],
+  "levels": [
+   1,
+   3
+  ],
+  "day": true,
+  "altitude": [
+   0,
+   1000
+  ]
+ },
+ {
+  "creature": "Charred_Melee",
+  "list": "_SpawnList_ashlands",
+  "biomes": [
+   "Meadows",
+   "Swamp",
+   "Mountain",
+   "BlackForest",
+   "Plains"
+  ],
+  "biomeArea": "7",
+  "maxSpawned": 3,
+  "interval": 3000,
+  "chance": 5,
+  "groupSize": [
+   1,
+   3
+  ],
+  "levels": [
+   1,
+   1
+  ],
+  "night": true,
+  "altitude": [
+   0,
+   1000
+  ],
+  "requiredGlobalKey": "defeated_fader",
+  "huntPlayer": true
+ },
+ {
+  "creature": "Charred_Archer",
+  "list": "_SpawnList_ashlands",
+  "biomes": [
+   "Meadows",
+   "Swamp",
+   "Mountain",
+   "BlackForest",
+   "Plains"
+  ],
+  "biomeArea": "7",
+  "maxSpawned": 3,
+  "interval": 3000,
+  "chance": 5,
+  "groupSize": [
+   1,
+   3
+  ],
+  "levels": [
+   1,
+   1
+  ],
+  "night": true,
+  "altitude": [
+   0,
+   1000
+  ],
+  "requiredGlobalKey": "defeated_fader",
+  "huntPlayer": true
+ },
+ {
+  "creature": "Deer",
+  "list": "_SpawnList_base",
+  "biomes": [
+   "Meadows",
+   "BlackForest"
+  ],
+  "biomeArea": "7",
+  "maxSpawned": 4,
+  "interval": 100,
+  "chance": 50,
+  "groupSize": [
+   1,
+   3
+  ],
+  "levels": [
+   1,
+   3
+  ],
+  "day": true,
+  "night": true,
+  "altitude": [
+   0,
+   1000
+  ]
+ },
+ {
+  "creature": "Boar",
+  "list": "_SpawnList_base",
+  "biomes": [
+   "Meadows"
+  ],
+  "biomeArea": "7",
+  "maxSpawned": 4,
+  "interval": 150,
+  "chance": 50,
+  "groupSize": [
+   1,
+   3
+  ],
+  "levels": [
+   1,
+   3
+  ],
+  "day": true,
+  "night": true,
+  "altitude": [
+   0,
+   1000
+  ]
+ },
+ {
+  "creature": "Neck",
+  "list": "_SpawnList_base",
+  "biomes": [
+   "Meadows"
+  ],
+  "biomeArea": "7",
+  "maxSpawned": 6,
+  "interval": 100,
+  "chance": 50,
+  "groupSize": [
+   2,
+   4
+  ],
+  "levels": [
+   1,
+   3
+  ],
+  "day": true,
+  "night": true,
+  "altitude": [
+   -1.5,
+   0.5
+  ]
+ },
+ {
+  "creature": "Neck",
+  "list": "_SpawnList_base",
+  "biomes": [
+   "Meadows"
+  ],
+  "biomeArea": "7",
+  "maxSpawned": 8,
+  "interval": 30,
+  "chance": 100,
+  "groupSize": [
+   2,
+   4
+  ],
+  "levels": [
+   1,
+   3
+  ],
+  "day": true,
+  "night": true,
+  "altitude": [
+   0,
+   10
+  ],
+  "requiredEnvironments": [
+   "Rain",
+   "ThunderStorm",
+   "LightRain"
+  ]
+ },
+ {
+  "creature": "Fish1",
+  "list": "_SpawnList_base",
+  "biomes": [
+   "Meadows",
+   "BlackForest",
+   "Plains"
+  ],
+  "biomeArea": "7",
+  "maxSpawned": 5,
+  "interval": 120,
+  "chance": 50,
+  "groupSize": [
+   2,
+   6
+  ],
+  "levels": [
+   1,
+   5
+  ],
+  "day": true,
+  "night": true,
+  "altitude": [
+   -3,
+   -1.5
+  ]
+ },
+ {
+  "creature": "Fish2",
+  "list": "_SpawnList_base",
+  "biomes": [
+   "Meadows",
+   "BlackForest",
+   "Plains"
+  ],
+  "biomeArea": "7",
+  "maxSpawned": 4,
+  "interval": 120,
+  "chance": 50,
+  "groupSize": [
+   2,
+   4
+  ],
+  "levels": [
+   1,
+   5
+  ],
+  "day": true,
+  "night": true,
+  "altitude": [
+   -5,
+   -2
+  ]
+ },
+ {
+  "creature": "Fish3",
+  "list": "_SpawnList_base",
+  "biomes": [
+   "Ocean"
+  ],
+  "biomeArea": "7",
+  "maxSpawned": 3,
+  "interval": 120,
+  "chance": 50,
+  "groupSize": [
+   1,
+   2
+  ],
+  "levels": [
+   1,
+   5
+  ],
+  "day": true,
+  "night": true,
+  "altitude": [
+   -999,
+   -5
+  ]
+ },
+ {
+  "creature": "Fish5",
+  "list": "_SpawnList_base",
+  "biomes": [
+   "BlackForest"
+  ],
+  "biomeArea": "7",
+  "maxSpawned": 10,
+  "interval": 80,
+  "chance": 50,
+  "groupSize": [
+   3,
+   7
+  ],
+  "levels": [
+   1,
+   5
+  ],
+  "day": true,
+  "night": true,
+  "altitude": [
+   -999,
+   -5
+  ]
+ },
+ {
+  "creature": "Fish6",
+  "list": "_SpawnList_base",
+  "biomes": [
+   "Swamp"
+  ],
+  "biomeArea": "7",
+  "maxSpawned": 10,
+  "interval": 80,
+  "chance": 60,
+  "groupSize": [
+   3,
+   7
+  ],
+  "levels": [
+   1,
+   5
+  ],
+  "day": true,
+  "night": true,
+  "altitude": [
+   -999,
+   -5
+  ]
+ },
+ {
+  "creature": "Fish7",
+  "list": "_SpawnList_base",
+  "biomes": [
+   "Plains"
+  ],
+  "biomeArea": "7",
+  "maxSpawned": 7,
+  "interval": 80,
+  "chance": 60,
+  "groupSize": [
+   3,
+   6
+  ],
+  "levels": [
+   1,
+   5
+  ],
+  "day": true,
+  "night": true,
+  "altitude": [
+   -999,
+   -5
+  ]
+ },
+ {
+  "creature": "Fish8",
+  "list": "_SpawnList_base",
+  "biomes": [
+   "Ocean"
+  ],
+  "biomeArea": "7",
+  "maxSpawned": 10,
+  "interval": 80,
+  "chance": 50,
+  "groupSize": [
+   2,
+   7
+  ],
+  "levels": [
+   1,
+   5
+  ],
+  "day": true,
+  "night": true,
+  "altitude": [
+   -999,
+   -5
+  ]
+ },
+ {
+  "creature": "Fish9",
+  "list": "_SpawnList_base",
+  "biomes": [
+   "Mistlands"
+  ],
+  "biomeArea": "7",
+  "maxSpawned": 5,
+  "interval": 60,
+  "chance": 50,
+  "groupSize": [
+   2,
+   7
+  ],
+  "levels": [
+   1,
+   5
+  ],
+  "day": true,
+  "night": true,
+  "altitude": [
+   -999,
+   -5
+  ]
+ },
+ {
+  "creature": "Fish12",
+  "list": "_SpawnList_base",
+  "biomes": [
+   "Ocean",
+   "Mistlands"
+  ],
+  "biomeArea": "7",
+  "maxSpawned": 8,
+  "interval": 80,
+  "chance": 40,
+  "groupSize": [
+   2,
+   5
+  ],
+  "levels": [
+   1,
+   5
+  ],
+  "day": true,
+  "night": true,
+  "altitude": [
+   -999,
+   -6
+  ]
+ },
+ {
+  "creature": "Fish10",
+  "list": "_SpawnList_base",
+  "biomes": [
+   "DeepNorth"
+  ],
+  "biomeArea": "7",
+  "maxSpawned": 10,
+  "interval": 70,
+  "chance": 60,
+  "groupSize": [
+   3,
+   10
+  ],
+  "levels": [
+   1,
+   5
+  ],
+  "day": true,
+  "night": true,
+  "altitude": [
+   -999,
+   -5
+  ]
+ },
+ {
+  "creature": "Fish11",
+  "list": "_SpawnList_base",
+  "biomes": [
+   "AshLands"
+  ],
+  "biomeArea": "7",
+  "maxSpawned": 10,
+  "interval": 80,
+  "chance": 60,
+  "groupSize": [
+   3,
+   7
+  ],
+  "levels": [
+   1,
+   5
+  ],
+  "day": true,
+  "night": true,
+  "altitude": [
+   -999,
+   -5
+  ]
+ },
+ {
+  "creature": "Greydwarf",
+  "list": "_SpawnList_base",
+  "biomes": [
+   "BlackForest"
+  ],
+  "biomeArea": "7",
+  "maxSpawned": 3,
+  "interval": 120,
+  "chance": 30,
+  "groupSize": [
+   2,
+   3
+  ],
+  "levels": [
+   1,
+   3
+  ],
+  "day": true,
+  "altitude": [
+   0,
+   1000
+  ]
+ },
+ {
+  "creature": "Bjorn",
+  "list": "_SpawnList_base",
+  "biomes": [
+   "BlackForest"
+  ],
+  "biomeArea": "-1",
+  "maxSpawned": 1,
+  "interval": 2000,
+  "chance": 15,
+  "groupSize": [
+   1,
+   1
+  ],
+  "levels": [
+   1,
+   2
+  ],
+  "day": true,
+  "altitude": [
+   0,
+   1000
+  ]
+ },
+ {
+  "creature": "Bjorn",
+  "list": "_SpawnList_base",
+  "biomes": [
+   "BlackForest"
+  ],
+  "biomeArea": "-1",
+  "maxSpawned": 1,
+  "interval": 2000,
+  "chance": 20,
+  "groupSize": [
+   1,
+   1
+  ],
+  "levels": [
+   1,
+   3
+  ],
+  "night": true,
+  "altitude": [
+   0,
+   1000
+  ]
+ },
+ {
+  "creature": "Greydwarf",
+  "list": "_SpawnList_base",
+  "biomes": [
+   "Meadows"
+  ],
+  "biomeArea": "7",
+  "maxSpawned": 1,
+  "interval": 120,
+  "chance": 30,
+  "groupSize": [
+   2,
+   3
+  ],
+  "levels": [
+   1,
+   1
+  ],
+  "night": true,
+  "altitude": [
+   0,
+   1000
+  ],
+  "requiredGlobalKey": "defeated_eikthyr"
+ },
+ {
+  "creature": "Greydwarf",
+  "list": "_SpawnList_base",
+  "biomes": [
+   "BlackForest"
+  ],
+  "biomeArea": "7",
+  "maxSpawned": 6,
+  "interval": 60,
+  "chance": 100,
+  "groupSize": [
+   3,
+   4
+  ],
+  "levels": [
+   1,
+   3
+  ],
+  "night": true,
+  "altitude": [
+   0,
+   1000
+  ]
+ },
+ {
+  "creature": "Greydwarf_Elite",
+  "list": "_SpawnList_base",
+  "biomes": [
+   "BlackForest"
+  ],
+  "biomeArea": "7",
+  "maxSpawned": 1,
+  "interval": 120,
+  "chance": 50.6,
+  "groupSize": [
+   1,
+   1
+  ],
+  "levels": [
+   1,
+   3
+  ],
+  "night": true,
+  "altitude": [
+   0,
+   1000
+  ]
+ },
+ {
+  "creature": "Fenring",
+  "list": "_SpawnList_base",
+  "biomes": [
+   "Mountain"
+  ],
+  "biomeArea": "Median",
+  "maxSpawned": 2,
+  "interval": 400,
+  "chance": 20,
+  "groupSize": [
+   1,
+   1
+  ],
+  "levels": [
+   1,
+   1
+  ],
+  "night": true,
+  "altitude": [
+   0,
+   1000
+  ]
+ },
+ {
+  "creature": "Greydwarf_Elite",
+  "list": "_SpawnList_base",
+  "biomes": [
+   "Meadows"
+  ],
+  "biomeArea": "7",
+  "maxSpawned": 1,
+  "interval": 120,
+  "chance": 50.6,
+  "groupSize": [
+   1,
+   1
+  ],
+  "levels": [
+   1,
+   1
+  ],
+  "night": true,
+  "altitude": [
+   0,
+   1000
+  ],
+  "requiredGlobalKey": "defeated_gdking"
+ },
+ {
+  "creature": "Greydwarf_Shaman",
+  "list": "_SpawnList_base",
+  "biomes": [
+   "Meadows"
+  ],
+  "biomeArea": "7",
+  "maxSpawned": 1,
+  "interval": 120,
+  "chance": 50.6,
+  "groupSize": [
+   1,
+   1
+  ],
+  "levels": [
+   1,
+   1
+  ],
+  "night": true,
+  "altitude": [
+   0,
+   1000
+  ],
+  "requiredGlobalKey": "defeated_gdking"
+ },
+ {
+  "creature": "Skeleton",
+  "list": "_SpawnList_base",
+  "biomes": [
+   "Meadows",
+   "Swamp",
+   "Mountain",
+   "BlackForest",
+   "Plains"
+  ],
+  "biomeArea": "7",
+  "maxSpawned": 3,
+  "interval": 300,
+  "chance": 25,
+  "groupSize": [
+   1,
+   3
+  ],
+  "levels": [
+   1,
+   1
+  ],
+  "night": true,
+  "altitude": [
+   0,
+   1000
+  ],
+  "requiredGlobalKey": "defeated_bonemass"
+ },
+ {
+  "creature": "Draugr",
+  "list": "_SpawnList_base",
+  "biomes": [
+   "Meadows",
+   "Mountain",
+   "BlackForest",
+   "Plains"
+  ],
+  "biomeArea": "7",
+  "maxSpawned": 1,
+  "interval": 300,
+  "chance": 5,
+  "groupSize": [
+   1,
+   1
+  ],
+  "levels": [
+   1,
+   1
+  ],
+  "night": true,
+  "altitude": [
+   0,
+   1000
+  ],
+  "requiredGlobalKey": "defeated_gdking",
+  "requiredEnvironments": [
+   "Misty"
+  ]
+ },
+ {
+  "creature": "Goblin",
+  "list": "_SpawnList_base",
+  "biomes": [
+   "Meadows",
+   "Mountain",
+   "BlackForest"
+  ],
+  "biomeArea": "7",
+  "maxSpawned": 3,
+  "interval": 3000,
+  "chance": 5,
+  "groupSize": [
+   3,
+   3
+  ],
+  "levels": [
+   1,
+   1
+  ],
+  "night": true,
+  "altitude": [
+   0,
+   1000
+  ],
+  "requiredGlobalKey": "defeated_goblinking",
+  "huntPlayer": true
+ },
+ {
+  "creature": "Greydwarf_Shaman",
+  "list": "_SpawnList_base",
+  "biomes": [
+   "BlackForest"
+  ],
+  "biomeArea": "7",
+  "maxSpawned": 2,
+  "interval": 60,
+  "chance": 50.6,
+  "groupSize": [
+   1,
+   1
+  ],
+  "levels": [
+   1,
+   3
+  ],
+  "night": true,
+  "altitude": [
+   0,
+   1000
+  ]
+ },
+ {
+  "creature": "Greydwarf",
+  "list": "_SpawnList_base",
+  "biomes": [
+   "Meadows"
+  ],
+  "biomeArea": "7",
+  "maxSpawned": 2,
+  "interval": 200,
+  "chance": 50,
+  "groupSize": [
+   1,
+   1
+  ],
+  "levels": [
+   1,
+   1
+  ],
+  "night": true,
+  "altitude": [
+   0,
+   1000
+  ],
+  "requiredGlobalKey": "defeated_eikthyr"
+ },
+ {
+  "creature": "Greyling",
+  "list": "_SpawnList_base",
+  "biomes": [
+   "Meadows"
+  ],
+  "biomeArea": "7",
+  "maxSpawned": 2,
+  "interval": 300,
+  "chance": 50,
+  "groupSize": [
+   1,
+   1
+  ],
+  "levels": [
+   1,
+   1
+  ],
+  "day": true,
+  "night": true,
+  "altitude": [
+   0,
+   1000
+  ]
+ },
+ {
+  "creature": "Troll",
+  "list": "_SpawnList_base",
+  "biomes": [
+   "BlackForest"
+  ],
+  "biomeArea": "-1",
+  "maxSpawned": 1,
+  "interval": 4000,
+  "chance": 5,
+  "groupSize": [
+   1,
+   1
+  ],
+  "levels": [
+   1,
+   3
+  ],
+  "day": true,
+  "night": true,
+  "altitude": [
+   0,
+   1000
+  ]
+ },
+ {
+  "creature": "Unbjorn",
+  "list": "_SpawnList_base",
+  "biomes": [
+   "Plains"
+  ],
+  "biomeArea": "-1",
+  "maxSpawned": 1,
+  "interval": 4000,
+  "chance": 25,
+  "groupSize": [
+   1,
+   1
+  ],
+  "levels": [
+   1,
+   1
+  ],
+  "night": true,
+  "altitude": [
+   0,
+   1000
+  ]
+ },
+ {
+  "creature": "Draugr",
+  "list": "_SpawnList_base",
+  "biomes": [
+   "Swamp"
+  ],
+  "biomeArea": "7",
+  "maxSpawned": 4,
+  "interval": 120,
+  "chance": 50,
+  "groupSize": [
+   1,
+   2
+  ],
+  "levels": [
+   1,
+   3
+  ],
+  "day": true,
+  "night": true,
+  "altitude": [
+   -1.5,
+   10
+  ]
+ },
+ {
+  "creature": "Skeleton_Swamps",
+  "list": "_SpawnList_base",
+  "biomes": [
+   "Swamp"
+  ],
+  "biomeArea": "7",
+  "maxSpawned": 4,
+  "interval": 400,
+  "chance": 25,
+  "groupSize": [
+   2,
+   4
+  ],
+  "levels": [
+   1,
+   3
+  ],
+  "day": true,
+  "night": true,
+  "altitude": [
+   -1,
+   10
+  ]
+ },
+ {
+  "creature": "Draugr_Elite",
+  "list": "_SpawnList_base",
+  "biomes": [
+   "Swamp"
+  ],
+  "biomeArea": "Median",
+  "maxSpawned": 1,
+  "interval": 300,
+  "chance": 5,
+  "groupSize": [
+   1,
+   1
+  ],
+  "levels": [
+   1,
+   1
+  ],
+  "night": true,
+  "altitude": [
+   -1.5,
+   10
+  ]
+ },
+ {
+  "creature": "Blob",
+  "list": "_SpawnList_base",
+  "biomes": [
+   "Swamp"
+  ],
+  "biomeArea": "7",
+  "maxSpawned": 2,
+  "interval": 500,
+  "chance": 20,
+  "groupSize": [
+   1,
+   2
+  ],
+  "levels": [
+   1,
+   1
+  ],
+  "day": true,
+  "night": true,
+  "altitude": [
+   -1,
+   1000
+  ]
+ },
+ {
+  "creature": "Leech",
+  "list": "_SpawnList_base",
+  "biomes": [
+   "Swamp"
+  ],
+  "biomeArea": "-1",
+  "maxSpawned": 10,
+  "interval": 200,
+  "chance": 50,
+  "groupSize": [
+   1,
+   1
+  ],
+  "levels": [
+   1,
+   3
+  ],
+  "day": true,
+  "night": true,
+  "altitude": [
+   -3,
+   -0.1
+  ]
+ },
+ {
+  "creature": "BlobElite",
+  "list": "_SpawnList_base",
+  "biomes": [
+   "Swamp"
+  ],
+  "biomeArea": "7",
+  "maxSpawned": 1,
+  "interval": 120,
+  "chance": 20,
+  "groupSize": [
+   1,
+   1
+  ],
+  "levels": [
+   1,
+   1
+  ],
+  "night": true,
+  "altitude": [
+   -1,
+   1000
+  ]
+ },
+ {
+  "creature": "Goblin",
+  "list": "_SpawnList_base",
+  "biomes": [
+   "Plains"
+  ],
+  "biomeArea": "7",
+  "maxSpawned": 5,
+  "interval": 60,
+  "chance": 33,
+  "groupSize": [
+   3,
+   5
+  ],
+  "levels": [
+   1,
+   3
+  ],
+  "night": true,
+  "altitude": [
+   0,
+   1000
+  ]
+ },
+ {
+  "creature": "Goblin",
+  "list": "_SpawnList_base",
+  "biomes": [
+   "Plains"
+  ],
+  "biomeArea": "7",
+  "maxSpawned": 2,
+  "interval": 1000,
+  "chance": 33,
+  "groupSize": [
+   1,
+   2
+  ],
+  "levels": [
+   1,
+   3
+  ],
+  "day": true,
+  "altitude": [
+   0,
+   1000
+  ]
+ },
+ {
+  "creature": "GoblinBrute",
+  "list": "_SpawnList_base",
+  "biomes": [
+   "Plains"
+  ],
+  "biomeArea": "7",
+  "maxSpawned": 1,
+  "interval": 1000,
+  "chance": 20,
+  "groupSize": [
+   1,
+   2
+  ],
+  "levels": [
+   1,
+   3
+  ],
+  "altitude": [
+   0,
+   1000
+  ]
+ },
+ {
+  "creature": "Lox",
+  "list": "_SpawnList_base",
+  "biomes": [
+   "Plains"
+  ],
+  "biomeArea": "7",
+  "maxSpawned": 3,
+  "interval": 1000,
+  "chance": 5,
+  "groupSize": [
+   2,
+   4
+  ],
+  "levels": [
+   1,
+   1
+  ],
+  "day": true,
+  "night": true,
+  "altitude": [
+   1,
+   1000
+  ]
+ },
+ {
+  "creature": "Deathsquito",
+  "list": "_SpawnList_base",
+  "biomes": [
+   "Plains"
+  ],
+  "biomeArea": "7",
+  "maxSpawned": 3,
+  "interval": 500,
+  "chance": 20,
+  "groupSize": [
+   1,
+   2
+  ],
+  "levels": [
+   1,
+   1
+  ],
+  "day": true,
+  "night": true,
+  "altitude": [
+   1,
+   1000
+  ]
+ },
+ {
+  "creature": "Wraith",
+  "list": "_SpawnList_base",
+  "biomes": [
+   "Swamp"
+  ],
+  "biomeArea": "-1",
+  "maxSpawned": 2,
+  "interval": 200,
+  "chance": 30,
+  "groupSize": [
+   1,
+   1
+  ],
+  "levels": [
+   1,
+   1
+  ],
+  "night": true,
+  "altitude": [
+   -2,
+   1000
+  ]
+ },
+ {
+  "creature": "StoneGolem",
+  "list": "_SpawnList_base",
+  "biomes": [
+   "Mountain"
+  ],
+  "biomeArea": "6",
+  "maxSpawned": 1,
+  "interval": 120,
+  "chance": 25.6,
+  "groupSize": [
+   1,
+   1
+  ],
+  "levels": [
+   1,
+   1
+  ],
+  "day": true,
+  "night": true,
+  "altitude": [
+   120,
+   1000
+  ]
+ },
+ {
+  "creature": "Hatchling",
+  "list": "_SpawnList_base",
+  "biomes": [
+   "Mountain"
+  ],
+  "biomeArea": "6",
+  "maxSpawned": 2,
+  "interval": 120,
+  "chance": 25.6,
+  "groupSize": [
+   1,
+   1
+  ],
+  "levels": [
+   1,
+   1
+  ],
+  "day": true,
+  "night": true,
+  "altitude": [
+   100,
+   1000
+  ]
+ },
+ {
+  "creature": "Wolf",
+  "list": "_SpawnList_base",
+  "biomes": [
+   "Mountain"
+  ],
+  "biomeArea": "6",
+  "maxSpawned": 6,
+  "interval": 120,
+  "chance": 50,
+  "groupSize": [
+   2,
+   4
+  ],
+  "levels": [
+   1,
+   3
+  ],
+  "night": true,
+  "altitude": [
+   0,
+   1000
+  ]
+ },
+ {
+  "creature": "Wolf",
+  "list": "_SpawnList_base",
+  "biomes": [
+   "Mountain"
+  ],
+  "biomeArea": "6",
+  "maxSpawned": 3,
+  "interval": 400,
+  "chance": 25.6,
+  "groupSize": [
+   1,
+   2
+  ],
+  "levels": [
+   1,
+   1
+  ],
+  "day": true,
+  "altitude": [
+   0,
+   1000
+  ]
+ },
+ {
+  "creature": "Serpent",
+  "list": "_SpawnList_base",
+  "biomes": [
+   "Ocean"
+  ],
+  "biomeArea": "Median",
+  "maxSpawned": 1,
+  "interval": 1000,
+  "chance": 5,
+  "groupSize": [
+   1,
+   1
+  ],
+  "levels": [
+   1,
+   1
+  ],
+  "night": true,
+  "altitude": [
+   -1000,
+   -5
+  ]
+ },
+ {
+  "creature": "Serpent",
+  "list": "_SpawnList_base",
+  "biomes": [
+   "Ocean"
+  ],
+  "biomeArea": "Median",
+  "maxSpawned": 1,
+  "interval": 1000,
+  "chance": 5,
+  "groupSize": [
+   1,
+   1
+  ],
+  "levels": [
+   1,
+   1
+  ],
+  "day": true,
+  "night": true,
+  "altitude": [
+   -1000,
+   -5
+  ],
+  "requiredEnvironments": [
+   "ThunderStorm",
+   "Rain"
+  ]
+ },
+ {
+  "creature": "Abomination",
+  "list": "_SpawnList_base",
+  "biomes": [
+   "Swamp"
+  ],
+  "biomeArea": "Median",
+  "maxSpawned": 1,
+  "interval": 4000,
+  "chance": 15,
+  "groupSize": [
+   1,
+   1
+  ],
+  "levels": [
+   1,
+   0
+  ],
+  "day": true,
+  "night": true,
+  "altitude": [
+   -2,
+   5
+  ]
+ },
+ {
+  "creature": "Writhan",
+  "list": "_SpawnList_base",
+  "biomes": [
+   "Swamp"
+  ],
+  "biomeArea": "Median",
+  "maxSpawned": 1,
+  "interval": 4000,
+  "chance": 10,
+  "groupSize": [
+   1,
+   1
+  ],
+  "levels": [
+   1,
+   3
+  ],
+  "day": true,
+  "night": true,
+  "altitude": [
+   -2,
+   10
+  ]
+ },
+ {
+  "creature": "Seeker",
+  "list": "_SpawnList_mistlands",
+  "biomes": [
+   "Mistlands"
+  ],
+  "biomeArea": "Median",
+  "maxSpawned": 2,
+  "interval": 200,
+  "chance": 30,
+  "groupSize": [
+   2,
+   3
+  ],
+  "levels": [
+   1,
+   2
+  ],
+  "day": true,
+  "altitude": [
+   0,
+   1000
+  ]
+ },
+ {
+  "creature": "Dverger",
+  "list": "_SpawnList_mistlands",
+  "biomes": [
+   "Mistlands"
+  ],
+  "biomeArea": "Median",
+  "maxSpawned": 2,
+  "interval": 1000,
+  "chance": 30,
+  "groupSize": [
+   1,
+   2
+  ],
+  "levels": [
+   1,
+   3
+  ],
+  "day": true,
+  "altitude": [
+   0,
+   1000
+  ]
+ },
+ {
+  "creature": "Seeker",
+  "list": "_SpawnList_mistlands",
+  "biomes": [
+   "Mistlands"
+  ],
+  "biomeArea": "Median",
+  "maxSpawned": 6,
+  "interval": 300,
+  "chance": 20,
+  "groupSize": [
+   2,
+   3
+  ],
+  "levels": [
+   1,
+   3
+  ],
+  "night": true,
+  "altitude": [
+   0,
+   1000
+  ]
+ },
+ {
+  "creature": "Gjall",
+  "list": "_SpawnList_mistlands",
+  "biomes": [
+   "Mistlands"
+  ],
+  "biomeArea": "Median",
+  "maxSpawned": 1,
+  "interval": 4000,
+  "chance": 10,
+  "groupSize": [
+   1,
+   1
+  ],
+  "levels": [
+   0,
+   0
+  ],
+  "day": true,
+  "altitude": [
+   0,
+   1000
+  ]
+ },
+ {
+  "creature": "Gjall",
+  "list": "_SpawnList_mistlands",
+  "biomes": [
+   "Mistlands"
+  ],
+  "biomeArea": "Median",
+  "maxSpawned": 1,
+  "interval": 4000,
+  "chance": 10,
+  "groupSize": [
+   1,
+   1
+  ],
+  "levels": [
+   1,
+   3
+  ],
+  "night": true,
+  "altitude": [
+   0,
+   1000
+  ]
+ },
+ {
+  "creature": "Hare",
+  "list": "_SpawnList_mistlands",
+  "biomes": [
+   "Mistlands"
+  ],
+  "biomeArea": "Everything",
+  "maxSpawned": 10,
+  "interval": 100,
+  "chance": 50,
+  "groupSize": [
+   1,
+   3
+  ],
+  "levels": [
+   1,
+   3
+  ],
+  "day": true,
+  "night": true,
+  "altitude": [
+   0,
+   1000
+  ]
+ },
+ {
+  "creature": "SeekerBrute",
+  "list": "_SpawnList_mistlands",
+  "biomes": [
+   "Mistlands"
+  ],
+  "biomeArea": "Median",
+  "maxSpawned": 1,
+  "interval": 4000,
+  "chance": 10,
+  "groupSize": [
+   1,
+   1
+  ],
+  "levels": [
+   1,
+   3
+  ],
+  "day": true,
+  "night": true,
+  "altitude": [
+   0,
+   1000
+  ]
+ },
+ {
+  "creature": "Seeker",
+  "list": "_SpawnList_mistlands",
+  "biomes": [
+   "Meadows",
+   "Swamp",
+   "Mountain",
+   "BlackForest",
+   "Plains"
+  ],
+  "biomeArea": "Median",
+  "maxSpawned": 2,
+  "interval": 3000,
+  "chance": 5,
+  "groupSize": [
+   3,
+   3
+  ],
+  "levels": [
+   1,
+   1
+  ],
+  "night": true,
+  "altitude": [
+   0,
+   1000
+  ],
+  "requiredGlobalKey": "defeated_queen",
+  "huntPlayer": true
+ },
+ {
+  "creature": "SeekerBrood",
+  "list": "_SpawnList_mistlands",
+  "biomes": [
+   "Mistlands"
+  ],
+  "biomeArea": "Median",
+  "maxSpawned": 5,
+  "interval": 3000,
+  "chance": 5,
+  "groupSize": [
+   3,
+   3
+  ],
+  "levels": [
+   1,
+   1
+  ],
+  "night": true,
+  "altitude": [
+   0,
+   1000
+  ],
+  "requiredGlobalKey": "defeated_queen",
+  "huntPlayer": true
+ },
+ {
+  "creature": "Tick",
+  "list": "_SpawnList_mistlands",
+  "biomes": [
+   "Mistlands"
+  ],
+  "biomeArea": "Median",
+  "maxSpawned": 4,
+  "interval": 3000,
+  "chance": 5,
+  "groupSize": [
+   3,
+   3
+  ],
+  "levels": [
+   1,
+   3
+  ],
+  "night": true,
+  "altitude": [
+   0,
+   1000
+  ],
+  "requiredGlobalKey": "defeated_queen",
+  "huntPlayer": true
+ }
+]
