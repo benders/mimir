@@ -1,5 +1,28 @@
 [
  {
+  "id": "Chief",
+  "name": "Chief",
+  "faction": "ForestMonsters",
+  "boss": true,
+  "health": 900,
+  "speed": {
+   "walk": 2,
+   "run": 5,
+   "swim": 2
+  }
+ },
+ {
+  "id": "Pup",
+  "name": "Pup",
+  "faction": "ForestMonsters",
+  "health": 20,
+  "speed": {
+   "walk": 2,
+   "run": 5,
+   "swim": 2
+  }
+ },
+ {
   "id": "Raider",
   "name": "Raider",
   "faction": "ForestMonsters",

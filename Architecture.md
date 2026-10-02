@@ -126,6 +126,9 @@ erDiagram
 - Empty, zero, false and `Normal` values are omitted.
 - `normalize.py` is deterministic (sorted, no timestamps).
 - Reverse relations ("used in", "dropped by") are derived by the site build, not stored.
+- A spawn's `source` says where the creature comes from: world spawns, raids, locations and their dungeons
+  (from the plugin's `locations/` and `rooms/` dump), offspring and eggs. Creatures with no spawn at all are boss
+  phases and summons, or unused in vanilla worldgen.
 
 ## Site
 

@@ -72,14 +72,20 @@ Logs after a dump: `.cache/dump/<branch>/server.log` (Unity) and `bepinex.log` (
 - `status_effect_defaults.json` — a fresh instance per status effect type; normalize diffs against it.
 - `piece_tables.json` — tool build menus (`_HammerPieceTable`, ...); they aren't networked prefabs.
 - `world/*.json` — ZoneSystem (vegetation, locations), EnvMan (biomes, weather), SpawnSystemList, RandEventSystem.
+- `locations/<name>.json` — each enabled ZoneSystem location (soft-referenced asset, loaded by the plugin), components
+  as for prefabs: creature spawners, boss altars (`OfferingBowl`), chests, `DungeonGenerator`.
+- `rooms/<name>.json` — dungeon rooms from DungeonDB with `theme` (Room.Theme bitmask); a location's DungeonGenerator
+  uses the enabled rooms whose theme overlaps its `m_themes`. `room_themes.json` maps theme names to bits.
 - `localization/English.json` — `$token` → text (keys without the `$`).
 
 ## Site data (`data/`, committed)
 
 `meta.json` (versions, counts, unresolved tokens, skipped refs), `items`, `recipes`, `creatures`, `spawns`,
 `pieces`, `processing` (smelter/cooking/fermenter conversions), `sources` (pickables, ore, trees, rocks; follow
-`becomes` for multi-stage objects), `status_effects`. Ids are prefab names; references are ids. Empty, zero,
-false and "Normal" values are omitted. Derived relations (used in, dropped by) are left to the site build.
+`becomes` for multi-stage objects), `status_effects`. Each `spawns` entry has a `source`: `world` (SpawnSystem),
+`raid` (RandEventSystem; the event's biomes), `location` / `dungeon` (spawners and boss altars in a location or its
+dungeon rooms; the location's biomes), `offspring` (`parent` creature) or `egg` (`item` that hatches).
+Ids are prefab names; references are ids. Empty, zero, false and "Normal" values are omitted. Derived relations (used in, dropped by) are left to the site build.
 Items flagged `internal` (creature attack items) or `enemyOnly` (FW_/SP_ gear copies, Dvergr crossbow) get no site
 page; creatures list them under `attacks` (weapons) and `equipment`.
 

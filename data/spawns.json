@@ -1,6 +1,7 @@
 [
  {
   "creature": "Seal",
+  "source": "world",
   "list": "_SpawnList_DeepNorth",
   "biomes": [
    "DeepNorth"
@@ -26,6 +27,7 @@
  },
  {
   "creature": "ShadowPerson",
+  "source": "world",
   "list": "_SpawnList_DeepNorth",
   "biomes": [
    "DeepNorth"
@@ -50,6 +52,7 @@
  },
  {
   "creature": "Greydwarf_Frozen",
+  "source": "world",
   "list": "_SpawnList_DeepNorth",
   "biomes": [
    "DeepNorth"
@@ -75,6 +78,7 @@
  },
  {
   "creature": "Greydwarf_Shaman_Frozen",
+  "source": "world",
   "list": "_SpawnList_DeepNorth",
   "biomes": [
    "DeepNorth"
@@ -100,6 +104,7 @@
  },
  {
   "creature": "Skeleton_DeepNorth",
+  "source": "world",
   "list": "_SpawnList_DeepNorth",
   "biomes": [
    "DeepNorth"
@@ -125,6 +130,7 @@
  },
  {
   "creature": "Seal_Pup",
+  "source": "world",
   "list": "_SpawnList_DeepNorth",
   "biomes": [
    "DeepNorth"
@@ -150,6 +156,7 @@
  },
  {
   "creature": "Elaking",
+  "source": "world",
   "list": "_SpawnList_DeepNorth",
   "biomes": [
    "DeepNorth"
@@ -174,6 +181,7 @@
  },
  {
   "creature": "ElakingLantern",
+  "source": "world",
   "list": "_SpawnList_DeepNorth",
   "biomes": [
    "DeepNorth"
@@ -198,6 +206,7 @@
  },
  {
   "creature": "JotunWarrior",
+  "source": "world",
   "list": "_SpawnList_DeepNorth",
   "biomes": [
    "DeepNorth"
@@ -224,6 +233,7 @@
  },
  {
   "creature": "JotunWitch",
+  "source": "world",
   "list": "_SpawnList_DeepNorth",
   "biomes": [
    "DeepNorth"
@@ -249,7 +259,34 @@
   "huntPlayer": true
  },
  {
+  "creature": "TrollFrost",
+  "source": "world",
+  "list": "_SpawnList_DeepNorth",
+  "biomes": [
+   "DeepNorth"
+  ],
+  "biomeArea": "7",
+  "maxSpawned": 1,
+  "interval": 1500,
+  "chance": 15,
+  "groupSize": [
+   1,
+   1
+  ],
+  "levels": [
+   1,
+   1
+  ],
+  "day": true,
+  "night": true,
+  "altitude": [
+   10,
+   1000
+  ]
+ },
+ {
   "creature": "Barka",
+  "source": "world",
   "list": "_SpawnList_DeepNorth",
   "biomes": [
    "DeepNorth"
@@ -275,6 +312,7 @@
  },
  {
   "creature": "Moose",
+  "source": "world",
   "list": "_SpawnList_DeepNorth",
   "biomes": [
    "DeepNorth"
@@ -300,9 +338,18 @@
  },
  {
   "creature": "JotunWarrior",
+  "source": "world",
   "list": "_SpawnList_DeepNorth",
   "biomes": [
-   "-1"
+   "Meadows",
+   "Swamp",
+   "Mountain",
+   "BlackForest",
+   "Plains",
+   "AshLands",
+   "DeepNorth",
+   "Ocean",
+   "Mistlands"
   ],
   "biomeArea": "Everything",
   "maxSpawned": 4,
@@ -325,9 +372,18 @@
  },
  {
   "creature": "JotunWitch",
+  "source": "world",
   "list": "_SpawnList_DeepNorth",
   "biomes": [
-   "-1"
+   "Meadows",
+   "Swamp",
+   "Mountain",
+   "BlackForest",
+   "Plains",
+   "AshLands",
+   "DeepNorth",
+   "Ocean",
+   "Mistlands"
   ],
   "biomeArea": "Everything",
   "maxSpawned": 2,
@@ -350,9 +406,18 @@
  },
  {
   "creature": "Elaking",
+  "source": "world",
   "list": "_SpawnList_DeepNorth",
   "biomes": [
-   "-1"
+   "Meadows",
+   "Swamp",
+   "Mountain",
+   "BlackForest",
+   "Plains",
+   "AshLands",
+   "DeepNorth",
+   "Ocean",
+   "Mistlands"
   ],
   "biomeArea": "Everything",
   "maxSpawned": 6,
@@ -375,6 +440,7 @@
  },
  {
   "creature": "BonemawSerpent",
+  "source": "world",
   "list": "_SpawnList_ashlands",
   "biomes": [
    "AshLands"
@@ -400,6 +466,7 @@
  },
  {
   "creature": "FallenValkyrie",
+  "source": "world",
   "list": "_SpawnList_ashlands",
   "biomes": [
    "AshLands"
@@ -425,6 +492,7 @@
  },
  {
   "creature": "Morgen_NonSleeping",
+  "source": "world",
   "list": "_SpawnList_ashlands",
   "biomes": [
    "AshLands"
@@ -450,6 +518,7 @@
  },
  {
   "creature": "Asksvin",
+  "source": "world",
   "list": "_SpawnList_ashlands",
   "biomes": [
    "AshLands"
@@ -474,6 +543,7 @@
  },
  {
   "creature": "Asksvin",
+  "source": "world",
   "list": "_SpawnList_ashlands",
   "biomes": [
    "AshLands"
@@ -498,6 +568,7 @@
  },
  {
   "creature": "Volture",
+  "source": "world",
   "list": "_SpawnList_ashlands",
   "biomes": [
    "AshLands"
@@ -523,6 +594,7 @@
  },
  {
   "creature": "Charred_Twitcher",
+  "source": "world",
   "list": "_SpawnList_ashlands",
   "biomes": [
    "AshLands"
@@ -547,6 +619,7 @@
  },
  {
   "creature": "Charred_Twitcher",
+  "source": "world",
   "list": "_SpawnList_ashlands",
   "biomes": [
    "AshLands"
@@ -571,6 +644,7 @@
  },
  {
   "creature": "Charred_Archer",
+  "source": "world",
   "list": "_SpawnList_ashlands",
   "biomes": [
    "AshLands"
@@ -596,6 +670,7 @@
  },
  {
   "creature": "Charred_Melee",
+  "source": "world",
   "list": "_SpawnList_ashlands",
   "biomes": [
    "AshLands"
@@ -621,6 +696,7 @@
  },
  {
   "creature": "BlobLava",
+  "source": "world",
   "list": "_SpawnList_ashlands",
   "biomes": [
    "AshLands"
@@ -646,6 +722,7 @@
  },
  {
   "creature": "DvergerAshlands",
+  "source": "world",
   "list": "_SpawnList_ashlands",
   "biomes": [
    "AshLands"
@@ -670,6 +747,7 @@
  },
  {
   "creature": "Charred_Melee",
+  "source": "world",
   "list": "_SpawnList_ashlands",
   "biomes": [
    "Meadows",
@@ -700,6 +778,7 @@
  },
  {
   "creature": "Charred_Archer",
+  "source": "world",
   "list": "_SpawnList_ashlands",
   "biomes": [
    "Meadows",
@@ -730,6 +809,7 @@
  },
  {
   "creature": "Deer",
+  "source": "world",
   "list": "_SpawnList_base",
   "biomes": [
    "Meadows",
@@ -756,6 +836,7 @@
  },
  {
   "creature": "Boar",
+  "source": "world",
   "list": "_SpawnList_base",
   "biomes": [
    "Meadows"
@@ -781,6 +862,7 @@
  },
  {
   "creature": "Neck",
+  "source": "world",
   "list": "_SpawnList_base",
   "biomes": [
    "Meadows"
@@ -806,6 +888,7 @@
  },
  {
   "creature": "Neck",
+  "source": "world",
   "list": "_SpawnList_base",
   "biomes": [
    "Meadows"
@@ -836,6 +919,7 @@
  },
  {
   "creature": "Fish1",
+  "source": "world",
   "list": "_SpawnList_base",
   "biomes": [
    "Meadows",
@@ -863,6 +947,7 @@
  },
  {
   "creature": "Fish2",
+  "source": "world",
   "list": "_SpawnList_base",
   "biomes": [
    "Meadows",
@@ -890,6 +975,7 @@
  },
  {
   "creature": "Fish3",
+  "source": "world",
   "list": "_SpawnList_base",
   "biomes": [
    "Ocean"
@@ -915,6 +1001,7 @@
  },
  {
   "creature": "Fish5",
+  "source": "world",
   "list": "_SpawnList_base",
   "biomes": [
    "BlackForest"
@@ -940,6 +1027,7 @@
  },
  {
   "creature": "Fish6",
+  "source": "world",
   "list": "_SpawnList_base",
   "biomes": [
    "Swamp"
@@ -965,6 +1053,7 @@
  },
  {
   "creature": "Fish7",
+  "source": "world",
   "list": "_SpawnList_base",
   "biomes": [
    "Plains"
@@ -990,6 +1079,7 @@
  },
  {
   "creature": "Fish8",
+  "source": "world",
   "list": "_SpawnList_base",
   "biomes": [
    "Ocean"
@@ -1015,6 +1105,7 @@
  },
  {
   "creature": "Fish9",
+  "source": "world",
   "list": "_SpawnList_base",
   "biomes": [
    "Mistlands"
@@ -1040,6 +1131,7 @@
  },
  {
   "creature": "Fish12",
+  "source": "world",
   "list": "_SpawnList_base",
   "biomes": [
    "Ocean",
@@ -1066,6 +1158,7 @@
  },
  {
   "creature": "Fish10",
+  "source": "world",
   "list": "_SpawnList_base",
   "biomes": [
    "DeepNorth"
@@ -1091,6 +1184,7 @@
  },
  {
   "creature": "Fish11",
+  "source": "world",
   "list": "_SpawnList_base",
   "biomes": [
    "AshLands"
@@ -1116,6 +1210,7 @@
  },
  {
   "creature": "Greydwarf",
+  "source": "world",
   "list": "_SpawnList_base",
   "biomes": [
    "BlackForest"
@@ -1140,6 +1235,7 @@
  },
  {
   "creature": "Bjorn",
+  "source": "world",
   "list": "_SpawnList_base",
   "biomes": [
    "BlackForest"
@@ -1164,6 +1260,7 @@
  },
  {
   "creature": "Bjorn",
+  "source": "world",
   "list": "_SpawnList_base",
   "biomes": [
    "BlackForest"
@@ -1188,6 +1285,7 @@
  },
  {
   "creature": "Greydwarf",
+  "source": "world",
   "list": "_SpawnList_base",
   "biomes": [
    "Meadows"
@@ -1213,6 +1311,7 @@
  },
  {
   "creature": "Greydwarf",
+  "source": "world",
   "list": "_SpawnList_base",
   "biomes": [
    "BlackForest"
@@ -1237,6 +1336,7 @@
  },
  {
   "creature": "Greydwarf_Elite",
+  "source": "world",
   "list": "_SpawnList_base",
   "biomes": [
    "BlackForest"
@@ -1261,6 +1361,7 @@
  },
  {
   "creature": "Fenring",
+  "source": "world",
   "list": "_SpawnList_base",
   "biomes": [
    "Mountain"
@@ -1285,6 +1386,7 @@
  },
  {
   "creature": "Greydwarf_Elite",
+  "source": "world",
   "list": "_SpawnList_base",
   "biomes": [
    "Meadows"
@@ -1310,6 +1412,7 @@
  },
  {
   "creature": "Greydwarf_Shaman",
+  "source": "world",
   "list": "_SpawnList_base",
   "biomes": [
    "Meadows"
@@ -1335,6 +1438,7 @@
  },
  {
   "creature": "Skeleton",
+  "source": "world",
   "list": "_SpawnList_base",
   "biomes": [
    "Meadows",
@@ -1364,6 +1468,7 @@
  },
  {
   "creature": "Draugr",
+  "source": "world",
   "list": "_SpawnList_base",
   "biomes": [
    "Meadows",
@@ -1395,6 +1500,7 @@
  },
  {
   "creature": "Goblin",
+  "source": "world",
   "list": "_SpawnList_base",
   "biomes": [
    "Meadows",
@@ -1423,6 +1529,7 @@
  },
  {
   "creature": "Greydwarf_Shaman",
+  "source": "world",
   "list": "_SpawnList_base",
   "biomes": [
    "BlackForest"
@@ -1447,6 +1554,7 @@
  },
  {
   "creature": "Greydwarf",
+  "source": "world",
   "list": "_SpawnList_base",
   "biomes": [
    "Meadows"
@@ -1472,6 +1580,7 @@
  },
  {
   "creature": "Greyling",
+  "source": "world",
   "list": "_SpawnList_base",
   "biomes": [
    "Meadows"
@@ -1497,6 +1606,7 @@
  },
  {
   "creature": "Troll",
+  "source": "world",
   "list": "_SpawnList_base",
   "biomes": [
    "BlackForest"
@@ -1522,6 +1632,7 @@
  },
  {
   "creature": "Unbjorn",
+  "source": "world",
   "list": "_SpawnList_base",
   "biomes": [
    "Plains"
@@ -1546,6 +1657,7 @@
  },
  {
   "creature": "Draugr",
+  "source": "world",
   "list": "_SpawnList_base",
   "biomes": [
    "Swamp"
@@ -1571,6 +1683,7 @@
  },
  {
   "creature": "Skeleton_Swamps",
+  "source": "world",
   "list": "_SpawnList_base",
   "biomes": [
    "Swamp"
@@ -1596,6 +1709,7 @@
  },
  {
   "creature": "Draugr_Elite",
+  "source": "world",
   "list": "_SpawnList_base",
   "biomes": [
    "Swamp"
@@ -1620,6 +1734,7 @@
  },
  {
   "creature": "Blob",
+  "source": "world",
   "list": "_SpawnList_base",
   "biomes": [
    "Swamp"
@@ -1645,6 +1760,7 @@
  },
  {
   "creature": "Leech",
+  "source": "world",
   "list": "_SpawnList_base",
   "biomes": [
    "Swamp"
@@ -1670,6 +1786,7 @@
  },
  {
   "creature": "BlobElite",
+  "source": "world",
   "list": "_SpawnList_base",
   "biomes": [
    "Swamp"
@@ -1694,6 +1811,7 @@
  },
  {
   "creature": "Goblin",
+  "source": "world",
   "list": "_SpawnList_base",
   "biomes": [
    "Plains"
@@ -1718,6 +1836,7 @@
  },
  {
   "creature": "Goblin",
+  "source": "world",
   "list": "_SpawnList_base",
   "biomes": [
    "Plains"
@@ -1742,6 +1861,7 @@
  },
  {
   "creature": "GoblinBrute",
+  "source": "world",
   "list": "_SpawnList_base",
   "biomes": [
    "Plains"
@@ -1765,6 +1885,7 @@
  },
  {
   "creature": "Lox",
+  "source": "world",
   "list": "_SpawnList_base",
   "biomes": [
    "Plains"
@@ -1790,6 +1911,7 @@
  },
  {
   "creature": "Deathsquito",
+  "source": "world",
   "list": "_SpawnList_base",
   "biomes": [
    "Plains"
@@ -1815,6 +1937,7 @@
  },
  {
   "creature": "Wraith",
+  "source": "world",
   "list": "_SpawnList_base",
   "biomes": [
    "Swamp"
@@ -1839,6 +1962,7 @@
  },
  {
   "creature": "StoneGolem",
+  "source": "world",
   "list": "_SpawnList_base",
   "biomes": [
    "Mountain"
@@ -1864,6 +1988,7 @@
  },
  {
   "creature": "Hatchling",
+  "source": "world",
   "list": "_SpawnList_base",
   "biomes": [
    "Mountain"
@@ -1889,6 +2014,7 @@
  },
  {
   "creature": "Wolf",
+  "source": "world",
   "list": "_SpawnList_base",
   "biomes": [
    "Mountain"
@@ -1913,6 +2039,7 @@
  },
  {
   "creature": "Wolf",
+  "source": "world",
   "list": "_SpawnList_base",
   "biomes": [
    "Mountain"
@@ -1937,6 +2064,7 @@
  },
  {
   "creature": "Serpent",
+  "source": "world",
   "list": "_SpawnList_base",
   "biomes": [
    "Ocean"
@@ -1961,6 +2089,7 @@
  },
  {
   "creature": "Serpent",
+  "source": "world",
   "list": "_SpawnList_base",
   "biomes": [
    "Ocean"
@@ -1990,6 +2119,7 @@
  },
  {
   "creature": "Abomination",
+  "source": "world",
   "list": "_SpawnList_base",
   "biomes": [
    "Swamp"
@@ -2015,6 +2145,7 @@
  },
  {
   "creature": "Writhan",
+  "source": "world",
   "list": "_SpawnList_base",
   "biomes": [
    "Swamp"
@@ -2040,6 +2171,7 @@
  },
  {
   "creature": "Seeker",
+  "source": "world",
   "list": "_SpawnList_mistlands",
   "biomes": [
    "Mistlands"
@@ -2064,6 +2196,7 @@
  },
  {
   "creature": "Dverger",
+  "source": "world",
   "list": "_SpawnList_mistlands",
   "biomes": [
    "Mistlands"
@@ -2088,6 +2221,7 @@
  },
  {
   "creature": "Seeker",
+  "source": "world",
   "list": "_SpawnList_mistlands",
   "biomes": [
    "Mistlands"
@@ -2112,6 +2246,7 @@
  },
  {
   "creature": "Gjall",
+  "source": "world",
   "list": "_SpawnList_mistlands",
   "biomes": [
    "Mistlands"
@@ -2136,6 +2271,7 @@
  },
  {
   "creature": "Gjall",
+  "source": "world",
   "list": "_SpawnList_mistlands",
   "biomes": [
    "Mistlands"
@@ -2160,6 +2296,7 @@
  },
  {
   "creature": "Hare",
+  "source": "world",
   "list": "_SpawnList_mistlands",
   "biomes": [
    "Mistlands"
@@ -2185,6 +2322,7 @@
  },
  {
   "creature": "SeekerBrute",
+  "source": "world",
   "list": "_SpawnList_mistlands",
   "biomes": [
    "Mistlands"
@@ -2210,6 +2348,7 @@
  },
  {
   "creature": "Seeker",
+  "source": "world",
   "list": "_SpawnList_mistlands",
   "biomes": [
    "Meadows",
@@ -2240,6 +2379,7 @@
  },
  {
   "creature": "SeekerBrood",
+  "source": "world",
   "list": "_SpawnList_mistlands",
   "biomes": [
    "Mistlands"
@@ -2266,6 +2406,7 @@
  },
  {
   "creature": "Tick",
+  "source": "world",
   "list": "_SpawnList_mistlands",
   "biomes": [
    "Mistlands"
@@ -2289,5 +2430,4032 @@
   ],
   "requiredGlobalKey": "defeated_queen",
   "huntPlayer": true
+ },
+ {
+  "creature": "Draugr",
+  "source": "raid",
+  "event": "army_bonemass",
+  "message": "A foul smell from the swamp...",
+  "biomes": [
+   "Meadows",
+   "Swamp",
+   "Mountain",
+   "BlackForest",
+   "Plains"
+  ],
+  "maxSpawned": 3,
+  "interval": 5,
+  "chance": 100,
+  "groupSize": [
+   1,
+   1
+  ],
+  "levels": [
+   1,
+   1
+  ],
+  "requiredGlobalKeys": [
+   "defeated_gdking"
+  ],
+  "notRequiredGlobalKeys": [
+   "defeated_bonemass"
+  ]
+ },
+ {
+  "creature": "Skeleton",
+  "source": "raid",
+  "event": "army_bonemass",
+  "message": "A foul smell from the swamp...",
+  "biomes": [
+   "Meadows",
+   "Swamp",
+   "Mountain",
+   "BlackForest",
+   "Plains"
+  ],
+  "maxSpawned": 6,
+  "interval": 5,
+  "chance": 100,
+  "groupSize": [
+   1,
+   1
+  ],
+  "levels": [
+   1,
+   1
+  ],
+  "requiredGlobalKeys": [
+   "defeated_gdking"
+  ],
+  "notRequiredGlobalKeys": [
+   "defeated_bonemass"
+  ]
+ },
+ {
+  "creature": "Charred_Melee",
+  "source": "raid",
+  "event": "army_charred",
+  "message": "The undead army marches",
+  "biomes": [
+   "BlackForest",
+   "Plains",
+   "AshLands",
+   "DeepNorth",
+   "Mistlands"
+  ],
+  "maxSpawned": 2,
+  "interval": 50,
+  "chance": 100,
+  "groupSize": [
+   1,
+   1
+  ],
+  "levels": [
+   1,
+   1
+  ],
+  "requiredGlobalKeys": [
+   "defeated_queen"
+  ],
+  "notRequiredGlobalKeys": [
+   "defeated_fader"
+  ]
+ },
+ {
+  "creature": "Charred_Twitcher",
+  "source": "raid",
+  "event": "army_charred",
+  "message": "The undead army marches",
+  "biomes": [
+   "BlackForest",
+   "Plains",
+   "AshLands",
+   "DeepNorth",
+   "Mistlands"
+  ],
+  "maxSpawned": 3,
+  "interval": 40,
+  "chance": 100,
+  "groupSize": [
+   1,
+   1
+  ],
+  "levels": [
+   1,
+   1
+  ],
+  "requiredGlobalKeys": [
+   "defeated_queen"
+  ],
+  "notRequiredGlobalKeys": [
+   "defeated_fader"
+  ]
+ },
+ {
+  "creature": "Charred_Archer",
+  "source": "raid",
+  "event": "army_charred",
+  "message": "The undead army marches",
+  "biomes": [
+   "BlackForest",
+   "Plains",
+   "AshLands",
+   "DeepNorth",
+   "Mistlands"
+  ],
+  "maxSpawned": 3,
+  "interval": 50,
+  "chance": 100,
+  "groupSize": [
+   1,
+   1
+  ],
+  "levels": [
+   1,
+   1
+  ],
+  "requiredGlobalKeys": [
+   "defeated_queen"
+  ],
+  "notRequiredGlobalKeys": [
+   "defeated_fader"
+  ]
+ },
+ {
+  "creature": "Charred_Twitcher",
+  "source": "raid",
+  "event": "army_charredspawners",
+  "message": "The dead have been summoned",
+  "biomes": [
+   "BlackForest",
+   "Plains",
+   "AshLands",
+   "DeepNorth",
+   "Mistlands"
+  ],
+  "maxSpawned": 3,
+  "interval": 40,
+  "chance": 100,
+  "groupSize": [
+   1,
+   1
+  ],
+  "levels": [
+   1,
+   1
+  ],
+  "requiredGlobalKeys": [
+   "defeated_queen"
+  ],
+  "notRequiredGlobalKeys": [
+   "defeated_fader"
+  ]
+ },
+ {
+  "creature": "Neck",
+  "source": "raid",
+  "event": "army_eikthyr",
+  "message": "Eikthyr rallies the creatures of the forest",
+  "biomes": [
+   "Meadows",
+   "BlackForest"
+  ],
+  "maxSpawned": 2,
+  "interval": 20,
+  "chance": 100,
+  "groupSize": [
+   1,
+   1
+  ],
+  "levels": [
+   1,
+   1
+  ],
+  "notRequiredGlobalKeys": [
+   "defeated_eikthyr"
+  ]
+ },
+ {
+  "creature": "Boar",
+  "source": "raid",
+  "event": "army_eikthyr",
+  "message": "Eikthyr rallies the creatures of the forest",
+  "biomes": [
+   "Meadows",
+   "BlackForest"
+  ],
+  "maxSpawned": 2,
+  "interval": 20,
+  "chance": 100,
+  "groupSize": [
+   1,
+   1
+  ],
+  "levels": [
+   1,
+   1
+  ],
+  "notRequiredGlobalKeys": [
+   "defeated_eikthyr"
+  ]
+ },
+ {
+  "creature": "ElakingMole",
+  "source": "raid",
+  "event": "army_elakingar",
+  "message": "They emerge from below...",
+  "biomes": [
+   "DeepNorth"
+  ],
+  "maxSpawned": 2,
+  "interval": 40,
+  "chance": 100,
+  "groupSize": [
+   1,
+   1
+  ],
+  "levels": [
+   1,
+   1
+  ],
+  "requiredGlobalKeys": [
+   "elakingmole_defeated"
+  ],
+  "notRequiredGlobalKeys": [
+   "defeated_frozenking_p3"
+  ]
+ },
+ {
+  "creature": "Elaking",
+  "source": "raid",
+  "event": "army_elakingar",
+  "message": "They emerge from below...",
+  "biomes": [
+   "DeepNorth"
+  ],
+  "maxSpawned": 10,
+  "interval": 15,
+  "chance": 100,
+  "groupSize": [
+   1,
+   1
+  ],
+  "levels": [
+   1,
+   1
+  ],
+  "requiredGlobalKeys": [
+   "elakingmole_defeated"
+  ],
+  "notRequiredGlobalKeys": [
+   "defeated_frozenking_p3"
+  ]
+ },
+ {
+  "creature": "ElakingLantern",
+  "source": "raid",
+  "event": "army_elakingar",
+  "message": "They emerge from below...",
+  "biomes": [
+   "DeepNorth"
+  ],
+  "maxSpawned": 3,
+  "interval": 20,
+  "chance": 60,
+  "groupSize": [
+   1,
+   1
+  ],
+  "levels": [
+   1,
+   1
+  ],
+  "requiredGlobalKeys": [
+   "elakingmole_defeated"
+  ],
+  "notRequiredGlobalKeys": [
+   "defeated_frozenking_p3"
+  ]
+ },
+ {
+  "creature": "Gjall",
+  "source": "raid",
+  "event": "army_gjall",
+  "message": "What's up, Gjall?!",
+  "biomes": [
+   "Mistlands"
+  ],
+  "maxSpawned": 1,
+  "interval": 40,
+  "chance": 100,
+  "groupSize": [
+   1,
+   1
+  ],
+  "levels": [
+   1,
+   1
+  ],
+  "requiredGlobalKeys": [
+   "defeated_goblinking"
+  ],
+  "notRequiredGlobalKeys": [
+   "defeated_queen"
+  ]
+ },
+ {
+  "creature": "Tick",
+  "source": "raid",
+  "event": "army_gjall",
+  "message": "What's up, Gjall?!",
+  "biomes": [
+   "Mistlands"
+  ],
+  "maxSpawned": 4,
+  "interval": 20,
+  "chance": 100,
+  "groupSize": [
+   1,
+   1
+  ],
+  "levels": [
+   1,
+   3
+  ],
+  "requiredGlobalKeys": [
+   "defeated_goblinking"
+  ],
+  "notRequiredGlobalKeys": [
+   "defeated_queen"
+  ]
+ },
+ {
+  "creature": "Goblin",
+  "source": "raid",
+  "event": "army_goblin",
+  "message": "The horde is attacking!",
+  "biomes": [
+   "Meadows",
+   "BlackForest",
+   "Plains"
+  ],
+  "maxSpawned": 8,
+  "interval": 10,
+  "chance": 58.2,
+  "groupSize": [
+   1,
+   4
+  ],
+  "levels": [
+   1,
+   1
+  ],
+  "requiredGlobalKeys": [
+   "defeated_dragon"
+  ],
+  "notRequiredGlobalKeys": [
+   "defeated_goblinking"
+  ]
+ },
+ {
+  "creature": "GoblinBrute",
+  "source": "raid",
+  "event": "army_goblin",
+  "message": "The horde is attacking!",
+  "biomes": [
+   "Meadows",
+   "BlackForest",
+   "Plains"
+  ],
+  "maxSpawned": 2,
+  "interval": 20,
+  "chance": 47,
+  "groupSize": [
+   1,
+   1
+  ],
+  "levels": [
+   1,
+   1
+  ],
+  "requiredGlobalKeys": [
+   "defeated_dragon"
+  ],
+  "notRequiredGlobalKeys": [
+   "defeated_goblinking"
+  ]
+ },
+ {
+  "creature": "GoblinShaman",
+  "source": "raid",
+  "event": "army_goblin",
+  "message": "The horde is attacking!",
+  "biomes": [
+   "Meadows",
+   "BlackForest",
+   "Plains"
+  ],
+  "maxSpawned": 1,
+  "interval": 20,
+  "chance": 47,
+  "groupSize": [
+   1,
+   1
+  ],
+  "levels": [
+   1,
+   1
+  ],
+  "requiredGlobalKeys": [
+   "defeated_dragon"
+  ],
+  "notRequiredGlobalKeys": [
+   "defeated_goblinking"
+  ]
+ },
+ {
+  "creature": "JotunWarrior",
+  "source": "raid",
+  "event": "army_jotuns",
+  "message": "The Jotun have found you",
+  "biomes": [
+   "Meadows",
+   "Swamp",
+   "Mountain",
+   "BlackForest",
+   "Plains",
+   "DeepNorth",
+   "Mistlands"
+  ],
+  "maxSpawned": 3,
+  "interval": 40,
+  "chance": 100,
+  "groupSize": [
+   1,
+   1
+  ],
+  "levels": [
+   1,
+   1
+  ],
+  "requiredGlobalKeys": [
+   "jotun_killed"
+  ],
+  "notRequiredGlobalKeys": [
+   "defeated_frozenking_p3"
+  ]
+ },
+ {
+  "creature": "Elaking",
+  "source": "raid",
+  "event": "army_jotuns",
+  "message": "The Jotun have found you",
+  "biomes": [
+   "Meadows",
+   "Swamp",
+   "Mountain",
+   "BlackForest",
+   "Plains",
+   "DeepNorth",
+   "Mistlands"
+  ],
+  "maxSpawned": 3,
+  "interval": 30,
+  "chance": 100,
+  "groupSize": [
+   1,
+   1
+  ],
+  "levels": [
+   1,
+   1
+  ],
+  "requiredGlobalKeys": [
+   "jotun_killed"
+  ],
+  "notRequiredGlobalKeys": [
+   "defeated_frozenking_p3"
+  ]
+ },
+ {
+  "creature": "Hatchling",
+  "source": "raid",
+  "event": "army_moder",
+  "message": "A cold wind blows from the mountains",
+  "biomes": [
+   "Meadows",
+   "Swamp",
+   "Mountain",
+   "BlackForest",
+   "Plains"
+  ],
+  "maxSpawned": 3,
+  "interval": 10,
+  "chance": 100,
+  "groupSize": [
+   1,
+   1
+  ],
+  "levels": [
+   1,
+   1
+  ],
+  "requiredGlobalKeys": [
+   "defeated_bonemass"
+  ],
+  "notRequiredGlobalKeys": [
+   "defeated_dragon"
+  ]
+ },
+ {
+  "creature": "Seeker",
+  "source": "raid",
+  "event": "army_seekers",
+  "message": "They sought you out",
+  "biomes": [
+   "BlackForest",
+   "Plains",
+   "AshLands",
+   "DeepNorth",
+   "Mistlands"
+  ],
+  "maxSpawned": 3,
+  "interval": 35,
+  "chance": 100,
+  "groupSize": [
+   1,
+   1
+  ],
+  "levels": [
+   1,
+   1
+  ],
+  "requiredGlobalKeys": [
+   "defeated_goblinking"
+  ],
+  "notRequiredGlobalKeys": [
+   "defeated_queen"
+  ]
+ },
+ {
+  "creature": "SeekerBrood",
+  "source": "raid",
+  "event": "army_seekers",
+  "message": "They sought you out",
+  "biomes": [
+   "BlackForest",
+   "Plains",
+   "AshLands",
+   "DeepNorth",
+   "Mistlands"
+  ],
+  "maxSpawned": 8,
+  "interval": 20,
+  "chance": 100,
+  "groupSize": [
+   1,
+   1
+  ],
+  "levels": [
+   1,
+   1
+  ],
+  "requiredGlobalKeys": [
+   "defeated_goblinking"
+  ],
+  "notRequiredGlobalKeys": [
+   "defeated_queen"
+  ]
+ },
+ {
+  "creature": "Greydwarf",
+  "source": "raid",
+  "event": "army_theelder",
+  "message": "The forest is moving...",
+  "biomes": [
+   "Meadows",
+   "Swamp",
+   "BlackForest",
+   "Plains"
+  ],
+  "maxSpawned": 6,
+  "interval": 5,
+  "chance": 100,
+  "groupSize": [
+   1,
+   3
+  ],
+  "levels": [
+   1,
+   1
+  ],
+  "requiredGlobalKeys": [
+   "defeated_eikthyr"
+  ],
+  "notRequiredGlobalKeys": [
+   "defeated_gdking"
+  ]
+ },
+ {
+  "creature": "Greyling",
+  "source": "raid",
+  "event": "army_theelder",
+  "message": "The forest is moving...",
+  "biomes": [
+   "Meadows",
+   "Swamp",
+   "BlackForest",
+   "Plains"
+  ],
+  "maxSpawned": 4,
+  "interval": 5,
+  "chance": 100,
+  "groupSize": [
+   1,
+   3
+  ],
+  "levels": [
+   1,
+   1
+  ],
+  "requiredGlobalKeys": [
+   "defeated_eikthyr"
+  ],
+  "notRequiredGlobalKeys": [
+   "defeated_gdking"
+  ]
+ },
+ {
+  "creature": "Greydwarf_Shaman",
+  "source": "raid",
+  "event": "army_theelder",
+  "message": "The forest is moving...",
+  "biomes": [
+   "Meadows",
+   "Swamp",
+   "BlackForest",
+   "Plains"
+  ],
+  "maxSpawned": 1,
+  "interval": 5,
+  "chance": 100,
+  "groupSize": [
+   1,
+   1
+  ],
+  "levels": [
+   1,
+   1
+  ],
+  "requiredGlobalKeys": [
+   "defeated_eikthyr"
+  ],
+  "notRequiredGlobalKeys": [
+   "defeated_gdking"
+  ]
+ },
+ {
+  "creature": "Greydwarf_Elite",
+  "source": "raid",
+  "event": "army_theelder",
+  "message": "The forest is moving...",
+  "biomes": [
+   "Meadows",
+   "Swamp",
+   "BlackForest",
+   "Plains"
+  ],
+  "maxSpawned": 1,
+  "interval": 5,
+  "chance": 100,
+  "groupSize": [
+   1,
+   1
+  ],
+  "levels": [
+   1,
+   1
+  ],
+  "requiredGlobalKeys": [
+   "defeated_eikthyr"
+  ],
+  "notRequiredGlobalKeys": [
+   "defeated_gdking"
+  ]
+ },
+ {
+  "creature": "Bat",
+  "source": "raid",
+  "event": "bats",
+  "message": "You stirred the cauldron",
+  "biomes": [
+   "Meadows",
+   "Swamp",
+   "Mountain",
+   "BlackForest",
+   "Plains",
+   "AshLands",
+   "DeepNorth",
+   "Ocean",
+   "Mistlands"
+  ],
+  "maxSpawned": 10,
+  "interval": 10,
+  "chance": 100,
+  "groupSize": [
+   2,
+   4
+  ],
+  "levels": [
+   1,
+   1
+  ],
+  "requiredGlobalKeys": [
+   "KilledBat",
+   "defeated_bonemass"
+  ]
+ },
+ {
+  "creature": "Blob",
+  "source": "raid",
+  "event": "blobs",
+  "message": "A foul smell from the swamp...",
+  "biomes": [
+   "Meadows",
+   "Swamp",
+   "BlackForest",
+   "Plains"
+  ],
+  "maxSpawned": 5,
+  "interval": 2,
+  "chance": 100,
+  "groupSize": [
+   1,
+   3
+  ],
+  "levels": [
+   1,
+   1
+  ],
+  "requiredGlobalKeys": [
+   "defeated_bonemass"
+  ]
+ },
+ {
+  "creature": "BlobElite",
+  "source": "raid",
+  "event": "blobs",
+  "message": "A foul smell from the swamp...",
+  "biomes": [
+   "Meadows",
+   "Swamp",
+   "BlackForest",
+   "Plains"
+  ],
+  "maxSpawned": 2,
+  "interval": 10,
+  "chance": 100,
+  "groupSize": [
+   1,
+   1
+  ],
+  "levels": [
+   1,
+   1
+  ],
+  "requiredGlobalKeys": [
+   "defeated_bonemass"
+  ]
+ },
+ {
+  "creature": "Troll",
+  "source": "raid",
+  "event": "foresttrolls",
+  "message": "The ground is shaking",
+  "biomes": [
+   "Meadows",
+   "Swamp",
+   "BlackForest",
+   "Plains"
+  ],
+  "maxSpawned": 2,
+  "interval": 20,
+  "chance": 100,
+  "groupSize": [
+   1,
+   1
+  ],
+  "levels": [
+   1,
+   1
+  ],
+  "requiredGlobalKeys": [
+   "KilledTroll",
+   "defeated_gdking"
+  ]
+ },
+ {
+  "creature": "Ghost",
+  "source": "raid",
+  "event": "ghosts",
+  "message": "You feel a chill down your spine...",
+  "biomes": [
+   "Meadows",
+   "Swamp",
+   "Mountain",
+   "BlackForest",
+   "Plains"
+  ],
+  "maxSpawned": 3,
+  "interval": 10,
+  "chance": 100,
+  "groupSize": [
+   1,
+   1
+  ],
+  "levels": [
+   1,
+   1
+  ],
+  "requiredGlobalKeys": [
+   "defeated_bonemass"
+  ]
+ },
+ {
+  "creature": "Wraith",
+  "source": "raid",
+  "event": "ghosts",
+  "message": "You feel a chill down your spine...",
+  "biomes": [
+   "Meadows",
+   "Swamp",
+   "Mountain",
+   "BlackForest",
+   "Plains"
+  ],
+  "maxSpawned": 2,
+  "interval": 10,
+  "chance": 100,
+  "groupSize": [
+   1,
+   1
+  ],
+  "levels": [
+   1,
+   1
+  ],
+  "requiredGlobalKeys": [
+   "defeated_bonemass"
+  ]
+ },
+ {
+  "creature": "Skeleton_Hildir_nochest",
+  "source": "raid",
+  "event": "hildirboss1",
+  "message": "She's hot on your tail!",
+  "biomes": [
+   "Meadows",
+   "Swamp",
+   "Mountain",
+   "BlackForest",
+   "Plains",
+   "AshLands",
+   "DeepNorth",
+   "Ocean",
+   "Mistlands"
+  ],
+  "maxSpawned": 1,
+  "interval": 100,
+  "chance": 100,
+  "groupSize": [
+   1,
+   1
+  ],
+  "levels": [
+   1,
+   1
+  ],
+  "requiredGlobalKeys": [
+   "hildir1"
+  ]
+ },
+ {
+  "creature": "Skeleton",
+  "source": "raid",
+  "event": "hildirboss1",
+  "message": "She's hot on your tail!",
+  "biomes": [
+   "Meadows",
+   "Swamp",
+   "Mountain",
+   "BlackForest",
+   "Plains",
+   "AshLands",
+   "DeepNorth",
+   "Ocean",
+   "Mistlands"
+  ],
+  "maxSpawned": 4,
+  "interval": 20,
+  "chance": 100,
+  "groupSize": [
+   1,
+   2
+  ],
+  "levels": [
+   2,
+   3
+  ],
+  "requiredGlobalKeys": [
+   "hildir1"
+  ]
+ },
+ {
+  "creature": "Skeleton_Meadows",
+  "source": "raid",
+  "event": "hildirboss1",
+  "message": "She's hot on your tail!",
+  "biomes": [
+   "Meadows",
+   "Swamp",
+   "Mountain",
+   "BlackForest",
+   "Plains",
+   "AshLands",
+   "DeepNorth",
+   "Ocean",
+   "Mistlands"
+  ],
+  "maxSpawned": 3,
+  "interval": 20,
+  "chance": 100,
+  "groupSize": [
+   1,
+   2
+  ],
+  "levels": [
+   2,
+   3
+  ],
+  "requiredGlobalKeys": [
+   "hildir1"
+  ]
+ },
+ {
+  "creature": "Skeleton_Poison",
+  "source": "raid",
+  "event": "hildirboss1",
+  "message": "She's hot on your tail!",
+  "biomes": [
+   "Meadows",
+   "Swamp",
+   "Mountain",
+   "BlackForest",
+   "Plains",
+   "AshLands",
+   "DeepNorth",
+   "Ocean",
+   "Mistlands"
+  ],
+  "maxSpawned": 1,
+  "interval": 100,
+  "chance": 100,
+  "groupSize": [
+   1,
+   1
+  ],
+  "levels": [
+   2,
+   3
+  ],
+  "requiredGlobalKeys": [
+   "hildir1"
+  ]
+ },
+ {
+  "creature": "Fenring_Cultist_Hildir_nochest",
+  "source": "raid",
+  "event": "hildirboss2",
+  "message": "You get the chills...",
+  "biomes": [
+   "Meadows",
+   "Swamp",
+   "Mountain",
+   "BlackForest",
+   "Plains",
+   "AshLands",
+   "DeepNorth",
+   "Ocean",
+   "Mistlands"
+  ],
+  "maxSpawned": 1,
+  "interval": 100,
+  "chance": 100,
+  "groupSize": [
+   1,
+   1
+  ],
+  "levels": [
+   1,
+   1
+  ],
+  "requiredGlobalKeys": [
+   "hildir2"
+  ]
+ },
+ {
+  "creature": "Fenring",
+  "source": "raid",
+  "event": "hildirboss2",
+  "message": "You get the chills...",
+  "biomes": [
+   "Meadows",
+   "Swamp",
+   "Mountain",
+   "BlackForest",
+   "Plains",
+   "AshLands",
+   "DeepNorth",
+   "Ocean",
+   "Mistlands"
+  ],
+  "maxSpawned": 3,
+  "interval": 20,
+  "chance": 100,
+  "groupSize": [
+   1,
+   2
+  ],
+  "levels": [
+   2,
+   3
+  ],
+  "requiredGlobalKeys": [
+   "hildir2"
+  ]
+ },
+ {
+  "creature": "Fenring_Cultist",
+  "source": "raid",
+  "event": "hildirboss2",
+  "message": "You get the chills...",
+  "biomes": [
+   "Meadows",
+   "Swamp",
+   "Mountain",
+   "BlackForest",
+   "Plains",
+   "AshLands",
+   "DeepNorth",
+   "Ocean",
+   "Mistlands"
+  ],
+  "maxSpawned": 1,
+  "interval": 100,
+  "chance": 100,
+  "groupSize": [
+   1,
+   1
+  ],
+  "levels": [
+   2,
+   3
+  ],
+  "requiredGlobalKeys": [
+   "hildir2"
+  ]
+ },
+ {
+  "creature": "GoblinBruteBros_nochest",
+  "source": "raid",
+  "event": "hildirboss3",
+  "message": "They were bros, man",
+  "biomes": [
+   "Meadows",
+   "Swamp",
+   "Mountain",
+   "BlackForest",
+   "Plains",
+   "AshLands",
+   "DeepNorth",
+   "Ocean",
+   "Mistlands"
+  ],
+  "maxSpawned": 1,
+  "interval": 100,
+  "chance": 100,
+  "groupSize": [
+   1,
+   1
+  ],
+  "levels": [
+   1,
+   1
+  ],
+  "requiredGlobalKeys": [
+   "hildir3"
+  ]
+ },
+ {
+  "creature": "Goblin",
+  "source": "raid",
+  "event": "hildirboss3",
+  "message": "They were bros, man",
+  "biomes": [
+   "Meadows",
+   "Swamp",
+   "Mountain",
+   "BlackForest",
+   "Plains",
+   "AshLands",
+   "DeepNorth",
+   "Ocean",
+   "Mistlands"
+  ],
+  "maxSpawned": 4,
+  "interval": 20,
+  "chance": 100,
+  "groupSize": [
+   1,
+   2
+  ],
+  "levels": [
+   2,
+   3
+  ],
+  "requiredGlobalKeys": [
+   "hildir3"
+  ]
+ },
+ {
+  "creature": "GoblinBrute",
+  "source": "raid",
+  "event": "hildirboss3",
+  "message": "They were bros, man",
+  "biomes": [
+   "Meadows",
+   "Swamp",
+   "Mountain",
+   "BlackForest",
+   "Plains",
+   "AshLands",
+   "DeepNorth",
+   "Ocean",
+   "Mistlands"
+  ],
+  "maxSpawned": 1,
+  "interval": 100,
+  "chance": 100,
+  "groupSize": [
+   1,
+   1
+  ],
+  "levels": [
+   2,
+   3
+  ],
+  "requiredGlobalKeys": [
+   "hildir3"
+  ]
+ },
+ {
+  "creature": "Skeleton",
+  "source": "raid",
+  "event": "skeletons",
+  "message": "A skeleton surprise!",
+  "biomes": [
+   "Meadows",
+   "Swamp",
+   "Mountain",
+   "BlackForest",
+   "Plains",
+   "Mistlands"
+  ],
+  "maxSpawned": 20,
+  "interval": 10,
+  "chance": 100,
+  "groupSize": [
+   4,
+   6
+  ],
+  "levels": [
+   1,
+   1
+  ],
+  "requiredGlobalKeys": [
+   "defeated_bonemass"
+  ]
+ },
+ {
+  "creature": "Skeleton_Poison",
+  "source": "raid",
+  "event": "skeletons",
+  "message": "A skeleton surprise!",
+  "biomes": [
+   "Meadows",
+   "Swamp",
+   "Mountain",
+   "BlackForest",
+   "Plains",
+   "Mistlands"
+  ],
+  "maxSpawned": 1,
+  "interval": 15,
+  "chance": 54,
+  "groupSize": [
+   1,
+   1
+  ],
+  "levels": [
+   1,
+   1
+  ],
+  "requiredGlobalKeys": [
+   "defeated_bonemass"
+  ]
+ },
+ {
+  "creature": "Surtling",
+  "source": "raid",
+  "event": "surtlings",
+  "message": "There's a smell of sulfur in the air...",
+  "biomes": [
+   "Meadows",
+   "Swamp",
+   "BlackForest",
+   "Plains"
+  ],
+  "maxSpawned": 4,
+  "interval": 2,
+  "chance": 100,
+  "groupSize": [
+   1,
+   1
+  ],
+  "levels": [
+   1,
+   1
+  ],
+  "requiredGlobalKeys": [
+   "killed_surtling",
+   "defeated_bonemass"
+  ]
+ },
+ {
+  "creature": "Wolf",
+  "source": "raid",
+  "event": "wolves",
+  "message": "You are being hunted...",
+  "biomes": [
+   "Mountain",
+   "Plains"
+  ],
+  "maxSpawned": 6,
+  "interval": 2,
+  "chance": 100,
+  "groupSize": [
+   1,
+   1
+  ],
+  "levels": [
+   1,
+   1
+  ],
+  "requiredGlobalKeys": [
+   "defeated_bonemass"
+  ]
+ },
+ {
+  "creature": "StoneGolem",
+  "source": "location",
+  "location": "AbandonedLogCabin02",
+  "biomes": [
+   "Mountain"
+  ],
+  "levels": [
+   1,
+   1
+  ]
+ },
+ {
+  "creature": "Skeleton_Mountains",
+  "source": "location",
+  "location": "AbandonedLogCabin03",
+  "biomes": [
+   "Mountain"
+  ],
+  "levels": [
+   1,
+   3
+  ]
+ },
+ {
+  "creature": "StoneGolem",
+  "source": "location",
+  "location": "AbandonedLogCabin03",
+  "biomes": [
+   "Mountain"
+  ],
+  "levels": [
+   1,
+   1
+  ]
+ },
+ {
+  "creature": "Skeleton_Mountains",
+  "source": "location",
+  "location": "AbandonedLogCabin04",
+  "biomes": [
+   "Mountain"
+  ],
+  "levels": [
+   1,
+   3
+  ]
+ },
+ {
+  "creature": "StoneGolem",
+  "source": "location",
+  "location": "AbandonedLogCabin04",
+  "biomes": [
+   "Mountain"
+  ],
+  "levels": [
+   1,
+   1
+  ]
+ },
+ {
+  "creature": "Morgen",
+  "source": "dungeon",
+  "location": "AshlandRuins",
+  "biomes": [
+   "AshLands"
+  ],
+  "levels": [
+   1,
+   3
+  ]
+ },
+ {
+  "creature": "Bjorn_sleeping",
+  "source": "location",
+  "location": "BearCave",
+  "biomes": [
+   "BlackForest"
+  ],
+  "levels": [
+   1,
+   1
+  ]
+ },
+ {
+  "creature": "BogWitchKvastur",
+  "source": "location",
+  "location": "BogWitch_Camp",
+  "biomes": [
+   "Swamp"
+  ],
+  "levels": [
+   1,
+   1
+  ],
+  "respawning": true
+ },
+ {
+  "creature": "Bonemass",
+  "source": "location",
+  "location": "Bonemass",
+  "biomes": [
+   "Swamp"
+  ],
+  "summon": {
+   "item": "WitheredBone",
+   "amount": 10
+  }
+ },
+ {
+  "creature": "Charred_Archer",
+  "source": "location",
+  "location": "CharredFortress",
+  "biomes": [
+   "AshLands"
+  ],
+  "levels": [
+   1,
+   3
+  ],
+  "respawning": true
+ },
+ {
+  "creature": "Charred_Mage",
+  "source": "location",
+  "location": "CharredFortress",
+  "biomes": [
+   "AshLands"
+  ],
+  "levels": [
+   1,
+   3
+  ],
+  "respawning": true
+ },
+ {
+  "creature": "Charred_Melee",
+  "source": "location",
+  "location": "CharredFortress",
+  "biomes": [
+   "AshLands"
+  ],
+  "levels": [
+   1,
+   3
+  ],
+  "respawning": true
+ },
+ {
+  "creature": "Charred_Melee",
+  "source": "location",
+  "location": "CharredStone_Spawner",
+  "biomes": [
+   "AshLands"
+  ],
+  "levels": [
+   1,
+   3
+  ],
+  "respawning": true
+ },
+ {
+  "creature": "Charred_Twitcher",
+  "source": "location",
+  "location": "CharredStone_Spawner",
+  "biomes": [
+   "AshLands"
+  ],
+  "levels": [
+   1,
+   3
+  ],
+  "respawning": true
+ },
+ {
+  "creature": "DvergerAshlands",
+  "source": "location",
+  "location": "CharredTowerRuins1_dvergr",
+  "biomes": [
+   "AshLands"
+  ],
+  "levels": [
+   1,
+   3
+  ]
+ },
+ {
+  "creature": "Charred_Melee",
+  "source": "location",
+  "location": "CharredTowerRuins3",
+  "biomes": [
+   "AshLands"
+  ],
+  "levels": [
+   1,
+   3
+  ],
+  "respawning": true
+ },
+ {
+  "creature": "Charred_Twitcher",
+  "source": "location",
+  "location": "CharredTowerRuins3",
+  "biomes": [
+   "AshLands"
+  ],
+  "levels": [
+   1,
+   3
+  ],
+  "respawning": true
+ },
+ {
+  "creature": "Skeleton",
+  "source": "location",
+  "location": "CombatRuin01",
+  "biomes": [
+   "Meadows"
+  ],
+  "levels": [
+   1,
+   3
+  ],
+  "respawning": true
+ },
+ {
+  "creature": "Skeleton",
+  "source": "location",
+  "location": "Crypt2",
+  "biomes": [
+   "BlackForest"
+  ],
+  "levels": [
+   1,
+   3
+  ],
+  "respawning": true
+ },
+ {
+  "creature": "Ghost",
+  "source": "dungeon",
+  "location": "Crypt2",
+  "biomes": [
+   "BlackForest"
+  ],
+  "levels": [
+   1,
+   1
+  ]
+ },
+ {
+  "creature": "Skeleton",
+  "source": "dungeon",
+  "location": "Crypt2",
+  "biomes": [
+   "BlackForest"
+  ],
+  "levels": [
+   1,
+   3
+  ],
+  "respawning": true
+ },
+ {
+  "creature": "Skeleton_Poison",
+  "source": "dungeon",
+  "location": "Crypt2",
+  "biomes": [
+   "BlackForest"
+  ],
+  "levels": [
+   1,
+   3
+  ]
+ },
+ {
+  "creature": "Skeleton",
+  "source": "location",
+  "location": "Crypt3",
+  "biomes": [
+   "BlackForest"
+  ],
+  "levels": [
+   1,
+   3
+  ],
+  "respawning": true
+ },
+ {
+  "creature": "Ghost",
+  "source": "dungeon",
+  "location": "Crypt3",
+  "biomes": [
+   "BlackForest"
+  ],
+  "levels": [
+   1,
+   1
+  ]
+ },
+ {
+  "creature": "Skeleton",
+  "source": "dungeon",
+  "location": "Crypt3",
+  "biomes": [
+   "BlackForest"
+  ],
+  "levels": [
+   1,
+   3
+  ],
+  "respawning": true
+ },
+ {
+  "creature": "Skeleton_Poison",
+  "source": "dungeon",
+  "location": "Crypt3",
+  "biomes": [
+   "BlackForest"
+  ],
+  "levels": [
+   1,
+   3
+  ]
+ },
+ {
+  "creature": "Skeleton",
+  "source": "location",
+  "location": "Crypt4",
+  "biomes": [
+   "BlackForest"
+  ],
+  "levels": [
+   1,
+   3
+  ],
+  "respawning": true
+ },
+ {
+  "creature": "Ghost",
+  "source": "dungeon",
+  "location": "Crypt4",
+  "biomes": [
+   "BlackForest"
+  ],
+  "levels": [
+   1,
+   1
+  ]
+ },
+ {
+  "creature": "Skeleton",
+  "source": "dungeon",
+  "location": "Crypt4",
+  "biomes": [
+   "BlackForest"
+  ],
+  "levels": [
+   1,
+   3
+  ],
+  "respawning": true
+ },
+ {
+  "creature": "Skeleton_Poison",
+  "source": "dungeon",
+  "location": "Crypt4",
+  "biomes": [
+   "BlackForest"
+  ],
+  "levels": [
+   1,
+   3
+  ]
+ },
+ {
+  "creature": "FrozenKing",
+  "source": "location",
+  "location": "DN_Bossroom",
+  "biomes": [
+   "DeepNorth"
+  ],
+  "summon": {
+   "item": "HatefulBlood",
+   "amount": 3
+  }
+ },
+ {
+  "creature": "Skeleton_Meadows_noarcher",
+  "source": "location",
+  "location": "Dolmen01",
+  "biomes": [
+   "Meadows",
+   "BlackForest"
+  ],
+  "levels": [
+   1,
+   3
+  ]
+ },
+ {
+  "creature": "Skeleton_Meadows_noarcher",
+  "source": "location",
+  "location": "Dolmen02",
+  "biomes": [
+   "Meadows",
+   "BlackForest"
+  ],
+  "levels": [
+   1,
+   3
+  ]
+ },
+ {
+  "creature": "Skeleton_Meadows_noarcher",
+  "source": "location",
+  "location": "Dolmen03",
+  "biomes": [
+   "Meadows",
+   "BlackForest"
+  ],
+  "levels": [
+   1,
+   3
+  ]
+ },
+ {
+  "creature": "Dragon",
+  "source": "location",
+  "location": "Dragonqueen",
+  "biomes": [
+   "Mountain"
+  ]
+ },
+ {
+  "creature": "Hatchling",
+  "source": "location",
+  "location": "DrakeNest01",
+  "biomes": [
+   "Mountain"
+  ],
+  "levels": [
+   1,
+   1
+  ]
+ },
+ {
+  "creature": "Eikthyr",
+  "source": "location",
+  "location": "Eikthyrnir",
+  "biomes": [
+   "Meadows"
+  ],
+  "summon": {
+   "item": "TrophyDeer",
+   "amount": 2
+  }
+ },
+ {
+  "creature": "Fader",
+  "source": "location",
+  "location": "FaderLocation",
+  "biomes": [
+   "AshLands"
+  ],
+  "summon": {
+   "item": "Bell",
+   "amount": 3
+  }
+ },
+ {
+  "creature": "Surtling",
+  "source": "location",
+  "location": "FireHole",
+  "biomes": [
+   "Swamp"
+  ],
+  "levels": [
+   1,
+   3
+  ],
+  "respawning": true
+ },
+ {
+  "creature": "Charred_Twitcher",
+  "source": "dungeon",
+  "location": "FortressRuins",
+  "biomes": [
+   "AshLands"
+  ],
+  "levels": [
+   1,
+   3
+  ]
+ },
+ {
+  "creature": "Morgen",
+  "source": "dungeon",
+  "location": "FortressRuins",
+  "biomes": [
+   "AshLands"
+  ],
+  "levels": [
+   1,
+   3
+  ]
+ },
+ {
+  "creature": "gd_king",
+  "source": "location",
+  "location": "GDKing",
+  "biomes": [
+   "BlackForest"
+  ],
+  "summon": {
+   "item": "AncientSeed",
+   "amount": 3
+  }
+ },
+ {
+  "creature": "Goblin",
+  "source": "dungeon",
+  "location": "GoblinCamp2",
+  "biomes": [
+   "Plains"
+  ],
+  "levels": [
+   1,
+   3
+  ]
+ },
+ {
+  "creature": "GoblinArcher",
+  "source": "dungeon",
+  "location": "GoblinCamp2",
+  "biomes": [
+   "Plains"
+  ],
+  "levels": [
+   1,
+   3
+  ]
+ },
+ {
+  "creature": "GoblinBrute",
+  "source": "dungeon",
+  "location": "GoblinCamp2",
+  "biomes": [
+   "Plains"
+  ],
+  "levels": [
+   1,
+   3
+  ]
+ },
+ {
+  "creature": "GoblinShaman",
+  "source": "dungeon",
+  "location": "GoblinCamp2",
+  "biomes": [
+   "Plains"
+  ],
+  "levels": [
+   1,
+   1
+  ]
+ },
+ {
+  "creature": "Goblin",
+  "source": "dungeon",
+  "location": "GoblinCamp2_1",
+  "biomes": [
+   "Plains"
+  ],
+  "levels": [
+   1,
+   3
+  ]
+ },
+ {
+  "creature": "GoblinArcher",
+  "source": "dungeon",
+  "location": "GoblinCamp2_1",
+  "biomes": [
+   "Plains"
+  ],
+  "levels": [
+   1,
+   3
+  ]
+ },
+ {
+  "creature": "GoblinBrute",
+  "source": "dungeon",
+  "location": "GoblinCamp2_1",
+  "biomes": [
+   "Plains"
+  ],
+  "levels": [
+   1,
+   3
+  ]
+ },
+ {
+  "creature": "GoblinShaman",
+  "source": "dungeon",
+  "location": "GoblinCamp2_1",
+  "biomes": [
+   "Plains"
+  ],
+  "levels": [
+   1,
+   1
+  ]
+ },
+ {
+  "creature": "Goblin",
+  "source": "location",
+  "location": "GoblinHut01",
+  "biomes": [
+   "Plains"
+  ],
+  "levels": [
+   1,
+   3
+  ]
+ },
+ {
+  "creature": "Goblin",
+  "source": "location",
+  "location": "GoblinHut02",
+  "biomes": [
+   "Plains"
+  ],
+  "levels": [
+   1,
+   3
+  ]
+ },
+ {
+  "creature": "GoblinBrute",
+  "source": "location",
+  "location": "GoblinHut02",
+  "biomes": [
+   "Plains"
+  ],
+  "levels": [
+   1,
+   3
+  ]
+ },
+ {
+  "creature": "GoblinShaman",
+  "source": "location",
+  "location": "GoblinHut02",
+  "biomes": [
+   "Plains"
+  ],
+  "levels": [
+   1,
+   1
+  ]
+ },
+ {
+  "creature": "Goblin",
+  "source": "location",
+  "location": "GoblinHut03",
+  "biomes": [
+   "Plains"
+  ],
+  "levels": [
+   1,
+   3
+  ]
+ },
+ {
+  "creature": "GoblinArcher",
+  "source": "location",
+  "location": "GoblinHut03",
+  "biomes": [
+   "Plains"
+  ],
+  "levels": [
+   1,
+   3
+  ]
+ },
+ {
+  "creature": "GoblinBrute",
+  "source": "location",
+  "location": "GoblinHut03",
+  "biomes": [
+   "Plains"
+  ],
+  "levels": [
+   1,
+   3
+  ]
+ },
+ {
+  "creature": "GoblinShaman",
+  "source": "location",
+  "location": "GoblinHut03",
+  "biomes": [
+   "Plains"
+  ],
+  "levels": [
+   1,
+   1
+  ]
+ },
+ {
+  "creature": "GoblinKing",
+  "source": "location",
+  "location": "GoblinKing",
+  "biomes": [
+   "Plains"
+  ],
+  "summon": {
+   "item": "GoblinTotem",
+   "amount": 3
+  }
+ },
+ {
+  "creature": "Draugr",
+  "source": "location",
+  "location": "Grave1",
+  "biomes": [
+   "Swamp"
+  ],
+  "levels": [
+   1,
+   3
+  ],
+  "respawning": true
+ },
+ {
+  "creature": "Draugr_Elite",
+  "source": "location",
+  "location": "Grave1",
+  "biomes": [
+   "Swamp"
+  ],
+  "levels": [
+   1,
+   3
+  ],
+  "respawning": true
+ },
+ {
+  "creature": "Draugr_Ranged",
+  "source": "location",
+  "location": "Grave1",
+  "biomes": [
+   "Swamp"
+  ],
+  "levels": [
+   1,
+   3
+  ],
+  "respawning": true
+ },
+ {
+  "creature": "Skeleton_Swamps",
+  "source": "location",
+  "location": "Grave1",
+  "biomes": [
+   "Swamp"
+  ],
+  "levels": [
+   1,
+   3
+  ],
+  "respawning": true
+ },
+ {
+  "creature": "Greydwarf",
+  "source": "location",
+  "location": "Greydwarf_camp1",
+  "biomes": [
+   "BlackForest"
+  ],
+  "levels": [
+   1,
+   3
+  ],
+  "respawning": true
+ },
+ {
+  "creature": "Greydwarf_Elite",
+  "source": "location",
+  "location": "Greydwarf_camp1",
+  "biomes": [
+   "BlackForest"
+  ],
+  "levels": [
+   1,
+   3
+  ],
+  "respawning": true
+ },
+ {
+  "creature": "Greydwarf_Shaman",
+  "source": "location",
+  "location": "Greydwarf_camp1",
+  "biomes": [
+   "BlackForest"
+  ],
+  "levels": [
+   1,
+   3
+  ],
+  "respawning": true
+ },
+ {
+  "creature": "Bat",
+  "source": "dungeon",
+  "location": "Hildir_cave",
+  "biomes": [
+   "Mountain"
+  ],
+  "levels": [
+   1,
+   1
+  ]
+ },
+ {
+  "creature": "Fenring_Cultist_Hildir",
+  "source": "dungeon",
+  "location": "Hildir_cave",
+  "biomes": [
+   "Mountain"
+  ],
+  "levels": [
+   1,
+   1
+  ]
+ },
+ {
+  "creature": "Fish4_cave",
+  "source": "dungeon",
+  "location": "Hildir_cave",
+  "biomes": [
+   "Mountain"
+  ],
+  "levels": [
+   1,
+   5
+  ],
+  "respawning": true
+ },
+ {
+  "creature": "Ulv",
+  "source": "dungeon",
+  "location": "Hildir_cave",
+  "biomes": [
+   "Mountain"
+  ],
+  "levels": [
+   1,
+   1
+  ]
+ },
+ {
+  "creature": "Skeleton",
+  "source": "location",
+  "location": "Hildir_crypt",
+  "biomes": [
+   "BlackForest"
+  ],
+  "levels": [
+   1,
+   3
+  ],
+  "respawning": true
+ },
+ {
+  "creature": "Ghost",
+  "source": "dungeon",
+  "location": "Hildir_crypt",
+  "biomes": [
+   "BlackForest"
+  ],
+  "levels": [
+   1,
+   1
+  ]
+ },
+ {
+  "creature": "Skeleton",
+  "source": "dungeon",
+  "location": "Hildir_crypt",
+  "biomes": [
+   "BlackForest"
+  ],
+  "levels": [
+   1,
+   3
+  ],
+  "respawning": true
+ },
+ {
+  "creature": "Skeleton_Hildir",
+  "source": "dungeon",
+  "location": "Hildir_crypt",
+  "biomes": [
+   "BlackForest"
+  ],
+  "levels": [
+   1,
+   1
+  ]
+ },
+ {
+  "creature": "Goblin",
+  "source": "dungeon",
+  "location": "Hildir_plainsfortress",
+  "biomes": [
+   "Plains"
+  ],
+  "levels": [
+   1,
+   3
+  ]
+ },
+ {
+  "creature": "GoblinArcher",
+  "source": "dungeon",
+  "location": "Hildir_plainsfortress",
+  "biomes": [
+   "Plains"
+  ],
+  "levels": [
+   1,
+   3
+  ]
+ },
+ {
+  "creature": "GoblinBruteBros",
+  "source": "dungeon",
+  "location": "Hildir_plainsfortress",
+  "biomes": [
+   "Plains"
+  ],
+  "levels": [
+   1,
+   1
+  ]
+ },
+ {
+  "creature": "GoblinShaman",
+  "source": "dungeon",
+  "location": "Hildir_plainsfortress",
+  "biomes": [
+   "Plains"
+  ],
+  "levels": [
+   1,
+   1
+  ]
+ },
+ {
+  "creature": "Seeker",
+  "source": "location",
+  "location": "Mistlands_DvergrBossEntrance1",
+  "biomes": [
+   "Mistlands"
+  ],
+  "levels": [
+   1,
+   3
+  ]
+ },
+ {
+  "creature": "SeekerQueen",
+  "source": "dungeon",
+  "location": "Mistlands_DvergrBossEntrance1",
+  "biomes": [
+   "Mistlands"
+  ],
+  "summon": {
+   "item": "TrophySeekerBrute",
+   "amount": 3
+  }
+ },
+ {
+  "creature": "Seeker",
+  "source": "location",
+  "location": "Mistlands_DvergrTownEntrance1",
+  "biomes": [
+   "Mistlands"
+  ],
+  "levels": [
+   1,
+   3
+  ]
+ },
+ {
+  "creature": "Seeker",
+  "source": "dungeon",
+  "location": "Mistlands_DvergrTownEntrance1",
+  "biomes": [
+   "Mistlands"
+  ],
+  "levels": [
+   1,
+   3
+  ],
+  "respawning": true
+ },
+ {
+  "creature": "SeekerBrute",
+  "source": "dungeon",
+  "location": "Mistlands_DvergrTownEntrance1",
+  "biomes": [
+   "Mistlands"
+  ],
+  "levels": [
+   1,
+   3
+  ],
+  "respawning": true
+ },
+ {
+  "creature": "Tick",
+  "source": "dungeon",
+  "location": "Mistlands_DvergrTownEntrance1",
+  "biomes": [
+   "Mistlands"
+  ],
+  "levels": [
+   1,
+   3
+  ],
+  "respawning": true
+ },
+ {
+  "creature": "Seeker",
+  "source": "location",
+  "location": "Mistlands_DvergrTownEntrance2",
+  "biomes": [
+   "Mistlands"
+  ],
+  "levels": [
+   1,
+   3
+  ]
+ },
+ {
+  "creature": "Seeker",
+  "source": "dungeon",
+  "location": "Mistlands_DvergrTownEntrance2",
+  "biomes": [
+   "Mistlands"
+  ],
+  "levels": [
+   1,
+   3
+  ],
+  "respawning": true
+ },
+ {
+  "creature": "SeekerBrute",
+  "source": "dungeon",
+  "location": "Mistlands_DvergrTownEntrance2",
+  "biomes": [
+   "Mistlands"
+  ],
+  "levels": [
+   1,
+   3
+  ],
+  "respawning": true
+ },
+ {
+  "creature": "Tick",
+  "source": "dungeon",
+  "location": "Mistlands_DvergrTownEntrance2",
+  "biomes": [
+   "Mistlands"
+  ],
+  "levels": [
+   1,
+   3
+  ],
+  "respawning": true
+ },
+ {
+  "creature": "Dverger",
+  "source": "location",
+  "location": "Mistlands_Excavation1",
+  "biomes": [
+   "Mistlands"
+  ],
+  "levels": [
+   1,
+   3
+  ]
+ },
+ {
+  "creature": "DvergerMage",
+  "source": "location",
+  "location": "Mistlands_Excavation1",
+  "biomes": [
+   "Mistlands"
+  ],
+  "levels": [
+   1,
+   3
+  ]
+ },
+ {
+  "creature": "Dverger",
+  "source": "location",
+  "location": "Mistlands_Excavation2",
+  "biomes": [
+   "Mistlands"
+  ],
+  "levels": [
+   1,
+   3
+  ]
+ },
+ {
+  "creature": "DvergerMage",
+  "source": "location",
+  "location": "Mistlands_Excavation2",
+  "biomes": [
+   "Mistlands"
+  ],
+  "levels": [
+   1,
+   3
+  ]
+ },
+ {
+  "creature": "Seeker",
+  "source": "location",
+  "location": "Mistlands_Excavation3",
+  "biomes": [
+   "Mistlands"
+  ],
+  "levels": [
+   1,
+   3
+  ]
+ },
+ {
+  "creature": "Tick",
+  "source": "location",
+  "location": "Mistlands_Giant1",
+  "biomes": [
+   "Mistlands"
+  ],
+  "levels": [
+   1,
+   3
+  ]
+ },
+ {
+  "creature": "Dverger",
+  "source": "location",
+  "location": "Mistlands_GuardTower1_new",
+  "biomes": [
+   "Mistlands"
+  ],
+  "levels": [
+   1,
+   3
+  ]
+ },
+ {
+  "creature": "DvergerMage",
+  "source": "location",
+  "location": "Mistlands_GuardTower1_new",
+  "biomes": [
+   "Mistlands"
+  ],
+  "levels": [
+   1,
+   3
+  ]
+ },
+ {
+  "creature": "Seeker",
+  "source": "location",
+  "location": "Mistlands_GuardTower1_ruined_new",
+  "biomes": [
+   "Mistlands"
+  ],
+  "levels": [
+   1,
+   3
+  ]
+ },
+ {
+  "creature": "Seeker",
+  "source": "location",
+  "location": "Mistlands_GuardTower1_ruined_new2",
+  "biomes": [
+   "Mistlands"
+  ],
+  "levels": [
+   1,
+   3
+  ]
+ },
+ {
+  "creature": "Dverger",
+  "source": "location",
+  "location": "Mistlands_GuardTower2_new",
+  "biomes": [
+   "Mistlands"
+  ],
+  "levels": [
+   1,
+   3
+  ]
+ },
+ {
+  "creature": "DvergerMage",
+  "source": "location",
+  "location": "Mistlands_GuardTower2_new",
+  "biomes": [
+   "Mistlands"
+  ],
+  "levels": [
+   1,
+   3
+  ]
+ },
+ {
+  "creature": "Dverger",
+  "source": "location",
+  "location": "Mistlands_GuardTower3_new",
+  "biomes": [
+   "Mistlands"
+  ],
+  "levels": [
+   1,
+   3
+  ]
+ },
+ {
+  "creature": "DvergerMage",
+  "source": "location",
+  "location": "Mistlands_GuardTower3_new",
+  "biomes": [
+   "Mistlands"
+  ],
+  "levels": [
+   1,
+   3
+  ]
+ },
+ {
+  "creature": "Seeker",
+  "source": "location",
+  "location": "Mistlands_GuardTower3_ruined_new",
+  "biomes": [
+   "Mistlands"
+  ],
+  "levels": [
+   1,
+   3
+  ]
+ },
+ {
+  "creature": "Dverger",
+  "source": "location",
+  "location": "Mistlands_Harbour1",
+  "biomes": [
+   "Mistlands"
+  ],
+  "levels": [
+   1,
+   3
+  ]
+ },
+ {
+  "creature": "DvergerMage",
+  "source": "location",
+  "location": "Mistlands_Harbour1",
+  "biomes": [
+   "Mistlands"
+  ],
+  "levels": [
+   1,
+   3
+  ]
+ },
+ {
+  "creature": "Dverger",
+  "source": "location",
+  "location": "Mistlands_Lighthouse1_new",
+  "biomes": [
+   "Mistlands"
+  ],
+  "levels": [
+   1,
+   3
+  ]
+ },
+ {
+  "creature": "DvergerMage",
+  "source": "location",
+  "location": "Mistlands_Lighthouse1_new",
+  "biomes": [
+   "Mistlands"
+  ],
+  "levels": [
+   1,
+   3
+  ]
+ },
+ {
+  "creature": "Dverger",
+  "source": "location",
+  "location": "Mistlands_RoadPost1",
+  "biomes": [
+   "Mistlands"
+  ],
+  "levels": [
+   1,
+   3
+  ]
+ },
+ {
+  "creature": "DvergerMage",
+  "source": "location",
+  "location": "Mistlands_RoadPost1",
+  "biomes": [
+   "Mistlands"
+  ],
+  "levels": [
+   1,
+   3
+  ]
+ },
+ {
+  "creature": "Seeker",
+  "source": "location",
+  "location": "Mistlands_RockSpire1",
+  "biomes": [
+   "Mistlands"
+  ],
+  "levels": [
+   1,
+   3
+  ],
+  "respawning": true
+ },
+ {
+  "creature": "Morgen",
+  "source": "location",
+  "location": "MorgenHole1",
+  "biomes": [
+   "AshLands"
+  ],
+  "levels": [
+   1,
+   3
+  ]
+ },
+ {
+  "creature": "Morgen",
+  "source": "location",
+  "location": "MorgenHole2",
+  "biomes": [
+   "AshLands"
+  ],
+  "levels": [
+   1,
+   3
+  ]
+ },
+ {
+  "creature": "Morgen",
+  "source": "location",
+  "location": "MorgenHole3",
+  "biomes": [
+   "AshLands"
+  ],
+  "levels": [
+   1,
+   3
+  ]
+ },
+ {
+  "creature": "BlobMork",
+  "source": "location",
+  "location": "MorkBorg",
+  "biomes": [
+   "DeepNorth"
+  ],
+  "levels": [
+   1,
+   3
+  ],
+  "respawning": true
+ },
+ {
+  "creature": "BlobMork",
+  "source": "dungeon",
+  "location": "MorkBorg",
+  "biomes": [
+   "DeepNorth"
+  ],
+  "levels": [
+   1,
+   3
+  ],
+  "respawning": true
+ },
+ {
+  "creature": "DvergerDeepNorth",
+  "source": "dungeon",
+  "location": "MorkBorg",
+  "biomes": [
+   "DeepNorth"
+  ],
+  "levels": [
+   1,
+   3
+  ]
+ },
+ {
+  "creature": "GoblinDeepNorth",
+  "source": "dungeon",
+  "location": "MorkBorg",
+  "biomes": [
+   "DeepNorth"
+  ],
+  "levels": [
+   1,
+   3
+  ]
+ },
+ {
+  "creature": "JotunWarrior",
+  "source": "dungeon",
+  "location": "MorkBorg",
+  "biomes": [
+   "DeepNorth"
+  ],
+  "levels": [
+   1,
+   3
+  ]
+ },
+ {
+  "creature": "JotunWarriorDualWield",
+  "source": "dungeon",
+  "location": "MorkBorg",
+  "biomes": [
+   "DeepNorth"
+  ],
+  "levels": [
+   1,
+   3
+  ]
+ },
+ {
+  "creature": "JotunWitch",
+  "source": "dungeon",
+  "location": "MorkBorg",
+  "biomes": [
+   "DeepNorth"
+  ],
+  "levels": [
+   1,
+   2
+  ]
+ },
+ {
+  "creature": "Bat",
+  "source": "dungeon",
+  "location": "MountainCave02",
+  "biomes": [
+   "Mountain"
+  ],
+  "levels": [
+   1,
+   1
+  ]
+ },
+ {
+  "creature": "Fenring_Cultist",
+  "source": "dungeon",
+  "location": "MountainCave02",
+  "biomes": [
+   "Mountain"
+  ],
+  "levels": [
+   1,
+   1
+  ]
+ },
+ {
+  "creature": "Fenring_Cultist_Hildir",
+  "source": "dungeon",
+  "location": "MountainCave02",
+  "biomes": [
+   "Mountain"
+  ],
+  "levels": [
+   1,
+   1
+  ]
+ },
+ {
+  "creature": "Fish4_cave",
+  "source": "dungeon",
+  "location": "MountainCave02",
+  "biomes": [
+   "Mountain"
+  ],
+  "levels": [
+   1,
+   5
+  ],
+  "respawning": true
+ },
+ {
+  "creature": "StoneGolem",
+  "source": "dungeon",
+  "location": "MountainCave02",
+  "biomes": [
+   "Mountain"
+  ],
+  "levels": [
+   1,
+   1
+  ]
+ },
+ {
+  "creature": "Ulv",
+  "source": "dungeon",
+  "location": "MountainCave02",
+  "biomes": [
+   "Mountain"
+  ],
+  "levels": [
+   1,
+   1
+  ]
+ },
+ {
+  "creature": "ShadowPerson",
+  "source": "dungeon",
+  "location": "NorthVillage",
+  "biomes": [
+   "DeepNorth"
+  ],
+  "levels": [
+   1,
+   3
+  ]
+ },
+ {
+  "creature": "Charred_Archer",
+  "source": "location",
+  "location": "PlaceofMystery1",
+  "biomes": [
+   "AshLands"
+  ],
+  "levels": [
+   2,
+   3
+  ],
+  "respawning": true
+ },
+ {
+  "creature": "Charred_Mage",
+  "source": "location",
+  "location": "PlaceofMystery1",
+  "biomes": [
+   "AshLands"
+  ],
+  "levels": [
+   2,
+   3
+  ],
+  "respawning": true
+ },
+ {
+  "creature": "Charred_Melee",
+  "source": "location",
+  "location": "PlaceofMystery1",
+  "biomes": [
+   "AshLands"
+  ],
+  "levels": [
+   2,
+   3
+  ],
+  "respawning": true
+ },
+ {
+  "creature": "Charred_Twitcher",
+  "source": "location",
+  "location": "PlaceofMystery1",
+  "biomes": [
+   "AshLands"
+  ],
+  "levels": [
+   2,
+   3
+  ],
+  "respawning": true
+ },
+ {
+  "creature": "Charred_Archer",
+  "source": "location",
+  "location": "PlaceofMystery2",
+  "biomes": [
+   "AshLands"
+  ],
+  "levels": [
+   2,
+   3
+  ],
+  "respawning": true
+ },
+ {
+  "creature": "Charred_Mage",
+  "source": "location",
+  "location": "PlaceofMystery2",
+  "biomes": [
+   "AshLands"
+  ],
+  "levels": [
+   2,
+   3
+  ],
+  "respawning": true
+ },
+ {
+  "creature": "Charred_Melee",
+  "source": "location",
+  "location": "PlaceofMystery2",
+  "biomes": [
+   "AshLands"
+  ],
+  "levels": [
+   2,
+   3
+  ],
+  "respawning": true
+ },
+ {
+  "creature": "Charred_Twitcher",
+  "source": "location",
+  "location": "PlaceofMystery2",
+  "biomes": [
+   "AshLands"
+  ],
+  "levels": [
+   2,
+   3
+  ],
+  "respawning": true
+ },
+ {
+  "creature": "Charred_Archer",
+  "source": "location",
+  "location": "PlaceofMystery3",
+  "biomes": [
+   "AshLands"
+  ],
+  "levels": [
+   2,
+   3
+  ],
+  "respawning": true
+ },
+ {
+  "creature": "Charred_Mage",
+  "source": "location",
+  "location": "PlaceofMystery3",
+  "biomes": [
+   "AshLands"
+  ],
+  "levels": [
+   2,
+   3
+  ],
+  "respawning": true
+ },
+ {
+  "creature": "Charred_Melee",
+  "source": "location",
+  "location": "PlaceofMystery3",
+  "biomes": [
+   "AshLands"
+  ],
+  "levels": [
+   2,
+   3
+  ],
+  "respawning": true
+ },
+ {
+  "creature": "Charred_Melee_Dyrnwyn",
+  "source": "location",
+  "location": "PlaceofMystery3",
+  "biomes": [
+   "AshLands"
+  ],
+  "levels": [
+   3,
+   3
+  ]
+ },
+ {
+  "creature": "Charred_Twitcher",
+  "source": "location",
+  "location": "PlaceofMystery3",
+  "biomes": [
+   "AshLands"
+  ],
+  "levels": [
+   2,
+   3
+  ],
+  "respawning": true
+ },
+ {
+  "creature": "Greydwarf",
+  "source": "location",
+  "location": "Ruin1",
+  "biomes": [
+   "BlackForest"
+  ],
+  "levels": [
+   1,
+   3
+  ]
+ },
+ {
+  "creature": "Greydwarf_Shaman",
+  "source": "location",
+  "location": "Ruin1",
+  "biomes": [
+   "BlackForest"
+  ],
+  "levels": [
+   1,
+   3
+  ]
+ },
+ {
+  "creature": "Greydwarf",
+  "source": "location",
+  "location": "Ruin2",
+  "biomes": [
+   "BlackForest"
+  ],
+  "levels": [
+   1,
+   3
+  ]
+ },
+ {
+  "creature": "Greydwarf_Elite",
+  "source": "location",
+  "location": "Ruin2",
+  "biomes": [
+   "BlackForest"
+  ],
+  "levels": [
+   1,
+   3
+  ]
+ },
+ {
+  "creature": "Goblin",
+  "source": "location",
+  "location": "Ruin3",
+  "biomes": [
+   "Plains"
+  ],
+  "levels": [
+   1,
+   3
+  ]
+ },
+ {
+  "creature": "Boar",
+  "source": "location",
+  "location": "Runestone_Boars",
+  "biomes": [
+   "Meadows"
+  ],
+  "levels": [
+   1,
+   3
+  ]
+ },
+ {
+  "creature": "Draugr",
+  "source": "location",
+  "location": "Runestone_Draugr",
+  "biomes": [
+   "Swamp"
+  ],
+  "levels": [
+   1,
+   3
+  ]
+ },
+ {
+  "creature": "Greydwarf",
+  "source": "location",
+  "location": "Runestone_Greydwarfs",
+  "biomes": [
+   "BlackForest"
+  ],
+  "levels": [
+   1,
+   3
+  ]
+ },
+ {
+  "creature": "Skeleton_Meadows_noarcher",
+  "source": "location",
+  "location": "ShipSetting01",
+  "biomes": [
+   "Meadows"
+  ],
+  "levels": [
+   1,
+   3
+  ]
+ },
+ {
+  "creature": "GoblinBrute",
+  "source": "location",
+  "location": "StoneHenge1",
+  "biomes": [
+   "Plains"
+  ],
+  "levels": [
+   1,
+   3
+  ]
+ },
+ {
+  "creature": "GoblinBrute",
+  "source": "location",
+  "location": "StoneHenge2",
+  "biomes": [
+   "Plains"
+  ],
+  "levels": [
+   1,
+   3
+  ]
+ },
+ {
+  "creature": "GoblinBrute",
+  "source": "location",
+  "location": "StoneHenge3",
+  "biomes": [
+   "Plains"
+  ],
+  "levels": [
+   1,
+   3
+  ]
+ },
+ {
+  "creature": "GoblinBrute",
+  "source": "location",
+  "location": "StoneHenge4",
+  "biomes": [
+   "Plains"
+  ],
+  "levels": [
+   1,
+   3
+  ]
+ },
+ {
+  "creature": "Goblin",
+  "source": "location",
+  "location": "StoneHenge5",
+  "biomes": [
+   "Plains"
+  ],
+  "levels": [
+   1,
+   3
+  ]
+ },
+ {
+  "creature": "Goblin",
+  "source": "location",
+  "location": "StoneHouse1_heath",
+  "biomes": [
+   "Plains"
+  ],
+  "levels": [
+   1,
+   3
+  ]
+ },
+ {
+  "creature": "Goblin",
+  "source": "location",
+  "location": "StoneHouse2_heath",
+  "biomes": [
+   "Plains"
+  ],
+  "levels": [
+   1,
+   3
+  ]
+ },
+ {
+  "creature": "Greydwarf",
+  "source": "location",
+  "location": "StoneHouse3",
+  "biomes": [
+   "BlackForest"
+  ],
+  "levels": [
+   1,
+   3
+  ]
+ },
+ {
+  "creature": "Greydwarf",
+  "source": "location",
+  "location": "StoneHouse4",
+  "biomes": [
+   "BlackForest"
+  ],
+  "levels": [
+   1,
+   3
+  ]
+ },
+ {
+  "creature": "Goblin",
+  "source": "location",
+  "location": "StoneTower1",
+  "biomes": [
+   "Plains"
+  ],
+  "levels": [
+   1,
+   3
+  ]
+ },
+ {
+  "creature": "Goblin",
+  "source": "location",
+  "location": "StoneTower3",
+  "biomes": [
+   "Plains"
+  ],
+  "levels": [
+   1,
+   3
+  ]
+ },
+ {
+  "creature": "Greydwarf",
+  "source": "location",
+  "location": "StoneTowerRuins03",
+  "biomes": [
+   "BlackForest"
+  ],
+  "levels": [
+   1,
+   3
+  ]
+ },
+ {
+  "creature": "Greydwarf_Elite",
+  "source": "location",
+  "location": "StoneTowerRuins03",
+  "biomes": [
+   "BlackForest"
+  ],
+  "levels": [
+   1,
+   3
+  ]
+ },
+ {
+  "creature": "Skeleton",
+  "source": "location",
+  "location": "StoneTowerRuins03",
+  "biomes": [
+   "BlackForest"
+  ],
+  "levels": [
+   1,
+   3
+  ]
+ },
+ {
+  "creature": "Skeleton_Mountains",
+  "source": "location",
+  "location": "StoneTowerRuins04",
+  "biomes": [
+   "Mountain"
+  ],
+  "levels": [
+   1,
+   3
+  ]
+ },
+ {
+  "creature": "Skeleton",
+  "source": "location",
+  "location": "StoneTowerRuins05",
+  "biomes": [
+   "Mountain"
+  ],
+  "levels": [
+   1,
+   3
+  ],
+  "respawning": true
+ },
+ {
+  "creature": "Skeleton_Mountains",
+  "source": "location",
+  "location": "StoneTowerRuins05",
+  "biomes": [
+   "Mountain"
+  ],
+  "levels": [
+   1,
+   3
+  ]
+ },
+ {
+  "creature": "Skeleton",
+  "source": "location",
+  "location": "StoneTowerRuins05_leet",
+  "biomes": [
+   "Mountain"
+  ],
+  "levels": [
+   1,
+   3
+  ],
+  "respawning": true
+ },
+ {
+  "creature": "Skeleton_Mountains",
+  "source": "location",
+  "location": "StoneTowerRuins05_leet",
+  "biomes": [
+   "Mountain"
+  ],
+  "levels": [
+   1,
+   3
+  ]
+ },
+ {
+  "creature": "Skeleton",
+  "source": "location",
+  "location": "StoneTowerRuins07",
+  "biomes": [
+   "BlackForest"
+  ],
+  "levels": [
+   1,
+   3
+  ]
+ },
+ {
+  "creature": "Skeleton",
+  "source": "location",
+  "location": "StoneTowerRuins08",
+  "biomes": [
+   "BlackForest"
+  ],
+  "levels": [
+   1,
+   3
+  ]
+ },
+ {
+  "creature": "Skeleton",
+  "source": "location",
+  "location": "StoneTowerRuins09",
+  "biomes": [
+   "BlackForest"
+  ],
+  "levels": [
+   1,
+   3
+  ]
+ },
+ {
+  "creature": "Skeleton",
+  "source": "location",
+  "location": "StoneTowerRuins09_sunk",
+  "biomes": [
+   "BlackForest"
+  ],
+  "levels": [
+   1,
+   3
+  ]
+ },
+ {
+  "creature": "Skeleton",
+  "source": "location",
+  "location": "StoneTowerRuins10",
+  "biomes": [
+   "BlackForest"
+  ],
+  "levels": [
+   1,
+   3
+  ]
+ },
+ {
+  "creature": "Skeleton",
+  "source": "location",
+  "location": "StoneTowerRuins10_sunk",
+  "biomes": [
+   "BlackForest"
+  ],
+  "levels": [
+   1,
+   3
+  ]
+ },
+ {
+  "creature": "BlobElite",
+  "source": "location",
+  "location": "SunkenCrypt4",
+  "biomes": [
+   "Swamp"
+  ],
+  "levels": [
+   1,
+   1
+  ]
+ },
+ {
+  "creature": "Draugr",
+  "source": "location",
+  "location": "SunkenCrypt4",
+  "biomes": [
+   "Swamp"
+  ],
+  "levels": [
+   1,
+   3
+  ]
+ },
+ {
+  "creature": "Blob",
+  "source": "dungeon",
+  "location": "SunkenCrypt4",
+  "biomes": [
+   "Swamp"
+  ],
+  "levels": [
+   1,
+   1
+  ]
+ },
+ {
+  "creature": "Draugr",
+  "source": "dungeon",
+  "location": "SunkenCrypt4",
+  "biomes": [
+   "Swamp"
+  ],
+  "levels": [
+   1,
+   3
+  ],
+  "respawning": true
+ },
+ {
+  "creature": "Draugr_Elite",
+  "source": "dungeon",
+  "location": "SunkenCrypt4",
+  "biomes": [
+   "Swamp"
+  ],
+  "levels": [
+   1,
+   3
+  ],
+  "respawning": true
+ },
+ {
+  "creature": "Draugr_Ranged",
+  "source": "dungeon",
+  "location": "SunkenCrypt4",
+  "biomes": [
+   "Swamp"
+  ],
+  "levels": [
+   1,
+   3
+  ],
+  "respawning": true
+ },
+ {
+  "creature": "Wraith",
+  "source": "location",
+  "location": "SwampHut1",
+  "biomes": [
+   "Swamp"
+  ],
+  "levels": [
+   1,
+   1
+  ]
+ },
+ {
+  "creature": "Wraith",
+  "source": "location",
+  "location": "SwampHut1_1",
+  "biomes": [
+   "Swamp"
+  ],
+  "levels": [
+   1,
+   1
+  ]
+ },
+ {
+  "creature": "Wraith",
+  "source": "location",
+  "location": "SwampHut2",
+  "biomes": [
+   "Swamp"
+  ],
+  "levels": [
+   1,
+   1
+  ]
+ },
+ {
+  "creature": "Wraith",
+  "source": "location",
+  "location": "SwampHut2_1",
+  "biomes": [
+   "Swamp"
+  ],
+  "levels": [
+   1,
+   1
+  ]
+ },
+ {
+  "creature": "Wraith",
+  "source": "location",
+  "location": "SwampHut3",
+  "biomes": [
+   "Swamp"
+  ],
+  "levels": [
+   1,
+   1
+  ]
+ },
+ {
+  "creature": "Wraith",
+  "source": "location",
+  "location": "SwampHut3_1",
+  "biomes": [
+   "Swamp"
+  ],
+  "levels": [
+   1,
+   1
+  ]
+ },
+ {
+  "creature": "Draugr",
+  "source": "location",
+  "location": "SwampHut4",
+  "biomes": [
+   "Swamp"
+  ],
+  "levels": [
+   1,
+   3
+  ]
+ },
+ {
+  "creature": "Draugr_Ranged",
+  "source": "location",
+  "location": "SwampHut4",
+  "biomes": [
+   "Swamp"
+  ],
+  "levels": [
+   1,
+   3
+  ]
+ },
+ {
+  "creature": "Wraith",
+  "source": "location",
+  "location": "SwampHut5",
+  "biomes": [
+   "Swamp"
+  ],
+  "levels": [
+   1,
+   1
+  ]
+ },
+ {
+  "creature": "Draugr",
+  "source": "location",
+  "location": "SwampRuin1",
+  "biomes": [
+   "Swamp"
+  ],
+  "levels": [
+   1,
+   3
+  ],
+  "respawning": true
+ },
+ {
+  "creature": "Draugr_Elite",
+  "source": "location",
+  "location": "SwampRuin1",
+  "biomes": [
+   "Swamp"
+  ],
+  "levels": [
+   1,
+   3
+  ],
+  "respawning": true
+ },
+ {
+  "creature": "Draugr_Ranged",
+  "source": "location",
+  "location": "SwampRuin1",
+  "biomes": [
+   "Swamp"
+  ],
+  "levels": [
+   1,
+   3
+  ],
+  "respawning": true
+ },
+ {
+  "creature": "Draugr",
+  "source": "location",
+  "location": "SwampRuin2",
+  "biomes": [
+   "Swamp"
+  ],
+  "levels": [
+   1,
+   3
+  ],
+  "respawning": true
+ },
+ {
+  "creature": "Draugr_Elite",
+  "source": "location",
+  "location": "SwampRuin2",
+  "biomes": [
+   "Swamp"
+  ],
+  "levels": [
+   1,
+   3
+  ],
+  "respawning": true
+ },
+ {
+  "creature": "Draugr_Ranged",
+  "source": "location",
+  "location": "SwampRuin2",
+  "biomes": [
+   "Swamp"
+  ],
+  "levels": [
+   1,
+   3
+  ],
+  "respawning": true
+ },
+ {
+  "creature": "Draugr_Elite",
+  "source": "location",
+  "location": "SwampWell1",
+  "biomes": [
+   "Swamp"
+  ],
+  "levels": [
+   1,
+   3
+  ]
+ },
+ {
+  "creature": "BlobTar",
+  "source": "location",
+  "location": "TarPit1",
+  "biomes": [
+   "Plains"
+  ],
+  "levels": [
+   1,
+   1
+  ],
+  "respawning": true
+ },
+ {
+  "creature": "BlobTar",
+  "source": "location",
+  "location": "TarPit1_1",
+  "biomes": [
+   "Plains"
+  ],
+  "levels": [
+   1,
+   1
+  ],
+  "respawning": true
+ },
+ {
+  "creature": "BlobTar",
+  "source": "location",
+  "location": "TarPit2",
+  "biomes": [
+   "Plains"
+  ],
+  "levels": [
+   1,
+   1
+  ],
+  "respawning": true
+ },
+ {
+  "creature": "BlobTar",
+  "source": "location",
+  "location": "TarPit2_1",
+  "biomes": [
+   "Plains"
+  ],
+  "levels": [
+   1,
+   1
+  ],
+  "respawning": true
+ },
+ {
+  "creature": "BlobTar",
+  "source": "location",
+  "location": "TarPit3",
+  "biomes": [
+   "Plains"
+  ],
+  "levels": [
+   1,
+   1
+  ],
+  "respawning": true
+ },
+ {
+  "creature": "BlobTar",
+  "source": "location",
+  "location": "TarPit3_1",
+  "biomes": [
+   "Plains"
+  ],
+  "levels": [
+   1,
+   1
+  ],
+  "respawning": true
+ },
+ {
+  "creature": "ShadowPerson",
+  "source": "location",
+  "location": "TheHole01",
+  "biomes": [
+   "DeepNorth"
+  ],
+  "levels": [
+   1,
+   3
+  ]
+ },
+ {
+  "creature": "Elaking",
+  "source": "dungeon",
+  "location": "TheHole01",
+  "biomes": [
+   "DeepNorth"
+  ],
+  "levels": [
+   1,
+   3
+  ],
+  "respawning": true
+ },
+ {
+  "creature": "ElakingLantern",
+  "source": "dungeon",
+  "location": "TheHole01",
+  "biomes": [
+   "DeepNorth"
+  ],
+  "levels": [
+   1,
+   3
+  ],
+  "respawning": true
+ },
+ {
+  "creature": "ElakingMole",
+  "source": "dungeon",
+  "location": "TheHole01",
+  "biomes": [
+   "DeepNorth"
+  ],
+  "levels": [
+   1,
+   3
+  ]
+ },
+ {
+  "creature": "Troll",
+  "source": "location",
+  "location": "TrollCave02",
+  "biomes": [
+   "BlackForest"
+  ],
+  "levels": [
+   1,
+   3
+  ]
+ },
+ {
+  "creature": "Volture",
+  "source": "location",
+  "location": "VoltureNest",
+  "biomes": [
+   "AshLands"
+  ],
+  "levels": [
+   1,
+   1
+  ]
+ },
+ {
+  "creature": "Boar",
+  "source": "dungeon",
+  "location": "WoodFarm1",
+  "biomes": [
+   "Meadows"
+  ],
+  "levels": [
+   1,
+   3
+  ]
+ },
+ {
+  "creature": "Greydwarf",
+  "source": "location",
+  "location": "WoodHouse11",
+  "biomes": [
+   "Meadows"
+  ],
+  "levels": [
+   1,
+   3
+  ]
+ },
+ {
+  "creature": "Greydwarf",
+  "source": "location",
+  "location": "WoodHouse13",
+  "biomes": [
+   "Meadows"
+  ],
+  "levels": [
+   1,
+   3
+  ]
+ },
+ {
+  "creature": "Greydwarf",
+  "source": "location",
+  "location": "WoodHouse6",
+  "biomes": [
+   "Meadows"
+  ],
+  "levels": [
+   1,
+   3
+  ]
+ },
+ {
+  "creature": "Draugr",
+  "source": "dungeon",
+  "location": "WoodVillage1",
+  "biomes": [
+   "Meadows"
+  ],
+  "levels": [
+   1,
+   3
+  ],
+  "respawning": true
+ },
+ {
+  "creature": "Draugr_Elite",
+  "source": "dungeon",
+  "location": "WoodVillage1",
+  "biomes": [
+   "Meadows"
+  ],
+  "levels": [
+   1,
+   3
+  ],
+  "respawning": true
+ },
+ {
+  "creature": "Draugr_Ranged",
+  "source": "dungeon",
+  "location": "WoodVillage1",
+  "biomes": [
+   "Meadows"
+  ],
+  "levels": [
+   1,
+   3
+  ],
+  "respawning": true
+ },
+ {
+  "creature": "Draugr",
+  "source": "dungeon",
+  "location": "WoodVillage2",
+  "biomes": [
+   "Meadows"
+  ],
+  "levels": [
+   1,
+   3
+  ],
+  "respawning": true
+ },
+ {
+  "creature": "Draugr_Elite",
+  "source": "dungeon",
+  "location": "WoodVillage2",
+  "biomes": [
+   "Meadows"
+  ],
+  "levels": [
+   1,
+   3
+  ],
+  "respawning": true
+ },
+ {
+  "creature": "Draugr_Ranged",
+  "source": "dungeon",
+  "location": "WoodVillage2",
+  "biomes": [
+   "Meadows"
+  ],
+  "levels": [
+   1,
+   3
+  ],
+  "respawning": true
+ },
+ {
+  "creature": "AsksvinEgg",
+  "source": "offspring",
+  "parent": "Asksvin"
+ },
+ {
+  "creature": "Asksvin_hatchling",
+  "source": "egg",
+  "item": "AsksvinEgg"
+ },
+ {
+  "creature": "Boar_piggy",
+  "source": "offspring",
+  "parent": "Boar"
+ },
+ {
+  "creature": "Chicken",
+  "source": "egg",
+  "item": "ChickenEgg"
+ },
+ {
+  "creature": "ChickenEgg",
+  "source": "offspring",
+  "parent": "Hen"
+ },
+ {
+  "creature": "Lox_Calf",
+  "source": "offspring",
+  "parent": "Lox"
+ },
+ {
+  "creature": "Moose_calf",
+  "source": "offspring",
+  "parent": "Moose"
+ },
+ {
+  "creature": "Wolf_cub",
+  "source": "offspring",
+  "parent": "Wolf"
+ },
+ {
+  "creature": "Wolf_cub",
+  "source": "offspring",
+  "parent": "Wolf_spiritcaller"
  }
 ]

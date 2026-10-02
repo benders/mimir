@@ -44,6 +44,20 @@ class Site(unittest.TestCase):
         self.assertIn('href="pieces/Kiln.html"', ingot)  # smelted in
         self.assertIn('href="items/Sword.html"', ingot)  # used in
 
+    def test_spawn_sections(self):
+        raider = (self.out / "creatures/Raider.html").read_text(encoding="utf-8")
+        for h in ("Spawns", "Locations", "Raids"):
+            self.assertIn(f"<h2>{h}</h2>", raider)
+        self.assertIn("Something stirs", raider)
+        pup = (self.out / "creatures/Pup.html").read_text(encoding="utf-8")
+        self.assertIn("in the dungeon", pup)
+        self.assertIn("<h2>Born from</h2>", pup)
+        self.assertIn('href="creatures/Raider.html"', pup)
+        self.assertIn('href="items/Egg.html"', pup)
+        chief = (self.out / "creatures/Chief.html").read_text(encoding="utf-8")
+        self.assertIn("summoned with", chief)
+        self.assertIn('href="items/Ore.html"', chief)
+
     def test_search_index(self):
         index = json.loads((self.out / "search.json").read_text(encoding="utf-8"))
         names = {e[1] for e in index}

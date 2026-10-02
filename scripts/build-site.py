@@ -486,8 +486,23 @@ def creature_page(c: dict) -> None:
     drops = [[link("item", d["item"]), rng(d.get("min", 1), d.get("max", 1)), pct(d.get("chance", 1))]
              for d in c.get("drops", [])]
     body += section("Drops", table(["Item", "Amount", "Chance"], drops))
-    sp_rows = []
-    for s in spawns_of[c["id"]]:
+    body += spawn_sections(spawns_of[c["id"]])
+    page(href("creature", c["id"]), name_of("creature", c["id"]), body, '<a href="creatures/index.html">Creatures</a>')
+
+
+def biome_list(s: dict) -> str:
+    return ", ".join(esc(words(b)) for b in s.get("biomes", []))
+
+
+def spawn_sections(spawns: list[dict]) -> str:
+    """Where a creature comes from: ambient world spawns, locations and dungeons, raids, offspring."""
+    by = defaultdict(list)
+    for s in spawns:
+        by[s.get("source", "world")].append(s)
+    out = ""
+
+    rows = []
+    for s in by["world"]:
         when = "day and night" if s.get("day") and s.get("night") else "day" if s.get("day") else "night"
         extra = []
         if s.get("requiredGlobalKey"):
@@ -496,10 +511,30 @@ def creature_page(c: dict) -> None:
             extra.append("weather: " + ", ".join(esc(e) for e in s["requiredEnvironments"]))
         if s.get("huntPlayer"):
             extra.append("hunts player")
-        sp_rows.append([", ".join(esc(words(b)) for b in s["biomes"]), when, rng(*s["levels"]), rng(*s["groupSize"]),
-                        "; ".join(extra)])
-    body += section("Spawns", table(["Biome", "Time", "Level", "Group", "Notes"], sp_rows))
-    page(href("creature", c["id"]), name_of("creature", c["id"]), body, '<a href="creatures/index.html">Creatures</a>')
+        rows.append([biome_list(s), when, rng(*s["levels"]), rng(*s["groupSize"]), "; ".join(extra)])
+    out += section("Spawns", table(["Biome", "Time", "Level", "Group", "Notes"], rows))
+
+    rows = []
+    for s in by["location"] + by["dungeon"]:
+        notes = []
+        if s["source"] == "dungeon":
+            notes.append("in the dungeon")
+        if s.get("respawning"):
+            notes.append("respawns")
+        if s.get("summon"):
+            sm = s["summon"]
+            notes.append("summoned with " + (link("item", sm["item"], sm.get("amount")) if sm.get("item") else "an offering"))
+        rows.append([esc(pretty_id(s["location"])), biome_list(s), rng(*s["levels"]) if s.get("levels") else "",
+                     "; ".join(notes)])
+    out += section("Locations", table(["Location", "Biome", "Level", "Notes"], rows))
+
+    rows = [[esc(pretty_id(s["event"])), biome_list(s), rng(*s["levels"]), rng(*s["groupSize"]),
+             esc(s.get("message") or "")] for s in by["raid"]]
+    out += section("Raids", table(["Event", "Biome", "Level", "Group", "Message"], rows))
+
+    born = [link("creature", s["parent"]) for s in by["offspring"]] + [link("item", s["item"]) for s in by["egg"]]
+    out += section("Born from", reflist(born))
+    return out
 
 
 # --- pieces ---------------------------------------------------------------------------------

@@ -90,6 +90,18 @@ def main() -> int:
     troll = creatures.get("Troll", {})
     check(troll.get("health", 0) > 0 and any(d["item"] == "TrollHide" for d in troll.get("drops", [])), "Troll: health + TrollHide drop")
     check(any(s["creature"] == "Troll" and "BlackForest" in s.get("biomes", []) for s in spawns), "Troll spawns in BlackForest")
+    def spawned(creature, source, **kw):
+        return any(s["creature"] == creature and s.get("source") == source
+                   and all(s.get(k) == v or v in (s.get(k) or []) for k, v in kw.items()) for s in spawns)
+    check(spawned("Fenring_Cultist", "dungeon", biomes="Mountain"), "Cultist: Mountain cave dungeon")
+    check(spawned("Bonemass", "location", biomes="Swamp"), "Bonemass: Swamp altar")
+    check(spawned("Neck", "raid", event="army_eikthyr"), "Necks in the Eikthyr raid")
+    check(spawned("Wolf_cub", "offspring", parent="Wolf"), "Wolf cub born from Wolf")
+    check(spawned("TrollFrost", "world", biomes="DeepNorth"), "TrollFrost: spawner-placed world spawn")
+    check(all(s.get("biomes") for s in spawns if s.get("source") not in ("offspring", "egg")), "every spawn has a biome")
+    bosses = [c for c in creatures.values() if c.get("boss") and not c["id"].endswith(("_p2", "_p3"))]
+    unplaced = sorted(c["id"] for c in bosses if not any(s["creature"] == c["id"] for s in spawns))
+    check(unplaced == ["Hive", "TheHive"], f"every boss but the Queen's hives has a location (unplaced: {unplaced})")
     check(creatures.get("Eikthyr", {}).get("boss") is True, "Eikthyr: boss")
     check("Hammer" in pieces.get("piece_workbench", {}).get("tools", []), "workbench built with Hammer")
     check(any(p["from"] == "CopperOre" and p["to"] == "Copper" for p in procs), "smelting CopperOre -> Copper")

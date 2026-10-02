@@ -1,13 +1,13 @@
 {
  "gameVersion": "1.0.16",
  "networkVersion": 40,
- "dumperVersion": "0.2.0",
+ "dumperVersion": "0.3.0",
  "steamBuildId": "25527701",
  "counts": {
   "items": 1519,
   "recipes": 481,
   "creatures": 161,
-  "spawns": 91,
+  "spawns": 364,
   "pieces": 664,
   "processing": 106,
   "sources": 462,
@@ -55,8 +55,11 @@
   "JotunWitch_projectile_lightningbolt",
   "LavaRock",
   "Seagal",
-  "Spawner_TrollFrost",
+  "Spawner_CharredStone_event",
+  "memorialsite_offering",
   "odin",
-  "projectile_FimbulvinterMeteor"
+  "piece_Charred_Balista",
+  "projectile_FimbulvinterMeteor",
+  "vfx_LastBossGate_destroyed"
  ]
 }

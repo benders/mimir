@@ -157,10 +157,45 @@ class Entities(FixtureCase):
         self.assertEqual(e["stats"]["mods"], {"poison": "Resistant"})
         self.assertEqual(e["stats"]["percentigeDamageModifiers"], {"fire": 0.1})
 
-    def test_spawns_filtered(self):
-        s = N.spawns()
-        self.assertEqual(len(s), 1)  # disabled, devDisabled and non-creature spawners dropped
+    def test_biomes(self):
+        self.assertEqual(N.biomes("Meadows, BlackForest"), ["Meadows", "BlackForest"])
+        self.assertEqual(N.biomes("None"), [])
+        self.assertEqual(N.biomes("10"), ["Swamp", "BlackForest"])
+        self.assertEqual(len(N.biomes("-1")), len(N.BIOME_BITS))
+        self.assertEqual(N.biomes("All"), N.biomes("-1"))
+
+    def spawns(self, source):
+        return [N.prune(s) for s in N.spawns() if s["source"] == source]
+
+    def test_world_spawns(self):
+        s = self.spawns("world")
+        self.assertEqual(len(s), 2)  # disabled, devDisabled and non-creature spawners dropped
         self.assertEqual((s[0]["creature"], s[0]["biomes"]), ("Raider", ["Meadows", "BlackForest"]))
+        self.assertEqual(s[1]["creature"], "Raider")  # placed via Spawner_Raider
+        self.assertEqual(len(s[1]["biomes"]), len(N.BIOME_BITS))
+
+    def test_raid_spawns(self):
+        [r] = self.spawns("raid")  # disabled event and effect prefab dropped
+        self.assertEqual((r["creature"], r["event"], r["message"]), ("Raider", "army_test", "Something stirs"))
+        self.assertEqual(r["biomes"], ["Meadows", "Swamp"])  # the event's biome, not the spawner's
+        self.assertEqual(r["levels"], [1, 2])
+
+    def test_location_spawns(self):
+        s = {(x["creature"], x["location"]): x for x in self.spawns("location")}
+        self.assertEqual(set(s), {("Raider", "Camp"), ("Pup", "Camp"), ("Chief", "Lair")})  # Ruin disabled
+        camp = s["Raider", "Camp"]
+        self.assertEqual(camp["biomes"], ["Swamp", "Plains"])
+        self.assertEqual(camp["levels"], [1, 3])  # merged; swapped min/max fixed
+        self.assertTrue(camp["respawning"])
+        self.assertEqual(s["Chief", "Lair"]["summon"], {"item": "Ore", "amount": 3})
+
+    def test_dungeon_spawns(self):
+        [d] = self.spawns("dungeon")  # Crypt room and disabled room don't match the Cave generator
+        self.assertEqual((d["creature"], d["location"], d["biomes"], d["levels"]), ("Pup", "Lair", ["Mountain"], [1, 2]))
+
+    def test_offspring(self):
+        self.assertEqual(self.spawns("offspring"), [{"creature": "Pup", "source": "offspring", "parent": "Raider"}])
+        self.assertEqual(self.spawns("egg"), [{"creature": "Pup", "source": "egg", "item": "Egg"}])
 
 
 class EnemyOnly(FixtureCase):

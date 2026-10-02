@@ -82,6 +82,12 @@ def main() -> int:
 
     spawns = load("world/SpawnSystemList.json")
     check(sum(len(s["fields"].get("m_spawners", [])) for s in spawns) > 50, "spawn lists populated")
+    locations = list((DUMP / "locations").glob("*.json"))
+    check(len(locations) > 100, f"locations dumped ({len(locations)})")
+    check(len(list((DUMP / "rooms").glob("*.json"))) > 100, "dungeon rooms dumped")
+    check("Crypt" in load("room_themes.json"), "room themes table")
+    bowls = [c["fields"] for c in load("locations/Eikthyrnir.json")["components"] if c["type"] == "OfferingBowl"]
+    check(any((b.get("m_bossPrefab") or {}).get("$ref") == "Eikthyr" for b in bowls), "Eikthyrnir location: altar summons Eikthyr")
 
     tables = {t["name"]: t["fields"] for t in load("piece_tables.json")}
     hammer = tables.get("_HammerPieceTable", {}).get("m_pieces") or []

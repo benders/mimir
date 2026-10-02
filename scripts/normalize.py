@@ -436,16 +436,80 @@ def status_effect(e: dict, defaults: dict[str, dict]) -> dict:
     }
 
 
-def spawns() -> list[dict]:
+BIOME_BITS = {"Meadows": 1, "Swamp": 2, "Mountain": 4, "BlackForest": 8, "Plains": 0x10, "AshLands": 0x20,
+              "DeepNorth": 0x40, "Ocean": 0x100, "Mistlands": 0x200}  # Heightmap.Biome
+
+
+def biomes(v: str) -> list[str]:
+    """Heightmap.Biome flags as names. Flag enums serialize as "A, B", "All", or a bare number (-1 = all bits)."""
+    bits = v.strip()
+    if bits == "All":
+        bits = sum(BIOME_BITS.values())
+    elif bits.lstrip("-").isdigit():
+        bits = int(bits)
+    else:
+        return [b for b in bits.split(", ") if b in BIOME_BITS]
+    return [b for b, bit in BIOME_BITS.items() if bits & bit]
+
+
+def levels(lo: int, hi: int) -> list[int]:
+    return sorted([lo, hi])  # some spawners have min/max swapped
+
+
+def spawners_in(p: dict) -> list[dict]:
+    """Creatures placed by spawners inside a location or dungeon room."""
+    out = []
+    for c in p["components"]:
+        t, f = c["type"], c["fields"]
+        if t == "CreatureSpawner" and keep(ref(f["m_creaturePrefab"]), is_creature, is_item):
+            out.append({"creature": ref(f["m_creaturePrefab"]), "levels": levels(f["m_minLevel"], f["m_maxLevel"]),
+                        "respawnMinutes": f["m_respawnTimeMinuts"]})
+        elif t == "SpawnArea":
+            out += [{"creature": ref(x["m_prefab"]), "levels": levels(x["m_minLevel"], x["m_maxLevel"]), "respawning": True}
+                    for x in f["m_prefabs"] if keep(ref(x["m_prefab"]), is_creature, is_item)]
+        elif t == "OfferingBowl" and keep(ref(f["m_bossPrefab"]), is_creature):
+            out.append({"creature": ref(f["m_bossPrefab"]), "summon": prune(
+                {"item": ref(f["m_bossItem"]), "amount": f["m_bossItems"]})})
+    return out
+
+
+def merge_spawners(found: list[dict]) -> list[dict]:
+    """One entry per creature: widest level range; respawning if any spawner respawns."""
+    by = {}
+    for x in found:
+        e = by.setdefault(x["creature"], {"creature": x["creature"]})
+        if "levels" in x:
+            lo, hi = e.get("levels", x["levels"])
+            e["levels"] = [min(lo, x["levels"][0]), max(hi, x["levels"][1])]
+        if x.get("respawning") or x.get("respawnMinutes"):
+            e["respawning"] = True
+        if "summon" in x:
+            e["summon"] = x["summon"]
+    return [by[k] for k in sorted(by)]
+
+
+def load_dir(rel: str) -> dict[str, dict]:
+    d = RAW / rel
+    return {p["name"]: p for p in (json.loads(f.read_text(encoding="utf-8")) for f in sorted(d.glob("*.json")))} \
+        if d.is_dir() else {}
+
+
+def world_spawns() -> list[dict]:
+    """SpawnSystem: the ambient spawns of each biome."""
     out = []
     for lst in sorted(load("world/SpawnSystemList.json"), key=lambda s: s["name"]):
         for s in lst["fields"]["m_spawners"]:
-            if not s["m_enabled"] or s.get("m_devDisabled") or not keep(ref(s["m_prefab"]), is_creature, is_item):
+            prefab = ref(s["m_prefab"])
+            # some entries place a CreatureSpawner prefab rather than the creature itself
+            if prefab in PREFABS and (cs := comp(PREFABS[prefab], "CreatureSpawner")):
+                prefab = ref(cs["m_creaturePrefab"])
+            if not s["m_enabled"] or s.get("m_devDisabled") or not keep(prefab, is_creature, is_item):
                 continue
             out.append({
-                "creature": ref(s["m_prefab"]),
+                "creature": prefab,
+                "source": "world",
                 "list": lst["name"],
-                "biomes": [b for b in s["m_biome"].split(", ") if b != "None"],
+                "biomes": biomes(s["m_biome"]),
                 "biomeArea": s["m_biomeArea"],
                 "maxSpawned": s["m_maxSpawned"],
                 "interval": s["m_spawnInterval"],
@@ -460,6 +524,79 @@ def spawns() -> list[dict]:
                 "huntPlayer": s["m_huntPlayer"],
             })
     return out
+
+
+def raid_spawns() -> list[dict]:
+    """RandEventSystem: raids on player bases. The event's biome applies; its spawners use All."""
+    out = []
+    for e in sorted(load("world/RandEventSystem.json")[0]["fields"]["m_events"], key=lambda e: e["m_name"]):
+        if not e["m_enabled"] or e.get("m_devDisabled"):
+            continue
+        for s in e["m_spawn"]:
+            if not s["m_enabled"] or s.get("m_devDisabled") or not keep(ref(s["m_prefab"]), is_creature, is_item):
+                continue
+            out.append({
+                "creature": ref(s["m_prefab"]),
+                "source": "raid",
+                "event": e["m_name"],
+                "message": text(e["m_startMessage"]),
+                "biomes": biomes(e["m_biome"]),
+                "maxSpawned": s["m_maxSpawned"],
+                "interval": s["m_spawnInterval"],
+                "chance": s["m_spawnChance"],
+                "groupSize": [s["m_groupSizeMin"], s["m_groupSizeMax"]],
+                "levels": levels(s["m_minLevel"], s["m_maxLevel"]),
+                "requiredGlobalKeys": e["m_requiredGlobalKeys"],
+                "notRequiredGlobalKeys": e["m_notRequiredGlobalKeys"],
+            })
+    return out
+
+
+def location_spawns() -> list[dict]:
+    """Creature spawners, spawn areas and boss altars inside world locations and the dungeons they generate.
+    A DungeonGenerator uses the rooms whose Room.Theme overlaps its m_themes."""
+    locations, rooms = load_dir("locations"), load_dir("rooms")
+    themes = load("room_themes.json") if (RAW / "room_themes.json").exists() else {}
+
+    def theme_bits(v) -> int:
+        return v if isinstance(v, int) else int(v) if v.isdigit() else sum(themes.get(t, 0) for t in v.split(", "))
+
+    where = defaultdict(list)  # location prefab -> biomes, in ZoneSystem order
+    for z in load("world/ZoneSystem.json")[0]["fields"]["m_locations"]:
+        if z["m_enable"]:
+            where[z["m_prefabName"]] += [b for b in biomes(z["m_biome"]) if b not in where[z["m_prefabName"]]]
+
+    out = []
+    for name in sorted(where):
+        if name not in locations:
+            continue
+        loc = locations[name]
+        found = [dict(x, dungeon=False) for x in spawners_in(loc)]
+        for g in (c["fields"] for c in loc["components"] if c["type"] == "DungeonGenerator"):
+            bits = theme_bits(g["m_themes"])
+            for r in rooms.values():
+                if r.get("enabled") and theme_bits(r["theme"]) & bits:
+                    found += [dict(x, dungeon=True) for x in spawners_in(r)]
+        for dungeon in (False, True):
+            for e in merge_spawners([x for x in found if x["dungeon"] == dungeon]):
+                out.append({"creature": e.pop("creature"), "source": "dungeon" if dungeon else "location",
+                            "location": name, "biomes": where[name], **e})
+    return out
+
+
+def offspring_spawns() -> list[dict]:
+    """Creatures born from another creature (Procreation) or hatched from an egg item (EggGrow)."""
+    out = []
+    for name, p in PREFABS.items():
+        if (c := comp(p, "Procreation")) and is_creature(name) and keep(ref(c["m_offspring"]), is_creature, is_item):
+            out.append({"creature": ref(c["m_offspring"]), "source": "offspring", "parent": name})
+        if (c := comp(p, "EggGrow")) and keep(ref(c["m_grownPrefab"]), is_creature):
+            out.append({"creature": ref(c["m_grownPrefab"]), "source": "egg", "item": name})
+    return out
+
+
+def spawns() -> list[dict]:
+    return world_spawns() + raid_spawns() + location_spawns() + offspring_spawns()
 
 
 def piece_tools() -> dict[str, list[str]]:

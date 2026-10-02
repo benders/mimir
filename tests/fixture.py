@@ -32,6 +32,10 @@ def prefab(name, *components, is_item=False):
     return {"name": name, "isItem": is_item, "components": [comp("ZNetView", {}), *components]}
 
 
+def with_components(p, *components):
+    return {**p, "components": p["components"] + list(components)}
+
+
 DAMAGES = {f"m_{k}": 0 for k in
            ("damage", "blunt", "slash", "pierce", "chop", "pickaxe", "fire", "frost", "lightning", "poison", "spirit")}
 
@@ -107,6 +111,24 @@ def spawner(creature, **kw):
                 requiredEnvironments=[], huntPlayer=False), **m(**kw)}
 
 
+def creature_spawner(creature, **kw):
+    return {**m(creaturePrefab=R(creature), minLevel=1, maxLevel=1, respawnTimeMinuts=0), **m(**kw)}
+
+
+def spawners(*components):
+    """A location or room: game components, as children of the root object."""
+    return [comp(t, f, path=f"child{i}") for i, (t, f) in enumerate(components)]
+
+
+def zone_location(name, biome, enable=True):
+    return m(name=name, prefabName=name, enable=enable, biome=biome)
+
+
+def event(name, biome, *spawns, **kw):
+    return {**m(name=name, enabled=True, devDisabled=False, biome=biome, startMessage="$event_test",
+                requiredGlobalKeys=[], notRequiredGlobalKeys=["defeated_chief"], spawn=list(spawns)), **m(**kw)}
+
+
 SE_DEFAULTS = m(name="", tooltip="", icon=None, category="", ttl=0, cooldown=0, startMessage="", mods=[],
                 healthRegenMultiplier=1, staminaRegenMultiplier=1, percentigeDamageModifiers=damages(),
                 runStaminaDrainModifier=0)
@@ -119,6 +141,7 @@ TRANSLATIONS = {
     "item_hammer": "Mallet", "item_bite": "Bite",
     "enemy_raider": "Raider", "piece_bench": "Bench", "piece_anvil": "Anvil", "piece_kiln": "Kiln",
     "piece_bush": "Twig Bush", "piece_orerock": "Ore Rock", "se_fizz": "Fizzy",
+    "enemy_pup": "Pup", "enemy_chief": "Chief", "item_egg": "Egg", "event_test": "Something stirs",
 }
 
 
@@ -150,7 +173,12 @@ def prefabs():
                comp("CharacterDrop", {"m_drops": [char_drop("Ore", amountMax=3, chance=0.5),
                                                    char_drop("vfx_Poof")]}),  # effect prefab: skipped ref
                comp("Tameable", m(fedDuration=600, tamingTime=1800, commandable=True)),
-               comp("MonsterAI", m(consumeItems=[R("Fish")], afraidOfFire=True, avoidWater=False))),
+               comp("MonsterAI", m(consumeItems=[R("Fish")], afraidOfFire=True, avoidWater=False)),
+               comp("Procreation", m(offspring=R("Pup")))),
+        prefab("Pup", character(name="$enemy_pup", health=20)),
+        prefab("Chief", character(name="$enemy_chief", health=900, boss=True)),
+        with_components(item("Egg", name="$item_egg", icons=[S("Egg")]), comp("EggGrow", m(grownPrefab=R("Pup")))),
+        prefab("Spawner_Raider", comp("CreatureSpawner", creature_spawner("Raider"))),
         prefab("Player", character(name="Player"), comp("Player", {})),
         piece("Bench", comp("CraftingStation", m(name="$piece_bench", rangeBuild=20, craftRequireRoof=True,
                                                  craftRequireFire=False)),
@@ -213,5 +241,34 @@ def write_dump(raw: Path) -> Path:
         spawner("Raider", enabled=False),
         spawner("Raider", devDisabled=True),
         spawner("vfx_Poof"),
+        spawner("Spawner_Raider", biome="-1"),  # places a spawner, everywhere
     ]}}])
+    dump("world/RandEventSystem.json", [{"name": "_GameMain", "type": "RandEventSystem", "fields": {"m_events": [
+        event("army_test", "Meadows, Swamp", spawner("Raider", biome="1023", minLevel=2, maxLevel=1), spawner("vfx_Poof")),
+        event("army_off", "Meadows", spawner("Pup"), enabled=False),
+    ]}}])
+    dump("world/ZoneSystem.json", [{"name": "_GameMain", "type": "ZoneSystem", "fields": {"m_locations": [
+        zone_location("Camp", "Swamp"),
+        zone_location("Camp", "Plains"),  # same prefab placed in a second biome
+        zone_location("Lair", "Mountain"),
+        zone_location("Ruin", "Meadows", enable=False),
+    ]}}])
+    dump("locations/Camp.json", {"name": "Camp", "components": [comp("Location", {}), *spawners(
+        ("CreatureSpawner", creature_spawner("Raider", minLevel=3, maxLevel=1)),  # swapped levels
+        ("CreatureSpawner", creature_spawner("Raider", minLevel=1, maxLevel=2, respawnTimeMinuts=30)),
+        ("SpawnArea", m(prefabs=[m(prefab=R("Pup"), weight=1, minLevel=1, maxLevel=1)])),
+        ("CreatureSpawner", creature_spawner("vfx_Poof")),
+    )]})
+    dump("locations/Lair.json", {"name": "Lair", "components": [comp("Location", {}), *spawners(
+        ("OfferingBowl", m(bossPrefab=R("Chief"), bossItem=R("Ore"), bossItems=3)),
+        ("DungeonGenerator", m(themes="Cave")),
+    )]})
+    dump("locations/Ruin.json", {"name": "Ruin", "components": spawners(("CreatureSpawner", creature_spawner("Pup")))})
+    dump("room_themes.json", {"None": 0, "Crypt": 1, "Cave": 4})
+    dump("rooms/cave_a.json", {"name": "cave_a", "theme": 5, "enabled": True,  # Crypt|Cave: used by Lair
+                               "components": spawners(("CreatureSpawner", creature_spawner("Pup", maxLevel=2)))})
+    dump("rooms/cave_off.json", {"name": "cave_off", "theme": 4, "enabled": False,
+                                 "components": spawners(("CreatureSpawner", creature_spawner("Raider")))})
+    dump("rooms/crypt_a.json", {"name": "crypt_a", "theme": 1, "enabled": True,
+                                "components": spawners(("CreatureSpawner", creature_spawner("Raider")))})
     return raw

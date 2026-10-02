@@ -66,7 +66,7 @@ check-local: test extract verify data verify-data site ## Tests, then full end-t
 
 decompile: ## Decompile game assemblies to .cache/decompiled (reference only, never commit)
 	dotnet tool restore
-	for a in assembly_valheim assembly_utils assembly_guiutils; do \
+	for a in assembly_valheim assembly_utils assembly_guiutils SoftReferenceableAssets; do \
 	  dotnet ilspycmd -p -o .cache/decompiled/$$a .cache/server/$(BRANCH)/valheim_server_Data/Managed/$$a.dll >/dev/null; done
 
 clean: ## Remove build outputs and dumps (keeps the server download)

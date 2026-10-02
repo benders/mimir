@@ -5,6 +5,8 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 
+using SoftReferenceableAssets;
+
 using UnityEngine;
 
 using Object = UnityEngine.Object;
@@ -19,6 +21,9 @@ namespace Mimir.Dumper
     ///   status_effect_defaults.json    a fresh instance of each status effect type (to tell set fields from defaults)
     ///   piece_tables.json              build menus of tools (hammer, hoe, ...), not networked prefabs
     ///   world/&lt;Type&gt;.json            world-level systems (zones, environments, spawns, events)
+    ///   locations/&lt;name&gt;.json      every enabled ZoneSystem location (soft-referenced asset), components as for prefabs
+    ///   rooms/&lt;name&gt;.json          every dungeon room in DungeonDB, plus its theme (Room.Theme bitmask)
+    ///   room_themes.json               Room.Theme name -> bit (DungeonGenerator.m_themes is written by name)
     ///   localization/English.json      $token -> text
     ///   manifest.json                  written last; its presence marks a complete dump
     /// </summary>
@@ -35,7 +40,7 @@ namespace Mimir.Dumper
 
         public sealed class Result
         {
-            public int Prefabs, Items, Recipes, StatusEffects, PieceTables, WorldObjects, Translations;
+            public int Prefabs, Locations, Rooms, Items, Recipes, StatusEffects, PieceTables, WorldObjects, Translations;
             public List<string> Warnings = new List<string>();
         }
 
@@ -55,6 +60,8 @@ namespace Mimir.Dumper
                 .Select(d => d != null ? d.m_itemData.m_shared.m_buildPieces : null)
                 .Where(t => t != null).Distinct().Cast<Object>());
             DumpWorld(Path.Combine(outDir, "world"), r);
+            DumpLocations(Path.Combine(outDir, "locations"), r);
+            DumpRooms(Path.Combine(outDir, "rooms"), r);
             r.Translations = DumpLocalization(Path.Combine(outDir, "localization"), r);
             WriteManifest(outDir, r);
             return r;
@@ -77,33 +84,94 @@ namespace Mimir.Dumper
             var usedFiles = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
             foreach (var kv in all)
             {
-                var go = kv.Value;
-                var w = new JsonWriter();
-                w.BeginObject();
-                w.Key("name"); w.Value(go.name);
-                w.Key("isItem"); w.Value(items.Contains(go.name));
-                w.Key("components");
-                w.BeginArray();
-                foreach (var mb in go.GetComponentsInChildren<MonoBehaviour>(true))
-                {
-                    if (mb == null || !IsGameType(mb.GetType())) continue;
-                    w.BeginObject();
-                    w.Key("type"); w.Value(mb.GetType().Name);
-                    if (mb.transform != go.transform) { w.Key("path"); w.Value(Serializer.PathOf(mb.transform)); }
-                    w.Key("fields");
-                    w.BeginObject();
-                    Serializer.WriteFields(w, mb);
-                    w.EndObject();
-                    w.EndObject();
-                }
-                w.EndArray();
-                w.EndObject();
-
-                var file = SafeFileName(go.name);
-                if (!usedFiles.Add(file)) { file += "__" + (go.name.GetHashCode() & 0x7fffffff); usedFiles.Add(file); }
-                Write(Path.Combine(dir, file + ".json"), w);
+                WriteGameObject(dir, usedFiles, kv.Value, w => { w.Key("isItem"); w.Value(items.Contains(kv.Key)); });
                 r.Prefabs++;
             }
+        }
+
+        /// <summary>
+        /// Locations (dungeon entrances, villages, boss altars, ...) aren't networked prefabs: ZoneSystem holds them
+        /// as soft references and loads them on demand. Their children hold the creature spawners, chests and
+        /// dungeon generators that place content in the world.
+        /// </summary>
+        private static void DumpLocations(string dir, Result r)
+        {
+            Directory.CreateDirectory(dir);
+            var usedFiles = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
+            var seen = new HashSet<AssetID>();
+            foreach (var loc in ZoneSystem.instance.m_locations)
+            {
+                if (loc == null || !loc.m_enable || !loc.m_prefab.IsValid || !seen.Add(loc.m_prefab.m_assetID)) continue;
+                if (WriteSoftReference(dir, usedFiles, loc.m_prefab, null, r)) r.Locations++;
+            }
+        }
+
+        /// <summary>Dungeon rooms; a location's DungeonGenerator picks rooms whose theme matches its m_themes.</summary>
+        private static void DumpRooms(string dir, Result r)
+        {
+            Directory.CreateDirectory(dir);
+            var rooms = DungeonDB.GetRooms();
+            if (rooms == null || rooms.Count == 0) { r.Warnings.Add("no dungeon rooms"); return; }
+            var themes = new JsonWriter();
+            themes.BeginObject();
+            foreach (Room.Theme t in Enum.GetValues(typeof(Room.Theme))) { themes.Key(t.ToString()); themes.Value((long)t); }
+            themes.EndObject();
+            Write(Path.Combine(Path.GetDirectoryName(dir), "room_themes.json"), themes);
+
+            var usedFiles = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
+            foreach (var room in rooms.Where(x => x != null && x.m_prefab.IsValid).OrderBy(x => x.m_prefab.Name, StringComparer.Ordinal))
+            {
+                var data = room;
+                if (WriteSoftReference(dir, usedFiles, room.m_prefab, w =>
+                    {
+                        w.Key("theme"); w.Value((long)data.m_theme);
+                        w.Key("enabled"); w.Value(data.m_enabled);
+                    }, r)) r.Rooms++;
+            }
+        }
+
+        private static bool WriteSoftReference(string dir, HashSet<string> usedFiles, SoftReference<GameObject> sr,
+                                               Action<JsonWriter> extra, Result r)
+        {
+            if (sr.Load() != LoadResult.Succeeded || sr.Asset == null)
+            {
+                r.Warnings.Add("could not load " + sr.Name);
+                return false;
+            }
+            try { WriteGameObject(dir, usedFiles, sr.Asset, extra, sr.Name); }
+            finally { sr.Release(); }
+            return true;
+        }
+
+        /// <summary>{"name", ...extra, "components": [{type, path?, fields}]} for every game component of the object.</summary>
+        private static void WriteGameObject(string dir, HashSet<string> usedFiles, GameObject go, Action<JsonWriter> extra,
+                                            string name = null)
+        {
+            name ??= go.name;
+            var w = new JsonWriter();
+            w.BeginObject();
+            w.Key("name"); w.Value(name);
+            extra?.Invoke(w);
+            w.Key("components");
+            w.BeginArray();
+            foreach (var mb in go.GetComponentsInChildren<MonoBehaviour>(true))
+            {
+                if (mb == null || !IsGameType(mb.GetType())) continue;
+                w.BeginObject();
+                w.Key("type"); w.Value(mb.GetType().Name);
+                if (mb.transform != go.transform) { w.Key("path"); w.Value(Serializer.PathOf(mb.transform)); }
+                w.Key("fields");
+                w.BeginObject();
+                Serializer.WriteFields(w, mb);
+                w.EndObject();
+                w.EndObject();
+            }
+            w.EndArray();
+            w.EndObject();
+
+            var file = SafeFileName(name);
+            if (!usedFiles.Add(file)) { file += "__" + (name.GetHashCode() & 0x7fffffff); usedFiles.Add(file); }
+            Write(Path.Combine(dir, file + ".json"), w);
         }
 
         private static int DumpObjects(string path, IEnumerable<Object> objects)
@@ -178,6 +246,8 @@ namespace Mimir.Dumper
             w.Key("counts");
             w.BeginObject();
             w.Key("prefabs"); w.Value(r.Prefabs);
+            w.Key("locations"); w.Value(r.Locations);
+            w.Key("rooms"); w.Value(r.Rooms);
             w.Key("items"); w.Value(r.Items);
             w.Key("recipes"); w.Value(r.Recipes);
             w.Key("statusEffects"); w.Value(r.StatusEffects);

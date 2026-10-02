@@ -1,6 +1,7 @@
 [
  {
   "creature": "Raider",
+  "source": "world",
   "list": "Spawns",
   "biomes": [
    "Meadows",
@@ -23,5 +24,125 @@
    0,
    1000
   ]
+ },
+ {
+  "creature": "Raider",
+  "source": "world",
+  "list": "Spawns",
+  "biomes": [
+   "Meadows",
+   "Swamp",
+   "Mountain",
+   "BlackForest",
+   "Plains",
+   "AshLands",
+   "DeepNorth",
+   "Ocean",
+   "Mistlands"
+  ],
+  "biomeArea": "Everything",
+  "maxSpawned": 2,
+  "interval": 90,
+  "chance": 50,
+  "groupSize": [
+   1,
+   1
+  ],
+  "levels": [
+   1,
+   3
+  ],
+  "day": true,
+  "night": true,
+  "altitude": [
+   0,
+   1000
+  ]
+ },
+ {
+  "creature": "Raider",
+  "source": "raid",
+  "event": "army_test",
+  "message": "Something stirs",
+  "biomes": [
+   "Meadows",
+   "Swamp"
+  ],
+  "maxSpawned": 2,
+  "interval": 90,
+  "chance": 50,
+  "groupSize": [
+   1,
+   1
+  ],
+  "levels": [
+   1,
+   2
+  ],
+  "notRequiredGlobalKeys": [
+   "defeated_chief"
+  ]
+ },
+ {
+  "creature": "Pup",
+  "source": "location",
+  "location": "Camp",
+  "biomes": [
+   "Swamp",
+   "Plains"
+  ],
+  "levels": [
+   1,
+   1
+  ],
+  "respawning": true
+ },
+ {
+  "creature": "Raider",
+  "source": "location",
+  "location": "Camp",
+  "biomes": [
+   "Swamp",
+   "Plains"
+  ],
+  "levels": [
+   1,
+   3
+  ],
+  "respawning": true
+ },
+ {
+  "creature": "Chief",
+  "source": "location",
+  "location": "Lair",
+  "biomes": [
+   "Mountain"
+  ],
+  "summon": {
+   "item": "Ore",
+   "amount": 3
+  }
+ },
+ {
+  "creature": "Pup",
+  "source": "dungeon",
+  "location": "Lair",
+  "biomes": [
+   "Mountain"
+  ],
+  "levels": [
+   1,
+   2
+  ]
+ },
+ {
+  "creature": "Pup",
+  "source": "egg",
+  "item": "Egg"
+ },
+ {
+  "creature": "Pup",
+  "source": "offspring",
+  "parent": "Raider"
  }
 ]
