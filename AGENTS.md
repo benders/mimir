@@ -20,6 +20,7 @@ remote.sh        runs a step (extract) on a native x86_64 Linux host, pulls .cac
 verify.py        invariant checks on the raw dump + icons
 normalize.py     raw dump -> data/*.json (compact, English text resolved, committed)
 verify_data.py   counts, referential integrity, known content in data/ (+ icons)
+build-site.py    data/ + icons -> .cache/site/<branch>/ (static HTML + search.json; fails on broken links)
 ```
 
 ## Commands (all non-interactive; non-zero exit = failure)
@@ -29,6 +30,7 @@ verify_data.py   counts, referential integrity, known content in data/ (+ icons)
 - `make remote-extract`, `make verify`, `make data`, `make verify-data` — the individual steps.
 - `make data verify-data` — re-normalize from the existing local dump (no remote needed); use this when
   changing `normalize.py`.
+- `make site` / `make serve` — build the static site (offline, from `data/` + local icons); serve on :8000.
 - `make icons` — icons only; runs anywhere with python3 (needs the server download in `.cache/server`).
 - `make dump` — run the server locally. Only practical on x86_64 Linux; on macOS it uses a qemu x86_64 VM and is very slow.
 - `make decompile` — decompile game assemblies into `.cache/decompiled/` for reference.

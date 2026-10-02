@@ -34,3 +34,13 @@ site's mechanics pages. Re-check against the decompiled code after major game up
 ## Creature attacks
 
 - Damage scales by level: `1 + 0.5 × (level − 1)` (`Attack.cs`).
+
+## Item quality and upgrade costs (`ItemDrop.ItemData`, `Piece.Requirement.GetAmount`, `Recipe`)
+
+- Damage, armor, durability, block power: `base + (quality − 1) × perLevel` (`GetDamage`, `GetArmor`,
+  `GetMaxDurability`, `GetBaseBlockPower`; world level adds more on top).
+- Resource cost for quality `q`: `q = 1` → `m_amount`; `q = 2, 3` → `(q − 1) × perLevel`; `q ≥ 4` →
+  `(4 + (q − 4) / 2) × perLevel`, floored. So quality 4 costs 4 × perLevel, not 3×.
+- Required station level: `max(1, m_minStationLevel) + q − 1` (`GetRequiredStationLevel`).
+- `m_upgraderResource` requirements (battle idols) only count at a station with `m_upgrader` (the
+  `UpgradeStation` prefab), which can also upgrade past `m_maxQuality` (`InventoryGui`). Not verified in-game.

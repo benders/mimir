@@ -9,7 +9,7 @@ BRANCH ?= public
 REMOTE ?= nic@mini
 export MIMIR_BRANCH := $(BRANCH)
 
-.PHONY: help server bepinex plugin dump icons extract remote-extract verify data verify-data check clean decompile
+.PHONY: help server bepinex plugin dump icons extract remote-extract verify data verify-data site serve check clean decompile
 
 help:
 	@grep -E '^[a-z-]+:.*## ' $(MAKEFILE_LIST) | awk -F':.*## ' '{printf "  %-12s %s\n", $$1, $$2}'
@@ -45,6 +45,14 @@ data: ## Normalize the raw dump -> data/ (public) or .cache/data/$(BRANCH)
 verify-data: ## Check normalized data (+ icons, if extracted)
 	scripts/verify_data.py $(DATA_DIR) .cache/dump/$(BRANCH)/icons
 
+SITE_DIR := .cache/site/$(BRANCH)
+
+site: ## Build the static site from $(DATA_DIR) + icons -> .cache/site/$(BRANCH)
+	scripts/build-site.py $(DATA_DIR) .cache/dump/$(BRANCH)/icons $(SITE_DIR)
+
+serve: site ## Build the site and serve it on http://localhost:8000
+	python3 -m http.server -d $(SITE_DIR) 8000
+
 check: remote-extract verify data verify-data ## Full end-to-end on $(REMOTE): extract, verify, normalize, verify
 
 decompile: ## Decompile game assemblies to .cache/decompiled (reference only, never commit)
@@ -53,4 +61,4 @@ decompile: ## Decompile game assemblies to .cache/decompiled (reference only, ne
 	  dotnet ilspycmd -p -o .cache/decompiled/$$a .cache/server/$(BRANCH)/valheim_server_Data/Managed/$$a.dll >/dev/null; done
 
 clean: ## Remove build outputs and dumps (keeps the server download)
-	rm -rf .cache/build .cache/dump
+	rm -rf .cache/build .cache/dump .cache/site

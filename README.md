@@ -4,7 +4,7 @@ A companion website for [Valheim](https://www.valheimgame.com/): item and creatu
 building pieces, and how the game's mechanics actually work. The data comes straight from the game's
 dedicated server, so the site follows game updates without anyone editing pages by hand.
 
-**Status:** data extraction works end to end, and the site itself is next. See [issues](https://github.com/benders/mimir/issues).
+**Status:** data extraction and a static site build work end to end; hosting and CI are next. See [issues](https://github.com/benders/mimir/issues).
 
 ## What's here
 
@@ -12,7 +12,8 @@ dedicated server, so the site follows game updates without anyone editing pages 
 |---|---|
 | `data/` | The extracted game data as compact JSON (items, recipes, creatures, spawns, pieces, ...). Browse it or diff it between game versions. |
 | `plugin/` | A small BepInEx plugin that dumps game data from inside a running server. |
-| `scripts/` | The pipeline: download, run, extract icons, normalize, verify. |
+| `scripts/` | The pipeline: download, run, extract icons, normalize, verify, build the site. |
+| `site/` | Stylesheet and search script copied into the built site. |
 | `docs/mechanics.md` | Notes on game mechanics (blocking, drop rates, ...) taken from the game code. |
 | [Architecture.md](Architecture.md) | How it all fits together, with diagrams. |
 
@@ -23,6 +24,7 @@ emulation on Apple Silicon. A Mac can drive the run on a Linux box over SSH:
 
 ```sh
 make check REMOTE=user@linux-box   # download server, dump, extract icons, normalize into data/, verify
+make serve                         # build the site from data/ + icons, serve on localhost:8000
 make help                          # all targets
 ```
 

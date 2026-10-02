@@ -28,7 +28,7 @@ flowchart LR
     RAW -->|sprite names| ICONS
 
     RAW -->|normalize.py| DATA[(data/*.json<br/>committed, ~1.6 MB)]
-    DATA --> SITE[Static site<br/>planned]
+    DATA --> SITE[Static site<br/>build-site.py]
     ICONS --> SITE
 ```
 
@@ -104,6 +104,14 @@ erDiagram
 - Empty, zero, false and `Normal` values are omitted.
 - `normalize.py` is deterministic (sorted, no timestamps).
 - Reverse relations ("used in", "dropped by") are derived by the site build, not stored.
+
+## Site
+
+`scripts/build-site.py` (stdlib only) turns `data/` + icons into `.cache/site/<branch>/`: one page per item,
+creature, piece and status effect, index pages, and `search.json` for the client-side search in `site/search.js`.
+Pages set `<base href>` to the site root, so the output works from any sub-path or straight from disk. Per-quality
+stats and upgrade costs use the game's formulas (cited in the script header). Internal items (creature attacks)
+get no page; they show on their creature. The build fails if any page links to a file it didn't write.
 
 ## Verification
 
