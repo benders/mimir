@@ -227,6 +227,50 @@ for i in ITEMS.values():
 for s in SPAWNS:
     spawns_of[s["creature"]].append(s)
 
+BIOMES = {  # game progression order (creatures index)
+    "Meadows": "Meadows", "BlackForest": "Black Forest", "Swamp": "Swamp", "Mountain": "Mountain",
+    "Plains": "Plains", "Mistlands": "Mistlands", "AshLands": "Ashlands", "DeepNorth": "Deep North", "Ocean": "Ocean",
+}
+
+
+def biome_weights(cid: str, seen: frozenset = frozenset()) -> dict[str, float]:
+    """How strongly a creature belongs to each biome. Each world, location or dungeon spawn spreads one unit over
+    its biomes, so a spawn limited to one biome outweighs a night spawn across five. Raids and spawns everywhere
+    say nothing. Offspring and hatchlings inherit from their parents; raids are the last resort."""
+    def spread(sources):
+        w = defaultdict(float)
+        for s in spawns_of[cid]:
+            bs = [b for b in s.get("biomes", []) if b in BIOMES]
+            if s.get("source", "world") in sources and 0 < len(bs) < len(BIOMES):
+                for b in bs:
+                    w[b] += 1 / len(bs)
+        return w
+
+    w = spread({"world", "location", "dungeon"})
+    if not w:
+        seen |= {cid}
+        parents = [s["parent"] for s in spawns_of[cid] if s.get("source") == "offspring"]
+        parents += [e["parent"] for s in spawns_of[cid] if s.get("source") == "egg"
+                    for e in spawns_of[s["item"]] if e.get("source") == "offspring"]
+        for p in parents:
+            if p not in seen:
+                for b, v in biome_weights(p, seen).items():
+                    w[b] += v
+    return w or spread({"raid"})
+
+
+def creature_biomes(cid: str) -> list[str]:
+    """Biomes in progression order."""
+    w = biome_weights(cid)
+    return [b for b in BIOMES if b in w]
+
+
+def home_biome(cid: str) -> str | None:
+    """The biome a creature is listed under: the strongest, the earliest on a tie."""
+    w = biome_weights(cid)
+    order = list(BIOMES)
+    return max(w, key=lambda b: (round(w[b], 6), -order.index(b))) if w else None
+
 
 # --- page shell -----------------------------------------------------------------------------
 
@@ -459,11 +503,12 @@ def item_page(i: dict) -> None:
 # --- creatures ------------------------------------------------------------------------------
 
 def creature_page(c: dict) -> None:
-    sub = esc(words(c.get("faction", "")))
-    if c.get("boss"):
-        sub += " · boss"
+    home = home_biome(c["id"])
+    sub = " · ".join(x for x in (esc(BIOMES[home]) if home else "", "boss" if c.get("boss") else "") if x)
     sp = c.get("speed") or {}
-    facts = [("Health", num(c["health"])),
+    facts = [("Biome", ", ".join(esc(BIOMES[b]) for b in creature_biomes(c["id"]))),
+             ("Faction", esc(words(c["faction"])) if c.get("faction") else None),
+             ("Health", num(c["health"])),
              ("Speed", ", ".join(f"{k} {num(v)}" for k, v in sp.items())),
              ("Tameable", "yes" if c.get("tameable") else None),
              ("Afraid of fire", "yes" if c.get("afraidOfFire") else None),
@@ -491,7 +536,7 @@ def creature_page(c: dict) -> None:
 
 
 def biome_list(s: dict) -> str:
-    return ", ".join(esc(words(b)) for b in s.get("biomes", []))
+    return ", ".join(esc(BIOMES.get(b, words(b))) for b in s.get("biomes", []))
 
 
 def spawn_sections(spawns: list[dict]) -> str:
@@ -614,9 +659,16 @@ def index_pages() -> None:
 
     groups = defaultdict(list)
     for c in CREATURES.values():
-        groups["Bosses" if c.get("boss") else words(c.get("faction", "Other"))].append(c["id"])
-    body = "<h1>Creatures</h1>" + "".join(f"<h2>{esc(g)}</h2>{grid('creature', groups[g])}"
-                                          for g in sorted(groups, key=lambda g: (g != "Bosses", g)))
+        groups[home_biome(c["id"]) or "Other"].append(c["id"])
+    labels = {**BIOMES, "Other": "Other"}  # Other: boss phases, summons, prefabs worldgen never places
+    order = [g for g in labels if g in groups]
+    toc = " · ".join(f'<a href="creatures/index.html#{g}">{esc(labels[g])}</a>' for g in order)
+
+    def bosses_first(ids):
+        return "".join(grid("creature", part) for part in ([i for i in ids if CREATURES[i].get("boss")],
+                                                            [i for i in ids if not CREATURES[i].get("boss")]) if part)
+    body = f'<h1>Creatures</h1><p class="toc">{toc}</p>' + "".join(
+        f'<h2 id="{g}">{esc(labels[g])}</h2>{bosses_first(groups[g])}' for g in order)
     page("creatures/index.html", "Creatures", body)
 
     groups = defaultdict(list)

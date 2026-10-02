@@ -138,6 +138,11 @@ Pages set `<base href>` to the site root, so the output works from any sub-path 
 stats and upgrade costs use the game's formulas (cited in the script header). Internal items (creature attacks)
 get no page; they show on their creature. The build fails if any page links to a file it didn't write.
 
+The creatures index groups by **home biome**, in progression order (Meadows → … → Deep North, then Ocean, Other).
+Each world, location or dungeon spawn spreads one unit of weight over its biomes; the heaviest biome wins, the
+earliest on a tie. Raids and spawns everywhere don't count, offspring and hatchlings inherit from their parents, and
+creatures with no biome (boss phases, summons, unplaced prefabs) go under Other. Bosses list first in their biome.
+
 ## Verification
 
 Each stage has an invariant check that fails loudly, so an agent can run the whole thing unattended:

@@ -1,6 +1,7 @@
 """Smoke test for scripts/build-site.py: build the site from tests/golden/ (no icons) and check its shape.
 build-site.py itself fails on any broken internal link."""
 import json
+import re
 import subprocess
 import sys
 import tempfile
@@ -57,6 +58,18 @@ class Site(unittest.TestCase):
         chief = (self.out / "creatures/Chief.html").read_text(encoding="utf-8")
         self.assertIn("summoned with", chief)
         self.assertIn('href="items/Ore.html"', chief)
+
+    def test_creatures_by_biome(self):
+        index = (self.out / "creatures/index.html").read_text(encoding="utf-8")
+        heads = re.findall(r'<h2 id="(\w+)">', index)
+        self.assertEqual(heads, ["Meadows", "Mountain"])  # progression order; empty biomes left out
+        mountain = index[index.index('id="Mountain"'):]
+        self.assertLess(mountain.index("Chief"), mountain.index("Pup"))  # bosses first
+        # Raider: world spawns in Meadows/Black Forest tie with a location in Swamp/Plains; earliest wins
+        self.assertIn("creatures/Raider.html", index[:index.index('id="Mountain"')])
+        pup = (self.out / "creatures/Pup.html").read_text(encoding="utf-8")
+        self.assertRegex(pup, r"<dt>Biome</dt><dd>Swamp, Mountain, Plains</dd>")  # dungeon outweighs the camp
+        self.assertRegex(pup, r"<dt>Faction</dt><dd>Forest monsters</dd>")
 
     def test_search_index(self):
         index = json.loads((self.out / "search.json").read_text(encoding="utf-8"))
