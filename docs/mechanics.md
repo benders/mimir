@@ -31,6 +31,26 @@ site's mechanics pages. Re-check against the decompiled code after major game up
   reference position is parked off-map in `Game.FixedUpdate`), so a **client** rolls the drop, and the
   counters are per client process (reset on relog).
 
+## Where creatures spawn
+
+- World spawns: `SpawnSystem` lists per biome; some entries place a `CreatureSpawner` prefab instead of the creature.
+  Biome masks are `Heightmap.Biome` flags (`-1` = all).
+- Raids: `RandEventSystem` events; the event's `m_biome` decides where it can start, its spawners use all biomes.
+- Locations: `ZoneSystem.m_locations` are soft-referenced prefabs (`SoftReference<GameObject>`, loaded on demand)
+  whose children hold `CreatureSpawner`, `SpawnArea` and boss altars (`OfferingBowl.m_bossPrefab`, summoned with
+  `m_bossItems` × `m_bossItem`).
+- Dungeons: a location's `DungeonGenerator` uses the enabled rooms from `DungeonDB` whose `Room.Theme` overlaps its
+  `m_themes` (`(room.m_theme & m_themes) != 0 && room.m_enabled`, `DungeonGenerator.cs`).
+- Offspring: `Procreation.m_offspring` (Hen lays `ChickenEgg`), eggs hatch via `EggGrow.m_grownPrefab`.
+- Some creature prefabs (Hen, Leech_cave, Troll_sleeping, Deer_White, ...) aren't referenced by any of these; they
+  look unused in vanilla worldgen (inferred from the dump, not verified in-game).
+
+## Damage modifiers
+
+- `Ignore` means the damage type does nothing: `HitData.ApplyModifier` returns 0, and a later modifier can't override
+  it (`DamageModifiers.ShouldOverride`). Almost every creature ignores `chop` and `pickaxe`; Jotun warriors ignore
+  `spirit`, ShadowPerson everything (#27).
+
 ## Creature attacks
 
 - Damage scales by level: `1 + 0.5 × (level − 1)` (`Attack.cs`).
