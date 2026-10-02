@@ -325,6 +325,10 @@
   "attacks": [
    "tentaroot_attack"
   ],
+  "equipment": [
+   "ShieldBronzeBuckler",
+   "ShieldWood"
+  ],
   "avoidWater": true
  },
  {
@@ -1214,9 +1218,13 @@
    "run": 4
   },
   "attacks": [
-   "Charred_HipCloth",
    "charred_bow",
    "charred_bow_volley"
+  ],
+  "equipment": [
+   "Charred_Breastplate",
+   "Charred_Helmet",
+   "Charred_HipCloth"
   ],
   "drops": [
    {
@@ -1253,9 +1261,13 @@
    "run": 4
   },
   "attacks": [
-   "Charred_HipCloth",
    "charred_bow_Fader",
    "charred_bow_volley_Fader"
+  ],
+  "equipment": [
+   "Charred_Breastplate",
+   "Charred_Helmet",
+   "Charred_HipCloth"
   ],
   "avoidWater": true
  },
@@ -1278,10 +1290,13 @@
    "run": 4
   },
   "attacks": [
-   "Charred_HipCloth",
-   "Charred_MageCloths",
    "charred_magestaff_fire",
    "charred_magestaff_summon"
+  ],
+  "equipment": [
+   "Charred_Helmet",
+   "Charred_HipCloth",
+   "Charred_MageCloths"
   ],
   "drops": [
    {
@@ -1318,11 +1333,15 @@
    "run": 4
   },
   "attacks": [
-   "Charred_HipCloth",
    "charred_greatsword_feint",
    "charred_greatsword_swing",
    "charred_greatsword_thrust",
    "charred_greatsword_thrustfeint"
+  ],
+  "equipment": [
+   "Charred_Breastplate",
+   "Charred_Helmet",
+   "Charred_HipCloth"
   ],
   "drops": [
    {
@@ -1360,13 +1379,15 @@
    "run": 4
   },
   "attacks": [
-   "Charred_Breastplate",
-   "Charred_Helmet",
-   "Charred_HipCloth",
    "charred_dyrnwyn_greatsword_feint",
    "charred_dyrnwyn_greatsword_swing",
    "charred_dyrnwyn_greatsword_thrust",
    "charred_dyrnwyn_greatsword_thrustfeint"
+  ],
+  "equipment": [
+   "Charred_Breastplate",
+   "Charred_Helmet",
+   "Charred_HipCloth"
   ],
   "drops": [
    {
@@ -1396,11 +1417,15 @@
    "run": 4
   },
   "attacks": [
-   "Charred_HipCloth",
    "charred_fader_greatsword_feint",
    "charred_fader_greatsword_swing",
    "charred_fader_greatsword_thrust",
    "charred_fader_greatsword_thrustfeint"
+  ],
+  "equipment": [
+   "Charred_Breastplate",
+   "Charred_Helmet",
+   "Charred_HipCloth"
   ],
   "avoidWater": true
  },
@@ -1675,6 +1700,10 @@
    "draugr_axe",
    "draugr_bow"
   ],
+  "equipment": [
+   "ShieldBanded",
+   "ShieldWood"
+  ],
   "drops": [
    {
     "item": "Entrails",
@@ -1851,6 +1880,10 @@
    "draugr_axe",
    "draugr_bow"
   ],
+  "equipment": [
+   "ShieldBanded",
+   "ShieldWood"
+  ],
   "drops": [
    {
     "item": "Entrails",
@@ -1884,10 +1917,14 @@
    "swim": 1.5
   },
   "attacks": [
-   "DvergerArbalest",
    "DvergerArbalest_shoot",
-   "DvergerSuitArbalest",
    "Dverger_melee"
+  ],
+  "equipment": [
+   "DvergerArbalest",
+   "DvergerHairFemale",
+   "DvergerHairMale",
+   "DvergerSuitArbalest"
   ],
   "drops": [
    {
@@ -1933,10 +1970,14 @@
    "swim": 1.5
   },
   "attacks": [
-   "DvergerArbalest",
    "DvergerArbalest_shootAshlands",
-   "DvergerSuitArbalest_Ashlands",
    "Dverger_meleeAshlands"
+  ],
+  "equipment": [
+   "DvergerArbalest",
+   "DvergerHairFemale_Redhair",
+   "DvergerHairMale_Redbeard",
+   "DvergerSuitArbalest_Ashlands"
   ],
   "drops": [
    {
@@ -1982,10 +2023,14 @@
    "swim": 1.5
   },
   "attacks": [
-   "DvergerArbalest",
    "DvergerArbalest_shootDeepNorth",
-   "DvergerSuitArbalest_Ashlands",
    "Dverger_meleeDeepNorth"
+  ],
+  "equipment": [
+   "DvergerArbalest",
+   "DvergerHairFemale_Redhair",
+   "DvergerHairMale_Redbeard",
+   "DvergerSuitArbalest_Ashlands"
   ],
   "drops": [
    {
@@ -2051,19 +2096,23 @@
   },
   "attacks": [
    "DvergerMistile",
-   "DvergerStaffFire",
    "DvergerStaffFire_clusterbomb",
    "DvergerStaffFire_fireball",
-   "DvergerStaffHeal",
    "DvergerStaffHeal_heal",
-   "DvergerStaffIce",
    "DvergerStaffIce_icebolt",
    "DvergerStaffNova",
    "DvergerStaffSupport_buff",
+   "Dverger_melee"
+  ],
+  "equipment": [
+   "DvergerHairFemale",
+   "DvergerHairMale",
+   "DvergerStaffFire",
+   "DvergerStaffHeal",
+   "DvergerStaffIce",
    "DvergerSuitFire",
    "DvergerSuitIce",
-   "DvergerSuitSupport",
-   "Dverger_melee"
+   "DvergerSuitSupport"
   ],
   "drops": [
    {
@@ -2111,11 +2160,15 @@
    "swim": 1.5
   },
   "attacks": [
-   "DvergerStaffFire",
    "DvergerStaffFire_clusterbomb",
    "DvergerStaffFire_fireball",
-   "DvergerSuitFire",
    "Dverger_melee"
+  ],
+  "equipment": [
+   "DvergerHairFemale",
+   "DvergerHairMale",
+   "DvergerStaffFire",
+   "DvergerSuitFire"
   ],
   "drops": [
    {
@@ -2163,11 +2216,15 @@
    "swim": 1.5
   },
   "attacks": [
-   "DvergerStaffIce",
    "DvergerStaffIce_icebolt",
    "DvergerStaffNova",
-   "DvergerSuitIce",
    "Dverger_melee"
+  ],
+  "equipment": [
+   "DvergerHairFemale",
+   "DvergerHairMale",
+   "DvergerStaffIce",
+   "DvergerSuitIce"
   ],
   "drops": [
    {
@@ -2216,9 +2273,13 @@
   },
   "attacks": [
    "DvergerMistile",
-   "DvergerStaffHeal",
    "DvergerStaffHeal_heal",
-   "DvergerStaffSupport_buff",
+   "DvergerStaffSupport_buff"
+  ],
+  "equipment": [
+   "DvergerHairFemale",
+   "DvergerHairMale",
+   "DvergerStaffHeal",
    "DvergerSuitSupport"
   ],
   "drops": [
@@ -2265,12 +2326,14 @@
    "swim": 1.5
   },
   "attacks": [
+   "GoblinShaman_attack_fireball",
+   "GoblinShaman_attack_poke"
+  ],
+  "equipment": [
    "GoblinShaman_Headdress_antlers",
    "GoblinShaman_Headdress_feathers",
    "GoblinShaman_Staff_Bones",
-   "GoblinShaman_Staff_Feathers",
-   "GoblinShaman_attack_fireball",
-   "GoblinShaman_attack_poke"
+   "GoblinShaman_Staff_Feathers"
   ],
   "drops": [
    {
@@ -2576,6 +2639,16 @@
    "swim": 2
   },
   "attacks": [
+   "FW_AxeBronze",
+   "FW_BattleaxeCrystal",
+   "FW_BowDraugrFang",
+   "FW_KnifeSilver",
+   "FW_KnifeSkollAndHati",
+   "FW_StaffFireball",
+   "FW_StaffLightning",
+   "FW_SwordBlackmetal"
+  ],
+  "equipment": [
    "FW_ArmorBronzeChest",
    "FW_ArmorBronzeLegs",
    "FW_ArmorFenringChest",
@@ -2588,19 +2661,11 @@
    "FW_ArmorPaddedGreaves",
    "FW_ArmorTrollLeatherChest",
    "FW_ArmorTrollLeatherLegs",
-   "FW_AxeBronze",
-   "FW_BattleaxeCrystal",
-   "FW_BowDraugrFang",
    "FW_CapeLinen",
    "FW_CapeTrollHide",
    "FW_CapeWolf",
    "FW_HelmetBronze",
-   "FW_KnifeSilver",
-   "FW_KnifeSkollAndHati",
-   "FW_ShieldBlackmetalTower",
-   "FW_StaffFireball",
-   "FW_StaffLightning",
-   "FW_SwordBlackmetal"
+   "FW_ShieldBlackmetalTower"
   ],
   "drops": [
    {
@@ -3116,10 +3181,17 @@
   },
   "attacks": [
    "GoblinClub",
-   "GoblinLoin",
    "GoblinSpear",
    "GoblinSword",
    "GoblinTorch"
+  ],
+  "equipment": [
+   "GoblinArmband",
+   "GoblinHelmet",
+   "GoblinLegband",
+   "GoblinLoin",
+   "GoblinShoulders",
+   "ShieldWood"
   ],
   "drops": [
    {
@@ -3161,8 +3233,15 @@
    "swim": 1.5
   },
   "attacks": [
-   "GoblinLoin",
    "GoblinSpear"
+  ],
+  "equipment": [
+   "GoblinArmband",
+   "GoblinHelmet",
+   "GoblinLegband",
+   "GoblinLoin",
+   "GoblinShoulders",
+   "ShieldWood"
   ],
   "drops": [
    {
@@ -3204,15 +3283,17 @@
    "swim": 1.5
   },
   "attacks": [
-   "GoblinBrute_ArmGuard",
    "GoblinBrute_Attack",
+   "GoblinBrute_RageAttack",
+   "GoblinBrute_Taunt"
+  ],
+  "equipment": [
+   "GoblinBrute_ArmGuard",
    "GoblinBrute_Backbones",
    "GoblinBrute_ExecutionerCap",
    "GoblinBrute_HipCloth",
    "GoblinBrute_LegBones",
-   "GoblinBrute_RageAttack",
-   "GoblinBrute_ShoulderGuard",
-   "GoblinBrute_Taunt"
+   "GoblinBrute_ShoulderGuard"
   ],
   "drops": [
    {
@@ -3263,11 +3344,13 @@
   "attacks": [
    "GoblinBruteBros_Attack",
    "GoblinBruteBros_RageAttack",
-   "GoblinBrute_HipCloth",
-   "GoblinBrute_ShoulderGuard",
    "GoblinBrute_Taunt",
    "GoblinShaman_attack_fireball_hildir",
    "GoblinShaman_attack_protect_hildir"
+  ],
+  "equipment": [
+   "GoblinBrute_HipCloth",
+   "GoblinBrute_ShoulderGuard"
   ],
   "drops": [
    {
@@ -3304,11 +3387,13 @@
   "attacks": [
    "GoblinBruteBros_Attack",
    "GoblinBruteBros_RageAttack",
-   "GoblinBrute_HipCloth",
-   "GoblinBrute_ShoulderGuard",
    "GoblinBrute_Taunt",
    "GoblinShaman_attack_fireball_hildir",
    "GoblinShaman_attack_protect_hildir"
+  ],
+  "equipment": [
+   "GoblinBrute_HipCloth",
+   "GoblinBrute_ShoulderGuard"
   ],
   "drops": [
    {
@@ -3343,10 +3428,12 @@
   },
   "attacks": [
    "GoblinBrute_Attack",
-   "GoblinBrute_HipCloth",
    "GoblinBrute_RageAttack",
-   "GoblinBrute_ShoulderGuard",
    "GoblinBrute_Taunt"
+  ],
+  "equipment": [
+   "GoblinBrute_HipCloth",
+   "GoblinBrute_ShoulderGuard"
   ],
   "drops": [
    {
@@ -3375,10 +3462,17 @@
   },
   "attacks": [
    "GoblinClubDeepNorth",
-   "GoblinLoin",
    "GoblinSpearDeepNorth",
    "GoblinSwordDeepNorth",
    "GoblinTorchDeepNorth"
+  ],
+  "equipment": [
+   "GoblinArmband",
+   "GoblinHelmet",
+   "GoblinLegband",
+   "GoblinLoin",
+   "GoblinShoulders",
+   "ShieldWood"
   ],
   "drops": [
    {
@@ -3462,13 +3556,15 @@
    "swim": 1.5
   },
   "attacks": [
-   "GoblinShaman_Headdress_antlers",
-   "GoblinShaman_Headdress_feathers",
-   "GoblinShaman_Staff_Bones",
-   "GoblinShaman_Staff_Feathers",
    "GoblinShaman_attack_fireball",
    "GoblinShaman_attack_poke",
    "GoblinShaman_attack_protect"
+  ],
+  "equipment": [
+   "GoblinShaman_Headdress_antlers",
+   "GoblinShaman_Headdress_feathers",
+   "GoblinShaman_Staff_Bones",
+   "GoblinShaman_Staff_Feathers"
   ],
   "drops": [
    {
@@ -3517,10 +3613,12 @@
    "swim": 1.5
   },
   "attacks": [
-   "GoblinShaman_Staff_Hildir",
    "GoblinShaman_attack_fireball",
    "GoblinShaman_attack_poke",
    "GoblinShaman_attack_protect"
+  ],
+  "equipment": [
+   "GoblinShaman_Staff_Hildir"
   ],
   "drops": [
    {
@@ -3554,10 +3652,12 @@
    "swim": 1.5
   },
   "attacks": [
-   "GoblinShaman_Staff_Hildir",
    "GoblinShaman_attack_fireball",
    "GoblinShaman_attack_poke",
    "GoblinShaman_attack_protect"
+  ],
+  "equipment": [
+   "GoblinShaman_Staff_Hildir"
   ],
   "drops": [
    {
@@ -4158,6 +4258,16 @@
    "JotunWarrior2HSword_attack_dodge",
    "JotunWarrior2HSword_attack_slash"
   ],
+  "equipment": [
+   "JotunHairMale",
+   "JotunHairMale2",
+   "JotunHairMale3",
+   "JotunHairMale4",
+   "JotunHairMale5",
+   "JotunHairMale6",
+   "JotunHairMale7",
+   "JotunHairMale8"
+  ],
   "drops": [
    {
     "item": "MoldArmormediumChest",
@@ -4249,6 +4359,16 @@
    "JotunWarrior1HAxe_attack_dodger",
    "JotunWarrior1HAxe_attack_slash",
    "JotunWarrior1HAxe_attack_slashdw"
+  ],
+  "equipment": [
+   "JotunHairMale",
+   "JotunHairMale2",
+   "JotunHairMale3",
+   "JotunHairMale4",
+   "JotunHairMale5",
+   "JotunHairMale6",
+   "JotunHairMale7",
+   "JotunHairMale8"
   ],
   "drops": [
    {
@@ -5141,19 +5261,21 @@
    "swim": 2
   },
   "attacks": [
+   "SP_AxeBronze",
+   "SP_BattleaxeCrystal",
+   "SP_KnifeSkollAndHati",
+   "SP_SwordBlackmetal"
+  ],
+  "equipment": [
    "SP_ArmorBronzeChest",
    "SP_ArmorBronzeLegs",
    "SP_ArmorFenringLegs",
    "SP_ArmorTrollLeatherLegs",
    "SP_ArmorTunic5",
-   "SP_AxeBronze",
-   "SP_BattleaxeCrystal",
    "SP_CapeLinen",
    "SP_CapeWolf",
    "SP_HelmetBronze",
-   "SP_KnifeSkollAndHati",
-   "SP_ShieldBlackmetalTower",
-   "SP_SwordBlackmetal"
+   "SP_ShieldBlackmetalTower"
   ],
   "afraidOfFire": true,
   "avoidWater": true
@@ -5179,6 +5301,10 @@
   "attacks": [
    "skeleton_bow",
    "skeleton_sword"
+  ],
+  "equipment": [
+   "ShieldBronzeBuckler",
+   "ShieldWood"
   ],
   "drops": [
    {
@@ -5217,6 +5343,10 @@
   },
   "attacks": [
    "skeleton_mace_DeepNorth"
+  ],
+  "equipment": [
+   "ShieldBronzeBuckler",
+   "ShieldWood"
   ],
   "drops": [
    {
@@ -5263,6 +5393,10 @@
   "attacks": [
    "skeleton_bow2",
    "skeleton_sword2"
+  ],
+  "equipment": [
+   "ShieldBronzeBuckler",
+   "ShieldWood"
   ],
   "tameable": {
    "fedDuration": 30,
@@ -5364,6 +5498,10 @@
    "skeleton_bow_meadows",
    "skeleton_sword_meadows"
   ],
+  "equipment": [
+   "ShieldBronzeBuckler",
+   "ShieldWood"
+  ],
   "drops": [
    {
     "item": "TrophySkeleton",
@@ -5401,6 +5539,10 @@
   },
   "attacks": [
    "skeleton_sword_meadows"
+  ],
+  "equipment": [
+   "ShieldBronzeBuckler",
+   "ShieldWood"
   ],
   "drops": [
    {
@@ -5441,6 +5583,10 @@
    "skeleton_bow_mountains",
    "skeleton_sword_mountains"
   ],
+  "equipment": [
+   "ShieldBronzeBuckler",
+   "ShieldWood"
+  ],
   "drops": [
    {
     "item": "TrophySkeleton",
@@ -5479,6 +5625,10 @@
   "attacks": [
    "skeleton_sword_mountains"
   ],
+  "equipment": [
+   "ShieldBronzeBuckler",
+   "ShieldWood"
+  ],
   "drops": [
    {
     "item": "TrophySkeleton",
@@ -5516,6 +5666,10 @@
   },
   "attacks": [
    "skeleton_sword"
+  ],
+  "equipment": [
+   "ShieldBronzeBuckler",
+   "ShieldWood"
   ],
   "drops": [
    {
@@ -5594,6 +5748,10 @@
    "skeleton_bow_swamps",
    "skeleton_sword_swamps"
   ],
+  "equipment": [
+   "ShieldBronzeBuckler",
+   "ShieldWood"
+  ],
   "drops": [
    {
     "item": "TrophySkeleton",
@@ -5631,6 +5789,10 @@
   },
   "attacks": [
    "skeleton_sword_swamps"
+  ],
+  "equipment": [
+   "ShieldBronzeBuckler",
+   "ShieldWood"
   ],
   "drops": [
    {
@@ -5671,6 +5833,10 @@
    "skeleton_bow",
    "skeleton_sword"
   ],
+  "equipment": [
+   "ShieldBronzeBuckler",
+   "ShieldWood"
+  ],
   "drops": [
    {
     "item": "TrophySkeleton",
@@ -5709,12 +5875,15 @@
    "swim": 1.5
   },
   "attacks": [
-   "StoneGolem_clubs",
-   "StoneGolem_spikes",
    "stonegolem_attack1_spike",
    "stonegolem_attack2_left_groundslam",
    "stonegolem_attack3_spikesweep",
    "stonegolem_attack_doublesmash"
+  ],
+  "equipment": [
+   "StoneGolem_clubs",
+   "StoneGolem_hat",
+   "StoneGolem_spikes"
   ],
   "drops": [
    {
@@ -5801,6 +5970,10 @@
   "attacks": [
    "tendril_attack"
   ],
+  "equipment": [
+   "ShieldBronzeBuckler",
+   "ShieldWood"
+  ],
   "avoidWater": true
  },
  {
@@ -5824,6 +5997,10 @@
   "attacks": [
    "tentaroot_attack"
   ],
+  "equipment": [
+   "ShieldBronzeBuckler",
+   "ShieldWood"
+  ],
   "avoidWater": true
  },
  {
@@ -5842,6 +6019,10 @@
   "attacks": [
    "tentaroot_attack"
   ],
+  "equipment": [
+   "ShieldBronzeBuckler",
+   "ShieldWood"
+  ],
   "avoidWater": true
  },
  {
@@ -5859,6 +6040,10 @@
   },
   "attacks": [
    "tentaroot_attack"
+  ],
+  "equipment": [
+   "ShieldBronzeBuckler",
+   "ShieldWood"
   ],
   "avoidWater": true
  },
@@ -6542,6 +6727,10 @@
   },
   "attacks": [
    "staff_greenroots_tentaroot_attack"
+  ],
+  "equipment": [
+   "ShieldBronzeBuckler",
+   "ShieldWood"
   ],
   "avoidWater": true
  }

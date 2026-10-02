@@ -214,16 +214,52 @@ def item(name: str, p: dict) -> dict | None:
     }
 
 
+WEAPON_TYPES = {"OneHandedWeapon", "TwoHandedWeapon", "TwoHandedWeaponLeft", "Bow", "Torch", "Tool"}
+
+
+def item_type(name: str) -> str | None:
+    drop = comp(PREFABS[name], "ItemDrop") if name in PREFABS else None
+    return drop["m_itemData"]["m_shared"]["m_itemType"] if drop else None
+
+
+def mark_enemy_only(items: list, creatures: list, recipes: list, procs: list, sources: list, pieces: list) -> None:
+    """Flag items players can't get and that only exist for enemies: no recipe, drop, source, conversion or piece
+    yields them, and they are either carried by a creature (Dvergr crossbow, FW_* Fallen Warrior and SP_* Shadow
+    gear) or a prefixed copy of an obtainable item with the same name (unused SP_* leftovers). Items that are merely
+    unobtainable here (fishing, chests and traders aren't modelled yet) stay visible. The site hides enemyOnly items."""
+    carried = {i for c in creatures for i in c.get("attacks", []) + c.get("equipment", [])}
+    obtainable = {r.get("item") for r in recipes} | {p["to"] for p in procs}
+    obtainable |= {d["item"] for c in creatures for d in c.get("drops", [])}
+    for src in sources:
+        obtainable |= {d["item"] for d in (src.get("drops") or {}).get("items", [])}
+        if src.get("pickable"):
+            obtainable.add(src["pickable"]["item"])
+    obtainable |= {p["id"] for p in pieces}  # e.g. feast items placed as pieces
+    by_id = {i["id"]: i for i in items}
+
+    def is_copy(i: dict) -> bool:
+        orig = by_id.get(i["id"].split("_", 1)[-1])
+        return orig is not None and orig is not i and orig["id"] in obtainable and orig["name"] == i["name"]
+
+    for i in items:
+        if not i["internal"] and i["id"] not in obtainable and (i["id"] in carried or is_copy(i)):
+            i["enemyOnly"] = True
+
+
 def creature(name: str, p: dict) -> dict | None:
     c = comp(p, "Humanoid") or comp(p, "Character")
     if not c or comp(p, "Player"):
         return None
-    attacks = set()
-    for v in (c.get("m_defaultItems") or []) + (c.get("m_randomWeapon") or []):
-        attacks.add(ref(v))
+    carried = set()
+    for v in (c.get("m_defaultItems") or []) + (c.get("m_randomWeapon") or []) + (c.get("m_randomShield") or []) \
+            + (c.get("m_randomArmor") or []):
+        carried.add(ref(v))
     for s in c.get("m_randomSets") or []:
-        attacks.update(ref(v) for v in s["m_items"])
-    attacks = {a for a in attacks if keep(a, is_item)}
+        carried.update(ref(v) for v in s["m_items"])
+    carried.update(ref(r["m_prefab"]) for r in c.get("m_randomItems") or [])
+    carried = {a for a in carried if keep(a, is_item)}
+    # weapons (incl. the internal attack items) are attacks; armor, shields and trinkets are equipment
+    attacks = {a for a in carried if item_type(a) in WEAPON_TYPES}
     drops = [{
         "item": ref(d["m_prefab"]), "min": d["m_amountMin"], "max": d["m_amountMax"], "chance": d["m_chance"],
         "onePerPlayer": d["m_onePerPlayer"], "levelMultiplier": d["m_levelMultiplier"],
@@ -242,6 +278,7 @@ def creature(name: str, p: dict) -> dict | None:
         "speed": {"walk": c["m_walkSpeed"], "run": c["m_runSpeed"], "swim": c["m_swimSpeed"] if c["m_canSwim"] else 0,
                   "fly": c["m_flyFastSpeed"] if c["m_flying"] else 0},
         "attacks": sorted(attacks),
+        "equipment": sorted(carried - attacks),
         "drops": drops,
         "tameable": {
             "fedDuration": tame["m_fedDuration"], "tamingTime": tame["m_tamingTime"],
@@ -452,9 +489,11 @@ def main() -> int:
         if not p["isItem"] and not comp(p, "Piece") and (s := source(name, p)):
             sources.append(s)
 
+    recipes = [recipe(r) for r in load("recipes.json")]
+    mark_enemy_only(items, creatures, recipes, procs, sources, pieces)
     data = {
         "items.json": items,
-        "recipes.json": [recipe(r) for r in load("recipes.json")],
+        "recipes.json": recipes,
         "creatures.json": creatures,
         "spawns.json": spawns(),
         "pieces.json": pieces,

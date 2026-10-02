@@ -119,7 +119,15 @@ def entity(kind: str, id_: str):
 
 def has_page(kind: str, id_: str) -> bool:
     e = entity(kind, id_)
-    return e is not None and not (kind == "item" and e.get("internal"))
+    return e is not None and not (kind == "item" and (e.get("internal") or e.get("enemyOnly")))
+
+
+def original(item_id: str) -> str:
+    """The player item an enemy-only copy imitates (FW_HelmetBronze -> HelmetBronze), else the id itself."""
+    orig = item_id.split("_", 1)[-1]
+    if ITEMS.get(item_id, {}).get("enemyOnly") and orig in ITEMS and ITEMS[orig].get("name") == ITEMS[item_id].get("name"):
+        return orig
+    return item_id
 
 
 def name_of(kind: str, id_: str) -> str:
@@ -206,7 +214,7 @@ for s in SOURCES.values():
     for it in dr.get("items", []):
         found_in[it["item"]].append((s, rng(it.get("min", 1), it.get("max", 1))))
 for i in ITEMS.values():
-    if i.get("internal"):
+    if i.get("internal") or i.get("enemyOnly"):
         continue
     if i.get("consumeEffect"):
         effect_users[i["consumeEffect"]].append((i["id"], "consumed"))
@@ -465,13 +473,16 @@ def creature_page(c: dict) -> None:
     body += section("Resistances", modifiers_table(c.get("damageModifiers")))
     attacks = []
     for a in c.get("attacks", []):
-        w = ITEMS.get(a)
-        if not w or w["type"] not in WEAPONS | {"Bow", "Shield"}:
-            continue
+        w = ITEMS[a]
         atk = w.get("attack") or {}
-        attacks.append([esc(clean(w.get("name")) or pretty_id(a)), damages(w.get("damages")),
+        label = link("item", original(a)) if has_page("item", original(a)) else esc(clean(w.get("name")) or pretty_id(a))
+        attacks.append([label, damages(w.get("damages")),
                         esc(words(atk.get("type", ""))), num(w["attackForce"]) if w.get("attackForce") else ""])
     body += section("Attacks", table(["Attack", "Damage", "Type", "Knockback"], attacks))
+    gear = [link("item", original(x)) for x in c.get("equipment", []) if not ITEMS[x].get("internal")]
+    body += section("Equipment", reflist(gear) + ('<p class=note>Enemy copies of player gear; '
+                                                   'their stats can differ from the items linked here.</p>'
+                                                   if any(ITEMS[x].get("enemyOnly") for x in c.get("equipment", [])) else ""))
     drops = [[link("item", d["item"]), rng(d.get("min", 1), d.get("max", 1)), pct(d.get("chance", 1))]
              for d in c.get("drops", [])]
     body += section("Drops", table(["Item", "Amount", "Chance"], drops))
@@ -556,7 +567,7 @@ def grid(kind: str, ids) -> str:
 
 
 def index_pages() -> None:
-    items = [i for i in ITEMS.values() if not i.get("internal")]
+    items = [i for i in ITEMS.values() if has_page("item", i["id"])]
     by_type = defaultdict(list)
     for i in items:
         by_type[i["type"]].append(i["id"])
@@ -642,7 +653,7 @@ def main() -> int:
     if not HAVE_ICONS:
         print(f"warning: no icons in {ICONS}; pages will have no images (run make icons)", file=sys.stderr)
     for i in ITEMS.values():
-        if not i.get("internal"):
+        if has_page("item", i["id"]):
             item_page(i)
     for c in CREATURES.values():
         creature_page(c)

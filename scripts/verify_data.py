@@ -64,7 +64,8 @@ def main() -> int:
     dangling("piece ingredients", [x["item"] for p in pieces.values() for x in p.get("resources", [])], set(items))
     dangling("piece tools", [t for p in pieces.values() for t in p.get("tools", [])], set(items))
     dangling("drops", drops, set(items) | set(creatures))  # some creatures "drop" spawns (eggs hatching etc.)
-    dangling("creature attacks", [a for c in creatures.values() for a in c.get("attacks", [])], set(items))
+    dangling("creature attacks/equipment", [a for c in creatures.values() for k in ("attacks", "equipment")
+                                            for a in c.get(k, [])], set(items))
     dangling("processing items", [x for p in procs for x in (p["from"], p["to"])], set(items))
     dangling("processing stations", [p["station"] for p in procs], set(pieces))
     dangling("spawned creatures/fish", [s["creature"] for s in spawns], set(creatures) | set(items))
@@ -96,6 +97,15 @@ def main() -> int:
     mead = items.get("MeadHealthMinor", {}).get("consumeEffect")
     check(bool(mead) and bool(effects.get(mead, {}).get("stats")), "MeadHealthMinor: consume effect with stats")
     check(items.get("CookedMeat", {}).get("food", {}).get("health", 0) > 0, "CookedMeat: food values")
+    fw = creatures.get("FallenWarrior", {})
+    weapons = {"OneHandedWeapon", "TwoHandedWeapon", "TwoHandedWeaponLeft", "Bow", "Torch", "Tool"}
+    check(all(items[a]["type"] in weapons for c in creatures.values() for a in c.get("attacks", [])),
+          "creature attacks are weapons only (armor goes to equipment)")
+    check("FW_HelmetBronze" in fw.get("equipment", []), "FallenWarrior: FW_HelmetBronze is equipment")
+    check(all(items[x].get("enemyOnly") for x in ("FW_ArmorBronzeChest", "SP_ArmorBronzeChest", "SP_ArmorDress1"))
+          and not items["ArmorBronzeChest"].get("enemyOnly"), "FW_/SP_ gear copies are enemyOnly, the real item isn't")
+    check(not any(i.get("enemyOnly") for i in items.values() if any(r.get("item") == i["id"] for r in recipes)),
+          "no craftable item is enemyOnly")
 
     print()
     if failures:

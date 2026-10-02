@@ -70,6 +70,8 @@ Logs after a dump: `.cache/dump/<branch>/server.log` (Unity) and `bepinex.log` (
 `pieces`, `processing` (smelter/cooking/fermenter conversions), `sources` (pickables, ore, trees, rocks; follow
 `becomes` for multi-stage objects), `status_effects`. Ids are prefab names; references are ids. Empty, zero,
 false and "Normal" values are omitted. Derived relations (used in, dropped by) are left to the site build.
+Items flagged `internal` (creature attack items) or `enemyOnly` (FW_/SP_ gear copies, Dvergr crossbow) get no site
+page; creatures list them under `attacks` (weapons) and `equipment`.
 
 ## Working on this repo
 

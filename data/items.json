@@ -8561,7 +8561,8 @@
   },
   "modifiers": {
    "movement": -0.05
-  }
+  },
+  "enemyOnly": true
  },
  {
   "id": "DvergerArbalest_shoot",
@@ -8601,7 +8602,8 @@
   },
   "modifiers": {
    "movement": -0.05
-  }
+  },
+  "enemyOnly": true
  },
  {
   "id": "DvergerArbalest_shootAshlands",
@@ -8641,7 +8643,8 @@
   },
   "modifiers": {
    "movement": -0.05
-  }
+  },
+  "enemyOnly": true
  },
  {
   "id": "DvergerArbalest_shootDeepNorth",
@@ -8681,7 +8684,8 @@
   },
   "modifiers": {
    "movement": -0.05
-  }
+  },
+  "enemyOnly": true
  },
  {
   "id": "DvergerHairFemale",
@@ -9712,7 +9716,8 @@
   },
   "modifiers": {
    "movement": -0.05
-  }
+  },
+  "enemyOnly": true
  },
  {
   "id": "FW_ArmorBronzeLegs",
@@ -9739,7 +9744,8 @@
   },
   "modifiers": {
    "movement": -0.05
-  }
+  },
+  "enemyOnly": true
  },
  {
   "id": "FW_ArmorFenringChest",
@@ -9774,7 +9780,8 @@
    "name": "fenring_armor",
    "size": 3,
    "effect": "SetEffect_FenringArmor"
-  }
+  },
+  "enemyOnly": true
  },
  {
   "id": "FW_ArmorFenringLegs",
@@ -9806,7 +9813,8 @@
    "name": "fenring_armor",
    "size": 3,
    "effect": "SetEffect_FenringArmor"
-  }
+  },
+  "enemyOnly": true
  },
  {
   "id": "FW_ArmorMageChest",
@@ -9834,7 +9842,8 @@
   "modifiers": {
    "eitrRegen": 0.4,
    "movement": -0.02
-  }
+  },
+  "enemyOnly": true
  },
  {
   "id": "FW_ArmorMageChest_Ashlands",
@@ -9862,7 +9871,8 @@
   "modifiers": {
    "eitrRegen": 0.5,
    "movement": -0.02
-  }
+  },
+  "enemyOnly": true
  },
  {
   "id": "FW_ArmorMageLegs",
@@ -9890,7 +9900,8 @@
   "modifiers": {
    "eitrRegen": 0.4,
    "movement": -0.02
-  }
+  },
+  "enemyOnly": true
  },
  {
   "id": "FW_ArmorMageLegs_Ashlands",
@@ -9918,7 +9929,8 @@
   "modifiers": {
    "eitrRegen": 0.5,
    "movement": -0.02
-  }
+  },
+  "enemyOnly": true
  },
  {
   "id": "FW_ArmorPaddedCuirass",
@@ -9945,7 +9957,8 @@
   },
   "modifiers": {
    "movement": -0.05
-  }
+  },
+  "enemyOnly": true
  },
  {
   "id": "FW_ArmorPaddedGreaves",
@@ -9972,7 +9985,8 @@
   },
   "modifiers": {
    "movement": -0.05
-  }
+  },
+  "enemyOnly": true
  },
  {
   "id": "FW_ArmorTrollLeatherChest",
@@ -10001,7 +10015,8 @@
    "name": "troll",
    "size": 4,
    "effect": "SetEffect_TrollArmor"
-  }
+  },
+  "enemyOnly": true
  },
  {
   "id": "FW_ArmorTrollLeatherLegs",
@@ -10030,7 +10045,8 @@
    "name": "troll",
    "size": 4,
    "effect": "SetEffect_TrollArmor"
-  }
+  },
+  "enemyOnly": true
  },
  {
   "id": "FW_AxeBronze",
@@ -10077,7 +10093,8 @@
   },
   "modifiers": {
    "movement": -0.05
-  }
+  },
+  "enemyOnly": true
  },
  {
   "id": "FW_BattleaxeCrystal",
@@ -10124,7 +10141,8 @@
   },
   "modifiers": {
    "movement": -0.15
-  }
+  },
+  "enemyOnly": true
  },
  {
   "id": "FW_BowDraugrFang",
@@ -10163,7 +10181,8 @@
   },
   "modifiers": {
    "movement": -0.05
-  }
+  },
+  "enemyOnly": true
  },
  {
   "id": "FW_CapeLinen",
@@ -10195,7 +10214,8 @@
    "perLevel": 50,
    "drain": 1,
    "repairable": true
-  }
+  },
+  "enemyOnly": true
  },
  {
   "id": "FW_CapeTrollHide",
@@ -10224,7 +10244,8 @@
    "name": "troll",
    "size": 4,
    "effect": "SetEffect_TrollArmor"
-  }
+  },
+  "enemyOnly": true
  },
  {
   "id": "FW_CapeWolf",
@@ -10251,7 +10272,8 @@
   },
   "damageModifiers": {
    "frost": "Resistant"
-  }
+  },
+  "enemyOnly": true
  },
  {
   "id": "FW_HelmetBronze",
@@ -10278,7 +10300,8 @@
    "perLevel": 200,
    "drain": 1,
    "repairable": true
-  }
+  },
+  "enemyOnly": true
  },
  {
   "id": "FW_KnifeSilver",
@@ -10321,7 +10344,8 @@
    "type": "Horizontal",
    "stamina": 30,
    "damageMultiplier": 3
-  }
+  },
+  "enemyOnly": true
  },
  {
   "id": "FW_KnifeSkollAndHati",
@@ -10364,7 +10388,8 @@
    "type": "Horizontal",
    "stamina": 42,
    "damageMultiplier": 3
-  }
+  },
+  "enemyOnly": true
  },
  {
   "id": "FW_ShieldBlackmetalTower",
@@ -10405,7 +10430,8 @@
   },
   "modifiers": {
    "movement": -0.1
-  }
+  },
+  "enemyOnly": true
  },
  {
   "id": "FW_StaffFireball",
@@ -10445,7 +10471,8 @@
   },
   "modifiers": {
    "movement": -0.05
-  }
+  },
+  "enemyOnly": true
  },
  {
   "id": "FW_StaffLightning",
@@ -10486,7 +10513,8 @@
   },
   "modifiers": {
    "movement": -0.05
-  }
+  },
+  "enemyOnly": true
  },
  {
   "id": "FW_SwordBlackmetal",
@@ -10530,7 +10558,8 @@
   },
   "modifiers": {
    "movement": -0.05
-  }
+  },
+  "enemyOnly": true
  },
  {
   "id": "FaderDrop",
@@ -23697,7 +23726,8 @@
   },
   "modifiers": {
    "movement": -0.05
-  }
+  },
+  "enemyOnly": true
  },
  {
   "id": "SP_ArmorBronzeLegs",
@@ -23724,7 +23754,8 @@
   },
   "modifiers": {
    "movement": -0.05
-  }
+  },
+  "enemyOnly": true
  },
  {
   "id": "SP_ArmorDress1",
@@ -23750,7 +23781,8 @@
   },
   "modifiers": {
    "homeItemsStamina": -0.2
-  }
+  },
+  "enemyOnly": true
  },
  {
   "id": "SP_ArmorFenringChest",
@@ -23785,7 +23817,8 @@
    "name": "fenring_armor",
    "size": 3,
    "effect": "SetEffect_FenringArmor"
-  }
+  },
+  "enemyOnly": true
  },
  {
   "id": "SP_ArmorFenringLegs",
@@ -23817,7 +23850,8 @@
    "name": "fenring_armor",
    "size": 3,
    "effect": "SetEffect_FenringArmor"
-  }
+  },
+  "enemyOnly": true
  },
  {
   "id": "SP_ArmorLeatherLegs",
@@ -23840,7 +23874,8 @@
    "perLevel": 100,
    "drain": 1,
    "repairable": true
-  }
+  },
+  "enemyOnly": true
  },
  {
   "id": "SP_ArmorMageChest",
@@ -23868,7 +23903,8 @@
   "modifiers": {
    "eitrRegen": 0.4,
    "movement": -0.02
-  }
+  },
+  "enemyOnly": true
  },
  {
   "id": "SP_ArmorMageChest_Ashlands",
@@ -23896,7 +23932,8 @@
   "modifiers": {
    "eitrRegen": 0.5,
    "movement": -0.02
-  }
+  },
+  "enemyOnly": true
  },
  {
   "id": "SP_ArmorMageLegs",
@@ -23924,7 +23961,8 @@
   "modifiers": {
    "eitrRegen": 0.4,
    "movement": -0.02
-  }
+  },
+  "enemyOnly": true
  },
  {
   "id": "SP_ArmorMageLegs_Ashlands",
@@ -23952,7 +23990,8 @@
   "modifiers": {
    "eitrRegen": 0.5,
    "movement": -0.02
-  }
+  },
+  "enemyOnly": true
  },
  {
   "id": "SP_ArmorPaddedCuirass",
@@ -23979,7 +24018,8 @@
   },
   "modifiers": {
    "movement": -0.05
-  }
+  },
+  "enemyOnly": true
  },
  {
   "id": "SP_ArmorPaddedGreaves",
@@ -24006,7 +24046,8 @@
   },
   "modifiers": {
    "movement": -0.05
-  }
+  },
+  "enemyOnly": true
  },
  {
   "id": "SP_ArmorTrollLeatherChest",
@@ -24035,7 +24076,8 @@
    "name": "troll",
    "size": 4,
    "effect": "SetEffect_TrollArmor"
-  }
+  },
+  "enemyOnly": true
  },
  {
   "id": "SP_ArmorTrollLeatherLegs",
@@ -24064,7 +24106,8 @@
    "name": "troll",
    "size": 4,
    "effect": "SetEffect_TrollArmor"
-  }
+  },
+  "enemyOnly": true
  },
  {
   "id": "SP_ArmorTunic5",
@@ -24090,7 +24133,8 @@
   },
   "modifiers": {
    "homeItemsStamina": -0.2
-  }
+  },
+  "enemyOnly": true
  },
  {
   "id": "SP_AxeBronze",
@@ -24136,7 +24180,8 @@
   },
   "modifiers": {
    "movement": -0.05
-  }
+  },
+  "enemyOnly": true
  },
  {
   "id": "SP_BattleaxeCrystal",
@@ -24183,7 +24228,8 @@
   },
   "modifiers": {
    "movement": -0.15
-  }
+  },
+  "enemyOnly": true
  },
  {
   "id": "SP_BowDraugrFang",
@@ -24222,7 +24268,8 @@
   },
   "modifiers": {
    "movement": -0.05
-  }
+  },
+  "enemyOnly": true
  },
  {
   "id": "SP_CapeLinen",
@@ -24254,7 +24301,8 @@
    "perLevel": 50,
    "drain": 1,
    "repairable": true
-  }
+  },
+  "enemyOnly": true
  },
  {
   "id": "SP_CapeTrollHide",
@@ -24283,7 +24331,8 @@
    "name": "troll",
    "size": 4,
    "effect": "SetEffect_TrollArmor"
-  }
+  },
+  "enemyOnly": true
  },
  {
   "id": "SP_CapeWolf",
@@ -24310,7 +24359,8 @@
   },
   "damageModifiers": {
    "frost": "Resistant"
-  }
+  },
+  "enemyOnly": true
  },
  {
   "id": "SP_HelmetBronze",
@@ -24337,7 +24387,8 @@
    "perLevel": 200,
    "drain": 1,
    "repairable": true
-  }
+  },
+  "enemyOnly": true
  },
  {
   "id": "SP_KnifeSilver",
@@ -24381,7 +24432,8 @@
    "type": "Horizontal",
    "stamina": 30,
    "damageMultiplier": 3
-  }
+  },
+  "enemyOnly": true
  },
  {
   "id": "SP_KnifeSkollAndHati",
@@ -24424,7 +24476,8 @@
    "type": "Horizontal",
    "stamina": 42,
    "damageMultiplier": 3
-  }
+  },
+  "enemyOnly": true
  },
  {
   "id": "SP_ShieldBlackmetalTower",
@@ -24465,7 +24518,8 @@
   },
   "modifiers": {
    "movement": -0.1
-  }
+  },
+  "enemyOnly": true
  },
  {
   "id": "SP_StaffFireball",
@@ -24505,7 +24559,8 @@
   },
   "modifiers": {
    "movement": -0.05
-  }
+  },
+  "enemyOnly": true
  },
  {
   "id": "SP_StaffLightning",
@@ -24545,7 +24600,8 @@
   },
   "modifiers": {
    "movement": -0.05
-  }
+  },
+  "enemyOnly": true
  },
  {
   "id": "SP_SwordBlackmetal",
@@ -24589,7 +24645,8 @@
   },
   "modifiers": {
    "movement": -0.05
-  }
+  },
+  "enemyOnly": true
  },
  {
   "id": "SaddleAsksvin",
