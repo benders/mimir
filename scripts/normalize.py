@@ -292,7 +292,7 @@ def reachable(items: list, creatures: list, pieces: list, recipes: list, procs: 
     of reachable inputs, eggs laid by a reachable creature, summons of a reachable summoner, boss phases of a reachable phase, creature-pieces (training dummy) whose cost is reachable. Pieces standing in a location (`locations`) count. Chests in locations and trader stock count (as
     sources; trader keys are ignored, Coins must be reachable), fish via their bait, honey and sap from buildable pieces whose cost is reachable (sap
     needs its root in the world). World sources count when placed (`biomes`, `locations`, `placedBy`, or a
-    `becomes` stage of a placed one). Incomplete while quests aren't modelled (#20)."""
+    `becomes` stage of a placed one); a placed source whose `becomes` is an item yields it (Dvergr altar crystals). Incomplete while quests aren't modelled (#20)."""
     by_creature = {c["id"]: c for c in creatures}
     got_creatures = {s["creature"] for s in spawn_list if s["source"] not in ("summon", "phase")}
     traders = [src for src in sources if src["kind"] == "trader"]
@@ -309,7 +309,9 @@ def reachable(items: list, creatures: list, pieces: list, recipes: list, procs: 
         before = len(got), len(got_creatures)
         for src in world:  # a source counts once placed: in the world, made by an affordable piece, or a stage of one
             if src["id"] in placed:
-                if src.get("becomes"):
+                if src.get("becomes") in item_ids:  # breaks into an item (Destructible.m_spawnWhenDestroyed)
+                    got.add(src["becomes"])
+                elif src.get("becomes"):
                     placed.add(src["becomes"])
             elif any(pc in got_pieces and all(r["item"] in got for r in by_piece[pc]["resources"])
                      for pc in src.get("placedBy", [])):

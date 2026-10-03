@@ -377,6 +377,8 @@ for s in SOURCES.values():
     dr = s.get("drops") or {}
     for it in dr.get("items", []):
         found_in[it["item"]].append((s, rng(it.get("min", 1), it.get("max", 1))))
+    if s.get("becomes") in ITEMS:  # breaks into the item itself (Destructible.m_spawnWhenDestroyed)
+        found_in[s["becomes"]].append((s, "1, when destroyed"))
 for i in ITEMS.values():
     if i.get("internal") or i.get("enemyOnly") or i.get("unobtainable"):
         continue

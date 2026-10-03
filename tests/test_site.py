@@ -228,6 +228,10 @@ class Site(unittest.TestCase):
         self.assertIn('href="mechanics/damage-types.html"', raider)  # Resistances section
         self.assertIn('href="mechanics/drops.html"', raider)         # Drops section
 
+    def test_destroyed_into_item(self):
+        shard = (self.out / "items/Shard.html").read_text(encoding="utf-8")
+        self.assertIn("when destroyed", shard)
+
     def test_no_inverted_ranges(self):
         wood = (self.out / "items/Wood.html").read_text(encoding="utf-8")
         self.assertIn("<td>2</td>", wood)  # stackMin 2, stackMax 1 rolls Random.Range(2, 2)

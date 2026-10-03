@@ -171,6 +171,8 @@ def main() -> int:
           and not items["ArmorBronzeChest"].get("enemyOnly"), "FW_/SP_ gear copies are enemyOnly, the real item isn't")
     check(not any(i.get("enemyOnly") for i in items.values() if any(r.get("item") == i["id"] for r in recipes)),
           "no craftable item is enemyOnly")
+    check(any(s.get("becomes") == "DvergrKeyFragment" and s.get("locations") for s in sources),
+          "DvergrKeyFragment: placed blackmarble_altar_crystal breaks into it")
     hidden = {"Deer_White", "DvergerTest", "FrostWisp", "Hive", "TheHive", "IceSkates", "Larva", "TorchMist", "Sled"}
     every = {**items, **creatures, **pieces}
     check(all(every.get(x, {}).get("unobtainable") for x in hidden), "unreleased content is unobtainable")

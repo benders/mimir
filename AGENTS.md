@@ -93,7 +93,7 @@ Logs after a dump: `.cache/dump/<branch>/server.log` (Unity) and `bepinex.log` (
 
 `meta.json` (versions, counts, unresolved tokens, skipped refs), `items`, `recipes`, `creatures`, `spawns`,
 `pieces`, `processing` (smelter/cooking/fermenter conversions), `sources` (pickables, ore, trees, rocks; follow
-`becomes` for multi-stage objects; `kind: container` = loot chests, one per distinct name + `Container` drop table, with
+`becomes` for multi-stage objects (or an item id: the object breaks into that item, e.g. Dvergr altar crystal → DvergrKeyFragment); `kind: container` = loot chests, one per distinct name + `Container` drop table, with
 `locations` [{location, dungeon}] where it is placed, `dungeon` = in a room that location's dungeon generates;
 `kind: fishing` = one per fish prefab, id = the caught item: `baits` [{item, chance}], `biomes` from its spawns, `drops` = extra
 catch drops; fish spawn as `creature` ids in `spawns` but have no `creatures` entry;

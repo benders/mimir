@@ -144,7 +144,7 @@ TRANSLATIONS = {
     "item_buckler": "Test Buckler",
     "item_sword": "Test Sword", "item_sword_desc": "Sharp <b>enough</b>.",
     "item_helmet": "Pot Helm", "item_fish": "Glimfish", "item_pearl": "Moon Pearl", "item_mead": "Fizz Mead", "item_coins": "Coins", "item_charm": "Lucky Charm", "npc_vendor": "Old Vendor",
-    "item_hammer": "Mallet", "item_bite": "Bite",
+    "item_hammer": "Mallet", "item_shard": "Shard", "item_bite": "Bite",
     "enemy_raider": "Raider", "piece_bench": "Bench", "piece_anvil": "Anvil", "piece_kiln": "Kiln",
     "piece_bush": "Twig Bush", "piece_orerock": "Ore Rock", "se_fizz": "Fizzy",
     "enemy_pup": "Pup", "enemy_chief_p2": "Chief Risen", "enemy_imp": "Imp", "enemy_shade": "Shade", "enemy_sprite": "Sprite", "enemy_moth": "Moth", "enemy_singer": "Singer", "item_wand": "Wand", "item_rod": "Summoning Rod", "enemy_chief": "<color=orange>Chief</color>", "item_egg": "Egg", "item_nectar": "Nectar", "item_ichor": "Ichor", "item_dust": "Dust",
@@ -195,6 +195,7 @@ def prefabs():
         item("Bite", name="$item_bite", itemType="OneHandedWeapon", attack=attack(attackStamina=0),
              damages=damages(pierce=12)),  # no icon: internal attack item
         item("Gem", name="$item_gem", icons=[S("Gem")]),  # unresolved name, only in a chest: reachable, so shown
+        item("Shard", name="$item_shard", icons=[S("Shard")]),  # only from breaking the Altar
         item("Coins", name="$item_coins", icons=[S("Coins")]),
         item("Charm", name="$item_charm", icons=[S("Charm")]),  # only sold by the vendor, for Coins
         item("Mystery", name="$item_missing"),  # unresolved token, no source: hidden
@@ -244,6 +245,7 @@ def prefabs():
               name="$piece_tap", icon=S("Tap"), resources=[req("Wood", 4)]),
         piece("Tap2", comp("SapCollector", m(spawnItem=R("Dust"), secPerUnit=60, maxLevel=10, mustConnectTo=R("Root2"))),
               name="$piece_tap", icon=S("Tap"), resources=[req("Wood", 4)]),
+        prefab("Altar", comp("Destructible", m(health=100, minToolTier=0, damages={}, spawnWhenDestroyed=R("Shard")))),
         prefab("WildHive", comp("WearNTear", m(health=20, materialType="Wood", damages={"m_fire": "Weak"})),
                comp("DropOnDestroyed", m(dropWhenDestroyed=drop_table(("Wood", 1, 3, 1), ("Ore", 1, 1, 1))))),
         prefab("Bush", comp("Pickable", m(overrideName="$piece_bush", itemPrefab=R("Wood"), amount=2,
@@ -379,7 +381,8 @@ def write_dump(raw: Path) -> Path:
     dump("rooms/cave_a.json", {"name": "cave_a", "theme": 5, "enabled": True,  # Crypt|Cave: used by Lair
                                "components": [*spawners(("CreatureSpawner", creature_spawner("Pup", maxLevel=2)),
                                                         container(("Gem", 1, 1, 1), ("Wood", 2, 5, 3))),
-                                              ], "instances": [{"prefab": "WildHive", "path": "hall/WildHive"}]})
+                                              ], "instances": [{"prefab": "WildHive", "path": "hall/WildHive"},
+                                                               {"prefab": "Altar", "path": "hall/Altar"}]})
     dump("rooms/cave_off.json", {"name": "cave_off", "theme": 4, "enabled": False,
                                  "components": spawners(("CreatureSpawner", creature_spawner("Raider")))})
     dump("rooms/crypt_a.json", {"name": "crypt_a", "theme": 1, "enabled": True,

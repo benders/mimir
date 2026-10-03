@@ -1,5 +1,17 @@
 [
  {
+  "id": "Altar",
+  "kind": "destructible",
+  "health": 100,
+  "becomes": "Shard",
+  "locations": [
+   {
+    "location": "Lair",
+    "dungeon": true
+   }
+  ]
+ },
+ {
   "id": "Bush",
   "kind": "pickable",
   "name": "Twig Bush",

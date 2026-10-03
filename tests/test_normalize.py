@@ -372,6 +372,7 @@ class Unobtainable(FixtureCase):
         self.assertTrue({"Wood", "Ore", "Ingot", "Sword", "Helmet"} <= got)  # source -> smelt -> craft (upgrader ignored)
         self.assertNotIn("Mead", got)  # needs Fish, which nothing yields
         self.assertNotIn("Gem", got)
+        self.assertIn("Shard", got)  # the placed Altar breaks into it (m_spawnWhenDestroyed)
         got, _, _ = N.reachable(items, creatures, pieces, recipes, procs, sources + N.location_containers(), N.spawns())
         self.assertIn("Gem", got)  # found in a chest
         fish = N.fishing(N.spawns())
