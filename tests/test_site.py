@@ -206,6 +206,13 @@ class Site(unittest.TestCase):
         self.assertIn('href="mechanics/damage-types.html"', raider)  # Resistances section
         self.assertIn('href="mechanics/drops.html"', raider)         # Drops section
 
+    def test_no_inverted_ranges(self):
+        wood = (self.out / "items/Wood.html").read_text(encoding="utf-8")
+        self.assertIn("<td>2</td>", wood)  # stackMin 2, stackMax 1 rolls Random.Range(2, 2)
+        for page in self.out.rglob("*.html"):
+            for lo, hi in re.findall(r"(?<![\d.])(\d+)–(\d+)(?![\d.])", page.read_text(encoding="utf-8")):
+                self.assertLess(int(lo), int(hi), f"{page.name}: {lo}–{hi}")
+
     def test_search_index(self):
         index = json.loads((self.out / "search.json").read_text(encoding="utf-8"))
         names = {e[1] for e in index}

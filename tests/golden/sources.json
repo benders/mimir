@@ -35,7 +35,7 @@
     },
     {
      "item": "Wood",
-     "min": 1,
+     "min": 2,
      "max": 1,
      "weight": 0.25
     }

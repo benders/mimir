@@ -242,7 +242,7 @@ def prefabs():
                comp("HoverText", m(text="ignored, Pickable has a name"))),
         prefab("OreRock", comp("MineRock", m(name="$piece_orerock", health=50, minToolTier=2,
                                              damageModifiers={"m_chop": "Immune", "m_pickaxe": "Normal"},
-                                             dropItems=drop_table(("Ore", 1, 2, 1), ("Wood", 1, 1, 0.25),
+                                             dropItems=drop_table(("Ore", 1, 2, 1), ("Wood", 2, 1, 0.25),  # Wood: min above max
                                                                   ("vfx_Poof", 1, 1, 1), dropMax=3)))),
         prefab("Boulder", comp("MineRock", m(name="Boulder", health=50, minToolTier=0, damageModifiers={},
                                              dropItems=drop_table()))),  # yields nothing: not a source

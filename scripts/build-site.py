@@ -105,7 +105,9 @@ def pct(v) -> str:
 
 
 def rng(lo, hi) -> str:
-    return num(lo) if lo == hi else f"{num(lo)}–{num(hi)}"
+    """A range for display; one value when the top isn't above the bottom (Ashlands trees have stackMin 2, stackMax 1,
+    which DropTable.AddItemToList rolls as Random.Range(2, 2) = 2)."""
+    return num(lo) if hi <= lo else f"{num(lo)}–{num(hi)}"
 
 
 def drop_amount(d: dict) -> str:
@@ -941,9 +943,9 @@ def block_star_odds() -> str:
     ranges = sorted({tuple(x["levels"]) for x in SPAWNS if x.get("levels") and x["levels"][1] > 1 and x["levels"][0] >= 1})
     rows = []
     for lo, hi in ranges:
-        for chance in (10, 15):
+        for chance in (10, 15) if hi > lo else (10,):  # a fixed level doesn't depend on the chance
             dist = mechanics.level_distribution(chance, lo, hi)
-            rows.append([f"{lo - 1}–{hi - 1} stars", f"{chance}%"] +
+            rows.append([f"{stars(lo, hi)} stars", f"{chance}%" if hi > lo else "–"] +
                         [pct(dist[lv]) if lv in dist else "–" for lv in range(1, 6)])
     return table(["Spawn range", "Chance per star"] + [f"{n} stars" if n != 1 else "1 star" for n in range(0, 5)], rows, "num")
 
