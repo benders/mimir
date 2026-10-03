@@ -20,7 +20,7 @@ namespace Mimir.Dumper
     {
         public const string Guid = "dev.mimir.dumper";
         public const string Name = "Mimir.Dumper";
-        public const string PluginVersion = "0.3.0";
+        public const string PluginVersion = "0.4.0";
 
         // Frames to wait after everything reports ready, so late Start() initialisation settles.
         private const int SettleFrames = 120;
@@ -55,7 +55,7 @@ namespace Mimir.Dumper
             {
                 var r = Dumper.Run(_outDir);
                 Log.LogInfo($"MIMIR_DUMP_OK prefabs={r.Prefabs} locations={r.Locations} rooms={r.Rooms} items={r.Items} recipes={r.Recipes} " +
-                            $"statusEffects={r.StatusEffects} world={r.WorldObjects} translations={r.Translations} " +
+                            $"subPrefabs={r.SubPrefabs} subPrefabBytes={r.SubPrefabBytes} seasons={r.Seasons} statusEffects={r.StatusEffects} world={r.WorldObjects} translations={r.Translations} " +
                             $"warnings={r.Warnings.Count}");
                 foreach (var wrn in r.Warnings) Log.LogWarning(wrn);
             }

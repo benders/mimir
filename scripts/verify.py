@@ -89,6 +89,31 @@ def main() -> int:
     bowls = [c["fields"] for c in load("locations/Eikthyrnir.json")["components"] if c["type"] == "OfferingBowl"]
     check(any((b.get("m_bossPrefab") or {}).get("$ref") == "Eikthyr" for b in bowls), "Eikthyrnir location: altar summons Eikthyr")
 
+    # Seasons (plugin 0.4.0+)
+    seasons = {g["name"]: g["fields"] for g in load("world/seasons.json")}
+    for key in ("yule", "midsummer", "halloween"):
+        hit = [f for n, f in seasons.items() if key in n.lower()]
+        check(bool(hit), f"seasons: a group named *{key}*")
+        if hit:
+            f = hit[0]
+            check(len(f.get("_startDate") or []) == 2 and len(f.get("_endDate") or []) == 2, f"seasons: {key} has start/end dates")
+            check(bool(f.get("Pieces")) or bool(f.get("Recipes")), f"seasons: {key} has pieces or recipes")
+
+    # Sub-prefabs: non-networked prefabs referenced from dumped data (plugin 0.4.0+)
+    sub = DUMP / "subprefabs"
+    check(sub.is_dir() and len(list(sub.glob("*.json"))) > 20, "subprefabs dumped")
+    check((sub / "staff_skeleton_spawn.json").is_file() or (DUMP / "prefabs" / "staff_skeleton_spawn.json").is_file(),
+          "staff_skeleton_spawn dumped (SpawnAbility)")
+
+    # Network prefab instances in the location/room hierarchy (plugin 0.4.0+)
+    def instance_hits(subdir: str, needle: str) -> int:
+        return sum(needle in f.read_text() for f in (DUMP / subdir).glob("*.json"))
+    check('"instances"' in (DUMP / "locations" / "Eikthyrnir.json").read_text(), "locations carry an instances list")
+    check(instance_hits("locations", '"prefab":"Pickable_Mushroom_blue"') + instance_hits("rooms", '"prefab":"Pickable_Mushroom_blue"') > 0,
+          "some location/room places Pickable_Mushroom_blue")
+    check(instance_hits("locations", '_sleeping"') + instance_hits("rooms", '_sleeping"') > 0,
+          "some location/room places a *_sleeping creature")
+
     tables = {t["name"]: t["fields"] for t in load("piece_tables.json")}
     hammer = tables.get("_HammerPieceTable", {}).get("m_pieces") or []
     check(any(p and p.get("$ref") == "piece_workbench" for p in hammer), "hammer piece table has the workbench")

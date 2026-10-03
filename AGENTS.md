@@ -76,6 +76,17 @@ Logs after a dump: `.cache/dump/<branch>/server.log` (Unity) and `bepinex.log` (
   as for prefabs: creature spawners, boss altars (`OfferingBowl`), chests, `DungeonGenerator`.
 - `rooms/<name>.json` — dungeon rooms from DungeonDB with `theme` (Room.Theme bitmask); a location's DungeonGenerator
   uses the enabled rooms whose theme overlaps its `m_themes`. `room_themes.json` maps theme names to bits.
+- `instances` (in each location and room file, plugin 0.4.0+) — network prefabs placed in the hierarchy: descendants whose
+  name minus " (N)"/"(Clone)" is a ZNetScene/ObjectDB prefab and that have a ZNetView (sleeping Draugr/Troll, props, pickables,
+  `Spawner_*`). One compact line each: `{"prefab", "path", "inactive"?: true (self or an ancestor disabled),
+  "randomSpawn"?: {"chance" (%), "theme"?, "biome"?, "path"? (when the RandomSpawn is on an ancestor)}}`. Doesn't descend into
+  an instance. Components inside instances are not repeated; the instance's own prefab has them.
+- `subprefabs/<name>.json` (0.4.0+) — non-networked prefabs referenced (transitively, cycle-guarded) from any dumped
+  prefab, location, room, recipe, status effect or world object: projectile `m_spawnOnHit` targets, attack/`SpawnAbility`
+  objects (`staff_skeleton_spawn`, ...). Same format as `prefabs/`, so a `{"$ref": X}` resolves in `prefabs/` or `subprefabs/`.
+  Skipped: scene objects, `vfx_`/`sfx_`/`fx_` names, objects with no game components, locations and rooms.
+- `world/seasons.json` (0.4.0+) — `SeasonalItemGroup` assets (Yule, Midsummer, Halloween...): `fields._startDate` /
+  `_endDate` are `[day, month]`, `Pieces` are `$ref` prefabs, `Recipes` are `$asset` recipe names.
 - `localization/English.json` — `$token` → text (keys without the `$`).
 
 ## Site data (`data/`, committed)

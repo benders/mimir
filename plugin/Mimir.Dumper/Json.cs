@@ -57,6 +57,16 @@ namespace Mimir.Dumper
             _needComma = true;
         }
 
+        /// <summary>Append an already-serialized (compact) JSON value as one element.</summary>
+        public void Raw(string json) { Prefix(); _sb.Append(json); _needComma = true; }
+
+        public static string Quote(string s)
+        {
+            var sb = new StringBuilder(s.Length + 2);
+            AppendString(sb, s);
+            return sb.ToString();
+        }
+
         private void Prefix()
         {
             if (_afterKey) { _afterKey = false; return; }
@@ -78,25 +88,27 @@ namespace Mimir.Dumper
             _sb.Append(' ', _depth * 2);
         }
 
-        private void WriteString(string s)
+        private void WriteString(string s) => AppendString(_sb, s);
+
+        private static void AppendString(StringBuilder sb, string s)
         {
-            _sb.Append('"');
+            sb.Append('"');
             foreach (char c in s)
             {
                 switch (c)
                 {
-                    case '"': _sb.Append("\\\""); break;
-                    case '\\': _sb.Append("\\\\"); break;
-                    case '\n': _sb.Append("\\n"); break;
-                    case '\r': _sb.Append("\\r"); break;
-                    case '\t': _sb.Append("\\t"); break;
+                    case '"': sb.Append("\\\""); break;
+                    case '\\': sb.Append("\\\\"); break;
+                    case '\n': sb.Append("\\n"); break;
+                    case '\r': sb.Append("\\r"); break;
+                    case '\t': sb.Append("\\t"); break;
                     default:
-                        if (c < 0x20) _sb.Append("\\u").Append(((int)c).ToString("x4"));
-                        else _sb.Append(c);
+                        if (c < 0x20) sb.Append("\\u").Append(((int)c).ToString("x4"));
+                        else sb.Append(c);
                         break;
                 }
             }
-            _sb.Append('"');
+            sb.Append('"');
         }
     }
 }

@@ -26,6 +26,9 @@ namespace Mimir.Dumper
 
         public static int SkippedFields;
 
+        /// <summary>Called with the root GameObject of every GameObject/Component reference written.</summary>
+        public static Action<GameObject> RefSink;
+
         /// <summary>Write all serialized fields of <paramref name="obj"/> as JSON object members.</summary>
         public static void WriteFields(JsonWriter w, object obj, int depth = 0)
         {
@@ -99,10 +102,12 @@ namespace Mimir.Dumper
             switch (o)
             {
                 case GameObject go:
+                    RefSink?.Invoke(go.transform.root.gameObject);
                     w.Key("$ref"); w.Value(go.transform.root.name);
                     if (go.transform.parent != null) { w.Key("path"); w.Value(PathOf(go.transform)); }
                     break;
                 case Component comp:
+                    RefSink?.Invoke(comp.transform.root.gameObject);
                     w.Key("$ref"); w.Value(comp.transform.root.name);
                     if (comp.transform.parent != null) { w.Key("path"); w.Value(PathOf(comp.transform)); }
                     w.Key("component"); w.Value(comp.GetType().Name);
