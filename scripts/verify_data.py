@@ -112,6 +112,11 @@ def main() -> int:
     tagged = [e["id"] for coll in (items, creatures, pieces) for e in coll.values()
               if "<" in (e.get("name") or "") + (e.get("description") or "")]
     check(not tagged, f"no rich-text tags in names or descriptions ({tagged[:5]})")
+    check((pieces.get("piece_xmastree", {}).get("season") or {}).get("name") == "Yule", "Yule tree is seasonal (Yule)")
+    check(pieces.get("piece_maypole", {}).get("season", {}).get("start") == [1, 6], "maypole season starts 1 Jun")
+    check(next((r for r in recipes if r["id"] == "Recipe_HelmetMidsummerCrown"), {}).get("season", {}).get("name") == "Midsummer",
+          "Midsummer crown recipe is seasonal")
+    check("season" not in pieces.get("piece_workbench", {}), "workbench isn't seasonal")
     check("Hammer" in pieces.get("piece_workbench", {}).get("tools", []), "workbench built with Hammer")
     check(any(p["from"] == "CopperOre" and p["to"] == "Copper" for p in procs), "smelting CopperOre -> Copper")
     check(any(d["item"] == "CopperOre" for s in sources for d in (s.get("drops") or {}).get("items", [])), "CopperOre has a world source")

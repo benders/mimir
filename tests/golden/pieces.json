@@ -186,6 +186,37 @@
   }
  },
  {
+  "id": "Tree",
+  "name": "Winter Tree",
+  "icon": "Tree",
+  "category": "Misc",
+  "tools": [
+   "Hammer"
+  ],
+  "resources": [
+   {
+    "item": "Wood",
+    "amount": 1
+   }
+  ],
+  "health": 400,
+  "material": "Wood",
+  "damageModifiers": {
+   "fire": "Weak"
+  },
+  "season": {
+   "name": "Winter",
+   "start": [
+    1,
+    12
+   ],
+   "end": [
+    6,
+    1
+   ]
+  }
+ },
+ {
   "id": "piece_bench",
   "name": "Bench",
   "icon": "Bench",

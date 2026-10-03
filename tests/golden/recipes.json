@@ -54,6 +54,29 @@
   ]
  },
  {
+  "id": "Recipe_Hat",
+  "item": "Hat",
+  "amount": 1,
+  "stationLevel": 1,
+  "resources": [
+   {
+    "item": "Wood",
+    "amount": 1
+   }
+  ],
+  "season": {
+   "name": "Winter",
+   "start": [
+    1,
+    12
+   ],
+   "end": [
+    6,
+    1
+   ]
+  }
+ },
+ {
   "id": "Recipe_OddBar",
   "item": "OddBar",
   "amount": 1,

@@ -370,6 +370,34 @@ class Unobtainable(FixtureCase):
         self.assertNotIn("Fish", got)
 
 
+class Seasons(FixtureCase):
+    def test_season(self):
+        winter = {"name": "Winter", "start": [1, 12], "end": [6, 1]}
+        pieces = [N.piece(n, p, N.piece_tools()) for n, p in N.PREFABS.items() if n in ("Tree", "Bench")]
+        recipes = [N.recipe(r) for r in N.load("recipes.json") if r["name"] in ("Recipe_Hat", "Recipe_Helmet")]
+        N.seasons(pieces, recipes)
+        by = {x["id"]: x for x in pieces + recipes}
+        self.assertEqual(by["Tree"]["season"], winter)
+        self.assertEqual(by["Recipe_Hat"]["season"], winter)
+        self.assertNotIn("season", by["Bench"])
+        self.assertNotIn("season", by["Recipe_Helmet"])
+
+    def test_reachable(self):
+        items = [N.item(n, p) for n, p in N.PREFABS.items() if p["isItem"]]
+        pieces = [x for n, p in N.PREFABS.items() if (x := N.piece(n, p, N.piece_tools()))]
+        recipes = [N.recipe(r) for r in N.load("recipes.json")]
+        sources = [s for n, p in N.PREFABS.items() if not p["isItem"] and (s := N.source(n, p))]
+        N.place_sources(sources)
+        args = (items, [], pieces, recipes, [], sources, [])
+        got, _, got_pieces = N.reachable(*args)
+        self.assertNotIn("Hat", got)  # disabled
+        self.assertNotIn("Tree", got_pieces)
+        N.seasons(pieces, recipes)
+        got, _, got_pieces = N.reachable(*args)
+        self.assertIn("Hat", got)  # its recipe is disabled, but seasonal
+        self.assertIn("Tree", got_pieces)
+
+
 class BuildId(FixtureCase):
     def test_env_wins(self):
         with mock.patch.dict(os.environ, {"MIMIR_STEAM_BUILDID": " 42 "}):

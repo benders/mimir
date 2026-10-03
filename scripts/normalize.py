@@ -285,7 +285,7 @@ def reachable(items: list, creatures: list, pieces: list, recipes: list, procs: 
     by_creature = {c["id"]: c for c in creatures}
     got_creatures = {s["creature"] for s in spawn_list if s["source"] not in ("summon", "phase")}
     traders = [src for src in sources if src["kind"] == "trader"]
-    got_pieces = {p["id"] for p in pieces if p.get("enabled") and p.get("tools")}
+    got_pieces = {p["id"] for p in pieces if (p.get("enabled") or p.get("season")) and p.get("tools")}
     got = set()
     fish = [src for src in sources if src["kind"] == "fishing"]
     made = [p for p in pieces if p["id"] in got_pieces and (pr := p.get("produces")) and pr["item"]
@@ -308,7 +308,7 @@ def reachable(items: list, creatures: list, pieces: list, recipes: list, procs: 
                 got |= {d["item"] for d in (src.get("drops") or {}).get("items", [])}
                 if src.get("pickable"):
                     got.add(src["pickable"]["item"])
-        got |= {r["item"] for r in recipes if r.get("item") and r.get("enabled")
+        got |= {r["item"] for r in recipes if r.get("item") and (r.get("enabled") or r.get("season"))
                 and all(x["item"] in got for x in r["resources"] if not x.get("upgrader"))}
         dropped = {d["item"] for c in got_creatures for d in by_creature.get(c, {}).get("drops", [])}
         got |= dropped
@@ -332,6 +332,23 @@ def reachable(items: list, creatures: list, pieces: list, recipes: list, procs: 
                 got |= {d["item"] for d in (f.get("drops") or {}).get("items", [])}
         if (len(got), len(got_creatures)) == before:
             return got, got_creatures, got_pieces | {p["id"] for p in pieces if p.get("locations")}
+
+
+def seasons(pieces: list, recipes: list) -> None:
+    """Tag the pieces and recipes of each SeasonalItemGroup with `season`: name and (day, month) start and end, both
+    inclusive (SeasonalItemGroup.IsInSeason; an end before the start wraps over New Year). The game lets a disabled
+    piece or recipe through while the season is current (PieceTable, Player.UpdateCurrentSeason)."""
+    by_piece = {p["id"]: p for p in pieces}
+    by_recipe = {r["id"]: r for r in recipes}
+    for g in load("world/seasons.json"):
+        f = g["fields"]
+        s = {"name": g["name"], "start": f["_startDate"], "end": f["_endDate"]}
+        for pc in f["Pieces"]:
+            if ref(pc) in by_piece:
+                by_piece[ref(pc)]["season"] = s
+        for r in f["Recipes"]:
+            if ref(r) in by_recipe:
+                by_recipe[ref(r)]["season"] = s
 
 
 def mark_unobtainable(items: list, creatures: list, pieces: list, recipes: list, procs: list, sources: list,
@@ -940,6 +957,7 @@ def main(argv: list[str]) -> int:
     sources += traders()
 
     recipes = [recipe(r) for r in load("recipes.json")]
+    seasons(pieces, recipes)
     mark_enemy_only(items, creatures, recipes, procs, sources, pieces)
     mark_unobtainable(items, creatures, pieces, recipes, procs, sources, spawn_list)
     data = {

@@ -45,6 +45,13 @@ class Site(unittest.TestCase):
         self.assertIn('href="pieces/Kiln.html"', ingot)  # smelted in
         self.assertIn('href="items/Sword.html"', ingot)  # used in
 
+    def test_seasonal(self):
+        tree = (self.out / "pieces/Tree.html").read_text(encoding="utf-8")
+        self.assertIn("Seasonal: Winter (1 Dec – 6 Jan)", tree)  # a normal page, with the season
+        hat = (self.out / "items/Hat.html").read_text(encoding="utf-8")
+        self.assertIn("Seasonal: Winter (1 Dec – 6 Jan)", hat)  # on the crafted item too
+        self.assertNotIn("Seasonal", (self.out / "items/Sword.html").read_text(encoding="utf-8"))
+
     def test_producers(self):
         nectar = (self.out / "items/Nectar.html").read_text(encoding="utf-8")
         self.assertIn('href="pieces/Hive.html"', nectar)  # made by a placed piece

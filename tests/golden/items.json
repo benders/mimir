@@ -122,6 +122,17 @@
   "buildTable": "_HammerTable"
  },
  {
+  "id": "Hat",
+  "name": "Party Hat",
+  "type": "Helmet",
+  "icon": "Helmet",
+  "weight": 1.0,
+  "stack": 1,
+  "maxQuality": 1,
+  "backstab": 1,
+  "parryBonus": 1
+ },
+ {
   "id": "Helmet",
   "name": "Pot Helm",
   "type": "Helmet",

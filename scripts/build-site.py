@@ -533,6 +533,18 @@ def req_amount(res: dict, q: int) -> int:
     return math.floor(n * res.get("perLevel", 0) + (res.get("amount", 0) if res.get("upgrader") else 0))
 
 
+MONTHS = "Jan Feb Mar Apr May Jun Jul Aug Sep Oct Nov Dec".split()
+
+
+def season_note(x: dict) -> str:
+    """"Seasonal: Yule (1 Dec – 6 Jan)" for a piece or recipe that is only enabled in a season."""
+    s = x.get("season")
+    if not s:
+        return ""
+    d, e = s["start"], s["end"]
+    return f'Seasonal: {esc(s["name"])} ({d[0]} {MONTHS[d[1] - 1]} – {e[0]} {MONTHS[e[1] - 1]})'
+
+
 def recipe_block(r: dict, max_q: int) -> str:
     station = link("piece", r["station"]) if r.get("station") else "by hand"
     base_lvl = max(1, r.get("stationLevel", 1))
@@ -540,6 +552,8 @@ def recipe_block(r: dict, max_q: int) -> str:
     upgrader = [x for x in r["resources"] if x.get("upgrader")]
     out = f'<p>{station}{f" (level {base_lvl})" if r.get("station") else ""}'
     out += f' · makes ×{r["amount"]}</p>' if r["amount"] > 1 else "</p>"
+    if r.get("season"):
+        out += f"<p class=note>{season_note(r)}</p>"
     if r.get("anyOneIngredient"):
         out += "<p class=note>Needs any one of these ingredients.</p>"
     qs = range(1, max_q + 1) if not r.get("upgradeOnly") else range(2, max_q + 1)
@@ -814,6 +828,8 @@ def piece_page(p: dict) -> None:
     if cs:
         facts += [("Build range", num(cs.get("buildRange"))), ("Needs roof", "yes" if cs.get("requiresRoof") else None)]
     body = header(p, "piece", sub, p.get("description")) + kv(facts)
+    if p.get("season"):
+        body += f"<p class=note>{season_note(p)}</p>"
     body += section("Cost", reflist(link("item", r["item"], r["amount"]) for r in p.get("resources", [])))
     body += section("Resistances", modifiers_table(p.get("damageModifiers")))
     body += section("Upgrades", reflist(link("piece", e["id"]) for e in extensions[p["id"]]))

@@ -148,7 +148,7 @@ TRANSLATIONS = {
     "enemy_raider": "Raider", "piece_bench": "Bench", "piece_anvil": "Anvil", "piece_kiln": "Kiln",
     "piece_bush": "Twig Bush", "piece_orerock": "Ore Rock", "se_fizz": "Fizzy",
     "enemy_pup": "Pup", "enemy_chief_p2": "Chief Risen", "enemy_imp": "Imp", "item_rod": "Summoning Rod", "enemy_chief": "<color=orange>Chief</color>", "item_egg": "Egg", "item_nectar": "Nectar", "item_ichor": "Ichor", "item_dust": "Dust",
-    "piece_hive": "Hive", "piece_tap": "Tap", "piece_wildhive": "Wild Hive", "event_test": "Something stirs",
+    "item_hat": "Party Hat", "piece_tree": "Winter Tree", "piece_hive": "Hive", "piece_tap": "Tap", "piece_wildhive": "Wild Hive", "event_test": "Something stirs",
 }
 
 
@@ -180,6 +180,7 @@ def prefabs():
         item("Buckler", name="$item_buckler", itemType="Shield", icons=[S("Helmet")], maxQuality=3,
              skillType="Blocking", blockPower=20, blockPowerPerLevel=5, timedBlockBonus=2),
         item("Helmet", name="$item_helmet", itemType="Helmet", icons=[S("Helmet")], armor=4, armorPerLevel=2),
+        item("Hat", name="$item_hat", itemType="Helmet", icons=[S("Helmet")]),  # only craftable in season
         item("HelmetFem", name="$item_helmet", itemType="Helmet", icons=[S("Helmet")], armor=5),  # "Pot Helm (female)"
         item("WoodOld", name="$item_wood", description="$item_wood_desc", icons=[S("Wood")], maxStackSize=50),  # copy
         item("FW_Helmet", name="$item_helmet", itemType="Helmet", icons=[S("Helmet")], armor=8),  # carried copy
@@ -229,6 +230,7 @@ def prefabs():
         item("Nectar", name="$item_nectar", icons=[S("Nectar")]),  # only from the Hive piece
         item("Ichor", name="$item_ichor", icons=[S("Ichor")]),  # only from the Tap piece, which needs a Root
         item("Dust", name="$item_dust", icons=[S("Dust")]),  # from Tap2, whose Root2 isn't in the world
+        piece("Tree", name="$piece_tree", icon=S("Tree"), enabled=False, resources=[req("Wood", 1)]),  # seasonal
         piece("Hive", comp("Beehive", m(honeyItem=R("Nectar"), secPerUnit=600, maxHoney=4, biome="Meadows, BlackForest")),
               name="$piece_hive", icon=S("Hive"), resources=[req("Wood", 10)]),
         piece("Tap", comp("SapCollector", m(spawnItem=R("Ichor"), secPerUnit=60, maxLevel=10, mustConnectTo=R("Root"))),
@@ -260,6 +262,7 @@ def recipes():
                                                      req("Fish", 1, 1, upgrader=True)]),
         recipe("Recipe_Helmet", "Helmet", "Bench", resources=[req("Ingot", 2, 1)]),
         recipe("Recipe_Mead", "Mead", amount=3, resources=[req("Fish", 1)]),
+        recipe("Recipe_Hat", "Hat", resources=[req("Wood", 1)], enabled=False),
         recipe("Recipe_OddBar", "OddBar", resources=[req("Wood", 1)]),
         recipe("Recipe_Rod", "Rod", resources=[req("Wood", 1)]),
     ]
@@ -287,7 +290,10 @@ def write_dump(raw: Path) -> Path:
     dump("status_effects.json", status_effects())
     dump("status_effect_defaults.json", [{"name": "SE_Stats", "type": "SE_Stats", "fields": SE_DEFAULTS}])
     dump("piece_tables.json", [{"name": "_HammerTable", "type": "PieceTable",
-                                "fields": {"m_pieces": [R("Bench"), R("Anvil"), R("Kiln"), R("Hive"), R("Tap"), R("Tap2")]}}])
+                                "fields": {"m_pieces": [R("Bench"), R("Anvil"), R("Kiln"), R("Hive"), R("Tap"), R("Tap2"), R("Tree")]}}])
+    dump("world/seasons.json", [{"name": "Winter", "type": "SeasonalItemGroup", "fields": {
+        "_startDate": [1, 12], "_endDate": [6, 1], "Pieces": [R("Tree")],
+        "Recipes": [{"$asset": "Recipe_Hat", "type": "Recipe"}]}}])
     dump("world/SpawnSystemList.json", [{"name": "Spawns", "type": "SpawnSystemList", "fields": {"m_spawners": [
         spawner("Raider", biome="Meadows, BlackForest", minLevel=1, maxLevel=2, spawnAtDay=False),
         spawner("Raider", enabled=False),

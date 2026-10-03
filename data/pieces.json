@@ -13979,6 +13979,17 @@
    "frost": "Resistant",
    "poison": "Immune",
    "spirit": "Immune"
+  },
+  "season": {
+   "name": "Yule",
+   "start": [
+    1,
+    12
+   ],
+   "end": [
+    6,
+    1
+   ]
   }
  },
  {
@@ -14015,6 +14026,17 @@
    "frost": "Resistant",
    "poison": "Immune",
    "spirit": "Immune"
+  },
+  "season": {
+   "name": "Yule",
+   "start": [
+    1,
+    12
+   ],
+   "end": [
+    6,
+    1
+   ]
   }
  },
  {
@@ -14051,6 +14073,17 @@
    "frost": "Resistant",
    "poison": "Immune",
    "spirit": "Immune"
+  },
+  "season": {
+   "name": "Yule",
+   "start": [
+    1,
+    12
+   ],
+   "end": [
+    6,
+    1
+   ]
   }
  },
  {
@@ -14559,6 +14592,17 @@
    "frost": "Immune",
    "poison": "Immune",
    "spirit": "Immune"
+  },
+  "season": {
+   "name": "Halloween",
+   "start": [
+    1,
+    10
+   ],
+   "end": [
+    6,
+    11
+   ]
   }
  },
  {
@@ -14837,6 +14881,17 @@
    "chop": "Weak",
    "poison": "Immune",
    "spirit": "Immune"
+  },
+  "season": {
+   "name": "Midsummer",
+   "start": [
+    1,
+    6
+   ],
+   "end": [
+    6,
+    7
+   ]
   }
  },
  {
@@ -14873,6 +14928,17 @@
    "fire": "Weak",
    "poison": "Immune",
    "spirit": "Immune"
+  },
+  "season": {
+   "name": "Yule",
+   "start": [
+    1,
+    12
+   ],
+   "end": [
+    6,
+    1
+   ]
   }
  },
  {
@@ -16191,6 +16257,17 @@
    "fire": "Weak",
    "poison": "Immune",
    "spirit": "Immune"
+  },
+  "season": {
+   "name": "Yule",
+   "start": [
+    1,
+    12
+   ],
+   "end": [
+    6,
+    1
+   ]
   }
  },
  {
@@ -16227,6 +16304,17 @@
    "fire": "Weak",
    "poison": "Immune",
    "spirit": "Immune"
+  },
+  "season": {
+   "name": "Yule",
+   "start": [
+    1,
+    12
+   ],
+   "end": [
+    6,
+    1
+   ]
   }
  },
  {
@@ -16261,6 +16349,17 @@
    "chop": "Weak",
    "poison": "Immune",
    "spirit": "Immune"
+  },
+  "season": {
+   "name": "Yule",
+   "start": [
+    1,
+    12
+   ],
+   "end": [
+    6,
+    1
+   ]
   }
  },
  {
