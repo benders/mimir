@@ -551,3 +551,9 @@ def adrenaline_chart(adr: dict) -> str:
 
 CHARTS = {"armor": armor_chart, "block": block_chart, "stars": stars_chart, "stamina": stamina_chart,
           "pseudo": pseudo_chart, "upgrade": upgrade_chart}
+
+
+def world_piece_drop(amount: int) -> int:
+    """What breaking a piece a player didn't place gives of one of its cost items: a third, at least 1
+    (Piece.DropResources: Mathf.Max(1, dropCount / 3) unless IsPlacedByPlayer)."""
+    return max(1, amount // 3)

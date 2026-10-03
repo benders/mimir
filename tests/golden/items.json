@@ -339,6 +339,16 @@
   "stage": "Meadows"
  },
  {
+  "id": "Marble",
+  "name": "Marble",
+  "type": "Material",
+  "icon": "Marble",
+  "weight": 1.0,
+  "stack": 1,
+  "maxQuality": 1,
+  "stage": "Mountain"
+ },
+ {
   "id": "Mead",
   "name": "Fizz Mead",
   "type": "Consumable",

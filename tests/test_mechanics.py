@@ -195,5 +195,9 @@ class Charts(unittest.TestCase):
         self.assertIn("health ×3, damage ×2, level-multiplied drops ×4", M.stars_chart())
 
 
+    def test_world_piece_drop(self):
+        self.assertEqual([M.world_piece_drop(n) for n in (1, 2, 3, 10)], [1, 1, 1, 3])
+
+
 if __name__ == "__main__":
     unittest.main()

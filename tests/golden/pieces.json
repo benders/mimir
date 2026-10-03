@@ -110,6 +110,53 @@
   "stage": "Meadows"
  },
  {
+  "id": "LootChest",
+  "name": "Loot chest",
+  "enabled": true,
+  "category": "Misc",
+  "resources": [
+   {
+    "item": "Marble",
+    "amount": 7
+   },
+   {
+    "item": "Wood",
+    "amount": 2,
+    "noRecover": true
+   }
+  ],
+  "health": 400,
+  "material": "Wood",
+  "damageModifiers": {
+   "fire": "Weak"
+  },
+  "contains": {
+   "min": 1,
+   "max": 1,
+   "chance": 1,
+   "items": [
+    {
+     "item": "Gem",
+     "min": 1,
+     "max": 2,
+     "weight": 3
+    },
+    {
+     "item": "Coins",
+     "min": 5,
+     "max": 10,
+     "weight": 1
+    }
+   ]
+  },
+  "locations": [
+   {
+    "location": "Lair"
+   }
+  ],
+  "stage": "Mountain"
+ },
+ {
   "id": "Sapling",
   "name": "Twig Bush",
   "icon": "Sapling",

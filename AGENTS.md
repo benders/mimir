@@ -127,7 +127,11 @@ chance below 100 still counts, the chance isn't recorded. Containers, `Spawner_*
 `placedBy` (pieces that plant/build it: Plant, Procreation, WispSpawner). `reachable()` counts only placed sources
 (or a `becomes` stage of one); sources with none are not in the world (Meteorite rock, MushroomBlue pickable). Creatures that grow up from another have a `growup` spawn
 (`parent`). Pieces with no build menu that stand in a location or dungeon room (loot chests, ruin walls, props) have `locations`
-[{location, dungeon}], found the same way (`instances`); they count as reachable. Derived relations (used in, dropped by) are left to the site build.
+[{location, dungeon}], found the same way (`instances`); they count as reachable. A piece with a Container has `contains`
+(its default items, a drop table). Breaking a world piece drops a third of each recoverable cost item, at least 1
+(`mechanics.world_piece_drop`, Piece.DropResources): `reachable()` counts that, stages only where nothing else gives one.
+The site lists world pieces in their own "Found in the world" section of the pieces index, shows Contains / Breaks into
+instead of Cost, lists them in their materials' "Found in", and links same-name copies from the buildable piece. Derived relations (used in, dropped by) are left to the site build.
 Pieces and recipes of a SeasonalItemGroup (Halloween, Midsummer, Yule; `world/seasons.json`) carry `season`
 {name, start [day, month], end [day, month]}, both ends inclusive, end before start wraps over New Year. They are
 disabled in the game data but let through while the season is current, so `reachable()` treats them as enabled.

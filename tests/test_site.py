@@ -118,6 +118,23 @@ class Site(unittest.TestCase):
         self.assertIn("<h2>Found in</h2>", bench)
         self.assertIn("Lair", bench)
 
+    def test_world_pieces(self):
+        chest = (self.out / "pieces/LootChest.html").read_text(encoding="utf-8")
+        self.assertIn("<h2>Contains</h2>", chest)
+        self.assertRegex(chest, r'href="items/Gem.html".*?</td><td>1–2</td><td>75%</td>')  # weight 3 of 4
+        self.assertRegex(chest, r'<h2>Breaks into</h2>.*href="items/Marble.html".*×2')  # 7 // 3; Wood isn't recovered
+        self.assertNotIn("<h2>Cost</h2>", chest)
+        marble = (self.out / "items/Marble.html").read_text(encoding="utf-8")
+        self.assertIn("2, when broken", marble)
+        self.assertNotIn("LootChest", (self.out / "items/Wood.html").read_text(encoding="utf-8"))  # not "Used in"
+        index = (self.out / "pieces/index.html").read_text(encoding="utf-8")
+        world = index[index.index("Found in the world"):]
+        self.assertIn("pieces/LootChest.html", world)
+        self.assertIn("pieces/piece_bench.html", world)
+        self.assertNotIn("pieces/LootChest.html", index[:index.index("Found in the world")])
+        bench = (self.out / "pieces/Bench.html").read_text(encoding="utf-8")
+        self.assertRegex(bench, r'<h2>Also in the world</h2>.*href="pieces/piece_bench.html"')
+
     def test_sold_by(self):
         charm = (self.out / "items/Charm.html").read_text(encoding="utf-8")
         self.assertIn("<h2>Sold by</h2>", charm)
@@ -301,6 +318,7 @@ class Site(unittest.TestCase):
         self.assertRegex(wood, r'<a class="stage"[^>]*>Meadows</a>')
         self.assertNotIn('class="spoiler"', wood)
         self.assertIn('<select id="stage">', wood)
+        self.assertRegex(wood, r'<option value="6">Ashlands</option><option value="">Deep North</option></select>')
         self.assertIn('localStorage.getItem("mimir-stage")', wood)
         index = (self.out / "items/index.html").read_text(encoding="utf-8")
         self.assertIn('<li data-stage="2"><a class="ref" href="items/Gem.html"', index)

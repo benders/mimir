@@ -412,7 +412,7 @@ def biome_stage(bs: list | None) -> int:
 
 
 def stages(items: list, creatures: list, pieces: list, recipes: list, procs: list, sources: list, spawn_list: list,
-           location_list=(), reach: tuple | None = None) -> tuple[dict, dict, dict]:
+           location_list=(), reach: tuple | None = None, breakage: bool = True) -> tuple[dict, dict, dict]:
     """Progression stage (index into STAGES) of the items, creatures and pieces a player can get to, by fixed point:
     each way of getting a thing costs the latest stage among what it needs, and the thing takes its cheapest way.
     World sources, spawns, traders and located pieces start at their earliest biome (`location_list` gives a
@@ -428,6 +428,7 @@ def stages(items: list, creatures: list, pieces: list, recipes: list, procs: lis
       - the parent of offspring and hatchlings;
       - for a source with `minToolTier`, a player item of that tier dealing a damage type it isn't immune to
         (MineRock.RPC_Hit, MineRock5/TreeBase/Destructible.RPC_Damage: CheckToolTier), except STAGE_IGNORED_TOOLS.
+    `breakage=False` leaves out breaking world pieces for their cost (a sign's coal), an unusual route.
     A soft requirement on an unreachable thing is ignored; a
     reachable thing whose stage can't be settled (a cycle through soft requirements) is left out."""
     I, C, P, S = (defaultdict(lambda: NEVER) for _ in range(4))
@@ -513,6 +514,11 @@ def stages(items: list, creatures: list, pieces: list, recipes: list, procs: lis
                 lower(P, p["id"], max(tools, soft_cost(p["resources"]), station(p.get("station"))))
             if p.get("locations"):
                 lower(P, p["id"], at(p["locations"]))
+                if breakage and not p.get("tools") and p.get("health"):  # breaking one drops part of its cost
+                    # (Piece.DropResources)
+                    for r in p.get("resources", []):
+                        if not r.get("noRecover"):
+                            lower(I, r["item"], P[p["id"]])
         for src in world:  # a source counts once placed: in the world, made by an affordable piece, or a stage of one
             if src["kind"] == "container" or src.get("biomes") or src.get("locations"):
                 lower(S, src["id"], min(biome_stage(src["biomes"]) if src.get("biomes") else NEVER,
@@ -580,6 +586,7 @@ def reachable(items: list, creatures: list, pieces: list, recipes: list, procs: 
     sources; trader keys are ignored, Coins must be reachable), fish via their bait, honey and sap from buildable pieces whose cost is reachable (sap
     needs its root in the world). World sources count when placed (`biomes`, `locations`, `placedBy`, or a
     `becomes` stage of a placed one); a placed source whose `becomes` is an item yields it (Dvergr altar crystals).
+    A piece standing in the world that can be broken yields its recoverable cost (Dvergr black marble ruins).
     Stations, tools and fuel aren't required. Incomplete while quests aren't modelled (#20). The first pass of stages()."""
     return tuple(set(d) for d in stages(items, creatures, pieces, recipes, procs, sources, spawn_list))
 
@@ -648,7 +655,8 @@ def mark_stages(items: list, creatures: list, pieces: list, recipes: list, procs
     it couldn't be settled."""
     args = items, creatures, pieces, recipes, procs, sources, spawn_list, location_list
     got = tuple(set(d) for d in stages(*args))
-    staged = stages(*args, reach=got)
+    staged = stages(*args, reach=got, breakage=False)  # breaking world pieces: only where nothing else gives a stage
+    staged = tuple({**more, **st} for st, more in zip(staged, stages(*args, reach=got)))
     for entries, ids, st in zip((items, creatures, pieces), got, staged):
         for e in entries:
             if e["id"] not in ids and not e.get("internal") and not e.get("enemyOnly"):
@@ -734,6 +742,7 @@ def piece(name: str, p: dict, tools: dict[str, list[str]]) -> dict | None:
         if station else None,
         "extends": ref(ext["m_craftingStation"]) if ext else None,
         "produces": produces(p),
+        "contains": drop_table((comp(p, "Container") or {}).get("m_defaultItems")),  # loot chests placed in the world
         "dlc": pc["m_dlc"],
     }
 

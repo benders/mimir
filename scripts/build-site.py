@@ -333,6 +333,21 @@ effect_users = defaultdict(list)     # effect -> (kind, id, how): items, and cre
 spawns_of = defaultdict(list)        # creature -> spawn entries
 tool_pieces = defaultdict(list)      # tool item -> pieces
 set_members = defaultdict(list)      # set name -> items
+world_copies = defaultdict(list)     # buildable piece -> world pieces with the same name (Hildir's campfire)
+
+
+def world_piece(p: dict) -> bool:
+    """A piece players can't build that stands in the world: a loot chest, a ruin, a trader's campfire."""
+    return not p.get("tools") and bool(p.get("locations"))
+
+
+def breaks_into(p: dict) -> list[tuple[str, int]]:
+    """(item, amount) a world piece drops when broken: part of its cost (mechanics.world_piece_drop)."""
+    if not world_piece(p) or not p.get("health"):
+        return []
+    return [(r["item"], mechanics.world_piece_drop(r["amount"])) for r in p.get("resources", [])
+            if not r.get("noRecover") and r.get("amount")]
+
 
 for r in RECIPES:
     if ITEMS.get(r.get("item"), {}).get("unobtainable"):
@@ -346,6 +361,11 @@ for r in RECIPES:
 for p in PIECES.values():
     if p.get("unobtainable"):
         continue
+    if world_piece(p):  # not built: its cost is what breaking it gives, its station doesn't matter
+        for it, n in breaks_into(p):
+            found_in[it].append(({"id": p["id"], "name": name_of("piece", p["id"]), "kind": "piece",
+                                  "piece": p["id"], "locations": p["locations"]}, f"{n}, when broken"))
+        continue
     for res in p.get("resources", []):
         used_in_piece[res["item"]].append(p)
     if p.get("station"):
@@ -356,6 +376,13 @@ for p in PIECES.values():
         tool_pieces[t].append(p)
     if p.get("produces"):
         produced_by[p["produces"]["item"]].append(p)
+_built = {}
+for p in PIECES.values():
+    if p.get("tools") and has_page("piece", p["id"]):
+        _built.setdefault(base_name("piece", p["id"]), p["id"])
+for p in PIECES.values():
+    if world_piece(p) and has_page("piece", p["id"]) and base_name("piece", p["id"]) in _built:
+        world_copies[_built[base_name("piece", p["id"])]].append(p["id"])
 for c in PROCESSING:
     process_from[c["from"]].append(c)
     if c.get("fuel") and c["fuel"] != c["from"]:
@@ -494,7 +521,8 @@ def home_biome(cid: str) -> str | None:
 written: list[Path] = []
 
 
-STAGE_OPTIONS = "".join(f'<option value="{i}">{esc(BIOMES[s])}</option>' for i, s in enumerate(STAGES[:-1]))
+STAGE_OPTIONS = "".join(f'<option value="{i}">{esc(BIOMES[s])}</option>' for i, s in enumerate(STAGES[:-1])) + \
+    f'<option value="">{esc(BIOMES[STAGES[-1]])}</option>'  # the last stage: no filter
 
 
 def page(path: str, title: str, body: str, kind_label: str = "", scripts=()) -> None:
@@ -516,7 +544,7 @@ def page(path: str, title: str, body: str, kind_label: str = "", scripts=()) -> 
   <a class="brand" href="index.html">{esc(SITE_NAME)}</a>
   <nav>{"".join(f'<a href="{d}/index.html">{d.capitalize()}</a>' for d in KINDS.values())}<a href="mechanics/index.html">Mechanics</a></nav>
   <label class="stagesel" title="Hide what you meet after this biome">Up to
-  <select id="stage"><option value="">all</option>{STAGE_OPTIONS}</select></label>
+  <select id="stage">{STAGE_OPTIONS}</select></label>
   <div class="search"><input id="q" type="search" placeholder="Search…  ( / )" autocomplete="off" aria-label="Search">
   <ol id="results" hidden></ol></div>
 </header>
@@ -1013,10 +1041,23 @@ def spawn_sections(spawns: list[dict]) -> str:
 
 # --- pieces ---------------------------------------------------------------------------------
 
+def loot_table(t: dict) -> str:
+    """A Container's default items (DropTable.GetDropListItems): a number of weighted picks, each a stack."""
+    total = sum(d.get("weight", 1) for d in t["items"]) or 1
+    lo, hi = t.get("min", 1), t.get("max", 1)
+    picks = f'{rng(lo, hi)} pick{"" if lo == hi == 1 else "s"}' + (", no item twice" if t.get("oneOfEach") else "")
+    if t.get("chance", 1) < 1:
+        picks += f", filled {pct(t['chance'])} of the time"
+    rows = [[link("item", d["item"]), rng(max(1, d.get("min", 1)), d.get("max", 1)), pct(d.get("weight", 1) / total)]
+            for d in t["items"]]
+    return f'<p class="note">{esc(picks)}; each pick:</p>' + table(["Item", "Stack", "Odds"], rows)
+
+
 def piece_page(p: dict) -> None:
     sub = esc(words(p.get("category", "")))
+    world = world_piece(p)
     facts = [("Built with", " ".join(link("item", t) for t in p.get("tools", []))),
-             ("Requires", link("piece", p["station"]) + " nearby" if p.get("station") else None),
+             ("Requires", link("piece", p["station"]) + " nearby" if p.get("station") and not world else None),
              ("Extends", link("piece", p["extends"]) if p.get("extends") else None),
              ("Comfort", f'{num(p["comfort"]["value"])} ({esc(p["comfort"].get("group", "none"))})'
               if p.get("comfort") else None),
@@ -1029,7 +1070,14 @@ def piece_page(p: dict) -> None:
     body = header(p, "piece", sub, p.get("description")) + kv(facts)
     if p.get("season"):
         body += f"<p class=note>{season_note(p)}</p>"
-    body += section("Cost", reflist(link("item", r["item"], r["amount"]) for r in p.get("resources", [])))
+    if world:  # nobody builds it: what it holds and what breaking it gives instead of a cost
+        body += section("Contains", loot_table(p["contains"]) if p.get("contains") else "")
+        body += section("Breaks into", reflist(link("item", i, n) for i, n in breaks_into(p)) +
+                        '<p class="note">A third of its cost, at least 1, like any piece a player didn\'t place.</p>'
+                        if breaks_into(p) else "")
+    else:
+        body += section("Cost", reflist(link("item", r["item"], r["amount"]) for r in p.get("resources", [])))
+        body += section("Also in the world", reflist(link("piece", w) for w in world_copies[p["id"]]))
     body += section("Resistances", modifiers_table(p.get("damageModifiers")))
     body += staged_section("Upgrades", [("piece", e["id"], link("piece", e["id"])) for e in extensions[p["id"]]])
 
@@ -1054,7 +1102,7 @@ def piece_page(p: dict) -> None:
                  if pr.get("connectsTo") else None)]
         body += section("Produces", kv(rows))
     body += staged_section("Enables building", [("piece", b["id"], link("piece", b["id"])) for b in built_at[p["id"]]])
-    if p.get("locations"):  # not buildable, but standing in the world
+    if world:
         body += section("Found in", f'<p>{esc(source_places({"kind": "world", "locations": p["locations"]}))}</p>')
     page(href("piece", p["id"]), name_of("piece", p["id"]), body, '<a href="pieces/index.html">Pieces</a>')
 
@@ -1448,12 +1496,15 @@ def index_pages() -> None:
         f'<h2 id="{g}"{group_stage("creature", groups[g])}>{esc(labels[g])}</h2>{bosses_first(groups[g])}' for g in order)
     page("creatures/index.html", "Creatures", body)
 
-    groups = defaultdict(list)
+    groups, world = defaultdict(list), []
     for p in PIECES.values():
         if has_page("piece", p["id"]):
-            groups[words(p.get("category", "Misc"))].append(p["id"])
+            (world if world_piece(p) else groups[words(p.get("category", "Misc"))]).append(p["id"])
     body = "<h1>Pieces</h1>" + "".join(f"<h2{group_stage('piece', groups[g])}>{esc(g)}</h2>{grid('piece', groups[g])}"
                                        for g in sorted(groups))
+    if world:  # loot chests, ruins, traders' campfires: standing in locations, not buildable
+        body += (f'<h2 id="world"{group_stage("piece", world)}>Found in the world</h2><p class="note">Not buildable: '
+                 f'placed in locations and dungeons.</p>{grid("piece", world)}')
     page("pieces/index.html", "Pieces", body)
 
     body = "<h1>Status effects</h1>" + grid("effect", EFFECTS)

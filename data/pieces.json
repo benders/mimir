@@ -2293,6 +2293,92 @@
    "poison": "Immune",
    "spirit": "Immune"
   },
+  "contains": {
+   "min": 5,
+   "max": 7,
+   "chance": 1,
+   "oneOfEach": true,
+   "items": [
+    {
+     "item": "AncientCoin",
+     "min": 11,
+     "max": 55,
+     "weight": 2
+    },
+    {
+     "item": "AncientGemstoneBlack",
+     "min": 1,
+     "max": 1,
+     "weight": 0.2
+    },
+    {
+     "item": "AncientGemstoneGreen",
+     "min": 1,
+     "max": 1,
+     "weight": 0.5
+    },
+    {
+     "item": "AncientGemstoneOrange",
+     "min": 1,
+     "max": 1,
+     "weight": 0.4
+    },
+    {
+     "item": "AncientGemstonePurple",
+     "min": 1,
+     "max": 1,
+     "weight": 0.3
+    },
+    {
+     "item": "Copper",
+     "min": 1,
+     "max": 5,
+     "weight": 1
+    },
+    {
+     "item": "Bronze",
+     "min": 1,
+     "max": 5,
+     "weight": 1
+    },
+    {
+     "item": "Tin",
+     "min": 1,
+     "max": 5,
+     "weight": 1
+    },
+    {
+     "item": "Upgrader6Armor",
+     "min": 1,
+     "max": 1,
+     "weight": 0.05
+    },
+    {
+     "item": "Upgrader6Weapon",
+     "min": 1,
+     "max": 1,
+     "weight": 0.025
+    },
+    {
+     "item": "Upgrader7Armor",
+     "min": 1,
+     "max": 1,
+     "weight": 0.025
+    },
+    {
+     "item": "Upgrader7Weapon",
+     "min": 1,
+     "max": 1,
+     "weight": 0.0125
+    },
+    {
+     "item": "BlackCore",
+     "min": 1,
+     "max": 1,
+     "weight": 0.5
+    }
+   ]
+  },
   "locations": [
    {
     "location": "MorkBorg",
@@ -4133,6 +4219,68 @@
    "fire": "Resistant",
    "frost": "Resistant"
   },
+  "contains": {
+   "min": 2,
+   "max": 4,
+   "chance": 1,
+   "oneOfEach": true,
+   "items": [
+    {
+     "item": "MoltenCore",
+     "min": 1,
+     "max": 2,
+     "weight": 0.5
+    },
+    {
+     "item": "CharredBone",
+     "min": 3,
+     "max": 12,
+     "weight": 0.5
+    },
+    {
+     "item": "ArrowCarapace",
+     "min": 3,
+     "max": 12,
+     "weight": 0.5
+    },
+    {
+     "item": "Coins",
+     "min": 99,
+     "max": 199,
+     "weight": 0.5
+    },
+    {
+     "item": "Blackwood",
+     "min": 1,
+     "max": 2,
+     "weight": 0.5
+    },
+    {
+     "item": "Upgrader5Armor",
+     "min": 1,
+     "max": 1,
+     "weight": 0.1
+    },
+    {
+     "item": "Upgrader5Weapon",
+     "min": 1,
+     "max": 1,
+     "weight": 0.05
+    },
+    {
+     "item": "Upgrader6Armor",
+     "min": 1,
+     "max": 1,
+     "weight": 0.01
+    },
+    {
+     "item": "Upgrader6Weapon",
+     "min": 1,
+     "max": 1,
+     "weight": 0.01
+    }
+   ]
+  },
   "locations": [
    {
     "location": "MorgenHole1"
@@ -4170,6 +4318,68 @@
    "pickaxe": "Resistant",
    "fire": "Resistant",
    "frost": "Resistant"
+  },
+  "contains": {
+   "min": 2,
+   "max": 3,
+   "chance": 1,
+   "oneOfEach": true,
+   "items": [
+    {
+     "item": "Feathers",
+     "min": 2,
+     "max": 4,
+     "weight": 1
+    },
+    {
+     "item": "ArrowFlint",
+     "min": 5,
+     "max": 10,
+     "weight": 1
+    },
+    {
+     "item": "Coins",
+     "min": 5,
+     "max": 30,
+     "weight": 1
+    },
+    {
+     "item": "Amber",
+     "min": 1,
+     "max": 2,
+     "weight": 1
+    },
+    {
+     "item": "SpearWood",
+     "min": 1,
+     "max": 1,
+     "weight": 0.2
+    },
+    {
+     "item": "Upgrader1Armor",
+     "min": 1,
+     "max": 1,
+     "weight": 0.1
+    },
+    {
+     "item": "Upgrader1Weapon",
+     "min": 1,
+     "max": 1,
+     "weight": 0.05
+    },
+    {
+     "item": "Upgrader2Armor",
+     "min": 1,
+     "max": 1,
+     "weight": 0.01
+    },
+    {
+     "item": "Upgrader2Weapon",
+     "min": 1,
+     "max": 1,
+     "weight": 0.01
+    }
+   ]
   },
   "locations": [
    {
@@ -4254,6 +4464,92 @@
    "fire": "Resistant",
    "frost": "Resistant"
   },
+  "contains": {
+   "min": 5,
+   "max": 6,
+   "chance": 1,
+   "oneOfEach": true,
+   "items": [
+    {
+     "item": "GemstoneBlue",
+     "min": 1,
+     "max": 1,
+     "weight": 0.5
+    },
+    {
+     "item": "GemstoneGreen",
+     "min": 1,
+     "max": 1,
+     "weight": 0.5
+    },
+    {
+     "item": "GemstoneRed",
+     "min": 1,
+     "max": 1,
+     "weight": 0.5
+    },
+    {
+     "item": "Coins",
+     "min": 200,
+     "max": 500,
+     "weight": 1
+    },
+    {
+     "item": "CharredBone",
+     "min": 5,
+     "max": 10,
+     "weight": 1
+    },
+    {
+     "item": "Charredskull",
+     "min": 1,
+     "max": 2,
+     "weight": 1
+    },
+    {
+     "item": "CelestialFeather",
+     "min": 1,
+     "max": 1,
+     "weight": 0.1
+    },
+    {
+     "item": "MoltenCore",
+     "min": 1,
+     "max": 2,
+     "weight": 0.5
+    },
+    {
+     "item": "FlametalOreNew",
+     "min": 10,
+     "max": 20,
+     "weight": 1
+    },
+    {
+     "item": "Upgrader5Armor",
+     "min": 1,
+     "max": 1,
+     "weight": 0.2
+    },
+    {
+     "item": "Upgrader5Weapon",
+     "min": 1,
+     "max": 1,
+     "weight": 0.1
+    },
+    {
+     "item": "Upgrader6Armor",
+     "min": 1,
+     "max": 1,
+     "weight": 0.02
+    },
+    {
+     "item": "Upgrader6Weapon",
+     "min": 1,
+     "max": 1,
+     "weight": 0.02
+    }
+   ]
+  },
   "locations": [
    {
     "location": "CharredFortress"
@@ -4288,6 +4584,68 @@
    "pickaxe": "Resistant",
    "fire": "Resistant",
    "frost": "Resistant"
+  },
+  "contains": {
+   "min": 3,
+   "max": 4,
+   "chance": 1,
+   "oneOfEach": true,
+   "items": [
+    {
+     "item": "ArrowCharred",
+     "min": 5,
+     "max": 11,
+     "weight": 1
+    },
+    {
+     "item": "BoltCharred",
+     "min": 5,
+     "max": 11,
+     "weight": 1
+    },
+    {
+     "item": "Coins",
+     "min": 22,
+     "max": 99,
+     "weight": 1
+    },
+    {
+     "item": "Torch",
+     "min": 1,
+     "max": 1,
+     "weight": 1
+    },
+    {
+     "item": "Feathers",
+     "min": 5,
+     "max": 13,
+     "weight": 1
+    },
+    {
+     "item": "Upgrader6Armor",
+     "min": 1,
+     "max": 1,
+     "weight": 0.1
+    },
+    {
+     "item": "Upgrader6Weapon",
+     "min": 1,
+     "max": 1,
+     "weight": 0.05
+    },
+    {
+     "item": "Upgrader7Armor",
+     "min": 1,
+     "max": 1,
+     "weight": 0.01
+    },
+    {
+     "item": "Upgrader7Weapon",
+     "min": 1,
+     "max": 1,
+     "weight": 0.01
+    }
+   ]
   },
   "locations": [
    {
@@ -4334,6 +4692,26 @@
    "fire": "Resistant",
    "frost": "Resistant"
   },
+  "contains": {
+   "min": 1,
+   "max": 2,
+   "chance": 1,
+   "oneOfEach": true,
+   "items": [
+    {
+     "item": "Coins",
+     "min": 19,
+     "max": 99,
+     "weight": 1
+    },
+    {
+     "item": "BoneFragments",
+     "min": 2,
+     "max": 3,
+     "weight": 0.5
+    }
+   ]
+  },
   "unobtainable": true
  },
  {
@@ -4360,6 +4738,56 @@
    "pickaxe": "Resistant",
    "fire": "Resistant",
    "frost": "Resistant"
+  },
+  "contains": {
+   "min": 2,
+   "max": 3,
+   "chance": 1,
+   "oneOfEach": true,
+   "items": [
+    {
+     "item": "Coins",
+     "min": 12,
+     "max": 54,
+     "weight": 1
+    },
+    {
+     "item": "THSwordWood",
+     "min": 1,
+     "max": 1,
+     "weight": 0.1
+    },
+    {
+     "item": "Hook",
+     "min": 1,
+     "max": 1,
+     "weight": 0.5
+    },
+    {
+     "item": "Upgrader5Armor",
+     "min": 1,
+     "max": 1,
+     "weight": 0.1
+    },
+    {
+     "item": "Upgrader5Weapon",
+     "min": 1,
+     "max": 1,
+     "weight": 0.05
+    },
+    {
+     "item": "Upgrader6Armor",
+     "min": 1,
+     "max": 1,
+     "weight": 0.01
+    },
+    {
+     "item": "Upgrader6Weapon",
+     "min": 1,
+     "max": 1,
+     "weight": 0.01
+    }
+   ]
   },
   "locations": [
    {
@@ -4402,6 +4830,92 @@
    "fire": "Resistant",
    "frost": "Resistant"
   },
+  "contains": {
+   "min": 4,
+   "max": 5,
+   "chance": 1,
+   "oneOfEach": true,
+   "items": [
+    {
+     "item": "MeadHealthMinor",
+     "min": 1,
+     "max": 2,
+     "weight": 1
+    },
+    {
+     "item": "MeadStaminaMinor",
+     "min": 1,
+     "max": 2,
+     "weight": 1
+    },
+    {
+     "item": "MeadPoisonResist",
+     "min": 1,
+     "max": 2,
+     "weight": 1
+    },
+    {
+     "item": "Sausages",
+     "min": 3,
+     "max": 6,
+     "weight": 1
+    },
+    {
+     "item": "Tankard_dvergr",
+     "min": 1,
+     "max": 1,
+     "weight": 0.1
+    },
+    {
+     "item": "Coins",
+     "min": 33,
+     "max": 66,
+     "weight": 1
+    },
+    {
+     "item": "Coins",
+     "min": 33,
+     "max": 66,
+     "weight": 1
+    },
+    {
+     "item": "THSwordWood",
+     "min": 1,
+     "max": 1,
+     "weight": 0.2
+    },
+    {
+     "item": "Hook",
+     "min": 1,
+     "max": 1,
+     "weight": 0.5
+    },
+    {
+     "item": "Upgrader5Armor",
+     "min": 1,
+     "max": 1,
+     "weight": 0.1
+    },
+    {
+     "item": "Upgrader5Weapon",
+     "min": 1,
+     "max": 1,
+     "weight": 0.05
+    },
+    {
+     "item": "Upgrader6Armor",
+     "min": 1,
+     "max": 1,
+     "weight": 0.01
+    },
+    {
+     "item": "Upgrader6Weapon",
+     "min": 1,
+     "max": 1,
+     "weight": 0.01
+    }
+   ]
+  },
   "locations": [
    {
     "location": "Mistlands_DvergrTownEntrance1",
@@ -4439,6 +4953,44 @@
    "fire": "Resistant",
    "frost": "Resistant"
   },
+  "contains": {
+   "min": 2,
+   "max": 4,
+   "chance": 1,
+   "oneOfEach": true,
+   "items": [
+    {
+     "item": "Feathers",
+     "min": 5,
+     "max": 15,
+     "weight": 1
+    },
+    {
+     "item": "ArrowFlint",
+     "min": 5,
+     "max": 10,
+     "weight": 1
+    },
+    {
+     "item": "Coins",
+     "min": 5,
+     "max": 50,
+     "weight": 1
+    },
+    {
+     "item": "Amber",
+     "min": 1,
+     "max": 3,
+     "weight": 1
+    },
+    {
+     "item": "SilverNecklace",
+     "min": 1,
+     "max": 1,
+     "weight": 1
+    }
+   ]
+  },
   "unobtainable": true
  },
  {
@@ -4465,6 +5017,74 @@
    "pickaxe": "Resistant",
    "fire": "Resistant",
    "frost": "Resistant"
+  },
+  "contains": {
+   "min": 2,
+   "max": 4,
+   "chance": 1,
+   "oneOfEach": true,
+   "items": [
+    {
+     "item": "Feathers",
+     "min": 1,
+     "max": 10,
+     "weight": 1
+    },
+    {
+     "item": "ArrowFlint",
+     "min": 5,
+     "max": 10,
+     "weight": 1
+    },
+    {
+     "item": "Ruby",
+     "min": 1,
+     "max": 2,
+     "weight": 1
+    },
+    {
+     "item": "Coins",
+     "min": 10,
+     "max": 30,
+     "weight": 1
+    },
+    {
+     "item": "Amber",
+     "min": 1,
+     "max": 3,
+     "weight": 1
+    },
+    {
+     "item": "SilverNecklace",
+     "min": 1,
+     "max": 1,
+     "weight": 0.2
+    },
+    {
+     "item": "Upgrader1Armor",
+     "min": 1,
+     "max": 1,
+     "weight": 0.1
+    },
+    {
+     "item": "Upgrader1Weapon",
+     "min": 1,
+     "max": 1,
+     "weight": 0.05
+    },
+    {
+     "item": "Upgrader2Armor",
+     "min": 1,
+     "max": 1,
+     "weight": 0.01
+    },
+    {
+     "item": "Upgrader2Weapon",
+     "min": 1,
+     "max": 1,
+     "weight": 0.01
+    }
+   ]
   },
   "locations": [
    {
@@ -4511,6 +5131,20 @@
    "fire": "Resistant",
    "frost": "Resistant"
   },
+  "contains": {
+   "min": 1,
+   "max": 1,
+   "chance": 1,
+   "oneOfEach": true,
+   "items": [
+    {
+     "item": "HildirKey_forestcrypt",
+     "min": 1,
+     "max": 1,
+     "weight": 1
+    }
+   ]
+  },
   "unobtainable": true
  },
  {
@@ -4537,6 +5171,74 @@
    "pickaxe": "Resistant",
    "fire": "Resistant",
    "frost": "Resistant"
+  },
+  "contains": {
+   "min": 3,
+   "max": 4,
+   "chance": 1,
+   "oneOfEach": true,
+   "items": [
+    {
+     "item": "Barley",
+     "min": 2,
+     "max": 4,
+     "weight": 0.5
+    },
+    {
+     "item": "BlackMetalScrap",
+     "min": 2,
+     "max": 5,
+     "weight": 1
+    },
+    {
+     "item": "Needle",
+     "min": 2,
+     "max": 5,
+     "weight": 1
+    },
+    {
+     "item": "Coins",
+     "min": 10,
+     "max": 40,
+     "weight": 1
+    },
+    {
+     "item": "SharpeningStone",
+     "min": 1,
+     "max": 1,
+     "weight": 0.1
+    },
+    {
+     "item": "AtgeirWood",
+     "min": 1,
+     "max": 1,
+     "weight": 0.2
+    },
+    {
+     "item": "Upgrader4Armor",
+     "min": 1,
+     "max": 1,
+     "weight": 0.1
+    },
+    {
+     "item": "Upgrader4Weapon",
+     "min": 1,
+     "max": 1,
+     "weight": 0.05
+    },
+    {
+     "item": "Upgrader5Armor",
+     "min": 1,
+     "max": 1,
+     "weight": 0.01
+    },
+    {
+     "item": "Upgrader5Weapon",
+     "min": 1,
+     "max": 1,
+     "weight": 0.01
+    }
+   ]
   },
   "locations": [
    {
@@ -4600,6 +5302,62 @@
    "fire": "Resistant",
    "frost": "Resistant"
   },
+  "contains": {
+   "min": 5,
+   "max": 6,
+   "chance": 1,
+   "oneOfEach": true,
+   "items": [
+    {
+     "item": "AmberPearl",
+     "min": 2,
+     "max": 4,
+     "weight": 1
+    },
+    {
+     "item": "Chain",
+     "min": 2,
+     "max": 5,
+     "weight": 1
+    },
+    {
+     "item": "Coins",
+     "min": 11,
+     "max": 66,
+     "weight": 1
+    },
+    {
+     "item": "ChickenEgg",
+     "min": 1,
+     "max": 1,
+     "weight": 0.5
+    },
+    {
+     "item": "Upgrader4Armor",
+     "min": 1,
+     "max": 1,
+     "weight": 0.1
+    },
+    {
+     "item": "Upgrader4Weapon",
+     "min": 1,
+     "max": 1,
+     "weight": 0.05
+    },
+    {
+     "item": "Upgrader5Armor",
+     "min": 1,
+     "max": 1,
+     "weight": 0.01
+    },
+    {
+     "item": "Upgrader5Weapon",
+     "min": 1,
+     "max": 1,
+     "weight": 0.01
+    }
+   ]
+  },
   "locations": [
    {
     "location": "Hildir_plainsfortress",
@@ -4632,6 +5390,74 @@
    "pickaxe": "Resistant",
    "fire": "Resistant",
    "frost": "Resistant"
+  },
+  "contains": {
+   "min": 2,
+   "max": 3,
+   "chance": 1,
+   "oneOfEach": true,
+   "items": [
+    {
+     "item": "Feathers",
+     "min": 1,
+     "max": 3,
+     "weight": 1
+    },
+    {
+     "item": "Coins",
+     "min": 5,
+     "max": 15,
+     "weight": 1
+    },
+    {
+     "item": "Amber",
+     "min": 1,
+     "max": 1,
+     "weight": 1
+    },
+    {
+     "item": "ArrowFlint",
+     "min": 10,
+     "max": 20,
+     "weight": 1
+    },
+    {
+     "item": "Torch",
+     "min": 1,
+     "max": 1,
+     "weight": 1
+    },
+    {
+     "item": "Flint",
+     "min": 2,
+     "max": 4,
+     "weight": 1
+    },
+    {
+     "item": "Upgrader0Armor",
+     "min": 1,
+     "max": 1,
+     "weight": 0.1
+    },
+    {
+     "item": "Upgrader0Weapon",
+     "min": 1,
+     "max": 1,
+     "weight": 0.05
+    },
+    {
+     "item": "Upgrader1Armor",
+     "min": 1,
+     "max": 1,
+     "weight": 0.01
+    },
+    {
+     "item": "Upgrader1Weapon",
+     "min": 1,
+     "max": 1,
+     "weight": 0.01
+    }
+   ]
   },
   "locations": [
    {
@@ -4695,6 +5521,56 @@
    "fire": "Resistant",
    "frost": "Resistant"
   },
+  "contains": {
+   "min": 2,
+   "max": 3,
+   "chance": 1,
+   "oneOfEach": true,
+   "items": [
+    {
+     "item": "Feathers",
+     "min": 1,
+     "max": 3,
+     "weight": 1
+    },
+    {
+     "item": "Coins",
+     "min": 5,
+     "max": 15,
+     "weight": 1
+    },
+    {
+     "item": "Amber",
+     "min": 1,
+     "max": 1,
+     "weight": 1
+    },
+    {
+     "item": "ArrowFlint",
+     "min": 10,
+     "max": 20,
+     "weight": 1
+    },
+    {
+     "item": "Torch",
+     "min": 1,
+     "max": 1,
+     "weight": 1
+    },
+    {
+     "item": "Flint",
+     "min": 2,
+     "max": 4,
+     "weight": 1
+    },
+    {
+     "item": "AxeHead1",
+     "min": 1,
+     "max": 1,
+     "weight": 2
+    }
+   ]
+  },
   "locations": [
    {
     "location": "WoodHouse6"
@@ -4726,6 +5602,56 @@
    "pickaxe": "Resistant",
    "fire": "Resistant",
    "frost": "Resistant"
+  },
+  "contains": {
+   "min": 2,
+   "max": 3,
+   "chance": 1,
+   "oneOfEach": true,
+   "items": [
+    {
+     "item": "Feathers",
+     "min": 1,
+     "max": 3,
+     "weight": 1
+    },
+    {
+     "item": "Coins",
+     "min": 5,
+     "max": 15,
+     "weight": 1
+    },
+    {
+     "item": "Amber",
+     "min": 1,
+     "max": 1,
+     "weight": 1
+    },
+    {
+     "item": "ArrowFlint",
+     "min": 10,
+     "max": 20,
+     "weight": 1
+    },
+    {
+     "item": "Torch",
+     "min": 1,
+     "max": 1,
+     "weight": 1
+    },
+    {
+     "item": "Flint",
+     "min": 2,
+     "max": 4,
+     "weight": 1
+    },
+    {
+     "item": "AxeHead2",
+     "min": 1,
+     "max": 1,
+     "weight": 2
+    }
+   ]
   },
   "locations": [
    {
@@ -4759,6 +5685,80 @@
    "fire": "Resistant",
    "frost": "Resistant"
   },
+  "contains": {
+   "min": 2,
+   "max": 3,
+   "chance": 1,
+   "oneOfEach": true,
+   "items": [
+    {
+     "item": "ArrowFire",
+     "min": 10,
+     "max": 15,
+     "weight": 1
+    },
+    {
+     "item": "Coins",
+     "min": 20,
+     "max": 50,
+     "weight": 1
+    },
+    {
+     "item": "Ruby",
+     "min": 1,
+     "max": 3,
+     "weight": 1
+    },
+    {
+     "item": "AmberPearl",
+     "min": 1,
+     "max": 2,
+     "weight": 1
+    },
+    {
+     "item": "SilverNecklace",
+     "min": 1,
+     "max": 1,
+     "weight": 1
+    },
+    {
+     "item": "KnifeWood",
+     "min": 1,
+     "max": 1,
+     "weight": 0.2
+    },
+    {
+     "item": "AxeWood",
+     "min": 1,
+     "max": 1,
+     "weight": 0.2
+    },
+    {
+     "item": "Upgrader0Weapon",
+     "min": 1,
+     "max": 1,
+     "weight": 0.1
+    },
+    {
+     "item": "Upgrader0Armor",
+     "min": 1,
+     "max": 1,
+     "weight": 0.05
+    },
+    {
+     "item": "Upgrader1Armor",
+     "min": 1,
+     "max": 1,
+     "weight": 0.01
+    },
+    {
+     "item": "Upgrader1Weapon",
+     "min": 1,
+     "max": 1,
+     "weight": 0.01
+    }
+   ]
+  },
   "locations": [
    {
     "location": "ShipSetting01"
@@ -4791,6 +5791,44 @@
    "fire": "Resistant",
    "frost": "Resistant"
   },
+  "contains": {
+   "min": 2,
+   "max": 3,
+   "chance": 1,
+   "oneOfEach": true,
+   "items": [
+    {
+     "item": "MaceWood",
+     "min": 1,
+     "max": 1,
+     "weight": 0.1
+    },
+    {
+     "item": "Feathers",
+     "min": 1,
+     "max": 3,
+     "weight": 1
+    },
+    {
+     "item": "Torch",
+     "min": 1,
+     "max": 1,
+     "weight": 1
+    },
+    {
+     "item": "ArrowFlint",
+     "min": 10,
+     "max": 20,
+     "weight": 1
+    },
+    {
+     "item": "LeatherScraps",
+     "min": 2,
+     "max": 3,
+     "weight": 1
+    }
+   ]
+  },
   "locations": [
    {
     "location": "CombatRuin01"
@@ -4822,6 +5860,134 @@
    "pickaxe": "Resistant",
    "fire": "Resistant",
    "frost": "Resistant"
+  },
+  "contains": {
+   "min": 1,
+   "max": 1,
+   "chance": 1,
+   "oneOfEach": true,
+   "items": [
+    {
+     "item": "SilverNecklace",
+     "min": 1,
+     "max": 1,
+     "weight": 1
+    },
+    {
+     "item": "MoldAtgeir",
+     "min": 1,
+     "max": 1,
+     "weight": 1
+    },
+    {
+     "item": "MoldAxe",
+     "min": 1,
+     "max": 1,
+     "weight": 1
+    },
+    {
+     "item": "MoldAxe2H",
+     "min": 1,
+     "max": 1,
+     "weight": 1
+    },
+    {
+     "item": "MoldBow",
+     "min": 1,
+     "max": 1,
+     "weight": 1
+    },
+    {
+     "item": "MoldCrossbow",
+     "min": 1,
+     "max": 1,
+     "weight": 1
+    },
+    {
+     "item": "MoldFistweapon",
+     "min": 1,
+     "max": 1,
+     "weight": 1
+    },
+    {
+     "item": "MoldKnife",
+     "min": 1,
+     "max": 1,
+     "weight": 1
+    },
+    {
+     "item": "MoldMace",
+     "min": 1,
+     "max": 1,
+     "weight": 1
+    },
+    {
+     "item": "MoldMace2H",
+     "min": 1,
+     "max": 1,
+     "weight": 1
+    },
+    {
+     "item": "MoldShieldBuckler",
+     "min": 1,
+     "max": 1,
+     "weight": 1
+    },
+    {
+     "item": "MoldShieldRound",
+     "min": 1,
+     "max": 1,
+     "weight": 1
+    },
+    {
+     "item": "MoldShieldTower",
+     "min": 1,
+     "max": 1,
+     "weight": 1
+    },
+    {
+     "item": "MoldSpear",
+     "min": 1,
+     "max": 1,
+     "weight": 1
+    },
+    {
+     "item": "MoldSword",
+     "min": 1,
+     "max": 1,
+     "weight": 1
+    },
+    {
+     "item": "MoldSword2H",
+     "min": 1,
+     "max": 1,
+     "weight": 1
+    },
+    {
+     "item": "MoldStafffrostorbs",
+     "min": 1,
+     "max": 1,
+     "weight": 1
+    },
+    {
+     "item": "MoldStaffOrbofAhri",
+     "min": 1,
+     "max": 1,
+     "weight": 1
+    },
+    {
+     "item": "MoldStaffspiritcaller",
+     "min": 1,
+     "max": 1,
+     "weight": 1
+    },
+    {
+     "item": "MoldStaffthunderblood",
+     "min": 1,
+     "max": 1,
+     "weight": 1
+    }
+   ]
   },
   "locations": [
    {
@@ -4857,6 +6023,68 @@
    "poison": "Immune",
    "spirit": "Immune"
   },
+  "contains": {
+   "min": 2,
+   "max": 4,
+   "chance": 1,
+   "oneOfEach": true,
+   "items": [
+    {
+     "item": "AncientCoin",
+     "min": 4,
+     "max": 10,
+     "weight": 1
+    },
+    {
+     "item": "MeadStaminaMedium",
+     "min": 1,
+     "max": 1,
+     "weight": 1
+    },
+    {
+     "item": "MeadHealthMedium",
+     "min": 1,
+     "max": 1,
+     "weight": 1
+    },
+    {
+     "item": "MeadEitrMinor",
+     "min": 1,
+     "max": 1,
+     "weight": 1
+    },
+    {
+     "item": "ArrowCharred",
+     "min": 5,
+     "max": 11,
+     "weight": 1
+    },
+    {
+     "item": "Upgrader6Armor",
+     "min": 1,
+     "max": 1,
+     "weight": 0.05
+    },
+    {
+     "item": "Upgrader6Weapon",
+     "min": 1,
+     "max": 1,
+     "weight": 0.025
+    },
+    {
+     "item": "Upgrader7Armor",
+     "min": 1,
+     "max": 1,
+     "weight": 0.01
+    },
+    {
+     "item": "Upgrader7Weapon",
+     "min": 1,
+     "max": 1,
+     "weight": 0.01
+    }
+   ]
+  },
   "locations": [
    {
     "location": "MorkBorg",
@@ -4889,6 +6117,74 @@
    "pickaxe": "Resistant",
    "fire": "Resistant",
    "frost": "Resistant"
+  },
+  "contains": {
+   "min": 3,
+   "max": 5,
+   "chance": 1,
+   "oneOfEach": true,
+   "items": [
+    {
+     "item": "Obsidian",
+     "min": 3,
+     "max": 9,
+     "weight": 0.5
+    },
+    {
+     "item": "SilverNecklace",
+     "min": 1,
+     "max": 1,
+     "weight": 0.1
+    },
+    {
+     "item": "Ruby",
+     "min": 1,
+     "max": 2,
+     "weight": 0.5
+    },
+    {
+     "item": "Coins",
+     "min": 15,
+     "max": 35,
+     "weight": 1
+    },
+    {
+     "item": "Coins",
+     "min": 15,
+     "max": 35,
+     "weight": 1
+    },
+    {
+     "item": "Obsidian",
+     "min": 1,
+     "max": 5,
+     "weight": 1
+    },
+    {
+     "item": "Upgrader3Armor",
+     "min": 1,
+     "max": 1,
+     "weight": 0.1
+    },
+    {
+     "item": "Upgrader3Weapon",
+     "min": 1,
+     "max": 1,
+     "weight": 0.05
+    },
+    {
+     "item": "Upgrader4Armor",
+     "min": 1,
+     "max": 1,
+     "weight": 0.01
+    },
+    {
+     "item": "Upgrader4Weapon",
+     "min": 1,
+     "max": 1,
+     "weight": 0.01
+    }
+   ]
   },
   "locations": [
    {
@@ -4927,6 +6223,20 @@
    "fire": "Resistant",
    "frost": "Resistant"
   },
+  "contains": {
+   "min": 1,
+   "max": 1,
+   "chance": 1,
+   "oneOfEach": true,
+   "items": [
+    {
+     "item": "HildirKey_mountaincave",
+     "min": 1,
+     "max": 1,
+     "weight": 1
+    }
+   ]
+  },
   "unobtainable": true
  },
  {
@@ -4953,6 +6263,86 @@
    "pickaxe": "Resistant",
    "fire": "Resistant",
    "frost": "Resistant"
+  },
+  "contains": {
+   "min": 3,
+   "max": 5,
+   "chance": 1,
+   "oneOfEach": true,
+   "items": [
+    {
+     "item": "OnionSeeds",
+     "min": 3,
+     "max": 9,
+     "weight": 1
+    },
+    {
+     "item": "Amber",
+     "min": 1,
+     "max": 6,
+     "weight": 1
+    },
+    {
+     "item": "Coins",
+     "min": 46,
+     "max": 96,
+     "weight": 1
+    },
+    {
+     "item": "AmberPearl",
+     "min": 2,
+     "max": 5,
+     "weight": 1
+    },
+    {
+     "item": "Ruby",
+     "min": 1,
+     "max": 2,
+     "weight": 1
+    },
+    {
+     "item": "Obsidian",
+     "min": 5,
+     "max": 10,
+     "weight": 1
+    },
+    {
+     "item": "ArrowFrost",
+     "min": 5,
+     "max": 10,
+     "weight": 1
+    },
+    {
+     "item": "BattleaxeWood",
+     "min": 1,
+     "max": 1,
+     "weight": 0.2
+    },
+    {
+     "item": "Upgrader3Armor",
+     "min": 1,
+     "max": 1,
+     "weight": 0.1
+    },
+    {
+     "item": "Upgrader3Weapon",
+     "min": 1,
+     "max": 1,
+     "weight": 0.05
+    },
+    {
+     "item": "Upgrader4Armor",
+     "min": 1,
+     "max": 1,
+     "weight": 0.01
+    },
+    {
+     "item": "Upgrader4Weapon",
+     "min": 1,
+     "max": 1,
+     "weight": 0.01
+    }
+   ]
   },
   "locations": [
    {
@@ -5004,6 +6394,44 @@
    "fire": "Resistant",
    "frost": "Resistant"
   },
+  "contains": {
+   "min": 2,
+   "max": 4,
+   "chance": 1,
+   "oneOfEach": true,
+   "items": [
+    {
+     "item": "Feathers",
+     "min": 5,
+     "max": 10,
+     "weight": 1
+    },
+    {
+     "item": "ArrowObsidian",
+     "min": 5,
+     "max": 10,
+     "weight": 1
+    },
+    {
+     "item": "SilverNecklace",
+     "min": 1,
+     "max": 1,
+     "weight": 0.5
+    },
+    {
+     "item": "Coins",
+     "min": 66,
+     "max": 99,
+     "weight": 1
+    },
+    {
+     "item": "GoblinTotem",
+     "min": 1,
+     "max": 1,
+     "weight": 0.1
+    }
+   ]
+  },
   "locations": [
    {
     "location": "StoneHenge1"
@@ -5042,6 +6470,20 @@
    "fire": "Resistant",
    "frost": "Resistant"
   },
+  "contains": {
+   "min": 1,
+   "max": 1,
+   "chance": 1,
+   "oneOfEach": true,
+   "items": [
+    {
+     "item": "HildirKey_plainsfortress",
+     "min": 1,
+     "max": 1,
+     "weight": 1
+    }
+   ]
+  },
   "unobtainable": true
  },
  {
@@ -5068,6 +6510,98 @@
    "pickaxe": "Resistant",
    "fire": "Resistant",
    "frost": "Resistant"
+  },
+  "contains": {
+   "min": 4,
+   "max": 5,
+   "chance": 1,
+   "oneOfEach": true,
+   "items": [
+    {
+     "item": "WitheredBone",
+     "min": 1,
+     "max": 1,
+     "weight": 0.5
+    },
+    {
+     "item": "ArrowIron",
+     "min": 10,
+     "max": 15,
+     "weight": 1
+    },
+    {
+     "item": "ArrowPoison",
+     "min": 10,
+     "max": 15,
+     "weight": 1
+    },
+    {
+     "item": "Coins",
+     "min": 20,
+     "max": 60,
+     "weight": 1
+    },
+    {
+     "item": "Amber",
+     "min": 1,
+     "max": 5,
+     "weight": 1
+    },
+    {
+     "item": "AmberPearl",
+     "min": 1,
+     "max": 3,
+     "weight": 1
+    },
+    {
+     "item": "Ruby",
+     "min": 1,
+     "max": 3,
+     "weight": 1
+    },
+    {
+     "item": "Chain",
+     "min": 1,
+     "max": 3,
+     "weight": 1
+    },
+    {
+     "item": "ElderBark",
+     "min": 20,
+     "max": 30,
+     "weight": 1
+    },
+    {
+     "item": "IronScrap",
+     "min": 10,
+     "max": 20,
+     "weight": 2
+    },
+    {
+     "item": "Upgrader2Armor",
+     "min": 1,
+     "max": 1,
+     "weight": 0.1
+    },
+    {
+     "item": "Upgrader2Weapon",
+     "min": 1,
+     "max": 1,
+     "weight": 0.05
+    },
+    {
+     "item": "Upgrader3Armor",
+     "min": 1,
+     "max": 1,
+     "weight": 0.01
+    },
+    {
+     "item": "Upgrader3Weapon",
+     "min": 1,
+     "max": 1,
+     "weight": 0.01
+    }
+   ]
   },
   "locations": [
    {
@@ -5101,6 +6635,98 @@
    "pickaxe": "Resistant",
    "fire": "Resistant",
    "frost": "Resistant"
+  },
+  "contains": {
+   "min": 3,
+   "max": 5,
+   "chance": 1,
+   "oneOfEach": true,
+   "items": [
+    {
+     "item": "WitheredBone",
+     "min": 1,
+     "max": 1,
+     "weight": 0.5
+    },
+    {
+     "item": "ArrowIron",
+     "min": 10,
+     "max": 15,
+     "weight": 1
+    },
+    {
+     "item": "ArrowPoison",
+     "min": 10,
+     "max": 15,
+     "weight": 1
+    },
+    {
+     "item": "Coins",
+     "min": 20,
+     "max": 60,
+     "weight": 1
+    },
+    {
+     "item": "Amber",
+     "min": 1,
+     "max": 5,
+     "weight": 1
+    },
+    {
+     "item": "AmberPearl",
+     "min": 1,
+     "max": 3,
+     "weight": 1
+    },
+    {
+     "item": "Ruby",
+     "min": 1,
+     "max": 3,
+     "weight": 1
+    },
+    {
+     "item": "Chain",
+     "min": 1,
+     "max": 1,
+     "weight": 1
+    },
+    {
+     "item": "ElderBark",
+     "min": 20,
+     "max": 30,
+     "weight": 1
+    },
+    {
+     "item": "SledgeWood",
+     "min": 1,
+     "max": 1,
+     "weight": 0.5
+    },
+    {
+     "item": "Upgrader2Armor",
+     "min": 1,
+     "max": 1,
+     "weight": 0.1
+    },
+    {
+     "item": "Upgrader2Weapon",
+     "min": 1,
+     "max": 1,
+     "weight": 0.05
+    },
+    {
+     "item": "Upgrader3Armor",
+     "min": 1,
+     "max": 1,
+     "weight": 0.01
+    },
+    {
+     "item": "Upgrader3Weapon",
+     "min": 1,
+     "max": 1,
+     "weight": 0.01
+    }
+   ]
   },
   "locations": [
    {
@@ -5139,6 +6765,86 @@
    "pickaxe": "Resistant",
    "fire": "Resistant",
    "frost": "Resistant"
+  },
+  "contains": {
+   "min": 3,
+   "max": 5,
+   "chance": 1,
+   "oneOfEach": true,
+   "items": [
+    {
+     "item": "Wood",
+     "min": 10,
+     "max": 30,
+     "weight": 0.5
+    },
+    {
+     "item": "Stone",
+     "min": 10,
+     "max": 30,
+     "weight": 0.5
+    },
+    {
+     "item": "Ruby",
+     "min": 1,
+     "max": 2,
+     "weight": 1
+    },
+    {
+     "item": "Coins",
+     "min": 20,
+     "max": 50,
+     "weight": 1
+    },
+    {
+     "item": "DeerHide",
+     "min": 2,
+     "max": 4,
+     "weight": 1
+    },
+    {
+     "item": "BoneFragments",
+     "min": 10,
+     "max": 15,
+     "weight": 1
+    },
+    {
+     "item": "LeatherScraps",
+     "min": 3,
+     "max": 5,
+     "weight": 1
+    },
+    {
+     "item": "SilverNecklace",
+     "min": 1,
+     "max": 1,
+     "weight": 0.2
+    },
+    {
+     "item": "Upgrader1Armor",
+     "min": 1,
+     "max": 1,
+     "weight": 0.1
+    },
+    {
+     "item": "Upgrader1Weapon",
+     "min": 1,
+     "max": 1,
+     "weight": 0.05
+    },
+    {
+     "item": "Upgrader2Armor",
+     "min": 1,
+     "max": 1,
+     "weight": 0.01
+    },
+    {
+     "item": "Upgrader2Weapon",
+     "min": 1,
+     "max": 1,
+     "weight": 0.01
+    }
+   ]
   },
   "locations": [
    {
@@ -11430,6 +13136,86 @@
    "poison": "Immune",
    "spirit": "Immune"
   },
+  "contains": {
+   "min": 3,
+   "max": 6,
+   "chance": 1,
+   "oneOfEach": true,
+   "items": [
+    {
+     "item": "MoldAxe",
+     "min": 1,
+     "max": 1,
+     "weight": 0.2
+    },
+    {
+     "item": "MoldBow",
+     "min": 1,
+     "max": 1,
+     "weight": 0.2
+    },
+    {
+     "item": "MoldMace",
+     "min": 1,
+     "max": 1,
+     "weight": 0.2
+    },
+    {
+     "item": "MoldSword",
+     "min": 1,
+     "max": 1,
+     "weight": 0.2
+    },
+    {
+     "item": "MoldSpear",
+     "min": 1,
+     "max": 1,
+     "weight": 0.2
+    },
+    {
+     "item": "Barley",
+     "min": 1,
+     "max": 10,
+     "weight": 0.5
+    },
+    {
+     "item": "Flax",
+     "min": 1,
+     "max": 10,
+     "weight": 0.5
+    },
+    {
+     "item": "TurnipSeeds",
+     "min": 1,
+     "max": 10,
+     "weight": 0.5
+    },
+    {
+     "item": "CarrotSeeds",
+     "min": 1,
+     "max": 10,
+     "weight": 0.5
+    },
+    {
+     "item": "OatSeeds",
+     "min": 4,
+     "max": 10,
+     "weight": 5
+    },
+    {
+     "item": "PoteitrSeeds",
+     "min": 1,
+     "max": 10,
+     "weight": 3
+    },
+    {
+     "item": "KaleSeeds",
+     "min": 2,
+     "max": 4,
+     "weight": 1
+    }
+   ]
+  },
   "locations": [
    {
     "location": "NorthVillage",
@@ -11464,6 +13250,80 @@
    "frost": "Resistant",
    "poison": "Immune",
    "spirit": "Immune"
+  },
+  "contains": {
+   "min": 2,
+   "max": 3,
+   "chance": 1,
+   "oneOfEach": true,
+   "items": [
+    {
+     "item": "MoldAxe",
+     "min": 1,
+     "max": 1,
+     "weight": 0.1
+    },
+    {
+     "item": "MoldBow",
+     "min": 1,
+     "max": 1,
+     "weight": 0.1
+    },
+    {
+     "item": "MoldMace",
+     "min": 1,
+     "max": 1,
+     "weight": 0.1
+    },
+    {
+     "item": "MoldSword",
+     "min": 1,
+     "max": 1,
+     "weight": 0.1
+    },
+    {
+     "item": "MoldSpear",
+     "min": 1,
+     "max": 1,
+     "weight": 0.1
+    },
+    {
+     "item": "MeadTasty",
+     "min": 1,
+     "max": 5,
+     "weight": 1
+    },
+    {
+     "item": "BjornMeat",
+     "min": 1,
+     "max": 3,
+     "weight": 1
+    },
+    {
+     "item": "Bread",
+     "min": 1,
+     "max": 2,
+     "weight": 1
+    },
+    {
+     "item": "Onion",
+     "min": 1,
+     "max": 3,
+     "weight": 1
+    },
+    {
+     "item": "Upgrader6Armor",
+     "min": 1,
+     "max": 1,
+     "weight": 0.1
+    },
+    {
+     "item": "Upgrader6Weapon",
+     "min": 1,
+     "max": 1,
+     "weight": 0.05
+    }
+   ]
   },
   "locations": [
    {

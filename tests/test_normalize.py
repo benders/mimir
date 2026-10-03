@@ -420,13 +420,13 @@ class Entities(FixtureCase):
 
     def test_location_containers(self):
         by = {c["name"]: c for c in N.location_containers()}  # empty table dropped; one source per name + table
-        self.assertEqual(set(by), {"Strongbox", "$piece_other", "Crate", "$piece_stash"})  # Crate: a placed prefab's Container
+        self.assertEqual(set(by), {"Strongbox", "$piece_other", "Crate", "$piece_stash", "Loot chest"})  # Crate: a placed prefab's Container
         box = by["Strongbox"]
         self.assertEqual(box["kind"], "container")
         self.assertEqual([d["item"] for d in box["drops"]["items"]], ["Gem", "Wood"])
         # in Camp and, as a dungeon room, in Lair; Ruin is disabled, the Crypt room's theme doesn't match Lair
         self.assertEqual([(x["location"], x["dungeon"]) for x in box["locations"]], [("Camp", False), ("Lair", True)])
-        self.assertEqual(len({c["id"] for c in N.location_containers()}), 4)
+        self.assertEqual(len({c["id"] for c in N.location_containers()}), 5)
 
     def test_fishing(self):
         [f] = N.fishing(N.spawns())

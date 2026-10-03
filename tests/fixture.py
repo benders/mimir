@@ -146,7 +146,7 @@ TRANSLATIONS = {
     "item_sword": "Test Sword", "item_sword_desc": "Sharp <b>enough</b>.",
     "item_helmet": "Pot Helm", "item_fish": "Glimfish", "item_pearl": "Moon Pearl", "item_javelin": "Test Javelin", "item_mace": "Mace", "item_longbow": "Longbow", "item_arbal": "Arbal", "item_dart": "Dart", "item_mead": "Fizz Mead", "item_coins": "Coins", "item_charm": "Lucky Charm", "npc_vendor": "Old Vendor",
     "item_hammer": "Mallet", "item_shard": "Shard", "item_bite": "Bite",
-    "enemy_raider": "Raider", "piece_bench": "Bench", "piece_anvil": "Anvil", "piece_kiln": "Kiln",
+    "enemy_raider": "Raider", "piece_bench": "Bench", "piece_lootchest": "Loot chest", "item_marble": "Marble", "piece_anvil": "Anvil", "piece_kiln": "Kiln",
     "piece_bush": "Twig Bush", "piece_orerock": "Ore Rock", "se_fizz": "Fizzy",
     "enemy_pup": "Pup", "enemy_chief_p2": "Chief Risen", "enemy_imp": "Imp", "enemy_shade": "Shade", "enemy_sprite": "Sprite", "enemy_moth": "Moth", "enemy_singer": "Singer", "item_wand": "Wand", "item_rod": "Summoning Rod", "enemy_chief": "<color=orange>Chief</color>", "item_egg": "Egg", "item_nectar": "Nectar", "item_ichor": "Ichor", "item_dust": "Dust",
     "item_hat": "Party Hat", "piece_tree": "Winter Tree", "piece_hive": "Hive", "piece_tap": "Tap", "piece_wildhive": "Wild Hive", "event_test": "Something stirs",
@@ -215,6 +215,7 @@ def prefabs():
         prefab("SpitBolt", comp("Projectile", m(damage=damages(), spawnOnHit=R("SpitPool"), randomSpawnOnHit=[],
                                                 onlySpawnedProjectilesDealDamage=True, projectilesInheritHitData=False))),
         prefab("SpitPool", comp("Aoe", m(damage=damages(poison=9), useAttackSettings=True))),
+        item("Marble", name="$item_marble", icons=[S("Marble")]),  # only from breaking the LootChest
         item("Gem", name="$item_gem", icons=[S("Gem")]),  # unresolved name, only in a chest: reachable, so shown
         item("Shard", name="$item_shard", icons=[S("Shard")]),  # only from breaking the Altar
         item("Coins", name="$item_coins", icons=[S("Coins")]),
@@ -252,6 +253,8 @@ def prefabs():
                                                  craftRequireFire=False)),
               name="$piece_bench", icon=S("Bench"), category="Crafting", resources=[req("Wood", 10)]),
         piece("piece_bench", name="$piece_bench", icon=S("Bench"), comfort=2),  # not buildable: "Bench (world)"
+        piece("LootChest", comp(*container(("Gem", 1, 2, 3), ("Coins", 5, 10, 1), name="$piece_lootchest")),
+              name="$piece_lootchest", resources=[req("Marble", 7), req("Wood", 2, recover=False)]),  # breaks: 2 Marble
         piece("Anvil", comp("StationExtension", m(craftingStation=R("Bench"))),
               name="$piece_anvil", icon=S("Anvil"), category="Crafting", craftingStation=R("Bench"),
               resources=[req("Ingot", 4, recover=False)]),
@@ -403,6 +406,7 @@ def write_dump(raw: Path) -> Path:
         {"prefab": "OreRock", "path": "cave/OreRock (2)"},  # an instance of a source inside the location
         {"prefab": "Orb", "path": "cave/Orb"},
         {"prefab": "piece_bench", "path": "cave/piece_bench (1)"},  # a non-buildable piece standing there
+        {"prefab": "LootChest", "path": "cave/LootChest"},
         {"prefab": "Spawner_Raider", "path": "cave/Spawner_Raider"},
         {"prefab": "Pup", "path": "cave/Pup"},  # a creature placed directly
         {"prefab": "Crate", "path": "cave/Crate", "randomSpawn": {"chance": 40}},  # may or may not be there
