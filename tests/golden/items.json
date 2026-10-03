@@ -225,6 +225,22 @@
   "parryBonus": 1
  },
  {
+  "id": "Rod",
+  "name": "Summoning Rod",
+  "type": "OneHandedWeapon",
+  "icon": "Rod",
+  "weight": 1.0,
+  "stack": 1,
+  "maxQuality": 1,
+  "backstab": 1,
+  "parryBonus": 1,
+  "attack": {
+   "type": "Horizontal",
+   "stamina": 10,
+   "projectile": "RodBolt"
+  }
+ },
+ {
   "id": "SP_Helmet",
   "name": "Pot Helm",
   "type": "Helmet",

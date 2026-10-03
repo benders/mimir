@@ -70,6 +70,14 @@ class Site(unittest.TestCase):
         self.assertIn("summoned with", chief)
         self.assertIn('href="items/Ore.html"', chief)
 
+    def test_summon_and_phase_sections(self):
+        imp = (self.out / "creatures/Imp.html").read_text(encoding="utf-8")
+        self.assertIn("<h2>Summoned by</h2>", imp)
+        self.assertIn('href="items/Rod.html"', imp)
+        phase = (self.out / "creatures/Chief_p2.html").read_text(encoding="utf-8")
+        self.assertIn("<h2>Phase of</h2>", phase)
+        self.assertIn('href="creatures/Chief.html"', phase)
+
     def test_container_found_in(self):
         gem = (self.out / "items/Gem.html").read_text(encoding="utf-8")  # unresolved name, only in a chest
         self.assertIn("<h2>Found in</h2>", gem)

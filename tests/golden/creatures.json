@@ -13,6 +13,29 @@
   }
  },
  {
+  "id": "Chief_p2",
+  "name": "Chief Risen",
+  "faction": "ForestMonsters",
+  "boss": true,
+  "health": 1200,
+  "speed": {
+   "walk": 2,
+   "run": 5,
+   "swim": 2
+  }
+ },
+ {
+  "id": "Imp",
+  "name": "Imp",
+  "faction": "ForestMonsters",
+  "health": 30,
+  "speed": {
+   "walk": 2,
+   "run": 5,
+   "swim": 2
+  }
+ },
+ {
   "id": "Pup",
   "name": "Pup",
   "faction": "ForestMonsters",

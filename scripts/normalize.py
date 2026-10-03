@@ -278,12 +278,12 @@ def reachable(items: list, creatures: list, pieces: list, recipes: list, procs: 
     """Ids of the items, creatures and pieces a player can get to, by fixed point from what the world offers:
     sources, spawns and enabled pieces in a build menu, then enabled recipes with reachable ingredients, drops of
     reachable creatures (a creature dropped by one, like a miniboss's second phase, is reached too), conversions
-    of reachable inputs, eggs laid by a reachable creature. Chests in locations and trader stock count (as
+    of reachable inputs, eggs laid by a reachable creature, summons of a reachable summoner, boss phases of a reachable phase. Chests in locations and trader stock count (as
     sources; trader keys are ignored, Coins must be reachable), fish via their bait, honey and sap from buildable pieces whose cost is reachable (sap
     needs its root in the world). World sources count when placed (`biomes`, `locations`, `placedBy`, or a
     `becomes` stage of a placed one). Incomplete while quests aren't modelled (#20)."""
     by_creature = {c["id"]: c for c in creatures}
-    got_creatures = {s["creature"] for s in spawn_list}
+    got_creatures = {s["creature"] for s in spawn_list if s["source"] not in ("summon", "phase")}
     traders = [src for src in sources if src["kind"] == "trader"]
     got_pieces = {p["id"] for p in pieces if p.get("enabled") and p.get("tools")}
     got = set()
@@ -295,7 +295,7 @@ def reachable(items: list, creatures: list, pieces: list, recipes: list, procs: 
     world = [src for src in sources if src["kind"] not in ("fishing", "trader")]
     placed = {src["id"] for src in world if src["kind"] == "container" or src.get("biomes") or src.get("locations")}
     while True:
-        before = len(got)
+        before = len(got), len(got_creatures)
         for src in world:  # a source counts once placed: in the world, made by an affordable piece, or a stage of one
             if src["id"] in placed:
                 if src.get("becomes"):
@@ -313,6 +313,9 @@ def reachable(items: list, creatures: list, pieces: list, recipes: list, procs: 
         dropped = {d["item"] for c in got_creatures for d in by_creature.get(c, {}).get("drops", [])}
         got |= dropped
         got_creatures |= dropped & by_creature.keys()
+        for s in spawn_list:  # a summon needs its summoner (the creature carrying the item, else the item itself)
+            if s["source"] in ("summon", "phase") and (s["parent"] in got_creatures if "parent" in s else s["item"] in got):
+                got_creatures.add(s["creature"])
         got |= {s["creature"] for s in spawn_list if s["source"] == "offspring" and s["parent"] in got_creatures
                 and s["creature"] in item_ids}  # eggs laid by a creature we have
         if "Coins" in got:
@@ -327,7 +330,7 @@ def reachable(items: list, creatures: list, pieces: list, recipes: list, procs: 
             if f["id"] in got_creatures and any(b["item"] in got for b in f["baits"]):
                 got.add(f["id"])
                 got |= {d["item"] for d in (f.get("drops") or {}).get("items", [])}
-        if len(got) == before:
+        if (len(got), len(got_creatures)) == before:
             return got, got_creatures, got_pieces
 
 
@@ -342,10 +345,8 @@ def mark_unobtainable(items: list, creatures: list, pieces: list, recipes: list,
                 e["unobtainable"] = True
 
 
-def creature(name: str, p: dict) -> dict | None:
-    c = comp(p, "Humanoid") or comp(p, "Character")
-    if c is None or has(p, "Player"):
-        return None
+def carried_items(c: dict) -> set[str]:
+    """Item ids a Humanoid/Character carries: default, random weapon/shield/armor, random sets and items."""
     carried = set()
     for v in (c.get("m_defaultItems") or []) + (c.get("m_randomWeapon") or []) + (c.get("m_randomShield") or []) \
             + (c.get("m_randomArmor") or []):
@@ -353,7 +354,14 @@ def creature(name: str, p: dict) -> dict | None:
     for s in c.get("m_randomSets") or []:
         carried.update(ref(v) for v in s["m_items"])
     carried.update(ref(r["m_prefab"]) for r in c.get("m_randomItems") or [])
-    carried = {a for a in carried if keep(a, is_item)}
+    return {a for a in carried if keep(a, is_item)}
+
+
+def creature(name: str, p: dict) -> dict | None:
+    c = comp(p, "Humanoid") or comp(p, "Character")
+    if c is None or has(p, "Player"):
+        return None
+    carried = carried_items(c)
     # weapons (incl. the internal attack items) are attacks; armor, shields and trinkets are equipment
     attacks = {a for a in carried if item_type(a) in WEAPON_TYPES}
     drops = [{
@@ -803,8 +811,55 @@ def offspring_spawns() -> list[dict]:
     return out
 
 
+def summoned_by(item_name: str) -> list[str]:
+    """Creatures an attack item makes: its projectile's `m_spawnOnHit` / `m_randomSpawnOnHit` is a creature, or a
+    SpawnAbility prefab (staff summons) whose `m_spawnPrefab` are creatures."""
+    if not (drop := comp(PREFABS[item_name], "ItemDrop")):
+        return []
+    shared = drop["m_itemData"]["m_shared"]
+    out = []
+    for a in (shared["m_attack"], shared["m_secondaryAttack"]):
+        if not (pr := comp(PREFABS.get(ref(a.get("m_attackProjectile"))) or {"components": []}, "Projectile")):
+            continue
+        for target in [ref(pr.get("m_spawnOnHit"))] + [ref(x) for x in pr.get("m_randomSpawnOnHit") or []]:
+            if ability := comp(PREFABS.get(target) or {"components": []}, "SpawnAbility"):
+                out += [r for x in ability["m_spawnPrefab"] if is_creature(r := ref(x))]
+            elif is_creature(target):
+                out.append(target)
+    return sorted(set(out))
+
+
+def summon_spawns() -> list[dict]:
+    """Creatures made by another's attack or a player's item: `summon` with the summoning `parent` creature (it
+    carries the attack `item`) or just the `item` when no creature carries it (a staff)."""
+    carried = defaultdict(list)
+    for name, p in PREFABS.items():
+        if is_creature(name):
+            for i in carried_items(comp(p, "Humanoid") or comp(p, "Character")):
+                carried[i].append(name)
+    out = []
+    for name in PREFABS:
+        if is_item(name):
+            for target in summoned_by(name):
+                out += [{"creature": target, "source": "summon", "parent": parent, "item": name}
+                        for parent in sorted(carried[name])] or [{"creature": target, "source": "summon", "item": name}]
+    return out
+
+
+def phase_spawns() -> list[dict]:
+    """Boss phases: a creature whose death effects create another creature (FrozenKing -> FrozenKing_p2)."""
+    out = []
+    for name, p in PREFABS.items():
+        if is_creature(name):
+            c = comp(p, "Humanoid") or comp(p, "Character")
+            for e in (c.get("m_deathEffects") or {}).get("m_effectPrefabs", []):
+                if (nxt := ref(e["m_prefab"])) and nxt != name and is_creature(nxt):
+                    out.append({"creature": nxt, "source": "phase", "parent": name})
+    return out
+
+
 def spawns() -> list[dict]:
-    return world_spawns() + raid_spawns() + location_spawns() + offspring_spawns()
+    return world_spawns() + raid_spawns() + location_spawns() + offspring_spawns() + summon_spawns() + phase_spawns()
 
 
 def piece_tools() -> dict[str, list[str]]:

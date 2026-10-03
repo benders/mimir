@@ -146,7 +146,7 @@ TRANSLATIONS = {
     "item_hammer": "Mallet", "item_bite": "Bite",
     "enemy_raider": "Raider", "piece_bench": "Bench", "piece_anvil": "Anvil", "piece_kiln": "Kiln",
     "piece_bush": "Twig Bush", "piece_orerock": "Ore Rock", "se_fizz": "Fizzy",
-    "enemy_pup": "Pup", "enemy_chief": "<color=orange>Chief</color>", "item_egg": "Egg", "item_nectar": "Nectar", "item_ichor": "Ichor", "item_dust": "Dust",
+    "enemy_pup": "Pup", "enemy_chief_p2": "Chief Risen", "enemy_imp": "Imp", "item_rod": "Summoning Rod", "enemy_chief": "<color=orange>Chief</color>", "item_egg": "Egg", "item_nectar": "Nectar", "item_ichor": "Ichor", "item_dust": "Dust",
     "piece_hive": "Hive", "piece_tap": "Tap", "piece_wildhive": "Wild Hive", "event_test": "Something stirs",
 }
 
@@ -199,7 +199,14 @@ def prefabs():
         raider("Raider_sleeping"),  # identical copy: merged into Raider's page
         raider("Raider_Ranged", health=120),  # differs: "Raider (archer)"
         prefab("Pup", character(name="$enemy_pup", health=20), comp("Growup", m(grownPrefab=R("Raider")))),
-        prefab("Chief", character(name="$enemy_chief", health=900, boss=True)),
+        prefab("Chief", character(name="$enemy_chief", health=900, boss=True, deathEffects={"m_effectPrefabs": [
+            {"m_prefab": R("vfx_Poof")}, {"m_prefab": R("Chief_p2")}]})),  # second phase: made when it dies
+        prefab("Chief_p2", character(name="$enemy_chief_p2", health=1200, boss=True)),
+        prefab("Imp", character(name="$enemy_imp", health=30)),  # only summoned, by the Rod
+        item("Rod", name="$item_rod", itemType="OneHandedWeapon", icons=[S("Rod")],
+             attack=attack(attackProjectile=R("RodBolt"))),
+        prefab("RodBolt", comp("Projectile", m(spawnOnHit=R("RodSpawn"), randomSpawnOnHit=[]))),
+        prefab("RodSpawn", comp("SpawnAbility", m(spawnPrefab=[R("Imp"), R("Wood")]))),  # a summon: creatures only
         prefab("Wisp", character(name="$enemy_missing", health=10)),  # unresolved name, never spawns: hidden
         with_components(item("Egg", name="$item_egg", icons=[S("Egg")]), comp("EggGrow", m(grownPrefab=R("Pup")))),
         prefab("Spawner_Raider", comp("CreatureSpawner", creature_spawner("Raider"))),
@@ -251,6 +258,7 @@ def recipes():
         recipe("Recipe_Helmet", "Helmet", "Bench", resources=[req("Ingot", 2, 1)]),
         recipe("Recipe_Mead", "Mead", amount=3, resources=[req("Fish", 1)]),
         recipe("Recipe_OddBar", "OddBar", resources=[req("Wood", 1)]),
+        recipe("Recipe_Rod", "Rod", resources=[req("Wood", 1)]),
     ]
 
 

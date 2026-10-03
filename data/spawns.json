@@ -6487,5 +6487,45 @@
   "creature": "Wolf_cub",
   "source": "offspring",
   "parent": "Wolf_spiritcaller"
+ },
+ {
+  "creature": "BlobFrost",
+  "source": "summon",
+  "item": "BombBlob_Frost"
+ },
+ {
+  "creature": "BlobLava",
+  "source": "summon",
+  "item": "BombBlob_Lava"
+ },
+ {
+  "creature": "BlobMork",
+  "source": "summon",
+  "item": "BombBlob_Morkhalla"
+ },
+ {
+  "creature": "Blob",
+  "source": "summon",
+  "item": "BombBlob_Poison"
+ },
+ {
+  "creature": "BlobElite",
+  "source": "summon",
+  "item": "BombBlob_PoisonElite"
+ },
+ {
+  "creature": "BlobTar",
+  "source": "summon",
+  "item": "BombBlob_Tar"
+ },
+ {
+  "creature": "FrozenKing_p2",
+  "source": "phase",
+  "parent": "FrozenKing"
+ },
+ {
+  "creature": "FrozenKing_p3",
+  "source": "phase",
+  "parent": "FrozenKing_p2"
  }
 ]

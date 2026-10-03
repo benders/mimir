@@ -211,5 +211,15 @@
   "creature": "Pup",
   "source": "offspring",
   "parent": "Raider_sleeping"
+ },
+ {
+  "creature": "Imp",
+  "source": "summon",
+  "item": "Rod"
+ },
+ {
+  "creature": "Chief_p2",
+  "source": "phase",
+  "parent": "Chief"
  }
 ]

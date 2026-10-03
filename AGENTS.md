@@ -89,7 +89,9 @@ catch drops; fish spawn as `creature` ids in `spawns` but have no `creatures` en
 `kind: trader` = Haldor / Hildir / BogWitch (id = name in the location prefab): `sells` [{item, stack, price in Coins,
 `requiredKey` global key}], `locations` [{location, biomes}]), `status_effects`. Each `spawns` entry has a `source`: `world` (SpawnSystem),
 `raid` (RandEventSystem; the event's biomes), `location` / `dungeon` (spawners and boss altars in a location or its
-dungeon rooms; the location's biomes), `offspring` (`parent` creature) or `egg` (`item` that hatches).
+dungeon rooms; the location's biomes), `offspring` (`parent` creature), `egg` (`item` that hatches), `summon` (an attack `item`'s projectile makes it;
+`parent` creature carrying the item, none if only players can use it) or `phase` (the `parent` creature's death effects
+create it, a boss's next stage). `summon` and `phase` count as reachable only once their parent or item is.
 Ids are prefab names; references are ids. Empty, zero, false and "Normal" values are omitted. Text is plain: Unity
 rich-text tags are stripped; creatures whose name was colored (Hildir's minibosses) are flagged `named`. Pieces that make items on their own have `produces` (`item`, `secPerUnit`, `max`; a Beehive's working `biomes`, a
 Sap Extractor's `connectsTo` root with the biomes it grows in); sources of kind `destructible` are non-piece objects

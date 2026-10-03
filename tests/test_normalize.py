@@ -185,6 +185,22 @@ class Entities(FixtureCase):
         self.assertIn("Egg", N.reachable(items, [{"id": "Hen"}], [], [], [], [], spawn_list)[0])
         self.assertNotIn("Egg", N.reachable(items, [{"id": "Hen"}], [], [], [], [], spawn_list[:1])[0])
 
+    def test_summons_and_phases(self):
+        self.assertEqual(self.spawns("summon"), [{"creature": "Imp", "source": "summon", "item": "Rod"}])  # SpawnAbility
+        self.assertEqual(self.spawns("phase"), [{"creature": "Chief_p2", "source": "phase", "parent": "Chief"}])
+
+    def test_summon_and_phase_need_their_parent(self):
+        items, creatures = [{"id": "Rod"}], [{"id": "Imp"}, {"id": "A"}, {"id": "B"}, {"id": "C"}]
+        spawn_list = [{"creature": "Imp", "source": "summon", "item": "Rod"},
+                      {"creature": "C", "source": "phase", "parent": "B"},
+                      {"creature": "B", "source": "phase", "parent": "A"},
+                      {"creature": "Imp", "source": "summon", "parent": "Imp2"}]
+        reached = lambda sp: N.reachable(items, creatures, [], [], [], [], sp)[1]
+        self.assertEqual(reached(spawn_list), set())
+        self.assertEqual(reached(spawn_list + [{"creature": "A", "source": "world"}]), {"A", "B", "C"})  # chained phases
+        recipes = [{"item": "Rod", "enabled": True, "resources": []}]
+        self.assertEqual(N.reachable(items, creatures, [], recipes, [], [], spawn_list)[1], {"Imp"})
+
     def test_produces(self):
         hive = N.piece("Hive", N.PREFABS["Hive"], {})["produces"]
         self.assertEqual(hive, {"item": "Nectar", "secPerUnit": 600, "max": 4, "biomes": ["Meadows", "BlackForest"]})

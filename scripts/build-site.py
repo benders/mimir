@@ -392,7 +392,7 @@ def biome_weights(cid: str, seen: frozenset = frozenset()) -> dict[str, float]:
     w = spread({"world", "location", "dungeon"})
     if not w:
         seen |= {cid}
-        parents = [s["parent"] for s in spawns_of[cid] if s.get("source") in ("offspring", "growup")]
+        parents = [s["parent"] for s in spawns_of[cid] if s.get("source") in ("offspring", "growup", "phase")]
         parents += [e["parent"] for s in spawns_of[cid] if s.get("source") == "egg"
                     for e in spawns_of[s["item"]] if e.get("source") == "offspring"]
         for p in parents:
@@ -704,7 +704,7 @@ def biome_list(s: dict) -> str:
 
 
 def spawn_sections(spawns: list[dict]) -> str:
-    """Where a creature comes from: ambient world spawns, locations and dungeons, raids, offspring."""
+    """Where a creature comes from: ambient world spawns, locations and dungeons, raids, offspring, summons and boss phases."""
     by = defaultdict(list)
     for s in spawns:
         by[s.get("source", "world")].append(s)
@@ -748,6 +748,10 @@ def spawn_sections(spawns: list[dict]) -> str:
     born = [link("creature", s["parent"]) for s in by["offspring"] + by["growup"]] + \
            [link("item", s["item"]) for s in by["egg"]]
     out += section("Born from", reflist(born))
+    summoned = [link("creature", s["parent"]) + (f" ({link('item', s['item'])})" if s.get("item") else "")
+                if s.get("parent") else link("item", s["item"]) for s in by["summon"]]
+    out += section("Summoned by", reflist(summoned))
+    out += section("Phase of", reflist(link("creature", s["parent"]) for s in by["phase"]))
     return out
 
 

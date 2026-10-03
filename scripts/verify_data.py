@@ -97,8 +97,12 @@ def main() -> int:
     check(spawned("Bonemass", "location", biomes="Swamp"), "Bonemass: Swamp altar")
     check(spawned("Neck", "raid", event="army_eikthyr"), "Necks in the Eikthyr raid")
     check(spawned("Wolf_cub", "offspring", parent="Wolf"), "Wolf cub born from Wolf")
+    check(spawned("FrozenKing_p2", "phase", parent="FrozenKing") and spawned("FrozenKing_p3", "phase", parent="FrozenKing_p2"),
+          "Moder-king's phases: FrozenKing -> _p2 -> _p3")
+    check(spawned("BlobFrost", "summon", item="BombBlob_Frost"), "Blob Bomb: Frost summons a Frost Blob")
     check(spawned("TrollFrost", "world", biomes="DeepNorth"), "TrollFrost: spawner-placed world spawn")
-    check(all(s.get("biomes") for s in spawns if s.get("source") not in ("offspring", "egg", "growup")), "every spawn has a biome")
+    check(all(s.get("biomes") for s in spawns if s.get("source") not in ("offspring", "egg", "growup", "summon", "phase")),
+          "every spawn has a biome")
     bosses = [c for c in creatures.values() if c.get("boss") and not c["id"].endswith(("_p2", "_p3"))]
     unplaced = sorted(c["id"] for c in bosses if not any(s["creature"] == c["id"] for s in spawns))
     check(unplaced == ["Hive", "TheHive"], f"every boss but the Queen's hives has a location (unplaced: {unplaced})")
