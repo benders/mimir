@@ -24,17 +24,6 @@
  {
   "station": "blastfurnace",
   "kind": "smelter",
-  "from": "FlametalOreNew",
-  "to": "FlametalNew",
-  "amount": 1,
-  "time": 30,
-  "fuel": "Coal",
-  "fuelPerProduct": 2,
-  "capacity": 10
- },
- {
-  "station": "blastfurnace",
-  "kind": "smelter",
   "from": "GoldOre",
   "to": "Gold",
   "amount": 1,
@@ -462,15 +451,6 @@
   "kind": "cooking",
   "from": "StaffOrbofAhriUncooked",
   "to": "StaffOrbofAhri",
-  "amount": 1,
-  "time": 50,
-  "fuel": "FrozenFuel"
- },
- {
-  "station": "piece_FrostFoundry",
-  "kind": "cooking",
-  "from": "StaffSpiritCallerUncooked",
-  "to": "StaffSpiritCaller",
   "amount": 1,
   "time": 50,
   "fuel": "FrozenFuel"

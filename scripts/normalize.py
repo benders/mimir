@@ -248,6 +248,39 @@ def item(name: str, p: dict) -> dict | None:
 
 
 WEAPON_TYPES = {"OneHandedWeapon", "TwoHandedWeapon", "TwoHandedWeaponLeft", "Bow", "Torch", "Tool"}
+AMMO_TYPES = {"Ammo", "AmmoNonEquipable"}
+# Fields only some item types use; every ItemDrop carries the defaults (armor 10, block 10, skill Swords...).
+ARMOR_FIELDS = {"armor", "armorPerLevel"}  # Player.GetBodyArmor sums helmet, chest, legs and shoulder only
+BLOCK_FIELDS = {"block", "blockPerLevel", "parryForce", "parryForcePerLevel", "parryBonus"}  # Humanoid.GetCurrentBlocker:
+# the left-hand item (shield, bow, torch), else the weapon
+ATTACK_FIELDS = {"skill", "toolTier", "damages", "damagesPerLevel", "attackForce", "backstab", "attack", "secondaryAttack"}
+
+
+def catapult_ammo() -> set[str]:
+    """Items a Catapult fires with damage: its default ammo and m_includeItemsOverride (m_onlyIncludedItemsDealDamage)."""
+    out = set()
+    for p in PREFABS.values():
+        if c := comp(p, "Catapult"):
+            out |= {ref(c["m_defaultAmmo"])} | {ref(x) for x in c.get("m_includeItemsOverride") or []}
+    return out - {None}
+
+
+def prune_item_fields(items: list[dict]) -> None:
+    """Drop the stat fields an item's type never uses (#7, #19). Internal attack items keep everything: creatures
+    use them whatever their type."""
+    ammo = catapult_ammo()
+    for i in items:
+        if i["internal"]:
+            continue
+        t, drop = i["type"], set()
+        if t not in {"Helmet", "Chest", "Legs", "Shoulder"}:
+            drop |= ARMOR_FIELDS
+        if t not in WEAPON_TYPES | {"Shield"}:
+            drop |= BLOCK_FIELDS
+        if t not in WEAPON_TYPES | AMMO_TYPES and i["id"] not in ammo:
+            drop |= ATTACK_FIELDS - ({"skill"} if t == "Shield" else set())  # shields train Blocking
+        for k in drop:
+            i.pop(k, None)
 
 
 def item_type(name: str) -> str | None:
@@ -493,7 +526,8 @@ def processing(name: str, p: dict) -> list[dict]:
         for c in s["m_conversion"]:
             out.append({"station": name, "kind": "fermenter", "from": ref(c["m_from"]), "to": ref(c["m_to"]),
                         "amount": c["m_producedItems"], "time": s["m_fermentationDuration"]})
-    return [x for x in out if x["from"] and x["to"]]
+    # some stations list a conversion twice (blastfurnace FlametalOreNew, piece_FrostFoundry StaffSpiritCallerUncooked)
+    return [x for x in {json.dumps(x, sort_keys=True): x for x in out}.values() if x["from"] and x["to"]]
 
 
 def source(name: str, p: dict) -> dict | None:
@@ -930,6 +964,53 @@ def summoned_by(item_name: str) -> list[str]:
                    for c in summoned_creatures(ref(a.get("m_attackProjectile")))})
 
 
+def spawned_hits(target: str, inherited: dict | None, seen: frozenset = frozenset()) -> list[dict]:
+    """Damage dealt by an attack's spawned object and what it spawns in turn. `inherited` is the attack's damage when
+    the game passes its HitData on (Attack.FireProjectileBurst -> Projectile.Setup / Aoe.Setup), else None and the
+    object deals its own m_damage (SpawnAbility, Attack.m_spawnOnTrigger, ItemData m_spawnOnHit)."""
+    if not target or target in seen:
+        return []
+    p, seen = PREFABS.get(target) or SUBPREFABS.get(target), seen | {target}
+    if not p:
+        return []
+    if pr := comp(p, "Projectile"):
+        spawn = ref(pr.get("m_spawnOnHit"))
+        own = inherited if inherited is not None else damages(pr.get("m_damage"))
+        out = [] if spawn and pr.get("m_onlySpawnedProjectilesDealDamage") else [{"kind": "projectile", "damages": own}]
+        out += spawned_hits(spawn, inherited if pr.get("m_projectilesInheritHitData") else None, seen)
+        return out + [h for r in pr.get("m_randomSpawnOnHit") or [] for h in spawned_hits(ref(r), None, seen)]
+    if a := comp(p, "Aoe"):  # Aoe.Setup takes the attack's damage only with m_useAttackSettings
+        return [{"kind": "area", "damages": inherited if inherited is not None and a.get("m_useAttackSettings", True)
+                 else damages(a["m_damage"])}]
+    if sa := comp(p, "SpawnAbility"):  # SpawnAbility.SetupProjectile / spawned Aoe: no HitData
+        return [h for x in sa["m_spawnPrefab"] for h in spawned_hits(ref(x), None, seen)]
+    return []
+
+
+def attack_hits(name: str) -> list[dict] | None:
+    """What a creature's attack item hits with when the damage goes through spawned objects (#9), None when the
+    item's own damage is all there is. Only the primary attack: MonsterAI uses m_attack."""
+    s = comp(PREFABS[name], "ItemDrop")["m_itemData"]["m_shared"]
+    a, own = s["m_attack"], damages(s["m_damages"])
+    hits, spawned = [], False
+    if a["m_attackType"] == "Projectile":
+        hits, spawned = spawned_hits(ref(a.get("m_attackProjectile")), own), True
+    else:
+        hits = [{"kind": "hit", "damages": own}]
+    for extra in (ref(a.get("m_spawnOnTrigger")), ref(s.get("m_spawnOnHit")), ref(s.get("m_spawnOnHitTerrain"))):
+        if extra:
+            hits, spawned = hits + spawned_hits(extra, None), True
+    hits = [h for h in hits if h["damages"]]
+    return hits if spawned and hits != [{"kind": "projectile", "damages": own}] else None
+
+
+def resolve_hits(items: list[dict], creatures: list[dict]) -> None:
+    attacks = {a for c in creatures for a in c.get("attacks", [])}
+    for i in items:
+        if i["id"] in attacks and (h := attack_hits(i["id"])) is not None:
+            i["hits"] = h or [{"kind": "none"}]  # spawns only creatures or effects: no damage
+
+
 def has_no_icon(name: str) -> bool:
     """An internal attack item: never in an inventory, so nobody summons with it unless a creature carries it."""
     return not any(icon(i) for i in comp(PREFABS[name], "ItemDrop")["m_itemData"]["m_shared"]["m_icons"] or [])
@@ -1029,6 +1110,8 @@ def main(argv: list[str]) -> int:
     sources += fishing(spawn_list)
     sources += traders()
 
+    prune_item_fields(items)
+    resolve_hits(items, creatures)
     recipes = [recipe(r) for r in load("recipes.json")]
     seasons(pieces, recipes)
     mark_enemy_only(items, creatures, recipes, procs, sources, pieces)

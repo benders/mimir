@@ -117,7 +117,8 @@
    "swim": 2
   },
   "attacks": [
-   "Bite"
+   "Bite",
+   "Spit"
   ],
   "equipment": [
    "FW_Helmet"

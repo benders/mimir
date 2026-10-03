@@ -25,7 +25,6 @@
   "stack": 1,
   "maxQuality": 3,
   "skill": "Blocking",
-  "backstab": 1,
   "block": 20,
   "blockPerLevel": 5,
   "parryBonus": 2
@@ -37,9 +36,7 @@
   "icon": "Charm",
   "weight": 1.0,
   "stack": 1,
-  "maxQuality": 1,
-  "backstab": 1,
-  "parryBonus": 1
+  "maxQuality": 1
  },
  {
   "id": "Coins",
@@ -48,9 +45,7 @@
   "icon": "Coins",
   "weight": 1.0,
   "stack": 1,
-  "maxQuality": 1,
-  "backstab": 1,
-  "parryBonus": 1
+  "maxQuality": 1
  },
  {
   "id": "Dust",
@@ -60,8 +55,6 @@
   "weight": 1.0,
   "stack": 1,
   "maxQuality": 1,
-  "backstab": 1,
-  "parryBonus": 1,
   "unobtainable": true
  },
  {
@@ -71,9 +64,7 @@
   "icon": "Egg",
   "weight": 1.0,
   "stack": 1,
-  "maxQuality": 1,
-  "backstab": 1,
-  "parryBonus": 1
+  "maxQuality": 1
  },
  {
   "id": "FW_Helmet",
@@ -83,9 +74,7 @@
   "weight": 1.0,
   "stack": 1,
   "maxQuality": 1,
-  "backstab": 1,
   "armor": 8,
-  "parryBonus": 1,
   "enemyOnly": true
  },
  {
@@ -95,9 +84,7 @@
   "icon": "Fish",
   "weight": 1.0,
   "stack": 1,
-  "maxQuality": 1,
-  "backstab": 1,
-  "parryBonus": 1
+  "maxQuality": 1
  },
  {
   "id": "Gem",
@@ -106,9 +93,7 @@
   "icon": "Gem",
   "weight": 1.0,
   "stack": 1,
-  "maxQuality": 1,
-  "backstab": 1,
-  "parryBonus": 1
+  "maxQuality": 1
  },
  {
   "id": "Hammer",
@@ -129,9 +114,7 @@
   "icon": "Helmet",
   "weight": 1.0,
   "stack": 1,
-  "maxQuality": 1,
-  "backstab": 1,
-  "parryBonus": 1
+  "maxQuality": 1
  },
  {
   "id": "Helmet",
@@ -141,10 +124,8 @@
   "weight": 1.0,
   "stack": 1,
   "maxQuality": 1,
-  "backstab": 1,
   "armor": 4,
-  "armorPerLevel": 2,
-  "parryBonus": 1
+  "armorPerLevel": 2
  },
  {
   "id": "HelmetFem",
@@ -154,9 +135,7 @@
   "weight": 1.0,
   "stack": 1,
   "maxQuality": 1,
-  "backstab": 1,
-  "armor": 5,
-  "parryBonus": 1
+  "armor": 5
  },
  {
   "id": "Ichor",
@@ -165,9 +144,7 @@
   "icon": "Ichor",
   "weight": 1.0,
   "stack": 1,
-  "maxQuality": 1,
-  "backstab": 1,
-  "parryBonus": 1
+  "maxQuality": 1
  },
  {
   "id": "Ingot",
@@ -176,9 +153,7 @@
   "icon": "Ingot",
   "weight": 1.0,
   "stack": 30,
-  "maxQuality": 1,
-  "backstab": 1,
-  "parryBonus": 1
+  "maxQuality": 1
  },
  {
   "id": "Mead",
@@ -188,8 +163,6 @@
   "weight": 1.0,
   "stack": 1,
   "maxQuality": 1,
-  "backstab": 1,
-  "parryBonus": 1,
   "consumeEffect": "SE_Fizz"
  },
  {
@@ -210,9 +183,7 @@
   "icon": "Nectar",
   "weight": 1.0,
   "stack": 1,
-  "maxQuality": 1,
-  "backstab": 1,
-  "parryBonus": 1
+  "maxQuality": 1
  },
  {
   "id": "OddBar",
@@ -222,9 +193,7 @@
   "icon": "Ingot",
   "weight": 1.0,
   "stack": 1,
-  "maxQuality": 1,
-  "backstab": 1,
-  "parryBonus": 1
+  "maxQuality": 1
  },
  {
   "id": "Ore",
@@ -234,9 +203,7 @@
   "weight": 1.0,
   "stack": 30,
   "maxQuality": 1,
-  "noTeleport": true,
-  "backstab": 1,
-  "parryBonus": 1
+  "noTeleport": true
  },
  {
   "id": "Pearl",
@@ -245,9 +212,7 @@
   "icon": "Pearl",
   "weight": 1.0,
   "stack": 1,
-  "maxQuality": 1,
-  "backstab": 1,
-  "parryBonus": 1
+  "maxQuality": 1
  },
  {
   "id": "Rod",
@@ -273,8 +238,6 @@
   "weight": 1.0,
   "stack": 1,
   "maxQuality": 1,
-  "backstab": 1,
-  "parryBonus": 1,
   "enemyOnly": true
  },
  {
@@ -295,9 +258,34 @@
   "icon": "Shard",
   "weight": 1.0,
   "stack": 1,
+  "maxQuality": 1
+ },
+ {
+  "id": "Spit",
+  "name": "Spit",
+  "type": "OneHandedWeapon",
+  "internal": true,
+  "weight": 1.0,
+  "stack": 1,
   "maxQuality": 1,
+  "damages": {
+   "poison": 5
+  },
   "backstab": 1,
-  "parryBonus": 1
+  "parryBonus": 1,
+  "attack": {
+   "type": "Projectile",
+   "stamina": 10,
+   "projectile": "SpitBolt"
+  },
+  "hits": [
+   {
+    "kind": "area",
+    "damages": {
+     "poison": 9
+    }
+   }
+  ]
  },
  {
   "id": "Sword",
@@ -370,9 +358,7 @@
   "icon": "Wood",
   "weight": 1.0,
   "stack": 50,
-  "maxQuality": 1,
-  "backstab": 1,
-  "parryBonus": 1
+  "maxQuality": 1
  },
  {
   "id": "WoodOld",
@@ -382,8 +368,6 @@
   "icon": "Wood",
   "weight": 1.0,
   "stack": 50,
-  "maxQuality": 1,
-  "backstab": 1,
-  "parryBonus": 1
+  "maxQuality": 1
  }
 ]

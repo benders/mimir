@@ -124,6 +124,24 @@ class Entities(FixtureCase):
     def test_item_without_icon_is_internal(self):
         self.assertTrue(N.item("Bite", N.PREFABS["Bite"])["internal"])
 
+    def test_item_fields_pruned_by_type(self):
+        items = [N.item(n, N.PREFABS[n]) for n in ("Helmet", "Buckler", "Sword", "Mead", "Bite")]
+        N.prune_item_fields(items)
+        helmet, buckler, sword, mead, bite = items
+        self.assertEqual(helmet["armor"], 4)
+        self.assertNotIn("block", helmet)
+        self.assertNotIn("armor", buckler)  # #7: shields don't count towards armor
+        self.assertEqual((buckler["skill"], buckler["block"]), ("Blocking", 20))
+        self.assertNotIn("backstab", buckler)
+        self.assertNotIn("armor", sword)
+        self.assertEqual(sword["skill"], "Swords")
+        self.assertFalse({"armor", "block", "skill", "backstab", "attackForce", "parryBonus"} & mead.keys())
+        self.assertIn("backstab", bite)  # internal attack items keep everything
+
+    def test_attack_hits(self):
+        self.assertIsNone(N.attack_hits("Bite"))  # melee: the item's own damage
+        self.assertEqual(N.attack_hits("Spit"), [{"kind": "area", "damages": {"poison": 9}}])  # the pool, not the bolt
+
     def test_creature_splits_attacks_and_equipment(self):
         c = N.creature("Raider", N.PREFABS["Raider"])
         self.assertEqual(c["attacks"], ["Bite"])
@@ -145,7 +163,7 @@ class Entities(FixtureCase):
         self.assertIsNone(b["extends"])
         self.assertEqual(b["craftingStation"]["buildRange"], 20)
 
-    def test_processing_skips_incomplete_conversions(self):
+    def test_processing_skips_incomplete_and_duplicate_conversions(self):
         p = N.processing("Kiln", N.PREFABS["Kiln"])
         self.assertEqual([(x["from"], x["to"], x["fuel"]) for x in p], [("Ore", "Ingot", "Wood")])
 

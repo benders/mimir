@@ -171,6 +171,15 @@ def main() -> int:
           and not items["ArmorBronzeChest"].get("enemyOnly"), "FW_/SP_ gear copies are enemyOnly, the real item isn't")
     check(not any(i.get("enemyOnly") for i in items.values() if any(r.get("item") == i["id"] for r in recipes)),
           "no craftable item is enemyOnly")
+    check(len({json.dumps(p, sort_keys=True) for p in procs}) == len(procs), "processing: each conversion once")
+    check(not any("armor" in i for i in items.values() if i["type"] == "Shield" and not i.get("internal")),
+          "shields carry no armor")
+    check("armor" in items["ArmorBronzeChest"] and not {"armor", "block", "skill"} & items["Wood"].keys(),
+          "item stat fields kept only for the types that use them")
+    check(any(h["kind"] == "area" for h in items["DvergerStaffNova"].get("hits", [])),
+          "DvergerStaffNova: damage from its Aoe (hits)")
+    check(any(h["kind"] == "area" for h in items["troll_groundslam"].get("hits", [])),
+          "troll_groundslam: weapon spawnOnHit Aoe in hits")
     check(any(s.get("becomes") == "DvergrKeyFragment" and s.get("locations") for s in sources),
           "DvergrKeyFragment: placed blackmarble_altar_crystal breaks into it")
     hidden = {"Deer_White", "DvergerTest", "FrostWisp", "Hive", "TheHive", "IceSkates", "Larva", "TorchMist", "Sled",

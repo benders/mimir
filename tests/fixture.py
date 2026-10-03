@@ -144,7 +144,7 @@ TRANSLATIONS = {
     "item_buckler": "Test Buckler",
     "item_sword": "Test Sword", "item_sword_desc": "Sharp <b>enough</b>.",
     "item_helmet": "Pot Helm", "item_fish": "Glimfish", "item_pearl": "Moon Pearl", "item_mead": "Fizz Mead", "item_coins": "Coins", "item_charm": "Lucky Charm", "npc_vendor": "Old Vendor",
-    "item_hammer": "Mallet", "item_shard": "Shard", "item_bite": "Bite",
+    "item_hammer": "Mallet", "item_shard": "Shard", "item_bite": "Bite", "item_spit": "Spit",
     "enemy_raider": "Raider", "piece_bench": "Bench", "piece_anvil": "Anvil", "piece_kiln": "Kiln",
     "piece_bush": "Twig Bush", "piece_orerock": "Ore Rock", "se_fizz": "Fizzy",
     "enemy_pup": "Pup", "enemy_chief_p2": "Chief Risen", "enemy_imp": "Imp", "enemy_shade": "Shade", "enemy_sprite": "Sprite", "enemy_moth": "Moth", "enemy_singer": "Singer", "item_wand": "Wand", "item_rod": "Summoning Rod", "enemy_chief": "<color=orange>Chief</color>", "item_egg": "Egg", "item_nectar": "Nectar", "item_ichor": "Ichor", "item_dust": "Dust",
@@ -194,6 +194,11 @@ def prefabs():
         item("Hammer", name="$item_hammer", itemType="Tool", icons=[S("Hammer")], buildPieces=R("_HammerTable")),
         item("Bite", name="$item_bite", itemType="OneHandedWeapon", attack=attack(attackStamina=0),
              damages=damages(pierce=12)),  # no icon: internal attack item
+        item("Spit", name="$item_spit", itemType="OneHandedWeapon", damages=damages(poison=5),
+             attack=attack(attackType="Projectile", attackProjectile=R("SpitBolt"))),  # the pool it leaves does the damage
+        prefab("SpitBolt", comp("Projectile", m(damage=damages(), spawnOnHit=R("SpitPool"), randomSpawnOnHit=[],
+                                                onlySpawnedProjectilesDealDamage=True, projectilesInheritHitData=False))),
+        prefab("SpitPool", comp("Aoe", m(damage=damages(poison=9), useAttackSettings=True))),
         item("Gem", name="$item_gem", icons=[S("Gem")]),  # unresolved name, only in a chest: reachable, so shown
         item("Shard", name="$item_shard", icons=[S("Shard")]),  # only from breaking the Altar
         item("Coins", name="$item_coins", icons=[S("Coins")]),
@@ -202,7 +207,7 @@ def prefabs():
         item("OddBar", name="$item_oddbar", description="$item_oddbar_desc", icons=[S("Ingot")]),  # unresolved, craftable: shown as "Odd Bar"
         raider("Raider"),
         raider("Raider_sleeping"),  # identical copy: merged into Raider's page
-        raider("Raider_Ranged", health=120),  # differs: "Raider (archer)"
+        raider("Raider_Ranged", health=120, defaultItems=[R("Bite"), R("Spit"), R("FW_Helmet")]),  # differs: "Raider (archer)"
         prefab("Pup", character(name="$enemy_pup", health=20), comp("Growup", m(grownPrefab=R("Raider")))),
         prefab("Chief", character(name="$enemy_chief", health=900, boss=True, deathEffects={"m_effectPrefabs": [
             {"m_prefab": R("vfx_Poof")}, {"m_prefab": R("Chief_p2")},
@@ -231,6 +236,7 @@ def prefabs():
               name="$piece_anvil", icon=S("Anvil"), category="Crafting", craftingStation=R("Bench"),
               resources=[req("Ingot", 4, recover=False)]),
         piece("Kiln", comp("Smelter", m(conversion=[m(**{"from": R("Ore"), "to": R("Ingot")}),
+                                                    m(**{"from": R("Ore"), "to": R("Ingot")}),  # listed twice
                                                     m(**{"from": R("Ore"), "to": None})],
                                         secPerProduct=30, fuelItem=R("Wood"), fuelPerProduct=2, maxOre=10)),
               name="$piece_kiln", icon=S("Kiln"), craftingStation=R("Bench"), resources=[req("Wood", 5)],

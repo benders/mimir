@@ -121,7 +121,13 @@ chance below 100 still counts, the chance isn't recorded. Containers, `Spawner_*
 Pieces and recipes of a SeasonalItemGroup (Halloween, Midsummer, Yule; `world/seasons.json`) carry `season`
 {name, start [day, month], end [day, month]}, both ends inclusive, end before start wraps over New Year. They are
 disabled in the game data but let through while the season is current, so `reachable()` treats them as enabled.
-Items flagged `internal` (creature attack items) or `enemyOnly` (FW_/SP_ gear copies, Dvergr crossbow) get no site
+Items keep only the stat fields their type uses: `armor*` for helmet/chest/legs/shoulder (shields' armor is ignored by the
+game), block/parry fields for weapons and shields, attack fields (`skill`, `damages`, `attack`...) for weapons, ammo and
+Catapult ammo (shields keep `skill`); `internal` items keep everything. A creature attack item whose damage goes through
+spawned objects has `hits` [{kind: projectile | area | hit (the item's own melee hit), damages}]: projectiles carry the
+attack's damage unless they only spawn, Aoe use their own `m_damage` unless they inherit the attack's, SpawnAbility
+projectiles and Aoe deal their own; `[{kind: none}]` = it deals no damage (summons, heals, buffs). No `hits` = the item's
+`damages` is what it deals. Items flagged `internal` (creature attack items) or `enemyOnly` (FW_/SP_ gear copies, Dvergr crossbow) get no site
 page; creatures list them under `attacks` (weapons) and `equipment`. Items, creatures and pieces flagged
 `unobtainable` (`normalize.reachable()` can't get to them from any source: unreleased, test, cheat, legacy or unplaced
 content) get no page, search entry or relation rows either. `verify_data.py` keeps a list of known-obtainable content

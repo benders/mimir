@@ -613,6 +613,16 @@ def attack_text(a: dict) -> str:
     return ", ".join(p for p in parts if p)
 
 
+def attack_damage(w: dict) -> str:
+    """A creature attack's damage: the item's, or what its projectiles and area effects deal (`hits`)."""
+    if not (hits := w.get("hits")):
+        return damages(w.get("damages"))
+    if hits[0]["kind"] == "none":
+        return "—"
+    return " + ".join(damages(h["damages"]) + ("" if h["kind"] == "hit" or len(hits) == 1 and h["kind"] == "projectile"
+                                                else f' <span class="qty">{h["kind"]}</span>') for h in hits)
+
+
 def item_page(i: dict) -> None:
     t = i["type"]
     facts = [
@@ -742,7 +752,7 @@ def creature_page(c: dict) -> None:
         w = ITEMS[a]
         atk = w.get("attack") or {}
         label = link("item", original(a)) if has_page("item", original(a)) else esc(clean(w.get("name")) or pretty_id(a))
-        attacks.append([label, damages(w.get("damages")),
+        attacks.append([label, attack_damage(w),
                         esc(words(atk.get("type", ""))), num(w["attackForce"]) if w.get("attackForce") else ""])
     body += section("Attacks", table(["Attack", "Damage", "Type", "Knockback"], attacks))
     gear = [link("item", original(x)) for x in c.get("equipment", []) if not ITEMS[x].get("internal")]
