@@ -169,6 +169,43 @@ class Site(unittest.TestCase):
         self.assertIn("<h1>Bench (world)</h1>", (self.out / "pieces/piece_bench.html").read_text(encoding="utf-8"))
         self.assertIn("<h1>Chief</h1>", (self.out / "creatures/Chief.html").read_text(encoding="utf-8"))
 
+    def test_mechanics_section(self):
+        for page in ("index", "blocking", "drops", "creature-levels", "damage-types", "item-upgrades"):
+            self.assertTrue((self.out / f"mechanics/{page}.html").is_file(), page)
+        home = (self.out / "index.html").read_text(encoding="utf-8")
+        self.assertIn('<a href="mechanics/index.html">Mechanics</a>', home)  # nav entry
+        index = (self.out / "mechanics/index.html").read_text(encoding="utf-8")
+        for page in ("blocking", "drops", "creature-levels", "damage-types"):
+            self.assertIn(f'href="mechanics/{page}.html"', index)
+        self.assertFalse((self.out / "mechanics/blocking.md").exists())
+        blocking = (self.out / "mechanics/blocking.html").read_text(encoding="utf-8")
+        self.assertIn("Humanoid.BlockAttack", blocking)
+        version = json.loads((ROOT / "tests/golden/meta.json").read_text(encoding="utf-8"))["gameVersion"]
+        self.assertIn(f"decompiled game code of Valheim {version}", blocking)
+        names = [e[0] for e in json.loads((self.out / "search.json").read_text(encoding="utf-8"))]
+        self.assertIn("Blocking", names)
+
+    def test_charts(self):
+        for page, text in (("damage-types", "Damage taken against armor"), ("blocking", "Damage through a block"),
+                           ("creature-levels", "Multipliers by star level")):
+            html = (self.out / f"mechanics/{page}.html").read_text(encoding="utf-8")
+            self.assertIn('<svg class="chart"', html)
+            self.assertIn("<title", html)
+            self.assertIn(text, html)
+
+    def test_links_to_mechanics(self):
+        items = list((self.out / "items").glob("*.html"))
+        buckler = (self.out / "items/Buckler.html").read_text(encoding="utf-8")  # shield stats link to Blocking
+        self.assertIn('href="mechanics/blocking.html"', buckler)
+        self.assertIn("Test Buckler", (self.out / "mechanics/blocking.html").read_text(encoding="utf-8"))  # shields table
+        dropped = [f for f in items if "<h2>Dropped by</h2>" in f.read_text(encoding="utf-8")]
+        self.assertTrue(dropped)
+        self.assertIn('href="mechanics/drops.html"', dropped[0].read_text(encoding="utf-8"))
+        raider = (self.out / "creatures/Raider.html").read_text(encoding="utf-8")
+        self.assertIn('href="mechanics/creature-levels.html"', raider)
+        self.assertIn('href="mechanics/damage-types.html"', raider)  # Resistances section
+        self.assertIn('href="mechanics/drops.html"', raider)         # Drops section
+
     def test_search_index(self):
         index = json.loads((self.out / "search.json").read_text(encoding="utf-8"))
         names = {e[1] for e in index}
