@@ -130,7 +130,9 @@ disabled in the game data but let through while the season is current, so `reach
 Player attacks (#37) carry animation timing: `chain` [{time (s, until the next level may start or the state exits;
 Speed events applied), hits}] per chain level (or per random variant, `random`), `lastChainMultiplier` (melee: always 2,
 Area: `m_lastChainDamageMultiplier`) and `cycle` (whole combo with every hit connecting, + 0.15 s FreezeFrame per melee
-hit; omitted for bow draw, crossbow reload and projectile bursts, which aren't modelled yet). Looping attacks have none.
+hit; omitted for bow draw, crossbow reload and projectile bursts, which aren't modelled yet, and for `thrown` attacks whose
+projectile lands as the weapon). Looping attacks have none. `tamedOnly` weapons (Butcher Knife) hit only tamed creatures.
+The site shows DPS per quality (`mechanics.dps`) and lists every timed attack on the `attack-speed` mechanics page.
 Items keep only the stat fields their type uses: `armor*` for helmet/chest/legs/shoulder (shields' armor is ignored by the
 game), block/parry fields for weapons and shields, attack fields (`skill`, `damages`, `attack`...) for weapons, ammo and
 Catapult ammo (shields keep `skill`); `internal` items keep everything. Blockers have `blockAdrenaline` / `parryAdrenaline`,

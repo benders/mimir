@@ -166,6 +166,36 @@
   "maxQuality": 1
  },
  {
+  "id": "Javelin",
+  "name": "Test Javelin",
+  "type": "OneHandedWeapon",
+  "icon": "Sword",
+  "weight": 1.0,
+  "stack": 1,
+  "maxQuality": 1,
+  "damages": {
+   "pierce": 10
+  },
+  "backstab": 1,
+  "parryBonus": 1,
+  "blockAdrenaline": 2,
+  "parryAdrenaline": 5,
+  "attack": {
+   "type": "Projectile",
+   "stamina": 10,
+   "projectile": "JavelinBolt",
+   "adrenaline": 1,
+   "chain": [
+    {
+     "time": 1.0,
+     "hits": 1
+    }
+   ],
+   "thrown": true
+  },
+  "unobtainable": true
+ },
+ {
   "id": "Mead",
   "name": "Fizz Mead",
   "type": "Consumable",

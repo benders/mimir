@@ -18717,6 +18717,7 @@
   "weight": 0.3,
   "stack": 1,
   "maxQuality": 1,
+  "tamedOnly": true,
   "skill": "Knives",
   "toolTier": 1,
   "damages": {
@@ -25953,7 +25954,7 @@
      "hits": 1
     }
    ],
-   "cycle": 1.034
+   "thrown": true
   },
   "modifiers": {
    "movement": -0.05
@@ -26014,7 +26015,7 @@
      "hits": 1
     }
    ],
-   "cycle": 1.034
+   "thrown": true
   },
   "modifiers": {
    "movement": -0.05
@@ -26120,7 +26121,7 @@
      "hits": 1
     }
    ],
-   "cycle": 1.034
+   "thrown": true
   },
   "modifiers": {
    "movement": -0.05
@@ -26180,7 +26181,7 @@
      "hits": 1
     }
    ],
-   "cycle": 1.034
+   "thrown": true
   },
   "modifiers": {
    "movement": -0.05
@@ -26241,7 +26242,7 @@
      "hits": 1
     }
    ],
-   "cycle": 1.034
+   "thrown": true
   },
   "modifiers": {
    "movement": -0.05
@@ -26314,7 +26315,7 @@
      "hits": 1
     }
    ],
-   "cycle": 1.034
+   "thrown": true
   },
   "modifiers": {
    "movement": -0.05
@@ -26379,7 +26380,7 @@
      "hits": 1
     }
    ],
-   "cycle": 1.034
+   "thrown": true
   },
   "modifiers": {
    "movement": -0.05
@@ -26440,7 +26441,7 @@
      "hits": 1
     }
    ],
-   "cycle": 1.034
+   "thrown": true
   },
   "modifiers": {
    "movement": -0.05
@@ -26501,7 +26502,7 @@
      "hits": 1
     }
    ],
-   "cycle": 1.034
+   "thrown": true
   },
   "modifiers": {
    "movement": -0.05
@@ -26563,7 +26564,7 @@
      "hits": 1
     }
    ],
-   "cycle": 1.034
+   "thrown": true
   },
   "modifiers": {
    "movement": -0.05
@@ -26625,7 +26626,7 @@
      "hits": 1
     }
    ],
-   "cycle": 1.034
+   "thrown": true
   },
   "modifiers": {
    "movement": -0.05
@@ -26686,7 +26687,7 @@
      "hits": 1
     }
    ],
-   "cycle": 1.034
+   "thrown": true
   },
   "modifiers": {
    "movement": -0.05
@@ -26747,7 +26748,7 @@
      "hits": 1
     }
    ],
-   "cycle": 1.034
+   "thrown": true
   },
   "modifiers": {
    "movement": -0.05

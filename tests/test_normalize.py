@@ -164,6 +164,9 @@ class Entities(FixtureCase):
         self.assertEqual(sword["cycle"], round(0.4 + 0.725 + 3 * N.HIT_FREEZE, 3))  # + the freeze per melee hit
         self.assertNotIn("chain", N.item("SP_Sword", N.PREFABS["SP_Sword"])["attack"])  # looping: no exit time
         self.assertNotIn("chain", N.item("Bite", N.PREFABS["Bite"])["attack"])  # creature attack: not the player's animator
+        javelin = N.item("Javelin", N.PREFABS["Javelin"])["attack"]
+        self.assertTrue(javelin["thrown"])  # the projectile respawns the item: no repeatable cycle
+        self.assertEqual((javelin["chain"], "cycle" in javelin), ([{"time": 1.0, "hits": 1}], False))
 
     def test_attack_hits(self):
         self.assertIsNone(N.attack_hits("Bite"))  # melee: the item's own damage

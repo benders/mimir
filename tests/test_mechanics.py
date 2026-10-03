@@ -36,6 +36,17 @@ class Formulas(unittest.TestCase):
         # degen 1 + 3·A/60: t = 20 ln(1 + A/20), from 60 = 20 ln 4
         self.assertAlmostEqual(M.adrenaline_drain_time(60, 60, [[0, 1], [1, 4]]), 20 * __import__("math").log(4), 3)
 
+    def test_dps(self):
+        a = {"chain": [{"time": 0.5, "hits": 1}, {"time": 0.7, "hits": 2}], "lastChainMultiplier": 2, "cycle": 1.65}
+        self.assertEqual(M.hit_damage({"slash": 30, "fire": 5, "chop": 20, "pickaxe": 9}), 35)  # chop/pickaxe skipped
+        self.assertEqual(M.combo_damage(10, a), 10 + 2 * 10 * 2)  # the last level's two hits doubled
+        self.assertEqual(M.combo_damage(10, {**a, "damageMultiplier": 1.5}), 75)
+        self.assertAlmostEqual(M.dps(10, a), 50 / 1.65)
+        self.assertIsNone(M.dps(10, {"chain": a["chain"]}))  # no cycle: bow draw, reload, bursts
+        self.assertIsNone(M.dps(0, a))
+        self.assertEqual(M.skill_roll(100), (0.85, 1.0))  # Skills.GetRandomSkillFactor, clamped at 1
+        self.assertEqual(tuple(round(x, 2) for x in M.skill_roll(0)), (0.25, 0.55))
+
     def test_block_power(self):
         # (42 + 6 * 2) * (1 + 0.5 * 0.5) = 67.5; parry x1.5
         self.assertEqual(M.block_power(42, 6, 3, 50), 67.5)

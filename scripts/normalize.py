@@ -220,14 +220,17 @@ def attack_timing(a: dict) -> dict | None:
         chain.append({"time": round(secs, 3), "hits": sum(1 for e in tr["events"] if e[1] in HIT_EVENTS and start <= e[0] <= stop)})
         speed = after if stop < exit_t else 1.0
     melee = a["m_attackType"] in ("Horizontal", "Vertical")
-    out = {"chain": chain, "random": len(names) > 1 and levels <= 1}
+    proj = PREFABS.get(ref(a.get("m_attackProjectile")) or "") or SUBPREFABS.get(ref(a.get("m_attackProjectile")) or "")
+    # Projectile.Setup (m_respawnItemOnHit): the weapon itself flies and lands as an item (spear throw); not repeatable
+    thrown = a["m_attackType"] == "Projectile" and bool(proj and (comp(proj, "Projectile") or {}).get("m_respawnItemOnHit"))
+    out = {"chain": chain, "random": len(names) > 1 and levels <= 1, "thrown": thrown}
     if levels > 1 and melee:
         out["lastChainMultiplier"] = 2  # Attack.DoMeleeAttack: the last level always deals x2
     elif levels > 1 and a["m_attackType"] == "Area" and a.get("m_lastChainDamageMultiplier", 2) > 1:
         out["lastChainMultiplier"] = a.get("m_lastChainDamageMultiplier", 2)  # Attack.DoAreaAttack
     # The whole combo (or the one attack), every hit connecting. Not when the animation isn't the whole story yet:
     # bow draw (m_drawDurationMin), crossbow reload (m_reloadTime), projectile bursts (m_burstInterval).
-    if not out["random"] and not a.get("m_bowDraw") and not a.get("m_requiresReload") and a.get("m_projectileBursts", 1) <= 1:
+    if not out["random"] and not thrown and not a.get("m_bowDraw") and not a.get("m_requiresReload") and a.get("m_projectileBursts", 1) <= 1:
         out["cycle"] = round(sum(c["time"] + (HIT_FREEZE * c["hits"] if melee else 0) for c in chain), 3)
     return out
 
@@ -277,6 +280,7 @@ def item(name: str, p: dict) -> dict | None:
         "stack": s["m_maxStackSize"],
         "maxQuality": s["m_maxQuality"],
         "noTeleport": not s["m_teleportable"],
+        "tamedOnly": s.get("m_tamedOnly", False),  # Attack.DoMeleeAttack/DoAreaAttack: hits only tamed creatures
         "dlc": s["m_dlc"],
         "skill": s["m_skillType"] if s["m_skillType"] != "None" else None,
         "toolTier": s["m_toolTier"],
@@ -317,7 +321,7 @@ ARMOR_FIELDS = {"armor", "armorPerLevel"}  # Player.GetBodyArmor sums helmet, ch
 BLOCK_FIELDS = {"block", "blockPerLevel", "parryForce", "parryForcePerLevel", "parryBonus", "blockAdrenaline",
                 "parryAdrenaline"}  # Humanoid.GetCurrentBlocker:
 # the left-hand item (shield, bow, torch), else the weapon
-ATTACK_FIELDS = {"skill", "toolTier", "damages", "damagesPerLevel", "attackForce", "backstab", "attack", "secondaryAttack"}
+ATTACK_FIELDS = {"tamedOnly", "skill", "toolTier", "damages", "damagesPerLevel", "attackForce", "backstab", "attack", "secondaryAttack"}
 
 
 def catapult_ammo() -> set[str]:

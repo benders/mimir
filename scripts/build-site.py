@@ -588,6 +588,10 @@ def quality_table(i: dict) -> str:
     dmg, dpl = i.get("damages", {}), i.get("damagesPerLevel", {})
     for k in dict.fromkeys([*dmg, *dpl]):
         cols.append((k.capitalize(), dmg.get(k, 0), dpl.get(k, 0)))
+    if t in WEAPONS and not i.get("tamedOnly"):
+        for label, a in (("DPS", i.get("attack")), ("Secondary DPS", i.get("secondaryAttack"))):
+            if (d := mechanics.dps(mechanics.hit_damage(dmg), a)) is not None:  # linear in damage, so per level too
+                cols.append((label, d, mechanics.dps(mechanics.hit_damage(dpl), a) or 0))
     if t in ARMOR:
         cols.append(("Armor", i.get("armor", 0), i.get("armorPerLevel", 0)))
     if t in WEAPONS | {"Shield"} and i.get("block"):
@@ -600,7 +604,7 @@ def quality_table(i: dict) -> str:
         return ""
     if mq <= 1:
         return kv((c[0], num(c[1])) for c in cols)
-    rows = [[str(q)] + [num(b + (q - 1) * p) for _, b, p in cols] for q in range(1, mq + 1)]
+    rows = [[str(q)] + [num(round(b + (q - 1) * p, 1)) for _, b, p in cols] for q in range(1, mq + 1)]
     return table(["Quality"] + [esc(c[0]) for c in cols], rows, "num")
 
 
@@ -614,6 +618,13 @@ def attack_text(a: dict) -> str:
         parts.append(f"×{num(a['damageMultiplier'])} damage")
     if a.get("projectile"):
         parts.append(f"projectile {esc(pretty_id(a['projectile']))}")
+    if a.get("thrown"):
+        parts.append("thrown (the weapon lands where it hits)")
+    if a.get("cycle"):
+        hits = sum(c["hits"] for c in a["chain"])
+        n = len(a["chain"])
+        parts.append((f"{n}-attack combo in {num(a['cycle'])} s" if n > 1 else f"{num(a['cycle'])} s")
+                     + (f" ({hits} hits)" if hits != n else ""))
     return ", ".join(p for p in parts if p)
 
 
@@ -702,6 +713,8 @@ def item_page(i: dict) -> None:
             combat.append(("Parry bonus", f'×{num(i["parryBonus"])}' if i.get("parryBonus") else None))
             combat.append(("Adrenaline", f'+{num(i.get("blockAdrenaline", 0))} per block, '
                                          f'+{num(i.get("parryAdrenaline", 0))} per parry'))
+        if i.get("tamedOnly"):
+            combat.append(("Hits", "only tamed creatures"))
         if {"chop", "pickaxe"} & set(i.get("damages", {})):
             combat.append(("Tool tier", num(i.get("toolTier", 0))))
     if i.get("ammoType") and t in WEAPONS | {"Ammo", "AmmoNonEquipable"}:
@@ -716,6 +729,8 @@ def item_page(i: dict) -> None:
     stat_note = ""
     if t == "Shield" or (t in WEAPONS and i.get("block") and i.get("skill") == "Blocking"):
         stat_note = f'<p class="note">How block power, parrying and stagger work: {mech_link("blocking", "Blocking")}.</p>'
+    elif t in WEAPONS and any((a or {}).get("cycle") for a in (i.get("attack"), i.get("secondaryAttack"))):
+        stat_note = f'<p class="note">How attack speed and DPS are worked out: {mech_link("attack-speed", "Attack speed")}.</p>'
     elif t in ARMOR and i.get("armor"):
         stat_note = (f'<p class="note">How armor reduces damage: {mech_link("damage-types", "Damage types and resistances")}.</p>')
     body += section("Stats", quality_table(i) + kv(combat) + stat_note)
@@ -1160,6 +1175,24 @@ def block_adrenaline_attacks() -> str:
     return table(["Weapon", "Attack", "Type", "Per hit", "On use"], rows, "num")
 
 
+def block_attack_speed() -> str:
+    """Every player weapon attack with a known cycle: hits, time, and DPS at max quality (tooltip damage, skill roll 1)."""
+    rows = []
+    weapons = (x for x in ITEMS.values() if x["type"] in WEAPONS and has_page("item", x["id"]) and not x.get("tamedOnly"))
+    for i in sorted(weapons, key=lambda x: (words(x.get("skill") or ""), name_of("item", x["id"]).lower())):
+        q = i.get("maxQuality", 1)
+        dmg = {k: i.get("damages", {}).get(k, 0) + (q - 1) * i.get("damagesPerLevel", {}).get(k, 0)
+               for k in mechanics.COMBAT_DAMAGE}
+        for label, a in (("primary", i.get("attack")), ("secondary", i.get("secondaryAttack"))):
+            d = mechanics.dps(mechanics.hit_damage(dmg), a)
+            if d is None:
+                continue
+            rows.append([link("item", i["id"]), esc(words(i.get("skill") or "")), label,
+                         num(sum(c["hits"] for c in a["chain"])), num(a["cycle"]),
+                         num(round(mechanics.combo_damage(mechanics.hit_damage(dmg), a), 1)), num(round(d, 1))])
+    return table(["Weapon", "Skill", "Attack", "Hits", "Seconds", "Damage", "DPS"], rows, "num")
+
+
 def block_adrenaline_blockers() -> str:
     """Shields and weapons whose block or parry adrenaline differs from the ItemDrop defaults (2 and 5)."""
     rows = []
@@ -1203,7 +1236,7 @@ def mech_blocks() -> dict:
             "pseudo-drops": block_pseudo_drops, "pseudo-table": block_pseudo_table,
             "drops-example": block_drops_example, "upgrade-costs": block_upgrade_costs,
             "upgrade-example": block_upgrade_example,
-            "trinkets": block_trinkets, "adrenaline-attacks": block_adrenaline_attacks,
+            "trinkets": block_trinkets, "attack-speed": block_attack_speed, "adrenaline-attacks": block_adrenaline_attacks,
             "adrenaline-blockers": block_adrenaline_blockers, "adrenaline-effects": block_adrenaline_effects,
             "adrenaline-sources": block_adrenaline_sources,
             "adrenaline-chart": lambda: mechanics.adrenaline_chart(PLAYER["adrenaline"]),

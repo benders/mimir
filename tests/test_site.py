@@ -248,6 +248,17 @@ class Site(unittest.TestCase):
         self.assertIn("<td>primary</td><td>Horizontal</td><td>2</td>", page)  # Sword: 2 per hit
         self.assertIn("<td>3</td><td>0</td>", page)  # Buckler's block and parry adrenaline
 
+    def test_attack_speed(self):
+        sword = (self.out / "items/Sword.html").read_text(encoding="utf-8")
+        self.assertIn("<th>DPS</th>", sword)
+        # (35 + 2 hits x 35 x 2) / 1.575 s at quality 1; slash +6 per level -> (48 + 5) x 5 / 1.575 at quality 4
+        self.assertIn("<tr><td>1</td><td>30</td><td>5</td><td>111.1</td>", sword)
+        self.assertIn("<tr><td>4</td><td>48</td><td>5</td><td>168.3</td>", sword)
+        self.assertIn("2-attack combo in 1.57 s (3 hits)", sword)
+        self.assertIn('href="mechanics/attack-speed.html"', sword)
+        page = (self.out / "mechanics/attack-speed.html").read_text(encoding="utf-8")
+        self.assertIn("<td>primary</td><td>3</td><td>1.57</td><td>265</td><td>168.3</td>", page)
+
     def test_destroyed_into_item(self):
         shard = (self.out / "items/Shard.html").read_text(encoding="utf-8")
         self.assertIn("when destroyed", shard)

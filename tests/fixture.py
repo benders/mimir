@@ -143,7 +143,7 @@ TRANSLATIONS = {
     "item_ore": "Rustore", "item_ingot": "Ingot",
     "item_buckler": "Test Buckler",
     "item_sword": "Test Sword", "item_sword_desc": "Sharp <b>enough</b>.",
-    "item_helmet": "Pot Helm", "item_fish": "Glimfish", "item_pearl": "Moon Pearl", "item_mead": "Fizz Mead", "item_coins": "Coins", "item_charm": "Lucky Charm", "npc_vendor": "Old Vendor",
+    "item_helmet": "Pot Helm", "item_fish": "Glimfish", "item_pearl": "Moon Pearl", "item_javelin": "Test Javelin", "item_mead": "Fizz Mead", "item_coins": "Coins", "item_charm": "Lucky Charm", "npc_vendor": "Old Vendor",
     "item_hammer": "Mallet", "item_shard": "Shard", "item_bite": "Bite",
     "enemy_raider": "Raider", "piece_bench": "Bench", "piece_anvil": "Anvil", "piece_kiln": "Kiln",
     "piece_bush": "Twig Bush", "piece_orerock": "Ore Rock", "se_fizz": "Fizzy",
@@ -192,6 +192,9 @@ def prefabs():
                         comp("Fish", m(name="$item_fish", baits=[m(bait=R("Wood"), chance=1)],
                                        extraDrops=drop_table(("Pearl", 1, 2, 1))))),
         item("Pearl", name="$item_pearl", icons=[S("Pearl")]),  # only from fishing
+        item("Javelin", name="$item_javelin", itemType="OneHandedWeapon", icons=[S("Sword")], damages=damages(pierce=10),
+             attack=attack(attackAnimation="throw", attackType="Projectile", attackProjectile=R("JavelinBolt"))),
+        prefab("JavelinBolt", comp("Projectile", m(damage=damages(), respawnItemOnHit=True))),  # lands as the item
         item("Mead", name="$item_mead", itemType="Consumable", icons=[S("Mead")], consumeStatusEffect=R("SE_Fizz")),
         item("Hammer", name="$item_hammer", itemType="Tool", icons=[S("Hammer")], buildPieces=R("_HammerTable")),
         item("Bite", name="$item_bite", itemType="OneHandedWeapon", attack=attack(attackStamina=0),
@@ -400,6 +403,8 @@ def write_dump(raw: Path) -> Path:
                    "offset": 0.0, "events": [[0.2, "Speed", 2.0], [0.4, "Hit"], [0.6, "Chain"]]},
         "swing1": {"state": "Base Layer.swing 1", "layer": 0, "speed": 2.0, "clip": "Swing2", "length": 0.8, "exit": 1.0,
                    "offset": 0.0, "events": [[0.1, "Speed", 0.5], [0.3, "OnAttackTrigger"], [0.5, "Hit"]]},
+        "throw": {"state": "Base Layer.throw", "layer": 0, "speed": 1.0, "clip": "Throw", "length": 1.0, "exit": 1.0,
+                  "offset": 0.0, "events": [[0.5, "OnAttackTrigger"]]},
         "beam": {"state": "upperbody.beam", "layer": 1, "speed": 1.0, "clip": "Beam", "length": 0.5, "exit": None,
                  "offset": 0.0, "events": [[0.1, "Hit"]]},  # loops until released: no timing
     }})

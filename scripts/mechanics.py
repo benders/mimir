@@ -146,6 +146,37 @@ def adrenaline_drain_time(max_a: float, start: float, degen_keys: list, steps: i
     return sum(h / curve(degen_keys, (k + 0.5) * h / max_a) for k in range(steps))
 
 
+# Damage types a creature takes; nearly every creature ignores chop and pickaxe (Character m_damageModifiers).
+COMBAT_DAMAGE = ("damage", "blunt", "slash", "pierce", "fire", "frost", "lightning", "poison", "spirit")
+
+
+def hit_damage(damages: dict) -> float:
+    """One hit's damage against a creature at full skill roll: the weapon's combat damage types summed."""
+    return sum(damages.get(k, 0) for k in COMBAT_DAMAGE)
+
+
+def skill_roll(skill: float) -> tuple[float, float]:
+    """Skills.GetRandomSkillFactor: each hit's damage × a uniform roll in [n - 0.15, n + 0.15] clamped to [0, 1],
+    n = lerp(0.4, 1, skill / 100)."""
+    n = 0.4 + 0.6 * skill / 100
+    return max(0.0, n - 0.15), min(1.0, n + 0.15)
+
+
+def combo_damage(per_hit: float, attack: dict) -> float:
+    """Damage of one pass through the attack's chain (data/items.json `chain`): every hit × m_damageMultiplier
+    (Attack.ModifyDamage), the last chain level's hits × the last-chain multiplier (Attack.DoMeleeAttack, DoAreaAttack)."""
+    chain, mult, last = attack["chain"], attack.get("damageMultiplier") or 1, attack.get("lastChainMultiplier") or 1
+    return sum(c["hits"] * per_hit * mult * (last if k == len(chain) - 1 else 1) for k, c in enumerate(chain))
+
+
+def dps(per_hit: float, attack: dict | None) -> float | None:
+    """Damage per second holding the attack, every hit connecting: combo damage / `cycle` (the animation time of the
+    whole chain plus the 0.15 s melee hit freeze). None when the cycle isn't known (bow draw, reload, bursts, loops)."""
+    if not attack or not attack.get("cycle") or not per_hit:
+        return None
+    return combo_damage(per_hit, attack) / attack["cycle"]
+
+
 # --- markdown -------------------------------------------------------------------------------
 
 def parse_front_matter(text: str) -> tuple[dict, str]:
