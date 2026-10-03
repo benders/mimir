@@ -30,6 +30,10 @@
   "icon": "Bench",
   "enabled": true,
   "category": "Crafting",
+  "tags": [
+   "Crafting",
+   "Furniture"
+  ],
   "tools": [
    "Hammer"
   ],

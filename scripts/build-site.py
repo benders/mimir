@@ -1054,7 +1054,7 @@ def loot_table(t: dict) -> str:
 
 
 def piece_page(p: dict) -> None:
-    sub = esc(words(p.get("category", "")))
+    sub = " · ".join(esc(t) for t in p.get("tags", [])) or ("Found in the world" if world_piece(p) else "")
     world = world_piece(p)
     facts = [("Built with", " ".join(link("item", t) for t in p.get("tools", []))),
              ("Requires", link("piece", p["station"]) + " nearby" if p.get("station") and not world else None),
@@ -1496,13 +1496,27 @@ def index_pages() -> None:
         f'<h2 id="{g}"{group_stage("creature", groups[g])}>{esc(labels[g])}</h2>{bosses_first(groups[g])}' for g in order)
     page("creatures/index.html", "Creatures", body)
 
-    groups, world = defaultdict(list), []
+    groups, world = defaultdict(list), []  # the build menu's tags (a piece under each of its tags), then the world
+    copies = {w for ws in world_copies.values() for w in ws}
     for p in PIECES.values():
-        if has_page("piece", p["id"]):
-            (world if world_piece(p) else groups[words(p.get("category", "Misc"))]).append(p["id"])
-    body = "<h1>Pieces</h1>" + "".join(f"<h2{group_stage('piece', groups[g])}>{esc(g)}</h2>{grid('piece', groups[g])}"
-                                       for g in sorted(groups))
-    if world:  # loot chests, ruins, traders' campfires: standing in locations, not buildable
+        if not has_page("piece", p["id"]):
+            continue
+        if world_piece(p):
+            if p["id"] not in copies or p.get("contains"):  # a plain copy of a buildable piece is linked from that
+                # piece's page; loot chests stay
+                world.append(p["id"])
+            continue
+        for t in p.get("tags") or ["Other"]:
+            groups[t].append(p["id"])
+    order = [t for t in META.get("pieceTags", []) + sorted(groups) if t in groups]
+    order = list(dict.fromkeys(order))
+    anchor = lambda t: re.sub(r"[^a-z]+", "-", t.lower()).strip("-")
+    toc = " · ".join(f'<a href="pieces/index.html#{anchor(t)}"{group_stage("piece", groups[t])}>{esc(t)}</a>' for t in order)
+    if world:
+        toc += f' · <a href="pieces/index.html#world"{group_stage("piece", world)}>Found in the world</a>'
+    body = f'<h1>Pieces</h1><p class="toc">{toc}</p>' + "".join(
+        f'<h2 id="{anchor(t)}"{group_stage("piece", groups[t])}>{esc(t)}</h2>{grid("piece", groups[t])}' for t in order)
+    if world:  # loot chests, ruins, props: standing in locations, not buildable
         body += (f'<h2 id="world"{group_stage("piece", world)}>Found in the world</h2><p class="note">Not buildable: '
                  f'placed in locations and dungeons.</p>{grid("piece", world)}')
     page("pieces/index.html", "Pieces", body)

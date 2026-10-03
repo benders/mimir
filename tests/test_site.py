@@ -128,10 +128,16 @@ class Site(unittest.TestCase):
         self.assertIn("2, when broken", marble)
         self.assertNotIn("LootChest", (self.out / "items/Wood.html").read_text(encoding="utf-8"))  # not "Used in"
         index = (self.out / "pieces/index.html").read_text(encoding="utf-8")
-        world = index[index.index("Found in the world"):]
+        world = index[index.index('<h2 id="world"'):]
         self.assertIn("pieces/LootChest.html", world)
-        self.assertIn("pieces/piece_bench.html", world)
-        self.assertNotIn("pieces/LootChest.html", index[:index.index("Found in the world")])
+        self.assertNotIn("pieces/piece_bench.html", world)  # a plain copy of the Bench: linked from the Bench instead
+        self.assertNotIn("pieces/LootChest.html", index[:index.index('<h2 id="world"')])
+        tags = re.findall(r'<h2 id="([a-z-]+)"[^>]*>([^<]+)</h2>', index)
+        self.assertLess(tags.index(("crafting", "Crafting")), tags.index(("furniture", "Furniture")))  # menu order
+        for tag in ("crafting", "furniture"):  # the Bench under each of its tags
+            part = index[index.index(f'<h2 id="{tag}"'):]
+            self.assertIn("pieces/Bench.html", part[:part.index("</ul>")])
+        self.assertIn("Crafting · Furniture", bench_page := (self.out / "pieces/Bench.html").read_text(encoding="utf-8"))
         bench = (self.out / "pieces/Bench.html").read_text(encoding="utf-8")
         self.assertRegex(bench, r'<h2>Also in the world</h2>.*href="pieces/piece_bench.html"')
 

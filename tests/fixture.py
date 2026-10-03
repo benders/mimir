@@ -146,7 +146,12 @@ TRANSLATIONS = {
     "item_sword": "Test Sword", "item_sword_desc": "Sharp <b>enough</b>.",
     "item_helmet": "Pot Helm", "item_fish": "Glimfish", "item_pearl": "Moon Pearl", "item_javelin": "Test Javelin", "item_mace": "Mace", "item_longbow": "Longbow", "item_arbal": "Arbal", "item_dart": "Dart", "item_mead": "Fizz Mead", "item_coins": "Coins", "item_charm": "Lucky Charm", "npc_vendor": "Old Vendor",
     "item_hammer": "Mallet", "item_shard": "Shard", "item_bite": "Bite",
-    "enemy_raider": "Raider", "piece_bench": "Bench", "piece_lootchest": "Loot chest", "item_marble": "Marble", "piece_anvil": "Anvil", "piece_kiln": "Kiln",
+    "enemy_raider": "Raider", "piece_bench": "Bench", **{f"tag_{k}": v for k, v in (  # build menu tags (Piece.UsageTagFlags)
+        ("misc", "Misc."), ("crafting", "Crafting"), ("building", "Building"), ("floor", "Flooring"), ("wall", "Walls"),
+        ("roof", "Roofing"), ("architecture", "Architecture"), ("furniture", "Furniture"), ("lighting", "Lighting"),
+        ("decor", "Decor"), ("storage", "Storage"), ("transport", "Transportation"), ("food", "Food"), ("mead", "Mead"),
+        ("feasts", "Feasts"), ("defense", "Defence"), ("stacks", "Piles and Stacks"), ("stairs", "Stairs"),
+        ("doors", "Doors and Windows"), ("seasonal", "Seasonal Items"))}, "piece_lootchest": "Loot chest", "item_marble": "Marble", "piece_anvil": "Anvil", "piece_kiln": "Kiln",
     "piece_bush": "Twig Bush", "piece_orerock": "Ore Rock", "se_fizz": "Fizzy",
     "enemy_pup": "Pup", "enemy_chief_p2": "Chief Risen", "enemy_imp": "Imp", "enemy_shade": "Shade", "enemy_sprite": "Sprite", "enemy_moth": "Moth", "enemy_singer": "Singer", "item_wand": "Wand", "item_rod": "Summoning Rod", "enemy_chief": "<color=orange>Chief</color>", "item_egg": "Egg", "item_nectar": "Nectar", "item_ichor": "Ichor", "item_dust": "Dust",
     "item_hat": "Party Hat", "piece_tree": "Winter Tree", "piece_hive": "Hive", "piece_tap": "Tap", "piece_wildhive": "Wild Hive", "event_test": "Something stirs",
@@ -251,7 +256,8 @@ def prefabs():
             attackMissAdrenaline=0, nonBlockDamageAdrenaline=-1))),
         piece("Bench", comp("CraftingStation", m(name="$piece_bench", rangeBuild=20, craftRequireRoof=True,
                                                  craftRequireFire=False)),
-              name="$piece_bench", icon=S("Bench"), category="Crafting", resources=[req("Wood", 10)]),
+              name="$piece_bench", icon=S("Bench"), category="Crafting", resources=[req("Wood", 10)],
+              usage="Crafting, Furniture"),  # listed under both tags
         piece("piece_bench", name="$piece_bench", icon=S("Bench"), comfort=2),  # not buildable: "Bench (world)"
         piece("LootChest", comp(*container(("Gem", 1, 2, 3), ("Coins", 5, 10, 1), name="$piece_lootchest")),
               name="$piece_lootchest", resources=[req("Marble", 7), req("Wood", 2, recover=False)]),  # breaks: 2 Marble

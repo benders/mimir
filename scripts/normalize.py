@@ -714,6 +714,25 @@ def creature(name: str, p: dict) -> dict | None:
     }
 
 
+USAGE_TAGS = {  # Piece.UsageTagFlags: flag -> (bit, the [DisplayName] token the build menu shows)
+    "Misc": (0x1, "$tag_misc"), "Crafting": (0x2, "$tag_crafting"), "Building": (0x4, "$tag_building"),
+    "Floor": (0x8, "$tag_floor"), "Wall": (0x10, "$tag_wall"), "Roof": (0x20, "$tag_roof"),
+    "Architecture": (0x40, "$tag_architecture"), "Furniture": (0x80, "$tag_furniture"),
+    "Lighting": (0x100, "$tag_lighting"), "Decor": (0x200, "$tag_decor"), "Storage": (0x400, "$tag_storage"),
+    "Transport": (0x800, "$tag_transport"), "Food": (0x1000, "$tag_food"), "Meads": (0x2000, "$tag_mead"),
+    "Feasts": (0x4000, "$tag_feasts"), "Defense": (0x8000, "$tag_defense"), "Stacks": (0x10000, "$tag_stacks"),
+    "Stairs": (0x20000, "$tag_stairs"), "Doors": (0x40000, "$tag_doors"), "Seasonal": (0x80000, "$tag_seasonal"),
+}
+
+
+def usage_tags(v) -> list[str]:
+    """Piece.m_usage as the build menu's tag labels, in the menu's order (BuildUi lists a piece under each of its
+    tags). Flag enums serialize as "A, B" or a number; 0 = in no build menu (world copies of buildable pieces)."""
+    v = str(v or "0").strip()
+    bits = int(v) if v.lstrip("-").isdigit() else sum(USAGE_TAGS[t][0] for t in v.split(", ") if t in USAGE_TAGS)
+    return [text(tok) for bit, tok in sorted(USAGE_TAGS.values()) if bits & bit]
+
+
 def piece(name: str, p: dict, tools: dict[str, list[str]]) -> dict | None:
     pc = comp(p, "Piece")
     if not pc:
@@ -727,7 +746,8 @@ def piece(name: str, p: dict, tools: dict[str, list[str]]) -> dict | None:
         "description": text(pc["m_description"]),
         "icon": icon(pc["m_icon"]),
         "enabled": pc["m_enabled"],
-        "category": pc["m_category"],
+        "category": pc["m_category"],  # PieceTable tab of the old build menu; the menu now uses `tags`
+        "tags": usage_tags(pc.get("m_usage")),
         "tools": sorted(tools.get(name, [])),
         "station": ref(pc["m_craftingStation"]),
         "resources": requirements(pc["m_resources"]),
@@ -1430,6 +1450,7 @@ def main(argv: list[str]) -> int:
     write("meta.json", {
         "gameVersion": m["gameVersion"], "networkVersion": m["networkVersion"], "dumperVersion": m["dumperVersion"],
         "steamBuildId": steam_build_id(),
+        "pieceTags": [text(tok) for _, tok in sorted(USAGE_TAGS.values())],  # the build menu's tag list, in order
         "counts": {k.removesuffix(".json"): len(v) for k, v in data.items()},
         "unresolvedTokens": sorted(unresolved),
         "skippedRefs": sorted(skipped_refs),

@@ -130,7 +130,11 @@ chance below 100 still counts, the chance isn't recorded. Containers, `Spawner_*
 [{location, dungeon}], found the same way (`instances`); they count as reachable. A piece with a Container has `contains`
 (its default items, a drop table). Breaking a world piece drops a third of each recoverable cost item, at least 1
 (`mechanics.world_piece_drop`, Piece.DropResources): `reachable()` counts that, stages only where nothing else gives one.
-The site lists world pieces in their own "Found in the world" section of the pieces index, shows Contains / Breaks into
+Pieces have `tags`: the build menu's tag labels (Piece.m_usage, `UsageTagFlags` with their `$tag_*` DisplayName; menu
+order in meta.json `pieceTags`); `category` is the old PieceTable tab enum (its "DeepNorth" value is not a biome) and
+isn't shown. The pieces index lists a piece under each of its tags, like the menu.
+The site lists world pieces in their own "Found in the world" section of the pieces index (plain copies of a buildable
+piece, such as sign_notext, only on that piece's page under "Also in the world"), shows Contains / Breaks into
 instead of Cost, lists them in their materials' "Found in", and links same-name copies from the buildable piece. Derived relations (used in, dropped by) are left to the site build.
 Pieces and recipes of a SeasonalItemGroup (Halloween, Midsummer, Yule; `world/seasons.json`) carry `season`
 {name, start [day, month], end [day, month]}, both ends inclusive, end before start wraps over New Year. They are

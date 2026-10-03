@@ -6,6 +6,10 @@
   "icon": "ArmorStand",
   "enabled": true,
   "category": "Furniture",
+  "tags": [
+   "Decor",
+   "Storage"
+  ],
   "tools": [
    "Hammer"
   ],
@@ -233,6 +237,9 @@
   "icon": "bakedpoteitr",
   "enabled": true,
   "category": "Feasts",
+  "tags": [
+   "Food"
+  ],
   "tools": [
    "Feaster"
   ],
@@ -254,6 +261,9 @@
   "icon": "barleywine",
   "enabled": true,
   "category": "Food",
+  "tags": [
+   "Mead"
+  ],
   "tools": [
    "Feaster"
   ],
@@ -275,6 +285,9 @@
   "icon": "batteringram",
   "enabled": true,
   "category": "Misc",
+  "tags": [
+   "Defence"
+  ],
   "tools": [
    "Hammer"
   ],
@@ -314,6 +327,9 @@
   "icon": "sapling_beech",
   "enabled": true,
   "category": "Misc",
+  "tags": [
+   "Misc."
+  ],
   "tools": [
    "Cultivator"
   ],
@@ -334,6 +350,9 @@
   "icon": "sapling_birch",
   "enabled": true,
   "category": "Misc",
+  "tags": [
+   "Misc."
+  ],
   "tools": [
    "Cultivator"
   ],
@@ -354,6 +373,9 @@
   "icon": "BlackSoup",
   "enabled": true,
   "category": "Feasts",
+  "tags": [
+   "Food"
+  ],
   "tools": [
    "Feaster"
   ],
@@ -375,6 +397,9 @@
   "icon": "BloodPudding",
   "enabled": true,
   "category": "Feasts",
+  "tags": [
+   "Food"
+  ],
   "tools": [
    "Feaster"
   ],
@@ -396,6 +421,9 @@
   "icon": "blueberries",
   "enabled": true,
   "category": "Feasts",
+  "tags": [
+   "Food"
+  ],
   "tools": [
    "Feaster"
   ],
@@ -417,6 +445,9 @@
   "icon": "boarjerky",
   "enabled": true,
   "category": "Feasts",
+  "tags": [
+   "Food"
+  ],
   "tools": [
    "Feaster"
   ],
@@ -468,6 +499,9 @@
   "icon": "Bread",
   "enabled": true,
   "category": "Feasts",
+  "tags": [
+   "Food"
+  ],
   "tools": [
    "Feaster"
   ],
@@ -489,6 +523,10 @@
   "icon": "candle_resin",
   "enabled": true,
   "category": "Furniture",
+  "tags": [
+   "Lighting",
+   "Decor"
+  ],
   "tools": [
    "Hammer"
   ],
@@ -556,6 +594,9 @@
   "icon": "carrot",
   "enabled": true,
   "category": "Feasts",
+  "tags": [
+   "Food"
+  ],
   "tools": [
    "Feaster"
   ],
@@ -577,6 +618,9 @@
   "icon": "CarrotSoup",
   "enabled": true,
   "category": "Feasts",
+  "tags": [
+   "Food"
+  ],
   "tools": [
    "Feaster"
   ],
@@ -598,6 +642,9 @@
   "icon": "cart",
   "enabled": true,
   "category": "Misc",
+  "tags": [
+   "Transportation"
+  ],
   "tools": [
    "Hammer"
   ],
@@ -632,6 +679,9 @@
   "icon": "Catapult",
   "enabled": true,
   "category": "Misc",
+  "tags": [
+   "Defence"
+  ],
   "tools": [
    "Hammer"
   ],
@@ -671,6 +721,9 @@
   "icon": "cloudberry",
   "enabled": true,
   "category": "Feasts",
+  "tags": [
+   "Food"
+  ],
   "tools": [
    "Feaster"
   ],
@@ -692,6 +745,9 @@
   "icon": "asksvin_meat_cooked",
   "enabled": true,
   "category": "Feasts",
+  "tags": [
+   "Food"
+  ],
   "tools": [
    "Feaster"
   ],
@@ -713,6 +769,9 @@
   "icon": "bjorn_meat",
   "enabled": true,
   "category": "Feasts",
+  "tags": [
+   "Food"
+  ],
   "tools": [
    "Feaster"
   ],
@@ -734,6 +793,9 @@
   "icon": "BonemawMeatCooked",
   "enabled": true,
   "category": "Feasts",
+  "tags": [
+   "Food"
+  ],
   "tools": [
    "Feaster"
   ],
@@ -755,6 +817,9 @@
   "icon": "bugmeat_cooked",
   "enabled": true,
   "category": "Feasts",
+  "tags": [
+   "Food"
+  ],
   "tools": [
    "Feaster"
   ],
@@ -776,6 +841,9 @@
   "icon": "chicken_meat_cooked",
   "enabled": true,
   "category": "Feasts",
+  "tags": [
+   "Food"
+  ],
   "tools": [
    "Feaster"
   ],
@@ -797,6 +865,9 @@
   "icon": "deer_meat_cooked",
   "enabled": true,
   "category": "Feasts",
+  "tags": [
+   "Food"
+  ],
   "tools": [
    "Feaster"
   ],
@@ -818,6 +889,9 @@
   "icon": "egg_cooked",
   "enabled": true,
   "category": "Feasts",
+  "tags": [
+   "Food"
+  ],
   "tools": [
    "Feaster"
   ],
@@ -839,6 +913,9 @@
   "icon": "hare_meat_cooked",
   "enabled": true,
   "category": "Feasts",
+  "tags": [
+   "Food"
+  ],
   "tools": [
    "Feaster"
   ],
@@ -860,6 +937,9 @@
   "icon": "loxmeat_cooked",
   "enabled": true,
   "category": "Feasts",
+  "tags": [
+   "Food"
+  ],
   "tools": [
    "Feaster"
   ],
@@ -881,6 +961,9 @@
   "icon": "meat_cooked",
   "enabled": true,
   "category": "Feasts",
+  "tags": [
+   "Food"
+  ],
   "tools": [
    "Feaster"
   ],
@@ -902,6 +985,9 @@
   "icon": "moose_meat_cooked",
   "enabled": true,
   "category": "Feasts",
+  "tags": [
+   "Food"
+  ],
   "tools": [
    "Feaster"
   ],
@@ -923,6 +1009,9 @@
   "icon": "sealblubbercooked",
   "enabled": true,
   "category": "Feasts",
+  "tags": [
+   "Food"
+  ],
   "tools": [
    "Feaster"
   ],
@@ -944,6 +1033,9 @@
   "icon": "volture_meat_cooked",
   "enabled": true,
   "category": "Feasts",
+  "tags": [
+   "Food"
+  ],
   "tools": [
    "Feaster"
   ],
@@ -965,6 +1057,9 @@
   "icon": "wolf_meat_cooked",
   "enabled": true,
   "category": "Feasts",
+  "tags": [
+   "Food"
+  ],
   "tools": [
    "Feaster"
   ],
@@ -986,6 +1081,9 @@
   "icon": "deerstew",
   "enabled": true,
   "category": "Feasts",
+  "tags": [
+   "Food"
+  ],
   "tools": [
    "Feaster"
   ],
@@ -1007,6 +1105,9 @@
   "icon": "eyescream",
   "enabled": true,
   "category": "Feasts",
+  "tags": [
+   "Food"
+  ],
   "tools": [
    "Feaster"
   ],
@@ -1028,6 +1129,9 @@
   "icon": "FeastAshlands",
   "enabled": true,
   "category": "DeepNorth",
+  "tags": [
+   "Feasts"
+  ],
   "tools": [
    "Feaster"
   ],
@@ -1049,6 +1153,9 @@
   "icon": "FeastBlackforest",
   "enabled": true,
   "category": "DeepNorth",
+  "tags": [
+   "Feasts"
+  ],
   "tools": [
    "Feaster"
   ],
@@ -1070,6 +1177,9 @@
   "icon": "FeastDeepNorth",
   "enabled": true,
   "category": "DeepNorth",
+  "tags": [
+   "Feasts"
+  ],
   "tools": [
    "Feaster"
   ],
@@ -1091,6 +1201,9 @@
   "icon": "FeastMeadows",
   "enabled": true,
   "category": "DeepNorth",
+  "tags": [
+   "Feasts"
+  ],
   "tools": [
    "Feaster"
   ],
@@ -1112,6 +1225,9 @@
   "icon": "FeastMistlands",
   "enabled": true,
   "category": "DeepNorth",
+  "tags": [
+   "Feasts"
+  ],
   "tools": [
    "Feaster"
   ],
@@ -1133,6 +1249,9 @@
   "icon": "FeastMountains",
   "enabled": true,
   "category": "DeepNorth",
+  "tags": [
+   "Feasts"
+  ],
   "tools": [
    "Feaster"
   ],
@@ -1154,6 +1273,9 @@
   "icon": "FeastOcean",
   "enabled": true,
   "category": "DeepNorth",
+  "tags": [
+   "Feasts"
+  ],
   "tools": [
    "Feaster"
   ],
@@ -1175,6 +1297,9 @@
   "icon": "FeastPlains",
   "enabled": true,
   "category": "DeepNorth",
+  "tags": [
+   "Feasts"
+  ],
   "tools": [
    "Feaster"
   ],
@@ -1196,6 +1321,9 @@
   "icon": "FeastSwamps",
   "enabled": true,
   "category": "DeepNorth",
+  "tags": [
+   "Feasts"
+  ],
   "tools": [
    "Feaster"
   ],
@@ -1217,6 +1345,9 @@
   "icon": "fiddlehead",
   "enabled": true,
   "category": "Feasts",
+  "tags": [
+   "Food"
+  ],
   "tools": [
    "Feaster"
   ],
@@ -1238,6 +1369,9 @@
   "icon": "FierySvinstew",
   "enabled": true,
   "category": "Feasts",
+  "tags": [
+   "Food"
+  ],
   "tools": [
    "Feaster"
   ],
@@ -1259,6 +1393,9 @@
   "icon": "sapling_fir",
   "enabled": true,
   "category": "Misc",
+  "tags": [
+   "Misc."
+  ],
   "tools": [
    "Cultivator"
   ],
@@ -1279,6 +1416,9 @@
   "icon": "sapling_fir_big",
   "enabled": true,
   "category": "Misc",
+  "tags": [
+   "Misc."
+  ],
   "tools": [
    "Cultivator"
   ],
@@ -1299,6 +1439,9 @@
   "icon": "FishAndBread",
   "enabled": true,
   "category": "Feasts",
+  "tags": [
+   "Food"
+  ],
   "tools": [
    "Feaster"
   ],
@@ -1320,6 +1463,9 @@
   "icon": "fish_cooked",
   "enabled": true,
   "category": "Feasts",
+  "tags": [
+   "Food"
+  ],
   "tools": [
    "Feaster"
   ],
@@ -1341,6 +1487,9 @@
   "icon": "fishsoup",
   "enabled": true,
   "category": "Feasts",
+  "tags": [
+   "Food"
+  ],
   "tools": [
    "Feaster"
   ],
@@ -1362,6 +1511,9 @@
   "icon": "FishWraps",
   "enabled": true,
   "category": "Feasts",
+  "tags": [
+   "Food"
+  ],
   "tools": [
    "Feaster"
   ],
@@ -1401,6 +1553,9 @@
   "icon": "honey",
   "enabled": true,
   "category": "Feasts",
+  "tags": [
+   "Food"
+  ],
   "tools": [
    "Feaster"
   ],
@@ -1422,6 +1577,9 @@
   "icon": "honeyglazedchicken",
   "enabled": true,
   "category": "Feasts",
+  "tags": [
+   "Food"
+  ],
   "tools": [
    "Feaster"
   ],
@@ -1443,6 +1601,9 @@
   "icon": "kale",
   "enabled": true,
   "category": "Feasts",
+  "tags": [
+   "Food"
+  ],
   "tools": [
    "Feaster"
   ],
@@ -1464,6 +1625,9 @@
   "icon": "kalechips",
   "enabled": true,
   "category": "Feasts",
+  "tags": [
+   "Food"
+  ],
   "tools": [
    "Feaster"
   ],
@@ -1485,6 +1649,9 @@
   "icon": "karve",
   "enabled": true,
   "category": "Misc",
+  "tags": [
+   "Transportation"
+  ],
   "tools": [
    "Hammer"
   ],
@@ -1530,6 +1697,9 @@
   "icon": "lingonberry",
   "enabled": true,
   "category": "Feasts",
+  "tags": [
+   "Food"
+  ],
   "tools": [
    "Feaster"
   ],
@@ -1551,6 +1721,9 @@
   "icon": "lingondricka",
   "enabled": true,
   "category": "Feasts",
+  "tags": [
+   "Food"
+  ],
   "tools": [
    "Feaster"
   ],
@@ -1572,6 +1745,9 @@
   "icon": "LoxPie",
   "enabled": true,
   "category": "Feasts",
+  "tags": [
+   "Food"
+  ],
   "tools": [
    "Feaster"
   ],
@@ -1593,6 +1769,9 @@
   "icon": "stuffedmagicshroom",
   "enabled": true,
   "category": "Feasts",
+  "tags": [
+   "Food"
+  ],
   "tools": [
    "Feaster"
   ],
@@ -1614,6 +1793,9 @@
   "icon": "MarinatedGreens",
   "enabled": true,
   "category": "Feasts",
+  "tags": [
+   "Food"
+  ],
   "tools": [
    "Feaster"
   ],
@@ -1635,6 +1817,9 @@
   "icon": "MashedMeat",
   "enabled": true,
   "category": "Feasts",
+  "tags": [
+   "Food"
+  ],
   "tools": [
    "Feaster"
   ],
@@ -1656,6 +1841,9 @@
   "icon": "potion_bugrepellent",
   "enabled": true,
   "category": "Food",
+  "tags": [
+   "Mead"
+  ],
   "tools": [
    "Feaster"
   ],
@@ -1681,6 +1869,9 @@
   "icon": "potion_bzerker",
   "enabled": true,
   "category": "Food",
+  "tags": [
+   "Mead"
+  ],
   "tools": [
    "Feaster"
   ],
@@ -1706,6 +1897,9 @@
   "icon": "potion_eitr_lingering",
   "enabled": true,
   "category": "Food",
+  "tags": [
+   "Mead"
+  ],
   "tools": [
    "Feaster"
   ],
@@ -1731,6 +1925,9 @@
   "icon": "potion_eitr_minor",
   "enabled": true,
   "category": "Food",
+  "tags": [
+   "Mead"
+  ],
   "tools": [
    "Feaster"
   ],
@@ -1756,6 +1953,9 @@
   "icon": "potion_frostresist",
   "enabled": true,
   "category": "Food",
+  "tags": [
+   "Mead"
+  ],
   "tools": [
    "Feaster"
   ],
@@ -1781,6 +1981,9 @@
   "icon": "potion_hasty",
   "enabled": true,
   "category": "Food",
+  "tags": [
+   "Mead"
+  ],
   "tools": [
    "Feaster"
   ],
@@ -1806,6 +2009,9 @@
   "icon": "potion_health_lingering",
   "enabled": true,
   "category": "Food",
+  "tags": [
+   "Mead"
+  ],
   "tools": [
    "Feaster"
   ],
@@ -1831,6 +2037,9 @@
   "icon": "potion_health_major",
   "enabled": true,
   "category": "Food",
+  "tags": [
+   "Mead"
+  ],
   "tools": [
    "Feaster"
   ],
@@ -1856,6 +2065,9 @@
   "icon": "potion_health_medium",
   "enabled": true,
   "category": "Food",
+  "tags": [
+   "Mead"
+  ],
   "tools": [
    "Feaster"
   ],
@@ -1881,6 +2093,9 @@
   "icon": "potion_health_minor",
   "enabled": true,
   "category": "Food",
+  "tags": [
+   "Mead"
+  ],
   "tools": [
    "Feaster"
   ],
@@ -1906,6 +2121,9 @@
   "icon": "potion_lightfoot",
   "enabled": true,
   "category": "Food",
+  "tags": [
+   "Mead"
+  ],
   "tools": [
    "Feaster"
   ],
@@ -1931,6 +2149,9 @@
   "icon": "potion_poisonresist",
   "enabled": true,
   "category": "Food",
+  "tags": [
+   "Mead"
+  ],
   "tools": [
    "Feaster"
   ],
@@ -1956,6 +2177,9 @@
   "icon": "potion_stamina_lingering",
   "enabled": true,
   "category": "Food",
+  "tags": [
+   "Mead"
+  ],
   "tools": [
    "Feaster"
   ],
@@ -1981,6 +2205,9 @@
   "icon": "potion_stamina_medium",
   "enabled": true,
   "category": "Food",
+  "tags": [
+   "Mead"
+  ],
   "tools": [
    "Feaster"
   ],
@@ -2006,6 +2233,9 @@
   "icon": "potion_stamina_minor",
   "enabled": true,
   "category": "Food",
+  "tags": [
+   "Mead"
+  ],
   "tools": [
    "Feaster"
   ],
@@ -2031,6 +2261,9 @@
   "icon": "potion_strength",
   "enabled": true,
   "category": "Food",
+  "tags": [
+   "Mead"
+  ],
   "tools": [
    "Feaster"
   ],
@@ -2056,6 +2289,9 @@
   "icon": "potion_swimmer",
   "enabled": true,
   "category": "Food",
+  "tags": [
+   "Mead"
+  ],
   "tools": [
    "Feaster"
   ],
@@ -2081,6 +2317,9 @@
   "icon": "potion_tamer",
   "enabled": true,
   "category": "Food",
+  "tags": [
+   "Mead"
+  ],
   "tools": [
    "Feaster"
   ],
@@ -2106,6 +2345,9 @@
   "icon": "potion_tasty",
   "enabled": true,
   "category": "Food",
+  "tags": [
+   "Mead"
+  ],
   "tools": [
    "Feaster"
   ],
@@ -2131,6 +2373,9 @@
   "icon": "potion_pheromones",
   "enabled": true,
   "category": "Food",
+  "tags": [
+   "Mead"
+  ],
   "tools": [
    "Feaster"
   ],
@@ -2156,6 +2401,9 @@
   "icon": "MeatPlatter",
   "enabled": true,
   "category": "Feasts",
+  "tags": [
+   "Food"
+  ],
   "tools": [
    "Feaster"
   ],
@@ -2177,6 +2425,9 @@
   "icon": "meatballsmashedpoteitr",
   "enabled": true,
   "category": "Feasts",
+  "tags": [
+   "Food"
+  ],
   "tools": [
    "Feaster"
   ],
@@ -2198,6 +2449,9 @@
   "icon": "mincemeatsauce",
   "enabled": true,
   "category": "Feasts",
+  "tags": [
+   "Food"
+  ],
   "tools": [
    "Feaster"
   ],
@@ -2219,6 +2473,9 @@
   "icon": "MisthareSupreme",
   "enabled": true,
   "category": "Feasts",
+  "tags": [
+   "Food"
+  ],
   "tools": [
    "Feaster"
   ],
@@ -2240,6 +2497,9 @@
   "icon": "moosekebab",
   "enabled": true,
   "category": "Feasts",
+  "tags": [
+   "Food"
+  ],
   "tools": [
    "Feaster"
   ],
@@ -2447,6 +2707,9 @@
   "icon": "mushroom",
   "enabled": true,
   "category": "Feasts",
+  "tags": [
+   "Food"
+  ],
   "tools": [
    "Feaster"
   ],
@@ -2468,6 +2731,9 @@
   "icon": "mushroombzerker",
   "enabled": true,
   "category": "Feasts",
+  "tags": [
+   "Misc."
+  ],
   "tools": [
    "Feaster"
   ],
@@ -2489,6 +2755,9 @@
   "icon": "mushroomjotunpuffs",
   "enabled": true,
   "category": "Feasts",
+  "tags": [
+   "Food"
+  ],
   "tools": [
    "Feaster"
   ],
@@ -2510,6 +2779,9 @@
   "icon": "mushroommagecap",
   "enabled": true,
   "category": "Feasts",
+  "tags": [
+   "Food"
+  ],
   "tools": [
    "Feaster"
   ],
@@ -2531,6 +2803,9 @@
   "icon": "MushroomOmelette",
   "enabled": true,
   "category": "Feasts",
+  "tags": [
+   "Food"
+  ],
   "tools": [
    "Feaster"
   ],
@@ -2552,6 +2827,9 @@
   "icon": "mushroomsmokepuff",
   "enabled": true,
   "category": "Feasts",
+  "tags": [
+   "Food"
+  ],
   "tools": [
    "Feaster"
   ],
@@ -2573,6 +2851,9 @@
   "icon": "mushroomyellow",
   "enabled": true,
   "category": "Feasts",
+  "tags": [
+   "Food"
+  ],
   "tools": [
    "Feaster"
   ],
@@ -2594,6 +2875,9 @@
   "icon": "necktailgrilled",
   "enabled": true,
   "category": "Feasts",
+  "tags": [
+   "Food"
+  ],
   "tools": [
    "Feaster"
   ],
@@ -2730,6 +3014,9 @@
   "icon": "sapling_oak",
   "enabled": true,
   "category": "Misc",
+  "tags": [
+   "Misc."
+  ],
   "tools": [
    "Cultivator"
   ],
@@ -2750,6 +3037,9 @@
   "icon": "oats",
   "enabled": true,
   "category": "Feasts",
+  "tags": [
+   "Food"
+  ],
   "tools": [
    "Feaster"
   ],
@@ -2771,6 +3061,9 @@
   "icon": "oatmilk",
   "enabled": true,
   "category": "Feasts",
+  "tags": [
+   "Food"
+  ],
   "tools": [
    "Feaster"
   ],
@@ -2792,6 +3085,9 @@
   "icon": "oatmeallingonberryjam",
   "enabled": true,
   "category": "Feasts",
+  "tags": [
+   "Food"
+  ],
   "tools": [
    "Feaster"
   ],
@@ -2813,6 +3109,9 @@
   "icon": "onion",
   "enabled": true,
   "category": "Feasts",
+  "tags": [
+   "Food"
+  ],
   "tools": [
    "Feaster"
   ],
@@ -2834,6 +3133,9 @@
   "icon": "OnionSoup",
   "enabled": true,
   "category": "Feasts",
+  "tags": [
+   "Food"
+  ],
   "tools": [
    "Feaster"
   ],
@@ -2855,6 +3157,9 @@
   "icon": "ovenpancake",
   "enabled": true,
   "category": "Feasts",
+  "tags": [
+   "Food"
+  ],
   "tools": [
    "Feaster"
   ],
@@ -2876,6 +3181,9 @@
   "icon": "pancakes",
   "enabled": true,
   "category": "Feasts",
+  "tags": [
+   "Food"
+  ],
   "tools": [
    "Feaster"
   ],
@@ -2897,6 +3205,10 @@
   "icon": "flametal_beam",
   "enabled": true,
   "category": "BuildingStonecutter",
+  "tags": [
+   "Building",
+   "Architecture"
+  ],
   "tools": [
    "Hammer"
   ],
@@ -2928,6 +3240,10 @@
   "icon": "flametal_pillar",
   "enabled": true,
   "category": "BuildingStonecutter",
+  "tags": [
+   "Building",
+   "Architecture"
+  ],
   "tools": [
    "Hammer"
   ],
@@ -2959,6 +3275,10 @@
   "icon": "grausten_floor_1x1",
   "enabled": true,
   "category": "BuildingStonecutter",
+  "tags": [
+   "Building",
+   "Flooring"
+  ],
   "tools": [
    "Hammer"
   ],
@@ -2990,6 +3310,10 @@
   "icon": "grausten_floor_2x2",
   "enabled": true,
   "category": "BuildingStonecutter",
+  "tags": [
+   "Building",
+   "Flooring"
+  ],
   "tools": [
    "Hammer"
   ],
@@ -3021,6 +3345,10 @@
   "icon": "grausten_floor_4x4",
   "enabled": true,
   "category": "BuildingStonecutter",
+  "tags": [
+   "Building",
+   "Flooring"
+  ],
   "tools": [
    "Hammer"
   ],
@@ -3052,6 +3380,10 @@
   "icon": "grausten_arch_medium",
   "enabled": true,
   "category": "BuildingStonecutter",
+  "tags": [
+   "Building",
+   "Architecture"
+  ],
   "tools": [
    "Hammer"
   ],
@@ -3083,6 +3415,10 @@
   "icon": "grausten_arch_small",
   "enabled": true,
   "category": "BuildingStonecutter",
+  "tags": [
+   "Building",
+   "Architecture"
+  ],
   "tools": [
    "Hammer"
   ],
@@ -3114,6 +3450,10 @@
   "icon": "grausten_pillar_medium",
   "enabled": true,
   "category": "BuildingStonecutter",
+  "tags": [
+   "Building",
+   "Architecture"
+  ],
   "tools": [
    "Hammer"
   ],
@@ -3145,6 +3485,10 @@
   "icon": "grausten_pillar_small",
   "enabled": true,
   "category": "BuildingStonecutter",
+  "tags": [
+   "Building",
+   "Architecture"
+  ],
   "tools": [
    "Hammer"
   ],
@@ -3176,6 +3520,10 @@
   "icon": "grausten_pillar_tapered",
   "enabled": true,
   "category": "BuildingStonecutter",
+  "tags": [
+   "Building",
+   "Architecture"
+  ],
   "tools": [
    "Hammer"
   ],
@@ -3207,6 +3555,10 @@
   "icon": "grausten_pillar_tapered_inv",
   "enabled": true,
   "category": "BuildingStonecutter",
+  "tags": [
+   "Building",
+   "Architecture"
+  ],
   "tools": [
    "Hammer"
   ],
@@ -3238,6 +3590,10 @@
   "icon": "grausten_beam_medium",
   "enabled": true,
   "category": "BuildingStonecutter",
+  "tags": [
+   "Building",
+   "Architecture"
+  ],
   "tools": [
    "Hammer"
   ],
@@ -3269,6 +3625,10 @@
   "icon": "grausten_beam_small",
   "enabled": true,
   "category": "BuildingStonecutter",
+  "tags": [
+   "Building",
+   "Architecture"
+  ],
   "tools": [
    "Hammer"
   ],
@@ -3300,6 +3660,10 @@
   "icon": "grausten_ladder",
   "enabled": true,
   "category": "BuildingStonecutter",
+  "tags": [
+   "Building",
+   "Stairs"
+  ],
   "tools": [
    "Hammer"
   ],
@@ -3331,6 +3695,10 @@
   "icon": "grausten_wall_1x2",
   "enabled": true,
   "category": "BuildingStonecutter",
+  "tags": [
+   "Building",
+   "Walls"
+  ],
   "tools": [
    "Hammer"
   ],
@@ -3362,6 +3730,10 @@
   "icon": "grausten_wall_2x2",
   "enabled": true,
   "category": "BuildingStonecutter",
+  "tags": [
+   "Building",
+   "Walls"
+  ],
   "tools": [
    "Hammer"
   ],
@@ -3393,6 +3765,10 @@
   "icon": "grausten_wall_4x2",
   "enabled": true,
   "category": "BuildingStonecutter",
+  "tags": [
+   "Building",
+   "Walls"
+  ],
   "tools": [
    "Hammer"
   ],
@@ -3424,6 +3800,11 @@
   "icon": "grausten_wall_arch",
   "enabled": true,
   "category": "BuildingStonecutter",
+  "tags": [
+   "Building",
+   "Walls",
+   "Architecture"
+  ],
   "tools": [
    "Hammer"
   ],
@@ -3455,6 +3836,11 @@
   "icon": "grausten_wall_arch_inv",
   "enabled": true,
   "category": "BuildingStonecutter",
+  "tags": [
+   "Building",
+   "Walls",
+   "Architecture"
+  ],
   "tools": [
    "Hammer"
   ],
@@ -3486,6 +3872,11 @@
   "icon": "grausten_window_2x2",
   "enabled": true,
   "category": "BuildingStonecutter",
+  "tags": [
+   "Building",
+   "Walls",
+   "Doors and Windows"
+  ],
   "tools": [
    "Hammer"
   ],
@@ -3517,6 +3908,11 @@
   "icon": "grausten_window_4x2",
   "enabled": true,
   "category": "BuildingStonecutter",
+  "tags": [
+   "Building",
+   "Walls",
+   "Doors and Windows"
+  ],
   "tools": [
    "Hammer"
   ],
@@ -3548,6 +3944,9 @@
   "icon": "sapling_pine",
   "enabled": true,
   "category": "Misc",
+  "tags": [
+   "Misc."
+  ],
   "tools": [
    "Cultivator"
   ],
@@ -3568,6 +3967,9 @@
   "icon": "PiquantPie",
   "enabled": true,
   "category": "Feasts",
+  "tags": [
+   "Food"
+  ],
   "tools": [
    "Feaster"
   ],
@@ -3589,6 +3991,9 @@
   "icon": "stonerock",
   "enabled": true,
   "category": "Misc",
+  "tags": [
+   "Misc."
+  ],
   "tools": [
    "Hammer"
   ],
@@ -3620,6 +4025,9 @@
   "icon": "stone",
   "enabled": true,
   "category": "Misc",
+  "tags": [
+   "Misc."
+  ],
   "tools": [
    "Hoe"
   ],
@@ -3647,6 +4055,9 @@
   "icon": "poteitr",
   "enabled": true,
   "category": "Feasts",
+  "tags": [
+   "Food"
+  ],
   "tools": [
    "Feaster"
   ],
@@ -3668,6 +4079,9 @@
   "icon": "pukeberries",
   "enabled": true,
   "category": "Feasts",
+  "tags": [
+   "Misc."
+  ],
   "tools": [
    "Feaster"
   ],
@@ -3689,6 +4103,9 @@
   "icon": "pulledbear",
   "enabled": true,
   "category": "Feasts",
+  "tags": [
+   "Food"
+  ],
   "tools": [
    "Feaster"
   ],
@@ -3710,6 +4127,9 @@
   "icon": "QueensJam",
   "enabled": true,
   "category": "Feasts",
+  "tags": [
+   "Food"
+  ],
   "tools": [
    "Feaster"
   ],
@@ -3731,6 +4151,9 @@
   "icon": "raft",
   "enabled": true,
   "category": "Misc",
+  "tags": [
+   "Transportation"
+  ],
   "tools": [
    "Hammer"
   ],
@@ -3772,6 +4195,9 @@
   "icon": "raspberry",
   "enabled": true,
   "category": "Feasts",
+  "tags": [
+   "Food"
+  ],
   "tools": [
    "Feaster"
   ],
@@ -3793,6 +4219,9 @@
   "icon": "RoastedCrustPie",
   "enabled": true,
   "category": "Feasts",
+  "tags": [
+   "Food"
+  ],
   "tools": [
    "Feaster"
   ],
@@ -3814,6 +4243,9 @@
   "icon": "meat_rotten",
   "enabled": true,
   "category": "Feasts",
+  "tags": [
+   "Misc."
+  ],
   "tools": [
    "Feaster"
   ],
@@ -3835,6 +4267,9 @@
   "icon": "royaljelly",
   "enabled": true,
   "category": "Feasts",
+  "tags": [
+   "Food"
+  ],
   "tools": [
    "Feaster"
   ],
@@ -3856,6 +4291,9 @@
   "icon": "Salad",
   "enabled": true,
   "category": "Feasts",
+  "tags": [
+   "Food"
+  ],
   "tools": [
    "Feaster"
   ],
@@ -3877,6 +4315,9 @@
   "icon": "Sausages",
   "enabled": true,
   "category": "Feasts",
+  "tags": [
+   "Food"
+  ],
   "tools": [
    "Feaster"
   ],
@@ -3898,6 +4339,9 @@
   "icon": "ScorchingMedley",
   "enabled": true,
   "category": "Feasts",
+  "tags": [
+   "Food"
+  ],
   "tools": [
    "Feaster"
   ],
@@ -3919,6 +4363,9 @@
   "icon": "sealsoup",
   "enabled": true,
   "category": "Feasts",
+  "tags": [
+   "Food"
+  ],
   "tools": [
    "Feaster"
   ],
@@ -3940,6 +4387,9 @@
   "icon": "SeekerAspic",
   "enabled": true,
   "category": "Feasts",
+  "tags": [
+   "Food"
+  ],
   "tools": [
    "Feaster"
   ],
@@ -3961,6 +4411,9 @@
   "icon": "serpentmeat_cooked",
   "enabled": true,
   "category": "Feasts",
+  "tags": [
+   "Food"
+  ],
   "tools": [
    "Feaster"
   ],
@@ -3982,6 +4435,9 @@
   "icon": "SerpentStew",
   "enabled": true,
   "category": "Feasts",
+  "tags": [
+   "Food"
+  ],
   "tools": [
    "Feaster"
   ],
@@ -4003,6 +4459,9 @@
   "icon": "shocklatesmoothie",
   "enabled": true,
   "category": "Feasts",
+  "tags": [
+   "Food"
+  ],
   "tools": [
    "Feaster"
   ],
@@ -4024,6 +4483,9 @@
   "icon": "SizzlingBerryBroth",
   "enabled": true,
   "category": "Feasts",
+  "tags": [
+   "Food"
+  ],
   "tools": [
    "Feaster"
   ],
@@ -4044,6 +4506,10 @@
   "description": "$tool_sled_description",
   "icon": "cart",
   "category": "Misc",
+  "tags": [
+   "Storage",
+   "Transportation"
+  ],
   "station": "piece_workbench",
   "resources": [
    {
@@ -4075,6 +4541,9 @@
   "icon": "smokedfish",
   "enabled": true,
   "category": "Feasts",
+  "tags": [
+   "Food"
+  ],
   "tools": [
    "Feaster"
   ],
@@ -4096,6 +4565,9 @@
   "icon": "smokedmoose",
   "enabled": true,
   "category": "Feasts",
+  "tags": [
+   "Food"
+  ],
   "tools": [
    "Feaster"
   ],
@@ -4117,6 +4589,9 @@
   "icon": "SparklingShroomshake",
   "enabled": true,
   "category": "Feasts",
+  "tags": [
+   "Food"
+  ],
   "tools": [
    "Feaster"
   ],
@@ -4138,6 +4613,9 @@
   "icon": "FiddleberrySoup",
   "enabled": true,
   "category": "Feasts",
+  "tags": [
+   "Food"
+  ],
   "tools": [
    "Feaster"
   ],
@@ -6860,6 +7338,9 @@
   "icon": "TurnipStew",
   "enabled": true,
   "category": "Feasts",
+  "tags": [
+   "Food"
+  ],
   "tools": [
    "Feaster"
   ],
@@ -6881,6 +7362,9 @@
   "icon": "VikingCupcake",
   "enabled": true,
   "category": "Feasts",
+  "tags": [
+   "Food"
+  ],
   "tools": [
    "Feaster"
   ],
@@ -6902,6 +7386,9 @@
   "icon": "longship",
   "enabled": true,
   "category": "Misc",
+  "tags": [
+   "Transportation"
+  ],
   "tools": [
    "Hammer"
   ],
@@ -6948,6 +7435,9 @@
   "icon": "longship_ashlands",
   "enabled": true,
   "category": "Misc",
+  "tags": [
+   "Transportation"
+  ],
   "tools": [
    "Hammer"
   ],
@@ -6994,6 +7484,9 @@
   "icon": "ashvine_sapling",
   "enabled": true,
   "category": "Misc",
+  "tags": [
+   "Misc."
+  ],
   "tools": [
    "Cultivator"
   ],
@@ -7014,6 +7507,9 @@
   "icon": "vinegreen_sapling",
   "enabled": true,
   "category": "Misc",
+  "tags": [
+   "Misc."
+  ],
   "tools": [
    "Cultivator"
   ],
@@ -7034,6 +7530,9 @@
   "icon": "Vineberry",
   "enabled": true,
   "category": "Feasts",
+  "tags": [
+   "Food"
+  ],
   "tools": [
    "Feaster"
   ],
@@ -7055,6 +7554,9 @@
   "icon": "wolfjerky",
   "enabled": true,
   "category": "Feasts",
+  "tags": [
+   "Food"
+  ],
   "tools": [
    "Feaster"
   ],
@@ -7076,6 +7578,9 @@
   "icon": "wolf_skewer",
   "enabled": true,
   "category": "Feasts",
+  "tags": [
+   "Food"
+  ],
   "tools": [
    "Feaster"
   ],
@@ -7097,6 +7602,9 @@
   "icon": "YggdrasilPorridge",
   "enabled": true,
   "category": "Feasts",
+  "tags": [
+   "Food"
+  ],
   "tools": [
    "Feaster"
   ],
@@ -7118,6 +7626,9 @@
   "icon": "artisanextension",
   "enabled": true,
   "category": "Crafting",
+  "tags": [
+   "Crafting"
+  ],
   "tools": [
    "Hammer"
   ],
@@ -7158,6 +7669,10 @@
   "icon": "ashwood_arch",
   "enabled": true,
   "category": "BuildingWorkbench",
+  "tags": [
+   "Building",
+   "Architecture"
+  ],
   "tools": [
    "Hammer"
   ],
@@ -7187,6 +7702,10 @@
   "icon": "ashwood_arch_bottom",
   "enabled": true,
   "category": "BuildingWorkbench",
+  "tags": [
+   "Building",
+   "Architecture"
+  ],
   "station": "piece_workbench",
   "resources": [
    {
@@ -7214,6 +7733,10 @@
   "icon": "ashwood_arch_top",
   "enabled": true,
   "category": "BuildingWorkbench",
+  "tags": [
+   "Building",
+   "Architecture"
+  ],
   "station": "piece_workbench",
   "resources": [
    {
@@ -7241,6 +7764,10 @@
   "icon": "ashwood_beam_1m",
   "enabled": true,
   "category": "BuildingWorkbench",
+  "tags": [
+   "Building",
+   "Architecture"
+  ],
   "tools": [
    "Hammer"
   ],
@@ -7271,6 +7798,10 @@
   "icon": "ashwood_beam_2m",
   "enabled": true,
   "category": "BuildingWorkbench",
+  "tags": [
+   "Building",
+   "Architecture"
+  ],
   "tools": [
    "Hammer"
   ],
@@ -7301,6 +7832,9 @@
   "icon": "ashwood_bed",
   "enabled": true,
   "category": "Furniture",
+  "tags": [
+   "Furniture"
+  ],
   "tools": [
    "Hammer"
   ],
@@ -7343,6 +7877,11 @@
   "icon": "ashwood_deco_floor",
   "enabled": true,
   "category": "BuildingWorkbench",
+  "tags": [
+   "Building",
+   "Flooring",
+   "Decor"
+  ],
   "tools": [
    "Hammer"
   ],
@@ -7375,6 +7914,11 @@
   "icon": "ashwood_decowall_2x2",
   "enabled": true,
   "category": "BuildingWorkbench",
+  "tags": [
+   "Building",
+   "Walls",
+   "Decor"
+  ],
   "tools": [
    "Hammer"
   ],
@@ -7403,6 +7947,11 @@
   "icon": "ashwood_decowall_divider",
   "enabled": true,
   "category": "BuildingWorkbench",
+  "tags": [
+   "Building",
+   "Walls",
+   "Decor"
+  ],
   "tools": [
    "Hammer"
   ],
@@ -7431,6 +7980,11 @@
   "icon": "ashwood_decowall_tree",
   "enabled": true,
   "category": "BuildingWorkbench",
+  "tags": [
+   "Building",
+   "Walls",
+   "Decor"
+  ],
   "tools": [
    "Hammer"
   ],
@@ -7459,6 +8013,10 @@
   "icon": "ashwood_door",
   "enabled": true,
   "category": "BuildingWorkbench",
+  "tags": [
+   "Building",
+   "Doors and Windows"
+  ],
   "tools": [
    "Hammer"
   ],
@@ -7492,6 +8050,10 @@
   "icon": "ashwood_floor_1x1",
   "enabled": true,
   "category": "BuildingWorkbench",
+  "tags": [
+   "Building",
+   "Flooring"
+  ],
   "tools": [
    "Hammer"
   ],
@@ -7524,6 +8086,10 @@
   "icon": "ashwood_floor",
   "enabled": true,
   "category": "BuildingWorkbench",
+  "tags": [
+   "Building",
+   "Flooring"
+  ],
   "tools": [
    "Hammer"
   ],
@@ -7556,6 +8122,10 @@
   "icon": "ashwood_halfwall_1x2",
   "enabled": true,
   "category": "BuildingWorkbench",
+  "tags": [
+   "Building",
+   "Walls"
+  ],
   "tools": [
    "Hammer"
   ],
@@ -7584,6 +8154,10 @@
   "icon": "ashwood_pole_1m",
   "enabled": true,
   "category": "BuildingWorkbench",
+  "tags": [
+   "Building",
+   "Architecture"
+  ],
   "tools": [
    "Hammer"
   ],
@@ -7614,6 +8188,10 @@
   "icon": "ashwood_pole_2m",
   "enabled": true,
   "category": "BuildingWorkbench",
+  "tags": [
+   "Building",
+   "Architecture"
+  ],
   "tools": [
    "Hammer"
   ],
@@ -7644,6 +8222,10 @@
   "icon": "ashwood_quarterwall_1x1",
   "enabled": true,
   "category": "BuildingWorkbench",
+  "tags": [
+   "Building",
+   "Walls"
+  ],
   "tools": [
    "Hammer"
   ],
@@ -7672,6 +8254,10 @@
   "icon": "ashwood_stair",
   "enabled": true,
   "category": "BuildingWorkbench",
+  "tags": [
+   "Building",
+   "Stairs"
+  ],
   "tools": [
    "Hammer"
   ],
@@ -7700,6 +8286,10 @@
   "icon": "ashwood_wall_2x2",
   "enabled": true,
   "category": "BuildingWorkbench",
+  "tags": [
+   "Building",
+   "Walls"
+  ],
   "tools": [
    "Hammer"
   ],
@@ -7728,6 +8318,11 @@
   "icon": "ashwood_wall_arch",
   "enabled": true,
   "category": "BuildingWorkbench",
+  "tags": [
+   "Building",
+   "Walls",
+   "Architecture"
+  ],
   "tools": [
    "Hammer"
   ],
@@ -7758,6 +8353,10 @@
   "icon": "ashwood_beam_26",
   "enabled": true,
   "category": "BuildingWorkbench",
+  "tags": [
+   "Building",
+   "Architecture"
+  ],
   "tools": [
    "Hammer"
   ],
@@ -7811,6 +8410,10 @@
   "icon": "ashwood_beam_45",
   "enabled": true,
   "category": "BuildingWorkbench",
+  "tags": [
+   "Building",
+   "Architecture"
+  ],
   "tools": [
    "Hammer"
   ],
@@ -7864,6 +8467,10 @@
   "icon": "ashwood_beam_67",
   "enabled": true,
   "category": "DeepNorth",
+  "tags": [
+   "Building",
+   "Architecture"
+  ],
   "tools": [
    "Hammer"
   ],
@@ -7892,6 +8499,10 @@
   "icon": "ashwood_cross_26",
   "enabled": true,
   "category": "BuildingWorkbench",
+  "tags": [
+   "Building",
+   "Architecture"
+  ],
   "tools": [
    "Hammer"
   ],
@@ -7945,6 +8556,10 @@
   "icon": "ashwood_cross_45",
   "enabled": true,
   "category": "BuildingWorkbench",
+  "tags": [
+   "Building",
+   "Architecture"
+  ],
   "tools": [
    "Hammer"
   ],
@@ -7998,6 +8613,10 @@
   "icon": "ashwood_cross_67",
   "enabled": true,
   "category": "DeepNorth",
+  "tags": [
+   "Building",
+   "Architecture"
+  ],
   "tools": [
    "Hammer"
   ],
@@ -8026,6 +8645,11 @@
   "icon": "ashwood_wall_roof_26",
   "enabled": true,
   "category": "BuildingWorkbench",
+  "tags": [
+   "Building",
+   "Walls",
+   "Architecture"
+  ],
   "tools": [
    "Hammer"
   ],
@@ -8054,6 +8678,11 @@
   "icon": "ashwood_wall_roof_26_upsidedown",
   "enabled": true,
   "category": "BuildingWorkbench",
+  "tags": [
+   "Building",
+   "Walls",
+   "Architecture"
+  ],
   "tools": [
    "Hammer"
   ],
@@ -8082,6 +8711,11 @@
   "icon": "ashwood_wall_roof_45",
   "enabled": true,
   "category": "BuildingWorkbench",
+  "tags": [
+   "Building",
+   "Walls",
+   "Architecture"
+  ],
   "tools": [
    "Hammer"
   ],
@@ -8110,6 +8744,11 @@
   "icon": "ashwood_wall_roof_45_upsidedown",
   "enabled": true,
   "category": "BuildingWorkbench",
+  "tags": [
+   "Building",
+   "Walls",
+   "Architecture"
+  ],
   "tools": [
    "Hammer"
   ],
@@ -8138,6 +8777,11 @@
   "icon": "ashwood_wall_roof_67",
   "enabled": true,
   "category": "DeepNorth",
+  "tags": [
+   "Building",
+   "Walls",
+   "Architecture"
+  ],
   "tools": [
    "Hammer"
   ],
@@ -8166,6 +8810,11 @@
   "icon": "ashwood_wall_roof_67_upsidedown",
   "enabled": true,
   "category": "DeepNorth",
+  "tags": [
+   "Building",
+   "Walls",
+   "Architecture"
+  ],
   "tools": [
    "Hammer"
   ],
@@ -8193,6 +8842,10 @@
   "description": "$piece_ancientmetalstack_description",
   "icon": "bar_ancientmetal_stack",
   "category": "Misc",
+  "tags": [
+   "Misc.",
+   "Piles and Stacks"
+  ],
   "resources": [
    {
     "item": "Flametal",
@@ -8217,6 +8870,10 @@
   "icon": "bar_blackmetal_stack",
   "enabled": true,
   "category": "Misc",
+  "tags": [
+   "Misc.",
+   "Piles and Stacks"
+  ],
   "tools": [
    "Hammer"
   ],
@@ -8244,6 +8901,10 @@
   "icon": "bar_bronze_stack",
   "enabled": true,
   "category": "Misc",
+  "tags": [
+   "Misc.",
+   "Piles and Stacks"
+  ],
   "tools": [
    "Hammer"
   ],
@@ -8271,6 +8932,10 @@
   "icon": "bar_copper_stack",
   "enabled": true,
   "category": "Misc",
+  "tags": [
+   "Misc.",
+   "Piles and Stacks"
+  ],
   "tools": [
    "Hammer"
   ],
@@ -8298,6 +8963,10 @@
   "icon": "bar_flametal_stack",
   "enabled": true,
   "category": "Misc",
+  "tags": [
+   "Misc.",
+   "Piles and Stacks"
+  ],
   "tools": [
    "Hammer"
   ],
@@ -8325,6 +8994,10 @@
   "icon": "bar_gold_stack",
   "enabled": true,
   "category": "Misc",
+  "tags": [
+   "Misc.",
+   "Piles and Stacks"
+  ],
   "tools": [
    "Hammer"
   ],
@@ -8352,6 +9025,10 @@
   "icon": "bar_iron_stack",
   "enabled": true,
   "category": "Misc",
+  "tags": [
+   "Misc.",
+   "Piles and Stacks"
+  ],
   "tools": [
    "Hammer"
   ],
@@ -8379,6 +9056,10 @@
   "icon": "bar_silver_stack",
   "enabled": true,
   "category": "Misc",
+  "tags": [
+   "Misc.",
+   "Piles and Stacks"
+  ],
   "tools": [
    "Hammer"
   ],
@@ -8406,6 +9087,10 @@
   "icon": "bar_tin_stack",
   "enabled": true,
   "category": "Misc",
+  "tags": [
+   "Misc.",
+   "Piles and Stacks"
+  ],
   "tools": [
    "Hammer"
   ],
@@ -8433,6 +9118,9 @@
   "icon": "bed",
   "enabled": true,
   "category": "Furniture",
+  "tags": [
+   "Furniture"
+  ],
   "tools": [
    "Hammer"
   ],
@@ -8465,6 +9153,9 @@
   "icon": "blackforge",
   "enabled": true,
   "category": "Crafting",
+  "tags": [
+   "Crafting"
+  ],
   "tools": [
    "Hammer"
   ],
@@ -8508,6 +9199,9 @@
   "icon": "blackforge_ext1",
   "enabled": true,
   "category": "Crafting",
+  "tags": [
+   "Crafting"
+  ],
   "tools": [
    "Hammer"
   ],
@@ -8548,6 +9242,9 @@
   "icon": "blackforge_ext2",
   "enabled": true,
   "category": "Crafting",
+  "tags": [
+   "Crafting"
+  ],
   "tools": [
    "Hammer"
   ],
@@ -8588,6 +9285,9 @@
   "icon": "blackforge_ext3",
   "enabled": true,
   "category": "Crafting",
+  "tags": [
+   "Crafting"
+  ],
   "tools": [
    "Hammer"
   ],
@@ -8633,6 +9333,9 @@
   "icon": "blackforge_ext4",
   "enabled": true,
   "category": "Crafting",
+  "tags": [
+   "Crafting"
+  ],
   "tools": [
    "Hammer"
   ],
@@ -8678,6 +9381,9 @@
   "icon": "blackforge_ext5",
   "enabled": true,
   "category": "Crafting",
+  "tags": [
+   "Crafting"
+  ],
   "tools": [
    "Hammer"
   ],
@@ -8718,6 +9424,12 @@
   "icon": "blackmarble_1x1",
   "enabled": true,
   "category": "BuildingStonecutter",
+  "tags": [
+   "Building",
+   "Flooring",
+   "Walls",
+   "Architecture"
+  ],
   "tools": [
    "Hammer"
   ],
@@ -8751,6 +9463,12 @@
   "icon": "blackmarble_2x1x1",
   "enabled": true,
   "category": "BuildingStonecutter",
+  "tags": [
+   "Building",
+   "Flooring",
+   "Walls",
+   "Architecture"
+  ],
   "tools": [
    "Hammer"
   ],
@@ -8857,6 +9575,11 @@
   "icon": "blackmarble_1x1",
   "enabled": true,
   "category": "BuildingStonecutter",
+  "tags": [
+   "Building",
+   "Walls",
+   "Architecture"
+  ],
   "station": "piece_stonecutter",
   "resources": [
    {
@@ -8925,6 +9648,12 @@
   "icon": "blackmarble_2x2",
   "enabled": true,
   "category": "BuildingStonecutter",
+  "tags": [
+   "Building",
+   "Flooring",
+   "Walls",
+   "Architecture"
+  ],
   "tools": [
    "Hammer"
   ],
@@ -8958,6 +9687,10 @@
   "icon": "blackmarble_arch",
   "enabled": true,
   "category": "BuildingStonecutter",
+  "tags": [
+   "Building",
+   "Architecture"
+  ],
   "tools": [
    "Hammer"
   ],
@@ -8991,6 +9724,11 @@
   "icon": "blackmarble_plinth",
   "enabled": true,
   "category": "BuildingStonecutter",
+  "tags": [
+   "Building",
+   "Walls",
+   "Architecture"
+  ],
   "tools": [
    "Hammer"
   ],
@@ -9024,6 +9762,11 @@
   "icon": "blackmarble_1x1",
   "enabled": true,
   "category": "BuildingStonecutter",
+  "tags": [
+   "Building",
+   "Walls",
+   "Architecture"
+  ],
   "station": "piece_stonecutter",
   "resources": [
    {
@@ -9086,6 +9829,10 @@
   "icon": "blackmarble_plinth_corner",
   "enabled": true,
   "category": "BuildingStonecutter",
+  "tags": [
+   "Building",
+   "Architecture"
+  ],
   "tools": [
    "Hammer"
   ],
@@ -9119,6 +9866,10 @@
   "icon": "blackmarble_column_small",
   "enabled": true,
   "category": "BuildingStonecutter",
+  "tags": [
+   "Building",
+   "Architecture"
+  ],
   "tools": [
    "Hammer"
   ],
@@ -9152,6 +9903,10 @@
   "icon": "blackmarble_column_wide",
   "enabled": true,
   "category": "BuildingStonecutter",
+  "tags": [
+   "Building",
+   "Architecture"
+  ],
   "tools": [
    "Hammer"
   ],
@@ -9434,6 +10189,10 @@
   "icon": "blackmarble_floor",
   "enabled": true,
   "category": "BuildingStonecutter",
+  "tags": [
+   "Building",
+   "Flooring"
+  ],
   "tools": [
    "Hammer"
   ],
@@ -9516,6 +10275,10 @@
   "icon": "blackmarble_triangle_floor",
   "enabled": true,
   "category": "BuildingStonecutter",
+  "tags": [
+   "Building",
+   "Flooring"
+  ],
   "tools": [
    "Hammer"
   ],
@@ -9811,6 +10574,11 @@
   "icon": "blackmarble_cornice",
   "enabled": true,
   "category": "BuildingStonecutter",
+  "tags": [
+   "Building",
+   "Walls",
+   "Architecture"
+  ],
   "tools": [
    "Hammer"
   ],
@@ -9844,6 +10612,11 @@
   "icon": "blackmarble_1x1",
   "enabled": true,
   "category": "BuildingStonecutter",
+  "tags": [
+   "Building",
+   "Walls",
+   "Architecture"
+  ],
   "station": "piece_stonecutter",
   "resources": [
    {
@@ -9874,6 +10647,11 @@
   "icon": "blackmarble_cornice_corner",
   "enabled": true,
   "category": "BuildingStonecutter",
+  "tags": [
+   "Building",
+   "Walls",
+   "Architecture"
+  ],
   "tools": [
    "Hammer"
   ],
@@ -9907,6 +10685,10 @@
   "icon": "marble_pile",
   "enabled": true,
   "category": "Misc",
+  "tags": [
+   "Misc.",
+   "Piles and Stacks"
+  ],
   "tools": [
    "Hammer"
   ],
@@ -10065,6 +10847,10 @@
   "icon": "blackmarble_stair",
   "enabled": true,
   "category": "BuildingStonecutter",
+  "tags": [
+   "Building",
+   "Stairs"
+  ],
   "tools": [
    "Hammer"
   ],
@@ -10162,6 +10948,10 @@
   "icon": "blackmarble_floor_tile_small",
   "enabled": true,
   "category": "BuildingStonecutter",
+  "tags": [
+   "Building",
+   "Flooring"
+  ],
   "station": "piece_stonecutter",
   "resources": [
    {
@@ -10191,6 +10981,10 @@
   "icon": "blackmarble_floor_tile_large",
   "enabled": true,
   "category": "BuildingStonecutter",
+  "tags": [
+   "Building",
+   "Flooring"
+  ],
   "station": "piece_stonecutter",
   "resources": [
    {
@@ -10220,6 +11014,10 @@
   "icon": "blackmarble_wall_tile_small",
   "enabled": true,
   "category": "BuildingStonecutter",
+  "tags": [
+   "Building",
+   "Walls"
+  ],
   "station": "piece_stonecutter",
   "resources": [
    {
@@ -10249,6 +11047,10 @@
   "icon": "blackmarble_wall_tile_large",
   "enabled": true,
   "category": "BuildingStonecutter",
+  "tags": [
+   "Building",
+   "Walls"
+  ],
   "station": "piece_stonecutter",
   "resources": [
    {
@@ -10278,6 +11080,10 @@
   "icon": "blackmarble_wall_tile_tall",
   "enabled": true,
   "category": "BuildingStonecutter",
+  "tags": [
+   "Building",
+   "Walls"
+  ],
   "station": "piece_stonecutter",
   "resources": [
    {
@@ -10308,6 +11114,9 @@
   "icon": "blackmarble_tip",
   "enabled": true,
   "category": "BuildingStonecutter",
+  "tags": [
+   "Building"
+  ],
   "tools": [
    "Hammer"
   ],
@@ -10342,6 +11151,10 @@
   "icon": "blackwood_stack",
   "enabled": true,
   "category": "Misc",
+  "tags": [
+   "Misc.",
+   "Piles and Stacks"
+  ],
   "tools": [
    "Hammer"
   ],
@@ -10370,6 +11183,9 @@
   "icon": "blastfurnace",
   "enabled": true,
   "category": "Crafting",
+  "tags": [
+   "Crafting"
+  ],
   "tools": [
    "Hammer"
   ],
@@ -10417,6 +11233,10 @@
   "icon": "bone_stack",
   "enabled": true,
   "category": "Misc",
+  "tags": [
+   "Misc.",
+   "Piles and Stacks"
+  ],
   "tools": [
    "Hammer"
   ],
@@ -10444,6 +11264,11 @@
   "icon": "bonfire",
   "enabled": true,
   "category": "Misc",
+  "tags": [
+   "Misc.",
+   "Lighting",
+   "Decor"
+  ],
   "tools": [
    "Hammer"
   ],
@@ -10490,6 +11315,9 @@
   "icon": "spicerack",
   "enabled": true,
   "category": "Crafting",
+  "tags": [
+   "Crafting"
+  ],
   "tools": [
    "Hammer"
   ],
@@ -10540,6 +11368,9 @@
   "icon": "butchertable",
   "enabled": true,
   "category": "Crafting",
+  "tags": [
+   "Crafting"
+  ],
   "tools": [
    "Hammer"
   ],
@@ -10584,6 +11415,9 @@
   "icon": "potsnpans",
   "enabled": true,
   "category": "Crafting",
+  "tags": [
+   "Crafting"
+  ],
   "tools": [
    "Hammer"
   ],
@@ -10629,6 +11463,9 @@
   "icon": "mortarandpestle",
   "enabled": true,
   "category": "Crafting",
+  "tags": [
+   "Crafting"
+  ],
   "tools": [
    "Hammer"
   ],
@@ -10668,6 +11505,9 @@
   "icon": "rollingpins",
   "enabled": true,
   "category": "Crafting",
+  "tags": [
+   "Crafting"
+  ],
   "tools": [
    "Hammer"
   ],
@@ -10707,6 +11547,9 @@
   "icon": "smoker",
   "enabled": true,
   "category": "Crafting",
+  "tags": [
+   "Crafting"
+  ],
   "tools": [
    "Hammer"
   ],
@@ -10741,6 +11584,9 @@
   "icon": "coal_kiln",
   "enabled": true,
   "category": "Crafting",
+  "tags": [
+   "Crafting"
+  ],
   "tools": [
    "Hammer"
   ],
@@ -10816,6 +11662,10 @@
   "icon": "coal_pile",
   "enabled": true,
   "category": "Misc",
+  "tags": [
+   "Misc.",
+   "Piles and Stacks"
+  ],
   "tools": [
    "Hammer"
   ],
@@ -10844,6 +11694,12 @@
   "icon": "crystal_wall",
   "enabled": true,
   "category": "BuildingStonecutter",
+  "tags": [
+   "Building",
+   "Walls",
+   "Decor",
+   "Doors and Windows"
+  ],
   "tools": [
    "Hammer"
   ],
@@ -10880,6 +11736,10 @@
   "icon": "darkwood_arch",
   "enabled": true,
   "category": "BuildingWorkbench",
+  "tags": [
+   "Building",
+   "Architecture"
+  ],
   "tools": [
    "Hammer"
   ],
@@ -10915,6 +11775,10 @@
   "icon": "darkwood_beam",
   "enabled": true,
   "category": "BuildingWorkbench",
+  "tags": [
+   "Building",
+   "Architecture"
+  ],
   "tools": [
    "Hammer"
   ],
@@ -10950,6 +11814,10 @@
   "icon": "darkwood_beam4",
   "enabled": true,
   "category": "BuildingWorkbench",
+  "tags": [
+   "Building",
+   "Architecture"
+  ],
   "tools": [
    "Hammer"
   ],
@@ -10985,6 +11853,10 @@
   "icon": "darkwood_beam_26",
   "enabled": true,
   "category": "BuildingWorkbench",
+  "tags": [
+   "Building",
+   "Architecture"
+  ],
   "tools": [
    "Hammer"
   ],
@@ -11020,6 +11892,10 @@
   "icon": "darkwood_beam_45",
   "enabled": true,
   "category": "BuildingWorkbench",
+  "tags": [
+   "Building",
+   "Architecture"
+  ],
   "tools": [
    "Hammer"
   ],
@@ -11055,6 +11931,10 @@
   "icon": "darkwood_beam_67",
   "enabled": true,
   "category": "DeepNorth",
+  "tags": [
+   "Building",
+   "Architecture"
+  ],
   "tools": [
    "Hammer"
   ],
@@ -11088,6 +11968,11 @@
   "icon": "darkwood_decowall",
   "enabled": true,
   "category": "BuildingWorkbench",
+  "tags": [
+   "Building",
+   "Walls",
+   "Decor"
+  ],
   "tools": [
    "Hammer"
   ],
@@ -11123,6 +12008,11 @@
   "icon": "darkwood_gate",
   "enabled": true,
   "category": "BuildingWorkbench",
+  "tags": [
+   "Building",
+   "Walls",
+   "Doors and Windows"
+  ],
   "tools": [
    "Hammer"
   ],
@@ -11161,6 +12051,10 @@
   "icon": "darkwood_pole",
   "enabled": true,
   "category": "BuildingWorkbench",
+  "tags": [
+   "Building",
+   "Architecture"
+  ],
   "tools": [
    "Hammer"
   ],
@@ -11196,6 +12090,10 @@
   "icon": "darkwood_pole4",
   "enabled": true,
   "category": "BuildingWorkbench",
+  "tags": [
+   "Building",
+   "Architecture"
+  ],
   "tools": [
    "Hammer"
   ],
@@ -11231,6 +12129,10 @@
   "icon": "darkwood_raven",
   "enabled": true,
   "category": "Misc",
+  "tags": [
+   "Building",
+   "Decor"
+  ],
   "tools": [
    "Hammer"
   ],
@@ -11266,6 +12168,10 @@
   "icon": "darkwood_roof_26",
   "enabled": true,
   "category": "BuildingWorkbench",
+  "tags": [
+   "Building",
+   "Roofing"
+  ],
   "tools": [
    "Hammer"
   ],
@@ -11301,6 +12207,10 @@
   "icon": "darkwood_roof_45",
   "enabled": true,
   "category": "BuildingWorkbench",
+  "tags": [
+   "Building",
+   "Roofing"
+  ],
   "tools": [
    "Hammer"
   ],
@@ -11336,6 +12246,10 @@
   "icon": "darkwood_roof_67",
   "enabled": true,
   "category": "DeepNorth",
+  "tags": [
+   "Building",
+   "Roofing"
+  ],
   "tools": [
    "Hammer"
   ],
@@ -11371,6 +12285,10 @@
   "icon": "darkwood_roof_icorner_26",
   "enabled": true,
   "category": "BuildingWorkbench",
+  "tags": [
+   "Building",
+   "Roofing"
+  ],
   "tools": [
    "Hammer"
   ],
@@ -11406,6 +12324,10 @@
   "icon": "darkwood_roof_icorner_45",
   "enabled": true,
   "category": "BuildingWorkbench",
+  "tags": [
+   "Building",
+   "Roofing"
+  ],
   "tools": [
    "Hammer"
   ],
@@ -11441,6 +12363,10 @@
   "icon": "darkwood_roof_icorner_67",
   "enabled": true,
   "category": "DeepNorth",
+  "tags": [
+   "Building",
+   "Roofing"
+  ],
   "tools": [
    "Hammer"
   ],
@@ -11476,6 +12402,10 @@
   "icon": "darkwood_roof_ocorner_26",
   "enabled": true,
   "category": "BuildingWorkbench",
+  "tags": [
+   "Building",
+   "Roofing"
+  ],
   "tools": [
    "Hammer"
   ],
@@ -11511,6 +12441,10 @@
   "icon": "darkwood_roof_ocorner_45",
   "enabled": true,
   "category": "BuildingWorkbench",
+  "tags": [
+   "Building",
+   "Roofing"
+  ],
   "tools": [
    "Hammer"
   ],
@@ -11546,6 +12480,10 @@
   "icon": "darkwood_roof_ocorner_67",
   "enabled": true,
   "category": "DeepNorth",
+  "tags": [
+   "Building",
+   "Roofing"
+  ],
   "tools": [
    "Hammer"
   ],
@@ -11581,6 +12519,10 @@
   "icon": "darkwood_roof_top_26",
   "enabled": true,
   "category": "BuildingWorkbench",
+  "tags": [
+   "Building",
+   "Roofing"
+  ],
   "tools": [
    "Hammer"
   ],
@@ -11616,6 +12558,10 @@
   "icon": "darkwood_roof_top_45",
   "enabled": true,
   "category": "BuildingWorkbench",
+  "tags": [
+   "Building",
+   "Roofing"
+  ],
   "tools": [
    "Hammer"
   ],
@@ -11651,6 +12597,10 @@
   "icon": "darkwood_roof_top_67",
   "enabled": true,
   "category": "DeepNorth",
+  "tags": [
+   "Building",
+   "Roofing"
+  ],
   "tools": [
    "Hammer"
   ],
@@ -11686,6 +12636,10 @@
   "icon": "darkwood_wolf",
   "enabled": true,
   "category": "Misc",
+  "tags": [
+   "Building",
+   "Decor"
+  ],
   "tools": [
    "Hammer"
   ],
@@ -11721,6 +12675,10 @@
   "icon": "guardstone",
   "enabled": true,
   "category": "Misc",
+  "tags": [
+   "Decor",
+   "Defence"
+  ],
   "resources": [
    {
     "item": "FineWood",
@@ -11850,6 +12808,9 @@
   "icon": "refinery",
   "enabled": true,
   "category": "Crafting",
+  "tags": [
+   "Crafting"
+  ],
   "tools": [
    "Hammer"
   ],
@@ -11903,6 +12864,9 @@
   "icon": "fermenter",
   "enabled": true,
   "category": "Crafting",
+  "tags": [
+   "Crafting"
+  ],
   "tools": [
    "Hammer"
   ],
@@ -11945,6 +12909,10 @@
   "icon": "firepit",
   "enabled": true,
   "category": "Misc",
+  "tags": [
+   "Furniture",
+   "Lighting"
+  ],
   "tools": [
    "Hammer"
   ],
@@ -12042,6 +13010,10 @@
   "icon": "firepitiron",
   "enabled": true,
   "category": "Misc",
+  "tags": [
+   "Furniture",
+   "Lighting"
+  ],
   "tools": [
    "Hammer"
   ],
@@ -12079,6 +13051,10 @@
   "icon": "flametal_gate",
   "enabled": true,
   "category": "BuildingStonecutter",
+  "tags": [
+   "Building",
+   "Doors and Windows"
+  ],
   "tools": [
    "Hammer"
   ],
@@ -12108,6 +13084,10 @@
   "icon": "flint_pile",
   "enabled": true,
   "category": "Misc",
+  "tags": [
+   "Misc.",
+   "Piles and Stacks"
+  ],
   "tools": [
    "Hammer"
   ],
@@ -12136,6 +13116,9 @@
   "icon": "forge",
   "enabled": true,
   "category": "Crafting",
+  "tags": [
+   "Crafting"
+  ],
   "tools": [
    "Hammer"
   ],
@@ -12184,6 +13167,9 @@
   "icon": "forge_ext1",
   "enabled": true,
   "category": "Crafting",
+  "tags": [
+   "Crafting"
+  ],
   "tools": [
    "Hammer"
   ],
@@ -12224,6 +13210,9 @@
   "icon": "forge_ext2",
   "enabled": true,
   "category": "Crafting",
+  "tags": [
+   "Crafting"
+  ],
   "tools": [
    "Hammer"
   ],
@@ -12259,6 +13248,9 @@
   "icon": "forge_ext3",
   "enabled": true,
   "category": "Crafting",
+  "tags": [
+   "Crafting"
+  ],
   "tools": [
    "Hammer"
   ],
@@ -12294,6 +13286,9 @@
   "icon": "forge_ext4",
   "enabled": true,
   "category": "Crafting",
+  "tags": [
+   "Crafting"
+  ],
   "tools": [
    "Hammer"
   ],
@@ -12329,6 +13324,9 @@
   "icon": "forge_ext5",
   "enabled": true,
   "category": "Crafting",
+  "tags": [
+   "Crafting"
+  ],
   "tools": [
    "Hammer"
   ],
@@ -12364,6 +13362,9 @@
   "icon": "forge_ext6",
   "enabled": true,
   "category": "Crafting",
+  "tags": [
+   "Crafting"
+  ],
   "tools": [
    "Hammer"
   ],
@@ -12545,6 +13546,10 @@
   "icon": "grausten_pile",
   "enabled": true,
   "category": "Misc",
+  "tags": [
+   "Misc.",
+   "Piles and Stacks"
+  ],
   "tools": [
    "Hammer"
   ],
@@ -12573,6 +13578,10 @@
   "icon": "guardstone",
   "enabled": true,
   "category": "Misc",
+  "tags": [
+   "Decor",
+   "Defence"
+  ],
   "tools": [
    "Hammer"
   ],
@@ -12635,6 +13644,10 @@
   "icon": "hearth",
   "enabled": true,
   "category": "Misc",
+  "tags": [
+   "Furniture",
+   "Lighting"
+  ],
   "tools": [
    "Hammer"
   ],
@@ -12671,6 +13684,9 @@
   "icon": "incinerator",
   "enabled": true,
   "category": "Crafting",
+  "tags": [
+   "Crafting"
+  ],
   "tools": [
    "Hammer"
   ],
@@ -12714,6 +13730,10 @@
   "description": "Finely crafted iron bars, sure to be rattle-proof!",
   "icon": "iron_floor_1x1",
   "category": "BuildingStonecutter",
+  "tags": [
+   "Building",
+   "Flooring"
+  ],
   "station": "forge",
   "resources": [
    {
@@ -12742,6 +13762,10 @@
   "icon": "iron_floor_1x1",
   "enabled": true,
   "category": "BuildingStonecutter",
+  "tags": [
+   "Building",
+   "Flooring"
+  ],
   "tools": [
    "Hammer"
   ],
@@ -12773,6 +13797,10 @@
   "icon": "iron_floor_2x2",
   "enabled": true,
   "category": "BuildingStonecutter",
+  "tags": [
+   "Building",
+   "Flooring"
+  ],
   "tools": [
    "Hammer"
   ],
@@ -12804,6 +13832,10 @@
   "icon": "iron_grate",
   "enabled": true,
   "category": "BuildingStonecutter",
+  "tags": [
+   "Building",
+   "Doors and Windows"
+  ],
   "tools": [
    "Hammer"
   ],
@@ -12831,6 +13863,10 @@
   "icon": "iron_wall_1x1",
   "enabled": true,
   "category": "BuildingStonecutter",
+  "tags": [
+   "Building",
+   "Walls"
+  ],
   "tools": [
    "Hammer"
   ],
@@ -12861,6 +13897,10 @@
   "icon": "iron_wall_1x1",
   "enabled": true,
   "category": "BuildingWorkbench",
+  "tags": [
+   "Building",
+   "Walls"
+  ],
   "station": "forge",
   "resources": [
    {
@@ -12895,6 +13935,10 @@
   "icon": "iron_wall_2x2",
   "enabled": true,
   "category": "BuildingStonecutter",
+  "tags": [
+   "Building",
+   "Walls"
+  ],
   "tools": [
    "Hammer"
   ],
@@ -12926,6 +13970,10 @@
   "icon": "itemstand",
   "enabled": true,
   "category": "Furniture",
+  "tags": [
+   "Decor",
+   "Storage"
+  ],
   "tools": [
    "Hammer"
   ],
@@ -12963,6 +14011,10 @@
   "icon": "itemstandh",
   "enabled": true,
   "category": "Furniture",
+  "tags": [
+   "Decor",
+   "Storage"
+  ],
   "tools": [
    "Hammer"
   ],
@@ -13000,6 +14052,9 @@
   "icon": "jute_carpet",
   "enabled": true,
   "category": "Furniture",
+  "tags": [
+   "Decor"
+  ],
   "tools": [
    "Hammer"
   ],
@@ -13032,6 +14087,9 @@
   "icon": "juteblue_carpet",
   "enabled": true,
   "category": "Furniture",
+  "tags": [
+   "Decor"
+  ],
   "tools": [
    "Hammer"
   ],
@@ -13382,6 +14440,10 @@
   "icon": "obsidian_pile",
   "enabled": true,
   "category": "Misc",
+  "tags": [
+   "Misc.",
+   "Piles and Stacks"
+  ],
   "resources": [
    {
     "item": "Obsidian",
@@ -13433,6 +14495,9 @@
   "icon": "ArcheryTarget",
   "enabled": true,
   "category": "Misc",
+  "tags": [
+   "Misc."
+  ],
   "tools": [
    "Hammer"
   ],
@@ -13466,6 +14531,9 @@
   "icon": "GarlandCelebration",
   "enabled": true,
   "category": "Furniture",
+  "tags": [
+   "Decor"
+  ],
   "tools": [
    "Hammer"
   ],
@@ -13504,6 +14572,11 @@
   "icon": "EternalPyreIcon",
   "enabled": true,
   "category": "Crafting",
+  "tags": [
+   "Misc.",
+   "Crafting",
+   "Lighting"
+  ],
   "tools": [
    "Hammer"
   ],
@@ -13569,6 +14642,10 @@
   "icon": "GarlandFairyLight",
   "enabled": true,
   "category": "Furniture",
+  "tags": [
+   "Lighting",
+   "Decor"
+  ],
   "tools": [
    "Hammer"
   ],
@@ -13607,6 +14684,9 @@
   "icon": "FrostFoundry",
   "enabled": true,
   "category": "Crafting",
+  "tags": [
+   "Crafting"
+  ],
   "tools": [
    "Hammer"
   ],
@@ -13646,6 +14726,9 @@
   "icon": "piece_FrostKiln",
   "enabled": true,
   "category": "Crafting",
+  "tags": [
+   "Crafting"
+  ],
   "tools": [
    "Hammer"
   ],
@@ -13688,6 +14771,10 @@
   "icon": "lavalantern",
   "enabled": true,
   "category": "Furniture",
+  "tags": [
+   "Lighting",
+   "Decor"
+  ],
   "tools": [
    "Hammer"
   ],
@@ -13730,6 +14817,9 @@
   "icon": "meadcauldron",
   "enabled": true,
   "category": "Crafting",
+  "tags": [
+   "Crafting"
+  ],
   "tools": [
    "Hammer"
   ],
@@ -13773,6 +14863,10 @@
   "icon": "TrainingDummy",
   "enabled": true,
   "category": "Misc",
+  "tags": [
+   "Misc.",
+   "Defence"
+  ],
   "tools": [
    "Hammer"
   ],
@@ -13803,6 +14897,9 @@
   "icon": "artisanstation",
   "enabled": true,
   "category": "Crafting",
+  "tags": [
+   "Crafting"
+  ],
   "tools": [
    "Hammer"
   ],
@@ -13840,6 +14937,9 @@
   "icon": "asksvinskeleton",
   "enabled": true,
   "category": "Furniture",
+  "tags": [
+   "Decor"
+  ],
   "tools": [
    "Hammer"
   ],
@@ -13892,6 +14992,9 @@
   "icon": "banner01",
   "enabled": true,
   "category": "Furniture",
+  "tags": [
+   "Decor"
+  ],
   "tools": [
    "Hammer"
   ],
@@ -13934,6 +15037,9 @@
   "icon": "banner02",
   "enabled": true,
   "category": "Furniture",
+  "tags": [
+   "Decor"
+  ],
   "tools": [
    "Hammer"
   ],
@@ -13976,6 +15082,9 @@
   "icon": "banner03",
   "enabled": true,
   "category": "Furniture",
+  "tags": [
+   "Decor"
+  ],
   "tools": [
    "Hammer"
   ],
@@ -14018,6 +15127,9 @@
   "icon": "banner04",
   "enabled": true,
   "category": "Furniture",
+  "tags": [
+   "Decor"
+  ],
   "tools": [
    "Hammer"
   ],
@@ -14060,6 +15172,9 @@
   "icon": "banner05",
   "enabled": true,
   "category": "Furniture",
+  "tags": [
+   "Decor"
+  ],
   "tools": [
    "Hammer"
   ],
@@ -14102,6 +15217,9 @@
   "icon": "banner06",
   "enabled": true,
   "category": "Furniture",
+  "tags": [
+   "Decor"
+  ],
   "tools": [
    "Hammer"
   ],
@@ -14154,6 +15272,9 @@
   "icon": "banner07",
   "enabled": true,
   "category": "Furniture",
+  "tags": [
+   "Decor"
+  ],
   "tools": [
    "Hammer"
   ],
@@ -14201,6 +15322,9 @@
   "icon": "banner08",
   "enabled": true,
   "category": "Furniture",
+  "tags": [
+   "Decor"
+  ],
   "tools": [
    "Hammer"
   ],
@@ -14248,6 +15372,9 @@
   "icon": "banner09",
   "enabled": true,
   "category": "Furniture",
+  "tags": [
+   "Decor"
+  ],
   "tools": [
    "Hammer"
   ],
@@ -14295,6 +15422,9 @@
   "icon": "banner10",
   "enabled": true,
   "category": "Furniture",
+  "tags": [
+   "Decor"
+  ],
   "tools": [
    "Hammer"
   ],
@@ -14342,6 +15472,9 @@
   "icon": "banner11",
   "enabled": true,
   "category": "Furniture",
+  "tags": [
+   "Decor"
+  ],
   "tools": [
    "Hammer"
   ],
@@ -14389,6 +15522,9 @@
   "icon": "barberstation",
   "enabled": true,
   "category": "Furniture",
+  "tags": [
+   "Furniture"
+  ],
   "tools": [
    "Hammer"
   ],
@@ -14436,6 +15572,9 @@
   "icon": "bath",
   "enabled": true,
   "category": "Furniture",
+  "tags": [
+   "Furniture"
+  ],
   "tools": [
    "Hammer"
   ],
@@ -14483,6 +15622,9 @@
   "icon": "bed02",
   "enabled": true,
   "category": "Furniture",
+  "tags": [
+   "Furniture"
+  ],
   "tools": [
    "Hammer"
   ],
@@ -14535,6 +15677,9 @@
   "icon": "beehive",
   "enabled": true,
   "category": "Crafting",
+  "tags": [
+   "Crafting"
+  ],
   "tools": [
    "Hammer"
   ],
@@ -14578,6 +15723,9 @@
   "icon": "bench01",
   "enabled": true,
   "category": "Furniture",
+  "tags": [
+   "Furniture"
+  ],
   "tools": [
    "Hammer"
   ],
@@ -14610,6 +15758,9 @@
   "icon": "bench_runed",
   "enabled": true,
   "category": "DeepNorth",
+  "tags": [
+   "Furniture"
+  ],
   "tools": [
    "Hammer"
   ],
@@ -14647,6 +15798,9 @@
   "icon": "birdnest",
   "enabled": true,
   "category": "Crafting",
+  "tags": [
+   "Crafting"
+  ],
   "tools": [
    "Hammer"
   ],
@@ -14695,6 +15849,9 @@
   "icon": "bench_blackmarble",
   "enabled": true,
   "category": "Furniture",
+  "tags": [
+   "Furniture"
+  ],
   "tools": [
    "Hammer"
   ],
@@ -14732,6 +15889,9 @@
   "icon": "table_blackmarble",
   "enabled": true,
   "category": "Furniture",
+  "tags": [
+   "Furniture"
+  ],
   "tools": [
    "Hammer"
   ],
@@ -14769,6 +15929,9 @@
   "icon": "throne_blackmarble",
   "enabled": true,
   "category": "Furniture",
+  "tags": [
+   "Furniture"
+  ],
   "tools": [
    "Hammer"
   ],
@@ -14816,6 +15979,9 @@
   "icon": "bench01",
   "enabled": true,
   "category": "Furniture",
+  "tags": [
+   "Furniture"
+  ],
   "station": "piece_workbench",
   "resources": [
    {
@@ -14856,6 +16022,9 @@
   "icon": "benchashwood",
   "enabled": true,
   "category": "Furniture",
+  "tags": [
+   "Furniture"
+  ],
   "tools": [
    "Hammer"
   ],
@@ -14888,6 +16057,9 @@
   "icon": "throne_bone",
   "enabled": true,
   "category": "Furniture",
+  "tags": [
+   "Furniture"
+  ],
   "tools": [
    "Hammer"
   ],
@@ -14936,6 +16108,9 @@
   "icon": "brazierceiling01",
   "enabled": true,
   "category": "Furniture",
+  "tags": [
+   "Lighting"
+  ],
   "tools": [
    "Hammer"
   ],
@@ -14979,6 +16154,9 @@
   "icon": "brazierfloor01",
   "enabled": true,
   "category": "Furniture",
+  "tags": [
+   "Lighting"
+  ],
   "tools": [
    "Hammer"
   ],
@@ -15022,6 +16200,9 @@
   "icon": "brazierfloor02",
   "enabled": true,
   "category": "Furniture",
+  "tags": [
+   "Lighting"
+  ],
   "tools": [
    "Hammer"
   ],
@@ -15065,6 +16246,10 @@
   "icon": "cartography_table",
   "enabled": true,
   "category": "Misc",
+  "tags": [
+   "Misc.",
+   "Furniture"
+  ],
   "tools": [
    "Hammer"
   ],
@@ -15113,6 +16298,9 @@
   "icon": "cauldron",
   "enabled": true,
   "category": "Crafting",
+  "tags": [
+   "Crafting"
+  ],
   "tools": [
    "Hammer"
   ],
@@ -15146,6 +16334,9 @@
   "icon": "chair",
   "enabled": true,
   "category": "Furniture",
+  "tags": [
+   "Furniture"
+  ],
   "tools": [
    "Hammer"
   ],
@@ -15178,6 +16369,9 @@
   "icon": "chair02",
   "enabled": true,
   "category": "Furniture",
+  "tags": [
+   "Furniture"
+  ],
   "tools": [
    "Hammer"
   ],
@@ -15210,6 +16404,9 @@
   "icon": "chair03",
   "enabled": true,
   "category": "Furniture",
+  "tags": [
+   "Furniture"
+  ],
   "tools": [
    "Hammer"
   ],
@@ -15257,6 +16454,9 @@
   "icon": "chair_runed",
   "enabled": true,
   "category": "DeepNorth",
+  "tags": [
+   "Furniture"
+  ],
   "tools": [
    "Hammer"
   ],
@@ -15294,6 +16494,10 @@
   "icon": "chest_iron",
   "enabled": true,
   "category": "Furniture",
+  "tags": [
+   "Furniture",
+   "Storage"
+  ],
   "tools": [
    "Hammer"
   ],
@@ -15332,6 +16536,10 @@
   "icon": "Barrel",
   "enabled": true,
   "category": "Furniture",
+  "tags": [
+   "Furniture",
+   "Storage"
+  ],
   "tools": [
    "Hammer"
   ],
@@ -15370,6 +16578,10 @@
   "icon": "chest_blackmetal",
   "enabled": true,
   "category": "Furniture",
+  "tags": [
+   "Furniture",
+   "Storage"
+  ],
   "tools": [
    "Hammer"
   ],
@@ -15413,6 +16625,10 @@
   "icon": "chest_grausten",
   "enabled": true,
   "category": "DeepNorth",
+  "tags": [
+   "Furniture",
+   "Storage"
+  ],
   "tools": [
    "Hammer"
   ],
@@ -15456,6 +16672,10 @@
   "icon": "chest_private",
   "enabled": true,
   "category": "Furniture",
+  "tags": [
+   "Furniture",
+   "Storage"
+  ],
   "tools": [
    "Hammer"
   ],
@@ -15494,6 +16714,10 @@
   "icon": "chest_treasure",
   "enabled": true,
   "category": "Misc",
+  "tags": [
+   "Furniture",
+   "Storage"
+  ],
   "tools": [
    "Hammer"
   ],
@@ -15543,6 +16767,10 @@
   "icon": "chest_warderobe",
   "enabled": true,
   "category": "DeepNorth",
+  "tags": [
+   "Furniture",
+   "Storage"
+  ],
   "tools": [
    "Hammer"
   ],
@@ -15586,6 +16814,10 @@
   "icon": "chest_wood",
   "enabled": true,
   "category": "Furniture",
+  "tags": [
+   "Furniture",
+   "Storage"
+  ],
   "tools": [
    "Hammer"
   ],
@@ -15619,6 +16851,9 @@
   "icon": "clothdoor",
   "enabled": true,
   "category": "Furniture",
+  "tags": [
+   "Decor"
+  ],
   "tools": [
    "Hammer"
   ],
@@ -15657,6 +16892,9 @@
   "icon": "hanging_cloth_blue1",
   "enabled": true,
   "category": "Furniture",
+  "tags": [
+   "Decor"
+  ],
   "tools": [
    "Hammer"
   ],
@@ -15695,6 +16933,9 @@
   "icon": "hanging_cloth_blue2",
   "enabled": true,
   "category": "Furniture",
+  "tags": [
+   "Decor"
+  ],
   "tools": [
    "Hammer"
   ],
@@ -15733,6 +16974,9 @@
   "icon": "cooking_station",
   "enabled": true,
   "category": "Crafting",
+  "tags": [
+   "Crafting"
+  ],
   "tools": [
    "Hammer"
   ],
@@ -15760,6 +17004,9 @@
   "icon": "cooking_station_iron",
   "enabled": true,
   "category": "Crafting",
+  "tags": [
+   "Crafting"
+  ],
   "tools": [
    "Hammer"
   ],
@@ -15794,6 +17041,11 @@
   "icon": "Drawbridge",
   "enabled": true,
   "category": "BuildingWorkbench",
+  "tags": [
+   "Building",
+   "Defence",
+   "Doors and Windows"
+  ],
   "tools": [
    "Hammer"
   ],
@@ -15832,6 +17084,11 @@
   "icon": "Drawbridge_log",
   "enabled": true,
   "category": "BuildingWorkbench",
+  "tags": [
+   "Building",
+   "Defence",
+   "Doors and Windows"
+  ],
   "tools": [
    "Hammer"
   ],
@@ -15870,6 +17127,9 @@
   "icon": "piece_dvergr_lantern",
   "enabled": true,
   "category": "Furniture",
+  "tags": [
+   "Lighting"
+  ],
   "tools": [
    "Hammer"
   ],
@@ -15915,6 +17175,9 @@
   "icon": "piece_dvergr_lantern_pole",
   "enabled": true,
   "category": "Furniture",
+  "tags": [
+   "Lighting"
+  ],
   "tools": [
    "Hammer"
   ],
@@ -15960,6 +17223,11 @@
   "icon": "piece_dvergr_metall_wall_2x2",
   "enabled": true,
   "category": "BuildingStonecutter",
+  "tags": [
+   "Building",
+   "Walls",
+   "Decor"
+  ],
   "tools": [
    "Hammer"
   ],
@@ -16019,6 +17287,10 @@
   "icon": "piece_dvergr_sharpstakes",
   "enabled": true,
   "category": "Misc",
+  "tags": [
+   "Building",
+   "Defence"
+  ],
   "tools": [
    "Hammer"
   ],
@@ -16055,6 +17327,11 @@
   "icon": "piece_dvergr_spiralstair",
   "enabled": true,
   "category": "BuildingWorkbench",
+  "tags": [
+   "Building",
+   "Architecture",
+   "Stairs"
+  ],
   "tools": [
    "Hammer"
   ],
@@ -16088,6 +17365,11 @@
   "icon": "piece_dvergr_spiralstair_right",
   "enabled": true,
   "category": "BuildingWorkbench",
+  "tags": [
+   "Building",
+   "Architecture",
+   "Stairs"
+  ],
   "tools": [
    "Hammer"
   ],
@@ -16121,6 +17403,11 @@
   "icon": "piece_dvergr_stake_wall",
   "enabled": true,
   "category": "Misc",
+  "tags": [
+   "Building",
+   "Walls",
+   "Defence"
+  ],
   "tools": [
    "Hammer"
   ],
@@ -16242,6 +17529,11 @@
   "description": "A small gift for someone you like.",
   "icon": "gift1",
   "category": "Furniture",
+  "tags": [
+   "Decor",
+   "Storage",
+   "Seasonal Items"
+  ],
   "tools": [
    "Hammer"
   ],
@@ -16290,6 +17582,11 @@
   "description": "A gift for someone who was nice this year.",
   "icon": "gift2",
   "category": "Furniture",
+  "tags": [
+   "Decor",
+   "Storage",
+   "Seasonal Items"
+  ],
   "tools": [
    "Hammer"
   ],
@@ -16338,6 +17635,11 @@
   "description": "A large gift for someone you appreciate a lot.",
   "icon": "gift3",
   "category": "Furniture",
+  "tags": [
+   "Decor",
+   "Storage",
+   "Seasonal Items"
+  ],
   "tools": [
    "Hammer"
   ],
@@ -16387,6 +17689,10 @@
   "icon": "grausten_roof45",
   "enabled": true,
   "category": "BuildingStonecutter",
+  "tags": [
+   "Building",
+   "Roofing"
+  ],
   "tools": [
    "Hammer"
   ],
@@ -16418,6 +17724,10 @@
   "icon": "grausten_roof45_arch",
   "enabled": true,
   "category": "BuildingStonecutter",
+  "tags": [
+   "Building",
+   "Roofing"
+  ],
   "tools": [
    "Hammer"
   ],
@@ -16449,6 +17759,10 @@
   "icon": "grausten_roof45_arch_corner",
   "enabled": true,
   "category": "BuildingStonecutter",
+  "tags": [
+   "Building",
+   "Roofing"
+  ],
   "tools": [
    "Hammer"
   ],
@@ -16480,6 +17794,10 @@
   "icon": "grausten_roof45_arch_corner2",
   "enabled": true,
   "category": "BuildingStonecutter",
+  "tags": [
+   "Building",
+   "Roofing"
+  ],
   "tools": [
    "Hammer"
   ],
@@ -16511,6 +17829,10 @@
   "icon": "grausten_roof45_corner",
   "enabled": true,
   "category": "BuildingStonecutter",
+  "tags": [
+   "Building",
+   "Roofing"
+  ],
   "tools": [
    "Hammer"
   ],
@@ -16542,6 +17864,10 @@
   "icon": "grausten_roof45_corner2",
   "enabled": true,
   "category": "BuildingStonecutter",
+  "tags": [
+   "Building",
+   "Roofing"
+  ],
   "tools": [
    "Hammer"
   ],
@@ -16573,6 +17899,10 @@
   "icon": "grausten_stair",
   "enabled": true,
   "category": "BuildingStonecutter",
+  "tags": [
+   "Building",
+   "Stairs"
+  ],
   "tools": [
    "Hammer"
   ],
@@ -16603,6 +17933,9 @@
   "icon": "groundtorch",
   "enabled": true,
   "category": "Furniture",
+  "tags": [
+   "Lighting"
+  ],
   "tools": [
    "Hammer"
   ],
@@ -16638,6 +17971,9 @@
   "icon": "groundtorch_blue",
   "enabled": true,
   "category": "Furniture",
+  "tags": [
+   "Lighting"
+  ],
   "tools": [
    "Hammer"
   ],
@@ -16673,6 +18009,9 @@
   "icon": "groundtorch_green",
   "enabled": true,
   "category": "Furniture",
+  "tags": [
+   "Lighting"
+  ],
   "tools": [
    "Hammer"
   ],
@@ -16708,6 +18047,10 @@
   "icon": "groundtorch_mist",
   "enabled": true,
   "category": "Furniture",
+  "tags": [
+   "Lighting",
+   "Defence"
+  ],
   "tools": [
    "Hammer"
   ],
@@ -16741,6 +18084,9 @@
   "icon": "groundtorch_wood",
   "enabled": true,
   "category": "Furniture",
+  "tags": [
+   "Lighting"
+  ],
   "tools": [
    "Hammer"
   ],
@@ -16776,6 +18122,10 @@
   "icon": "hexagonal_gate",
   "enabled": true,
   "category": "BuildingWorkbench",
+  "tags": [
+   "Building",
+   "Doors and Windows"
+  ],
   "tools": [
    "Hammer"
   ],
@@ -16810,6 +18160,9 @@
   "icon": "lantern_hooded",
   "enabled": true,
   "category": "Misc",
+  "tags": [
+   "Lighting"
+  ],
   "tools": [
    "Hammer"
   ],
@@ -16845,6 +18198,12 @@
   "icon": "piece_icecube",
   "enabled": true,
   "category": "BuildingStonecutter",
+  "tags": [
+   "Building",
+   "Flooring",
+   "Walls",
+   "Architecture"
+  ],
   "tools": [
    "Hammer"
   ],
@@ -16872,6 +18231,11 @@
   "description": "The face carved into this vegetable...is it spooky or friendly?",
   "icon": "jackoturnip",
   "category": "Furniture",
+  "tags": [
+   "Lighting",
+   "Decor",
+   "Seasonal Items"
+  ],
   "tools": [
    "Hammer"
   ],
@@ -16922,6 +18286,9 @@
   "icon": "bench_log",
   "enabled": true,
   "category": "Furniture",
+  "tags": [
+   "Furniture"
+  ],
   "tools": [
    "Hammer"
   ],
@@ -16954,6 +18321,9 @@
   "icon": "magetable",
   "enabled": true,
   "category": "Crafting",
+  "tags": [
+   "Crafting"
+  ],
   "tools": [
    "Hammer"
   ],
@@ -17002,6 +18372,9 @@
   "icon": "magetable_ext1",
   "enabled": true,
   "category": "Crafting",
+  "tags": [
+   "Crafting"
+  ],
   "tools": [
    "Hammer"
   ],
@@ -17042,6 +18415,9 @@
   "icon": "magetable_ext2",
   "enabled": true,
   "category": "Crafting",
+  "tags": [
+   "Crafting"
+  ],
   "tools": [
    "Hammer"
   ],
@@ -17087,6 +18463,9 @@
   "icon": "magetable_ext3",
   "enabled": true,
   "category": "Crafting",
+  "tags": [
+   "Crafting"
+  ],
   "tools": [
    "Hammer"
   ],
@@ -17132,6 +18511,9 @@
   "icon": "magetable_ext4",
   "enabled": true,
   "category": "Crafting",
+  "tags": [
+   "Crafting"
+  ],
   "tools": [
    "Hammer"
   ],
@@ -17166,6 +18548,10 @@
   "description": "On the longest day of the year, let this monument stretch towards the sun!",
   "icon": "maypole",
   "category": "Furniture",
+  "tags": [
+   "Decor",
+   "Seasonal Items"
+  ],
   "tools": [
    "Hammer"
   ],
@@ -17217,6 +18603,10 @@
   "description": "You can't help but to feel like there's something romantic about this...",
   "icon": "mistletoe",
   "category": "Furniture",
+  "tags": [
+   "Decor",
+   "Seasonal Items"
+  ],
   "tools": [
    "Hammer"
   ],
@@ -17266,6 +18656,9 @@
   "icon": "throne_moose",
   "enabled": true,
   "category": "Furniture",
+  "tags": [
+   "Furniture"
+  ],
   "tools": [
    "Hammer"
   ],
@@ -17309,6 +18702,9 @@
   "icon": "oven",
   "enabled": true,
   "category": "Crafting",
+  "tags": [
+   "Crafting"
+  ],
   "tools": [
    "Hammer"
   ],
@@ -17348,6 +18744,10 @@
   "icon": "piece_pot1",
   "enabled": true,
   "category": "Furniture",
+  "tags": [
+   "Decor",
+   "Storage"
+  ],
   "tools": [
    "Hammer"
   ],
@@ -17446,6 +18846,10 @@
   "icon": "piece_pot2",
   "enabled": true,
   "category": "Furniture",
+  "tags": [
+   "Decor",
+   "Storage"
+  ],
   "tools": [
    "Hammer"
   ],
@@ -17544,6 +18948,10 @@
   "icon": "piece_pot3",
   "enabled": true,
   "category": "Furniture",
+  "tags": [
+   "Decor",
+   "Storage"
+  ],
   "tools": [
    "Hammer"
   ],
@@ -17642,6 +19050,9 @@
   "icon": "preptable",
   "enabled": true,
   "category": "Crafting",
+  "tags": [
+   "Crafting"
+  ],
   "tools": [
    "Hammer"
   ],
@@ -17685,6 +19096,9 @@
   "icon": "sapcollector",
   "enabled": true,
   "category": "Crafting",
+  "tags": [
+   "Crafting"
+  ],
   "tools": [
    "Hammer"
   ],
@@ -17734,6 +19148,9 @@
   "icon": "sharpstakes",
   "enabled": true,
   "category": "Misc",
+  "tags": [
+   "Defence"
+  ],
   "tools": [
    "Hammer"
   ],
@@ -17769,6 +19186,9 @@
   "icon": "shieldgenerator",
   "enabled": true,
   "category": "Misc",
+  "tags": [
+   "Defence"
+  ],
   "tools": [
    "Hammer"
   ],
@@ -17811,6 +19231,10 @@
   "icon": "snowlantern",
   "enabled": true,
   "category": "DeepNorth",
+  "tags": [
+   "Lighting",
+   "Decor"
+  ],
   "tools": [
    "Hammer"
   ],
@@ -17843,6 +19267,9 @@
   "icon": "spinningwheel",
   "enabled": true,
   "category": "Crafting",
+  "tags": [
+   "Crafting"
+  ],
   "tools": [
    "Hammer"
   ],
@@ -17885,6 +19312,10 @@
   "icon": "blackwood_stakewall",
   "enabled": true,
   "category": "Misc",
+  "tags": [
+   "Building",
+   "Defence"
+  ],
   "tools": [
    "Hammer"
   ],
@@ -17914,6 +19345,9 @@
   "icon": "stonecutter",
   "enabled": true,
   "category": "Crafting",
+  "tags": [
+   "Crafting"
+  ],
   "tools": [
    "Hammer"
   ],
@@ -17957,6 +19391,9 @@
   "icon": "table",
   "enabled": true,
   "category": "Furniture",
+  "tags": [
+   "Furniture"
+  ],
   "tools": [
    "Hammer"
   ],
@@ -17989,6 +19426,9 @@
   "icon": "table_oak",
   "enabled": true,
   "category": "Furniture",
+  "tags": [
+   "Furniture"
+  ],
   "tools": [
    "Hammer"
   ],
@@ -18031,6 +19471,9 @@
   "icon": "table_round",
   "enabled": true,
   "category": "Furniture",
+  "tags": [
+   "Furniture"
+  ],
   "tools": [
    "Hammer"
   ],
@@ -18073,6 +19516,9 @@
   "icon": "table_runed",
   "enabled": true,
   "category": "DeepNorth",
+  "tags": [
+   "Furniture"
+  ],
   "tools": [
    "Hammer"
   ],
@@ -18115,6 +19561,9 @@
   "icon": "table_small_runed",
   "enabled": true,
   "category": "DeepNorth",
+  "tags": [
+   "Furniture"
+  ],
   "tools": [
    "Hammer"
   ],
@@ -18157,6 +19606,9 @@
   "icon": "throne01",
   "enabled": true,
   "category": "Furniture",
+  "tags": [
+   "Furniture"
+  ],
   "tools": [
    "Hammer"
   ],
@@ -18194,6 +19646,9 @@
   "icon": "throne02",
   "enabled": true,
   "category": "Furniture",
+  "tags": [
+   "Furniture"
+  ],
   "tools": [
    "Hammer"
   ],
@@ -18237,6 +19692,9 @@
   "icon": "Trap",
   "enabled": true,
   "category": "Misc",
+  "tags": [
+   "Defence"
+  ],
   "tools": [
    "Hammer"
   ],
@@ -18278,6 +19736,9 @@
   "icon": "Turret",
   "enabled": true,
   "category": "Misc",
+  "tags": [
+   "Defence"
+  ],
   "tools": [
    "Hammer"
   ],
@@ -18319,6 +19780,9 @@
   "icon": "walltorch",
   "enabled": true,
   "category": "Furniture",
+  "tags": [
+   "Lighting"
+  ],
   "tools": [
    "Hammer"
   ],
@@ -18357,6 +19821,9 @@
   "icon": "wisplure",
   "enabled": true,
   "category": "Crafting",
+  "tags": [
+   "Crafting"
+  ],
   "tools": [
    "Hammer"
   ],
@@ -18391,6 +19858,9 @@
   "icon": "workbench",
   "enabled": true,
   "category": "Crafting",
+  "tags": [
+   "Crafting"
+  ],
   "tools": [
    "Hammer"
   ],
@@ -18423,6 +19893,9 @@
   "icon": "workbench_ext1",
   "enabled": true,
   "category": "Crafting",
+  "tags": [
+   "Crafting"
+  ],
   "tools": [
    "Hammer"
   ],
@@ -18458,6 +19931,9 @@
   "icon": "workbench_ext2",
   "enabled": true,
   "category": "Crafting",
+  "tags": [
+   "Crafting"
+  ],
   "tools": [
    "Hammer"
   ],
@@ -18503,6 +19979,9 @@
   "icon": "workbench_ext3",
   "enabled": true,
   "category": "Crafting",
+  "tags": [
+   "Crafting"
+  ],
   "tools": [
    "Hammer"
   ],
@@ -18538,6 +20017,9 @@
   "icon": "workbench_ext4",
   "enabled": true,
   "category": "Crafting",
+  "tags": [
+   "Crafting"
+  ],
   "tools": [
    "Hammer"
   ],
@@ -18577,6 +20059,10 @@
   "description": "It's hard to think of anything more festive than a wreath!",
   "icon": "yulecrown",
   "category": "Furniture",
+  "tags": [
+   "Decor",
+   "Seasonal Items"
+  ],
   "tools": [
    "Hammer"
   ],
@@ -18630,6 +20116,10 @@
   "description": "Deck the halls!",
   "icon": "yulegarland",
   "category": "Furniture",
+  "tags": [
+   "Decor",
+   "Seasonal Items"
+  ],
   "tools": [
    "Hammer"
   ],
@@ -18678,6 +20168,10 @@
   "description": "This fir tree has been given festive decorative lights.",
   "icon": "xmastree",
   "category": "Furniture",
+  "tags": [
+   "Decor",
+   "Seasonal Items"
+  ],
   "tools": [
    "Hammer"
   ],
@@ -18725,6 +20219,9 @@
   "icon": "placeablerock1",
   "enabled": true,
   "category": "Misc",
+  "tags": [
+   "Misc."
+  ],
   "tools": [
    "Hoe"
   ],
@@ -18752,6 +20249,9 @@
   "icon": "placeablerock2",
   "enabled": true,
   "category": "Misc",
+  "tags": [
+   "Misc."
+  ],
   "tools": [
    "Hoe"
   ],
@@ -18778,6 +20278,9 @@
   "icon": "portal",
   "enabled": true,
   "category": "Misc",
+  "tags": [
+   "Transportation"
+  ],
   "station": "piece_workbench",
   "resources": [
    {
@@ -18812,6 +20315,9 @@
   "icon": "portal_stone",
   "enabled": true,
   "category": "Misc",
+  "tags": [
+   "Transportation"
+  ],
   "tools": [
    "Hammer"
   ],
@@ -18852,6 +20358,9 @@
   "icon": "portal_wood",
   "enabled": true,
   "category": "Misc",
+  "tags": [
+   "Transportation"
+  ],
   "tools": [
    "Hammer"
   ],
@@ -18918,6 +20427,9 @@
   "icon": "rug_bjorn",
   "enabled": true,
   "category": "Furniture",
+  "tags": [
+   "Decor"
+  ],
   "tools": [
    "Hammer"
   ],
@@ -18960,6 +20472,9 @@
   "icon": "rug_asksvin",
   "enabled": true,
   "category": "Furniture",
+  "tags": [
+   "Decor"
+  ],
   "tools": [
    "Hammer"
   ],
@@ -18992,6 +20507,9 @@
   "icon": "rug_deer",
   "enabled": true,
   "category": "Furniture",
+  "tags": [
+   "Decor"
+  ],
   "tools": [
    "Hammer"
   ],
@@ -19024,6 +20542,9 @@
   "icon": "rug_lox",
   "enabled": true,
   "category": "Furniture",
+  "tags": [
+   "Decor"
+  ],
   "tools": [
    "Hammer"
   ],
@@ -19056,6 +20577,9 @@
   "icon": "rug_hare",
   "enabled": true,
   "category": "Furniture",
+  "tags": [
+   "Decor"
+  ],
   "tools": [
    "Hammer"
   ],
@@ -19088,6 +20612,9 @@
   "icon": "rug_moose",
   "enabled": true,
   "category": "Furniture",
+  "tags": [
+   "Decor"
+  ],
   "tools": [
    "Hammer"
   ],
@@ -19120,6 +20647,9 @@
   "icon": "rug_seal",
   "enabled": true,
   "category": "DeepNorth",
+  "tags": [
+   "Decor"
+  ],
   "tools": [
    "Hammer"
   ],
@@ -19152,6 +20682,9 @@
   "icon": "rug_straw",
   "enabled": true,
   "category": "Furniture",
+  "tags": [
+   "Decor"
+  ],
   "tools": [
    "Hammer"
   ],
@@ -19189,6 +20722,9 @@
   "icon": "rug_wolf",
   "enabled": true,
   "category": "Furniture",
+  "tags": [
+   "Decor"
+  ],
   "tools": [
    "Hammer"
   ],
@@ -19221,6 +20757,9 @@
   "icon": "kale",
   "enabled": true,
   "category": "Misc",
+  "tags": [
+   "Misc."
+  ],
   "tools": [
    "Cultivator"
   ],
@@ -19241,6 +20780,9 @@
   "icon": "barley",
   "enabled": true,
   "category": "Misc",
+  "tags": [
+   "Misc."
+  ],
   "tools": [
    "Cultivator"
   ],
@@ -19261,6 +20803,9 @@
   "icon": "carrot",
   "enabled": true,
   "category": "Misc",
+  "tags": [
+   "Misc."
+  ],
   "tools": [
    "Cultivator"
   ],
@@ -19281,6 +20826,9 @@
   "icon": "flax",
   "enabled": true,
   "category": "Misc",
+  "tags": [
+   "Misc."
+  ],
   "tools": [
    "Cultivator"
   ],
@@ -19301,6 +20849,9 @@
   "icon": "mushroomjotunpuffs",
   "enabled": true,
   "category": "Misc",
+  "tags": [
+   "Misc."
+  ],
   "tools": [
    "Cultivator"
   ],
@@ -19321,6 +20872,9 @@
   "icon": "mushroommagecap",
   "enabled": true,
   "category": "Misc",
+  "tags": [
+   "Misc."
+  ],
   "tools": [
    "Cultivator"
   ],
@@ -19341,6 +20895,9 @@
   "icon": "oats",
   "enabled": true,
   "category": "Misc",
+  "tags": [
+   "Misc."
+  ],
   "tools": [
    "Cultivator"
   ],
@@ -19361,6 +20918,9 @@
   "icon": "onion_sapling",
   "enabled": true,
   "category": "Misc",
+  "tags": [
+   "Misc."
+  ],
   "tools": [
    "Cultivator"
   ],
@@ -19381,6 +20941,9 @@
   "icon": "poteitr",
   "enabled": true,
   "category": "Misc",
+  "tags": [
+   "Misc."
+  ],
   "tools": [
    "Cultivator"
   ],
@@ -19401,6 +20964,9 @@
   "icon": "seedcarrot",
   "enabled": true,
   "category": "Misc",
+  "tags": [
+   "Misc."
+  ],
   "tools": [
    "Cultivator"
   ],
@@ -19421,6 +20987,9 @@
   "icon": "kaleseedling",
   "enabled": true,
   "category": "Misc",
+  "tags": [
+   "Misc."
+  ],
   "tools": [
    "Cultivator"
   ],
@@ -19441,6 +21010,9 @@
   "icon": "onion_seedling",
   "enabled": true,
   "category": "Misc",
+  "tags": [
+   "Misc."
+  ],
   "tools": [
    "Cultivator"
   ],
@@ -19461,6 +21033,9 @@
   "icon": "seedturnip",
   "enabled": true,
   "category": "Misc",
+  "tags": [
+   "Misc."
+  ],
   "tools": [
    "Cultivator"
   ],
@@ -19481,6 +21056,9 @@
   "icon": "turnip",
   "enabled": true,
   "category": "Misc",
+  "tags": [
+   "Misc."
+  ],
   "tools": [
    "Cultivator"
   ],
@@ -19501,6 +21079,10 @@
   "icon": "scale_wall_2x1",
   "enabled": true,
   "category": "DeepNorth",
+  "tags": [
+   "Building",
+   "Walls"
+  ],
   "tools": [
    "Hammer"
   ],
@@ -19529,6 +21111,10 @@
   "icon": "scale_wall_1x1",
   "enabled": true,
   "category": "DeepNorth",
+  "tags": [
+   "Building",
+   "Walls"
+  ],
   "tools": [
    "Hammer"
   ],
@@ -19557,6 +21143,10 @@
   "icon": "scale_wall_2x2",
   "enabled": true,
   "category": "DeepNorth",
+  "tags": [
+   "Building",
+   "Walls"
+  ],
   "tools": [
    "Hammer"
   ],
@@ -19585,6 +21175,10 @@
   "icon": "scale_wall_roof_26",
   "enabled": true,
   "category": "DeepNorth",
+  "tags": [
+   "Building",
+   "Walls"
+  ],
   "tools": [
    "Hammer"
   ],
@@ -19613,6 +21207,10 @@
   "icon": "scale_wall_roof_26_flipped",
   "enabled": true,
   "category": "DeepNorth",
+  "tags": [
+   "Building",
+   "Walls"
+  ],
   "tools": [
    "Hammer"
   ],
@@ -19641,6 +21239,10 @@
   "icon": "scale_wall_roof_26_upsidedown",
   "enabled": true,
   "category": "DeepNorth",
+  "tags": [
+   "Building",
+   "Walls"
+  ],
   "tools": [
    "Hammer"
   ],
@@ -19669,6 +21271,10 @@
   "icon": "scale_wall_roof_26_upsidedown_flipped",
   "enabled": true,
   "category": "DeepNorth",
+  "tags": [
+   "Building",
+   "Walls"
+  ],
   "tools": [
    "Hammer"
   ],
@@ -19697,6 +21303,10 @@
   "icon": "scale_wall_roof_45",
   "enabled": true,
   "category": "DeepNorth",
+  "tags": [
+   "Building",
+   "Walls"
+  ],
   "tools": [
    "Hammer"
   ],
@@ -19725,6 +21335,10 @@
   "icon": "scale_wall_roof_45_flipped",
   "enabled": true,
   "category": "DeepNorth",
+  "tags": [
+   "Building",
+   "Walls"
+  ],
   "tools": [
    "Hammer"
   ],
@@ -19753,6 +21367,10 @@
   "icon": "scale_wall_roof_45_upsidedown",
   "enabled": true,
   "category": "DeepNorth",
+  "tags": [
+   "Building",
+   "Walls"
+  ],
   "tools": [
    "Hammer"
   ],
@@ -19781,6 +21399,10 @@
   "icon": "scale_wall_roof_45_upsidedown_flipped",
   "enabled": true,
   "category": "DeepNorth",
+  "tags": [
+   "Building",
+   "Walls"
+  ],
   "tools": [
    "Hammer"
   ],
@@ -19809,6 +21431,10 @@
   "icon": "scale_wall_roof_67",
   "enabled": true,
   "category": "DeepNorth",
+  "tags": [
+   "Building",
+   "Walls"
+  ],
   "tools": [
    "Hammer"
   ],
@@ -19837,6 +21463,10 @@
   "icon": "scale_wall_roof_67_flipped",
   "enabled": true,
   "category": "DeepNorth",
+  "tags": [
+   "Building",
+   "Walls"
+  ],
   "tools": [
    "Hammer"
   ],
@@ -19865,6 +21495,10 @@
   "icon": "scale_wall_roof_67_upsidedown",
   "enabled": true,
   "category": "DeepNorth",
+  "tags": [
+   "Building",
+   "Walls"
+  ],
   "tools": [
    "Hammer"
   ],
@@ -19893,6 +21527,10 @@
   "icon": "scale_wall_roof_67_upsidedown_flipped",
   "enabled": true,
   "category": "DeepNorth",
+  "tags": [
+   "Building",
+   "Walls"
+  ],
   "tools": [
    "Hammer"
   ],
@@ -19970,6 +21608,9 @@
   "icon": "sign",
   "enabled": true,
   "category": "Furniture",
+  "tags": [
+   "Decor"
+  ],
   "tools": [
    "Hammer"
   ],
@@ -20037,6 +21678,10 @@
   "icon": "skullpile",
   "enabled": true,
   "category": "Misc",
+  "tags": [
+   "Misc.",
+   "Piles and Stacks"
+  ],
   "tools": [
    "Hammer"
   ],
@@ -20064,6 +21709,9 @@
   "icon": "smelter",
   "enabled": true,
   "category": "Crafting",
+  "tags": [
+   "Crafting"
+  ],
   "tools": [
    "Hammer"
   ],
@@ -20101,6 +21749,10 @@
   "icon": "stake_wall",
   "enabled": true,
   "category": "Misc",
+  "tags": [
+   "Walls",
+   "Defence"
+  ],
   "tools": [
    "Hammer"
   ],
@@ -20129,6 +21781,10 @@
   "icon": "stave_beam_26",
   "enabled": true,
   "category": "DeepNorth",
+  "tags": [
+   "Building",
+   "Architecture"
+  ],
   "tools": [
    "Hammer"
   ],
@@ -20158,6 +21814,10 @@
   "icon": "stave_beam_2m",
   "enabled": true,
   "category": "DeepNorth",
+  "tags": [
+   "Building",
+   "Architecture"
+  ],
   "tools": [
    "Hammer"
   ],
@@ -20187,6 +21847,10 @@
   "icon": "stave_beam_45",
   "enabled": true,
   "category": "DeepNorth",
+  "tags": [
+   "Building",
+   "Architecture"
+  ],
   "tools": [
    "Hammer"
   ],
@@ -20216,6 +21880,10 @@
   "icon": "stave_beam_4m",
   "enabled": true,
   "category": "DeepNorth",
+  "tags": [
+   "Building",
+   "Architecture"
+  ],
   "tools": [
    "Hammer"
   ],
@@ -20245,6 +21913,10 @@
   "icon": "stave_beam_67",
   "enabled": true,
   "category": "DeepNorth",
+  "tags": [
+   "Building",
+   "Architecture"
+  ],
   "tools": [
    "Hammer"
   ],
@@ -20273,6 +21945,10 @@
   "icon": "stave_deco_beam_26",
   "enabled": true,
   "category": "DeepNorth",
+  "tags": [
+   "Building",
+   "Architecture"
+  ],
   "tools": [
    "Hammer"
   ],
@@ -20302,6 +21978,10 @@
   "icon": "stave_deco_beam_2m",
   "enabled": true,
   "category": "DeepNorth",
+  "tags": [
+   "Building",
+   "Architecture"
+  ],
   "tools": [
    "Hammer"
   ],
@@ -20332,6 +22012,10 @@
   "icon": "stave_deco_beam_45",
   "enabled": true,
   "category": "DeepNorth",
+  "tags": [
+   "Building",
+   "Architecture"
+  ],
   "tools": [
    "Hammer"
   ],
@@ -20360,6 +22044,10 @@
   "icon": "stave_deco_beam_67",
   "enabled": true,
   "category": "DeepNorth",
+  "tags": [
+   "Building",
+   "Architecture"
+  ],
   "tools": [
    "Hammer"
   ],
@@ -20388,6 +22076,10 @@
   "icon": "stave_deco_pole_2m",
   "enabled": true,
   "category": "DeepNorth",
+  "tags": [
+   "Building",
+   "Architecture"
+  ],
   "tools": [
    "Hammer"
   ],
@@ -20418,6 +22110,11 @@
   "icon": "stave_deco_wall_2x2",
   "enabled": true,
   "category": "DeepNorth",
+  "tags": [
+   "Building",
+   "Walls",
+   "Decor"
+  ],
   "tools": [
    "Hammer"
   ],
@@ -20446,6 +22143,11 @@
   "icon": "stave_gate",
   "enabled": true,
   "category": "BuildingWorkbench",
+  "tags": [
+   "Building",
+   "Walls",
+   "Doors and Windows"
+  ],
   "tools": [
    "Hammer"
   ],
@@ -20479,6 +22181,10 @@
   "icon": "stave_pole_2m",
   "enabled": true,
   "category": "DeepNorth",
+  "tags": [
+   "Building",
+   "Architecture"
+  ],
   "tools": [
    "Hammer"
   ],
@@ -20509,6 +22215,10 @@
   "icon": "stave_pole_4m",
   "enabled": true,
   "category": "DeepNorth",
+  "tags": [
+   "Building",
+   "Architecture"
+  ],
   "tools": [
    "Hammer"
   ],
@@ -20539,6 +22249,10 @@
   "icon": "stave_wall_2x2",
   "enabled": true,
   "category": "DeepNorth",
+  "tags": [
+   "Building",
+   "Walls"
+  ],
   "tools": [
    "Hammer"
   ],
@@ -20567,6 +22281,10 @@
   "icon": "stave_cross_26",
   "enabled": true,
   "category": "DeepNorth",
+  "tags": [
+   "Building",
+   "Architecture"
+  ],
   "tools": [
    "Hammer"
   ],
@@ -20595,6 +22313,10 @@
   "icon": "stave_cross_45",
   "enabled": true,
   "category": "DeepNorth",
+  "tags": [
+   "Building",
+   "Architecture"
+  ],
   "tools": [
    "Hammer"
   ],
@@ -20623,6 +22345,10 @@
   "icon": "stave_cross_67",
   "enabled": true,
   "category": "DeepNorth",
+  "tags": [
+   "Building",
+   "Architecture"
+  ],
   "tools": [
    "Hammer"
   ],
@@ -20651,6 +22377,10 @@
   "icon": "stone_arch",
   "enabled": true,
   "category": "BuildingStonecutter",
+  "tags": [
+   "Building",
+   "Architecture"
+  ],
   "tools": [
    "Hammer"
   ],
@@ -20680,6 +22410,10 @@
   "icon": "stone_fence",
   "enabled": true,
   "category": "Misc",
+  "tags": [
+   "Misc.",
+   "Walls"
+  ],
   "tools": [
    "Hammer"
   ],
@@ -20745,6 +22479,10 @@
   "icon": "stone_floor_2x2",
   "enabled": true,
   "category": "BuildingStonecutter",
+  "tags": [
+   "Building",
+   "Flooring"
+  ],
   "tools": [
    "Hammer"
   ],
@@ -20774,6 +22512,10 @@
   "icon": "stone_pile",
   "enabled": true,
   "category": "Misc",
+  "tags": [
+   "Misc.",
+   "Piles and Stacks"
+  ],
   "tools": [
    "Hammer"
   ],
@@ -20802,6 +22544,10 @@
   "icon": "stone_pillar",
   "enabled": true,
   "category": "BuildingStonecutter",
+  "tags": [
+   "Building",
+   "Architecture"
+  ],
   "tools": [
    "Hammer"
   ],
@@ -20831,6 +22577,10 @@
   "icon": "stone_stair",
   "enabled": true,
   "category": "BuildingStonecutter",
+  "tags": [
+   "Building",
+   "Stairs"
+  ],
   "tools": [
    "Hammer"
   ],
@@ -20860,6 +22610,11 @@
   "icon": "stone_wall_1x1",
   "enabled": true,
   "category": "BuildingStonecutter",
+  "tags": [
+   "Building",
+   "Walls",
+   "Architecture"
+  ],
   "tools": [
    "Hammer"
   ],
@@ -20889,6 +22644,10 @@
   "icon": "stone_wall_2x1",
   "enabled": true,
   "category": "BuildingStonecutter",
+  "tags": [
+   "Building",
+   "Walls"
+  ],
   "tools": [
    "Hammer"
   ],
@@ -20918,6 +22677,10 @@
   "icon": "stone_wall_4x2",
   "enabled": true,
   "category": "BuildingStonecutter",
+  "tags": [
+   "Building",
+   "Walls"
+  ],
   "tools": [
    "Hammer"
   ],
@@ -20947,6 +22710,10 @@
   "icon": "treasure_pile",
   "enabled": true,
   "category": "Misc",
+  "tags": [
+   "Misc.",
+   "Piles and Stacks"
+  ],
   "tools": [
    "Hammer"
   ],
@@ -20975,6 +22742,10 @@
   "icon": "treasure_stack",
   "enabled": true,
   "category": "Misc",
+  "tags": [
+   "Misc.",
+   "Piles and Stacks"
+  ],
   "tools": [
    "Hammer"
   ],
@@ -21077,6 +22848,9 @@
   "icon": "windmill",
   "enabled": true,
   "category": "Crafting",
+  "tags": [
+   "Crafting"
+  ],
   "tools": [
    "Hammer"
   ],
@@ -21119,6 +22893,10 @@
   "icon": "wood_beam2",
   "enabled": true,
   "category": "BuildingWorkbench",
+  "tags": [
+   "Building",
+   "Architecture"
+  ],
   "tools": [
    "Hammer"
   ],
@@ -21148,6 +22926,10 @@
   "icon": "wood_beam1",
   "enabled": true,
   "category": "BuildingWorkbench",
+  "tags": [
+   "Building",
+   "Architecture"
+  ],
   "tools": [
    "Hammer"
   ],
@@ -21176,6 +22958,10 @@
   "icon": "wood_beam_26",
   "enabled": true,
   "category": "BuildingWorkbench",
+  "tags": [
+   "Building",
+   "Architecture"
+  ],
   "tools": [
    "Hammer"
   ],
@@ -21205,6 +22991,10 @@
   "icon": "wood_beam_45",
   "enabled": true,
   "category": "BuildingWorkbench",
+  "tags": [
+   "Building",
+   "Architecture"
+  ],
   "tools": [
    "Hammer"
   ],
@@ -21234,6 +23024,10 @@
   "icon": "wood_beam_67",
   "enabled": true,
   "category": "DeepNorth",
+  "tags": [
+   "Building",
+   "Architecture"
+  ],
   "tools": [
    "Hammer"
   ],
@@ -21262,6 +23056,10 @@
   "icon": "wood_core_stack",
   "enabled": true,
   "category": "Misc",
+  "tags": [
+   "Misc.",
+   "Piles and Stacks"
+  ],
   "tools": [
    "Hammer"
   ],
@@ -21289,6 +23087,10 @@
   "icon": "wood_door",
   "enabled": true,
   "category": "BuildingWorkbench",
+  "tags": [
+   "Building",
+   "Doors and Windows"
+  ],
   "tools": [
    "Hammer"
   ],
@@ -21317,6 +23119,10 @@
   "icon": "wood_dragon1",
   "enabled": true,
   "category": "Misc",
+  "tags": [
+   "Building",
+   "Decor"
+  ],
   "tools": [
    "Hammer"
   ],
@@ -21345,6 +23151,10 @@
   "icon": "wood_fence",
   "enabled": true,
   "category": "Misc",
+  "tags": [
+   "Misc.",
+   "Walls"
+  ],
   "tools": [
    "Hammer"
   ],
@@ -21373,6 +23183,10 @@
   "icon": "wood_fence_gate",
   "enabled": true,
   "category": "Misc",
+  "tags": [
+   "Misc.",
+   "Doors and Windows"
+  ],
   "tools": [
    "Hammer"
   ],
@@ -21401,6 +23215,10 @@
   "icon": "wood_fine_stack",
   "enabled": true,
   "category": "Misc",
+  "tags": [
+   "Misc.",
+   "Piles and Stacks"
+  ],
   "tools": [
    "Hammer"
   ],
@@ -21428,6 +23246,10 @@
   "icon": "wood_floor",
   "enabled": true,
   "category": "BuildingWorkbench",
+  "tags": [
+   "Building",
+   "Flooring"
+  ],
   "tools": [
    "Hammer"
   ],
@@ -21456,6 +23278,10 @@
   "icon": "wood_floor_1x1",
   "enabled": true,
   "category": "BuildingWorkbench",
+  "tags": [
+   "Building",
+   "Flooring"
+  ],
   "tools": [
    "Hammer"
   ],
@@ -21484,6 +23310,10 @@
   "icon": "wood_frost_stack",
   "enabled": true,
   "category": "Misc",
+  "tags": [
+   "Misc.",
+   "Piles and Stacks"
+  ],
   "tools": [
    "Hammer"
   ],
@@ -21511,6 +23341,10 @@
   "icon": "wood_gate",
   "enabled": true,
   "category": "BuildingWorkbench",
+  "tags": [
+   "Building",
+   "Doors and Windows"
+  ],
   "tools": [
    "Hammer"
   ],
@@ -21563,6 +23397,10 @@
   "icon": "wood_log_26",
   "enabled": true,
   "category": "BuildingWorkbench",
+  "tags": [
+   "Building",
+   "Architecture"
+  ],
   "tools": [
    "Hammer"
   ],
@@ -21592,6 +23430,10 @@
   "icon": "wood_log_45",
   "enabled": true,
   "category": "BuildingWorkbench",
+  "tags": [
+   "Building",
+   "Architecture"
+  ],
   "tools": [
    "Hammer"
   ],
@@ -21621,6 +23463,10 @@
   "icon": "woodlog_67",
   "enabled": true,
   "category": "BuildingWorkbench",
+  "tags": [
+   "Building",
+   "Architecture"
+  ],
   "tools": [
    "Hammer"
   ],
@@ -21649,6 +23495,10 @@
   "icon": "wood_pole",
   "enabled": true,
   "category": "BuildingWorkbench",
+  "tags": [
+   "Building",
+   "Architecture"
+  ],
   "tools": [
    "Hammer"
   ],
@@ -21677,6 +23527,10 @@
   "icon": "wood_pole2",
   "enabled": true,
   "category": "BuildingWorkbench",
+  "tags": [
+   "Building",
+   "Architecture"
+  ],
   "tools": [
    "Hammer"
   ],
@@ -21705,6 +23559,10 @@
   "icon": "wood_logpole2",
   "enabled": true,
   "category": "BuildingWorkbench",
+  "tags": [
+   "Building",
+   "Architecture"
+  ],
   "tools": [
    "Hammer"
   ],
@@ -21733,6 +23591,10 @@
   "icon": "wood_logpole4",
   "enabled": true,
   "category": "BuildingWorkbench",
+  "tags": [
+   "Building",
+   "Architecture"
+  ],
   "tools": [
    "Hammer"
   ],
@@ -21761,6 +23623,10 @@
   "icon": "wood_logpole4",
   "enabled": true,
   "category": "BuildingWorkbench",
+  "tags": [
+   "Building",
+   "Architecture"
+  ],
   "station": "piece_workbench",
   "resources": [
    {
@@ -21786,6 +23652,10 @@
   "icon": "wood_roof",
   "enabled": true,
   "category": "BuildingWorkbench",
+  "tags": [
+   "Building",
+   "Roofing"
+  ],
   "tools": [
    "Hammer"
   ],
@@ -21814,6 +23684,10 @@
   "icon": "wood_roof_45",
   "enabled": true,
   "category": "BuildingWorkbench",
+  "tags": [
+   "Building",
+   "Roofing"
+  ],
   "tools": [
    "Hammer"
   ],
@@ -21842,6 +23716,10 @@
   "icon": "wood_roof_67",
   "enabled": true,
   "category": "DeepNorth",
+  "tags": [
+   "Building",
+   "Roofing"
+  ],
   "tools": [
    "Hammer"
   ],
@@ -21872,6 +23750,10 @@
   "icon": "wood_roof_icorner",
   "enabled": true,
   "category": "BuildingWorkbench",
+  "tags": [
+   "Building",
+   "Roofing"
+  ],
   "tools": [
    "Hammer"
   ],
@@ -21900,6 +23782,10 @@
   "icon": "wood_roof_icorner_45",
   "enabled": true,
   "category": "BuildingWorkbench",
+  "tags": [
+   "Building",
+   "Roofing"
+  ],
   "tools": [
    "Hammer"
   ],
@@ -21928,6 +23814,10 @@
   "icon": "wood_roof_icorner_67",
   "enabled": true,
   "category": "DeepNorth",
+  "tags": [
+   "Building",
+   "Roofing"
+  ],
   "tools": [
    "Hammer"
   ],
@@ -21958,6 +23848,10 @@
   "icon": "wood_roof_ocorner",
   "enabled": true,
   "category": "BuildingWorkbench",
+  "tags": [
+   "Building",
+   "Roofing"
+  ],
   "tools": [
    "Hammer"
   ],
@@ -21986,6 +23880,10 @@
   "icon": "wood_roof_ocorner_45",
   "enabled": true,
   "category": "BuildingWorkbench",
+  "tags": [
+   "Building",
+   "Roofing"
+  ],
   "tools": [
    "Hammer"
   ],
@@ -22014,6 +23912,10 @@
   "icon": "wood_roof_ocorner_67",
   "enabled": true,
   "category": "DeepNorth",
+  "tags": [
+   "Building",
+   "Roofing"
+  ],
   "tools": [
    "Hammer"
   ],
@@ -22044,6 +23946,10 @@
   "icon": "wood_roof_top",
   "enabled": true,
   "category": "BuildingWorkbench",
+  "tags": [
+   "Building",
+   "Roofing"
+  ],
   "tools": [
    "Hammer"
   ],
@@ -22072,6 +23978,10 @@
   "icon": "wood_roof_top_45",
   "enabled": true,
   "category": "BuildingWorkbench",
+  "tags": [
+   "Building",
+   "Roofing"
+  ],
   "tools": [
    "Hammer"
   ],
@@ -22100,6 +24010,10 @@
   "icon": "wood_roof_top_67",
   "enabled": true,
   "category": "DeepNorth",
+  "tags": [
+   "Building",
+   "Roofing"
+  ],
   "tools": [
    "Hammer"
   ],
@@ -22130,6 +24044,10 @@
   "icon": "wood_stack",
   "enabled": true,
   "category": "Misc",
+  "tags": [
+   "Misc.",
+   "Piles and Stacks"
+  ],
   "tools": [
    "Hammer"
   ],
@@ -22157,6 +24075,10 @@
   "icon": "wood_stair",
   "enabled": true,
   "category": "BuildingWorkbench",
+  "tags": [
+   "Building",
+   "Stairs"
+  ],
   "tools": [
    "Hammer"
   ],
@@ -22185,6 +24107,10 @@
   "icon": "wood_ladder",
   "enabled": true,
   "category": "BuildingWorkbench",
+  "tags": [
+   "Building",
+   "Stairs"
+  ],
   "tools": [
    "Hammer"
   ],
@@ -22213,6 +24139,10 @@
   "icon": "wood_wall_half",
   "enabled": true,
   "category": "BuildingWorkbench",
+  "tags": [
+   "Building",
+   "Walls"
+  ],
   "tools": [
    "Hammer"
   ],
@@ -22241,6 +24171,10 @@
   "icon": "wood_logwall",
   "enabled": true,
   "category": "BuildingWorkbench",
+  "tags": [
+   "Building",
+   "Architecture"
+  ],
   "tools": [
    "Hammer"
   ],
@@ -22269,6 +24203,10 @@
   "icon": "wood_logwall_4x05",
   "enabled": true,
   "category": "BuildingWorkbench",
+  "tags": [
+   "Building",
+   "Architecture"
+  ],
   "tools": [
    "Hammer"
   ],
@@ -22297,6 +24235,10 @@
   "icon": "wood_wall_quarter",
   "enabled": true,
   "category": "BuildingWorkbench",
+  "tags": [
+   "Building",
+   "Walls"
+  ],
   "tools": [
    "Hammer"
   ],
@@ -22325,6 +24267,11 @@
   "icon": "wood_wall_roof",
   "enabled": true,
   "category": "BuildingWorkbench",
+  "tags": [
+   "Building",
+   "Walls",
+   "Architecture"
+  ],
   "station": "piece_workbench",
   "resources": [
    {
@@ -22380,6 +24327,11 @@
   "icon": "wood_wall_roof_45",
   "enabled": true,
   "category": "BuildingWorkbench",
+  "tags": [
+   "Building",
+   "Walls",
+   "Architecture"
+  ],
   "tools": [
    "Hammer"
   ],
@@ -22408,6 +24360,11 @@
   "icon": "wood_wall_roof_45_upsidedown",
   "enabled": true,
   "category": "BuildingWorkbench",
+  "tags": [
+   "Building",
+   "Walls",
+   "Architecture"
+  ],
   "tools": [
    "Hammer"
   ],
@@ -22436,6 +24393,11 @@
   "icon": "wood_wall_roof_67",
   "enabled": true,
   "category": "DeepNorth",
+  "tags": [
+   "Building",
+   "Walls",
+   "Architecture"
+  ],
   "tools": [
    "Hammer"
   ],
@@ -22464,6 +24426,11 @@
   "icon": "wood_wall_roof_67_upsidedown",
   "enabled": true,
   "category": "DeepNorth",
+  "tags": [
+   "Building",
+   "Walls",
+   "Architecture"
+  ],
   "tools": [
    "Hammer"
   ],
@@ -22492,6 +24459,11 @@
   "icon": "wood_wall_roof",
   "enabled": true,
   "category": "BuildingWorkbench",
+  "tags": [
+   "Building",
+   "Walls",
+   "Architecture"
+  ],
   "tools": [
    "Hammer"
   ],
@@ -22520,6 +24492,10 @@
   "icon": "wood_wall_roof_cross",
   "enabled": true,
   "category": "BuildingWorkbench",
+  "tags": [
+   "Building",
+   "Architecture"
+  ],
   "tools": [
    "Hammer"
   ],
@@ -22548,6 +24524,10 @@
   "icon": "wood_wall_roof_cross_45",
   "enabled": true,
   "category": "BuildingWorkbench",
+  "tags": [
+   "Building",
+   "Architecture"
+  ],
   "tools": [
    "Hammer"
   ],
@@ -22576,6 +24556,10 @@
   "icon": "wood_wall_roof_cross_67",
   "enabled": true,
   "category": "DeepNorth",
+  "tags": [
+   "Building",
+   "Architecture"
+  ],
   "tools": [
    "Hammer"
   ],
@@ -22604,6 +24588,10 @@
   "icon": "wood_wall_roof_upsidedown",
   "enabled": true,
   "category": "BuildingWorkbench",
+  "tags": [
+   "Building",
+   "Architecture"
+  ],
   "tools": [
    "Hammer"
   ],
@@ -22632,6 +24620,10 @@
   "icon": "wood_window",
   "enabled": true,
   "category": "BuildingWorkbench",
+  "tags": [
+   "Building",
+   "Doors and Windows"
+  ],
   "tools": [
    "Hammer"
   ],
@@ -22665,6 +24657,10 @@
   "icon": "wood_yggdrasil_stack",
   "enabled": true,
   "category": "Misc",
+  "tags": [
+   "Misc.",
+   "Piles and Stacks"
+  ],
   "tools": [
    "Hammer"
   ],
@@ -22692,6 +24688,10 @@
   "icon": "woodiron_beam",
   "enabled": true,
   "category": "BuildingWorkbench",
+  "tags": [
+   "Building",
+   "Architecture"
+  ],
   "tools": [
    "Hammer"
   ],
@@ -22726,6 +24726,10 @@
   "icon": "woodiron_beam_26",
   "enabled": true,
   "category": "BuildingWorkbench",
+  "tags": [
+   "Building",
+   "Architecture"
+  ],
   "tools": [
    "Hammer"
   ],
@@ -22760,6 +24764,10 @@
   "icon": "woodiron_beam_45",
   "enabled": true,
   "category": "BuildingWorkbench",
+  "tags": [
+   "Building",
+   "Architecture"
+  ],
   "tools": [
    "Hammer"
   ],
@@ -22794,6 +24802,10 @@
   "icon": "woodiron_beam_67",
   "enabled": true,
   "category": "BuildingWorkbench",
+  "tags": [
+   "Building",
+   "Architecture"
+  ],
   "tools": [
    "Hammer"
   ],
@@ -22827,6 +24839,10 @@
   "icon": "woodiron_pole",
   "enabled": true,
   "category": "BuildingWorkbench",
+  "tags": [
+   "Building",
+   "Architecture"
+  ],
   "tools": [
    "Hammer"
   ],
@@ -22861,6 +24877,10 @@
   "icon": "wood_wall",
   "enabled": true,
   "category": "BuildingWorkbench",
+  "tags": [
+   "Building",
+   "Walls"
+  ],
   "tools": [
    "Hammer"
   ],

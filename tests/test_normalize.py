@@ -312,6 +312,12 @@ class Entities(FixtureCase):
         N.mark_stages(*args)
         self.assertEqual({i["id"]: i.get("stage") for i in items}["Sword"], "Mountain")
 
+    def test_usage_tags(self):
+        self.assertEqual(N.usage_tags("Building, Roof"), ["Building", "Roofing"])  # the build menu's labels
+        self.assertEqual(N.usage_tags(0x80 | 0x2), ["Crafting", "Furniture"])  # a number: menu order
+        self.assertEqual(N.usage_tags("0"), [])  # in no build menu
+        self.assertEqual(N.usage_tags(None), [])
+
     def test_effect_stages(self):
         items = [N.item(n, p) for n, p in N.PREFABS.items() if p["isItem"]]
         N.guardian_powers(items)
