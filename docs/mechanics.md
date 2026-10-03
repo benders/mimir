@@ -64,3 +64,14 @@ site's mechanics pages. Re-check against the decompiled code after major game up
 - Required station level: `max(1, m_minStationLevel) + q − 1` (`GetRequiredStationLevel`).
 - `m_upgraderResource` requirements (battle idols) only count at a station with `m_upgrader` (the
   `UpgradeStation` prefab), which can also upgrade past `m_maxQuality` (`InventoryGui`). Not verified in-game.
+
+## Hildir's quests (`Trader.m_useItems`, `CharacterDrop`, `Door.m_keyItem`)
+
+Each of Hildir's minibosses drops her chest directly through `CharacterDrop` (`Skeleton_Hildir` → `chest_hildir1`, and
+likewise for the other two). Giving the chest to Hildir (`Trader.m_useItems`: `m_removesItem`, `m_setsGlobalKey`
+`Hildir1`–`3`) unlocks more of her stock, whose `requiredKey` is that global key. No key is involved.
+
+The `HildirKey_*` items (Brass, Silver, Bronze Key) look like cut content: their only source is
+`TreasureChest_{forestcrypt,mountaincave,plainsfortress}_hildir`, which no location or dungeon room places, and no
+`Door.m_keyItem` in the dump or code path refers to them (nothing in the decompiled assembly names them). Verified
+against the dump and code, not in-game.
