@@ -161,6 +161,14 @@ class Site(unittest.TestCase):
         self.assertNotIn("<span>pickaxe</span>", raider)
         self.assertNotIn("Ignore", raider)
 
+    def test_spirit(self):
+        # most fixture creatures are immune to spirit: DPS leaves it out, and creatures always show their spirit tag
+        mace = (self.out / "items/Mace.html").read_text(encoding="utf-8")
+        self.assertIn("<dt>DPS*</dt><dd>31.7</dd>", mace)  # (10 + 2 hits x 10 x 2) / 1.575 s, spirit 5 left out
+        self.assertIn("* DPS leaves out spirit damage: 10 of 11 creatures are immune to it.", mace)
+        self.assertIn("<span>spirit</span>Normal", (self.out / "creatures/Shade.html").read_text(encoding="utf-8"))
+        self.assertNotIn("*", (self.out / "items/Sword.html").read_text(encoding="utf-8").split("<h2>Stats")[1][:400])
+
     def test_creatures_by_biome(self):
         index = (self.out / "creatures/index.html").read_text(encoding="utf-8")
         heads = re.findall(r'<h2 id="(\w+)">', index)

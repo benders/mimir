@@ -286,6 +286,41 @@
   "ammoType": "$ammo_dart"
  },
  {
+  "id": "Mace",
+  "name": "Mace",
+  "type": "OneHandedWeapon",
+  "icon": "Sword",
+  "weight": 1.0,
+  "stack": 1,
+  "maxQuality": 1,
+  "skill": "Clubs",
+  "damages": {
+   "blunt": 10,
+   "spirit": 5
+  },
+  "backstab": 1,
+  "parryBonus": 1,
+  "blockAdrenaline": 2,
+  "parryAdrenaline": 5,
+  "attack": {
+   "type": "Horizontal",
+   "stamina": 10,
+   "adrenaline": 1,
+   "chain": [
+    {
+     "time": 0.4,
+     "hits": 1
+    },
+    {
+     "time": 0.725,
+     "hits": 2
+    }
+   ],
+   "lastChainMultiplier": 2,
+   "cycle": 1.575
+  }
+ },
+ {
   "id": "Mead",
   "name": "Fizz Mead",
   "type": "Consumable",

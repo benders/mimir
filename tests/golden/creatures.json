@@ -6,6 +6,9 @@
   "faction": "ForestMonsters",
   "boss": true,
   "health": 900,
+  "damageModifiers": {
+   "spirit": "Immune"
+  },
   "speed": {
    "walk": 2,
    "run": 5,
@@ -18,6 +21,9 @@
   "faction": "ForestMonsters",
   "boss": true,
   "health": 1200,
+  "damageModifiers": {
+   "spirit": "Immune"
+  },
   "speed": {
    "walk": 2,
    "run": 5,
@@ -29,6 +35,9 @@
   "name": "Imp",
   "faction": "ForestMonsters",
   "health": 30,
+  "damageModifiers": {
+   "spirit": "Immune"
+  },
   "speed": {
    "walk": 2,
    "run": 5,
@@ -40,6 +49,9 @@
   "name": "Moth",
   "faction": "ForestMonsters",
   "health": 5,
+  "damageModifiers": {
+   "spirit": "Immune"
+  },
   "speed": {
    "walk": 2,
    "run": 5,
@@ -51,6 +63,9 @@
   "name": "Pup",
   "faction": "ForestMonsters",
   "health": 20,
+  "damageModifiers": {
+   "spirit": "Immune"
+  },
   "speed": {
    "walk": 2,
    "run": 5,
@@ -200,6 +215,9 @@
   "name": "Singer",
   "faction": "ForestMonsters",
   "health": 50,
+  "damageModifiers": {
+   "spirit": "Immune"
+  },
   "speed": {
    "walk": 2,
    "run": 5,
@@ -211,6 +229,9 @@
   "name": "Sprite",
   "faction": "ForestMonsters",
   "health": 10,
+  "damageModifiers": {
+   "spirit": "Immune"
+  },
   "speed": {
    "walk": 2,
    "run": 5,
@@ -222,6 +243,9 @@
   "name": "$enemy_missing",
   "faction": "ForestMonsters",
   "health": 10,
+  "damageModifiers": {
+   "spirit": "Immune"
+  },
   "speed": {
    "walk": 2,
    "run": 5,

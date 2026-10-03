@@ -68,7 +68,8 @@ def item(name, /, **kw):
 def character(type_="Humanoid", **kw):
     return comp(type_, {**m(
         name="", faction="ForestMonsters", group="", boss=False, defeatSetGlobalKey="", health=100,
-        damageModifiers={f"m_{k}": "Normal" for k in ("blunt", "slash", "pierce", "fire", "frost", "poison")},
+        damageModifiers={**{f"m_{k}": "Normal" for k in ("blunt", "slash", "pierce", "fire", "frost", "poison")},
+                         "m_spirit": "Immune"},  # most creatures, as in the game
         walkSpeed=2, runSpeed=5, swimSpeed=2, canSwim=True, flyFastSpeed=0, flying=False, defaultItems=[],
         randomWeapon=[], randomShield=[], randomArmor=[], randomSets=[], randomItems=[]), **m(**kw)})
 
@@ -143,7 +144,7 @@ TRANSLATIONS = {
     "item_ore": "Rustore", "item_ingot": "Ingot",
     "item_buckler": "Test Buckler",
     "item_sword": "Test Sword", "item_sword_desc": "Sharp <b>enough</b>.",
-    "item_helmet": "Pot Helm", "item_fish": "Glimfish", "item_pearl": "Moon Pearl", "item_javelin": "Test Javelin", "item_longbow": "Longbow", "item_arbal": "Arbal", "item_dart": "Dart", "item_mead": "Fizz Mead", "item_coins": "Coins", "item_charm": "Lucky Charm", "npc_vendor": "Old Vendor",
+    "item_helmet": "Pot Helm", "item_fish": "Glimfish", "item_pearl": "Moon Pearl", "item_javelin": "Test Javelin", "item_mace": "Mace", "item_longbow": "Longbow", "item_arbal": "Arbal", "item_dart": "Dart", "item_mead": "Fizz Mead", "item_coins": "Coins", "item_charm": "Lucky Charm", "npc_vendor": "Old Vendor",
     "item_hammer": "Mallet", "item_shard": "Shard", "item_bite": "Bite",
     "enemy_raider": "Raider", "piece_bench": "Bench", "piece_anvil": "Anvil", "piece_kiln": "Kiln",
     "piece_bush": "Twig Bush", "piece_orerock": "Ore Rock", "se_fizz": "Fizzy",
@@ -201,6 +202,8 @@ def prefabs():
         item("Arbal", name="$item_arbal", itemType="Bow", icons=[S("Sword")], damages=damages(pierce=50), ammoType="$ammo_dart",
              attack=attack(attackAnimation="throw", attackType="Projectile", requiresReload=True, reloadTime=4,
                            reloadAnimation="reload_test", blockReloadTime=0)),
+        item("Mace", name="$item_mace", itemType="OneHandedWeapon", icons=[S("Sword")], skillType="Clubs",
+             damages=damages(blunt=10, spirit=5), attack=attack(attackChainLevels=2)),  # spirit: left out of DPS
         item("Dart", name="$item_dart", itemType="Ammo", icons=[S("Sword")], damages=damages(pierce=10), ammoType="$ammo_dart"),
         item("DartBlunt", name="$item_dart", itemType="Ammo", icons=[S("Sword")], damages=damages(blunt=4), ammoType="$ammo_dart"),
         item("Mead", name="$item_mead", itemType="Consumable", icons=[S("Mead")], consumeStatusEffect=R("SE_Fizz")),
@@ -231,7 +234,7 @@ def prefabs():
         item("Rod", name="$item_rod", itemType="OneHandedWeapon", icons=[S("Rod")],
              attack=attack(attackProjectile=R("RodBolt"))),
         prefab("RodBolt", comp("Projectile", m(spawnOnHit=R("RodSpawn"), randomSpawnOnHit=[]))),
-        prefab("Shade", character(name="$enemy_shade", health=10)),  # made by the Chief's death burst
+        prefab("Shade", character(name="$enemy_shade", health=10, damageModifiers={"m_spirit": "Normal"})),  # made by the Chief's death burst
         prefab("ChiefBurst", comp("Projectile", m(spawnOnHit=R("BurstSpawn"), randomSpawnOnHit=[]))),
         prefab("Sprite", character(name="$enemy_sprite", health=10)),  # only summoned, by the Wand's ability
         item("Wand", name="$item_wand", itemType="OneHandedWeapon", icons=[S("Rod")],
@@ -401,7 +404,7 @@ def write_dump(raw: Path) -> Path:
     dump("locations/Stash.json", {"name": "Stash", "components": [comp("Location", {}), *spawners(
         container(("Coins", 1, 1, 1), ("Hammer", 1, 1, 1), ("Buckler", 1, 1, 1), ("HelmetFem", 1, 1, 1), ("SP_Sword", 1, 1, 1),
                   ("WoodOld", 1, 1, 1), ("Egg", 1, 1, 1), ("Longbow", 1, 1, 1), ("Arbal", 1, 1, 1),
-                  ("Dart", 1, 1, 1), ("DartBlunt", 1, 1, 1), name="$piece_stash"))],  # so the site tests' items are obtainable
+                  ("Dart", 1, 1, 1), ("DartBlunt", 1, 1, 1), ("Mace", 1, 1, 1), name="$piece_stash"))],  # so the site tests' items are obtainable
         "instances": [{"prefab": "Raider_Ranged", "path": "Raider_Ranged"}]})
     dump("locations/Market.json", {"name": "Market", "components": [comp("Location", {}), comp("Trader", {
         **m(name="$npc_vendor"), "m_items": [m(prefab=R("Charm"), stack=2, price=50, requiredGlobalKey="defeated_chief"),

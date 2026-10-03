@@ -522,10 +522,12 @@ def header(e: dict, kind: str, subtitle: str, desc: str = "") -> str:
             f'<p class="sub">{subtitle}</p>{d}</div></div>')
 
 
-def modifiers_table(mods: dict, hide_tools: bool = False) -> str:
+def modifiers_table(mods: dict, hide_tools: bool = False, always=()) -> str:
     """Ignore means zero damage (HitData.ApplyModifier), shown as Immune. Nearly every creature ignores chop and
-    pickaxe (tool damage, irrelevant in combat), so creature pages drop those rows."""
+    pickaxe (tool damage, irrelevant in combat), so creature pages drop those rows. Types in `always` show even when
+    Normal (the data omits Normal): for those, most creatures are immune, so taking damage is the notable case."""
     mods = {k: v for k, v in (mods or {}).items() if not (hide_tools and v == "Ignore" and k in ("chop", "pickaxe"))}
+    mods.update({k: "Normal" for k in always if k not in mods})
     if not mods:
         return ""
     return '<ul class="mods">' + "".join(
@@ -849,7 +851,8 @@ def creature_page(c: dict) -> None:
              ("Avoids water", "yes" if c.get("avoidWater") else None),
              ("Group", esc(c["group"]) if c.get("group") else None)]
     body = header(c, "creature", sub) + kv(facts)
-    mods = modifiers_table(c.get("damageModifiers"), hide_tools=True)
+    mods = modifiers_table(c.get("damageModifiers"), hide_tools=True,
+                           always=[t for t in IGNORED if t not in mechanics.TOOL_DAMAGE])  # spirit
     body += section("Resistances", mods + (f'<p class="note">What the levels mean: '
                                            f'{mech_link("damage-types", "Damage types and resistances")}.</p>' if mods else ""))
     attacks, labels = [], attack_labels(c)
