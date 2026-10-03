@@ -17,7 +17,6 @@ freezes the animation for 0.15 s. Skills and status effects don't change attack 
 - DPS = combo damage / cycle
 - bow: shot time = max(draw, release animation), draw = m_drawDurationMin × (1 − 0.8 × skill / 100)
 - crossbow: shot time = fire animation + reload + "reload done" animation (1.15 s), reload = m_reloadTime × (1 − 0.5 × skill / 100)
-- bow and crossbow hit damage = weapon damage + ammo damage, × the draw fraction for bows
 - each hit rolls × [n − 0.15, n + 0.15], clamped to [0, 1], n = 0.4 + 0.6 × skill / 100 (× 0.85–1 at skill 100)
 
 The table uses max quality, the sum of the combat damage types (chop and pickaxe left out; creatures ignore them) and
@@ -31,7 +30,8 @@ spear has to be picked up again) aren't listed. Nor is the Butcher Knife, which 
 
 ## Bows and crossbows
 
-At max quality with the hardest-hitting ammo of their type. A bow's damage scales with the draw fraction, so
-releasing early (once the release animation allows) gives the same DPS with slower, less accurate arrows.
+Speed only: damage per shot is the weapon's plus the ammo's, so DPS depends on the arrows or bolts used. A bow's
+damage scales with the draw fraction, so releasing early (once the release animation allows) trades damage for
+speed one for one, with slower, less accurate arrows.
 
 {{attack-speed-ranged}}
