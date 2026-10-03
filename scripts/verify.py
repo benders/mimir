@@ -109,10 +109,10 @@ def main() -> int:
     def instance_hits(subdir: str, needle: str) -> int:
         return sum(needle in f.read_text() for f in (DUMP / subdir).glob("*.json"))
     check('"instances"' in (DUMP / "locations" / "Eikthyrnir.json").read_text(), "locations carry an instances list")
-    check(instance_hits("locations", '"prefab":"Pickable_Mushroom_blue"') + instance_hits("rooms", '"prefab":"Pickable_Mushroom_blue"') > 0,
-          "some location/room places Pickable_Mushroom_blue")
-    check(instance_hits("locations", '_sleeping"') + instance_hits("rooms", '_sleeping"') > 0,
-          "some location/room places a *_sleeping creature")
+    check(instance_hits("rooms", '"prefab":"Pickable_MountainCaveRandom"') > 0,
+          "frost cave rooms place Pickable_MountainCaveRandom")
+    check(instance_hits("locations", '"prefab":"Spawner_Bjorn_sleeping"') + instance_hits("rooms", '"prefab":"Spawner_Bjorn_sleeping"') > 0,
+          "some location/room places Spawner_Bjorn_sleeping")
 
     tables = {t["name"]: t["fields"] for t in load("piece_tables.json")}
     hammer = tables.get("_HammerPieceTable", {}).get("m_pieces") or []

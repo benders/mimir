@@ -1,7 +1,7 @@
 {
  "gameVersion": "1.0.16",
  "networkVersion": 40,
- "dumperVersion": "0.3.0",
+ "dumperVersion": "0.4.0",
  "steamBuildId": "25527701",
  "counts": {
   "items": 1519,
