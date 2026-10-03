@@ -4,13 +4,13 @@
  "dumperVersion": "test",
  "steamBuildId": "1",
  "counts": {
-  "items": 18,
+  "items": 19,
   "recipes": 4,
   "creatures": 6,
-  "spawns": 12,
+  "spawns": 13,
   "pieces": 4,
   "processing": 1,
-  "sources": 4,
+  "sources": 5,
   "status_effects": 1
  },
  "unresolvedTokens": [

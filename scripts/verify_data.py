@@ -114,6 +114,11 @@ def main() -> int:
     in_chest = {d["item"] for s in sources if s.get("kind") == "container" and s.get("locations")
                 for d in s["drops"]["items"]}
     check({"Amber", "AmberPearl", "Ruby"} <= in_chest, "Amber, AmberPearl, Ruby are found in chests")
+    fish = {s["id"]: s for s in sources if s.get("kind") == "fishing"}
+    check(len(fish) >= 12 and all(f["baits"] and f["id"] in items for f in fish.values()), "fish: fishing sources with baits")
+    check(fish.get("Fish1", {}).get("baits", [{}])[0].get("item") == "FishingBait" and "Meadows" in fish["Fish1"]["biomes"],
+          "Fish1: caught with FishingBait in Meadows")
+    check(any(d["item"] == "Ruby" for d in fish.get("Fish3", {}).get("drops", {}).get("items", [])), "Fish3 can carry a Ruby")
     mead = items.get("MeadHealthMinor", {}).get("consumeEffect")
     check(bool(mead) and bool(effects.get(mead, {}).get("stats")), "MeadHealthMinor: consume effect with stats")
     check(items.get("CookedMeat", {}).get("food", {}).get("health", 0) > 0, "CookedMeat: food values")

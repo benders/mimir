@@ -283,7 +283,10 @@ def reachable(items: list, creatures: list, pieces: list, recipes: list, procs: 
     got_creatures = {s["creature"] for s in spawn_list}
     got_pieces = {p["id"] for p in pieces if p.get("enabled") and p.get("tools")}
     got = set()
+    fish = [src for src in sources if src["kind"] == "fishing"]
     for src in sources:
+        if src["kind"] == "fishing":
+            continue
         got |= {d["item"] for d in (src.get("drops") or {}).get("items", [])}
         if src.get("pickable"):
             got.add(src["pickable"]["item"])
@@ -293,6 +296,10 @@ def reachable(items: list, creatures: list, pieces: list, recipes: list, procs: 
                 and all(x["item"] in got for x in r["resources"] if not x.get("upgrader"))}
         got |= {d["item"] for c in got_creatures for d in by_creature.get(c, {}).get("drops", [])}
         got |= {p["to"] for p in procs if p["from"] in got}
+        for f in fish:
+            if f["id"] in got_creatures and any(b["item"] in got for b in f["baits"]):
+                got.add(f["id"])
+                got |= {d["item"] for d in (f.get("drops") or {}).get("items", [])}
         if len(got) == before:
             return got, got_creatures, got_pieces
 
@@ -660,6 +667,25 @@ def location_containers() -> list[dict]:
                   key=lambda e: e["id"])
 
 
+def fishing(spawn_list: list[dict]) -> list[dict]:
+    """Fish prefabs (Fish component) as sources of kind `fishing`: the baits they take (`baits` [{item, chance}]),
+    the biomes they swim in (from their spawns) and the extra drops a catch can carry. The caught fish is the
+    item with the same id."""
+    out = []
+    for name, p in PREFABS.items():
+        if not (f := comp(p, "Fish")) or not p["isItem"]:
+            continue
+        biomes_of = []
+        for s in spawn_list:
+            if s["creature"] == name and s.get("biomes"):  # world, or cave pools in dungeons
+                biomes_of += [b for b in s["biomes"] if b not in biomes_of]
+        out.append({"id": name, "kind": "fishing", "name": text(f["m_name"]), "biomes": biomes_of,
+                    "baits": [{"item": ref(b["m_bait"]), "chance": b["m_chance"]} for b in f["m_baits"]
+                              if keep(ref(b["m_bait"]), is_item)],
+                    "drops": drop_table(f["m_extraDrops"])})
+    return out
+
+
 def offspring_spawns() -> list[dict]:
     """Creatures born from another creature (Procreation) or hatched from an egg item (EggGrow)."""
     out = []
@@ -727,10 +753,11 @@ def main(argv: list[str]) -> int:
         if not p["isItem"] and not has(p, "Piece") and (s := source(name, p)):
             sources.append(s)
     sources += location_containers()
+    spawn_list = spawns()
+    sources += fishing(spawn_list)
 
     recipes = [recipe(r) for r in load("recipes.json")]
     mark_enemy_only(items, creatures, recipes, procs, sources, pieces)
-    spawn_list = spawns()
     mark_unobtainable(items, creatures, pieces, recipes, procs, sources, spawn_list)
     data = {
         "items.json": items,

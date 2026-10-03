@@ -66,6 +66,19 @@ class Site(unittest.TestCase):
         self.assertIn("Camp, Lair dungeon", gem)
         self.assertFalse((self.out / "items/Mystery.html").exists())
 
+    def test_fishing(self):
+        fish = (self.out / "items/Fish.html").read_text(encoding="utf-8")
+        self.assertIn("<h2>Fishing</h2>", fish)
+        self.assertIn("Caught with", fish)
+        self.assertIn('href="items/Wood.html"', fish)  # the bait
+        self.assertIn("in Ocean", fish)
+        wood = (self.out / "items/Wood.html").read_text(encoding="utf-8")
+        self.assertIn("<h2>Bait for</h2>", wood)
+        self.assertIn('href="items/Fish.html"', wood)
+        pearl = (self.out / "items/Pearl.html").read_text(encoding="utf-8")  # extra drop of a catch
+        self.assertIn("Glimfish", pearl)
+        self.assertIn("fishing", pearl)
+
     def test_unobtainable_hidden(self):
         for page in ("items/Mystery.html", "creatures/Wisp.html"):
             self.assertFalse((self.out / page).exists(), page)

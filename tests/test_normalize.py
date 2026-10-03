@@ -177,7 +177,7 @@ class Entities(FixtureCase):
 
     def test_world_spawns(self):
         s = self.spawns("world")
-        self.assertEqual(len(s), 3)  # disabled, devDisabled and non-creature spawners dropped
+        self.assertEqual(len(s), 4)  # disabled, devDisabled and non-creature spawners dropped; a fish is kept
         self.assertEqual((s[0]["creature"], s[0]["biomes"]), ("Raider", ["Meadows", "BlackForest"]))
         self.assertEqual(s[1]["creature"], "Raider")  # placed via Spawner_Raider
         self.assertEqual(len(s[1]["biomes"]), len(N.BIOME_BITS))
@@ -210,6 +210,12 @@ class Entities(FixtureCase):
         # in Camp and, as a dungeon room, in Lair; Ruin is disabled, the Crypt room's theme doesn't match Lair
         self.assertEqual([(x["location"], x["dungeon"]) for x in box["locations"]], [("Camp", False), ("Lair", True)])
         self.assertEqual(len({c["id"] for c in N.location_containers()}), 2)
+
+    def test_fishing(self):
+        [f] = N.fishing(N.spawns())
+        self.assertEqual((f["id"], f["kind"], f["name"], f["biomes"]), ("Fish", "fishing", "Glimfish", ["Ocean"]))
+        self.assertEqual(f["baits"], [{"item": "Wood", "chance": 1}])
+        self.assertEqual([d["item"] for d in f["drops"]["items"]], ["Pearl"])
 
     def test_offspring(self):
         self.assertEqual([s["parent"] for s in self.spawns("offspring")], ["Raider", "Raider_Ranged", "Raider_sleeping"])
@@ -252,7 +258,7 @@ class Unobtainable(FixtureCase):
         flagged = self.flagged()
         self.assertIn("Mystery", flagged)  # unresolved name, no source
         self.assertIn("Wisp", flagged)     # unresolved name, never spawns
-        self.assertNotIn("Fish", flagged)  # unreached (no fishing yet), but a real name
+        self.assertNotIn("Fish", flagged)  # a real name
         self.assertNotIn("Chief", flagged)
         self.assertNotIn("Sword", flagged)
 
@@ -263,12 +269,18 @@ class Unobtainable(FixtureCase):
         recipes = [N.recipe(r) for r in N.load("recipes.json")]
         procs = [x for n, p in N.PREFABS.items() for x in N.processing(n, p)]
         sources = [s for n, p in N.PREFABS.items() if not p["isItem"] and (s := N.source(n, p))]
-        got, _, _ = N.reachable(items, creatures, pieces, recipes, procs, sources, N.spawns())
+        got, _, _ = N.reachable(items, creatures, pieces, recipes, procs, sources, N.spawns())  # without fishing
         self.assertTrue({"Wood", "Ore", "Ingot", "Sword", "Helmet"} <= got)  # source -> smelt -> craft (upgrader ignored)
         self.assertNotIn("Mead", got)  # needs Fish, which nothing yields
         self.assertNotIn("Gem", got)
         got, _, _ = N.reachable(items, creatures, pieces, recipes, procs, sources + N.location_containers(), N.spawns())
         self.assertIn("Gem", got)  # found in a chest
+        fish = N.fishing(N.spawns())
+        got, _, _ = N.reachable(items, creatures, pieces, recipes, procs, sources + fish, N.spawns())
+        self.assertTrue({"Fish", "Pearl", "Mead"} <= got)  # spawned, bait (Wood) reachable; its drop and dish follow
+        no_bait = [dict(f, baits=[{"item": "Gem", "chance": 1}]) for f in fish]  # Gem is unreachable here
+        got, _, _ = N.reachable(items, creatures, pieces, recipes, procs, sources + no_bait, N.spawns())
+        self.assertNotIn("Fish", got)
 
 
 class BuildId(FixtureCase):

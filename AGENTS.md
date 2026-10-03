@@ -83,7 +83,9 @@ Logs after a dump: `.cache/dump/<branch>/server.log` (Unity) and `bepinex.log` (
 `meta.json` (versions, counts, unresolved tokens, skipped refs), `items`, `recipes`, `creatures`, `spawns`,
 `pieces`, `processing` (smelter/cooking/fermenter conversions), `sources` (pickables, ore, trees, rocks; follow
 `becomes` for multi-stage objects; `kind: container` = loot chests, one per distinct name + `Container` drop table, with
-`locations` [{location, dungeon}] where it is placed, `dungeon` = in a room that location's dungeon generates), `status_effects`. Each `spawns` entry has a `source`: `world` (SpawnSystem),
+`locations` [{location, dungeon}] where it is placed, `dungeon` = in a room that location's dungeon generates;
+`kind: fishing` = one per fish prefab, id = the caught item: `baits` [{item, chance}], `biomes` from its spawns, `drops` = extra
+catch drops; fish spawn as `creature` ids in `spawns` but have no `creatures` entry), `status_effects`. Each `spawns` entry has a `source`: `world` (SpawnSystem),
 `raid` (RandEventSystem; the event's biomes), `location` / `dungeon` (spawners and boss altars in a location or its
 dungeon rooms; the location's biomes), `offspring` (`parent` creature) or `egg` (`item` that hatches).
 Ids are prefab names; references are ids. Empty, zero, false and "Normal" values are omitted. Text is plain: Unity

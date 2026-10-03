@@ -13900,5 +13900,412 @@
     "dungeon": true
    }
   ]
+ },
+ {
+  "id": "Fish1",
+  "kind": "fishing",
+  "name": "Perch",
+  "biomes": [
+   "Meadows",
+   "BlackForest",
+   "Plains"
+  ],
+  "baits": [
+   {
+    "item": "FishingBait",
+    "chance": 1
+   }
+  ],
+  "drops": {
+   "min": 1,
+   "max": 1,
+   "chance": 0.2,
+   "items": [
+    {
+     "item": "Stone",
+     "min": 1,
+     "max": 2,
+     "weight": 1
+    },
+    {
+     "item": "Amber",
+     "min": 1,
+     "max": 1,
+     "weight": 0.2
+    }
+   ]
+  }
+ },
+ {
+  "id": "Fish10",
+  "kind": "fishing",
+  "name": "Northern Salmon",
+  "biomes": [
+   "DeepNorth"
+  ],
+  "baits": [
+   {
+    "item": "FishingBaitDeepNorth",
+    "chance": 1
+   }
+  ],
+  "drops": {
+   "min": 1,
+   "max": 1,
+   "chance": 0.2,
+   "items": [
+    {
+     "item": "CarrotSeeds",
+     "min": 1,
+     "max": 2,
+     "weight": 1
+    },
+    {
+     "item": "Silver",
+     "min": 1,
+     "max": 1,
+     "weight": 0.5
+    }
+   ]
+  }
+ },
+ {
+  "id": "Fish11",
+  "kind": "fishing",
+  "name": "Magmafish",
+  "biomes": [
+   "AshLands"
+  ],
+  "baits": [
+   {
+    "item": "FishingBaitAshlands",
+    "chance": 1
+   }
+  ],
+  "drops": {
+   "min": 1,
+   "max": 1,
+   "chance": 0.2,
+   "items": [
+    {
+     "item": "FlametalOreNew",
+     "min": 1,
+     "max": 2,
+     "weight": 0.3
+    },
+    {
+     "item": "SurtlingCore",
+     "min": 1,
+     "max": 1,
+     "weight": 0.5
+    },
+    {
+     "item": "Grausten",
+     "min": 1,
+     "max": 1,
+     "weight": 0.5
+    }
+   ]
+  }
+ },
+ {
+  "id": "Fish12",
+  "kind": "fishing",
+  "name": "Pufferfish",
+  "biomes": [
+   "Ocean",
+   "Mistlands"
+  ],
+  "baits": [
+   {
+    "item": "FishingBaitMistlands",
+    "chance": 1
+   }
+  ],
+  "drops": {
+   "min": 1,
+   "max": 1,
+   "chance": 0.2,
+   "items": [
+    {
+     "item": "Sap",
+     "min": 1,
+     "max": 2,
+     "weight": 1
+    },
+    {
+     "item": "Ooze",
+     "min": 1,
+     "max": 2,
+     "weight": 1
+    }
+   ]
+  }
+ },
+ {
+  "id": "Fish2",
+  "kind": "fishing",
+  "name": "Pike",
+  "biomes": [
+   "Meadows",
+   "BlackForest",
+   "Plains"
+  ],
+  "baits": [
+   {
+    "item": "FishingBait",
+    "chance": 1
+   }
+  ],
+  "drops": {
+   "min": 1,
+   "max": 1,
+   "chance": 0.2,
+   "items": [
+    {
+     "item": "Flint",
+     "min": 1,
+     "max": 2,
+     "weight": 1
+    },
+    {
+     "item": "AmberPearl",
+     "min": 1,
+     "max": 1,
+     "weight": 0.2
+    }
+   ]
+  }
+ },
+ {
+  "id": "Fish3",
+  "kind": "fishing",
+  "name": "Tuna",
+  "biomes": [
+   "Ocean"
+  ],
+  "baits": [
+   {
+    "item": "FishingBaitOcean",
+    "chance": 1
+   }
+  ],
+  "drops": {
+   "min": 1,
+   "max": 1,
+   "chance": 0.2,
+   "items": [
+    {
+     "item": "TinOre",
+     "min": 1,
+     "max": 2,
+     "weight": 1
+    },
+    {
+     "item": "Ruby",
+     "min": 1,
+     "max": 2,
+     "weight": 0.2
+    }
+   ]
+  }
+ },
+ {
+  "id": "Fish4_cave",
+  "kind": "fishing",
+  "name": "Tetra",
+  "biomes": [
+   "Mountain"
+  ],
+  "baits": [
+   {
+    "item": "FishingBaitCave",
+    "chance": 1
+   }
+  ],
+  "drops": {
+   "min": 1,
+   "max": 1,
+   "chance": 0.2,
+   "items": [
+    {
+     "item": "Obsidian",
+     "min": 1,
+     "max": 2,
+     "weight": 1
+    },
+    {
+     "item": "Coins",
+     "min": 1,
+     "max": 15,
+     "weight": 0.2
+    }
+   ]
+  }
+ },
+ {
+  "id": "Fish5",
+  "kind": "fishing",
+  "name": "Trollfish",
+  "biomes": [
+   "BlackForest"
+  ],
+  "baits": [
+   {
+    "item": "FishingBaitForest",
+    "chance": 1
+   }
+  ],
+  "drops": {
+   "min": 1,
+   "max": 1,
+   "chance": 0.2,
+   "items": [
+    {
+     "item": "TrollHide",
+     "min": 1,
+     "max": 2,
+     "weight": 0.5
+    },
+    {
+     "item": "CopperOre",
+     "min": 1,
+     "max": 1,
+     "weight": 0.5
+    }
+   ]
+  }
+ },
+ {
+  "id": "Fish6",
+  "kind": "fishing",
+  "name": "Giant Herring",
+  "biomes": [
+   "Swamp"
+  ],
+  "baits": [
+   {
+    "item": "FishingBaitSwamp",
+    "chance": 1
+   }
+  ],
+  "drops": {
+   "min": 1,
+   "max": 1,
+   "chance": 0.2,
+   "items": [
+    {
+     "item": "IronOre",
+     "min": 1,
+     "max": 2,
+     "weight": 1
+    },
+    {
+     "item": "Chain",
+     "min": 1,
+     "max": 2,
+     "weight": 0.2
+    }
+   ]
+  }
+ },
+ {
+  "id": "Fish7",
+  "kind": "fishing",
+  "name": "Grouper",
+  "biomes": [
+   "Plains"
+  ],
+  "baits": [
+   {
+    "item": "FishingBaitPlains",
+    "chance": 1
+   }
+  ],
+  "drops": {
+   "min": 1,
+   "max": 1,
+   "chance": 0.2,
+   "items": [
+    {
+     "item": "BlackMetalScrap",
+     "min": 1,
+     "max": 2,
+     "weight": 0.5
+    },
+    {
+     "item": "Barley",
+     "min": 1,
+     "max": 2,
+     "weight": 0.5
+    }
+   ]
+  }
+ },
+ {
+  "id": "Fish8",
+  "kind": "fishing",
+  "name": "Coral Cod",
+  "biomes": [
+   "Ocean"
+  ],
+  "baits": [
+   {
+    "item": "FishingBaitOcean",
+    "chance": 1
+   }
+  ],
+  "drops": {
+   "min": 1,
+   "max": 1,
+   "chance": 0.2,
+   "items": [
+    {
+     "item": "Chitin",
+     "min": 1,
+     "max": 2,
+     "weight": 1
+    },
+    {
+     "item": "OnionSeeds",
+     "min": 1,
+     "max": 2,
+     "weight": 0.5
+    }
+   ]
+  }
+ },
+ {
+  "id": "Fish9",
+  "kind": "fishing",
+  "name": "Anglerfish",
+  "biomes": [
+   "Mistlands"
+  ],
+  "baits": [
+   {
+    "item": "FishingBaitMistlands",
+    "chance": 1
+   }
+  ],
+  "drops": {
+   "min": 1,
+   "max": 1,
+   "chance": 0.2,
+   "items": [
+    {
+     "item": "Softtissue",
+     "min": 1,
+     "max": 2,
+     "weight": 1
+    },
+    {
+     "item": "JuteBlue",
+     "min": 1,
+     "max": 2,
+     "weight": 1
+    }
+   ]
+  }
  }
 ]

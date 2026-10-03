@@ -173,7 +173,9 @@ def source_name(s: dict) -> str:
 
 
 def source_places(s: dict) -> str:
-    """Where a container source (loot chest) is found: its locations, dungeon rooms marked."""
+    """Where a source is found: a fish's biomes, or a loot chest's locations (dungeon rooms marked)."""
+    if s["kind"] == "fishing":
+        return ", ".join(BIOMES.get(b, words(b)) for b in s.get("biomes", []))
     return ", ".join(pretty_id(x["location"]) + (" dungeon" if x.get("dungeon") else "") for x in s.get("locations", []))
 
 
@@ -276,6 +278,7 @@ process_to = defaultdict(list)       # item -> conversions producing it
 process_at = defaultdict(list)       # station -> conversions
 dropped_by = defaultdict(list)       # item -> (creature id, drop)
 found_in = defaultdict(list)         # item -> (source, text)
+bait_for = defaultdict(list)         # bait item -> fish ids
 effect_users = defaultdict(list)     # effect -> (item id, how)
 spawns_of = defaultdict(list)        # creature -> spawn entries
 tool_pieces = defaultdict(list)      # tool item -> pieces
@@ -313,6 +316,8 @@ for c in CREATURES.values():
     for d in c.get("drops", []):
         dropped_by[d["item"]].append((c["id"], d))
 for s in SOURCES.values():
+    for b in s.get("baits", []):
+        bait_for[b["item"]].append(s["id"])
     if s.get("pickable"):
         pk = s["pickable"]
         found_in[pk["item"]].append((s, f"pick ×{num(pk.get('amount', 1))}"))
@@ -333,7 +338,7 @@ for i in ITEMS.values():
 for s in SPAWNS:
     spawns_of[s["creature"]].append(s)
 for kind, rels in {"item": [crafted_by, used_in_recipe, used_in_piece, process_from, process_to, dropped_by,
-                            found_in, tool_pieces],
+                            found_in, bait_for, tool_pieces],
                    "creature": [spawns_of],
                    "piece": [crafted_at, built_at, extensions, process_at]}.items():
     for variant, page_id in MERGED[kind].items():  # a merged copy's relations show on its page
@@ -599,6 +604,12 @@ def item_page(i: dict) -> None:
         obtain.append([f'{esc(PROCESS_LABELS.get(c["kind"], c["kind"]))} at {link("piece", c["station"])}',
                        f'{link("item", c["from"])} → ×{num(c["amount"])}', duration(c["time"])])
     body += section("Produced by", table(["How", "From", "Time"], obtain))
+
+    fish = SOURCES.get(i["id"])
+    if fish and fish["kind"] == "fishing":
+        how = "Caught with " + ", ".join(link("item", b["item"]) for b in fish["baits"])
+        body += section("Fishing", f'<p>{how}{" in " + esc(source_places(fish)) if fish.get("biomes") else ""}.</p>')
+    body += section("Bait for", reflist(link("item", f) for f in bait_for[i["id"]]))
 
     drops = [[link("creature", cid), rng(d.get("min", 1), d.get("max", 1)), pct(d.get("chance", 1))]
              for cid, d in dropped_by[i["id"]]]

@@ -159,6 +159,17 @@
   "parryBonus": 1
  },
  {
+  "id": "Pearl",
+  "name": "Moon Pearl",
+  "type": "Material",
+  "icon": "Pearl",
+  "weight": 1.0,
+  "stack": 1,
+  "maxQuality": 1,
+  "backstab": 1,
+  "parryBonus": 1
+ },
+ {
   "id": "SP_Helmet",
   "name": "Pot Helm",
   "type": "Helmet",

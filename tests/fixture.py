@@ -142,7 +142,7 @@ TRANSLATIONS = {
     "item_wood": "Twig", "item_wood_desc": "A stick.",
     "item_ore": "Rustore", "item_ingot": "Ingot",
     "item_sword": "Test Sword", "item_sword_desc": "Sharp <b>enough</b>.",
-    "item_helmet": "Pot Helm", "item_fish": "Glimfish", "item_mead": "Fizz Mead",
+    "item_helmet": "Pot Helm", "item_fish": "Glimfish", "item_pearl": "Moon Pearl", "item_mead": "Fizz Mead",
     "item_hammer": "Mallet", "item_bite": "Bite",
     "enemy_raider": "Raider", "piece_bench": "Bench", "piece_anvil": "Anvil", "piece_kiln": "Kiln",
     "piece_bush": "Twig Bush", "piece_orerock": "Ore Rock", "se_fizz": "Fizzy",
@@ -181,7 +181,10 @@ def prefabs():
         item("FW_Helmet", name="$item_helmet", itemType="Helmet", icons=[S("Helmet")], armor=8),  # carried copy
         item("SP_Helmet", name="$item_helmet", itemType="Helmet", icons=[S("Helmet")]),  # unused copy
         item("SP_Sword", name="Other Sword", itemType="OneHandedWeapon", icons=[S("Sword")]),  # renamed: not a copy
-        item("Fish", name="$item_fish", icons=[S("Fish")]),  # no source modelled: stays visible
+        with_components(item("Fish", name="$item_fish", icons=[S("Fish")]),  # caught with Wood in the Ocean
+                        comp("Fish", m(name="$item_fish", baits=[m(bait=R("Wood"), chance=1)],
+                                       extraDrops=drop_table(("Pearl", 1, 2, 1))))),
+        item("Pearl", name="$item_pearl", icons=[S("Pearl")]),  # only from fishing
         item("Mead", name="$item_mead", itemType="Consumable", icons=[S("Mead")], consumeStatusEffect=R("SE_Fizz")),
         item("Hammer", name="$item_hammer", itemType="Tool", icons=[S("Hammer")], buildPieces=R("_HammerTable")),
         item("Bite", name="$item_bite", itemType="OneHandedWeapon", attack=attack(attackStamina=0),
@@ -263,6 +266,7 @@ def write_dump(raw: Path) -> Path:
         spawner("vfx_Poof"),
         spawner("Spawner_Raider", biome="-1"),  # places a spawner, everywhere
         spawner("Raider_sleeping", biome="Meadows"),  # shown on Raider's page
+        spawner("Fish", biome="Ocean"),  # a fish: its biomes go into the fishing source
     ]}}])
     dump("world/RandEventSystem.json", [{"name": "_GameMain", "type": "RandEventSystem", "fields": {"m_events": [
         event("army_test", "Meadows, Swamp", spawner("Raider", biome="1023", minLevel=2, maxLevel=1), spawner("vfx_Poof")),
