@@ -7,10 +7,10 @@
   "items": 29,
   "recipes": 7,
   "creatures": 12,
-  "spawns": 22,
+  "spawns": 23,
   "pieces": 9,
   "processing": 1,
-  "sources": 12,
+  "sources": 13,
   "status_effects": 1
  },
  "unresolvedTokens": [
@@ -19,7 +19,8 @@
   "item_missing",
   "item_oddbar",
   "item_oddbar_desc",
-  "piece_other"
+  "piece_other",
+  "piece_stash"
  ],
  "skippedRefs": [
   "ChoirOffering",

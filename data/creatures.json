@@ -1791,7 +1791,8 @@
     "chance": 0.1
    }
   ],
-  "avoidWater": true
+  "avoidWater": true,
+  "unobtainable": true
  },
  {
   "id": "Draugr_Ranged",
@@ -1861,7 +1862,8 @@
     "chance": 0.1
    }
   ],
-  "avoidWater": true
+  "avoidWater": true,
+  "unobtainable": true
  },
  {
   "id": "Draugr_sleeping",
@@ -1901,7 +1903,8 @@
     "chance": 0.1
    }
   ],
-  "avoidWater": true
+  "avoidWater": true,
+  "unobtainable": true
  },
  {
   "id": "Dverger",
@@ -2198,7 +2201,8 @@
     "chance": 0.05
    }
   ],
-  "avoidWater": true
+  "avoidWater": true,
+  "unobtainable": true
  },
  {
   "id": "DvergerMageIce",
@@ -2254,7 +2258,8 @@
     "chance": 0.05
    }
   ],
-  "avoidWater": true
+  "avoidWater": true,
+  "unobtainable": true
  },
  {
   "id": "DvergerMageSupport",
@@ -2310,7 +2315,8 @@
     "chance": 0.05
    }
   ],
-  "avoidWater": true
+  "avoidWater": true,
+  "unobtainable": true
  },
  {
   "id": "DvergerTest",
@@ -2994,7 +3000,8 @@
     "levelMultiplier": true
    }
   ],
-  "avoidWater": true
+  "avoidWater": true,
+  "unobtainable": true
  },
  {
   "id": "Ghost",
@@ -3062,7 +3069,8 @@
     "chance": 1
    }
   ],
-  "avoidWater": true
+  "avoidWater": true,
+  "unobtainable": true
  },
  {
   "id": "Ghost_old",
@@ -3093,7 +3101,8 @@
     "chance": 0.5
    }
   ],
-  "avoidWater": true
+  "avoidWater": true,
+  "unobtainable": true
  },
  {
   "id": "Ghost_sleeping",
@@ -3130,7 +3139,8 @@
     "chance": 0.1
    }
   ],
-  "avoidWater": true
+  "avoidWater": true,
+  "unobtainable": true
  },
  {
   "id": "Gjall",
@@ -3452,7 +3462,8 @@
     "chance": 1
    }
   ],
-  "avoidWater": true
+  "avoidWater": true,
+  "unobtainable": true
  },
  {
   "id": "GoblinDeepNorth",
@@ -3719,7 +3730,8 @@
    }
   ],
   "afraidOfFire": true,
-  "avoidWater": true
+  "avoidWater": true,
+  "unobtainable": true
  },
  {
   "id": "Greydwarf",
@@ -4586,7 +4598,8 @@
     "chance": 1,
     "levelMultiplier": true
    }
-  ]
+  ],
+  "unobtainable": true
  },
  {
   "id": "Lox",
@@ -5658,7 +5671,8 @@
     "levelMultiplier": true
    }
   ],
-  "avoidWater": true
+  "avoidWater": true,
+  "unobtainable": true
  },
  {
   "id": "Skeleton_NoArcher",
@@ -5700,7 +5714,8 @@
     "levelMultiplier": true
    }
   ],
-  "avoidWater": true
+  "avoidWater": true,
+  "unobtainable": true
  },
  {
   "id": "Skeleton_Poison",
@@ -5823,7 +5838,8 @@
     "levelMultiplier": true
    }
   ],
-  "avoidWater": true
+  "avoidWater": true,
+  "unobtainable": true
  },
  {
   "id": "Skeleton_aspect",
@@ -6015,7 +6031,8 @@
    "ShieldBronzeBuckler",
    "ShieldWood"
   ],
-  "avoidWater": true
+  "avoidWater": true,
+  "unobtainable": true
  },
  {
   "id": "TentaRoot",
@@ -6169,7 +6186,8 @@
     "levelMultiplier": true
    }
   ],
-  "avoidWater": true
+  "avoidWater": true,
+  "unobtainable": true
  },
  {
   "id": "Troll",
@@ -6323,7 +6341,8 @@
     "levelMultiplier": true
    }
   ],
-  "avoidWater": true
+  "avoidWater": true,
+  "unobtainable": true
  },
  {
   "id": "Ulv",

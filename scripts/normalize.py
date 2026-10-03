@@ -367,12 +367,14 @@ def seasons(pieces: list, recipes: list) -> None:
 
 def mark_unobtainable(items: list, creatures: list, pieces: list, recipes: list, procs: list, sources: list,
                       spawn_list: list) -> None:
-    """Flag entries players can't get. Only those whose name is also an unresolved $token (unreleased or test
-    content: DvergerTest, Hive, IceSkates) until reachable() covers every source (#21). The site hides them."""
+    """Flag every item, creature and piece reachable() can't get to: unreleased, test, cheat and legacy content
+    (Hive, SwordCheat, HealthUpgrade_*, OLD_wood_roof, unplaced *_sleeping variants). Internal and enemyOnly items
+    are hidden already. The site hides unobtainable entries; verify_data guards against a source gap hiding real
+    content (#35)."""
     got = reachable(items, creatures, pieces, recipes, procs, sources, spawn_list)
     for entries, ids in zip((items, creatures, pieces), got):
         for e in entries:
-            if e["id"] not in ids and "$" in (e.get("name") or ""):
+            if e["id"] not in ids and not e.get("internal") and not e.get("enemyOnly"):
                 e["unobtainable"] = True
 
 

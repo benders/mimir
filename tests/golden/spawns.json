@@ -247,6 +247,14 @@
   ]
  },
  {
+  "creature": "Raider_Ranged",
+  "source": "location",
+  "location": "Stash",
+  "biomes": [
+   "Meadows"
+  ]
+ },
+ {
   "creature": "Pup",
   "source": "egg",
   "item": "Egg"

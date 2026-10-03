@@ -3,7 +3,9 @@
     python3 -m unittest discover -s tests                         # or: make test
     MIMIR_UPDATE_GOLDEN=1 python3 -m unittest tests/test_normalize.py   # rewrite tests/golden/ after a deliberate change
 """
+import contextlib
 import importlib.util
+import io
 import json
 import os
 import sys
@@ -279,7 +281,7 @@ class Entities(FixtureCase):
     def test_location_spawns(self):
         s = {(x["creature"], x["location"]): x for x in self.spawns("location")}
         self.assertEqual(set(s), {("Raider", "Camp"), ("Pup", "Camp"), ("Chief", "Lair"),
-                          ("Raider", "Lair"), ("Pup", "Lair"), ("Singer", "Lair")})  # Ruin disabled; Lair: a Spawner_ and a creature instance
+                          ("Raider", "Lair"), ("Pup", "Lair"), ("Singer", "Lair"), ("Raider_Ranged", "Stash")})  # Ruin disabled; Lair: a Spawner_ and a creature instance
         camp = s["Raider", "Camp"]
         self.assertEqual(camp["biomes"], ["Swamp", "Plains"])
         self.assertEqual(camp["levels"], [1, 3])  # merged; swapped min/max fixed
@@ -292,13 +294,13 @@ class Entities(FixtureCase):
 
     def test_location_containers(self):
         by = {c["name"]: c for c in N.location_containers()}  # empty table dropped; one source per name + table
-        self.assertEqual(set(by), {"Strongbox", "$piece_other", "Crate"})  # Crate: a placed prefab's Container
+        self.assertEqual(set(by), {"Strongbox", "$piece_other", "Crate", "$piece_stash"})  # Crate: a placed prefab's Container
         box = by["Strongbox"]
         self.assertEqual(box["kind"], "container")
         self.assertEqual([d["item"] for d in box["drops"]["items"]], ["Gem", "Wood"])
         # in Camp and, as a dungeon room, in Lair; Ruin is disabled, the Crypt room's theme doesn't match Lair
         self.assertEqual([(x["location"], x["dungeon"]) for x in box["locations"]], [("Camp", False), ("Lair", True)])
-        self.assertEqual(len({c["id"] for c in N.location_containers()}), 3)
+        self.assertEqual(len({c["id"] for c in N.location_containers()}), 4)
 
     def test_fishing(self):
         [f] = N.fishing(N.spawns())
@@ -342,23 +344,23 @@ class EnemyOnly(FixtureCase):
 
 class Unobtainable(FixtureCase):
     def flagged(self):
-        items = [i for n, p in N.PREFABS.items() if p["isItem"] and (i := N.item(n, p))]
-        creatures = [c for n, p in N.PREFABS.items() if (c := N.creature(n, p))]
-        pieces = [x for n, p in N.PREFABS.items() if (x := N.piece(n, p, N.piece_tools()))]
-        recipes = [N.recipe(r) for r in N.load("recipes.json")]
-        procs = [x for n, p in N.PREFABS.items() for x in N.processing(n, p)]
-        sources = [s for n, p in N.PREFABS.items() if not p["isItem"] and (s := N.source(n, p))]
-        N.place_sources(sources)
-        N.mark_unobtainable(items, creatures, pieces, recipes, procs, sources, N.spawns())
-        return {e["id"] for e in items + creatures + pieces if e.get("unobtainable")}
+        with tempfile.TemporaryDirectory() as tmp, mock.patch.dict(os.environ, {"MIMIR_STEAM_BUILDID": "1"}):
+            out = Path(tmp) / "out"
+            with contextlib.redirect_stdout(io.StringIO()):
+                N.main([str(self.raw), str(out)])
+            entries = [e for f in ("items", "creatures", "pieces")
+                       for e in json.loads((out / f"{f}.json").read_text(encoding="utf-8"))]
+        N.setup(self.raw, self.out)
+        return {e["id"] for e in entries if e.get("unobtainable")}
 
     def test_flags(self):
         flagged = self.flagged()
-        self.assertIn("Mystery", flagged)  # unresolved name, no source
-        self.assertIn("Wisp", flagged)     # unresolved name, never spawns
-        self.assertNotIn("Fish", flagged)  # a real name
-        self.assertNotIn("Chief", flagged)
-        self.assertNotIn("Sword", flagged)
+        self.assertIn("Wisp", flagged)       # never spawns
+        self.assertIn("Dust", flagged)       # from a tap whose root isn't in the world
+        self.assertNotIn("Mystery", flagged)  # internal (no icon): hidden already, not flagged twice
+        self.assertNotIn("FW_Helmet", flagged)  # enemyOnly, likewise
+        for x in ("Fish", "Chief", "Sword", "Gem", "Charm", "Shard", "Sapling", "Raider_Ranged"):
+            self.assertNotIn(x, flagged)
 
     def test_reachable(self):
         items, creatures, pieces = (

@@ -5960,7 +5960,8 @@
   "armor": 10,
   "armorPerLevel": 1,
   "block": 10,
-  "parryBonus": 1.5
+  "parryBonus": 1.5,
+  "unobtainable": true
  },
  {
   "id": "BonemawSerpentTooth",
@@ -7012,7 +7013,8 @@
    "perLevel": 50,
    "drain": 1,
    "repairable": true
-  }
+  },
+  "unobtainable": true
  },
  {
   "id": "CapeTrollHide",
@@ -12118,7 +12120,8 @@
    "stamina": 20,
    "duration": 600,
    "regen": 1
-  }
+  },
+  "unobtainable": true
  },
  {
   "id": "FishCooked",
@@ -12706,7 +12709,8 @@
   "armor": 10,
   "armorPerLevel": 1,
   "block": 10,
-  "parryBonus": 1.5
+  "parryBonus": 1.5,
+  "unobtainable": true
  },
  {
   "id": "FlametalNew",
@@ -12742,7 +12746,8 @@
   "armor": 10,
   "armorPerLevel": 1,
   "block": 10,
-  "parryBonus": 1.5
+  "parryBonus": 1.5,
+  "unobtainable": true
  },
  {
   "id": "FlametalOreNew",
@@ -12896,7 +12901,8 @@
   "armor": 10,
   "armorPerLevel": 1,
   "block": 10,
-  "parryBonus": 1.5
+  "parryBonus": 1.5,
+  "unobtainable": true
  },
  {
   "id": "FrozenKingDrop",
@@ -16630,7 +16636,8 @@
   "armor": 10,
   "armorPerLevel": 1,
   "block": 10,
-  "parryBonus": 1.5
+  "parryBonus": 1.5,
+  "unobtainable": true
  },
  {
   "id": "HealthUpgrade_Bonemass",
@@ -16647,7 +16654,8 @@
   "armor": 10,
   "armorPerLevel": 1,
   "block": 10,
-  "parryBonus": 1.5
+  "parryBonus": 1.5,
+  "unobtainable": true
  },
  {
   "id": "HealthUpgrade_GDKing",
@@ -16668,7 +16676,8 @@
   "attack": {
    "type": "Horizontal",
    "stamina": 20
-  }
+  },
+  "unobtainable": true
  },
  {
   "id": "HelmetAshlandsMediumHood",
@@ -17782,7 +17791,8 @@
   "armor": 10,
   "armorPerLevel": 1,
   "block": 10,
-  "parryBonus": 1.5
+  "parryBonus": 1.5,
+  "unobtainable": true
  },
  {
   "id": "HildirKey_mountaincave",
@@ -17799,7 +17809,8 @@
   "armor": 10,
   "armorPerLevel": 1,
   "block": 10,
-  "parryBonus": 1.5
+  "parryBonus": 1.5,
+  "unobtainable": true
  },
  {
   "id": "HildirKey_plainsfortress",
@@ -17816,7 +17827,8 @@
   "armor": 10,
   "armorPerLevel": 1,
   "block": 10,
-  "parryBonus": 1.5
+  "parryBonus": 1.5,
+  "unobtainable": true
  },
  {
   "id": "Hoe",
@@ -19474,7 +19486,8 @@
    "type": "Horizontal",
    "stamina": 18,
    "damageMultiplier": 3
-  }
+  },
+  "unobtainable": true
  },
  {
   "id": "KnifeWood",
@@ -19577,7 +19590,8 @@
   "parryBonus": 2,
   "modifiers": {
    "movement": -0.05
-  }
+  },
+  "unobtainable": true
  },
  {
   "id": "Larva",
@@ -22417,7 +22431,8 @@
    "stamina": 20,
    "duration": 600,
    "regen": 1
-  }
+  },
+  "unobtainable": true
  },
  {
   "id": "MushroomBzerker",
@@ -23183,7 +23198,8 @@
   },
   "modifiers": {
    "movement": -0.05
-  }
+  },
+  "unobtainable": true
  },
  {
   "id": "PineCone",
@@ -23276,7 +23292,8 @@
   },
   "modifiers": {
    "movement": -0.05
-  }
+  },
+  "unobtainable": true
  },
  {
   "id": "Pot_Shard_Green",
@@ -25901,7 +25918,8 @@
   },
   "modifiers": {
    "movement": -0.2
-  }
+  },
+  "unobtainable": true
  },
  {
   "id": "ShieldIronTower",
@@ -25969,7 +25987,8 @@
   },
   "modifiers": {
    "movement": -0.05
-  }
+  },
+  "unobtainable": true
  },
  {
   "id": "ShieldRoots",
@@ -26353,7 +26372,8 @@
   },
   "modifiers": {
    "movement": -0.15
-  }
+  },
+  "unobtainable": true
  },
  {
   "id": "SledgeDemolisher",
@@ -26777,7 +26797,8 @@
    "type": "Projectile",
    "stamina": 8,
    "projectile": "snowballbig_projectile"
-  }
+  },
+  "unobtainable": true
  },
  {
   "id": "Softtissue",
@@ -28330,7 +28351,8 @@
   "armor": 10,
   "armorPerLevel": 1,
   "block": 10,
-  "parryBonus": 1.5
+  "parryBonus": 1.5,
+  "unobtainable": true
  },
  {
   "id": "StaminaUpgrade_Troll",
@@ -28347,7 +28369,8 @@
   "armor": 10,
   "armorPerLevel": 1,
   "block": 10,
-  "parryBonus": 1.5
+  "parryBonus": 1.5,
+  "unobtainable": true
  },
  {
   "id": "StaminaUpgrade_Wraith",
@@ -28364,7 +28387,8 @@
   "armor": 10,
   "armorPerLevel": 1,
   "block": 10,
-  "parryBonus": 1.5
+  "parryBonus": 1.5,
+  "unobtainable": true
  },
  {
   "id": "Stone",
@@ -28625,7 +28649,8 @@
   },
   "modifiers": {
    "movement": -0.05
-  }
+  },
+  "unobtainable": true
  },
  {
   "id": "SwordDyrnwyn",
@@ -28932,7 +28957,8 @@
   },
   "modifiers": {
    "movement": -0.05
-  }
+  },
+  "unobtainable": true
  },
  {
   "id": "SwordMistwalker",
@@ -30778,7 +30804,8 @@
   "armor": 5,
   "armorPerLevel": 1,
   "block": 10,
-  "parryBonus": 1.5
+  "parryBonus": 1.5,
+  "unobtainable": true
  },
  {
   "id": "TrophyDvergr",
@@ -30918,7 +30945,8 @@
   "armor": 5,
   "armorPerLevel": 1,
   "block": 10,
-  "parryBonus": 1.5
+  "parryBonus": 1.5,
+  "unobtainable": true
  },
  {
   "id": "TrophyFrostTroll",
@@ -32250,7 +32278,8 @@
   "armor": 10,
   "armorPerLevel": 1,
   "block": 10,
-  "parryBonus": 1.5
+  "parryBonus": 1.5,
+  "unobtainable": true
  },
  {
   "id": "VikingCupcake",
@@ -32375,7 +32404,8 @@
   "armor": 10,
   "armorPerLevel": 1,
   "block": 10,
-  "parryBonus": 1.5
+  "parryBonus": 1.5,
+  "unobtainable": true
  },
  {
   "id": "VoltureEgg",

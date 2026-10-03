@@ -180,6 +180,65 @@
   ]
  },
  {
+  "id": "container_piece_stash_c3395e",
+  "kind": "container",
+  "name": "$piece_stash",
+  "drops": {
+   "min": 1,
+   "max": 1,
+   "chance": 1,
+   "items": [
+    {
+     "item": "Coins",
+     "min": 1,
+     "max": 1,
+     "weight": 1
+    },
+    {
+     "item": "Hammer",
+     "min": 1,
+     "max": 1,
+     "weight": 1
+    },
+    {
+     "item": "Buckler",
+     "min": 1,
+     "max": 1,
+     "weight": 1
+    },
+    {
+     "item": "HelmetFem",
+     "min": 1,
+     "max": 1,
+     "weight": 1
+    },
+    {
+     "item": "SP_Sword",
+     "min": 1,
+     "max": 1,
+     "weight": 1
+    },
+    {
+     "item": "WoodOld",
+     "min": 1,
+     "max": 1,
+     "weight": 1
+    },
+    {
+     "item": "Egg",
+     "min": 1,
+     "max": 1,
+     "weight": 1
+    }
+   ]
+  },
+  "locations": [
+   {
+    "location": "Stash"
+   }
+  ]
+ },
+ {
   "id": "container_strongbox_3bb70a",
   "kind": "container",
   "name": "Strongbox",

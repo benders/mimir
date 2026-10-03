@@ -80,7 +80,8 @@
    "chop": "Weak",
    "poison": "Immune",
    "spirit": "Immune"
-  }
+  },
+  "unobtainable": true
  },
  {
   "id": "ArmorStand_Male",
@@ -143,7 +144,8 @@
    "frost": "Resistant",
    "poison": "Immune",
    "spirit": "Immune"
-  }
+  },
+  "unobtainable": true
  },
  {
   "id": "Ashlands_Arch2",
@@ -168,7 +170,8 @@
    "frost": "Resistant",
    "poison": "Immune",
    "spirit": "Immune"
-  }
+  },
+  "unobtainable": true
  },
  {
   "id": "Ashlands_WallBlock_1x2x2",
@@ -193,7 +196,8 @@
    "frost": "Resistant",
    "poison": "Immune",
    "spirit": "Immune"
-  }
+  },
+  "unobtainable": true
  },
  {
   "id": "Ashlands_WallBlock_base",
@@ -218,7 +222,8 @@
    "frost": "Resistant",
    "poison": "Immune",
    "spirit": "Immune"
-  }
+  },
+  "unobtainable": true
  },
  {
   "id": "BakedPoteitr",
@@ -1334,7 +1339,8 @@
    }
   ],
   "health": 50,
-  "material": "Wood"
+  "material": "Wood",
+  "unobtainable": true
  },
  {
   "id": "Honey",
@@ -2228,7 +2234,8 @@
    "frost": "Resistant",
    "poison": "Immune",
    "spirit": "Immune"
-  }
+  },
+  "unobtainable": true
  },
  {
   "id": "Morkhalla_firepit",
@@ -2437,7 +2444,8 @@
    "pierce": "Resistant",
    "chop": "Weak",
    "poison": "Immune"
-  }
+  },
+  "unobtainable": true
  },
  {
   "id": "OLD_wood_roof_icorner",
@@ -2459,7 +2467,8 @@
    "pierce": "Resistant",
    "chop": "Weak",
    "poison": "Immune"
-  }
+  },
+  "unobtainable": true
  },
  {
   "id": "OLD_wood_roof_ocorner",
@@ -2481,7 +2490,8 @@
    "pierce": "Resistant",
    "chop": "Weak",
    "poison": "Immune"
-  }
+  },
+  "unobtainable": true
  },
  {
   "id": "OLD_wood_roof_top",
@@ -2503,7 +2513,8 @@
    "pierce": "Resistant",
    "chop": "Weak",
    "poison": "Immune"
-  }
+  },
+  "unobtainable": true
  },
  {
   "id": "OLD_wood_wall_roof",
@@ -2525,7 +2536,8 @@
    "pierce": "Resistant",
    "chop": "Weak",
    "poison": "Immune"
-  }
+  },
+  "unobtainable": true
  },
  {
   "id": "Oak_Sapling",
@@ -3940,7 +3952,8 @@
    "frost": "Resistant",
    "poison": "Immune",
    "spirit": "Immune"
-  }
+  },
+  "unobtainable": true
  },
  {
   "id": "TreasureChest_ashland_stone",
@@ -4163,7 +4176,8 @@
    "pickaxe": "Resistant",
    "fire": "Resistant",
    "frost": "Resistant"
-  }
+  },
+  "unobtainable": true
  },
  {
   "id": "TreasureChest_dvergrtower",
@@ -4265,7 +4279,8 @@
    "pickaxe": "Resistant",
    "fire": "Resistant",
    "frost": "Resistant"
-  }
+  },
+  "unobtainable": true
  },
  {
   "id": "TreasureChest_forestcrypt",
@@ -4335,7 +4350,8 @@
    "pickaxe": "Resistant",
    "fire": "Resistant",
    "frost": "Resistant"
-  }
+  },
+  "unobtainable": true
  },
  {
   "id": "TreasureChest_heath",
@@ -4740,7 +4756,8 @@
    "pickaxe": "Resistant",
    "fire": "Resistant",
    "frost": "Resistant"
-  }
+  },
+  "unobtainable": true
  },
  {
   "id": "TreasureChest_mountains",
@@ -4852,7 +4869,8 @@
    "pickaxe": "Resistant",
    "fire": "Resistant",
    "frost": "Resistant"
-  }
+  },
+  "unobtainable": true
  },
  {
   "id": "TreasureChest_sunkencrypt",
@@ -5293,7 +5311,8 @@
    "fire": "Weak",
    "poison": "Immune",
    "spirit": "Immune"
-  }
+  },
+  "unobtainable": true
  },
  {
   "id": "ashwood_arch_top",
@@ -5319,7 +5338,8 @@
    "fire": "Weak",
    "poison": "Immune",
    "spirit": "Immune"
-  }
+  },
+  "unobtainable": true
  },
  {
   "id": "ashwood_beam_1m",
@@ -5870,7 +5890,8 @@
    "chop": "Weak",
    "poison": "Immune",
    "spirit": "Immune"
-  }
+  },
+  "unobtainable": true
  },
  {
   "id": "ashwood_wall_beam_45",
@@ -5921,7 +5942,8 @@
    "chop": "Weak",
    "poison": "Immune",
    "spirit": "Immune"
-  }
+  },
+  "unobtainable": true
  },
  {
   "id": "ashwood_wall_beam_67",
@@ -5999,7 +6021,8 @@
    "chop": "Weak",
    "poison": "Immune",
    "spirit": "Immune"
-  }
+  },
+  "unobtainable": true
  },
  {
   "id": "ashwood_wall_cross_45",
@@ -6050,7 +6073,8 @@
    "chop": "Weak",
    "poison": "Immune",
    "spirit": "Immune"
-  }
+  },
+  "unobtainable": true
  },
  {
   "id": "ashwood_wall_cross_67",
@@ -7878,7 +7902,8 @@
    "lightning": "Ignore",
    "poison": "Ignore",
    "spirit": "Immune"
-  }
+  },
+  "unobtainable": true
  },
  {
   "id": "blackmarble_outcorner",
@@ -8160,7 +8185,8 @@
    "lightning": "Immune",
    "poison": "Immune",
    "spirit": "Immune"
-  }
+  },
+  "unobtainable": true
  },
  {
   "id": "blackmarble_tile_floor_1x1",
@@ -8188,7 +8214,8 @@
    "lightning": "Ignore",
    "poison": "Ignore",
    "spirit": "Immune"
-  }
+  },
+  "unobtainable": true
  },
  {
   "id": "blackmarble_tile_floor_2x2",
@@ -8216,7 +8243,8 @@
    "lightning": "Ignore",
    "poison": "Ignore",
    "spirit": "Immune"
-  }
+  },
+  "unobtainable": true
  },
  {
   "id": "blackmarble_tile_wall_1x1",
@@ -8244,7 +8272,8 @@
    "lightning": "Ignore",
    "poison": "Ignore",
    "spirit": "Immune"
-  }
+  },
+  "unobtainable": true
  },
  {
   "id": "blackmarble_tile_wall_2x2",
@@ -8272,7 +8301,8 @@
    "lightning": "Ignore",
    "poison": "Ignore",
    "spirit": "Immune"
-  }
+  },
+  "unobtainable": true
  },
  {
   "id": "blackmarble_tile_wall_2x4",
@@ -8300,7 +8330,8 @@
    "lightning": "Ignore",
    "poison": "Ignore",
    "spirit": "Immune"
-  }
+  },
+  "unobtainable": true
  },
  {
   "id": "blackmarble_tip",
@@ -8795,7 +8826,8 @@
    "frost": "Immune",
    "poison": "Immune",
    "spirit": "Immune"
-  }
+  },
+  "unobtainable": true
  },
  {
   "id": "coal_pile",
@@ -8856,7 +8888,8 @@
   "description": "Make the soil ready for planting.",
   "icon": "cultivate_ground",
   "enabled": true,
-  "category": "Misc"
+  "category": "Misc",
+  "unobtainable": true
  },
  {
   "id": "darkwood_arch",
@@ -10413,7 +10446,8 @@
    "lightning": "Immune",
    "poison": "Immune",
    "spirit": "Immune"
-  }
+  },
+  "unobtainable": true
  },
  {
   "id": "goblin_bed",
@@ -10563,7 +10597,8 @@
    }
   ],
   "health": 5000,
-  "material": "Stone"
+  "material": "Stone",
+  "unobtainable": true
  },
  {
   "id": "hearth",
@@ -10667,7 +10702,8 @@
    "lightning": "Immune",
    "poison": "Immune",
    "spirit": "Immune"
-  }
+  },
+  "unobtainable": true
  },
  {
   "id": "iron_floor_1x1_v2",
@@ -11004,7 +11040,8 @@
    "pickaxe": "Resistant",
    "fire": "Resistant",
    "frost": "Resistant"
-  }
+  },
+  "unobtainable": true
  },
  {
   "id": "loot_chest_wood",
@@ -11029,7 +11066,8 @@
    "pickaxe": "Resistant",
    "fire": "Resistant",
    "frost": "Resistant"
-  }
+  },
+  "unobtainable": true
  },
  {
   "id": "loot_deepNorth_Granary",
@@ -11129,7 +11167,8 @@
    "lightning": "Immune",
    "poison": "Immune",
    "spirit": "Immune"
-  }
+  },
+  "unobtainable": true
  },
  {
   "id": "mud_road",
@@ -11137,7 +11176,8 @@
   "description": "If the terrain is too lumpy, you can just flatten it.",
   "icon": "clear_ground",
   "enabled": true,
-  "category": "Misc"
+  "category": "Misc",
+  "unobtainable": true
  },
  {
   "id": "obsidian_pile",
@@ -11161,7 +11201,8 @@
    "frost": "Resistant",
    "poison": "Immune",
    "spirit": "Immune"
-  }
+  },
+  "unobtainable": true
  },
  {
   "id": "path",
@@ -11169,7 +11210,8 @@
   "description": "Mark out the best way forward.",
   "icon": "path",
   "enabled": true,
-  "category": "Misc"
+  "category": "Misc",
+  "unobtainable": true
  },
  {
   "id": "paved_road",
@@ -11185,7 +11227,8 @@
     "amount": 1,
     "noRecover": true
    }
-  ]
+  ],
+  "unobtainable": true
  },
  {
   "id": "piece_ArcheryTarget",
@@ -11317,7 +11360,8 @@
    "frost": "Resistant",
    "poison": "Immune",
    "spirit": "Immune"
-  }
+  },
+  "unobtainable": true
  },
  {
   "id": "piece_FairylightGarland",
@@ -13707,7 +13751,8 @@
    "chop": "Weak",
    "poison": "Immune",
    "spirit": "Immune"
-  }
+  },
+  "unobtainable": true
  },
  {
   "id": "piece_dvergr_sharpstakes",
@@ -13925,7 +13970,8 @@
    "lightning": "Resistant",
    "poison": "Immune",
    "spirit": "Immune"
-  }
+  },
+  "unobtainable": true
  },
  {
   "id": "piece_gift1",
@@ -15067,7 +15113,8 @@
    "lightning": "Resistant",
    "poison": "Immune",
    "spirit": "Immune"
-  }
+  },
+  "unobtainable": true
  },
  {
   "id": "piece_pot1_red",
@@ -15096,7 +15143,8 @@
    "lightning": "Resistant",
    "poison": "Immune",
    "spirit": "Immune"
-  }
+  },
+  "unobtainable": true
  },
  {
   "id": "piece_pot2",
@@ -15162,7 +15210,8 @@
    "lightning": "Resistant",
    "poison": "Immune",
    "spirit": "Immune"
-  }
+  },
+  "unobtainable": true
  },
  {
   "id": "piece_pot2_red",
@@ -15191,7 +15240,8 @@
    "lightning": "Resistant",
    "poison": "Immune",
    "spirit": "Immune"
-  }
+  },
+  "unobtainable": true
  },
  {
   "id": "piece_pot3",
@@ -15257,7 +15307,8 @@
    "lightning": "Resistant",
    "poison": "Immune",
    "spirit": "Immune"
-  }
+  },
+  "unobtainable": true
  },
  {
   "id": "piece_pot3_red",
@@ -15286,7 +15337,8 @@
    "lightning": "Resistant",
    "poison": "Immune",
    "spirit": "Immune"
-  }
+  },
+  "unobtainable": true
  },
  {
   "id": "piece_preptable",
@@ -16426,7 +16478,8 @@
    "frost": "Immune",
    "poison": "Immune",
    "spirit": "Immune"
-  }
+  },
+  "unobtainable": true
  },
  {
   "id": "portal_stone",
@@ -16520,7 +16573,8 @@
     "amount": 4,
     "noRecover": true
    }
-  ]
+  ],
+  "unobtainable": true
  },
  {
   "id": "replant",
@@ -16528,7 +16582,8 @@
   "description": "Restore the ground to its original vegetation.",
   "icon": "replant",
   "enabled": true,
-  "category": "Misc"
+  "category": "Misc",
+  "unobtainable": true
  },
  {
   "id": "rug_Bjorn",
@@ -17512,7 +17567,8 @@
     "amount": 4,
     "perLevel": 1
    }
-  ]
+  ],
+  "unobtainable": true
  },
  {
   "id": "siege_wall_1x1",
@@ -17540,7 +17596,8 @@
    "lightning": "Immune",
    "poison": "Immune",
    "spirit": "Immune"
-  }
+  },
+  "unobtainable": true
  },
  {
   "id": "sign",
@@ -18565,7 +18622,8 @@
    "pierce": "Resistant",
    "chop": "Weak",
    "poison": "Immune"
-  }
+  },
+  "unobtainable": true
  },
  {
   "id": "turf_roof_top",
@@ -18587,7 +18645,8 @@
    "pierce": "Resistant",
    "chop": "Weak",
    "poison": "Immune"
-  }
+  },
+  "unobtainable": true
  },
  {
   "id": "turf_roof_wall",
@@ -18609,7 +18668,8 @@
    "pierce": "Resistant",
    "chop": "Weak",
    "poison": "Immune"
-  }
+  },
+  "unobtainable": true
  },
  {
   "id": "windmill",
@@ -19078,7 +19138,8 @@
    "chop": "Weak",
    "poison": "Immune",
    "spirit": "Immune"
-  }
+  },
+  "unobtainable": true
  },
  {
   "id": "wood_log_26",
@@ -19293,7 +19354,8 @@
    "chop": "Weak",
    "poison": "Immune",
    "spirit": "Immune"
-  }
+  },
+  "unobtainable": true
  },
  {
   "id": "wood_roof",

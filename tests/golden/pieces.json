@@ -111,6 +111,9 @@
   "icon": "Sapling",
   "enabled": true,
   "category": "Misc",
+  "tools": [
+   "Hammer"
+  ],
   "resources": [
    {
     "item": "Wood",

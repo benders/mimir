@@ -122,7 +122,11 @@ Pieces and recipes of a SeasonalItemGroup (Halloween, Midsummer, Yule; `world/se
 {name, start [day, month], end [day, month]}, both ends inclusive, end before start wraps over New Year. They are
 disabled in the game data but let through while the season is current, so `reachable()` treats them as enabled.
 Items flagged `internal` (creature attack items) or `enemyOnly` (FW_/SP_ gear copies, Dvergr crossbow) get no site
-page; creatures list them under `attacks` (weapons) and `equipment`.
+page; creatures list them under `attacks` (weapons) and `equipment`. Items, creatures and pieces flagged
+`unobtainable` (`normalize.reachable()` can't get to them from any source: unreleased, test, cheat, legacy or unplaced
+content) get no page, search entry or relation rows either. `verify_data.py` keeps a list of known-obtainable content
+and caps the flagged share, so a source gap can't silently hide real pages; `scripts/unreached.py -v` lists what
+`reachable()` misses. Add a source to normalize rather than an exception when something real is flagged.
 
 ## Working on this repo
 

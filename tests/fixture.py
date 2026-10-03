@@ -321,7 +321,8 @@ def write_dump(raw: Path) -> Path:
     dump("status_effects.json", status_effects())
     dump("status_effect_defaults.json", [{"name": "SE_Stats", "type": "SE_Stats", "fields": SE_DEFAULTS}])
     dump("piece_tables.json", [{"name": "_HammerTable", "type": "PieceTable",
-                                "fields": {"m_pieces": [R("Bench"), R("Anvil"), R("Kiln"), R("Hive"), R("Tap"), R("Tap2"), R("Tree")]}}])
+                                "fields": {"m_pieces": [R("Bench"), R("Anvil"), R("Kiln"), R("Hive"), R("Tap"), R("Tap2"), R("Tree"),
+                                                       R("Sapling")]}}])
     dump("world/seasons.json", [{"name": "Winter", "type": "SeasonalItemGroup", "fields": {
         "_startDate": [1, 12], "_endDate": [6, 1], "Pieces": [R("Tree")],
         "Recipes": [{"$asset": "Recipe_Hat", "type": "Recipe"}]}}])
@@ -348,6 +349,7 @@ def write_dump(raw: Path) -> Path:
         zone_location("Lair", "Mountain"),
         zone_location("Ruin", "Meadows", enable=False),
         zone_location("Market", "Meadows"),
+        zone_location("Stash", "Meadows"),
     ]}}])
     dump("locations/Camp.json", {"name": "Camp", "components": [comp("Location", {}), *spawners(
         ("CreatureSpawner", creature_spawner("Raider", minLevel=3, maxLevel=1)),  # swapped levels
@@ -373,6 +375,10 @@ def write_dump(raw: Path) -> Path:
         {"prefab": "Gift", "path": "cave/Gift", "inactive": True, "randomSpawn": {"chance": 90}}]})  # never placed
     dump("locations/Ruin.json", {"name": "Ruin", "components": spawners(("CreatureSpawner", creature_spawner("Pup")),
                                                                     container(("Ore", 1, 1, 1)))})  # disabled location
+    dump("locations/Stash.json", {"name": "Stash", "components": [comp("Location", {}), *spawners(
+        container(("Coins", 1, 1, 1), ("Hammer", 1, 1, 1), ("Buckler", 1, 1, 1), ("HelmetFem", 1, 1, 1), ("SP_Sword", 1, 1, 1),
+                  ("WoodOld", 1, 1, 1), ("Egg", 1, 1, 1), name="$piece_stash"))],  # so the site tests' items are obtainable
+        "instances": [{"prefab": "Raider_Ranged", "path": "Raider_Ranged"}]})
     dump("locations/Market.json", {"name": "Market", "components": [comp("Location", {}), comp("Trader", {
         **m(name="$npc_vendor"), "m_items": [m(prefab=R("Charm"), stack=2, price=50, requiredGlobalKey="defeated_chief"),
                                              m(prefab=R("vfx_Poof"), stack=1, price=1, requiredGlobalKey="")]},

@@ -173,13 +173,26 @@ def main() -> int:
           "no craftable item is enemyOnly")
     check(any(s.get("becomes") == "DvergrKeyFragment" and s.get("locations") for s in sources),
           "DvergrKeyFragment: placed blackmarble_altar_crystal breaks into it")
-    hidden = {"Deer_White", "DvergerTest", "FrostWisp", "Hive", "TheHive", "IceSkates", "Larva", "TorchMist", "Sled"}
+    hidden = {"Deer_White", "DvergerTest", "FrostWisp", "Hive", "TheHive", "IceSkates", "Larva", "TorchMist", "Sled",
+              "SwordCheat", "CapeTest", "HealthUpgrade_GDKing", "Draugr_sleeping", "HildirKey_forestcrypt", "OLD_wood_roof"}
     every = {**items, **creatures, **pieces}
-    check(all(every.get(x, {}).get("unobtainable") for x in hidden), "unreleased content is unobtainable")
-    check(not any(every.get(x, {}).get("unobtainable") for x in ("darkwood_beam_67", "Wood", "Boar", "Hammer", "FishRaw")),
-          "reachable or merely unmodelled content isn't unobtainable")
-    check(all("$" in (e.get("name") or "") for e in every.values() if e.get("unobtainable")),
-          "only entries with an unresolved name are unobtainable (#21 phase 1)")
+    check(all(every.get(x, {}).get("unobtainable") for x in hidden), "unreleased, test and unused content is unobtainable")
+    # Known-obtainable vanilla content, one or more per kind of source, so a gap in reachable() can't hide real pages.
+    obtainable = {
+        "Wood", "Stone", "Hammer", "Coins", "Amber", "AmberPearl", "Ruby", "SilverNecklace", "FishRaw", "Fish1",
+        "MeadHealthMinor", "BeltStrength", "Thunderstone", "Honey", "QueenBee", "Sap", "FlametalOreNew", "FlametalNew",
+        "WolfClaw", "CrownJewel", "DvergrKeyFragment", "ChickenEgg", "AsksvinEgg", "HelmetMidsummerCrown", "HelmetYule",
+        "TrophyEikthyr", "BlackMetal", "Eitr", "OrbFrostFire", "darkwood_beam_67",
+        "Boar", "Eikthyr", "Troll", "Draugr", "Skeleton", "Leech", "Serpent", "Lox", "Hen", "Chicken", "DvergerMage",
+        "Troll_Summoned", "Bat_Swamp", "Aspect_Eikthyr", "FrozenKing", "FallenWarrior", "Skeleton_Hildir",
+        "piece_workbench", "forge", "portal_wood", "piece_xmastree", "TreasureChest_meadows", "piece_TrainingDummy",
+    }
+    check(not [x for x in obtainable if every.get(x, {}).get("unobtainable")],
+          f"known-obtainable content isn't unobtainable ({[x for x in obtainable if every.get(x, {}).get('unobtainable')]})")
+    check(not [x for x in obtainable if x not in every], f"known-obtainable ids exist ({[x for x in obtainable if x not in every]})")
+    for kind, coll, share in (("items", items, 0.06), ("creatures", creatures, 0.2), ("pieces", pieces, 0.15)):
+        n = sum(1 for e in coll.values() if e.get("unobtainable"))
+        check(n <= share * len(coll), f"{kind}: {n} unobtainable, at most {share:.0%} of {len(coll)}")
 
     print()
     if failures:

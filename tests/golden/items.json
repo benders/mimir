@@ -61,7 +61,8 @@
   "stack": 1,
   "maxQuality": 1,
   "backstab": 1,
-  "parryBonus": 1
+  "parryBonus": 1,
+  "unobtainable": true
  },
  {
   "id": "Egg",
@@ -200,8 +201,7 @@
   "stack": 1,
   "maxQuality": 1,
   "backstab": 1,
-  "parryBonus": 1,
-  "unobtainable": true
+  "parryBonus": 1
  },
  {
   "id": "Nectar",
