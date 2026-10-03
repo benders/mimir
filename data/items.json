@@ -1810,6 +1810,7 @@
   "attackForce": 10,
   "backstab": 3,
   "ammoType": "$ammo_arrows",
+  "attackEffect": "Burning",
   "stage": "Meadows"
  },
  {
@@ -3134,6 +3135,7 @@
   "modifiers": {
    "movement": -0.05
   },
+  "attackEffect": "ImmobilizedAshlands",
   "stage": "AshLands"
  },
  {
@@ -6539,6 +6541,7 @@
   "modifiers": {
    "movement": -0.05
   },
+  "attackEffect": "ImmobilizedAshlands",
   "stage": "AshLands"
  },
  {
@@ -8407,6 +8410,7 @@
   "modifiers": {
    "movement": -0.05
   },
+  "attackEffect": "ImmobilizedAshlands",
   "stage": "AshLands"
  },
  {
@@ -9036,7 +9040,8 @@
    "stamina": 15,
    "projectile": "DvergerStaffHeal_aoe",
    "adrenaline": 1
-  }
+  },
+  "attackEffect": "SE_Dvergr_heal"
  },
  {
   "id": "DvergerStaffHeal_heal",
@@ -9064,6 +9069,7 @@
    "projectile": "DvergerStaffHeal_aoe",
    "adrenaline": 1
   },
+  "attackEffect": "SE_Dvergr_heal",
   "hits": [
    {
     "kind": "none"
@@ -14533,6 +14539,7 @@
    "projectile": "GoblinShaman_protect_aoe",
    "adrenaline": 1
   },
+  "attackEffect": "GoblinShaman_shield",
   "hits": [
    {
     "kind": "none"
@@ -14561,6 +14568,7 @@
    "projectile": "GoblinShaman_protect_aoe",
    "adrenaline": 1
   },
+  "attackEffect": "GoblinShaman_shield",
   "hits": [
    {
     "kind": "none"
@@ -15034,6 +15042,7 @@
    "projectile": "shaman_heal_aoe",
    "adrenaline": 1
   },
+  "attackEffect": "SE_Greydwarf_shaman_heal",
   "hits": [
    {
     "kind": "none"
@@ -15062,6 +15071,7 @@
    "projectile": "shaman_heal_aoe",
    "adrenaline": 1
   },
+  "attackEffect": "SE_Greydwarf_shaman_frozen_heal",
   "hits": [
    {
     "kind": "none"
@@ -20537,6 +20547,7 @@
   "modifiers": {
    "movement": -0.05
   },
+  "attackEffect": "ImmobilizedAshlands",
   "stage": "AshLands"
  },
  {
@@ -26782,6 +26793,7 @@
   "modifiers": {
    "movement": -0.05
   },
+  "attackEffect": "Harpooned",
   "stage": "BlackForest"
  },
  {
@@ -27358,6 +27370,7 @@
   "modifiers": {
    "movement": -0.05
   },
+  "attackEffect": "ImmobilizedAshlands",
   "stage": "AshLands"
  },
  {
@@ -27805,6 +27818,7 @@
   "modifiers": {
    "movement": -0.05
   },
+  "attackEffect": "Staff_FrostOrbs",
   "stage": "DeepNorth"
  },
  {
@@ -28109,6 +28123,7 @@
   "modifiers": {
    "movement": -0.05
   },
+  "attackEffect": "Staff_shield",
   "stage": "Mistlands"
  },
  {
@@ -29415,6 +29430,7 @@
   "modifiers": {
    "movement": -0.05
   },
+  "attackEffect": "ImmobilizedAshlands",
   "stage": "AshLands"
  },
  {
@@ -30136,6 +30152,7 @@
   "modifiers": {
    "movement": -0.05
   },
+  "attackEffect": "ImmobilizedAshlands",
   "stage": "AshLands"
  },
  {
@@ -30956,6 +30973,7 @@
   "weight": 2,
   "stack": 20,
   "maxQuality": 1,
+  "guardianPower": "GP_Bonemass",
   "stage": "Swamp"
  },
  {
@@ -31066,6 +31084,7 @@
   "weight": 2,
   "stack": 20,
   "maxQuality": 1,
+  "guardianPower": "GP_Moder",
   "stage": "Mountain"
  },
  {
@@ -31121,6 +31140,7 @@
   "weight": 2,
   "stack": 20,
   "maxQuality": 1,
+  "guardianPower": "GP_Eikthyr",
   "stage": "Meadows"
  },
  {
@@ -31143,6 +31163,7 @@
   "weight": 2,
   "stack": 20,
   "maxQuality": 1,
+  "guardianPower": "GP_Fader",
   "stage": "AshLands"
  },
  {
@@ -31264,6 +31285,7 @@
   "weight": 1,
   "stack": 20,
   "maxQuality": 1,
+  "guardianPower": "GP_Yagluth",
   "stage": "Plains"
  },
  {
@@ -31495,6 +31517,7 @@
   "weight": 2,
   "stack": 20,
   "maxQuality": 1,
+  "guardianPower": "GP_Queen",
   "stage": "Mistlands"
  },
  {
@@ -31539,7 +31562,7 @@
   "weight": 0.5,
   "stack": 20,
   "maxQuality": 1,
-  "stage": "Meadows"
+  "stage": "BlackForest"
  },
  {
   "id": "TrophySurtling",
@@ -31561,6 +31584,7 @@
   "weight": 4,
   "stack": 20,
   "maxQuality": 1,
+  "guardianPower": "GP_TheElder",
   "stage": "BlackForest"
  },
  {
@@ -33710,7 +33734,8 @@
    "stamina": 20,
    "projectile": "blobtar_projectile_tarball",
    "adrenaline": 1
-  }
+  },
+  "attackEffect": "Tared"
  },
  {
   "id": "boar_base_attack",
@@ -36477,7 +36502,8 @@
    "type": "Vertical",
    "stamina": 20,
    "adrenaline": 1
-  }
+  },
+  "attackEffect": "ImmobilizedAshlands"
  },
  {
   "id": "stonegolem_attack1_spike",

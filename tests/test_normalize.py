@@ -312,6 +312,18 @@ class Entities(FixtureCase):
         N.mark_stages(*args)
         self.assertEqual({i["id"]: i.get("stage") for i in items}["Sword"], "Mountain")
 
+    def test_effect_stages(self):
+        items = [N.item(n, p) for n, p in N.PREFABS.items() if p["isItem"]]
+        N.guardian_powers(items)
+        by = {i["id"]: i for i in items}
+        self.assertEqual(by["Shard"]["guardianPower"], "SE_Ward")  # the GuardStone's ItemStand takes it
+        self.assertEqual(by["Bite"]["attackEffect"], "SE_Stun")
+        by["Shard"]["stage"], by["Mead"]["stage"] = "Mountain", "Meadows"
+        creatures = [{"id": "Raider", "attacks": ["Bite"], "stage": "Swamp"}]  # Bite is internal: its carrier counts
+        effects = [{"id": x} for x in ("SE_Ward", "SE_Stun", "SE_Fizz", "SE_Wet")]
+        N.effect_stages(effects, items, creatures)
+        self.assertEqual([e.get("stage") for e in effects], ["Mountain", "Swamp", "Meadows", None])
+
     def test_offspring_egg_is_reached(self):
         items, spawn_list = [{"id": "Egg"}], [{"creature": "Egg", "source": "offspring", "parent": "Hen"}]
         spawn_list.append({"creature": "Hen", "source": "world"})

@@ -162,7 +162,10 @@ applied as `<html data-max>` by an inline head script before render) hides later
 items and group headings, on forward relation lists and their sections (Used in, Builds, Upgrades, Crafts, Enables
 building, Bait for; not costs or sources), and in search.json (6th field). The hiding CSS is generated
 (`build-site.stage_css()`, appended to style.css). Detail pages get a stage badge and a spoiler banner past the filter;
-a merged page takes its earliest copy's stage. The `progression` mechanics page explains the rules. `verify_data.py` keeps a list of known-obtainable content
+a merged page takes its earliest copy's stage. Status effects get `stage` from what gives them (`normalize.effect_stages`:
+an item's consume/equip/set/adrenaline effect, `attackEffect` (m_attackStatusEffect), a trophy's `guardianPower` (boss
+stone ItemStand), or a creature using an internal attack item); damage-type, weather and resting effects have none.
+Alt-biome spawns' `biomes` are the overlap of the spawn's and the patch's biomes. The `progression` mechanics page explains the rules. `verify_data.py` keeps a list of known-obtainable content
 and caps the flagged share, so a source gap can't silently hide real pages; `scripts/unreached.py -v` lists what
 `reachable()` misses. Add a source to normalize rather than an exception when something real is flagged.
 

@@ -309,6 +309,13 @@ class Site(unittest.TestCase):
         self.assertIn('html[data-max="0"] [data-stage="2"]', css)
         self.assertIn('html[data-max="1"] p.spoiler[data-stage="2"]', css)
         self.assertNotIn('html[data-max="2"] [data-stage="2"]', css)  # its own stage stays visible
+        effects = (self.out / "effects/index.html").read_text(encoding="utf-8")
+        self.assertIn('<li data-stage="3"><a class="ref" href="effects/SE_Ward.html"', effects)  # Shard's guardian power
+        ward = (self.out / "effects/SE_Ward.html").read_text(encoding="utf-8")
+        self.assertRegex(ward, r'href="items/Shard.html".*offered at its boss stone')
+        self.assertIn("offered at its boss stone", ward)
+        stun = (self.out / "effects/SE_Stun.html").read_text(encoding="utf-8")
+        self.assertRegex(stun, r'href="creatures/Raider.html".*attack')  # through its internal attack item
         page = (self.out / "mechanics/progression.html").read_text(encoding="utf-8")
         self.assertRegex(page, r"<td>Mountain</td><td>\d+</td>")
 

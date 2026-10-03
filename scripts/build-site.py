@@ -329,7 +329,7 @@ dropped_by = defaultdict(list)       # item -> (creature id, drop)
 found_in = defaultdict(list)         # item -> (source, text)
 bait_for = defaultdict(list)         # bait item -> fish ids
 sold_by = defaultdict(list)          # item -> (trader, offer)
-effect_users = defaultdict(list)     # effect -> (item id, how)
+effect_users = defaultdict(list)     # effect -> (kind, id, how): items, and creatures through their attack items
 spawns_of = defaultdict(list)        # creature -> spawn entries
 tool_pieces = defaultdict(list)      # tool item -> pieces
 set_members = defaultdict(list)      # set name -> items
@@ -384,19 +384,28 @@ for s in SOURCES.values():
         found_in[it["item"]].append((s, rng(it.get("min", 1), it.get("max", 1))))
     if s.get("becomes") in ITEMS:  # breaks into the item itself (Destructible.m_spawnWhenDestroyed)
         found_in[s["becomes"]].append((s, "1, when destroyed"))
+for c in CREATURES.values():  # creature attacks (internal items) that apply an effect: the creature gives it
+    if not c.get("unobtainable"):
+        for a in c.get("attacks", []):
+            if (eff := ITEMS.get(a, {}).get("attackEffect")) and ITEMS[a].get("internal"):
+                effect_users[eff].append(("creature", c["id"], "attack"))
 for i in ITEMS.values():
     if i.get("internal") or i.get("enemyOnly") or i.get("unobtainable"):
         continue
     if i.get("consumeEffect"):
-        effect_users[i["consumeEffect"]].append((i["id"], "consumed"))
+        effect_users[i["consumeEffect"]].append(("item", i["id"], "consumed"))
     if i.get("equipEffect"):
-        effect_users[i["equipEffect"]].append((i["id"], "equipped"))
+        effect_users[i["equipEffect"]].append(("item", i["id"], "equipped"))
+    if i.get("attackEffect"):
+        effect_users[i["attackEffect"]].append(("item", i["id"], "on hit"))
+    if i.get("guardianPower"):
+        effect_users[i["guardianPower"]].append(("item", i["id"], "offered at its boss stone"))
     if (i.get("adrenaline") or {}).get("effect"):
-        effect_users[i["adrenaline"]["effect"]].append((i["id"], "full adrenaline"))
+        effect_users[i["adrenaline"]["effect"]].append(("item", i["id"], "full adrenaline"))
     if i.get("set"):
         set_members[i["set"]["name"]].append(i["id"])
         if i["set"].get("effect"):
-            effect_users[i["set"]["effect"]].append((i["id"], f"set of {i['set']['size']}"))
+            effect_users[i["set"]["effect"]].append(("item", i["id"], f"set of {i['set']['size']}"))
 for s in SPAWNS:
     spawns_of[s["creature"]].append(s)
 for kind, rels in {"item": [crafted_by, used_in_recipe, used_in_piece, process_from, process_to, dropped_by,
@@ -415,7 +424,7 @@ BIOMES = {  # game progression order (creatures index)
 STAGES = ["Meadows", "BlackForest", "Swamp", "Mountain", "Plains", "Mistlands", "AshLands", "DeepNorth"]  # normalize.STAGES
 STAGE_KEY = "mimir-stage"  # localStorage: the last stage the reader wants to see (index into STAGES)
 PAGE_STAGE = {k: {} for k in KINDS}  # page id -> stage index; a merged page takes its earliest copy's
-for _kind, _coll in (("item", ITEMS), ("creature", CREATURES), ("piece", PIECES)):
+for _kind, _coll in (("item", ITEMS), ("creature", CREATURES), ("piece", PIECES), ("effect", EFFECTS)):
     for _id, _e in _coll.items():
         if _e.get("stage") in STAGES:
             _page, _s = MERGED[_kind].get(_id, _id), STAGES.index(_e["stage"])
@@ -833,6 +842,10 @@ def item_page(i: dict) -> None:
         eff.append(("When consumed", link("effect", i["consumeEffect"])))
     if i.get("equipEffect"):
         eff.append(("When equipped", link("effect", i["equipEffect"])))
+    if i.get("attackEffect"):
+        eff.append(("On hit", link("effect", i["attackEffect"])))
+    if i.get("guardianPower"):
+        eff.append(("At its boss stone", link("effect", i["guardianPower"])))
     if adr := i.get("adrenaline"):
         if adr.get("max"):
             eff.append(("Max adrenaline", f'+{num(adr["max"])}'))
@@ -1064,8 +1077,8 @@ def effect_page(e: dict) -> None:
              ("Category", esc(e["category"]) if e.get("category") else None)]
     body = header(e, "effect", esc(e["type"]), e.get("tooltip")) + kv(facts)
     body += section("Stats", kv((words(k), effect_value(k, v)) for k, v in (e.get("stats") or {}).items()))
-    body += section("From", reflist(f'{link("item", iid)} <span class=note>{esc(how)}</span>'
-                                    for iid, how in effect_users[e["id"]]))
+    body += section("From", reflist(f'{link(k, x)} <span class=note>{esc(how)}</span>'
+                                    for k, x, how in effect_users[e["id"]]))
     page(href("effect", e["id"]), name_of("effect", e["id"]), body, '<a href="effects/index.html">Status effects</a>')
 
 

@@ -319,6 +319,7 @@ def item(name: str, p: dict) -> dict | None:
         "damageModifiers": modifier_list(s["m_damageModifiers"]),
         "equipEffect": ref(s["m_equipStatusEffect"]),
         "consumeEffect": ref(s["m_consumeStatusEffect"]),
+        "attackEffect": ref(s.get("m_attackStatusEffect")),  # applied to what the attack hits (or the user: shields)
         "set": {"name": s["m_setName"], "size": s["m_setSize"], "effect": ref(s["m_setStatusEffect"])} if s["m_setName"] else None,
         "buildTable": ref(s["m_buildPieces"]),
     }
@@ -331,7 +332,8 @@ ARMOR_FIELDS = {"armor", "armorPerLevel"}  # Player.GetBodyArmor sums helmet, ch
 BLOCK_FIELDS = {"block", "blockPerLevel", "parryForce", "parryForcePerLevel", "parryBonus", "blockAdrenaline",
                 "parryAdrenaline"}  # Humanoid.GetCurrentBlocker:
 # the left-hand item (shield, bow, torch), else the weapon
-ATTACK_FIELDS = {"tamedOnly", "skill", "toolTier", "damages", "damagesPerLevel", "attackForce", "backstab", "attack", "secondaryAttack"}
+ATTACK_FIELDS = {"tamedOnly", "skill", "toolTier", "damages", "damagesPerLevel", "attackForce", "backstab", "attack", "secondaryAttack",
+                 "attackEffect"}
 
 
 def catapult_ammo() -> set[str]:
@@ -597,6 +599,44 @@ def seasons(pieces: list, recipes: list) -> None:
         for r in f["Recipes"]:
             if ref(r) in by_recipe:
                 by_recipe[ref(r)]["season"] = s
+
+
+def guardian_powers(items: list) -> None:
+    """Record `guardianPower` on the items an ItemStand with a guardian power takes: a boss stone's trophy grants
+    the power (ItemStand.m_guardianPower)."""
+    by = {i["id"]: i for i in items}
+    for p in PREFABS.values():
+        for c in (c["fields"] for c in p["components"] if c["type"] == "ItemStand"):
+            if gp := ref(c.get("m_guardianPower")):
+                for x in c.get("m_supportedItems") or []:
+                    if ref(x) in by:
+                        by[ref(x)]["guardianPower"] = gp
+
+
+EFFECT_FIELDS = ("consumeEffect", "equipEffect", "attackEffect", "guardianPower")
+
+
+def effect_stages(effects: list, items: list, creatures: list) -> None:
+    """`stage` of a status effect: the earliest stage of what gives it, an item (eaten, worn, its set, full
+    adrenaline, an attack's hit, a trophy's guardian power) or a creature using an attack item. Effects nothing gives
+    in the data (damage types, weather, resting) get none and count from the start."""
+    order = {s: n for n, s in enumerate(STAGES)}
+    carriers = defaultdict(list)  # internal attack item -> creatures with it
+    for c in creatures:
+        for x in c.get("attacks", []) + c.get("equipment", []):
+            carriers[x].append(c)
+    best = {}
+    for i in items:
+        given = [i.get(k) for k in EFFECT_FIELDS] + [(i.get("set") or {}).get("effect"),
+                                                      (i.get("adrenaline") or {}).get("effect")]
+        holders = [i] if not i.get("internal") and not i.get("enemyOnly") else carriers[i["id"]]
+        stages_ = [order[h["stage"]] for h in holders if h.get("stage") in order]
+        for e in filter(None, given):
+            if stages_:
+                best[e] = min(best.get(e, NEVER), *stages_)
+    for e in effects:
+        if e["id"] in best:
+            e["stage"] = STAGES[best[e["id"]]]
 
 
 def mark_stages(items: list, creatures: list, pieces: list, recipes: list, procs: list, sources: list,
@@ -928,7 +968,9 @@ def world_spawn(s: dict, lst: str, alt: str = "") -> dict | None:
 
 def world_spawns() -> list[dict]:
     """SpawnSystem: the ambient spawns of each biome, and those of the alt biomes (ZoneSystem's AltBiomeList:
-    random patches within a biome that add spawns, `altBiome` is the patch's name; enabled ones only, like the game)."""
+    random patches within a biome that add spawns, `altBiome` is the patch's name; enabled ones only, like the game).
+    An alt biome's spawn needs both its own biome and the patch's (AltBiomeList: patches only in the alt's m_biome;
+    SpawnSystem.UpdateSpawnList checks the spawn's), so its `biomes` are the overlap; none = it can't spawn."""
     out = []
     for lst in sorted(load("world/SpawnSystemList.json"), key=lambda s: s["name"]):
         out += filter(None, (world_spawn(s, lst["name"]) for s in lst["fields"]["m_spawners"]))
@@ -936,7 +978,11 @@ def world_spawns() -> list[dict]:
         for p in SUBPREFABS.get(ref_["$ref"], {"components": []})["components"]:
             for alt in p["fields"].get("m_alts", []) if p["type"] == "AltBiomeList" else []:
                 if alt["m_enabled"]:
-                    out += filter(None, (world_spawn(s, ref_["$ref"], alt["m_name"]) for s in alt["m_spawn"]))
+                    patch = biomes(alt["m_biome"])
+                    for sp in filter(None, (world_spawn(s, ref_["$ref"], alt["m_name"]) for s in alt["m_spawn"])):
+                        sp["biomes"] = [b for b in sp["biomes"] if b in patch]
+                        if sp["biomes"]:
+                            out.append(sp)
     return out
 
 
@@ -1353,8 +1399,11 @@ def main(argv: list[str]) -> int:
     recipes = [recipe(r) for r in load("recipes.json")]
     seasons(pieces, recipes)
     mark_enemy_only(items, creatures, recipes, procs, sources, pieces)
+    guardian_powers(items)
     location_list = locations()
     mark_stages(items, creatures, pieces, recipes, procs, sources, spawn_list, location_list)
+    effects = [status_effect(e, defaults) for e in load("status_effects.json")]
+    effect_stages(effects, items, creatures)
     data = {
         "items.json": items,
         "recipes.json": recipes,
@@ -1364,7 +1413,7 @@ def main(argv: list[str]) -> int:
         "processing.json": sorted(procs, key=lambda x: (x["station"], x["from"], x["to"])),
         "sources.json": sources,
         "locations.json": location_list,
-        "status_effects.json": [status_effect(e, defaults) for e in load("status_effects.json")],
+        "status_effects.json": effects,
     }
     for name, v in data.items():
         write(name, v)

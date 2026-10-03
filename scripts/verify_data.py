@@ -237,10 +237,15 @@ def main() -> int:
         "JotunWarrior": "DeepNorth",  # its everywhere spawn needs the Fimbulvinter event
         "Serpent": "Meadows",  # the sea counts from the start
     }
+    effects = {e["id"]: e for e in load("status_effects.json")}
+    stages |= {"GP_Eikthyr": "Meadows", "GP_Moder": "Mountain", "GP_Fader": "AshLands",  # trophy at the boss stone
+               "Staff_shield": "Mistlands", "Tared": "Plains",  # a weapon's hit, a creature's attack
+               "Skeleton_Poison": "BlackForest"}  # its alt-biome patch is only in later biomes
+    every = {**every, **effects}
     wrong = {x: every.get(x, {}).get("stage") for x, s in stages.items() if every.get(x, {}).get("stage") != s}
     check(not wrong, f"stages of known content {wrong or ''}")
-    unstaged = [x for x, e in every.items() if "stage" not in e and not e.get("unobtainable") and not e.get("internal")
-                and not e.get("enemyOnly")]
+    unstaged = [x for x, e in every.items() if x not in effects and "stage" not in e and not e.get("unobtainable")
+                and not e.get("internal") and not e.get("enemyOnly")]
     check(len(unstaged) <= 20, f"{len(unstaged)} reachable entries without a stage (at most 20) {unstaged[:10]}")
 
     print()

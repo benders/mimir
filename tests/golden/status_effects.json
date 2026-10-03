@@ -15,6 +15,27 @@
    "percentigeDamageModifiers": {
     "fire": 0.1
    }
-  }
+  },
+  "stage": "Meadows"
+ },
+ {
+  "id": "SE_Ward",
+  "type": "SE_Stats",
+  "name": "$se_ward",
+  "duration": 300,
+  "stage": "Mountain"
+ },
+ {
+  "id": "SE_Stun",
+  "type": "SE_Stats",
+  "name": "$se_stun",
+  "duration": 2,
+  "stage": "Meadows"
+ },
+ {
+  "id": "SE_Wet",
+  "type": "SE_Stats",
+  "name": "$se_wet",
+  "duration": 60
  }
 ]

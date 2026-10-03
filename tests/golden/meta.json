@@ -12,7 +12,7 @@
   "processing": 1,
   "sources": 14,
   "locations": 4,
-  "status_effects": 1
+  "status_effects": 4
  },
  "unresolvedTokens": [
   "enemy_missing",
@@ -21,7 +21,10 @@
   "item_oddbar",
   "item_oddbar_desc",
   "piece_other",
-  "piece_stash"
+  "piece_stash",
+  "se_stun",
+  "se_ward",
+  "se_wet"
  ],
  "skippedRefs": [
   "ChoirOffering",

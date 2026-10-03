@@ -2440,9 +2440,7 @@
   "list": "AltBiomes_Erik",
   "altBiome": "Bones",
   "biomes": [
-   "Meadows",
    "Swamp",
-   "BlackForest",
    "Plains",
    "Mistlands"
   ],
@@ -2540,32 +2538,6 @@
    3
   ],
   "day": true,
-  "night": true,
-  "altitude": [
-   -1.5,
-   1000
-  ]
- },
- {
-  "creature": "Draugr_Elite",
-  "source": "world",
-  "list": "AltBiomes_Erik",
-  "altBiome": "Dark Meadows",
-  "biomes": [
-   "Swamp"
-  ],
-  "biomeArea": "Median",
-  "maxSpawned": 1,
-  "interval": 300,
-  "chance": 5,
-  "groupSize": [
-   1,
-   1
-  ],
-  "levels": [
-   1,
-   1
-  ],
   "night": true,
   "altitude": [
    -1.5,

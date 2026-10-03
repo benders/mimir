@@ -208,7 +208,7 @@ def prefabs():
         item("DartBlunt", name="$item_dart", itemType="Ammo", icons=[S("Sword")], damages=damages(blunt=4), ammoType="$ammo_dart"),
         item("Mead", name="$item_mead", itemType="Consumable", icons=[S("Mead")], consumeStatusEffect=R("SE_Fizz")),
         item("Hammer", name="$item_hammer", itemType="Tool", icons=[S("Hammer")], buildPieces=R("_HammerTable")),
-        item("Bite", name="$item_bite", itemType="OneHandedWeapon", attack=attack(attackStamina=0),
+        item("Bite", name="$item_bite", itemType="OneHandedWeapon", attack=attack(attackStamina=0), attackStatusEffect=R("SE_Stun"),
              damages=damages(pierce=12)),  # no icon: internal attack item
         item("Spit", name="$item_bite", itemType="OneHandedWeapon", damages=damages(poison=5),
              attack=attack(attackType="Projectile", attackProjectile=R("SpitBolt"))),  # placeholder name; the pool it leaves does the damage
@@ -272,6 +272,7 @@ def prefabs():
         piece("Tap2", comp("SapCollector", m(spawnItem=R("Dust"), secPerUnit=60, maxLevel=10, mustConnectTo=R("Root2"))),
               name="$piece_tap", icon=S("Tap"), resources=[req("Wood", 4)]),
         prefab("Altar", comp("Destructible", m(health=100, minToolTier=0, damages={}, spawnWhenDestroyed=R("Shard")))),
+        prefab("GuardStone", comp("ItemStand", m(name="$guard", supportedItems=[R("Shard")], guardianPower=R("SE_Ward")))),
         prefab("Orb", comp("Destructible", m(health=100, minToolTier=0, damages={}, spawnWhenDestroyed=None)),
                comp("TriggerPersistentEventOnDestroy", {"_eventInternalName": "siege", "_stopEvent": False})),  # no drops
         prefab("WildHive", comp("WearNTear", m(health=20, materialType="Wood", damages={"m_fire": "Weak"})),
@@ -305,8 +306,10 @@ def subprefabs():
         {"name": "BurstSpawn", "components": [comp("SpawnAbility", m(spawnPrefab=[R("Shade")]))]},
         {"name": "WandSpawn", "components": [comp("SpawnAbility", m(spawnPrefab=[R("Sprite")]))]},
         {"name": "AltBiomes_Test", "components": [comp("AltBiomeList", m(alts=[
-            m(name="Moths", enabled=True, spawn=[spawner("Moth", biome="Meadows")]),
-            m(name="Off", enabled=False, spawn=[spawner("Raider")])]))]},
+            m(name="Moths", enabled=True, biome="Meadows, Swamp", spawn=[
+                spawner("Moth", biome="Meadows, BlackForest"),  # the patch is only in Meadows and Swamp: Meadows
+                spawner("Pup", biome="Plains")]),  # no overlap: never spawns
+            m(name="Off", enabled=False, biome="Meadows", spawn=[spawner("Raider")])]))]},
         {"name": "ChoirOffering", "components": [comp("Humanoid", m(name="$enemy_singer"), path=f"Singer{n}")
                                                  for n in ("", " (1)", " (2)")]},
     ]
@@ -329,7 +332,10 @@ def status_effects():
     return [{"name": "SE_Fizz", "type": "SE_Stats", "fields": {**SE_DEFAULTS, **m(
         name="$se_fizz", tooltip="Bubbly.", icon=S("Mead"), category="mead", ttl=300, startMessage="ignored",
         mods=[{"m_type": "Poison", "m_modifier": "Resistant"}], healthRegenMultiplier=1.5,
-        percentigeDamageModifiers=damages(fire=0.1), runStaminaDrainModifier=0)}}]
+        percentigeDamageModifiers=damages(fire=0.1), runStaminaDrainModifier=0)}},
+            {"name": "SE_Ward", "type": "SE_Stats", "fields": {**SE_DEFAULTS, **m(name="$se_ward", ttl=300)}},  # a guardian power
+            {"name": "SE_Stun", "type": "SE_Stats", "fields": {**SE_DEFAULTS, **m(name="$se_stun", ttl=2)}},  # Raider's bite
+            {"name": "SE_Wet", "type": "SE_Stats", "fields": {**SE_DEFAULTS, **m(name="$se_wet", ttl=60)}}]  # nothing gives it
 
 
 def write_dump(raw: Path) -> Path:
