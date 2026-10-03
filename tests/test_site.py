@@ -85,6 +85,14 @@ class Site(unittest.TestCase):
         self.assertIn("<h2>Phase of</h2>", phase)
         self.assertIn('href="creatures/Chief.html"', phase)
 
+    def test_alt_biome_spawn_and_summons_through_abilities(self):
+        moth = (self.out / "creatures/Moth.html").read_text(encoding="utf-8")
+        self.assertIn("in Moths patches", moth)
+        sprite = (self.out / "creatures/Sprite.html").read_text(encoding="utf-8")  # the Wand's ability makes it
+        self.assertIn('href="items/Wand.html"', sprite)
+        shade = (self.out / "creatures/Shade.html").read_text(encoding="utf-8")
+        self.assertIn("<h2>Phase of</h2>", shade)
+
     def test_container_found_in(self):
         gem = (self.out / "items/Gem.html").read_text(encoding="utf-8")  # unresolved name, only in a chest
         self.assertIn("<h2>Found in</h2>", gem)

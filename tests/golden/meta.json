@@ -4,10 +4,10 @@
  "dumperVersion": "test",
  "steamBuildId": "1",
  "counts": {
-  "items": 27,
-  "recipes": 6,
-  "creatures": 8,
-  "spawns": 18,
+  "items": 28,
+  "recipes": 7,
+  "creatures": 12,
+  "spawns": 22,
   "pieces": 9,
   "processing": 1,
   "sources": 11,
@@ -22,6 +22,7 @@
   "piece_other"
  ],
  "skippedRefs": [
+  "ChoirOffering",
   "vfx_Poof"
  ]
 }

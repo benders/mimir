@@ -147,7 +147,7 @@ TRANSLATIONS = {
     "item_hammer": "Mallet", "item_bite": "Bite",
     "enemy_raider": "Raider", "piece_bench": "Bench", "piece_anvil": "Anvil", "piece_kiln": "Kiln",
     "piece_bush": "Twig Bush", "piece_orerock": "Ore Rock", "se_fizz": "Fizzy",
-    "enemy_pup": "Pup", "enemy_chief_p2": "Chief Risen", "enemy_imp": "Imp", "item_rod": "Summoning Rod", "enemy_chief": "<color=orange>Chief</color>", "item_egg": "Egg", "item_nectar": "Nectar", "item_ichor": "Ichor", "item_dust": "Dust",
+    "enemy_pup": "Pup", "enemy_chief_p2": "Chief Risen", "enemy_imp": "Imp", "enemy_shade": "Shade", "enemy_sprite": "Sprite", "enemy_moth": "Moth", "enemy_singer": "Singer", "item_wand": "Wand", "item_rod": "Summoning Rod", "enemy_chief": "<color=orange>Chief</color>", "item_egg": "Egg", "item_nectar": "Nectar", "item_ichor": "Ichor", "item_dust": "Dust",
     "item_hat": "Party Hat", "piece_tree": "Winter Tree", "piece_hive": "Hive", "piece_tap": "Tap", "piece_wildhive": "Wild Hive", "event_test": "Something stirs",
 }
 
@@ -204,13 +204,20 @@ def prefabs():
         raider("Raider_Ranged", health=120),  # differs: "Raider (archer)"
         prefab("Pup", character(name="$enemy_pup", health=20), comp("Growup", m(grownPrefab=R("Raider")))),
         prefab("Chief", character(name="$enemy_chief", health=900, boss=True, deathEffects={"m_effectPrefabs": [
-            {"m_prefab": R("vfx_Poof")}, {"m_prefab": R("Chief_p2")}]})),  # second phase: made when it dies
+            {"m_prefab": R("vfx_Poof")}, {"m_prefab": R("Chief_p2")},
+            {"m_prefab": R("ChiefBurst")}]})),  # second phase: made when it dies; a burst that spawns a Shade
         prefab("Chief_p2", character(name="$enemy_chief_p2", health=1200, boss=True)),
         prefab("Imp", character(name="$enemy_imp", health=30)),  # only summoned, by the Rod
         item("Rod", name="$item_rod", itemType="OneHandedWeapon", icons=[S("Rod")],
              attack=attack(attackProjectile=R("RodBolt"))),
         prefab("RodBolt", comp("Projectile", m(spawnOnHit=R("RodSpawn"), randomSpawnOnHit=[]))),
-        prefab("RodSpawn", comp("SpawnAbility", m(spawnPrefab=[R("Imp"), R("Wood")]))),  # a summon: creatures only
+        prefab("Shade", character(name="$enemy_shade", health=10)),  # made by the Chief's death burst
+        prefab("ChiefBurst", comp("Projectile", m(spawnOnHit=R("BurstSpawn"), randomSpawnOnHit=[]))),
+        prefab("Sprite", character(name="$enemy_sprite", health=10)),  # only summoned, by the Wand's ability
+        item("Wand", name="$item_wand", itemType="OneHandedWeapon", icons=[S("Rod")],
+             attack=attack(attackProjectile=R("WandSpawn"))),  # the attack's prefab is the ability itself
+        prefab("Moth", character(name="$enemy_moth", health=5)),  # only in an alt biome
+        prefab("Singer", character(name="$enemy_singer", health=50)),  # one of the offering's three
         prefab("Wisp", character(name="$enemy_missing", health=10)),  # unresolved name, never spawns: hidden
         with_components(item("Egg", name="$item_egg", icons=[S("Egg")]), comp("EggGrow", m(grownPrefab=R("Pup")))),
         prefab("Spawner_Raider", comp("CreatureSpawner", creature_spawner("Raider"))),
@@ -261,6 +268,20 @@ def prefabs():
     ]
 
 
+def subprefabs():
+    """Non-networked prefabs (no ZNetView) referenced from the others: summon abilities, alt biomes, offerings."""
+    return [
+        {"name": "RodSpawn", "components": [comp("SpawnAbility", m(spawnPrefab=[R("Imp"), R("Wood")]))]},  # creatures only
+        {"name": "BurstSpawn", "components": [comp("SpawnAbility", m(spawnPrefab=[R("Shade")]))]},
+        {"name": "WandSpawn", "components": [comp("SpawnAbility", m(spawnPrefab=[R("Sprite")]))]},
+        {"name": "AltBiomes_Test", "components": [comp("AltBiomeList", m(alts=[
+            m(name="Moths", enabled=True, spawn=[spawner("Moth", biome="Meadows")]),
+            m(name="Off", enabled=False, spawn=[spawner("Raider")])]))]},
+        {"name": "ChoirOffering", "components": [comp("Humanoid", m(name="$enemy_singer"), path=f"Singer{n}")
+                                                 for n in ("", " (1)", " (2)")]},
+    ]
+
+
 def recipes():
     return [
         recipe("Recipe_Sword", "Sword", "Bench", 2, [req("Ingot", 4, 2), req("Wood", 2, 1),
@@ -270,6 +291,7 @@ def recipes():
         recipe("Recipe_Hat", "Hat", resources=[req("Wood", 1)], enabled=False),
         recipe("Recipe_OddBar", "OddBar", resources=[req("Wood", 1)]),
         recipe("Recipe_Rod", "Rod", resources=[req("Wood", 1)]),
+        recipe("Recipe_Wand", "Wand", resources=[req("Wood", 1)]),
     ]
 
 
@@ -291,6 +313,8 @@ def write_dump(raw: Path) -> Path:
     dump("localization/English.json", TRANSLATIONS)
     for p in prefabs():
         dump(f"prefabs/{p['name']}.json", p)
+    for p in subprefabs():
+        dump(f"subprefabs/{p['name']}.json", p)
     dump("recipes.json", recipes())
     dump("status_effects.json", status_effects())
     dump("status_effect_defaults.json", [{"name": "SE_Stats", "type": "SE_Stats", "fields": SE_DEFAULTS}])
@@ -312,7 +336,7 @@ def write_dump(raw: Path) -> Path:
         event("army_test", "Meadows, Swamp", spawner("Raider", biome="1023", minLevel=2, maxLevel=1), spawner("vfx_Poof")),
         event("army_off", "Meadows", spawner("Pup"), enabled=False),
     ]}}])
-    dump("world/ZoneSystem.json", [{"name": "_GameMain", "type": "ZoneSystem", "fields": {"m_vegetation": [
+    dump("world/ZoneSystem.json", [{"name": "_GameMain", "type": "ZoneSystem", "fields": {"m_altBiomeLists": [{"$ref": "AltBiomes_Test", "component": "AltBiomeList"}], "m_vegetation": [
         m(prefab=R("Root"), enable=True, biome="Mountain"), m(prefab=R("Root"), enable=True, biome="Swamp"),
         m(prefab=R("Root"), enable=False, biome="Plains"), m(prefab=R("Root2"), enable=False, biome="Plains"),
         m(prefab=R("Bush"), enable=True, biome="Meadows, Swamp"), m(prefab=R("Bush"), enable=True, biome="Meadows")],
@@ -334,6 +358,7 @@ def write_dump(raw: Path) -> Path:
     )]})
     dump("locations/Lair.json", {"name": "Lair", "components": [comp("Location", {}), *spawners(
         ("OfferingBowl", m(bossPrefab=R("Chief"), bossItem=R("Ore"), bossItems=3)),
+        ("OfferingBowl", m(bossPrefab=R("ChoirOffering"), bossItem=R("Wood"), bossItems=1)),  # a group of creatures
         ("DungeonGenerator", m(themes="Cave")),
     )], "instances": [
         {"prefab": "OreRock", "path": "cave/OreRock (2)"},  # an instance of a source inside the location

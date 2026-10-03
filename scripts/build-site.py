@@ -779,6 +779,8 @@ def spawn_sections(spawns: list[dict]) -> str:
     for s in by["world"]:
         when = "day and night" if s.get("day") and s.get("night") else "day" if s.get("day") else "night"
         extra = as_variant(s)
+        if s.get("altBiome"):
+            extra.append(f"in {esc(words(s['altBiome']))} patches")
         if s.get("requiredGlobalKey"):
             extra.append(f"after {esc(s['requiredGlobalKey'])}")
         if s.get("requiredEnvironments"):

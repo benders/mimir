@@ -36,6 +36,17 @@
   }
  },
  {
+  "id": "Moth",
+  "name": "Moth",
+  "faction": "ForestMonsters",
+  "health": 5,
+  "speed": {
+   "walk": 2,
+   "run": 5,
+   "swim": 2
+  }
+ },
+ {
   "id": "Pup",
   "name": "Pup",
   "faction": "ForestMonsters",
@@ -171,6 +182,39 @@
    ]
   },
   "afraidOfFire": true
+ },
+ {
+  "id": "Shade",
+  "name": "Shade",
+  "faction": "ForestMonsters",
+  "health": 10,
+  "speed": {
+   "walk": 2,
+   "run": 5,
+   "swim": 2
+  }
+ },
+ {
+  "id": "Singer",
+  "name": "Singer",
+  "faction": "ForestMonsters",
+  "health": 50,
+  "speed": {
+   "walk": 2,
+   "run": 5,
+   "swim": 2
+  }
+ },
+ {
+  "id": "Sprite",
+  "name": "Sprite",
+  "faction": "ForestMonsters",
+  "health": 10,
+  "speed": {
+   "walk": 2,
+   "run": 5,
+   "swim": 2
+  }
  },
  {
   "id": "Wisp",

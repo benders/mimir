@@ -101,5 +101,18 @@
     "amount": 1
    }
   ]
+ },
+ {
+  "id": "Recipe_Wand",
+  "item": "Wand",
+  "amount": 1,
+  "enabled": true,
+  "stationLevel": 1,
+  "resources": [
+   {
+    "item": "Wood",
+    "amount": 1
+   }
+  ]
  }
 ]

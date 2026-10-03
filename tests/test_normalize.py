@@ -204,8 +204,24 @@ class Entities(FixtureCase):
         self.assertNotIn("Egg", N.reachable(items, [{"id": "Hen"}], [], [], [], [], spawn_list[:1])[0])
 
     def test_summons_and_phases(self):
-        self.assertEqual(self.spawns("summon"), [{"creature": "Imp", "source": "summon", "item": "Rod"}])  # SpawnAbility
-        self.assertEqual(self.spawns("phase"), [{"creature": "Chief_p2", "source": "phase", "parent": "Chief"}])
+        # projectile -> SpawnAbility (a non-networked prefab, from subprefabs/), and the attack's prefab being the ability
+        self.assertEqual(self.spawns("summon"), [{"creature": "Imp", "source": "summon", "item": "Rod"},
+                                                 {"creature": "Sprite", "source": "summon", "item": "Wand"}])
+        self.assertEqual(self.spawns("phase"), [{"creature": "Chief_p2", "source": "phase", "parent": "Chief"},
+                                                {"creature": "Shade", "source": "phase", "parent": "Chief"}])  # death burst
+
+    def test_alt_biome_spawns(self):
+        alt = [s for s in self.spawns("world") if s.get("altBiome")]
+        self.assertEqual([(s["creature"], s["altBiome"], s["biomes"]) for s in alt], [("Moth", "Moths", ["Meadows"])])
+
+    def test_offering_of_a_group(self):
+        lair = {s["creature"]: s for s in self.spawns("location") if s["location"] == "Lair"}
+        self.assertEqual(lair["Singer"]["summon"], {"item": "Wood", "amount": 1})  # children named after a creature prefab
+
+    def test_creature_piece_is_reached_when_buildable(self):
+        creatures, pieces = [{"id": "Dummy"}], [{"id": "Dummy", "enabled": True, "tools": ["Hammer"], "resources": []}]
+        self.assertEqual(N.reachable([], creatures, pieces, [], [], [], [])[1], {"Dummy"})
+        self.assertEqual(N.reachable([], creatures, [{**pieces[0], "tools": []}], [], [], [], [])[1], set())
 
     def test_summon_and_phase_need_their_parent(self):
         items, creatures = [{"id": "Rod"}], [{"id": "Imp"}, {"id": "A"}, {"id": "B"}, {"id": "C"}]
@@ -249,7 +265,7 @@ class Entities(FixtureCase):
 
     def test_world_spawns(self):
         s = self.spawns("world")
-        self.assertEqual(len(s), 4)  # disabled, devDisabled and non-creature spawners dropped; a fish is kept
+        self.assertEqual(len(s), 5)  # disabled, devDisabled and non-creature spawners dropped; a fish is kept, so is the alt biome's Moth
         self.assertEqual((s[0]["creature"], s[0]["biomes"]), ("Raider", ["Meadows", "BlackForest"]))
         self.assertEqual(s[1]["creature"], "Raider")  # placed via Spawner_Raider
         self.assertEqual(len(s[1]["biomes"]), len(N.BIOME_BITS))
@@ -263,7 +279,7 @@ class Entities(FixtureCase):
     def test_location_spawns(self):
         s = {(x["creature"], x["location"]): x for x in self.spawns("location")}
         self.assertEqual(set(s), {("Raider", "Camp"), ("Pup", "Camp"), ("Chief", "Lair"),
-                          ("Raider", "Lair"), ("Pup", "Lair")})  # Ruin disabled; Lair: a Spawner_ and a creature instance
+                          ("Raider", "Lair"), ("Pup", "Lair"), ("Singer", "Lair")})  # Ruin disabled; Lair: a Spawner_ and a creature instance
         camp = s["Raider", "Camp"]
         self.assertEqual(camp["biomes"], ["Swamp", "Plains"])
         self.assertEqual(camp["levels"], [1, 3])  # merged; swapped min/max fixed

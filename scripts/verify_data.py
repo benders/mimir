@@ -101,6 +101,12 @@ def main() -> int:
     check(spawned("FrozenKing_p2", "phase", parent="FrozenKing") and spawned("FrozenKing_p3", "phase", parent="FrozenKing_p2"),
           "Moder-king's phases: FrozenKing -> _p2 -> _p3")
     check(spawned("BlobFrost", "summon", item="BombBlob_Frost"), "Blob Bomb: Frost summons a Frost Blob")
+    check(spawned("Troll_Summoned", "summon", item="StaffRedTroll") and spawned("Skeleton_Friendly", "summon", item="StaffSkeleton"),
+          "staffs summon through their (non-networked) abilities")
+    check(spawned("Mistile", "summon", parent="DvergerMage") and spawned("Aspect_Eikthyr", "phase", parent="FrozenKing"),
+          "Dvergr mage's Mistiles; FrozenKing's death burst spawns the Eikthyr aspect")
+    check(spawned("Bat_Swamp", "world", biomes="Swamp"), "alt biome spawns (Bat_Swamp)")
+    check(spawned("FallenWarrior", "location", location="NorthMemorialPlace"), "memorial offering summons Fallen Warriors")
     check(spawned("TrollFrost", "world", biomes="DeepNorth"), "TrollFrost: spawner-placed world spawn")
     check(all(s.get("biomes") for s in spawns if s.get("source") not in ("offspring", "egg", "growup", "summon", "phase")),
           "every spawn has a biome")

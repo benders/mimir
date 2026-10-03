@@ -36,6 +36,7 @@ def load(rel: str):
 
 TRANSLATIONS: dict[str, str] = {}
 PREFABS: dict[str, dict] = {}
+SUBPREFABS: dict[str, dict] = {}  # non-networked prefabs referenced by the above (summon abilities); lookup only
 
 
 def setup(raw: Path, out: Path = OUT) -> None:
@@ -48,6 +49,11 @@ def setup(raw: Path, out: Path = OUT) -> None:
     for f in sorted((RAW / "prefabs").glob("*.json")):
         p = json.loads(f.read_text(encoding="utf-8"))
         PREFABS[p["name"]] = p
+    SUBPREFABS.clear()
+    if (RAW / "subprefabs").is_dir():
+        for f in sorted((RAW / "subprefabs").glob("*.json")):
+            p = json.loads(f.read_text(encoding="utf-8"))
+            SUBPREFABS[p["name"]] = p
     unresolved.clear()
     skipped_refs.clear()
 
@@ -283,7 +289,7 @@ def reachable(items: list, creatures: list, pieces: list, recipes: list, procs: 
     """Ids of the items, creatures and pieces a player can get to, by fixed point from what the world offers:
     sources, spawns and enabled pieces in a build menu, then enabled recipes with reachable ingredients, drops of
     reachable creatures (a creature dropped by one, like a miniboss's second phase, is reached too), conversions
-    of reachable inputs, eggs laid by a reachable creature, summons of a reachable summoner, boss phases of a reachable phase. Pieces standing in a location (`locations`) count. Chests in locations and trader stock count (as
+    of reachable inputs, eggs laid by a reachable creature, summons of a reachable summoner, boss phases of a reachable phase, creature-pieces (training dummy) whose cost is reachable. Pieces standing in a location (`locations`) count. Chests in locations and trader stock count (as
     sources; trader keys are ignored, Coins must be reachable), fish via their bait, honey and sap from buildable pieces whose cost is reachable (sap
     needs its root in the world). World sources count when placed (`biomes`, `locations`, `placedBy`, or a
     `becomes` stage of a placed one). Incomplete while quests aren't modelled (#20)."""
@@ -320,6 +326,8 @@ def reachable(items: list, creatures: list, pieces: list, recipes: list, procs: 
         for s in spawn_list:  # a summon needs its summoner (the creature carrying the item, else the item itself)
             if s["source"] in ("summon", "phase") and (s["parent"] in got_creatures if "parent" in s else s["item"] in got):
                 got_creatures.add(s["creature"])
+        got_creatures |= {c for c in got_pieces if all(r["item"] in got for r in by_piece[c]["resources"])} \
+            & by_creature.keys()  # a buildable piece that is a creature (the training dummy)
         got |= {s["creature"] for s in spawn_list if s["source"] == "offspring" and s["parent"] in got_creatures
                 and s["creature"] in item_ids}  # eggs laid by a creature we have
         if "Coins" in got:
@@ -595,6 +603,16 @@ def levels(lo: int, hi: int) -> list[int]:
     return sorted([lo, hi])  # some spawners have min/max swapped
 
 
+def offered_creatures(boss: str | None) -> list[str]:
+    """What an offering bowl summons: the boss creature, or a non-networked group prefab (the memorial's three
+    warriors) whose child objects are named after creature prefabs ("FallenWarrior (1)")."""
+    if keep(boss, is_creature):
+        return [boss]
+    kids = {re.sub(r" \(\d+\)$", "", c["path"].rsplit("/", 1)[-1]) for c in SUBPREFABS.get(boss, {"components": []})["components"]
+            if "path" in c and c["type"] == "Humanoid"}
+    return sorted(k for k in kids if is_creature(k))
+
+
 def spawners_in(p: dict) -> list[dict]:
     """Creatures placed by spawners inside a location or dungeon room."""
     out = []
@@ -606,9 +624,9 @@ def spawners_in(p: dict) -> list[dict]:
         elif t == "SpawnArea":
             out += [{"creature": ref(x["m_prefab"]), "levels": levels(x["m_minLevel"], x["m_maxLevel"]), "respawning": True}
                     for x in f["m_prefabs"] if keep(ref(x["m_prefab"]), is_creature, is_item)]
-        elif t == "OfferingBowl" and keep(ref(f["m_bossPrefab"]), is_creature):
-            out.append({"creature": ref(f["m_bossPrefab"]), "summon": prune(
-                {"item": ref(f["m_bossItem"]), "amount": f["m_bossItems"]})})
+        elif t == "OfferingBowl":
+            for boss in offered_creatures(ref(f["m_bossPrefab"])):
+                out.append({"creature": boss, "summon": prune({"item": ref(f["m_bossItem"]), "amount": f["m_bossItems"]})})
     return out
 
 
@@ -633,35 +651,45 @@ def load_dir(rel: str) -> dict[str, dict]:
         if d.is_dir() else {}
 
 
+def world_spawn(s: dict, lst: str, alt: str = "") -> dict | None:
+    prefab = ref(s["m_prefab"])
+    # some entries place a CreatureSpawner prefab rather than the creature itself
+    if prefab in PREFABS and (cs := comp(PREFABS[prefab], "CreatureSpawner")):
+        prefab = ref(cs["m_creaturePrefab"])
+    if not s["m_enabled"] or s.get("m_devDisabled") or not keep(prefab, is_creature, is_item):
+        return None
+    return {
+        "creature": prefab,
+        "source": "world",
+        "list": lst,
+        **({"altBiome": alt} if alt else {}),
+        "biomes": biomes(s["m_biome"]),
+        "biomeArea": s["m_biomeArea"],
+        "maxSpawned": s["m_maxSpawned"],
+        "interval": s["m_spawnInterval"],
+        "chance": s["m_spawnChance"],
+        "groupSize": [s["m_groupSizeMin"], s["m_groupSizeMax"]],
+        "levels": [s["m_minLevel"], s["m_maxLevel"]],
+        "day": s["m_spawnAtDay"],
+        "night": s["m_spawnAtNight"],
+        "altitude": [s["m_minAltitude"], s["m_maxAltitude"]],
+        "requiredGlobalKey": s["m_requiredGlobalKey"],
+        "requiredEnvironments": s["m_requiredEnvironments"],
+        "huntPlayer": s["m_huntPlayer"],
+    }
+
+
 def world_spawns() -> list[dict]:
-    """SpawnSystem: the ambient spawns of each biome."""
+    """SpawnSystem: the ambient spawns of each biome, and those of the alt biomes (ZoneSystem's AltBiomeList:
+    random patches within a biome that add spawns, `altBiome` is the patch's name; enabled ones only, like the game)."""
     out = []
     for lst in sorted(load("world/SpawnSystemList.json"), key=lambda s: s["name"]):
-        for s in lst["fields"]["m_spawners"]:
-            prefab = ref(s["m_prefab"])
-            # some entries place a CreatureSpawner prefab rather than the creature itself
-            if prefab in PREFABS and (cs := comp(PREFABS[prefab], "CreatureSpawner")):
-                prefab = ref(cs["m_creaturePrefab"])
-            if not s["m_enabled"] or s.get("m_devDisabled") or not keep(prefab, is_creature, is_item):
-                continue
-            out.append({
-                "creature": prefab,
-                "source": "world",
-                "list": lst["name"],
-                "biomes": biomes(s["m_biome"]),
-                "biomeArea": s["m_biomeArea"],
-                "maxSpawned": s["m_maxSpawned"],
-                "interval": s["m_spawnInterval"],
-                "chance": s["m_spawnChance"],
-                "groupSize": [s["m_groupSizeMin"], s["m_groupSizeMax"]],
-                "levels": [s["m_minLevel"], s["m_maxLevel"]],
-                "day": s["m_spawnAtDay"],
-                "night": s["m_spawnAtNight"],
-                "altitude": [s["m_minAltitude"], s["m_maxAltitude"]],
-                "requiredGlobalKey": s["m_requiredGlobalKey"],
-                "requiredEnvironments": s["m_requiredEnvironments"],
-                "huntPlayer": s["m_huntPlayer"],
-            })
+        out += filter(None, (world_spawn(s, lst["name"]) for s in lst["fields"]["m_spawners"]))
+    for ref_ in load("world/ZoneSystem.json")[0]["fields"].get("m_altBiomeLists", []):
+        for p in SUBPREFABS.get(ref_["$ref"], {"components": []})["components"]:
+            for alt in p["fields"].get("m_alts", []) if p["type"] == "AltBiomeList" else []:
+                if alt["m_enabled"]:
+                    out += filter(None, (world_spawn(s, ref_["$ref"], alt["m_name"]) for s in alt["m_spawn"]))
     return out
 
 
@@ -873,22 +901,34 @@ def offspring_spawns() -> list[dict]:
     return out
 
 
+def summoned_creatures(target: str, seen: frozenset = frozenset()) -> list[str]:
+    """Creatures made by an attack's prefab: a SpawnAbility's `m_spawnPrefab`, or a projectile's `m_spawnOnHit` /
+    `m_randomSpawnOnHit` (followed, they are abilities or projectiles in turn), or a creature itself. Abilities
+    are mostly non-networked, so they come from SUBPREFABS."""
+    if not target or target in seen:
+        return []
+    p = PREFABS.get(target) or SUBPREFABS.get(target)
+    if p and (ability := comp(p, "SpawnAbility")):
+        return [r for x in ability["m_spawnPrefab"] if is_creature(r := ref(x))]
+    if p and (pr := comp(p, "Projectile")):
+        return [c for t in [ref(pr.get("m_spawnOnHit"))] + [ref(x) for x in pr.get("m_randomSpawnOnHit") or []]
+                for c in summoned_creatures(t, seen | {target})]
+    return [target] if is_creature(target) else []
+
+
 def summoned_by(item_name: str) -> list[str]:
-    """Creatures an attack item makes: its projectile's `m_spawnOnHit` / `m_randomSpawnOnHit` is a creature, or a
-    SpawnAbility prefab (staff summons) whose `m_spawnPrefab` are creatures."""
+    """Creatures an attack item makes (staff summons, boss abilities): see `summoned_creatures`; the attack's
+    `m_attackProjectile` is a projectile or, for boss abilities and some staffs, the SpawnAbility directly."""
     if not (drop := comp(PREFABS[item_name], "ItemDrop")):
         return []
     shared = drop["m_itemData"]["m_shared"]
-    out = []
-    for a in (shared["m_attack"], shared["m_secondaryAttack"]):
-        if not (pr := comp(PREFABS.get(ref(a.get("m_attackProjectile"))) or {"components": []}, "Projectile")):
-            continue
-        for target in [ref(pr.get("m_spawnOnHit"))] + [ref(x) for x in pr.get("m_randomSpawnOnHit") or []]:
-            if ability := comp(PREFABS.get(target) or {"components": []}, "SpawnAbility"):
-                out += [r for x in ability["m_spawnPrefab"] if is_creature(r := ref(x))]
-            elif is_creature(target):
-                out.append(target)
-    return sorted(set(out))
+    return sorted({c for a in (shared["m_attack"], shared["m_secondaryAttack"])
+                   for c in summoned_creatures(ref(a.get("m_attackProjectile")))})
+
+
+def has_no_icon(name: str) -> bool:
+    """An internal attack item: never in an inventory, so nobody summons with it unless a creature carries it."""
+    return not any(icon(i) for i in comp(PREFABS[name], "ItemDrop")["m_itemData"]["m_shared"]["m_icons"] or [])
 
 
 def summon_spawns() -> list[dict]:
@@ -904,19 +944,22 @@ def summon_spawns() -> list[dict]:
         if is_item(name):
             for target in summoned_by(name):
                 out += [{"creature": target, "source": "summon", "parent": parent, "item": name}
-                        for parent in sorted(carried[name])] or [{"creature": target, "source": "summon", "item": name}]
+                        for parent in sorted(carried[name])] or [{"creature": target, "source": "summon", "item": name}
+                                                                 for _ in [0] if not has_no_icon(name)]
     return out
 
 
 def phase_spawns() -> list[dict]:
-    """Boss phases: a creature whose death effects create another creature (FrozenKing -> FrozenKing_p2)."""
+    """Boss phases: a creature whose death effects create another creature (FrozenKing -> FrozenKing_p2), or
+    projectiles that spawn creatures where they land (FrozenKing's Aspects)."""
     out = []
     for name, p in PREFABS.items():
         if is_creature(name):
             c = comp(p, "Humanoid") or comp(p, "Character")
             for e in (c.get("m_deathEffects") or {}).get("m_effectPrefabs", []):
-                if (nxt := ref(e["m_prefab"])) and nxt != name and is_creature(nxt):
-                    out.append({"creature": nxt, "source": "phase", "parent": name})
+                if (nxt := ref(e["m_prefab"])) and nxt != name:
+                    out += [{"creature": made, "source": "phase", "parent": name} for made in summoned_creatures(nxt)
+                            if made != name]
     return out
 
 

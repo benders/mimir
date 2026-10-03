@@ -2432,6 +2432,714 @@
   "huntPlayer": true
  },
  {
+  "creature": "Skeleton_Poison",
+  "source": "world",
+  "list": "AltBiomes_Erik",
+  "altBiome": "Bones",
+  "biomes": [
+   "Meadows",
+   "Swamp",
+   "BlackForest",
+   "Plains",
+   "Mistlands"
+  ],
+  "biomeArea": "7",
+  "maxSpawned": 3,
+  "interval": 400,
+  "chance": 25,
+  "groupSize": [
+   1,
+   3
+  ],
+  "levels": [
+   1,
+   3
+  ],
+  "day": true,
+  "night": true,
+  "altitude": [
+   0,
+   1000
+  ]
+ },
+ {
+  "creature": "Skeleton",
+  "source": "world",
+  "list": "AltBiomes_Erik",
+  "altBiome": "Menhir",
+  "biomes": [
+   "Meadows"
+  ],
+  "biomeArea": "7",
+  "maxSpawned": 3,
+  "interval": 300,
+  "chance": 25,
+  "groupSize": [
+   1,
+   3
+  ],
+  "levels": [
+   1,
+   1
+  ],
+  "night": true,
+  "altitude": [
+   0,
+   1000
+  ],
+  "requiredGlobalKey": "defeated_bonemass"
+ },
+ {
+  "creature": "Skeleton_Mountains",
+  "source": "world",
+  "list": "AltBiomes_Erik",
+  "altBiome": "Menhir",
+  "biomes": [
+   "Plains"
+  ],
+  "biomeArea": "7",
+  "maxSpawned": 3,
+  "interval": 300,
+  "chance": 25,
+  "groupSize": [
+   1,
+   3
+  ],
+  "levels": [
+   1,
+   1
+  ],
+  "night": true,
+  "altitude": [
+   0,
+   1000
+  ],
+  "requiredGlobalKey": "defeated_bonemass"
+ },
+ {
+  "creature": "Draugr",
+  "source": "world",
+  "list": "AltBiomes_Erik",
+  "altBiome": "Dark Meadows",
+  "biomes": [
+   "Meadows"
+  ],
+  "biomeArea": "7",
+  "maxSpawned": 2,
+  "interval": 120,
+  "chance": 50,
+  "groupSize": [
+   1,
+   2
+  ],
+  "levels": [
+   1,
+   3
+  ],
+  "day": true,
+  "night": true,
+  "altitude": [
+   -1.5,
+   1000
+  ]
+ },
+ {
+  "creature": "Draugr_Elite",
+  "source": "world",
+  "list": "AltBiomes_Erik",
+  "altBiome": "Dark Meadows",
+  "biomes": [
+   "Swamp"
+  ],
+  "biomeArea": "Median",
+  "maxSpawned": 1,
+  "interval": 300,
+  "chance": 5,
+  "groupSize": [
+   1,
+   1
+  ],
+  "levels": [
+   1,
+   1
+  ],
+  "night": true,
+  "altitude": [
+   -1.5,
+   1000
+  ]
+ },
+ {
+  "creature": "Boar",
+  "source": "world",
+  "list": "AltBiomes_Erik",
+  "altBiome": "Peaceful Meadows",
+  "biomes": [
+   "Meadows"
+  ],
+  "biomeArea": "7",
+  "maxSpawned": 15,
+  "interval": 150,
+  "chance": 50,
+  "groupSize": [
+   4,
+   7
+  ],
+  "levels": [
+   1,
+   3
+  ],
+  "day": true,
+  "night": true,
+  "altitude": [
+   0,
+   1000
+  ]
+ },
+ {
+  "creature": "Deer",
+  "source": "world",
+  "list": "AltBiomes_Erik",
+  "altBiome": "Peaceful Meadows",
+  "biomes": [
+   "Meadows"
+  ],
+  "biomeArea": "7",
+  "maxSpawned": 10,
+  "interval": 100,
+  "chance": 50,
+  "groupSize": [
+   2,
+   4
+  ],
+  "levels": [
+   1,
+   3
+  ],
+  "day": true,
+  "night": true,
+  "altitude": [
+   0,
+   1000
+  ]
+ },
+ {
+  "creature": "Neck",
+  "source": "world",
+  "list": "AltBiomes_Erik",
+  "altBiome": "Smalltree Meadows",
+  "biomes": [
+   "Meadows"
+  ],
+  "biomeArea": "7",
+  "maxSpawned": 6,
+  "interval": 100,
+  "chance": 50,
+  "groupSize": [
+   2,
+   4
+  ],
+  "levels": [
+   1,
+   3
+  ],
+  "day": true,
+  "night": true,
+  "altitude": [
+   -1.5,
+   0.5
+  ]
+ },
+ {
+  "creature": "Neck",
+  "source": "world",
+  "list": "AltBiomes_Erik",
+  "altBiome": "Smalltree Meadows",
+  "biomes": [
+   "Meadows"
+  ],
+  "biomeArea": "7",
+  "maxSpawned": 8,
+  "interval": 30,
+  "chance": 100,
+  "groupSize": [
+   2,
+   4
+  ],
+  "levels": [
+   1,
+   3
+  ],
+  "day": true,
+  "night": true,
+  "altitude": [
+   0,
+   10
+  ],
+  "requiredEnvironments": [
+   "Rain",
+   "ThunderStorm",
+   "LightRain"
+  ]
+ },
+ {
+  "creature": "Deer",
+  "source": "world",
+  "list": "AltBiomes_Erik",
+  "altBiome": "Birch Meadows",
+  "biomes": [
+   "Meadows"
+  ],
+  "biomeArea": "7",
+  "maxSpawned": 5,
+  "interval": 100,
+  "chance": 50,
+  "groupSize": [
+   1,
+   3
+  ],
+  "levels": [
+   1,
+   3
+  ],
+  "day": true,
+  "night": true,
+  "altitude": [
+   0,
+   1000
+  ]
+ },
+ {
+  "creature": "Troll",
+  "source": "world",
+  "list": "AltBiomes_Erik",
+  "altBiome": "Troll Black Forest",
+  "biomes": [
+   "BlackForest"
+  ],
+  "biomeArea": "Everything",
+  "maxSpawned": 2,
+  "interval": 4000,
+  "chance": 10,
+  "groupSize": [
+   1,
+   1
+  ],
+  "levels": [
+   1,
+   3
+  ],
+  "day": true,
+  "night": true,
+  "altitude": [
+   0,
+   1000
+  ]
+ },
+ {
+  "creature": "TentaRoot_wild",
+  "source": "world",
+  "list": "AltBiomes_Erik",
+  "altBiome": "Root Black Forest",
+  "biomes": [
+   "BlackForest"
+  ],
+  "biomeArea": "Median",
+  "maxSpawned": 150,
+  "interval": 180,
+  "chance": 50,
+  "groupSize": [
+   1,
+   3
+  ],
+  "levels": [
+   1,
+   3
+  ],
+  "day": true,
+  "night": true,
+  "altitude": [
+   0.1,
+   1000
+  ]
+ },
+ {
+  "creature": "Greydwarf_Elite",
+  "source": "world",
+  "list": "AltBiomes_Erik",
+  "altBiome": "Root Black Forest",
+  "biomes": [
+   "BlackForest"
+  ],
+  "biomeArea": "7",
+  "maxSpawned": 3,
+  "interval": 120,
+  "chance": 50.6,
+  "groupSize": [
+   1,
+   1
+  ],
+  "levels": [
+   1,
+   3
+  ],
+  "night": true,
+  "altitude": [
+   0,
+   1000
+  ]
+ },
+ {
+  "creature": "Wraith",
+  "source": "world",
+  "list": "AltBiomes_Erik",
+  "altBiome": "Hut Swamp",
+  "biomes": [
+   "Swamp"
+  ],
+  "biomeArea": "0",
+  "maxSpawned": 3,
+  "interval": 300,
+  "chance": 30,
+  "groupSize": [
+   1,
+   1
+  ],
+  "levels": [
+   1,
+   1
+  ],
+  "night": true,
+  "altitude": [
+   -2,
+   1000
+  ],
+  "huntPlayer": true
+ },
+ {
+  "creature": "Abomination",
+  "source": "world",
+  "list": "AltBiomes_Erik",
+  "altBiome": "Bog Swamp",
+  "biomes": [
+   "Swamp"
+  ],
+  "biomeArea": "Median",
+  "maxSpawned": 3,
+  "interval": 2000,
+  "chance": 20,
+  "groupSize": [
+   1,
+   1
+  ],
+  "levels": [
+   1,
+   0
+  ],
+  "day": true,
+  "night": true,
+  "altitude": [
+   -2,
+   5
+  ]
+ },
+ {
+  "creature": "Bat_Swamp",
+  "source": "world",
+  "list": "AltBiomes_Erik",
+  "altBiome": "Bat Swamp",
+  "biomes": [
+   "Swamp"
+  ],
+  "biomeArea": "7",
+  "maxSpawned": 10,
+  "interval": 100,
+  "chance": 5,
+  "groupSize": [
+   2,
+   3
+  ],
+  "levels": [
+   1,
+   1
+  ],
+  "day": true,
+  "night": true,
+  "altitude": [
+   0,
+   1000
+  ]
+ },
+ {
+  "creature": "Abomination",
+  "source": "world",
+  "list": "AltBiomes_Erik",
+  "altBiome": "Abomination Swamp",
+  "biomes": [
+   "Swamp"
+  ],
+  "biomeArea": "Median",
+  "maxSpawned": 3,
+  "interval": 2000,
+  "chance": 20,
+  "groupSize": [
+   1,
+   1
+  ],
+  "levels": [
+   1,
+   0
+  ],
+  "day": true,
+  "night": true,
+  "altitude": [
+   -2,
+   5
+  ]
+ },
+ {
+  "creature": "Wolf",
+  "source": "world",
+  "list": "AltBiomes_Erik",
+  "altBiome": "Wolf Mountain",
+  "biomes": [
+   "Mountain"
+  ],
+  "biomeArea": "6",
+  "maxSpawned": 8,
+  "interval": 120,
+  "chance": 50,
+  "groupSize": [
+   2,
+   4
+  ],
+  "levels": [
+   1,
+   3
+  ],
+  "day": true,
+  "night": true,
+  "altitude": [
+   0,
+   1000
+  ]
+ },
+ {
+  "creature": "Hatchling",
+  "source": "world",
+  "list": "AltBiomes_Erik",
+  "altBiome": "Drake Mountain",
+  "biomes": [
+   "Mountain"
+  ],
+  "biomeArea": "6",
+  "maxSpawned": 4,
+  "interval": 120,
+  "chance": 25.6,
+  "groupSize": [
+   1,
+   2
+  ],
+  "levels": [
+   1,
+   1
+  ],
+  "day": true,
+  "night": true,
+  "altitude": [
+   100,
+   1000
+  ]
+ },
+ {
+  "creature": "Skeleton_Mountains",
+  "source": "world",
+  "list": "AltBiomes_Erik",
+  "altBiome": "Fortress Mountain",
+  "biomes": [
+   "Mountain"
+  ],
+  "biomeArea": "7",
+  "maxSpawned": 10,
+  "interval": 300,
+  "chance": 25,
+  "groupSize": [
+   3,
+   6
+  ],
+  "levels": [
+   1,
+   1
+  ],
+  "day": true,
+  "night": true,
+  "altitude": [
+   0,
+   1000
+  ]
+ },
+ {
+  "creature": "StoneGolem",
+  "source": "world",
+  "list": "AltBiomes_Erik",
+  "altBiome": "Fortress Mountain",
+  "biomes": [
+   "Mountain"
+  ],
+  "biomeArea": "6",
+  "maxSpawned": 1,
+  "interval": 120,
+  "chance": 25.6,
+  "groupSize": [
+   1,
+   2
+  ],
+  "levels": [
+   1,
+   1
+  ],
+  "day": true,
+  "night": true,
+  "altitude": [
+   120,
+   1000
+  ]
+ },
+ {
+  "creature": "Lox",
+  "source": "world",
+  "list": "AltBiomes_Erik",
+  "altBiome": "Lox Plains",
+  "biomes": [
+   "Plains"
+  ],
+  "biomeArea": "7",
+  "maxSpawned": 15,
+  "interval": 1000,
+  "chance": 10,
+  "groupSize": [
+   3,
+   5
+  ],
+  "levels": [
+   1,
+   1
+  ],
+  "day": true,
+  "night": true,
+  "altitude": [
+   1,
+   1000
+  ]
+ },
+ {
+  "creature": "Goblin",
+  "source": "world",
+  "list": "AltBiomes_Erik",
+  "altBiome": "Goblin Plains",
+  "biomes": [
+   "Plains"
+  ],
+  "biomeArea": "7",
+  "maxSpawned": 5,
+  "interval": 60,
+  "chance": 33,
+  "groupSize": [
+   5,
+   7
+  ],
+  "levels": [
+   1,
+   3
+  ],
+  "day": true,
+  "night": true,
+  "altitude": [
+   0,
+   1000
+  ]
+ },
+ {
+  "creature": "Deathsquito",
+  "source": "world",
+  "list": "AltBiomes_Erik",
+  "altBiome": "Death Plains",
+  "biomes": [
+   "Plains"
+  ],
+  "biomeArea": "7",
+  "maxSpawned": 5,
+  "interval": 500,
+  "chance": 20,
+  "groupSize": [
+   1,
+   3
+  ],
+  "levels": [
+   1,
+   1
+  ],
+  "day": true,
+  "night": true,
+  "altitude": [
+   1,
+   1000
+  ]
+ },
+ {
+  "creature": "Hare",
+  "source": "world",
+  "list": "AltBiomes_Erik",
+  "altBiome": "Hare Mistlands",
+  "biomes": [
+   "Mistlands"
+  ],
+  "biomeArea": "Everything",
+  "maxSpawned": 20,
+  "interval": 100,
+  "chance": 50,
+  "groupSize": [
+   1,
+   3
+  ],
+  "levels": [
+   1,
+   3
+  ],
+  "day": true,
+  "night": true,
+  "altitude": [
+   0,
+   1000
+  ]
+ },
+ {
+  "creature": "SeekerBrood",
+  "source": "world",
+  "list": "AltBiomes_Erik",
+  "altBiome": "BroodSwarm Mistlands",
+  "biomes": [
+   "Mistlands"
+  ],
+  "biomeArea": "Median",
+  "maxSpawned": 100,
+  "interval": 3000,
+  "chance": 40,
+  "groupSize": [
+   5,
+   10
+  ],
+  "levels": [
+   1,
+   1
+  ],
+  "night": true,
+  "altitude": [
+   1,
+   1000
+  ]
+ },
+ {
   "creature": "Draugr",
   "source": "raid",
   "event": "army_bonemass",
@@ -5273,6 +5981,18 @@
   ]
  },
  {
+  "creature": "FallenWarrior",
+  "source": "location",
+  "location": "NorthMemorialPlace",
+  "biomes": [
+   "DeepNorth"
+  ],
+  "summon": {
+   "item": "MemorialCoal",
+   "amount": 3
+  }
+ },
+ {
   "creature": "ShadowPerson",
   "source": "dungeon",
   "location": "NorthVillage",
@@ -6517,6 +7237,196 @@
   "creature": "BlobTar",
   "source": "summon",
   "item": "BombBlob_Tar"
+ },
+ {
+  "creature": "Mistile",
+  "source": "summon",
+  "parent": "DvergerMage",
+  "item": "DvergerMistile"
+ },
+ {
+  "creature": "Mistile",
+  "source": "summon",
+  "parent": "DvergerMageSupport",
+  "item": "DvergerMistile"
+ },
+ {
+  "creature": "Charred_Archer_Fader",
+  "source": "summon",
+  "parent": "Fader",
+  "item": "Fader_Roar"
+ },
+ {
+  "creature": "Charred_Melee_Fader",
+  "source": "summon",
+  "parent": "Fader",
+  "item": "Fader_Roar"
+ },
+ {
+  "creature": "Charred_Archer_Fader",
+  "source": "summon",
+  "parent": "Fader",
+  "item": "Fader_Roar_Intense"
+ },
+ {
+  "creature": "Charred_Melee_Fader",
+  "source": "summon",
+  "parent": "Fader",
+  "item": "Fader_Roar_Intense"
+ },
+ {
+  "creature": "Tendril",
+  "source": "summon",
+  "parent": "FrozenKing_p3",
+  "item": "FrozenKing_tendrilspawn"
+ },
+ {
+  "creature": "SeekerBrood",
+  "source": "summon",
+  "parent": "SeekerQueen",
+  "item": "SeekerQueen_Spit"
+ },
+ {
+  "creature": "staff_greenroots_tentaroot",
+  "source": "summon",
+  "item": "StaffGreenRoots"
+ },
+ {
+  "creature": "Troll_Summoned",
+  "source": "summon",
+  "item": "StaffRedTroll"
+ },
+ {
+  "creature": "Skeleton_Friendly",
+  "source": "summon",
+  "item": "StaffSkeleton"
+ },
+ {
+  "creature": "Bjorn_spiritcaller",
+  "source": "summon",
+  "item": "StaffSpiritCaller"
+ },
+ {
+  "creature": "Boar_spiritcaller",
+  "source": "summon",
+  "item": "StaffSpiritCaller"
+ },
+ {
+  "creature": "Moose_spiritcaller",
+  "source": "summon",
+  "item": "StaffSpiritCaller"
+ },
+ {
+  "creature": "Wolf_spiritcaller",
+  "source": "summon",
+  "item": "StaffSpiritCaller"
+ },
+ {
+  "creature": "SeekerBrood",
+  "source": "summon",
+  "parent": "Aspect_SeekerQueen",
+  "item": "aspect_SeekerQueen_Spit"
+ },
+ {
+  "creature": "BlobAspect",
+  "source": "summon",
+  "parent": "Aspect_Bonemass",
+  "item": "aspect_bonemass_attack_throw"
+ },
+ {
+  "creature": "Skeleton_aspect",
+  "source": "summon",
+  "parent": "Aspect_Bonemass",
+  "item": "aspect_bonemass_attack_throw"
+ },
+ {
+  "creature": "Aspect_TentaRoot",
+  "source": "summon",
+  "parent": "Aspect_Elder",
+  "item": "aspect_gd_king_rootspawn"
+ },
+ {
+  "creature": "Blob",
+  "source": "summon",
+  "parent": "Bonemass",
+  "item": "bonemass_attack_throw"
+ },
+ {
+  "creature": "Skeleton",
+  "source": "summon",
+  "parent": "Bonemass",
+  "item": "bonemass_attack_throw"
+ },
+ {
+  "creature": "Charred_Twitcher_Summoned",
+  "source": "summon",
+  "parent": "Charred_Mage",
+  "item": "charred_magestaff_summon"
+ },
+ {
+  "creature": "TentaRoot",
+  "source": "summon",
+  "parent": "gd_king",
+  "item": "gd_king_rootspawn"
+ },
+ {
+  "creature": "Tick",
+  "source": "summon",
+  "parent": "Gjall",
+  "item": "gjall_attack_egg"
+ },
+ {
+  "creature": "Tick",
+  "source": "summon",
+  "parent": "TheHive",
+  "item": "gjall_attack_egg"
+ },
+ {
+  "creature": "Seeker",
+  "source": "summon",
+  "parent": "Hive",
+  "item": "hive_attack_throw"
+ },
+ {
+  "creature": "Tick",
+  "source": "summon",
+  "parent": "Hive",
+  "item": "hive_attack_throw"
+ },
+ {
+  "creature": "Aspect_Yagluth",
+  "source": "phase",
+  "parent": "Aspect_Bonemass"
+ },
+ {
+  "creature": "Aspect_Elder",
+  "source": "phase",
+  "parent": "Aspect_Eikthyr"
+ },
+ {
+  "creature": "Aspect_Bonemass",
+  "source": "phase",
+  "parent": "Aspect_Eikthyr"
+ },
+ {
+  "creature": "Aspect_Moder",
+  "source": "phase",
+  "parent": "Aspect_Elder"
+ },
+ {
+  "creature": "Aspect_SeekerQueen",
+  "source": "phase",
+  "parent": "Aspect_Moder"
+ },
+ {
+  "creature": "Aspect_Fader",
+  "source": "phase",
+  "parent": "Aspect_Yagluth"
+ },
+ {
+  "creature": "Aspect_Eikthyr",
+  "source": "phase",
+  "parent": "FrozenKing"
  },
  {
   "creature": "FrozenKing_p2",
