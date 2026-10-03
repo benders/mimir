@@ -41,6 +41,7 @@ def load(name: str):
 
 
 META = load("meta")
+SITE_NAME = "Mimir's Well"  # shown on the site; the project itself is "mimir"
 ITEMS = {i["id"]: i for i in load("items")}
 CREATURES = {c["id"]: c for c in load("creatures")}
 PIECES = {p["id"]: p for p in load("pieces")}
@@ -463,13 +464,13 @@ def page(path: str, title: str, body: str, kind_label: str = "", scripts=()) -> 
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <base href="{base}">
-<title>{esc(title)} · Mimir</title>
+<title>{esc(title)} · {esc(SITE_NAME)}</title>
 <link rel="stylesheet" href="style.css">
 <script src="search.js" defer></script>
 {"".join(f'<script src="{esc(x)}" defer></script>' for x in scripts)}</head>
 <body>
 <header class="top">
-  <a class="brand" href="index.html">Mimir</a>
+  <a class="brand" href="index.html">{esc(SITE_NAME)}</a>
   <nav>{"".join(f'<a href="{d}/index.html">{d.capitalize()}</a>' for d in KINDS.values())}<a href="mechanics/index.html">Mechanics</a></nav>
   <div class="search"><input id="q" type="search" placeholder="Search…  ( / )" autocomplete="off" aria-label="Search">
   <ol id="results" hidden></ol></div>
@@ -1286,7 +1287,7 @@ def index_pages() -> None:
     counts = {"items": len(items), "creatures": len(CREATURES), "pieces": len(PIECES), "effects": len(EFFECTS)}
     cards = "".join(f'<li><a href="{d}/index.html"><b>{n}</b>{d}</a></li>' for d, n in counts.items())
     cards += f'<li><a href="mechanics/index.html"><b>{len(MECH_PAGES)}</b>mechanics</a></li>'
-    body = (f'<div class="home"><h1>Mimir</h1><p class="sub">A Valheim reference, rebuilt from the game data on '
+    body = (f'<div class="home"><h1>{esc(SITE_NAME)}</h1><p class="sub">A Valheim reference, rebuilt from the game data on '
             f'every update. Valheim {esc(META["gameVersion"])}.</p><p class="hint">Press <kbd>/</kbd> to search.</p>'
             f'<ul class="cards">{cards}</ul></div>')
     page("index.html", "Valheim reference", body)

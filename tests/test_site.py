@@ -200,6 +200,8 @@ class Site(unittest.TestCase):
             self.assertTrue((self.out / f"mechanics/{page}.html").is_file(), page)
         home = (self.out / "index.html").read_text(encoding="utf-8")
         self.assertIn('<a href="mechanics/index.html">Mechanics</a>', home)  # nav entry
+        self.assertIn('<a class="brand" href="index.html">Mimir&#x27;s Well</a>', home)
+        self.assertIn("<h1>Mimir&#x27;s Well</h1>", home)
         index = (self.out / "mechanics/index.html").read_text(encoding="utf-8")
         for page in ("blocking", "drops", "creature-levels", "damage-types"):
             self.assertIn(f'href="mechanics/{page}.html"', index)
