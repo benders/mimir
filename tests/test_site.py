@@ -289,7 +289,28 @@ class Site(unittest.TestCase):
         names = {e[1] for e in index}
         self.assertIn("Sword", names)
         self.assertNotIn("FW_Helmet", names)
-        self.assertTrue(all(len(e) == 5 for e in index))
+        self.assertTrue(all(len(e) == 6 for e in index))
+        stage = {e[1]: e[5] for e in index}
+        self.assertEqual((stage["Gem"], stage["Wood"]), (2, 0))  # Swamp, Meadows
+
+    def test_stage_filter(self):
+        gem = (self.out / "items/Gem.html").read_text(encoding="utf-8")
+        self.assertIn('<p class="spoiler" data-stage="2">', gem)  # shown only when the filter is below Swamp
+        self.assertRegex(gem, r'<a class="stage"[^>]*>Swamp</a>')
+        wood = (self.out / "items/Wood.html").read_text(encoding="utf-8")
+        self.assertRegex(wood, r'<a class="stage"[^>]*>Meadows</a>')
+        self.assertNotIn('class="spoiler"', wood)
+        self.assertIn('<select id="stage">', wood)
+        self.assertIn('localStorage.getItem("mimir-stage")', wood)
+        index = (self.out / "items/index.html").read_text(encoding="utf-8")
+        self.assertIn('<li data-stage="2"><a class="ref" href="items/Gem.html"', index)
+        self.assertIn('<li><a class="ref" href="items/Wood.html"', index)
+        css = (self.out / "style.css").read_text(encoding="utf-8")
+        self.assertIn('html[data-max="0"] [data-stage="2"]', css)
+        self.assertIn('html[data-max="1"] p.spoiler[data-stage="2"]', css)
+        self.assertNotIn('html[data-max="2"] [data-stage="2"]', css)  # its own stage stays visible
+        page = (self.out / "mechanics/progression.html").read_text(encoding="utf-8")
+        self.assertRegex(page, r"<td>Mountain</td><td>\d+</td>")
 
 
 if __name__ == "__main__":

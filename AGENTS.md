@@ -156,7 +156,13 @@ first biome of the progression (`normalize.STAGES`, Meadows..DeepNorth) where a 
 `normalize.stages()`, the same fixed point as `reachable()` (its first pass) with a second pass that adds stations and
 their extension levels, tools and tool tiers, fuel, boss keys (a boss's opens the next stage), quest hand-ins and
 persistent events. The earliest way wins (a creature's earliest spawn); Ocean alone counts as Meadows, next to land as
-that land. `STAGE_OVERRIDES` fixes what the data gets wrong; no `stage` = it couldn't be settled (shown from Meadows). `verify_data.py` keeps a list of known-obtainable content
+that land. `STAGE_OVERRIDES` fixes what the data gets wrong, `STAGE_IGNORED_TOOLS` drops unusual tool routes (Early Axes);
+no `stage` = it couldn't be settled (shown from Meadows). The site's "Up to" header select (localStorage `mimir-stage`,
+applied as `<html data-max>` by an inline head script before render) hides later entries: `data-stage` on index grid
+items and group headings, on forward relation lists and their sections (Used in, Builds, Upgrades, Crafts, Enables
+building, Bait for; not costs or sources), and in search.json (6th field). The hiding CSS is generated
+(`build-site.stage_css()`, appended to style.css). Detail pages get a stage badge and a spoiler banner past the filter;
+a merged page takes its earliest copy's stage. The `progression` mechanics page explains the rules. `verify_data.py` keeps a list of known-obtainable content
 and caps the flagged share, so a source gap can't silently hide real pages; `scripts/unreached.py -v` lists what
 `reachable()` misses. Add a source to normalize rather than an exception when something real is flagged.
 

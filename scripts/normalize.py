@@ -425,7 +425,7 @@ def stages(items: list, creatures: list, pieces: list, recipes: list, procs: lis
       - a world spawn's persistent event (SpawnSystem m_requiredPersistentEvent): the source that `startsEvent`;
       - the parent of offspring and hatchlings;
       - for a source with `minToolTier`, a player item of that tier dealing a damage type it isn't immune to
-        (MineRock/TreeBase/Destructible.Damage), except STAGE_IGNORED_TOOLS.
+        (MineRock.RPC_Hit, MineRock5/TreeBase/Destructible.RPC_Damage: CheckToolTier), except STAGE_IGNORED_TOOLS.
     A soft requirement on an unreachable thing is ignored; a
     reachable thing whose stage can't be settled (a cycle through soft requirements) is left out."""
     I, C, P, S = (defaultdict(lambda: NEVER) for _ in range(4))

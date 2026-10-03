@@ -1,5 +1,16 @@
-// Client-side search over search.json: [[name, id, url, icon, label], ...], loaded on first use.
-// Ranking: exact name, name prefix, word prefix, substring of name, substring of id.
+// Client-side search over search.json: [[name, id, url, icon, label, stage], ...], loaded on first use.
+// Ranking: exact name, name prefix, word prefix, substring of name, substring of id. Entries past the stage filter
+// (<html data-max>, the header's "Up to" select, kept in localStorage) are left out.
+(() => {
+  const sel = document.getElementById("stage"), root = document.documentElement, KEY = "mimir-stage";
+  if (!sel) return;
+  sel.value = root.dataset.max ?? "";
+  sel.addEventListener("change", () => {
+    if (sel.value === "") delete root.dataset.max; else root.dataset.max = sel.value;
+    try { sel.value === "" ? localStorage.removeItem(KEY) : localStorage.setItem(KEY, sel.value); } catch (e) {}
+  });
+})();
+
 (() => {
   const q = document.getElementById("q");
   const list = document.getElementById("results");
@@ -12,7 +23,7 @@
     .then((d) => { index = d.map((e) => [...e, e[0].toLowerCase(), e[1].toLowerCase()]); }));
 
   function score(e, s) {
-    const name = e[5], id = e[6];
+    const name = e[6], id = e[7];
     if (name === s) return 0;
     if (name.startsWith(s)) return 1;
     if (name.includes(" " + s)) return 2;
@@ -24,8 +35,9 @@
   function search(s) {
     s = s.trim().toLowerCase();
     if (!s) return [];
-    const out = [];
+    const out = [], max = document.documentElement.dataset.max;
     for (const e of index) {
+      if (max !== undefined && e[5] > +max) continue;
       const r = score(e, s);
       if (r >= 0) out.push([r, e[0].length, e]);
     }
