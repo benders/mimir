@@ -278,7 +278,7 @@ def reachable(items: list, creatures: list, pieces: list, recipes: list, procs: 
     """Ids of the items, creatures and pieces a player can get to, by fixed point from what the world offers:
     sources, spawns and enabled pieces in a build menu, then enabled recipes with reachable ingredients, drops of
     reachable creatures (a creature dropped by one, like a miniboss's second phase, is reached too), conversions
-    of reachable inputs, eggs laid by a reachable creature, summons of a reachable summoner, boss phases of a reachable phase. Chests in locations and trader stock count (as
+    of reachable inputs, eggs laid by a reachable creature, summons of a reachable summoner, boss phases of a reachable phase. Pieces standing in a location (`locations`) count. Chests in locations and trader stock count (as
     sources; trader keys are ignored, Coins must be reachable), fish via their bait, honey and sap from buildable pieces whose cost is reachable (sap
     needs its root in the world). World sources count when placed (`biomes`, `locations`, `placedBy`, or a
     `becomes` stage of a placed one). Incomplete while quests aren't modelled (#20)."""
@@ -331,7 +331,7 @@ def reachable(items: list, creatures: list, pieces: list, recipes: list, procs: 
                 got.add(f["id"])
                 got |= {d["item"] for d in (f.get("drops") or {}).get("items", [])}
         if (len(got), len(got_creatures)) == before:
-            return got, got_creatures, got_pieces
+            return got, got_creatures, got_pieces | {p["id"] for p in pieces if p.get("locations")}
 
 
 def mark_unobtainable(items: list, creatures: list, pieces: list, recipes: list, procs: list, sources: list,
@@ -724,6 +724,26 @@ def location_containers() -> list[dict]:
                   key=lambda e: e["id"])
 
 
+def scene_instances() -> dict[str, set]:
+    """prefab name -> {(location, dungeon)}: the location prefab itself, or an instance of the prefab (named by the
+    scene path of a component, sans the " (n)" copy suffix) in the location or a room its dungeon generates."""
+    found = defaultdict(set)
+    for name, bs, p, dungeon in placed_in_locations():
+        for inst in {re.sub(r" \(\d+\)$", "", c["path"].rsplit("/", 1)[-1]) for c in p["components"]
+                     if c.get("path")} | {p["name"]}:
+            found[inst].add((name, dungeon))
+    return found
+
+
+def place_pieces(pieces: list[dict]) -> None:
+    """Record `locations` [{location, dungeon}] on pieces that can't be built (no build menu) but stand in a world
+    location or one of its dungeon rooms: loot chests, ruined walls, props."""
+    found = scene_instances()
+    for pc in pieces:
+        if not pc["tools"] and found.get(pc["id"]):
+            pc["locations"] = [{"location": loc, "dungeon": d} for loc, d in sorted(found[pc["id"]])]
+
+
 def place_sources(sources: list[dict]) -> None:
     """Record where each world source is placed: `biomes` (enabled ZoneSystem vegetation), `locations`
     [{location, dungeon}] (the location is the object, or an instance of it sits in the location or in a room its
@@ -735,11 +755,10 @@ def place_sources(sources: list[dict]) -> None:
         if v["m_enable"] and (pid := ref(v["m_prefab"])) in by:
             veg[pid] += [b for b in biomes(v["m_biome"]) if b not in veg[pid]]
     found = defaultdict(set)
+    for inst, places in scene_instances().items():
+        if inst in by:
+            found[inst] |= places
     for name, bs, p, dungeon in placed_in_locations():
-        for inst in {re.sub(r" \(\d+\)$", "", c["path"].rsplit("/", 1)[-1]) for c in p["components"]
-                     if c.get("path")} | {p["name"]}:
-            if inst in by:
-                found[inst].add((name, dungeon))
         for c in p["components"]:  # objects a spawner makes (the Charred ballista)
             if c["type"] == "CreatureSpawner" and (spawned := ref(c["fields"]["m_creaturePrefab"])) in by:
                 found[spawned].add((name, dungeon))
@@ -914,6 +933,7 @@ def main(argv: list[str]) -> int:
         if not p["isItem"] and not has(p, "Piece") and (s := source(name, p)):
             sources.append(s)
     place_sources(sources)
+    place_pieces(pieces)
     sources += location_containers()
     spawn_list = spawns()
     sources += fishing(spawn_list)

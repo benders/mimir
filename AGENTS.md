@@ -100,7 +100,8 @@ are placed: `biomes` (enabled ZoneSystem vegetation), `locations` [{location, du
 sits in it or in a room its dungeon generates, found by scene path name, or a CreatureSpawner there makes it),
 `placedBy` (pieces that plant/build it: Plant, Procreation, WispSpawner). `reachable()` counts only placed sources
 (or a `becomes` stage of one); sources with none are not in the world (Meteorite rock, MushroomBlue pickable). Creatures that grow up from another have a `growup` spawn
-(`parent`). Derived relations (used in, dropped by) are left to the site build.
+(`parent`). Pieces with no build menu that stand in a location or dungeon room (loot chests, ruin walls, props) have `locations`
+[{location, dungeon}], found by the same scene-path matching; they count as reachable. Derived relations (used in, dropped by) are left to the site build.
 Items flagged `internal` (creature attack items) or `enemyOnly` (FW_/SP_ gear copies, Dvergr crossbow) get no site
 page; creatures list them under `attacks` (weapons) and `equipment`.
 

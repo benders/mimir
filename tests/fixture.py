@@ -321,7 +321,8 @@ def write_dump(raw: Path) -> Path:
     dump("locations/Lair.json", {"name": "Lair", "components": [comp("Location", {}), *spawners(
         ("OfferingBowl", m(bossPrefab=R("Chief"), bossItem=R("Ore"), bossItems=3)),
         ("DungeonGenerator", m(themes="Cave")),
-    ), comp("MineRock", {}, path="cave/OreRock (2)")]})  # an instance of a source inside the location
+    ), comp("MineRock", {}, path="cave/OreRock (2)"),
+        comp("Piece", {}, path="cave/piece_bench (1)")]})  # a non-buildable piece standing in the location  # an instance of a source inside the location
     dump("locations/Ruin.json", {"name": "Ruin", "components": spawners(("CreatureSpawner", creature_spawner("Pup")),
                                                                     container(("Ore", 1, 1, 1)))})  # disabled location
     dump("locations/Market.json", {"name": "Market", "components": [comp("Location", {}), comp("Trader", {

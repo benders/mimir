@@ -198,6 +198,11 @@
   "material": "Wood",
   "damageModifiers": {
    "fire": "Weak"
-  }
+  },
+  "locations": [
+   {
+    "location": "Lair"
+   }
+  ]
  }
 ]

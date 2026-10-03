@@ -91,6 +91,11 @@ class Site(unittest.TestCase):
         wood = (self.out / "items/Wood.html").read_text(encoding="utf-8")  # picked from a Bush in the Meadows and Swamp
         self.assertIn("Meadows, Swamp", wood)
 
+    def test_piece_found_in(self):
+        bench = (self.out / "pieces/piece_bench.html").read_text(encoding="utf-8")  # world copy, placed in the Lair
+        self.assertIn("<h2>Found in</h2>", bench)
+        self.assertIn("Lair", bench)
+
     def test_sold_by(self):
         charm = (self.out / "items/Charm.html").read_text(encoding="utf-8")
         self.assertIn("<h2>Sold by</h2>", charm)

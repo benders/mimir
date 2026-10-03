@@ -438,7 +438,12 @@
   "comfort": {
    "value": 1,
    "group": "Fire"
-  }
+  },
+  "locations": [
+   {
+    "location": "BogWitch_Camp"
+   }
+  ]
  },
  {
   "id": "Bread",
@@ -517,6 +522,11 @@
     "item": "CandleWick",
     "amount": 1,
     "perLevel": 1
+   }
+  ],
+  "locations": [
+   {
+    "location": "BogWitch_Camp"
    }
   ]
  },
@@ -2188,7 +2198,16 @@
    "lightning": "Resistant",
    "poison": "Immune",
    "spirit": "Immune"
-  }
+  },
+  "locations": [
+   {
+    "location": "MorkBorg"
+   },
+   {
+    "location": "MorkBorg",
+    "dungeon": true
+   }
+  ]
  },
  {
   "id": "Morkhalla_Stonepile",
@@ -2232,6 +2251,12 @@
     "amount": 2,
     "perLevel": 1,
     "noRecover": true
+   }
+  ],
+  "locations": [
+   {
+    "location": "MorkBorg",
+    "dungeon": true
    }
   ]
  },
@@ -3944,7 +3969,18 @@
    "pickaxe": "Resistant",
    "fire": "Resistant",
    "frost": "Resistant"
-  }
+  },
+  "locations": [
+   {
+    "location": "MorgenHole1"
+   },
+   {
+    "location": "MorgenHole2"
+   },
+   {
+    "location": "MorgenHole3"
+   }
+  ]
  },
  {
   "id": "TreasureChest_blackforest",
@@ -3970,7 +4006,66 @@
    "pickaxe": "Resistant",
    "fire": "Resistant",
    "frost": "Resistant"
-  }
+  },
+  "locations": [
+   {
+    "location": "Ruin1"
+   },
+   {
+    "location": "Ruin2"
+   },
+   {
+    "location": "StoneHouse3"
+   },
+   {
+    "location": "StoneTowerRuins03"
+   },
+   {
+    "location": "StoneTowerRuins07"
+   },
+   {
+    "location": "StoneTowerRuins08"
+   },
+   {
+    "location": "StoneTowerRuins09"
+   },
+   {
+    "location": "StoneTowerRuins09_sunk"
+   },
+   {
+    "location": "StoneTowerRuins10"
+   },
+   {
+    "location": "StoneTowerRuins10_sunk"
+   },
+   {
+    "location": "SwampHut1"
+   },
+   {
+    "location": "SwampHut1_1"
+   },
+   {
+    "location": "SwampHut2"
+   },
+   {
+    "location": "SwampHut2_1"
+   },
+   {
+    "location": "SwampHut3"
+   },
+   {
+    "location": "SwampHut3_1"
+   },
+   {
+    "location": "SwampHut4"
+   },
+   {
+    "location": "SwampHut5"
+   },
+   {
+    "location": "TrollCave02"
+   }
+  ]
  },
  {
   "id": "TreasureChest_charredfortress",
@@ -3996,7 +4091,16 @@
    "pickaxe": "Resistant",
    "fire": "Resistant",
    "frost": "Resistant"
-  }
+  },
+  "locations": [
+   {
+    "location": "CharredFortress"
+   },
+   {
+    "location": "FortressRuins",
+    "dungeon": true
+   }
+  ]
  },
  {
   "id": "TreasureChest_deepnorth_village",
@@ -4021,7 +4125,25 @@
    "pickaxe": "Resistant",
    "fire": "Resistant",
    "frost": "Resistant"
-  }
+  },
+  "locations": [
+   {
+    "location": "DN_hut01"
+   },
+   {
+    "location": "LumberCamp"
+   },
+   {
+    "location": "NorthVillage",
+    "dungeon": true
+   },
+   {
+    "location": "ShipSetting02"
+   },
+   {
+    "location": "ShipSetting03"
+   }
+  ]
  },
  {
   "id": "TreasureChest_dvergr_loose_stone",
@@ -4073,7 +4195,21 @@
    "pickaxe": "Resistant",
    "fire": "Resistant",
    "frost": "Resistant"
-  }
+  },
+  "locations": [
+   {
+    "location": "Mistlands_GuardTower1_ruined_new"
+   },
+   {
+    "location": "Mistlands_GuardTower1_ruined_new2"
+   },
+   {
+    "location": "Mistlands_GuardTower3_ruined_new"
+   },
+   {
+    "location": "Mistlands_RockSpire1"
+   }
+  ]
  },
  {
   "id": "TreasureChest_dvergrtown",
@@ -4099,7 +4235,17 @@
    "pickaxe": "Resistant",
    "fire": "Resistant",
    "frost": "Resistant"
-  }
+  },
+  "locations": [
+   {
+    "location": "Mistlands_DvergrTownEntrance1",
+    "dungeon": true
+   },
+   {
+    "location": "Mistlands_DvergrTownEntrance2",
+    "dungeon": true
+   }
+  ]
  },
  {
   "id": "TreasureChest_fCrypt",
@@ -4151,7 +4297,25 @@
    "pickaxe": "Resistant",
    "fire": "Resistant",
    "frost": "Resistant"
-  }
+  },
+  "locations": [
+   {
+    "location": "Crypt2",
+    "dungeon": true
+   },
+   {
+    "location": "Crypt3",
+    "dungeon": true
+   },
+   {
+    "location": "Crypt4",
+    "dungeon": true
+   },
+   {
+    "location": "Hildir_crypt",
+    "dungeon": true
+   }
+  ]
  },
  {
   "id": "TreasureChest_forestcrypt_hildir",
@@ -4203,7 +4367,42 @@
    "pickaxe": "Resistant",
    "fire": "Resistant",
    "frost": "Resistant"
-  }
+  },
+  "locations": [
+   {
+    "location": "GoblinCamp2",
+    "dungeon": true
+   },
+   {
+    "location": "GoblinCamp2_1",
+    "dungeon": true
+   },
+   {
+    "location": "GoblinHut02"
+   },
+   {
+    "location": "GoblinHut03"
+   },
+   {
+    "location": "Hildir_plainsfortress",
+    "dungeon": true
+   },
+   {
+    "location": "Ruin3"
+   },
+   {
+    "location": "StoneHouse1_heath"
+   },
+   {
+    "location": "StoneHouse5_heath"
+   },
+   {
+    "location": "StoneTower1"
+   },
+   {
+    "location": "StoneTower3"
+   }
+  ]
  },
  {
   "id": "TreasureChest_heath_hildir",
@@ -4229,7 +4428,13 @@
    "pickaxe": "Resistant",
    "fire": "Resistant",
    "frost": "Resistant"
-  }
+  },
+  "locations": [
+   {
+    "location": "Hildir_plainsfortress",
+    "dungeon": true
+   }
+  ]
  },
  {
   "id": "TreasureChest_meadows",
@@ -4255,7 +4460,42 @@
    "pickaxe": "Resistant",
    "fire": "Resistant",
    "frost": "Resistant"
-  }
+  },
+  "locations": [
+   {
+    "location": "WoodFarm1",
+    "dungeon": true
+   },
+   {
+    "location": "WoodHouse1"
+   },
+   {
+    "location": "WoodHouse10"
+   },
+   {
+    "location": "WoodHouse11"
+   },
+   {
+    "location": "WoodHouse12"
+   },
+   {
+    "location": "WoodHouse13"
+   },
+   {
+    "location": "WoodHouse7"
+   },
+   {
+    "location": "WoodHouse9"
+   },
+   {
+    "location": "WoodVillage1",
+    "dungeon": true
+   },
+   {
+    "location": "WoodVillage2",
+    "dungeon": true
+   }
+  ]
  },
  {
   "id": "TreasureChest_meadows_01",
@@ -4281,7 +4521,12 @@
    "pickaxe": "Resistant",
    "fire": "Resistant",
    "frost": "Resistant"
-  }
+  },
+  "locations": [
+   {
+    "location": "WoodHouse6"
+   }
+  ]
  },
  {
   "id": "TreasureChest_meadows_02",
@@ -4307,7 +4552,12 @@
    "pickaxe": "Resistant",
    "fire": "Resistant",
    "frost": "Resistant"
-  }
+  },
+  "locations": [
+   {
+    "location": "WoodHouse2"
+   }
+  ]
  },
  {
   "id": "TreasureChest_meadows_buried",
@@ -4333,7 +4583,12 @@
    "pickaxe": "Resistant",
    "fire": "Resistant",
    "frost": "Resistant"
-  }
+  },
+  "locations": [
+   {
+    "location": "ShipSetting01"
+   }
+  ]
  },
  {
   "id": "TreasureChest_meadows_combat",
@@ -4359,7 +4614,12 @@
    "pickaxe": "Resistant",
    "fire": "Resistant",
    "frost": "Resistant"
-  }
+  },
+  "locations": [
+   {
+    "location": "CombatRuin01"
+   }
+  ]
  },
  {
   "id": "TreasureChest_memorial_buried",
@@ -4385,7 +4645,12 @@
    "pickaxe": "Resistant",
    "fire": "Resistant",
    "frost": "Resistant"
-  }
+  },
+  "locations": [
+   {
+    "location": "NorthMemorialPlace"
+   }
+  ]
  },
  {
   "id": "TreasureChest_morkhalla",
@@ -4413,7 +4678,16 @@
    "frost": "Immune",
    "poison": "Immune",
    "spirit": "Immune"
-  }
+  },
+  "locations": [
+   {
+    "location": "MorkBorg"
+   },
+   {
+    "location": "MorkBorg",
+    "dungeon": true
+   }
+  ]
  },
  {
   "id": "TreasureChest_mountaincave",
@@ -4439,7 +4713,17 @@
    "pickaxe": "Resistant",
    "fire": "Resistant",
    "frost": "Resistant"
-  }
+  },
+  "locations": [
+   {
+    "location": "Hildir_cave",
+    "dungeon": true
+   },
+   {
+    "location": "MountainCave02",
+    "dungeon": true
+   }
+  ]
  },
  {
   "id": "TreasureChest_mountaincave_hildir",
@@ -4491,7 +4775,30 @@
    "pickaxe": "Resistant",
    "fire": "Resistant",
    "frost": "Resistant"
-  }
+  },
+  "locations": [
+   {
+    "location": "AbandonedLogCabin02"
+   },
+   {
+    "location": "AbandonedLogCabin03"
+   },
+   {
+    "location": "AbandonedLogCabin04"
+   },
+   {
+    "location": "MountainWell1"
+   },
+   {
+    "location": "StoneTowerRuins04"
+   },
+   {
+    "location": "StoneTowerRuins05"
+   },
+   {
+    "location": "StoneTowerRuins05_leet"
+   }
+  ]
  },
  {
   "id": "TreasureChest_plains_stone",
@@ -4517,7 +4824,18 @@
    "pickaxe": "Resistant",
    "fire": "Resistant",
    "frost": "Resistant"
-  }
+  },
+  "locations": [
+   {
+    "location": "StoneHenge1"
+   },
+   {
+    "location": "StoneHenge2"
+   },
+   {
+    "location": "StoneHenge3"
+   }
+  ]
  },
  {
   "id": "TreasureChest_plainsfortress_hildir",
@@ -4569,7 +4887,13 @@
    "pickaxe": "Resistant",
    "fire": "Resistant",
    "frost": "Resistant"
-  }
+  },
+  "locations": [
+   {
+    "location": "SunkenCrypt4",
+    "dungeon": true
+   }
+  ]
  },
  {
   "id": "TreasureChest_swamp",
@@ -4595,7 +4919,18 @@
    "pickaxe": "Resistant",
    "fire": "Resistant",
    "frost": "Resistant"
-  }
+  },
+  "locations": [
+   {
+    "location": "Grave1"
+   },
+   {
+    "location": "SwampRuin1"
+   },
+   {
+    "location": "SwampRuin2"
+   }
+  ]
  },
  {
   "id": "TreasureChest_trollcave",
@@ -4621,7 +4956,12 @@
    "pickaxe": "Resistant",
    "fire": "Resistant",
    "frost": "Resistant"
-  }
+  },
+  "locations": [
+   {
+    "location": "TrollCave02"
+   }
+  ]
  },
  {
   "id": "TurnipStew",
@@ -6515,7 +6855,48 @@
    "lightning": "Immune",
    "poison": "Immune",
    "spirit": "Immune"
-  }
+  },
+  "locations": [
+   {
+    "location": "Mistlands_DvergrBossEntrance1"
+   },
+   {
+    "location": "Mistlands_DvergrTownEntrance1"
+   },
+   {
+    "location": "Mistlands_DvergrTownEntrance2"
+   },
+   {
+    "location": "Mistlands_GuardTower1_new"
+   },
+   {
+    "location": "Mistlands_GuardTower1_ruined_new"
+   },
+   {
+    "location": "Mistlands_GuardTower1_ruined_new2"
+   },
+   {
+    "location": "Mistlands_GuardTower2_new"
+   },
+   {
+    "location": "Mistlands_GuardTower3_new"
+   },
+   {
+    "location": "Mistlands_GuardTower3_ruined_new"
+   },
+   {
+    "location": "Mistlands_Harbour1"
+   },
+   {
+    "location": "Mistlands_Lighthouse1_new"
+   },
+   {
+    "location": "Mistlands_Viaduct1"
+   },
+   {
+    "location": "Mistlands_Viaduct2"
+   }
+  ]
  },
  {
   "id": "blackmarble_2x2x1",
@@ -6544,7 +6925,48 @@
    "lightning": "Ignore",
    "poison": "Ignore",
    "spirit": "Immune"
-  }
+  },
+  "locations": [
+   {
+    "location": "Mistlands_DvergrBossEntrance1"
+   },
+   {
+    "location": "Mistlands_DvergrTownEntrance1"
+   },
+   {
+    "location": "Mistlands_DvergrTownEntrance2"
+   },
+   {
+    "location": "Mistlands_GuardTower1_new"
+   },
+   {
+    "location": "Mistlands_GuardTower1_ruined_new"
+   },
+   {
+    "location": "Mistlands_GuardTower1_ruined_new2"
+   },
+   {
+    "location": "Mistlands_GuardTower2_new"
+   },
+   {
+    "location": "Mistlands_GuardTower3_new"
+   },
+   {
+    "location": "Mistlands_GuardTower3_ruined_new"
+   },
+   {
+    "location": "Mistlands_Harbour1"
+   },
+   {
+    "location": "Mistlands_Lighthouse1_new"
+   },
+   {
+    "location": "Mistlands_Viaduct1"
+   },
+   {
+    "location": "Mistlands_Viaduct2"
+   }
+  ]
  },
  {
   "id": "blackmarble_2x2x2",
@@ -6669,7 +7091,39 @@
    "lightning": "Ignore",
    "poison": "Ignore",
    "spirit": "Immune"
-  }
+  },
+  "locations": [
+   {
+    "location": "Mistlands_DvergrBossEntrance1"
+   },
+   {
+    "location": "Mistlands_DvergrTownEntrance1"
+   },
+   {
+    "location": "Mistlands_GuardTower1_new"
+   },
+   {
+    "location": "Mistlands_GuardTower1_ruined_new"
+   },
+   {
+    "location": "Mistlands_GuardTower1_ruined_new2"
+   },
+   {
+    "location": "Mistlands_GuardTower2_new"
+   },
+   {
+    "location": "Mistlands_GuardTower3_new"
+   },
+   {
+    "location": "Mistlands_GuardTower3_ruined_new"
+   },
+   {
+    "location": "Mistlands_Harbour1"
+   },
+   {
+    "location": "Mistlands_Lighthouse1_new"
+   }
+  ]
  },
  {
   "id": "blackmarble_basecorner",
@@ -6793,7 +7247,42 @@
    "lightning": "Ignore",
    "poison": "Ignore",
    "spirit": "Immune"
-  }
+  },
+  "locations": [
+   {
+    "location": "Mistlands_DvergrTownEntrance1"
+   },
+   {
+    "location": "Mistlands_GuardTower1_new"
+   },
+   {
+    "location": "Mistlands_GuardTower1_ruined_new"
+   },
+   {
+    "location": "Mistlands_GuardTower1_ruined_new2"
+   },
+   {
+    "location": "Mistlands_GuardTower2_new"
+   },
+   {
+    "location": "Mistlands_GuardTower3_new"
+   },
+   {
+    "location": "Mistlands_GuardTower3_ruined_new"
+   },
+   {
+    "location": "Mistlands_Lighthouse1_new"
+   },
+   {
+    "location": "Mistlands_StatueGroup1"
+   },
+   {
+    "location": "Mistlands_Viaduct1"
+   },
+   {
+    "location": "Mistlands_Viaduct2"
+   }
+  ]
  },
  {
   "id": "blackmarble_creep_4x1x1",
@@ -6821,7 +7310,13 @@
    "lightning": "Ignore",
    "poison": "Ignore",
    "spirit": "Immune"
-  }
+  },
+  "locations": [
+   {
+    "location": "Mistlands_DvergrBossEntrance1",
+    "dungeon": true
+   }
+  ]
  },
  {
   "id": "blackmarble_creep_4x2x1",
@@ -6849,7 +7344,13 @@
    "lightning": "Ignore",
    "poison": "Ignore",
    "spirit": "Immune"
-  }
+  },
+  "locations": [
+   {
+    "location": "Mistlands_DvergrBossEntrance1",
+    "dungeon": true
+   }
+  ]
  },
  {
   "id": "blackmarble_creep_slope_inverted_1x1x2",
@@ -6878,7 +7379,21 @@
    "lightning": "Ignore",
    "poison": "Ignore",
    "spirit": "Immune"
-  }
+  },
+  "locations": [
+   {
+    "location": "Mistlands_DvergrBossEntrance1",
+    "dungeon": true
+   },
+   {
+    "location": "Mistlands_DvergrTownEntrance1",
+    "dungeon": true
+   },
+   {
+    "location": "Mistlands_DvergrTownEntrance2",
+    "dungeon": true
+   }
+  ]
  },
  {
   "id": "blackmarble_creep_slope_inverted_2x2x1",
@@ -6906,7 +7421,13 @@
    "lightning": "Ignore",
    "poison": "Ignore",
    "spirit": "Immune"
-  }
+  },
+  "locations": [
+   {
+    "location": "Mistlands_DvergrBossEntrance1",
+    "dungeon": true
+   }
+  ]
  },
  {
   "id": "blackmarble_creep_stair",
@@ -6935,7 +7456,13 @@
    "lightning": "Ignore",
    "poison": "Ignore",
    "spirit": "Immune"
-  }
+  },
+  "locations": [
+   {
+    "location": "Mistlands_DvergrBossEntrance1",
+    "dungeon": true
+   }
+  ]
  },
  {
   "id": "blackmarble_floor",
@@ -6992,7 +7519,33 @@
    "lightning": "Immune",
    "poison": "Immune",
    "spirit": "Immune"
-  }
+  },
+  "locations": [
+   {
+    "location": "Mistlands_DvergrBossEntrance1"
+   },
+   {
+    "location": "Mistlands_DvergrTownEntrance1"
+   },
+   {
+    "location": "Mistlands_DvergrTownEntrance2"
+   },
+   {
+    "location": "Mistlands_GuardTower1_new"
+   },
+   {
+    "location": "Mistlands_GuardTower1_ruined_new"
+   },
+   {
+    "location": "Mistlands_GuardTower1_ruined_new2"
+   },
+   {
+    "location": "Mistlands_GuardTower2_new"
+   },
+   {
+    "location": "Mistlands_Lighthouse1_new"
+   }
+  ]
  },
  {
   "id": "blackmarble_floor_triangle",
@@ -7054,7 +7607,42 @@
    "lightning": "Immune",
    "poison": "Immune",
    "spirit": "Immune"
-  }
+  },
+  "locations": [
+   {
+    "location": "Mistlands_DvergrBossEntrance1"
+   },
+   {
+    "location": "Mistlands_DvergrTownEntrance1"
+   },
+   {
+    "location": "Mistlands_DvergrTownEntrance2"
+   },
+   {
+    "location": "Mistlands_GuardTower1_new"
+   },
+   {
+    "location": "Mistlands_GuardTower1_ruined_new"
+   },
+   {
+    "location": "Mistlands_GuardTower1_ruined_new2"
+   },
+   {
+    "location": "Mistlands_GuardTower2_new"
+   },
+   {
+    "location": "Mistlands_GuardTower3_new"
+   },
+   {
+    "location": "Mistlands_GuardTower3_ruined_new"
+   },
+   {
+    "location": "Mistlands_Harbour1"
+   },
+   {
+    "location": "Mistlands_Lighthouse1_new"
+   }
+  ]
  },
  {
   "id": "blackmarble_head02",
@@ -7083,7 +7671,33 @@
    "lightning": "Immune",
    "poison": "Immune",
    "spirit": "Immune"
-  }
+  },
+  "locations": [
+   {
+    "location": "Mistlands_DvergrTownEntrance1"
+   },
+   {
+    "location": "Mistlands_GuardTower1_new"
+   },
+   {
+    "location": "Mistlands_GuardTower1_ruined_new"
+   },
+   {
+    "location": "Mistlands_GuardTower1_ruined_new2"
+   },
+   {
+    "location": "Mistlands_GuardTower2_new"
+   },
+   {
+    "location": "Mistlands_GuardTower3_new"
+   },
+   {
+    "location": "Mistlands_GuardTower3_ruined_new"
+   },
+   {
+    "location": "Mistlands_Lighthouse1_new"
+   }
+  ]
  },
  {
   "id": "blackmarble_head_big01",
@@ -7111,7 +7725,48 @@
    "lightning": "Ignore",
    "poison": "Ignore",
    "spirit": "Immune"
-  }
+  },
+  "locations": [
+   {
+    "location": "Mistlands_DvergrTownEntrance1"
+   },
+   {
+    "location": "Mistlands_GuardTower1_new"
+   },
+   {
+    "location": "Mistlands_GuardTower1_ruined_new"
+   },
+   {
+    "location": "Mistlands_GuardTower1_ruined_new2"
+   },
+   {
+    "location": "Mistlands_GuardTower2_new"
+   },
+   {
+    "location": "Mistlands_GuardTower3_new"
+   },
+   {
+    "location": "Mistlands_GuardTower3_ruined_new"
+   },
+   {
+    "location": "Mistlands_Lighthouse1_new"
+   },
+   {
+    "location": "Mistlands_RockSpire1"
+   },
+   {
+    "location": "Mistlands_Statue1"
+   },
+   {
+    "location": "Mistlands_StatueGroup1"
+   },
+   {
+    "location": "Mistlands_Viaduct1"
+   },
+   {
+    "location": "Mistlands_Viaduct2"
+   }
+  ]
  },
  {
   "id": "blackmarble_head_big02",
@@ -7139,7 +7794,48 @@
    "lightning": "Ignore",
    "poison": "Ignore",
    "spirit": "Immune"
-  }
+  },
+  "locations": [
+   {
+    "location": "Mistlands_DvergrTownEntrance1"
+   },
+   {
+    "location": "Mistlands_GuardTower1_new"
+   },
+   {
+    "location": "Mistlands_GuardTower1_ruined_new"
+   },
+   {
+    "location": "Mistlands_GuardTower1_ruined_new2"
+   },
+   {
+    "location": "Mistlands_GuardTower2_new"
+   },
+   {
+    "location": "Mistlands_GuardTower3_new"
+   },
+   {
+    "location": "Mistlands_GuardTower3_ruined_new"
+   },
+   {
+    "location": "Mistlands_Lighthouse1_new"
+   },
+   {
+    "location": "Mistlands_RockSpire1"
+   },
+   {
+    "location": "Mistlands_Statue2"
+   },
+   {
+    "location": "Mistlands_StatueGroup1"
+   },
+   {
+    "location": "Mistlands_Viaduct1"
+   },
+   {
+    "location": "Mistlands_Viaduct2"
+   }
+  ]
  },
  {
   "id": "blackmarble_out_1",
@@ -7288,7 +7984,45 @@
    "lightning": "Immune",
    "poison": "Immune",
    "spirit": "Immune"
-  }
+  },
+  "locations": [
+   {
+    "location": "Mistlands_DvergrBossEntrance1"
+   },
+   {
+    "location": "Mistlands_DvergrTownEntrance1"
+   },
+   {
+    "location": "Mistlands_GuardTower1_new"
+   },
+   {
+    "location": "Mistlands_GuardTower1_ruined_new"
+   },
+   {
+    "location": "Mistlands_GuardTower1_ruined_new2"
+   },
+   {
+    "location": "Mistlands_GuardTower2_new"
+   },
+   {
+    "location": "Mistlands_GuardTower3_new"
+   },
+   {
+    "location": "Mistlands_GuardTower3_ruined_new"
+   },
+   {
+    "location": "Mistlands_Harbour1"
+   },
+   {
+    "location": "Mistlands_Lighthouse1_new"
+   },
+   {
+    "location": "Mistlands_RockSpire1"
+   },
+   {
+    "location": "Mistlands_StatueGroup1"
+   }
+  ]
  },
  {
   "id": "blackmarble_slope_inverted_1x2",
@@ -7317,7 +8051,39 @@
    "lightning": "Immune",
    "poison": "Immune",
    "spirit": "Immune"
-  }
+  },
+  "locations": [
+   {
+    "location": "Mistlands_DvergrBossEntrance1"
+   },
+   {
+    "location": "Mistlands_DvergrTownEntrance1"
+   },
+   {
+    "location": "Mistlands_GuardTower1_new"
+   },
+   {
+    "location": "Mistlands_GuardTower1_ruined_new"
+   },
+   {
+    "location": "Mistlands_GuardTower1_ruined_new2"
+   },
+   {
+    "location": "Mistlands_GuardTower2_new"
+   },
+   {
+    "location": "Mistlands_GuardTower3_new"
+   },
+   {
+    "location": "Mistlands_GuardTower3_ruined_new"
+   },
+   {
+    "location": "Mistlands_Harbour1"
+   },
+   {
+    "location": "Mistlands_Lighthouse1_new"
+   }
+  ]
  },
  {
   "id": "blackmarble_stair",
@@ -7378,7 +8144,12 @@
    "lightning": "Immune",
    "poison": "Immune",
    "spirit": "Immune"
-  }
+  },
+  "locations": [
+   {
+    "location": "Mistlands_DvergrTownEntrance1"
+   }
+  ]
  },
  {
   "id": "blackmarble_stair_corner_left",
@@ -8955,7 +9726,33 @@
    "frost": "Resistant",
    "poison": "Immune",
    "spirit": "Immune"
-  }
+  },
+  "locations": [
+   {
+    "location": "CharredTowerRuins1_dvergr"
+   },
+   {
+    "location": "Mistlands_Excavation1"
+   },
+   {
+    "location": "Mistlands_Excavation2"
+   },
+   {
+    "location": "Mistlands_GuardTower1_new"
+   },
+   {
+    "location": "Mistlands_GuardTower2_new"
+   },
+   {
+    "location": "Mistlands_GuardTower3_new"
+   },
+   {
+    "location": "Mistlands_Harbour1"
+   },
+   {
+    "location": "Mistlands_Lighthouse1_new"
+   }
+  ]
  },
  {
   "id": "dvergrprops_wood_floor",
@@ -8978,7 +9775,18 @@
    "chop": "Weak",
    "poison": "Immune",
    "spirit": "Immune"
-  }
+  },
+  "locations": [
+   {
+    "location": "Mistlands_GuardTower1_new"
+   },
+   {
+    "location": "Mistlands_GuardTower1_ruined_new"
+   },
+   {
+    "location": "Mistlands_GuardTower2_new"
+   }
+  ]
  },
  {
   "id": "dvergrprops_wood_stair",
@@ -9001,7 +9809,15 @@
    "chop": "Weak",
    "poison": "Immune",
    "spirit": "Immune"
-  }
+  },
+  "locations": [
+   {
+    "location": "Mistlands_GuardTower3_new"
+   },
+   {
+    "location": "Mistlands_GuardTower3_ruined_new"
+   }
+  ]
  },
  {
   "id": "eitrrefinery",
@@ -9154,7 +9970,12 @@
   "comfort": {
    "value": 1,
    "group": "Fire"
-  }
+  },
+  "locations": [
+   {
+    "location": "Vendor_BlackForest"
+   }
+  ]
  },
  {
   "id": "fire_pit_hildir",
@@ -9178,7 +9999,12 @@
   "comfort": {
    "value": 1,
    "group": "Fire"
-  }
+  },
+  "locations": [
+   {
+    "location": "Hildir_camp"
+   }
+  ]
  },
  {
   "id": "fire_pit_iron",
@@ -9562,7 +10388,13 @@
    "lightning": "Immune",
    "poison": "Immune",
    "spirit": "Immune"
-  }
+  },
+  "locations": [
+   {
+    "location": "Hildir_plainsfortress",
+    "dungeon": true
+   }
+  ]
  },
  {
   "id": "fuling_turret",
@@ -9612,7 +10444,57 @@
    "chop": "Weak",
    "poison": "Immune",
    "spirit": "Immune"
-  }
+  },
+  "locations": [
+   {
+    "location": "GoblinCamp2",
+    "dungeon": true
+   },
+   {
+    "location": "GoblinCamp2_1",
+    "dungeon": true
+   },
+   {
+    "location": "GoblinHut01"
+   },
+   {
+    "location": "GoblinHut02"
+   },
+   {
+    "location": "GoblinHut03"
+   },
+   {
+    "location": "Hildir_plainsfortress",
+    "dungeon": true
+   },
+   {
+    "location": "SwampHut3"
+   },
+   {
+    "location": "SwampHut3_1"
+   },
+   {
+    "location": "SwampHut5"
+   },
+   {
+    "location": "WoodFarm1",
+    "dungeon": true
+   },
+   {
+    "location": "WoodHouse1"
+   },
+   {
+    "location": "WoodHouse2"
+   },
+   {
+    "location": "WoodVillage1",
+    "dungeon": true
+   },
+   {
+    "location": "WoodVillage2",
+    "dungeon": true
+   }
+  ]
  },
  {
   "id": "grausten_pile",
@@ -9945,7 +10827,13 @@
    "lightning": "Immune",
    "poison": "Immune",
    "spirit": "Immune"
-  }
+  },
+  "locations": [
+   {
+    "location": "Hildir_plainsfortress",
+    "dungeon": true
+   }
+  ]
  },
  {
   "id": "iron_wall_2x2",
@@ -10187,7 +11075,13 @@
    "frost": "Resistant",
    "poison": "Immune",
    "spirit": "Immune"
-  }
+  },
+  "locations": [
+   {
+    "location": "NorthVillage",
+    "dungeon": true
+   }
+  ]
  },
  {
   "id": "loot_deepNorth_TimberHall",
@@ -10215,7 +11109,16 @@
    "frost": "Resistant",
    "poison": "Immune",
    "spirit": "Immune"
-  }
+  },
+  "locations": [
+   {
+    "location": "NorthVillage",
+    "dungeon": true
+   },
+   {
+    "location": "TheHole01"
+   }
+  ]
  },
  {
   "id": "metalbar_1x2",
@@ -11678,7 +12581,18 @@
    "chop": "Weak",
    "poison": "Immune",
    "spirit": "Immune"
-  }
+  },
+  "locations": [
+   {
+    "location": "CharredRuins1"
+   },
+   {
+    "location": "CharredTowerRuins1"
+   },
+   {
+    "location": "CharredTowerRuins1_dvergr"
+   }
+  ]
  },
  {
   "id": "piece_blackwood_bench01",
@@ -12972,7 +13886,33 @@
    "chop": "Weak",
    "poison": "Immune",
    "spirit": "Immune"
-  }
+  },
+  "locations": [
+   {
+    "location": "Mistlands_GuardTower1_new"
+   },
+   {
+    "location": "Mistlands_GuardTower1_ruined_new"
+   },
+   {
+    "location": "Mistlands_GuardTower1_ruined_new2"
+   },
+   {
+    "location": "Mistlands_GuardTower2_new"
+   },
+   {
+    "location": "Mistlands_GuardTower3_new"
+   },
+   {
+    "location": "Mistlands_GuardTower3_ruined_new"
+   },
+   {
+    "location": "Mistlands_Harbour1"
+   },
+   {
+    "location": "Mistlands_Lighthouse1_new"
+   }
+  ]
  },
  {
   "id": "piece_dvergr_wood_wall",
@@ -16578,7 +17518,13 @@
    "chop": "Weak",
    "poison": "Immune",
    "spirit": "Immune"
-  }
+  },
+  "locations": [
+   {
+    "location": "WoodFarm1",
+    "dungeon": true
+   }
+  ]
  },
  {
   "id": "skull_pile",
@@ -17251,7 +18197,18 @@
    "frost": "Resistant",
    "poison": "Immune",
    "spirit": "Immune"
-  }
+  },
+  "locations": [
+   {
+    "location": "Ruin3"
+   },
+   {
+    "location": "StoneTowerRuins05"
+   },
+   {
+    "location": "StoneTowerRuins05_leet"
+   }
+  ]
  },
  {
   "id": "stone_floor_2x2",
@@ -18799,7 +19756,37 @@
    "chop": "Weak",
    "poison": "Immune",
    "spirit": "Immune"
-  }
+  },
+  "locations": [
+   {
+    "location": "AbandonedLogCabin02"
+   },
+   {
+    "location": "AbandonedLogCabin03"
+   },
+   {
+    "location": "StoneHouse1_heath"
+   },
+   {
+    "location": "StoneHouse2_heath"
+   },
+   {
+    "location": "StoneTowerRuins03"
+   },
+   {
+    "location": "WoodFarm1",
+    "dungeon": true
+   },
+   {
+    "location": "WoodHouse11"
+   },
+   {
+    "location": "WoodHouse13"
+   },
+   {
+    "location": "WoodHouse8"
+   }
+  ]
  },
  {
   "id": "wood_wall_roof_45",

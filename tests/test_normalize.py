@@ -169,6 +169,14 @@ class Entities(FixtureCase):
         self.assertEqual(sources["Stub"]["placedBy"], ["Sapling"])
         self.assertNotIn("biomes", sources["Stub"])
 
+    def test_place_pieces(self):
+        pieces = [N.piece(n, p, N.piece_tools()) for n, p in N.PREFABS.items() if N.has(p, "Piece")]
+        N.place_pieces(pieces)
+        by = {p["id"]: p for p in pieces}
+        self.assertEqual(by["piece_bench"]["locations"], [{"location": "Lair", "dungeon": False}])
+        self.assertNotIn("locations", by["Bench"])  # not placed
+        self.assertNotIn("locations", by["Anvil"])
+
     def test_unplaced_sources_dont_count(self):
         items = [{"id": "Rock"}, {"id": "Seed"}]
         src = lambda i, **kw: {"id": i, "kind": "rock", "drops": {"items": [{"item": "Rock"}]}, **kw}

@@ -120,6 +120,8 @@ def main() -> int:
     check("Meadows" in src.get("RaspberryBush", {}).get("biomes", []), "RaspberryBush grows in the Meadows")
     check(any(d["item"] == "FlametalOreNew" for d in src.get("LeviathanLava", {}).get("drops", {}).get("items", [])),
           "FlametalOreNew is mined from a placed deposit")
+    check(pieces.get("TreasureChest_meadows", {}).get("locations") and pieces.get("fire_pit_haldor", {}).get("locations"),
+          "loot chests and Haldor's fire pit are placed in locations")
     in_chest = {d["item"] for s in sources if s.get("kind") == "container" and s.get("locations")
                 for d in s["drops"]["items"]}
     check({"Amber", "AmberPearl", "Ruby"} <= in_chest, "Amber, AmberPearl, Ruby are found in chests")

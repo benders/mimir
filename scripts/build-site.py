@@ -794,6 +794,8 @@ def piece_page(p: dict) -> None:
                  if pr.get("connectsTo") else None)]
         body += section("Produces", kv(rows))
     body += section("Enables building", reflist(link("piece", b["id"]) for b in built_at[p["id"]]))
+    if p.get("locations"):  # not buildable, but standing in the world
+        body += section("Found in", f'<p>{esc(source_places({"kind": "world", "locations": p["locations"]}))}</p>')
     page(href("piece", p["id"]), name_of("piece", p["id"]), body, '<a href="pieces/index.html">Pieces</a>')
 
 
