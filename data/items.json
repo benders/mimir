@@ -2108,12 +2108,35 @@
   "attack": {
    "type": "Horizontal",
    "stamina": 18,
-   "adrenaline": 2
+   "adrenaline": 2,
+   "chain": [
+    {
+     "time": 0.667,
+     "hits": 1
+    },
+    {
+     "time": 0.7,
+     "hits": 1
+    },
+    {
+     "time": 1.148,
+     "hits": 1
+    }
+   ],
+   "lastChainMultiplier": 2,
+   "cycle": 2.965
   },
   "secondaryAttack": {
    "type": "Horizontal",
    "stamina": 36,
-   "adrenaline": 1
+   "adrenaline": 1,
+   "chain": [
+    {
+     "time": 1.376,
+     "hits": 1
+    }
+   ],
+   "cycle": 1.526
   },
   "modifiers": {
    "movement": -0.05
@@ -2154,12 +2177,35 @@
    "type": "Horizontal",
    "stamina": 12,
    "projectile": "flintspear_projectile",
-   "adrenaline": 2
+   "adrenaline": 2,
+   "chain": [
+    {
+     "time": 0.667,
+     "hits": 1
+    },
+    {
+     "time": 0.7,
+     "hits": 1
+    },
+    {
+     "time": 1.148,
+     "hits": 1
+    }
+   ],
+   "lastChainMultiplier": 2,
+   "cycle": 2.965
   },
   "secondaryAttack": {
    "type": "Horizontal",
    "stamina": 24,
-   "adrenaline": 1
+   "adrenaline": 1,
+   "chain": [
+    {
+     "time": 1.376,
+     "hits": 1
+    }
+   ],
+   "cycle": 1.526
   },
   "modifiers": {
    "movement": -0.05
@@ -2200,12 +2246,35 @@
    "type": "Horizontal",
    "stamina": 20,
    "projectile": "flintspear_projectile",
-   "adrenaline": 1
+   "adrenaline": 1,
+   "chain": [
+    {
+     "time": 0.667,
+     "hits": 1
+    },
+    {
+     "time": 0.7,
+     "hits": 1
+    },
+    {
+     "time": 1.148,
+     "hits": 1
+    }
+   ],
+   "lastChainMultiplier": 2,
+   "cycle": 2.965
   },
   "secondaryAttack": {
    "type": "Horizontal",
    "stamina": 40,
-   "adrenaline": 1
+   "adrenaline": 1,
+   "chain": [
+    {
+     "time": 1.376,
+     "hits": 1
+    }
+   ],
+   "cycle": 1.526
   },
   "modifiers": {
    "movement": -0.05
@@ -2258,12 +2327,35 @@
    "type": "Horizontal",
    "stamina": 20,
    "projectile": "flintspear_projectile",
-   "adrenaline": 1
+   "adrenaline": 1,
+   "chain": [
+    {
+     "time": 0.667,
+     "hits": 1
+    },
+    {
+     "time": 0.7,
+     "hits": 1
+    },
+    {
+     "time": 1.148,
+     "hits": 1
+    }
+   ],
+   "lastChainMultiplier": 2,
+   "cycle": 2.965
   },
   "secondaryAttack": {
    "type": "Horizontal",
    "stamina": 40,
-   "adrenaline": 1
+   "adrenaline": 1,
+   "chain": [
+    {
+     "time": 1.376,
+     "hits": 1
+    }
+   ],
+   "cycle": 1.526
   },
   "modifiers": {
    "movement": -0.05
@@ -2308,12 +2400,35 @@
    "type": "Horizontal",
    "stamina": 20,
    "projectile": "flintspear_projectile",
-   "adrenaline": 1
+   "adrenaline": 1,
+   "chain": [
+    {
+     "time": 0.667,
+     "hits": 1
+    },
+    {
+     "time": 0.7,
+     "hits": 1
+    },
+    {
+     "time": 1.148,
+     "hits": 1
+    }
+   ],
+   "lastChainMultiplier": 2,
+   "cycle": 2.965
   },
   "secondaryAttack": {
    "type": "Horizontal",
    "stamina": 40,
-   "adrenaline": 1
+   "adrenaline": 1,
+   "chain": [
+    {
+     "time": 1.376,
+     "hits": 1
+    }
+   ],
+   "cycle": 1.526
   },
   "modifiers": {
    "movement": -0.05
@@ -2354,12 +2469,35 @@
   "attack": {
    "type": "Horizontal",
    "stamina": 20,
-   "adrenaline": 2
+   "adrenaline": 2,
+   "chain": [
+    {
+     "time": 0.667,
+     "hits": 1
+    },
+    {
+     "time": 0.7,
+     "hits": 1
+    },
+    {
+     "time": 1.148,
+     "hits": 1
+    }
+   ],
+   "lastChainMultiplier": 2,
+   "cycle": 2.965
   },
   "secondaryAttack": {
    "type": "Horizontal",
    "stamina": 40,
-   "adrenaline": 1
+   "adrenaline": 1,
+   "chain": [
+    {
+     "time": 1.376,
+     "hits": 1
+    }
+   ],
+   "cycle": 1.526
   },
   "modifiers": {
    "movement": -0.05
@@ -2399,12 +2537,35 @@
   "attack": {
    "type": "Horizontal",
    "stamina": 14,
-   "adrenaline": 2
+   "adrenaline": 2,
+   "chain": [
+    {
+     "time": 0.667,
+     "hits": 1
+    },
+    {
+     "time": 0.7,
+     "hits": 1
+    },
+    {
+     "time": 1.148,
+     "hits": 1
+    }
+   ],
+   "lastChainMultiplier": 2,
+   "cycle": 2.965
   },
   "secondaryAttack": {
    "type": "Horizontal",
    "stamina": 28,
-   "adrenaline": 1
+   "adrenaline": 1,
+   "chain": [
+    {
+     "time": 1.376,
+     "hits": 1
+    }
+   ],
+   "cycle": 1.526
   },
   "modifiers": {
    "movement": -0.05
@@ -2444,12 +2605,35 @@
   "attack": {
    "type": "Horizontal",
    "stamina": 8,
-   "adrenaline": 2
+   "adrenaline": 2,
+   "chain": [
+    {
+     "time": 0.667,
+     "hits": 1
+    },
+    {
+     "time": 0.7,
+     "hits": 1
+    },
+    {
+     "time": 1.148,
+     "hits": 1
+    }
+   ],
+   "lastChainMultiplier": 2,
+   "cycle": 2.965
   },
   "secondaryAttack": {
    "type": "Horizontal",
    "stamina": 8,
-   "adrenaline": 1
+   "adrenaline": 1,
+   "chain": [
+    {
+     "time": 1.376,
+     "hits": 1
+    }
+   ],
+   "cycle": 1.526
   },
   "modifiers": {
    "movement": -0.05
@@ -2572,13 +2756,40 @@
   "attack": {
    "type": "Horizontal",
    "stamina": 16,
-   "adrenaline": 1
+   "adrenaline": 1,
+   "chain": [
+    {
+     "time": 0.257,
+     "hits": 1
+    },
+    {
+     "time": 0.533,
+     "hits": 1
+    },
+    {
+     "time": 0.706,
+     "hits": 2
+    },
+    {
+     "time": 1.125,
+     "hits": 2
+    }
+   ],
+   "lastChainMultiplier": 2,
+   "cycle": 3.521
   },
   "secondaryAttack": {
    "type": "Horizontal",
    "stamina": 32,
    "damageMultiplier": 1.5,
-   "adrenaline": 1
+   "adrenaline": 1,
+   "chain": [
+    {
+     "time": 1.748,
+     "hits": 1
+    }
+   ],
+   "cycle": 1.898
   },
   "modifiers": {
    "movement": -0.05
@@ -2620,13 +2831,40 @@
   "attack": {
    "type": "Horizontal",
    "stamina": 16,
-   "adrenaline": 1
+   "adrenaline": 1,
+   "chain": [
+    {
+     "time": 0.257,
+     "hits": 1
+    },
+    {
+     "time": 0.533,
+     "hits": 1
+    },
+    {
+     "time": 0.706,
+     "hits": 2
+    },
+    {
+     "time": 1.125,
+     "hits": 2
+    }
+   ],
+   "lastChainMultiplier": 2,
+   "cycle": 3.521
   },
   "secondaryAttack": {
    "type": "Horizontal",
    "stamina": 32,
    "damageMultiplier": 1.5,
-   "adrenaline": 1
+   "adrenaline": 1,
+   "chain": [
+    {
+     "time": 1.748,
+     "hits": 1
+    }
+   ],
+   "cycle": 1.898
   },
   "modifiers": {
    "movement": -0.05
@@ -2669,13 +2907,40 @@
   "attack": {
    "type": "Horizontal",
    "stamina": 16,
-   "adrenaline": 1
+   "adrenaline": 1,
+   "chain": [
+    {
+     "time": 0.257,
+     "hits": 1
+    },
+    {
+     "time": 0.533,
+     "hits": 1
+    },
+    {
+     "time": 0.706,
+     "hits": 2
+    },
+    {
+     "time": 1.125,
+     "hits": 2
+    }
+   ],
+   "lastChainMultiplier": 2,
+   "cycle": 3.521
   },
   "secondaryAttack": {
    "type": "Horizontal",
    "stamina": 32,
    "damageMultiplier": 1.5,
-   "adrenaline": 1
+   "adrenaline": 1,
+   "chain": [
+    {
+     "time": 1.748,
+     "hits": 1
+    }
+   ],
+   "cycle": 1.898
   },
   "modifiers": {
    "movement": -0.05
@@ -2718,13 +2983,40 @@
   "attack": {
    "type": "Horizontal",
    "stamina": 16,
-   "adrenaline": 1
+   "adrenaline": 1,
+   "chain": [
+    {
+     "time": 0.257,
+     "hits": 1
+    },
+    {
+     "time": 0.533,
+     "hits": 1
+    },
+    {
+     "time": 0.706,
+     "hits": 2
+    },
+    {
+     "time": 1.125,
+     "hits": 2
+    }
+   ],
+   "lastChainMultiplier": 2,
+   "cycle": 3.521
   },
   "secondaryAttack": {
    "type": "Horizontal",
    "stamina": 32,
    "damageMultiplier": 1.5,
-   "adrenaline": 1
+   "adrenaline": 1,
+   "chain": [
+    {
+     "time": 1.748,
+     "hits": 1
+    }
+   ],
+   "cycle": 1.898
   },
   "modifiers": {
    "movement": -0.05
@@ -2766,13 +3058,36 @@
   "attack": {
    "type": "Horizontal",
    "stamina": 14,
-   "adrenaline": 1
+   "adrenaline": 1,
+   "chain": [
+    {
+     "time": 0.801,
+     "hits": 1
+    },
+    {
+     "time": 0.636,
+     "hits": 1
+    },
+    {
+     "time": 0.861,
+     "hits": 1
+    }
+   ],
+   "lastChainMultiplier": 2,
+   "cycle": 2.748
   },
   "secondaryAttack": {
    "type": "Vertical",
    "stamina": 28,
    "damageMultiplier": 1.5,
-   "adrenaline": 1
+   "adrenaline": 1,
+   "chain": [
+    {
+     "time": 1.833,
+     "hits": 1
+    }
+   ],
+   "cycle": 1.983
   },
   "modifiers": {
    "movement": -0.05
@@ -2814,13 +3129,36 @@
   "attack": {
    "type": "Horizontal",
    "stamina": 8,
-   "adrenaline": 1
+   "adrenaline": 1,
+   "chain": [
+    {
+     "time": 0.801,
+     "hits": 1
+    },
+    {
+     "time": 0.636,
+     "hits": 1
+    },
+    {
+     "time": 0.861,
+     "hits": 1
+    }
+   ],
+   "lastChainMultiplier": 2,
+   "cycle": 2.748
   },
   "secondaryAttack": {
    "type": "Vertical",
    "stamina": 16,
    "damageMultiplier": 1.5,
-   "adrenaline": 1
+   "adrenaline": 1,
+   "chain": [
+    {
+     "time": 1.833,
+     "hits": 1
+    }
+   ],
+   "cycle": 1.983
   },
   "modifiers": {
    "movement": -0.05
@@ -2862,13 +3200,40 @@
   "attack": {
    "type": "Horizontal",
    "stamina": 6,
-   "adrenaline": 1
+   "adrenaline": 1,
+   "chain": [
+    {
+     "time": 0.257,
+     "hits": 1
+    },
+    {
+     "time": 0.533,
+     "hits": 1
+    },
+    {
+     "time": 0.706,
+     "hits": 2
+    },
+    {
+     "time": 1.125,
+     "hits": 2
+    }
+   ],
+   "lastChainMultiplier": 2,
+   "cycle": 3.521
   },
   "secondaryAttack": {
    "type": "Horizontal",
    "stamina": 12,
    "damageMultiplier": 1.5,
-   "adrenaline": 1
+   "adrenaline": 1,
+   "chain": [
+    {
+     "time": 1.748,
+     "hits": 1
+    }
+   ],
+   "cycle": 1.898
   },
   "modifiers": {
    "movement": -0.05
@@ -2910,13 +3275,36 @@
   "attack": {
    "type": "Horizontal",
    "stamina": 6,
-   "adrenaline": 1
+   "adrenaline": 1,
+   "chain": [
+    {
+     "time": 0.801,
+     "hits": 1
+    },
+    {
+     "time": 0.636,
+     "hits": 1
+    },
+    {
+     "time": 0.861,
+     "hits": 1
+    }
+   ],
+   "lastChainMultiplier": 2,
+   "cycle": 2.748
   },
   "secondaryAttack": {
    "type": "Vertical",
    "stamina": 12,
    "damageMultiplier": 1.5,
-   "adrenaline": 1
+   "adrenaline": 1,
+   "chain": [
+    {
+     "time": 1.833,
+     "hits": 1
+    }
+   ],
+   "cycle": 1.983
   },
   "modifiers": {
    "movement": -0.05
@@ -2958,13 +3346,36 @@
   "attack": {
    "type": "Horizontal",
    "stamina": 16,
-   "adrenaline": 1
+   "adrenaline": 1,
+   "chain": [
+    {
+     "time": 0.801,
+     "hits": 1
+    },
+    {
+     "time": 0.636,
+     "hits": 1
+    },
+    {
+     "time": 0.861,
+     "hits": 1
+    }
+   ],
+   "lastChainMultiplier": 2,
+   "cycle": 2.748
   },
   "secondaryAttack": {
    "type": "Vertical",
    "stamina": 28,
    "damageMultiplier": 1.5,
-   "adrenaline": 1
+   "adrenaline": 1,
+   "chain": [
+    {
+     "time": 1.833,
+     "hits": 1
+    }
+   ],
+   "cycle": 1.983
   },
   "modifiers": {
    "movement": -0.05
@@ -3018,13 +3429,36 @@
   "attack": {
    "type": "Horizontal",
    "stamina": 16,
-   "adrenaline": 1
+   "adrenaline": 1,
+   "chain": [
+    {
+     "time": 0.801,
+     "hits": 1
+    },
+    {
+     "time": 0.636,
+     "hits": 1
+    },
+    {
+     "time": 0.861,
+     "hits": 1
+    }
+   ],
+   "lastChainMultiplier": 2,
+   "cycle": 2.748
   },
   "secondaryAttack": {
    "type": "Vertical",
    "stamina": 28,
    "damageMultiplier": 1.5,
-   "adrenaline": 1
+   "adrenaline": 1,
+   "chain": [
+    {
+     "time": 1.833,
+     "hits": 1
+    }
+   ],
+   "cycle": 1.983
   },
   "modifiers": {
    "movement": -0.05
@@ -3070,13 +3504,36 @@
   "attack": {
    "type": "Horizontal",
    "stamina": 16,
-   "adrenaline": 1
+   "adrenaline": 1,
+   "chain": [
+    {
+     "time": 0.801,
+     "hits": 1
+    },
+    {
+     "time": 0.636,
+     "hits": 1
+    },
+    {
+     "time": 0.861,
+     "hits": 1
+    }
+   ],
+   "lastChainMultiplier": 2,
+   "cycle": 2.748
   },
   "secondaryAttack": {
    "type": "Vertical",
    "stamina": 28,
    "damageMultiplier": 1.5,
-   "adrenaline": 1
+   "adrenaline": 1,
+   "chain": [
+    {
+     "time": 1.833,
+     "hits": 1
+    }
+   ],
+   "cycle": 1.983
   },
   "modifiers": {
    "movement": -0.05
@@ -3138,13 +3595,36 @@
   "attack": {
    "type": "Horizontal",
    "stamina": 10,
-   "adrenaline": 1
+   "adrenaline": 1,
+   "chain": [
+    {
+     "time": 0.801,
+     "hits": 1
+    },
+    {
+     "time": 0.636,
+     "hits": 1
+    },
+    {
+     "time": 0.861,
+     "hits": 1
+    }
+   ],
+   "lastChainMultiplier": 2,
+   "cycle": 2.748
   },
   "secondaryAttack": {
    "type": "Vertical",
    "stamina": 20,
    "damageMultiplier": 1.5,
-   "adrenaline": 1
+   "adrenaline": 1,
+   "chain": [
+    {
+     "time": 1.833,
+     "hits": 1
+    }
+   ],
+   "cycle": 1.983
   },
   "modifiers": {
    "movement": -0.05
@@ -3187,13 +3667,36 @@
   "attack": {
    "type": "Horizontal",
    "stamina": 16,
-   "adrenaline": 1
+   "adrenaline": 1,
+   "chain": [
+    {
+     "time": 0.801,
+     "hits": 1
+    },
+    {
+     "time": 0.636,
+     "hits": 1
+    },
+    {
+     "time": 0.861,
+     "hits": 1
+    }
+   ],
+   "lastChainMultiplier": 2,
+   "cycle": 2.748
   },
   "secondaryAttack": {
    "type": "Vertical",
    "stamina": 32,
    "damageMultiplier": 1.5,
-   "adrenaline": 1
+   "adrenaline": 1,
+   "chain": [
+    {
+     "time": 1.833,
+     "hits": 1
+    }
+   ],
+   "cycle": 1.983
   },
   "modifiers": {
    "movement": -0.05
@@ -3234,13 +3737,36 @@
   "attack": {
    "type": "Horizontal",
    "stamina": 6,
-   "adrenaline": 1
+   "adrenaline": 1,
+   "chain": [
+    {
+     "time": 0.801,
+     "hits": 1
+    },
+    {
+     "time": 0.636,
+     "hits": 1
+    },
+    {
+     "time": 0.861,
+     "hits": 1
+    }
+   ],
+   "lastChainMultiplier": 2,
+   "cycle": 2.748
   },
   "secondaryAttack": {
    "type": "Vertical",
    "stamina": 12,
    "damageMultiplier": 1.5,
-   "adrenaline": 1
+   "adrenaline": 1,
+   "chain": [
+    {
+     "time": 1.833,
+     "hits": 1
+    }
+   ],
+   "cycle": 1.983
   },
   "modifiers": {
    "movement": -0.05
@@ -3282,13 +3808,36 @@
   "attack": {
    "type": "Horizontal",
    "stamina": 4,
-   "adrenaline": 1
+   "adrenaline": 1,
+   "chain": [
+    {
+     "time": 0.801,
+     "hits": 1
+    },
+    {
+     "time": 0.636,
+     "hits": 1
+    },
+    {
+     "time": 0.861,
+     "hits": 1
+    }
+   ],
+   "lastChainMultiplier": 2,
+   "cycle": 2.748
   },
   "secondaryAttack": {
    "type": "Vertical",
    "stamina": 4,
    "damageMultiplier": 1.5,
-   "adrenaline": 1
+   "adrenaline": 1,
+   "chain": [
+    {
+     "time": 1.833,
+     "hits": 1
+    }
+   ],
+   "cycle": 1.983
   },
   "modifiers": {
    "movement": -0.05
@@ -3587,13 +4136,36 @@
   "attack": {
    "type": "Horizontal",
    "stamina": 16,
-   "adrenaline": 2
+   "adrenaline": 2,
+   "chain": [
+    {
+     "time": 1.423,
+     "hits": 1
+    },
+    {
+     "time": 0.746,
+     "hits": 1
+    },
+    {
+     "time": 1.097,
+     "hits": 1
+    }
+   ],
+   "lastChainMultiplier": 2,
+   "cycle": 3.716
   },
   "secondaryAttack": {
    "type": "Horizontal",
    "stamina": 8,
    "damageMultiplier": 0.5,
-   "adrenaline": 1
+   "adrenaline": 1,
+   "chain": [
+    {
+     "time": 0.668,
+     "hits": 1
+    }
+   ],
+   "cycle": 0.818
   },
   "modifiers": {
    "movement": -0.15
@@ -3635,13 +4207,36 @@
   "attack": {
    "type": "Horizontal",
    "stamina": 20,
-   "adrenaline": 2
+   "adrenaline": 2,
+   "chain": [
+    {
+     "time": 1.423,
+     "hits": 1
+    },
+    {
+     "time": 0.746,
+     "hits": 1
+    },
+    {
+     "time": 1.097,
+     "hits": 1
+    }
+   ],
+   "lastChainMultiplier": 2,
+   "cycle": 3.716
   },
   "secondaryAttack": {
    "type": "Horizontal",
    "stamina": 10,
    "damageMultiplier": 0.5,
-   "adrenaline": 1
+   "adrenaline": 1,
+   "chain": [
+    {
+     "time": 0.668,
+     "hits": 1
+    }
+   ],
+   "cycle": 0.818
   },
   "modifiers": {
    "movement": -0.15
@@ -3684,13 +4279,36 @@
   "attack": {
    "type": "Horizontal",
    "stamina": 18,
-   "adrenaline": 2
+   "adrenaline": 2,
+   "chain": [
+    {
+     "time": 1.423,
+     "hits": 1
+    },
+    {
+     "time": 0.746,
+     "hits": 1
+    },
+    {
+     "time": 1.097,
+     "hits": 1
+    }
+   ],
+   "lastChainMultiplier": 2,
+   "cycle": 3.716
   },
   "secondaryAttack": {
    "type": "Horizontal",
    "stamina": 9,
    "damageMultiplier": 0.5,
-   "adrenaline": 1
+   "adrenaline": 1,
+   "chain": [
+    {
+     "time": 0.668,
+     "hits": 1
+    }
+   ],
+   "cycle": 0.818
   },
   "modifiers": {
    "movement": -0.15
@@ -3732,13 +4350,36 @@
   "attack": {
    "type": "Horizontal",
    "stamina": 22,
-   "adrenaline": 1
+   "adrenaline": 1,
+   "chain": [
+    {
+     "time": 1.423,
+     "hits": 1
+    },
+    {
+     "time": 0.746,
+     "hits": 1
+    },
+    {
+     "time": 1.097,
+     "hits": 1
+    }
+   ],
+   "lastChainMultiplier": 2,
+   "cycle": 3.716
   },
   "secondaryAttack": {
    "type": "Horizontal",
    "stamina": 11,
    "damageMultiplier": 0.5,
-   "adrenaline": 1
+   "adrenaline": 1,
+   "chain": [
+    {
+     "time": 0.668,
+     "hits": 1
+    }
+   ],
+   "cycle": 0.818
   },
   "modifiers": {
    "movement": -0.2
@@ -3792,13 +4433,36 @@
   "attack": {
    "type": "Horizontal",
    "stamina": 22,
-   "adrenaline": 1
+   "adrenaline": 1,
+   "chain": [
+    {
+     "time": 1.423,
+     "hits": 1
+    },
+    {
+     "time": 0.746,
+     "hits": 1
+    },
+    {
+     "time": 1.097,
+     "hits": 1
+    }
+   ],
+   "lastChainMultiplier": 2,
+   "cycle": 3.716
   },
   "secondaryAttack": {
    "type": "Horizontal",
    "stamina": 11,
    "damageMultiplier": 0.5,
-   "adrenaline": 1
+   "adrenaline": 1,
+   "chain": [
+    {
+     "time": 0.668,
+     "hits": 1
+    }
+   ],
+   "cycle": 0.818
   },
   "modifiers": {
    "movement": -0.2
@@ -3844,13 +4508,36 @@
   "attack": {
    "type": "Horizontal",
    "stamina": 22,
-   "adrenaline": 1
+   "adrenaline": 1,
+   "chain": [
+    {
+     "time": 1.423,
+     "hits": 1
+    },
+    {
+     "time": 0.746,
+     "hits": 1
+    },
+    {
+     "time": 1.097,
+     "hits": 1
+    }
+   ],
+   "lastChainMultiplier": 2,
+   "cycle": 3.716
   },
   "secondaryAttack": {
    "type": "Horizontal",
    "stamina": 11,
    "damageMultiplier": 0.5,
-   "adrenaline": 1
+   "adrenaline": 1,
+   "chain": [
+    {
+     "time": 0.668,
+     "hits": 1
+    }
+   ],
+   "cycle": 0.818
   },
   "modifiers": {
    "movement": -0.2
@@ -3892,13 +4579,36 @@
   "attack": {
    "type": "Horizontal",
    "stamina": 22,
-   "adrenaline": 2
+   "adrenaline": 2,
+   "chain": [
+    {
+     "time": 1.423,
+     "hits": 1
+    },
+    {
+     "time": 0.746,
+     "hits": 1
+    },
+    {
+     "time": 1.097,
+     "hits": 1
+    }
+   ],
+   "lastChainMultiplier": 2,
+   "cycle": 3.716
   },
   "secondaryAttack": {
    "type": "Horizontal",
    "stamina": 11,
    "damageMultiplier": 0.5,
-   "adrenaline": 1
+   "adrenaline": 1,
+   "chain": [
+    {
+     "time": 0.668,
+     "hits": 1
+    }
+   ],
+   "cycle": 0.818
   },
   "modifiers": {
    "movement": -0.15
@@ -3940,13 +4650,36 @@
   "attack": {
    "type": "Horizontal",
    "stamina": 8,
-   "adrenaline": 2
+   "adrenaline": 2,
+   "chain": [
+    {
+     "time": 1.423,
+     "hits": 1
+    },
+    {
+     "time": 0.746,
+     "hits": 1
+    },
+    {
+     "time": 1.097,
+     "hits": 1
+    }
+   ],
+   "lastChainMultiplier": 2,
+   "cycle": 3.716
   },
   "secondaryAttack": {
    "type": "Horizontal",
    "stamina": 8,
    "damageMultiplier": 0.5,
-   "adrenaline": 1
+   "adrenaline": 1,
+   "chain": [
+    {
+     "time": 0.668,
+     "hits": 1
+    }
+   ],
+   "cycle": 0.818
   },
   "modifiers": {
    "movement": -0.15
@@ -4907,7 +5640,14 @@
    "type": "Projectile",
    "stamina": 8,
    "projectile": "bilebomb_projectile",
-   "adrenaline": 1
+   "adrenaline": 1,
+   "chain": [
+    {
+     "time": 0.633,
+     "hits": 1
+    }
+   ],
+   "cycle": 0.633
   }
  },
  {
@@ -4932,7 +5672,14 @@
    "type": "Projectile",
    "stamina": 8,
    "projectile": "BombBlob_Frost_projectile",
-   "adrenaline": 1
+   "adrenaline": 1,
+   "chain": [
+    {
+     "time": 0.633,
+     "hits": 1
+    }
+   ],
+   "cycle": 0.633
   }
  },
  {
@@ -4957,7 +5704,14 @@
    "type": "Projectile",
    "stamina": 8,
    "projectile": "BombBlob_Lava_projectile",
-   "adrenaline": 1
+   "adrenaline": 1,
+   "chain": [
+    {
+     "time": 0.633,
+     "hits": 1
+    }
+   ],
+   "cycle": 0.633
   }
  },
  {
@@ -4982,7 +5736,14 @@
    "type": "Projectile",
    "stamina": 8,
    "projectile": "BombBlob_Morkhalla_projectile",
-   "adrenaline": 1
+   "adrenaline": 1,
+   "chain": [
+    {
+     "time": 0.633,
+     "hits": 1
+    }
+   ],
+   "cycle": 0.633
   }
  },
  {
@@ -5007,7 +5768,14 @@
    "type": "Projectile",
    "stamina": 8,
    "projectile": "BombBlob_Poison_projectile",
-   "adrenaline": 1
+   "adrenaline": 1,
+   "chain": [
+    {
+     "time": 0.633,
+     "hits": 1
+    }
+   ],
+   "cycle": 0.633
   }
  },
  {
@@ -5032,7 +5800,14 @@
    "type": "Projectile",
    "stamina": 8,
    "projectile": "BombBlob_PoisonElite_projectile",
-   "adrenaline": 1
+   "adrenaline": 1,
+   "chain": [
+    {
+     "time": 0.633,
+     "hits": 1
+    }
+   ],
+   "cycle": 0.633
   }
  },
  {
@@ -5057,7 +5832,14 @@
    "type": "Projectile",
    "stamina": 8,
    "projectile": "BombBlob_Tar_projectile",
-   "adrenaline": 1
+   "adrenaline": 1,
+   "chain": [
+    {
+     "time": 0.633,
+     "hits": 1
+    }
+   ],
+   "cycle": 0.633
   }
  },
  {
@@ -5080,7 +5862,14 @@
    "type": "Projectile",
    "stamina": 8,
    "projectile": "bombdynamite_projectile",
-   "adrenaline": 1
+   "adrenaline": 1,
+   "chain": [
+    {
+     "time": 0.633,
+     "hits": 1
+    }
+   ],
+   "cycle": 0.633
   }
  },
  {
@@ -5103,7 +5892,14 @@
    "type": "Projectile",
    "stamina": 8,
    "projectile": "lavabomb_projectile",
-   "adrenaline": 1
+   "adrenaline": 1,
+   "chain": [
+    {
+     "time": 0.633,
+     "hits": 1
+    }
+   ],
+   "cycle": 0.633
   }
  },
  {
@@ -5128,7 +5924,14 @@
    "type": "Projectile",
    "stamina": 8,
    "projectile": "oozebomb_projectile",
-   "adrenaline": 1
+   "adrenaline": 1,
+   "chain": [
+    {
+     "time": 0.633,
+     "hits": 1
+    }
+   ],
+   "cycle": 0.633
   }
  },
  {
@@ -5147,7 +5950,14 @@
    "type": "Projectile",
    "stamina": 8,
    "projectile": "siegebomb_projectile",
-   "adrenaline": 1
+   "adrenaline": 1,
+   "chain": [
+    {
+     "time": 0.633,
+     "hits": 1
+    }
+   ],
+   "cycle": 0.633
   }
  },
  {
@@ -5172,7 +5982,14 @@
    "type": "Projectile",
    "stamina": 8,
    "projectile": "smokebomb_projectile",
-   "adrenaline": 1
+   "adrenaline": 1,
+   "chain": [
+    {
+     "time": 0.633,
+     "hits": 1
+    }
+   ],
+   "cycle": 0.633
   }
  },
  {
@@ -5379,7 +6196,13 @@
   },
   "attack": {
    "type": "Projectile",
-   "adrenaline": 0.5
+   "adrenaline": 0.5,
+   "chain": [
+    {
+     "time": 0.56,
+     "hits": 1
+    }
+   ]
   },
   "ammoType": "$ammo_arrows",
   "modifiers": {
@@ -5418,7 +6241,13 @@
   },
   "attack": {
    "type": "Projectile",
-   "adrenaline": 0.5
+   "adrenaline": 0.5,
+   "chain": [
+    {
+     "time": 0.56,
+     "hits": 1
+    }
+   ]
   },
   "ammoType": "$ammo_arrows",
   "modifiers": {
@@ -5457,7 +6286,13 @@
   },
   "attack": {
    "type": "Projectile",
-   "adrenaline": 0.5
+   "adrenaline": 0.5,
+   "chain": [
+    {
+     "time": 0.56,
+     "hits": 1
+    }
+   ]
   },
   "ammoType": "$ammo_arrows",
   "modifiers": {
@@ -5497,7 +6332,13 @@
   },
   "attack": {
    "type": "Projectile",
-   "adrenaline": 0.5
+   "adrenaline": 0.5,
+   "chain": [
+    {
+     "time": 0.56,
+     "hits": 1
+    }
+   ]
   },
   "ammoType": "$ammo_arrows",
   "modifiers": {
@@ -5537,7 +6378,13 @@
   },
   "attack": {
    "type": "Projectile",
-   "adrenaline": 0.5
+   "adrenaline": 0.5,
+   "chain": [
+    {
+     "time": 0.56,
+     "hits": 1
+    }
+   ]
   },
   "ammoType": "$ammo_arrows",
   "modifiers": {
@@ -5577,7 +6424,13 @@
   },
   "attack": {
    "type": "Projectile",
-   "adrenaline": 0.5
+   "adrenaline": 0.5,
+   "chain": [
+    {
+     "time": 0.56,
+     "hits": 1
+    }
+   ]
   },
   "ammoType": "$ammo_arrows",
   "modifiers": {
@@ -5615,7 +6468,13 @@
   },
   "attack": {
    "type": "Projectile",
-   "adrenaline": 0.5
+   "adrenaline": 0.5,
+   "chain": [
+    {
+     "time": 0.56,
+     "hits": 1
+    }
+   ]
   },
   "ammoType": "$ammo_arrows",
   "modifiers": {
@@ -5655,7 +6514,13 @@
   },
   "attack": {
    "type": "Projectile",
-   "adrenaline": 1
+   "adrenaline": 1,
+   "chain": [
+    {
+     "time": 0.56,
+     "hits": 1
+    }
+   ]
   },
   "ammoType": "$ammo_arrows",
   "modifiers": {
@@ -5708,7 +6573,13 @@
   },
   "attack": {
    "type": "Projectile",
-   "adrenaline": 1
+   "adrenaline": 1,
+   "chain": [
+    {
+     "time": 0.56,
+     "hits": 1
+    }
+   ]
   },
   "ammoType": "$ammo_arrows",
   "modifiers": {
@@ -5752,7 +6623,13 @@
   },
   "attack": {
    "type": "Projectile",
-   "adrenaline": 1
+   "adrenaline": 1,
+   "chain": [
+    {
+     "time": 0.56,
+     "hits": 1
+    }
+   ]
   },
   "ammoType": "$ammo_arrows",
   "modifiers": {
@@ -5790,7 +6667,13 @@
   },
   "attack": {
    "type": "Projectile",
-   "adrenaline": 0.5
+   "adrenaline": 0.5,
+   "chain": [
+    {
+     "time": 0.56,
+     "hits": 1
+    }
+   ]
   },
   "ammoType": "$ammo_arrows",
   "modifiers": {
@@ -5830,7 +6713,13 @@
   },
   "attack": {
    "type": "Projectile",
-   "adrenaline": 0.5
+   "adrenaline": 0.5,
+   "chain": [
+    {
+     "time": 0.56,
+     "hits": 1
+    }
+   ]
   },
   "ammoType": "$ammo_arrows",
   "modifiers": {
@@ -6268,7 +7157,14 @@
    "type": "Projectile",
    "stamina": 8,
    "projectile": "Catapult_Ammo_BloodGold_Projectile",
-   "adrenaline": 1
+   "adrenaline": 1,
+   "chain": [
+    {
+     "time": 0.633,
+     "hits": 1
+    }
+   ],
+   "cycle": 0.633
   }
  },
  {
@@ -6290,7 +7186,14 @@
    "type": "Projectile",
    "stamina": 8,
    "projectile": "Catapult_Ammo_Projectile",
-   "adrenaline": 1
+   "adrenaline": 1,
+   "chain": [
+    {
+     "time": 0.633,
+     "hits": 1
+    }
+   ],
+   "cycle": 0.633
   }
  },
  {
@@ -6531,7 +7434,23 @@
   "attack": {
    "type": "Horizontal",
    "stamina": 6,
-   "adrenaline": 1
+   "adrenaline": 1,
+   "chain": [
+    {
+     "time": 0.692,
+     "hits": 1
+    },
+    {
+     "time": 0.536,
+     "hits": 1
+    },
+    {
+     "time": 0.747,
+     "hits": 1
+    }
+   ],
+   "lastChainMultiplier": 2,
+   "cycle": 2.425
   },
   "modifiers": {
    "movement": -0.05
@@ -6847,7 +7766,13 @@
   },
   "attack": {
    "type": "Projectile",
-   "adrenaline": 1
+   "adrenaline": 1,
+   "chain": [
+    {
+     "time": 0.5,
+     "hits": 1
+    }
+   ]
   },
   "ammoType": "$ammo_bolts",
   "modifiers": {
@@ -6887,7 +7812,13 @@
   },
   "attack": {
    "type": "Projectile",
-   "adrenaline": 1
+   "adrenaline": 1,
+   "chain": [
+    {
+     "time": 0.5,
+     "hits": 1
+    }
+   ]
   },
   "ammoType": "$ammo_bolts",
   "modifiers": {
@@ -6940,7 +7871,13 @@
   },
   "attack": {
    "type": "Projectile",
-   "adrenaline": 1
+   "adrenaline": 1,
+   "chain": [
+    {
+     "time": 0.5,
+     "hits": 1
+    }
+   ]
   },
   "ammoType": "$ammo_bolts",
   "modifiers": {
@@ -6984,7 +7921,13 @@
   },
   "attack": {
    "type": "Projectile",
-   "adrenaline": 1
+   "adrenaline": 1,
+   "chain": [
+    {
+     "time": 0.5,
+     "hits": 1
+    }
+   ]
   },
   "ammoType": "$ammo_bolts",
   "modifiers": {
@@ -7023,7 +7966,13 @@
   },
   "attack": {
    "type": "Projectile",
-   "adrenaline": 1
+   "adrenaline": 1,
+   "chain": [
+    {
+     "time": 0.5,
+     "hits": 1
+    }
+   ]
   },
   "ammoType": "$ammo_bolts",
   "modifiers": {
@@ -7062,7 +8011,13 @@
   },
   "attack": {
    "type": "Projectile",
-   "adrenaline": 1
+   "adrenaline": 1,
+   "chain": [
+    {
+     "time": 0.5,
+     "hits": 1
+    }
+   ]
   },
   "ammoType": "$ammo_bolts",
   "modifiers": {
@@ -7102,7 +8057,13 @@
   },
   "attack": {
    "type": "Projectile",
-   "adrenaline": 1
+   "adrenaline": 1,
+   "chain": [
+    {
+     "time": 0.5,
+     "hits": 1
+    }
+   ]
   },
   "ammoType": "$ammo_bolts",
   "modifiers": {
@@ -7142,7 +8103,13 @@
   },
   "attack": {
    "type": "Projectile",
-   "adrenaline": 1
+   "adrenaline": 1,
+   "chain": [
+    {
+     "time": 0.5,
+     "hits": 1
+    }
+   ]
   },
   "ammoType": "$ammo_bolts",
   "modifiers": {
@@ -8868,13 +9835,36 @@
   "attack": {
    "type": "Horizontal",
    "stamina": 8,
-   "adrenaline": 1
+   "adrenaline": 1,
+   "chain": [
+    {
+     "time": 0.801,
+     "hits": 1
+    },
+    {
+     "time": 0.636,
+     "hits": 1
+    },
+    {
+     "time": 0.861,
+     "hits": 1
+    }
+   ],
+   "lastChainMultiplier": 2,
+   "cycle": 2.748
   },
   "secondaryAttack": {
    "type": "Vertical",
    "stamina": 16,
    "damageMultiplier": 1.5,
-   "adrenaline": 1
+   "adrenaline": 1,
+   "chain": [
+    {
+     "time": 1.833,
+     "hits": 1
+    }
+   ],
+   "cycle": 1.983
   },
   "modifiers": {
    "movement": -0.05
@@ -8918,13 +9908,36 @@
   "attack": {
    "type": "Horizontal",
    "stamina": 18,
-   "adrenaline": 2
+   "adrenaline": 2,
+   "chain": [
+    {
+     "time": 1.423,
+     "hits": 1
+    },
+    {
+     "time": 0.746,
+     "hits": 1
+    },
+    {
+     "time": 1.097,
+     "hits": 1
+    }
+   ],
+   "lastChainMultiplier": 2,
+   "cycle": 3.716
   },
   "secondaryAttack": {
    "type": "Horizontal",
    "stamina": 9,
    "damageMultiplier": 0.5,
-   "adrenaline": 1
+   "adrenaline": 1,
+   "chain": [
+    {
+     "time": 0.668,
+     "hits": 1
+    }
+   ],
+   "cycle": 0.818
   },
   "modifiers": {
    "movement": -0.15
@@ -8965,7 +9978,14 @@
   "attack": {
    "type": "Projectile",
    "projectile": "charred_bow_projectile",
-   "adrenaline": 0.5
+   "adrenaline": 0.5,
+   "chain": [
+    {
+     "time": 0.56,
+     "hits": 1
+    }
+   ],
+   "cycle": 0.56
   },
   "modifiers": {
    "movement": -0.05
@@ -9100,13 +10120,36 @@
   "attack": {
    "type": "Horizontal",
    "stamina": 10,
-   "adrenaline": 1
+   "adrenaline": 1,
+   "chain": [
+    {
+     "time": 0.274,
+     "hits": 1
+    },
+    {
+     "time": 0.426,
+     "hits": 1
+    },
+    {
+     "time": 0.543,
+     "hits": 1
+    }
+   ],
+   "lastChainMultiplier": 2,
+   "cycle": 1.693
   },
   "secondaryAttack": {
    "type": "Horizontal",
    "stamina": 30,
    "damageMultiplier": 3,
-   "adrenaline": 2
+   "adrenaline": 2,
+   "chain": [
+    {
+     "time": 1.395,
+     "hits": 1
+    }
+   ],
+   "cycle": 1.545
   },
   "enemyOnly": true
  },
@@ -9146,13 +10189,36 @@
   "attack": {
    "type": "Horizontal",
    "stamina": 14,
-   "adrenaline": 1
+   "adrenaline": 1,
+   "chain": [
+    {
+     "time": 0.331,
+     "hits": 1
+    },
+    {
+     "time": 0.336,
+     "hits": 1
+    },
+    {
+     "time": 0.559,
+     "hits": 1
+    }
+   ],
+   "lastChainMultiplier": 2,
+   "cycle": 1.676
   },
   "secondaryAttack": {
    "type": "Horizontal",
    "stamina": 42,
    "damageMultiplier": 3,
-   "adrenaline": 2
+   "adrenaline": 2,
+   "chain": [
+    {
+     "time": 1.5,
+     "hits": 1
+    }
+   ],
+   "cycle": 1.65
   },
   "enemyOnly": true
  },
@@ -9226,7 +10292,18 @@
   "attack": {
    "type": "Projectile",
    "projectile": "staff_fireball_projectile",
-   "useAdrenaline": 3
+   "useAdrenaline": 3,
+   "chain": [
+    {
+     "time": 0.833,
+     "hits": 1
+    },
+    {
+     "time": 0.75,
+     "hits": 1
+    }
+   ],
+   "cycle": 1.583
   },
   "modifiers": {
    "movement": -0.05
@@ -9270,7 +10347,14 @@
    "projectile": "staff_lightning_projectile",
    "projectiles": 12,
    "adrenaline": 1,
-   "useAdrenaline": 5
+   "useAdrenaline": 5,
+   "chain": [
+    {
+     "time": 0.5,
+     "hits": 1
+    }
+   ],
+   "cycle": 0.5
   },
   "modifiers": {
    "movement": -0.05
@@ -9311,13 +10395,36 @@
   "attack": {
    "type": "Horizontal",
    "stamina": 14,
-   "adrenaline": 1
+   "adrenaline": 1,
+   "chain": [
+    {
+     "time": 0.692,
+     "hits": 1
+    },
+    {
+     "time": 0.536,
+     "hits": 1
+    },
+    {
+     "time": 0.747,
+     "hits": 1
+    }
+   ],
+   "lastChainMultiplier": 2,
+   "cycle": 2.425
   },
   "secondaryAttack": {
    "type": "Horizontal",
    "stamina": 28,
    "damageMultiplier": 3,
-   "adrenaline": 3
+   "adrenaline": 3,
+   "chain": [
+    {
+     "time": 1.769,
+     "hits": 1
+    }
+   ],
+   "cycle": 1.919
   },
   "modifiers": {
    "movement": -0.05
@@ -10955,7 +12062,13 @@
   "attack": {
    "type": "Projectile",
    "projectile": "FishingRodFloatProjectile",
-   "adrenaline": 1
+   "adrenaline": 1,
+   "chain": [
+    {
+     "time": 1.5,
+     "hits": 1
+    }
+   ]
   },
   "ammoType": "$item_fishingbait"
  },
@@ -10994,12 +12107,31 @@
   "attack": {
    "type": "Horizontal",
    "stamina": 6,
-   "adrenaline": 1
+   "adrenaline": 1,
+   "chain": [
+    {
+     "time": 0.592,
+     "hits": 1
+    },
+    {
+     "time": 0.54,
+     "hits": 1
+    }
+   ],
+   "lastChainMultiplier": 2,
+   "cycle": 1.432
   },
   "secondaryAttack": {
    "type": "Horizontal",
    "stamina": 20,
-   "adrenaline": 1
+   "adrenaline": 1,
+   "chain": [
+    {
+     "time": 1.324,
+     "hits": 1
+    }
+   ],
+   "cycle": 1.474
   }
  },
  {
@@ -11038,12 +12170,31 @@
   "attack": {
    "type": "Horizontal",
    "stamina": 12,
-   "adrenaline": 1
+   "adrenaline": 1,
+   "chain": [
+    {
+     "time": 0.592,
+     "hits": 1
+    },
+    {
+     "time": 0.54,
+     "hits": 1
+    }
+   ],
+   "lastChainMultiplier": 2,
+   "cycle": 1.432
   },
   "secondaryAttack": {
    "type": "Horizontal",
    "stamina": 20,
-   "adrenaline": 1
+   "adrenaline": 1,
+   "chain": [
+    {
+     "time": 1.324,
+     "hits": 1
+    }
+   ],
+   "cycle": 1.474
   }
  },
  {
@@ -11081,12 +12232,31 @@
   "attack": {
    "type": "Horizontal",
    "stamina": 10,
-   "adrenaline": 1
+   "adrenaline": 1,
+   "chain": [
+    {
+     "time": 0.592,
+     "hits": 1
+    },
+    {
+     "time": 0.54,
+     "hits": 1
+    }
+   ],
+   "lastChainMultiplier": 2,
+   "cycle": 1.432
   },
   "secondaryAttack": {
    "type": "Horizontal",
    "stamina": 20,
-   "adrenaline": 1
+   "adrenaline": 1,
+   "chain": [
+    {
+     "time": 1.324,
+     "hits": 1
+    }
+   ],
+   "cycle": 1.474
   }
  },
  {
@@ -11124,12 +12294,31 @@
   "attack": {
    "type": "Horizontal",
    "stamina": 14,
-   "adrenaline": 1
+   "adrenaline": 1,
+   "chain": [
+    {
+     "time": 0.592,
+     "hits": 1
+    },
+    {
+     "time": 0.54,
+     "hits": 1
+    }
+   ],
+   "lastChainMultiplier": 2,
+   "cycle": 1.432
   },
   "secondaryAttack": {
    "type": "Horizontal",
    "stamina": 20,
-   "adrenaline": 1
+   "adrenaline": 1,
+   "chain": [
+    {
+     "time": 1.324,
+     "hits": 1
+    }
+   ],
+   "cycle": 1.474
   }
  },
  {
@@ -11179,12 +12368,31 @@
   "attack": {
    "type": "Horizontal",
    "stamina": 14,
-   "adrenaline": 1
+   "adrenaline": 1,
+   "chain": [
+    {
+     "time": 0.592,
+     "hits": 1
+    },
+    {
+     "time": 0.54,
+     "hits": 1
+    }
+   ],
+   "lastChainMultiplier": 2,
+   "cycle": 1.432
   },
   "secondaryAttack": {
    "type": "Horizontal",
    "stamina": 20,
-   "adrenaline": 1
+   "adrenaline": 1,
+   "chain": [
+    {
+     "time": 1.324,
+     "hits": 1
+    }
+   ],
+   "cycle": 1.474
   }
  },
  {
@@ -11226,12 +12434,31 @@
   "attack": {
    "type": "Horizontal",
    "stamina": 14,
-   "adrenaline": 1
+   "adrenaline": 1,
+   "chain": [
+    {
+     "time": 0.592,
+     "hits": 1
+    },
+    {
+     "time": 0.54,
+     "hits": 1
+    }
+   ],
+   "lastChainMultiplier": 2,
+   "cycle": 1.432
   },
   "secondaryAttack": {
    "type": "Horizontal",
    "stamina": 20,
-   "adrenaline": 1
+   "adrenaline": 1,
+   "chain": [
+    {
+     "time": 1.324,
+     "hits": 1
+    }
+   ],
+   "cycle": 1.474
   }
  },
  {
@@ -13200,13 +14427,26 @@
    "type": "Projectile",
    "stamina": 15,
    "projectile": "Projectile_GrapplingHook",
-   "adrenaline": 1
+   "adrenaline": 1,
+   "chain": [
+    {
+     "time": 0.5,
+     "hits": 1
+    }
+   ]
   },
   "secondaryAttack": {
    "type": "Projectile",
    "stamina": 15,
    "projectile": "Projectile_GrapplingHook_secondary",
-   "adrenaline": 1
+   "adrenaline": 1,
+   "chain": [
+    {
+     "time": 0.5,
+     "hits": 1
+    }
+   ],
+   "cycle": 0.5
   }
  },
  {
@@ -17436,13 +18676,36 @@
   "attack": {
    "type": "Horizontal",
    "stamina": 12,
-   "adrenaline": 1
+   "adrenaline": 1,
+   "chain": [
+    {
+     "time": 0.274,
+     "hits": 1
+    },
+    {
+     "time": 0.426,
+     "hits": 1
+    },
+    {
+     "time": 0.543,
+     "hits": 1
+    }
+   ],
+   "lastChainMultiplier": 2,
+   "cycle": 1.693
   },
   "secondaryAttack": {
    "type": "Horizontal",
    "stamina": 36,
    "damageMultiplier": 3,
-   "adrenaline": 2
+   "adrenaline": 2,
+   "chain": [
+    {
+     "time": 1.395,
+     "hits": 1
+    }
+   ],
+   "cycle": 1.545
   }
  },
  {
@@ -17475,7 +18738,23 @@
   "attack": {
    "type": "Horizontal",
    "stamina": 5,
-   "adrenaline": 1
+   "adrenaline": 1,
+   "chain": [
+    {
+     "time": 0.274,
+     "hits": 1
+    },
+    {
+     "time": 0.426,
+     "hits": 1
+    },
+    {
+     "time": 0.543,
+     "hits": 1
+    }
+   ],
+   "lastChainMultiplier": 2,
+   "cycle": 1.693
   }
  },
  {
@@ -17514,13 +18793,36 @@
   "attack": {
    "type": "Horizontal",
    "stamina": 8,
-   "adrenaline": 1
+   "adrenaline": 1,
+   "chain": [
+    {
+     "time": 0.274,
+     "hits": 1
+    },
+    {
+     "time": 0.426,
+     "hits": 1
+    },
+    {
+     "time": 0.543,
+     "hits": 1
+    }
+   ],
+   "lastChainMultiplier": 2,
+   "cycle": 1.693
   },
   "secondaryAttack": {
    "type": "Horizontal",
    "stamina": 24,
    "damageMultiplier": 3,
-   "adrenaline": 2
+   "adrenaline": 2,
+   "chain": [
+    {
+     "time": 1.395,
+     "hits": 1
+    }
+   ],
+   "cycle": 1.545
   }
  },
  {
@@ -17559,13 +18861,36 @@
   "attack": {
    "type": "Horizontal",
    "stamina": 6,
-   "adrenaline": 1
+   "adrenaline": 1,
+   "chain": [
+    {
+     "time": 0.274,
+     "hits": 1
+    },
+    {
+     "time": 0.426,
+     "hits": 1
+    },
+    {
+     "time": 0.543,
+     "hits": 1
+    }
+   ],
+   "lastChainMultiplier": 2,
+   "cycle": 1.693
   },
   "secondaryAttack": {
    "type": "Horizontal",
    "stamina": 18,
    "damageMultiplier": 3,
-   "adrenaline": 2
+   "adrenaline": 2,
+   "chain": [
+    {
+     "time": 1.395,
+     "hits": 1
+    }
+   ],
+   "cycle": 1.545
   }
  },
  {
@@ -17603,13 +18928,36 @@
   "attack": {
    "type": "Horizontal",
    "stamina": 4,
-   "adrenaline": 1
+   "adrenaline": 1,
+   "chain": [
+    {
+     "time": 0.274,
+     "hits": 1
+    },
+    {
+     "time": 0.426,
+     "hits": 1
+    },
+    {
+     "time": 0.543,
+     "hits": 1
+    }
+   ],
+   "lastChainMultiplier": 2,
+   "cycle": 1.693
   },
   "secondaryAttack": {
    "type": "Horizontal",
    "stamina": 12,
    "damageMultiplier": 3,
-   "adrenaline": 2
+   "adrenaline": 2,
+   "chain": [
+    {
+     "time": 1.395,
+     "hits": 1
+    }
+   ],
+   "cycle": 1.545
   }
  },
  {
@@ -17648,13 +18996,36 @@
   "attack": {
    "type": "Horizontal",
    "stamina": 14,
-   "adrenaline": 1
+   "adrenaline": 1,
+   "chain": [
+    {
+     "time": 0.274,
+     "hits": 1
+    },
+    {
+     "time": 0.426,
+     "hits": 1
+    },
+    {
+     "time": 0.543,
+     "hits": 1
+    }
+   ],
+   "lastChainMultiplier": 2,
+   "cycle": 1.693
   },
   "secondaryAttack": {
    "type": "Horizontal",
    "stamina": 42,
    "damageMultiplier": 3,
-   "adrenaline": 1
+   "adrenaline": 1,
+   "chain": [
+    {
+     "time": 1.395,
+     "hits": 1
+    }
+   ],
+   "cycle": 1.545
   }
  },
  {
@@ -17705,13 +19076,36 @@
   "attack": {
    "type": "Horizontal",
    "stamina": 14,
-   "adrenaline": 1
+   "adrenaline": 1,
+   "chain": [
+    {
+     "time": 0.274,
+     "hits": 1
+    },
+    {
+     "time": 0.426,
+     "hits": 1
+    },
+    {
+     "time": 0.543,
+     "hits": 1
+    }
+   ],
+   "lastChainMultiplier": 2,
+   "cycle": 1.693
   },
   "secondaryAttack": {
    "type": "Horizontal",
    "stamina": 42,
    "damageMultiplier": 3,
-   "adrenaline": 1
+   "adrenaline": 1,
+   "chain": [
+    {
+     "time": 1.395,
+     "hits": 1
+    }
+   ],
+   "cycle": 1.545
   }
  },
  {
@@ -17754,13 +19148,36 @@
   "attack": {
    "type": "Horizontal",
    "stamina": 14,
-   "adrenaline": 1
+   "adrenaline": 1,
+   "chain": [
+    {
+     "time": 0.274,
+     "hits": 1
+    },
+    {
+     "time": 0.426,
+     "hits": 1
+    },
+    {
+     "time": 0.543,
+     "hits": 1
+    }
+   ],
+   "lastChainMultiplier": 2,
+   "cycle": 1.693
   },
   "secondaryAttack": {
    "type": "Horizontal",
    "stamina": 42,
    "damageMultiplier": 3,
-   "adrenaline": 1
+   "adrenaline": 1,
+   "chain": [
+    {
+     "time": 1.395,
+     "hits": 1
+    }
+   ],
+   "cycle": 1.545
   }
  },
  {
@@ -17800,13 +19217,36 @@
   "attack": {
    "type": "Horizontal",
    "stamina": 10,
-   "adrenaline": 1
+   "adrenaline": 1,
+   "chain": [
+    {
+     "time": 0.274,
+     "hits": 1
+    },
+    {
+     "time": 0.426,
+     "hits": 1
+    },
+    {
+     "time": 0.543,
+     "hits": 1
+    }
+   ],
+   "lastChainMultiplier": 2,
+   "cycle": 1.693
   },
   "secondaryAttack": {
    "type": "Horizontal",
    "stamina": 30,
    "damageMultiplier": 3,
-   "adrenaline": 2
+   "adrenaline": 2,
+   "chain": [
+    {
+     "time": 1.395,
+     "hits": 1
+    }
+   ],
+   "cycle": 1.545
   }
  },
  {
@@ -17845,13 +19285,36 @@
   "attack": {
    "type": "Horizontal",
    "stamina": 14,
-   "adrenaline": 1
+   "adrenaline": 1,
+   "chain": [
+    {
+     "time": 0.331,
+     "hits": 1
+    },
+    {
+     "time": 0.336,
+     "hits": 1
+    },
+    {
+     "time": 0.559,
+     "hits": 1
+    }
+   ],
+   "lastChainMultiplier": 2,
+   "cycle": 1.676
   },
   "secondaryAttack": {
    "type": "Horizontal",
    "stamina": 42,
    "damageMultiplier": 3,
-   "adrenaline": 2
+   "adrenaline": 2,
+   "chain": [
+    {
+     "time": 1.5,
+     "hits": 1
+    }
+   ],
+   "cycle": 1.65
   }
  },
  {
@@ -17890,13 +19353,36 @@
   "attack": {
    "type": "Horizontal",
    "stamina": 6,
-   "adrenaline": 1
+   "adrenaline": 1,
+   "chain": [
+    {
+     "time": 0.274,
+     "hits": 1
+    },
+    {
+     "time": 0.426,
+     "hits": 1
+    },
+    {
+     "time": 0.543,
+     "hits": 1
+    }
+   ],
+   "lastChainMultiplier": 2,
+   "cycle": 1.693
   },
   "secondaryAttack": {
    "type": "Horizontal",
    "stamina": 18,
    "damageMultiplier": 3,
-   "adrenaline": 1
+   "adrenaline": 1,
+   "chain": [
+    {
+     "time": 1.395,
+     "hits": 1
+    }
+   ],
+   "cycle": 1.545
   },
   "unobtainable": true
  },
@@ -17936,13 +19422,36 @@
   "attack": {
    "type": "Horizontal",
    "stamina": 4,
-   "adrenaline": 1
+   "adrenaline": 1,
+   "chain": [
+    {
+     "time": 0.274,
+     "hits": 1
+    },
+    {
+     "time": 0.426,
+     "hits": 1
+    },
+    {
+     "time": 0.543,
+     "hits": 1
+    }
+   ],
+   "lastChainMultiplier": 2,
+   "cycle": 1.693
   },
   "secondaryAttack": {
    "type": "Horizontal",
    "stamina": 4,
    "damageMultiplier": 3,
-   "adrenaline": 2
+   "adrenaline": 2,
+   "chain": [
+    {
+     "time": 1.395,
+     "hits": 1
+    }
+   ],
+   "cycle": 1.545
   }
  },
  {
@@ -18215,13 +19724,36 @@
   "attack": {
    "type": "Horizontal",
    "stamina": 8,
-   "adrenaline": 1
+   "adrenaline": 1,
+   "chain": [
+    {
+     "time": 0.692,
+     "hits": 1
+    },
+    {
+     "time": 0.536,
+     "hits": 1
+    },
+    {
+     "time": 0.747,
+     "hits": 1
+    }
+   ],
+   "lastChainMultiplier": 2,
+   "cycle": 2.425
   },
   "secondaryAttack": {
    "type": "Vertical",
    "stamina": 16,
    "damageMultiplier": 2.5,
-   "adrenaline": 3
+   "adrenaline": 3,
+   "chain": [
+    {
+     "time": 1.553,
+     "hits": 1
+    }
+   ],
+   "cycle": 1.703
   },
   "modifiers": {
    "movement": -0.05
@@ -18261,13 +19793,36 @@
   "attack": {
    "type": "Horizontal",
    "stamina": 16,
-   "adrenaline": 1
+   "adrenaline": 1,
+   "chain": [
+    {
+     "time": 0.692,
+     "hits": 1
+    },
+    {
+     "time": 0.536,
+     "hits": 1
+    },
+    {
+     "time": 0.747,
+     "hits": 1
+    }
+   ],
+   "lastChainMultiplier": 2,
+   "cycle": 2.425
   },
   "secondaryAttack": {
    "type": "Vertical",
    "stamina": 28,
    "damageMultiplier": 2.5,
-   "adrenaline": 3
+   "adrenaline": 3,
+   "chain": [
+    {
+     "time": 1.553,
+     "hits": 1
+    }
+   ],
+   "cycle": 1.703
   },
   "modifiers": {
    "movement": -0.05
@@ -18307,13 +19862,36 @@
   "attack": {
    "type": "Horizontal",
    "stamina": 16,
-   "adrenaline": 1
+   "adrenaline": 1,
+   "chain": [
+    {
+     "time": 0.692,
+     "hits": 1
+    },
+    {
+     "time": 0.536,
+     "hits": 1
+    },
+    {
+     "time": 0.747,
+     "hits": 1
+    }
+   ],
+   "lastChainMultiplier": 2,
+   "cycle": 2.425
   },
   "secondaryAttack": {
    "type": "Vertical",
    "stamina": 28,
    "damageMultiplier": 2.5,
-   "adrenaline": 3
+   "adrenaline": 3,
+   "chain": [
+    {
+     "time": 1.553,
+     "hits": 1
+    }
+   ],
+   "cycle": 1.703
   },
   "modifiers": {
    "movement": -0.05
@@ -18354,13 +19932,36 @@
   "attack": {
    "type": "Horizontal",
    "stamina": 16,
-   "adrenaline": 1
+   "adrenaline": 1,
+   "chain": [
+    {
+     "time": 0.692,
+     "hits": 1
+    },
+    {
+     "time": 0.536,
+     "hits": 1
+    },
+    {
+     "time": 0.747,
+     "hits": 1
+    }
+   ],
+   "lastChainMultiplier": 2,
+   "cycle": 2.425
   },
   "secondaryAttack": {
    "type": "Vertical",
    "stamina": 28,
    "damageMultiplier": 2.5,
-   "adrenaline": 3
+   "adrenaline": 3,
+   "chain": [
+    {
+     "time": 1.553,
+     "hits": 1
+    }
+   ],
+   "cycle": 1.703
   },
   "modifiers": {
    "movement": -0.05
@@ -18401,13 +20002,36 @@
   "attack": {
    "type": "Horizontal",
    "stamina": 16,
-   "adrenaline": 1
+   "adrenaline": 1,
+   "chain": [
+    {
+     "time": 0.692,
+     "hits": 1
+    },
+    {
+     "time": 0.536,
+     "hits": 1
+    },
+    {
+     "time": 0.747,
+     "hits": 1
+    }
+   ],
+   "lastChainMultiplier": 2,
+   "cycle": 2.425
   },
   "secondaryAttack": {
    "type": "Vertical",
    "stamina": 28,
    "damageMultiplier": 2.5,
-   "adrenaline": 3
+   "adrenaline": 3,
+   "chain": [
+    {
+     "time": 1.553,
+     "hits": 1
+    }
+   ],
+   "cycle": 1.703
   },
   "modifiers": {
    "movement": -0.05
@@ -18447,13 +20071,36 @@
   "attack": {
    "type": "Horizontal",
    "stamina": 16,
-   "adrenaline": 1
+   "adrenaline": 1,
+   "chain": [
+    {
+     "time": 0.692,
+     "hits": 1
+    },
+    {
+     "time": 0.536,
+     "hits": 1
+    },
+    {
+     "time": 0.747,
+     "hits": 1
+    }
+   ],
+   "lastChainMultiplier": 2,
+   "cycle": 2.425
   },
   "secondaryAttack": {
    "type": "Vertical",
    "stamina": 28,
    "damageMultiplier": 2.5,
-   "adrenaline": 1
+   "adrenaline": 1,
+   "chain": [
+    {
+     "time": 1.553,
+     "hits": 1
+    }
+   ],
+   "cycle": 1.703
   },
   "modifiers": {
    "movement": -0.05
@@ -18505,13 +20152,36 @@
   "attack": {
    "type": "Horizontal",
    "stamina": 16,
-   "adrenaline": 1
+   "adrenaline": 1,
+   "chain": [
+    {
+     "time": 0.692,
+     "hits": 1
+    },
+    {
+     "time": 0.536,
+     "hits": 1
+    },
+    {
+     "time": 0.747,
+     "hits": 1
+    }
+   ],
+   "lastChainMultiplier": 2,
+   "cycle": 2.425
   },
   "secondaryAttack": {
    "type": "Vertical",
    "stamina": 28,
    "damageMultiplier": 2.5,
-   "adrenaline": 1
+   "adrenaline": 1,
+   "chain": [
+    {
+     "time": 1.553,
+     "hits": 1
+    }
+   ],
+   "cycle": 1.703
   },
   "modifiers": {
    "movement": -0.05
@@ -18555,13 +20225,36 @@
   "attack": {
    "type": "Horizontal",
    "stamina": 16,
-   "adrenaline": 1
+   "adrenaline": 1,
+   "chain": [
+    {
+     "time": 0.692,
+     "hits": 1
+    },
+    {
+     "time": 0.536,
+     "hits": 1
+    },
+    {
+     "time": 0.747,
+     "hits": 1
+    }
+   ],
+   "lastChainMultiplier": 2,
+   "cycle": 2.425
   },
   "secondaryAttack": {
    "type": "Vertical",
    "stamina": 28,
    "damageMultiplier": 2.5,
-   "adrenaline": 1
+   "adrenaline": 1,
+   "chain": [
+    {
+     "time": 1.553,
+     "hits": 1
+    }
+   ],
+   "cycle": 1.703
   },
   "modifiers": {
    "movement": -0.05
@@ -18601,13 +20294,36 @@
   "attack": {
    "type": "Horizontal",
    "stamina": 10,
-   "adrenaline": 1
+   "adrenaline": 1,
+   "chain": [
+    {
+     "time": 0.692,
+     "hits": 1
+    },
+    {
+     "time": 0.536,
+     "hits": 1
+    },
+    {
+     "time": 0.747,
+     "hits": 1
+    }
+   ],
+   "lastChainMultiplier": 2,
+   "cycle": 2.425
   },
   "secondaryAttack": {
    "type": "Vertical",
    "stamina": 20,
    "damageMultiplier": 2.5,
-   "adrenaline": 3
+   "adrenaline": 3,
+   "chain": [
+    {
+     "time": 1.553,
+     "hits": 1
+    }
+   ],
+   "cycle": 1.703
   },
   "modifiers": {
    "movement": -0.05
@@ -18648,13 +20364,36 @@
   "attack": {
    "type": "Horizontal",
    "stamina": 14,
-   "adrenaline": 1
+   "adrenaline": 1,
+   "chain": [
+    {
+     "time": 0.692,
+     "hits": 1
+    },
+    {
+     "time": 0.536,
+     "hits": 1
+    },
+    {
+     "time": 0.747,
+     "hits": 1
+    }
+   ],
+   "lastChainMultiplier": 2,
+   "cycle": 2.425
   },
   "secondaryAttack": {
    "type": "Vertical",
    "stamina": 28,
    "damageMultiplier": 2.5,
-   "adrenaline": 3
+   "adrenaline": 3,
+   "chain": [
+    {
+     "time": 1.553,
+     "hits": 1
+    }
+   ],
+   "cycle": 1.703
   },
   "modifiers": {
    "movement": -0.05
@@ -18696,13 +20435,36 @@
   "attack": {
    "type": "Horizontal",
    "stamina": 12,
-   "adrenaline": 1
+   "adrenaline": 1,
+   "chain": [
+    {
+     "time": 0.692,
+     "hits": 1
+    },
+    {
+     "time": 0.536,
+     "hits": 1
+    },
+    {
+     "time": 0.747,
+     "hits": 1
+    }
+   ],
+   "lastChainMultiplier": 2,
+   "cycle": 2.425
   },
   "secondaryAttack": {
    "type": "Vertical",
    "stamina": 24,
    "damageMultiplier": 2.5,
-   "adrenaline": 3
+   "adrenaline": 3,
+   "chain": [
+    {
+     "time": 1.553,
+     "hits": 1
+    }
+   ],
+   "cycle": 1.703
   },
   "modifiers": {
    "movement": -0.05
@@ -18742,13 +20504,36 @@
   "attack": {
    "type": "Horizontal",
    "stamina": 8,
-   "adrenaline": 1
+   "adrenaline": 1,
+   "chain": [
+    {
+     "time": 0.692,
+     "hits": 1
+    },
+    {
+     "time": 0.536,
+     "hits": 1
+    },
+    {
+     "time": 0.747,
+     "hits": 1
+    }
+   ],
+   "lastChainMultiplier": 2,
+   "cycle": 2.425
   },
   "secondaryAttack": {
    "type": "Vertical",
    "stamina": 4,
    "damageMultiplier": 2.5,
-   "adrenaline": 3
+   "adrenaline": 3,
+   "chain": [
+    {
+     "time": 1.553,
+     "hits": 1
+    }
+   ],
+   "cycle": 1.703
   },
   "modifiers": {
    "movement": -0.05
@@ -20549,7 +22334,14 @@
   "attack": {
    "type": "Vertical",
    "stamina": 6,
-   "adrenaline": 1
+   "adrenaline": 1,
+   "chain": [
+    {
+     "time": 1.234,
+     "hits": 1
+    }
+   ],
+   "cycle": 1.384
   },
   "modifiers": {
    "movement": -0.05
@@ -20591,7 +22383,14 @@
   "attack": {
    "type": "Vertical",
    "stamina": 14,
-   "adrenaline": 1
+   "adrenaline": 1,
+   "chain": [
+    {
+     "time": 1.234,
+     "hits": 1
+    }
+   ],
+   "cycle": 1.384
   },
   "modifiers": {
    "movement": -0.05
@@ -20633,7 +22432,14 @@
   "attack": {
    "type": "Vertical",
    "stamina": 8,
-   "adrenaline": 1
+   "adrenaline": 1,
+   "chain": [
+    {
+     "time": 1.234,
+     "hits": 1
+    }
+   ],
+   "cycle": 1.384
   },
   "modifiers": {
    "movement": -0.05
@@ -20675,7 +22481,14 @@
   "attack": {
    "type": "Vertical",
    "stamina": 10,
-   "adrenaline": 1
+   "adrenaline": 1,
+   "chain": [
+    {
+     "time": 1.234,
+     "hits": 1
+    }
+   ],
+   "cycle": 1.384
   },
   "modifiers": {
    "movement": -0.05
@@ -20710,7 +22523,14 @@
   "attack": {
    "type": "Vertical",
    "stamina": 4,
-   "adrenaline": 1
+   "adrenaline": 1,
+   "chain": [
+    {
+     "time": 1.234,
+     "hits": 1
+    }
+   ],
+   "cycle": 1.384
   },
   "modifiers": {
    "movement": -0.05
@@ -20780,12 +22600,31 @@
   "attack": {
    "type": "Horizontal",
    "stamina": 4,
-   "adrenaline": 1
+   "adrenaline": 1,
+   "chain": [
+    {
+     "time": 0.592,
+     "hits": 1
+    },
+    {
+     "time": 0.54,
+     "hits": 1
+    }
+   ],
+   "lastChainMultiplier": 2,
+   "cycle": 1.432
   },
   "secondaryAttack": {
    "type": "Horizontal",
    "stamina": 8,
-   "adrenaline": 1
+   "adrenaline": 1,
+   "chain": [
+    {
+     "time": 1.324,
+     "hits": 1
+    }
+   ],
+   "cycle": 1.474
   },
   "modifiers": {
    "movement": -0.05
@@ -21448,13 +23287,36 @@
   "attack": {
    "type": "Horizontal",
    "stamina": 8,
-   "adrenaline": 1
+   "adrenaline": 1,
+   "chain": [
+    {
+     "time": 0.801,
+     "hits": 1
+    },
+    {
+     "time": 0.636,
+     "hits": 1
+    },
+    {
+     "time": 0.861,
+     "hits": 1
+    }
+   ],
+   "lastChainMultiplier": 2,
+   "cycle": 2.748
   },
   "secondaryAttack": {
    "type": "Vertical",
    "stamina": 16,
    "damageMultiplier": 1.5,
-   "adrenaline": 1
+   "adrenaline": 1,
+   "chain": [
+    {
+     "time": 1.833,
+     "hits": 1
+    }
+   ],
+   "cycle": 1.983
   },
   "modifiers": {
    "movement": -0.05
@@ -21498,13 +23360,36 @@
   "attack": {
    "type": "Horizontal",
    "stamina": 18,
-   "adrenaline": 2
+   "adrenaline": 2,
+   "chain": [
+    {
+     "time": 1.423,
+     "hits": 1
+    },
+    {
+     "time": 0.746,
+     "hits": 1
+    },
+    {
+     "time": 1.097,
+     "hits": 1
+    }
+   ],
+   "lastChainMultiplier": 2,
+   "cycle": 3.716
   },
   "secondaryAttack": {
    "type": "Horizontal",
    "stamina": 9,
    "damageMultiplier": 0.5,
-   "adrenaline": 1
+   "adrenaline": 1,
+   "chain": [
+    {
+     "time": 0.668,
+     "hits": 1
+    }
+   ],
+   "cycle": 0.818
   },
   "modifiers": {
    "movement": -0.15
@@ -21545,7 +23430,14 @@
   "attack": {
    "type": "Projectile",
    "projectile": "ArrowIron",
-   "adrenaline": 0.5
+   "adrenaline": 0.5,
+   "chain": [
+    {
+     "time": 0.56,
+     "hits": 1
+    }
+   ],
+   "cycle": 0.56
   },
   "modifiers": {
    "movement": -0.05
@@ -21681,13 +23573,36 @@
   "attack": {
    "type": "Horizontal",
    "stamina": 10,
-   "adrenaline": 1
+   "adrenaline": 1,
+   "chain": [
+    {
+     "time": 0.274,
+     "hits": 1
+    },
+    {
+     "time": 0.426,
+     "hits": 1
+    },
+    {
+     "time": 0.543,
+     "hits": 1
+    }
+   ],
+   "lastChainMultiplier": 2,
+   "cycle": 1.693
   },
   "secondaryAttack": {
    "type": "Horizontal",
    "stamina": 30,
    "damageMultiplier": 3,
-   "adrenaline": 2
+   "adrenaline": 2,
+   "chain": [
+    {
+     "time": 1.395,
+     "hits": 1
+    }
+   ],
+   "cycle": 1.545
   },
   "enemyOnly": true
  },
@@ -21727,13 +23642,36 @@
   "attack": {
    "type": "Horizontal",
    "stamina": 14,
-   "adrenaline": 1
+   "adrenaline": 1,
+   "chain": [
+    {
+     "time": 0.331,
+     "hits": 1
+    },
+    {
+     "time": 0.336,
+     "hits": 1
+    },
+    {
+     "time": 0.559,
+     "hits": 1
+    }
+   ],
+   "lastChainMultiplier": 2,
+   "cycle": 1.676
   },
   "secondaryAttack": {
    "type": "Horizontal",
    "stamina": 42,
    "damageMultiplier": 3,
-   "adrenaline": 2
+   "adrenaline": 2,
+   "chain": [
+    {
+     "time": 1.5,
+     "hits": 1
+    }
+   ],
+   "cycle": 1.65
   },
   "enemyOnly": true
  },
@@ -21807,7 +23745,18 @@
   "attack": {
    "type": "Projectile",
    "projectile": "staff_fireball_projectile",
-   "useAdrenaline": 3
+   "useAdrenaline": 3,
+   "chain": [
+    {
+     "time": 0.833,
+     "hits": 1
+    },
+    {
+     "time": 0.75,
+     "hits": 1
+    }
+   ],
+   "cycle": 1.583
   },
   "modifiers": {
    "movement": -0.05
@@ -21850,7 +23799,14 @@
    "projectile": "staff_lightning_projectile",
    "projectiles": 12,
    "adrenaline": 1,
-   "useAdrenaline": 5
+   "useAdrenaline": 5,
+   "chain": [
+    {
+     "time": 0.5,
+     "hits": 1
+    }
+   ],
+   "cycle": 0.5
   },
   "modifiers": {
    "movement": -0.05
@@ -21891,13 +23847,36 @@
   "attack": {
    "type": "Horizontal",
    "stamina": 14,
-   "adrenaline": 1
+   "adrenaline": 1,
+   "chain": [
+    {
+     "time": 0.692,
+     "hits": 1
+    },
+    {
+     "time": 0.536,
+     "hits": 1
+    },
+    {
+     "time": 0.747,
+     "hits": 1
+    }
+   ],
+   "lastChainMultiplier": 2,
+   "cycle": 2.425
   },
   "secondaryAttack": {
    "type": "Horizontal",
    "stamina": 28,
    "damageMultiplier": 3,
-   "adrenaline": 3
+   "adrenaline": 3,
+   "chain": [
+    {
+     "time": 1.769,
+     "hits": 1
+    }
+   ],
+   "cycle": 1.919
   },
   "modifiers": {
    "movement": -0.05
@@ -22024,7 +24003,14 @@
   "attack": {
    "type": "Horizontal",
    "stamina": 5,
-   "adrenaline": 1
+   "adrenaline": 1,
+   "chain": [
+    {
+     "time": 0.826,
+     "hits": 1
+    }
+   ],
+   "cycle": 0.976
   }
  },
  {
@@ -23272,7 +25258,19 @@
   "attack": {
    "type": "Horizontal",
    "stamina": 5,
-   "adrenaline": 1
+   "adrenaline": 1,
+   "chain": [
+    {
+     "time": 0.501,
+     "hits": 1
+    },
+    {
+     "time": 0.583,
+     "hits": 1
+    }
+   ],
+   "lastChainMultiplier": 2,
+   "cycle": 1.384
   }
  },
  {
@@ -23359,7 +25357,14 @@
   "attack": {
    "type": "Area",
    "stamina": 25,
-   "adrenaline": 2
+   "adrenaline": 2,
+   "chain": [
+    {
+     "time": 1.693,
+     "hits": 1
+    }
+   ],
+   "cycle": 1.693
   },
   "modifiers": {
    "movement": -0.15
@@ -23400,7 +25405,14 @@
   "attack": {
    "type": "Area",
    "stamina": 28,
-   "adrenaline": 2
+   "adrenaline": 2,
+   "chain": [
+    {
+     "time": 1.693,
+     "hits": 1
+    }
+   ],
+   "cycle": 1.693
   },
   "modifiers": {
    "movement": -0.15
@@ -23440,7 +25452,14 @@
   "attack": {
    "type": "Area",
    "stamina": 28,
-   "adrenaline": 1
+   "adrenaline": 1,
+   "chain": [
+    {
+     "time": 1.693,
+     "hits": 1
+    }
+   ],
+   "cycle": 1.693
   },
   "modifiers": {
    "movement": -0.2
@@ -23492,7 +25511,14 @@
   "attack": {
    "type": "Area",
    "stamina": 28,
-   "adrenaline": 1
+   "adrenaline": 1,
+   "chain": [
+    {
+     "time": 1.693,
+     "hits": 1
+    }
+   ],
+   "cycle": 1.693
   },
   "modifiers": {
    "movement": -0.2
@@ -23536,7 +25562,14 @@
   "attack": {
    "type": "Area",
    "stamina": 28,
-   "adrenaline": 1
+   "adrenaline": 1,
+   "chain": [
+    {
+     "time": 1.693,
+     "hits": 1
+    }
+   ],
+   "cycle": 1.693
   },
   "modifiers": {
    "movement": -0.2
@@ -23576,7 +25609,14 @@
   "attack": {
    "type": "Area",
    "stamina": 20,
-   "adrenaline": 2
+   "adrenaline": 2,
+   "chain": [
+    {
+     "time": 1.693,
+     "hits": 1
+    }
+   ],
+   "cycle": 1.693
   },
   "modifiers": {
    "movement": -0.15
@@ -23616,7 +25656,14 @@
   "attack": {
    "type": "Area",
    "stamina": 12,
-   "adrenaline": 2
+   "adrenaline": 2,
+   "chain": [
+    {
+     "time": 1.693,
+     "hits": 1
+    }
+   ],
+   "cycle": 1.693
   },
   "modifiers": {
    "movement": -0.15
@@ -23656,7 +25703,14 @@
   "attack": {
    "type": "Area",
    "stamina": 8,
-   "adrenaline": 2
+   "adrenaline": 2,
+   "chain": [
+    {
+     "time": 1.693,
+     "hits": 1
+    }
+   ],
+   "cycle": 1.693
   },
   "modifiers": {
    "movement": -0.15
@@ -23729,7 +25783,14 @@
    "type": "Projectile",
    "stamina": 8,
    "projectile": "snowball_projectile",
-   "adrenaline": 1
+   "adrenaline": 1,
+   "chain": [
+    {
+     "time": 0.633,
+     "hits": 1
+    }
+   ],
+   "cycle": 0.633
   }
  },
  {
@@ -23755,7 +25816,14 @@
    "type": "Projectile",
    "stamina": 8,
    "projectile": "snowballbig_projectile",
-   "adrenaline": 1
+   "adrenaline": 1,
+   "chain": [
+    {
+     "time": 0.633,
+     "hits": 1
+    }
+   ],
+   "cycle": 0.633
   },
   "unobtainable": true
  },
@@ -23794,7 +25862,22 @@
   "attack": {
    "type": "None",
    "stamina": 4,
-   "adrenaline": 1
+   "adrenaline": 1,
+   "chain": [
+    {
+     "time": 0.692,
+     "hits": 1
+    },
+    {
+     "time": 0.536,
+     "hits": 1
+    },
+    {
+     "time": 0.747,
+     "hits": 1
+    }
+   ],
+   "cycle": 1.975
   }
  },
  {
@@ -23849,14 +25932,28 @@
   "attack": {
    "type": "Horizontal",
    "stamina": 8,
-   "adrenaline": 1
+   "adrenaline": 1,
+   "chain": [
+    {
+     "time": 0.511,
+     "hits": 1
+    }
+   ],
+   "cycle": 0.661
   },
   "secondaryAttack": {
    "type": "Projectile",
    "stamina": 10,
    "damageMultiplier": 1.5,
    "projectile": "bronzespear_projectile",
-   "adrenaline": 1
+   "adrenaline": 1,
+   "chain": [
+    {
+     "time": 1.034,
+     "hits": 1
+    }
+   ],
+   "cycle": 1.034
   },
   "modifiers": {
    "movement": -0.05
@@ -23896,14 +25993,28 @@
   "attack": {
    "type": "Horizontal",
    "stamina": 16,
-   "adrenaline": 1
+   "adrenaline": 1,
+   "chain": [
+    {
+     "time": 0.511,
+     "hits": 1
+    }
+   ],
+   "cycle": 0.661
   },
   "secondaryAttack": {
    "type": "Projectile",
    "stamina": 18,
    "damageMultiplier": 1.5,
    "projectile": "projectile_wolffang",
-   "adrenaline": 1
+   "adrenaline": 1,
+   "chain": [
+    {
+     "time": 1.034,
+     "hits": 1
+    }
+   ],
+   "cycle": 1.034
   },
   "modifiers": {
    "movement": -0.05
@@ -23941,7 +26052,14 @@
    "type": "Projectile",
    "stamina": 15,
    "projectile": "projectile_chitinharpoon",
-   "adrenaline": 1
+   "adrenaline": 1,
+   "chain": [
+    {
+     "time": 1.034,
+     "hits": 1
+    }
+   ],
+   "cycle": 1.034
   },
   "modifiers": {
    "movement": -0.05
@@ -23981,14 +26099,28 @@
   "attack": {
    "type": "Horizontal",
    "stamina": 10,
-   "adrenaline": 1
+   "adrenaline": 1,
+   "chain": [
+    {
+     "time": 0.511,
+     "hits": 1
+    }
+   ],
+   "cycle": 0.661
   },
   "secondaryAttack": {
    "type": "Projectile",
    "stamina": 12,
    "damageMultiplier": 1.5,
    "projectile": "ancientbarkspear_projectile",
-   "adrenaline": 1
+   "adrenaline": 1,
+   "chain": [
+    {
+     "time": 1.034,
+     "hits": 1
+    }
+   ],
+   "cycle": 1.034
   },
   "modifiers": {
    "movement": -0.05
@@ -24027,14 +26159,28 @@
   "attack": {
    "type": "Horizontal",
    "stamina": 6,
-   "adrenaline": 1
+   "adrenaline": 1,
+   "chain": [
+    {
+     "time": 0.511,
+     "hits": 1
+    }
+   ],
+   "cycle": 0.661
   },
   "secondaryAttack": {
    "type": "Projectile",
    "stamina": 8,
    "damageMultiplier": 1.5,
    "projectile": "flintspear_projectile",
-   "adrenaline": 1
+   "adrenaline": 1,
+   "chain": [
+    {
+     "time": 1.034,
+     "hits": 1
+    }
+   ],
+   "cycle": 1.034
   },
   "modifiers": {
    "movement": -0.05
@@ -24074,14 +26220,28 @@
   "attack": {
    "type": "Horizontal",
    "stamina": 16,
-   "adrenaline": 1
+   "adrenaline": 1,
+   "chain": [
+    {
+     "time": 0.511,
+     "hits": 1
+    }
+   ],
+   "cycle": 0.661
   },
   "secondaryAttack": {
    "type": "Projectile",
    "stamina": 18,
    "damageMultiplier": 1.5,
    "projectile": "projectile_wolffang",
-   "adrenaline": 1
+   "adrenaline": 1,
+   "chain": [
+    {
+     "time": 1.034,
+     "hits": 1
+    }
+   ],
+   "cycle": 1.034
   },
   "modifiers": {
    "movement": -0.05
@@ -24133,14 +26293,28 @@
   "attack": {
    "type": "Horizontal",
    "stamina": 16,
-   "adrenaline": 1
+   "adrenaline": 1,
+   "chain": [
+    {
+     "time": 0.511,
+     "hits": 1
+    }
+   ],
+   "cycle": 0.661
   },
   "secondaryAttack": {
    "type": "Projectile",
    "stamina": 18,
    "damageMultiplier": 1.5,
    "projectile": "projectile_wolffang",
-   "adrenaline": 1
+   "adrenaline": 1,
+   "chain": [
+    {
+     "time": 1.034,
+     "hits": 1
+    }
+   ],
+   "cycle": 1.034
   },
   "modifiers": {
    "movement": -0.05
@@ -24184,14 +26358,28 @@
   "attack": {
    "type": "Horizontal",
    "stamina": 16,
-   "adrenaline": 1
+   "adrenaline": 1,
+   "chain": [
+    {
+     "time": 0.511,
+     "hits": 1
+    }
+   ],
+   "cycle": 0.661
   },
   "secondaryAttack": {
    "type": "Projectile",
    "stamina": 18,
    "damageMultiplier": 1.5,
    "projectile": "projectile_wolffang",
-   "adrenaline": 1
+   "adrenaline": 1,
+   "chain": [
+    {
+     "time": 1.034,
+     "hits": 1
+    }
+   ],
+   "cycle": 1.034
   },
   "modifiers": {
    "movement": -0.05
@@ -24231,14 +26419,28 @@
   "attack": {
    "type": "Horizontal",
    "stamina": 16,
-   "adrenaline": 1
+   "adrenaline": 1,
+   "chain": [
+    {
+     "time": 0.511,
+     "hits": 1
+    }
+   ],
+   "cycle": 0.661
   },
   "secondaryAttack": {
    "type": "Projectile",
    "stamina": 18,
    "damageMultiplier": 1.5,
    "projectile": "projectile_splitner",
-   "adrenaline": 1
+   "adrenaline": 1,
+   "chain": [
+    {
+     "time": 1.034,
+     "hits": 1
+    }
+   ],
+   "cycle": 1.034
   },
   "modifiers": {
    "movement": -0.05
@@ -24278,14 +26480,28 @@
   "attack": {
    "type": "Horizontal",
    "stamina": 16,
-   "adrenaline": 1
+   "adrenaline": 1,
+   "chain": [
+    {
+     "time": 0.511,
+     "hits": 1
+    }
+   ],
+   "cycle": 0.661
   },
   "secondaryAttack": {
    "type": "Projectile",
    "stamina": 18,
    "damageMultiplier": 1.5,
    "projectile": "projectile_splitner_blood",
-   "adrenaline": 1
+   "adrenaline": 1,
+   "chain": [
+    {
+     "time": 1.034,
+     "hits": 1
+    }
+   ],
+   "cycle": 1.034
   },
   "modifiers": {
    "movement": -0.05
@@ -24326,14 +26542,28 @@
   "attack": {
    "type": "Horizontal",
    "stamina": 16,
-   "adrenaline": 1
+   "adrenaline": 1,
+   "chain": [
+    {
+     "time": 0.511,
+     "hits": 1
+    }
+   ],
+   "cycle": 0.661
   },
   "secondaryAttack": {
    "type": "Projectile",
    "stamina": 18,
    "damageMultiplier": 1.5,
    "projectile": "projectile_splitner_lightning",
-   "adrenaline": 1
+   "adrenaline": 1,
+   "chain": [
+    {
+     "time": 1.034,
+     "hits": 1
+    }
+   ],
+   "cycle": 1.034
   },
   "modifiers": {
    "movement": -0.05
@@ -24374,14 +26604,28 @@
   "attack": {
    "type": "Horizontal",
    "stamina": 16,
-   "adrenaline": 1
+   "adrenaline": 1,
+   "chain": [
+    {
+     "time": 0.511,
+     "hits": 1
+    }
+   ],
+   "cycle": 0.661
   },
   "secondaryAttack": {
    "type": "Projectile",
    "stamina": 18,
    "damageMultiplier": 1.5,
    "projectile": "projectile_splitner_nature",
-   "adrenaline": 1
+   "adrenaline": 1,
+   "chain": [
+    {
+     "time": 1.034,
+     "hits": 1
+    }
+   ],
+   "cycle": 1.034
   },
   "modifiers": {
    "movement": -0.05
@@ -24421,14 +26665,28 @@
   "attack": {
    "type": "Horizontal",
    "stamina": 12,
-   "adrenaline": 1
+   "adrenaline": 1,
+   "chain": [
+    {
+     "time": 0.511,
+     "hits": 1
+    }
+   ],
+   "cycle": 0.661
   },
   "secondaryAttack": {
    "type": "Projectile",
    "stamina": 14,
    "damageMultiplier": 1.5,
    "projectile": "projectile_wolffang",
-   "adrenaline": 1
+   "adrenaline": 1,
+   "chain": [
+    {
+     "time": 1.034,
+     "hits": 1
+    }
+   ],
+   "cycle": 1.034
   },
   "modifiers": {
    "movement": -0.05
@@ -24468,14 +26726,28 @@
   "attack": {
    "type": "Horizontal",
    "stamina": 4,
-   "adrenaline": 1
+   "adrenaline": 1,
+   "chain": [
+    {
+     "time": 0.511,
+     "hits": 1
+    }
+   ],
+   "cycle": 0.661
   },
   "secondaryAttack": {
    "type": "Projectile",
    "stamina": 4,
    "damageMultiplier": 1.5,
    "projectile": "projectile_splitner",
-   "adrenaline": 1
+   "adrenaline": 1,
+   "chain": [
+    {
+     "time": 1.034,
+     "hits": 1
+    }
+   ],
+   "cycle": 1.034
   },
   "modifiers": {
    "movement": -0.05
@@ -24681,7 +26953,18 @@
    "type": "Projectile",
    "eitr": 30,
    "projectile": "staff_clusterbombstaff_projectile",
-   "useAdrenaline": 3
+   "useAdrenaline": 3,
+   "chain": [
+    {
+     "time": 0.833,
+     "hits": 1
+    },
+    {
+     "time": 0.75,
+     "hits": 1
+    }
+   ],
+   "cycle": 1.583
   },
   "modifiers": {
    "movement": -0.05
@@ -24723,7 +27006,18 @@
    "type": "Projectile",
    "eitr": 35,
    "projectile": "staff_fireball_projectile",
-   "useAdrenaline": 3
+   "useAdrenaline": 3,
+   "chain": [
+    {
+     "time": 0.833,
+     "hits": 1
+    },
+    {
+     "time": 0.75,
+     "hits": 1
+    }
+   ],
+   "cycle": 1.583
   },
   "modifiers": {
    "movement": -0.05
@@ -24758,7 +27052,14 @@
    "healthPercentage": 40,
    "projectile": "staff_FrostOrbs_aoe",
    "adrenaline": 4,
-   "useAdrenaline": 6
+   "useAdrenaline": 6,
+   "chain": [
+    {
+     "time": 1.8,
+     "hits": 1
+    }
+   ],
+   "cycle": 1.8
   },
   "modifiers": {
    "movement": -0.05
@@ -24812,7 +27113,18 @@
    "eitr": 55,
    "projectile": "staff_greenroots_projectile",
    "adrenaline": 1,
-   "useAdrenaline": 3
+   "useAdrenaline": 3,
+   "chain": [
+    {
+     "time": 0.833,
+     "hits": 1
+    },
+    {
+     "time": 0.75,
+     "hits": 1
+    }
+   ],
+   "cycle": 1.583
   },
   "modifiers": {
    "movement": -0.05
@@ -24852,7 +27164,13 @@
   "attack": {
    "type": "Projectile",
    "eitr": 5,
-   "projectile": "staff_iceshard_projectile"
+   "projectile": "staff_iceshard_projectile",
+   "chain": [
+    {
+     "time": 0.399,
+     "hits": 1
+    }
+   ]
   },
   "modifiers": {
    "movement": -0.05
@@ -24894,7 +27212,13 @@
    "projectile": "staff_lightning_projectile",
    "projectiles": 12,
    "adrenaline": 1,
-   "useAdrenaline": 5
+   "useAdrenaline": 5,
+   "chain": [
+    {
+     "time": 0.5,
+     "hits": 1
+    }
+   ]
   },
   "modifiers": {
    "movement": -0.05
@@ -24929,7 +27253,14 @@
    "eitr": 25,
    "projectile": "staff_OrbofAhri_projectile",
    "adrenaline": 4,
-   "useAdrenaline": 6
+   "useAdrenaline": 6,
+   "chain": [
+    {
+     "time": 0.833,
+     "hits": 1
+    }
+   ],
+   "cycle": 0.833
   },
   "modifiers": {
    "movement": -0.05
@@ -24973,7 +27304,14 @@
    "eitr": 120,
    "healthPercentage": 60,
    "projectile": "staff_redtroll_spawn",
-   "useAdrenaline": 12
+   "useAdrenaline": 12,
+   "chain": [
+    {
+     "time": 1.5,
+     "hits": 1
+    }
+   ],
+   "cycle": 1.5
   },
   "modifiers": {
    "movement": -0.05
@@ -25009,7 +27347,14 @@
    "healthPercentage": 40,
    "projectile": "staff_shield_aoe",
    "adrenaline": 4,
-   "useAdrenaline": 6
+   "useAdrenaline": 6,
+   "chain": [
+    {
+     "time": 1.976,
+     "hits": 1
+    }
+   ],
+   "cycle": 1.976
   },
   "modifiers": {
    "movement": -0.05
@@ -25044,7 +27389,14 @@
    "healthPercentage": 40,
    "projectile": "staff_skeleton_spawn",
    "adrenaline": 5,
-   "useAdrenaline": 10
+   "useAdrenaline": 10,
+   "chain": [
+    {
+     "time": 1.35,
+     "hits": 1
+    }
+   ],
+   "cycle": 1.35
   },
   "modifiers": {
    "movement": -0.05
@@ -25079,7 +27431,14 @@
    "healthPercentage": 40,
    "projectile": "staff_SpiritCaller_spawn",
    "adrenaline": 5,
-   "useAdrenaline": 10
+   "useAdrenaline": 10,
+   "chain": [
+    {
+     "time": 1.35,
+     "hits": 1
+    }
+   ],
+   "cycle": 1.35
   },
   "modifiers": {
    "movement": -0.05
@@ -25129,7 +27488,14 @@
   "attack": {
    "type": "Projectile",
    "eitr": 40,
-   "projectile": "staff_thunderblood_projectile"
+   "projectile": "staff_thunderblood_projectile",
+   "chain": [
+    {
+     "time": 1.05,
+     "hits": 1
+    }
+   ],
+   "cycle": 1.05
   },
   "modifiers": {
    "movement": -0.05
@@ -25330,13 +27696,36 @@
   "attack": {
    "type": "Horizontal",
    "stamina": 14,
-   "adrenaline": 1
+   "adrenaline": 1,
+   "chain": [
+    {
+     "time": 0.692,
+     "hits": 1
+    },
+    {
+     "time": 0.536,
+     "hits": 1
+    },
+    {
+     "time": 0.747,
+     "hits": 1
+    }
+   ],
+   "lastChainMultiplier": 2,
+   "cycle": 2.425
   },
   "secondaryAttack": {
    "type": "Horizontal",
    "stamina": 28,
    "damageMultiplier": 3,
-   "adrenaline": 3
+   "adrenaline": 3,
+   "chain": [
+    {
+     "time": 1.769,
+     "hits": 1
+    }
+   ],
+   "cycle": 1.919
   },
   "modifiers": {
    "movement": -0.05
@@ -25376,13 +27765,36 @@
   "attack": {
    "type": "Horizontal",
    "stamina": 8,
-   "adrenaline": 1
+   "adrenaline": 1,
+   "chain": [
+    {
+     "time": 0.692,
+     "hits": 1
+    },
+    {
+     "time": 0.536,
+     "hits": 1
+    },
+    {
+     "time": 0.747,
+     "hits": 1
+    }
+   ],
+   "lastChainMultiplier": 2,
+   "cycle": 2.425
   },
   "secondaryAttack": {
    "type": "Horizontal",
    "stamina": 16,
    "damageMultiplier": 3,
-   "adrenaline": 3
+   "adrenaline": 3,
+   "chain": [
+    {
+     "time": 1.769,
+     "hits": 1
+    }
+   ],
+   "cycle": 1.919
   },
   "modifiers": {
    "movement": -0.05
@@ -25414,13 +27826,36 @@
   "attack": {
    "type": "Horizontal",
    "stamina": 10,
-   "adrenaline": 1
+   "adrenaline": 1,
+   "chain": [
+    {
+     "time": 0.692,
+     "hits": 1
+    },
+    {
+     "time": 0.536,
+     "hits": 1
+    },
+    {
+     "time": 0.747,
+     "hits": 1
+    }
+   ],
+   "lastChainMultiplier": 2,
+   "cycle": 2.425
   },
   "secondaryAttack": {
    "type": "Horizontal",
    "stamina": 20,
    "damageMultiplier": 3,
-   "adrenaline": 3
+   "adrenaline": 3,
+   "chain": [
+    {
+     "time": 1.769,
+     "hits": 1
+    }
+   ],
+   "cycle": 1.919
   },
   "modifiers": {
    "movement": -0.05
@@ -25462,13 +27897,36 @@
   "attack": {
    "type": "Horizontal",
    "stamina": 16,
-   "adrenaline": 1
+   "adrenaline": 1,
+   "chain": [
+    {
+     "time": 0.692,
+     "hits": 1
+    },
+    {
+     "time": 0.536,
+     "hits": 1
+    },
+    {
+     "time": 0.747,
+     "hits": 1
+    }
+   ],
+   "lastChainMultiplier": 2,
+   "cycle": 2.425
   },
   "secondaryAttack": {
    "type": "Horizontal",
    "stamina": 28,
    "damageMultiplier": 3,
-   "adrenaline": 3
+   "adrenaline": 3,
+   "chain": [
+    {
+     "time": 1.769,
+     "hits": 1
+    }
+   ],
+   "cycle": 1.919
   },
   "modifiers": {
    "movement": -0.05
@@ -25508,13 +27966,36 @@
   "attack": {
    "type": "Horizontal",
    "stamina": 16,
-   "adrenaline": 1
+   "adrenaline": 1,
+   "chain": [
+    {
+     "time": 0.692,
+     "hits": 1
+    },
+    {
+     "time": 0.536,
+     "hits": 1
+    },
+    {
+     "time": 0.747,
+     "hits": 1
+    }
+   ],
+   "lastChainMultiplier": 2,
+   "cycle": 2.425
   },
   "secondaryAttack": {
    "type": "Horizontal",
    "stamina": 28,
    "damageMultiplier": 3,
-   "adrenaline": 1
+   "adrenaline": 1,
+   "chain": [
+    {
+     "time": 1.769,
+     "hits": 1
+    }
+   ],
+   "cycle": 1.919
   },
   "modifiers": {
    "movement": -0.05
@@ -25566,13 +28047,36 @@
   "attack": {
    "type": "Horizontal",
    "stamina": 16,
-   "adrenaline": 1
+   "adrenaline": 1,
+   "chain": [
+    {
+     "time": 0.692,
+     "hits": 1
+    },
+    {
+     "time": 0.536,
+     "hits": 1
+    },
+    {
+     "time": 0.747,
+     "hits": 1
+    }
+   ],
+   "lastChainMultiplier": 2,
+   "cycle": 2.425
   },
   "secondaryAttack": {
    "type": "Horizontal",
    "stamina": 28,
    "damageMultiplier": 3,
-   "adrenaline": 1
+   "adrenaline": 1,
+   "chain": [
+    {
+     "time": 1.769,
+     "hits": 1
+    }
+   ],
+   "cycle": 1.919
   },
   "modifiers": {
    "movement": -0.05
@@ -25616,13 +28120,36 @@
   "attack": {
    "type": "Horizontal",
    "stamina": 16,
-   "adrenaline": 1
+   "adrenaline": 1,
+   "chain": [
+    {
+     "time": 0.692,
+     "hits": 1
+    },
+    {
+     "time": 0.536,
+     "hits": 1
+    },
+    {
+     "time": 0.747,
+     "hits": 1
+    }
+   ],
+   "lastChainMultiplier": 2,
+   "cycle": 2.425
   },
   "secondaryAttack": {
    "type": "Horizontal",
    "stamina": 28,
    "damageMultiplier": 3,
-   "adrenaline": 1
+   "adrenaline": 1,
+   "chain": [
+    {
+     "time": 1.769,
+     "hits": 1
+    }
+   ],
+   "cycle": 1.919
   },
   "modifiers": {
    "movement": -0.05
@@ -25662,13 +28189,36 @@
   "attack": {
    "type": "Horizontal",
    "stamina": 10,
-   "adrenaline": 1
+   "adrenaline": 1,
+   "chain": [
+    {
+     "time": 0.692,
+     "hits": 1
+    },
+    {
+     "time": 0.536,
+     "hits": 1
+    },
+    {
+     "time": 0.747,
+     "hits": 1
+    }
+   ],
+   "lastChainMultiplier": 2,
+   "cycle": 2.425
   },
   "secondaryAttack": {
    "type": "Horizontal",
    "stamina": 20,
    "damageMultiplier": 3,
-   "adrenaline": 3
+   "adrenaline": 3,
+   "chain": [
+    {
+     "time": 1.769,
+     "hits": 1
+    }
+   ],
+   "cycle": 1.919
   },
   "modifiers": {
    "movement": -0.05
@@ -25709,13 +28259,36 @@
   "attack": {
    "type": "Horizontal",
    "stamina": 14,
-   "adrenaline": 1
+   "adrenaline": 1,
+   "chain": [
+    {
+     "time": 0.692,
+     "hits": 1
+    },
+    {
+     "time": 0.536,
+     "hits": 1
+    },
+    {
+     "time": 0.747,
+     "hits": 1
+    }
+   ],
+   "lastChainMultiplier": 2,
+   "cycle": 2.425
   },
   "secondaryAttack": {
    "type": "Horizontal",
    "stamina": 28,
    "damageMultiplier": 3,
-   "adrenaline": 3
+   "adrenaline": 3,
+   "chain": [
+    {
+     "time": 1.769,
+     "hits": 1
+    }
+   ],
+   "cycle": 1.919
   },
   "modifiers": {
    "movement": -0.05
@@ -25758,13 +28331,36 @@
   "attack": {
    "type": "Horizontal",
    "stamina": 16,
-   "adrenaline": 1
+   "adrenaline": 1,
+   "chain": [
+    {
+     "time": 0.692,
+     "hits": 1
+    },
+    {
+     "time": 0.536,
+     "hits": 1
+    },
+    {
+     "time": 0.747,
+     "hits": 1
+    }
+   ],
+   "lastChainMultiplier": 2,
+   "cycle": 2.425
   },
   "secondaryAttack": {
    "type": "Horizontal",
    "stamina": 32,
    "damageMultiplier": 3,
-   "adrenaline": 3
+   "adrenaline": 3,
+   "chain": [
+    {
+     "time": 1.769,
+     "hits": 1
+    }
+   ],
+   "cycle": 1.919
   },
   "modifiers": {
    "movement": -0.05
@@ -25804,13 +28400,36 @@
   "attack": {
    "type": "Horizontal",
    "stamina": 16,
-   "adrenaline": 1
+   "adrenaline": 1,
+   "chain": [
+    {
+     "time": 0.692,
+     "hits": 1
+    },
+    {
+     "time": 0.536,
+     "hits": 1
+    },
+    {
+     "time": 0.747,
+     "hits": 1
+    }
+   ],
+   "lastChainMultiplier": 2,
+   "cycle": 2.425
   },
   "secondaryAttack": {
    "type": "Horizontal",
    "stamina": 28,
    "damageMultiplier": 3,
-   "adrenaline": 3
+   "adrenaline": 3,
+   "chain": [
+    {
+     "time": 1.769,
+     "hits": 1
+    }
+   ],
+   "cycle": 1.919
   },
   "modifiers": {
    "movement": -0.05
@@ -25850,13 +28469,36 @@
   "attack": {
    "type": "Horizontal",
    "stamina": 16,
-   "adrenaline": 1
+   "adrenaline": 1,
+   "chain": [
+    {
+     "time": 0.692,
+     "hits": 1
+    },
+    {
+     "time": 0.536,
+     "hits": 1
+    },
+    {
+     "time": 0.747,
+     "hits": 1
+    }
+   ],
+   "lastChainMultiplier": 2,
+   "cycle": 2.425
   },
   "secondaryAttack": {
    "type": "Horizontal",
    "stamina": 28,
    "damageMultiplier": 3,
-   "adrenaline": 3
+   "adrenaline": 3,
+   "chain": [
+    {
+     "time": 1.769,
+     "hits": 1
+    }
+   ],
+   "cycle": 1.919
   },
   "modifiers": {
    "movement": -0.05
@@ -25897,13 +28539,36 @@
   "attack": {
    "type": "Horizontal",
    "stamina": 16,
-   "adrenaline": 1
+   "adrenaline": 1,
+   "chain": [
+    {
+     "time": 0.692,
+     "hits": 1
+    },
+    {
+     "time": 0.536,
+     "hits": 1
+    },
+    {
+     "time": 0.747,
+     "hits": 1
+    }
+   ],
+   "lastChainMultiplier": 2,
+   "cycle": 2.425
   },
   "secondaryAttack": {
    "type": "Horizontal",
    "stamina": 28,
    "damageMultiplier": 3,
-   "adrenaline": 3
+   "adrenaline": 3,
+   "chain": [
+    {
+     "time": 1.769,
+     "hits": 1
+    }
+   ],
+   "cycle": 1.919
   },
   "modifiers": {
    "movement": -0.05
@@ -25944,13 +28609,36 @@
   "attack": {
    "type": "Horizontal",
    "stamina": 16,
-   "adrenaline": 1
+   "adrenaline": 1,
+   "chain": [
+    {
+     "time": 0.692,
+     "hits": 1
+    },
+    {
+     "time": 0.536,
+     "hits": 1
+    },
+    {
+     "time": 0.747,
+     "hits": 1
+    }
+   ],
+   "lastChainMultiplier": 2,
+   "cycle": 2.425
   },
   "secondaryAttack": {
    "type": "Horizontal",
    "stamina": 28,
    "damageMultiplier": 3,
-   "adrenaline": 3
+   "adrenaline": 3,
+   "chain": [
+    {
+     "time": 1.769,
+     "hits": 1
+    }
+   ],
+   "cycle": 1.919
   },
   "modifiers": {
    "movement": -0.05
@@ -25992,13 +28680,36 @@
   "attack": {
    "type": "Horizontal",
    "stamina": 12,
-   "adrenaline": 1
+   "adrenaline": 1,
+   "chain": [
+    {
+     "time": 0.692,
+     "hits": 1
+    },
+    {
+     "time": 0.536,
+     "hits": 1
+    },
+    {
+     "time": 0.747,
+     "hits": 1
+    }
+   ],
+   "lastChainMultiplier": 2,
+   "cycle": 2.425
   },
   "secondaryAttack": {
    "type": "Horizontal",
    "stamina": 24,
    "damageMultiplier": 3,
-   "adrenaline": 3
+   "adrenaline": 3,
+   "chain": [
+    {
+     "time": 1.769,
+     "hits": 1
+    }
+   ],
+   "cycle": 1.919
   },
   "modifiers": {
    "movement": -0.05
@@ -26038,13 +28749,36 @@
   "attack": {
    "type": "Horizontal",
    "stamina": 4,
-   "adrenaline": 1
+   "adrenaline": 1,
+   "chain": [
+    {
+     "time": 0.692,
+     "hits": 1
+    },
+    {
+     "time": 0.536,
+     "hits": 1
+    },
+    {
+     "time": 0.747,
+     "hits": 1
+    }
+   ],
+   "lastChainMultiplier": 2,
+   "cycle": 2.425
   },
   "secondaryAttack": {
    "type": "Horizontal",
    "stamina": 4,
    "damageMultiplier": 3,
-   "adrenaline": 3
+   "adrenaline": 3,
+   "chain": [
+    {
+     "time": 1.769,
+     "hits": 1
+    }
+   ],
+   "cycle": 1.919
   },
   "modifiers": {
    "movement": -0.05
@@ -26084,13 +28818,36 @@
   "attack": {
    "type": "Horizontal",
    "stamina": 20,
-   "adrenaline": 2
+   "adrenaline": 2,
+   "chain": [
+    {
+     "time": 0.783,
+     "hits": 1
+    },
+    {
+     "time": 0.641,
+     "hits": 1
+    },
+    {
+     "time": 1.5,
+     "hits": 1
+    }
+   ],
+   "lastChainMultiplier": 2,
+   "cycle": 3.374
   },
   "secondaryAttack": {
    "type": "Horizontal",
    "stamina": 40,
    "damageMultiplier": 3,
-   "adrenaline": 1
+   "adrenaline": 1,
+   "chain": [
+    {
+     "time": 2.0,
+     "hits": 1
+    }
+   ],
+   "cycle": 2.15
   },
   "modifiers": {
    "movement": -0.05
@@ -26142,13 +28899,36 @@
   "attack": {
    "type": "Horizontal",
    "stamina": 20,
-   "adrenaline": 2
+   "adrenaline": 2,
+   "chain": [
+    {
+     "time": 0.783,
+     "hits": 1
+    },
+    {
+     "time": 0.641,
+     "hits": 1
+    },
+    {
+     "time": 1.5,
+     "hits": 1
+    }
+   ],
+   "lastChainMultiplier": 2,
+   "cycle": 3.374
   },
   "secondaryAttack": {
    "type": "Horizontal",
    "stamina": 40,
    "damageMultiplier": 3,
-   "adrenaline": 1
+   "adrenaline": 1,
+   "chain": [
+    {
+     "time": 2.0,
+     "hits": 1
+    }
+   ],
+   "cycle": 2.15
   },
   "modifiers": {
    "movement": -0.05
@@ -26192,13 +28972,36 @@
   "attack": {
    "type": "Horizontal",
    "stamina": 20,
-   "adrenaline": 2
+   "adrenaline": 2,
+   "chain": [
+    {
+     "time": 0.783,
+     "hits": 1
+    },
+    {
+     "time": 0.641,
+     "hits": 1
+    },
+    {
+     "time": 1.5,
+     "hits": 1
+    }
+   ],
+   "lastChainMultiplier": 2,
+   "cycle": 3.374
   },
   "secondaryAttack": {
    "type": "Horizontal",
    "stamina": 40,
    "damageMultiplier": 3,
-   "adrenaline": 1
+   "adrenaline": 1,
+   "chain": [
+    {
+     "time": 2.0,
+     "hits": 1
+    }
+   ],
+   "cycle": 2.15
   },
   "modifiers": {
    "movement": -0.05
@@ -26238,13 +29041,36 @@
   "attack": {
    "type": "Horizontal",
    "stamina": 20,
-   "adrenaline": 2
+   "adrenaline": 2,
+   "chain": [
+    {
+     "time": 0.783,
+     "hits": 1
+    },
+    {
+     "time": 0.641,
+     "hits": 1
+    },
+    {
+     "time": 1.5,
+     "hits": 1
+    }
+   ],
+   "lastChainMultiplier": 2,
+   "cycle": 3.374
   },
   "secondaryAttack": {
    "type": "Horizontal",
    "stamina": 40,
    "damageMultiplier": 3,
-   "adrenaline": 1
+   "adrenaline": 1,
+   "chain": [
+    {
+     "time": 2.0,
+     "hits": 1
+    }
+   ],
+   "cycle": 2.15
   },
   "modifiers": {
    "movement": -0.05
@@ -26284,13 +29110,36 @@
   "attack": {
    "type": "Horizontal",
    "stamina": 20,
-   "adrenaline": 2
+   "adrenaline": 2,
+   "chain": [
+    {
+     "time": 0.783,
+     "hits": 1
+    },
+    {
+     "time": 0.641,
+     "hits": 1
+    },
+    {
+     "time": 1.5,
+     "hits": 1
+    }
+   ],
+   "lastChainMultiplier": 2,
+   "cycle": 3.374
   },
   "secondaryAttack": {
    "type": "Horizontal",
    "stamina": 40,
    "damageMultiplier": 3,
-   "adrenaline": 1
+   "adrenaline": 1,
+   "chain": [
+    {
+     "time": 2.0,
+     "hits": 1
+    }
+   ],
+   "cycle": 2.15
   },
   "modifiers": {
    "movement": -0.05
@@ -26330,13 +29179,36 @@
   "attack": {
    "type": "Horizontal",
    "stamina": 20,
-   "adrenaline": 2
+   "adrenaline": 2,
+   "chain": [
+    {
+     "time": 0.783,
+     "hits": 1
+    },
+    {
+     "time": 0.641,
+     "hits": 1
+    },
+    {
+     "time": 1.5,
+     "hits": 1
+    }
+   ],
+   "lastChainMultiplier": 2,
+   "cycle": 3.374
   },
   "secondaryAttack": {
    "type": "Horizontal",
    "stamina": 40,
    "damageMultiplier": 3,
-   "adrenaline": 1
+   "adrenaline": 1,
+   "chain": [
+    {
+     "time": 2.0,
+     "hits": 1
+    }
+   ],
+   "cycle": 2.15
   },
   "modifiers": {
    "movement": -0.05
@@ -26377,13 +29249,36 @@
   "attack": {
    "type": "Horizontal",
    "stamina": 20,
-   "adrenaline": 2
+   "adrenaline": 2,
+   "chain": [
+    {
+     "time": 0.783,
+     "hits": 1
+    },
+    {
+     "time": 0.641,
+     "hits": 1
+    },
+    {
+     "time": 1.5,
+     "hits": 1
+    }
+   ],
+   "lastChainMultiplier": 2,
+   "cycle": 3.374
   },
   "secondaryAttack": {
    "type": "Horizontal",
    "stamina": 40,
    "damageMultiplier": 3,
-   "adrenaline": 1
+   "adrenaline": 1,
+   "chain": [
+    {
+     "time": 2.0,
+     "hits": 1
+    }
+   ],
+   "cycle": 2.15
   },
   "modifiers": {
    "movement": -0.05
@@ -26424,13 +29319,36 @@
   "attack": {
    "type": "Horizontal",
    "stamina": 20,
-   "adrenaline": 2
+   "adrenaline": 2,
+   "chain": [
+    {
+     "time": 0.783,
+     "hits": 1
+    },
+    {
+     "time": 0.641,
+     "hits": 1
+    },
+    {
+     "time": 1.5,
+     "hits": 1
+    }
+   ],
+   "lastChainMultiplier": 2,
+   "cycle": 3.374
   },
   "secondaryAttack": {
    "type": "Horizontal",
    "stamina": 40,
    "damageMultiplier": 3,
-   "adrenaline": 1
+   "adrenaline": 1,
+   "chain": [
+    {
+     "time": 2.0,
+     "hits": 1
+    }
+   ],
+   "cycle": 2.15
   },
   "modifiers": {
    "movement": -0.05
@@ -26470,13 +29388,36 @@
   "attack": {
    "type": "Horizontal",
    "stamina": 8,
-   "adrenaline": 2
+   "adrenaline": 2,
+   "chain": [
+    {
+     "time": 0.783,
+     "hits": 1
+    },
+    {
+     "time": 0.641,
+     "hits": 1
+    },
+    {
+     "time": 1.5,
+     "hits": 1
+    }
+   ],
+   "lastChainMultiplier": 2,
+   "cycle": 3.374
   },
   "secondaryAttack": {
    "type": "Horizontal",
    "stamina": 8,
    "damageMultiplier": 3,
-   "adrenaline": 1
+   "adrenaline": 1,
+   "chain": [
+    {
+     "time": 2.0,
+     "hits": 1
+    }
+   ],
+   "cycle": 2.15
   },
   "modifiers": {
    "movement": -0.05
@@ -26501,7 +29442,14 @@
   "parryAdrenaline": 5,
   "attack": {
    "type": "None",
-   "adrenaline": 1
+   "adrenaline": 1,
+   "chain": [
+    {
+     "time": 4.276,
+     "hits": 1
+    }
+   ],
+   "cycle": 4.276
   },
   "ammoType": "mead"
  },
@@ -26524,7 +29472,14 @@
   "parryAdrenaline": 5,
   "attack": {
    "type": "None",
-   "adrenaline": 1
+   "adrenaline": 1,
+   "chain": [
+    {
+     "time": 4.276,
+     "hits": 1
+    }
+   ],
+   "cycle": 4.276
   },
   "ammoType": "mead"
  },
@@ -26548,7 +29503,14 @@
   "parryAdrenaline": 5,
   "attack": {
    "type": "None",
-   "adrenaline": 1
+   "adrenaline": 1,
+   "chain": [
+    {
+     "time": 4.276,
+     "hits": 1
+    }
+   ],
+   "cycle": 4.276
   },
   "ammoType": "mead"
  },
@@ -26571,7 +29533,14 @@
   "parryAdrenaline": 5,
   "attack": {
    "type": "None",
-   "adrenaline": 1
+   "adrenaline": 1,
+   "chain": [
+    {
+     "time": 4.276,
+     "hits": 1
+    }
+   ],
+   "cycle": 4.276
   },
   "ammoType": "mead"
  },
@@ -26657,7 +29626,23 @@
   "attack": {
    "type": "Horizontal",
    "stamina": 4,
-   "adrenaline": 1
+   "adrenaline": 1,
+   "chain": [
+    {
+     "time": 0.692,
+     "hits": 1
+    },
+    {
+     "time": 0.536,
+     "hits": 1
+    },
+    {
+     "time": 0.747,
+     "hits": 1
+    }
+   ],
+   "lastChainMultiplier": 2,
+   "cycle": 2.425
   },
   "modifiers": {
    "movement": -0.05
@@ -26693,7 +29678,23 @@
   "attack": {
    "type": "Horizontal",
    "stamina": 4,
-   "adrenaline": 1
+   "adrenaline": 1,
+   "chain": [
+    {
+     "time": 0.692,
+     "hits": 1
+    },
+    {
+     "time": 0.536,
+     "hits": 1
+    },
+    {
+     "time": 0.747,
+     "hits": 1
+    }
+   ],
+   "lastChainMultiplier": 2,
+   "cycle": 2.425
   },
   "modifiers": {
    "movement": -0.05

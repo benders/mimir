@@ -62,6 +62,19 @@ in_tools() {
     -v "$ROOT:$ROOT" -w "$ROOT" mimir-tools:latest bash "$ROOT/scripts/$(basename "$0")"
 }
 
+# Per-platform python venv with requirements.txt (UnityPy) for the asset extractors; prints its python.
+ensure_venv() {
+  local venv="$CACHE/venv/$(host_os)-$(host_arch)"
+  if ! cmp -s "$ROOT/requirements.txt" "$venv/.requirements"; then
+    log "setting up python venv $venv"
+    rm -rf "$venv"
+    python3 -m venv "$venv"
+    "$venv/bin/pip" install -q --disable-pip-version-check -r "$ROOT/requirements.txt" >&2
+    cp "$ROOT/requirements.txt" "$venv/.requirements"
+  fi
+  echo "$venv/bin/python"
+}
+
 depotdownloader() {
   local bin="$TOOLS/DepotDownloader-$DEPOTDOWNLOADER_VERSION-$(host_os)-$(host_arch)/DepotDownloader"
   if [[ ! -x "$bin" ]]; then

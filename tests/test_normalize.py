@@ -150,6 +150,21 @@ class Entities(FixtureCase):
         a = N.player()["adrenaline"]
         self.assertEqual((a["degen"], a["perfectDodge"], a["nonBlockDamage"]), ([[0, 2], [1, 3]], 4, -1))
 
+    def test_anim_seconds(self):
+        ev = [[0.2, "Speed", 2.0], [0.4, "Hit"], [0.6, "Speed", 0.5]]
+        self.assertEqual(N.anim_seconds(ev, 0, 1.0, 1.0, 1.0), (0.2 + 0.4 / 2 + 0.4 / 0.5, 0.5))
+        self.assertEqual(N.anim_seconds(ev, 0, 0.5, 1.0, 2.0), (0.2 / 2 + 0.3 / 4, 2.0))  # state speed multiplies
+        self.assertEqual(N.anim_seconds(ev, 0.3, 0.5, 2.0, 1.0), (0.1, 2.0))  # events before start don't apply
+
+    def test_attack_timing(self):
+        sword = N.item("Sword", N.PREFABS["Sword"])["attack"]
+        # swing0 stops at Chain (0.6): 0.2 + 0.4/2; its speed 2 carries into swing1 (state speed 2): 0.1/4 + 0.7/1
+        self.assertEqual(sword["chain"], [{"time": 0.4, "hits": 1}, {"time": 0.725, "hits": 2}])
+        self.assertEqual(sword["lastChainMultiplier"], 2)
+        self.assertEqual(sword["cycle"], round(0.4 + 0.725 + 3 * N.HIT_FREEZE, 3))  # + the freeze per melee hit
+        self.assertNotIn("chain", N.item("SP_Sword", N.PREFABS["SP_Sword"])["attack"])  # looping: no exit time
+        self.assertNotIn("chain", N.item("Bite", N.PREFABS["Bite"])["attack"])  # creature attack: not the player's animator
+
     def test_attack_hits(self):
         self.assertIsNone(N.attack_hits("Bite"))  # melee: the item's own damage
         self.assertEqual(N.attack_hits("Spit"), [{"kind": "area", "damages": {"poison": 9}}])  # the pool, not the bolt

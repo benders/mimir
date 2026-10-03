@@ -173,7 +173,7 @@ def prefabs():
         item("Sword", name="$item_sword", description="$item_sword_desc", itemType="OneHandedWeapon",
              icons=[S("Sword"), S("Sword (gold)")], maxQuality=4, skillType="Swords",
              damages=damages(slash=30, fire=5), damagesPerLevel=damages(slash=6), blockPower=10,
-             blockPowerPerLevel=0.5, useDurability=True, attack=attack(attackAdrenaline=2), movementModifier=-0.05,
+             blockPowerPerLevel=0.5, useDurability=True, attack=attack(attackAdrenaline=2, attackChainLevels=2), movementModifier=-0.05,
              damageModifiers=[{"m_type": "Fire", "m_modifier": "Resistant"},
                               {"m_type": "Pierce", "m_modifier": "Normal"}],
              setName="tester", setSize=2, setStatusEffect=R("SE_Fizz")),
@@ -186,7 +186,8 @@ def prefabs():
         item("WoodOld", name="$item_wood", description="$item_wood_desc", icons=[S("Wood")], maxStackSize=50),  # copy
         item("FW_Helmet", name="$item_helmet", itemType="Helmet", icons=[S("Helmet")], armor=8),  # carried copy
         item("SP_Helmet", name="$item_helmet", itemType="Helmet", icons=[S("Helmet")]),  # unused copy
-        item("SP_Sword", name="Other Sword", itemType="OneHandedWeapon", icons=[S("Sword")]),  # renamed: not a copy
+        item("SP_Sword", name="Other Sword", itemType="OneHandedWeapon", icons=[S("Sword")],
+             attack=attack(attackAnimation="beam", attackType="Projectile")),  # renamed: not a copy
         with_components(item("Fish", name="$item_fish", icons=[S("Fish")]),  # caught with Wood in the Ocean
                         comp("Fish", m(name="$item_fish", baits=[m(bait=R("Wood"), chance=1)],
                                        extraDrops=drop_table(("Pearl", 1, 2, 1))))),
@@ -394,6 +395,14 @@ def write_dump(raw: Path) -> Path:
         **m(name="$npc_vendor"), "m_items": [m(prefab=R("Charm"), stack=2, price=50, requiredGlobalKey="defeated_chief"),
                                              m(prefab=R("vfx_Poof"), stack=1, price=1, requiredGlobalKey="")]},
         path="Stall/Vendor")]})
+    dump("anims/Player_animator.json", {"controller": "Player_animator", "triggers": {  # extract-anims.py
+        "swing0": {"state": "Base Layer.swing 0", "layer": 0, "speed": 1.0, "clip": "Swing1", "length": 1.0, "exit": 0.9,
+                   "offset": 0.0, "events": [[0.2, "Speed", 2.0], [0.4, "Hit"], [0.6, "Chain"]]},
+        "swing1": {"state": "Base Layer.swing 1", "layer": 0, "speed": 2.0, "clip": "Swing2", "length": 0.8, "exit": 1.0,
+                   "offset": 0.0, "events": [[0.1, "Speed", 0.5], [0.3, "OnAttackTrigger"], [0.5, "Hit"]]},
+        "beam": {"state": "upperbody.beam", "layer": 1, "speed": 1.0, "clip": "Beam", "length": 0.5, "exit": None,
+                 "offset": 0.0, "events": [[0.1, "Hit"]]},  # loops until released: no timing
+    }})
     dump("room_themes.json", {"None": 0, "Crypt": 1, "Cave": 4})
     dump("rooms/cave_a.json", {"name": "cave_a", "theme": 5, "enabled": True,  # Crypt|Cave: used by Lair
                                "components": [*spawners(("CreatureSpawner", creature_spawner("Pup", maxLevel=2)),

@@ -124,6 +124,15 @@ def main() -> int:
     check((loc.get("item_sword_bronze") or "").lower() == "bronze sword", "localization: item_sword_bronze")
     check("enemy_troll" in loc, "localization: enemy_troll")
 
+    anims = DUMP / "anims/Player_animator.json"
+    if check(anims.is_file(), "anims/Player_animator.json present (scripts/anims.sh)"):
+        trig = load("anims/Player_animator.json")["triggers"]
+        check(len(trig) >= 50, f"attack triggers: {len(trig)} >= 50")
+        sword = [trig.get(f"swing_longsword{k}") for k in range(3)]
+        check(all(sword), "attack triggers: swing_longsword0..2")
+        check(all(t and t["exit"] and any(e[1] in ("Hit", "OnAttackTrigger") for e in t["events"]) for t in sword), "swing_longsword: exit, hit event")
+        check(all(t and any(e[1] == "Chain" for e in t["events"]) for t in sword[:2]), "swing_longsword0..1: Chain")
+
     icons = DUMP.parent / "icons"
     if icons.is_dir():
         check(len(list(icons.glob("*.png"))) >= 1000, "icons extracted (>= 1000)")

@@ -86,6 +86,13 @@ def main() -> int:
     sword = items.get("SwordBronze", {})
     check((sword.get("name") or "").lower() == "bronze sword", "SwordBronze: English name")
     check(sword.get("damages", {}).get("slash", 0) > 0 and sword.get("icon") == "SwordBronze", "SwordBronze: damage + icon")
+    combo = sword.get("attack", {})
+    check(len(combo.get("chain", [])) == 3 and 1.5 < combo.get("cycle", 0) < 4 and combo.get("lastChainMultiplier") == 2,
+          "SwordBronze: 3-hit combo timing (anims)")
+    untimed = sorted(i["id"] for i in items.values() if i.get("type") in ("OneHandedWeapon", "TwoHandedWeapon",
+                     "TwoHandedWeaponLeft", "Bow") and not (i.get("internal") or i.get("enemyOnly") or i.get("unobtainable"))
+                     and not (i.get("attack") or {}).get("chain"))
+    check(not untimed, f"every obtainable weapon's primary attack has animation timing ({untimed[:10]})")
     r = next((r for r in recipes if r.get("item") == "SwordBronze"), {})
     check(r.get("station") == "forge" and any(x["item"] == "Bronze" for x in r.get("resources", [])), "SwordBronze: forge recipe with Bronze")
     troll = creatures.get("Troll", {})

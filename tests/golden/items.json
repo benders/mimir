@@ -266,7 +266,12 @@
   "backstab": 1,
   "parryBonus": 1,
   "blockAdrenaline": 2,
-  "parryAdrenaline": 5
+  "parryAdrenaline": 5,
+  "attack": {
+   "type": "Projectile",
+   "stamina": 10,
+   "adrenaline": 1
+  }
  },
  {
   "id": "Shard",
@@ -343,7 +348,19 @@
   "attack": {
    "type": "Horizontal",
    "stamina": 10,
-   "adrenaline": 2
+   "adrenaline": 2,
+   "chain": [
+    {
+     "time": 0.4,
+     "hits": 1
+    },
+    {
+     "time": 0.725,
+     "hits": 2
+    }
+   ],
+   "lastChainMultiplier": 2,
+   "cycle": 1.575
   },
   "modifiers": {
    "movement": -0.05

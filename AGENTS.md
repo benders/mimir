@@ -15,9 +15,10 @@ fetch-bepinex.sh Thunderstore BepInExPack_Valheim (pinned) -> .cache/tools/
 build-plugin.sh  plugin/Mimir.Dumper -> .cache/build/plugin/Mimir.Dumper.dll
 dump.sh          server + BepInEx in Docker (amd64) -> .cache/dump/<branch>/raw/
 icons.sh         extract-icons.py (UnityPy, venv) -> .cache/dump/<branch>/icons/*.png
-extract.sh       dump.sh + icons.sh
+anims.sh         extract-anims.py (UnityPy, venv) -> .cache/dump/<branch>/raw/anims/Player_animator.json
+extract.sh       dump.sh + icons.sh + anims.sh
 remote.sh        runs a step (extract) on a native x86_64 Linux host, pulls .cache/dump/<branch> back
-verify.py        invariant checks on the raw dump + icons
+verify.py        invariant checks on the raw dump (+ anims) + icons
 normalize.py     raw dump -> data/*.json (compact, English text resolved, committed)
 verify_data.py   counts, referential integrity, known content in data/ (+ icons)
 build-site.py    data/ + icons -> .cache/site/<branch>/ (static HTML + search.json; fails on broken links)
@@ -88,6 +89,10 @@ Logs after a dump: `.cache/dump/<branch>/server.log` (Unity) and `bepinex.log` (
 - `world/seasons.json` (0.4.0+) — `SeasonalItemGroup` assets (Yule, Midsummer, Halloween...): `fields._startDate` /
   `_endDate` are `[day, month]`, `Pieces` are `$ref` prefabs, `Recipes` are `$asset` recipe names.
 - `localization/English.json` — `$token` → text (keys without the `$`).
+- `anims/Player_animator.json` (written by `extract-anims.py`, not the plugin: the animator state machine is editor-only
+  API at runtime) — per animator trigger that leads to an `attack`-tagged state: `state`, `layer`, `speed` (state speed),
+  `clip`, `length` (s), `exit` (normalized exit time; null = loops until `attack_abort`), `offset`, `events`
+  [[clip time, name, float?]] with `Speed` (sets animator speed), `Hit`/`OnAttackTrigger` (one damage application), `Chain`.
 
 ## Site data (`data/`, committed)
 
@@ -122,6 +127,10 @@ chance below 100 still counts, the chance isn't recorded. Containers, `Spawner_*
 Pieces and recipes of a SeasonalItemGroup (Halloween, Midsummer, Yule; `world/seasons.json`) carry `season`
 {name, start [day, month], end [day, month]}, both ends inclusive, end before start wraps over New Year. They are
 disabled in the game data but let through while the season is current, so `reachable()` treats them as enabled.
+Player attacks (#37) carry animation timing: `chain` [{time (s, until the next level may start or the state exits;
+Speed events applied), hits}] per chain level (or per random variant, `random`), `lastChainMultiplier` (melee: always 2,
+Area: `m_lastChainDamageMultiplier`) and `cycle` (whole combo with every hit connecting, + 0.15 s FreezeFrame per melee
+hit; omitted for bow draw, crossbow reload and projectile bursts, which aren't modelled yet). Looping attacks have none.
 Items keep only the stat fields their type uses: `armor*` for helmet/chest/legs/shoulder (shields' armor is ignored by the
 game), block/parry fields for weapons and shields, attack fields (`skill`, `damages`, `attack`...) for weapons, ammo and
 Catapult ammo (shields keep `skill`); `internal` items keep everything. Blockers have `blockAdrenaline` / `parryAdrenaline`,

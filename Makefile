@@ -9,7 +9,7 @@ BRANCH ?= public
 REMOTE ?= nic@mini
 export MIMIR_BRANCH := $(BRANCH)
 
-.PHONY: help server buildid bepinex plugin dump icons extract remote-extract verify data verify-data site serve test check check-local clean decompile
+.PHONY: help server buildid bepinex plugin dump icons anims extract remote-extract verify data verify-data site serve test check check-local clean decompile
 
 help:
 	@grep -E '^[a-z-]+:.*## ' $(MAKEFILE_LIST) | awk -F':.*## ' '{printf "  %-12s %s\n", $$1, $$2}'
@@ -32,9 +32,12 @@ dump: ## Run the server headless here and write .cache/dump/$(BRANCH)/raw
 icons: ## Extract icons referenced by the dump -> .cache/dump/$(BRANCH)/icons
 	scripts/icons.sh
 
-extract: dump icons ## dump + icons on this host
+anims: ## Extract the player's attack animation timing -> .cache/dump/$(BRANCH)/raw/anims
+	scripts/anims.sh
 
-remote-extract: ## Run dump + icons on $(REMOTE) and pull the results back
+extract: dump icons anims ## dump + icons + anims on this host
+
+remote-extract: ## Run dump + icons + anims on $(REMOTE) and pull the results back
 	MIMIR_REMOTE=$(REMOTE) scripts/remote.sh extract
 
 verify: ## Check the dump (and icons) in .cache/dump/$(BRANCH)

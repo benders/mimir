@@ -37,6 +37,7 @@ def load(rel: str):
 TRANSLATIONS: dict[str, str] = {}
 PREFABS: dict[str, dict] = {}
 SUBPREFABS: dict[str, dict] = {}  # non-networked prefabs referenced by the above (summon abilities); lookup only
+ANIMS: dict[str, dict] = {}  # player attack animator trigger -> state timing (anims/Player_animator.json, extract-anims.py)
 
 
 def setup(raw: Path, out: Path = OUT) -> None:
@@ -54,6 +55,9 @@ def setup(raw: Path, out: Path = OUT) -> None:
         for f in sorted((RAW / "subprefabs").glob("*.json")):
             p = json.loads(f.read_text(encoding="utf-8"))
             SUBPREFABS[p["name"]] = p
+    ANIMS.clear()
+    if (RAW / "anims/Player_animator.json").is_file():
+        ANIMS.update(load("anims/Player_animator.json")["triggers"])
     unresolved.clear()
     skipped_refs.clear()
 
@@ -178,7 +182,57 @@ def comp(p: dict, type_name: str) -> dict | None:
     return next((c["fields"] for c in p["components"] if c["type"] == type_name and "path" not in c), None)
 
 
-def attack(a: dict | None) -> dict | None:
+HIT_EVENTS = {"Hit", "OnAttackTrigger"}  # CharacterAnimEvent -> Humanoid.OnAttackTrigger: one damage application
+HIT_FREEZE = 0.15  # Attack.DoMeleeAttack: FreezeFrame(0.15) when a melee hit connects
+
+
+def anim_seconds(events: list, start: float, stop: float, speed: float, state_speed: float) -> tuple[float, float]:
+    """Real seconds to play a clip from start to stop (clip seconds), and the animator speed after. Speed events
+    (CharacterAnimEvent.Speed) set animator.speed mid-clip; the state's own speed multiplies it."""
+    t, secs = start, 0.0
+    for e in events:
+        if e[1] != "Speed" or e[0] < start:
+            continue
+        if e[0] > stop:
+            break
+        secs += (e[0] - t) / (speed * state_speed)
+        t, speed = e[0], e[2]
+    return secs + (stop - t) / (speed * state_speed), speed
+
+
+def attack_timing(a: dict) -> dict | None:
+    """Player attack duration from the animator (#37). Attack.Start fires m_attackAnimation + chain level (or a random
+    index); the attack lasts while the state is tagged "attack" (Player.InAttack), i.e. until its exit time. A chain
+    level that isn't the last may hand over early, at its Chain event (Attack.CanStartChainAttack). Within a chain the
+    animator speed carries over; after an exit it is reset to 1 (CharacterAnimEvent.CustomFixedUpdate)."""
+    anim, levels, rnd = a["m_attackAnimation"], a.get("m_attackChainLevels", 0), a.get("m_attackRandomAnimations", 0)
+    names = [f"{anim}{k}" for k in range(levels)] if levels > 1 else [f"{anim}{k}" for k in range(rnd)] if rnd >= 2 else [anim]
+    if not all(n in ANIMS and ANIMS[n]["exit"] for n in names):
+        return None  # not a player animation, or a loop held until released (staff beams)
+    chain, speed = [], 1.0
+    for k, n in enumerate(names):
+        tr = ANIMS[n]
+        exit_t = tr["exit"] * tr["length"]
+        chain_t = [e[0] for e in tr["events"] if e[1] == "Chain"]
+        stop = min(exit_t, chain_t[0]) if levels > 1 and k < len(names) - 1 and chain_t else exit_t
+        start = tr["offset"] * tr["length"]
+        secs, after = anim_seconds(tr["events"], start, stop, speed if levels > 1 else 1.0, tr["speed"])
+        chain.append({"time": round(secs, 3), "hits": sum(1 for e in tr["events"] if e[1] in HIT_EVENTS and start <= e[0] <= stop)})
+        speed = after if stop < exit_t else 1.0
+    melee = a["m_attackType"] in ("Horizontal", "Vertical")
+    out = {"chain": chain, "random": len(names) > 1 and levels <= 1}
+    if levels > 1 and melee:
+        out["lastChainMultiplier"] = 2  # Attack.DoMeleeAttack: the last level always deals x2
+    elif levels > 1 and a["m_attackType"] == "Area" and a.get("m_lastChainDamageMultiplier", 2) > 1:
+        out["lastChainMultiplier"] = a.get("m_lastChainDamageMultiplier", 2)  # Attack.DoAreaAttack
+    # The whole combo (or the one attack), every hit connecting. Not when the animation isn't the whole story yet:
+    # bow draw (m_drawDurationMin), crossbow reload (m_reloadTime), projectile bursts (m_burstInterval).
+    if not out["random"] and not a.get("m_bowDraw") and not a.get("m_requiresReload") and a.get("m_projectileBursts", 1) <= 1:
+        out["cycle"] = round(sum(c["time"] + (HIT_FREEZE * c["hits"] if melee else 0) for c in chain), 3)
+    return out
+
+
+def attack(a: dict | None, player: bool = False) -> dict | None:
     if not a or not a.get("m_attackAnimation"):
         return None
     return {
@@ -190,6 +244,7 @@ def attack(a: dict | None) -> dict | None:
         # Attack.DoMeleeAttack (per character hit) / DoAreaAttack (once, if an enemy is hit); OnAttackTrigger adds useAdrenaline
         "adrenaline": a.get("m_attackAdrenaline", 1),
         "useAdrenaline": a.get("m_attackUseAdrenaline", 0),
+        **((attack_timing(a) or {}) if player else {}),
     }
 
 
@@ -242,8 +297,8 @@ def item(name: str, p: dict) -> dict | None:
         "adrenaline": {"max": s.get("m_maxAdrenaline", 0), "effect": ref(s.get("m_fullAdrenalineSE"))}
         if s.get("m_maxAdrenaline") or s.get("m_fullAdrenalineSE") else None,
         "durability": durability,
-        "attack": attack(s.get("m_attack")),
-        "secondaryAttack": attack(s.get("m_secondaryAttack")),
+        "attack": attack(s.get("m_attack"), player=bool(icons)),
+        "secondaryAttack": attack(s.get("m_secondaryAttack"), player=bool(icons)),
         "ammoType": s["m_ammoType"],
         "food": food,
         "modifiers": stat_mods,
