@@ -120,5 +120,26 @@
     }
    ]
   }
+ },
+ {
+  "id": "Vendor",
+  "kind": "trader",
+  "name": "Old Vendor",
+  "sells": [
+   {
+    "item": "Charm",
+    "stack": 2,
+    "price": 50,
+    "requiredKey": "defeated_chief"
+   }
+  ],
+  "locations": [
+   {
+    "location": "Market",
+    "biomes": [
+     "Meadows"
+    ]
+   }
+  ]
  }
 ]

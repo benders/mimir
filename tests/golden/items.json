@@ -17,6 +17,28 @@
   }
  },
  {
+  "id": "Charm",
+  "name": "Lucky Charm",
+  "type": "Material",
+  "icon": "Charm",
+  "weight": 1.0,
+  "stack": 1,
+  "maxQuality": 1,
+  "backstab": 1,
+  "parryBonus": 1
+ },
+ {
+  "id": "Coins",
+  "name": "Coins",
+  "type": "Material",
+  "icon": "Coins",
+  "weight": 1.0,
+  "stack": 1,
+  "maxQuality": 1,
+  "backstab": 1,
+  "parryBonus": 1
+ },
+ {
   "id": "Egg",
   "name": "Egg",
   "type": "Material",

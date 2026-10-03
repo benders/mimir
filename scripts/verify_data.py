@@ -119,6 +119,13 @@ def main() -> int:
     check(fish.get("Fish1", {}).get("baits", [{}])[0].get("item") == "FishingBait" and "Meadows" in fish["Fish1"]["biomes"],
           "Fish1: caught with FishingBait in Meadows")
     check(any(d["item"] == "Ruby" for d in fish.get("Fish3", {}).get("drops", {}).get("items", [])), "Fish3 can carry a Ruby")
+    shops = {s["id"]: s for s in sources if s.get("kind") == "trader"}
+    sold = {t: {o["item"]: o for o in shops.get(t, {}).get("sells", [])} for t in ("Haldor", "Hildir", "BogWitch")}
+    check(all(shops.get(t, {}).get("locations") for t in sold), "Haldor, Hildir and the Bog Witch stand in locations")
+    check(sold["Haldor"].get("BeltStrength", {}).get("price", 0) > 0 and "Coins" in items, "Haldor sells Megingjord for coins")
+    check({"FishingBait", "Thunderstone"} <= set(sold["Haldor"]) and "BarberKit" in sold["Hildir"]
+          and "SpiceOceans" in sold["BogWitch"], "Haldor sells bait and thunderstones, Hildir the barber kit, the Bog Witch spices")
+    check(any(o.get("requiredKey") for o in sold["Hildir"].values()), "Hildir's offers unlock with global keys")
     mead = items.get("MeadHealthMinor", {}).get("consumeEffect")
     check(bool(mead) and bool(effects.get(mead, {}).get("stats")), "MeadHealthMinor: consume effect with stats")
     check(items.get("CookedMeat", {}).get("food", {}).get("health", 0) > 0, "CookedMeat: food values")

@@ -217,6 +217,12 @@ class Entities(FixtureCase):
         self.assertEqual(f["baits"], [{"item": "Wood", "chance": 1}])
         self.assertEqual([d["item"] for d in f["drops"]["items"]], ["Pearl"])
 
+    def test_traders(self):
+        [t] = N.traders()  # the id is the last path segment; the item-less vfx entry is skipped
+        self.assertEqual((t["id"], t["kind"], t["name"]), ("Vendor", "trader", "Old Vendor"))
+        self.assertEqual(t["sells"], [{"item": "Charm", "stack": 2, "price": 50, "requiredKey": "defeated_chief"}])
+        self.assertEqual(t["locations"], [{"location": "Market", "biomes": ["Meadows"]}])
+
     def test_offspring(self):
         self.assertEqual([s["parent"] for s in self.spawns("offspring")], ["Raider", "Raider_Ranged", "Raider_sleeping"])
         self.assertEqual(self.spawns("egg"), [{"creature": "Pup", "source": "egg", "item": "Egg"}])
@@ -278,6 +284,19 @@ class Unobtainable(FixtureCase):
         fish = N.fishing(N.spawns())
         got, _, _ = N.reachable(items, creatures, pieces, recipes, procs, sources + fish, N.spawns())
         self.assertTrue({"Fish", "Pearl", "Mead"} <= got)  # spawned, bait (Wood) reachable; its drop and dish follow
+        shop = N.traders()
+        got, _, _ = N.reachable(items, creatures, pieces, recipes, procs, sources, N.spawns())
+        self.assertNotIn("Charm", got)  # for sale, but Coins are unreachable
+        coins = [{"id": "purse", "kind": "container", "drops": {"items": [{"item": "Coins"}]}}]
+        got, _, _ = N.reachable(items, creatures, pieces, recipes, procs, sources + shop, N.spawns())
+        self.assertNotIn("Charm", got)
+        got, _, _ = N.reachable(items, creatures, pieces, recipes, procs, sources + coins + shop, N.spawns())
+        self.assertIn("Charm", got)  # the global key is ignored
+        twin = [dict(c, drops=c["drops"] + [{"item": "Twin"}]) if c["id"] == "Raider" else c for c in creatures]
+        twin.append({"id": "Twin", "drops": [{"item": "Mystery"}]})  # a creature dropped by a creature (a second phase)
+        got, got_creatures, _ = N.reachable(items, twin, pieces, recipes, procs, sources, N.spawns())
+        self.assertIn("Twin", got_creatures)
+        self.assertIn("Mystery", got)
         no_bait = [dict(f, baits=[{"item": "Gem", "chance": 1}]) for f in fish]  # Gem is unreachable here
         got, _, _ = N.reachable(items, creatures, pieces, recipes, procs, sources + no_bait, N.spawns())
         self.assertNotIn("Fish", got)

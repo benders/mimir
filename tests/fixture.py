@@ -142,7 +142,7 @@ TRANSLATIONS = {
     "item_wood": "Twig", "item_wood_desc": "A stick.",
     "item_ore": "Rustore", "item_ingot": "Ingot",
     "item_sword": "Test Sword", "item_sword_desc": "Sharp <b>enough</b>.",
-    "item_helmet": "Pot Helm", "item_fish": "Glimfish", "item_pearl": "Moon Pearl", "item_mead": "Fizz Mead",
+    "item_helmet": "Pot Helm", "item_fish": "Glimfish", "item_pearl": "Moon Pearl", "item_mead": "Fizz Mead", "item_coins": "Coins", "item_charm": "Lucky Charm", "npc_vendor": "Old Vendor",
     "item_hammer": "Mallet", "item_bite": "Bite",
     "enemy_raider": "Raider", "piece_bench": "Bench", "piece_anvil": "Anvil", "piece_kiln": "Kiln",
     "piece_bush": "Twig Bush", "piece_orerock": "Ore Rock", "se_fizz": "Fizzy",
@@ -190,6 +190,8 @@ def prefabs():
         item("Bite", name="$item_bite", itemType="OneHandedWeapon", attack=attack(attackStamina=0),
              damages=damages(pierce=12)),  # no icon: internal attack item
         item("Gem", name="$item_gem", icons=[S("Gem")]),  # unresolved name, only in a chest: reachable, so shown
+        item("Coins", name="$item_coins", icons=[S("Coins")]),
+        item("Charm", name="$item_charm", icons=[S("Charm")]),  # only sold by the vendor, for Coins
         item("Mystery", name="$item_missing"),  # unresolved token, no source: hidden
         item("OddBar", name="$item_oddbar", description="$item_oddbar_desc", icons=[S("Ingot")]),  # unresolved, craftable: shown as "Odd Bar"
         raider("Raider"),
@@ -277,6 +279,7 @@ def write_dump(raw: Path) -> Path:
         zone_location("Camp", "Plains"),  # same prefab placed in a second biome
         zone_location("Lair", "Mountain"),
         zone_location("Ruin", "Meadows", enable=False),
+        zone_location("Market", "Meadows"),
     ]}}])
     dump("locations/Camp.json", {"name": "Camp", "components": [comp("Location", {}), *spawners(
         ("CreatureSpawner", creature_spawner("Raider", minLevel=3, maxLevel=1)),  # swapped levels
@@ -293,6 +296,10 @@ def write_dump(raw: Path) -> Path:
     )]})
     dump("locations/Ruin.json", {"name": "Ruin", "components": spawners(("CreatureSpawner", creature_spawner("Pup")),
                                                                     container(("Ore", 1, 1, 1)))})  # disabled location
+    dump("locations/Market.json", {"name": "Market", "components": [comp("Location", {}), comp("Trader", {
+        **m(name="$npc_vendor"), "m_items": [m(prefab=R("Charm"), stack=2, price=50, requiredGlobalKey="defeated_chief"),
+                                             m(prefab=R("vfx_Poof"), stack=1, price=1, requiredGlobalKey="")]},
+        path="Stall/Vendor")]})
     dump("room_themes.json", {"None": 0, "Crypt": 1, "Cave": 4})
     dump("rooms/cave_a.json", {"name": "cave_a", "theme": 5, "enabled": True,  # Crypt|Cave: used by Lair
                                "components": spawners(("CreatureSpawner", creature_spawner("Pup", maxLevel=2)),

@@ -173,10 +173,22 @@ def source_name(s: dict) -> str:
 
 
 def source_places(s: dict) -> str:
-    """Where a source is found: a fish's biomes, or a loot chest's locations (dungeon rooms marked)."""
+    """Where a source is found: a fish's biomes, a trader's locations (with biomes) or a loot chest's locations
+    (dungeon rooms marked)."""
+    if s["kind"] == "trader":
+        return ", ".join(f"{pretty_id(x['location'])} ({', '.join(BIOMES.get(b, words(b)) for b in x['biomes'])})"
+                         for x in s["locations"])
     if s["kind"] == "fishing":
         return ", ".join(BIOMES.get(b, words(b)) for b in s.get("biomes", []))
     return ", ".join(pretty_id(x["location"]) + (" dungeon" if x.get("dungeon") else "") for x in s.get("locations", []))
+
+
+def key_label(key: str) -> str:
+    """The condition behind a global key, for trader offers: the boss that sets it, Hildir's returned chest, or the key."""
+    boss = next((c for c in CREATURES.values() if c.get("defeatKey") == key and "nochest" not in c["id"]), None)
+    chest = ITEMS.get("chest_hildir" + key[6:]) if re.fullmatch(r"Hildir\d", key) else None
+    return f"defeating {link('creature', boss['id'])}" if boss else \
+        f"returning {link('item', chest['id'])}" if chest else esc(key)
 
 
 # --- derived relations ----------------------------------------------------------------------
@@ -279,6 +291,7 @@ process_at = defaultdict(list)       # station -> conversions
 dropped_by = defaultdict(list)       # item -> (creature id, drop)
 found_in = defaultdict(list)         # item -> (source, text)
 bait_for = defaultdict(list)         # bait item -> fish ids
+sold_by = defaultdict(list)          # item -> (trader, offer)
 effect_users = defaultdict(list)     # effect -> (item id, how)
 spawns_of = defaultdict(list)        # creature -> spawn entries
 tool_pieces = defaultdict(list)      # tool item -> pieces
@@ -316,6 +329,8 @@ for c in CREATURES.values():
     for d in c.get("drops", []):
         dropped_by[d["item"]].append((c["id"], d))
 for s in SOURCES.values():
+    for o in s.get("sells", []):
+        sold_by[o["item"]].append((s, o))
     for b in s.get("baits", []):
         bait_for[b["item"]].append(s["id"])
     if s.get("pickable"):
@@ -338,7 +353,7 @@ for i in ITEMS.values():
 for s in SPAWNS:
     spawns_of[s["creature"]].append(s)
 for kind, rels in {"item": [crafted_by, used_in_recipe, used_in_piece, process_from, process_to, dropped_by,
-                            found_in, bait_for, tool_pieces],
+                            found_in, bait_for, sold_by, tool_pieces],
                    "creature": [spawns_of],
                    "piece": [crafted_at, built_at, extensions, process_at]}.items():
     for variant, page_id in MERGED[kind].items():  # a merged copy's relations show on its page
@@ -610,6 +625,11 @@ def item_page(i: dict) -> None:
         how = "Caught with " + ", ".join(link("item", b["item"]) for b in fish["baits"])
         body += section("Fishing", f'<p>{how}{" in " + esc(source_places(fish)) if fish.get("biomes") else ""}.</p>')
     body += section("Bait for", reflist(link("item", f) for f in bait_for[i["id"]]))
+
+    offers = [[esc(source_name(t)), link("item", "Coins", o["price"]) + (f" for ×{num(o['stack'])}" if o["stack"] > 1 else ""),
+               key_label(o["requiredKey"]) if o.get("requiredKey") else "", esc(source_places(t))]
+              for t, o in sold_by[i["id"]]]
+    body += section("Sold by", table(["Trader", "Price", "After", "Where"], offers))
 
     drops = [[link("creature", cid), rng(d.get("min", 1), d.get("max", 1)), pct(d.get("chance", 1))]
              for cid, d in dropped_by[i["id"]]]

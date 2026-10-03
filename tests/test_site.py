@@ -66,6 +66,17 @@ class Site(unittest.TestCase):
         self.assertIn("Camp, Lair dungeon", gem)
         self.assertFalse((self.out / "items/Mystery.html").exists())
 
+    def test_sold_by(self):
+        charm = (self.out / "items/Charm.html").read_text(encoding="utf-8")
+        self.assertIn("<h2>Sold by</h2>", charm)
+        self.assertIn("Old Vendor", charm)
+        self.assertIn('href="items/Coins.html"', charm)  # the price
+        self.assertIn("×50", charm)
+        self.assertIn("for ×2", charm)  # stack size
+        self.assertIn("<th>After</th><", charm)
+        self.assertIn("<td>defeated_chief</td>", charm)  # no boss sets this key: shown as is
+        self.assertIn("Market (Meadows)", charm)
+
     def test_fishing(self):
         fish = (self.out / "items/Fish.html").read_text(encoding="utf-8")
         self.assertIn("<h2>Fishing</h2>", fish)

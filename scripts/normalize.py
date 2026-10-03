@@ -277,15 +277,17 @@ def reachable(items: list, creatures: list, pieces: list, recipes: list, procs: 
               spawn_list: list) -> tuple[set, set, set]:
     """Ids of the items, creatures and pieces a player can get to, by fixed point from what the world offers:
     sources, spawns and enabled pieces in a build menu, then enabled recipes with reachable ingredients, drops of
-    reachable creatures, conversions of reachable inputs. Chests in locations count (as sources). Incomplete while
-    fishing, traders and quests aren't modelled (#20)."""
+    reachable creatures (a creature dropped by one, like a miniboss's second phase, is reached too), conversions
+    of reachable inputs. Chests in locations and trader stock count (as sources; trader keys are ignored, Coins
+    must be reachable), fish via their bait. Incomplete while quests aren't modelled (#20)."""
     by_creature = {c["id"]: c for c in creatures}
     got_creatures = {s["creature"] for s in spawn_list}
+    traders = [src for src in sources if src["kind"] == "trader"]
     got_pieces = {p["id"] for p in pieces if p.get("enabled") and p.get("tools")}
     got = set()
     fish = [src for src in sources if src["kind"] == "fishing"]
     for src in sources:
-        if src["kind"] == "fishing":
+        if src["kind"] in ("fishing", "trader"):
             continue
         got |= {d["item"] for d in (src.get("drops") or {}).get("items", [])}
         if src.get("pickable"):
@@ -294,7 +296,11 @@ def reachable(items: list, creatures: list, pieces: list, recipes: list, procs: 
         before = len(got)
         got |= {r["item"] for r in recipes if r.get("item") and r.get("enabled")
                 and all(x["item"] in got for x in r["resources"] if not x.get("upgrader"))}
-        got |= {d["item"] for c in got_creatures for d in by_creature.get(c, {}).get("drops", [])}
+        dropped = {d["item"] for c in got_creatures for d in by_creature.get(c, {}).get("drops", [])}
+        got |= dropped
+        got_creatures |= dropped & by_creature.keys()
+        if "Coins" in got:
+            got |= {x["item"] for t in traders for x in t["sells"]}
         got |= {p["to"] for p in procs if p["from"] in got}
         for f in fish:
             if f["id"] in got_creatures and any(b["item"] in got for b in f["baits"]):
@@ -686,6 +692,24 @@ def fishing(spawn_list: list[dict]) -> list[dict]:
     return out
 
 
+def traders() -> list[dict]:
+    """Traders (Trader component) standing in a world location, as sources of kind `trader`: what they `sell`
+    (item, stack, price in coins, `requiredKey` global key that unlocks the offer) and the `locations` (with biomes)
+    they are found in. The id is the trader's name in the location prefab (Haldor, Hildir, BogWitch)."""
+    by = {}
+    for name, bs, p, dungeon in placed_in_locations():
+        for c in p["components"]:
+            if c["type"] != "Trader":
+                continue
+            f = c["fields"]
+            e = by.setdefault((c.get("path") or name).rsplit("/", 1)[-1], {"kind": "trader", "name": text(f["m_name"]),
+                              "sells": [{"item": ref(i["m_prefab"]), "stack": i["m_stack"], "price": i["m_price"],
+                                         "requiredKey": i["m_requiredGlobalKey"]} for i in f["m_items"]
+                                        if keep(ref(i["m_prefab"]), is_item)], "locations": []})
+            e["locations"].append({"location": name, "biomes": bs})
+    return [{"id": k, **v} for k, v in sorted(by.items())]
+
+
 def offspring_spawns() -> list[dict]:
     """Creatures born from another creature (Procreation) or hatched from an egg item (EggGrow)."""
     out = []
@@ -755,6 +779,7 @@ def main(argv: list[str]) -> int:
     sources += location_containers()
     spawn_list = spawns()
     sources += fishing(spawn_list)
+    sources += traders()
 
     recipes = [recipe(r) for r in load("recipes.json")]
     mark_enemy_only(items, creatures, recipes, procs, sources, pieces)
