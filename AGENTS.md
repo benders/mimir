@@ -91,7 +91,8 @@ Logs after a dump: `.cache/dump/<branch>/server.log` (Unity) and `bepinex.log` (
 
 ## Site data (`data/`, committed)
 
-`meta.json` (versions, counts, unresolved tokens, skipped refs), `items`, `recipes`, `creatures`, `spawns`,
+`meta.json` (versions, counts, unresolved tokens, skipped refs), `player.json` (Player prefab constants the mechanics
+pages use: `adrenaline` gains and decay curves as [time, value] keys, no tangents), `items`, `recipes`, `creatures`, `spawns`,
 `pieces`, `processing` (smelter/cooking/fermenter conversions), `sources` (pickables, ore, trees, rocks; follow
 `becomes` for multi-stage objects (or an item id: the object breaks into that item, e.g. Dvergr altar crystal → DvergrKeyFragment); `kind: container` = loot chests, one per distinct name + `Container` drop table, with
 `locations` [{location, dungeon}] where it is placed, `dungeon` = in a room that location's dungeon generates;
@@ -123,7 +124,9 @@ Pieces and recipes of a SeasonalItemGroup (Halloween, Midsummer, Yule; `world/se
 disabled in the game data but let through while the season is current, so `reachable()` treats them as enabled.
 Items keep only the stat fields their type uses: `armor*` for helmet/chest/legs/shoulder (shields' armor is ignored by the
 game), block/parry fields for weapons and shields, attack fields (`skill`, `damages`, `attack`...) for weapons, ammo and
-Catapult ammo (shields keep `skill`); `internal` items keep everything. A creature attack item whose damage goes through
+Catapult ammo (shields keep `skill`); `internal` items keep everything. Blockers have `blockAdrenaline` / `parryAdrenaline`,
+attacks `adrenaline` (per melee hit, once per area attack) and `useAdrenaline`; items with an adrenaline bar (trinkets) have
+`adrenaline` {max, effect fired when full}. A creature attack item whose damage goes through
 spawned objects has `hits` [{kind: projectile | area | hit (the item's own melee hit), damages}]: projectiles carry the
 attack's damage unless they only spawn, Aoe use their own `m_damage` unless they inherit the attack's, SpawnAbility
 projectiles and Aoe deal their own; `[{kind: none}]` = it deals no damage (summons, heals, buffs). No `hits` = the item's

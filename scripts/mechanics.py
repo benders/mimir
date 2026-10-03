@@ -118,6 +118,34 @@ def pseudo_rate(chance: float) -> float:
     return m / (1 + sum(range(m)))  # gaps 1,1,2,...,m-1 over m outcomes
 
 
+def curve(keys: list, t: float) -> float:
+    """AnimationCurve.Evaluate on [time, value] keys, clamped at the ends. The dump has the keys but not their
+    tangents, so between keys this is linear: an approximation of the game's curve."""
+    if not keys:
+        return 0.0
+    if t <= keys[0][0]:
+        return keys[0][1]
+    for (t0, v0), (t1, v1) in zip(keys, keys[1:]):
+        if t <= t1:
+            return v0 + (v1 - v0) * (t - t0) / (t1 - t0)
+    return keys[-1][1]
+
+
+def adrenaline_gain(v: float, fill: float, gain_keys: list | None = None, rate: float = 1, modifier: float = 0) -> float:
+    """Player.AddAdrenaline for v > 0 at fill fraction `fill` (adrenaline / max): × Game.m_adrenalineRate (world
+    modifier), × m_adrenalineGainMultiplier(fill), then SEMan.ModifyAdrenaline adds that × each effect's
+    m_adrenalineModifier (SE_Stats.ModifyAdrenaline)."""
+    v *= rate * (curve(gain_keys, fill) if gain_keys else 1)
+    return v * (1 + modifier)
+
+
+def adrenaline_drain_time(max_a: float, start: float, degen_keys: list, steps: int = 1000) -> float:
+    """Seconds for `start` adrenaline to drain to 0 once the delay has run out: Player.UpdateStats subtracts
+    m_adrenalineDegen(adrenaline / max) per second, so t = ∫ dA / degen(A / max) (midpoint rule)."""
+    h = start / steps
+    return sum(h / curve(degen_keys, (k + 0.5) * h / max_a) for k in range(steps))
+
+
 # --- markdown -------------------------------------------------------------------------------
 
 def parse_front_matter(text: str) -> tuple[dict, str]:
@@ -427,6 +455,26 @@ def upgrade_chart() -> str:
     return figure(line_chart(series, xlim=(2, 10), ylim=(0, 8), xticks=range(2, 11), yticks=range(0, 9, 2),
                              xlabel="Quality", ylabel="× amountPerLevel", title="Upgrade cost by quality", desc=desc),
                   "q − 1 below 4, then 4 + (q − 4)/2: the step to quality 4 doubles the cost.")
+
+
+def adrenaline_chart(adr: dict) -> str:
+    """Decay per second and the delay before decay starts, against how full the bar is (Player.UpdateStats,
+    Player.AddAdrenaline); keys from the Player prefab, linear between them."""
+    fills = [x / 100 for x in range(0, 101)]
+    series = [{"label": "delay (s)", "points": [(f * 100, curve(adr["degenDelay"], f)) for f in fills],
+               "marks": [(t * 100, v) for t, v in adr["degenDelay"]]},
+              {"label": "decay (/s)", "points": [(f * 100, curve(adr["degen"], f)) for f in fills],
+               "marks": [(t * 100, v) for t, v in adr["degen"]]}]
+    top = max(v for s in series for _, v in s["points"])
+    ymax = max(2, math.ceil(top / 2) * 2)
+    d, dl = adr["degen"], adr["degenDelay"]
+    desc = (f"Adrenaline decay per second and the delay after a gain before decay starts, by fill 0 to 100%. "
+            f"Decay goes from {_fmt(d[0][1])} to {_fmt(d[-1][1])} per second; the delay from {_fmt(dl[0][1])} s to "
+            f"{_fmt(dl[-1][1])} s.")
+    return figure(line_chart(series, xlim=(0, 100), ylim=(0, ymax), xticks=range(0, 101, 25),
+                             yticks=range(0, ymax + 1, 2), xlabel="Fill (% of max adrenaline)", ylabel="Seconds / per second",
+                             title="Adrenaline decay", desc=desc),
+                  "Dots: the curve keys in the Player prefab; linear between them (the dump has no tangents).")
 
 
 CHARTS = {"armor": armor_chart, "block": block_chart, "stars": stars_chart, "stamina": stamina_chart,

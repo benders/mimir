@@ -138,6 +138,18 @@ class Entities(FixtureCase):
         self.assertFalse({"armor", "block", "skill", "backstab", "attackForce", "parryBonus"} & mead.keys())
         self.assertIn("backstab", bite)  # internal attack items keep everything
 
+    def test_adrenaline_fields(self):
+        items = [N.item(n, N.PREFABS[n]) for n in ("Charm", "Buckler", "Sword", "Mead")]
+        N.prune_item_fields(items)
+        charm, buckler, sword, mead = items
+        self.assertEqual(charm["adrenaline"], {"max": 40, "effect": "SE_Fizz"})
+        self.assertNotIn("blockAdrenaline", charm)  # trinkets don't block
+        self.assertEqual((buckler["blockAdrenaline"], buckler["parryAdrenaline"]), (3, 0))
+        self.assertEqual((sword["attack"]["adrenaline"], sword["attack"]["useAdrenaline"]), (2, 0))
+        self.assertIsNone(mead["adrenaline"])
+        a = N.player()["adrenaline"]
+        self.assertEqual((a["degen"], a["perfectDodge"], a["nonBlockDamage"]), ([[0, 2], [1, 3]], 4, -1))
+
     def test_attack_hits(self):
         self.assertIsNone(N.attack_hits("Bite"))  # melee: the item's own damage
         self.assertEqual(N.attack_hits("Spit"), [{"kind": "area", "damages": {"poison": 9}}])  # the pool, not the bolt

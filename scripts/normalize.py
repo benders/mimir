@@ -187,6 +187,9 @@ def attack(a: dict | None) -> dict | None:
         "damageMultiplier": a["m_damageMultiplier"] if a["m_damageMultiplier"] != 1 else 0,
         "projectile": ref(a.get("m_attackProjectile")),
         "projectiles": a["m_projectiles"] if a["m_projectiles"] > 1 else 0,
+        # Attack.DoMeleeAttack (per character hit) / DoAreaAttack (once, if an enemy is hit); OnAttackTrigger adds useAdrenaline
+        "adrenaline": a.get("m_attackAdrenaline", 1),
+        "useAdrenaline": a.get("m_attackUseAdrenaline", 0),
     }
 
 
@@ -233,6 +236,11 @@ def item(name: str, p: dict) -> dict | None:
         "parryForce": s["m_deflectionForce"],
         "parryForcePerLevel": s["m_deflectionForcePerLevel"],
         "parryBonus": s["m_timedBlockBonus"],
+        "blockAdrenaline": s.get("m_blockAdrenaline", 2),  # Humanoid.BlockAttack, gained by the blocker
+        "parryAdrenaline": s.get("m_perfectBlockAdrenaline", 5),
+        # Player.AddAdrenaline: equipped items' maxAdrenaline add up; when full, each equipped item's effect fires
+        "adrenaline": {"max": s.get("m_maxAdrenaline", 0), "effect": ref(s.get("m_fullAdrenalineSE"))}
+        if s.get("m_maxAdrenaline") or s.get("m_fullAdrenalineSE") else None,
         "durability": durability,
         "attack": attack(s.get("m_attack")),
         "secondaryAttack": attack(s.get("m_secondaryAttack")),
@@ -251,7 +259,8 @@ WEAPON_TYPES = {"OneHandedWeapon", "TwoHandedWeapon", "TwoHandedWeaponLeft", "Bo
 AMMO_TYPES = {"Ammo", "AmmoNonEquipable"}
 # Fields only some item types use; every ItemDrop carries the defaults (armor 10, block 10, skill Swords...).
 ARMOR_FIELDS = {"armor", "armorPerLevel"}  # Player.GetBodyArmor sums helmet, chest, legs and shoulder only
-BLOCK_FIELDS = {"block", "blockPerLevel", "parryForce", "parryForcePerLevel", "parryBonus"}  # Humanoid.GetCurrentBlocker:
+BLOCK_FIELDS = {"block", "blockPerLevel", "parryForce", "parryForcePerLevel", "parryBonus", "blockAdrenaline",
+                "parryAdrenaline"}  # Humanoid.GetCurrentBlocker:
 # the left-hand item (shield, bow, torch), else the weapon
 ATTACK_FIELDS = {"skill", "toolTier", "damages", "damagesPerLevel", "attackForce", "backstab", "attack", "secondaryAttack"}
 
@@ -1069,6 +1078,19 @@ def piece_tools() -> dict[str, list[str]]:
 # ---------------------------------------------------------------------------------------------
 
 
+def player() -> dict:
+    """Player prefab constants for the mechanics pages. Curves are [time, value] keys (the dump has no tangents)."""
+    p = comp(PREFABS["Player"], "Player") or {}
+    g = lambda k, d=0: p.get(k, d)  # noqa: E731
+    return {"adrenaline": {
+        "max": g("m_maxAdrenaline"),  # Player.GetMaxAdrenaline: this + equipped items' m_maxAdrenaline
+        "degen": g("m_adrenalineDegen", []), "degenDelay": g("m_adrenalineDegenDelay", []),
+        "gainMultiplier": g("m_adrenalineGainMultiplier", []),
+        "perfectDodge": g("m_perfectDodgeAdrenaline"), "staggerEnemy": g("m_staggerEnemyAdrenaline"),
+        "attackMiss": g("m_attackMissAdrenaline"), "nonBlockDamage": g("m_nonBlockDamageAdrenaline"),
+    }}
+
+
 def write(name: str, data) -> None:
     data = prune(data)
     (OUT / name).write_text(json.dumps(data, indent=1, ensure_ascii=False) + "\n", encoding="utf-8")
@@ -1128,6 +1150,7 @@ def main(argv: list[str]) -> int:
     }
     for name, v in data.items():
         write(name, v)
+    write("player.json", player())
     write("meta.json", {
         "gameVersion": m["gameVersion"], "networkVersion": m["networkVersion"], "dumperVersion": m["dumperVersion"],
         "steamBuildId": steam_build_id(),

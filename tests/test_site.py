@@ -196,7 +196,7 @@ class Site(unittest.TestCase):
         self.assertIn("<h1>Chief</h1>", (self.out / "creatures/Chief.html").read_text(encoding="utf-8"))
 
     def test_mechanics_section(self):
-        for page in ("index", "blocking", "drops", "creature-levels", "damage-types", "item-upgrades"):
+        for page in ("index", "blocking", "drops", "creature-levels", "damage-types", "item-upgrades", "adrenaline"):
             self.assertTrue((self.out / f"mechanics/{page}.html").is_file(), page)
         home = (self.out / "index.html").read_text(encoding="utf-8")
         self.assertIn('<a href="mechanics/index.html">Mechanics</a>', home)  # nav entry
@@ -231,6 +231,20 @@ class Site(unittest.TestCase):
         self.assertIn('href="mechanics/creature-levels.html"', raider)
         self.assertIn('href="mechanics/damage-types.html"', raider)  # Resistances section
         self.assertIn('href="mechanics/drops.html"', raider)         # Drops section
+
+    def test_adrenaline(self):
+        charm = (self.out / "items/Charm.html").read_text(encoding="utf-8")
+        self.assertIn("<dt>Max adrenaline</dt><dd>+40</dd>", charm)
+        self.assertIn('<dt>When adrenaline is full</dt><dd><a class="ref" href="effects/SE_Fizz.html"', charm)
+        self.assertIn('href="mechanics/adrenaline.html"', charm)
+        self.assertIn("full adrenaline", (self.out / "effects/SE_Fizz.html").read_text(encoding="utf-8"))
+        self.assertIn("+3 per block, +0 per parry", (self.out / "items/Buckler.html").read_text(encoding="utf-8"))
+        page = (self.out / "mechanics/adrenaline.html").read_text(encoding="utf-8")
+        self.assertIn("Adrenaline decay", page)  # chart
+        self.assertIn('<td><a class="ref" href="items/Charm.html"', page)  # trinkets table
+        self.assertIn("<td>Perfect dodge</td><td>4</td>", page)  # from player.json
+        self.assertIn("<td>primary</td><td>Horizontal</td><td>2</td>", page)  # Sword: 2 per hit
+        self.assertIn("<td>3</td><td>0</td>", page)  # Buckler's block and parry adrenaline
 
     def test_destroyed_into_item(self):
         shard = (self.out / "items/Shard.html").read_text(encoding="utf-8")

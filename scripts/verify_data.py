@@ -180,6 +180,13 @@ def main() -> int:
           "DvergerStaffNova: damage from its Aoe (hits)")
     check(any(h["kind"] == "area" for h in items["troll_groundslam"].get("hits", [])),
           "troll_groundslam: weapon spawnOnHit Aoe in hits")
+    trinkets = [i for i in items.values() if i["type"] == "Trinket" and not i.get("unobtainable")]
+    check(len(trinkets) >= 10 and all(i.get("adrenaline", {}).get("max", 0) > 0 and i["adrenaline"].get("effect") in effects
+                                      for i in trinkets), f"{len(trinkets)} trinkets, each with max adrenaline and a known effect")
+    check(items["TrinketBlackStamina"].get("adrenaline", {}).get("effect") == "TrinketBlackStamina",
+          "TrinketBlackStamina fires its own effect when adrenaline is full")
+    adr = load("player.json").get("adrenaline", {})
+    check(len(adr.get("degen", [])) >= 2 and len(adr.get("degenDelay", [])) >= 2, "player.json: adrenaline decay curves")
     check(any(s.get("becomes") == "DvergrKeyFragment" and s.get("locations") for s in sources),
           "DvergrKeyFragment: placed blackmarble_altar_crystal breaks into it")
     hidden = {"Deer_White", "DvergerTest", "FrostWisp", "Hive", "TheHive", "IceSkates", "Larva", "TorchMist", "Sled",

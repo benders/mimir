@@ -1,0 +1,36 @@
+{
+ "adrenaline": {
+  "degen": [
+   [
+    0.00120778964,
+    1
+   ],
+   [
+    1,
+    4
+   ]
+  ],
+  "degenDelay": [
+   [
+    0,
+    10
+   ],
+   [
+    1,
+    6
+   ]
+  ],
+  "gainMultiplier": [
+   [
+    0,
+    1
+   ],
+   [
+    1,
+    1
+   ]
+  ],
+  "perfectDodge": 5,
+  "staggerEnemy": 3
+ }
+}

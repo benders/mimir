@@ -45,6 +45,7 @@ ITEMS = {i["id"]: i for i in load("items")}
 CREATURES = {c["id"]: c for c in load("creatures")}
 PIECES = {p["id"]: p for p in load("pieces")}
 EFFECTS = {e["id"]: e for e in load("status_effects")}
+PLAYER = load("player")
 RECIPES = load("recipes")
 SPAWNS = load("spawns")
 SOURCES = {s["id"]: s for s in load("sources")}
@@ -386,6 +387,8 @@ for i in ITEMS.values():
         effect_users[i["consumeEffect"]].append((i["id"], "consumed"))
     if i.get("equipEffect"):
         effect_users[i["equipEffect"]].append((i["id"], "equipped"))
+    if (i.get("adrenaline") or {}).get("effect"):
+        effect_users[i["adrenaline"]["effect"]].append((i["id"], "full adrenaline"))
     if i.get("set"):
         set_members[i["set"]["name"]].append(i["id"])
         if i["set"].get("effect"):
@@ -696,6 +699,8 @@ def item_page(i: dict) -> None:
                        ("Backstab", f'×{num(i["backstab"])}' if i.get("backstab") else None)]
         if t in WEAPONS | {"Shield"}:
             combat.append(("Parry bonus", f'×{num(i["parryBonus"])}' if i.get("parryBonus") else None))
+            combat.append(("Adrenaline", f'+{num(i.get("blockAdrenaline", 0))} per block, '
+                                         f'+{num(i.get("parryAdrenaline", 0))} per parry'))
         if {"chop", "pickaxe"} & set(i.get("damages", {})):
             combat.append(("Tool tier", num(i.get("toolTier", 0))))
     if i.get("ammoType") and t in WEAPONS | {"Ammo", "AmmoNonEquipable"}:
@@ -727,10 +732,17 @@ def item_page(i: dict) -> None:
         eff.append(("When consumed", link("effect", i["consumeEffect"])))
     if i.get("equipEffect"):
         eff.append(("When equipped", link("effect", i["equipEffect"])))
+    if adr := i.get("adrenaline"):
+        if adr.get("max"):
+            eff.append(("Max adrenaline", f'+{num(adr["max"])}'))
+        if adr.get("effect"):
+            eff.append(("When adrenaline is full", link("effect", adr["effect"])))
     if i.get("set"):
         st = i["set"]
         eff.append((f"Set bonus ({st['size']} pieces)", link("effect", st["effect"]) if st.get("effect") else "—"))
         eff.append(("Set", " ".join(link("item", m) for m in set_members[st["name"]] if m != i["id"])))
+    if i.get("adrenaline"):
+        eff.append(("How it fills", mech_link("adrenaline", "Adrenaline")))
     body += section("Effects", kv(eff))
 
     recipes = "".join(recipe_block(r, i.get("maxQuality", 1)) for r in crafted_by[i["id"]])
@@ -1115,12 +1127,85 @@ def block_upgrade_example() -> str:
             f'<code>amount</code> then <code>perLevel</code> times the multiplier.</p>' + table(head, rows, "num"))
 
 
+def block_trinkets() -> str:
+    """Every item with an adrenaline bar: what it adds to max adrenaline, the effect it fires when full, how long that
+    lasts, and how long a full bar takes to drain from just below full (delay not included)."""
+    adr = PLAYER["adrenaline"]
+    rows = []
+    for i in sorted((x for x in ITEMS.values() if x.get("adrenaline") and has_page("item", x["id"])),
+                    key=lambda x: (x["adrenaline"].get("max", 0), x["id"])):
+        a = i["adrenaline"]
+        e = EFFECTS.get(a.get("effect")) or {}
+        mx = a.get("max", 0)
+        drain = mechanics.adrenaline_drain_time(mx, mx, adr["degen"]) if mx and adr.get("degen") else 0
+        rows.append([link("item", i["id"]), num(mx), link("effect", e["id"]) if e else "—",
+                     duration(e["duration"]) if e.get("duration") else "—", duration(round(drain)) if drain else "—"])
+    return table(["Trinket", "Max adrenaline", "When full", "Lasts", "Full bar drains in"], rows, "num")
+
+
+def block_adrenaline_attacks() -> str:
+    """Player weapons whose attacks give other than the default 1 adrenaline per hit, or give adrenaline on use."""
+    rows = []
+    for i in sorted((x for x in ITEMS.values() if x["type"] in WEAPONS and has_page("item", x["id"])),
+                    key=lambda x: name_of("item", x["id"]).lower()):
+        for label, a in (("primary", i.get("attack")), ("secondary", i.get("secondaryAttack"))):
+            if not a:
+                continue
+            hit, use = a.get("adrenaline", 0), a.get("useAdrenaline", 0)
+            ranged = a.get("type") == "Projectile"
+            if use or (not ranged and hit != 1):
+                rows.append([link("item", i["id"]), label, esc(words(a.get("type", ""))),
+                             "projectile" if ranged else num(hit), num(use) if use else ""])
+    return table(["Weapon", "Attack", "Type", "Per hit", "On use"], rows, "num")
+
+
+def block_adrenaline_blockers() -> str:
+    """Shields and weapons whose block or parry adrenaline differs from the ItemDrop defaults (2 and 5)."""
+    rows = []
+    for i in sorted((x for x in ITEMS.values() if x["type"] in WEAPONS | {"Shield"} and has_page("item", x["id"])),
+                    key=lambda x: name_of("item", x["id"]).lower()):
+        b, pa = i.get("blockAdrenaline", 0), i.get("parryAdrenaline", 0)
+        if (b, pa) != (2, 5):
+            rows.append([link("item", i["id"]), num(b), num(pa)])
+    return table(["Item", "Per block", "Per parry"], rows, "num")
+
+
+def block_adrenaline_sources() -> str:
+    """What adds or removes adrenaline. Player values from data/player.json; the guardian power's 10 is a code constant
+    (Player.m_adrenalineGuardianPower, not serialized)."""
+    adr = PLAYER["adrenaline"]
+    rows = [("Melee hit", "the attack's per-hit value, for each creature hit", "Attack.DoMeleeAttack"),
+            ("Area attack", "the attack's per-hit value, once if an enemy is hit", "Attack.DoAreaAttack"),
+            ("Projectile hit", "the projectile's value (2 by default), when it damages a creature", "Projectile.OnHit"),
+            ("Attack used", "the attack's on-use value; again per burst for attacks that pay per burst",
+             "Attack.OnAttackTrigger"),
+            ("Block", "the blocker's per-block value, unless it is a parry; even if the block breaks", "Humanoid.BlockAttack"),
+            ("Parry", "the blocker's per-parry value, if the block holds", "Humanoid.BlockAttack"),
+            ("Perfect dodge", num(adr.get("perfectDodge", 0)), "Player.RPC_HitWhileDodging"),
+            ("Stagger an enemy", num(adr.get("staggerEnemy", 0)), "Character.AddStaggerDamage"),
+            ("Guardian power used", "10", "Player.ActivateGuardianPower"),
+            ("Melee attack hits nothing", num(adr.get("attackMiss", 0)), "Attack.DoMeleeAttack"),
+            ("Hit taken without blocking", num(adr.get("nonBlockDamage", 0)), "Character.RPC_Damage")]
+    return table(["Event", "Adrenaline", "Method"], [[esc(a), esc(b), f"<code>{c}</code>"] for a, b, c in rows])
+
+
+def block_adrenaline_effects() -> str:
+    """Status effects that change adrenaline gain (SE_Stats.m_adrenalineModifier)."""
+    return reflist(f'{link("effect", e["id"])} <span class=note>{"+" if v > 0 else ""}{num(round(v * 100))}% gain</span>'
+                   for e in sorted(EFFECTS.values(), key=lambda x: x["id"])
+                   if (v := (e.get("stats") or {}).get("adrenalineModifier")) and has_page("effect", e["id"]))
+
+
 def mech_blocks() -> dict:
     return {"shields": block_shields, "resistant-creatures": block_resist_creatures, "resistant-gear": block_resist_gear,
             "star-spawns": block_star_spawns, "star-odds": block_star_odds, "guaranteed-stars": block_guaranteed_stars,
             "pseudo-drops": block_pseudo_drops, "pseudo-table": block_pseudo_table,
             "drops-example": block_drops_example, "upgrade-costs": block_upgrade_costs,
             "upgrade-example": block_upgrade_example,
+            "trinkets": block_trinkets, "adrenaline-attacks": block_adrenaline_attacks,
+            "adrenaline-blockers": block_adrenaline_blockers, "adrenaline-effects": block_adrenaline_effects,
+            "adrenaline-sources": block_adrenaline_sources,
+            "adrenaline-chart": lambda: mechanics.adrenaline_chart(PLAYER["adrenaline"]),
             "chart": lambda name: mechanics.CHARTS[name]()}
 
 

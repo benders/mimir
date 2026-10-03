@@ -21,6 +21,21 @@ class Formulas(unittest.TestCase):
         self.assertEqual(M.armor_through(100, 0), 100)   # ac <= 0 is a no-op
         self.assertGreater(M.armor_through(100, 10000), 0)
 
+    def test_curve(self):
+        keys = [[0.2, 1], [1, 5]]
+        self.assertEqual(M.curve(keys, 0), 1)       # clamped before the first key
+        self.assertEqual(M.curve(keys, 0.6), 3)     # linear between keys
+        self.assertEqual(M.curve(keys, 2), 5)
+        self.assertEqual(M.curve([], 0.5), 0)
+
+    def test_adrenaline(self):
+        # v x rate x gain(fill), then + v x sum(m_adrenalineModifier)
+        self.assertEqual(M.adrenaline_gain(5, 0.5), 5)
+        self.assertEqual(M.adrenaline_gain(5, 0.5, [[0, 1], [1, 3]], rate=2, modifier=1), 40)
+        self.assertAlmostEqual(M.adrenaline_drain_time(60, 30, [[0, 2], [1, 2]]), 15)
+        # degen 1 + 3·A/60: t = 20 ln(1 + A/20), from 60 = 20 ln 4
+        self.assertAlmostEqual(M.adrenaline_drain_time(60, 60, [[0, 1], [1, 4]]), 20 * __import__("math").log(4), 3)
+
     def test_block_power(self):
         # (42 + 6 * 2) * (1 + 0.5 * 0.5) = 67.5; parry x1.5
         self.assertEqual(M.block_power(42, 6, 3, 50), 67.5)
@@ -151,6 +166,8 @@ class Charts(unittest.TestCase):
         self.assertLess(pts[1][1], pts[0][1])  # y grows upward in value, downward in SVG coordinates
 
     def test_other_charts(self):
+        adr = {"degen": [[0, 1], [1, 4]], "degenDelay": [[0, 10], [1, 6]]}
+        self.assertIn("Decay goes from 1 to 4 per second; the delay from 10 s to 6 s", M.adrenaline_chart(adr))
         self.assertIn("A 100 hit leaves 60 against block power 40 and 25 against block power 100", M.block_chart())
         self.assertIn("health ×3, damage ×2, level-multiplied drops ×4", M.stars_chart())
 

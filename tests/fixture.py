@@ -173,12 +173,13 @@ def prefabs():
         item("Sword", name="$item_sword", description="$item_sword_desc", itemType="OneHandedWeapon",
              icons=[S("Sword"), S("Sword (gold)")], maxQuality=4, skillType="Swords",
              damages=damages(slash=30, fire=5), damagesPerLevel=damages(slash=6), blockPower=10,
-             blockPowerPerLevel=0.5, useDurability=True, attack=attack(), movementModifier=-0.05,
+             blockPowerPerLevel=0.5, useDurability=True, attack=attack(attackAdrenaline=2), movementModifier=-0.05,
              damageModifiers=[{"m_type": "Fire", "m_modifier": "Resistant"},
                               {"m_type": "Pierce", "m_modifier": "Normal"}],
              setName="tester", setSize=2, setStatusEffect=R("SE_Fizz")),
         item("Buckler", name="$item_buckler", itemType="Shield", icons=[S("Helmet")], maxQuality=3,
-             skillType="Blocking", blockPower=20, blockPowerPerLevel=5, timedBlockBonus=2),
+             skillType="Blocking", blockPower=20, blockPowerPerLevel=5, timedBlockBonus=2,
+             blockAdrenaline=3, perfectBlockAdrenaline=0),
         item("Helmet", name="$item_helmet", itemType="Helmet", icons=[S("Helmet")], armor=4, armorPerLevel=2),
         item("Hat", name="$item_hat", itemType="Helmet", icons=[S("Helmet")]),  # only craftable in season
         item("HelmetFem", name="$item_helmet", itemType="Helmet", icons=[S("Helmet")], armor=5),  # "Pot Helm (female)"
@@ -202,7 +203,8 @@ def prefabs():
         item("Gem", name="$item_gem", icons=[S("Gem")]),  # unresolved name, only in a chest: reachable, so shown
         item("Shard", name="$item_shard", icons=[S("Shard")]),  # only from breaking the Altar
         item("Coins", name="$item_coins", icons=[S("Coins")]),
-        item("Charm", name="$item_charm", icons=[S("Charm")]),  # only sold by the vendor, for Coins
+        item("Charm", name="$item_charm", itemType="Trinket", icons=[S("Charm")], maxAdrenaline=40,
+             fullAdrenalineSE={"$asset": "SE_Fizz", "type": "SE_Stats"}),  # only sold by the vendor, for Coins
         item("Mystery", name="$item_missing"),  # unresolved token, no source: hidden
         item("OddBar", name="$item_oddbar", description="$item_oddbar_desc", icons=[S("Ingot")]),  # unresolved, craftable: shown as "Odd Bar"
         raider("Raider"),
@@ -227,7 +229,10 @@ def prefabs():
         prefab("Wisp", character(name="$enemy_missing", health=10)),  # unresolved name, never spawns: hidden
         with_components(item("Egg", name="$item_egg", icons=[S("Egg")]), comp("EggGrow", m(grownPrefab=R("Pup")))),
         prefab("Spawner_Raider", comp("CreatureSpawner", creature_spawner("Raider"))),
-        prefab("Player", character(name="Player"), comp("Player", {})),
+        prefab("Player", character(name="Player"), comp("Player", m(
+            maxAdrenaline=0, adrenalineDegen=[[0, 2], [1, 3]], adrenalineDegenDelay=[[0, 8], [1, 4]],
+            adrenalineGainMultiplier=[[0, 1], [1, 1]], perfectDodgeAdrenaline=4, staggerEnemyAdrenaline=6,
+            attackMissAdrenaline=0, nonBlockDamageAdrenaline=-1))),
         piece("Bench", comp("CraftingStation", m(name="$piece_bench", rangeBuild=20, craftRequireRoof=True,
                                                  craftRequireFire=False)),
               name="$piece_bench", icon=S("Bench"), category="Crafting", resources=[req("Wood", 10)]),
