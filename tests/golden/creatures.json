@@ -13,7 +13,8 @@
    "walk": 2,
    "run": 5,
    "swim": 2
-  }
+  },
+  "stage": "Mountain"
  },
  {
   "id": "Chief_p2",
@@ -28,7 +29,8 @@
    "walk": 2,
    "run": 5,
    "swim": 2
-  }
+  },
+  "stage": "Mountain"
  },
  {
   "id": "Imp",
@@ -42,7 +44,8 @@
    "walk": 2,
    "run": 5,
    "swim": 2
-  }
+  },
+  "stage": "Meadows"
  },
  {
   "id": "Moth",
@@ -56,7 +59,8 @@
    "walk": 2,
    "run": 5,
    "swim": 2
-  }
+  },
+  "stage": "Meadows"
  },
  {
   "id": "Pup",
@@ -70,7 +74,8 @@
    "walk": 2,
    "run": 5,
    "swim": 2
-  }
+  },
+  "stage": "Meadows"
  },
  {
   "id": "Raider",
@@ -112,7 +117,8 @@
     "Fish"
    ]
   },
-  "afraidOfFire": true
+  "afraidOfFire": true,
+  "stage": "Meadows"
  },
  {
   "id": "Raider_Ranged",
@@ -155,7 +161,8 @@
     "Fish"
    ]
   },
-  "afraidOfFire": true
+  "afraidOfFire": true,
+  "stage": "Meadows"
  },
  {
   "id": "Raider_sleeping",
@@ -197,7 +204,8 @@
     "Fish"
    ]
   },
-  "afraidOfFire": true
+  "afraidOfFire": true,
+  "stage": "Meadows"
  },
  {
   "id": "Shade",
@@ -208,7 +216,8 @@
    "walk": 2,
    "run": 5,
    "swim": 2
-  }
+  },
+  "stage": "Mountain"
  },
  {
   "id": "Singer",
@@ -222,7 +231,8 @@
    "walk": 2,
    "run": 5,
    "swim": 2
-  }
+  },
+  "stage": "Mountain"
  },
  {
   "id": "Sprite",
@@ -236,7 +246,8 @@
    "walk": 2,
    "run": 5,
    "swim": 2
-  }
+  },
+  "stage": "Meadows"
  },
  {
   "id": "Wisp",

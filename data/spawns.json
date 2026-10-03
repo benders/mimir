@@ -368,7 +368,8 @@
   "altitude": [
    -1000,
    1000
-  ]
+  ],
+  "requiredEvent": "jotun_invasion"
  },
  {
   "creature": "JotunWitch",
@@ -402,7 +403,8 @@
   "altitude": [
    -1000,
    1000
-  ]
+  ],
+  "requiredEvent": "jotun_invasion"
  },
  {
   "creature": "Elaking",
@@ -436,7 +438,8 @@
   "altitude": [
    -1000,
    1000
-  ]
+  ],
+  "requiredEvent": "jotun_invasion"
  },
  {
   "creature": "BonemawSerpent",

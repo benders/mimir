@@ -3240,6 +3240,24 @@
   "name": "Malicious Ice"
  },
  {
+  "id": "BlackIce_Start",
+  "kind": "destructible",
+  "health": 1000,
+  "damageModifiers": {
+   "chop": "Weak",
+   "pickaxe": "Weak",
+   "fire": "Weak"
+  },
+  "startsEvent": "jotun_invasion",
+  "name": "Malicious Ice",
+  "locations": [
+   {
+    "location": "MorkBorg",
+    "dungeon": true
+   }
+  ]
+ },
+ {
   "id": "BlobMorkBig",
   "kind": "destructible",
   "health": 600,
@@ -3731,6 +3749,12 @@
     }
    ]
   }
+ },
+ {
+  "id": "FimbulvinterOrb_start",
+  "kind": "destructible",
+  "health": 150,
+  "startsEvent": "jotun_invasion"
  },
  {
   "id": "FirTree",
@@ -22331,6 +22355,20 @@
     "item": "BarberKit",
     "stack": 1,
     "price": 600
+   }
+  ],
+  "takes": [
+   {
+    "item": "chest_hildir1",
+    "setsKey": "Hildir1"
+   },
+   {
+    "item": "chest_hildir2",
+    "setsKey": "Hildir2"
+   },
+   {
+    "item": "chest_hildir3",
+    "setsKey": "Hildir3"
    }
   ],
   "locations": [

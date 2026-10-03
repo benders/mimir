@@ -21,7 +21,8 @@
   "damageModifiers": {
    "fire": "Weak"
   },
-  "extends": "Bench"
+  "extends": "Bench",
+  "stage": "Meadows"
  },
  {
   "id": "Bench",
@@ -47,7 +48,8 @@
    "name": "Bench",
    "buildRange": 20,
    "requiresRoof": true
-  }
+  },
+  "stage": "Meadows"
  },
  {
   "id": "Hive",
@@ -77,7 +79,8 @@
     "Meadows",
     "BlackForest"
    ]
-  }
+  },
+  "stage": "Meadows"
  },
  {
   "id": "Kiln",
@@ -103,7 +106,8 @@
   "material": "Wood",
   "damageModifiers": {
    "fire": "Weak"
-  }
+  },
+  "stage": "Meadows"
  },
  {
   "id": "Sapling",
@@ -124,7 +128,8 @@
   "material": "Wood",
   "damageModifiers": {
    "fire": "Weak"
-  }
+  },
+  "stage": "Meadows"
  },
  {
   "id": "Tap",
@@ -157,7 +162,8 @@
      "Swamp"
     ]
    }
-  }
+  },
+  "stage": "Meadows"
  },
  {
   "id": "Tap2",
@@ -186,7 +192,8 @@
    "connectsTo": {
     "id": "Root2"
    }
-  }
+  },
+  "stage": "Meadows"
  },
  {
   "id": "Tree",
@@ -217,7 +224,8 @@
     6,
     1
    ]
-  }
+  },
+  "stage": "Meadows"
  },
  {
   "id": "piece_bench",
@@ -237,6 +245,7 @@
    {
     "location": "Lair"
    }
-  ]
+  ],
+  "stage": "Mountain"
  }
 ]

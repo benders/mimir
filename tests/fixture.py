@@ -272,6 +272,8 @@ def prefabs():
         piece("Tap2", comp("SapCollector", m(spawnItem=R("Dust"), secPerUnit=60, maxLevel=10, mustConnectTo=R("Root2"))),
               name="$piece_tap", icon=S("Tap"), resources=[req("Wood", 4)]),
         prefab("Altar", comp("Destructible", m(health=100, minToolTier=0, damages={}, spawnWhenDestroyed=R("Shard")))),
+        prefab("Orb", comp("Destructible", m(health=100, minToolTier=0, damages={}, spawnWhenDestroyed=None)),
+               comp("TriggerPersistentEventOnDestroy", {"_eventInternalName": "siege", "_stopEvent": False})),  # no drops
         prefab("WildHive", comp("WearNTear", m(health=20, materialType="Wood", damages={"m_fire": "Weak"})),
                comp("DropOnDestroyed", m(dropWhenDestroyed=drop_table(("Wood", 1, 3, 1), ("Ore", 1, 1, 1))))),
         prefab("Bush", comp("Pickable", m(overrideName="$piece_bush", itemPrefab=R("Wood"), amount=2,
@@ -360,6 +362,7 @@ def write_dump(raw: Path) -> Path:
         spawner("Spawner_Raider", biome="-1"),  # places a spawner, everywhere
         spawner("Raider_sleeping", biome="Meadows"),  # shown on Raider's page
         spawner("Fish", biome="Ocean"),  # a fish: its biomes go into the fishing source
+        spawner("Pup", biome="-1", requiredPersistentEvent="siege"),  # only while the Orb's event runs
     ]}}])
     dump("world/RandEventSystem.json", [{"name": "_GameMain", "type": "RandEventSystem", "fields": {"m_events": [
         event("army_test", "Meadows, Swamp", spawner("Raider", biome="1023", minLevel=2, maxLevel=1), spawner("vfx_Poof")),
@@ -392,6 +395,7 @@ def write_dump(raw: Path) -> Path:
         ("DungeonGenerator", m(themes="Cave")),
     )], "instances": [
         {"prefab": "OreRock", "path": "cave/OreRock (2)"},  # an instance of a source inside the location
+        {"prefab": "Orb", "path": "cave/Orb"},
         {"prefab": "piece_bench", "path": "cave/piece_bench (1)"},  # a non-buildable piece standing there
         {"prefab": "Spawner_Raider", "path": "cave/Spawner_Raider"},
         {"prefab": "Pup", "path": "cave/Pup"},  # a creature placed directly
@@ -408,7 +412,8 @@ def write_dump(raw: Path) -> Path:
         "instances": [{"prefab": "Raider_Ranged", "path": "Raider_Ranged"}]})
     dump("locations/Market.json", {"name": "Market", "components": [comp("Location", {}), comp("Trader", {
         **m(name="$npc_vendor"), "m_items": [m(prefab=R("Charm"), stack=2, price=50, requiredGlobalKey="defeated_chief"),
-                                             m(prefab=R("vfx_Poof"), stack=1, price=1, requiredGlobalKey="")]},
+                                             m(prefab=R("vfx_Poof"), stack=1, price=1, requiredGlobalKey="")],
+        "m_useItems": [m(prefab=R("Gem"), setsGlobalKey="Quest1", removesItem=True, dialog="")]},  # a quest hand-in
         path="Stall/Vendor")]})
     dump("anims/Player_animator.json", {"controller": "Player_animator", "triggers": {  # extract-anims.py
         "swing0": {"state": "Base Layer.swing 0", "layer": 0, "speed": 1.0, "clip": "Swing1", "length": 1.0, "exit": 0.9,

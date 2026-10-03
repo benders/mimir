@@ -34,6 +34,17 @@
   }
  },
  {
+  "id": "Orb",
+  "kind": "destructible",
+  "health": 100,
+  "startsEvent": "siege",
+  "locations": [
+   {
+    "location": "Lair"
+   }
+  ]
+ },
+ {
   "id": "OreRock",
   "kind": "rock",
   "name": "Ore Rock",
@@ -338,6 +349,12 @@
     "stack": 2,
     "price": 50,
     "requiredKey": "defeated_chief"
+   }
+  ],
+  "takes": [
+   {
+    "item": "Gem",
+    "setsKey": "Quest1"
    }
   ],
   "locations": [

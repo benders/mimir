@@ -1,0 +1,1133 @@
+[
+ {
+  "id": "AbandonedLogCabin02",
+  "biomes": [
+   "Mountain"
+  ]
+ },
+ {
+  "id": "AbandonedLogCabin03",
+  "biomes": [
+   "Mountain"
+  ]
+ },
+ {
+  "id": "AbandonedLogCabin04",
+  "biomes": [
+   "Mountain"
+  ]
+ },
+ {
+  "id": "AncientUpgradeStation",
+  "biomes": [
+   "Mountain"
+  ]
+ },
+ {
+  "id": "AshlandRuins",
+  "biomes": [
+   "AshLands"
+  ]
+ },
+ {
+  "id": "BearCave",
+  "biomes": [
+   "BlackForest"
+  ]
+ },
+ {
+  "id": "BigRockClearing",
+  "biomes": [
+   "BlackForest"
+  ]
+ },
+ {
+  "id": "BogWitch_Camp",
+  "biomes": [
+   "Swamp"
+  ]
+ },
+ {
+  "id": "Bonemass",
+  "biomes": [
+   "Swamp"
+  ]
+ },
+ {
+  "id": "CharredFortress",
+  "biomes": [
+   "AshLands"
+  ]
+ },
+ {
+  "id": "CharredRuins1",
+  "biomes": [
+   "AshLands"
+  ]
+ },
+ {
+  "id": "CharredRuins2",
+  "biomes": [
+   "AshLands"
+  ]
+ },
+ {
+  "id": "CharredRuins3",
+  "biomes": [
+   "AshLands"
+  ]
+ },
+ {
+  "id": "CharredRuins4",
+  "biomes": [
+   "AshLands"
+  ]
+ },
+ {
+  "id": "CharredStone_Spawner",
+  "biomes": [
+   "AshLands"
+  ]
+ },
+ {
+  "id": "CharredTowerRuins1",
+  "biomes": [
+   "AshLands"
+  ]
+ },
+ {
+  "id": "CharredTowerRuins1_dvergr",
+  "biomes": [
+   "AshLands"
+  ]
+ },
+ {
+  "id": "CharredTowerRuins2",
+  "biomes": [
+   "AshLands"
+  ]
+ },
+ {
+  "id": "CharredTowerRuins3",
+  "biomes": [
+   "AshLands"
+  ]
+ },
+ {
+  "id": "CombatRuin01",
+  "biomes": [
+   "Meadows"
+  ]
+ },
+ {
+  "id": "Crypt2",
+  "biomes": [
+   "BlackForest"
+  ]
+ },
+ {
+  "id": "Crypt3",
+  "biomes": [
+   "BlackForest"
+  ]
+ },
+ {
+  "id": "Crypt4",
+  "biomes": [
+   "BlackForest"
+  ]
+ },
+ {
+  "id": "DN_Bossroom",
+  "biomes": [
+   "DeepNorth"
+  ]
+ },
+ {
+  "id": "DN_gammeltrollFrac01",
+  "biomes": [
+   "DeepNorth"
+  ]
+ },
+ {
+  "id": "DN_gammeltrollFrac02",
+  "biomes": [
+   "DeepNorth"
+  ]
+ },
+ {
+  "id": "DN_hut01",
+  "biomes": [
+   "DeepNorth"
+  ]
+ },
+ {
+  "id": "Dolmen01",
+  "biomes": [
+   "Meadows",
+   "BlackForest"
+  ]
+ },
+ {
+  "id": "Dolmen02",
+  "biomes": [
+   "Meadows",
+   "BlackForest"
+  ]
+ },
+ {
+  "id": "Dolmen03",
+  "biomes": [
+   "Meadows",
+   "BlackForest"
+  ]
+ },
+ {
+  "id": "Dragonqueen",
+  "biomes": [
+   "Mountain"
+  ]
+ },
+ {
+  "id": "DrakeLorestone",
+  "biomes": [
+   "Mountain"
+  ]
+ },
+ {
+  "id": "DrakeNest01",
+  "biomes": [
+   "Mountain"
+  ]
+ },
+ {
+  "id": "Eikthyrnir",
+  "biomes": [
+   "Meadows"
+  ]
+ },
+ {
+  "id": "FaderLocation",
+  "biomes": [
+   "AshLands"
+  ]
+ },
+ {
+  "id": "FireHole",
+  "biomes": [
+   "Swamp"
+  ]
+ },
+ {
+  "id": "FortressRuins",
+  "biomes": [
+   "AshLands"
+  ]
+ },
+ {
+  "id": "FrozenShip01_DN",
+  "biomes": [
+   "DeepNorth"
+  ]
+ },
+ {
+  "id": "FrozenShip02_DN",
+  "biomes": [
+   "DeepNorth"
+  ]
+ },
+ {
+  "id": "FrozenShip03_DN",
+  "biomes": [
+   "DeepNorth"
+  ]
+ },
+ {
+  "id": "GDKing",
+  "biomes": [
+   "BlackForest"
+  ]
+ },
+ {
+  "id": "GoblinCamp2",
+  "biomes": [
+   "Plains"
+  ]
+ },
+ {
+  "id": "GoblinCamp2_1",
+  "biomes": [
+   "Plains"
+  ]
+ },
+ {
+  "id": "GoblinHut01",
+  "biomes": [
+   "Plains"
+  ]
+ },
+ {
+  "id": "GoblinHut02",
+  "biomes": [
+   "Plains"
+  ]
+ },
+ {
+  "id": "GoblinHut03",
+  "biomes": [
+   "Plains"
+  ]
+ },
+ {
+  "id": "GoblinKing",
+  "biomes": [
+   "Plains"
+  ]
+ },
+ {
+  "id": "Grave1",
+  "biomes": [
+   "Swamp"
+  ]
+ },
+ {
+  "id": "Greydwarf_camp1",
+  "biomes": [
+   "BlackForest"
+  ]
+ },
+ {
+  "id": "Hildir_camp",
+  "biomes": [
+   "Meadows"
+  ]
+ },
+ {
+  "id": "Hildir_cave",
+  "biomes": [
+   "Mountain"
+  ]
+ },
+ {
+  "id": "Hildir_crypt",
+  "biomes": [
+   "BlackForest"
+  ]
+ },
+ {
+  "id": "Hildir_plainsfortress",
+  "biomes": [
+   "Plains"
+  ]
+ },
+ {
+  "id": "IcePond1",
+  "biomes": [
+   "DeepNorth"
+  ]
+ },
+ {
+  "id": "InfestedTree01",
+  "biomes": [
+   "Swamp"
+  ]
+ },
+ {
+  "id": "LeviathanLava",
+  "biomes": [
+   "AshLands"
+  ]
+ },
+ {
+  "id": "LumberCamp",
+  "biomes": [
+   "DeepNorth"
+  ]
+ },
+ {
+  "id": "Mistlands_DvergrBossEntrance1",
+  "biomes": [
+   "Mistlands"
+  ]
+ },
+ {
+  "id": "Mistlands_DvergrTownEntrance1",
+  "biomes": [
+   "Mistlands"
+  ]
+ },
+ {
+  "id": "Mistlands_DvergrTownEntrance2",
+  "biomes": [
+   "Mistlands"
+  ]
+ },
+ {
+  "id": "Mistlands_Excavation1",
+  "biomes": [
+   "Mistlands"
+  ]
+ },
+ {
+  "id": "Mistlands_Excavation2",
+  "biomes": [
+   "Mistlands"
+  ]
+ },
+ {
+  "id": "Mistlands_Excavation3",
+  "biomes": [
+   "Mistlands"
+  ]
+ },
+ {
+  "id": "Mistlands_Giant1",
+  "biomes": [
+   "Mistlands"
+  ]
+ },
+ {
+  "id": "Mistlands_Giant2",
+  "biomes": [
+   "Mistlands"
+  ]
+ },
+ {
+  "id": "Mistlands_GuardTower1_new",
+  "biomes": [
+   "Mistlands"
+  ]
+ },
+ {
+  "id": "Mistlands_GuardTower1_ruined_new",
+  "biomes": [
+   "Mistlands"
+  ]
+ },
+ {
+  "id": "Mistlands_GuardTower1_ruined_new2",
+  "biomes": [
+   "Mistlands"
+  ]
+ },
+ {
+  "id": "Mistlands_GuardTower2_new",
+  "biomes": [
+   "Mistlands"
+  ]
+ },
+ {
+  "id": "Mistlands_GuardTower3_new",
+  "biomes": [
+   "Mistlands"
+  ]
+ },
+ {
+  "id": "Mistlands_GuardTower3_ruined_new",
+  "biomes": [
+   "Mistlands"
+  ]
+ },
+ {
+  "id": "Mistlands_Harbour1",
+  "biomes": [
+   "Mistlands"
+  ]
+ },
+ {
+  "id": "Mistlands_Lighthouse1_new",
+  "biomes": [
+   "Mistlands"
+  ]
+ },
+ {
+  "id": "Mistlands_RoadPost1",
+  "biomes": [
+   "Mistlands"
+  ]
+ },
+ {
+  "id": "Mistlands_RockSpire1",
+  "biomes": [
+   "Mistlands"
+  ]
+ },
+ {
+  "id": "Mistlands_Statue1",
+  "biomes": [
+   "Mistlands"
+  ]
+ },
+ {
+  "id": "Mistlands_Statue2",
+  "biomes": [
+   "Mistlands"
+  ]
+ },
+ {
+  "id": "Mistlands_StatueGroup1",
+  "biomes": [
+   "Mistlands"
+  ]
+ },
+ {
+  "id": "Mistlands_Swords1",
+  "biomes": [
+   "Mistlands"
+  ]
+ },
+ {
+  "id": "Mistlands_Swords2",
+  "biomes": [
+   "Mistlands"
+  ]
+ },
+ {
+  "id": "Mistlands_Swords3",
+  "biomes": [
+   "Mistlands"
+  ]
+ },
+ {
+  "id": "Mistlands_Viaduct1",
+  "biomes": [
+   "Mistlands"
+  ]
+ },
+ {
+  "id": "Mistlands_Viaduct2",
+  "biomes": [
+   "Mistlands"
+  ]
+ },
+ {
+  "id": "MorgenHole1",
+  "biomes": [
+   "AshLands"
+  ]
+ },
+ {
+  "id": "MorgenHole2",
+  "biomes": [
+   "AshLands"
+  ]
+ },
+ {
+  "id": "MorgenHole3",
+  "biomes": [
+   "AshLands"
+  ]
+ },
+ {
+  "id": "MorkBorg",
+  "biomes": [
+   "DeepNorth"
+  ]
+ },
+ {
+  "id": "MountainCave02",
+  "biomes": [
+   "Mountain"
+  ]
+ },
+ {
+  "id": "MountainGrave01",
+  "biomes": [
+   "Mountain"
+  ]
+ },
+ {
+  "id": "MountainWell1",
+  "biomes": [
+   "Mountain"
+  ]
+ },
+ {
+  "id": "NorthMemorialPlace",
+  "biomes": [
+   "DeepNorth"
+  ]
+ },
+ {
+  "id": "NorthVillage",
+  "biomes": [
+   "DeepNorth"
+  ]
+ },
+ {
+  "id": "PlaceofMystery1",
+  "biomes": [
+   "AshLands"
+  ]
+ },
+ {
+  "id": "PlaceofMystery2",
+  "biomes": [
+   "AshLands"
+  ]
+ },
+ {
+  "id": "PlaceofMystery3",
+  "biomes": [
+   "AshLands"
+  ]
+ },
+ {
+  "id": "Ruin1",
+  "biomes": [
+   "BlackForest"
+  ]
+ },
+ {
+  "id": "Ruin2",
+  "biomes": [
+   "BlackForest"
+  ]
+ },
+ {
+  "id": "Ruin3",
+  "biomes": [
+   "Plains"
+  ]
+ },
+ {
+  "id": "Runestone_Ashlands",
+  "biomes": [
+   "AshLands"
+  ]
+ },
+ {
+  "id": "Runestone_BlackForest",
+  "biomes": [
+   "BlackForest"
+  ]
+ },
+ {
+  "id": "Runestone_Boars",
+  "biomes": [
+   "Meadows"
+  ]
+ },
+ {
+  "id": "Runestone_DeepNorth",
+  "biomes": [
+   "DeepNorth"
+  ]
+ },
+ {
+  "id": "Runestone_Draugr",
+  "biomes": [
+   "Swamp"
+  ]
+ },
+ {
+  "id": "Runestone_Greydwarfs",
+  "biomes": [
+   "BlackForest"
+  ]
+ },
+ {
+  "id": "Runestone_Meadows",
+  "biomes": [
+   "Meadows"
+  ]
+ },
+ {
+  "id": "Runestone_Mistlands",
+  "biomes": [
+   "Mistlands"
+  ]
+ },
+ {
+  "id": "Runestone_Mountains",
+  "biomes": [
+   "Mountain"
+  ]
+ },
+ {
+  "id": "Runestone_Plains",
+  "biomes": [
+   "Plains"
+  ]
+ },
+ {
+  "id": "Runestone_Swamps",
+  "biomes": [
+   "Swamp"
+  ]
+ },
+ {
+  "id": "ShipSetting01",
+  "biomes": [
+   "Meadows"
+  ]
+ },
+ {
+  "id": "ShipSetting02",
+  "biomes": [
+   "DeepNorth"
+  ]
+ },
+ {
+  "id": "ShipSetting03",
+  "biomes": [
+   "DeepNorth"
+  ]
+ },
+ {
+  "id": "ShipWreck01",
+  "biomes": [
+   "Swamp",
+   "BlackForest",
+   "Plains",
+   "Ocean"
+  ]
+ },
+ {
+  "id": "ShipWreck01_DN",
+  "biomes": [
+   "DeepNorth"
+  ]
+ },
+ {
+  "id": "ShipWreck02",
+  "biomes": [
+   "Swamp",
+   "BlackForest",
+   "Plains",
+   "Ocean"
+  ]
+ },
+ {
+  "id": "ShipWreck02_DN",
+  "biomes": [
+   "DeepNorth"
+  ]
+ },
+ {
+  "id": "ShipWreck03",
+  "biomes": [
+   "Swamp",
+   "BlackForest",
+   "Plains",
+   "Ocean"
+  ]
+ },
+ {
+  "id": "ShipWreck04",
+  "biomes": [
+   "Swamp",
+   "BlackForest",
+   "Plains",
+   "Ocean"
+  ]
+ },
+ {
+  "id": "StartTemple",
+  "biomes": [
+   "Meadows"
+  ]
+ },
+ {
+  "id": "StoneCircle",
+  "biomes": [
+   "Meadows"
+  ]
+ },
+ {
+  "id": "StoneHenge1",
+  "biomes": [
+   "Plains"
+  ]
+ },
+ {
+  "id": "StoneHenge2",
+  "biomes": [
+   "Plains"
+  ]
+ },
+ {
+  "id": "StoneHenge3",
+  "biomes": [
+   "Plains"
+  ]
+ },
+ {
+  "id": "StoneHenge4",
+  "biomes": [
+   "Plains"
+  ]
+ },
+ {
+  "id": "StoneHenge5",
+  "biomes": [
+   "Plains"
+  ]
+ },
+ {
+  "id": "StoneHenge6",
+  "biomes": [
+   "Plains"
+  ]
+ },
+ {
+  "id": "StoneHouse1_heath",
+  "biomes": [
+   "Plains"
+  ]
+ },
+ {
+  "id": "StoneHouse2_heath",
+  "biomes": [
+   "Plains"
+  ]
+ },
+ {
+  "id": "StoneHouse3",
+  "biomes": [
+   "BlackForest"
+  ]
+ },
+ {
+  "id": "StoneHouse4",
+  "biomes": [
+   "BlackForest"
+  ]
+ },
+ {
+  "id": "StoneHouse5_heath",
+  "biomes": [
+   "Plains"
+  ]
+ },
+ {
+  "id": "StoneTower1",
+  "biomes": [
+   "Plains"
+  ]
+ },
+ {
+  "id": "StoneTower3",
+  "biomes": [
+   "Plains"
+  ]
+ },
+ {
+  "id": "StoneTowerRuins03",
+  "biomes": [
+   "BlackForest"
+  ]
+ },
+ {
+  "id": "StoneTowerRuins04",
+  "biomes": [
+   "Mountain"
+  ]
+ },
+ {
+  "id": "StoneTowerRuins05",
+  "biomes": [
+   "Mountain"
+  ]
+ },
+ {
+  "id": "StoneTowerRuins05_leet",
+  "biomes": [
+   "Mountain"
+  ]
+ },
+ {
+  "id": "StoneTowerRuins07",
+  "biomes": [
+   "BlackForest"
+  ]
+ },
+ {
+  "id": "StoneTowerRuins07_sunk",
+  "biomes": [
+   "BlackForest"
+  ]
+ },
+ {
+  "id": "StoneTowerRuins08",
+  "biomes": [
+   "BlackForest"
+  ]
+ },
+ {
+  "id": "StoneTowerRuins08_sunk",
+  "biomes": [
+   "BlackForest"
+  ]
+ },
+ {
+  "id": "StoneTowerRuins09",
+  "biomes": [
+   "BlackForest"
+  ]
+ },
+ {
+  "id": "StoneTowerRuins09_sunk",
+  "biomes": [
+   "BlackForest"
+  ]
+ },
+ {
+  "id": "StoneTowerRuins10",
+  "biomes": [
+   "BlackForest"
+  ]
+ },
+ {
+  "id": "StoneTowerRuins10_sunk",
+  "biomes": [
+   "BlackForest"
+  ]
+ },
+ {
+  "id": "SulfurArch",
+  "biomes": [
+   "AshLands"
+  ]
+ },
+ {
+  "id": "SunkenCrypt4",
+  "biomes": [
+   "Swamp"
+  ]
+ },
+ {
+  "id": "SwampHut1",
+  "biomes": [
+   "Swamp"
+  ]
+ },
+ {
+  "id": "SwampHut1_1",
+  "biomes": [
+   "Swamp"
+  ]
+ },
+ {
+  "id": "SwampHut2",
+  "biomes": [
+   "Swamp"
+  ]
+ },
+ {
+  "id": "SwampHut2_1",
+  "biomes": [
+   "Swamp"
+  ]
+ },
+ {
+  "id": "SwampHut3",
+  "biomes": [
+   "Swamp"
+  ]
+ },
+ {
+  "id": "SwampHut3_1",
+  "biomes": [
+   "Swamp"
+  ]
+ },
+ {
+  "id": "SwampHut4",
+  "biomes": [
+   "Swamp"
+  ]
+ },
+ {
+  "id": "SwampHut5",
+  "biomes": [
+   "Swamp"
+  ]
+ },
+ {
+  "id": "SwampRuin1",
+  "biomes": [
+   "Swamp"
+  ]
+ },
+ {
+  "id": "SwampRuin2",
+  "biomes": [
+   "Swamp"
+  ]
+ },
+ {
+  "id": "SwampWell1",
+  "biomes": [
+   "Swamp"
+  ]
+ },
+ {
+  "id": "TarPit1",
+  "biomes": [
+   "Plains"
+  ]
+ },
+ {
+  "id": "TarPit1_1",
+  "biomes": [
+   "Plains"
+  ]
+ },
+ {
+  "id": "TarPit2",
+  "biomes": [
+   "Plains"
+  ]
+ },
+ {
+  "id": "TarPit2_1",
+  "biomes": [
+   "Plains"
+  ]
+ },
+ {
+  "id": "TarPit3",
+  "biomes": [
+   "Plains"
+  ]
+ },
+ {
+  "id": "TarPit3_1",
+  "biomes": [
+   "Plains"
+  ]
+ },
+ {
+  "id": "TheHole01",
+  "biomes": [
+   "DeepNorth"
+  ]
+ },
+ {
+  "id": "TrollCave02",
+  "biomes": [
+   "BlackForest"
+  ]
+ },
+ {
+  "id": "Vendor_BlackForest",
+  "biomes": [
+   "BlackForest"
+  ]
+ },
+ {
+  "id": "VoltureNest",
+  "biomes": [
+   "AshLands"
+  ]
+ },
+ {
+  "id": "Waymarker01",
+  "biomes": [
+   "Mountain"
+  ]
+ },
+ {
+  "id": "Waymarker02",
+  "biomes": [
+   "Mountain"
+  ]
+ },
+ {
+  "id": "WoodFarm1",
+  "biomes": [
+   "Meadows"
+  ]
+ },
+ {
+  "id": "WoodHouse1",
+  "biomes": [
+   "Meadows"
+  ]
+ },
+ {
+  "id": "WoodHouse10",
+  "biomes": [
+   "Meadows"
+  ]
+ },
+ {
+  "id": "WoodHouse11",
+  "biomes": [
+   "Meadows"
+  ]
+ },
+ {
+  "id": "WoodHouse12",
+  "biomes": [
+   "Meadows"
+  ]
+ },
+ {
+  "id": "WoodHouse13",
+  "biomes": [
+   "Meadows"
+  ]
+ },
+ {
+  "id": "WoodHouse2",
+  "biomes": [
+   "Meadows"
+  ]
+ },
+ {
+  "id": "WoodHouse3",
+  "biomes": [
+   "Meadows"
+  ]
+ },
+ {
+  "id": "WoodHouse4",
+  "biomes": [
+   "Meadows"
+  ]
+ },
+ {
+  "id": "WoodHouse5",
+  "biomes": [
+   "Meadows"
+  ]
+ },
+ {
+  "id": "WoodHouse6",
+  "biomes": [
+   "Meadows"
+  ]
+ },
+ {
+  "id": "WoodHouse7",
+  "biomes": [
+   "Meadows"
+  ]
+ },
+ {
+  "id": "WoodHouse8",
+  "biomes": [
+   "Meadows"
+  ]
+ },
+ {
+  "id": "WoodHouse9",
+  "biomes": [
+   "Meadows"
+  ]
+ },
+ {
+  "id": "WoodVillage1",
+  "biomes": [
+   "Meadows"
+  ]
+ },
+ {
+  "id": "WoodVillage2",
+  "biomes": [
+   "Meadows"
+  ]
+ }
+]

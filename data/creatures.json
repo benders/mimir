@@ -43,7 +43,8 @@
     "max": 5,
     "chance": 1
    }
-  ]
+  ],
+  "stage": "Swamp"
  },
  {
   "id": "Asksvin",
@@ -106,7 +107,8 @@
     "Vineberry"
    ]
   },
-  "avoidWater": true
+  "avoidWater": true,
+  "stage": "AshLands"
  },
  {
   "id": "Asksvin_hatchling",
@@ -148,7 +150,8 @@
     "levelMultiplier": true
    }
   ],
-  "avoidWater": true
+  "avoidWater": true,
+  "stage": "AshLands"
  },
  {
   "id": "Aspect_Bonemass",
@@ -176,7 +179,8 @@
    "aspect_bonemass_attack_punch",
    "aspect_bonemass_attack_throw"
   ],
-  "avoidWater": true
+  "avoidWater": true,
+  "stage": "DeepNorth"
  },
  {
   "id": "Aspect_Eikthyr",
@@ -198,7 +202,8 @@
    "aspect_Eikthyr_charge",
    "aspect_Eikthyr_stomp"
   ],
-  "avoidWater": true
+  "avoidWater": true,
+  "stage": "DeepNorth"
  },
  {
   "id": "Aspect_Elder",
@@ -223,7 +228,8 @@
    "aspect_gd_king_shoot",
    "aspect_gd_king_stomp"
   ],
-  "avoidWater": true
+  "avoidWater": true,
+  "stage": "DeepNorth"
  },
  {
   "id": "Aspect_Fader",
@@ -252,7 +258,8 @@
    "aspect_Fader_Spin",
    "aspect_Fader_WallOfFire"
   ],
-  "avoidWater": true
+  "avoidWater": true,
+  "stage": "DeepNorth"
  },
  {
   "id": "Aspect_Moder",
@@ -281,7 +288,8 @@
    "aspect_dragon_spit_shotgun",
    "aspect_dragon_taunt"
   ],
-  "avoidWater": true
+  "avoidWater": true,
+  "stage": "DeepNorth"
  },
  {
   "id": "Aspect_SeekerQueen",
@@ -307,7 +315,8 @@
    "aspect_SeekerQueen_Slap",
    "aspect_SeekerQueen_Spit"
   ],
-  "avoidWater": true
+  "avoidWater": true,
+  "stage": "DeepNorth"
  },
  {
   "id": "Aspect_TentaRoot",
@@ -329,7 +338,8 @@
    "ShieldBronzeBuckler",
    "ShieldWood"
   ],
-  "avoidWater": true
+  "avoidWater": true,
+  "stage": "DeepNorth"
  },
  {
   "id": "Aspect_Yagluth",
@@ -354,7 +364,8 @@
    "aspect_GoblinKing_Nova",
    "aspect_GoblinKing_Taunt"
   ],
-  "avoidWater": true
+  "avoidWater": true,
+  "stage": "DeepNorth"
  },
  {
   "id": "Barka",
@@ -397,7 +408,8 @@
     "chance": 1
    }
   ],
-  "avoidWater": true
+  "avoidWater": true,
+  "stage": "DeepNorth"
  },
  {
   "id": "Bat",
@@ -432,7 +444,8 @@
     "chance": 0.5
    }
   ],
-  "avoidWater": true
+  "avoidWater": true,
+  "stage": "Mountain"
  },
  {
   "id": "Bat_Swamp",
@@ -467,7 +480,8 @@
     "chance": 0.5
    }
   ],
-  "avoidWater": true
+  "avoidWater": true,
+  "stage": "Swamp"
  },
  {
   "id": "Bjorn",
@@ -526,7 +540,8 @@
     "chance": 0.1
    }
   ],
-  "avoidWater": true
+  "avoidWater": true,
+  "stage": "BlackForest"
  },
  {
   "id": "Bjorn_sleeping",
@@ -585,7 +600,8 @@
     "chance": 0.1
    }
   ],
-  "avoidWater": true
+  "avoidWater": true,
+  "stage": "BlackForest"
  },
  {
   "id": "Bjorn_spiritcaller",
@@ -620,7 +636,8 @@
     "Blueberries"
    ]
   },
-  "avoidWater": true
+  "avoidWater": true,
+  "stage": "DeepNorth"
  },
  {
   "id": "Blob",
@@ -660,7 +677,8 @@
     "levelMultiplier": true
    }
   ],
-  "avoidWater": true
+  "avoidWater": true,
+  "stage": "Swamp"
  },
  {
   "id": "BlobAspect",
@@ -700,7 +718,8 @@
     "levelMultiplier": true
    }
   ],
-  "avoidWater": true
+  "avoidWater": true,
+  "stage": "DeepNorth"
  },
  {
   "id": "BlobElite",
@@ -754,7 +773,8 @@
     "levelMultiplier": true
    }
   ],
-  "avoidWater": true
+  "avoidWater": true,
+  "stage": "Swamp"
  },
  {
   "id": "BlobFrost",
@@ -794,7 +814,8 @@
     "chance": 0.1
    }
   ],
-  "avoidWater": true
+  "avoidWater": true,
+  "stage": "Mountain"
  },
  {
   "id": "BlobLava",
@@ -840,7 +861,8 @@
     "chance": 0.1
    }
   ],
-  "avoidWater": true
+  "avoidWater": true,
+  "stage": "AshLands"
  },
  {
   "id": "BlobMork",
@@ -886,7 +908,8 @@
     "chance": 0.5
    }
   ],
-  "avoidWater": true
+  "avoidWater": true,
+  "stage": "DeepNorth"
  },
  {
   "id": "BlobMorkMini",
@@ -917,7 +940,8 @@
     "levelMultiplier": true
    }
   ],
-  "avoidWater": true
+  "avoidWater": true,
+  "stage": "DeepNorth"
  },
  {
   "id": "BlobTar",
@@ -957,7 +981,8 @@
     "levelMultiplier": true
    }
   ],
-  "avoidWater": true
+  "avoidWater": true,
+  "stage": "Plains"
  },
  {
   "id": "Boar",
@@ -1013,7 +1038,8 @@
    ]
   },
   "afraidOfFire": true,
-  "avoidWater": true
+  "avoidWater": true,
+  "stage": "Meadows"
  },
  {
   "id": "Boar_piggy",
@@ -1032,7 +1058,8 @@
    "swim": 2
   },
   "afraidOfFire": true,
-  "avoidWater": true
+  "avoidWater": true,
+  "stage": "Meadows"
  },
  {
   "id": "Boar_spiritcaller",
@@ -1064,7 +1091,8 @@
    ]
   },
   "afraidOfFire": true,
-  "avoidWater": true
+  "avoidWater": true,
+  "stage": "DeepNorth"
  },
  {
   "id": "BogWitchKvastur",
@@ -1108,7 +1136,8 @@
     "chance": 1
    }
   ],
-  "avoidWater": true
+  "avoidWater": true,
+  "stage": "Swamp"
  },
  {
   "id": "Bonemass",
@@ -1152,7 +1181,8 @@
     "onePerPlayer": true
    }
   ],
-  "avoidWater": true
+  "avoidWater": true,
+  "stage": "Swamp"
  },
  {
   "id": "BonemawSerpent",
@@ -1198,7 +1228,8 @@
     "chance": 1,
     "levelMultiplier": true
    }
-  ]
+  ],
+  "stage": "AshLands"
  },
  {
   "id": "Charred_Archer",
@@ -1241,7 +1272,8 @@
     "chance": 0.05
    }
   ],
-  "avoidWater": true
+  "avoidWater": true,
+  "stage": "AshLands"
  },
  {
   "id": "Charred_Archer_Fader",
@@ -1269,7 +1301,8 @@
    "Charred_Helmet",
    "Charred_HipCloth"
   ],
-  "avoidWater": true
+  "avoidWater": true,
+  "stage": "AshLands"
  },
  {
   "id": "Charred_Mage",
@@ -1313,7 +1346,8 @@
     "chance": 0.05
    }
   ],
-  "avoidWater": true
+  "avoidWater": true,
+  "stage": "AshLands"
  },
  {
   "id": "Charred_Melee",
@@ -1358,7 +1392,8 @@
     "chance": 0.05
    }
   ],
-  "avoidWater": true
+  "avoidWater": true,
+  "stage": "AshLands"
  },
  {
   "id": "Charred_Melee_Dyrnwyn",
@@ -1398,7 +1433,8 @@
     "chance": 1
    }
   ],
-  "avoidWater": true
+  "avoidWater": true,
+  "stage": "AshLands"
  },
  {
   "id": "Charred_Melee_Fader",
@@ -1428,7 +1464,8 @@
    "Charred_Helmet",
    "Charred_HipCloth"
   ],
-  "avoidWater": true
+  "avoidWater": true,
+  "stage": "AshLands"
  },
  {
   "id": "Charred_Twitcher",
@@ -1461,7 +1498,8 @@
     "levelMultiplier": true
    }
   ],
-  "avoidWater": true
+  "avoidWater": true,
+  "stage": "AshLands"
  },
  {
   "id": "Charred_Twitcher_Summoned",
@@ -1494,7 +1532,8 @@
     "levelMultiplier": true
    }
   ],
-  "avoidWater": true
+  "avoidWater": true,
+  "stage": "AshLands"
  },
  {
   "id": "Chicken",
@@ -1529,7 +1568,8 @@
    }
   ],
   "afraidOfFire": true,
-  "avoidWater": true
+  "avoidWater": true,
+  "stage": "Plains"
  },
  {
   "id": "Deathsquito",
@@ -1563,7 +1603,8 @@
     "chance": 0.05
    }
   ],
-  "avoidWater": true
+  "avoidWater": true,
+  "stage": "Plains"
  },
  {
   "id": "Deer",
@@ -1603,7 +1644,8 @@
    }
   ],
   "afraidOfFire": true,
-  "avoidWater": true
+  "avoidWater": true,
+  "stage": "Meadows"
  },
  {
   "id": "Deer_White",
@@ -1681,7 +1723,8 @@
     "chance": 1
    }
   ],
-  "avoidWater": true
+  "avoidWater": true,
+  "stage": "Mountain"
  },
  {
   "id": "Draugr",
@@ -1721,7 +1764,8 @@
     "chance": 0.1
    }
   ],
-  "avoidWater": true
+  "avoidWater": true,
+  "stage": "Meadows"
  },
  {
   "id": "Draugr_Elite",
@@ -1756,7 +1800,8 @@
     "chance": 0.1
    }
   ],
-  "avoidWater": true
+  "avoidWater": true,
+  "stage": "Meadows"
  },
  {
   "id": "Draugr_Elite_sleeping",
@@ -1827,7 +1872,8 @@
     "chance": 0.1
    }
   ],
-  "avoidWater": true
+  "avoidWater": true,
+  "stage": "Meadows"
  },
  {
   "id": "Draugr_Ranged_sleeping",
@@ -1957,7 +2003,8 @@
     "chance": 0.05
    }
   ],
-  "avoidWater": true
+  "avoidWater": true,
+  "stage": "Mistlands"
  },
  {
   "id": "DvergerAshlands",
@@ -2010,7 +2057,8 @@
     "chance": 0.05
    }
   ],
-  "avoidWater": true
+  "avoidWater": true,
+  "stage": "AshLands"
  },
  {
   "id": "DvergerDeepNorth",
@@ -2080,7 +2128,8 @@
     "levelMultiplier": true
    }
   ],
-  "avoidWater": true
+  "avoidWater": true,
+  "stage": "DeepNorth"
  },
  {
   "id": "DvergerMage",
@@ -2145,7 +2194,8 @@
     "chance": 0.05
    }
   ],
-  "avoidWater": true
+  "avoidWater": true,
+  "stage": "Mistlands"
  },
  {
   "id": "DvergerMageFire",
@@ -2410,7 +2460,8 @@
     "chance": 1
    }
   ],
-  "avoidWater": true
+  "avoidWater": true,
+  "stage": "Meadows"
  },
  {
   "id": "Elaking",
@@ -2454,7 +2505,8 @@
     "chance": 0.2
    }
   ],
-  "avoidWater": true
+  "avoidWater": true,
+  "stage": "DeepNorth"
  },
  {
   "id": "ElakingLantern",
@@ -2491,7 +2543,8 @@
     "chance": 0.1
    }
   ],
-  "avoidWater": true
+  "avoidWater": true,
+  "stage": "DeepNorth"
  },
  {
   "id": "ElakingMole",
@@ -2536,7 +2589,8 @@
     "chance": 0.5
    }
   ],
-  "avoidWater": true
+  "avoidWater": true,
+  "stage": "DeepNorth"
  },
  {
   "id": "Fader",
@@ -2585,7 +2639,8 @@
     "chance": 1
    }
   ],
-  "avoidWater": true
+  "avoidWater": true,
+  "stage": "AshLands"
  },
  {
   "id": "FallenValkyrie",
@@ -2625,7 +2680,8 @@
     "chance": 0.05
    }
   ],
-  "avoidWater": true
+  "avoidWater": true,
+  "stage": "AshLands"
  },
  {
   "id": "FallenWarrior",
@@ -2689,7 +2745,8 @@
     "max": 1,
     "chance": 0.5
    }
-  ]
+  ],
+  "stage": "DeepNorth"
  },
  {
   "id": "Fenring",
@@ -2727,7 +2784,8 @@
     "chance": 0.1
    }
   ],
-  "avoidWater": true
+  "avoidWater": true,
+  "stage": "Mountain"
  },
  {
   "id": "Fenring_Cultist",
@@ -2765,7 +2823,8 @@
     "chance": 0.1
    }
   ],
-  "avoidWater": true
+  "avoidWater": true,
+  "stage": "Mountain"
  },
  {
   "id": "Fenring_Cultist_Hildir",
@@ -2805,7 +2864,8 @@
     "chance": 1
    }
   ],
-  "avoidWater": true
+  "avoidWater": true,
+  "stage": "Mountain"
  },
  {
   "id": "Fenring_Cultist_Hildir_nochest",
@@ -2839,7 +2899,8 @@
     "chance": 1
    }
   ],
-  "avoidWater": true
+  "avoidWater": true,
+  "stage": "Mountain"
  },
  {
   "id": "FrostWisp",
@@ -2902,7 +2963,8 @@
    "FrozenKing_ChainWhirl",
    "FrozenKing_DoubleSweep"
   ],
-  "avoidWater": true
+  "avoidWater": true,
+  "stage": "DeepNorth"
  },
  {
   "id": "FrozenKing_p2",
@@ -2921,7 +2983,8 @@
    "lightning": "Immune",
    "poison": "Immune",
    "spirit": "Immune"
-  }
+  },
+  "stage": "DeepNorth"
  },
  {
   "id": "FrozenKing_p3",
@@ -2968,7 +3031,8 @@
     "chance": 1
    }
   ],
-  "avoidWater": true
+  "avoidWater": true,
+  "stage": "DeepNorth"
  },
  {
   "id": "Frysling",
@@ -3038,7 +3102,8 @@
     "chance": 0.1
    }
   ],
-  "avoidWater": true
+  "avoidWater": true,
+  "stage": "BlackForest"
  },
  {
   "id": "Ghost_Void",
@@ -3178,7 +3243,8 @@
     "chance": 0.3
    }
   ],
-  "avoidWater": true
+  "avoidWater": true,
+  "stage": "Mistlands"
  },
  {
   "id": "Goblin",
@@ -3231,7 +3297,8 @@
     "chance": 0.1
    }
   ],
-  "avoidWater": true
+  "avoidWater": true,
+  "stage": "Plains"
  },
  {
   "id": "GoblinArcher",
@@ -3281,7 +3348,8 @@
     "chance": 0.1
    }
   ],
-  "avoidWater": true
+  "avoidWater": true,
+  "stage": "Plains"
  },
  {
   "id": "GoblinBrute",
@@ -3339,7 +3407,8 @@
     "chance": 0.05
    }
   ],
-  "avoidWater": true
+  "avoidWater": true,
+  "stage": "Plains"
  },
  {
   "id": "GoblinBruteBros",
@@ -3383,7 +3452,8 @@
     "chance": 1
    }
   ],
-  "avoidWater": true
+  "avoidWater": true,
+  "stage": "Plains"
  },
  {
   "id": "GoblinBruteBros_nochest",
@@ -3427,7 +3497,8 @@
     "chance": 1
    }
   ],
-  "avoidWater": true
+  "avoidWater": true,
+  "stage": "Plains"
  },
  {
   "id": "GoblinBrute_Hildir",
@@ -3517,7 +3588,8 @@
     "levelMultiplier": true
    }
   ],
-  "avoidWater": true
+  "avoidWater": true,
+  "stage": "DeepNorth"
  },
  {
   "id": "GoblinKing",
@@ -3558,7 +3630,8 @@
     "chance": 1
    }
   ],
-  "avoidWater": true
+  "avoidWater": true,
+  "stage": "Plains"
  },
  {
   "id": "GoblinShaman",
@@ -3615,7 +3688,8 @@
     "chance": 0.1
    }
   ],
-  "avoidWater": true
+  "avoidWater": true,
+  "stage": "Plains"
  },
  {
   "id": "GoblinShaman_Hildir",
@@ -3655,7 +3729,8 @@
     "chance": 1
    }
   ],
-  "avoidWater": true
+  "avoidWater": true,
+  "stage": "Plains"
  },
  {
   "id": "GoblinShaman_Hildir_nochest",
@@ -3689,7 +3764,8 @@
     "chance": 1
    }
   ],
-  "avoidWater": true
+  "avoidWater": true,
+  "stage": "Plains"
  },
  {
   "id": "Goblin_Gem",
@@ -3790,7 +3866,8 @@
     "chance": 0.05
    }
   ],
-  "avoidWater": true
+  "avoidWater": true,
+  "stage": "Meadows"
  },
  {
   "id": "Greydwarf_Elite",
@@ -3855,7 +3932,8 @@
     "chance": 0.1
    }
   ],
-  "avoidWater": true
+  "avoidWater": true,
+  "stage": "BlackForest"
  },
  {
   "id": "Greydwarf_Frozen",
@@ -3921,7 +3999,8 @@
     "levelMultiplier": true
    }
   ],
-  "avoidWater": true
+  "avoidWater": true,
+  "stage": "DeepNorth"
  },
  {
   "id": "Greydwarf_Shaman",
@@ -3981,7 +4060,8 @@
     "levelMultiplier": true
    }
   ],
-  "avoidWater": true
+  "avoidWater": true,
+  "stage": "BlackForest"
  },
  {
   "id": "Greydwarf_Shaman_Frozen",
@@ -4048,7 +4128,8 @@
     "levelMultiplier": true
    }
   ],
-  "avoidWater": true
+  "avoidWater": true,
+  "stage": "DeepNorth"
  },
  {
   "id": "Greyling",
@@ -4079,7 +4160,8 @@
     "levelMultiplier": true
    }
   ],
-  "avoidWater": true
+  "avoidWater": true,
+  "stage": "Meadows"
  },
  {
   "id": "Hare",
@@ -4119,7 +4201,8 @@
    }
   ],
   "afraidOfFire": true,
-  "avoidWater": true
+  "avoidWater": true,
+  "stage": "Mistlands"
  },
  {
   "id": "Hatchling",
@@ -4156,7 +4239,8 @@
     "levelMultiplier": true
    }
   ],
-  "avoidWater": true
+  "avoidWater": true,
+  "stage": "Mountain"
  },
  {
   "id": "Hen",
@@ -4207,7 +4291,8 @@
    ]
   },
   "afraidOfFire": true,
-  "avoidWater": true
+  "avoidWater": true,
+  "stage": "Plains"
  },
  {
   "id": "Hive",
@@ -4356,7 +4441,8 @@
     "levelMultiplier": true
    }
   ],
-  "avoidWater": true
+  "avoidWater": true,
+  "stage": "DeepNorth"
  },
  {
   "id": "JotunWarriorDualWield",
@@ -4458,7 +4544,8 @@
     "levelMultiplier": true
    }
   ],
-  "avoidWater": true
+  "avoidWater": true,
+  "stage": "DeepNorth"
  },
  {
   "id": "JotunWitch",
@@ -4526,7 +4613,8 @@
     "chance": 0.05
    }
   ],
-  "avoidWater": true
+  "avoidWater": true,
+  "stage": "DeepNorth"
  },
  {
   "id": "Leech",
@@ -4562,7 +4650,8 @@
     "chance": 1,
     "levelMultiplier": true
    }
-  ]
+  ],
+  "stage": "Swamp"
  },
  {
   "id": "Leech_cave",
@@ -4656,7 +4745,8 @@
     "Flax"
    ]
   },
-  "avoidWater": true
+  "avoidWater": true,
+  "stage": "Plains"
  },
  {
   "id": "Lox_Calf",
@@ -4686,7 +4776,8 @@
     "chance": 1
    }
   ],
-  "avoidWater": true
+  "avoidWater": true,
+  "stage": "Plains"
  },
  {
   "id": "Mistile",
@@ -4706,7 +4797,8 @@
   "attacks": [
    "Mistile_kamikaze"
   ],
-  "avoidWater": true
+  "avoidWater": true,
+  "stage": "Mistlands"
  },
  {
   "id": "Moose",
@@ -4769,7 +4861,8 @@
     "Lingonberry"
    ]
   },
-  "avoidWater": true
+  "avoidWater": true,
+  "stage": "DeepNorth"
  },
  {
   "id": "Moose_calf",
@@ -4795,7 +4888,8 @@
    "moose_hooves",
    "moose_horns"
   ],
-  "avoidWater": true
+  "avoidWater": true,
+  "stage": "DeepNorth"
  },
  {
   "id": "Moose_spiritcaller",
@@ -4827,7 +4921,8 @@
     "Lingonberry"
    ]
   },
-  "avoidWater": true
+  "avoidWater": true,
+  "stage": "DeepNorth"
  },
  {
   "id": "Morgen",
@@ -4879,7 +4974,8 @@
     "chance": 0.05
    }
   ],
-  "avoidWater": true
+  "avoidWater": true,
+  "stage": "AshLands"
  },
  {
   "id": "Morgen_NonSleeping",
@@ -4931,7 +5027,8 @@
     "chance": 0.05
    }
   ],
-  "avoidWater": true
+  "avoidWater": true,
+  "stage": "AshLands"
  },
  {
   "id": "Neck",
@@ -4968,7 +5065,8 @@
     "chance": 0.05
    }
   ],
-  "afraidOfFire": true
+  "afraidOfFire": true,
+  "stage": "Meadows"
  },
  {
   "id": "Seal",
@@ -5008,7 +5106,8 @@
     "levelMultiplier": true
    }
   ],
-  "afraidOfFire": true
+  "afraidOfFire": true,
+  "stage": "DeepNorth"
  },
  {
   "id": "Seal_Pup",
@@ -5035,7 +5134,8 @@
    }
   ],
   "afraidOfFire": true,
-  "avoidWater": true
+  "avoidWater": true,
+  "stage": "DeepNorth"
  },
  {
   "id": "Seeker",
@@ -5086,7 +5186,8 @@
     "chance": 0.05
    }
   ],
-  "avoidWater": true
+  "avoidWater": true,
+  "stage": "Mistlands"
  },
  {
   "id": "SeekerBrood",
@@ -5117,7 +5218,8 @@
     "chance": 0.5
    }
   ],
-  "avoidWater": true
+  "avoidWater": true,
+  "stage": "Mistlands"
  },
  {
   "id": "SeekerBrute",
@@ -5171,7 +5273,8 @@
     "chance": 1
    }
   ],
-  "avoidWater": true
+  "avoidWater": true,
+  "stage": "Mistlands"
  },
  {
   "id": "SeekerQueen",
@@ -5214,7 +5317,8 @@
     "chance": 1
    }
   ],
-  "avoidWater": true
+  "avoidWater": true,
+  "stage": "Mistlands"
  },
  {
   "id": "Serpent",
@@ -5260,7 +5364,8 @@
     "chance": 1,
     "levelMultiplier": true
    }
-  ]
+  ],
+  "stage": "Meadows"
  },
  {
   "id": "ShadowPerson",
@@ -5303,7 +5408,8 @@
    "SP_ShieldBlackmetalTower"
   ],
   "afraidOfFire": true,
-  "avoidWater": true
+  "avoidWater": true,
+  "stage": "DeepNorth"
  },
  {
   "id": "Skeleton",
@@ -5346,7 +5452,8 @@
     "levelMultiplier": true
    }
   ],
-  "avoidWater": true
+  "avoidWater": true,
+  "stage": "Meadows"
  },
  {
   "id": "Skeleton_DeepNorth",
@@ -5395,7 +5502,8 @@
     "levelMultiplier": true
    }
   ],
-  "avoidWater": true
+  "avoidWater": true,
+  "stage": "DeepNorth"
  },
  {
   "id": "Skeleton_Friendly",
@@ -5427,7 +5535,8 @@
    "fedDuration": 30,
    "tamingTime": 1800
   },
-  "avoidWater": true
+  "avoidWater": true,
+  "stage": "Mistlands"
  },
  {
   "id": "Skeleton_Hildir",
@@ -5467,7 +5576,8 @@
     "chance": 1
    }
   ],
-  "avoidWater": true
+  "avoidWater": true,
+  "stage": "BlackForest"
  },
  {
   "id": "Skeleton_Hildir_nochest",
@@ -5501,7 +5611,8 @@
     "chance": 1
    }
   ],
-  "avoidWater": true
+  "avoidWater": true,
+  "stage": "BlackForest"
  },
  {
   "id": "Skeleton_Meadows",
@@ -5544,7 +5655,8 @@
     "levelMultiplier": true
    }
   ],
-  "avoidWater": true
+  "avoidWater": true,
+  "stage": "BlackForest"
  },
  {
   "id": "Skeleton_Meadows_noarcher",
@@ -5586,7 +5698,8 @@
     "levelMultiplier": true
    }
   ],
-  "avoidWater": true
+  "avoidWater": true,
+  "stage": "Meadows"
  },
  {
   "id": "Skeleton_Mountains",
@@ -5629,7 +5742,8 @@
     "levelMultiplier": true
    }
   ],
-  "avoidWater": true
+  "avoidWater": true,
+  "stage": "Mountain"
  },
  {
   "id": "Skeleton_Mountains_noarcher",
@@ -5753,7 +5867,8 @@
     "levelMultiplier": true
    }
   ],
-  "avoidWater": true
+  "avoidWater": true,
+  "stage": "Meadows"
  },
  {
   "id": "Skeleton_Swamps",
@@ -5796,7 +5911,8 @@
     "levelMultiplier": true
    }
   ],
-  "avoidWater": true
+  "avoidWater": true,
+  "stage": "Swamp"
  },
  {
   "id": "Skeleton_Swamps_noarcher",
@@ -5882,7 +5998,8 @@
     "levelMultiplier": true
    }
   ],
-  "avoidWater": true
+  "avoidWater": true,
+  "stage": "DeepNorth"
  },
  {
   "id": "StoneGolem",
@@ -5937,7 +6054,8 @@
     "levelMultiplier": true
    }
   ],
-  "avoidWater": true
+  "avoidWater": true,
+  "stage": "Mountain"
  },
  {
   "id": "Surtling",
@@ -5982,7 +6100,8 @@
     "chance": 0.05
    }
   ],
-  "avoidWater": true
+  "avoidWater": true,
+  "stage": "Swamp"
  },
  {
   "id": "Tendril",
@@ -6004,7 +6123,8 @@
    "ShieldBronzeBuckler",
    "ShieldWood"
   ],
-  "avoidWater": true
+  "avoidWater": true,
+  "stage": "DeepNorth"
  },
  {
   "id": "Tendril_back",
@@ -6054,7 +6174,8 @@
    "ShieldBronzeBuckler",
    "ShieldWood"
   ],
-  "avoidWater": true
+  "avoidWater": true,
+  "stage": "BlackForest"
  },
  {
   "id": "TentaRoot_wild",
@@ -6076,7 +6197,8 @@
    "ShieldBronzeBuckler",
    "ShieldWood"
   ],
-  "avoidWater": true
+  "avoidWater": true,
+  "stage": "BlackForest"
  },
  {
   "id": "TheHive",
@@ -6155,7 +6277,8 @@
     "chance": 0.05
    }
   ],
-  "avoidWater": true
+  "avoidWater": true,
+  "stage": "Mistlands"
  },
  {
   "id": "TrainingDummy",
@@ -6236,7 +6359,8 @@
     "levelMultiplier": true
    }
   ],
-  "avoidWater": true
+  "avoidWater": true,
+  "stage": "BlackForest"
  },
  {
   "id": "TrollFrost",
@@ -6264,7 +6388,8 @@
    "trollsnow_punch_r",
    "trollsnow_throw"
   ],
-  "avoidWater": true
+  "avoidWater": true,
+  "stage": "DeepNorth"
  },
  {
   "id": "Troll_Summoned",
@@ -6292,7 +6417,8 @@
    "troll_summoned_punch",
    "troll_summoned_throw"
   ],
-  "avoidWater": true
+  "avoidWater": true,
+  "stage": "AshLands"
  },
  {
   "id": "Troll_sleeping",
@@ -6378,7 +6504,8 @@
     "chance": 0.1
    }
   ],
-  "avoidWater": true
+  "avoidWater": true,
+  "stage": "Mountain"
  },
  {
   "id": "Unbjorn",
@@ -6447,7 +6574,8 @@
     "levelMultiplier": true
    }
   ],
-  "avoidWater": true
+  "avoidWater": true,
+  "stage": "Plains"
  },
  {
   "id": "Volture",
@@ -6494,7 +6622,8 @@
     "chance": 0.5
    }
   ],
-  "avoidWater": true
+  "avoidWater": true,
+  "stage": "AshLands"
  },
  {
   "id": "Wolf",
@@ -6560,7 +6689,8 @@
     "Sausages"
    ]
   },
-  "avoidWater": true
+  "avoidWater": true,
+  "stage": "Mountain"
  },
  {
   "id": "Wolf_cub",
@@ -6578,7 +6708,8 @@
    "run": 4,
    "swim": 2
   },
-  "avoidWater": true
+  "avoidWater": true,
+  "stage": "Mountain"
  },
  {
   "id": "Wolf_spiritcaller",
@@ -6612,7 +6743,8 @@
     "Sausages"
    ]
   },
-  "avoidWater": true
+  "avoidWater": true,
+  "stage": "DeepNorth"
  },
  {
   "id": "Wraith",
@@ -6653,7 +6785,8 @@
     "levelMultiplier": true
    }
   ],
-  "avoidWater": true
+  "avoidWater": true,
+  "stage": "Swamp"
  },
  {
   "id": "Writhan",
@@ -6692,7 +6825,8 @@
     "levelMultiplier": true
    }
   ],
-  "avoidWater": true
+  "avoidWater": true,
+  "stage": "Swamp"
  },
  {
   "id": "gd_king",
@@ -6733,7 +6867,8 @@
     "onePerPlayer": true
    }
   ],
-  "avoidWater": true
+  "avoidWater": true,
+  "stage": "BlackForest"
  },
  {
   "id": "piece_TrainingDummy",
@@ -6746,7 +6881,8 @@
    "TrainingDummy_attack3",
    "TrainingDummy_throw"
   ],
-  "avoidWater": true
+  "avoidWater": true,
+  "stage": "BlackForest"
  },
  {
   "id": "staff_greenroots_tentaroot",
@@ -6766,6 +6902,7 @@
    "ShieldBronzeBuckler",
    "ShieldWood"
   ],
-  "avoidWater": true
+  "avoidWater": true,
+  "stage": "AshLands"
  }
 ]

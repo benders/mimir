@@ -27,7 +27,8 @@
    "reload": 4,
    "reloadDone": 1.0
   },
-  "ammoType": "$ammo_dart"
+  "ammoType": "$ammo_dart",
+  "stage": "Meadows"
  },
  {
   "id": "Bite",
@@ -61,7 +62,8 @@
   "block": 20,
   "blockPerLevel": 5,
   "parryBonus": 2,
-  "blockAdrenaline": 3
+  "blockAdrenaline": 3,
+  "stage": "Meadows"
  },
  {
   "id": "Charm",
@@ -74,7 +76,8 @@
   "adrenaline": {
    "max": 40,
    "effect": "SE_Fizz"
-  }
+  },
+  "stage": "Meadows"
  },
  {
   "id": "Coins",
@@ -83,7 +86,8 @@
   "icon": "Coins",
   "weight": 1.0,
   "stack": 1,
-  "maxQuality": 1
+  "maxQuality": 1,
+  "stage": "Meadows"
  },
  {
   "id": "Dart",
@@ -97,7 +101,8 @@
    "pierce": 10
   },
   "backstab": 1,
-  "ammoType": "$ammo_dart"
+  "ammoType": "$ammo_dart",
+  "stage": "Meadows"
  },
  {
   "id": "DartBlunt",
@@ -111,7 +116,8 @@
    "blunt": 4
   },
   "backstab": 1,
-  "ammoType": "$ammo_dart"
+  "ammoType": "$ammo_dart",
+  "stage": "Meadows"
  },
  {
   "id": "Dust",
@@ -130,7 +136,8 @@
   "icon": "Egg",
   "weight": 1.0,
   "stack": 1,
-  "maxQuality": 1
+  "maxQuality": 1,
+  "stage": "Meadows"
  },
  {
   "id": "FW_Helmet",
@@ -150,7 +157,8 @@
   "icon": "Fish",
   "weight": 1.0,
   "stack": 1,
-  "maxQuality": 1
+  "maxQuality": 1,
+  "stage": "Meadows"
  },
  {
   "id": "Gem",
@@ -159,7 +167,8 @@
   "icon": "Gem",
   "weight": 1.0,
   "stack": 1,
-  "maxQuality": 1
+  "maxQuality": 1,
+  "stage": "Swamp"
  },
  {
   "id": "Hammer",
@@ -173,7 +182,8 @@
   "parryBonus": 1,
   "blockAdrenaline": 2,
   "parryAdrenaline": 5,
-  "buildTable": "_HammerTable"
+  "buildTable": "_HammerTable",
+  "stage": "Meadows"
  },
  {
   "id": "Hat",
@@ -182,7 +192,8 @@
   "icon": "Helmet",
   "weight": 1.0,
   "stack": 1,
-  "maxQuality": 1
+  "maxQuality": 1,
+  "stage": "Meadows"
  },
  {
   "id": "Helmet",
@@ -193,7 +204,8 @@
   "stack": 1,
   "maxQuality": 1,
   "armor": 4,
-  "armorPerLevel": 2
+  "armorPerLevel": 2,
+  "stage": "Meadows"
  },
  {
   "id": "HelmetFem",
@@ -203,7 +215,8 @@
   "weight": 1.0,
   "stack": 1,
   "maxQuality": 1,
-  "armor": 5
+  "armor": 5,
+  "stage": "Meadows"
  },
  {
   "id": "Ichor",
@@ -212,7 +225,8 @@
   "icon": "Ichor",
   "weight": 1.0,
   "stack": 1,
-  "maxQuality": 1
+  "maxQuality": 1,
+  "stage": "Swamp"
  },
  {
   "id": "Ingot",
@@ -221,7 +235,8 @@
   "icon": "Ingot",
   "weight": 1.0,
   "stack": 30,
-  "maxQuality": 1
+  "maxQuality": 1,
+  "stage": "Meadows"
  },
  {
   "id": "Javelin",
@@ -283,7 +298,8 @@
    ],
    "draw": 2.5
   },
-  "ammoType": "$ammo_dart"
+  "ammoType": "$ammo_dart",
+  "stage": "Meadows"
  },
  {
   "id": "Mace",
@@ -318,7 +334,8 @@
    ],
    "lastChainMultiplier": 2,
    "cycle": 1.575
-  }
+  },
+  "stage": "Meadows"
  },
  {
   "id": "Mead",
@@ -328,7 +345,8 @@
   "weight": 1.0,
   "stack": 1,
   "maxQuality": 1,
-  "consumeEffect": "SE_Fizz"
+  "consumeEffect": "SE_Fizz",
+  "stage": "Meadows"
  },
  {
   "id": "Mystery",
@@ -350,7 +368,8 @@
   "icon": "Nectar",
   "weight": 1.0,
   "stack": 1,
-  "maxQuality": 1
+  "maxQuality": 1,
+  "stage": "Meadows"
  },
  {
   "id": "OddBar",
@@ -360,7 +379,8 @@
   "icon": "Ingot",
   "weight": 1.0,
   "stack": 1,
-  "maxQuality": 1
+  "maxQuality": 1,
+  "stage": "Meadows"
  },
  {
   "id": "Ore",
@@ -370,7 +390,8 @@
   "weight": 1.0,
   "stack": 30,
   "maxQuality": 1,
-  "noTeleport": true
+  "noTeleport": true,
+  "stage": "Meadows"
  },
  {
   "id": "Pearl",
@@ -379,7 +400,8 @@
   "icon": "Pearl",
   "weight": 1.0,
   "stack": 1,
-  "maxQuality": 1
+  "maxQuality": 1,
+  "stage": "Meadows"
  },
  {
   "id": "Rod",
@@ -398,7 +420,8 @@
    "stamina": 10,
    "projectile": "RodBolt",
    "adrenaline": 1
-  }
+  },
+  "stage": "Meadows"
  },
  {
   "id": "SP_Helmet",
@@ -426,7 +449,8 @@
    "type": "Projectile",
    "stamina": 10,
    "adrenaline": 1
-  }
+  },
+  "stage": "Meadows"
  },
  {
   "id": "Shard",
@@ -435,7 +459,8 @@
   "icon": "Shard",
   "weight": 1.0,
   "stack": 1,
-  "maxQuality": 1
+  "maxQuality": 1,
+  "stage": "Mountain"
  },
  {
   "id": "Spit",
@@ -527,7 +552,8 @@
    "name": "tester",
    "size": 2,
    "effect": "SE_Fizz"
-  }
+  },
+  "stage": "Meadows"
  },
  {
   "id": "Wand",
@@ -546,7 +572,8 @@
    "stamina": 10,
    "projectile": "WandSpawn",
    "adrenaline": 1
-  }
+  },
+  "stage": "Meadows"
  },
  {
   "id": "Wood",
@@ -556,7 +583,8 @@
   "icon": "Wood",
   "weight": 1.0,
   "stack": 50,
-  "maxQuality": 1
+  "maxQuality": 1,
+  "stage": "Meadows"
  },
  {
   "id": "WoodOld",
@@ -566,6 +594,7 @@
   "icon": "Wood",
   "weight": 1.0,
   "stack": 50,
-  "maxQuality": 1
+  "maxQuality": 1,
+  "stage": "Meadows"
  }
 ]

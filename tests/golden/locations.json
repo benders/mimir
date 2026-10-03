@@ -1,0 +1,27 @@
+[
+ {
+  "id": "Camp",
+  "biomes": [
+   "Swamp",
+   "Plains"
+  ]
+ },
+ {
+  "id": "Lair",
+  "biomes": [
+   "Mountain"
+  ]
+ },
+ {
+  "id": "Market",
+  "biomes": [
+   "Meadows"
+  ]
+ },
+ {
+  "id": "Stash",
+  "biomes": [
+   "Meadows"
+  ]
+ }
+]

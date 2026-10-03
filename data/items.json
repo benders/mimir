@@ -94,7 +94,8 @@
   "icon": "acorn",
   "weight": 0.1,
   "stack": 100,
-  "maxQuality": 1
+  "maxQuality": 1,
+  "stage": "Meadows"
  },
  {
   "id": "Amber",
@@ -105,7 +106,8 @@
   "weight": 0.1,
   "value": 5,
   "stack": 20,
-  "maxQuality": 1
+  "maxQuality": 1,
+  "stage": "Meadows"
  },
  {
   "id": "AmberPearl",
@@ -116,7 +118,8 @@
   "weight": 0.1,
   "value": 10,
   "stack": 50,
-  "maxQuality": 1
+  "maxQuality": 1,
+  "stage": "Meadows"
  },
  {
   "id": "AncientCoin",
@@ -127,7 +130,8 @@
   "weight": 0.2,
   "value": 10,
   "stack": 999,
-  "maxQuality": 1
+  "maxQuality": 1,
+  "stage": "DeepNorth"
  },
  {
   "id": "AncientGemstoneBlack",
@@ -138,7 +142,8 @@
   "weight": 0.3,
   "value": 175,
   "stack": 20,
-  "maxQuality": 1
+  "maxQuality": 1,
+  "stage": "DeepNorth"
  },
  {
   "id": "AncientGemstoneGreen",
@@ -149,7 +154,8 @@
   "weight": 0.3,
   "value": 55,
   "stack": 20,
-  "maxQuality": 1
+  "maxQuality": 1,
+  "stage": "DeepNorth"
  },
  {
   "id": "AncientGemstoneOrange",
@@ -160,7 +166,8 @@
   "weight": 0.3,
   "value": 95,
   "stack": 20,
-  "maxQuality": 1
+  "maxQuality": 1,
+  "stage": "DeepNorth"
  },
  {
   "id": "AncientGemstonePurple",
@@ -171,7 +178,8 @@
   "weight": 0.3,
   "value": 135,
   "stack": 20,
-  "maxQuality": 1
+  "maxQuality": 1,
+  "stage": "DeepNorth"
  },
  {
   "id": "AncientSeed",
@@ -181,7 +189,8 @@
   "icon": "ancientseed",
   "weight": 1,
   "stack": 50,
-  "maxQuality": 1
+  "maxQuality": 1,
+  "stage": "BlackForest"
  },
  {
   "id": "ArmorAshlandsMediumChest",
@@ -204,7 +213,8 @@
    "name": "AshlandsMediumArmor",
    "size": 3,
    "effect": "SetEffect_AshlandsMediumArmor"
-  }
+  },
+  "stage": "AshLands"
  },
  {
   "id": "ArmorAshlandsMediumlegs",
@@ -227,7 +237,8 @@
    "name": "AshlandsMediumArmor",
    "size": 3,
    "effect": "SetEffect_AshlandsMediumArmor"
-  }
+  },
+  "stage": "AshLands"
  },
  {
   "id": "ArmorBerserkerChest",
@@ -250,7 +261,8 @@
    "name": "berserker_armor",
    "size": 3,
    "effect": "SetEffect_BerserkerArmor"
-  }
+  },
+  "stage": "BlackForest"
  },
  {
   "id": "ArmorBerserkerLegs",
@@ -273,7 +285,8 @@
    "name": "berserker_armor",
    "size": 3,
    "effect": "SetEffect_BerserkerArmor"
-  }
+  },
+  "stage": "BlackForest"
  },
  {
   "id": "ArmorBerserkerUndeadChest",
@@ -296,7 +309,8 @@
    "name": "berserker_armor_undead",
    "size": 3,
    "effect": "SetEffect_BerserkerUndeadArmor"
-  }
+  },
+  "stage": "Plains"
  },
  {
   "id": "ArmorBerserkerUndeadLegs",
@@ -319,7 +333,8 @@
    "name": "berserker_armor_undead",
    "size": 3,
    "effect": "SetEffect_BerserkerUndeadArmor"
-  }
+  },
+  "stage": "Plains"
  },
  {
   "id": "ArmorBronzeChest",
@@ -340,7 +355,8 @@
   },
   "modifiers": {
    "movement": -0.05
-  }
+  },
+  "stage": "BlackForest"
  },
  {
   "id": "ArmorBronzeLegs",
@@ -361,7 +377,8 @@
   },
   "modifiers": {
    "movement": -0.05
-  }
+  },
+  "stage": "BlackForest"
  },
  {
   "id": "ArmorCarapaceChest",
@@ -382,7 +399,8 @@
   },
   "modifiers": {
    "movement": -0.05
-  }
+  },
+  "stage": "Mistlands"
  },
  {
   "id": "ArmorCarapaceLegs",
@@ -403,7 +421,8 @@
   },
   "modifiers": {
    "movement": -0.05
-  }
+  },
+  "stage": "Mistlands"
  },
  {
   "id": "ArmorDeepNorthHeavyChest",
@@ -424,7 +443,8 @@
   },
   "damageModifiers": {
    "frost": "Resistant"
-  }
+  },
+  "stage": "DeepNorth"
  },
  {
   "id": "ArmorDeepNorthHeavylegs",
@@ -442,7 +462,8 @@
    "perLevel": 200,
    "drain": 1,
    "repairable": true
-  }
+  },
+  "stage": "DeepNorth"
  },
  {
   "id": "ArmorDeepNorthMageChest",
@@ -467,7 +488,8 @@
   },
   "damageModifiers": {
    "frost": "Resistant"
-  }
+  },
+  "stage": "DeepNorth"
  },
  {
   "id": "ArmorDeepNorthMagelegs",
@@ -489,7 +511,8 @@
   "modifiers": {
    "eitrRegen": 0.6,
    "movement": -0.02
-  }
+  },
+  "stage": "DeepNorth"
  },
  {
   "id": "ArmorDeepNorthMediumChest",
@@ -515,7 +538,8 @@
    "name": "DeepNorthMediumArmor",
    "size": 3,
    "effect": "SetEffect_DeepNorthMediumArmor"
-  }
+  },
+  "stage": "DeepNorth"
  },
  {
   "id": "ArmorDeepNorthMediumlegs",
@@ -538,7 +562,8 @@
    "name": "DeepNorthMediumArmor",
    "size": 3,
    "effect": "SetEffect_DeepNorthMediumArmor"
-  }
+  },
+  "stage": "DeepNorth"
  },
  {
   "id": "ArmorDress1",
@@ -559,7 +584,8 @@
   },
   "modifiers": {
    "homeItemsStamina": -0.2
-  }
+  },
+  "stage": "BlackForest"
  },
  {
   "id": "ArmorDress10",
@@ -580,7 +606,8 @@
   },
   "modifiers": {
    "homeItemsStamina": -0.2
-  }
+  },
+  "stage": "Meadows"
  },
  {
   "id": "ArmorDress2",
@@ -601,7 +628,8 @@
   },
   "modifiers": {
    "homeItemsStamina": -0.2
-  }
+  },
+  "stage": "Mountain"
  },
  {
   "id": "ArmorDress3",
@@ -622,7 +650,8 @@
   },
   "modifiers": {
    "homeItemsStamina": -0.2
-  }
+  },
+  "stage": "Plains"
  },
  {
   "id": "ArmorDress4",
@@ -643,7 +672,8 @@
   },
   "modifiers": {
    "homeItemsStamina": -0.2
-  }
+  },
+  "stage": "BlackForest"
  },
  {
   "id": "ArmorDress5",
@@ -664,7 +694,8 @@
   },
   "modifiers": {
    "homeItemsStamina": -0.2
-  }
+  },
+  "stage": "Mountain"
  },
  {
   "id": "ArmorDress6",
@@ -685,7 +716,8 @@
   },
   "modifiers": {
    "homeItemsStamina": -0.2
-  }
+  },
+  "stage": "Plains"
  },
  {
   "id": "ArmorDress7",
@@ -706,7 +738,8 @@
   },
   "modifiers": {
    "homeItemsStamina": -0.2
-  }
+  },
+  "stage": "BlackForest"
  },
  {
   "id": "ArmorDress8",
@@ -727,7 +760,8 @@
   },
   "modifiers": {
    "homeItemsStamina": -0.2
-  }
+  },
+  "stage": "Mountain"
  },
  {
   "id": "ArmorDress9",
@@ -748,7 +782,8 @@
   },
   "modifiers": {
    "homeItemsStamina": -0.2
-  }
+  },
+  "stage": "Plains"
  },
  {
   "id": "ArmorFenringChest",
@@ -777,7 +812,8 @@
    "name": "fenring_armor",
    "size": 3,
    "effect": "SetEffect_FenringArmor"
-  }
+  },
+  "stage": "Mountain"
  },
  {
   "id": "ArmorFenringLegs",
@@ -803,7 +839,8 @@
    "name": "fenring_armor",
    "size": 3,
    "effect": "SetEffect_FenringArmor"
-  }
+  },
+  "stage": "Mountain"
  },
  {
   "id": "ArmorFlametalChest",
@@ -825,7 +862,8 @@
   "modifiers": {
    "movement": -0.05,
    "heatResistance": 0.2
-  }
+  },
+  "stage": "AshLands"
  },
  {
   "id": "ArmorFlametalLegs",
@@ -847,7 +885,8 @@
   "modifiers": {
    "movement": -0.05,
    "heatResistance": 0.2
-  }
+  },
+  "stage": "AshLands"
  },
  {
   "id": "ArmorGoldHeavyChestUncooked",
@@ -857,7 +896,8 @@
   "icon": "ArmorHeavyChestUncooked",
   "weight": 1,
   "stack": 10,
-  "maxQuality": 1
+  "maxQuality": 1,
+  "stage": "DeepNorth"
  },
  {
   "id": "ArmorGoldHeavyHelmetUncooked",
@@ -867,7 +907,8 @@
   "icon": "ArmorHeavyHelmetUncooked",
   "weight": 1,
   "stack": 10,
-  "maxQuality": 1
+  "maxQuality": 1,
+  "stage": "DeepNorth"
  },
  {
   "id": "ArmorGoldHeavyLegsUncooked",
@@ -877,7 +918,8 @@
   "icon": "ArmorHeavyLegsUncooked",
   "weight": 1,
   "stack": 10,
-  "maxQuality": 1
+  "maxQuality": 1,
+  "stage": "DeepNorth"
  },
  {
   "id": "ArmorGoldMageChestUncooked",
@@ -887,7 +929,8 @@
   "icon": "ArmorMageChestUncooked",
   "weight": 1,
   "stack": 10,
-  "maxQuality": 1
+  "maxQuality": 1,
+  "stage": "DeepNorth"
  },
  {
   "id": "ArmorGoldMageHelmetUncooked",
@@ -897,7 +940,8 @@
   "icon": "ArmorMageHelmetUncooked",
   "weight": 1,
   "stack": 10,
-  "maxQuality": 1
+  "maxQuality": 1,
+  "stage": "DeepNorth"
  },
  {
   "id": "ArmorGoldMageLegsUncooked",
@@ -907,7 +951,8 @@
   "icon": "ArmorMageLegsUncooked",
   "weight": 1,
   "stack": 10,
-  "maxQuality": 1
+  "maxQuality": 1,
+  "stage": "DeepNorth"
  },
  {
   "id": "ArmorGoldMediumChestUncooked",
@@ -917,7 +962,8 @@
   "icon": "ArmorMediumChestUncooked",
   "weight": 1,
   "stack": 10,
-  "maxQuality": 1
+  "maxQuality": 1,
+  "stage": "DeepNorth"
  },
  {
   "id": "ArmorGoldMediumHelmetUncooked",
@@ -927,7 +973,8 @@
   "icon": "ArmorMediumHelmetUncooked",
   "weight": 1,
   "stack": 10,
-  "maxQuality": 1
+  "maxQuality": 1,
+  "stage": "DeepNorth"
  },
  {
   "id": "ArmorGoldMediumLegsUncooked",
@@ -937,7 +984,8 @@
   "icon": "ArmorMediumLegsUncooked",
   "weight": 1,
   "stack": 10,
-  "maxQuality": 1
+  "maxQuality": 1,
+  "stage": "DeepNorth"
  },
  {
   "id": "ArmorHarvester1",
@@ -963,7 +1011,8 @@
    "name": "harvester",
    "size": 2,
    "effect": "SetEffect_HarvesterArmor"
-  }
+  },
+  "stage": "BlackForest"
  },
  {
   "id": "ArmorHarvester2",
@@ -989,7 +1038,8 @@
    "name": "harvester",
    "size": 2,
    "effect": "SetEffect_HarvesterArmor"
-  }
+  },
+  "stage": "BlackForest"
  },
  {
   "id": "ArmorIronChest",
@@ -1010,7 +1060,8 @@
   },
   "modifiers": {
    "movement": -0.05
-  }
+  },
+  "stage": "Swamp"
  },
  {
   "id": "ArmorIronLegs",
@@ -1031,7 +1082,8 @@
   },
   "modifiers": {
    "movement": -0.05
-  }
+  },
+  "stage": "Swamp"
  },
  {
   "id": "ArmorLeatherChest",
@@ -1049,7 +1101,8 @@
    "perLevel": 100,
    "drain": 1,
    "repairable": true
-  }
+  },
+  "stage": "Meadows"
  },
  {
   "id": "ArmorLeatherLegs",
@@ -1067,7 +1120,8 @@
    "perLevel": 100,
    "drain": 1,
    "repairable": true
-  }
+  },
+  "stage": "Meadows"
  },
  {
   "id": "ArmorLoxChest",
@@ -1090,7 +1144,8 @@
    "name": "lox",
    "size": 3,
    "effect": "SetEffect_LoxArmor"
-  }
+  },
+  "stage": "Plains"
  },
  {
   "id": "ArmorLoxLegs",
@@ -1113,7 +1168,8 @@
    "name": "lox",
    "size": 3,
    "effect": "SetEffect_LoxArmor"
-  }
+  },
+  "stage": "Plains"
  },
  {
   "id": "ArmorMageChest",
@@ -1135,7 +1191,8 @@
   "modifiers": {
    "eitrRegen": 0.4,
    "movement": -0.02
-  }
+  },
+  "stage": "Mistlands"
  },
  {
   "id": "ArmorMageChest_Ashlands",
@@ -1157,7 +1214,8 @@
   "modifiers": {
    "eitrRegen": 0.5,
    "movement": -0.02
-  }
+  },
+  "stage": "AshLands"
  },
  {
   "id": "ArmorMageLegs",
@@ -1179,7 +1237,8 @@
   "modifiers": {
    "eitrRegen": 0.4,
    "movement": -0.02
-  }
+  },
+  "stage": "Mistlands"
  },
  {
   "id": "ArmorMageLegs_Ashlands",
@@ -1201,7 +1260,8 @@
   "modifiers": {
    "eitrRegen": 0.5,
    "movement": -0.02
-  }
+  },
+  "stage": "AshLands"
  },
  {
   "id": "ArmorPaddedCuirass",
@@ -1222,7 +1282,8 @@
   },
   "modifiers": {
    "movement": -0.05
-  }
+  },
+  "stage": "Plains"
  },
  {
   "id": "ArmorPaddedGreaves",
@@ -1243,7 +1304,8 @@
   },
   "modifiers": {
    "movement": -0.05
-  }
+  },
+  "stage": "Plains"
  },
  {
   "id": "ArmorRagsChest",
@@ -1261,7 +1323,8 @@
    "perLevel": 50,
    "drain": 1,
    "repairable": true
-  }
+  },
+  "stage": "Meadows"
  },
  {
   "id": "ArmorRagsLegs",
@@ -1279,7 +1342,8 @@
    "perLevel": 50,
    "drain": 1,
    "repairable": true
-  }
+  },
+  "stage": "Meadows"
  },
  {
   "id": "ArmorRootChest",
@@ -1309,7 +1373,8 @@
    "name": "root_armor",
    "size": 3,
    "effect": "SetEffect_RootArmor"
-  }
+  },
+  "stage": "Swamp"
  },
  {
   "id": "ArmorRootLegs",
@@ -1338,7 +1403,8 @@
    "name": "root_armor",
    "size": 3,
    "effect": "SetEffect_RootArmor"
-  }
+  },
+  "stage": "Swamp"
  },
  {
   "id": "ArmorTrollLeatherChest",
@@ -1361,7 +1427,8 @@
    "name": "troll",
    "size": 4,
    "effect": "SetEffect_TrollArmor"
-  }
+  },
+  "stage": "BlackForest"
  },
  {
   "id": "ArmorTrollLeatherLegs",
@@ -1384,7 +1451,8 @@
    "name": "troll",
    "size": 4,
    "effect": "SetEffect_TrollArmor"
-  }
+  },
+  "stage": "BlackForest"
  },
  {
   "id": "ArmorTunic1",
@@ -1405,7 +1473,8 @@
   },
   "modifiers": {
    "homeItemsStamina": -0.2
-  }
+  },
+  "stage": "BlackForest"
  },
  {
   "id": "ArmorTunic10",
@@ -1426,7 +1495,8 @@
   },
   "modifiers": {
    "homeItemsStamina": -0.2
-  }
+  },
+  "stage": "Meadows"
  },
  {
   "id": "ArmorTunic2",
@@ -1447,7 +1517,8 @@
   },
   "modifiers": {
    "homeItemsStamina": -0.2
-  }
+  },
+  "stage": "Mountain"
  },
  {
   "id": "ArmorTunic3",
@@ -1468,7 +1539,8 @@
   },
   "modifiers": {
    "homeItemsStamina": -0.2
-  }
+  },
+  "stage": "Plains"
  },
  {
   "id": "ArmorTunic4",
@@ -1489,7 +1561,8 @@
   },
   "modifiers": {
    "homeItemsStamina": -0.2
-  }
+  },
+  "stage": "BlackForest"
  },
  {
   "id": "ArmorTunic5",
@@ -1510,7 +1583,8 @@
   },
   "modifiers": {
    "homeItemsStamina": -0.2
-  }
+  },
+  "stage": "Mountain"
  },
  {
   "id": "ArmorTunic6",
@@ -1531,7 +1605,8 @@
   },
   "modifiers": {
    "homeItemsStamina": -0.2
-  }
+  },
+  "stage": "Plains"
  },
  {
   "id": "ArmorTunic7",
@@ -1552,7 +1627,8 @@
   },
   "modifiers": {
    "homeItemsStamina": -0.2
-  }
+  },
+  "stage": "BlackForest"
  },
  {
   "id": "ArmorTunic8",
@@ -1573,7 +1649,8 @@
   },
   "modifiers": {
    "homeItemsStamina": -0.2
-  }
+  },
+  "stage": "Mountain"
  },
  {
   "id": "ArmorTunic9",
@@ -1594,7 +1671,8 @@
   },
   "modifiers": {
    "homeItemsStamina": -0.2
-  }
+  },
+  "stage": "Plains"
  },
  {
   "id": "ArmorWolfChest",
@@ -1618,7 +1696,8 @@
   },
   "damageModifiers": {
    "frost": "Resistant"
-  }
+  },
+  "stage": "Mountain"
  },
  {
   "id": "ArmorWolfLegs",
@@ -1639,7 +1718,8 @@
   },
   "modifiers": {
    "movement": -0.05
-  }
+  },
+  "stage": "Mountain"
  },
  {
   "id": "ArrowBloodGold",
@@ -1656,7 +1736,8 @@
   },
   "attackForce": 15,
   "backstab": 3,
-  "ammoType": "$ammo_arrows"
+  "ammoType": "$ammo_arrows",
+  "stage": "DeepNorth"
  },
  {
   "id": "ArrowBronze",
@@ -1673,7 +1754,8 @@
   },
   "attackForce": 10,
   "backstab": 3,
-  "ammoType": "$ammo_arrows"
+  "ammoType": "$ammo_arrows",
+  "stage": "BlackForest"
  },
  {
   "id": "ArrowCarapace",
@@ -1690,7 +1772,8 @@
   },
   "attackForce": 15,
   "backstab": 3,
-  "ammoType": "$ammo_arrows"
+  "ammoType": "$ammo_arrows",
+  "stage": "Mistlands"
  },
  {
   "id": "ArrowCharred",
@@ -1707,7 +1790,8 @@
   },
   "attackForce": 15,
   "backstab": 3,
-  "ammoType": "$ammo_arrows"
+  "ammoType": "$ammo_arrows",
+  "stage": "AshLands"
  },
  {
   "id": "ArrowFire",
@@ -1725,7 +1809,8 @@
   },
   "attackForce": 10,
   "backstab": 3,
-  "ammoType": "$ammo_arrows"
+  "ammoType": "$ammo_arrows",
+  "stage": "Meadows"
  },
  {
   "id": "ArrowFlint",
@@ -1742,7 +1827,8 @@
   },
   "attackForce": 10,
   "backstab": 3,
-  "ammoType": "$ammo_arrows"
+  "ammoType": "$ammo_arrows",
+  "stage": "Meadows"
  },
  {
   "id": "ArrowFrost",
@@ -1760,7 +1846,8 @@
   },
   "attackForce": 10,
   "backstab": 3,
-  "ammoType": "$ammo_arrows"
+  "ammoType": "$ammo_arrows",
+  "stage": "Mountain"
  },
  {
   "id": "ArrowIron",
@@ -1777,7 +1864,8 @@
   },
   "attackForce": 10,
   "backstab": 3,
-  "ammoType": "$ammo_arrows"
+  "ammoType": "$ammo_arrows",
+  "stage": "Swamp"
  },
  {
   "id": "ArrowNeedle",
@@ -1794,7 +1882,8 @@
   },
   "attackForce": 15,
   "backstab": 3,
-  "ammoType": "$ammo_arrows"
+  "ammoType": "$ammo_arrows",
+  "stage": "Plains"
  },
  {
   "id": "ArrowObsidian",
@@ -1811,7 +1900,8 @@
   },
   "attackForce": 10,
   "backstab": 3,
-  "ammoType": "$ammo_arrows"
+  "ammoType": "$ammo_arrows",
+  "stage": "Mountain"
  },
  {
   "id": "ArrowPoison",
@@ -1829,7 +1919,8 @@
   },
   "attackForce": 10,
   "backstab": 3,
-  "ammoType": "$ammo_arrows"
+  "ammoType": "$ammo_arrows",
+  "stage": "Swamp"
  },
  {
   "id": "ArrowSilver",
@@ -1847,7 +1938,8 @@
   },
   "attackForce": 10,
   "backstab": 3,
-  "ammoType": "$ammo_arrows"
+  "ammoType": "$ammo_arrows",
+  "stage": "Mountain"
  },
  {
   "id": "ArrowWood",
@@ -1867,7 +1959,8 @@
   },
   "attackForce": 10,
   "backstab": 3,
-  "ammoType": "$ammo_arrows"
+  "ammoType": "$ammo_arrows",
+  "stage": "Meadows"
  },
  {
   "id": "AskBladder",
@@ -1877,7 +1970,8 @@
   "icon": "AskBladder",
   "weight": 0.5,
   "stack": 50,
-  "maxQuality": 1
+  "maxQuality": 1,
+  "stage": "AshLands"
  },
  {
   "id": "AskHide",
@@ -1887,7 +1981,8 @@
   "icon": "AskHide",
   "weight": 1,
   "stack": 50,
-  "maxQuality": 1
+  "maxQuality": 1,
+  "stage": "AshLands"
  },
  {
   "id": "AsksvinCarrionNeck",
@@ -1897,7 +1992,8 @@
   "icon": "asksvinNeck",
   "weight": 2,
   "stack": 50,
-  "maxQuality": 1
+  "maxQuality": 1,
+  "stage": "AshLands"
  },
  {
   "id": "AsksvinCarrionPelvic",
@@ -1907,7 +2003,8 @@
   "icon": "asksvinPelvic",
   "weight": 2,
   "stack": 50,
-  "maxQuality": 1
+  "maxQuality": 1,
+  "stage": "AshLands"
  },
  {
   "id": "AsksvinCarrionRibcage",
@@ -1917,7 +2014,8 @@
   "icon": "asksvinRibcage",
   "weight": 5,
   "stack": 50,
-  "maxQuality": 1
+  "maxQuality": 1,
+  "stage": "AshLands"
  },
  {
   "id": "AsksvinCarrionSkull",
@@ -1927,7 +2025,8 @@
   "icon": "asksvinSkull",
   "weight": 2,
   "stack": 50,
-  "maxQuality": 1
+  "maxQuality": 1,
+  "stage": "AshLands"
  },
  {
   "id": "AsksvinEgg",
@@ -1943,7 +2042,8 @@
    "stamina": 30,
    "duration": 600,
    "regen": 2
-  }
+  },
+  "stage": "AshLands"
  },
  {
   "id": "AsksvinMeat",
@@ -1959,7 +2059,8 @@
    "stamina": 24,
    "duration": 1200,
    "regen": 6
-  }
+  },
+  "stage": "AshLands"
  },
  {
   "id": "Asksvin_Bite",
@@ -2140,7 +2241,8 @@
   },
   "modifiers": {
    "movement": -0.05
-  }
+  },
+  "stage": "Plains"
  },
  {
   "id": "AtgeirBronze",
@@ -2209,7 +2311,8 @@
   },
   "modifiers": {
    "movement": -0.05
-  }
+  },
+  "stage": "BlackForest"
  },
  {
   "id": "AtgeirGold",
@@ -2278,7 +2381,8 @@
   },
   "modifiers": {
    "movement": -0.05
-  }
+  },
+  "stage": "DeepNorth"
  },
  {
   "id": "AtgeirGoldUncooked",
@@ -2288,7 +2392,8 @@
   "icon": "AtgeirGoldUncooked",
   "weight": 2.5,
   "stack": 1,
-  "maxQuality": 1
+  "maxQuality": 1,
+  "stage": "DeepNorth"
  },
  {
   "id": "AtgeirGold_BloodLightning",
@@ -2359,7 +2464,8 @@
   },
   "modifiers": {
    "movement": -0.05
-  }
+  },
+  "stage": "DeepNorth"
  },
  {
   "id": "AtgeirGold_FrostFire",
@@ -2432,7 +2538,8 @@
   },
   "modifiers": {
    "movement": -0.05
-  }
+  },
+  "stage": "DeepNorth"
  },
  {
   "id": "AtgeirHimminAfl",
@@ -2501,7 +2608,8 @@
   },
   "modifiers": {
    "movement": -0.05
-  }
+  },
+  "stage": "Mistlands"
  },
  {
   "id": "AtgeirIron",
@@ -2569,7 +2677,8 @@
   },
   "modifiers": {
    "movement": -0.05
-  }
+  },
+  "stage": "Swamp"
  },
  {
   "id": "AtgeirWood",
@@ -2637,7 +2746,8 @@
   },
   "modifiers": {
    "movement": -0.05
-  }
+  },
+  "stage": "Plains"
  },
  {
   "id": "Axe1h_JotunWarrior",
@@ -2793,7 +2903,8 @@
   },
   "modifiers": {
    "movement": -0.05
-  }
+  },
+  "stage": "AshLands"
  },
  {
   "id": "AxeBerzerkrBlood",
@@ -2868,7 +2979,8 @@
   },
   "modifiers": {
    "movement": -0.05
-  }
+  },
+  "stage": "AshLands"
  },
  {
   "id": "AxeBerzerkrLightning",
@@ -2944,7 +3056,8 @@
   },
   "modifiers": {
    "movement": -0.05
-  }
+  },
+  "stage": "AshLands"
  },
  {
   "id": "AxeBerzerkrNature",
@@ -3020,7 +3133,8 @@
   },
   "modifiers": {
    "movement": -0.05
-  }
+  },
+  "stage": "AshLands"
  },
  {
   "id": "AxeBlackMetal",
@@ -3091,7 +3205,8 @@
   },
   "modifiers": {
    "movement": -0.05
-  }
+  },
+  "stage": "Plains"
  },
  {
   "id": "AxeBronze",
@@ -3162,7 +3277,8 @@
   },
   "modifiers": {
    "movement": -0.05
-  }
+  },
+  "stage": "BlackForest"
  },
  {
   "id": "AxeEarly",
@@ -3237,7 +3353,8 @@
   },
   "modifiers": {
    "movement": -0.05
-  }
+  },
+  "stage": "Meadows"
  },
  {
   "id": "AxeFlint",
@@ -3308,7 +3425,8 @@
   },
   "modifiers": {
    "movement": -0.05
-  }
+  },
+  "stage": "Meadows"
  },
  {
   "id": "AxeGold",
@@ -3379,7 +3497,8 @@
   },
   "modifiers": {
    "movement": -0.05
-  }
+  },
+  "stage": "DeepNorth"
  },
  {
   "id": "AxeGoldUncooked",
@@ -3389,7 +3508,8 @@
   "icon": "AxeGoldUncooked",
   "weight": 2,
   "stack": 1,
-  "maxQuality": 1
+  "maxQuality": 1,
+  "stage": "DeepNorth"
  },
  {
   "id": "AxeGold_BloodLightning",
@@ -3462,7 +3582,8 @@
   },
   "modifiers": {
    "movement": -0.05
-  }
+  },
+  "stage": "DeepNorth"
  },
  {
   "id": "AxeGold_FrostFire",
@@ -3537,7 +3658,8 @@
   },
   "modifiers": {
    "movement": -0.05
-  }
+  },
+  "stage": "DeepNorth"
  },
  {
   "id": "AxeHead1",
@@ -3547,7 +3669,8 @@
   "icon": "AxeHead1",
   "weight": 2,
   "stack": 10,
-  "maxQuality": 1
+  "maxQuality": 1,
+  "stage": "Meadows"
  },
  {
   "id": "AxeHead2",
@@ -3557,7 +3680,8 @@
   "icon": "AxeHead2",
   "weight": 2,
   "stack": 10,
-  "maxQuality": 1
+  "maxQuality": 1,
+  "stage": "Meadows"
  },
  {
   "id": "AxeIron",
@@ -3628,7 +3752,8 @@
   },
   "modifiers": {
    "movement": -0.05
-  }
+  },
+  "stage": "Swamp"
  },
  {
   "id": "AxeJotunBane",
@@ -3700,7 +3825,8 @@
   },
   "modifiers": {
    "movement": -0.05
-  }
+  },
+  "stage": "Mistlands"
  },
  {
   "id": "AxeStone",
@@ -3770,7 +3896,8 @@
   },
   "modifiers": {
    "movement": -0.05
-  }
+  },
+  "stage": "Meadows"
  },
  {
   "id": "AxeWood",
@@ -3841,7 +3968,8 @@
   },
   "modifiers": {
    "movement": -0.05
-  }
+  },
+  "stage": "Meadows"
  },
  {
   "id": "BakedPoteitr",
@@ -3858,7 +3986,8 @@
    "eitr": 100,
    "duration": 1500,
    "regen": 5
-  }
+  },
+  "stage": "DeepNorth"
  },
  {
   "id": "BakedPoteitrUncooked",
@@ -3875,7 +4004,8 @@
    "eitr": 110,
    "duration": 1500,
    "regen": 5
-  }
+  },
+  "stage": "DeepNorth"
  },
  {
   "id": "BarberKit",
@@ -3885,7 +4015,8 @@
   "icon": "BarberKit",
   "weight": 2,
   "stack": 1,
-  "maxQuality": 1
+  "maxQuality": 1,
+  "stage": "Meadows"
  },
  {
   "id": "BarkaBranch",
@@ -3895,7 +4026,8 @@
   "icon": "barkabranch",
   "weight": 0.5,
   "stack": 50,
-  "maxQuality": 1
+  "maxQuality": 1,
+  "stage": "DeepNorth"
  },
  {
   "id": "Barka_Backslam",
@@ -4055,7 +4187,8 @@
   "icon": "barley",
   "weight": 0.2,
   "stack": 100,
-  "maxQuality": 1
+  "maxQuality": 1,
+  "stage": "Plains"
  },
  {
   "id": "BarleyFlour",
@@ -4065,7 +4198,8 @@
   "icon": "barleyflour",
   "weight": 0.2,
   "stack": 50,
-  "maxQuality": 1
+  "maxQuality": 1,
+  "stage": "Plains"
  },
  {
   "id": "BarleyWine",
@@ -4077,7 +4211,8 @@
   "stack": 10,
   "maxQuality": 1,
   "ammoType": "mead",
-  "consumeEffect": "Potion_barleywine"
+  "consumeEffect": "Potion_barleywine",
+  "stage": "Plains"
  },
  {
   "id": "BarleyWineBase",
@@ -4088,7 +4223,8 @@
   "weight": 1,
   "stack": 1,
   "maxQuality": 1,
-  "consumeEffect": "Potion_barleywine"
+  "consumeEffect": "Potion_barleywine",
+  "stage": "Plains"
  },
  {
   "id": "BarrelRings",
@@ -4098,7 +4234,8 @@
   "icon": "BarrelRings",
   "weight": 2,
   "stack": 20,
-  "maxQuality": 1
+  "maxQuality": 1,
+  "stage": "BlackForest"
  },
  {
   "id": "Battleaxe",
@@ -4169,7 +4306,8 @@
   },
   "modifiers": {
    "movement": -0.15
-  }
+  },
+  "stage": "Swamp"
  },
  {
   "id": "BattleaxeBlackmetal",
@@ -4240,7 +4378,8 @@
   },
   "modifiers": {
    "movement": -0.15
-  }
+  },
+  "stage": "Plains"
  },
  {
   "id": "BattleaxeCrystal",
@@ -4312,7 +4451,8 @@
   },
   "modifiers": {
    "movement": -0.15
-  }
+  },
+  "stage": "Mountain"
  },
  {
   "id": "BattleaxeGold",
@@ -4383,7 +4523,8 @@
   },
   "modifiers": {
    "movement": -0.2
-  }
+  },
+  "stage": "DeepNorth"
  },
  {
   "id": "BattleaxeGoldUncooked",
@@ -4393,7 +4534,8 @@
   "icon": "BattleaxeGoldUncooked",
   "weight": 2.5,
   "stack": 1,
-  "maxQuality": 1
+  "maxQuality": 1,
+  "stage": "DeepNorth"
  },
  {
   "id": "BattleaxeGold_BloodLightning",
@@ -4466,7 +4608,8 @@
   },
   "modifiers": {
    "movement": -0.2
-  }
+  },
+  "stage": "DeepNorth"
  },
  {
   "id": "BattleaxeGold_FrostFire",
@@ -4541,7 +4684,8 @@
   },
   "modifiers": {
    "movement": -0.2
-  }
+  },
+  "stage": "DeepNorth"
  },
  {
   "id": "BattleaxeSkullSplittur",
@@ -4612,7 +4756,8 @@
   },
   "modifiers": {
    "movement": -0.15
-  }
+  },
+  "stage": "Mistlands"
  },
  {
   "id": "BattleaxeWood",
@@ -4683,7 +4828,8 @@
   },
   "modifiers": {
    "movement": -0.15
-  }
+  },
+  "stage": "Mountain"
  },
  {
   "id": "Beard1",
@@ -5260,7 +5406,8 @@
   "icon": "beechseeds",
   "weight": 0.1,
   "stack": 100,
-  "maxQuality": 1
+  "maxQuality": 1,
+  "stage": "Meadows"
  },
  {
   "id": "Bell",
@@ -5270,7 +5417,8 @@
   "icon": "Bell",
   "weight": 0.5,
   "stack": 9,
-  "maxQuality": 1
+  "maxQuality": 1,
+  "stage": "AshLands"
  },
  {
   "id": "BellFragment",
@@ -5280,7 +5428,8 @@
   "icon": "BellFragment",
   "weight": 0.5,
   "stack": 9,
-  "maxQuality": 1
+  "maxQuality": 1,
+  "stage": "AshLands"
  },
  {
   "id": "BeltStrength",
@@ -5291,7 +5440,8 @@
   "weight": 2,
   "stack": 1,
   "maxQuality": 1,
-  "equipEffect": "BeltStrength"
+  "equipEffect": "BeltStrength",
+  "stage": "BlackForest"
  },
  {
   "id": "Bilebag",
@@ -5301,7 +5451,8 @@
   "icon": "bilebag",
   "weight": 0.5,
   "stack": 50,
-  "maxQuality": 1
+  "maxQuality": 1,
+  "stage": "Mistlands"
  },
  {
   "id": "BirchSeeds",
@@ -5311,7 +5462,8 @@
   "icon": "birchseeds",
   "weight": 0.1,
   "stack": 100,
-  "maxQuality": 1
+  "maxQuality": 1,
+  "stage": "Meadows"
  },
  {
   "id": "BjornHide",
@@ -5321,7 +5473,8 @@
   "icon": "BjornHide",
   "weight": 1,
   "stack": 50,
-  "maxQuality": 1
+  "maxQuality": 1,
+  "stage": "BlackForest"
  },
  {
   "id": "BjornMeat",
@@ -5337,7 +5490,8 @@
    "stamina": 12,
    "duration": 1200,
    "regen": 2
-  }
+  },
+  "stage": "BlackForest"
  },
  {
   "id": "BjornPaw",
@@ -5347,7 +5501,8 @@
   "icon": "BjornPaw",
   "weight": 0.5,
   "stack": 50,
-  "maxQuality": 1
+  "maxQuality": 1,
+  "stage": "BlackForest"
  },
  {
   "id": "BlackCore",
@@ -5357,7 +5512,8 @@
   "icon": "BlackCore",
   "weight": 1,
   "stack": 20,
-  "maxQuality": 1
+  "maxQuality": 1,
+  "stage": "Mistlands"
  },
  {
   "id": "BlackMarble",
@@ -5367,7 +5523,8 @@
   "icon": "blackmarble",
   "weight": 2,
   "stack": 50,
-  "maxQuality": 1
+  "maxQuality": 1,
+  "stage": "Mistlands"
  },
  {
   "id": "BlackMetal",
@@ -5378,7 +5535,8 @@
   "weight": 12,
   "stack": 30,
   "maxQuality": 1,
-  "noTeleport": true
+  "noTeleport": true,
+  "stage": "Plains"
  },
  {
   "id": "BlackMetalScrap",
@@ -5389,7 +5547,8 @@
   "weight": 10,
   "stack": 30,
   "maxQuality": 1,
-  "noTeleport": true
+  "noTeleport": true,
+  "stage": "Plains"
  },
  {
   "id": "BlackSoup",
@@ -5405,7 +5564,8 @@
    "stamina": 17,
    "duration": 1200,
    "regen": 3
-  }
+  },
+  "stage": "Swamp"
  },
  {
   "id": "Blackwood",
@@ -5415,7 +5575,8 @@
   "icon": "BlackWood",
   "weight": 2,
   "stack": 50,
-  "maxQuality": 1
+  "maxQuality": 1,
+  "stage": "AshLands"
  },
  {
   "id": "BlobVial",
@@ -5426,7 +5587,8 @@
   "weight": 1,
   "stack": 10,
   "maxQuality": 1,
-  "ammoType": "mead"
+  "ammoType": "mead",
+  "stage": "Swamp"
  },
  {
   "id": "BloodGoldKey",
@@ -5436,7 +5598,8 @@
   "icon": "BloodGoldKey",
   "weight": 0.1,
   "stack": 1,
-  "maxQuality": 1
+  "maxQuality": 1,
+  "stage": "DeepNorth"
  },
  {
   "id": "BloodPudding",
@@ -5452,7 +5615,8 @@
    "stamina": 75,
    "duration": 1800,
    "regen": 2
-  }
+  },
+  "stage": "Plains"
  },
  {
   "id": "Bloodbag",
@@ -5462,7 +5626,8 @@
   "icon": "bloodbag",
   "weight": 0.5,
   "stack": 50,
-  "maxQuality": 1
+  "maxQuality": 1,
+  "stage": "Swamp"
  },
  {
   "id": "Blueberries",
@@ -5478,7 +5643,8 @@
    "stamina": 25,
    "duration": 600,
    "regen": 1
-  }
+  },
+  "stage": "BlackForest"
  },
  {
   "id": "BoarJerky",
@@ -5494,7 +5660,8 @@
    "stamina": 23,
    "duration": 1800,
    "regen": 2
-  }
+  },
+  "stage": "BlackForest"
  },
  {
   "id": "BogWitchKvastur_attack",
@@ -5536,7 +5703,8 @@
    "pierce": 62
   },
   "backstab": 3,
-  "ammoType": "$ammo_bolts"
+  "ammoType": "$ammo_bolts",
+  "stage": "Mistlands"
  },
  {
   "id": "BoltBloodGold",
@@ -5552,7 +5720,8 @@
    "pierce": 92
   },
   "backstab": 3,
-  "ammoType": "$ammo_bolts"
+  "ammoType": "$ammo_bolts",
+  "stage": "DeepNorth"
  },
  {
   "id": "BoltBone",
@@ -5568,7 +5737,8 @@
    "pierce": 32
   },
   "backstab": 3,
-  "ammoType": "$ammo_bolts"
+  "ammoType": "$ammo_bolts",
+  "stage": "Mistlands"
  },
  {
   "id": "BoltCarapace",
@@ -5584,7 +5754,8 @@
    "pierce": 72
   },
   "backstab": 3,
-  "ammoType": "$ammo_bolts"
+  "ammoType": "$ammo_bolts",
+  "stage": "Mistlands"
  },
  {
   "id": "BoltCharred",
@@ -5600,7 +5771,8 @@
    "pierce": 82
   },
   "backstab": 3,
-  "ammoType": "$ammo_bolts"
+  "ammoType": "$ammo_bolts",
+  "stage": "AshLands"
  },
  {
   "id": "BoltIron",
@@ -5616,7 +5788,8 @@
    "pierce": 42
   },
   "backstab": 3,
-  "ammoType": "$ammo_bolts"
+  "ammoType": "$ammo_bolts",
+  "stage": "Mistlands"
  },
  {
   "id": "BombBile",
@@ -5648,7 +5821,8 @@
     }
    ],
    "cycle": 0.633
-  }
+  },
+  "stage": "Mistlands"
  },
  {
   "id": "BombBlob_Frost",
@@ -5680,7 +5854,8 @@
     }
    ],
    "cycle": 0.633
-  }
+  },
+  "stage": "Mountain"
  },
  {
   "id": "BombBlob_Lava",
@@ -5712,7 +5887,8 @@
     }
    ],
    "cycle": 0.633
-  }
+  },
+  "stage": "AshLands"
  },
  {
   "id": "BombBlob_Morkhalla",
@@ -5744,7 +5920,8 @@
     }
    ],
    "cycle": 0.633
-  }
+  },
+  "stage": "DeepNorth"
  },
  {
   "id": "BombBlob_Poison",
@@ -5776,7 +5953,8 @@
     }
    ],
    "cycle": 0.633
-  }
+  },
+  "stage": "Swamp"
  },
  {
   "id": "BombBlob_PoisonElite",
@@ -5808,7 +5986,8 @@
     }
    ],
    "cycle": 0.633
-  }
+  },
+  "stage": "Swamp"
  },
  {
   "id": "BombBlob_Tar",
@@ -5840,7 +6019,8 @@
     }
    ],
    "cycle": 0.633
-  }
+  },
+  "stage": "Plains"
  },
  {
   "id": "BombDynamite",
@@ -5870,7 +6050,8 @@
     }
    ],
    "cycle": 0.633
-  }
+  },
+  "stage": "DeepNorth"
  },
  {
   "id": "BombLava",
@@ -5900,7 +6081,8 @@
     }
    ],
    "cycle": 0.633
-  }
+  },
+  "stage": "AshLands"
  },
  {
   "id": "BombOoze",
@@ -5932,7 +6114,8 @@
     }
    ],
    "cycle": 0.633
-  }
+  },
+  "stage": "Swamp"
  },
  {
   "id": "BombSiege",
@@ -5958,7 +6141,8 @@
     }
    ],
    "cycle": 0.633
-  }
+  },
+  "stage": "AshLands"
  },
  {
   "id": "BombSmoke",
@@ -5990,7 +6174,8 @@
     }
    ],
    "cycle": 0.633
-  }
+  },
+  "stage": "AshLands"
  },
  {
   "id": "BoneFragments",
@@ -6000,7 +6185,8 @@
   "icon": "bonefragments",
   "weight": 0.5,
   "stack": 50,
-  "maxQuality": 1
+  "maxQuality": 1,
+  "stage": "Meadows"
  },
  {
   "id": "BoneMawSerpentMeat",
@@ -6010,7 +6196,8 @@
   "icon": "BonemawMeat",
   "weight": 10,
   "stack": 50,
-  "maxQuality": 1
+  "maxQuality": 1,
+  "stage": "AshLands"
  },
  {
   "id": "BonemawSerpentScale",
@@ -6031,7 +6218,8 @@
   "icon": "BonemawTooth",
   "weight": 2,
   "stack": 50,
-  "maxQuality": 1
+  "maxQuality": 1,
+  "stage": "AshLands"
  },
  {
   "id": "BonemawSerpent_bite",
@@ -6208,7 +6396,8 @@
   "ammoType": "$ammo_arrows",
   "modifiers": {
    "movement": -0.05
-  }
+  },
+  "stage": "Meadows"
  },
  {
   "id": "BowAshlands",
@@ -6254,7 +6443,8 @@
   "ammoType": "$ammo_arrows",
   "modifiers": {
    "movement": -0.05
-  }
+  },
+  "stage": "AshLands"
  },
  {
   "id": "BowAshlandsBlood",
@@ -6300,7 +6490,8 @@
   "ammoType": "$ammo_arrows",
   "modifiers": {
    "movement": -0.05
-  }
+  },
+  "stage": "AshLands"
  },
  {
   "id": "BowAshlandsRoot",
@@ -6347,7 +6538,8 @@
   "ammoType": "$ammo_arrows",
   "modifiers": {
    "movement": -0.05
-  }
+  },
+  "stage": "AshLands"
  },
  {
   "id": "BowAshlandsStorm",
@@ -6394,7 +6586,8 @@
   "ammoType": "$ammo_arrows",
   "modifiers": {
    "movement": -0.05
-  }
+  },
+  "stage": "AshLands"
  },
  {
   "id": "BowDraugrFang",
@@ -6441,7 +6634,8 @@
   "ammoType": "$ammo_arrows",
   "modifiers": {
    "movement": -0.05
-  }
+  },
+  "stage": "Mountain"
  },
  {
   "id": "BowFineWood",
@@ -6486,7 +6680,8 @@
   "ammoType": "$ammo_arrows",
   "modifiers": {
    "movement": -0.05
-  }
+  },
+  "stage": "BlackForest"
  },
  {
   "id": "BowGold",
@@ -6533,7 +6728,8 @@
   "ammoType": "$ammo_arrows",
   "modifiers": {
    "movement": -0.05
-  }
+  },
+  "stage": "DeepNorth"
  },
  {
   "id": "BowGoldUncooked",
@@ -6544,7 +6740,8 @@
   "weight": 1.5,
   "stack": 1,
   "maxQuality": 1,
-  "ammoType": "$ammo_arrows"
+  "ammoType": "$ammo_arrows",
+  "stage": "DeepNorth"
  },
  {
   "id": "BowGold_BloodLightning",
@@ -6593,7 +6790,8 @@
   "ammoType": "$ammo_arrows",
   "modifiers": {
    "movement": -0.05
-  }
+  },
+  "stage": "DeepNorth"
  },
  {
   "id": "BowGold_FrostFire",
@@ -6644,7 +6842,8 @@
   "ammoType": "$ammo_arrows",
   "modifiers": {
    "movement": -0.05
-  }
+  },
+  "stage": "DeepNorth"
  },
  {
   "id": "BowHuntsman",
@@ -6689,7 +6888,8 @@
   "ammoType": "$ammo_arrows",
   "modifiers": {
    "movement": -0.05
-  }
+  },
+  "stage": "Swamp"
  },
  {
   "id": "BowSpineSnap",
@@ -6736,7 +6936,8 @@
   "ammoType": "$ammo_arrows",
   "modifiers": {
    "movement": -0.05
-  }
+  },
+  "stage": "Mistlands"
  },
  {
   "id": "Bread",
@@ -6752,7 +6953,8 @@
    "stamina": 70,
    "duration": 1500,
    "regen": 2
-  }
+  },
+  "stage": "Plains"
  },
  {
   "id": "BreadDough",
@@ -6768,7 +6970,8 @@
    "stamina": 120,
    "duration": 1800,
    "regen": 2
-  }
+  },
+  "stage": "Plains"
  },
  {
   "id": "Bronze",
@@ -6779,7 +6982,8 @@
   "weight": 12,
   "stack": 30,
   "maxQuality": 1,
-  "noTeleport": true
+  "noTeleport": true,
+  "stage": "BlackForest"
  },
  {
   "id": "BronzeNails",
@@ -6789,7 +6993,8 @@
   "icon": "bronzenails",
   "weight": 0.5,
   "stack": 100,
-  "maxQuality": 1
+  "maxQuality": 1,
+  "stage": "BlackForest"
  },
  {
   "id": "BronzeScrap",
@@ -6800,7 +7005,8 @@
   "weight": 10,
   "stack": 30,
   "maxQuality": 1,
-  "noTeleport": true
+  "noTeleport": true,
+  "stage": "AshLands"
  },
  {
   "id": "BugMeat",
@@ -6816,7 +7022,8 @@
    "stamina": 12,
    "duration": 1200,
    "regen": 2
-  }
+  },
+  "stage": "Mistlands"
  },
  {
   "id": "CandleWick",
@@ -6826,7 +7033,8 @@
   "icon": "candlewick",
   "weight": 0.3,
   "stack": 50,
-  "maxQuality": 1
+  "maxQuality": 1,
+  "stage": "Swamp"
  },
  {
   "id": "CapeAsh",
@@ -6851,7 +7059,8 @@
   },
   "damageModifiers": {
    "frost": "Resistant"
-  }
+  },
+  "stage": "AshLands"
  },
  {
   "id": "CapeAsksvin",
@@ -6876,7 +7085,8 @@
   "damageModifiers": {
    "frost": "Resistant"
   },
-  "equipEffect": "WindRun"
+  "equipEffect": "WindRun",
+  "stage": "AshLands"
  },
  {
   "id": "CapeDeepNorth",
@@ -6901,7 +7111,8 @@
   },
   "damageModifiers": {
    "frost": "Resistant"
-  }
+  },
+  "stage": "DeepNorth"
  },
  {
   "id": "CapeDeepNorthMage",
@@ -6926,7 +7137,8 @@
   },
   "damageModifiers": {
    "frost": "Resistant"
-  }
+  },
+  "stage": "DeepNorth"
  },
  {
   "id": "CapeDeerHide",
@@ -6944,7 +7156,8 @@
    "perLevel": 50,
    "drain": 1,
    "repairable": true
-  }
+  },
+  "stage": "Meadows"
  },
  {
   "id": "CapeFeather",
@@ -6967,7 +7180,8 @@
    "fire": "VeryWeak",
    "frost": "Resistant"
   },
-  "equipEffect": "SlowFall"
+  "equipEffect": "SlowFall",
+  "stage": "Mistlands"
  },
  {
   "id": "CapeLinen",
@@ -6993,7 +7207,8 @@
    "perLevel": 50,
    "drain": 1,
    "repairable": true
-  }
+  },
+  "stage": "Plains"
  },
  {
   "id": "CapeLox",
@@ -7014,7 +7229,8 @@
   },
   "damageModifiers": {
    "frost": "Resistant"
-  }
+  },
+  "stage": "Plains"
  },
  {
   "id": "CapeOdin",
@@ -7033,7 +7249,8 @@
    "perLevel": 50,
    "drain": 1,
    "repairable": true
-  }
+  },
+  "stage": "BlackForest"
  },
  {
   "id": "CapeTest",
@@ -7075,7 +7292,8 @@
    "name": "troll",
    "size": 4,
    "effect": "SetEffect_TrollArmor"
-  }
+  },
+  "stage": "BlackForest"
  },
  {
   "id": "CapeWolf",
@@ -7096,7 +7314,8 @@
   },
   "damageModifiers": {
    "frost": "Resistant"
-  }
+  },
+  "stage": "Mountain"
  },
  {
   "id": "Carapace",
@@ -7106,7 +7325,8 @@
   "icon": "carapace",
   "weight": 2,
   "stack": 50,
-  "maxQuality": 1
+  "maxQuality": 1,
+  "stage": "Mistlands"
  },
  {
   "id": "Carrot",
@@ -7122,7 +7342,8 @@
    "stamina": 32,
    "duration": 900,
    "regen": 1
-  }
+  },
+  "stage": "BlackForest"
  },
  {
   "id": "CarrotSeeds",
@@ -7132,7 +7353,8 @@
   "icon": "carrotseeds",
   "weight": 0.1,
   "stack": 100,
-  "maxQuality": 1
+  "maxQuality": 1,
+  "stage": "BlackForest"
  },
  {
   "id": "CarrotSoup",
@@ -7148,7 +7370,8 @@
    "stamina": 45,
    "duration": 1500,
    "regen": 2
-  }
+  },
+  "stage": "BlackForest"
  },
  {
   "id": "Catapult_Ammo_BloodGold",
@@ -7177,7 +7400,8 @@
     }
    ],
    "cycle": 0.633
-  }
+  },
+  "stage": "DeepNorth"
  },
  {
   "id": "Catapult_ammo",
@@ -7206,7 +7430,8 @@
     }
    ],
    "cycle": 0.633
-  }
+  },
+  "stage": "AshLands"
  },
  {
   "id": "CelestialFeather",
@@ -7216,7 +7441,8 @@
   "icon": "CelestialFeather",
   "weight": 0.5,
   "stack": 50,
-  "maxQuality": 1
+  "maxQuality": 1,
+  "stage": "AshLands"
  },
  {
   "id": "CeramicPlate",
@@ -7226,7 +7452,8 @@
   "icon": "CeramicPlate",
   "weight": 2,
   "stack": 30,
-  "maxQuality": 1
+  "maxQuality": 1,
+  "stage": "Mistlands"
  },
  {
   "id": "Chain",
@@ -7236,7 +7463,8 @@
   "icon": "chain",
   "weight": 2,
   "stack": 50,
-  "maxQuality": 1
+  "maxQuality": 1,
+  "stage": "Swamp"
  },
  {
   "id": "CharcoalResin",
@@ -7246,7 +7474,8 @@
   "icon": "CharcoalResin",
   "weight": 0.3,
   "stack": 50,
-  "maxQuality": 1
+  "maxQuality": 1,
+  "stage": "AshLands"
  },
  {
   "id": "CharredBone",
@@ -7256,7 +7485,8 @@
   "icon": "CharredBone",
   "weight": 0.5,
   "stack": 50,
-  "maxQuality": 1
+  "maxQuality": 1,
+  "stage": "AshLands"
  },
  {
   "id": "CharredCogwheel",
@@ -7267,7 +7497,8 @@
   "weight": 5,
   "stack": 10,
   "maxQuality": 1,
-  "noTeleport": true
+  "noTeleport": true,
+  "stage": "AshLands"
  },
  {
   "id": "Charred_Breastplate",
@@ -7353,7 +7584,8 @@
   "icon": "charredskull",
   "weight": 2,
   "stack": 50,
-  "maxQuality": 1
+  "maxQuality": 1,
+  "stage": "AshLands"
  },
  {
   "id": "ChickenEgg",
@@ -7369,7 +7601,8 @@
    "stamina": 30,
    "duration": 600,
    "regen": 2
-  }
+  },
+  "stage": "Plains"
  },
  {
   "id": "ChickenMeat",
@@ -7385,7 +7618,8 @@
    "stamina": 12,
    "duration": 1200,
    "regen": 2
-  }
+  },
+  "stage": "Plains"
  },
  {
   "id": "Chitin",
@@ -7395,7 +7629,8 @@
   "icon": "chitin",
   "weight": 2,
   "stack": 50,
-  "maxQuality": 1
+  "maxQuality": 1,
+  "stage": "Meadows"
  },
  {
   "id": "Cloudberry",
@@ -7411,7 +7646,8 @@
    "stamina": 40,
    "duration": 900,
    "regen": 1
-  }
+  },
+  "stage": "Plains"
  },
  {
   "id": "Club",
@@ -7466,7 +7702,8 @@
   },
   "modifiers": {
    "movement": -0.05
-  }
+  },
+  "stage": "Meadows"
  },
  {
   "id": "Coal",
@@ -7476,7 +7713,8 @@
   "icon": "coal",
   "weight": 2,
   "stack": 50,
-  "maxQuality": 1
+  "maxQuality": 1,
+  "stage": "BlackForest"
  },
  {
   "id": "Coins",
@@ -7487,7 +7725,8 @@
   "weight": 0.1,
   "value": 1,
   "stack": 999,
-  "maxQuality": 1
+  "maxQuality": 1,
+  "stage": "Meadows"
  },
  {
   "id": "CookedAsksvinMeat",
@@ -7503,7 +7742,8 @@
    "stamina": 24,
    "duration": 1200,
    "regen": 6
-  }
+  },
+  "stage": "AshLands"
  },
  {
   "id": "CookedBjornMeat",
@@ -7519,7 +7759,8 @@
    "stamina": 13,
    "duration": 1200,
    "regen": 2
-  }
+  },
+  "stage": "BlackForest"
  },
  {
   "id": "CookedBoneMawSerpentMeat",
@@ -7535,7 +7776,8 @@
    "stamina": 30,
    "duration": 1500,
    "regen": 6
-  }
+  },
+  "stage": "AshLands"
  },
  {
   "id": "CookedBugMeat",
@@ -7551,7 +7793,8 @@
    "stamina": 20,
    "duration": 1200,
    "regen": 5
-  }
+  },
+  "stage": "Mistlands"
  },
  {
   "id": "CookedChickenMeat",
@@ -7567,7 +7810,8 @@
    "stamina": 20,
    "duration": 1200,
    "regen": 5
-  }
+  },
+  "stage": "Plains"
  },
  {
   "id": "CookedDeerMeat",
@@ -7583,7 +7827,8 @@
    "stamina": 12,
    "duration": 1200,
    "regen": 2
-  }
+  },
+  "stage": "Meadows"
  },
  {
   "id": "CookedEgg",
@@ -7599,7 +7844,8 @@
    "stamina": 12,
    "duration": 1200,
    "regen": 2
-  }
+  },
+  "stage": "Plains"
  },
  {
   "id": "CookedHareMeat",
@@ -7615,7 +7861,8 @@
    "stamina": 20,
    "duration": 1200,
    "regen": 5
-  }
+  },
+  "stage": "Mistlands"
  },
  {
   "id": "CookedLoxMeat",
@@ -7631,7 +7878,8 @@
    "stamina": 16,
    "duration": 1200,
    "regen": 4
-  }
+  },
+  "stage": "Plains"
  },
  {
   "id": "CookedMeat",
@@ -7647,7 +7895,8 @@
    "stamina": 10,
    "duration": 1200,
    "regen": 2
-  }
+  },
+  "stage": "Meadows"
  },
  {
   "id": "CookedMooseMeat",
@@ -7663,7 +7912,8 @@
    "stamina": 27,
    "duration": 1200,
    "regen": 7
-  }
+  },
+  "stage": "DeepNorth"
  },
  {
   "id": "CookedSealBlubber",
@@ -7679,7 +7929,8 @@
    "stamina": 20,
    "duration": 1200,
    "regen": 5
-  }
+  },
+  "stage": "DeepNorth"
  },
  {
   "id": "CookedVoltureMeat",
@@ -7695,7 +7946,8 @@
    "stamina": 24,
    "duration": 1200,
    "regen": 6
-  }
+  },
+  "stage": "AshLands"
  },
  {
   "id": "CookedWolfMeat",
@@ -7711,7 +7963,8 @@
    "stamina": 15,
    "duration": 1200,
    "regen": 3
-  }
+  },
+  "stage": "Mountain"
  },
  {
   "id": "Copper",
@@ -7722,7 +7975,8 @@
   "weight": 12,
   "stack": 30,
   "maxQuality": 1,
-  "noTeleport": true
+  "noTeleport": true,
+  "stage": "BlackForest"
  },
  {
   "id": "CopperOre",
@@ -7733,7 +7987,8 @@
   "weight": 10,
   "stack": 30,
   "maxQuality": 1,
-  "noTeleport": true
+  "noTeleport": true,
+  "stage": "BlackForest"
  },
  {
   "id": "CopperScrap",
@@ -7744,7 +7999,8 @@
   "weight": 10,
   "stack": 30,
   "maxQuality": 1,
-  "noTeleport": true
+  "noTeleport": true,
+  "stage": "Mistlands"
  },
  {
   "id": "CrossbowArbalest",
@@ -7791,7 +8047,8 @@
   "ammoType": "$ammo_bolts",
   "modifiers": {
    "movement": -0.05
-  }
+  },
+  "stage": "Mistlands"
  },
  {
   "id": "CrossbowGold",
@@ -7839,7 +8096,8 @@
   "ammoType": "$ammo_bolts",
   "modifiers": {
    "movement": -0.05
-  }
+  },
+  "stage": "DeepNorth"
  },
  {
   "id": "CrossbowGoldUncooked",
@@ -7850,7 +8108,8 @@
   "weight": 1.5,
   "stack": 1,
   "maxQuality": 1,
-  "ammoType": "$ammo_bolts"
+  "ammoType": "$ammo_bolts",
+  "stage": "DeepNorth"
  },
  {
   "id": "CrossbowGold_BloodLightning",
@@ -7900,7 +8159,8 @@
   "ammoType": "$ammo_bolts",
   "modifiers": {
    "movement": -0.05
-  }
+  },
+  "stage": "DeepNorth"
  },
  {
   "id": "CrossbowGold_FrostFire",
@@ -7952,7 +8212,8 @@
   "ammoType": "$ammo_bolts",
   "modifiers": {
    "movement": -0.05
-  }
+  },
+  "stage": "DeepNorth"
  },
  {
   "id": "CrossbowRipper",
@@ -7999,7 +8260,8 @@
   "ammoType": "$ammo_bolts",
   "modifiers": {
    "movement": -0.05
-  }
+  },
+  "stage": "AshLands"
  },
  {
   "id": "CrossbowRipperBlood",
@@ -8046,7 +8308,8 @@
   "ammoType": "$ammo_bolts",
   "modifiers": {
    "movement": -0.05
-  }
+  },
+  "stage": "AshLands"
  },
  {
   "id": "CrossbowRipperLightning",
@@ -8094,7 +8357,8 @@
   "ammoType": "$ammo_bolts",
   "modifiers": {
    "movement": -0.05
-  }
+  },
+  "stage": "AshLands"
  },
  {
   "id": "CrossbowRipperNature",
@@ -8142,7 +8406,8 @@
   "ammoType": "$ammo_bolts",
   "modifiers": {
    "movement": -0.05
-  }
+  },
+  "stage": "AshLands"
  },
  {
   "id": "CrownJewel",
@@ -8152,7 +8417,8 @@
   "icon": "crownjewel",
   "weight": 2,
   "stack": 5,
-  "maxQuality": 1
+  "maxQuality": 1,
+  "stage": "DeepNorth"
  },
  {
   "id": "CryptKey",
@@ -8162,7 +8428,8 @@
   "icon": "cryptkey",
   "weight": 0.1,
   "stack": 1,
-  "maxQuality": 1
+  "maxQuality": 1,
+  "stage": "BlackForest"
  },
  {
   "id": "Crystal",
@@ -8172,7 +8439,8 @@
   "icon": "crystal",
   "weight": 1,
   "stack": 50,
-  "maxQuality": 1
+  "maxQuality": 1,
+  "stage": "Mountain"
  },
  {
   "id": "Cultivator",
@@ -8201,7 +8469,8 @@
    "stamina": 5,
    "adrenaline": 1
   },
-  "buildTable": "_CultivatorPieceTable"
+  "buildTable": "_CultivatorPieceTable",
+  "stage": "BlackForest"
  },
  {
   "id": "CuredSquirrelHamstring",
@@ -8211,7 +8480,8 @@
   "icon": "CuredSquirrelHamstring",
   "weight": 0.5,
   "stack": 50,
-  "maxQuality": 1
+  "maxQuality": 1,
+  "stage": "Swamp"
  },
  {
   "id": "Dandelion",
@@ -8221,7 +8491,8 @@
   "icon": "dandelion",
   "weight": 0.1,
   "stack": 50,
-  "maxQuality": 1
+  "maxQuality": 1,
+  "stage": "Meadows"
  },
  {
   "id": "Deathsquito_sting",
@@ -8263,7 +8534,8 @@
   "icon": "deerhide",
   "weight": 1,
   "stack": 50,
-  "maxQuality": 1
+  "maxQuality": 1,
+  "stage": "Meadows"
  },
  {
   "id": "DeerMeat",
@@ -8278,7 +8550,8 @@
    "stamina": 20,
    "duration": 600,
    "regen": 1
-  }
+  },
+  "stage": "Meadows"
  },
  {
   "id": "DeerStew",
@@ -8294,7 +8567,8 @@
    "stamina": 15,
    "duration": 1500,
    "regen": 3
-  }
+  },
+  "stage": "BlackForest"
  },
  {
   "id": "Demister",
@@ -8305,7 +8579,8 @@
   "weight": 0.1,
   "stack": 1,
   "maxQuality": 1,
-  "equipEffect": "Demister"
+  "equipEffect": "Demister",
+  "stage": "Plains"
  },
  {
   "id": "DragonEgg",
@@ -8316,7 +8591,8 @@
   "weight": 200,
   "stack": 1,
   "maxQuality": 1,
-  "noTeleport": true
+  "noTeleport": true,
+  "stage": "Mountain"
  },
  {
   "id": "DragonTear",
@@ -8326,7 +8602,8 @@
   "icon": "dragontear",
   "weight": 1,
   "stack": 50,
-  "maxQuality": 1
+  "maxQuality": 1,
+  "stage": "Mountain"
  },
  {
   "id": "DvergerArbalest",
@@ -9145,7 +9422,8 @@
   "icon": "DvergrKey",
   "weight": 0.5,
   "stack": 1,
-  "maxQuality": 1
+  "maxQuality": 1,
+  "stage": "Mistlands"
  },
  {
   "id": "DvergrKeyFragment",
@@ -9155,7 +9433,8 @@
   "icon": "DvergrKeyFragment",
   "weight": 0.5,
   "stack": 9,
-  "maxQuality": 1
+  "maxQuality": 1,
+  "stage": "Mistlands"
  },
  {
   "id": "DvergrNeedle",
@@ -9166,7 +9445,8 @@
   "weight": 5,
   "stack": 10,
   "maxQuality": 1,
-  "noTeleport": true
+  "noTeleport": true,
+  "stage": "Mistlands"
  },
  {
   "id": "DyrnwynBladeFragment",
@@ -9176,7 +9456,8 @@
   "icon": "DyrnwynBlade",
   "weight": 0.5,
   "stack": 1,
-  "maxQuality": 1
+  "maxQuality": 1,
+  "stage": "AshLands"
  },
  {
   "id": "DyrnwynHiltFragment",
@@ -9186,7 +9467,8 @@
   "icon": "DyrnwynHilt",
   "weight": 0.5,
   "stack": 1,
-  "maxQuality": 1
+  "maxQuality": 1,
+  "stage": "AshLands"
  },
  {
   "id": "DyrnwynTipFragment",
@@ -9196,7 +9478,8 @@
   "icon": "DyrnwynTip",
   "weight": 0.5,
   "stack": 1,
-  "maxQuality": 1
+  "maxQuality": 1,
+  "stage": "AshLands"
  },
  {
   "id": "Ectoplasm",
@@ -9206,7 +9489,8 @@
   "icon": "ectoplasm",
   "weight": 2,
   "stack": 50,
-  "maxQuality": 1
+  "maxQuality": 1,
+  "stage": "BlackForest"
  },
  {
   "id": "Eikthyr_antler",
@@ -9324,7 +9608,8 @@
   "icon": "eitr",
   "weight": 5,
   "stack": 30,
-  "maxQuality": 1
+  "maxQuality": 1,
+  "stage": "Mistlands"
  },
  {
   "id": "ElakingHairBundle",
@@ -9334,7 +9619,8 @@
   "icon": "ElakingHairBundle",
   "weight": 1,
   "stack": 50,
-  "maxQuality": 1
+  "maxQuality": 1,
+  "stage": "DeepNorth"
  },
  {
   "id": "ElakingMole_AttackClaw",
@@ -9513,7 +9799,8 @@
   "icon": "elderbark",
   "weight": 2,
   "stack": 50,
-  "maxQuality": 1
+  "maxQuality": 1,
+  "stage": "Swamp"
  },
  {
   "id": "Entrails",
@@ -9523,7 +9810,8 @@
   "icon": "entrails",
   "weight": 0.5,
   "stack": 50,
-  "maxQuality": 1
+  "maxQuality": 1,
+  "stage": "Meadows"
  },
  {
   "id": "Eyescream",
@@ -9539,7 +9827,8 @@
    "stamina": 65,
    "duration": 1500,
    "regen": 1
-  }
+  },
+  "stage": "Mountain"
  },
  {
   "id": "FW_ArmorBronzeChest",
@@ -10467,7 +10756,8 @@
   "icon": "faderdrop",
   "weight": 1,
   "stack": 30,
-  "maxQuality": 1
+  "maxQuality": 1,
+  "stage": "AshLands"
  },
  {
   "id": "FaderEmber",
@@ -10477,7 +10767,8 @@
   "icon": "faderember",
   "weight": 0.5,
   "stack": 50,
-  "maxQuality": 1
+  "maxQuality": 1,
+  "stage": "AshLands"
  },
  {
   "id": "Fader_Bite",
@@ -11032,7 +11323,8 @@
    "eitr": 38,
    "duration": 3000,
    "regen": 6
-  }
+  },
+  "stage": "DeepNorth"
  },
  {
   "id": "FeastAshlands_Material",
@@ -11042,7 +11334,8 @@
   "icon": "FeastAshlands",
   "weight": 10,
   "stack": 5,
-  "maxQuality": 1
+  "maxQuality": 1,
+  "stage": "DeepNorth"
  },
  {
   "id": "FeastBlackforest",
@@ -11057,7 +11350,8 @@
    "stamina": 35,
    "duration": 3000,
    "regen": 3
-  }
+  },
+  "stage": "Swamp"
  },
  {
   "id": "FeastBlackforest_Material",
@@ -11067,7 +11361,8 @@
   "icon": "FeastBlackforest",
   "weight": 10,
   "stack": 5,
-  "maxQuality": 1
+  "maxQuality": 1,
+  "stage": "Swamp"
  },
  {
   "id": "FeastDeepNorth",
@@ -11083,7 +11378,8 @@
    "eitr": 43,
    "duration": 3000,
    "regen": 7
-  }
+  },
+  "stage": "DeepNorth"
  },
  {
   "id": "FeastDeepNorth_Material",
@@ -11093,7 +11389,8 @@
   "icon": "FeastDeepNorth",
   "weight": 10,
   "stack": 5,
-  "maxQuality": 1
+  "maxQuality": 1,
+  "stage": "DeepNorth"
  },
  {
   "id": "FeastMeadows",
@@ -11108,7 +11405,8 @@
    "stamina": 35,
    "duration": 3000,
    "regen": 2
-  }
+  },
+  "stage": "Swamp"
  },
  {
   "id": "FeastMeadows_Material",
@@ -11118,7 +11416,8 @@
   "icon": "FeastMeadows",
   "weight": 10,
   "stack": 5,
-  "maxQuality": 1
+  "maxQuality": 1,
+  "stage": "Swamp"
  },
  {
   "id": "FeastMistlands",
@@ -11134,7 +11433,8 @@
    "eitr": 33,
    "duration": 3000,
    "regen": 5
-  }
+  },
+  "stage": "AshLands"
  },
  {
   "id": "FeastMistlands_Material",
@@ -11144,7 +11444,8 @@
   "icon": "FeastMistlands",
   "weight": 10,
   "stack": 5,
-  "maxQuality": 1
+  "maxQuality": 1,
+  "stage": "AshLands"
  },
  {
   "id": "FeastMountains",
@@ -11159,7 +11460,8 @@
    "stamina": 45,
    "duration": 3000,
    "regen": 3
-  }
+  },
+  "stage": "Plains"
  },
  {
   "id": "FeastMountains_Material",
@@ -11169,7 +11471,8 @@
   "icon": "FeastMountains",
   "weight": 10,
   "stack": 5,
-  "maxQuality": 1
+  "maxQuality": 1,
+  "stage": "Plains"
  },
  {
   "id": "FeastOceans",
@@ -11184,7 +11487,8 @@
    "stamina": 45,
    "duration": 3000,
    "regen": 3
-  }
+  },
+  "stage": "DeepNorth"
  },
  {
   "id": "FeastOceans_Material",
@@ -11194,7 +11498,8 @@
   "icon": "FeastOcean",
   "weight": 10,
   "stack": 5,
-  "maxQuality": 1
+  "maxQuality": 1,
+  "stage": "DeepNorth"
  },
  {
   "id": "FeastPlains",
@@ -11209,7 +11514,8 @@
    "stamina": 55,
    "duration": 3000,
    "regen": 4
-  }
+  },
+  "stage": "Mistlands"
  },
  {
   "id": "FeastPlains_Material",
@@ -11219,7 +11525,8 @@
   "icon": "FeastPlains",
   "weight": 10,
   "stack": 5,
-  "maxQuality": 1
+  "maxQuality": 1,
+  "stage": "Mistlands"
  },
  {
   "id": "FeastSwamps",
@@ -11234,7 +11541,8 @@
    "stamina": 35,
    "duration": 3000,
    "regen": 3
-  }
+  },
+  "stage": "Swamp"
  },
  {
   "id": "FeastSwamps_Material",
@@ -11244,7 +11552,8 @@
   "icon": "FeastSwamps",
   "weight": 10,
   "stack": 5,
-  "maxQuality": 1
+  "maxQuality": 1,
+  "stage": "Swamp"
  },
  {
   "id": "Feaster",
@@ -11272,7 +11581,8 @@
    "stamina": 5,
    "adrenaline": 1
   },
-  "buildTable": "_FeasterPieceTable"
+  "buildTable": "_FeasterPieceTable",
+  "stage": "Swamp"
  },
  {
   "id": "Feathers",
@@ -11282,7 +11592,8 @@
   "icon": "feather",
   "weight": 0.1,
   "stack": 50,
-  "maxQuality": 1
+  "maxQuality": 1,
+  "stage": "Meadows"
  },
  {
   "id": "Fenring_attack_IceNova",
@@ -11588,7 +11899,8 @@
    "stamina": 30,
    "duration": 900,
    "regen": 1
-  }
+  },
+  "stage": "AshLands"
  },
  {
   "id": "FierySvinstew",
@@ -11604,7 +11916,8 @@
    "stamina": 32,
    "duration": 1500,
    "regen": 6
-  }
+  },
+  "stage": "AshLands"
  },
  {
   "id": "FineWood",
@@ -11614,7 +11927,8 @@
   "icon": "finewood",
   "weight": 2,
   "stack": 50,
-  "maxQuality": 1
+  "maxQuality": 1,
+  "stage": "Meadows"
  },
  {
   "id": "FirCone",
@@ -11624,7 +11938,8 @@
   "icon": "fircone",
   "weight": 0.1,
   "stack": 100,
-  "maxQuality": 1
+  "maxQuality": 1,
+  "stage": "BlackForest"
  },
  {
   "id": "FirConeFrost",
@@ -11634,7 +11949,8 @@
   "icon": "fircone_big",
   "weight": 0.1,
   "stack": 100,
-  "maxQuality": 1
+  "maxQuality": 1,
+  "stage": "DeepNorth"
  },
  {
   "id": "FireworksRocket_Blue",
@@ -11644,7 +11960,8 @@
   "icon": "RocketBlue",
   "weight": 0.5,
   "stack": 10,
-  "maxQuality": 1
+  "maxQuality": 1,
+  "stage": "Plains"
  },
  {
   "id": "FireworksRocket_Cyan",
@@ -11654,7 +11971,8 @@
   "icon": "RocketCyan",
   "weight": 0.5,
   "stack": 10,
-  "maxQuality": 1
+  "maxQuality": 1,
+  "stage": "Plains"
  },
  {
   "id": "FireworksRocket_Green",
@@ -11664,7 +11982,8 @@
   "icon": "RocketGreen",
   "weight": 0.5,
   "stack": 10,
-  "maxQuality": 1
+  "maxQuality": 1,
+  "stage": "Plains"
  },
  {
   "id": "FireworksRocket_Purple",
@@ -11674,7 +11993,8 @@
   "icon": "RocketPurple",
   "weight": 0.5,
   "stack": 10,
-  "maxQuality": 1
+  "maxQuality": 1,
+  "stage": "Plains"
  },
  {
   "id": "FireworksRocket_Red",
@@ -11684,7 +12004,8 @@
   "icon": "RocketRed",
   "weight": 0.5,
   "stack": 10,
-  "maxQuality": 1
+  "maxQuality": 1,
+  "stage": "Plains"
  },
  {
   "id": "FireworksRocket_White",
@@ -11694,7 +12015,8 @@
   "icon": "RocketWhite",
   "weight": 0.5,
   "stack": 10,
-  "maxQuality": 1
+  "maxQuality": 1,
+  "stage": "Plains"
  },
  {
   "id": "FireworksRocket_Yellow",
@@ -11704,7 +12026,8 @@
   "icon": "RocketYellow",
   "weight": 0.5,
   "stack": 10,
-  "maxQuality": 1
+  "maxQuality": 1,
+  "stage": "Plains"
  },
  {
   "id": "Fish1",
@@ -11714,7 +12037,8 @@
   "icon": "fish1",
   "weight": 2,
   "stack": 10,
-  "maxQuality": 5
+  "maxQuality": 5,
+  "stage": "BlackForest"
  },
  {
   "id": "Fish10",
@@ -11724,7 +12048,8 @@
   "icon": "fish10",
   "weight": 2,
   "stack": 10,
-  "maxQuality": 5
+  "maxQuality": 5,
+  "stage": "DeepNorth"
  },
  {
   "id": "Fish11",
@@ -11734,7 +12059,8 @@
   "icon": "fish11",
   "weight": 2,
   "stack": 10,
-  "maxQuality": 5
+  "maxQuality": 5,
+  "stage": "AshLands"
  },
  {
   "id": "Fish12",
@@ -11744,7 +12070,8 @@
   "icon": "fish12",
   "weight": 2,
   "stack": 10,
-  "maxQuality": 5
+  "maxQuality": 5,
+  "stage": "Mistlands"
  },
  {
   "id": "Fish2",
@@ -11754,7 +12081,8 @@
   "icon": "fish2",
   "weight": 2,
   "stack": 10,
-  "maxQuality": 5
+  "maxQuality": 5,
+  "stage": "BlackForest"
  },
  {
   "id": "Fish3",
@@ -11764,7 +12092,8 @@
   "icon": "fish3",
   "weight": 2,
   "stack": 10,
-  "maxQuality": 5
+  "maxQuality": 5,
+  "stage": "Swamp"
  },
  {
   "id": "Fish4_cave",
@@ -11774,7 +12103,8 @@
   "icon": "fish4",
   "weight": 2,
   "stack": 10,
-  "maxQuality": 5
+  "maxQuality": 5,
+  "stage": "Mountain"
  },
  {
   "id": "Fish5",
@@ -11784,7 +12114,8 @@
   "icon": "fish5",
   "weight": 2,
   "stack": 10,
-  "maxQuality": 5
+  "maxQuality": 5,
+  "stage": "Swamp"
  },
  {
   "id": "Fish6",
@@ -11794,7 +12125,8 @@
   "icon": "fish6",
   "weight": 2,
   "stack": 10,
-  "maxQuality": 5
+  "maxQuality": 5,
+  "stage": "Swamp"
  },
  {
   "id": "Fish7",
@@ -11804,7 +12136,8 @@
   "icon": "fish7",
   "weight": 2,
   "stack": 10,
-  "maxQuality": 5
+  "maxQuality": 5,
+  "stage": "Plains"
  },
  {
   "id": "Fish8",
@@ -11814,7 +12147,8 @@
   "icon": "fish8",
   "weight": 2,
   "stack": 10,
-  "maxQuality": 5
+  "maxQuality": 5,
+  "stage": "Swamp"
  },
  {
   "id": "Fish9",
@@ -11824,7 +12158,8 @@
   "icon": "fish9",
   "weight": 2,
   "stack": 10,
-  "maxQuality": 5
+  "maxQuality": 5,
+  "stage": "Mistlands"
  },
  {
   "id": "FishAndBread",
@@ -11840,7 +12175,8 @@
    "stamina": 90,
    "duration": 1800,
    "regen": 3
-  }
+  },
+  "stage": "Mistlands"
  },
  {
   "id": "FishAndBreadUncooked",
@@ -11856,7 +12192,8 @@
    "stamina": 85,
    "duration": 1500,
    "regen": 3
-  }
+  },
+  "stage": "Mistlands"
  },
  {
   "id": "FishAnglerRaw",
@@ -11889,7 +12226,8 @@
    "stamina": 15,
    "duration": 1200,
    "regen": 2
-  }
+  },
+  "stage": "DeepNorth"
  },
  {
   "id": "FishRaw",
@@ -11905,7 +12243,8 @@
    "stamina": 20,
    "duration": 600,
    "regen": 1
-  }
+  },
+  "stage": "DeepNorth"
  },
  {
   "id": "FishSoup",
@@ -11922,7 +12261,8 @@
    "eitr": 105,
    "duration": 1800,
    "regen": 5
-  }
+  },
+  "stage": "DeepNorth"
  },
  {
   "id": "FishWraps",
@@ -11938,7 +12278,8 @@
    "stamina": 23,
    "duration": 1500,
    "regen": 4
-  }
+  },
+  "stage": "DeepNorth"
  },
  {
   "id": "FishingBait",
@@ -11952,7 +12293,8 @@
   "skill": "Swords",
   "attackForce": 50,
   "backstab": 4,
-  "ammoType": "$item_fishingbait"
+  "ammoType": "$item_fishingbait",
+  "stage": "BlackForest"
  },
  {
   "id": "FishingBaitAshlands",
@@ -11966,7 +12308,8 @@
   "skill": "Swords",
   "attackForce": 50,
   "backstab": 4,
-  "ammoType": "$item_fishingbait"
+  "ammoType": "$item_fishingbait",
+  "stage": "AshLands"
  },
  {
   "id": "FishingBaitCave",
@@ -11980,7 +12323,8 @@
   "skill": "Swords",
   "attackForce": 50,
   "backstab": 4,
-  "ammoType": "$item_fishingbait"
+  "ammoType": "$item_fishingbait",
+  "stage": "Mountain"
  },
  {
   "id": "FishingBaitDeepNorth",
@@ -11994,7 +12338,8 @@
   "skill": "Swords",
   "attackForce": 50,
   "backstab": 4,
-  "ammoType": "$item_fishingbait"
+  "ammoType": "$item_fishingbait",
+  "stage": "Mountain"
  },
  {
   "id": "FishingBaitForest",
@@ -12008,7 +12353,8 @@
   "skill": "Swords",
   "attackForce": 50,
   "backstab": 4,
-  "ammoType": "$item_fishingbait"
+  "ammoType": "$item_fishingbait",
+  "stage": "Swamp"
  },
  {
   "id": "FishingBaitMistlands",
@@ -12022,7 +12368,8 @@
   "skill": "Swords",
   "attackForce": 50,
   "backstab": 4,
-  "ammoType": "$item_fishingbait"
+  "ammoType": "$item_fishingbait",
+  "stage": "Plains"
  },
  {
   "id": "FishingBaitOcean",
@@ -12036,7 +12383,8 @@
   "skill": "Swords",
   "attackForce": 50,
   "backstab": 4,
-  "ammoType": "$item_fishingbait"
+  "ammoType": "$item_fishingbait",
+  "stage": "Swamp"
  },
  {
   "id": "FishingBaitPlains",
@@ -12050,7 +12398,8 @@
   "skill": "Swords",
   "attackForce": 50,
   "backstab": 4,
-  "ammoType": "$item_fishingbait"
+  "ammoType": "$item_fishingbait",
+  "stage": "Plains"
  },
  {
   "id": "FishingBaitSwamp",
@@ -12064,7 +12413,8 @@
   "skill": "Swords",
   "attackForce": 50,
   "backstab": 4,
-  "ammoType": "$item_fishingbait"
+  "ammoType": "$item_fishingbait",
+  "stage": "Swamp"
  },
  {
   "id": "FishingRod",
@@ -12099,7 +12449,8 @@
    ],
    "draw": 1
   },
-  "ammoType": "$item_fishingbait"
+  "ammoType": "$item_fishingbait",
+  "stage": "BlackForest"
  },
  {
   "id": "FistBjornClaw",
@@ -12161,7 +12512,8 @@
     }
    ],
    "cycle": 1.474
-  }
+  },
+  "stage": "BlackForest"
  },
  {
   "id": "FistBjornUndeadClaw",
@@ -12224,7 +12576,8 @@
     }
    ],
    "cycle": 1.474
-  }
+  },
+  "stage": "Plains"
  },
  {
   "id": "FistFenrirClaw",
@@ -12286,7 +12639,8 @@
     }
    ],
    "cycle": 1.474
-  }
+  },
+  "stage": "Mountain"
  },
  {
   "id": "FistGold",
@@ -12348,7 +12702,8 @@
     }
    ],
    "cycle": 1.474
-  }
+  },
+  "stage": "DeepNorth"
  },
  {
   "id": "FistGoldUncooked",
@@ -12358,7 +12713,8 @@
   "icon": "FistGoldUncooked",
   "weight": 2,
   "stack": 1,
-  "maxQuality": 1
+  "maxQuality": 1,
+  "stage": "DeepNorth"
  },
  {
   "id": "FistGold_BloodLightning",
@@ -12422,7 +12778,8 @@
     }
    ],
    "cycle": 1.474
-  }
+  },
+  "stage": "DeepNorth"
  },
  {
   "id": "FistGold_FrostFire",
@@ -12488,7 +12845,8 @@
     }
    ],
    "cycle": 1.474
-  }
+  },
+  "stage": "DeepNorth"
  },
  {
   "id": "Flametal",
@@ -12511,7 +12869,8 @@
   "weight": 12,
   "stack": 30,
   "maxQuality": 1,
-  "noTeleport": true
+  "noTeleport": true,
+  "stage": "AshLands"
  },
  {
   "id": "FlametalOre",
@@ -12534,7 +12893,8 @@
   "weight": 10,
   "stack": 30,
   "maxQuality": 1,
-  "noTeleport": true
+  "noTeleport": true,
+  "stage": "AshLands"
  },
  {
   "id": "Flax",
@@ -12544,7 +12904,8 @@
   "icon": "flax",
   "weight": 0.2,
   "stack": 100,
-  "maxQuality": 1
+  "maxQuality": 1,
+  "stage": "Plains"
  },
  {
   "id": "Flint",
@@ -12554,7 +12915,8 @@
   "icon": "flint",
   "weight": 2,
   "stack": 30,
-  "maxQuality": 1
+  "maxQuality": 1,
+  "stage": "Meadows"
  },
  {
   "id": "FragrantBundle",
@@ -12564,7 +12926,8 @@
   "icon": "FragrantBundle",
   "weight": 0.5,
   "stack": 50,
-  "maxQuality": 1
+  "maxQuality": 1,
+  "stage": "Plains"
  },
  {
   "id": "FreezeGland",
@@ -12574,7 +12937,8 @@
   "icon": "freezegland",
   "weight": 0.5,
   "stack": 50,
-  "maxQuality": 1
+  "maxQuality": 1,
+  "stage": "Mountain"
  },
  {
   "id": "FreshSeaweed",
@@ -12584,7 +12948,8 @@
   "icon": "FreshSeaweed",
   "weight": 0.5,
   "stack": 50,
-  "maxQuality": 1
+  "maxQuality": 1,
+  "stage": "Swamp"
  },
  {
   "id": "FrostCore",
@@ -12594,7 +12959,8 @@
   "icon": "FrostCore",
   "weight": 1,
   "stack": 20,
-  "maxQuality": 1
+  "maxQuality": 1,
+  "stage": "DeepNorth"
  },
  {
   "id": "Frostwood",
@@ -12604,7 +12970,8 @@
   "icon": "frostwood",
   "weight": 2,
   "stack": 50,
-  "maxQuality": 1
+  "maxQuality": 1,
+  "stage": "DeepNorth"
  },
  {
   "id": "FrozenFuel",
@@ -12625,7 +12992,8 @@
   "icon": "frozenkingdrop",
   "weight": 1,
   "stack": 30,
-  "maxQuality": 1
+  "maxQuality": 1,
+  "stage": "DeepNorth"
  },
  {
   "id": "FrozenKing_ChainFlurry",
@@ -13286,7 +13654,8 @@
   "icon": "GemstoneBlue",
   "weight": 2,
   "stack": 50,
-  "maxQuality": 1
+  "maxQuality": 1,
+  "stage": "AshLands"
  },
  {
   "id": "GemstoneGreen",
@@ -13296,7 +13665,8 @@
   "icon": "GemstoneGreen",
   "weight": 2,
   "stack": 50,
-  "maxQuality": 1
+  "maxQuality": 1,
+  "stage": "AshLands"
  },
  {
   "id": "GemstoneRed",
@@ -13306,7 +13676,8 @@
   "icon": "GemstoneRed",
   "weight": 2,
   "stack": 50,
-  "maxQuality": 1
+  "maxQuality": 1,
+  "stage": "AshLands"
  },
  {
   "id": "GenericMoldUncooked",
@@ -13353,7 +13724,8 @@
   "icon": "giantbloodsack",
   "weight": 0.5,
   "stack": 50,
-  "maxQuality": 1
+  "maxQuality": 1,
+  "stage": "Mistlands"
  },
  {
   "id": "GlowWorm",
@@ -13369,7 +13741,8 @@
    "stamina": 30,
    "duration": 600,
    "regen": 1
-  }
+  },
+  "stage": "DeepNorth"
  },
  {
   "id": "GoblinArmband",
@@ -14401,7 +14774,8 @@
   "icon": "goblintotem",
   "weight": 1,
   "stack": 30,
-  "maxQuality": 1
+  "maxQuality": 1,
+  "stage": "Plains"
  },
  {
   "id": "Gold",
@@ -14412,7 +14786,8 @@
   "weight": 14,
   "stack": 30,
   "maxQuality": 1,
-  "noTeleport": true
+  "noTeleport": true,
+  "stage": "DeepNorth"
  },
  {
   "id": "GoldOre",
@@ -14423,7 +14798,8 @@
   "weight": 14,
   "stack": 30,
   "maxQuality": 1,
-  "noTeleport": true
+  "noTeleport": true,
+  "stage": "DeepNorth"
  },
  {
   "id": "GrapplingHook",
@@ -14479,7 +14855,8 @@
     }
    ],
    "cycle": 0.5
-  }
+  },
+  "stage": "Mistlands"
  },
  {
   "id": "Grausten",
@@ -14489,7 +14866,8 @@
   "icon": "stone_grausten",
   "weight": 2,
   "stack": 50,
-  "maxQuality": 1
+  "maxQuality": 1,
+  "stage": "AshLands"
  },
  {
   "id": "GreydwarfEye",
@@ -14499,7 +14877,8 @@
   "icon": "greydwarf_eye",
   "weight": 0.2,
   "stack": 50,
-  "maxQuality": 1
+  "maxQuality": 1,
+  "stage": "Meadows"
  },
  {
   "id": "Greydwarf_attack",
@@ -14778,7 +15157,8 @@
   "icon": "guck",
   "weight": 0.5,
   "stack": 50,
-  "maxQuality": 1
+  "maxQuality": 1,
+  "stage": "Swamp"
  },
  {
   "id": "Hair1",
@@ -16658,7 +17038,8 @@
    "stamina": 5,
    "adrenaline": 1
   },
-  "buildTable": "_HammerPieceTable"
+  "buildTable": "_HammerPieceTable",
+  "stage": "Meadows"
  },
  {
   "id": "HardAntler",
@@ -16668,7 +17049,8 @@
   "icon": "HardAntler",
   "weight": 2,
   "stack": 50,
-  "maxQuality": 1
+  "maxQuality": 1,
+  "stage": "Meadows"
  },
  {
   "id": "HareMeat",
@@ -16684,7 +17066,8 @@
    "stamina": 12,
    "duration": 1200,
    "regen": 2
-  }
+  },
+  "stage": "Mistlands"
  },
  {
   "id": "HatefulBlood",
@@ -16740,7 +17123,8 @@
    "name": "AshlandsMediumArmor",
    "size": 3,
    "effect": "SetEffect_AshlandsMediumArmor"
-  }
+  },
+  "stage": "AshLands"
  },
  {
   "id": "HelmetBerserkerHood",
@@ -16763,7 +17147,8 @@
    "name": "berserker_armor",
    "size": 3,
    "effect": "SetEffect_BerserkerArmor"
-  }
+  },
+  "stage": "BlackForest"
  },
  {
   "id": "HelmetBerserkerUndead",
@@ -16786,7 +17171,8 @@
    "name": "berserker_armor_undead",
    "size": 3,
    "effect": "SetEffect_BerserkerUndeadArmor"
-  }
+  },
+  "stage": "Plains"
  },
  {
   "id": "HelmetBronze",
@@ -16804,7 +17190,8 @@
    "perLevel": 200,
    "drain": 1,
    "repairable": true
-  }
+  },
+  "stage": "BlackForest"
  },
  {
   "id": "HelmetCarapace",
@@ -16822,7 +17209,8 @@
    "perLevel": 200,
    "drain": 1,
    "repairable": true
-  }
+  },
+  "stage": "Mistlands"
  },
  {
   "id": "HelmetCelebration",
@@ -16843,7 +17231,8 @@
   },
   "modifiers": {
    "homeItemsStamina": -0.15
-  }
+  },
+  "stage": "BlackForest"
  },
  {
   "id": "HelmetCrownofValheim",
@@ -16869,7 +17258,8 @@
    "sneakStamina": -0.2,
    "runStamina": -0.2
   },
-  "equipEffect": "Crowned"
+  "equipEffect": "Crowned",
+  "stage": "DeepNorth"
  },
  {
   "id": "HelmetDNHeavy",
@@ -16887,7 +17277,8 @@
    "perLevel": 200,
    "drain": 1,
    "repairable": true
-  }
+  },
+  "stage": "DeepNorth"
  },
  {
   "id": "HelmetDNMage",
@@ -16908,7 +17299,8 @@
   },
   "modifiers": {
    "eitrRegen": 0.4
-  }
+  },
+  "stage": "DeepNorth"
  },
  {
   "id": "HelmetDNMediumHood",
@@ -16931,7 +17323,8 @@
    "name": "DeepNorthMediumArmor",
    "size": 3,
    "effect": "SetEffect_DeepNorthMediumArmor"
-  }
+  },
+  "stage": "DeepNorth"
  },
  {
   "id": "HelmetDrake",
@@ -16949,7 +17342,8 @@
    "perLevel": 200,
    "drain": 1,
    "repairable": true
-  }
+  },
+  "stage": "Mountain"
  },
  {
   "id": "HelmetDverger",
@@ -16961,7 +17355,8 @@
   "stack": 1,
   "maxQuality": 1,
   "armor": 2,
-  "armorPerLevel": 1
+  "armorPerLevel": 1,
+  "stage": "BlackForest"
  },
  {
   "id": "HelmetFenring",
@@ -16987,7 +17382,8 @@
    "name": "fenring_armor",
    "size": 3,
    "effect": "SetEffect_FenringArmor"
-  }
+  },
+  "stage": "Mountain"
  },
  {
   "id": "HelmetFishingHat",
@@ -17006,7 +17402,8 @@
    "drain": 1,
    "repairable": true
   },
-  "equipEffect": "SetEffect_FishingHat"
+  "equipEffect": "SetEffect_FishingHat",
+  "stage": "DeepNorth"
  },
  {
   "id": "HelmetFlametal",
@@ -17024,7 +17421,8 @@
    "perLevel": 100,
    "drain": 1,
    "repairable": true
-  }
+  },
+  "stage": "AshLands"
  },
  {
   "id": "HelmetHat1",
@@ -17045,7 +17443,8 @@
   },
   "modifiers": {
    "homeItemsStamina": -0.15
-  }
+  },
+  "stage": "BlackForest"
  },
  {
   "id": "HelmetHat10",
@@ -17066,7 +17465,8 @@
   },
   "modifiers": {
    "homeItemsStamina": -0.15
-  }
+  },
+  "stage": "Meadows"
  },
  {
   "id": "HelmetHat2",
@@ -17087,7 +17487,8 @@
   },
   "modifiers": {
    "homeItemsStamina": -0.15
-  }
+  },
+  "stage": "Mountain"
  },
  {
   "id": "HelmetHat3",
@@ -17108,7 +17509,8 @@
   },
   "modifiers": {
    "homeItemsStamina": -0.15
-  }
+  },
+  "stage": "BlackForest"
  },
  {
   "id": "HelmetHat4",
@@ -17129,7 +17531,8 @@
   },
   "modifiers": {
    "homeItemsStamina": -0.15
-  }
+  },
+  "stage": "Mountain"
  },
  {
   "id": "HelmetHat5",
@@ -17150,7 +17553,8 @@
   },
   "modifiers": {
    "homeItemsStamina": -0.15
-  }
+  },
+  "stage": "Meadows"
  },
  {
   "id": "HelmetHat6",
@@ -17171,7 +17575,8 @@
   },
   "modifiers": {
    "homeItemsStamina": -0.15
-  }
+  },
+  "stage": "Mountain"
  },
  {
   "id": "HelmetHat7",
@@ -17192,7 +17597,8 @@
   },
   "modifiers": {
    "homeItemsStamina": -0.15
-  }
+  },
+  "stage": "Plains"
  },
  {
   "id": "HelmetHat8",
@@ -17213,7 +17619,8 @@
   },
   "modifiers": {
    "homeItemsStamina": -0.15
-  }
+  },
+  "stage": "Plains"
  },
  {
   "id": "HelmetHat9",
@@ -17234,7 +17641,8 @@
   },
   "modifiers": {
    "homeItemsStamina": -0.15
-  }
+  },
+  "stage": "Plains"
  },
  {
   "id": "HelmetIron",
@@ -17252,7 +17660,8 @@
    "perLevel": 200,
    "drain": 1,
    "repairable": true
-  }
+  },
+  "stage": "Swamp"
  },
  {
   "id": "HelmetLeather",
@@ -17270,7 +17679,8 @@
    "perLevel": 100,
    "drain": 1,
    "repairable": true
-  }
+  },
+  "stage": "Meadows"
  },
  {
   "id": "HelmetLox",
@@ -17293,7 +17703,8 @@
    "name": "lox",
    "size": 3,
    "effect": "SetEffect_LoxArmor"
-  }
+  },
+  "stage": "Plains"
  },
  {
   "id": "HelmetMage",
@@ -17314,7 +17725,8 @@
   },
   "modifiers": {
    "eitrRegen": 0.2
-  }
+  },
+  "stage": "Mistlands"
  },
  {
   "id": "HelmetMage_Ashlands",
@@ -17335,7 +17747,8 @@
   },
   "modifiers": {
    "eitrRegen": 0.3
-  }
+  },
+  "stage": "AshLands"
  },
  {
   "id": "HelmetMidsummerCrown",
@@ -17347,7 +17760,8 @@
   "stack": 1,
   "maxQuality": 1,
   "armor": 1,
-  "armorPerLevel": 1
+  "armorPerLevel": 1,
+  "stage": "Meadows"
  },
  {
   "id": "HelmetOdin",
@@ -17366,7 +17780,8 @@
    "perLevel": 100,
    "drain": 1,
    "repairable": true
-  }
+  },
+  "stage": "BlackForest"
  },
  {
   "id": "HelmetPadded",
@@ -17384,7 +17799,8 @@
    "perLevel": 200,
    "drain": 1,
    "repairable": true
-  }
+  },
+  "stage": "Plains"
  },
  {
   "id": "HelmetPointyHat",
@@ -17402,7 +17818,8 @@
    "perLevel": 100,
    "drain": 1,
    "repairable": true
-  }
+  },
+  "stage": "BlackForest"
  },
  {
   "id": "HelmetRoot",
@@ -17429,7 +17846,8 @@
    "name": "root_armor",
    "size": 3,
    "effect": "SetEffect_RootArmor"
-  }
+  },
+  "stage": "Swamp"
  },
  {
   "id": "HelmetRootCrown",
@@ -17447,7 +17865,8 @@
    "perLevel": 100,
    "drain": 1,
    "repairable": true
-  }
+  },
+  "stage": "Swamp"
  },
  {
   "id": "HelmetStrawHat",
@@ -17470,7 +17889,8 @@
    "name": "harvester",
    "size": 2,
    "effect": "SetEffect_HarvesterArmor"
-  }
+  },
+  "stage": "BlackForest"
  },
  {
   "id": "HelmetSweatBand",
@@ -17488,7 +17908,8 @@
    "perLevel": 200,
    "drain": 1,
    "repairable": true
-  }
+  },
+  "stage": "Meadows"
  },
  {
   "id": "HelmetTrollLeather",
@@ -17511,7 +17932,8 @@
    "name": "troll",
    "size": 4,
    "effect": "SetEffect_TrollArmor"
-  }
+  },
+  "stage": "BlackForest"
  },
  {
   "id": "HelmetYule",
@@ -17523,7 +17945,8 @@
   "stack": 1,
   "maxQuality": 1,
   "armor": 1,
-  "armorPerLevel": 1
+  "armorPerLevel": 1,
+  "stage": "BlackForest"
  },
  {
   "id": "HildirKey_forestcrypt",
@@ -17584,7 +18007,8 @@
    "stamina": 5,
    "adrenaline": 1
   },
-  "buildTable": "_HoePieceTable"
+  "buildTable": "_HoePieceTable",
+  "stage": "Meadows"
  },
  {
   "id": "Honey",
@@ -17600,7 +18024,8 @@
    "stamina": 35,
    "duration": 900,
    "regen": 1
-  }
+  },
+  "stage": "Meadows"
  },
  {
   "id": "HoneyGlazedChicken",
@@ -17616,7 +18041,8 @@
    "stamina": 26,
    "duration": 1800,
    "regen": 5
-  }
+  },
+  "stage": "Mistlands"
  },
  {
   "id": "HoneyGlazedChickenUncooked",
@@ -17632,7 +18058,8 @@
    "stamina": 26,
    "duration": 1800,
    "regen": 2
-  }
+  },
+  "stage": "Mistlands"
  },
  {
   "id": "Hook",
@@ -17642,7 +18069,8 @@
   "icon": "hook",
   "weight": 5,
   "stack": 50,
-  "maxQuality": 1
+  "maxQuality": 1,
+  "stage": "Mistlands"
  },
  {
   "id": "Ice",
@@ -17652,7 +18080,8 @@
   "icon": "ice",
   "weight": 1,
   "stack": 50,
-  "maxQuality": 1
+  "maxQuality": 1,
+  "stage": "DeepNorth"
  },
  {
   "id": "IceShoes",
@@ -17685,7 +18114,8 @@
   "weight": 12,
   "stack": 30,
   "maxQuality": 1,
-  "noTeleport": true
+  "noTeleport": true,
+  "stage": "Swamp"
  },
  {
   "id": "IronNails",
@@ -17695,7 +18125,8 @@
   "icon": "ironnails",
   "weight": 0.5,
   "stack": 100,
-  "maxQuality": 1
+  "maxQuality": 1,
+  "stage": "Swamp"
  },
  {
   "id": "IronOre",
@@ -17706,7 +18137,8 @@
   "weight": 10,
   "stack": 30,
   "maxQuality": 1,
-  "noTeleport": true
+  "noTeleport": true,
+  "stage": "Swamp"
  },
  {
   "id": "IronScrap",
@@ -17717,7 +18149,8 @@
   "weight": 10,
   "stack": 30,
   "maxQuality": 1,
-  "noTeleport": true
+  "noTeleport": true,
+  "stage": "Swamp"
  },
  {
   "id": "Ironpit",
@@ -17728,7 +18161,8 @@
   "weight": 10,
   "stack": 10,
   "maxQuality": 1,
-  "noTeleport": true
+  "noTeleport": true,
+  "stage": "Meadows"
  },
  {
   "id": "JotunHairFemale",
@@ -18592,7 +19026,8 @@
   "icon": "JuteBlue",
   "weight": 2,
   "stack": 50,
-  "maxQuality": 1
+  "maxQuality": 1,
+  "stage": "Mistlands"
  },
  {
   "id": "JuteRed",
@@ -18602,7 +19037,8 @@
   "icon": "JuteRed",
   "weight": 2,
   "stack": 50,
-  "maxQuality": 1
+  "maxQuality": 1,
+  "stage": "Mountain"
  },
  {
   "id": "Kale",
@@ -18618,7 +19054,8 @@
    "stamina": 35,
    "duration": 900,
    "regen": 1
-  }
+  },
+  "stage": "DeepNorth"
  },
  {
   "id": "KaleChips",
@@ -18634,7 +19071,8 @@
    "stamina": 105,
    "duration": 1500,
    "regen": 5
-  }
+  },
+  "stage": "DeepNorth"
  },
  {
   "id": "KaleChipsUncooked",
@@ -18650,7 +19088,8 @@
    "stamina": 115,
    "duration": 1500,
    "regen": 5
-  }
+  },
+  "stage": "DeepNorth"
  },
  {
   "id": "KaleSeeds",
@@ -18660,7 +19099,8 @@
   "icon": "kaleseeds",
   "weight": 0.1,
   "stack": 100,
-  "maxQuality": 1
+  "maxQuality": 1,
+  "stage": "DeepNorth"
  },
  {
   "id": "KeysGoldUncooked",
@@ -18670,7 +19110,8 @@
   "icon": "KeysGoldUncooked",
   "weight": 1,
   "stack": 10,
-  "maxQuality": 1
+  "maxQuality": 1,
+  "stage": "DeepNorth"
  },
  {
   "id": "KnifeBlackMetal",
@@ -18738,7 +19179,8 @@
     }
    ],
    "cycle": 1.545
-  }
+  },
+  "stage": "Plains"
  },
  {
   "id": "KnifeButcher",
@@ -18788,7 +19230,8 @@
    ],
    "lastChainMultiplier": 2,
    "cycle": 1.693
-  }
+  },
+  "stage": "BlackForest"
  },
  {
   "id": "KnifeChitin",
@@ -18856,7 +19299,8 @@
     }
    ],
    "cycle": 1.545
-  }
+  },
+  "stage": "Meadows"
  },
  {
   "id": "KnifeCopper",
@@ -18924,7 +19368,8 @@
     }
    ],
    "cycle": 1.545
-  }
+  },
+  "stage": "BlackForest"
  },
  {
   "id": "KnifeFlint",
@@ -18991,7 +19436,8 @@
     }
    ],
    "cycle": 1.545
-  }
+  },
+  "stage": "Meadows"
  },
  {
   "id": "KnifeGold",
@@ -19059,7 +19505,8 @@
     }
    ],
    "cycle": 1.545
-  }
+  },
+  "stage": "DeepNorth"
  },
  {
   "id": "KnifeGoldUncooked",
@@ -19069,7 +19516,8 @@
   "icon": "KnifeGoldUncooked",
   "weight": 0.3,
   "stack": 1,
-  "maxQuality": 1
+  "maxQuality": 1,
+  "stage": "DeepNorth"
  },
  {
   "id": "KnifeGold_BloodLightning",
@@ -19139,7 +19587,8 @@
     }
    ],
    "cycle": 1.545
-  }
+  },
+  "stage": "DeepNorth"
  },
  {
   "id": "KnifeGold_FrostFire",
@@ -19211,7 +19660,8 @@
     }
    ],
    "cycle": 1.545
-  }
+  },
+  "stage": "DeepNorth"
  },
  {
   "id": "KnifeSilver",
@@ -19280,7 +19730,8 @@
     }
    ],
    "cycle": 1.545
-  }
+  },
+  "stage": "Mountain"
  },
  {
   "id": "KnifeSkollAndHati",
@@ -19348,7 +19799,8 @@
     }
    ],
    "cycle": 1.65
-  }
+  },
+  "stage": "Mistlands"
  },
  {
   "id": "KnifeVoid",
@@ -19485,7 +19937,8 @@
     }
    ],
    "cycle": 1.545
-  }
+  },
+  "stage": "Meadows"
  },
  {
   "id": "Lantern",
@@ -19505,7 +19958,8 @@
   "parryAdrenaline": 5,
   "modifiers": {
    "movement": -0.05
-  }
+  },
+  "stage": "Mistlands"
  },
  {
   "id": "Lantern_DN",
@@ -19525,7 +19979,8 @@
   "parryAdrenaline": 5,
   "modifiers": {
    "movement": -0.05
-  }
+  },
+  "stage": "Meadows"
  },
  {
   "id": "Lantern_hooded",
@@ -19584,7 +20039,8 @@
   "icon": "leatherscraps",
   "weight": 0.5,
   "stack": 50,
-  "maxQuality": 1
+  "maxQuality": 1,
+  "stage": "Meadows"
  },
  {
   "id": "Leatherstraps",
@@ -19594,7 +20050,8 @@
   "icon": "leatherstraps",
   "weight": 0.5,
   "stack": 50,
-  "maxQuality": 1
+  "maxQuality": 1,
+  "stage": "DeepNorth"
  },
  {
   "id": "Leech_BiteAttack",
@@ -19631,7 +20088,8 @@
   "icon": "linenthread",
   "weight": 2,
   "stack": 50,
-  "maxQuality": 1
+  "maxQuality": 1,
+  "stage": "Plains"
  },
  {
   "id": "Lingonberry",
@@ -19647,7 +20105,8 @@
    "stamina": 35,
    "duration": 900,
    "regen": 1
-  }
+  },
+  "stage": "DeepNorth"
  },
  {
   "id": "Lingondricka",
@@ -19663,7 +20122,8 @@
    "stamina": 105,
    "duration": 1500,
    "regen": 5
-  }
+  },
+  "stage": "DeepNorth"
  },
  {
   "id": "LoxMeat",
@@ -19679,7 +20139,8 @@
    "stamina": 20,
    "duration": 600,
    "regen": 1
-  }
+  },
+  "stage": "Plains"
  },
  {
   "id": "LoxPelt",
@@ -19689,7 +20150,8 @@
   "icon": "loxpelt",
   "weight": 1,
   "stack": 50,
-  "maxQuality": 1
+  "maxQuality": 1,
+  "stage": "Plains"
  },
  {
   "id": "LoxPie",
@@ -19705,7 +20167,8 @@
    "stamina": 24,
    "duration": 1800,
    "regen": 4
-  }
+  },
+  "stage": "Plains"
  },
  {
   "id": "LoxPieUncooked",
@@ -19721,7 +20184,8 @@
    "stamina": 10,
    "duration": 2400,
    "regen": 4
-  }
+  },
+  "stage": "Plains"
  },
  {
   "id": "MaceBronze",
@@ -19790,7 +20254,8 @@
   },
   "modifiers": {
    "movement": -0.05
-  }
+  },
+  "stage": "BlackForest"
  },
  {
   "id": "MaceEldner",
@@ -19859,7 +20324,8 @@
   },
   "modifiers": {
    "movement": -0.05
-  }
+  },
+  "stage": "AshLands"
  },
  {
   "id": "MaceEldnerBlood",
@@ -19928,7 +20394,8 @@
   },
   "modifiers": {
    "movement": -0.05
-  }
+  },
+  "stage": "AshLands"
  },
  {
   "id": "MaceEldnerLightning",
@@ -19998,7 +20465,8 @@
   },
   "modifiers": {
    "movement": -0.05
-  }
+  },
+  "stage": "AshLands"
  },
  {
   "id": "MaceEldnerNature",
@@ -20068,7 +20536,8 @@
   },
   "modifiers": {
    "movement": -0.05
-  }
+  },
+  "stage": "AshLands"
  },
  {
   "id": "MaceGold",
@@ -20137,7 +20606,8 @@
   },
   "modifiers": {
    "movement": -0.05
-  }
+  },
+  "stage": "DeepNorth"
  },
  {
   "id": "MaceGoldUncooked",
@@ -20147,7 +20617,8 @@
   "icon": "MaceGoldUncooked",
   "weight": 2,
   "stack": 1,
-  "maxQuality": 1
+  "maxQuality": 1,
+  "stage": "DeepNorth"
  },
  {
   "id": "MaceGold_BloodLightning",
@@ -20218,7 +20689,8 @@
   },
   "modifiers": {
    "movement": -0.05
-  }
+  },
+  "stage": "DeepNorth"
  },
  {
   "id": "MaceGold_FrostFire",
@@ -20291,7 +20763,8 @@
   },
   "modifiers": {
    "movement": -0.05
-  }
+  },
+  "stage": "DeepNorth"
  },
  {
   "id": "MaceIron",
@@ -20360,7 +20833,8 @@
   },
   "modifiers": {
    "movement": -0.05
-  }
+  },
+  "stage": "Swamp"
  },
  {
   "id": "MaceNeedle",
@@ -20430,7 +20904,8 @@
   },
   "modifiers": {
    "movement": -0.05
-  }
+  },
+  "stage": "Plains"
  },
  {
   "id": "MaceSilver",
@@ -20501,7 +20976,8 @@
   },
   "modifiers": {
    "movement": -0.05
-  }
+  },
+  "stage": "Mountain"
  },
  {
   "id": "MaceWood",
@@ -20570,7 +21046,8 @@
   },
   "modifiers": {
    "movement": -0.05
-  }
+  },
+  "stage": "Meadows"
  },
  {
   "id": "MagicallyStuffedShroom",
@@ -20587,7 +21064,8 @@
    "eitr": 75,
    "duration": 1500,
    "regen": 3
-  }
+  },
+  "stage": "Mistlands"
  },
  {
   "id": "MagicallyStuffedShroomUncooked",
@@ -20604,7 +21082,8 @@
    "eitr": 75,
    "duration": 1500,
    "regen": 3
-  }
+  },
+  "stage": "Mistlands"
  },
  {
   "id": "Mandible",
@@ -20614,7 +21093,8 @@
   "icon": "mandible",
   "weight": 0.5,
   "stack": 50,
-  "maxQuality": 1
+  "maxQuality": 1,
+  "stage": "Mistlands"
  },
  {
   "id": "MarinatedGreens",
@@ -20631,7 +21111,8 @@
    "eitr": 95,
    "duration": 1800,
    "regen": 4
-  }
+  },
+  "stage": "AshLands"
  },
  {
   "id": "MashedMeat",
@@ -20647,7 +21128,8 @@
    "stamina": 34,
    "duration": 1500,
    "regen": 6
-  }
+  },
+  "stage": "AshLands"
  },
  {
   "id": "MeadBaseBugRepellent",
@@ -20658,7 +21140,8 @@
   "weight": 1,
   "stack": 1,
   "maxQuality": 1,
-  "consumeEffect": "Potion_BugRepellent"
+  "consumeEffect": "Potion_BugRepellent",
+  "stage": "Plains"
  },
  {
   "id": "MeadBaseBzerker",
@@ -20669,7 +21152,8 @@
   "weight": 1,
   "stack": 1,
   "maxQuality": 1,
-  "consumeEffect": "Potion_bzerker"
+  "consumeEffect": "Potion_bzerker",
+  "stage": "Plains"
  },
  {
   "id": "MeadBaseEitrLingering",
@@ -20680,7 +21164,8 @@
   "weight": 1,
   "stack": 1,
   "maxQuality": 1,
-  "consumeEffect": "Potion_eitr_lingering"
+  "consumeEffect": "Potion_eitr_lingering",
+  "stage": "Mistlands"
  },
  {
   "id": "MeadBaseEitrMinor",
@@ -20691,7 +21176,8 @@
   "weight": 1,
   "stack": 1,
   "maxQuality": 1,
-  "consumeEffect": "Potion_eitr_minor"
+  "consumeEffect": "Potion_eitr_minor",
+  "stage": "Mistlands"
  },
  {
   "id": "MeadBaseFrostResist",
@@ -20702,7 +21188,8 @@
   "weight": 1,
   "stack": 1,
   "maxQuality": 1,
-  "consumeEffect": "Potion_frostresist"
+  "consumeEffect": "Potion_frostresist",
+  "stage": "Swamp"
  },
  {
   "id": "MeadBaseHasty",
@@ -20713,7 +21200,8 @@
   "weight": 1,
   "stack": 1,
   "maxQuality": 1,
-  "consumeEffect": "Potion_hasty"
+  "consumeEffect": "Potion_hasty",
+  "stage": "Swamp"
  },
  {
   "id": "MeadBaseHealthLingering",
@@ -20724,7 +21212,8 @@
   "weight": 1,
   "stack": 1,
   "maxQuality": 1,
-  "consumeEffect": "Potion_health_lingering"
+  "consumeEffect": "Potion_health_lingering",
+  "stage": "AshLands"
  },
  {
   "id": "MeadBaseHealthMajor",
@@ -20735,7 +21224,8 @@
   "weight": 1,
   "stack": 1,
   "maxQuality": 1,
-  "consumeEffect": "Potion_health_major"
+  "consumeEffect": "Potion_health_major",
+  "stage": "Mistlands"
  },
  {
   "id": "MeadBaseHealthMedium",
@@ -20746,7 +21236,8 @@
   "weight": 1,
   "stack": 1,
   "maxQuality": 1,
-  "consumeEffect": "Potion_health_medium"
+  "consumeEffect": "Potion_health_medium",
+  "stage": "Swamp"
  },
  {
   "id": "MeadBaseHealthMinor",
@@ -20757,7 +21248,8 @@
   "weight": 1,
   "stack": 1,
   "maxQuality": 1,
-  "consumeEffect": "Potion_health_minor"
+  "consumeEffect": "Potion_health_minor",
+  "stage": "BlackForest"
  },
  {
   "id": "MeadBaseLightFoot",
@@ -20768,7 +21260,8 @@
   "weight": 1,
   "stack": 1,
   "maxQuality": 1,
-  "consumeEffect": "Potion_LightFoot"
+  "consumeEffect": "Potion_LightFoot",
+  "stage": "Mistlands"
  },
  {
   "id": "MeadBasePoisonResist",
@@ -20779,7 +21272,8 @@
   "weight": 1,
   "stack": 1,
   "maxQuality": 1,
-  "consumeEffect": "Potion_poisonresist"
+  "consumeEffect": "Potion_poisonresist",
+  "stage": "BlackForest"
  },
  {
   "id": "MeadBaseStaminaLingering",
@@ -20790,7 +21284,8 @@
   "weight": 1,
   "stack": 1,
   "maxQuality": 1,
-  "consumeEffect": "Potion_stamina_lingering"
+  "consumeEffect": "Potion_stamina_lingering",
+  "stage": "Mistlands"
  },
  {
   "id": "MeadBaseStaminaMedium",
@@ -20801,7 +21296,8 @@
   "weight": 1,
   "stack": 1,
   "maxQuality": 1,
-  "consumeEffect": "Potion_stamina_medium"
+  "consumeEffect": "Potion_stamina_medium",
+  "stage": "Plains"
  },
  {
   "id": "MeadBaseStaminaMinor",
@@ -20812,7 +21308,8 @@
   "weight": 1,
   "stack": 1,
   "maxQuality": 1,
-  "consumeEffect": "Potion_stamina_minor"
+  "consumeEffect": "Potion_stamina_minor",
+  "stage": "BlackForest"
  },
  {
   "id": "MeadBaseStrength",
@@ -20823,7 +21320,8 @@
   "weight": 1,
   "stack": 1,
   "maxQuality": 1,
-  "consumeEffect": "Potion_strength"
+  "consumeEffect": "Potion_strength",
+  "stage": "Swamp"
  },
  {
   "id": "MeadBaseSwimmer",
@@ -20834,7 +21332,8 @@
   "weight": 1,
   "stack": 1,
   "maxQuality": 1,
-  "consumeEffect": "Potion_swimmer"
+  "consumeEffect": "Potion_swimmer",
+  "stage": "Swamp"
  },
  {
   "id": "MeadBaseTamer",
@@ -20845,7 +21344,8 @@
   "weight": 1,
   "stack": 1,
   "maxQuality": 1,
-  "consumeEffect": "Potion_tamer"
+  "consumeEffect": "Potion_tamer",
+  "stage": "Swamp"
  },
  {
   "id": "MeadBaseTasty",
@@ -20856,7 +21356,8 @@
   "weight": 1,
   "stack": 1,
   "maxQuality": 1,
-  "consumeEffect": "Potion_tasty"
+  "consumeEffect": "Potion_tasty",
+  "stage": "BlackForest"
  },
  {
   "id": "MeadBugRepellent",
@@ -20868,7 +21369,8 @@
   "stack": 10,
   "maxQuality": 1,
   "ammoType": "mead",
-  "consumeEffect": "Potion_BugRepellent"
+  "consumeEffect": "Potion_BugRepellent",
+  "stage": "Plains"
  },
  {
   "id": "MeadBzerker",
@@ -20880,7 +21382,8 @@
   "stack": 10,
   "maxQuality": 1,
   "ammoType": "mead",
-  "consumeEffect": "Potion_bzerker"
+  "consumeEffect": "Potion_bzerker",
+  "stage": "Plains"
  },
  {
   "id": "MeadEitrLingering",
@@ -20892,7 +21395,8 @@
   "stack": 10,
   "maxQuality": 1,
   "ammoType": "mead",
-  "consumeEffect": "Potion_eitr_lingering"
+  "consumeEffect": "Potion_eitr_lingering",
+  "stage": "Mistlands"
  },
  {
   "id": "MeadEitrMinor",
@@ -20904,7 +21408,8 @@
   "stack": 10,
   "maxQuality": 1,
   "ammoType": "mead",
-  "consumeEffect": "Potion_eitr_minor"
+  "consumeEffect": "Potion_eitr_minor",
+  "stage": "Mistlands"
  },
  {
   "id": "MeadFrostResist",
@@ -20916,7 +21421,8 @@
   "stack": 10,
   "maxQuality": 1,
   "ammoType": "mead",
-  "consumeEffect": "Potion_frostresist"
+  "consumeEffect": "Potion_frostresist",
+  "stage": "Swamp"
  },
  {
   "id": "MeadHasty",
@@ -20928,7 +21434,8 @@
   "stack": 10,
   "maxQuality": 1,
   "ammoType": "mead",
-  "consumeEffect": "Potion_hasty"
+  "consumeEffect": "Potion_hasty",
+  "stage": "Swamp"
  },
  {
   "id": "MeadHealthLingering",
@@ -20940,7 +21447,8 @@
   "stack": 10,
   "maxQuality": 1,
   "ammoType": "mead",
-  "consumeEffect": "Potion_health_lingering"
+  "consumeEffect": "Potion_health_lingering",
+  "stage": "AshLands"
  },
  {
   "id": "MeadHealthMajor",
@@ -20952,7 +21460,8 @@
   "stack": 10,
   "maxQuality": 1,
   "ammoType": "mead",
-  "consumeEffect": "Potion_health_major"
+  "consumeEffect": "Potion_health_major",
+  "stage": "Mistlands"
  },
  {
   "id": "MeadHealthMedium",
@@ -20964,7 +21473,8 @@
   "stack": 10,
   "maxQuality": 1,
   "ammoType": "mead",
-  "consumeEffect": "Potion_health_medium"
+  "consumeEffect": "Potion_health_medium",
+  "stage": "Swamp"
  },
  {
   "id": "MeadHealthMinor",
@@ -20976,7 +21486,8 @@
   "stack": 10,
   "maxQuality": 1,
   "ammoType": "mead",
-  "consumeEffect": "Potion_health_minor"
+  "consumeEffect": "Potion_health_minor",
+  "stage": "BlackForest"
  },
  {
   "id": "MeadLightfoot",
@@ -20988,7 +21499,8 @@
   "stack": 10,
   "maxQuality": 1,
   "ammoType": "mead",
-  "consumeEffect": "Potion_LightFoot"
+  "consumeEffect": "Potion_LightFoot",
+  "stage": "Mistlands"
  },
  {
   "id": "MeadPoisonResist",
@@ -21000,7 +21512,8 @@
   "stack": 10,
   "maxQuality": 1,
   "ammoType": "mead",
-  "consumeEffect": "Potion_poisonresist"
+  "consumeEffect": "Potion_poisonresist",
+  "stage": "BlackForest"
  },
  {
   "id": "MeadStaminaLingering",
@@ -21012,7 +21525,8 @@
   "stack": 10,
   "maxQuality": 1,
   "ammoType": "mead",
-  "consumeEffect": "Potion_stamina_lingering"
+  "consumeEffect": "Potion_stamina_lingering",
+  "stage": "Mistlands"
  },
  {
   "id": "MeadStaminaMedium",
@@ -21024,7 +21538,8 @@
   "stack": 10,
   "maxQuality": 1,
   "ammoType": "mead",
-  "consumeEffect": "Potion_stamina_medium"
+  "consumeEffect": "Potion_stamina_medium",
+  "stage": "Plains"
  },
  {
   "id": "MeadStaminaMinor",
@@ -21036,7 +21551,8 @@
   "stack": 10,
   "maxQuality": 1,
   "ammoType": "mead",
-  "consumeEffect": "Potion_stamina_minor"
+  "consumeEffect": "Potion_stamina_minor",
+  "stage": "BlackForest"
  },
  {
   "id": "MeadStrength",
@@ -21048,7 +21564,8 @@
   "stack": 10,
   "maxQuality": 1,
   "ammoType": "mead",
-  "consumeEffect": "Potion_strength"
+  "consumeEffect": "Potion_strength",
+  "stage": "Swamp"
  },
  {
   "id": "MeadSwimmer",
@@ -21060,7 +21577,8 @@
   "stack": 10,
   "maxQuality": 1,
   "ammoType": "mead",
-  "consumeEffect": "Potion_swimmer"
+  "consumeEffect": "Potion_swimmer",
+  "stage": "Swamp"
  },
  {
   "id": "MeadTamer",
@@ -21072,7 +21590,8 @@
   "stack": 10,
   "maxQuality": 1,
   "ammoType": "mead",
-  "consumeEffect": "Potion_tamer"
+  "consumeEffect": "Potion_tamer",
+  "stage": "Swamp"
  },
  {
   "id": "MeadTasty",
@@ -21084,7 +21603,8 @@
   "stack": 10,
   "maxQuality": 1,
   "ammoType": "mead",
-  "consumeEffect": "Potion_tasty"
+  "consumeEffect": "Potion_tasty",
+  "stage": "BlackForest"
  },
  {
   "id": "MeadTrollPheromones",
@@ -21096,7 +21616,8 @@
   "stack": 10,
   "maxQuality": 1,
   "ammoType": "mead",
-  "consumeEffect": "Potion_TrollPheromones"
+  "consumeEffect": "Potion_TrollPheromones",
+  "stage": "Swamp"
  },
  {
   "id": "MeatPlatter",
@@ -21112,7 +21633,8 @@
    "stamina": 26,
    "duration": 1800,
    "regen": 5
-  }
+  },
+  "stage": "Mistlands"
  },
  {
   "id": "MeatPlatterUncooked",
@@ -21128,7 +21650,8 @@
    "stamina": 26,
    "duration": 1800,
    "regen": 2
-  }
+  },
+  "stage": "Mistlands"
  },
  {
   "id": "MeatballsMashedPoteitr",
@@ -21145,7 +21668,8 @@
    "eitr": 105,
    "duration": 1500,
    "regen": 5
-  }
+  },
+  "stage": "DeepNorth"
  },
  {
   "id": "MechanicalSpring",
@@ -21156,7 +21680,8 @@
   "weight": 5,
   "stack": 10,
   "maxQuality": 1,
-  "noTeleport": true
+  "noTeleport": true,
+  "stage": "Mistlands"
  },
  {
   "id": "MemorialCoal",
@@ -21166,7 +21691,8 @@
   "icon": "memorialcoal",
   "weight": 2,
   "stack": 50,
-  "maxQuality": 1
+  "maxQuality": 1,
+  "stage": "DeepNorth"
  },
  {
   "id": "MinceMeatSauce",
@@ -21182,7 +21708,8 @@
    "stamina": 13,
    "duration": 1500,
    "regen": 3
-  }
+  },
+  "stage": "BlackForest"
  },
  {
   "id": "MisthareSupreme",
@@ -21198,7 +21725,8 @@
    "stamina": 28,
    "duration": 1500,
    "regen": 5
-  }
+  },
+  "stage": "Mistlands"
  },
  {
   "id": "MisthareSupremeUncooked",
@@ -21214,7 +21742,8 @@
    "stamina": 28,
    "duration": 1800,
    "regen": 2
-  }
+  },
+  "stage": "Mistlands"
  },
  {
   "id": "Mistile_kamikaze",
@@ -21256,7 +21785,8 @@
   "icon": "MoldArmorHeavyChest",
   "weight": 1,
   "stack": 10,
-  "maxQuality": 1
+  "maxQuality": 1,
+  "stage": "DeepNorth"
  },
  {
   "id": "MoldArmorGoldHelmet",
@@ -21266,7 +21796,8 @@
   "icon": "MoldArmorHeavyHelmet",
   "weight": 1,
   "stack": 10,
-  "maxQuality": 1
+  "maxQuality": 1,
+  "stage": "DeepNorth"
  },
  {
   "id": "MoldArmorGoldLegs",
@@ -21276,7 +21807,8 @@
   "icon": "MoldArmorHeavyLegs",
   "weight": 1,
   "stack": 10,
-  "maxQuality": 1
+  "maxQuality": 1,
+  "stage": "DeepNorth"
  },
  {
   "id": "MoldArmorMageChest",
@@ -21286,7 +21818,8 @@
   "icon": "MoldArmorMageChest",
   "weight": 1,
   "stack": 10,
-  "maxQuality": 1
+  "maxQuality": 1,
+  "stage": "DeepNorth"
  },
  {
   "id": "MoldArmorMageHelmet",
@@ -21296,7 +21829,8 @@
   "icon": "MoldArmorMageHelmet",
   "weight": 1,
   "stack": 10,
-  "maxQuality": 1
+  "maxQuality": 1,
+  "stage": "DeepNorth"
  },
  {
   "id": "MoldArmorMageLegs",
@@ -21306,7 +21840,8 @@
   "icon": "MoldArmorMageLegs",
   "weight": 1,
   "stack": 10,
-  "maxQuality": 1
+  "maxQuality": 1,
+  "stage": "DeepNorth"
  },
  {
   "id": "MoldArmorMediumHelmet",
@@ -21316,7 +21851,8 @@
   "icon": "MoldArmorMediumHelmet",
   "weight": 1,
   "stack": 10,
-  "maxQuality": 1
+  "maxQuality": 1,
+  "stage": "DeepNorth"
  },
  {
   "id": "MoldArmorMediumLegs",
@@ -21326,7 +21862,8 @@
   "icon": "MoldArmorMediumLegs",
   "weight": 1,
   "stack": 10,
-  "maxQuality": 1
+  "maxQuality": 1,
+  "stage": "DeepNorth"
  },
  {
   "id": "MoldArmormediumChest",
@@ -21336,7 +21873,8 @@
   "icon": "MoldArmorMediumChest",
   "weight": 1,
   "stack": 10,
-  "maxQuality": 1
+  "maxQuality": 1,
+  "stage": "DeepNorth"
  },
  {
   "id": "MoldAtgeir",
@@ -21346,7 +21884,8 @@
   "icon": "MoldAtgeir",
   "weight": 1,
   "stack": 10,
-  "maxQuality": 1
+  "maxQuality": 1,
+  "stage": "DeepNorth"
  },
  {
   "id": "MoldAxe",
@@ -21356,7 +21895,8 @@
   "icon": "MoldAxe",
   "weight": 1,
   "stack": 10,
-  "maxQuality": 1
+  "maxQuality": 1,
+  "stage": "DeepNorth"
  },
  {
   "id": "MoldAxe2H",
@@ -21366,7 +21906,8 @@
   "icon": "MoldAxe2h",
   "weight": 1,
   "stack": 10,
-  "maxQuality": 1
+  "maxQuality": 1,
+  "stage": "DeepNorth"
  },
  {
   "id": "MoldBow",
@@ -21376,7 +21917,8 @@
   "icon": "MoldBow",
   "weight": 1,
   "stack": 10,
-  "maxQuality": 1
+  "maxQuality": 1,
+  "stage": "DeepNorth"
  },
  {
   "id": "MoldCrossbow",
@@ -21386,7 +21928,8 @@
   "icon": "MoldCrossbow",
   "weight": 1,
   "stack": 10,
-  "maxQuality": 1
+  "maxQuality": 1,
+  "stage": "DeepNorth"
  },
  {
   "id": "MoldFistweapon",
@@ -21396,7 +21939,8 @@
   "icon": "MoldFistweapon",
   "weight": 1,
   "stack": 10,
-  "maxQuality": 1
+  "maxQuality": 1,
+  "stage": "DeepNorth"
  },
  {
   "id": "MoldKeys",
@@ -21406,7 +21950,8 @@
   "icon": "MoldKeys",
   "weight": 1,
   "stack": 10,
-  "maxQuality": 1
+  "maxQuality": 1,
+  "stage": "DeepNorth"
  },
  {
   "id": "MoldKnife",
@@ -21416,7 +21961,8 @@
   "icon": "MoldKnife",
   "weight": 1,
   "stack": 10,
-  "maxQuality": 1
+  "maxQuality": 1,
+  "stage": "DeepNorth"
  },
  {
   "id": "MoldMace",
@@ -21426,7 +21972,8 @@
   "icon": "MoldMace",
   "weight": 1,
   "stack": 10,
-  "maxQuality": 1
+  "maxQuality": 1,
+  "stage": "DeepNorth"
  },
  {
   "id": "MoldMace2H",
@@ -21436,7 +21983,8 @@
   "icon": "MoldMace2h",
   "weight": 1,
   "stack": 10,
-  "maxQuality": 1
+  "maxQuality": 1,
+  "stage": "DeepNorth"
  },
  {
   "id": "MoldShieldBuckler",
@@ -21446,7 +21994,8 @@
   "icon": "MoldShieldBuckler",
   "weight": 1,
   "stack": 10,
-  "maxQuality": 1
+  "maxQuality": 1,
+  "stage": "DeepNorth"
  },
  {
   "id": "MoldShieldRound",
@@ -21456,7 +22005,8 @@
   "icon": "MoldShieldRound",
   "weight": 1,
   "stack": 10,
-  "maxQuality": 1
+  "maxQuality": 1,
+  "stage": "DeepNorth"
  },
  {
   "id": "MoldShieldTower",
@@ -21466,7 +22016,8 @@
   "icon": "MoldShieldTower",
   "weight": 1,
   "stack": 10,
-  "maxQuality": 1
+  "maxQuality": 1,
+  "stage": "DeepNorth"
  },
  {
   "id": "MoldSmallParts",
@@ -21487,7 +22038,8 @@
   "icon": "MoldSpear",
   "weight": 1,
   "stack": 10,
-  "maxQuality": 1
+  "maxQuality": 1,
+  "stage": "DeepNorth"
  },
  {
   "id": "MoldStaffOrbofAhri",
@@ -21497,7 +22049,8 @@
   "icon": "moldstafforbofahri",
   "weight": 1,
   "stack": 10,
-  "maxQuality": 1
+  "maxQuality": 1,
+  "stage": "DeepNorth"
  },
  {
   "id": "MoldStafffrostorbs",
@@ -21507,7 +22060,8 @@
   "icon": "moldstafffrostorbs",
   "weight": 1,
   "stack": 10,
-  "maxQuality": 1
+  "maxQuality": 1,
+  "stage": "DeepNorth"
  },
  {
   "id": "MoldStaffspiritcaller",
@@ -21517,7 +22071,8 @@
   "icon": "moldstaffspiritcaller",
   "weight": 1,
   "stack": 10,
-  "maxQuality": 1
+  "maxQuality": 1,
+  "stage": "DeepNorth"
  },
  {
   "id": "MoldStaffthunderblood",
@@ -21527,7 +22082,8 @@
   "icon": "moldstaffthunderblood",
   "weight": 1,
   "stack": 10,
-  "maxQuality": 1
+  "maxQuality": 1,
+  "stage": "DeepNorth"
  },
  {
   "id": "MoldSword",
@@ -21537,7 +22093,8 @@
   "icon": "MoldSword",
   "weight": 1,
   "stack": 10,
-  "maxQuality": 1
+  "maxQuality": 1,
+  "stage": "DeepNorth"
  },
  {
   "id": "MoldSword2H",
@@ -21547,7 +22104,8 @@
   "icon": "MoldSword2H",
   "weight": 1,
   "stack": 10,
-  "maxQuality": 1
+  "maxQuality": 1,
+  "stage": "DeepNorth"
  },
  {
   "id": "MoleClaws",
@@ -21557,7 +22115,8 @@
   "icon": "MoleClaws",
   "weight": 0.5,
   "stack": 50,
-  "maxQuality": 1
+  "maxQuality": 1,
+  "stage": "DeepNorth"
  },
  {
   "id": "MoltenCore",
@@ -21567,7 +22126,8 @@
   "icon": "MoltenCore",
   "weight": 1,
   "stack": 20,
-  "maxQuality": 1
+  "maxQuality": 1,
+  "stage": "AshLands"
  },
  {
   "id": "MooseHide",
@@ -21577,7 +22137,8 @@
   "icon": "MooseHide",
   "weight": 1,
   "stack": 50,
-  "maxQuality": 1
+  "maxQuality": 1,
+  "stage": "DeepNorth"
  },
  {
   "id": "MooseKebab",
@@ -21593,7 +22154,8 @@
    "stamina": 37,
    "duration": 1800,
    "regen": 7
-  }
+  },
+  "stage": "DeepNorth"
  },
  {
   "id": "MooseMeat",
@@ -21609,7 +22171,8 @@
    "stamina": 12,
    "duration": 1200,
    "regen": 2
-  }
+  },
+  "stage": "DeepNorth"
  },
  {
   "id": "MooseSinew",
@@ -21619,7 +22182,8 @@
   "icon": "MooseSinew",
   "weight": 0.5,
   "stack": 50,
-  "maxQuality": 1
+  "maxQuality": 1,
+  "stage": "DeepNorth"
  },
  {
   "id": "MorgenHeart",
@@ -21629,7 +22193,8 @@
   "icon": "MorgenHeart",
   "weight": 0.5,
   "stack": 50,
-  "maxQuality": 1
+  "maxQuality": 1,
+  "stage": "AshLands"
  },
  {
   "id": "MorgenSinew",
@@ -21639,7 +22204,8 @@
   "icon": "MorgenSinew",
   "weight": 0.5,
   "stack": 50,
-  "maxQuality": 1
+  "maxQuality": 1,
+  "stage": "AshLands"
  },
  {
   "id": "Morgen_bite",
@@ -21943,7 +22509,8 @@
    "stamina": 15,
    "duration": 900,
    "regen": 1
-  }
+  },
+  "stage": "Meadows"
  },
  {
   "id": "MushroomBlue",
@@ -21971,7 +22538,8 @@
   "weight": 0.1,
   "stack": 50,
   "maxQuality": 1,
-  "consumeEffect": "Puke"
+  "consumeEffect": "Puke",
+  "stage": "Plains"
  },
  {
   "id": "MushroomJotunPuffs",
@@ -21987,7 +22555,8 @@
    "stamina": 25,
    "duration": 900,
    "regen": 1
-  }
+  },
+  "stage": "Mistlands"
  },
  {
   "id": "MushroomMagecap",
@@ -22004,7 +22573,8 @@
    "eitr": 25,
    "duration": 900,
    "regen": 1
-  }
+  },
+  "stage": "Mistlands"
  },
  {
   "id": "MushroomOmelette",
@@ -22020,7 +22590,8 @@
    "stamina": 85,
    "duration": 1500,
    "regen": 3
-  }
+  },
+  "stage": "Mistlands"
  },
  {
   "id": "MushroomSmokePuff",
@@ -22036,7 +22607,8 @@
    "stamina": 15,
    "duration": 900,
    "regen": 1
-  }
+  },
+  "stage": "AshLands"
  },
  {
   "id": "MushroomYellow",
@@ -22052,7 +22624,8 @@
    "stamina": 30,
    "duration": 600,
    "regen": 1
-  }
+  },
+  "stage": "BlackForest"
  },
  {
   "id": "NeckTail",
@@ -22062,7 +22635,8 @@
   "icon": "necktail",
   "weight": 0.5,
   "stack": 50,
-  "maxQuality": 1
+  "maxQuality": 1,
+  "stage": "Meadows"
  },
  {
   "id": "NeckTailGrilled",
@@ -22078,7 +22652,8 @@
    "stamina": 8,
    "duration": 1200,
    "regen": 2
-  }
+  },
+  "stage": "Meadows"
  },
  {
   "id": "Neck_BiteAttack",
@@ -22114,7 +22689,8 @@
   "icon": "needle",
   "weight": 0.5,
   "stack": 50,
-  "maxQuality": 1
+  "maxQuality": 1,
+  "stage": "Plains"
  },
  {
   "id": "NornThread",
@@ -22124,7 +22700,8 @@
   "icon": "NornThread",
   "weight": 0.5,
   "stack": 50,
-  "maxQuality": 1
+  "maxQuality": 1,
+  "stage": "DeepNorth"
  },
  {
   "id": "Oat",
@@ -22140,7 +22717,8 @@
    "stamina": 33,
    "duration": 1800,
    "regen": 3
-  }
+  },
+  "stage": "DeepNorth"
  },
  {
   "id": "OatFlour",
@@ -22150,7 +22728,8 @@
   "icon": "oatflour",
   "weight": 0.2,
   "stack": 50,
-  "maxQuality": 1
+  "maxQuality": 1,
+  "stage": "DeepNorth"
  },
  {
   "id": "OatMilk",
@@ -22166,7 +22745,8 @@
    "stamina": 110,
    "duration": 1500,
    "regen": 5
-  }
+  },
+  "stage": "DeepNorth"
  },
  {
   "id": "OatSeeds",
@@ -22176,7 +22756,8 @@
   "icon": "oatseeds",
   "weight": 0.1,
   "stack": 100,
-  "maxQuality": 1
+  "maxQuality": 1,
+  "stage": "DeepNorth"
  },
  {
   "id": "OatmealLingonberryJam",
@@ -22193,7 +22774,8 @@
    "eitr": 85,
    "duration": 1800,
    "regen": 5
-  }
+  },
+  "stage": "DeepNorth"
  },
  {
   "id": "Obsidian",
@@ -22203,7 +22785,8 @@
   "icon": "obsidian",
   "weight": 2,
   "stack": 50,
-  "maxQuality": 1
+  "maxQuality": 1,
+  "stage": "Mountain"
  },
  {
   "id": "Onion",
@@ -22219,7 +22802,8 @@
    "stamina": 40,
    "duration": 900,
    "regen": 1
-  }
+  },
+  "stage": "Swamp"
  },
  {
   "id": "OnionSeeds",
@@ -22229,7 +22813,8 @@
   "icon": "onionseeds",
   "weight": 0.1,
   "stack": 100,
-  "maxQuality": 1
+  "maxQuality": 1,
+  "stage": "Swamp"
  },
  {
   "id": "OnionSoup",
@@ -22245,7 +22830,8 @@
    "stamina": 60,
    "duration": 1200,
    "regen": 1
-  }
+  },
+  "stage": "Swamp"
  },
  {
   "id": "Ooze",
@@ -22255,7 +22841,8 @@
   "icon": "ooze",
   "weight": 0.5,
   "stack": 50,
-  "maxQuality": 1
+  "maxQuality": 1,
+  "stage": "Swamp"
  },
  {
   "id": "OozeMork",
@@ -22265,7 +22852,8 @@
   "icon": "ooze_mork",
   "weight": 0.5,
   "stack": 50,
-  "maxQuality": 1
+  "maxQuality": 1,
+  "stage": "DeepNorth"
  },
  {
   "id": "OrbFrostFire",
@@ -22275,7 +22863,8 @@
   "icon": "OrbFrostFire",
   "weight": 0.5,
   "stack": 50,
-  "maxQuality": 1
+  "maxQuality": 1,
+  "stage": "DeepNorth"
  },
  {
   "id": "OrbThunderBlood",
@@ -22285,7 +22874,8 @@
   "icon": "OrbThunderBlood",
   "weight": 0.5,
   "stack": 50,
-  "maxQuality": 1
+  "maxQuality": 1,
+  "stage": "DeepNorth"
  },
  {
   "id": "OvenPancake",
@@ -22302,7 +22892,8 @@
    "eitr": 105,
    "duration": 1800,
    "regen": 5
-  }
+  },
+  "stage": "DeepNorth"
  },
  {
   "id": "OvenPancakeUncooked",
@@ -22318,7 +22909,8 @@
    "stamina": 115,
    "duration": 1500,
    "regen": 5
-  }
+  },
+  "stage": "DeepNorth"
  },
  {
   "id": "Pancakes",
@@ -22334,7 +22926,8 @@
    "stamina": 115,
    "duration": 1800,
    "regen": 5
-  }
+  },
+  "stage": "DeepNorth"
  },
  {
   "id": "PickaxeAntler",
@@ -22378,7 +22971,8 @@
   },
   "modifiers": {
    "movement": -0.05
-  }
+  },
+  "stage": "Meadows"
  },
  {
   "id": "PickaxeBlackMetal",
@@ -22427,7 +23021,8 @@
   },
   "modifiers": {
    "movement": -0.05
-  }
+  },
+  "stage": "Mistlands"
  },
  {
   "id": "PickaxeBronze",
@@ -22476,7 +23071,8 @@
   },
   "modifiers": {
    "movement": -0.05
-  }
+  },
+  "stage": "BlackForest"
  },
  {
   "id": "PickaxeIron",
@@ -22525,7 +23121,8 @@
   },
   "modifiers": {
    "movement": -0.05
-  }
+  },
+  "stage": "Swamp"
  },
  {
   "id": "PickaxeStone",
@@ -22578,7 +23175,8 @@
   "icon": "pinecone",
   "weight": 0.1,
   "stack": 100,
-  "maxQuality": 1
+  "maxQuality": 1,
+  "stage": "BlackForest"
  },
  {
   "id": "PiquantPie",
@@ -22594,7 +23192,8 @@
    "stamina": 35,
    "duration": 1800,
    "regen": 6
-  }
+  },
+  "stage": "AshLands"
  },
  {
   "id": "PiquantPieUncooked",
@@ -22610,7 +23209,8 @@
    "stamina": 10,
    "duration": 2400,
    "regen": 4
-  }
+  },
+  "stage": "AshLands"
  },
  {
   "id": "PlayerUnarmed",
@@ -22672,7 +23272,8 @@
   "icon": "pot_shard_green",
   "weight": 2,
   "stack": 50,
-  "maxQuality": 1
+  "maxQuality": 1,
+  "stage": "AshLands"
  },
  {
   "id": "Pot_Shard_Red",
@@ -22700,7 +23301,8 @@
    "eitr": 35,
    "duration": 900,
    "regen": 1
-  }
+  },
+  "stage": "DeepNorth"
  },
  {
   "id": "PoteitrSeeds",
@@ -22710,7 +23312,8 @@
   "icon": "poteitrseeds",
   "weight": 0.1,
   "stack": 100,
-  "maxQuality": 1
+  "maxQuality": 1,
+  "stage": "DeepNorth"
  },
  {
   "id": "PowderedDragonEgg",
@@ -22720,7 +23323,8 @@
   "icon": "PowderedDragonEgg",
   "weight": 0.5,
   "stack": 50,
-  "maxQuality": 1
+  "maxQuality": 1,
+  "stage": "Swamp"
  },
  {
   "id": "ProustitePowder",
@@ -22730,7 +23334,8 @@
   "icon": "ProustitePowder",
   "weight": 0.5,
   "stack": 50,
-  "maxQuality": 1
+  "maxQuality": 1,
+  "stage": "AshLands"
  },
  {
   "id": "Pukeberries",
@@ -22741,7 +23346,8 @@
   "weight": 0.1,
   "stack": 50,
   "maxQuality": 1,
-  "consumeEffect": "Puke"
+  "consumeEffect": "Puke",
+  "stage": "BlackForest"
  },
  {
   "id": "PulledBear",
@@ -22757,7 +23363,8 @@
    "stamina": 16,
    "duration": 1800,
    "regen": 3
-  }
+  },
+  "stage": "BlackForest"
  },
  {
   "id": "PungentPebbles",
@@ -22767,7 +23374,8 @@
   "icon": "PungentPebbles",
   "weight": 0.5,
   "stack": 50,
-  "maxQuality": 1
+  "maxQuality": 1,
+  "stage": "Swamp"
  },
  {
   "id": "QueenBee",
@@ -22777,7 +23385,8 @@
   "icon": "queenbee",
   "weight": 0.2,
   "stack": 20,
-  "maxQuality": 1
+  "maxQuality": 1,
+  "stage": "Meadows"
  },
  {
   "id": "QueenDrop",
@@ -22787,7 +23396,8 @@
   "icon": "queendrop",
   "weight": 1,
   "stack": 30,
-  "maxQuality": 1
+  "maxQuality": 1,
+  "stage": "Mistlands"
  },
  {
   "id": "QueensJam",
@@ -22803,7 +23413,8 @@
    "stamina": 40,
    "duration": 1200,
    "regen": 2
-  }
+  },
+  "stage": "BlackForest"
  },
  {
   "id": "Raspberry",
@@ -22819,7 +23430,8 @@
    "stamina": 20,
    "duration": 600,
    "regen": 1
-  }
+  },
+  "stage": "Meadows"
  },
  {
   "id": "RawMeat",
@@ -22834,7 +23446,8 @@
    "stamina": 20,
    "duration": 600,
    "regen": 1
-  }
+  },
+  "stage": "Meadows"
  },
  {
   "id": "Resin",
@@ -22844,7 +23457,8 @@
   "icon": "resin",
   "weight": 0.3,
   "stack": 50,
-  "maxQuality": 1
+  "maxQuality": 1,
+  "stage": "Meadows"
  },
  {
   "id": "RoastedCrustPie",
@@ -22860,7 +23474,8 @@
    "stamina": 100,
    "duration": 1800,
    "regen": 4
-  }
+  },
+  "stage": "AshLands"
  },
  {
   "id": "RoastedCrustPieUncooked",
@@ -22876,7 +23491,8 @@
    "stamina": 10,
    "duration": 2400,
    "regen": 4
-  }
+  },
+  "stage": "AshLands"
  },
  {
   "id": "Root",
@@ -22886,7 +23502,8 @@
   "icon": "Root",
   "weight": 0.3,
   "stack": 50,
-  "maxQuality": 1
+  "maxQuality": 1,
+  "stage": "Swamp"
  },
  {
   "id": "RottenMeat",
@@ -22897,7 +23514,8 @@
   "weight": 0.5,
   "stack": 20,
   "maxQuality": 1,
-  "consumeEffect": "Puke"
+  "consumeEffect": "Puke",
+  "stage": "Plains"
  },
  {
   "id": "RoundLog",
@@ -22907,7 +23525,8 @@
   "icon": "roundlog",
   "weight": 2,
   "stack": 50,
-  "maxQuality": 1
+  "maxQuality": 1,
+  "stage": "BlackForest"
  },
  {
   "id": "RoyalJelly",
@@ -22923,7 +23542,8 @@
    "stamina": 15,
    "duration": 900,
    "regen": 1
-  }
+  },
+  "stage": "Mistlands"
  },
  {
   "id": "Ruby",
@@ -22934,7 +23554,8 @@
   "weight": 0.1,
   "value": 20,
   "stack": 20,
-  "maxQuality": 1
+  "maxQuality": 1,
+  "stage": "Meadows"
  },
  {
   "id": "SP_ArmorBronzeChest",
@@ -23924,7 +24545,8 @@
   "icon": "SadleAsksvin",
   "weight": 10,
   "stack": 1,
-  "maxQuality": 1
+  "maxQuality": 1,
+  "stage": "AshLands"
  },
  {
   "id": "SaddleLox",
@@ -23934,7 +24556,8 @@
   "icon": "SadleLox",
   "weight": 10,
   "stack": 1,
-  "maxQuality": 1
+  "maxQuality": 1,
+  "stage": "Plains"
  },
  {
   "id": "SaddleMoose",
@@ -23944,7 +24567,8 @@
   "icon": "SadleMoose",
   "weight": 10,
   "stack": 1,
-  "maxQuality": 1
+  "maxQuality": 1,
+  "stage": "DeepNorth"
  },
  {
   "id": "Salad",
@@ -23960,7 +24584,8 @@
    "stamina": 80,
    "duration": 1500,
    "regen": 3
-  }
+  },
+  "stage": "Mistlands"
  },
  {
   "id": "Sap",
@@ -23970,7 +24595,8 @@
   "icon": "sap",
   "weight": 0.2,
   "stack": 50,
-  "maxQuality": 1
+  "maxQuality": 1,
+  "stage": "Mistlands"
  },
  {
   "id": "Sausages",
@@ -23986,7 +24612,8 @@
    "stamina": 18,
    "duration": 1500,
    "regen": 3
-  }
+  },
+  "stage": "Swamp"
  },
  {
   "id": "ScaleHide",
@@ -23996,7 +24623,8 @@
   "icon": "scalehide",
   "weight": 0.5,
   "stack": 50,
-  "maxQuality": 1
+  "maxQuality": 1,
+  "stage": "Mistlands"
  },
  {
   "id": "ScorchingMedley",
@@ -24012,7 +24640,8 @@
    "stamina": 95,
    "duration": 1500,
    "regen": 4
-  }
+  },
+  "stage": "AshLands"
  },
  {
   "id": "Scythe",
@@ -24044,7 +24673,8 @@
     }
    ],
    "cycle": 0.976
-  }
+  },
+  "stage": "Plains"
  },
  {
   "id": "ScytheHandle",
@@ -24054,7 +24684,8 @@
   "icon": "ScytheHandle",
   "weight": 2,
   "stack": 20,
-  "maxQuality": 1
+  "maxQuality": 1,
+  "stage": "Plains"
  },
  {
   "id": "SealBlubber",
@@ -24070,7 +24701,8 @@
    "stamina": 27,
    "duration": 1200,
    "regen": 7
-  }
+  },
+  "stage": "DeepNorth"
  },
  {
   "id": "SealHide",
@@ -24080,7 +24712,8 @@
   "icon": "sealhide",
   "weight": 0.5,
   "stack": 50,
-  "maxQuality": 1
+  "maxQuality": 1,
+  "stage": "DeepNorth"
  },
  {
   "id": "SealSoup",
@@ -24096,7 +24729,8 @@
    "stamina": 37,
    "duration": 1800,
    "regen": 7
-  }
+  },
+  "stage": "DeepNorth"
  },
  {
   "id": "SeekerAspic",
@@ -24113,7 +24747,8 @@
    "eitr": 85,
    "duration": 1800,
    "regen": 3
-  }
+  },
+  "stage": "Mistlands"
  },
  {
   "id": "SeekerBrute_Taunt",
@@ -24461,7 +25096,8 @@
   "icon": "serpentmeat",
   "weight": 10,
   "stack": 50,
-  "maxQuality": 1
+  "maxQuality": 1,
+  "stage": "Meadows"
  },
  {
   "id": "SerpentMeatCooked",
@@ -24477,7 +25113,8 @@
    "stamina": 23,
    "duration": 1500,
    "regen": 3
-  }
+  },
+  "stage": "Swamp"
  },
  {
   "id": "SerpentScale",
@@ -24487,7 +25124,8 @@
   "icon": "serpentscale",
   "weight": 2,
   "stack": 50,
-  "maxQuality": 1
+  "maxQuality": 1,
+  "stage": "Meadows"
  },
  {
   "id": "SerpentStew",
@@ -24503,7 +25141,8 @@
    "stamina": 26,
    "duration": 1800,
    "regen": 4
-  }
+  },
+  "stage": "Swamp"
  },
  {
   "id": "Serpent_attack",
@@ -24566,7 +25205,8 @@
   "icon": "sharpeningstone",
   "weight": 6,
   "stack": 20,
-  "maxQuality": 1
+  "maxQuality": 1,
+  "stage": "Swamp"
  },
  {
   "id": "ShieldBanded",
@@ -24599,7 +25239,8 @@
   },
   "modifiers": {
    "movement": -0.05
-  }
+  },
+  "stage": "Swamp"
  },
  {
   "id": "ShieldBlackmetal",
@@ -24635,7 +25276,8 @@
   },
   "modifiers": {
    "movement": -0.05
-  }
+  },
+  "stage": "Plains"
  },
  {
   "id": "ShieldBlackmetalTower",
@@ -24669,7 +25311,8 @@
   },
   "modifiers": {
    "movement": -0.1
-  }
+  },
+  "stage": "Plains"
  },
  {
   "id": "ShieldBoneTower",
@@ -24694,7 +25337,8 @@
   },
   "modifiers": {
    "movement": -0.1
-  }
+  },
+  "stage": "Meadows"
  },
  {
   "id": "ShieldBronzeBuckler",
@@ -24720,7 +25364,8 @@
   },
   "modifiers": {
    "movement": -0.05
-  }
+  },
+  "stage": "BlackForest"
  },
  {
   "id": "ShieldBucklerGoldUncooked",
@@ -24730,7 +25375,8 @@
   "icon": "ShieldBucklerGoldUncooked",
   "weight": 1,
   "stack": 10,
-  "maxQuality": 1
+  "maxQuality": 1,
+  "stage": "DeepNorth"
  },
  {
   "id": "ShieldCarapace",
@@ -24757,7 +25403,8 @@
   },
   "modifiers": {
    "movement": -0.05
-  }
+  },
+  "stage": "Mistlands"
  },
  {
   "id": "ShieldCarapaceBuckler",
@@ -24784,7 +25431,8 @@
   },
   "modifiers": {
    "movement": -0.05
-  }
+  },
+  "stage": "Mistlands"
  },
  {
   "id": "ShieldCore",
@@ -24794,7 +25442,8 @@
   "icon": "ShieldCore",
   "weight": 1,
   "stack": 20,
-  "maxQuality": 1
+  "maxQuality": 1,
+  "stage": "Mistlands"
  },
  {
   "id": "ShieldFlametal",
@@ -24828,7 +25477,8 @@
   },
   "modifiers": {
    "movement": -0.05
-  }
+  },
+  "stage": "AshLands"
  },
  {
   "id": "ShieldFlametalTower",
@@ -24860,7 +25510,8 @@
   },
   "modifiers": {
    "movement": -0.1
-  }
+  },
+  "stage": "AshLands"
  },
  {
   "id": "ShieldGold",
@@ -24894,7 +25545,8 @@
   },
   "modifiers": {
    "movement": -0.05
-  }
+  },
+  "stage": "DeepNorth"
  },
  {
   "id": "ShieldGoldBuckler",
@@ -24920,7 +25572,8 @@
   },
   "modifiers": {
    "movement": -0.05
-  }
+  },
+  "stage": "DeepNorth"
  },
  {
   "id": "ShieldGoldTower",
@@ -24953,7 +25606,8 @@
   },
   "modifiers": {
    "movement": -0.1
-  }
+  },
+  "stage": "DeepNorth"
  },
  {
   "id": "ShieldIronBuckler",
@@ -24979,7 +25633,8 @@
   },
   "modifiers": {
    "movement": -0.05
-  }
+  },
+  "stage": "Swamp"
  },
  {
   "id": "ShieldIronSquare",
@@ -25040,7 +25695,8 @@
   },
   "modifiers": {
    "movement": -0.1
-  }
+  },
+  "stage": "Swamp"
  },
  {
   "id": "ShieldKnight",
@@ -25099,7 +25755,8 @@
   },
   "modifiers": {
    "attackStamina": -0.1
-  }
+  },
+  "stage": "Swamp"
  },
  {
   "id": "ShieldRoundGoldUncooked",
@@ -25109,7 +25766,8 @@
   "icon": "ShieldRoundGoldUncooked",
   "weight": 1,
   "stack": 10,
-  "maxQuality": 1
+  "maxQuality": 1,
+  "stage": "DeepNorth"
  },
  {
   "id": "ShieldSerpentscale",
@@ -25137,7 +25795,8 @@
   },
   "damageModifiers": {
    "pierce": "Resistant"
-  }
+  },
+  "stage": "Swamp"
  },
  {
   "id": "ShieldSilver",
@@ -25173,7 +25832,8 @@
   },
   "modifiers": {
    "movement": -0.05
-  }
+  },
+  "stage": "Mountain"
  },
  {
   "id": "ShieldTowerGoldUncooked",
@@ -25183,7 +25843,8 @@
   "icon": "ShieldTowerGoldUncooked",
   "weight": 1,
   "stack": 10,
-  "maxQuality": 1
+  "maxQuality": 1,
+  "stage": "DeepNorth"
  },
  {
   "id": "ShieldWood",
@@ -25216,7 +25877,8 @@
   },
   "modifiers": {
    "movement": -0.05
-  }
+  },
+  "stage": "Meadows"
  },
  {
   "id": "ShieldWoodTower",
@@ -25250,7 +25912,8 @@
   },
   "modifiers": {
    "movement": -0.1
-  }
+  },
+  "stage": "Meadows"
  },
  {
   "id": "ShocklateSmoothie",
@@ -25267,7 +25930,8 @@
    "duration": 1200,
    "regen": 1,
    "drink": true
-  }
+  },
+  "stage": "Swamp"
  },
  {
   "id": "Shovel",
@@ -25304,7 +25968,8 @@
    ],
    "lastChainMultiplier": 2,
    "cycle": 1.384
-  }
+  },
+  "stage": "AshLands"
  },
  {
   "id": "Silver",
@@ -25315,7 +25980,8 @@
   "weight": 14,
   "stack": 30,
   "maxQuality": 1,
-  "noTeleport": true
+  "noTeleport": true,
+  "stage": "Mountain"
  },
  {
   "id": "SilverNecklace",
@@ -25326,7 +25992,8 @@
   "weight": 0.1,
   "value": 30,
   "stack": 20,
-  "maxQuality": 1
+  "maxQuality": 1,
+  "stage": "Meadows"
  },
  {
   "id": "SilverOre",
@@ -25337,7 +26004,8 @@
   "weight": 14,
   "stack": 30,
   "maxQuality": 1,
-  "noTeleport": true
+  "noTeleport": true,
+  "stage": "Mountain"
  },
  {
   "id": "SizzlingBerryBroth",
@@ -25354,7 +26022,8 @@
    "eitr": 85,
    "duration": 1500,
    "regen": 4
-  }
+  },
+  "stage": "AshLands"
  },
  {
   "id": "SledgeCheat",
@@ -25449,7 +26118,8 @@
   },
   "modifiers": {
    "movement": -0.15
-  }
+  },
+  "stage": "Mistlands"
  },
  {
   "id": "SledgeGold",
@@ -25496,7 +26166,8 @@
   },
   "modifiers": {
    "movement": -0.2
-  }
+  },
+  "stage": "DeepNorth"
  },
  {
   "id": "SledgeGoldUncooked",
@@ -25506,7 +26177,8 @@
   "icon": "SledgeGoldUncooked",
   "weight": 4,
   "stack": 1,
-  "maxQuality": 1
+  "maxQuality": 1,
+  "stage": "DeepNorth"
  },
  {
   "id": "SledgeGold_BloodLightning",
@@ -25555,7 +26227,8 @@
   },
   "modifiers": {
    "movement": -0.2
-  }
+  },
+  "stage": "DeepNorth"
  },
  {
   "id": "SledgeGold_FrostFire",
@@ -25606,7 +26279,8 @@
   },
   "modifiers": {
    "movement": -0.2
-  }
+  },
+  "stage": "DeepNorth"
  },
  {
   "id": "SledgeIron",
@@ -25653,7 +26327,8 @@
   },
   "modifiers": {
    "movement": -0.15
-  }
+  },
+  "stage": "Swamp"
  },
  {
   "id": "SledgeStagbreaker",
@@ -25700,7 +26375,8 @@
   },
   "modifiers": {
    "movement": -0.15
-  }
+  },
+  "stage": "BlackForest"
  },
  {
   "id": "SledgeWood",
@@ -25747,7 +26423,8 @@
   },
   "modifiers": {
    "movement": -0.15
-  }
+  },
+  "stage": "Swamp"
  },
  {
   "id": "SmallPartsGoldUncooked",
@@ -25775,7 +26452,8 @@
    "eitr": 95,
    "duration": 1500,
    "regen": 5
-  }
+  },
+  "stage": "DeepNorth"
  },
  {
   "id": "SmokedMooseMeat",
@@ -25791,7 +26469,8 @@
    "stamina": 35,
    "duration": 1500,
    "regen": 7
-  }
+  },
+  "stage": "DeepNorth"
  },
  {
   "id": "Snowball",
@@ -25824,7 +26503,8 @@
     }
    ],
    "cycle": 0.633
-  }
+  },
+  "stage": "DeepNorth"
  },
  {
   "id": "SnowballBig",
@@ -25868,7 +26548,8 @@
   "icon": "softtissue",
   "weight": 1,
   "stack": 40,
-  "maxQuality": 1
+  "maxQuality": 1,
+  "stage": "Mistlands"
  },
  {
   "id": "Sparkler",
@@ -25911,7 +26592,8 @@
     }
    ],
    "cycle": 1.975
-  }
+  },
+  "stage": "Meadows"
  },
  {
   "id": "SparklingShroomshake",
@@ -25929,7 +26611,8 @@
    "duration": 1500,
    "regen": 4,
    "drink": true
-  }
+  },
+  "stage": "AshLands"
  },
  {
   "id": "SpearBronze",
@@ -25990,7 +26673,8 @@
   },
   "modifiers": {
    "movement": -0.05
-  }
+  },
+  "stage": "BlackForest"
  },
  {
   "id": "SpearCarapace",
@@ -26051,7 +26735,8 @@
   },
   "modifiers": {
    "movement": -0.05
-  }
+  },
+  "stage": "Mistlands"
  },
  {
   "id": "SpearChitin",
@@ -26096,7 +26781,8 @@
   },
   "modifiers": {
    "movement": -0.05
-  }
+  },
+  "stage": "Meadows"
  },
  {
   "id": "SpearElderbark",
@@ -26157,7 +26843,8 @@
   },
   "modifiers": {
    "movement": -0.05
-  }
+  },
+  "stage": "Swamp"
  },
  {
   "id": "SpearFlint",
@@ -26217,7 +26904,8 @@
   },
   "modifiers": {
    "movement": -0.05
-  }
+  },
+  "stage": "Meadows"
  },
  {
   "id": "SpearGold",
@@ -26278,7 +26966,8 @@
   },
   "modifiers": {
    "movement": -0.05
-  }
+  },
+  "stage": "DeepNorth"
  },
  {
   "id": "SpearGoldUncooked",
@@ -26288,7 +26977,8 @@
   "icon": "SpearGoldUncooked",
   "weight": 1.5,
   "stack": 1,
-  "maxQuality": 1
+  "maxQuality": 1,
+  "stage": "DeepNorth"
  },
  {
   "id": "SpearGold_BloodLightning",
@@ -26351,7 +27041,8 @@
   },
   "modifiers": {
    "movement": -0.05
-  }
+  },
+  "stage": "DeepNorth"
  },
  {
   "id": "SpearGold_FrostFire",
@@ -26416,7 +27107,8 @@
   },
   "modifiers": {
    "movement": -0.05
-  }
+  },
+  "stage": "DeepNorth"
  },
  {
   "id": "SpearSplitner",
@@ -26477,7 +27169,8 @@
   },
   "modifiers": {
    "movement": -0.05
-  }
+  },
+  "stage": "AshLands"
  },
  {
   "id": "SpearSplitner_Blood",
@@ -26538,7 +27231,8 @@
   },
   "modifiers": {
    "movement": -0.05
-  }
+  },
+  "stage": "AshLands"
  },
  {
   "id": "SpearSplitner_Lightning",
@@ -26600,7 +27294,8 @@
   },
   "modifiers": {
    "movement": -0.05
-  }
+  },
+  "stage": "AshLands"
  },
  {
   "id": "SpearSplitner_Nature",
@@ -26662,7 +27357,8 @@
   },
   "modifiers": {
    "movement": -0.05
-  }
+  },
+  "stage": "AshLands"
  },
  {
   "id": "SpearWolfFang",
@@ -26723,7 +27419,8 @@
   },
   "modifiers": {
    "movement": -0.05
-  }
+  },
+  "stage": "Mountain"
  },
  {
   "id": "SpearWood",
@@ -26784,7 +27481,8 @@
   },
   "modifiers": {
    "movement": -0.05
-  }
+  },
+  "stage": "BlackForest"
  },
  {
   "id": "SpiceAshlands",
@@ -26794,7 +27492,8 @@
   "icon": "spiceashlands",
   "weight": 0.1,
   "stack": 100,
-  "maxQuality": 1
+  "maxQuality": 1,
+  "stage": "DeepNorth"
  },
  {
   "id": "SpiceDeepNorth",
@@ -26804,7 +27503,8 @@
   "icon": "spicedeepnorth",
   "weight": 0.1,
   "stack": 100,
-  "maxQuality": 1
+  "maxQuality": 1,
+  "stage": "DeepNorth"
  },
  {
   "id": "SpiceForests",
@@ -26814,7 +27514,8 @@
   "icon": "spiceforests",
   "weight": 0.1,
   "stack": 100,
-  "maxQuality": 1
+  "maxQuality": 1,
+  "stage": "Swamp"
  },
  {
   "id": "SpiceMistlands",
@@ -26824,7 +27525,8 @@
   "icon": "spicemistlands",
   "weight": 0.1,
   "stack": 100,
-  "maxQuality": 1
+  "maxQuality": 1,
+  "stage": "AshLands"
  },
  {
   "id": "SpiceMountains",
@@ -26834,7 +27536,8 @@
   "icon": "spicemountains",
   "weight": 0.1,
   "stack": 100,
-  "maxQuality": 1
+  "maxQuality": 1,
+  "stage": "Plains"
  },
  {
   "id": "SpiceOceans",
@@ -26844,7 +27547,8 @@
   "icon": "spiceoceans",
   "weight": 0.1,
   "stack": 100,
-  "maxQuality": 1
+  "maxQuality": 1,
+  "stage": "Swamp"
  },
  {
   "id": "SpicePlains",
@@ -26854,7 +27558,8 @@
   "icon": "spiceplains",
   "weight": 0.1,
   "stack": 100,
-  "maxQuality": 1
+  "maxQuality": 1,
+  "stage": "Mistlands"
  },
  {
   "id": "SpicyMarmalade",
@@ -26870,7 +27575,8 @@
    "stamina": 90,
    "duration": 1500,
    "regen": 4
-  }
+  },
+  "stage": "AshLands"
  },
  {
   "id": "SpiritWolf_Attack1",
@@ -27001,7 +27707,8 @@
   },
   "modifiers": {
    "movement": -0.05
-  }
+  },
+  "stage": "AshLands"
  },
  {
   "id": "StaffFireball",
@@ -27054,7 +27761,8 @@
   },
   "modifiers": {
    "movement": -0.05
-  }
+  },
+  "stage": "Mistlands"
  },
  {
   "id": "StaffFrostOrbs",
@@ -27096,7 +27804,8 @@
   },
   "modifiers": {
    "movement": -0.05
-  }
+  },
+  "stage": "DeepNorth"
  },
  {
   "id": "StaffFrostOrbsUncooked",
@@ -27106,7 +27815,8 @@
   "icon": "FrostOrbsUncooked",
   "weight": 2.5,
   "stack": 1,
-  "maxQuality": 1
+  "maxQuality": 1,
+  "stage": "DeepNorth"
  },
  {
   "id": "StaffGreenRoots",
@@ -27161,7 +27871,8 @@
   },
   "modifiers": {
    "movement": -0.05
-  }
+  },
+  "stage": "AshLands"
  },
  {
   "id": "StaffIceShards",
@@ -27207,7 +27918,8 @@
   },
   "modifiers": {
    "movement": -0.05
-  }
+  },
+  "stage": "Mistlands"
  },
  {
   "id": "StaffLightning",
@@ -27256,7 +27968,8 @@
   },
   "modifiers": {
    "movement": -0.05
-  }
+  },
+  "stage": "AshLands"
  },
  {
   "id": "StaffOrbofAhri",
@@ -27298,7 +28011,8 @@
   },
   "modifiers": {
    "movement": -0.05
-  }
+  },
+  "stage": "DeepNorth"
  },
  {
   "id": "StaffOrbofAhriUncooked",
@@ -27308,7 +28022,8 @@
   "icon": "stafforbofahriuncooked",
   "weight": 2.5,
   "stack": 1,
-  "maxQuality": 1
+  "maxQuality": 1,
+  "stage": "DeepNorth"
  },
  {
   "id": "StaffRedTroll",
@@ -27349,7 +28064,8 @@
   },
   "modifiers": {
    "movement": -0.05
-  }
+  },
+  "stage": "AshLands"
  },
  {
   "id": "StaffShield",
@@ -27392,7 +28108,8 @@
   },
   "modifiers": {
    "movement": -0.05
-  }
+  },
+  "stage": "Mistlands"
  },
  {
   "id": "StaffSkeleton",
@@ -27434,7 +28151,8 @@
   },
   "modifiers": {
    "movement": -0.05
-  }
+  },
+  "stage": "Mistlands"
  },
  {
   "id": "StaffSpiritCaller",
@@ -27476,7 +28194,8 @@
   },
   "modifiers": {
    "movement": -0.05
-  }
+  },
+  "stage": "DeepNorth"
  },
  {
   "id": "StaffSpiritCallerUncooked",
@@ -27486,7 +28205,8 @@
   "icon": "staffspiritcalleruncooked",
   "weight": 2.5,
   "stack": 1,
-  "maxQuality": 1
+  "maxQuality": 1,
+  "stage": "DeepNorth"
  },
  {
   "id": "StaffThunderBlood",
@@ -27533,7 +28253,8 @@
   },
   "modifiers": {
    "movement": -0.05
-  }
+  },
+  "stage": "DeepNorth"
  },
  {
   "id": "StaffThunderbloodUncooked",
@@ -27543,7 +28264,8 @@
   "icon": "staffthunderblooduncooked",
   "weight": 2.5,
   "stack": 1,
-  "maxQuality": 1
+  "maxQuality": 1,
+  "stage": "DeepNorth"
  },
  {
   "id": "StaminaUpgrade_Greydwarf",
@@ -27586,7 +28308,8 @@
   "icon": "stone",
   "weight": 2,
   "stack": 50,
-  "maxQuality": 1
+  "maxQuality": 1,
+  "stage": "Meadows"
  },
  {
   "id": "StoneGolem_clubs",
@@ -27647,7 +28370,8 @@
   "icon": "stonerock",
   "weight": 2,
   "stack": 50,
-  "maxQuality": 1
+  "maxQuality": 1,
+  "stage": "Meadows"
  },
  {
   "id": "SulfurStone",
@@ -27657,7 +28381,8 @@
   "icon": "Sulfur",
   "weight": 2,
   "stack": 50,
-  "maxQuality": 1
+  "maxQuality": 1,
+  "stage": "AshLands"
  },
  {
   "id": "SurtlingCore",
@@ -27667,7 +28392,8 @@
   "icon": "surtling_core",
   "weight": 5,
   "stack": 10,
-  "maxQuality": 1
+  "maxQuality": 1,
+  "stage": "BlackForest"
  },
  {
   "id": "Sword2h_JotunWarrior",
@@ -27763,7 +28489,8 @@
   },
   "modifiers": {
    "movement": -0.05
-  }
+  },
+  "stage": "Plains"
  },
  {
   "id": "SwordBronze",
@@ -27832,7 +28559,8 @@
   },
   "modifiers": {
    "movement": -0.05
-  }
+  },
+  "stage": "BlackForest"
  },
  {
   "id": "SwordCheat",
@@ -27964,7 +28692,8 @@
   },
   "modifiers": {
    "movement": -0.05
-  }
+  },
+  "stage": "AshLands"
  },
  {
   "id": "SwordGold",
@@ -28033,7 +28762,8 @@
   },
   "modifiers": {
    "movement": -0.05
-  }
+  },
+  "stage": "DeepNorth"
  },
  {
   "id": "SwordGoldUncooked",
@@ -28043,7 +28773,8 @@
   "icon": "SwordGoldUncooked",
   "weight": 0.8,
   "stack": 1,
-  "maxQuality": 1
+  "maxQuality": 1,
+  "stage": "DeepNorth"
  },
  {
   "id": "SwordGold_BloodLightning",
@@ -28114,7 +28845,8 @@
   },
   "modifiers": {
    "movement": -0.05
-  }
+  },
+  "stage": "DeepNorth"
  },
  {
   "id": "SwordGold_FrostFire",
@@ -28187,7 +28919,8 @@
   },
   "modifiers": {
    "movement": -0.05
-  }
+  },
+  "stage": "DeepNorth"
  },
  {
   "id": "SwordIron",
@@ -28256,7 +28989,8 @@
   },
   "modifiers": {
    "movement": -0.05
-  }
+  },
+  "stage": "Swamp"
  },
  {
   "id": "SwordIronFire",
@@ -28398,7 +29132,8 @@
   },
   "modifiers": {
    "movement": -0.05
-  }
+  },
+  "stage": "Mistlands"
  },
  {
   "id": "SwordNiedhogg",
@@ -28467,7 +29202,8 @@
   },
   "modifiers": {
    "movement": -0.05
-  }
+  },
+  "stage": "AshLands"
  },
  {
   "id": "SwordNiedhoggBlood",
@@ -28536,7 +29272,8 @@
   },
   "modifiers": {
    "movement": -0.05
-  }
+  },
+  "stage": "AshLands"
  },
  {
   "id": "SwordNiedhoggLightning",
@@ -28606,7 +29343,8 @@
   },
   "modifiers": {
    "movement": -0.05
-  }
+  },
+  "stage": "AshLands"
  },
  {
   "id": "SwordNiedhoggNature",
@@ -28676,7 +29414,8 @@
   },
   "modifiers": {
    "movement": -0.05
-  }
+  },
+  "stage": "AshLands"
  },
  {
   "id": "SwordSilver",
@@ -28747,7 +29486,8 @@
   },
   "modifiers": {
    "movement": -0.05
-  }
+  },
+  "stage": "Mountain"
  },
  {
   "id": "SwordWood",
@@ -28816,7 +29556,8 @@
   },
   "modifiers": {
    "movement": -0.05
-  }
+  },
+  "stage": "BlackForest"
  },
  {
   "id": "THSwordGold",
@@ -28885,7 +29626,8 @@
   },
   "modifiers": {
    "movement": -0.05
-  }
+  },
+  "stage": "DeepNorth"
  },
  {
   "id": "THSwordGoldUncooked",
@@ -28895,7 +29637,8 @@
   "icon": "THSwordGoldUncooked",
   "weight": 4,
   "stack": 1,
-  "maxQuality": 1
+  "maxQuality": 1,
+  "stage": "DeepNorth"
  },
  {
   "id": "THSwordGold_BloodLightning",
@@ -28966,7 +29709,8 @@
   },
   "modifiers": {
    "movement": -0.05
-  }
+  },
+  "stage": "DeepNorth"
  },
  {
   "id": "THSwordGold_FrostFire",
@@ -29039,7 +29783,8 @@
   },
   "modifiers": {
    "movement": -0.05
-  }
+  },
+  "stage": "DeepNorth"
  },
  {
   "id": "THSwordKrom",
@@ -29108,7 +29853,8 @@
   },
   "modifiers": {
    "movement": -0.05
-  }
+  },
+  "stage": "Mistlands"
  },
  {
   "id": "THSwordSlayer",
@@ -29177,7 +29923,8 @@
   },
   "modifiers": {
    "movement": -0.05
-  }
+  },
+  "stage": "AshLands"
  },
  {
   "id": "THSwordSlayerBlood",
@@ -29246,7 +29993,8 @@
   },
   "modifiers": {
    "movement": -0.05
-  }
+  },
+  "stage": "AshLands"
  },
  {
   "id": "THSwordSlayerLightning",
@@ -29316,7 +30064,8 @@
   },
   "modifiers": {
    "movement": -0.05
-  }
+  },
+  "stage": "AshLands"
  },
  {
   "id": "THSwordSlayerNature",
@@ -29386,7 +30135,8 @@
   },
   "modifiers": {
    "movement": -0.05
-  }
+  },
+  "stage": "AshLands"
  },
  {
   "id": "THSwordWood",
@@ -29455,7 +30205,8 @@
   },
   "modifiers": {
    "movement": -0.05
-  }
+  },
+  "stage": "Mistlands"
  },
  {
   "id": "Tankard",
@@ -29485,7 +30236,8 @@
    ],
    "cycle": 4.276
   },
-  "ammoType": "mead"
+  "ammoType": "mead",
+  "stage": "Meadows"
  },
  {
   "id": "TankardAnniversary",
@@ -29515,7 +30267,8 @@
    ],
    "cycle": 4.276
   },
-  "ammoType": "mead"
+  "ammoType": "mead",
+  "stage": "Swamp"
  },
  {
   "id": "TankardOdin",
@@ -29546,7 +30299,8 @@
    ],
    "cycle": 4.276
   },
-  "ammoType": "mead"
+  "ammoType": "mead",
+  "stage": "Meadows"
  },
  {
   "id": "Tankard_dvergr",
@@ -29576,7 +30330,8 @@
    ],
    "cycle": 4.276
   },
-  "ammoType": "mead"
+  "ammoType": "mead",
+  "stage": "Mistlands"
  },
  {
   "id": "Tar",
@@ -29586,7 +30341,8 @@
   "icon": "tar",
   "weight": 2,
   "stack": 50,
-  "maxQuality": 1
+  "maxQuality": 1,
+  "stage": "Plains"
  },
  {
   "id": "Thistle",
@@ -29596,7 +30352,8 @@
   "icon": "thistle",
   "weight": 0.1,
   "stack": 50,
-  "maxQuality": 1
+  "maxQuality": 1,
+  "stage": "BlackForest"
  },
  {
   "id": "Thunderstone",
@@ -29606,7 +30363,8 @@
   "icon": "thunderstone",
   "weight": 10,
   "stack": 20,
-  "maxQuality": 1
+  "maxQuality": 1,
+  "stage": "Swamp"
  },
  {
   "id": "Tin",
@@ -29617,7 +30375,8 @@
   "weight": 8,
   "stack": 30,
   "maxQuality": 1,
-  "noTeleport": true
+  "noTeleport": true,
+  "stage": "BlackForest"
  },
  {
   "id": "TinOre",
@@ -29628,7 +30387,8 @@
   "weight": 8,
   "stack": 30,
   "maxQuality": 1,
-  "noTeleport": true
+  "noTeleport": true,
+  "stage": "BlackForest"
  },
  {
   "id": "Torch",
@@ -29680,7 +30440,8 @@
   },
   "modifiers": {
    "movement": -0.05
-  }
+  },
+  "stage": "Meadows"
  },
  {
   "id": "TorchMist",
@@ -29852,7 +30613,8 @@
   "adrenaline": {
    "max": 85,
    "effect": "TrinketBlackDamageHealth"
-  }
+  },
+  "stage": "Plains"
  },
  {
   "id": "TrinketBlackStamina",
@@ -29866,7 +30628,8 @@
   "adrenaline": {
    "max": 60,
    "effect": "TrinketBlackStamina"
-  }
+  },
+  "stage": "Plains"
  },
  {
   "id": "TrinketBloodGoldHealth",
@@ -29880,7 +30643,8 @@
   "adrenaline": {
    "max": 65,
    "effect": "TrinketBloodGoldHealth"
-  }
+  },
+  "stage": "DeepNorth"
  },
  {
   "id": "TrinketBloodGoldStamina",
@@ -29894,7 +30658,8 @@
   "adrenaline": {
    "max": 60,
    "effect": "TrinketBloodGoldStamina"
-  }
+  },
+  "stage": "DeepNorth"
  },
  {
   "id": "TrinketBronzeHealth",
@@ -29908,7 +30673,8 @@
   "adrenaline": {
    "max": 50,
    "effect": "TrinketBronzeHealth"
-  }
+  },
+  "stage": "BlackForest"
  },
  {
   "id": "TrinketBronzeStamina",
@@ -29922,7 +30688,8 @@
   "adrenaline": {
    "max": 50,
    "effect": "TrinketBronzeStamina"
-  }
+  },
+  "stage": "BlackForest"
  },
  {
   "id": "TrinketCarapaceEitr",
@@ -29936,7 +30703,8 @@
   "adrenaline": {
    "max": 65,
    "effect": "TrinketCarapaceEitr"
-  }
+  },
+  "stage": "Mistlands"
  },
  {
   "id": "TrinketChitinSwim",
@@ -29950,7 +30718,8 @@
   "adrenaline": {
    "max": 10,
    "effect": "TrinketChitinSwim"
-  }
+  },
+  "stage": "BlackForest"
  },
  {
   "id": "TrinketFlametalEitr",
@@ -29964,7 +30733,8 @@
   "adrenaline": {
    "max": 70,
    "effect": "TrinketFlametalEitr"
-  }
+  },
+  "stage": "AshLands"
  },
  {
   "id": "TrinketFlametalStaminaHealth",
@@ -29978,7 +30748,8 @@
   "adrenaline": {
    "max": 100,
    "effect": "TrinketFlametalStaminaHealth"
-  }
+  },
+  "stage": "AshLands"
  },
  {
   "id": "TrinketIronHealth",
@@ -29992,7 +30763,8 @@
   "adrenaline": {
    "max": 65,
    "effect": "TrinketIronHealth"
-  }
+  },
+  "stage": "Swamp"
  },
  {
   "id": "TrinketIronStamina",
@@ -30006,7 +30778,8 @@
   "adrenaline": {
    "max": 60,
    "effect": "TrinketIronStamina"
-  }
+  },
+  "stage": "Swamp"
  },
  {
   "id": "TrinketScaleStaminaDamage",
@@ -30020,7 +30793,8 @@
   "adrenaline": {
    "max": 75,
    "effect": "TrinketScaleStaminaDamage"
-  }
+  },
+  "stage": "Mistlands"
  },
  {
   "id": "TrinketSilverDamage",
@@ -30034,7 +30808,8 @@
   "adrenaline": {
    "max": 55,
    "effect": "TrinketSilverDamage"
-  }
+  },
+  "stage": "Mountain"
  },
  {
   "id": "TrinketSilverResist",
@@ -30048,7 +30823,8 @@
   "adrenaline": {
    "max": 80,
    "effect": "TrinketSilverResist"
-  }
+  },
+  "stage": "Mountain"
  },
  {
   "id": "TrollHide",
@@ -30058,7 +30834,8 @@
   "icon": "troll_hide",
   "weight": 2,
   "stack": 20,
-  "maxQuality": 1
+  "maxQuality": 1,
+  "stage": "BlackForest"
  },
  {
   "id": "TrophyAbomination",
@@ -30068,7 +30845,8 @@
   "icon": "TrophyAbomination",
   "weight": 4,
   "stack": 20,
-  "maxQuality": 1
+  "maxQuality": 1,
+  "stage": "Swamp"
  },
  {
   "id": "TrophyAsksvin",
@@ -30078,7 +30856,8 @@
   "icon": "TrophyAsksvin",
   "weight": 2,
   "stack": 20,
-  "maxQuality": 1
+  "maxQuality": 1,
+  "stage": "AshLands"
  },
  {
   "id": "TrophyBarka",
@@ -30088,7 +30867,8 @@
   "icon": "TrophyBarka",
   "weight": 2,
   "stack": 20,
-  "maxQuality": 1
+  "maxQuality": 1,
+  "stage": "DeepNorth"
  },
  {
   "id": "TrophyBjorn",
@@ -30098,7 +30878,8 @@
   "icon": "TrophyBjorn",
   "weight": 2,
   "stack": 20,
-  "maxQuality": 1
+  "maxQuality": 1,
+  "stage": "BlackForest"
  },
  {
   "id": "TrophyBjornUndead",
@@ -30108,7 +30889,8 @@
   "icon": "TrophyBjornUndead",
   "weight": 2,
   "stack": 20,
-  "maxQuality": 1
+  "maxQuality": 1,
+  "stage": "Plains"
  },
  {
   "id": "TrophyBlob",
@@ -30118,7 +30900,8 @@
   "icon": "TrophyBlob",
   "weight": 1,
   "stack": 20,
-  "maxQuality": 1
+  "maxQuality": 1,
+  "stage": "Swamp"
  },
  {
   "id": "TrophyBlob_Frost",
@@ -30128,7 +30911,8 @@
   "icon": "TrophyBlob_Frost",
   "weight": 1,
   "stack": 20,
-  "maxQuality": 1
+  "maxQuality": 1,
+  "stage": "Mountain"
  },
  {
   "id": "TrophyBlob_Lava",
@@ -30138,7 +30922,8 @@
   "icon": "TrophyBlob_Lava",
   "weight": 1,
   "stack": 20,
-  "maxQuality": 1
+  "maxQuality": 1,
+  "stage": "AshLands"
  },
  {
   "id": "TrophyBlob_Morkhalla",
@@ -30148,7 +30933,8 @@
   "icon": "TrophyBlob_Morkhalla",
   "weight": 1,
   "stack": 20,
-  "maxQuality": 1
+  "maxQuality": 1,
+  "stage": "DeepNorth"
  },
  {
   "id": "TrophyBoar",
@@ -30158,7 +30944,8 @@
   "icon": "TrophyBoar",
   "weight": 2,
   "stack": 20,
-  "maxQuality": 1
+  "maxQuality": 1,
+  "stage": "Meadows"
  },
  {
   "id": "TrophyBonemass",
@@ -30168,7 +30955,8 @@
   "icon": "TrophyBonemass",
   "weight": 2,
   "stack": 20,
-  "maxQuality": 1
+  "maxQuality": 1,
+  "stage": "Swamp"
  },
  {
   "id": "TrophyBonemawSerpent",
@@ -30178,7 +30966,8 @@
   "icon": "TrophyBonemawSerpent",
   "weight": 25,
   "stack": 20,
-  "maxQuality": 1
+  "maxQuality": 1,
+  "stage": "AshLands"
  },
  {
   "id": "TrophyCharredArcher",
@@ -30188,7 +30977,8 @@
   "icon": "TrophyCharredArcher",
   "weight": 0.5,
   "stack": 20,
-  "maxQuality": 1
+  "maxQuality": 1,
+  "stage": "AshLands"
  },
  {
   "id": "TrophyCharredMage",
@@ -30198,7 +30988,8 @@
   "icon": "TrophyCharredMage",
   "weight": 0.5,
   "stack": 20,
-  "maxQuality": 1
+  "maxQuality": 1,
+  "stage": "AshLands"
  },
  {
   "id": "TrophyCharredMelee",
@@ -30208,7 +30999,8 @@
   "icon": "TrophyCharredMelee",
   "weight": 0.5,
   "stack": 20,
-  "maxQuality": 1
+  "maxQuality": 1,
+  "stage": "AshLands"
  },
  {
   "id": "TrophyCultist",
@@ -30218,7 +31010,8 @@
   "icon": "TrophyCultist",
   "weight": 3,
   "stack": 20,
-  "maxQuality": 1
+  "maxQuality": 1,
+  "stage": "Mountain"
  },
  {
   "id": "TrophyCultist_Hildir",
@@ -30228,7 +31021,8 @@
   "icon": "TrophyCultistHildir",
   "weight": 3,
   "stack": 20,
-  "maxQuality": 1
+  "maxQuality": 1,
+  "stage": "Mountain"
  },
  {
   "id": "TrophyDeathsquito",
@@ -30238,7 +31032,8 @@
   "icon": "TrophyDeathSquito",
   "weight": 0.5,
   "stack": 20,
-  "maxQuality": 1
+  "maxQuality": 1,
+  "stage": "Plains"
  },
  {
   "id": "TrophyDeer",
@@ -30248,7 +31043,8 @@
   "icon": "TrophyDeer",
   "weight": 2,
   "stack": 20,
-  "maxQuality": 1
+  "maxQuality": 1,
+  "stage": "Meadows"
  },
  {
   "id": "TrophyDeerWhite",
@@ -30269,7 +31065,8 @@
   "icon": "TrophyDragonQueen",
   "weight": 2,
   "stack": 20,
-  "maxQuality": 1
+  "maxQuality": 1,
+  "stage": "Mountain"
  },
  {
   "id": "TrophyDraugr",
@@ -30279,7 +31076,8 @@
   "icon": "TrophyDraugr",
   "weight": 1,
   "stack": 20,
-  "maxQuality": 1
+  "maxQuality": 1,
+  "stage": "Meadows"
  },
  {
   "id": "TrophyDraugrElite",
@@ -30289,7 +31087,8 @@
   "icon": "TrophyDraugrElite",
   "weight": 1,
   "stack": 20,
-  "maxQuality": 1
+  "maxQuality": 1,
+  "stage": "Meadows"
  },
  {
   "id": "TrophyDraugrFem",
@@ -30310,7 +31109,8 @@
   "icon": "TrophyDvergr",
   "weight": 2,
   "stack": 20,
-  "maxQuality": 1
+  "maxQuality": 1,
+  "stage": "Mistlands"
  },
  {
   "id": "TrophyEikthyr",
@@ -30320,7 +31120,8 @@
   "icon": "TrophyEikthyr",
   "weight": 2,
   "stack": 20,
-  "maxQuality": 1
+  "maxQuality": 1,
+  "stage": "Meadows"
  },
  {
   "id": "TrophyElaking",
@@ -30330,7 +31131,8 @@
   "icon": "TrophyElaking",
   "weight": 2,
   "stack": 20,
-  "maxQuality": 1
+  "maxQuality": 1,
+  "stage": "DeepNorth"
  },
  {
   "id": "TrophyFader",
@@ -30340,7 +31142,8 @@
   "icon": "TrophyFader",
   "weight": 2,
   "stack": 20,
-  "maxQuality": 1
+  "maxQuality": 1,
+  "stage": "AshLands"
  },
  {
   "id": "TrophyFallenValkyrie",
@@ -30350,7 +31153,8 @@
   "icon": "TrophyFallenValkyrie",
   "weight": 0.5,
   "stack": 20,
-  "maxQuality": 1
+  "maxQuality": 1,
+  "stage": "AshLands"
  },
  {
   "id": "TrophyFenring",
@@ -30360,7 +31164,8 @@
   "icon": "TrophyFenring",
   "weight": 1.5,
   "stack": 20,
-  "maxQuality": 1
+  "maxQuality": 1,
+  "stage": "Mountain"
  },
  {
   "id": "TrophyForestTroll",
@@ -30381,7 +31186,8 @@
   "icon": "TrophyFrostTroll",
   "weight": 4,
   "stack": 20,
-  "maxQuality": 1
+  "maxQuality": 1,
+  "stage": "BlackForest"
  },
  {
   "id": "TrophyGhost",
@@ -30391,7 +31197,8 @@
   "icon": "TrophyGhost",
   "weight": 2,
   "stack": 20,
-  "maxQuality": 1
+  "maxQuality": 1,
+  "stage": "BlackForest"
  },
  {
   "id": "TrophyGjall",
@@ -30401,7 +31208,8 @@
   "icon": "TrophyGjall",
   "weight": 2,
   "stack": 20,
-  "maxQuality": 1
+  "maxQuality": 1,
+  "stage": "Mistlands"
  },
  {
   "id": "TrophyGoblin",
@@ -30411,7 +31219,8 @@
   "icon": "TrophyGoblin",
   "weight": 1,
   "stack": 20,
-  "maxQuality": 1
+  "maxQuality": 1,
+  "stage": "Plains"
  },
  {
   "id": "TrophyGoblinBrute",
@@ -30421,7 +31230,8 @@
   "icon": "TrophyGoblinBrute",
   "weight": 2,
   "stack": 20,
-  "maxQuality": 1
+  "maxQuality": 1,
+  "stage": "Plains"
  },
  {
   "id": "TrophyGoblinBruteBrosBrute",
@@ -30431,7 +31241,8 @@
   "icon": "TrophyGoblinBruteBro",
   "weight": 2,
   "stack": 20,
-  "maxQuality": 1
+  "maxQuality": 1,
+  "stage": "Plains"
  },
  {
   "id": "TrophyGoblinBruteBrosShaman",
@@ -30441,7 +31252,8 @@
   "icon": "TrophyGoblinShamanBro",
   "weight": 2,
   "stack": 20,
-  "maxQuality": 1
+  "maxQuality": 1,
+  "stage": "Plains"
  },
  {
   "id": "TrophyGoblinKing",
@@ -30451,7 +31263,8 @@
   "icon": "TrophyGoblinKing",
   "weight": 1,
   "stack": 20,
-  "maxQuality": 1
+  "maxQuality": 1,
+  "stage": "Plains"
  },
  {
   "id": "TrophyGoblinShaman",
@@ -30461,7 +31274,8 @@
   "icon": "TrophyGoblinShaman",
   "weight": 0.5,
   "stack": 20,
-  "maxQuality": 1
+  "maxQuality": 1,
+  "stage": "Plains"
  },
  {
   "id": "TrophyGreydwarf",
@@ -30471,7 +31285,8 @@
   "icon": "TrophyGreydwarf",
   "weight": 1,
   "stack": 20,
-  "maxQuality": 1
+  "maxQuality": 1,
+  "stage": "Meadows"
  },
  {
   "id": "TrophyGreydwarfBrute",
@@ -30481,7 +31296,8 @@
   "icon": "TrophyGreydwarfBrute",
   "weight": 1.5,
   "stack": 20,
-  "maxQuality": 1
+  "maxQuality": 1,
+  "stage": "BlackForest"
  },
  {
   "id": "TrophyGreydwarfShaman",
@@ -30491,7 +31307,8 @@
   "icon": "TrophyGreydwarfShaman",
   "weight": 1,
   "stack": 20,
-  "maxQuality": 1
+  "maxQuality": 1,
+  "stage": "BlackForest"
  },
  {
   "id": "TrophyGrowth",
@@ -30501,7 +31318,8 @@
   "icon": "TrophyGrowth",
   "weight": 1,
   "stack": 20,
-  "maxQuality": 1
+  "maxQuality": 1,
+  "stage": "Plains"
  },
  {
   "id": "TrophyHare",
@@ -30511,7 +31329,8 @@
   "icon": "TrophyHare",
   "weight": 2,
   "stack": 20,
-  "maxQuality": 1
+  "maxQuality": 1,
+  "stage": "Mistlands"
  },
  {
   "id": "TrophyHatchling",
@@ -30521,7 +31340,8 @@
   "icon": "TrophyHatchling",
   "weight": 2,
   "stack": 20,
-  "maxQuality": 1
+  "maxQuality": 1,
+  "stage": "Mountain"
  },
  {
   "id": "TrophyJotunWarrior",
@@ -30531,7 +31351,8 @@
   "icon": "TrophyJotunWarrior",
   "weight": 2,
   "stack": 20,
-  "maxQuality": 1
+  "maxQuality": 1,
+  "stage": "DeepNorth"
  },
  {
   "id": "TrophyJotunWitch",
@@ -30541,7 +31362,8 @@
   "icon": "TrophyJotunWitch",
   "weight": 2,
   "stack": 20,
-  "maxQuality": 1
+  "maxQuality": 1,
+  "stage": "DeepNorth"
  },
  {
   "id": "TrophyKvastur",
@@ -30551,7 +31373,8 @@
   "icon": "Kvastur",
   "weight": 2,
   "stack": 20,
-  "maxQuality": 1
+  "maxQuality": 1,
+  "stage": "Swamp"
  },
  {
   "id": "TrophyLeech",
@@ -30561,7 +31384,8 @@
   "icon": "TrophyLeech",
   "weight": 2,
   "stack": 20,
-  "maxQuality": 1
+  "maxQuality": 1,
+  "stage": "Swamp"
  },
  {
   "id": "TrophyLox",
@@ -30571,7 +31395,8 @@
   "icon": "TrophyLox",
   "weight": 2,
   "stack": 20,
-  "maxQuality": 1
+  "maxQuality": 1,
+  "stage": "Plains"
  },
  {
   "id": "TrophyMole",
@@ -30581,7 +31406,8 @@
   "icon": "TrophyMole",
   "weight": 1.5,
   "stack": 20,
-  "maxQuality": 1
+  "maxQuality": 1,
+  "stage": "DeepNorth"
  },
  {
   "id": "TrophyMoose",
@@ -30591,7 +31417,8 @@
   "icon": "TrophyMoose",
   "weight": 2,
   "stack": 20,
-  "maxQuality": 1
+  "maxQuality": 1,
+  "stage": "DeepNorth"
  },
  {
   "id": "TrophyMorgen",
@@ -30601,7 +31428,8 @@
   "icon": "TrophyMorgen",
   "weight": 0.5,
   "stack": 20,
-  "maxQuality": 1
+  "maxQuality": 1,
+  "stage": "AshLands"
  },
  {
   "id": "TrophyNeck",
@@ -30611,7 +31439,8 @@
   "icon": "TrophyNeck",
   "weight": 0.5,
   "stack": 20,
-  "maxQuality": 1
+  "maxQuality": 1,
+  "stage": "Meadows"
  },
  {
   "id": "TrophySGolem",
@@ -30621,7 +31450,8 @@
   "icon": "TrophySGolem",
   "weight": 2,
   "stack": 20,
-  "maxQuality": 1
+  "maxQuality": 1,
+  "stage": "Mountain"
  },
  {
   "id": "TrophySeal",
@@ -30631,7 +31461,8 @@
   "icon": "TrophySeal",
   "weight": 2,
   "stack": 20,
-  "maxQuality": 1
+  "maxQuality": 1,
+  "stage": "DeepNorth"
  },
  {
   "id": "TrophySeeker",
@@ -30641,7 +31472,8 @@
   "icon": "TrophySeeker",
   "weight": 2,
   "stack": 20,
-  "maxQuality": 1
+  "maxQuality": 1,
+  "stage": "Mistlands"
  },
  {
   "id": "TrophySeekerBrute",
@@ -30651,7 +31483,8 @@
   "icon": "TrophySeekerBrute",
   "weight": 2,
   "stack": 20,
-  "maxQuality": 1
+  "maxQuality": 1,
+  "stage": "Mistlands"
  },
  {
   "id": "TrophySeekerQueen",
@@ -30661,7 +31494,8 @@
   "icon": "TrophySeekerQueen",
   "weight": 2,
   "stack": 20,
-  "maxQuality": 1
+  "maxQuality": 1,
+  "stage": "Mistlands"
  },
  {
   "id": "TrophySerpent",
@@ -30671,7 +31505,8 @@
   "icon": "TrophySerpent",
   "weight": 25,
   "stack": 20,
-  "maxQuality": 1
+  "maxQuality": 1,
+  "stage": "Meadows"
  },
  {
   "id": "TrophySkeleton",
@@ -30681,7 +31516,8 @@
   "icon": "TrophySkeleton",
   "weight": 0.5,
   "stack": 20,
-  "maxQuality": 1
+  "maxQuality": 1,
+  "stage": "Meadows"
  },
  {
   "id": "TrophySkeletonHildir",
@@ -30691,7 +31527,8 @@
   "icon": "TrophySkeletonHildir",
   "weight": 0.5,
   "stack": 20,
-  "maxQuality": 1
+  "maxQuality": 1,
+  "stage": "BlackForest"
  },
  {
   "id": "TrophySkeletonPoison",
@@ -30701,7 +31538,8 @@
   "icon": "TrophySkeletonPoison",
   "weight": 0.5,
   "stack": 20,
-  "maxQuality": 1
+  "maxQuality": 1,
+  "stage": "Meadows"
  },
  {
   "id": "TrophySurtling",
@@ -30711,7 +31549,8 @@
   "icon": "TrophySurtling",
   "weight": 1,
   "stack": 20,
-  "maxQuality": 1
+  "maxQuality": 1,
+  "stage": "Swamp"
  },
  {
   "id": "TrophyTheElder",
@@ -30721,7 +31560,8 @@
   "icon": "TrophyTheElder",
   "weight": 4,
   "stack": 20,
-  "maxQuality": 1
+  "maxQuality": 1,
+  "stage": "BlackForest"
  },
  {
   "id": "TrophyTick",
@@ -30731,7 +31571,8 @@
   "icon": "TrophyTick",
   "weight": 2,
   "stack": 20,
-  "maxQuality": 1
+  "maxQuality": 1,
+  "stage": "Mistlands"
  },
  {
   "id": "TrophyUlv",
@@ -30741,7 +31582,8 @@
   "icon": "TrophyUlv",
   "weight": 1.5,
   "stack": 20,
-  "maxQuality": 1
+  "maxQuality": 1,
+  "stage": "Mountain"
  },
  {
   "id": "TrophyVolture",
@@ -30751,7 +31593,8 @@
   "icon": "TrophyVolture",
   "weight": 2,
   "stack": 20,
-  "maxQuality": 1
+  "maxQuality": 1,
+  "stage": "AshLands"
  },
  {
   "id": "TrophyWolf",
@@ -30761,7 +31604,8 @@
   "icon": "TrophyWolf",
   "weight": 1.5,
   "stack": 20,
-  "maxQuality": 1
+  "maxQuality": 1,
+  "stage": "Mountain"
  },
  {
   "id": "TrophyWraith",
@@ -30771,7 +31615,8 @@
   "icon": "TrophyWraith",
   "weight": 1,
   "stack": 20,
-  "maxQuality": 1
+  "maxQuality": 1,
+  "stage": "Swamp"
  },
  {
   "id": "TrophyWrithan",
@@ -30781,7 +31626,8 @@
   "icon": "TrophyWrithan",
   "weight": 2,
   "stack": 20,
-  "maxQuality": 1
+  "maxQuality": 1,
+  "stage": "Swamp"
  },
  {
   "id": "Turnip",
@@ -30791,7 +31637,8 @@
   "icon": "turnip",
   "weight": 0.3,
   "stack": 50,
-  "maxQuality": 1
+  "maxQuality": 1,
+  "stage": "Swamp"
  },
  {
   "id": "TurnipSeeds",
@@ -30801,7 +31648,8 @@
   "icon": "turnipseeds",
   "weight": 0.1,
   "stack": 100,
-  "maxQuality": 1
+  "maxQuality": 1,
+  "stage": "Swamp"
  },
  {
   "id": "TurnipStew",
@@ -30817,7 +31665,8 @@
    "stamina": 55,
    "duration": 1500,
    "regen": 2
-  }
+  },
+  "stage": "Swamp"
  },
  {
   "id": "TurretBolt",
@@ -30834,7 +31683,8 @@
   },
   "attackForce": 60,
   "backstab": 3,
-  "ammoType": "$ammo_turretbolt"
+  "ammoType": "$ammo_turretbolt",
+  "stage": "Plains"
  },
  {
   "id": "TurretBoltBloodgold",
@@ -30851,7 +31701,8 @@
   },
   "attackForce": 60,
   "backstab": 3,
-  "ammoType": "$ammo_turretbolt"
+  "ammoType": "$ammo_turretbolt",
+  "stage": "DeepNorth"
  },
  {
   "id": "TurretBoltBone",
@@ -30886,7 +31737,8 @@
   },
   "attackForce": 60,
   "backstab": 3,
-  "ammoType": "$ammo_turretbolt"
+  "ammoType": "$ammo_turretbolt",
+  "stage": "AshLands"
  },
  {
   "id": "TurretBoltWood",
@@ -30903,7 +31755,8 @@
   },
   "attackForce": 45,
   "backstab": 3,
-  "ammoType": "$ammo_turretbolt"
+  "ammoType": "$ammo_turretbolt",
+  "stage": "Mountain"
  },
  {
   "id": "Ulv_attack1_bite",
@@ -30965,7 +31818,8 @@
   "icon": "UndeadBjornRibcage",
   "weight": 5,
   "stack": 50,
-  "maxQuality": 1
+  "maxQuality": 1,
+  "stage": "Plains"
  },
  {
   "id": "Upgrader0Armor",
@@ -30975,7 +31829,8 @@
   "icon": "upgrader0a",
   "weight": 0.5,
   "stack": 20,
-  "maxQuality": 1
+  "maxQuality": 1,
+  "stage": "Meadows"
  },
  {
   "id": "Upgrader0Weapon",
@@ -30985,7 +31840,8 @@
   "icon": "upgrader0",
   "weight": 0.5,
   "stack": 20,
-  "maxQuality": 1
+  "maxQuality": 1,
+  "stage": "Meadows"
  },
  {
   "id": "Upgrader1Armor",
@@ -30995,7 +31851,8 @@
   "icon": "upgrader1a",
   "weight": 0.5,
   "stack": 20,
-  "maxQuality": 1
+  "maxQuality": 1,
+  "stage": "Meadows"
  },
  {
   "id": "Upgrader1Weapon",
@@ -31005,7 +31862,8 @@
   "icon": "upgrader1",
   "weight": 0.5,
   "stack": 20,
-  "maxQuality": 1
+  "maxQuality": 1,
+  "stage": "Meadows"
  },
  {
   "id": "Upgrader2Armor",
@@ -31015,7 +31873,8 @@
   "icon": "upgrader2a",
   "weight": 0.5,
   "stack": 20,
-  "maxQuality": 1
+  "maxQuality": 1,
+  "stage": "BlackForest"
  },
  {
   "id": "Upgrader2Weapon",
@@ -31025,7 +31884,8 @@
   "icon": "upgrader2",
   "weight": 0.5,
   "stack": 20,
-  "maxQuality": 1
+  "maxQuality": 1,
+  "stage": "BlackForest"
  },
  {
   "id": "Upgrader3Armor",
@@ -31035,7 +31895,8 @@
   "icon": "upgrader3a",
   "weight": 0.5,
   "stack": 20,
-  "maxQuality": 1
+  "maxQuality": 1,
+  "stage": "Swamp"
  },
  {
   "id": "Upgrader3Weapon",
@@ -31045,7 +31906,8 @@
   "icon": "upgrader3",
   "weight": 0.5,
   "stack": 20,
-  "maxQuality": 1
+  "maxQuality": 1,
+  "stage": "Swamp"
  },
  {
   "id": "Upgrader4Armor",
@@ -31055,7 +31917,8 @@
   "icon": "upgrader4a",
   "weight": 0.5,
   "stack": 20,
-  "maxQuality": 1
+  "maxQuality": 1,
+  "stage": "Mountain"
  },
  {
   "id": "Upgrader4Weapon",
@@ -31065,7 +31928,8 @@
   "icon": "upgrader4",
   "weight": 0.5,
   "stack": 20,
-  "maxQuality": 1
+  "maxQuality": 1,
+  "stage": "Mountain"
  },
  {
   "id": "Upgrader5Armor",
@@ -31075,7 +31939,8 @@
   "icon": "upgrader5a",
   "weight": 0.5,
   "stack": 20,
-  "maxQuality": 1
+  "maxQuality": 1,
+  "stage": "Plains"
  },
  {
   "id": "Upgrader5Weapon",
@@ -31085,7 +31950,8 @@
   "icon": "upgrader5",
   "weight": 0.5,
   "stack": 20,
-  "maxQuality": 1
+  "maxQuality": 1,
+  "stage": "Plains"
  },
  {
   "id": "Upgrader6Armor",
@@ -31095,7 +31961,8 @@
   "icon": "upgrader6a",
   "weight": 0.5,
   "stack": 20,
-  "maxQuality": 1
+  "maxQuality": 1,
+  "stage": "Mistlands"
  },
  {
   "id": "Upgrader6Weapon",
@@ -31105,7 +31972,8 @@
   "icon": "upgrader6",
   "weight": 0.5,
   "stack": 20,
-  "maxQuality": 1
+  "maxQuality": 1,
+  "stage": "Mistlands"
  },
  {
   "id": "Upgrader7Armor",
@@ -31115,7 +31983,8 @@
   "icon": "upgrader7a",
   "weight": 0.5,
   "stack": 20,
-  "maxQuality": 1
+  "maxQuality": 1,
+  "stage": "DeepNorth"
  },
  {
   "id": "Upgrader7Weapon",
@@ -31125,7 +31994,8 @@
   "icon": "upgrader7",
   "weight": 0.5,
   "stack": 20,
-  "maxQuality": 1
+  "maxQuality": 1,
+  "stage": "DeepNorth"
  },
  {
   "id": "VegvisirShard_Bonemass",
@@ -31152,7 +32022,8 @@
    "stamina": 43,
    "duration": 1800,
    "regen": 4
-  }
+  },
+  "stage": "Plains"
  },
  {
   "id": "VikingCupcakeUncooked",
@@ -31168,7 +32039,8 @@
    "stamina": 10,
    "duration": 2400,
    "regen": 4
-  }
+  },
+  "stage": "Plains"
  },
  {
   "id": "VineGreenSeeds",
@@ -31178,7 +32050,8 @@
   "icon": "vinegreenseeds",
   "weight": 0.1,
   "stack": 100,
-  "maxQuality": 1
+  "maxQuality": 1,
+  "stage": "Swamp"
  },
  {
   "id": "Vineberry",
@@ -31195,7 +32068,8 @@
    "eitr": 30,
    "duration": 900,
    "regen": 1
-  }
+  },
+  "stage": "Swamp"
  },
  {
   "id": "VineberrySeeds",
@@ -31205,7 +32079,8 @@
   "icon": "vineberryseeds",
   "weight": 0.1,
   "stack": 100,
-  "maxQuality": 1
+  "maxQuality": 1,
+  "stage": "AshLands"
  },
  {
   "id": "Voidplasm",
@@ -31232,7 +32107,8 @@
    "stamina": 60,
    "duration": 1200,
    "regen": 1
-  }
+  },
+  "stage": "AshLands"
  },
  {
   "id": "VoltureMeat",
@@ -31248,7 +32124,8 @@
    "stamina": 24,
    "duration": 1200,
    "regen": 6
-  }
+  },
+  "stage": "AshLands"
  },
  {
   "id": "Wishbone",
@@ -31259,7 +32136,8 @@
   "weight": 0.1,
   "stack": 1,
   "maxQuality": 1,
-  "equipEffect": "Wishbone"
+  "equipEffect": "Wishbone",
+  "stage": "Swamp"
  },
  {
   "id": "Wisp",
@@ -31269,7 +32147,8 @@
   "icon": "wisp",
   "weight": 0.5,
   "stack": 50,
-  "maxQuality": 1
+  "maxQuality": 1,
+  "stage": "Plains"
  },
  {
   "id": "WitheredBone",
@@ -31279,7 +32158,8 @@
   "icon": "witheredbone",
   "weight": 1,
   "stack": 30,
-  "maxQuality": 1
+  "maxQuality": 1,
+  "stage": "Swamp"
  },
  {
   "id": "WolfClaw",
@@ -31289,7 +32169,8 @@
   "icon": "WolfClaw",
   "weight": 0.5,
   "stack": 20,
-  "maxQuality": 1
+  "maxQuality": 1,
+  "stage": "Mountain"
  },
  {
   "id": "WolfFang",
@@ -31299,7 +32180,8 @@
   "icon": "WolfFang",
   "weight": 0.1,
   "stack": 50,
-  "maxQuality": 1
+  "maxQuality": 1,
+  "stage": "Mountain"
  },
  {
   "id": "WolfHairBundle",
@@ -31309,7 +32191,8 @@
   "icon": "WolfHairBundle",
   "weight": 1,
   "stack": 50,
-  "maxQuality": 1
+  "maxQuality": 1,
+  "stage": "Mountain"
  },
  {
   "id": "WolfJerky",
@@ -31325,7 +32208,8 @@
    "stamina": 33,
    "duration": 1800,
    "regen": 3
-  }
+  },
+  "stage": "Mountain"
  },
  {
   "id": "WolfMeat",
@@ -31340,7 +32224,8 @@
    "stamina": 5,
    "duration": 1500,
    "regen": 3
-  }
+  },
+  "stage": "Mountain"
  },
  {
   "id": "WolfMeatSkewer",
@@ -31356,7 +32241,8 @@
    "stamina": 21,
    "duration": 1500,
    "regen": 3
-  }
+  },
+  "stage": "Mountain"
  },
  {
   "id": "WolfPelt",
@@ -31366,7 +32252,8 @@
   "icon": "wolfpelt",
   "weight": 1,
   "stack": 50,
-  "maxQuality": 1
+  "maxQuality": 1,
+  "stage": "Mountain"
  },
  {
   "id": "Wolf_Attack1",
@@ -31454,7 +32341,8 @@
   "icon": "wood",
   "weight": 2,
   "stack": 50,
-  "maxQuality": 1
+  "maxQuality": 1,
+  "stage": "Meadows"
  },
  {
   "id": "WrithanRoots",
@@ -31464,7 +32352,8 @@
   "icon": "writhanroots",
   "weight": 0.5,
   "stack": 50,
-  "maxQuality": 1
+  "maxQuality": 1,
+  "stage": "Swamp"
  },
  {
   "id": "YagluthDrop",
@@ -31474,7 +32363,8 @@
   "icon": "yagluthdrop",
   "weight": 1,
   "stack": 30,
-  "maxQuality": 1
+  "maxQuality": 1,
+  "stage": "Plains"
  },
  {
   "id": "YggdrasilPorridge",
@@ -31491,7 +32381,8 @@
    "eitr": 80,
    "duration": 1500,
    "regen": 3
-  }
+  },
+  "stage": "Mistlands"
  },
  {
   "id": "YggdrasilWood",
@@ -31501,7 +32392,8 @@
   "icon": "yggdrasilwood",
   "weight": 2,
   "stack": 50,
-  "maxQuality": 1
+  "maxQuality": 1,
+  "stage": "Mistlands"
  },
  {
   "id": "YmirRemains",
@@ -31511,7 +32403,8 @@
   "icon": "ymirremains",
   "weight": 0.3,
   "stack": 50,
-  "maxQuality": 1
+  "maxQuality": 1,
+  "stage": "Swamp"
  },
  {
   "id": "aspect_Eikthyr_antler",
@@ -33544,7 +34437,8 @@
   "weight": 200,
   "stack": 1,
   "maxQuality": 1,
-  "noTeleport": true
+  "noTeleport": true,
+  "stage": "BlackForest"
  },
  {
   "id": "chest_hildir2",
@@ -33555,7 +34449,8 @@
   "weight": 200,
   "stack": 1,
   "maxQuality": 1,
-  "noTeleport": true
+  "noTeleport": true,
+  "stage": "Mountain"
  },
  {
   "id": "chest_hildir3",
@@ -33566,7 +34461,8 @@
   "weight": 200,
   "stack": 1,
   "maxQuality": 1,
-  "noTeleport": true
+  "noTeleport": true,
+  "stage": "Plains"
  },
  {
   "id": "dragon_bite",

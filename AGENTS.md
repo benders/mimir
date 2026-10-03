@@ -105,8 +105,11 @@ pages use: `adrenaline` gains and decay curves as [time, value] keys, no tangent
 `kind: fishing` = one per fish prefab, id = the caught item: `baits` [{item, chance}], `biomes` from its spawns, `drops` = extra
 catch drops; fish spawn as `creature` ids in `spawns` but have no `creatures` entry;
 `kind: trader` = Haldor / Hildir / BogWitch (id = name in the location prefab): `sells` [{item, stack, price in Coins,
-`requiredKey` global key}], `locations` [{location, biomes}]), `status_effects`. Each `spawns` entry has a `source`: `world` (SpawnSystem; also the enabled alt biomes' spawns, `altBiome` = the patch name),
-`raid` (RandEventSystem; the event's biomes), `location` / `dungeon` (spawners and boss altars in a location or its
+`requiredKey` global key}], `takes` [{item, setsKey}] (quest hand-ins: Hildir's chests set `Hildir1`..3),
+`locations` [{location, biomes}]; a source that `startsEvent` starts a persistent event when destroyed (Fimbulvinter orb)),
+`status_effects`, `locations` (every enabled world location with the `biomes` it is placed in). Each `spawns` entry has a `source`: `world` (SpawnSystem; also the enabled alt biomes' spawns, `altBiome` = the patch name),
+`raid` (RandEventSystem; the event's biomes; `requiredGlobalKeys`), world spawns may need a `requiredGlobalKey` or a
+`requiredEvent` (persistent event running), `location` / `dungeon` (spawners and boss altars in a location or its
 dungeon rooms; the location's biomes), `offspring` (`parent` creature), `egg` (`item` that hatches), `summon` (an attack `item`'s projectile or ability prefab makes it, through `subprefabs/`;
 `parent` creature carrying the item, none if only players can use it) or `phase` (the `parent` creature's death effects
 create it, or a death-effect projectile spawns it: a boss's next stage). `summon` and `phase` count as reachable only once their parent or item is.
@@ -148,7 +151,12 @@ projectiles and Aoe deal their own; `[{kind: none}]` = it deals no damage (summo
 `damages` is what it deals. Items flagged `internal` (creature attack items) or `enemyOnly` (FW_/SP_ gear copies, Dvergr crossbow) get no site
 page; creatures list them under `attacks` (weapons) and `equipment`. Items, creatures and pieces flagged
 `unobtainable` (`normalize.reachable()` can't get to them from any source: unreleased, test, cheat, legacy or unplaced
-content) get no page, search entry or relation rows either. `verify_data.py` keeps a list of known-obtainable content
+content) get no page, search entry or relation rows either. Reachable items, creatures and pieces carry `stage` (#24): the
+first biome of the progression (`normalize.STAGES`, Meadows..DeepNorth) where a player can get them, from
+`normalize.stages()`, the same fixed point as `reachable()` (its first pass) with a second pass that adds stations and
+their extension levels, tools and tool tiers, fuel, boss keys (a boss's opens the next stage), quest hand-ins and
+persistent events. The earliest way wins (a creature's earliest spawn); Ocean alone counts as Meadows, next to land as
+that land. `STAGE_OVERRIDES` fixes what the data gets wrong; no `stage` = it couldn't be settled (shown from Meadows). `verify_data.py` keeps a list of known-obtainable content
 and caps the flagged share, so a source gap can't silently hide real pages; `scripts/unreached.py -v` lists what
 `reachable()` misses. Add a source to normalize rather than an exception when something real is flagged.
 

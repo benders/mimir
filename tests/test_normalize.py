@@ -251,6 +251,67 @@ class Entities(FixtureCase):
         stages[0]["locations"] = [{"location": "X", "dungeon": False}]
         self.assertEqual(N.reachable(items, [], [], [], [], stages, [])[0], {"Rock", "Seed"})  # a stage of a placed one
 
+    def test_stages(self):
+        src = lambda i, kind="rock", **kw: {"id": i, "kind": kind, **kw}
+        drops = lambda *xs: {"items": [{"item": x} for x in xs]}
+        items = [{"id": x} for x in ("Wood", "Ore", "Bar", "Sword", "Club", "Gem", "Coins", "Charm", "Chest", "Hammer",
+                                      "Pebble")]
+        items += [{"id": "Pick", "toolTier": 2, "damages": {"pickaxe": 10}}, {"id": "Axe", "toolTier": 3, "damages": {"chop": 9}}]
+        pieces = [{"id": "bench", "enabled": True, "tools": ["Hammer"], "resources": [{"item": "Wood"}]},
+                  {"id": "ext", "enabled": True, "tools": ["Hammer"], "extends": "bench", "resources": [{"item": "Bar"}]},
+                  {"id": "smelter", "enabled": True, "tools": ["Hammer"], "resources": [{"item": "Wood"}]}]
+        recipes = [{"item": "Hammer", "enabled": True, "resources": [{"item": "Wood"}]},
+                   {"item": "Pick", "enabled": True, "station": "bench", "resources": [{"item": "Gem"}]},
+                   {"item": "Axe", "enabled": True, "station": "bench", "resources": [{"item": "Wood"}]},
+                   {"item": "Club", "enabled": True, "station": "bench", "resources": [{"item": "Wood"}]},
+                   {"item": "Sword", "enabled": True, "station": "bench", "stationLevel": 2, "resources": [{"item": "Wood"}]}]
+        procs = [{"station": "smelter", "from": "Ore", "to": "Bar"}]
+        sources = [src("tree", "tree", biomes=["Meadows"], drops=drops("Wood")),
+                   src("vein", biomes=["Meadows"], minToolTier=2, drops=drops("Ore"),  # the pick needs a Mountain gem
+                       damageModifiers={"chop": "Immune"}),
+                   src("chest", "container", locations=[{"location": "Peak"}], drops=drops("Gem")),
+                   src("purse", "container", locations=[{"location": "Camp"}], drops=drops("Coins")),
+                   src("wreck", "destructible", locations=[{"location": "Shore"}], drops=drops("Pebble")),
+                   src("orb", "destructible", locations=[{"location": "Peak"}], startsEvent="Siege"),
+                   {"id": "Vendor", "kind": "trader", "locations": [{"location": "Camp", "biomes": ["Meadows"]}],
+                    "sells": [{"item": "Charm", "requiredKey": "defeated_boss"}],
+                    "takes": [{"item": "Chest", "setsKey": "Quest1"}]}]
+        creatures = [{"id": "Boss", "boss": True, "defeatKey": "defeated_boss", "drops": [{"item": "Chest"}]},
+                     {"id": "Raider"}, {"id": "Ghost"}, {"id": "Giant"}, {"id": "Serpent"}]
+        spawn_list = [{"creature": "Boss", "source": "location", "biomes": ["BlackForest"]},
+                      {"creature": "Raider", "source": "raid", "biomes": ["Meadows"], "requiredGlobalKeys": ["defeated_boss"]},
+                      {"creature": "Ghost", "source": "raid", "biomes": ["Meadows"], "requiredGlobalKeys": ["quest1"]},
+                      {"creature": "Giant", "source": "world", "biomes": ["Meadows", "DeepNorth"], "requiredEvent": "siege"},
+                      {"creature": "Serpent", "source": "world", "biomes": ["Ocean"]}]
+        location_list = [{"id": "Peak", "biomes": ["Mountain"]}, {"id": "Camp", "biomes": ["Meadows"]},
+                         {"id": "Shore", "biomes": ["Swamp", "Ocean"]}]
+        args = items, creatures, pieces, recipes, procs, sources, spawn_list, location_list
+        reach = tuple(set(d) for d in N.stages(*args))
+        self.assertEqual(reach, N.reachable(*args[:-1]))  # the first pass: soft requirements don't count
+        got = {k: N.STAGES[v] for d in N.stages(*args, reach=reach) for k, v in d.items()}
+        self.assertEqual(got["Wood"], "Meadows")
+        self.assertEqual(got["Club"], "Meadows")
+        self.assertEqual(got["Ore"], "Mountain")  # Meadows rock, but only the Mountain pick can mine it
+        self.assertEqual(got["Bar"], "Mountain")
+        self.assertEqual(got["Sword"], "Mountain")  # bench level 2 needs the extension, which costs Bar
+        self.assertEqual(got["Boss"], "BlackForest")
+        self.assertEqual(got["Raider"], "Swamp")  # a boss's key opens the next stage
+        self.assertEqual(got["Charm"], "Swamp")
+        self.assertEqual(got["Ghost"], "BlackForest")  # the key comes from handing over the Boss's chest
+        self.assertEqual(got["Giant"], "Mountain")  # its event starts when the orb on the Peak is destroyed
+        self.assertEqual(got["Serpent"], "Meadows")  # the open sea counts from the start
+        self.assertEqual(got["Pebble"], "Swamp")  # a shore location: Ocean next to land is that land's shore
+        N.STAGE_OVERRIDES["Club"] = "Plains"
+        try:
+            got = N.stages(*args, reach=reach)[0]
+            self.assertEqual(N.STAGES[got["Club"]], "Plains")
+        finally:
+            del N.STAGE_OVERRIDES["Club"]
+        for e in items + creatures + pieces:
+            e.pop("stage", None)
+        N.mark_stages(*args)
+        self.assertEqual({i["id"]: i.get("stage") for i in items}["Sword"], "Mountain")
+
     def test_offspring_egg_is_reached(self):
         items, spawn_list = [{"id": "Egg"}], [{"creature": "Egg", "source": "offspring", "parent": "Hen"}]
         spawn_list.append({"creature": "Hen", "source": "world"})
@@ -319,7 +380,8 @@ class Entities(FixtureCase):
 
     def test_world_spawns(self):
         s = self.spawns("world")
-        self.assertEqual(len(s), 5)  # disabled, devDisabled and non-creature spawners dropped; a fish is kept, so is the alt biome's Moth
+        self.assertEqual(len(s), 6)  # disabled, devDisabled and non-creature spawners dropped; a fish is kept, so is the alt biome's Moth
+        self.assertEqual([x["requiredEvent"] for x in s if x.get("requiredEvent")], ["siege"])
         self.assertEqual((s[0]["creature"], s[0]["biomes"]), ("Raider", ["Meadows", "BlackForest"]))
         self.assertEqual(s[1]["creature"], "Raider")  # placed via Spawner_Raider
         self.assertEqual(len(s[1]["biomes"]), len(N.BIOME_BITS))

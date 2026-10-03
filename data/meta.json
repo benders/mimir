@@ -10,7 +10,8 @@
   "spawns": 439,
   "pieces": 664,
   "processing": 104,
-  "sources": 618,
+  "sources": 620,
+  "locations": 186,
   "status_effects": 97
  },
  "unresolvedTokens": [

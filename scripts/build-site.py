@@ -278,8 +278,8 @@ def variants(kind: str, coll: dict, shown, primary=lambda id_: False, other="") 
             continue
         pages = []
         for id_ in sorted(ids, key=lambda x: (len(x), x)):  # the shortest id of identical copies keeps the page
-            same = {k: v for k, v in coll[id_].items() if k != "id"}
-            twin = next((p for p in pages if {k: v for k, v in coll[p].items() if k != "id"} == same), None)
+            same = {k: v for k, v in coll[id_].items() if k not in ("id", "stage")}  # stage: how it's reached
+            twin = next((p for p in pages if {k: v for k, v in coll[p].items() if k not in ("id", "stage")} == same), None)
             if twin:
                 merged[id_] = twin
             else:

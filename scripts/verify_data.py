@@ -220,6 +220,29 @@ def main() -> int:
         n = sum(1 for e in coll.values() if e.get("unobtainable"))
         check(n <= share * len(coll), f"{kind}: {n} unobtainable, at most {share:.0%} of {len(coll)}")
 
+    # Progression stages (#24): the metal ladder, a boss per biome, and rules that would break silently.
+    locations = load("locations.json")
+    check(len(locations) > 100 and all(x["biomes"] for x in locations), f"locations: {len(locations)} with biomes")
+    stages = {
+        "Wood": "Meadows", "FineWood": "Meadows",  # Early Axes from Meadows chests cut birch
+        "Copper": "BlackForest", "Bronze": "BlackForest", "Iron": "Swamp", "Silver": "Mountain",
+        "BlackMetal": "Plains", "Eitr": "Mistlands", "FlametalNew": "AshLands",
+        "SwordBronze": "BlackForest", "SwordIron": "Swamp", "SwordBlackmetal": "Plains",
+        "ArmorFlametalChest": "AshLands",  # black forge level 3: two extensions
+        "forge": "BlackForest", "blastfurnace": "Mountain", "Karve": "BlackForest", "VikingShip": "Swamp",
+        "Eikthyr": "Meadows", "gd_king": "BlackForest", "Bonemass": "Swamp", "Dragon": "Mountain",
+        "GoblinKing": "Plains", "SeekerQueen": "Mistlands", "Fader": "AshLands", "FrozenKing": "DeepNorth",
+        "Hatchling": "Mountain",  # the drake raid only comes after Bonemass
+        "Goblin": "Plains",  # Hildir's fuling raid needs her third chest
+        "JotunWarrior": "DeepNorth",  # its everywhere spawn needs the Fimbulvinter event
+        "Serpent": "Meadows",  # the sea counts from the start
+    }
+    wrong = {x: every.get(x, {}).get("stage") for x, s in stages.items() if every.get(x, {}).get("stage") != s}
+    check(not wrong, f"stages of known content {wrong or ''}")
+    unstaged = [x for x, e in every.items() if "stage" not in e and not e.get("unobtainable") and not e.get("internal")
+                and not e.get("enemyOnly")]
+    check(len(unstaged) <= 20, f"{len(unstaged)} reachable entries without a stage (at most 20) {unstaged[:10]}")
+
     print()
     if failures:
         print(f"VERIFY DATA FAILED: {len(failures)} check(s)")

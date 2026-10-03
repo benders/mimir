@@ -395,6 +395,179 @@ def mark_enemy_only(items: list, creatures: list, recipes: list, procs: list, so
             i["enemyOnly"] = True
 
 
+STAGES = ("Meadows", "BlackForest", "Swamp", "Mountain", "Plains", "Mistlands", "AshLands", "DeepNorth")
+BIOME_STAGE = {b: i for i, b in enumerate(STAGES)} | {"Ocean": 0}  # the sea counts from the start (#24)
+NEVER = len(STAGES)
+STAGE_OVERRIDES: dict[str, str] = {}  # id -> stage, where the data gets the progression wrong
+
+
+def biome_stage(bs: list | None) -> int:
+    """The earliest progression stage of a list of biomes; no biome (unrestricted or unknown) is the first. Ocean
+    counts only on its own: next to land biomes it is the shore of those (shipwrecks)."""
+    land = [b for b in bs or () if b in BIOME_STAGE and b != "Ocean"]
+    return min((BIOME_STAGE[b] for b in land or bs or () if b in BIOME_STAGE), default=0)
+
+
+def stages(items: list, creatures: list, pieces: list, recipes: list, procs: list, sources: list, spawn_list: list,
+           location_list=(), reach: tuple | None = None) -> tuple[dict, dict, dict]:
+    """Progression stage (index into STAGES) of the items, creatures and pieces a player can get to, by fixed point:
+    each way of getting a thing costs the latest stage among what it needs, and the thing takes its cheapest way.
+    World sources, spawns, traders and located pieces start at their earliest biome (`location_list` gives a
+    location's biomes; unknown = the first stage). Hard requirements decide whether a thing is reachable at all
+    (reachable() lists them). With `reach` (the reachable item, creature and piece ids), soft requirements only make
+    a stage later:
+      - a recipe's or conversion's station, with enough extensions for its level (CraftingStation.GetLevel: 1 +
+        distinct StationExtensions in range, none stack), and smelter fuel;
+      - a piece's tool, station and cost;
+      - a spawn's or trader offer's global key: the earliest creature that sets it as `defeatKey` (a boss's opens the
+        next stage), or an item a trader `takes` for it (Hildir's chests); a key nothing sets holds nothing back;
+      - a world spawn's persistent event (SpawnSystem m_requiredPersistentEvent): the source that `startsEvent`;
+      - the parent of offspring and hatchlings;
+      - for a source with `minToolTier`, a player item of that tier dealing a damage type it isn't immune to
+        (MineRock/TreeBase/Destructible.Damage).
+    A soft requirement on an unreachable thing is ignored; a
+    reachable thing whose stage can't be settled (a cycle through soft requirements) is left out."""
+    I, C, P, S = (defaultdict(lambda: NEVER) for _ in range(4))
+    item_ids, by_creature, by_piece = {i["id"] for i in items}, {c["id"]: c for c in creatures}, {p["id"]: p for p in pieces}
+    overrides = {k: BIOME_STAGE[v] for k, v in STAGE_OVERRIDES.items()}
+    changed = True
+
+    def lower(d: dict, k: str, v: int) -> None:
+        nonlocal changed
+        if v < NEVER and k in overrides:
+            v = overrides[k]
+        if v < d[k]:
+            d[k], changed = v, True
+
+    def soft(d: dict, ids: set, k: str | None) -> int:  # a soft requirement: 0 in the first pass or if unreachable
+        return d[k] if reach and k in ids else 0
+
+    soft_item = lambda k: soft(I, reach[0] if reach else (), k)
+    soft_creature = lambda k: soft(C, reach[1] if reach else (), k)
+    soft_piece = lambda k: soft(P, reach[2] if reach else (), k)
+    cost = lambda rs: max((I[r["item"]] for r in rs if not r.get("upgrader")), default=0)
+    soft_cost = lambda rs: max((soft_item(r["item"]) for r in rs if not r.get("upgrader")), default=0)
+
+    killers, givers = defaultdict(list), defaultdict(list)  # global key (lowercase, ZoneSystem.GetKeyValue) ->
+    for c in creatures:  # creatures that set it on death, items a trader takes for it
+        if c.get("defeatKey"):
+            killers[c["defeatKey"].lower()].append(c["id"])
+    for t in sources:
+        for x in t.get("takes", []):
+            here = min((biome_stage(loc.get("biomes")) for loc in t.get("locations", [])), default=0)
+            givers[x["setsKey"].lower()].append((x["item"], here))
+
+    starters = defaultdict(list)  # persistent event -> sources whose destruction starts it
+    for src in sources:
+        if src.get("startsEvent"):
+            starters[src["startsEvent"].lower()].append(src["id"])
+    event = lambda e: min((S[x] if reach else 0 for x in starters[e.lower()]), default=0) if e else 0
+
+    def key(k: str | None) -> int:  # the earliest a global key can be set; one nothing sets doesn't hold anything back
+        k = (k or "").lower()
+        if k not in killers and k not in givers:
+            return 0
+        return min([min(soft_creature(c) + bool(by_creature[c].get("boss")), NEVER - 1) for c in killers[k]]
+                   + [max(soft_item(i), h) for i, h in givers[k]])
+
+    extensions = defaultdict(list)
+    for p in pieces:
+        if p.get("extends"):
+            extensions[p["extends"]].append(p["id"])
+
+    def station(sid: str | None, level: int = 1) -> int:
+        if not sid:
+            return 0
+        s = soft_piece(sid)
+        if reach and level > 1:
+            ext = sorted(soft_piece(x) for x in extensions[sid] if x in reach[2])
+            s = max(s, ext[level - 2] if len(ext) >= level - 1 else 0)
+        return s
+
+    def tool(src: dict) -> int:  # the earliest player item that can damage a source with a minimum tool tier
+        if not reach or not (tier := src.get("minToolTier")):
+            return 0
+        hurt = {t for t, m in (src.get("damageModifiers") or {}).items() if m not in ("Immune", "Ignore")}
+        hurt |= {t for t in ("chop", "pickaxe") if t not in (src.get("damageModifiers") or {})}
+        return min((soft_item(i["id"]) for i in items if i["id"] in reach[0] and i.get("toolTier", 0) >= tier
+                    and not i.get("internal") and not i.get("enemyOnly")
+                    and any(v > 0 for t, v in (i.get("damages") or {}).items() if t in hurt)), default=0)
+
+    loc_stage = {loc["id"]: biome_stage(loc["biomes"]) for loc in location_list}
+    at = lambda locs: min((loc_stage.get(x["location"], 0) for x in locs), default=NEVER)
+    buildable = {p["id"] for p in pieces if (p.get("enabled") or p.get("season")) and p.get("tools")}
+    built = lambda pc: max(P[pc], cost(by_piece[pc]["resources"])) if pc in buildable else NEVER
+    traders = [src for src in sources if src["kind"] == "trader"]
+    fish = [src for src in sources if src["kind"] == "fishing"]
+    world = [src for src in sources if src["kind"] not in ("fishing", "trader")]
+    made = [p for p in pieces if p["id"] in buildable and (pr := p.get("produces")) and pr["item"]
+            and pr.get("connectsTo", {"biomes": True}).get("biomes")]
+    while changed:
+        changed = False
+        for p in pieces:
+            if p["id"] in buildable:
+                tools = min((soft_item(t) if t in item_ids else 0 for t in p["tools"]), default=0)
+                lower(P, p["id"], max(tools, soft_cost(p["resources"]), station(p.get("station"))))
+            if p.get("locations"):
+                lower(P, p["id"], at(p["locations"]))
+        for src in world:  # a source counts once placed: in the world, made by an affordable piece, or a stage of one
+            if src["kind"] == "container" or src.get("biomes") or src.get("locations"):
+                lower(S, src["id"], min(biome_stage(src["biomes"]) if src.get("biomes") else NEVER,
+                                        at(src["locations"]) if src.get("locations") else NEVER,
+                                        0 if src["kind"] == "container" and not src.get("locations") else NEVER))
+            for pc in src.get("placedBy", []):
+                if pc in by_piece:
+                    lower(S, src["id"], built(pc))
+            v = max(S[src["id"]], tool(src))
+            if src.get("becomes") in item_ids:  # breaks into an item (Destructible.m_spawnWhenDestroyed)
+                lower(I, src["becomes"], v)
+            elif src.get("becomes"):
+                lower(S, src["becomes"], v)
+            for it in {d["item"] for d in (src.get("drops") or {}).get("items", [])} | picked_items(src):
+                lower(I, it, v)
+        for r in recipes:
+            if r.get("item") and (r.get("enabled") or r.get("season")):
+                lower(I, r["item"], max(cost(r["resources"]), station(r.get("station"), r.get("stationLevel", 1))))
+        for s in spawn_list:
+            src, c = s["source"], s["creature"]
+            if src in ("world", "location", "dungeon", "raid"):
+                keys = s.get("requiredGlobalKeys", []) + ([s["requiredGlobalKey"]] if s.get("requiredGlobalKey") else [])
+                lower(C, c, max([biome_stage(s.get("biomes")), event(s.get("requiredEvent"))] + [key(k) for k in keys]))
+            elif src in ("offspring", "growup"):  # counted from the start, like the parent's spawn (soft)
+                lower(C, c, soft_creature(s["parent"]))
+                if src == "offspring" and c in item_ids:  # an egg laid by a creature we have
+                    lower(I, c, C[s["parent"]])
+            elif src == "egg":
+                lower(C, c, soft_item(s["item"]))
+            elif src in ("summon", "phase"):  # a summon needs its summoner (the creature carrying it, else the item)
+                lower(C, c, C[s["parent"]] if "parent" in s else I[s["item"]])
+        for cid, cr in by_creature.items():
+            for d in cr.get("drops", []):
+                lower(I, d["item"], C[cid])
+                if d["item"] in by_creature:  # a creature dropped by one (a miniboss's second phase)
+                    lower(C, d["item"], C[cid])
+            if cid in by_piece:  # a buildable piece that is a creature (the training dummy)
+                lower(C, cid, built(cid))
+        for t in traders:
+            here = min((biome_stage(x.get("biomes")) for x in t.get("locations", [])), default=0)
+            for x in t["sells"]:
+                lower(I, x["item"], max(here if reach else 0, I["Coins"], key(x.get("requiredKey"))))
+        for p in procs:
+            lower(I, p["to"], max(I[p["from"]], station(p["station"]), soft_item(p.get("fuel"))))
+        for p in pieces:  # feasts: item and piece in one
+            if p["id"] in item_ids:
+                lower(I, p["id"], built(p["id"]))
+        for pc in made:  # a placed piece needs its cost; sap also its root, a world object
+            root = pc["produces"].get("connectsTo")
+            lower(I, pc["produces"]["item"], max(built(pc["id"]), biome_stage(root["biomes"]) if root else 0))
+        for f in fish:
+            v = max(C[f["id"]], min((I[b["item"]] for b in f["baits"]), default=NEVER))
+            lower(I, f["id"], v)
+            for d in (f.get("drops") or {}).get("items", []):
+                lower(I, d["item"], v)
+    return tuple({k: v for k, v in d.items() if v < NEVER} for d in (I, C, P))
+
+
 def reachable(items: list, creatures: list, pieces: list, recipes: list, procs: list, sources: list,
               spawn_list: list) -> tuple[set, set, set]:
     """Ids of the items, creatures and pieces a player can get to, by fixed point from what the world offers:
@@ -403,60 +576,9 @@ def reachable(items: list, creatures: list, pieces: list, recipes: list, procs: 
     of reachable inputs, eggs laid by a reachable creature, summons of a reachable summoner, boss phases of a reachable phase, creature-pieces (training dummy) whose cost is reachable. Pieces standing in a location (`locations`) count. Chests in locations and trader stock count (as
     sources; trader keys are ignored, Coins must be reachable), fish via their bait, honey and sap from buildable pieces whose cost is reachable (sap
     needs its root in the world). World sources count when placed (`biomes`, `locations`, `placedBy`, or a
-    `becomes` stage of a placed one); a placed source whose `becomes` is an item yields it (Dvergr altar crystals). Incomplete while quests aren't modelled (#20)."""
-    by_creature = {c["id"]: c for c in creatures}
-    got_creatures = {s["creature"] for s in spawn_list if s["source"] not in ("summon", "phase")}
-    traders = [src for src in sources if src["kind"] == "trader"]
-    got_pieces = {p["id"] for p in pieces if (p.get("enabled") or p.get("season")) and p.get("tools")}
-    got = set()
-    fish = [src for src in sources if src["kind"] == "fishing"]
-    made = [p for p in pieces if p["id"] in got_pieces and (pr := p.get("produces")) and pr["item"]
-            and pr.get("connectsTo", {"biomes": True}).get("biomes")]
-    by_piece = {p["id"]: p for p in pieces}
-    item_ids = {i["id"] for i in items}
-    world = [src for src in sources if src["kind"] not in ("fishing", "trader")]
-    placed = {src["id"] for src in world if src["kind"] == "container" or src.get("biomes") or src.get("locations")}
-    while True:
-        before = len(got), len(got_creatures)
-        for src in world:  # a source counts once placed: in the world, made by an affordable piece, or a stage of one
-            if src["id"] in placed:
-                if src.get("becomes") in item_ids:  # breaks into an item (Destructible.m_spawnWhenDestroyed)
-                    got.add(src["becomes"])
-                elif src.get("becomes"):
-                    placed.add(src["becomes"])
-            elif any(pc in got_pieces and all(r["item"] in got for r in by_piece[pc]["resources"])
-                     for pc in src.get("placedBy", [])):
-                placed.add(src["id"])
-        for src in world:
-            if src["id"] in placed:
-                got |= {d["item"] for d in (src.get("drops") or {}).get("items", [])}
-                got |= picked_items(src)
-        got |= {r["item"] for r in recipes if r.get("item") and (r.get("enabled") or r.get("season"))
-                and all(x["item"] in got for x in r["resources"] if not x.get("upgrader"))}
-        dropped = {d["item"] for c in got_creatures for d in by_creature.get(c, {}).get("drops", [])}
-        got |= dropped
-        got_creatures |= dropped & by_creature.keys()
-        for s in spawn_list:  # a summon needs its summoner (the creature carrying the item, else the item itself)
-            if s["source"] in ("summon", "phase") and (s["parent"] in got_creatures if "parent" in s else s["item"] in got):
-                got_creatures.add(s["creature"])
-        got_creatures |= {c for c in got_pieces if all(r["item"] in got for r in by_piece[c]["resources"])} \
-            & by_creature.keys()  # a buildable piece that is a creature (the training dummy)
-        got |= {s["creature"] for s in spawn_list if s["source"] == "offspring" and s["parent"] in got_creatures
-                and s["creature"] in item_ids}  # eggs laid by a creature we have
-        if "Coins" in got:
-            got |= {x["item"] for t in traders for x in t["sells"]}
-        got |= {p["to"] for p in procs if p["from"] in got}
-        got |= {p["id"] for p in pieces if p["id"] in got_pieces and p["id"] in item_ids  # feasts: item and piece in one
-                and all(r["item"] in got for r in p["resources"])}
-        for pc in made:  # a placed piece needs its cost; sap also its root, a world object
-            if all(r["item"] in got for r in pc["resources"]):
-                got.add(pc["produces"]["item"])
-        for f in fish:
-            if f["id"] in got_creatures and any(b["item"] in got for b in f["baits"]):
-                got.add(f["id"])
-                got |= {d["item"] for d in (f.get("drops") or {}).get("items", [])}
-        if (len(got), len(got_creatures)) == before:
-            return got, got_creatures, got_pieces | {p["id"] for p in pieces if p.get("locations")}
+    `becomes` stage of a placed one); a placed source whose `becomes` is an item yields it (Dvergr altar crystals).
+    Stations, tools and fuel aren't required. Incomplete while quests aren't modelled (#20). The first pass of stages()."""
+    return tuple(set(d) for d in stages(items, creatures, pieces, recipes, procs, sources, spawn_list))
 
 
 def seasons(pieces: list, recipes: list) -> None:
@@ -476,17 +598,22 @@ def seasons(pieces: list, recipes: list) -> None:
                 by_recipe[ref(r)]["season"] = s
 
 
-def mark_unobtainable(items: list, creatures: list, pieces: list, recipes: list, procs: list, sources: list,
-                      spawn_list: list) -> None:
+def mark_stages(items: list, creatures: list, pieces: list, recipes: list, procs: list, sources: list,
+                spawn_list: list, location_list: list) -> None:
     """Flag every item, creature and piece reachable() can't get to: unreleased, test, cheat and legacy content
     (Hive, SwordCheat, HealthUpgrade_*, OLD_wood_roof, unplaced *_sleeping variants). Internal and enemyOnly items
     are hidden already. The site hides unobtainable entries; verify_data guards against a source gap hiding real
-    content (#35)."""
-    got = reachable(items, creatures, pieces, recipes, procs, sources, spawn_list)
-    for entries, ids in zip((items, creatures, pieces), got):
+    content (#35). Reachable ones get the `stage` (a biome in STAGES) where a player first gets them (#24); none =
+    it couldn't be settled."""
+    args = items, creatures, pieces, recipes, procs, sources, spawn_list, location_list
+    got = tuple(set(d) for d in stages(*args))
+    staged = stages(*args, reach=got)
+    for entries, ids, st in zip((items, creatures, pieces), got, staged):
         for e in entries:
             if e["id"] not in ids and not e.get("internal") and not e.get("enemyOnly"):
                 e["unobtainable"] = True
+            elif e["id"] in st:
+                e["stage"] = STAGES[st[e["id"]]]
 
 
 def carried_items(c: dict) -> set[str]:
@@ -642,7 +769,9 @@ def source(name: str, p: dict) -> dict | None:
                      drops=drop_table(dod["m_dropWhenDestroyed"]))
     else:
         return None
-    if not entry.get("drops") and not entry.get("pickable") and not entry.get("becomes"):
+    if (ev := comp(p, "TriggerPersistentEventOnDestroy")) and not ev["_stopEvent"]:
+        entry["startsEvent"] = ev["_eventInternalName"]  # destroying it starts a persistent event (Fimbulvinter orb)
+    if not entry.get("drops") and not entry.get("pickable") and not entry.get("becomes") and not entry.get("startsEvent"):
         return None
     if hover := comp(p, "HoverText"):
         entry["name"] = entry.get("name") or text(hover.get("m_text"))
@@ -790,6 +919,7 @@ def world_spawn(s: dict, lst: str, alt: str = "") -> dict | None:
         "night": s["m_spawnAtNight"],
         "altitude": [s["m_minAltitude"], s["m_maxAltitude"]],
         "requiredGlobalKey": s["m_requiredGlobalKey"],
+        "requiredEvent": s.get("m_requiredPersistentEvent"),  # SpawnSystem: only while this persistent event runs
         "requiredEnvironments": s["m_requiredEnvironments"],
         "huntPlayer": s["m_huntPlayer"],
     }
@@ -835,6 +965,22 @@ def raid_spawns() -> list[dict]:
     return out
 
 
+def location_biomes() -> dict[str, list[str]]:
+    """Enabled ZoneSystem location prefab -> the biomes it is placed in, in ZoneSystem order (a prefab can have
+    several entries)."""
+    where = defaultdict(list)
+    for z in load("world/ZoneSystem.json")[0]["fields"]["m_locations"]:
+        if z["m_enable"]:
+            where[z["m_prefabName"]] += [b for b in biomes(z["m_biome"]) if b not in where[z["m_prefabName"]]]
+    return dict(where)
+
+
+def locations() -> list[dict]:
+    """Every enabled world location the dump has, with the `biomes` it is placed in."""
+    have = load_dir("locations")
+    return [{"id": k, "biomes": v} for k, v in sorted(location_biomes().items()) if k in have]
+
+
 def placed_in_locations():
     """(location, biomes, prefab, dungeon) for each enabled world location's own prefab and, as dungeon, every
     enabled room its DungeonGenerator can use (Room.Theme overlapping the generator's m_themes)."""
@@ -844,11 +990,7 @@ def placed_in_locations():
     def theme_bits(v) -> int:
         return v if isinstance(v, int) else int(v) if v.isdigit() else sum(themes.get(t, 0) for t in v.split(", "))
 
-    where = defaultdict(list)  # location prefab -> biomes, in ZoneSystem order
-    for z in load("world/ZoneSystem.json")[0]["fields"]["m_locations"]:
-        if z["m_enable"]:
-            where[z["m_prefabName"]] += [b for b in biomes(z["m_biome"]) if b not in where[z["m_prefabName"]]]
-
+    where = location_biomes()
     for name in sorted(where):
         if name not in locations:
             continue
@@ -987,7 +1129,8 @@ def fishing(spawn_list: list[dict]) -> list[dict]:
 
 def traders() -> list[dict]:
     """Traders (Trader component) standing in a world location, as sources of kind `trader`: what they `sell`
-    (item, stack, price in coins, `requiredKey` global key that unlocks the offer) and the `locations` (with biomes)
+    (item, stack, price in coins, `requiredKey` global key that unlocks the offer), what they `take` (an item handed
+    over that `setsKey`, a global key: Hildir's quest chests; Trader.m_useItems) and the `locations` (with biomes)
     they are found in. The id is the trader's name in the location prefab (Haldor, Hildir, BogWitch)."""
     by = {}
     for name, bs, p, dungeon in placed_in_locations():
@@ -998,7 +1141,10 @@ def traders() -> list[dict]:
             e = by.setdefault((c.get("path") or name).rsplit("/", 1)[-1], {"kind": "trader", "name": text(f["m_name"]),
                               "sells": [{"item": ref(i["m_prefab"]), "stack": i["m_stack"], "price": i["m_price"],
                                          "requiredKey": i["m_requiredGlobalKey"]} for i in f["m_items"]
-                                        if keep(ref(i["m_prefab"]), is_item)], "locations": []})
+                                        if keep(ref(i["m_prefab"]), is_item)],
+                              "takes": [{"item": ref(u["m_prefab"]), "setsKey": u["m_setsGlobalKey"]}
+                                        for u in f.get("m_useItems") or [] if u.get("m_setsGlobalKey")],
+                              "locations": []})
             e["locations"].append({"location": name, "biomes": bs})
     return [{"id": k, **v} for k, v in sorted(by.items())]
 
@@ -1206,7 +1352,8 @@ def main(argv: list[str]) -> int:
     recipes = [recipe(r) for r in load("recipes.json")]
     seasons(pieces, recipes)
     mark_enemy_only(items, creatures, recipes, procs, sources, pieces)
-    mark_unobtainable(items, creatures, pieces, recipes, procs, sources, spawn_list)
+    location_list = locations()
+    mark_stages(items, creatures, pieces, recipes, procs, sources, spawn_list, location_list)
     data = {
         "items.json": items,
         "recipes.json": recipes,
@@ -1215,6 +1362,7 @@ def main(argv: list[str]) -> int:
         "pieces.json": pieces,
         "processing.json": sorted(procs, key=lambda x: (x["station"], x["from"], x["to"])),
         "sources.json": sources,
+        "locations.json": location_list,
         "status_effects.json": [status_effect(e, defaults) for e in load("status_effects.json")],
     }
     for name, v in data.items():
