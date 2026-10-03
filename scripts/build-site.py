@@ -613,6 +613,58 @@ def attack_text(a: dict) -> str:
     return ", ".join(p for p in parts if p)
 
 
+ATTACK_VARIANTS = {"hildir", "frozen", "deep", "north", "ashlands", "nochest", "summoned"}  # which creature, not which move
+ATTACK_ABBREV = {"l": "left", "r": "right", "h": "horizontal", "v": "vertical"}
+
+
+def id_words(s: str) -> list[str]:
+    """CamelCase / snake_case id -> words; "2HAxe" -> 2H, Axe."""
+    out = []
+    for w in re.findall(r"[A-Z]+(?![a-z])|[A-Z]?[a-z]+|[0-9]+", s):
+        if out and out[-1].isdigit() and w == "H":
+            out[-1] += "H"
+        else:
+            out.append(w)
+    return out
+
+
+def attack_label(cid: str, aid: str, strict: bool = False) -> str:
+    """A name for an internal attack item from its id: the game's own names are placeholders shared across
+    creatures ("Club", "slap"). Drops the owner's words, for an aspect the boss's id (Aspect_Elder uses
+    aspect_gd_king_*), the "attack" segment and variant words. `strict` drops only the first word, to tell apart two
+    attacks of one creature that would get the same label."""
+    rest = re.sub(r"^aspect_", "", aid, flags=re.I)
+    owners = sorted((c for c in CREATURES if rest.lower().startswith(c.lower() + "_") or
+                     rest.startswith(c) and rest[len(c):len(c) + 1].isupper()), key=len)
+    if owners and cid.startswith("Aspect_") and not strict:  # a boss's aspect reuses the boss's attacks
+        rest = rest[len(owners[-1]):].lstrip("_")
+    own = {"aspect"} | ({id_words(aid)[0].lower()} if strict else {w.lower() for w in id_words(cid)})
+    dropped_attack, words_ = False, []
+    for seg in rest.split("_"):
+        if seg.lower() == "attack" and not strict:
+            dropped_attack = True
+        else:
+            words_ += id_words(seg)
+    keep = [w for w in words_ if w.lower() not in own | ATTACK_VARIANTS
+            and not (len(w) > 3 and any(len(o) > 3 and o in w.lower() for o in own))]
+    keep = [w for n, w in enumerate(keep) if not n or w.lower() != keep[n - 1].lower()]  # "Staff heal heal"
+    if not keep:
+        return "Attack" if dropped_attack or not words_ else words_[-1].capitalize()
+    text_ = " ".join(ATTACK_ABBREV.get(w.lower(), w if w[0].isdigit() or len(w) > 1 and w.isupper() else w.lower())
+                     for w in keep)
+    return text_[0].upper() + text_[1:]
+
+
+def attack_labels(c: dict) -> dict[str, str]:
+    """Labels for a creature's internal attacks, unique within the creature."""
+    ids = [a for a in c.get("attacks", []) if ITEMS[a].get("internal")]
+    labels = {a: attack_label(c["id"], a) for a in ids}
+    for a in ids:
+        if list(labels.values()).count(labels[a]) > 1:
+            labels[a] = attack_label(c["id"], a, strict=True)
+    return labels
+
+
 def attack_damage(w: dict) -> str:
     """A creature attack's damage: the item's, or what its projectiles and area effects deal (`hits`)."""
     if not (hits := w.get("hits")):
@@ -747,11 +799,12 @@ def creature_page(c: dict) -> None:
     mods = modifiers_table(c.get("damageModifiers"), hide_tools=True)
     body += section("Resistances", mods + (f'<p class="note">What the levels mean: '
                                            f'{mech_link("damage-types", "Damage types and resistances")}.</p>' if mods else ""))
-    attacks = []
+    attacks, labels = [], attack_labels(c)
     for a in c.get("attacks", []):
         w = ITEMS[a]
         atk = w.get("attack") or {}
-        label = link("item", original(a)) if has_page("item", original(a)) else esc(clean(w.get("name")) or pretty_id(a))
+        label = (link("item", original(a)) if has_page("item", original(a))
+                 else esc(labels.get(a) or clean(w.get("name")) or pretty_id(a)))
         attacks.append([label, attack_damage(w),
                         esc(words(atk.get("type", ""))), num(w["attackForce"]) if w.get("attackForce") else ""])
     body += section("Attacks", table(["Attack", "Damage", "Type", "Knockback"], attacks))

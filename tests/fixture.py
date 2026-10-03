@@ -144,7 +144,7 @@ TRANSLATIONS = {
     "item_buckler": "Test Buckler",
     "item_sword": "Test Sword", "item_sword_desc": "Sharp <b>enough</b>.",
     "item_helmet": "Pot Helm", "item_fish": "Glimfish", "item_pearl": "Moon Pearl", "item_mead": "Fizz Mead", "item_coins": "Coins", "item_charm": "Lucky Charm", "npc_vendor": "Old Vendor",
-    "item_hammer": "Mallet", "item_shard": "Shard", "item_bite": "Bite", "item_spit": "Spit",
+    "item_hammer": "Mallet", "item_shard": "Shard", "item_bite": "Bite",
     "enemy_raider": "Raider", "piece_bench": "Bench", "piece_anvil": "Anvil", "piece_kiln": "Kiln",
     "piece_bush": "Twig Bush", "piece_orerock": "Ore Rock", "se_fizz": "Fizzy",
     "enemy_pup": "Pup", "enemy_chief_p2": "Chief Risen", "enemy_imp": "Imp", "enemy_shade": "Shade", "enemy_sprite": "Sprite", "enemy_moth": "Moth", "enemy_singer": "Singer", "item_wand": "Wand", "item_rod": "Summoning Rod", "enemy_chief": "<color=orange>Chief</color>", "item_egg": "Egg", "item_nectar": "Nectar", "item_ichor": "Ichor", "item_dust": "Dust",
@@ -194,8 +194,8 @@ def prefabs():
         item("Hammer", name="$item_hammer", itemType="Tool", icons=[S("Hammer")], buildPieces=R("_HammerTable")),
         item("Bite", name="$item_bite", itemType="OneHandedWeapon", attack=attack(attackStamina=0),
              damages=damages(pierce=12)),  # no icon: internal attack item
-        item("Spit", name="$item_spit", itemType="OneHandedWeapon", damages=damages(poison=5),
-             attack=attack(attackType="Projectile", attackProjectile=R("SpitBolt"))),  # the pool it leaves does the damage
+        item("Spit", name="$item_bite", itemType="OneHandedWeapon", damages=damages(poison=5),
+             attack=attack(attackType="Projectile", attackProjectile=R("SpitBolt"))),  # placeholder name; the pool it leaves does the damage
         prefab("SpitBolt", comp("Projectile", m(damage=damages(), spawnOnHit=R("SpitPool"), randomSpawnOnHit=[],
                                                 onlySpawnedProjectilesDealDamage=True, projectilesInheritHitData=False))),
         prefab("SpitPool", comp("Aoe", m(damage=damages(poison=9), useAttackSettings=True))),
