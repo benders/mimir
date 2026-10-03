@@ -224,7 +224,7 @@ def main() -> int:
     locations = load("locations.json")
     check(len(locations) > 100 and all(x["biomes"] for x in locations), f"locations: {len(locations)} with biomes")
     stages = {
-        "Wood": "Meadows", "FineWood": "Meadows",  # Early Axes from Meadows chests cut birch
+        "Wood": "Meadows", "FineWood": "BlackForest",  # bronze axe (Early Axes are STAGE_IGNORED_TOOLS)
         "Copper": "BlackForest", "Bronze": "BlackForest", "Iron": "Swamp", "Silver": "Mountain",
         "BlackMetal": "Plains", "Eitr": "Mistlands", "FlametalNew": "AshLands",
         "SwordBronze": "BlackForest", "SwordIron": "Swamp", "SwordBlackmetal": "Plains",

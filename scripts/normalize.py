@@ -399,6 +399,7 @@ STAGES = ("Meadows", "BlackForest", "Swamp", "Mountain", "Plains", "Mistlands", 
 BIOME_STAGE = {b: i for i, b in enumerate(STAGES)} | {"Ocean": 0}  # the sea counts from the start (#24)
 NEVER = len(STAGES)
 STAGE_OVERRIDES: dict[str, str] = {}  # id -> stage, where the data gets the progression wrong
+STAGE_IGNORED_TOOLS = {"AxeEarly"}  # Early Axes (Meadows chest axe heads, tier 2): an unusual path to FineWood
 
 
 def biome_stage(bs: list | None) -> int:
@@ -424,7 +425,7 @@ def stages(items: list, creatures: list, pieces: list, recipes: list, procs: lis
       - a world spawn's persistent event (SpawnSystem m_requiredPersistentEvent): the source that `startsEvent`;
       - the parent of offspring and hatchlings;
       - for a source with `minToolTier`, a player item of that tier dealing a damage type it isn't immune to
-        (MineRock/TreeBase/Destructible.Damage).
+        (MineRock/TreeBase/Destructible.Damage), except STAGE_IGNORED_TOOLS.
     A soft requirement on an unreachable thing is ignored; a
     reachable thing whose stage can't be settled (a cycle through soft requirements) is left out."""
     I, C, P, S = (defaultdict(lambda: NEVER) for _ in range(4))
@@ -490,7 +491,7 @@ def stages(items: list, creatures: list, pieces: list, recipes: list, procs: lis
         hurt = {t for t, m in (src.get("damageModifiers") or {}).items() if m not in ("Immune", "Ignore")}
         hurt |= {t for t in ("chop", "pickaxe") if t not in (src.get("damageModifiers") or {})}
         return min((soft_item(i["id"]) for i in items if i["id"] in reach[0] and i.get("toolTier", 0) >= tier
-                    and not i.get("internal") and not i.get("enemyOnly")
+                    and not i.get("internal") and not i.get("enemyOnly") and i["id"] not in STAGE_IGNORED_TOOLS
                     and any(v > 0 for t, v in (i.get("damages") or {}).items() if t in hurt)), default=0)
 
     loc_stage = {loc["id"]: biome_stage(loc["biomes"]) for loc in location_list}

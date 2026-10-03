@@ -11597,7 +11597,7 @@
    "poison": "Immune",
    "spirit": "Immune"
   },
-  "stage": "Meadows"
+  "stage": "BlackForest"
  },
  {
   "id": "piece_CelebrationGarland",
@@ -11635,7 +11635,7 @@
    "poison": "Immune",
    "spirit": "Immune"
   },
-  "stage": "Meadows"
+  "stage": "BlackForest"
  },
  {
   "id": "piece_EternalPyre",
@@ -12149,7 +12149,7 @@
    "poison": "Immune",
    "spirit": "Immune"
   },
-  "stage": "Meadows"
+  "stage": "BlackForest"
  },
  {
   "id": "piece_banner04",
@@ -12741,7 +12741,7 @@
    "poison": "Immune",
    "spirit": "Immune"
   },
-  "stage": "Meadows"
+  "stage": "BlackForest"
  },
  {
   "id": "piece_bench_runed",
@@ -13309,7 +13309,7 @@
    "poison": "Immune",
    "spirit": "Immune"
   },
-  "stage": "Meadows"
+  "stage": "BlackForest"
  },
  {
   "id": "piece_chair02",
@@ -13341,7 +13341,7 @@
    "poison": "Immune",
    "spirit": "Immune"
   },
-  "stage": "Meadows"
+  "stage": "BlackForest"
  },
  {
   "id": "piece_chair03",
@@ -14422,7 +14422,7 @@
     1
    ]
   },
-  "stage": "Meadows"
+  "stage": "BlackForest"
  },
  {
   "id": "piece_gift2",
@@ -14470,7 +14470,7 @@
     1
    ]
   },
-  "stage": "Meadows"
+  "stage": "BlackForest"
  },
  {
   "id": "piece_gift3",
@@ -14518,7 +14518,7 @@
     1
    ]
   },
-  "stage": "Meadows"
+  "stage": "BlackForest"
  },
  {
   "id": "piece_grausten_roof_45",
@@ -16120,7 +16120,7 @@
    "poison": "Immune",
    "spirit": "Immune"
   },
-  "stage": "Meadows"
+  "stage": "BlackForest"
  },
  {
   "id": "piece_table_oak",
@@ -19476,7 +19476,7 @@
    "poison": "Immune",
    "spirit": "Immune"
   },
-  "stage": "Meadows"
+  "stage": "BlackForest"
  },
  {
   "id": "wood_fence",
@@ -19559,7 +19559,7 @@
    "poison": "Immune",
    "spirit": "Immune"
   },
-  "stage": "Meadows"
+  "stage": "BlackForest"
  },
  {
   "id": "wood_floor",

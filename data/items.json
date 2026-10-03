@@ -95,7 +95,7 @@
   "weight": 0.1,
   "stack": 100,
   "maxQuality": 1,
-  "stage": "Meadows"
+  "stage": "BlackForest"
  },
  {
   "id": "Amber",
@@ -5463,7 +5463,7 @@
   "weight": 0.1,
   "stack": 100,
   "maxQuality": 1,
-  "stage": "Meadows"
+  "stage": "BlackForest"
  },
  {
   "id": "BjornHide",
@@ -11928,7 +11928,7 @@
   "weight": 2,
   "stack": 50,
   "maxQuality": 1,
-  "stage": "Meadows"
+  "stage": "BlackForest"
  },
  {
   "id": "FirCone",
@@ -19300,7 +19300,7 @@
    ],
    "cycle": 1.545
   },
-  "stage": "Meadows"
+  "stage": "BlackForest"
  },
  {
   "id": "KnifeCopper",
@@ -26782,7 +26782,7 @@
   "modifiers": {
    "movement": -0.05
   },
-  "stage": "Meadows"
+  "stage": "BlackForest"
  },
  {
   "id": "SpearElderbark",
@@ -30237,7 +30237,7 @@
    "cycle": 4.276
   },
   "ammoType": "mead",
-  "stage": "Meadows"
+  "stage": "BlackForest"
  },
  {
   "id": "TankardAnniversary",
@@ -30300,7 +30300,7 @@
    "cycle": 4.276
   },
   "ammoType": "mead",
-  "stage": "Meadows"
+  "stage": "BlackForest"
  },
  {
   "id": "Tankard_dvergr",
