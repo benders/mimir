@@ -155,6 +155,19 @@ class Entities(FixtureCase):
         rock = N.source("OreRock", N.PREFABS["OreRock"])
         self.assertEqual(rock["minToolTier"], 2)
 
+    def test_destructible_source(self):
+        hive = N.source("WildHive", N.PREFABS["WildHive"])  # a destroyable object that isn't a Piece
+        self.assertEqual((hive["kind"], hive["health"], [d["item"] for d in hive["drops"]["items"]]),
+                         ("destructible", 20, ["Wood", "Ore"]))
+
+    def test_produces(self):
+        hive = N.piece("Hive", N.PREFABS["Hive"], {})["produces"]
+        self.assertEqual(hive, {"item": "Nectar", "secPerUnit": 600, "max": 4, "biomes": ["Meadows", "BlackForest"]})
+        tap = N.piece("Tap", N.PREFABS["Tap"], {})["produces"]
+        self.assertEqual((tap["item"], tap["connectsTo"]), ("Ichor", {"id": "Root", "biomes": ["Mountain", "Swamp"]}))
+        self.assertEqual(N.piece("Tap2", N.PREFABS["Tap2"], {})["produces"]["connectsTo"], {"id": "Root2", "biomes": []})
+        self.assertIsNone(N.piece("Bench", N.PREFABS["Bench"], {})["produces"])
+
     def test_status_effect_diffs_against_defaults(self):
         defaults = {d["type"]: d["fields"] for d in N.load("status_effect_defaults.json")}
         e = N.status_effect(N.load("status_effects.json")[0], defaults)
@@ -226,6 +239,7 @@ class Entities(FixtureCase):
     def test_offspring(self):
         self.assertEqual([s["parent"] for s in self.spawns("offspring")], ["Raider", "Raider_Ranged", "Raider_sleeping"])
         self.assertEqual(self.spawns("egg"), [{"creature": "Pup", "source": "egg", "item": "Egg"}])
+        self.assertEqual(self.spawns("growup"), [{"creature": "Raider", "source": "growup", "parent": "Pup"}])
 
 
 class EnemyOnly(FixtureCase):
@@ -292,6 +306,8 @@ class Unobtainable(FixtureCase):
         self.assertNotIn("Charm", got)
         got, _, _ = N.reachable(items, creatures, pieces, recipes, procs, sources + coins + shop, N.spawns())
         self.assertIn("Charm", got)  # the global key is ignored
+        self.assertTrue({"Nectar", "Ichor"} <= got)  # honey from a buildable hive, sap from one with a Root in the world
+        self.assertNotIn("Dust", got)  # its Root2 isn't placed
         twin = [dict(c, drops=c["drops"] + [{"item": "Twin"}]) if c["id"] == "Raider" else c for c in creatures]
         twin.append({"id": "Twin", "drops": [{"item": "Mystery"}]})  # a creature dropped by a creature (a second phase)
         got, got_creatures, _ = N.reachable(items, twin, pieces, recipes, procs, sources, N.spawns())

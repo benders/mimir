@@ -45,6 +45,17 @@ class Site(unittest.TestCase):
         self.assertIn('href="pieces/Kiln.html"', ingot)  # smelted in
         self.assertIn('href="items/Sword.html"', ingot)  # used in
 
+    def test_producers(self):
+        nectar = (self.out / "items/Nectar.html").read_text(encoding="utf-8")
+        self.assertIn('href="pieces/Hive.html"', nectar)  # made by a placed piece
+        self.assertIn("10 min each, up to ×4", nectar)
+        hive = (self.out / "pieces/Hive.html").read_text(encoding="utf-8")
+        self.assertIn("<h2>Produces</h2>", hive)
+        self.assertIn('href="items/Nectar.html"', hive)
+        self.assertIn("Root", (self.out / "pieces/Tap.html").read_text(encoding="utf-8"))
+        raider = (self.out / "creatures/Raider.html").read_text(encoding="utf-8")
+        self.assertIn('href="creatures/Pup.html"', raider)  # born from: grows up from Pup
+
     def test_spawn_sections(self):
         raider = (self.out / "creatures/Raider.html").read_text(encoding="utf-8")
         for h in ("Spawns", "Locations", "Raids"):

@@ -193,6 +193,11 @@
   "item": "Egg"
  },
  {
+  "creature": "Raider",
+  "source": "growup",
+  "parent": "Pup"
+ },
+ {
   "creature": "Pup",
   "source": "offspring",
   "parent": "Raider"

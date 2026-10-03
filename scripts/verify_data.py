@@ -98,7 +98,7 @@ def main() -> int:
     check(spawned("Neck", "raid", event="army_eikthyr"), "Necks in the Eikthyr raid")
     check(spawned("Wolf_cub", "offspring", parent="Wolf"), "Wolf cub born from Wolf")
     check(spawned("TrollFrost", "world", biomes="DeepNorth"), "TrollFrost: spawner-placed world spawn")
-    check(all(s.get("biomes") for s in spawns if s.get("source") not in ("offspring", "egg")), "every spawn has a biome")
+    check(all(s.get("biomes") for s in spawns if s.get("source") not in ("offspring", "egg", "growup")), "every spawn has a biome")
     bosses = [c for c in creatures.values() if c.get("boss") and not c["id"].endswith(("_p2", "_p3"))]
     unplaced = sorted(c["id"] for c in bosses if not any(s["creature"] == c["id"] for s in spawns))
     check(unplaced == ["Hive", "TheHive"], f"every boss but the Queen's hives has a location (unplaced: {unplaced})")
@@ -126,6 +126,13 @@ def main() -> int:
     check({"FishingBait", "Thunderstone"} <= set(sold["Haldor"]) and "BarberKit" in sold["Hildir"]
           and "SpiceOceans" in sold["BogWitch"], "Haldor sells bait and thunderstones, Hildir the barber kit, the Bog Witch spices")
     check(any(o.get("requiredKey") for o in sold["Hildir"].values()), "Hildir's offers unlock with global keys")
+    made = {p["produces"]["item"]: p for p in pieces.values() if p.get("produces")}
+    check({"Honey", "Sap"} <= set(made) and made["Honey"]["produces"]["secPerUnit"] > 0
+          and "Mistlands" in made["Sap"]["produces"].get("connectsTo", {}).get("biomes", []),
+          "Beehive makes Honey, the Sap Extractor Sap (from a Mistlands root)")
+    hive = next((s for s in sources if s["id"] == "Beehive"), {})
+    check({d["item"] for d in hive.get("drops", {}).get("items", [])} == {"Honey", "QueenBee"}, "wild Beehive drops Honey and QueenBee")
+    check(any(s["creature"] == "Hen" and s.get("source") == "growup" for s in spawns), "Hen grows up from the Chicken")
     mead = items.get("MeadHealthMinor", {}).get("consumeEffect")
     check(bool(mead) and bool(effects.get(mead, {}).get("stats")), "MeadHealthMinor: consume effect with stats")
     check(items.get("CookedMeat", {}).get("food", {}).get("health", 0) > 0, "CookedMeat: food values")

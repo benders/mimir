@@ -146,7 +146,8 @@ TRANSLATIONS = {
     "item_hammer": "Mallet", "item_bite": "Bite",
     "enemy_raider": "Raider", "piece_bench": "Bench", "piece_anvil": "Anvil", "piece_kiln": "Kiln",
     "piece_bush": "Twig Bush", "piece_orerock": "Ore Rock", "se_fizz": "Fizzy",
-    "enemy_pup": "Pup", "enemy_chief": "<color=orange>Chief</color>", "item_egg": "Egg", "event_test": "Something stirs",
+    "enemy_pup": "Pup", "enemy_chief": "<color=orange>Chief</color>", "item_egg": "Egg", "item_nectar": "Nectar", "item_ichor": "Ichor", "item_dust": "Dust",
+    "piece_hive": "Hive", "piece_tap": "Tap", "piece_wildhive": "Wild Hive", "event_test": "Something stirs",
 }
 
 
@@ -197,7 +198,7 @@ def prefabs():
         raider("Raider"),
         raider("Raider_sleeping"),  # identical copy: merged into Raider's page
         raider("Raider_Ranged", health=120),  # differs: "Raider (archer)"
-        prefab("Pup", character(name="$enemy_pup", health=20)),
+        prefab("Pup", character(name="$enemy_pup", health=20), comp("Growup", m(grownPrefab=R("Raider")))),
         prefab("Chief", character(name="$enemy_chief", health=900, boss=True)),
         prefab("Wisp", character(name="$enemy_missing", health=10)),  # unresolved name, never spawns: hidden
         with_components(item("Egg", name="$item_egg", icons=[S("Egg")]), comp("EggGrow", m(grownPrefab=R("Pup")))),
@@ -215,6 +216,17 @@ def prefabs():
                                         secPerProduct=30, fuelItem=R("Wood"), fuelPerProduct=2, maxOre=10)),
               name="$piece_kiln", icon=S("Kiln"), craftingStation=R("Bench"), resources=[req("Wood", 5)],
               comfort=1, comfortGroup="Fire"),
+        item("Nectar", name="$item_nectar", icons=[S("Nectar")]),  # only from the Hive piece
+        item("Ichor", name="$item_ichor", icons=[S("Ichor")]),  # only from the Tap piece, which needs a Root
+        item("Dust", name="$item_dust", icons=[S("Dust")]),  # from Tap2, whose Root2 isn't in the world
+        piece("Hive", comp("Beehive", m(honeyItem=R("Nectar"), secPerUnit=600, maxHoney=4, biome="Meadows, BlackForest")),
+              name="$piece_hive", icon=S("Hive"), resources=[req("Wood", 10)]),
+        piece("Tap", comp("SapCollector", m(spawnItem=R("Ichor"), secPerUnit=60, maxLevel=10, mustConnectTo=R("Root"))),
+              name="$piece_tap", icon=S("Tap"), resources=[req("Wood", 4)]),
+        piece("Tap2", comp("SapCollector", m(spawnItem=R("Dust"), secPerUnit=60, maxLevel=10, mustConnectTo=R("Root2"))),
+              name="$piece_tap", icon=S("Tap"), resources=[req("Wood", 4)]),
+        prefab("WildHive", comp("WearNTear", m(health=20, materialType="Wood", damages={"m_fire": "Weak"})),
+               comp("DropOnDestroyed", m(dropWhenDestroyed=drop_table(("Wood", 1, 3, 1), ("Ore", 1, 1, 1))))),
         prefab("Bush", comp("Pickable", m(overrideName="$piece_bush", itemPrefab=R("Wood"), amount=2,
                                           respawnTimeMinutes=240, extraDrops=drop_table())),
                comp("HoverText", m(text="ignored, Pickable has a name"))),
@@ -260,7 +272,7 @@ def write_dump(raw: Path) -> Path:
     dump("status_effects.json", status_effects())
     dump("status_effect_defaults.json", [{"name": "SE_Stats", "type": "SE_Stats", "fields": SE_DEFAULTS}])
     dump("piece_tables.json", [{"name": "_HammerTable", "type": "PieceTable",
-                                "fields": {"m_pieces": [R("Bench"), R("Anvil"), R("Kiln")]}}])
+                                "fields": {"m_pieces": [R("Bench"), R("Anvil"), R("Kiln"), R("Hive"), R("Tap"), R("Tap2")]}}])
     dump("world/SpawnSystemList.json", [{"name": "Spawns", "type": "SpawnSystemList", "fields": {"m_spawners": [
         spawner("Raider", biome="Meadows, BlackForest", minLevel=1, maxLevel=2, spawnAtDay=False),
         spawner("Raider", enabled=False),
@@ -274,7 +286,10 @@ def write_dump(raw: Path) -> Path:
         event("army_test", "Meadows, Swamp", spawner("Raider", biome="1023", minLevel=2, maxLevel=1), spawner("vfx_Poof")),
         event("army_off", "Meadows", spawner("Pup"), enabled=False),
     ]}}])
-    dump("world/ZoneSystem.json", [{"name": "_GameMain", "type": "ZoneSystem", "fields": {"m_locations": [
+    dump("world/ZoneSystem.json", [{"name": "_GameMain", "type": "ZoneSystem", "fields": {"m_vegetation": [
+        m(prefab=R("Root"), enable=True, biome="Mountain"), m(prefab=R("Root"), enable=True, biome="Swamp"),
+        m(prefab=R("Root"), enable=False, biome="Plains"), m(prefab=R("Root2"), enable=False, biome="Plains")],
+        "m_locations": [
         zone_location("Camp", "Swamp"),
         zone_location("Camp", "Plains"),  # same prefab placed in a second biome
         zone_location("Lair", "Mountain"),

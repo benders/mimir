@@ -6424,9 +6424,24 @@
   "item": "AsksvinEgg"
  },
  {
+  "creature": "Asksvin",
+  "source": "growup",
+  "parent": "Asksvin_hatchling"
+ },
+ {
   "creature": "Boar_piggy",
   "source": "offspring",
   "parent": "Boar"
+ },
+ {
+  "creature": "Boar",
+  "source": "growup",
+  "parent": "Boar_piggy"
+ },
+ {
+  "creature": "Hen",
+  "source": "growup",
+  "parent": "Chicken"
  },
  {
   "creature": "Chicken",
@@ -6444,14 +6459,29 @@
   "parent": "Lox"
  },
  {
+  "creature": "Lox",
+  "source": "growup",
+  "parent": "Lox_Calf"
+ },
+ {
   "creature": "Moose_calf",
   "source": "offspring",
   "parent": "Moose"
  },
  {
+  "creature": "Moose",
+  "source": "growup",
+  "parent": "Moose_calf"
+ },
+ {
   "creature": "Wolf_cub",
   "source": "offspring",
   "parent": "Wolf"
+ },
+ {
+  "creature": "Wolf",
+  "source": "growup",
+  "parent": "Wolf_cub"
  },
  {
   "creature": "Wolf_cub",

@@ -287,6 +287,7 @@ built_at = defaultdict(list)         # station piece -> pieces needing it nearby
 extensions = defaultdict(list)       # station piece -> extension pieces
 process_from = defaultdict(list)     # item -> conversions consuming it (input or fuel)
 process_to = defaultdict(list)       # item -> conversions producing it
+produced_by = defaultdict(list)      # item -> pieces making it on their own (beehive, sap extractor)
 process_at = defaultdict(list)       # station -> conversions
 dropped_by = defaultdict(list)       # item -> (creature id, drop)
 found_in = defaultdict(list)         # item -> (source, text)
@@ -317,6 +318,8 @@ for p in PIECES.values():
         extensions[p["extends"]].append(p)
     for t in p.get("tools", []):
         tool_pieces[t].append(p)
+    if p.get("produces"):
+        produced_by[p["produces"]["item"]].append(p)
 for c in PROCESSING:
     process_from[c["from"]].append(c)
     if c.get("fuel") and c["fuel"] != c["from"]:
@@ -383,7 +386,7 @@ def biome_weights(cid: str, seen: frozenset = frozenset()) -> dict[str, float]:
     w = spread({"world", "location", "dungeon"})
     if not w:
         seen |= {cid}
-        parents = [s["parent"] for s in spawns_of[cid] if s.get("source") == "offspring"]
+        parents = [s["parent"] for s in spawns_of[cid] if s.get("source") in ("offspring", "growup")]
         parents += [e["parent"] for s in spawns_of[cid] if s.get("source") == "egg"
                     for e in spawns_of[s["item"]] if e.get("source") == "offspring"]
         for p in parents:
@@ -618,7 +621,13 @@ def item_page(i: dict) -> None:
     for c in process_to[i["id"]]:
         obtain.append([f'{esc(PROCESS_LABELS.get(c["kind"], c["kind"]))} at {link("piece", c["station"])}',
                        f'{link("item", c["from"])} → ×{num(c["amount"])}', duration(c["time"])])
+    for p in produced_by[i["id"]]:
+        pr = p["produces"]
+        where = " near " + esc(pretty_id(pr["connectsTo"]["id"])) if pr.get("connectsTo") else ""
+        obtain.append([f'Produced by {link("piece", p["id"])}{where}', "", f'{duration(pr["secPerUnit"])} each, up to ×{num(pr["max"])}'])
     body += section("Produced by", table(["How", "From", "Time"], obtain))
+    laid = [s["parent"] for s in spawns_of[i["id"]] if s.get("source") == "offspring"]
+    body += section("Laid by", reflist(link("creature", c) for c in laid))
 
     fish = SOURCES.get(i["id"])
     if fish and fish["kind"] == "fishing":
@@ -730,7 +739,8 @@ def spawn_sections(spawns: list[dict]) -> str:
              rng(*s["groupSize"]), esc(s.get("message") or "")] for s in by["raid"]]
     out += section("Raids", table(["Event", "Biome", "Level", "Group", "Message"], rows))
 
-    born = [link("creature", s["parent"]) for s in by["offspring"]] + [link("item", s["item"]) for s in by["egg"]]
+    born = [link("creature", s["parent"]) for s in by["offspring"] + by["growup"]] + \
+           [link("item", s["item"]) for s in by["egg"]]
     out += section("Born from", reflist(born))
     return out
 
@@ -765,6 +775,14 @@ def piece_page(p: dict) -> None:
     conv = [[link("item", c["from"]), link("item", c["to"], c["amount"]), duration(c["time"]),
              link("item", c["fuel"]) if c.get("fuel") else ""] for c in process_at[p["id"]]]
     body += section("Converts", table(["Input", "Output", "Time", "Fuel"], conv))
+    pr = p.get("produces")
+    if pr:
+        rows = [("Produces", link("item", pr["item"])), ("Rate", f'one per {duration(pr["secPerUnit"])}, holds up to {num(pr["max"])}'),
+                ("Works in", ", ".join(esc(BIOMES.get(b, words(b))) for b in pr.get("biomes", []))),
+                ("Needs", esc(pretty_id(pr["connectsTo"]["id"])) + " (" + ", ".join(
+                    esc(BIOMES.get(b, words(b))) for b in pr["connectsTo"].get("biomes", [])) + ")"
+                 if pr.get("connectsTo") else None)]
+        body += section("Produces", kv(rows))
     body += section("Enables building", reflist(link("piece", b["id"]) for b in built_at[p["id"]]))
     page(href("piece", p["id"]), name_of("piece", p["id"]), body, '<a href="pieces/index.html">Pieces</a>')
 

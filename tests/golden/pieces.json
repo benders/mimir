@@ -50,6 +50,36 @@
   }
  },
  {
+  "id": "Hive",
+  "name": "Hive",
+  "icon": "Hive",
+  "enabled": true,
+  "category": "Misc",
+  "tools": [
+   "Hammer"
+  ],
+  "resources": [
+   {
+    "item": "Wood",
+    "amount": 10
+   }
+  ],
+  "health": 400,
+  "material": "Wood",
+  "damageModifiers": {
+   "fire": "Weak"
+  },
+  "produces": {
+   "item": "Nectar",
+   "secPerUnit": 600,
+   "max": 4,
+   "biomes": [
+    "Meadows",
+    "BlackForest"
+   ]
+  }
+ },
+ {
   "id": "Kiln",
   "name": "Kiln",
   "icon": "Kiln",
@@ -73,6 +103,68 @@
   "material": "Wood",
   "damageModifiers": {
    "fire": "Weak"
+  }
+ },
+ {
+  "id": "Tap",
+  "name": "Tap",
+  "icon": "Tap",
+  "enabled": true,
+  "category": "Misc",
+  "tools": [
+   "Hammer"
+  ],
+  "resources": [
+   {
+    "item": "Wood",
+    "amount": 4
+   }
+  ],
+  "health": 400,
+  "material": "Wood",
+  "damageModifiers": {
+   "fire": "Weak"
+  },
+  "produces": {
+   "item": "Ichor",
+   "secPerUnit": 60,
+   "max": 10,
+   "connectsTo": {
+    "id": "Root",
+    "biomes": [
+     "Mountain",
+     "Swamp"
+    ]
+   }
+  }
+ },
+ {
+  "id": "Tap2",
+  "name": "Tap",
+  "icon": "Tap",
+  "enabled": true,
+  "category": "Misc",
+  "tools": [
+   "Hammer"
+  ],
+  "resources": [
+   {
+    "item": "Wood",
+    "amount": 4
+   }
+  ],
+  "health": 400,
+  "material": "Wood",
+  "damageModifiers": {
+   "fire": "Weak"
+  },
+  "produces": {
+   "item": "Dust",
+   "secPerUnit": 60,
+   "max": 10,
+   "connectsTo": {
+    "id": "Root2"
+   }
   }
  },
  {

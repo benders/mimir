@@ -11408,6 +11408,16 @@
    "chop": "Weak",
    "poison": "Immune",
    "spirit": "Immune"
+  },
+  "produces": {
+   "item": "Honey",
+   "secPerUnit": 1200,
+   "max": 4,
+   "biomes": [
+    "Meadows",
+    "BlackForest",
+    "Plains"
+   ]
   }
  },
  {
@@ -11512,6 +11522,16 @@
    "chop": "Weak",
    "poison": "Immune",
    "spirit": "Immune"
+  },
+  "produces": {
+   "item": "Feathers",
+   "secPerUnit": 1200,
+   "max": 4,
+   "biomes": [
+    "Meadows",
+    "BlackForest",
+    "Plains"
+   ]
   }
  },
  {
@@ -14357,6 +14377,17 @@
    "pickaxe": "Ignore",
    "poison": "Immune",
    "spirit": "Immune"
+  },
+  "produces": {
+   "item": "Sap",
+   "secPerUnit": 60,
+   "max": 10,
+   "connectsTo": {
+    "id": "YggdrasilRoot",
+    "biomes": [
+     "Mistlands"
+    ]
+   }
   }
  },
  {

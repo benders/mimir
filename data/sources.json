@@ -18,6 +18,63 @@
   }
  },
  {
+  "id": "Ashland_Stair",
+  "kind": "destructible",
+  "health": 1500,
+  "damageModifiers": {
+   "blunt": "Resistant",
+   "slash": "Resistant",
+   "pierce": "Resistant",
+   "chop": "Resistant",
+   "fire": "Immune",
+   "frost": "Immune",
+   "lightning": "Ignore",
+   "poison": "Ignore",
+   "spirit": "Immune"
+  },
+  "drops": {
+   "min": 2,
+   "max": 5,
+   "chance": 1,
+   "items": [
+    {
+     "item": "Stone",
+     "min": 1,
+     "max": 1,
+     "weight": 1
+    }
+   ]
+  }
+ },
+ {
+  "id": "Ashland_Steepstair",
+  "kind": "destructible",
+  "health": 500,
+  "damageModifiers": {
+   "slash": "Resistant",
+   "pierce": "Resistant",
+   "pickaxe": "Weak",
+   "fire": "Resistant",
+   "frost": "Resistant",
+   "lightning": "Immune",
+   "poison": "Ignore",
+   "spirit": "Ignore"
+  },
+  "drops": {
+   "min": 3,
+   "max": 4,
+   "chance": 1,
+   "items": [
+    {
+     "item": "Grausten",
+     "min": 1,
+     "max": 1,
+     "weight": 1
+    }
+   ]
+  }
+ },
+ {
   "id": "AshlandsBranch1",
   "kind": "destructible",
   "health": 80,
@@ -571,6 +628,381 @@
   "name": "Stump"
  },
  {
+  "id": "Ashlands_Altar",
+  "kind": "destructible",
+  "health": 1000,
+  "damageModifiers": {
+   "slash": "Resistant",
+   "pierce": "Resistant",
+   "chop": "Immune",
+   "pickaxe": "Weak",
+   "fire": "Immune",
+   "frost": "Resistant",
+   "lightning": "Immune",
+   "poison": "Ignore",
+   "spirit": "Ignore"
+  },
+  "drops": {
+   "min": 4,
+   "max": 6,
+   "chance": 1,
+   "items": [
+    {
+     "item": "Grausten",
+     "min": 1,
+     "max": 1,
+     "weight": 1
+    }
+   ]
+  }
+ },
+ {
+  "id": "Ashlands_Arch2_Broken1",
+  "kind": "destructible",
+  "health": 666,
+  "damageModifiers": {
+   "slash": "Resistant",
+   "pierce": "Resistant",
+   "chop": "Immune",
+   "pickaxe": "Weak",
+   "fire": "Immune",
+   "frost": "Resistant",
+   "lightning": "Immune",
+   "poison": "Ignore",
+   "spirit": "Ignore"
+  },
+  "drops": {
+   "min": 2,
+   "max": 4,
+   "chance": 1,
+   "items": [
+    {
+     "item": "Grausten",
+     "min": 1,
+     "max": 1,
+     "weight": 1
+    }
+   ]
+  }
+ },
+ {
+  "id": "Ashlands_Arch2_Broken2",
+  "kind": "destructible",
+  "health": 333,
+  "damageModifiers": {
+   "slash": "Resistant",
+   "pierce": "Resistant",
+   "chop": "Immune",
+   "pickaxe": "Weak",
+   "fire": "Immune",
+   "frost": "Resistant",
+   "lightning": "Immune",
+   "poison": "Ignore",
+   "spirit": "Ignore"
+  },
+  "drops": {
+   "min": 2,
+   "max": 4,
+   "chance": 1,
+   "items": [
+    {
+     "item": "Grausten",
+     "min": 1,
+     "max": 1,
+     "weight": 1
+    }
+   ]
+  }
+ },
+ {
+  "id": "Ashlands_ArchRoofDamaged",
+  "kind": "destructible",
+  "health": 400,
+  "damageModifiers": {
+   "slash": "Resistant",
+   "pierce": "Resistant",
+   "chop": "Immune",
+   "pickaxe": "Weak",
+   "fire": "Immune",
+   "frost": "Resistant",
+   "lightning": "Immune",
+   "poison": "Ignore",
+   "spirit": "Ignore"
+  },
+  "drops": {
+   "min": 3,
+   "max": 4,
+   "chance": 1,
+   "items": [
+    {
+     "item": "Grausten",
+     "min": 1,
+     "max": 1,
+     "weight": 1
+    }
+   ]
+  }
+ },
+ {
+  "id": "Ashlands_ArchRoofDamaged_half1",
+  "kind": "destructible",
+  "health": 1000,
+  "damageModifiers": {
+   "slash": "Resistant",
+   "pierce": "Resistant",
+   "chop": "Immune",
+   "pickaxe": "Weak",
+   "fire": "Immune",
+   "frost": "Resistant",
+   "lightning": "Immune",
+   "poison": "Ignore",
+   "spirit": "Ignore"
+  },
+  "drops": {
+   "min": 3,
+   "max": 4,
+   "chance": 1,
+   "items": [
+    {
+     "item": "Grausten",
+     "min": 1,
+     "max": 1,
+     "weight": 1
+    }
+   ]
+  }
+ },
+ {
+  "id": "Ashlands_ArchRoofDamaged_half2",
+  "kind": "destructible",
+  "health": 1000,
+  "damageModifiers": {
+   "slash": "Resistant",
+   "pierce": "Resistant",
+   "chop": "Immune",
+   "pickaxe": "Weak",
+   "fire": "Immune",
+   "frost": "Resistant",
+   "lightning": "Immune",
+   "poison": "Ignore",
+   "spirit": "Ignore"
+  },
+  "drops": {
+   "min": 3,
+   "max": 4,
+   "chance": 1,
+   "items": [
+    {
+     "item": "Grausten",
+     "min": 1,
+     "max": 1,
+     "weight": 1
+    }
+   ]
+  }
+ },
+ {
+  "id": "Ashlands_ArchRoofLong_Damaged",
+  "kind": "destructible",
+  "health": 1000,
+  "damageModifiers": {
+   "slash": "Resistant",
+   "pierce": "Resistant",
+   "chop": "Immune",
+   "pickaxe": "Weak",
+   "fire": "Immune",
+   "frost": "Resistant",
+   "lightning": "Immune",
+   "poison": "Ignore",
+   "spirit": "Ignore"
+  },
+  "drops": {
+   "min": 3,
+   "max": 4,
+   "chance": 1,
+   "items": [
+    {
+     "item": "Grausten",
+     "min": 1,
+     "max": 1,
+     "weight": 1
+    }
+   ]
+  }
+ },
+ {
+  "id": "Ashlands_Boss_Pillar",
+  "kind": "destructible",
+  "health": 4000,
+  "damageModifiers": {
+   "slash": "Resistant",
+   "pierce": "Resistant",
+   "chop": "Immune",
+   "pickaxe": "Weak",
+   "fire": "Immune",
+   "frost": "Resistant",
+   "lightning": "Immune",
+   "poison": "Ignore",
+   "spirit": "Ignore"
+  },
+  "drops": {
+   "min": 5,
+   "max": 8,
+   "chance": 1,
+   "items": [
+    {
+     "item": "Grausten",
+     "min": 1,
+     "max": 1,
+     "weight": 1
+    }
+   ]
+  }
+ },
+ {
+  "id": "Ashlands_Boss_Pillar_Twist_broken1",
+  "kind": "destructible",
+  "health": 3000,
+  "damageModifiers": {
+   "slash": "Resistant",
+   "pierce": "Resistant",
+   "chop": "Immune",
+   "pickaxe": "Weak",
+   "fire": "Immune",
+   "frost": "Resistant",
+   "lightning": "Immune",
+   "poison": "Ignore",
+   "spirit": "Ignore"
+  },
+  "drops": {
+   "min": 5,
+   "max": 8,
+   "chance": 1,
+   "items": [
+    {
+     "item": "Grausten",
+     "min": 1,
+     "max": 1,
+     "weight": 1
+    }
+   ]
+  }
+ },
+ {
+  "id": "Ashlands_Boss_Pillar_Twist_broken2",
+  "kind": "destructible",
+  "health": 2000,
+  "damageModifiers": {
+   "slash": "Resistant",
+   "pierce": "Resistant",
+   "chop": "Immune",
+   "pickaxe": "Weak",
+   "fire": "Immune",
+   "frost": "Resistant",
+   "lightning": "Immune",
+   "poison": "Ignore",
+   "spirit": "Ignore"
+  },
+  "drops": {
+   "min": 5,
+   "max": 8,
+   "chance": 1,
+   "items": [
+    {
+     "item": "Grausten",
+     "min": 1,
+     "max": 1,
+     "weight": 1
+    }
+   ]
+  }
+ },
+ {
+  "id": "Ashlands_Boss_Pillar_Twist_broken3",
+  "kind": "destructible",
+  "health": 1000,
+  "damageModifiers": {
+   "slash": "Resistant",
+   "pierce": "Resistant",
+   "chop": "Immune",
+   "pickaxe": "Weak",
+   "fire": "Immune",
+   "frost": "Resistant",
+   "lightning": "Immune",
+   "poison": "Ignore",
+   "spirit": "Ignore"
+  },
+  "drops": {
+   "min": 5,
+   "max": 8,
+   "chance": 1,
+   "items": [
+    {
+     "item": "Grausten",
+     "min": 1,
+     "max": 1,
+     "weight": 1
+    }
+   ]
+  }
+ },
+ {
+  "id": "Ashlands_Floor",
+  "kind": "destructible",
+  "health": 333,
+  "damageModifiers": {
+   "slash": "Resistant",
+   "pierce": "Resistant",
+   "chop": "Immune",
+   "pickaxe": "Weak",
+   "fire": "Immune",
+   "frost": "Resistant",
+   "lightning": "Immune",
+   "poison": "Ignore",
+   "spirit": "Ignore"
+  },
+  "drops": {
+   "min": 2,
+   "max": 4,
+   "chance": 1,
+   "items": [
+    {
+     "item": "Grausten",
+     "weight": 1
+    }
+   ]
+  }
+ },
+ {
+  "id": "Ashlands_Fortress_Floor",
+  "kind": "destructible",
+  "health": 1500,
+  "damageModifiers": {
+   "blunt": "Immune",
+   "slash": "Immune",
+   "pierce": "Immune",
+   "chop": "Immune",
+   "fire": "Immune",
+   "frost": "Immune",
+   "lightning": "Immune",
+   "poison": "Ignore",
+   "spirit": "Ignore"
+  },
+  "drops": {
+   "min": 1,
+   "max": 3,
+   "chance": 1,
+   "items": [
+    {
+     "item": "Stone",
+     "min": 1,
+     "max": 1,
+     "weight": 1
+    }
+   ]
+  }
+ },
+ {
   "id": "Ashlands_Fortress_Wall_Pillar",
   "kind": "destructible",
   "health": 1,
@@ -754,6 +1186,727 @@
      "item": "Stone",
      "min": 1,
      "max": 1
+    }
+   ]
+  }
+ },
+ {
+  "id": "Ashlands_Fortress_Wall_Spikes",
+  "kind": "destructible",
+  "health": 1500,
+  "damageModifiers": {
+   "chop": "Immune",
+   "fire": "Immune",
+   "frost": "Resistant",
+   "poison": "Ignore",
+   "spirit": "Ignore"
+  },
+  "drops": {
+   "min": 2,
+   "max": 5,
+   "chance": 1,
+   "items": [
+    {
+     "item": "BronzeScrap",
+     "min": 1,
+     "max": 1,
+     "weight": 1
+    }
+   ]
+  }
+ },
+ {
+  "id": "Ashlands_Pillar4",
+  "kind": "destructible",
+  "health": 1000,
+  "damageModifiers": {
+   "slash": "Resistant",
+   "pierce": "Resistant",
+   "chop": "Immune",
+   "pickaxe": "Weak",
+   "fire": "Immune",
+   "frost": "Resistant",
+   "lightning": "Immune",
+   "poison": "Ignore",
+   "spirit": "Ignore"
+  },
+  "drops": {
+   "min": 2,
+   "max": 3,
+   "chance": 1,
+   "items": [
+    {
+     "item": "Grausten",
+     "min": 1,
+     "max": 1,
+     "weight": 1
+    }
+   ]
+  }
+ },
+ {
+  "id": "Ashlands_Pillar4_tip2_broken1",
+  "kind": "destructible",
+  "health": 400,
+  "damageModifiers": {
+   "slash": "Resistant",
+   "pierce": "Resistant",
+   "chop": "Immune",
+   "pickaxe": "Weak",
+   "fire": "Immune",
+   "frost": "Resistant",
+   "lightning": "Immune",
+   "poison": "Ignore",
+   "spirit": "Ignore"
+  },
+  "drops": {
+   "min": 2,
+   "max": 3,
+   "chance": 1,
+   "items": [
+    {
+     "item": "Grausten",
+     "min": 1,
+     "max": 1,
+     "weight": 1
+    }
+   ]
+  }
+ },
+ {
+  "id": "Ashlands_Pillar4_tip2_broken2",
+  "kind": "destructible",
+  "health": 200,
+  "damageModifiers": {
+   "slash": "Resistant",
+   "pierce": "Resistant",
+   "chop": "Immune",
+   "pickaxe": "Weak",
+   "fire": "Immune",
+   "frost": "Resistant",
+   "lightning": "Immune",
+   "poison": "Ignore",
+   "spirit": "Ignore"
+  },
+  "drops": {
+   "min": 2,
+   "max": 3,
+   "chance": 1,
+   "items": [
+    {
+     "item": "Grausten",
+     "min": 1,
+     "max": 1,
+     "weight": 1
+    }
+   ]
+  }
+ },
+ {
+  "id": "Ashlands_Pillar4_tip3_broken1",
+  "kind": "destructible",
+  "health": 600,
+  "damageModifiers": {
+   "slash": "Resistant",
+   "pierce": "Resistant",
+   "chop": "Immune",
+   "pickaxe": "Weak",
+   "fire": "Immune",
+   "frost": "Resistant",
+   "lightning": "Immune",
+   "poison": "Ignore",
+   "spirit": "Ignore"
+  },
+  "drops": {
+   "min": 2,
+   "max": 3,
+   "chance": 1,
+   "items": [
+    {
+     "item": "Grausten",
+     "min": 1,
+     "max": 1,
+     "weight": 1
+    }
+   ]
+  }
+ },
+ {
+  "id": "Ashlands_Pillar4_tip3_broken2",
+  "kind": "destructible",
+  "health": 400,
+  "damageModifiers": {
+   "slash": "Resistant",
+   "pierce": "Resistant",
+   "chop": "Immune",
+   "pickaxe": "Weak",
+   "fire": "Immune",
+   "frost": "Resistant",
+   "lightning": "Immune",
+   "poison": "Ignore",
+   "spirit": "Ignore"
+  },
+  "drops": {
+   "min": 2,
+   "max": 3,
+   "chance": 1,
+   "items": [
+    {
+     "item": "Grausten",
+     "min": 1,
+     "max": 1,
+     "weight": 1
+    }
+   ]
+  }
+ },
+ {
+  "id": "Ashlands_Pillar4_tip3_broken3",
+  "kind": "destructible",
+  "health": 200,
+  "damageModifiers": {
+   "slash": "Resistant",
+   "pierce": "Resistant",
+   "chop": "Immune",
+   "pickaxe": "Weak",
+   "fire": "Immune",
+   "frost": "Resistant",
+   "lightning": "Immune",
+   "poison": "Ignore",
+   "spirit": "Ignore"
+  },
+  "drops": {
+   "min": 2,
+   "max": 3,
+   "chance": 1,
+   "items": [
+    {
+     "item": "Grausten",
+     "min": 1,
+     "max": 1,
+     "weight": 1
+    }
+   ]
+  }
+ },
+ {
+  "id": "Ashlands_Pillar4_tip_broken1",
+  "kind": "destructible",
+  "health": 400,
+  "damageModifiers": {
+   "slash": "Resistant",
+   "pierce": "Resistant",
+   "chop": "Immune",
+   "pickaxe": "Weak",
+   "fire": "Immune",
+   "frost": "Resistant",
+   "lightning": "Immune",
+   "poison": "Ignore",
+   "spirit": "Ignore"
+  },
+  "drops": {
+   "min": 2,
+   "max": 3,
+   "chance": 1,
+   "items": [
+    {
+     "item": "Grausten",
+     "min": 1,
+     "max": 1,
+     "weight": 1
+    }
+   ]
+  }
+ },
+ {
+  "id": "Ashlands_Pillar4_tip_broken2",
+  "kind": "destructible",
+  "health": 200,
+  "damageModifiers": {
+   "slash": "Resistant",
+   "pierce": "Resistant",
+   "chop": "Immune",
+   "pickaxe": "Weak",
+   "fire": "Immune",
+   "frost": "Resistant",
+   "lightning": "Immune",
+   "poison": "Ignore",
+   "spirit": "Ignore"
+  },
+  "drops": {
+   "min": 2,
+   "max": 3,
+   "chance": 1,
+   "items": [
+    {
+     "item": "Grausten",
+     "min": 1,
+     "max": 1,
+     "weight": 1
+    }
+   ]
+  }
+ },
+ {
+  "id": "Ashlands_PillarBase3_double",
+  "kind": "destructible",
+  "health": 400,
+  "damageModifiers": {
+   "slash": "Resistant",
+   "pierce": "Resistant",
+   "chop": "Immune",
+   "pickaxe": "Weak",
+   "fire": "Immune",
+   "frost": "Resistant",
+   "lightning": "Immune",
+   "poison": "Ignore",
+   "spirit": "Ignore"
+  },
+  "drops": {
+   "min": 2,
+   "max": 3,
+   "chance": 1,
+   "items": [
+    {
+     "item": "Grausten",
+     "min": 1,
+     "max": 1,
+     "weight": 1
+    }
+   ]
+  }
+ },
+ {
+  "id": "Ashlands_Ruins_Floor_1point5x1point5",
+  "kind": "destructible",
+  "health": 200,
+  "damageModifiers": {
+   "slash": "Resistant",
+   "pierce": "Resistant",
+   "chop": "Immune",
+   "pickaxe": "Weak",
+   "fire": "Immune",
+   "frost": "Resistant",
+   "lightning": "Immune",
+   "poison": "Ignore",
+   "spirit": "Ignore"
+  },
+  "drops": {
+   "min": 1,
+   "max": 2,
+   "chance": 1,
+   "items": [
+    {
+     "item": "Grausten",
+     "min": 1,
+     "max": 1,
+     "weight": 1
+    }
+   ]
+  }
+ },
+ {
+  "id": "Ashlands_Ruins_Floor_1point5x1point5_broken",
+  "kind": "destructible",
+  "health": 200,
+  "damageModifiers": {
+   "slash": "Resistant",
+   "pierce": "Resistant",
+   "chop": "Immune",
+   "pickaxe": "Weak",
+   "fire": "Immune",
+   "frost": "Resistant",
+   "lightning": "Immune",
+   "poison": "Ignore",
+   "spirit": "Ignore"
+  },
+  "drops": {
+   "min": 1,
+   "max": 2,
+   "chance": 1,
+   "items": [
+    {
+     "item": "Grausten",
+     "min": 1,
+     "max": 1,
+     "weight": 1
+    }
+   ]
+  }
+ },
+ {
+  "id": "Ashlands_Ruins_Floor_3x3",
+  "kind": "destructible",
+  "health": 500,
+  "damageModifiers": {
+   "slash": "Resistant",
+   "pierce": "Resistant",
+   "chop": "Immune",
+   "pickaxe": "Weak",
+   "fire": "Immune",
+   "frost": "Resistant",
+   "lightning": "Immune",
+   "poison": "Ignore",
+   "spirit": "Ignore"
+  },
+  "drops": {
+   "min": 1,
+   "max": 2,
+   "chance": 1,
+   "items": [
+    {
+     "item": "Grausten",
+     "min": 1,
+     "max": 1,
+     "weight": 1
+    }
+   ]
+  }
+ },
+ {
+  "id": "Ashlands_Ruins_Floor_3x3_broken1",
+  "kind": "destructible",
+  "health": 500,
+  "damageModifiers": {
+   "slash": "Resistant",
+   "pierce": "Resistant",
+   "chop": "Immune",
+   "pickaxe": "Weak",
+   "fire": "Immune",
+   "frost": "Resistant",
+   "lightning": "Immune",
+   "poison": "Ignore",
+   "spirit": "Ignore"
+  },
+  "drops": {
+   "min": 1,
+   "max": 2,
+   "chance": 1,
+   "items": [
+    {
+     "item": "Grausten",
+     "min": 1,
+     "max": 1,
+     "weight": 1
+    }
+   ]
+  }
+ },
+ {
+  "id": "Ashlands_Ruins_Floor_3x3_broken2",
+  "kind": "destructible",
+  "health": 1000,
+  "damageModifiers": {
+   "slash": "Resistant",
+   "pierce": "Resistant",
+   "chop": "Immune",
+   "pickaxe": "Weak",
+   "fire": "Immune",
+   "frost": "Resistant",
+   "lightning": "Immune",
+   "poison": "Ignore",
+   "spirit": "Ignore"
+  },
+  "drops": {
+   "min": 1,
+   "max": 2,
+   "chance": 1,
+   "items": [
+    {
+     "item": "Grausten",
+     "min": 1,
+     "max": 1,
+     "weight": 1
+    }
+   ]
+  }
+ },
+ {
+  "id": "Ashlands_Ruins_Floor_3x3_broken3",
+  "kind": "destructible",
+  "health": 500,
+  "damageModifiers": {
+   "slash": "Resistant",
+   "pierce": "Resistant",
+   "chop": "Immune",
+   "pickaxe": "Weak",
+   "fire": "Immune",
+   "frost": "Resistant",
+   "lightning": "Immune",
+   "poison": "Ignore",
+   "spirit": "Ignore"
+  },
+  "drops": {
+   "min": 1,
+   "max": 2,
+   "chance": 1,
+   "items": [
+    {
+     "item": "Grausten",
+     "min": 1,
+     "max": 1,
+     "weight": 1
+    }
+   ]
+  }
+ },
+ {
+  "id": "Ashlands_Ruins_Floor_6x6",
+  "kind": "destructible",
+  "health": 1000,
+  "damageModifiers": {
+   "slash": "Resistant",
+   "pierce": "Resistant",
+   "chop": "Immune",
+   "pickaxe": "Weak",
+   "fire": "Immune",
+   "frost": "Resistant",
+   "lightning": "Immune",
+   "poison": "Ignore",
+   "spirit": "Ignore"
+  },
+  "drops": {
+   "min": 2,
+   "max": 4,
+   "chance": 1,
+   "items": [
+    {
+     "item": "Grausten",
+     "min": 1,
+     "max": 1,
+     "weight": 1
+    }
+   ]
+  }
+ },
+ {
+  "id": "Ashlands_Ruins_Floor_6x6_broken1",
+  "kind": "destructible",
+  "health": 750,
+  "damageModifiers": {
+   "slash": "Resistant",
+   "pierce": "Resistant",
+   "chop": "Immune",
+   "pickaxe": "Weak",
+   "fire": "Immune",
+   "frost": "Resistant",
+   "lightning": "Immune",
+   "poison": "Ignore",
+   "spirit": "Ignore"
+  },
+  "drops": {
+   "min": 2,
+   "max": 4,
+   "chance": 1,
+   "items": [
+    {
+     "item": "Grausten",
+     "min": 1,
+     "max": 1,
+     "weight": 1
+    }
+   ]
+  }
+ },
+ {
+  "id": "Ashlands_Ruins_Floor_6x6_broken2",
+  "kind": "destructible",
+  "health": 750,
+  "damageModifiers": {
+   "slash": "Resistant",
+   "pierce": "Resistant",
+   "chop": "Immune",
+   "pickaxe": "Weak",
+   "fire": "Immune",
+   "frost": "Resistant",
+   "lightning": "Immune",
+   "poison": "Ignore",
+   "spirit": "Ignore"
+  },
+  "drops": {
+   "min": 2,
+   "max": 4,
+   "chance": 1,
+   "items": [
+    {
+     "item": "Grausten",
+     "min": 1,
+     "max": 1,
+     "weight": 1
+    }
+   ]
+  }
+ },
+ {
+  "id": "Ashlands_Ruins_Ramp",
+  "kind": "destructible",
+  "health": 1000,
+  "damageModifiers": {
+   "slash": "Resistant",
+   "pierce": "Resistant",
+   "chop": "Immune",
+   "pickaxe": "Weak",
+   "fire": "Immune",
+   "frost": "Resistant",
+   "lightning": "Immune",
+   "poison": "Ignore",
+   "spirit": "Ignore"
+  },
+  "drops": {
+   "min": 3,
+   "max": 4,
+   "chance": 1,
+   "items": [
+    {
+     "item": "Grausten",
+     "min": 1,
+     "max": 1,
+     "weight": 1
+    }
+   ]
+  }
+ },
+ {
+  "id": "Ashlands_Ruins_Ramp_Upsidedown",
+  "kind": "destructible",
+  "health": 1000,
+  "damageModifiers": {
+   "slash": "Resistant",
+   "pierce": "Resistant",
+   "chop": "Immune",
+   "pickaxe": "Weak",
+   "fire": "Immune",
+   "frost": "Resistant",
+   "lightning": "Immune",
+   "poison": "Ignore",
+   "spirit": "Ignore"
+  },
+  "drops": {
+   "min": 3,
+   "max": 4,
+   "chance": 1,
+   "items": [
+    {
+     "item": "Grausten",
+     "min": 1,
+     "max": 1,
+     "weight": 1
+    }
+   ]
+  }
+ },
+ {
+  "id": "Ashlands_Ruins_TopStone",
+  "kind": "destructible",
+  "health": 300,
+  "damageModifiers": {
+   "slash": "Resistant",
+   "pierce": "Resistant",
+   "chop": "Immune",
+   "pickaxe": "Weak",
+   "fire": "Immune",
+   "frost": "Resistant",
+   "lightning": "Immune",
+   "poison": "Ignore",
+   "spirit": "Ignore"
+  },
+  "drops": {
+   "min": 1,
+   "max": 2,
+   "chance": 1,
+   "items": [
+    {
+     "item": "Grausten",
+     "min": 1,
+     "max": 1,
+     "weight": 1
+    }
+   ]
+  }
+ },
+ {
+  "id": "Ashlands_Ruins_twist_ArchBig",
+  "kind": "destructible",
+  "health": 666,
+  "damageModifiers": {
+   "slash": "Resistant",
+   "pierce": "Resistant",
+   "chop": "Immune",
+   "pickaxe": "Weak",
+   "fire": "Immune",
+   "frost": "Resistant",
+   "lightning": "Immune",
+   "poison": "Ignore",
+   "spirit": "Ignore"
+  },
+  "drops": {
+   "min": 1,
+   "max": 3,
+   "chance": 1,
+   "items": [
+    {
+     "item": "Grausten",
+     "min": 1,
+     "max": 1,
+     "weight": 1
+    }
+   ]
+  }
+ },
+ {
+  "id": "Ashlands_Ruins_twist_PillarBase",
+  "kind": "destructible",
+  "health": 750,
+  "damageModifiers": {
+   "slash": "Resistant",
+   "pierce": "Resistant",
+   "chop": "Immune",
+   "pickaxe": "Weak",
+   "fire": "Immune",
+   "frost": "Resistant",
+   "lightning": "Immune",
+   "poison": "Ignore",
+   "spirit": "Ignore"
+  },
+  "drops": {
+   "min": 2,
+   "max": 3,
+   "chance": 1,
+   "items": [
+    {
+     "item": "Grausten",
+     "min": 1,
+     "max": 1,
+     "weight": 1
+    }
+   ]
+  }
+ },
+ {
+  "id": "Ashlands_Ruins_twist_PillarBaseSmall",
+  "kind": "destructible",
+  "health": 400,
+  "damageModifiers": {
+   "slash": "Resistant",
+   "pierce": "Resistant",
+   "chop": "Immune",
+   "pickaxe": "Weak",
+   "fire": "Immune",
+   "frost": "Resistant",
+   "lightning": "Immune",
+   "poison": "Ignore",
+   "spirit": "Ignore"
+  },
+  "drops": {
+   "min": 1,
+   "max": 2,
+   "chance": 1,
+   "items": [
+    {
+     "item": "Grausten",
+     "min": 1,
+     "max": 1,
+     "weight": 1
     }
    ]
   }
@@ -964,6 +2117,36 @@
    ]
   },
   "name": "Beech"
+ },
+ {
+  "id": "Beehive",
+  "kind": "destructible",
+  "health": 50,
+  "damageModifiers": {
+   "fire": "Weak",
+   "poison": "Immune",
+   "spirit": "Immune"
+  },
+  "drops": {
+   "min": 2,
+   "max": 2,
+   "chance": 1,
+   "oneOfEach": true,
+   "items": [
+    {
+     "item": "Honey",
+     "min": 1,
+     "max": 3,
+     "weight": 1
+    },
+    {
+     "item": "QueenBee",
+     "min": 1,
+     "max": 1,
+     "weight": 1
+    }
+   ]
+  }
  },
  {
   "id": "BigBranch",
@@ -1516,6 +2699,72 @@
     },
     {
      "item": "Coal",
+     "min": 1,
+     "max": 1,
+     "weight": 1
+    }
+   ]
+  }
+ },
+ {
+  "id": "CharredBanner1",
+  "kind": "destructible",
+  "health": 200,
+  "damageModifiers": {
+   "poison": "Ignore",
+   "spirit": "Ignore"
+  },
+  "drops": {
+   "min": 2,
+   "max": 2,
+   "chance": 1,
+   "items": [
+    {
+     "item": "Blackwood",
+     "min": 1,
+     "max": 1,
+     "weight": 1
+    }
+   ]
+  }
+ },
+ {
+  "id": "CharredBanner2",
+  "kind": "destructible",
+  "health": 200,
+  "damageModifiers": {
+   "poison": "Ignore",
+   "spirit": "Ignore"
+  },
+  "drops": {
+   "min": 2,
+   "max": 2,
+   "chance": 1,
+   "items": [
+    {
+     "item": "Blackwood",
+     "min": 1,
+     "max": 1,
+     "weight": 1
+    }
+   ]
+  }
+ },
+ {
+  "id": "CharredBanner3",
+  "kind": "destructible",
+  "health": 200,
+  "damageModifiers": {
+   "poison": "Ignore",
+   "spirit": "Ignore"
+  },
+  "drops": {
+   "min": 2,
+   "max": 2,
+   "chance": 1,
+   "items": [
+    {
+     "item": "Blackwood",
      "min": 1,
      "max": 1,
      "weight": 1
@@ -3417,6 +4666,56 @@
   "name": "Tin Deposit"
  },
  {
+  "id": "Morkhalla_Banner1",
+  "kind": "destructible",
+  "health": 200,
+  "damageModifiers": {
+   "blunt": "Resistant",
+   "pickaxe": "Resistant",
+   "frost": "Immune",
+   "poison": "Ignore",
+   "spirit": "Ignore"
+  },
+  "drops": {
+   "min": 1,
+   "max": 2,
+   "chance": 1,
+   "items": [
+    {
+     "item": "JuteRed",
+     "min": 1,
+     "max": 1,
+     "weight": 1
+    }
+   ]
+  }
+ },
+ {
+  "id": "Morkhalla_Banner2",
+  "kind": "destructible",
+  "health": 200,
+  "damageModifiers": {
+   "blunt": "Resistant",
+   "pickaxe": "Resistant",
+   "frost": "Immune",
+   "poison": "Ignore",
+   "spirit": "Ignore"
+  },
+  "drops": {
+   "min": 1,
+   "max": 2,
+   "chance": 1,
+   "items": [
+    {
+     "item": "JuteRed",
+     "min": 1,
+     "max": 1,
+     "weight": 1
+    }
+   ]
+  }
+ },
+ {
   "id": "Morkhalla_Bedroll1",
   "kind": "destructible",
   "health": 200,
@@ -3507,6 +4806,45 @@
    ]
   },
   "becomes": "vfx_SawDust"
+ },
+ {
+  "id": "Morkhalla_Bench",
+  "kind": "destructible",
+  "health": 100,
+  "damageModifiers": {
+   "pierce": "Resistant",
+   "chop": "Weak",
+   "fire": "Weak",
+   "frost": "Immune",
+   "lightning": "Resistant",
+   "poison": "Immune",
+   "spirit": "Immune"
+  },
+  "drops": {
+   "min": 2,
+   "max": 3,
+   "chance": 1,
+   "items": [
+    {
+     "item": "Frostwood",
+     "min": 1,
+     "max": 1,
+     "weight": 1
+    },
+    {
+     "item": "Frostwood",
+     "min": 1,
+     "max": 1,
+     "weight": 1
+    },
+    {
+     "item": "Chain",
+     "min": 1,
+     "max": 1,
+     "weight": 1
+    }
+   ]
+  }
  },
  {
   "id": "Morkhalla_Eye1",
@@ -3916,6 +5254,170 @@
   "becomes": "vfx_SawDust"
  },
  {
+  "id": "Morkhalla_Stool",
+  "kind": "destructible",
+  "health": 500,
+  "damageModifiers": {
+   "pierce": "Resistant",
+   "chop": "Weak",
+   "fire": "Weak",
+   "frost": "Immune",
+   "lightning": "Resistant",
+   "poison": "Immune",
+   "spirit": "Immune"
+  },
+  "drops": {
+   "min": 2,
+   "max": 3,
+   "chance": 1,
+   "items": [
+    {
+     "item": "Frostwood",
+     "min": 1,
+     "max": 1,
+     "weight": 1
+    },
+    {
+     "item": "Frostwood",
+     "min": 1,
+     "max": 1,
+     "weight": 1
+    },
+    {
+     "item": "Chain",
+     "min": 1,
+     "max": 1,
+     "weight": 1
+    }
+   ]
+  }
+ },
+ {
+  "id": "Morkhalla_Table",
+  "kind": "destructible",
+  "health": 100,
+  "damageModifiers": {
+   "pierce": "Resistant",
+   "chop": "Weak",
+   "fire": "Weak",
+   "frost": "Immune",
+   "lightning": "Resistant",
+   "poison": "Immune",
+   "spirit": "Immune"
+  },
+  "drops": {
+   "min": 2,
+   "max": 3,
+   "chance": 1,
+   "items": [
+    {
+     "item": "Frostwood",
+     "min": 1,
+     "max": 1,
+     "weight": 1
+    },
+    {
+     "item": "Frostwood",
+     "min": 1,
+     "max": 1,
+     "weight": 1
+    },
+    {
+     "item": "Chain",
+     "min": 1,
+     "max": 1,
+     "weight": 1
+    },
+    {
+     "item": "Chain",
+     "min": 1,
+     "max": 1,
+     "weight": 1
+    }
+   ]
+  }
+ },
+ {
+  "id": "Morkhalla_Trainingdummy1",
+  "kind": "destructible",
+  "health": 800,
+  "damageModifiers": {
+   "blunt": "Resistant",
+   "pierce": "Resistant",
+   "chop": "Weak",
+   "pickaxe": "Resistant",
+   "fire": "Weak",
+   "frost": "Immune",
+   "poison": "Immune",
+   "spirit": "Immune"
+  },
+  "drops": {
+   "min": 2,
+   "max": 3,
+   "chance": 1,
+   "items": [
+    {
+     "item": "Frostwood",
+     "min": 1,
+     "max": 1,
+     "weight": 1
+    },
+    {
+     "item": "Barley",
+     "min": 1,
+     "max": 1,
+     "weight": 1
+    },
+    {
+     "item": "Flax",
+     "min": 1,
+     "max": 1,
+     "weight": 1
+    }
+   ]
+  }
+ },
+ {
+  "id": "Morkhalla_Trainingdummy2",
+  "kind": "destructible",
+  "health": 200,
+  "damageModifiers": {
+   "blunt": "Resistant",
+   "pierce": "Resistant",
+   "chop": "Weak",
+   "pickaxe": "Resistant",
+   "fire": "Weak",
+   "frost": "Immune",
+   "poison": "Immune",
+   "spirit": "Immune"
+  },
+  "drops": {
+   "min": 2,
+   "max": 3,
+   "chance": 1,
+   "items": [
+    {
+     "item": "Frostwood",
+     "min": 1,
+     "max": 1,
+     "weight": 1
+    },
+    {
+     "item": "Barley",
+     "min": 1,
+     "max": 1,
+     "weight": 1
+    },
+    {
+     "item": "Flax",
+     "min": 1,
+     "max": 1,
+     "weight": 1
+    }
+   ]
+  }
+ },
+ {
   "id": "Morkhalla_WeaponStand",
   "kind": "destructible",
   "health": 200,
@@ -4080,6 +5582,31 @@
   "becomes": "Morkhalla_woodboards_Destroyed"
  },
  {
+  "id": "Morkhalla_coal_pile_memorial",
+  "kind": "destructible",
+  "health": 200,
+  "damageModifiers": {
+   "pickaxe": "Weak",
+   "fire": "Weak",
+   "frost": "Resistant",
+   "poison": "Immune",
+   "spirit": "Immune"
+  },
+  "drops": {
+   "min": 3,
+   "max": 5,
+   "chance": 1,
+   "items": [
+    {
+     "item": "MemorialCoal",
+     "min": 1,
+     "max": 1,
+     "weight": 1
+    }
+   ]
+  }
+ },
+ {
   "id": "Morkhalla_rubble_trashpile",
   "kind": "destructible",
   "health": 100,
@@ -4184,6 +5711,42 @@
    "lightning": "Immune",
    "poison": "Immune",
    "spirit": "Immune"
+  },
+  "drops": {
+   "min": 1,
+   "max": 2,
+   "chance": 1,
+   "items": [
+    {
+     "item": "Bronze",
+     "min": 1,
+     "max": 1,
+     "weight": 0.5
+    },
+    {
+     "item": "Coal",
+     "min": 1,
+     "max": 2,
+     "weight": 1
+    },
+    {
+     "item": "Coal",
+     "min": 1,
+     "max": 1,
+     "weight": 1
+    }
+   ]
+  }
+ },
+ {
+  "id": "MountainKit_brazier_purple",
+  "kind": "destructible",
+  "health": 100,
+  "damageModifiers": {
+   "fire": "Resistant",
+   "frost": "Weak",
+   "poison": "Ignore",
+   "spirit": "Ignore"
   },
   "drops": {
    "min": 1,
@@ -7248,6 +8811,682 @@
   "becomes": "rock4_forest_frac"
  },
  {
+  "id": "ashland_pot1_green",
+  "kind": "destructible",
+  "health": 40,
+  "damageModifiers": {
+   "blunt": "Weak",
+   "pierce": "Resistant",
+   "pickaxe": "Weak",
+   "fire": "Resistant",
+   "frost": "Resistant",
+   "lightning": "Resistant",
+   "poison": "Immune",
+   "spirit": "Immune"
+  },
+  "drops": {
+   "min": 2,
+   "max": 3,
+   "chance": 1,
+   "oneOfEach": true,
+   "items": [
+    {
+     "item": "Pot_Shard_Green",
+     "min": 1,
+     "max": 1,
+     "weight": 1
+    },
+    {
+     "item": "Pot_Shard_Green",
+     "min": 1,
+     "max": 1,
+     "weight": 1
+    },
+    {
+     "item": "Bronze",
+     "min": 1,
+     "max": 1,
+     "weight": 0.1
+    },
+    {
+     "item": "Iron",
+     "min": 1,
+     "max": 1,
+     "weight": 0.1
+    },
+    {
+     "item": "Silver",
+     "min": 1,
+     "max": 1,
+     "weight": 0.1
+    },
+    {
+     "item": "MeadHealthMinor",
+     "min": 1,
+     "max": 1,
+     "weight": 0.1
+    },
+    {
+     "item": "MeadStaminaMinor",
+     "min": 1,
+     "max": 1,
+     "weight": 0.1
+    },
+    {
+     "item": "MeadTasty",
+     "min": 1,
+     "max": 1,
+     "weight": 0.1
+    },
+    {
+     "item": "Upgrader5Armor",
+     "min": 1,
+     "max": 1,
+     "weight": 0.025
+    },
+    {
+     "item": "Upgrader5Weapon",
+     "min": 1,
+     "max": 1,
+     "weight": 0.0125
+    },
+    {
+     "item": "Upgrader6Armor",
+     "min": 1,
+     "max": 1,
+     "weight": 0.01
+    },
+    {
+     "item": "Upgrader6Weapon",
+     "min": 1,
+     "max": 1,
+     "weight": 0.01
+    }
+   ]
+  },
+  "name": "Ancient Pot"
+ },
+ {
+  "id": "ashland_pot1_red",
+  "kind": "destructible",
+  "health": 40,
+  "damageModifiers": {
+   "blunt": "Weak",
+   "pierce": "Resistant",
+   "pickaxe": "Weak",
+   "fire": "Resistant",
+   "frost": "Resistant",
+   "lightning": "Resistant",
+   "poison": "Immune",
+   "spirit": "Immune"
+  },
+  "drops": {
+   "min": 2,
+   "max": 3,
+   "chance": 1,
+   "oneOfEach": true,
+   "items": [
+    {
+     "item": "Pot_Shard_Green",
+     "min": 1,
+     "max": 1,
+     "weight": 1
+    },
+    {
+     "item": "Pot_Shard_Green",
+     "min": 1,
+     "max": 1,
+     "weight": 1
+    },
+    {
+     "item": "Bronze",
+     "min": 1,
+     "max": 1,
+     "weight": 0.1
+    },
+    {
+     "item": "Iron",
+     "min": 1,
+     "max": 1,
+     "weight": 0.1
+    },
+    {
+     "item": "Silver",
+     "min": 1,
+     "max": 1,
+     "weight": 0.1
+    },
+    {
+     "item": "MeadHealthMinor",
+     "min": 1,
+     "max": 1,
+     "weight": 0.1
+    },
+    {
+     "item": "MeadStaminaMinor",
+     "min": 1,
+     "max": 1,
+     "weight": 0.1
+    },
+    {
+     "item": "MeadTasty",
+     "min": 1,
+     "max": 1,
+     "weight": 0.1
+    },
+    {
+     "item": "Upgrader5Armor",
+     "min": 1,
+     "max": 1,
+     "weight": 0.025
+    },
+    {
+     "item": "Upgrader5Weapon",
+     "min": 1,
+     "max": 1,
+     "weight": 0.0125
+    },
+    {
+     "item": "Upgrader6Armor",
+     "min": 1,
+     "max": 1,
+     "weight": 0.01
+    },
+    {
+     "item": "Upgrader6Weapon",
+     "min": 1,
+     "max": 1,
+     "weight": 0.01
+    }
+   ]
+  },
+  "name": "Ancient Pot"
+ },
+ {
+  "id": "ashland_pot2_green",
+  "kind": "destructible",
+  "health": 50,
+  "damageModifiers": {
+   "blunt": "Weak",
+   "pierce": "Resistant",
+   "pickaxe": "Weak",
+   "fire": "Resistant",
+   "frost": "Resistant",
+   "lightning": "Resistant",
+   "poison": "Immune",
+   "spirit": "Immune"
+  },
+  "drops": {
+   "min": 2,
+   "max": 3,
+   "chance": 1,
+   "oneOfEach": true,
+   "items": [
+    {
+     "item": "Pot_Shard_Green",
+     "min": 1,
+     "max": 1,
+     "weight": 1
+    },
+    {
+     "item": "Pot_Shard_Green",
+     "min": 1,
+     "max": 1,
+     "weight": 1
+    },
+    {
+     "item": "Bronze",
+     "min": 1,
+     "max": 1,
+     "weight": 0.1
+    },
+    {
+     "item": "Iron",
+     "min": 1,
+     "max": 1,
+     "weight": 0.1
+    },
+    {
+     "item": "Silver",
+     "min": 1,
+     "max": 1,
+     "weight": 0.1
+    },
+    {
+     "item": "MeadHealthMinor",
+     "min": 1,
+     "max": 1,
+     "weight": 0.1
+    },
+    {
+     "item": "MeadStaminaMinor",
+     "min": 1,
+     "max": 1,
+     "weight": 0.1
+    },
+    {
+     "item": "MeadTasty",
+     "min": 1,
+     "max": 1,
+     "weight": 0.1
+    },
+    {
+     "item": "Upgrader5Armor",
+     "min": 1,
+     "max": 1,
+     "weight": 0.025
+    },
+    {
+     "item": "Upgrader5Weapon",
+     "min": 1,
+     "max": 1,
+     "weight": 0.0125
+    },
+    {
+     "item": "Upgrader6Armor",
+     "min": 1,
+     "max": 1,
+     "weight": 0.01
+    },
+    {
+     "item": "Upgrader6Weapon",
+     "min": 1,
+     "max": 1,
+     "weight": 0.01
+    }
+   ]
+  },
+  "name": "Ancient Pot"
+ },
+ {
+  "id": "ashland_pot2_red",
+  "kind": "destructible",
+  "health": 50,
+  "damageModifiers": {
+   "blunt": "Weak",
+   "pierce": "Resistant",
+   "pickaxe": "Weak",
+   "fire": "Resistant",
+   "frost": "Resistant",
+   "lightning": "Resistant",
+   "poison": "Immune",
+   "spirit": "Immune"
+  },
+  "drops": {
+   "min": 2,
+   "max": 3,
+   "chance": 1,
+   "oneOfEach": true,
+   "items": [
+    {
+     "item": "Pot_Shard_Green",
+     "min": 1,
+     "max": 1,
+     "weight": 1
+    },
+    {
+     "item": "Pot_Shard_Green",
+     "min": 1,
+     "max": 1,
+     "weight": 1
+    },
+    {
+     "item": "Bronze",
+     "min": 1,
+     "max": 1,
+     "weight": 0.1
+    },
+    {
+     "item": "Iron",
+     "min": 1,
+     "max": 1,
+     "weight": 0.1
+    },
+    {
+     "item": "Silver",
+     "min": 1,
+     "max": 1,
+     "weight": 0.1
+    },
+    {
+     "item": "MeadHealthMinor",
+     "min": 1,
+     "max": 1,
+     "weight": 0.1
+    },
+    {
+     "item": "MeadStaminaMinor",
+     "min": 1,
+     "max": 1,
+     "weight": 0.1
+    },
+    {
+     "item": "MeadTasty",
+     "min": 1,
+     "max": 1,
+     "weight": 0.1
+    },
+    {
+     "item": "Upgrader5Armor",
+     "min": 1,
+     "max": 1,
+     "weight": 0.025
+    },
+    {
+     "item": "Upgrader5Weapon",
+     "min": 1,
+     "max": 1,
+     "weight": 0.0125
+    },
+    {
+     "item": "Upgrader6Armor",
+     "min": 1,
+     "max": 1,
+     "weight": 0.01
+    },
+    {
+     "item": "Upgrader6Weapon",
+     "min": 1,
+     "max": 1,
+     "weight": 0.01
+    }
+   ]
+  },
+  "name": "Ancient Pot"
+ },
+ {
+  "id": "ashland_pot3_green",
+  "kind": "destructible",
+  "health": 30,
+  "damageModifiers": {
+   "blunt": "Weak",
+   "pierce": "Resistant",
+   "pickaxe": "Weak",
+   "fire": "Resistant",
+   "frost": "Resistant",
+   "lightning": "Resistant",
+   "poison": "Immune",
+   "spirit": "Immune"
+  },
+  "drops": {
+   "min": 2,
+   "max": 3,
+   "chance": 1,
+   "oneOfEach": true,
+   "items": [
+    {
+     "item": "Pot_Shard_Green",
+     "min": 1,
+     "max": 1,
+     "weight": 1
+    },
+    {
+     "item": "Pot_Shard_Green",
+     "min": 1,
+     "max": 1,
+     "weight": 1
+    },
+    {
+     "item": "Bronze",
+     "min": 1,
+     "max": 1,
+     "weight": 0.1
+    },
+    {
+     "item": "Iron",
+     "min": 1,
+     "max": 1,
+     "weight": 0.1
+    },
+    {
+     "item": "Silver",
+     "min": 1,
+     "max": 1,
+     "weight": 0.1
+    },
+    {
+     "item": "MeadHealthMinor",
+     "min": 1,
+     "max": 1,
+     "weight": 0.1
+    },
+    {
+     "item": "MeadStaminaMinor",
+     "min": 1,
+     "max": 1,
+     "weight": 0.1
+    },
+    {
+     "item": "MeadTasty",
+     "min": 1,
+     "max": 1,
+     "weight": 0.1
+    },
+    {
+     "item": "Upgrader5Armor",
+     "min": 1,
+     "max": 1,
+     "weight": 0.025
+    },
+    {
+     "item": "Upgrader5Weapon",
+     "min": 1,
+     "max": 1,
+     "weight": 0.0125
+    },
+    {
+     "item": "Upgrader6Armor",
+     "min": 1,
+     "max": 1,
+     "weight": 0.01
+    },
+    {
+     "item": "Upgrader6Weapon",
+     "min": 1,
+     "max": 1,
+     "weight": 0.01
+    }
+   ]
+  },
+  "name": "Ancient Pot"
+ },
+ {
+  "id": "ashland_pot3_red",
+  "kind": "destructible",
+  "health": 30,
+  "damageModifiers": {
+   "blunt": "Weak",
+   "pierce": "Resistant",
+   "pickaxe": "Weak",
+   "fire": "Resistant",
+   "frost": "Resistant",
+   "lightning": "Resistant",
+   "poison": "Immune",
+   "spirit": "Immune"
+  },
+  "drops": {
+   "min": 2,
+   "max": 3,
+   "chance": 1,
+   "oneOfEach": true,
+   "items": [
+    {
+     "item": "Pot_Shard_Green",
+     "min": 1,
+     "max": 1,
+     "weight": 1
+    },
+    {
+     "item": "Pot_Shard_Green",
+     "min": 1,
+     "max": 1,
+     "weight": 1
+    },
+    {
+     "item": "Bronze",
+     "min": 1,
+     "max": 1,
+     "weight": 0.1
+    },
+    {
+     "item": "Iron",
+     "min": 1,
+     "max": 1,
+     "weight": 0.1
+    },
+    {
+     "item": "Silver",
+     "min": 1,
+     "max": 1,
+     "weight": 0.1
+    },
+    {
+     "item": "MeadHealthMinor",
+     "min": 1,
+     "max": 1,
+     "weight": 0.1
+    },
+    {
+     "item": "MeadStaminaMinor",
+     "min": 1,
+     "max": 1,
+     "weight": 0.1
+    },
+    {
+     "item": "MeadTasty",
+     "min": 1,
+     "max": 1,
+     "weight": 0.1
+    },
+    {
+     "item": "Upgrader5Armor",
+     "min": 1,
+     "max": 1,
+     "weight": 0.025
+    },
+    {
+     "item": "Upgrader5Weapon",
+     "min": 1,
+     "max": 1,
+     "weight": 0.0125
+    },
+    {
+     "item": "Upgrader6Armor",
+     "min": 1,
+     "max": 1,
+     "weight": 0.01
+    },
+    {
+     "item": "Upgrader6Weapon",
+     "min": 1,
+     "max": 1,
+     "weight": 0.01
+    }
+   ]
+  },
+  "name": "Ancient Pot"
+ },
+ {
+  "id": "asksvin_carrion",
+  "kind": "destructible",
+  "health": 150,
+  "damageModifiers": {
+   "pierce": "Resistant",
+   "chop": "Weak",
+   "fire": "Resistant",
+   "lightning": "Resistant",
+   "poison": "Ignore",
+   "spirit": "Ignore"
+  },
+  "drops": {
+   "min": 1,
+   "max": 2,
+   "chance": 1,
+   "items": [
+    {
+     "item": "BoneFragments",
+     "min": 2,
+     "max": 15,
+     "weight": 1
+    },
+    {
+     "item": "AsksvinCarrionSkull",
+     "min": 1,
+     "max": 1,
+     "weight": 0.02
+    },
+    {
+     "item": "AsksvinCarrionRibcage",
+     "min": 1,
+     "max": 1,
+     "weight": 0.02
+    },
+    {
+     "item": "AsksvinCarrionPelvic",
+     "min": 1,
+     "max": 1,
+     "weight": 0.02
+    },
+    {
+     "item": "AsksvinCarrionNeck",
+     "min": 1,
+     "max": 1,
+     "weight": 0.02
+    }
+   ]
+  }
+ },
+ {
+  "id": "asksvin_carrion2",
+  "kind": "destructible",
+  "health": 150,
+  "damageModifiers": {
+   "pierce": "Resistant",
+   "chop": "Weak",
+   "fire": "Resistant",
+   "lightning": "Resistant",
+   "poison": "Ignore",
+   "spirit": "Ignore"
+  },
+  "drops": {
+   "min": 1,
+   "max": 2,
+   "chance": 1,
+   "items": [
+    {
+     "item": "BoneFragments",
+     "min": 2,
+     "max": 15,
+     "weight": 1
+    },
+    {
+     "item": "AsksvinCarrionSkull",
+     "min": 1,
+     "max": 1,
+     "weight": 0.02
+    },
+    {
+     "item": "AsksvinCarrionRibcage",
+     "min": 1,
+     "max": 1,
+     "weight": 0.02
+    },
+    {
+     "item": "AsksvinCarrionPelvic",
+     "min": 1,
+     "max": 1,
+     "weight": 0.02
+    },
+    {
+     "item": "AsksvinCarrionNeck",
+     "min": 1,
+     "max": 1,
+     "weight": 0.02
+    }
+   ]
+  }
+ },
+ {
   "id": "barrell",
   "kind": "destructible",
   "health": 10,
@@ -8092,6 +10331,83 @@
   "name": "Ancient Coffin"
  },
  {
+  "id": "deepnorth_lantern_standing",
+  "kind": "destructible",
+  "health": 200,
+  "damageModifiers": {
+   "pierce": "Resistant",
+   "chop": "Weak",
+   "pickaxe": "Resistant",
+   "fire": "Resistant",
+   "frost": "Immune",
+   "poison": "Immune",
+   "spirit": "Immune"
+  },
+  "drops": {
+   "min": 1,
+   "max": 1,
+   "chance": 1,
+   "items": [
+    {
+     "item": "Lantern_DN",
+     "min": 1,
+     "max": 1,
+     "weight": 1
+    }
+   ]
+  }
+ },
+ {
+  "id": "dungeon_sunkencrypt_irongate_rusty",
+  "kind": "destructible",
+  "health": 100,
+  "damageModifiers": {
+   "poison": "Immune",
+   "spirit": "Immune"
+  },
+  "drops": {
+   "min": 1,
+   "max": 1,
+   "chance": 1,
+   "items": [
+    {
+     "item": "IronScrap",
+     "min": 1,
+     "max": 1,
+     "weight": 1
+    }
+   ]
+  },
+  "name": "Iron Gate"
+ },
+ {
+  "id": "dvergrprops_banner",
+  "kind": "destructible",
+  "health": 100,
+  "damageModifiers": {
+   "pierce": "Resistant",
+   "chop": "Weak",
+   "fire": "Weak",
+   "frost": "Resistant",
+   "lightning": "Resistant",
+   "poison": "Immune",
+   "spirit": "Immune"
+  },
+  "drops": {
+   "min": 1,
+   "max": 2,
+   "chance": 1,
+   "items": [
+    {
+     "item": "JuteBlue",
+     "min": 1,
+     "max": 1,
+     "weight": 1
+    }
+   ]
+  }
+ },
+ {
   "id": "dvergrprops_barrel",
   "kind": "destructible",
   "health": 800,
@@ -8129,6 +10445,291 @@
   }
  },
  {
+  "id": "dvergrprops_bed",
+  "kind": "destructible",
+  "health": 800,
+  "damageModifiers": {
+   "pierce": "Resistant",
+   "chop": "Weak",
+   "fire": "Weak",
+   "frost": "Resistant",
+   "lightning": "Resistant",
+   "poison": "Immune",
+   "spirit": "Immune"
+  },
+  "drops": {
+   "min": 1,
+   "max": 4,
+   "chance": 1,
+   "items": [
+    {
+     "item": "Wood",
+     "min": 1,
+     "max": 1,
+     "weight": 1
+    },
+    {
+     "item": "CopperScrap",
+     "min": 1,
+     "max": 1,
+     "weight": 0.5
+    }
+   ]
+  }
+ },
+ {
+  "id": "dvergrprops_chair",
+  "kind": "destructible",
+  "health": 500,
+  "damageModifiers": {
+   "pierce": "Resistant",
+   "chop": "Weak",
+   "fire": "Weak",
+   "frost": "Resistant",
+   "lightning": "Resistant",
+   "poison": "Immune",
+   "spirit": "Immune"
+  },
+  "drops": {
+   "min": 1,
+   "max": 3,
+   "chance": 1,
+   "items": [
+    {
+     "item": "Wood",
+     "min": 1,
+     "max": 1,
+     "weight": 1
+    },
+    {
+     "item": "CopperScrap",
+     "min": 1,
+     "max": 1,
+     "weight": 0.5
+    }
+   ]
+  }
+ },
+ {
+  "id": "dvergrprops_crate",
+  "kind": "destructible",
+  "health": 200,
+  "damageModifiers": {
+   "pierce": "Resistant",
+   "chop": "Weak",
+   "poison": "Immune",
+   "spirit": "Immune"
+  },
+  "drops": {
+   "min": 1,
+   "max": 4,
+   "chance": 1,
+   "oneOfEach": true,
+   "items": [
+    {
+     "item": "FineWood",
+     "min": 1,
+     "max": 1,
+     "weight": 1
+    },
+    {
+     "item": "Softtissue",
+     "min": 2,
+     "max": 4,
+     "weight": 1
+    }
+   ]
+  },
+  "name": "Crate"
+ },
+ {
+  "id": "dvergrprops_crate_ashlands",
+  "kind": "destructible",
+  "health": 200,
+  "damageModifiers": {
+   "pierce": "Resistant",
+   "chop": "Weak",
+   "poison": "Immune",
+   "spirit": "Immune"
+  },
+  "drops": {
+   "min": 1,
+   "max": 4,
+   "chance": 1,
+   "oneOfEach": true,
+   "items": [
+    {
+     "item": "Blackwood",
+     "min": 1,
+     "max": 1,
+     "weight": 1
+    },
+    {
+     "item": "FlametalOreNew",
+     "min": 1,
+     "max": 1,
+     "weight": 1
+    }
+   ]
+  },
+  "name": "Crate"
+ },
+ {
+  "id": "dvergrprops_crate_long",
+  "kind": "destructible",
+  "health": 10,
+  "damageModifiers": {
+   "chop": "Weak",
+   "poison": "Immune",
+   "spirit": "Immune"
+  },
+  "drops": {
+   "min": 1,
+   "max": 1,
+   "chance": 1,
+   "oneOfEach": true,
+   "items": [
+    {
+     "item": "DvergrNeedle",
+     "min": 1,
+     "max": 1,
+     "weight": 1
+    }
+   ]
+  },
+  "name": "Dvergr Component Crate"
+ },
+ {
+  "id": "dvergrprops_curtain",
+  "kind": "destructible",
+  "health": 100,
+  "damageModifiers": {
+   "pierce": "Resistant",
+   "chop": "Weak",
+   "fire": "Weak",
+   "frost": "Resistant",
+   "lightning": "Resistant",
+   "poison": "Immune",
+   "spirit": "Immune"
+  },
+  "drops": {
+   "min": 1,
+   "max": 2,
+   "chance": 1,
+   "items": [
+    {
+     "item": "JuteBlue",
+     "min": 1,
+     "max": 1,
+     "weight": 1
+    }
+   ]
+  }
+ },
+ {
+  "id": "dvergrprops_hooknchain",
+  "kind": "destructible",
+  "health": 500,
+  "damageModifiers": {
+   "blunt": "Resistant",
+   "slash": "Resistant",
+   "pierce": "Resistant",
+   "chop": "Resistant",
+   "pickaxe": "Resistant",
+   "fire": "Resistant",
+   "frost": "Resistant",
+   "lightning": "Resistant",
+   "poison": "Immune",
+   "spirit": "Immune"
+  },
+  "drops": {
+   "min": 1,
+   "max": 2,
+   "chance": 1,
+   "oneOfEach": true,
+   "items": [
+    {
+     "item": "CopperScrap",
+     "min": 1,
+     "max": 1,
+     "weight": 1
+    },
+    {
+     "item": "Chain",
+     "min": 1,
+     "max": 1,
+     "weight": 1
+    }
+   ]
+  }
+ },
+ {
+  "id": "dvergrprops_lantern",
+  "kind": "destructible",
+  "health": 100,
+  "damageModifiers": {
+   "blunt": "Weak",
+   "pierce": "Resistant",
+   "chop": "Weak",
+   "fire": "Resistant",
+   "frost": "Resistant",
+   "lightning": "Resistant",
+   "poison": "Immune",
+   "spirit": "Immune"
+  },
+  "drops": {
+   "min": 1,
+   "max": 2,
+   "chance": 1,
+   "items": [
+    {
+     "item": "CopperScrap",
+     "min": 1,
+     "max": 1,
+     "weight": 1
+    },
+    {
+     "item": "SurtlingCore",
+     "min": 1,
+     "max": 1,
+     "weight": 1
+    }
+   ]
+  }
+ },
+ {
+  "id": "dvergrprops_lantern_standing",
+  "kind": "destructible",
+  "health": 10,
+  "damageModifiers": {
+   "blunt": "Weak",
+   "slash": "Weak",
+   "chop": "Weak",
+   "pickaxe": "Weak",
+   "poison": "Immune",
+   "spirit": "Immune"
+  },
+  "drops": {
+   "min": 1,
+   "max": 2,
+   "chance": 1,
+   "items": [
+    {
+     "item": "CopperScrap",
+     "min": 1,
+     "max": 1,
+     "weight": 1
+    },
+    {
+     "item": "SurtlingCore",
+     "min": 1,
+     "max": 1,
+     "weight": 1
+    }
+   ]
+  }
+ },
+ {
   "id": "dvergrprops_pickaxe",
   "kind": "destructible",
   "health": 1,
@@ -8142,6 +10743,275 @@
      "min": 1,
      "max": 1,
      "weight": 1
+    }
+   ]
+  }
+ },
+ {
+  "id": "dvergrprops_shelf",
+  "kind": "destructible",
+  "health": 200,
+  "damageModifiers": {
+   "pierce": "Resistant",
+   "chop": "Weak",
+   "fire": "Weak",
+   "frost": "Resistant",
+   "lightning": "Resistant",
+   "poison": "Immune",
+   "spirit": "Immune"
+  },
+  "drops": {
+   "min": 1,
+   "max": 3,
+   "chance": 1,
+   "items": [
+    {
+     "item": "Wood",
+     "min": 1,
+     "max": 1,
+     "weight": 1
+    },
+    {
+     "item": "CopperScrap",
+     "min": 1,
+     "max": 1,
+     "weight": 0.5
+    }
+   ]
+  }
+ },
+ {
+  "id": "dvergrprops_stool",
+  "kind": "destructible",
+  "health": 100,
+  "damageModifiers": {
+   "pierce": "Resistant",
+   "chop": "Weak",
+   "fire": "Weak",
+   "poison": "Immune",
+   "spirit": "Immune"
+  },
+  "drops": {
+   "min": 1,
+   "max": 3,
+   "chance": 1,
+   "items": [
+    {
+     "item": "Wood",
+     "min": 1,
+     "max": 1,
+     "weight": 1
+    },
+    {
+     "item": "CopperScrap",
+     "min": 1,
+     "max": 1,
+     "weight": 0.5
+    }
+   ]
+  }
+ },
+ {
+  "id": "dvergrprops_table",
+  "kind": "destructible",
+  "health": 400,
+  "damageModifiers": {
+   "pierce": "Resistant",
+   "chop": "Weak",
+   "fire": "Weak",
+   "frost": "Resistant",
+   "lightning": "Resistant",
+   "poison": "Immune",
+   "spirit": "Immune"
+  },
+  "drops": {
+   "min": 1,
+   "max": 3,
+   "chance": 1,
+   "items": [
+    {
+     "item": "Wood",
+     "min": 1,
+     "max": 1,
+     "weight": 1
+    },
+    {
+     "item": "CopperScrap",
+     "min": 1,
+     "max": 1,
+     "weight": 0.5
+    }
+   ]
+  }
+ },
+ {
+  "id": "dvergrprops_wood_beam",
+  "kind": "destructible",
+  "health": 800,
+  "damageModifiers": {
+   "pierce": "Resistant",
+   "chop": "Weak",
+   "poison": "Immune",
+   "spirit": "Immune"
+  },
+  "drops": {
+   "min": 1,
+   "max": 1,
+   "chance": 1,
+   "items": [
+    {
+     "item": "Wood",
+     "min": 1,
+     "max": 1,
+     "weight": 1
+    }
+   ]
+  }
+ },
+ {
+  "id": "dvergrprops_wood_pole",
+  "kind": "destructible",
+  "health": 800,
+  "damageModifiers": {
+   "pierce": "Resistant",
+   "chop": "Weak",
+   "poison": "Immune",
+   "spirit": "Immune"
+  },
+  "drops": {
+   "min": 1,
+   "max": 1,
+   "chance": 1,
+   "items": [
+    {
+     "item": "Wood",
+     "min": 1,
+     "max": 1,
+     "weight": 1
+    },
+    {
+     "item": "CopperScrap",
+     "min": 1,
+     "max": 1,
+     "weight": 0.5
+    }
+   ]
+  }
+ },
+ {
+  "id": "dvergrprops_wood_stake",
+  "kind": "destructible",
+  "health": 500,
+  "damageModifiers": {
+   "pierce": "Resistant",
+   "chop": "Weak",
+   "frost": "Resistant",
+   "lightning": "Resistant",
+   "poison": "Immune",
+   "spirit": "Immune"
+  },
+  "drops": {
+   "min": 1,
+   "max": 1,
+   "chance": 1,
+   "items": [
+    {
+     "item": "Wood",
+     "min": 1,
+     "max": 1,
+     "weight": 1
+    }
+   ]
+  }
+ },
+ {
+  "id": "dvergrprops_wood_stakewall",
+  "kind": "destructible",
+  "health": 500,
+  "damageModifiers": {
+   "pierce": "Resistant",
+   "chop": "Weak",
+   "frost": "Resistant",
+   "lightning": "Resistant",
+   "poison": "Immune",
+   "spirit": "Immune"
+  },
+  "drops": {
+   "min": 1,
+   "max": 5,
+   "chance": 1,
+   "items": [
+    {
+     "item": "Wood",
+     "min": 1,
+     "max": 1,
+     "weight": 1
+    }
+   ]
+  }
+ },
+ {
+  "id": "dvergrprops_wood_wall",
+  "kind": "destructible",
+  "health": 1000,
+  "damageModifiers": {
+   "pierce": "Resistant",
+   "pickaxe": "Resistant",
+   "fire": "Weak",
+   "frost": "Resistant",
+   "lightning": "Resistant",
+   "poison": "Immune",
+   "spirit": "Immune"
+  },
+  "drops": {
+   "min": 1,
+   "max": 5,
+   "chance": 1,
+   "items": [
+    {
+     "item": "Wood",
+     "min": 1,
+     "max": 1,
+     "weight": 1
+    },
+    {
+     "item": "CopperScrap",
+     "min": 1,
+     "max": 1,
+     "weight": 0.5
+    }
+   ]
+  }
+ },
+ {
+  "id": "dvergrtown_stair_corner_wood_left",
+  "kind": "destructible",
+  "health": 750,
+  "damageModifiers": {
+   "pierce": "Resistant",
+   "chop": "Weak",
+   "fire": "Resistant",
+   "frost": "Resistant",
+   "lightning": "Resistant",
+   "poison": "Immune",
+   "spirit": "Immune"
+  },
+  "drops": {
+   "min": 1,
+   "max": 3,
+   "chance": 1,
+   "items": [
+    {
+     "item": "Wood",
+     "min": 1,
+     "max": 1,
+     "weight": 1
+    },
+    {
+     "item": "CopperScrap",
+     "min": 1,
+     "max": 1,
+     "weight": 0.5
     }
    ]
   }
@@ -8171,6 +11041,43 @@
    ]
   },
   "becomes": "vfx_dvergrcreep_beam_destroyed"
+ },
+ {
+  "id": "dvergrtown_wood_crane",
+  "kind": "destructible",
+  "health": 1000,
+  "damageModifiers": {
+   "pierce": "Resistant",
+   "chop": "Weak",
+   "poison": "Immune",
+   "spirit": "Immune"
+  },
+  "drops": {
+   "min": 1,
+   "max": 4,
+   "chance": 1,
+   "oneOfEach": true,
+   "items": [
+    {
+     "item": "Wood",
+     "min": 1,
+     "max": 1,
+     "weight": 1
+    },
+    {
+     "item": "CopperScrap",
+     "min": 1,
+     "max": 1,
+     "weight": 1
+    },
+    {
+     "item": "Chain",
+     "min": 1,
+     "max": 1,
+     "weight": 1
+    }
+   ]
+  }
  },
  {
   "id": "dvergrtown_wood_pole",
@@ -8913,6 +11820,180 @@
   }
  },
  {
+  "id": "goblin_banner",
+  "kind": "destructible",
+  "health": 200,
+  "damageModifiers": {
+   "pierce": "Resistant",
+   "chop": "Weak",
+   "poison": "Immune",
+   "spirit": "Immune"
+  },
+  "drops": {
+   "min": 1,
+   "max": 2,
+   "chance": 1,
+   "items": [
+    {
+     "item": "Wood",
+     "min": 1,
+     "max": 1,
+     "weight": 1
+    },
+    {
+     "item": "DeerHide",
+     "min": 1,
+     "max": 1,
+     "weight": 1
+    }
+   ]
+  }
+ },
+ {
+  "id": "goblin_fence",
+  "kind": "destructible",
+  "health": 200,
+  "damageModifiers": {
+   "pierce": "Resistant",
+   "chop": "Weak",
+   "poison": "Immune",
+   "spirit": "Immune"
+  },
+  "drops": {
+   "min": 2,
+   "max": 3,
+   "chance": 1,
+   "items": [
+    {
+     "item": "Wood",
+     "min": 1,
+     "max": 1,
+     "weight": 1
+    }
+   ]
+  }
+ },
+ {
+  "id": "goblin_pole",
+  "kind": "destructible",
+  "health": 200,
+  "damageModifiers": {
+   "pierce": "Resistant",
+   "chop": "Weak",
+   "poison": "Immune",
+   "spirit": "Immune"
+  },
+  "drops": {
+   "min": 1,
+   "max": 1,
+   "chance": 1,
+   "items": [
+    {
+     "item": "Wood",
+     "min": 1,
+     "max": 1,
+     "weight": 1
+    }
+   ]
+  }
+ },
+ {
+  "id": "goblin_pole_small",
+  "kind": "destructible",
+  "health": 200,
+  "damageModifiers": {
+   "pierce": "Resistant",
+   "chop": "Weak",
+   "poison": "Immune",
+   "spirit": "Immune"
+  },
+  "drops": {
+   "min": 1,
+   "max": 1,
+   "chance": 1,
+   "items": [
+    {
+     "item": "Wood",
+     "min": 1,
+     "max": 1,
+     "weight": 1
+    }
+   ]
+  }
+ },
+ {
+  "id": "goblin_roof_45d",
+  "kind": "destructible",
+  "health": 200,
+  "damageModifiers": {
+   "pierce": "Resistant",
+   "chop": "Weak",
+   "poison": "Immune",
+   "spirit": "Immune"
+  },
+  "drops": {
+   "min": 1,
+   "max": 3,
+   "chance": 1,
+   "items": [
+    {
+     "item": "DeerHide",
+     "min": 1,
+     "max": 1,
+     "weight": 1
+    }
+   ]
+  }
+ },
+ {
+  "id": "goblin_roof_45d_corner",
+  "kind": "destructible",
+  "health": 200,
+  "damageModifiers": {
+   "pierce": "Resistant",
+   "chop": "Weak",
+   "poison": "Immune",
+   "spirit": "Immune"
+  },
+  "drops": {
+   "min": 1,
+   "max": 3,
+   "chance": 1,
+   "items": [
+    {
+     "item": "DeerHide",
+     "min": 1,
+     "max": 1,
+     "weight": 1
+    }
+   ]
+  }
+ },
+ {
+  "id": "goblin_roof_cap",
+  "kind": "destructible",
+  "health": 200,
+  "damageModifiers": {
+   "pierce": "Resistant",
+   "chop": "Weak",
+   "poison": "Immune",
+   "spirit": "Immune"
+  },
+  "drops": {
+   "min": 2,
+   "max": 5,
+   "chance": 1,
+   "items": [
+    {
+     "item": "DeerHide",
+     "min": 1,
+     "max": 1,
+     "weight": 1
+    }
+   ]
+  }
+ },
+ {
   "id": "goblin_totempole",
   "kind": "pickable",
   "pickable": {
@@ -8965,6 +12046,78 @@
      "min": 1,
      "max": 1,
      "weight": 0.01
+    }
+   ]
+  }
+ },
+ {
+  "id": "goblin_woodwall_1m",
+  "kind": "destructible",
+  "health": 200,
+  "damageModifiers": {
+   "pierce": "Resistant",
+   "chop": "Weak",
+   "poison": "Immune",
+   "spirit": "Immune"
+  },
+  "drops": {
+   "min": 1,
+   "max": 2,
+   "chance": 1,
+   "items": [
+    {
+     "item": "Wood",
+     "min": 1,
+     "max": 1,
+     "weight": 1
+    }
+   ]
+  }
+ },
+ {
+  "id": "goblin_woodwall_2m",
+  "kind": "destructible",
+  "health": 200,
+  "damageModifiers": {
+   "pierce": "Resistant",
+   "chop": "Weak",
+   "poison": "Immune",
+   "spirit": "Immune"
+  },
+  "drops": {
+   "min": 2,
+   "max": 3,
+   "chance": 1,
+   "items": [
+    {
+     "item": "Wood",
+     "min": 1,
+     "max": 1,
+     "weight": 1
+    }
+   ]
+  }
+ },
+ {
+  "id": "goblin_woodwall_2m_ribs",
+  "kind": "destructible",
+  "health": 200,
+  "damageModifiers": {
+   "pierce": "Resistant",
+   "chop": "Weak",
+   "poison": "Immune",
+   "spirit": "Immune"
+  },
+  "drops": {
+   "min": 5,
+   "max": 8,
+   "chance": 1,
+   "items": [
+    {
+     "item": "BoneFragments",
+     "min": 1,
+     "max": 1,
+     "weight": 1
     }
    ]
   }
@@ -9183,6 +12336,30 @@
    "spirit": "Immune"
   },
   "becomes": "cliff_ashlands2_frac"
+ },
+ {
+  "id": "lox_ribs",
+  "kind": "destructible",
+  "health": 50,
+  "damageModifiers": {
+   "pierce": "Resistant",
+   "chop": "Weak",
+   "poison": "Immune",
+   "spirit": "Immune"
+  },
+  "drops": {
+   "min": 5,
+   "max": 8,
+   "chance": 1,
+   "items": [
+    {
+     "item": "BoneFragments",
+     "min": 1,
+     "max": 1,
+     "weight": 1
+    }
+   ]
+  }
  },
  {
   "id": "marker01",
@@ -9495,6 +12672,39 @@
      "min": 1,
      "max": 1,
      "weight": 0.1
+    }
+   ]
+  }
+ },
+ {
+  "id": "piece_Charred_Balista",
+  "kind": "destructible",
+  "health": 400,
+  "damageModifiers": {
+   "pierce": "Resistant",
+   "pickaxe": "Resistant",
+   "fire": "Resistant",
+   "frost": "Resistant",
+   "lightning": "Resistant",
+   "poison": "Immune"
+  },
+  "drops": {
+   "min": 2,
+   "max": 2,
+   "chance": 1,
+   "oneOfEach": true,
+   "items": [
+    {
+     "item": "CharredCogwheel",
+     "min": 1,
+     "max": 1,
+     "weight": 1
+    },
+    {
+     "item": "BoneFragments",
+     "min": 5,
+     "max": 15,
+     "weight": 1
     }
    ]
   }
@@ -10835,6 +14045,222 @@
      "item": "Wood",
      "min": 1,
      "max": 2,
+     "weight": 1
+    }
+   ]
+  }
+ },
+ {
+  "id": "shipwreck_karve_bottomboards",
+  "kind": "destructible",
+  "health": 100,
+  "damageModifiers": {
+   "pierce": "Resistant",
+   "chop": "Weak",
+   "poison": "Immune",
+   "spirit": "Immune"
+  },
+  "drops": {
+   "min": 3,
+   "max": 6,
+   "chance": 1,
+   "items": [
+    {
+     "item": "FineWood",
+     "min": 1,
+     "max": 1,
+     "weight": 1
+    }
+   ]
+  }
+ },
+ {
+  "id": "shipwreck_karve_bow",
+  "kind": "destructible",
+  "health": 200,
+  "damageModifiers": {
+   "pierce": "Resistant",
+   "chop": "Weak",
+   "poison": "Immune",
+   "spirit": "Immune"
+  },
+  "drops": {
+   "min": 10,
+   "max": 15,
+   "chance": 1,
+   "items": [
+    {
+     "item": "FineWood",
+     "min": 1,
+     "max": 1,
+     "weight": 1
+    }
+   ]
+  }
+ },
+ {
+  "id": "shipwreck_karve_dragonhead",
+  "kind": "destructible",
+  "health": 50,
+  "damageModifiers": {
+   "pierce": "Resistant",
+   "chop": "Weak",
+   "poison": "Immune",
+   "spirit": "Immune"
+  },
+  "drops": {
+   "min": 1,
+   "max": 2,
+   "chance": 1,
+   "items": [
+    {
+     "item": "FineWood",
+     "min": 1,
+     "max": 1,
+     "weight": 1
+    }
+   ]
+  }
+ },
+ {
+  "id": "shipwreck_karve_stern",
+  "kind": "destructible",
+  "health": 200,
+  "damageModifiers": {
+   "pierce": "Resistant",
+   "chop": "Weak",
+   "poison": "Immune",
+   "spirit": "Immune"
+  },
+  "drops": {
+   "min": 10,
+   "max": 15,
+   "chance": 1,
+   "items": [
+    {
+     "item": "FineWood",
+     "min": 1,
+     "max": 1,
+     "weight": 1
+    }
+   ]
+  }
+ },
+ {
+  "id": "shipwreck_karve_sternpost",
+  "kind": "destructible",
+  "health": 100,
+  "damageModifiers": {
+   "pierce": "Resistant",
+   "chop": "Weak",
+   "poison": "Immune",
+   "spirit": "Immune"
+  },
+  "drops": {
+   "min": 3,
+   "max": 6,
+   "chance": 1,
+   "items": [
+    {
+     "item": "FineWood",
+     "min": 1,
+     "max": 1,
+     "weight": 1
+    }
+   ]
+  }
+ },
+ {
+  "id": "shipwreck_vikingship_front",
+  "kind": "destructible",
+  "health": 200,
+  "damageModifiers": {
+   "pierce": "Resistant",
+   "chop": "Weak",
+   "poison": "Immune",
+   "spirit": "Immune"
+  },
+  "drops": {
+   "min": 10,
+   "max": 15,
+   "chance": 1,
+   "items": [
+    {
+     "item": "FineWood",
+     "min": 1,
+     "max": 1,
+     "weight": 1
+    }
+   ]
+  }
+ },
+ {
+  "id": "shipwreck_vikingship_frontpiece",
+  "kind": "destructible",
+  "health": 200,
+  "damageModifiers": {
+   "pierce": "Resistant",
+   "chop": "Weak",
+   "poison": "Immune",
+   "spirit": "Immune"
+  },
+  "drops": {
+   "min": 10,
+   "max": 15,
+   "chance": 1,
+   "items": [
+    {
+     "item": "FineWood",
+     "min": 1,
+     "max": 1,
+     "weight": 1
+    }
+   ]
+  }
+ },
+ {
+  "id": "shipwreck_vikingship_mast1",
+  "kind": "destructible",
+  "health": 100,
+  "damageModifiers": {
+   "pierce": "Resistant",
+   "chop": "Weak",
+   "poison": "Immune",
+   "spirit": "Immune"
+  },
+  "drops": {
+   "min": 3,
+   "max": 6,
+   "chance": 1,
+   "items": [
+    {
+     "item": "FineWood",
+     "min": 1,
+     "max": 1,
+     "weight": 1
+    }
+   ]
+  }
+ },
+ {
+  "id": "shipwreck_vikingship_rear",
+  "kind": "destructible",
+  "health": 100,
+  "damageModifiers": {
+   "pierce": "Resistant",
+   "chop": "Weak",
+   "poison": "Immune",
+   "spirit": "Immune"
+  },
+  "drops": {
+   "min": 3,
+   "max": 6,
+   "chance": 1,
+   "items": [
+    {
+     "item": "FineWood",
+     "min": 1,
+     "max": 1,
      "weight": 1
     }
    ]

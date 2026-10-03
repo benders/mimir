@@ -39,6 +39,17 @@
   "parryBonus": 1
  },
  {
+  "id": "Dust",
+  "name": "Dust",
+  "type": "Material",
+  "icon": "Dust",
+  "weight": 1.0,
+  "stack": 1,
+  "maxQuality": 1,
+  "backstab": 1,
+  "parryBonus": 1
+ },
+ {
   "id": "Egg",
   "name": "Egg",
   "type": "Material",
@@ -122,6 +133,17 @@
   "parryBonus": 1
  },
  {
+  "id": "Ichor",
+  "name": "Ichor",
+  "type": "Material",
+  "icon": "Ichor",
+  "weight": 1.0,
+  "stack": 1,
+  "maxQuality": 1,
+  "backstab": 1,
+  "parryBonus": 1
+ },
+ {
   "id": "Ingot",
   "name": "Ingot",
   "type": "Material",
@@ -155,6 +177,17 @@
   "backstab": 1,
   "parryBonus": 1,
   "unobtainable": true
+ },
+ {
+  "id": "Nectar",
+  "name": "Nectar",
+  "type": "Material",
+  "icon": "Nectar",
+  "weight": 1.0,
+  "stack": 1,
+  "maxQuality": 1,
+  "backstab": 1,
+  "parryBonus": 1
  },
  {
   "id": "OddBar",

@@ -279,13 +279,16 @@ def reachable(items: list, creatures: list, pieces: list, recipes: list, procs: 
     sources, spawns and enabled pieces in a build menu, then enabled recipes with reachable ingredients, drops of
     reachable creatures (a creature dropped by one, like a miniboss's second phase, is reached too), conversions
     of reachable inputs. Chests in locations and trader stock count (as sources; trader keys are ignored, Coins
-    must be reachable), fish via their bait. Incomplete while quests aren't modelled (#20)."""
+    must be reachable), fish via their bait, honey and sap from buildable pieces whose cost is reachable (sap
+    needs its root in the world). Incomplete while quests aren't modelled (#20)."""
     by_creature = {c["id"]: c for c in creatures}
     got_creatures = {s["creature"] for s in spawn_list}
     traders = [src for src in sources if src["kind"] == "trader"]
     got_pieces = {p["id"] for p in pieces if p.get("enabled") and p.get("tools")}
     got = set()
     fish = [src for src in sources if src["kind"] == "fishing"]
+    made = [p for p in pieces if p["id"] in got_pieces and (pr := p.get("produces")) and pr["item"]
+            and pr.get("connectsTo", {"biomes": True}).get("biomes")]
     for src in sources:
         if src["kind"] in ("fishing", "trader"):
             continue
@@ -302,6 +305,12 @@ def reachable(items: list, creatures: list, pieces: list, recipes: list, procs: 
         if "Coins" in got:
             got |= {x["item"] for t in traders for x in t["sells"]}
         got |= {p["to"] for p in procs if p["from"] in got}
+        item_ids = {i["id"] for i in items}
+        got |= {p["id"] for p in pieces if p["id"] in got_pieces and p["id"] in item_ids  # feasts: item and piece in one
+                and all(r["item"] in got for r in p["resources"])}
+        for pc in made:  # a placed piece needs its cost; sap also its root, a world object
+            if all(r["item"] in got for r in pc["resources"]):
+                got.add(pc["produces"]["item"])
         for f in fish:
             if f["id"] in got_creatures and any(b["item"] in got for b in f["baits"]):
                 got.add(f["id"])
@@ -392,8 +401,27 @@ def piece(name: str, p: dict, tools: dict[str, list[str]]) -> dict | None:
                             "requiresRoof": station["m_craftRequireRoof"], "requiresFire": station["m_craftRequireFire"]}
         if station else None,
         "extends": ref(ext["m_craftingStation"]) if ext else None,
+        "produces": produces(p),
         "dlc": pc["m_dlc"],
     }
+
+
+def produces(p: dict) -> dict | None:
+    """What a placed piece makes by itself: a Beehive's honey (`secPerUnit` each, up to `max`, only when its
+    `biomes` allow) or a SapCollector's sap, which needs a world object (`connectsTo`: id and the biomes it grows in,
+    from ZoneSystem vegetation) below it."""
+    if b := comp(p, "Beehive"):
+        return {"item": ref(b["m_honeyItem"]), "secPerUnit": b["m_secPerUnit"], "max": b["m_maxHoney"],
+                "biomes": biomes(b["m_biome"])}
+    if s := comp(p, "SapCollector"):
+        root = ref(s["m_mustConnectTo"])
+        where = []
+        for v in load("world/ZoneSystem.json")[0]["fields"]["m_vegetation"]:
+            if v["m_enable"] and ref(v["m_prefab"]) == root:
+                where += [x for x in biomes(v["m_biome"]) if x not in where]
+        return {"item": ref(s["m_spawnItem"]), "secPerUnit": s["m_secPerUnit"], "max": s["m_maxLevel"],
+                "connectsTo": {"id": root, "biomes": where}}
+    return None
 
 
 def processing(name: str, p: dict) -> list[dict]:
@@ -438,6 +466,9 @@ def source(name: str, p: dict) -> dict | None:
         entry.update(kind="destructible", health=d["m_health"], minToolTier=d["m_minToolTier"],
                      damageModifiers=modifiers(d["m_damages"]), drops=drop_table(dod.get("m_dropWhenDestroyed")),
                      becomes=ref(d.get("m_spawnWhenDestroyed")))
+    elif (dod := comp(p, "DropOnDestroyed")) and (w := comp(p, "WearNTear")):  # wild beehives, props in locations
+        entry.update(kind="destructible", health=w["m_health"], damageModifiers=modifiers(w["m_damages"]),
+                     drops=drop_table(dod["m_dropWhenDestroyed"]))
     else:
         return None
     if not entry.get("drops") and not entry.get("pickable") and not entry.get("becomes"):
@@ -711,13 +742,16 @@ def traders() -> list[dict]:
 
 
 def offspring_spawns() -> list[dict]:
-    """Creatures born from another creature (Procreation) or hatched from an egg item (EggGrow)."""
+    """Creatures born from another creature (Procreation; the offspring can be an egg item), hatched from an egg
+    item (EggGrow) or grown up from another creature (Growup)."""
     out = []
     for name, p in PREFABS.items():
         if (c := comp(p, "Procreation")) and is_creature(name) and keep(ref(c["m_offspring"]), is_creature, is_item):
             out.append({"creature": ref(c["m_offspring"]), "source": "offspring", "parent": name})
         if (c := comp(p, "EggGrow")) and keep(ref(c["m_grownPrefab"]), is_creature):
             out.append({"creature": ref(c["m_grownPrefab"]), "source": "egg", "item": name})
+        if (c := comp(p, "Growup")) and is_creature(name) and keep(ref(c["m_grownPrefab"]), is_creature):
+            out.append({"creature": ref(c["m_grownPrefab"]), "source": "growup", "parent": name})
     return out
 
 

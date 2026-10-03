@@ -39,6 +39,33 @@
   }
  },
  {
+  "id": "WildHive",
+  "kind": "destructible",
+  "health": 20,
+  "damageModifiers": {
+   "fire": "Weak"
+  },
+  "drops": {
+   "min": 1,
+   "max": 1,
+   "chance": 1,
+   "items": [
+    {
+     "item": "Wood",
+     "min": 1,
+     "max": 3,
+     "weight": 1
+    },
+    {
+     "item": "Ore",
+     "min": 1,
+     "max": 1,
+     "weight": 1
+    }
+   ]
+  }
+ },
+ {
   "id": "container_piece_other_8d3ee0",
   "kind": "container",
   "name": "$piece_other",

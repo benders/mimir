@@ -91,7 +91,10 @@ catch drops; fish spawn as `creature` ids in `spawns` but have no `creatures` en
 `raid` (RandEventSystem; the event's biomes), `location` / `dungeon` (spawners and boss altars in a location or its
 dungeon rooms; the location's biomes), `offspring` (`parent` creature) or `egg` (`item` that hatches).
 Ids are prefab names; references are ids. Empty, zero, false and "Normal" values are omitted. Text is plain: Unity
-rich-text tags are stripped; creatures whose name was colored (Hildir's minibosses) are flagged `named`. Derived relations (used in, dropped by) are left to the site build.
+rich-text tags are stripped; creatures whose name was colored (Hildir's minibosses) are flagged `named`. Pieces that make items on their own have `produces` (`item`, `secPerUnit`, `max`; a Beehive's working `biomes`, a
+Sap Extractor's `connectsTo` root with the biomes it grows in); sources of kind `destructible` are non-piece objects
+with a drop table (wild Beehive, props in locations). Creatures that grow up from another have a `growup` spawn
+(`parent`). Derived relations (used in, dropped by) are left to the site build.
 Items flagged `internal` (creature attack items) or `enemyOnly` (FW_/SP_ gear copies, Dvergr crossbow) get no site
 page; creatures list them under `attacks` (weapons) and `equipment`.
 
