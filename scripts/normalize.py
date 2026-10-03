@@ -249,6 +249,12 @@ def item_type(name: str) -> str | None:
     return drop["m_itemData"]["m_shared"]["m_itemType"] if drop else None
 
 
+def picked_items(src: dict) -> set[str]:
+    """Items a pickable source gives: its `item`, or any of its `oneOf` choices."""
+    pk = src.get("pickable") or {}
+    return {x["item"] for x in pk.get("oneOf", [pk]) if "item" in x}
+
+
 def mark_enemy_only(items: list, creatures: list, recipes: list, procs: list, sources: list, pieces: list) -> None:
     """Flag items players can't get and that only exist for enemies: no recipe, drop, source, conversion or piece
     yields them, and they are either carried by a creature (Dvergr crossbow, FW_* Fallen Warrior and SP_* Shadow
@@ -259,8 +265,7 @@ def mark_enemy_only(items: list, creatures: list, recipes: list, procs: list, so
     obtainable |= {d["item"] for c in creatures for d in c.get("drops", [])}
     for src in sources:
         obtainable |= {d["item"] for d in (src.get("drops") or {}).get("items", [])}
-        if src.get("pickable"):
-            obtainable.add(src["pickable"]["item"])
+        obtainable |= picked_items(src)
     obtainable |= {p["id"] for p in pieces}  # e.g. feast items placed as pieces
     by_id = {i["id"]: i for i in items}
 
@@ -306,8 +311,7 @@ def reachable(items: list, creatures: list, pieces: list, recipes: list, procs: 
         for src in world:
             if src["id"] in placed:
                 got |= {d["item"] for d in (src.get("drops") or {}).get("items", [])}
-                if src.get("pickable"):
-                    got.add(src["pickable"]["item"])
+                got |= picked_items(src)
         got |= {r["item"] for r in recipes if r.get("item") and (r.get("enabled") or r.get("season"))
                 and all(x["item"] in got for x in r["resources"] if not x.get("upgrader"))}
         dropped = {d["item"] for c in got_creatures for d in by_creature.get(c, {}).get("drops", [])}
@@ -487,6 +491,12 @@ def source(name: str, p: dict) -> dict | None:
         entry.update(kind="pickable", name=text(pk["m_overrideName"]), pickable={
             "item": ref(pk["m_itemPrefab"]), "amount": pk["m_amount"], "respawnMinutes": pk["m_respawnTimeMinutes"]},
             drops=drop_table(pk["m_extraDrops"]))
+    elif pi := comp(p, "PickableItem"):  # treasure piles: one of m_randomItemPrefabs, else m_itemPrefab x m_stack
+        if opts := pi["m_randomItemPrefabs"]:  # PickableItem.SetupRandomPrefab: Random.Range(stackMin, stackMax + 1)
+            entry.update(kind="pickable", pickable={"oneOf": [prune({"item": ref(r["m_itemPrefab"]),
+                         "min": r["m_stackMin"], "max": r["m_stackMax"]}) for r in opts]})
+        else:
+            entry.update(kind="pickable", pickable={"item": ref(pi["m_itemPrefab"]), "amount": pi["m_stack"]})
     elif mr := comp(p, "MineRock") or comp(p, "MineRock5"):
         entry.update(kind="rock", name=text(mr["m_name"]), health=mr["m_health"], minToolTier=mr["m_minToolTier"],
                      damageModifiers=modifiers(mr.get("m_damageModifiers")), drops=drop_table(mr["m_dropItems"]))
@@ -707,11 +717,28 @@ def placed_in_locations():
                     yield name, where[name], r, True
 
 
+def placed_prefabs(p: dict) -> set[str]:
+    """Prefabs placed in a location or room: its hierarchy's network prefab `instances`. An `inactive` one (it or an
+    ancestor is disabled in the asset) is skipped: ZoneSystem.SpawnLocation re-enables only objects enabled in the
+    asset, so it is never created, except under a RandomSpawn ancestor (`randomSpawn.path`), which activates its own
+    object when it has no ZNetView (RandomSpawn.SetSpawned; assumed to be the disabled one). A RandomSpawn `chance`
+    under 100 still counts as placed: it is rolled per location."""
+    return {i["prefab"] for i in p.get("instances", []) if not i.get("inactive") or "path" in i.get("randomSpawn", {})}
+
+
+def with_instances(p: dict) -> list[dict]:
+    """Components of a location or room plus those of the prefabs it places (the dump doesn't repeat
+    them in the location: a Spawner_* object's CreatureSpawner, a chest's Container)."""
+    return p["components"] + [c for n in sorted(placed_prefabs(p)) if n in PREFABS for c in PREFABS[n]["components"]]
+
+
 def location_spawns() -> list[dict]:
-    """Creature spawners, spawn areas and boss altars inside world locations and the dungeons they generate."""
+    """Creature spawners, spawn areas and boss altars inside world locations and the dungeons they generate,
+    including those of placed `Spawner_*` objects, and creatures placed directly."""
     found, biomes_of = defaultdict(list), {}
     for name, bs, p, dungeon in placed_in_locations():
-        found[name, dungeon] += spawners_in(p)
+        found[name, dungeon] += spawners_in({"components": with_instances(p)})
+        found[name, dungeon] += [{"creature": n} for n in sorted(placed_prefabs(p)) if n in PREFABS and is_creature(n)]
         biomes_of[name] = bs
     out = []
     for name in sorted(biomes_of):
@@ -728,7 +755,7 @@ def location_containers() -> list[dict]:
     dungeon generates)."""
     by = {}
     for name, bs, p, dungeon in placed_in_locations():
-        for c in (c["fields"] for c in p["components"] if c["type"] == "Container"):
+        for c in (c["fields"] for c in with_instances(p) if c["type"] == "Container"):
             if not (table := drop_table(c["m_defaultItems"])):
                 continue
             title = text(c["m_name"])
@@ -742,12 +769,11 @@ def location_containers() -> list[dict]:
 
 
 def scene_instances() -> dict[str, set]:
-    """prefab name -> {(location, dungeon)}: the location prefab itself, or an instance of the prefab (named by the
-    scene path of a component, sans the " (n)" copy suffix) in the location or a room its dungeon generates."""
+    """prefab name -> {(location, dungeon)}: the location prefab itself, or a placed instance of the prefab in the
+    location or in a room its dungeon generates."""
     found = defaultdict(set)
     for name, bs, p, dungeon in placed_in_locations():
-        for inst in {re.sub(r" \(\d+\)$", "", c["path"].rsplit("/", 1)[-1]) for c in p["components"]
-                     if c.get("path")} | {p["name"]}:
+        for inst in placed_prefabs(p) | {p["name"]}:
             found[inst].add((name, dungeon))
     return found
 
@@ -764,7 +790,7 @@ def place_pieces(pieces: list[dict]) -> None:
 def place_sources(sources: list[dict]) -> None:
     """Record where each world source is placed: `biomes` (enabled ZoneSystem vegetation), `locations`
     [{location, dungeon}] (the location is the object, or an instance of it sits in the location or in a room its
-    dungeon generates, named by the scene path), `placedBy` (pieces that create it: Plant, Procreation, WispSpawner).
+    dungeon generates), `placedBy` (pieces that create it: Plant, Procreation, WispSpawner).
     Sources with none of these are not found anywhere in the world."""
     by = {s["id"]: s for s in sources if s["kind"] not in ("fishing", "trader", "container")}
     veg = defaultdict(list)
@@ -776,7 +802,7 @@ def place_sources(sources: list[dict]) -> None:
         if inst in by:
             found[inst] |= places
     for name, bs, p, dungeon in placed_in_locations():
-        for c in p["components"]:  # objects a spawner makes (the Charred ballista)
+        for c in with_instances(p):  # objects a spawner makes (the Charred ballista)
             if c["type"] == "CreatureSpawner" and (spawned := ref(c["fields"]["m_creaturePrefab"])) in by:
                 found[spawned].add((name, dungeon))
     made = defaultdict(set)

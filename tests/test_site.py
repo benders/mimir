@@ -98,6 +98,13 @@ class Site(unittest.TestCase):
         wood = (self.out / "items/Wood.html").read_text(encoding="utf-8")  # picked from a Bush in the Meadows and Swamp
         self.assertIn("Meadows, Swamp", wood)
 
+    def test_random_pickable_found_in(self):
+        ore = (self.out / "items/Ore.html").read_text(encoding="utf-8")  # one of Treasure's items, in Lair via RandomSpawn
+        self.assertIn("Treasure", ore)
+        self.assertIn("one of 2: ×1", ore)
+        wood = (self.out / "items/Wood.html").read_text(encoding="utf-8")
+        self.assertIn("one of 2: ×2–4", wood)
+
     def test_piece_found_in(self):
         bench = (self.out / "pieces/piece_bench.html").read_text(encoding="utf-8")  # world copy, placed in the Lair
         self.assertIn("<h2>Found in</h2>", bench)

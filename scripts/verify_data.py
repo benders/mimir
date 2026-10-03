@@ -57,7 +57,8 @@ def main() -> int:
     # Referential integrity: everything a page links to must exist.
     drops = [d["item"] for c in creatures.values() for d in c.get("drops", [])]
     drops += [d["item"] for s in sources for d in (s.get("drops") or {}).get("items", [])]
-    drops += [s["pickable"]["item"] for s in sources if "pickable" in s]
+    drops += [x["item"] for s in sources for x in (s.get("pickable") or {}).get("oneOf", [s.get("pickable") or {}])
+              if "item" in x]
     dangling("recipe outputs", [r["item"] for r in recipes if "item" in r], set(items))
     dangling("recipe ingredients", [x["item"] for r in recipes for x in r.get("resources", [])], set(items))
     dangling("recipe stations", [r["station"] for r in recipes if "station" in r], set(pieces))
@@ -142,6 +143,9 @@ def main() -> int:
     check({"FishingBait", "Thunderstone"} <= set(sold["Haldor"]) and "BarberKit" in sold["Hildir"]
           and "SpiceOceans" in sold["BogWitch"], "Haldor sells bait and thunderstones, Hildir the barber kit, the Bog Witch spices")
     check(any(o.get("requiredKey") for o in sold["Hildir"].values()), "Hildir's offers unlock with global keys")
+    mc = next((s for s in sources if s["id"] == "Pickable_MountainCaveRandom"), {})
+    check("WolfClaw" in {x["item"] for x in mc.get("pickable", {}).get("oneOf", [])} and mc.get("locations"),
+          "WolfClaw: found in the frost cave treasure pile (PickableItem), placed in cave rooms")
     made = {p["produces"]["item"]: p for p in pieces.values() if p.get("produces")}
     check({"Honey", "Sap"} <= set(made) and made["Honey"]["produces"]["secPerUnit"] > 0
           and "Mistlands" in made["Sap"]["produces"].get("connectsTo", {}).get("biomes", []),

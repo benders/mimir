@@ -3286,9 +3286,6 @@
   "name": "Hexahedric Pulp",
   "locations": [
    {
-    "location": "MorkBorg"
-   },
-   {
     "location": "MorkBorg",
     "dungeon": true
    }
@@ -6150,9 +6147,6 @@
   "becomes": "Morkhalla_Rubble_Destroyed",
   "locations": [
    {
-    "location": "MorkBorg"
-   },
-   {
     "location": "MorkBorg",
     "dungeon": true
    }
@@ -6207,9 +6201,6 @@
   },
   "becomes": "Morkhalla_Rubble_Destroyed",
   "locations": [
-   {
-    "location": "MorkBorg"
-   },
    {
     "location": "MorkBorg",
     "dungeon": true
@@ -6266,9 +6257,6 @@
   "becomes": "Morkhalla_Rubble_Destroyed",
   "locations": [
    {
-    "location": "MorkBorg"
-   },
-   {
     "location": "MorkBorg",
     "dungeon": true
    }
@@ -6308,9 +6296,6 @@
   },
   "becomes": "Morkhalla_Rubble_Destroyed",
   "locations": [
-   {
-    "location": "MorkBorg"
-   },
    {
     "location": "MorkBorg",
     "dungeon": true
@@ -7434,6 +7419,43 @@
   ]
  },
  {
+  "id": "Pickable_DolmenTreasure",
+  "kind": "pickable",
+  "pickable": {
+   "oneOf": [
+    {
+     "item": "Coins",
+     "min": 2,
+     "max": 15
+    },
+    {
+     "item": "AmberPearl",
+     "min": 1,
+     "max": 3
+    },
+    {
+     "item": "Amber",
+     "min": 1,
+     "max": 5
+    }
+   ]
+  },
+  "locations": [
+   {
+    "location": "Dolmen01"
+   },
+   {
+    "location": "Dolmen02"
+   },
+   {
+    "location": "Dolmen03"
+   },
+   {
+    "location": "ShipSetting01"
+   }
+  ]
+ },
+ {
   "id": "Pickable_DragonEgg",
   "kind": "pickable",
   "pickable": {
@@ -7646,6 +7668,55 @@
   ]
  },
  {
+  "id": "Pickable_ForestCryptRandom",
+  "kind": "pickable",
+  "pickable": {
+   "oneOf": [
+    {
+     "item": "Coins",
+     "min": 5,
+     "max": 20
+    },
+    {
+     "item": "Ruby",
+     "min": 1,
+     "max": 2
+    },
+    {
+     "item": "Amber",
+     "min": 1,
+     "max": 5
+    },
+    {
+     "item": "AmberPearl",
+     "min": 1,
+     "max": 3
+    }
+   ]
+  },
+  "locations": [
+   {
+    "location": "Crypt2",
+    "dungeon": true
+   },
+   {
+    "location": "Crypt3",
+    "dungeon": true
+   },
+   {
+    "location": "Crypt4",
+    "dungeon": true
+   },
+   {
+    "location": "Hildir_crypt",
+    "dungeon": true
+   },
+   {
+    "location": "TrollCave02"
+   }
+  ]
+ },
+ {
   "id": "Pickable_ForestCryptRemains01",
   "kind": "pickable",
   "name": "Skeletal Remains",
@@ -7654,9 +7725,6 @@
    "amount": 1
   },
   "locations": [
-   {
-    "location": "BearCave"
-   },
    {
     "location": "Crypt2",
     "dungeon": true
@@ -7712,9 +7780,6 @@
    "amount": 1
   },
   "locations": [
-   {
-    "location": "BearCave"
-   },
    {
     "location": "CombatRuin01"
    },
@@ -7887,6 +7952,29 @@
   ]
  },
  {
+  "id": "Pickable_Item",
+  "kind": "pickable",
+  "pickable": {
+   "oneOf": [
+    {
+     "item": "Coins",
+     "min": 3,
+     "max": 9
+    }
+   ]
+  },
+  "locations": [
+   {
+    "location": "Hildir_cave",
+    "dungeon": true
+   },
+   {
+    "location": "MountainCave02",
+    "dungeon": true
+   }
+  ]
+ },
+ {
   "id": "Pickable_Kale",
   "kind": "pickable",
   "pickable": {
@@ -7991,6 +8079,46 @@
   ]
  },
  {
+  "id": "Pickable_MorkHallaTreasure",
+  "kind": "pickable",
+  "pickable": {
+   "oneOf": [
+    {
+     "item": "AncientGemstoneBlack",
+     "min": 1,
+     "max": 1
+    },
+    {
+     "item": "AncientGemstonePurple",
+     "min": 1,
+     "max": 1
+    },
+    {
+     "item": "AncientGemstoneGreen",
+     "min": 1,
+     "max": 1
+    },
+    {
+     "item": "AncientGemstoneOrange",
+     "min": 1,
+     "max": 1
+    }
+   ]
+  },
+  "locations": [
+   {
+    "location": "MorkBorg",
+    "dungeon": true
+   },
+   {
+    "location": "ShipSetting02"
+   },
+   {
+    "location": "ShipSetting03"
+   }
+  ]
+ },
+ {
   "id": "Pickable_MountainCaveCrystal",
   "kind": "pickable",
   "name": "Crystal",
@@ -8029,6 +8157,44 @@
     }
    ]
   }
+ },
+ {
+  "id": "Pickable_MountainCaveRandom",
+  "kind": "pickable",
+  "pickable": {
+   "oneOf": [
+    {
+     "item": "Coins",
+     "min": 40,
+     "max": 60
+    },
+    {
+     "item": "WolfHairBundle",
+     "min": 1,
+     "max": 1
+    },
+    {
+     "item": "WolfClaw",
+     "min": 1,
+     "max": 1
+    },
+    {
+     "item": "SilverNecklace",
+     "min": 1,
+     "max": 1
+    }
+   ]
+  },
+  "locations": [
+   {
+    "location": "Hildir_cave",
+    "dungeon": true
+   },
+   {
+    "location": "MountainCave02",
+    "dungeon": true
+   }
+  ]
  },
  {
   "id": "Pickable_MountainRemains01_buried",
@@ -8246,6 +8412,32 @@
   ]
  },
  {
+  "id": "Pickable_RandomFood",
+  "kind": "pickable",
+  "pickable": {
+   "oneOf": [
+    {
+     "item": "Bread"
+    },
+    {
+     "item": "Blueberries"
+    },
+    {
+     "item": "Raspberry"
+    },
+    {
+     "item": "CookedMeat"
+    },
+    {
+     "item": "TurnipStew"
+    },
+    {
+     "item": "Mushroom"
+    }
+   ]
+  }
+ },
+ {
   "id": "Pickable_RoyalJelly",
   "kind": "pickable",
   "pickable": {
@@ -8423,6 +8615,50 @@
   "locations": [
    {
     "location": "SulfurArch"
+   }
+  ]
+ },
+ {
+  "id": "Pickable_SunkenCryptRandom",
+  "kind": "pickable",
+  "pickable": {
+   "oneOf": [
+    {
+     "item": "Coins",
+     "min": 5,
+     "max": 30
+    },
+    {
+     "item": "Ruby",
+     "min": 1,
+     "max": 2
+    },
+    {
+     "item": "Amber",
+     "min": 3,
+     "max": 10
+    },
+    {
+     "item": "AmberPearl",
+     "min": 2,
+     "max": 5
+    },
+    {
+     "item": "WitheredBone",
+     "min": 1,
+     "max": 1
+    },
+    {
+     "item": "WitheredBone",
+     "min": 1,
+     "max": 1
+    }
+   ]
+  },
+  "locations": [
+   {
+    "location": "SunkenCrypt4",
+    "dungeon": true
    }
   ]
  },
@@ -9473,27 +9709,6 @@
   "locations": [
    {
     "location": "BogWitch_Camp"
-   },
-   {
-    "location": "Dolmen01"
-   },
-   {
-    "location": "Dolmen02"
-   },
-   {
-    "location": "Dolmen03"
-   },
-   {
-    "location": "LeviathanLava"
-   },
-   {
-    "location": "ShipSetting01"
-   },
-   {
-    "location": "ShipSetting02"
-   },
-   {
-    "location": "ShipSetting03"
    }
   ]
  },
@@ -9809,12 +10024,7 @@
    "poison": "Immune",
    "spirit": "Immune"
   },
-  "becomes": "ShimmeringSand_rock_frac",
-  "locations": [
-   {
-    "location": "IcePond1"
-   }
-  ]
+  "becomes": "ShimmeringSand_rock_frac"
  },
  {
   "id": "ShimmeringSand_rock_frac",
@@ -10908,11 +11118,6 @@
   "name": "Yggdrasil Shoot",
   "biomes": [
    "Mistlands"
-  ],
-  "locations": [
-   {
-    "location": "Mistlands_GuardTower1_ruined_new2"
-   }
   ]
  },
  {
@@ -10954,11 +11159,6 @@
   "name": "Yggdrasil Shoot",
   "biomes": [
    "Mistlands"
-  ],
-  "locations": [
-   {
-    "location": "Mistlands_GuardTower1_ruined_new2"
-   }
   ]
  },
  {
@@ -12719,15 +12919,7 @@
    "poison": "Immune",
    "spirit": "Immune"
   },
-  "becomes": "cliff_mistlands1_creep_frac",
-  "locations": [
-   {
-    "location": "Mistlands_DvergrBossEntrance1"
-   },
-   {
-    "location": "Mistlands_DvergrTownEntrance2"
-   }
-  ]
+  "becomes": "cliff_mistlands1_creep_frac"
  },
  {
   "id": "cliff_mistlands1_creep_frac",
@@ -12915,7 +13107,17 @@
     }
    ]
   },
-  "becomes": "vfx_cloth_hanging_destroyed"
+  "becomes": "vfx_cloth_hanging_destroyed",
+  "locations": [
+   {
+    "location": "Hildir_cave",
+    "dungeon": true
+   },
+   {
+    "location": "MountainCave02",
+    "dungeon": true
+   }
+  ]
  },
  {
   "id": "cloth_hanging_long",
@@ -13077,9 +13279,6 @@
   "locations": [
    {
     "location": "Mistlands_DvergrBossEntrance1"
-   },
-   {
-    "location": "Mistlands_DvergrTownEntrance2"
    },
    {
     "location": "Mistlands_GuardTower1_new"
@@ -13409,9 +13608,6 @@
   "locations": [
    {
     "location": "Mistlands_DvergrBossEntrance1"
-   },
-   {
-    "location": "Mistlands_DvergrTownEntrance2"
    },
    {
     "location": "Mistlands_GuardTower1_new"
@@ -16324,10 +16520,6 @@
    },
    {
     "location": "LumberCamp"
-   },
-   {
-    "location": "NorthVillage",
-    "dungeon": true
    }
   ]
  },
@@ -16446,13 +16638,7 @@
      "max": 2
     }
    ]
-  },
-  "locations": [
-   {
-    "location": "NorthVillage",
-    "dungeon": true
-   }
-  ]
+  }
  },
  {
   "id": "prop_cauldron_ext6_rollingpins",
@@ -16643,13 +16829,7 @@
      "weight": 0.01
     }
    ]
-  },
-  "locations": [
-   {
-    "location": "NorthVillage",
-    "dungeon": true
-   }
-  ]
+  }
  },
  {
   "id": "prop_itemstand_TrophyGoblinShaman",
@@ -16733,13 +16913,7 @@
      "weight": 0.05
     }
    ]
-  },
-  "locations": [
-   {
-    "location": "NorthVillage",
-    "dungeon": true
-   }
-  ]
+  }
  },
  {
   "id": "prop_itemstand_TrophySeekerBrute",
@@ -16808,13 +16982,7 @@
      "max": 5
     }
    ]
-  },
-  "locations": [
-   {
-    "location": "NorthVillage",
-    "dungeon": true
-   }
-  ]
+  }
  },
  {
   "id": "prop_piece_brazierfloor01",
@@ -17776,9 +17944,6 @@
    {
     "location": "SunkenCrypt4",
     "dungeon": true
-   },
-   {
-    "location": "TrollCave02"
    }
   ]
  },
@@ -17824,9 +17989,6 @@
    {
     "location": "SunkenCrypt4",
     "dungeon": true
-   },
-   {
-    "location": "TrollCave02"
    }
   ]
  },
@@ -17872,9 +18034,6 @@
    {
     "location": "SunkenCrypt4",
     "dungeon": true
-   },
-   {
-    "location": "TrollCave02"
    }
   ]
  },
@@ -17920,9 +18079,6 @@
    {
     "location": "SunkenCrypt4",
     "dungeon": true
-   },
-   {
-    "location": "TrollCave02"
    }
   ]
  },
@@ -19608,6 +19764,12 @@
    ]
   },
   "locations": [
+   {
+    "location": "DN_hut01"
+   },
+   {
+    "location": "LumberCamp"
+   },
    {
     "location": "NorthVillage",
     "dungeon": true

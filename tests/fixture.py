@@ -252,6 +252,11 @@ def prefabs():
                                           respawnTimeMinutes=0, extraDrops=drop_table()))),
         piece("Sapling", comp("Plant", m(growTime=100, grownPrefabs=[R("Stub")])), name="$piece_bush",
               icon=S("Sapling"), resources=[req("Wood")]),
+        prefab("Treasure", comp("PickableItem", m(itemPrefab=None, stack=0, randomItemPrefabs=[  # one of these
+            m(itemPrefab=R("Wood"), stackMin=2, stackMax=4), m(itemPrefab=R("Ore"), stackMin=0, stackMax=0)]))),
+        prefab("Gift", comp("PickableItem", m(itemPrefab=R("Ore"), stack=3, randomItemPrefabs=[]))),
+        prefab("Spawner_Raider", comp("CreatureSpawner", creature_spawner("Raider", minLevel=2, maxLevel=2))),
+        prefab("Crate", comp(*container(("Ore", 1, 1, 1), name="Crate"))),
         prefab("vfx_Poof"),
     ]
 
@@ -330,8 +335,15 @@ def write_dump(raw: Path) -> Path:
     dump("locations/Lair.json", {"name": "Lair", "components": [comp("Location", {}), *spawners(
         ("OfferingBowl", m(bossPrefab=R("Chief"), bossItem=R("Ore"), bossItems=3)),
         ("DungeonGenerator", m(themes="Cave")),
-    ), comp("MineRock", {}, path="cave/OreRock (2)"),
-        comp("Piece", {}, path="cave/piece_bench (1)")]})  # a non-buildable piece standing in the location  # an instance of a source inside the location
+    )], "instances": [
+        {"prefab": "OreRock", "path": "cave/OreRock (2)"},  # an instance of a source inside the location
+        {"prefab": "piece_bench", "path": "cave/piece_bench (1)"},  # a non-buildable piece standing there
+        {"prefab": "Spawner_Raider", "path": "cave/Spawner_Raider"},
+        {"prefab": "Pup", "path": "cave/Pup"},  # a creature placed directly
+        {"prefab": "Crate", "path": "cave/Crate", "randomSpawn": {"chance": 40}},  # may or may not be there
+        {"prefab": "WildHive", "path": "cave/hive", "inactive": True},  # disabled in the asset: never placed
+        {"prefab": "Treasure", "path": "cave/Treasure", "inactive": True, "randomSpawn": {"chance": 90, "path": "cave"}},
+        {"prefab": "Gift", "path": "cave/Gift", "inactive": True, "randomSpawn": {"chance": 90}}]})  # never placed
     dump("locations/Ruin.json", {"name": "Ruin", "components": spawners(("CreatureSpawner", creature_spawner("Pup")),
                                                                     container(("Ore", 1, 1, 1)))})  # disabled location
     dump("locations/Market.json", {"name": "Market", "components": [comp("Location", {}), comp("Trader", {
@@ -342,7 +354,7 @@ def write_dump(raw: Path) -> Path:
     dump("rooms/cave_a.json", {"name": "cave_a", "theme": 5, "enabled": True,  # Crypt|Cave: used by Lair
                                "components": [*spawners(("CreatureSpawner", creature_spawner("Pup", maxLevel=2)),
                                                         container(("Gem", 1, 1, 1), ("Wood", 2, 5, 3))),
-                                              comp("Destructible", {}, path="hall/WildHive")]})
+                                              ], "instances": [{"prefab": "WildHive", "path": "hall/WildHive"}]})
     dump("rooms/cave_off.json", {"name": "cave_off", "theme": 4, "enabled": False,
                                  "components": spawners(("CreatureSpawner", creature_spawner("Raider")))})
     dump("rooms/crypt_a.json", {"name": "crypt_a", "theme": 1, "enabled": True,

@@ -2201,9 +2201,6 @@
   },
   "locations": [
    {
-    "location": "MorkBorg"
-   },
-   {
     "location": "MorkBorg",
     "dungeon": true
    }
@@ -4061,9 +4058,6 @@
    },
    {
     "location": "SwampHut5"
-   },
-   {
-    "location": "TrollCave02"
    }
   ]
  },
@@ -4680,9 +4674,6 @@
    "spirit": "Immune"
   },
   "locations": [
-   {
-    "location": "MorkBorg"
-   },
    {
     "location": "MorkBorg",
     "dungeon": true
@@ -6864,9 +6855,6 @@
     "location": "Mistlands_DvergrTownEntrance1"
    },
    {
-    "location": "Mistlands_DvergrTownEntrance2"
-   },
-   {
     "location": "Mistlands_GuardTower1_new"
    },
    {
@@ -6932,9 +6920,6 @@
    },
    {
     "location": "Mistlands_DvergrTownEntrance1"
-   },
-   {
-    "location": "Mistlands_DvergrTownEntrance2"
    },
    {
     "location": "Mistlands_GuardTower1_new"
@@ -7526,9 +7511,6 @@
    },
    {
     "location": "Mistlands_DvergrTownEntrance1"
-   },
-   {
-    "location": "Mistlands_DvergrTownEntrance2"
    },
    {
     "location": "Mistlands_GuardTower1_new"

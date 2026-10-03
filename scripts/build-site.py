@@ -369,7 +369,11 @@ for s in SOURCES.values():
         bait_for[b["item"]].append(s["id"])
     if s.get("pickable"):
         pk = s["pickable"]
-        found_in[pk["item"]].append((s, f"pick ×{num(pk.get('amount', 1))}"))
+        if "oneOf" in pk:  # a treasure pile gives one of these at random
+            for o in pk["oneOf"]:
+                found_in[o["item"]].append((s, f"one of {len(pk['oneOf'])}: ×{rng(o.get('min', 1), o.get('max', 1))}"))
+        else:
+            found_in[pk["item"]].append((s, f"pick ×{num(pk.get('amount', 1))}"))
     dr = s.get("drops") or {}
     for it in dr.get("items", []):
         found_in[it["item"]].append((s, rng(it.get("min", 1), it.get("max", 1))))

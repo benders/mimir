@@ -108,11 +108,16 @@ rich-text tags are stripped; creatures whose name was colored (Hildir's miniboss
 Sap Extractor's `connectsTo` root with the biomes it grows in); sources of kind `destructible` are non-piece objects
 with a drop table (wild Beehive, props in locations). Pickable/rock/tree/log/destructible sources record where they
 are placed: `biomes` (enabled ZoneSystem vegetation), `locations` [{location, dungeon}] (the object is the location,
-sits in it or in a room its dungeon generates, found by scene path name, or a CreatureSpawner there makes it),
+sits in it or in a room its dungeon generates, from the dump's `instances`, or a CreatureSpawner there makes it),
+`pickable` is `{item, amount}`, or `{oneOf: [{item, min, max}]}` for a `PickableItem` treasure pile that gives one at random
+(max inclusive; no min/max = the item's own stack). Placement counts an `instances` entry unless it is `inactive` (disabled in
+the asset, never created) and has no RandomSpawn ancestor (`randomSpawn.path`, which re-enables its own object); a RandomSpawn
+chance below 100 still counts, the chance isn't recorded. Containers, `Spawner_*` objects (their CreatureSpawners become
+`location`/`dungeon` spawns) and creatures placed in `instances` are handled the same way.
 `placedBy` (pieces that plant/build it: Plant, Procreation, WispSpawner). `reachable()` counts only placed sources
 (or a `becomes` stage of one); sources with none are not in the world (Meteorite rock, MushroomBlue pickable). Creatures that grow up from another have a `growup` spawn
 (`parent`). Pieces with no build menu that stand in a location or dungeon room (loot chests, ruin walls, props) have `locations`
-[{location, dungeon}], found by the same scene-path matching; they count as reachable. Derived relations (used in, dropped by) are left to the site build.
+[{location, dungeon}], found the same way (`instances`); they count as reachable. Derived relations (used in, dropped by) are left to the site build.
 Pieces and recipes of a SeasonalItemGroup (Halloween, Midsummer, Yule; `world/seasons.json`) carry `season`
 {name, start [day, month], end [day, month]}, both ends inclusive, end before start wraps over New Year. They are
 disabled in the game data but let through while the season is current, so `reachable()` treats them as enabled.

@@ -177,6 +177,26 @@
  },
  {
   "creature": "Pup",
+  "source": "location",
+  "location": "Lair",
+  "biomes": [
+   "Mountain"
+  ]
+ },
+ {
+  "creature": "Raider",
+  "source": "location",
+  "location": "Lair",
+  "biomes": [
+   "Mountain"
+  ],
+  "levels": [
+   2,
+   2
+  ]
+ },
+ {
+  "creature": "Pup",
   "source": "dungeon",
   "location": "Lair",
   "biomes": [

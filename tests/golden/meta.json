@@ -7,10 +7,10 @@
   "items": 27,
   "recipes": 6,
   "creatures": 8,
-  "spawns": 16,
+  "spawns": 18,
   "pieces": 9,
   "processing": 1,
-  "sources": 8,
+  "sources": 11,
   "status_effects": 1
  },
  "unresolvedTokens": [

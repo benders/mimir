@@ -160,12 +160,22 @@ class Entities(FixtureCase):
         self.assertEqual((hive["kind"], hive["health"], [d["item"] for d in hive["drops"]["items"]]),
                          ("destructible", 20, ["Wood", "Ore"]))
 
+    def test_pickable_item_source(self):
+        t = N.source("Treasure", N.PREFABS["Treasure"])  # one random item; a 0..0 stack is the item's own
+        self.assertEqual((t["kind"], t["pickable"]), ("pickable", {"oneOf": [{"item": "Wood", "min": 2, "max": 4},
+                                                                              {"item": "Ore"}]}))
+        self.assertEqual(N.source("Gift", N.PREFABS["Gift"])["pickable"], {"item": "Ore", "amount": 3})
+        self.assertEqual(N.picked_items(t), {"Wood", "Ore"})
+
     def test_place_sources(self):
         sources = {s["id"]: s for n, p in N.PREFABS.items() if not p["isItem"] and (s := N.source(n, p))}
         N.place_sources(list(sources.values()))
         self.assertEqual(sources["Bush"]["biomes"], ["Meadows", "Swamp"])  # enabled vegetation, merged
         self.assertEqual(sources["OreRock"]["locations"], [{"location": "Lair", "dungeon": False}])
         self.assertEqual(sources["WildHive"]["locations"], [{"location": "Lair", "dungeon": True}])  # via a room
+        # inactive in Lair: never placed; but under a RandomSpawn ancestor it is, with or without a netview's own
+        self.assertEqual(sources["Treasure"]["locations"], [{"location": "Lair", "dungeon": False}])
+        self.assertNotIn("locations", sources["Gift"])  # disabled, RandomSpawn on itself
         self.assertEqual(sources["Stub"]["placedBy"], ["Sapling"])
         self.assertNotIn("biomes", sources["Stub"])
 
@@ -252,7 +262,8 @@ class Entities(FixtureCase):
 
     def test_location_spawns(self):
         s = {(x["creature"], x["location"]): x for x in self.spawns("location")}
-        self.assertEqual(set(s), {("Raider", "Camp"), ("Pup", "Camp"), ("Chief", "Lair")})  # Ruin disabled
+        self.assertEqual(set(s), {("Raider", "Camp"), ("Pup", "Camp"), ("Chief", "Lair"),
+                          ("Raider", "Lair"), ("Pup", "Lair")})  # Ruin disabled; Lair: a Spawner_ and a creature instance
         camp = s["Raider", "Camp"]
         self.assertEqual(camp["biomes"], ["Swamp", "Plains"])
         self.assertEqual(camp["levels"], [1, 3])  # merged; swapped min/max fixed
@@ -265,13 +276,13 @@ class Entities(FixtureCase):
 
     def test_location_containers(self):
         by = {c["name"]: c for c in N.location_containers()}  # empty table dropped; one source per name + table
-        self.assertEqual(set(by), {"Strongbox", "$piece_other"})
+        self.assertEqual(set(by), {"Strongbox", "$piece_other", "Crate"})  # Crate: a placed prefab's Container
         box = by["Strongbox"]
         self.assertEqual(box["kind"], "container")
         self.assertEqual([d["item"] for d in box["drops"]["items"]], ["Gem", "Wood"])
         # in Camp and, as a dungeon room, in Lair; Ruin is disabled, the Crypt room's theme doesn't match Lair
         self.assertEqual([(x["location"], x["dungeon"]) for x in box["locations"]], [("Camp", False), ("Lair", True)])
-        self.assertEqual(len({c["id"] for c in N.location_containers()}), 2)
+        self.assertEqual(len({c["id"] for c in N.location_containers()}), 3)
 
     def test_fishing(self):
         [f] = N.fishing(N.spawns())
