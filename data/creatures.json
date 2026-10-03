@@ -1636,7 +1636,8 @@
    }
   ],
   "afraidOfFire": true,
-  "avoidWater": true
+  "avoidWater": true,
+  "unobtainable": true
  },
  {
   "id": "Dragon",
@@ -2365,7 +2366,8 @@
     "chance": 0.1
    }
   ],
-  "avoidWater": true
+  "avoidWater": true,
+  "unobtainable": true
  },
  {
   "id": "Eikthyr",
@@ -2862,7 +2864,8 @@
     "chance": 0.5
    }
   ],
-  "avoidWater": true
+  "avoidWater": true,
+  "unobtainable": true
  },
  {
   "id": "FrozenKing",
@@ -4235,7 +4238,8 @@
     "onePerPlayer": true
    }
   ],
-  "avoidWater": true
+  "avoidWater": true,
+  "unobtainable": true
  },
  {
   "id": "JotunWarrior",
@@ -6099,7 +6103,8 @@
     "levelMultiplier": true
    }
   ],
-  "avoidWater": true
+  "avoidWater": true,
+  "unobtainable": true
  },
  {
   "id": "Tick",

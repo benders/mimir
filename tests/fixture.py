@@ -181,12 +181,14 @@ def prefabs():
         item("Hammer", name="$item_hammer", itemType="Tool", icons=[S("Hammer")], buildPieces=R("_HammerTable")),
         item("Bite", name="$item_bite", itemType="OneHandedWeapon", attack=attack(attackStamina=0),
              damages=damages(pierce=12)),  # no icon: internal attack item
-        item("Mystery", name="$item_missing"),  # unresolved token
+        item("Mystery", name="$item_missing"),  # unresolved token, no source: hidden
+        item("OddBar", name="$item_oddbar", description="$item_oddbar_desc", icons=[S("Ingot")]),  # unresolved, craftable: shown as "Odd Bar"
         raider("Raider"),
         raider("Raider_sleeping"),  # identical copy: merged into Raider's page
         raider("Raider_Ranged", health=120),  # differs: "Raider (archer)"
         prefab("Pup", character(name="$enemy_pup", health=20)),
         prefab("Chief", character(name="$enemy_chief", health=900, boss=True)),
+        prefab("Wisp", character(name="$enemy_missing", health=10)),  # unresolved name, never spawns: hidden
         with_components(item("Egg", name="$item_egg", icons=[S("Egg")]), comp("EggGrow", m(grownPrefab=R("Pup")))),
         prefab("Spawner_Raider", comp("CreatureSpawner", creature_spawner("Raider"))),
         prefab("Player", character(name="Player"), comp("Player", {})),
@@ -221,6 +223,7 @@ def recipes():
                                                      req("Fish", 1, 1, upgrader=True)]),
         recipe("Recipe_Helmet", "Helmet", "Bench", resources=[req("Ingot", 2, 1)]),
         recipe("Recipe_Mead", "Mead", amount=3, resources=[req("Fish", 1)]),
+        recipe("Recipe_OddBar", "OddBar", resources=[req("Wood", 1)]),
     ]
 
 

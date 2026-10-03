@@ -59,6 +59,18 @@ class Site(unittest.TestCase):
         self.assertIn("summoned with", chief)
         self.assertIn('href="items/Ore.html"', chief)
 
+    def test_unobtainable_hidden(self):
+        for page in ("items/Mystery.html", "creatures/Wisp.html"):
+            self.assertFalse((self.out / page).exists(), page)
+        index = (self.out / "search.json").read_text(encoding="utf-8")
+        self.assertNotIn("Mystery", index)
+        self.assertNotIn("Wisp", index)
+
+    def test_unresolved_name_fallback(self):
+        bar = (self.out / "items/OddBar.html").read_text(encoding="utf-8")
+        self.assertIn("<h1>Odd Bar</h1>", bar)
+        self.assertNotIn("$item_oddbar", bar)
+
     def test_ignore_modifiers(self):
         raider = (self.out / "creatures/Raider.html").read_text(encoding="utf-8")
         self.assertIn("<span>spirit</span>Immune", raider)

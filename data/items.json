@@ -13548,7 +13548,8 @@
   "armor": 10,
   "armorPerLevel": 1,
   "block": 10,
-  "parryBonus": 1.5
+  "parryBonus": 1.5,
+  "unobtainable": true
  },
  {
   "id": "Ghost_attack",
@@ -17962,7 +17963,8 @@
   "armor": 10,
   "armorPerLevel": 1,
   "block": 10,
-  "parryBonus": 1.5
+  "parryBonus": 1.5,
+  "unobtainable": true
  },
  {
   "id": "IceSkates",
@@ -17979,7 +17981,8 @@
   "armor": 10,
   "armorPerLevel": 1,
   "block": 10,
-  "parryBonus": 1.5
+  "parryBonus": 1.5,
+  "unobtainable": true
  },
  {
   "id": "Iron",
@@ -19597,7 +19600,8 @@
    "stamina": 12,
    "duration": 1200,
    "regen": 2
-  }
+  },
+  "unobtainable": true
  },
  {
   "id": "LastBossGate_RuneTile",
@@ -19614,7 +19618,8 @@
   "armor": 10,
   "armorPerLevel": 1,
   "block": 10,
-  "parryBonus": 1.5
+  "parryBonus": 1.5,
+  "unobtainable": true
  },
  {
   "id": "LeatherScraps",
@@ -21832,7 +21837,8 @@
   "armor": 10,
   "armorPerLevel": 1,
   "block": 10,
-  "parryBonus": 1.5
+  "parryBonus": 1.5,
+  "unobtainable": true
  },
  {
   "id": "MoldSpear",
@@ -23304,7 +23310,8 @@
   "armor": 10,
   "armorPerLevel": 1,
   "block": 10,
-  "parryBonus": 1.5
+  "parryBonus": 1.5,
+  "unobtainable": true
  },
  {
   "id": "Poteitr",
@@ -26672,7 +26679,8 @@
   "armor": 10,
   "armorPerLevel": 1,
   "block": 10,
-  "parryBonus": 1.5
+  "parryBonus": 1.5,
+  "unobtainable": true
  },
  {
   "id": "SmokedFish",
@@ -29923,7 +29931,8 @@
   },
   "modifiers": {
    "movement": -0.05
-  }
+  },
+  "unobtainable": true
  },
  {
   "id": "TrainingDummy_attack",
@@ -30688,7 +30697,8 @@
   "armor": 5,
   "armorPerLevel": 1,
   "block": 10,
-  "parryBonus": 1.5
+  "parryBonus": 1.5,
+  "unobtainable": true
  },
  {
   "id": "TrophyDragonQueen",
@@ -31845,7 +31855,8 @@
   "armorPerLevel": 1,
   "block": 10,
   "parryBonus": 1.5,
-  "ammoType": "$ammo_turretbolt"
+  "ammoType": "$ammo_turretbolt",
+  "unobtainable": true
  },
  {
   "id": "TurretBoltFlametal",

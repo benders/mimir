@@ -120,6 +120,19 @@
   "stack": 1,
   "maxQuality": 1,
   "backstab": 1,
+  "parryBonus": 1,
+  "unobtainable": true
+ },
+ {
+  "id": "OddBar",
+  "name": "$item_oddbar",
+  "description": "$item_oddbar_desc",
+  "type": "Material",
+  "icon": "Ingot",
+  "weight": 1.0,
+  "stack": 1,
+  "maxQuality": 1,
+  "backstab": 1,
   "parryBonus": 1
  },
  {

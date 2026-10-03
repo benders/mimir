@@ -227,6 +227,37 @@ class EnemyOnly(FixtureCase):
         self.assertNotIn("Helmet", flagged)
 
 
+class Unobtainable(FixtureCase):
+    def flagged(self):
+        items = [i for n, p in N.PREFABS.items() if p["isItem"] and (i := N.item(n, p))]
+        creatures = [c for n, p in N.PREFABS.items() if (c := N.creature(n, p))]
+        pieces = [x for n, p in N.PREFABS.items() if (x := N.piece(n, p, N.piece_tools()))]
+        recipes = [N.recipe(r) for r in N.load("recipes.json")]
+        procs = [x for n, p in N.PREFABS.items() for x in N.processing(n, p)]
+        sources = [s for n, p in N.PREFABS.items() if not p["isItem"] and (s := N.source(n, p))]
+        N.mark_unobtainable(items, creatures, pieces, recipes, procs, sources, N.spawns())
+        return {e["id"] for e in items + creatures + pieces if e.get("unobtainable")}
+
+    def test_flags(self):
+        flagged = self.flagged()
+        self.assertIn("Mystery", flagged)  # unresolved name, no source
+        self.assertIn("Wisp", flagged)     # unresolved name, never spawns
+        self.assertNotIn("Fish", flagged)  # unreached (no fishing yet), but a real name
+        self.assertNotIn("Chief", flagged)
+        self.assertNotIn("Sword", flagged)
+
+    def test_reachable(self):
+        items, creatures, pieces = (
+            [x for n, p in N.PREFABS.items() if (x := f(n, p))]
+            for f in (lambda n, p: p["isItem"] and N.item(n, p), N.creature, lambda n, p: N.piece(n, p, N.piece_tools())))
+        recipes = [N.recipe(r) for r in N.load("recipes.json")]
+        procs = [x for n, p in N.PREFABS.items() for x in N.processing(n, p)]
+        sources = [s for n, p in N.PREFABS.items() if not p["isItem"] and (s := N.source(n, p))]
+        got, _, _ = N.reachable(items, creatures, pieces, recipes, procs, sources, N.spawns())
+        self.assertTrue({"Wood", "Ore", "Ingot", "Sword", "Helmet"} <= got)  # source -> smelt -> craft (upgrader ignored)
+        self.assertNotIn("Mead", got)  # needs Fish, which nothing yields
+
+
 class BuildId(FixtureCase):
     def test_env_wins(self):
         with mock.patch.dict(os.environ, {"MIMIR_STEAM_BUILDID": " 42 "}):

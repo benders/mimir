@@ -117,7 +117,8 @@
    "chop": "Weak",
    "poison": "Immune",
    "spirit": "Immune"
-  }
+  },
+  "unobtainable": true
  },
  {
   "id": "Ashlands_Arch1",
@@ -3795,7 +3796,8 @@
    "frost": "Resistant",
    "poison": "Immune",
    "spirit": "Immune"
-  }
+  },
+  "unobtainable": true
  },
  {
   "id": "SmokedFish",
@@ -5928,7 +5930,8 @@
    "chop": "Weak",
    "poison": "Immune",
    "spirit": "Immune"
-  }
+  },
+  "unobtainable": true
  },
  {
   "id": "bar_blackmetal_stack",

@@ -123,6 +123,13 @@ def main() -> int:
           and not items["ArmorBronzeChest"].get("enemyOnly"), "FW_/SP_ gear copies are enemyOnly, the real item isn't")
     check(not any(i.get("enemyOnly") for i in items.values() if any(r.get("item") == i["id"] for r in recipes)),
           "no craftable item is enemyOnly")
+    hidden = {"Deer_White", "DvergerTest", "FrostWisp", "Hive", "TheHive", "IceSkates", "Larva", "TorchMist", "Sled"}
+    every = {**items, **creatures, **pieces}
+    check(all(every.get(x, {}).get("unobtainable") for x in hidden), "unreleased content is unobtainable")
+    check(not any(every.get(x, {}).get("unobtainable") for x in ("darkwood_beam_67", "Wood", "Boar", "Hammer", "FishRaw")),
+          "reachable or merely unmodelled content isn't unobtainable")
+    check(all("$" in (e.get("name") or "") for e in every.values() if e.get("unobtainable")),
+          "only entries with an unresolved name are unobtainable (#21 phase 1)")
 
     print()
     if failures:

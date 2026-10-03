@@ -272,6 +272,41 @@ def mark_enemy_only(items: list, creatures: list, recipes: list, procs: list, so
             i["enemyOnly"] = True
 
 
+def reachable(items: list, creatures: list, pieces: list, recipes: list, procs: list, sources: list,
+              spawn_list: list) -> tuple[set, set, set]:
+    """Ids of the items, creatures and pieces a player can get to, by fixed point from what the world offers:
+    sources, spawns and enabled pieces in a build menu, then enabled recipes with reachable ingredients, drops of
+    reachable creatures, conversions of reachable inputs. Incomplete while fishing, chests, traders and quests
+    aren't modelled (#20)."""
+    by_creature = {c["id"]: c for c in creatures}
+    got_creatures = {s["creature"] for s in spawn_list}
+    got_pieces = {p["id"] for p in pieces if p.get("enabled") and p.get("tools")}
+    got = set()
+    for src in sources:
+        got |= {d["item"] for d in (src.get("drops") or {}).get("items", [])}
+        if src.get("pickable"):
+            got.add(src["pickable"]["item"])
+    while True:
+        before = len(got)
+        got |= {r["item"] for r in recipes if r.get("item") and r.get("enabled")
+                and all(x["item"] in got for x in r["resources"] if not x.get("upgrader"))}
+        got |= {d["item"] for c in got_creatures for d in by_creature.get(c, {}).get("drops", [])}
+        got |= {p["to"] for p in procs if p["from"] in got}
+        if len(got) == before:
+            return got, got_creatures, got_pieces
+
+
+def mark_unobtainable(items: list, creatures: list, pieces: list, recipes: list, procs: list, sources: list,
+                      spawn_list: list) -> None:
+    """Flag entries players can't get. Only those whose name is also an unresolved $token (unreleased or test
+    content: DvergerTest, Hive, IceSkates) until reachable() covers every source (#21). The site hides them."""
+    got = reachable(items, creatures, pieces, recipes, procs, sources, spawn_list)
+    for entries, ids in zip((items, creatures, pieces), got):
+        for e in entries:
+            if e["id"] not in ids and "$" in (e.get("name") or ""):
+                e["unobtainable"] = True
+
+
 def creature(name: str, p: dict) -> dict | None:
     c = comp(p, "Humanoid") or comp(p, "Character")
     if c is None or has(p, "Player"):
@@ -665,11 +700,13 @@ def main(argv: list[str]) -> int:
 
     recipes = [recipe(r) for r in load("recipes.json")]
     mark_enemy_only(items, creatures, recipes, procs, sources, pieces)
+    spawn_list = spawns()
+    mark_unobtainable(items, creatures, pieces, recipes, procs, sources, spawn_list)
     data = {
         "items.json": items,
         "recipes.json": recipes,
         "creatures.json": creatures,
-        "spawns.json": spawns(),
+        "spawns.json": spawn_list,
         "pieces.json": pieces,
         "processing.json": sorted(procs, key=lambda x: (x["station"], x["from"], x["to"])),
         "sources.json": sources,

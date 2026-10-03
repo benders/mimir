@@ -119,8 +119,8 @@ def entity(kind: str, id_: str):
 
 def has_page(kind: str, id_: str) -> bool:
     e = entity(kind, id_)
-    return e is not None and not (kind == "item" and (e.get("internal") or e.get("enemyOnly"))) \
-        and id_ not in MERGED[kind]
+    return e is not None and not e.get("unobtainable") \
+        and not (kind == "item" and (e.get("internal") or e.get("enemyOnly"))) and id_ not in MERGED[kind]
 
 
 def original(item_id: str) -> str:
@@ -133,7 +133,8 @@ def original(item_id: str) -> str:
 
 def base_name(kind: str, id_: str) -> str:
     e = entity(kind, id_)
-    return clean(e.get("name")) if e and e.get("name") else pretty_id(id_)
+    name = clean(e.get("name")) if e else ""
+    return name if name and "$" not in name else pretty_id(id_)  # unresolved $token: the prefab id, prettified
 
 
 def name_of(kind: str, id_: str) -> str:
@@ -163,7 +164,7 @@ def link(kind: str, id_: str, qty=None) -> str:
 
 
 def source_name(s: dict) -> str:
-    if s.get("name"):
+    if s.get("name") and "$" not in s["name"]:
         return clean(s["name"])
     parent = next((p for p in SOURCES.values() if p.get("becomes") == s["id"]), None)
     if parent:
@@ -249,9 +250,9 @@ def variants(kind: str, coll: dict, shown, primary=lambda id_: False, other="") 
 
 MERGED, QUALIFIED = {k: {} for k in KINDS}, {k: {} for k in KINDS}
 MERGED["item"], QUALIFIED["item"] = variants(
-    "item", ITEMS, lambda i: not (ITEMS[i].get("internal") or ITEMS[i].get("enemyOnly")))
-MERGED["creature"], QUALIFIED["creature"] = variants("creature", CREATURES, lambda c: True)
-MERGED["piece"], QUALIFIED["piece"] = variants("piece", PIECES, lambda p: True, lambda p: bool(PIECES[p].get("tools")),
+    "item", ITEMS, lambda i: not (ITEMS[i].get("internal") or ITEMS[i].get("enemyOnly") or ITEMS[i].get("unobtainable")))
+MERGED["creature"], QUALIFIED["creature"] = variants("creature", CREATURES, lambda c: not CREATURES[c].get("unobtainable"))
+MERGED["piece"], QUALIFIED["piece"] = variants("piece", PIECES, lambda p: not PIECES[p].get("unobtainable"), lambda p: bool(PIECES[p].get("tools")),
                                                     "world")
 
 
@@ -276,6 +277,8 @@ tool_pieces = defaultdict(list)      # tool item -> pieces
 set_members = defaultdict(list)      # set name -> items
 
 for r in RECIPES:
+    if ITEMS.get(r.get("item"), {}).get("unobtainable"):
+        continue
     if r.get("item"):
         crafted_by[r["item"]].append(r)
     for res in r["resources"]:
@@ -283,6 +286,8 @@ for r in RECIPES:
     if r.get("station"):
         crafted_at[r["station"]].append(r)
 for p in PIECES.values():
+    if p.get("unobtainable"):
+        continue
     for res in p.get("resources", []):
         used_in_piece[res["item"]].append(p)
     if p.get("station"):
@@ -298,6 +303,8 @@ for c in PROCESSING:
     process_to[c["to"]].append(c)
     process_at[c["station"]].append(c)
 for c in CREATURES.values():
+    if c.get("unobtainable"):
+        continue
     for d in c.get("drops", []):
         dropped_by[d["item"]].append((c["id"], d))
 for s in SOURCES.values():
@@ -308,7 +315,7 @@ for s in SOURCES.values():
     for it in dr.get("items", []):
         found_in[it["item"]].append((s, rng(it.get("min", 1), it.get("max", 1))))
 for i in ITEMS.values():
-    if i.get("internal") or i.get("enemyOnly"):
+    if i.get("internal") or i.get("enemyOnly") or i.get("unobtainable"):
         continue
     if i.get("consumeEffect"):
         effect_users[i["consumeEffect"]].append((i["id"], "consumed"))
@@ -438,7 +445,7 @@ def reflist(links) -> str:
 
 
 def header(e: dict, kind: str, subtitle: str, desc: str = "") -> str:
-    d = f'<p class="desc">{esc(clean(desc))}</p>' if desc else ""
+    d = f'<p class="desc">{esc(clean(desc))}</p>' if desc and "$" not in desc else ""  # unresolved $token
     return (f'<div class="hero">{icon(icon_of(kind, e), "big")}<div><h1>{esc(name_of(kind, e["id"]))}</h1>'
             f'<p class="sub">{subtitle}</p>{d}</div></div>')
 
