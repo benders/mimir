@@ -44,6 +44,14 @@ class Formulas(unittest.TestCase):
         self.assertAlmostEqual(M.dps(10, a), 50 / 1.65)
         self.assertIsNone(M.dps(10, {"chain": a["chain"]}))  # no cycle: bow draw, reload, bursts
         self.assertIsNone(M.dps(0, a))
+        bow = {"chain": [{"time": 0.6, "hits": 1}], "draw": 2.5}
+        self.assertEqual(M.attack_cycle(bow, 0), 2.5)
+        self.assertEqual(M.attack_cycle(bow, 100), 0.6)  # 0.5 s draw, but the release animation is longer
+        self.assertAlmostEqual(M.dps(50, bow, 50), 50 / 1.5)
+        xbow = {"chain": [{"time": 0.5, "hits": 1}], "reload": 4, "reloadDone": 1, "reloadBlock": 0.8}
+        self.assertEqual(M.attack_cycle(xbow, 0), 0.8 + 4 + 1)  # the block outlasts the attack
+        self.assertEqual(M.attack_cycle(xbow, 100), 0.8 + 2 + 1)
+        self.assertIsNone(M.attack_cycle({"chain": bow["chain"], "thrown": True}))
         self.assertEqual(M.skill_roll(100), (0.85, 1.0))  # Skills.GetRandomSkillFactor, clamped at 1
         self.assertEqual(tuple(round(x, 2) for x in M.skill_roll(0)), (0.25, 0.55))
 

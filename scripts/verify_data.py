@@ -89,6 +89,9 @@ def main() -> int:
     combo = sword.get("attack", {})
     check(len(combo.get("chain", [])) == 3 and 1.5 < combo.get("cycle", 0) < 4 and combo.get("lastChainMultiplier") == 2,
           "SwordBronze: 3-hit combo timing (anims)")
+    bow, xbow = items.get("Bow", {}).get("attack", {}), items.get("CrossbowArbalest", {}).get("attack", {})
+    check(bow.get("draw", 0) > 0 and bow.get("chain"), "Bow: draw time and release animation")
+    check(xbow.get("reload", 0) > 0 and xbow.get("reloadDone", 0) > 0, "Arbalest: reload and reload-done times")
     untimed = sorted(i["id"] for i in items.values() if i.get("type") in ("OneHandedWeapon", "TwoHandedWeapon",
                      "TwoHandedWeaponLeft", "Bow") and not (i.get("internal") or i.get("enemyOnly") or i.get("unobtainable"))
                      and not (i.get("attack") or {}).get("chain"))

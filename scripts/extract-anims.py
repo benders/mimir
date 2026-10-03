@@ -7,10 +7,11 @@ editor-only API at runtime, so the plugin can't dump it; UnityPy reads the seria
 
     scripts/extract-anims.py <server_dir> <raw_dump_dir>
 
-Writes, per trigger that leads to an attack-tagged state:
-  state, layer, speed (state speed multiplier), clip, length (clip seconds), exit (normalized exit time of the
-  unconditional exit transition; none = loops until an abort trigger), offset (normalized start offset of the
-  transition into it), events [[clip time, name, float?]]: Speed (CharacterAnimEvent.Speed sets animator.speed),
+Writes, per trigger that leads to a state tagged attack (Player.InAttack) or minoraction / minoraction_fast
+(Player.InMinorAction: crossbow "reload done"):
+  state, layer, tag, speed (state speed multiplier), clip, length (clip seconds), exit (normalized exit time of the
+  unconditional exit transition; none = loops until an abort trigger), exitDuration (that transition's length: seconds
+  if exitFixed, else normalized), offset (normalized start offset of the transition into it), events [[clip time, name, float?]]: Speed (CharacterAnimEvent.Speed sets animator.speed),
   Hit / OnAttackTrigger (Humanoid.OnAttackTrigger), Chain (CharacterAnimEvent.Chain: next chain level may start).
 Fails if the controller or a clip is missing. Needs UnityPy (scripts/anims.sh sets up the venv).
 """
@@ -23,6 +24,7 @@ import UnityPy
 
 CONTROLLER = "Player_animator"
 EVENTS = {"Speed", "Hit", "OnAttackTrigger", "Chain"}
+TAGS = {"attack", "minoraction", "minoraction_fast"}  # Player.InAttack, Player.InMinorAction
 SKIP_SUFFIXES = (".manifest", ".resS", ".resource", ".json", ".info", ".config", ".dll", ".so", ".txt", ".sh")
 NO_CLIP = 0xFFFFFFFF
 IF = 1  # AnimatorConditionMode.If: bool/trigger parameter set
@@ -68,13 +70,14 @@ def extract(obj) -> dict:
     tos = dict((h, n) for h, n in tt["m_TOS"])
     clips = tt["m_AnimationClips"]
     triggers: dict[str, dict] = {}
+    ambiguous: set[str] = set()
     for layer, sm in enumerate(tt["m_Controller"]["m_StateMachineArray"]):
         states = [s["data"] for s in sm["data"]["m_StateConstantArray"]]
         transitions = [t["data"] for t in sm["data"]["m_AnyStateTransitionConstantArray"]]
         transitions += [t["data"] for s in states for t in s["m_TransitionConstantArray"]]
         for t in transitions:
             dest = t["m_DestinationState"]
-            if dest >= len(states) or tos.get(states[dest]["m_TagID"]) != "attack":
+            if dest >= len(states) or tos.get(states[dest]["m_TagID"]) not in TAGS:
                 continue
             s = states[dest]
             for c in t["m_ConditionConstantArray"]:
@@ -86,19 +89,24 @@ def extract(obj) -> dict:
                 ids = [i for i in ids if i != NO_CLIP]
                 if len(ids) != 1:
                     continue  # blend trees (upper-body loops) have no single timeline
-                exits = [x["data"]["m_ExitTime"] for x in s["m_TransitionConstantArray"]
+                exits = [x["data"] for x in s["m_TransitionConstantArray"]
                          if x["data"]["m_HasExitTime"] and not x["data"]["m_ConditionConstantArray"]]
+                first = min(exits, key=lambda x: x["m_ExitTime"]) if exits else None
                 state = tos.get(s["m_FullPathID"], str(s["m_NameID"]))
                 if name in triggers and triggers[name]["state"] != state:
-                    raise SystemExit(f"ERROR: trigger {name} leads to two attack states: {triggers[name]['state']}, {state}")
+                    if "attack" in (triggers[name]["tag"], tos[s["m_TagID"]]):
+                        raise SystemExit(f"ERROR: trigger {name} leads to two states: {triggers[name]['state']}, {state}")
+                    ambiguous.add(name)  # minor actions picked by other parameters too (interact): no single timing
                 triggers[name] = {
-                    "state": state, "layer": layer,
+                    "state": state, "layer": layer, "tag": tos[s["m_TagID"]],
                     "speed": round(s["m_Speed"], 4),
                     **clip(obj, clips[ids[0]]),
-                    "exit": round(min(exits), 4) if exits else None,
+                    "exit": round(first["m_ExitTime"], 4) if first else None,
+                    "exitDuration": round(first["m_TransitionDuration"], 4) if first else None,
+                    "exitFixed": first["m_HasFixedDuration"] if first else None,
                     "offset": round(t["m_TransitionOffset"], 4),
                 }
-    return {"controller": CONTROLLER, "triggers": dict(sorted(triggers.items()))}
+    return {"controller": CONTROLLER, "triggers": {k: v for k, v in sorted(triggers.items()) if k not in ambiguous}}
 
 
 def main() -> int:
@@ -111,7 +119,7 @@ def main() -> int:
     out.parent.mkdir(parents=True, exist_ok=True)
     data = extract(obj)
     out.write_text(json.dumps(data, indent=1) + "\n", encoding="utf-8")
-    print(f"wrote {len(data['triggers'])} attack triggers -> {out}")
+    print(f"wrote {len(data['triggers'])} attack and minor action triggers -> {out}")
     return 0
 
 

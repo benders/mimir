@@ -132,6 +132,8 @@ def main() -> int:
         check(all(sword), "attack triggers: swing_longsword0..2")
         check(all(t and t["exit"] and any(e[1] in ("Hit", "OnAttackTrigger") for e in t["events"]) for t in sword), "swing_longsword: exit, hit event")
         check(all(t and any(e[1] == "Chain" for e in t["events"]) for t in sword[:2]), "swing_longsword0..1: Chain")
+        done = trig.get("reload_crossbow_done") or {}
+        check(done.get("tag") == "minoraction_fast" and done.get("exit"), "reload_crossbow_done: minor action with exit")
 
     icons = DUMP.parent / "icons"
     if icons.is_dir():

@@ -169,12 +169,42 @@ def combo_damage(per_hit: float, attack: dict) -> float:
     return sum(c["hits"] * per_hit * mult * (last if k == len(chain) - 1 else 1) for k, c in enumerate(chain))
 
 
-def dps(per_hit: float, attack: dict | None) -> float | None:
-    """Damage per second holding the attack, every hit connecting: combo damage / `cycle` (the animation time of the
-    whole chain plus the 0.15 s melee hit freeze). None when the cycle isn't known (bow draw, reload, bursts, loops)."""
-    if not attack or not attack.get("cycle") or not per_hit:
+def draw_time(draw_min: float, skill: float) -> float:
+    """Humanoid.GetAttackDrawPercentage: a full draw takes lerp(m_drawDurationMin, 0.2 × it, skill / 100)."""
+    return draw_min * (1 - 0.8 * skill / 100)
+
+
+def reload_time(reload: float, skill: float) -> float:
+    """ItemData.GetWeaponLoadingTime: lerp(m_reloadTime, 0.5 × it, skill / 100)."""
+    return reload * (1 - 0.5 * skill / 100)
+
+
+def attack_cycle(attack: dict | None, skill: float = 0) -> float | None:
+    """Seconds between attacks held back to back (data/items.json attack timing).
+    Melee and plain attacks: `cycle`. Bows (Player.UpdateAttackBowDraw): the next draw starts at release and the shot
+    needs both a full draw and the end of the release animation (Humanoid.StartAttack refuses while InAttack), so
+    max(draw, release). Crossbows: firing unloads (Attack.OnAttackTrigger); the reload runs once the attack ends and
+    m_blockReloadTime has passed (Player.UpdateActionQueue, QueueReloadAction), then Attack.Start waits out the
+    "reload done" minor action."""
+    if not attack or not attack.get("chain") or attack.get("thrown") or attack.get("random"):
         return None
-    return combo_damage(per_hit, attack) / attack["cycle"]
+    if attack.get("cycle"):
+        return attack["cycle"]
+    anim = sum(c["time"] for c in attack["chain"])
+    if attack.get("draw"):
+        return max(draw_time(attack["draw"], skill), anim)
+    if attack.get("reload") and attack.get("reloadDone") is not None:
+        return max(anim, attack.get("reloadBlock", 0)) + reload_time(attack["reload"], skill) + attack["reloadDone"]
+    return None
+
+
+def dps(per_hit: float, attack: dict | None, skill: float = 0) -> float | None:
+    """Damage per second holding the attack, every hit connecting: combo damage / attack_cycle. Skill only changes
+    bow draw and crossbow reload. None when the cycle isn't known (projectile bursts, loops, thrown)."""
+    cycle = attack_cycle(attack, skill)
+    if not cycle or not per_hit:
+        return None
+    return combo_damage(per_hit, attack) / cycle
 
 
 # --- markdown -------------------------------------------------------------------------------

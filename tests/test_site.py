@@ -258,6 +258,14 @@ class Site(unittest.TestCase):
         self.assertIn('href="mechanics/attack-speed.html"', sword)
         page = (self.out / "mechanics/attack-speed.html").read_text(encoding="utf-8")
         self.assertIn("<td>primary</td><td>3</td><td>1.57</td><td>265</td><td>168.3</td>", page)
+        bow = (self.out / "items/Longbow.html").read_text(encoding="utf-8")
+        # (20 + 10 Dart) per shot: 2.5 s full draw at skill 0, 0.5 s at 100 but the 1 s release animation
+        self.assertIn("<tr><td>1</td><td>20</td><td>12</td><td>30</td>", bow)
+        self.assertIn("full draw 2.5 s (0.5 s at skill 100), 2.5 s per shot (1 s at skill 100)", bow)
+        self.assertIn('href="items/Dart.html"', bow)  # the hardest-hitting ammo of the type
+        # Arbal: 1 s fire + 4 s reload (2 at skill 100) + 1 s reload done; 60 per shot
+        self.assertIn("<td>6</td><td>4</td>", page)
+        self.assertIn("<td>10</td><td>15</td>", page)
 
     def test_destroyed_into_item(self):
         shard = (self.out / "items/Shard.html").read_text(encoding="utf-8")

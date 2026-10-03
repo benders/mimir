@@ -207,7 +207,7 @@ def attack_timing(a: dict) -> dict | None:
     animator speed carries over; after an exit it is reset to 1 (CharacterAnimEvent.CustomFixedUpdate)."""
     anim, levels, rnd = a["m_attackAnimation"], a.get("m_attackChainLevels", 0), a.get("m_attackRandomAnimations", 0)
     names = [f"{anim}{k}" for k in range(levels)] if levels > 1 else [f"{anim}{k}" for k in range(rnd)] if rnd >= 2 else [anim]
-    if not all(n in ANIMS and ANIMS[n]["exit"] for n in names):
+    if not all(n in ANIMS and ANIMS[n]["exit"] and ANIMS[n].get("tag", "attack") == "attack" for n in names):
         return None  # not a player animation, or a loop held until released (staff beams)
     chain, speed = [], 1.0
     for k, n in enumerate(names):
@@ -228,9 +228,19 @@ def attack_timing(a: dict) -> dict | None:
         out["lastChainMultiplier"] = 2  # Attack.DoMeleeAttack: the last level always deals x2
     elif levels > 1 and a["m_attackType"] == "Area" and a.get("m_lastChainDamageMultiplier", 2) > 1:
         out["lastChainMultiplier"] = a.get("m_lastChainDamageMultiplier", 2)  # Attack.DoAreaAttack
-    # The whole combo (or the one attack), every hit connecting. Not when the animation isn't the whole story yet:
-    # bow draw (m_drawDurationMin), crossbow reload (m_reloadTime), projectile bursts (m_burstInterval).
-    if not out["random"] and not thrown and not a.get("m_bowDraw") and not a.get("m_requiresReload") and a.get("m_projectileBursts", 1) <= 1:
+    if a.get("m_bowDraw"):
+        out["draw"] = a.get("m_drawDurationMin", 0)  # Humanoid.GetAttackDrawPercentage: × lerp(1, 0.2, skill)
+    if a.get("m_requiresReload"):
+        done = ANIMS.get(a.get("m_reloadAnimation", "") + "_done")  # Player.UpdateActionQueue sets <anim>_done
+        out["reload"] = a.get("m_reloadTime", 0)  # ItemData.GetWeaponLoadingTime: × lerp(1, 0.5, skill)
+        out["reloadBlock"] = a.get("m_blockReloadTime", 0)  # Attack.FireProjectileBurst: no reload queued before this
+        # Attack.Start refuses while Player.InMinorAction: the "reload done" state, until its exit transition ends
+        out["reloadDone"] = round(done["exit"] * done["length"] / done["speed"] + (
+            done["exitDuration"] if done["exitFixed"] else done["exitDuration"] * done["length"]), 3) if done else None
+    # The whole combo (or the one attack), every hit connecting. Draw and reload depend on skill: no fixed cycle
+    # (mechanics.attack_cycle). Projectile bursts (m_burstInterval) aren't modelled yet.
+    if not out["random"] and not thrown and a.get("m_projectileBursts", 1) <= 1 and not (
+            a.get("m_bowDraw") or a.get("m_requiresReload")):
         out["cycle"] = round(sum(c["time"] + (HIT_FREEZE * c["hits"] if melee else 0) for c in chain), 3)
     return out
 

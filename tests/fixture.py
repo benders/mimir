@@ -143,7 +143,7 @@ TRANSLATIONS = {
     "item_ore": "Rustore", "item_ingot": "Ingot",
     "item_buckler": "Test Buckler",
     "item_sword": "Test Sword", "item_sword_desc": "Sharp <b>enough</b>.",
-    "item_helmet": "Pot Helm", "item_fish": "Glimfish", "item_pearl": "Moon Pearl", "item_javelin": "Test Javelin", "item_mead": "Fizz Mead", "item_coins": "Coins", "item_charm": "Lucky Charm", "npc_vendor": "Old Vendor",
+    "item_helmet": "Pot Helm", "item_fish": "Glimfish", "item_pearl": "Moon Pearl", "item_javelin": "Test Javelin", "item_longbow": "Longbow", "item_arbal": "Arbal", "item_dart": "Dart", "item_mead": "Fizz Mead", "item_coins": "Coins", "item_charm": "Lucky Charm", "npc_vendor": "Old Vendor",
     "item_hammer": "Mallet", "item_shard": "Shard", "item_bite": "Bite",
     "enemy_raider": "Raider", "piece_bench": "Bench", "piece_anvil": "Anvil", "piece_kiln": "Kiln",
     "piece_bush": "Twig Bush", "piece_orerock": "Ore Rock", "se_fizz": "Fizzy",
@@ -195,6 +195,14 @@ def prefabs():
         item("Javelin", name="$item_javelin", itemType="OneHandedWeapon", icons=[S("Sword")], damages=damages(pierce=10),
              attack=attack(attackAnimation="throw", attackType="Projectile", attackProjectile=R("JavelinBolt"))),
         prefab("JavelinBolt", comp("Projectile", m(damage=damages(), respawnItemOnHit=True))),  # lands as the item
+        item("Longbow", name="$item_longbow", itemType="Bow", icons=[S("Sword")], damages=damages(pierce=20),
+             damagesPerLevel=damages(pierce=5), maxQuality=2, ammoType="$ammo_dart",
+             attack=attack(attackAnimation="throw", attackType="Projectile", bowDraw=True, drawDurationMin=2.5)),
+        item("Arbal", name="$item_arbal", itemType="Bow", icons=[S("Sword")], damages=damages(pierce=50), ammoType="$ammo_dart",
+             attack=attack(attackAnimation="throw", attackType="Projectile", requiresReload=True, reloadTime=4,
+                           reloadAnimation="reload_test", blockReloadTime=0)),
+        item("Dart", name="$item_dart", itemType="Ammo", icons=[S("Sword")], damages=damages(pierce=10), ammoType="$ammo_dart"),
+        item("DartBlunt", name="$item_dart", itemType="Ammo", icons=[S("Sword")], damages=damages(blunt=4), ammoType="$ammo_dart"),
         item("Mead", name="$item_mead", itemType="Consumable", icons=[S("Mead")], consumeStatusEffect=R("SE_Fizz")),
         item("Hammer", name="$item_hammer", itemType="Tool", icons=[S("Hammer")], buildPieces=R("_HammerTable")),
         item("Bite", name="$item_bite", itemType="OneHandedWeapon", attack=attack(attackStamina=0),
@@ -392,7 +400,8 @@ def write_dump(raw: Path) -> Path:
                                                                     container(("Ore", 1, 1, 1)))})  # disabled location
     dump("locations/Stash.json", {"name": "Stash", "components": [comp("Location", {}), *spawners(
         container(("Coins", 1, 1, 1), ("Hammer", 1, 1, 1), ("Buckler", 1, 1, 1), ("HelmetFem", 1, 1, 1), ("SP_Sword", 1, 1, 1),
-                  ("WoodOld", 1, 1, 1), ("Egg", 1, 1, 1), name="$piece_stash"))],  # so the site tests' items are obtainable
+                  ("WoodOld", 1, 1, 1), ("Egg", 1, 1, 1), ("Longbow", 1, 1, 1), ("Arbal", 1, 1, 1),
+                  ("Dart", 1, 1, 1), ("DartBlunt", 1, 1, 1), name="$piece_stash"))],  # so the site tests' items are obtainable
         "instances": [{"prefab": "Raider_Ranged", "path": "Raider_Ranged"}]})
     dump("locations/Market.json", {"name": "Market", "components": [comp("Location", {}), comp("Trader", {
         **m(name="$npc_vendor"), "m_items": [m(prefab=R("Charm"), stack=2, price=50, requiredGlobalKey="defeated_chief"),
@@ -405,6 +414,9 @@ def write_dump(raw: Path) -> Path:
                    "offset": 0.0, "events": [[0.1, "Speed", 0.5], [0.3, "OnAttackTrigger"], [0.5, "Hit"]]},
         "throw": {"state": "Base Layer.throw", "layer": 0, "speed": 1.0, "clip": "Throw", "length": 1.0, "exit": 1.0,
                   "offset": 0.0, "events": [[0.5, "OnAttackTrigger"]]},
+        "reload_test_done": {"state": "upperbody.reload done", "layer": 1, "tag": "minoraction_fast", "speed": 2.0,
+                             "clip": "Done", "length": 1.6, "exit": 1.0, "exitDuration": 0.2, "exitFixed": True,
+                             "offset": 0.0, "events": []},  # blocks attacks for 1.6 / 2 + 0.2 s
         "beam": {"state": "upperbody.beam", "layer": 1, "speed": 1.0, "clip": "Beam", "length": 0.5, "exit": None,
                  "offset": 0.0, "events": [[0.1, "Hit"]]},  # loops until released: no timing
     }})

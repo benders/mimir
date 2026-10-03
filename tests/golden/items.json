@@ -1,5 +1,35 @@
 [
  {
+  "id": "Arbal",
+  "name": "Arbal",
+  "type": "Bow",
+  "icon": "Sword",
+  "weight": 1.0,
+  "stack": 1,
+  "maxQuality": 1,
+  "damages": {
+   "pierce": 50
+  },
+  "backstab": 1,
+  "parryBonus": 1,
+  "blockAdrenaline": 2,
+  "parryAdrenaline": 5,
+  "attack": {
+   "type": "Projectile",
+   "stamina": 10,
+   "adrenaline": 1,
+   "chain": [
+    {
+     "time": 1.0,
+     "hits": 1
+    }
+   ],
+   "reload": 4,
+   "reloadDone": 1.0
+  },
+  "ammoType": "$ammo_dart"
+ },
+ {
   "id": "Bite",
   "name": "Bite",
   "type": "OneHandedWeapon",
@@ -54,6 +84,34 @@
   "weight": 1.0,
   "stack": 1,
   "maxQuality": 1
+ },
+ {
+  "id": "Dart",
+  "name": "Dart",
+  "type": "Ammo",
+  "icon": "Sword",
+  "weight": 1.0,
+  "stack": 1,
+  "maxQuality": 1,
+  "damages": {
+   "pierce": 10
+  },
+  "backstab": 1,
+  "ammoType": "$ammo_dart"
+ },
+ {
+  "id": "DartBlunt",
+  "name": "Dart",
+  "type": "Ammo",
+  "icon": "Sword",
+  "weight": 1.0,
+  "stack": 1,
+  "maxQuality": 1,
+  "damages": {
+   "blunt": 4
+  },
+  "backstab": 1,
+  "ammoType": "$ammo_dart"
  },
  {
   "id": "Dust",
@@ -194,6 +252,38 @@
    "thrown": true
   },
   "unobtainable": true
+ },
+ {
+  "id": "Longbow",
+  "name": "Longbow",
+  "type": "Bow",
+  "icon": "Sword",
+  "weight": 1.0,
+  "stack": 1,
+  "maxQuality": 2,
+  "damages": {
+   "pierce": 20
+  },
+  "damagesPerLevel": {
+   "pierce": 5
+  },
+  "backstab": 1,
+  "parryBonus": 1,
+  "blockAdrenaline": 2,
+  "parryAdrenaline": 5,
+  "attack": {
+   "type": "Projectile",
+   "stamina": 10,
+   "adrenaline": 1,
+   "chain": [
+    {
+     "time": 1.0,
+     "hits": 1
+    }
+   ],
+   "draw": 2.5
+  },
+  "ammoType": "$ammo_dart"
  },
  {
   "id": "Mead",

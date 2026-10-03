@@ -6202,7 +6202,8 @@
      "time": 0.56,
      "hits": 1
     }
-   ]
+   ],
+   "draw": 2.5
   },
   "ammoType": "$ammo_arrows",
   "modifiers": {
@@ -6247,7 +6248,8 @@
      "time": 0.56,
      "hits": 1
     }
-   ]
+   ],
+   "draw": 2.5
   },
   "ammoType": "$ammo_arrows",
   "modifiers": {
@@ -6292,7 +6294,8 @@
      "time": 0.56,
      "hits": 1
     }
-   ]
+   ],
+   "draw": 2.5
   },
   "ammoType": "$ammo_arrows",
   "modifiers": {
@@ -6338,7 +6341,8 @@
      "time": 0.56,
      "hits": 1
     }
-   ]
+   ],
+   "draw": 2.5
   },
   "ammoType": "$ammo_arrows",
   "modifiers": {
@@ -6384,7 +6388,8 @@
      "time": 0.56,
      "hits": 1
     }
-   ]
+   ],
+   "draw": 2.5
   },
   "ammoType": "$ammo_arrows",
   "modifiers": {
@@ -6430,7 +6435,8 @@
      "time": 0.56,
      "hits": 1
     }
-   ]
+   ],
+   "draw": 2.5
   },
   "ammoType": "$ammo_arrows",
   "modifiers": {
@@ -6474,7 +6480,8 @@
      "time": 0.56,
      "hits": 1
     }
-   ]
+   ],
+   "draw": 2.5
   },
   "ammoType": "$ammo_arrows",
   "modifiers": {
@@ -6520,7 +6527,8 @@
      "time": 0.56,
      "hits": 1
     }
-   ]
+   ],
+   "draw": 2.5
   },
   "ammoType": "$ammo_arrows",
   "modifiers": {
@@ -6579,7 +6587,8 @@
      "time": 0.56,
      "hits": 1
     }
-   ]
+   ],
+   "draw": 2.5
   },
   "ammoType": "$ammo_arrows",
   "modifiers": {
@@ -6629,7 +6638,8 @@
      "time": 0.56,
      "hits": 1
     }
-   ]
+   ],
+   "draw": 2.5
   },
   "ammoType": "$ammo_arrows",
   "modifiers": {
@@ -6673,7 +6683,8 @@
      "time": 0.56,
      "hits": 1
     }
-   ]
+   ],
+   "draw": 2.5
   },
   "ammoType": "$ammo_arrows",
   "modifiers": {
@@ -6719,7 +6730,8 @@
      "time": 0.56,
      "hits": 1
     }
-   ]
+   ],
+   "draw": 2.5
   },
   "ammoType": "$ammo_arrows",
   "modifiers": {
@@ -7772,7 +7784,9 @@
      "time": 0.5,
      "hits": 1
     }
-   ]
+   ],
+   "reload": 3.5,
+   "reloadDone": 1.15
   },
   "ammoType": "$ammo_bolts",
   "modifiers": {
@@ -7818,7 +7832,9 @@
      "time": 0.5,
      "hits": 1
     }
-   ]
+   ],
+   "reload": 3.5,
+   "reloadDone": 1.15
   },
   "ammoType": "$ammo_bolts",
   "modifiers": {
@@ -7877,7 +7893,9 @@
      "time": 0.5,
      "hits": 1
     }
-   ]
+   ],
+   "reload": 3.5,
+   "reloadDone": 1.15
   },
   "ammoType": "$ammo_bolts",
   "modifiers": {
@@ -7927,7 +7945,9 @@
      "time": 0.5,
      "hits": 1
     }
-   ]
+   ],
+   "reload": 3.5,
+   "reloadDone": 1.15
   },
   "ammoType": "$ammo_bolts",
   "modifiers": {
@@ -7972,7 +7992,9 @@
      "time": 0.5,
      "hits": 1
     }
-   ]
+   ],
+   "reload": 3.5,
+   "reloadDone": 1.15
   },
   "ammoType": "$ammo_bolts",
   "modifiers": {
@@ -8017,7 +8039,9 @@
      "time": 0.5,
      "hits": 1
     }
-   ]
+   ],
+   "reload": 3.5,
+   "reloadDone": 1.15
   },
   "ammoType": "$ammo_bolts",
   "modifiers": {
@@ -8063,7 +8087,9 @@
      "time": 0.5,
      "hits": 1
     }
-   ]
+   ],
+   "reload": 3.5,
+   "reloadDone": 1.15
   },
   "ammoType": "$ammo_bolts",
   "modifiers": {
@@ -8109,7 +8135,9 @@
      "time": 0.5,
      "hits": 1
     }
-   ]
+   ],
+   "reload": 3.5,
+   "reloadDone": 1.15
   },
   "ammoType": "$ammo_bolts",
   "modifiers": {
@@ -12068,7 +12096,8 @@
      "time": 1.5,
      "hits": 1
     }
-   ]
+   ],
+   "draw": 1
   },
   "ammoType": "$item_fishingbait"
  },
@@ -14433,7 +14462,10 @@
      "time": 0.5,
      "hits": 1
     }
-   ]
+   ],
+   "reload": 2,
+   "reloadBlock": 1.1,
+   "reloadDone": 1.15
   },
   "secondaryAttack": {
    "type": "Projectile",
@@ -27219,7 +27251,8 @@
      "time": 0.5,
      "hits": 1
     }
-   ]
+   ],
+   "reload": 1.9
   },
   "modifiers": {
    "movement": -0.05

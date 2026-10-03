@@ -590,8 +590,14 @@ def quality_table(i: dict) -> str:
         cols.append((k.capitalize(), dmg.get(k, 0), dpl.get(k, 0)))
     if t in WEAPONS and not i.get("tamedOnly"):
         for label, a in (("DPS", i.get("attack")), ("Secondary DPS", i.get("secondaryAttack"))):
-            if (d := mechanics.dps(mechanics.hit_damage(dmg), a)) is not None:  # linear in damage, so per level too
-                cols.append((label, d, mechanics.dps(mechanics.hit_damage(dpl), a) or 0))
+            if a and a.get("cycle") and (d := mechanics.dps(mechanics.hit_damage(dmg), a)) is not None:
+                cols.append((label, d, mechanics.dps(mechanics.hit_damage(dpl), a) or 0))  # linear in damage
+        a, ammo = i.get("attack") or {}, best_ammo(i)
+        if (a.get("draw") or a.get("reload")) and ammo:  # bows and crossbows: weapon + ammo damage, skill-dependent
+            extra = mechanics.hit_damage(ammo.get("damages", {}))
+            for skill in (0, 100):
+                if (d := mechanics.dps(mechanics.hit_damage(dmg) + extra, a, skill)) is not None:
+                    cols.append((f"DPS (skill {skill})", d, mechanics.dps(mechanics.hit_damage(dpl), a, skill) or 0))
     if t in ARMOR:
         cols.append(("Armor", i.get("armor", 0), i.get("armorPerLevel", 0)))
     if t in WEAPONS | {"Shield"} and i.get("block"):
@@ -620,6 +626,12 @@ def attack_text(a: dict) -> str:
         parts.append(f"projectile {esc(pretty_id(a['projectile']))}")
     if a.get("thrown"):
         parts.append("thrown (the weapon lands where it hits)")
+    if a.get("draw"):
+        parts.append(f"full draw {num(a['draw'])} s ({num(mechanics.draw_time(a['draw'], 100))} s at skill 100)")
+    if a.get("reload"):
+        parts.append(f"reload {num(a['reload'])} s ({num(mechanics.reload_time(a['reload'], 100))} s at skill 100)")
+    if (a.get("draw") or a.get("reload")) and (c0 := mechanics.attack_cycle(a, 0)):
+        parts.append(f"{num(round(c0, 2))} s per shot ({num(round(mechanics.attack_cycle(a, 100), 2))} s at skill 100)")
     if a.get("cycle"):
         hits = sum(c["hits"] for c in a["chain"])
         n = len(a["chain"])
@@ -729,8 +741,11 @@ def item_page(i: dict) -> None:
     stat_note = ""
     if t == "Shield" or (t in WEAPONS and i.get("block") and i.get("skill") == "Blocking"):
         stat_note = f'<p class="note">How block power, parrying and stagger work: {mech_link("blocking", "Blocking")}.</p>'
-    elif t in WEAPONS and any((a or {}).get("cycle") for a in (i.get("attack"), i.get("secondaryAttack"))):
-        stat_note = f'<p class="note">How attack speed and DPS are worked out: {mech_link("attack-speed", "Attack speed")}.</p>'
+    elif t in WEAPONS and any(mechanics.attack_cycle(a) for a in (i.get("attack"), i.get("secondaryAttack"))):
+        ammo = best_ammo(i) if (i.get("attack") or {}).get("draw") or (i.get("attack") or {}).get("reload") else None
+        stat_note = ((f'<p class="note">Bow and crossbow DPS with {link("item", ammo["id"])}, the hardest-hitting '
+                      f'ammo.</p>') if ammo else "")
+        stat_note += f'<p class="note">How attack speed and DPS are worked out: {mech_link("attack-speed", "Attack speed")}.</p>'
     elif t in ARMOR and i.get("armor"):
         stat_note = (f'<p class="note">How armor reduces damage: {mech_link("damage-types", "Damage types and resistances")}.</p>')
     body += section("Stats", quality_table(i) + kv(combat) + stat_note)
@@ -1184,13 +1199,40 @@ def block_attack_speed() -> str:
         dmg = {k: i.get("damages", {}).get(k, 0) + (q - 1) * i.get("damagesPerLevel", {}).get(k, 0)
                for k in mechanics.COMBAT_DAMAGE}
         for label, a in (("primary", i.get("attack")), ("secondary", i.get("secondaryAttack"))):
-            d = mechanics.dps(mechanics.hit_damage(dmg), a)
+            d = mechanics.dps(mechanics.hit_damage(dmg), a) if a and a.get("cycle") else None
             if d is None:
                 continue
             rows.append([link("item", i["id"]), esc(words(i.get("skill") or "")), label,
                          num(sum(c["hits"] for c in a["chain"])), num(a["cycle"]),
                          num(round(mechanics.combo_damage(mechanics.hit_damage(dmg), a), 1)), num(round(d, 1))])
     return table(["Weapon", "Skill", "Attack", "Hits", "Seconds", "Damage", "DPS"], rows, "num")
+
+
+def best_ammo(i: dict) -> dict | None:
+    """The obtainable ammo of the weapon's ammo type with the most combat damage per hit. None if no ammo of the
+    type does damage (the fishing rod draws like a bow, but casts bait)."""
+    ammo = [x for x in ITEMS.values() if x["type"] == "Ammo" and x.get("ammoType") == i.get("ammoType")
+            and has_page("item", x["id"]) and mechanics.hit_damage(x.get("damages", {}))]
+    return max(ammo, key=lambda x: (mechanics.hit_damage(x.get("damages", {})), x["id"]), default=None)
+
+
+def block_attack_speed_ranged() -> str:
+    """Bows and crossbows at max quality with their best ammo: time per shot and DPS at skill 0 and 100."""
+    rows = []
+    for i in sorted((x for x in ITEMS.values() if x["type"] in WEAPONS and has_page("item", x["id"])),
+                    key=lambda x: (words(x.get("skill") or ""), name_of("item", x["id"]).lower())):
+        a, ammo = i.get("attack") or {}, best_ammo(i)
+        if not (a.get("draw") or a.get("reload")) or not ammo or not mechanics.attack_cycle(a):
+            continue
+        q = i.get("maxQuality", 1)
+        hit = mechanics.hit_damage({k: i.get("damages", {}).get(k, 0) + (q - 1) * i.get("damagesPerLevel", {}).get(k, 0)
+                                    for k in mechanics.COMBAT_DAMAGE}) + mechanics.hit_damage(ammo.get("damages", {}))
+        rows.append([link("item", i["id"]), num(a.get("draw") or a.get("reload")),
+                     num(round(mechanics.attack_cycle(a, 0), 2)), num(round(mechanics.attack_cycle(a, 100), 2)),
+                     link("item", ammo["id"]), num(round(mechanics.combo_damage(hit, a), 1)),
+                     num(round(mechanics.dps(hit, a, 0), 1)), num(round(mechanics.dps(hit, a, 100), 1))])
+    return table(["Weapon", "Draw / reload", "Seconds (skill 0)", "Seconds (skill 100)", "Ammo", "Damage",
+                  "DPS (skill 0)", "DPS (skill 100)"], rows, "num")
 
 
 def block_adrenaline_blockers() -> str:
@@ -1236,7 +1278,8 @@ def mech_blocks() -> dict:
             "pseudo-drops": block_pseudo_drops, "pseudo-table": block_pseudo_table,
             "drops-example": block_drops_example, "upgrade-costs": block_upgrade_costs,
             "upgrade-example": block_upgrade_example,
-            "trinkets": block_trinkets, "attack-speed": block_attack_speed, "adrenaline-attacks": block_adrenaline_attacks,
+            "trinkets": block_trinkets, "attack-speed": block_attack_speed,
+            "attack-speed-ranged": block_attack_speed_ranged, "adrenaline-attacks": block_adrenaline_attacks,
             "adrenaline-blockers": block_adrenaline_blockers, "adrenaline-effects": block_adrenaline_effects,
             "adrenaline-sources": block_adrenaline_sources,
             "adrenaline-chart": lambda: mechanics.adrenaline_chart(PLAYER["adrenaline"]),

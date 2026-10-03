@@ -90,8 +90,9 @@ Logs after a dump: `.cache/dump/<branch>/server.log` (Unity) and `bepinex.log` (
   `_endDate` are `[day, month]`, `Pieces` are `$ref` prefabs, `Recipes` are `$asset` recipe names.
 - `localization/English.json` — `$token` → text (keys without the `$`).
 - `anims/Player_animator.json` (written by `extract-anims.py`, not the plugin: the animator state machine is editor-only
-  API at runtime) — per animator trigger that leads to an `attack`-tagged state: `state`, `layer`, `speed` (state speed),
-  `clip`, `length` (s), `exit` (normalized exit time; null = loops until `attack_abort`), `offset`, `events`
+  API at runtime) — per animator trigger that leads to an `attack` or `minoraction(_fast)`-tagged state: `state`, `layer`,
+  `tag`, `speed` (state speed), `clip`, `length` (s), `exit` (normalized exit time; null = loops until `attack_abort`),
+  `exitDuration` / `exitFixed` (that transition's length), `offset`, `events`
   [[clip time, name, float?]] with `Speed` (sets animator speed), `Hit`/`OnAttackTrigger` (one damage application), `Chain`.
 
 ## Site data (`data/`, committed)
@@ -131,8 +132,11 @@ Player attacks (#37) carry animation timing: `chain` [{time (s, until the next l
 Speed events applied), hits}] per chain level (or per random variant, `random`), `lastChainMultiplier` (melee: always 2,
 Area: `m_lastChainDamageMultiplier`) and `cycle` (whole combo with every hit connecting, + 0.15 s FreezeFrame per melee
 hit; omitted for bow draw, crossbow reload and projectile bursts, which aren't modelled yet, and for `thrown` attacks whose
-projectile lands as the weapon). Looping attacks have none. `tamedOnly` weapons (Butcher Knife) hit only tamed creatures.
-The site shows DPS per quality (`mechanics.dps`) and lists every timed attack on the `attack-speed` mechanics page.
+projectile lands as the weapon). Bows have `draw` (m_drawDurationMin) and crossbows `reload`, `reloadBlock` and
+`reloadDone` (the "reload done" minor action, from the animator) instead of `cycle`: those depend on skill
+(`mechanics.attack_cycle`). Looping attacks have none. `tamedOnly` weapons (Butcher Knife) hit only tamed creatures.
+The site shows DPS per quality (`mechanics.dps`; bows and crossbows at skill 0 and 100 with the hardest-hitting ammo)
+and lists every timed attack on the `attack-speed` mechanics page.
 Items keep only the stat fields their type uses: `armor*` for helmet/chest/legs/shoulder (shields' armor is ignored by the
 game), block/parry fields for weapons and shields, attack fields (`skill`, `damages`, `attack`...) for weapons, ammo and
 Catapult ammo (shields keep `skill`); `internal` items keep everything. Blockers have `blockAdrenaline` / `parryAdrenaline`,
