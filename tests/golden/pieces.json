@@ -106,6 +106,24 @@
   }
  },
  {
+  "id": "Sapling",
+  "name": "Twig Bush",
+  "icon": "Sapling",
+  "enabled": true,
+  "category": "Misc",
+  "resources": [
+   {
+    "item": "Wood",
+    "amount": 1
+   }
+  ],
+  "health": 400,
+  "material": "Wood",
+  "damageModifiers": {
+   "fire": "Weak"
+  }
+ },
+ {
   "id": "Tap",
   "name": "Tap",
   "icon": "Tap",

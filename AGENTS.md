@@ -93,7 +93,11 @@ dungeon rooms; the location's biomes), `offspring` (`parent` creature) or `egg` 
 Ids are prefab names; references are ids. Empty, zero, false and "Normal" values are omitted. Text is plain: Unity
 rich-text tags are stripped; creatures whose name was colored (Hildir's minibosses) are flagged `named`. Pieces that make items on their own have `produces` (`item`, `secPerUnit`, `max`; a Beehive's working `biomes`, a
 Sap Extractor's `connectsTo` root with the biomes it grows in); sources of kind `destructible` are non-piece objects
-with a drop table (wild Beehive, props in locations). Creatures that grow up from another have a `growup` spawn
+with a drop table (wild Beehive, props in locations). Pickable/rock/tree/log/destructible sources record where they
+are placed: `biomes` (enabled ZoneSystem vegetation), `locations` [{location, dungeon}] (the object is the location,
+sits in it or in a room its dungeon generates, found by scene path name, or a CreatureSpawner there makes it),
+`placedBy` (pieces that plant/build it: Plant, Procreation, WispSpawner). `reachable()` counts only placed sources
+(or a `becomes` stage of one); sources with none are not in the world (Meteorite rock, MushroomBlue pickable). Creatures that grow up from another have a `growup` spawn
 (`parent`). Derived relations (used in, dropped by) are left to the site build.
 Items flagged `internal` (creature attack items) or `enemyOnly` (FW_/SP_ gear copies, Dvergr crossbow) get no site
 page; creatures list them under `attacks` (weapons) and `equipment`.

@@ -8,9 +8,9 @@
   "recipes": 4,
   "creatures": 6,
   "spawns": 14,
-  "pieces": 7,
+  "pieces": 8,
   "processing": 1,
-  "sources": 7,
+  "sources": 8,
   "status_effects": 1
  },
  "unresolvedTokens": [

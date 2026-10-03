@@ -111,6 +111,11 @@ def main() -> int:
     check("Hammer" in pieces.get("piece_workbench", {}).get("tools", []), "workbench built with Hammer")
     check(any(p["from"] == "CopperOre" and p["to"] == "Copper" for p in procs), "smelting CopperOre -> Copper")
     check(any(d["item"] == "CopperOre" for s in sources for d in (s.get("drops") or {}).get("items", [])), "CopperOre has a world source")
+    src = {s["id"]: s for s in sources}
+    check(src.get("LeviathanLava", {}).get("locations"), "LeviathanLava (a Flametal Ore deposit) is placed as a location")
+    check("Meadows" in src.get("RaspberryBush", {}).get("biomes", []), "RaspberryBush grows in the Meadows")
+    check(any(d["item"] == "FlametalOreNew" for d in src.get("LeviathanLava", {}).get("drops", {}).get("items", [])),
+          "FlametalOreNew is mined from a placed deposit")
     in_chest = {d["item"] for s in sources if s.get("kind") == "container" and s.get("locations")
                 for d in s["drops"]["items"]}
     check({"Amber", "AmberPearl", "Ruby"} <= in_chest, "Amber, AmberPearl, Ruby are found in chests")

@@ -7,7 +7,11 @@
    "item": "Wood",
    "amount": 2,
    "respawnMinutes": 240
-  }
+  },
+  "biomes": [
+   "Meadows",
+   "Swamp"
+  ]
  },
  {
   "id": "OreRock",
@@ -36,7 +40,24 @@
      "weight": 0.25
     }
    ]
-  }
+  },
+  "locations": [
+   {
+    "location": "Lair"
+   }
+  ]
+ },
+ {
+  "id": "Stub",
+  "kind": "pickable",
+  "name": "Twig Bush",
+  "pickable": {
+   "item": "Ore",
+   "amount": 1
+  },
+  "placedBy": [
+   "Sapling"
+  ]
  },
  {
   "id": "WildHive",
@@ -63,7 +84,13 @@
      "weight": 1
     }
    ]
-  }
+  },
+  "locations": [
+   {
+    "location": "Lair",
+    "dungeon": true
+   }
+  ]
  },
  {
   "id": "container_piece_other_8d3ee0",

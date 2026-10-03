@@ -278,9 +278,10 @@ def reachable(items: list, creatures: list, pieces: list, recipes: list, procs: 
     """Ids of the items, creatures and pieces a player can get to, by fixed point from what the world offers:
     sources, spawns and enabled pieces in a build menu, then enabled recipes with reachable ingredients, drops of
     reachable creatures (a creature dropped by one, like a miniboss's second phase, is reached too), conversions
-    of reachable inputs. Chests in locations and trader stock count (as sources; trader keys are ignored, Coins
-    must be reachable), fish via their bait, honey and sap from buildable pieces whose cost is reachable (sap
-    needs its root in the world). Incomplete while quests aren't modelled (#20)."""
+    of reachable inputs, eggs laid by a reachable creature. Chests in locations and trader stock count (as
+    sources; trader keys are ignored, Coins must be reachable), fish via their bait, honey and sap from buildable pieces whose cost is reachable (sap
+    needs its root in the world). World sources count when placed (`biomes`, `locations`, `placedBy`, or a
+    `becomes` stage of a placed one). Incomplete while quests aren't modelled (#20)."""
     by_creature = {c["id"]: c for c in creatures}
     got_creatures = {s["creature"] for s in spawn_list}
     traders = [src for src in sources if src["kind"] == "trader"]
@@ -289,23 +290,34 @@ def reachable(items: list, creatures: list, pieces: list, recipes: list, procs: 
     fish = [src for src in sources if src["kind"] == "fishing"]
     made = [p for p in pieces if p["id"] in got_pieces and (pr := p.get("produces")) and pr["item"]
             and pr.get("connectsTo", {"biomes": True}).get("biomes")]
-    for src in sources:
-        if src["kind"] in ("fishing", "trader"):
-            continue
-        got |= {d["item"] for d in (src.get("drops") or {}).get("items", [])}
-        if src.get("pickable"):
-            got.add(src["pickable"]["item"])
+    by_piece = {p["id"]: p for p in pieces}
+    item_ids = {i["id"] for i in items}
+    world = [src for src in sources if src["kind"] not in ("fishing", "trader")]
+    placed = {src["id"] for src in world if src["kind"] == "container" or src.get("biomes") or src.get("locations")}
     while True:
         before = len(got)
+        for src in world:  # a source counts once placed: in the world, made by an affordable piece, or a stage of one
+            if src["id"] in placed:
+                if src.get("becomes"):
+                    placed.add(src["becomes"])
+            elif any(pc in got_pieces and all(r["item"] in got for r in by_piece[pc]["resources"])
+                     for pc in src.get("placedBy", [])):
+                placed.add(src["id"])
+        for src in world:
+            if src["id"] in placed:
+                got |= {d["item"] for d in (src.get("drops") or {}).get("items", [])}
+                if src.get("pickable"):
+                    got.add(src["pickable"]["item"])
         got |= {r["item"] for r in recipes if r.get("item") and r.get("enabled")
                 and all(x["item"] in got for x in r["resources"] if not x.get("upgrader"))}
         dropped = {d["item"] for c in got_creatures for d in by_creature.get(c, {}).get("drops", [])}
         got |= dropped
         got_creatures |= dropped & by_creature.keys()
+        got |= {s["creature"] for s in spawn_list if s["source"] == "offspring" and s["parent"] in got_creatures
+                and s["creature"] in item_ids}  # eggs laid by a creature we have
         if "Coins" in got:
             got |= {x["item"] for t in traders for x in t["sells"]}
         got |= {p["to"] for p in procs if p["from"] in got}
-        item_ids = {i["id"] for i in items}
         got |= {p["id"] for p in pieces if p["id"] in got_pieces and p["id"] in item_ids  # feasts: item and piece in one
                 and all(r["item"] in got for r in p["resources"])}
         for pc in made:  # a placed piece needs its cost; sap also its root, a world object
@@ -704,6 +716,42 @@ def location_containers() -> list[dict]:
                   key=lambda e: e["id"])
 
 
+def place_sources(sources: list[dict]) -> None:
+    """Record where each world source is placed: `biomes` (enabled ZoneSystem vegetation), `locations`
+    [{location, dungeon}] (the location is the object, or an instance of it sits in the location or in a room its
+    dungeon generates, named by the scene path), `placedBy` (pieces that create it: Plant, Procreation, WispSpawner).
+    Sources with none of these are not found anywhere in the world."""
+    by = {s["id"]: s for s in sources if s["kind"] not in ("fishing", "trader", "container")}
+    veg = defaultdict(list)
+    for v in load("world/ZoneSystem.json")[0]["fields"]["m_vegetation"]:
+        if v["m_enable"] and (pid := ref(v["m_prefab"])) in by:
+            veg[pid] += [b for b in biomes(v["m_biome"]) if b not in veg[pid]]
+    found = defaultdict(set)
+    for name, bs, p, dungeon in placed_in_locations():
+        for inst in {re.sub(r" \(\d+\)$", "", c["path"].rsplit("/", 1)[-1]) for c in p["components"]
+                     if c.get("path")} | {p["name"]}:
+            if inst in by:
+                found[inst].add((name, dungeon))
+        for c in p["components"]:  # objects a spawner makes (the Charred ballista)
+            if c["type"] == "CreatureSpawner" and (spawned := ref(c["fields"]["m_creaturePrefab"])) in by:
+                found[spawned].add((name, dungeon))
+    made = defaultdict(set)
+    for name, p in PREFABS.items():
+        if not has(p, "Piece"):
+            continue
+        for c, field in (("Plant", "m_grownPrefabs"), ("Procreation", "m_offspring"), ("WispSpawner", "m_wispPrefab")):
+            if cc := comp(p, c):
+                v = cc[field]
+                made[name] |= {r for x in (v if isinstance(v, list) else [v]) if (r := ref(x)) in by}
+    for sid, e in by.items():
+        if veg[sid]:
+            e["biomes"] = veg[sid]
+        if found[sid]:
+            e["locations"] = [{"location": loc, "dungeon": d} for loc, d in sorted(found[sid])]
+        if pieces := sorted(n for n, ids in made.items() if sid in ids):
+            e["placedBy"] = pieces
+
+
 def fishing(spawn_list: list[dict]) -> list[dict]:
     """Fish prefabs (Fish component) as sources of kind `fishing`: the baits they take (`baits` [{item, chance}]),
     the biomes they swim in (from their spawns) and the extra drops a catch can carry. The caught fish is the
@@ -810,6 +858,7 @@ def main(argv: list[str]) -> int:
         procs.extend(processing(name, p))
         if not p["isItem"] and not has(p, "Piece") and (s := source(name, p)):
             sources.append(s)
+    place_sources(sources)
     sources += location_containers()
     spawn_list = spawns()
     sources += fishing(spawn_list)

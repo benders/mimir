@@ -160,6 +160,31 @@ class Entities(FixtureCase):
         self.assertEqual((hive["kind"], hive["health"], [d["item"] for d in hive["drops"]["items"]]),
                          ("destructible", 20, ["Wood", "Ore"]))
 
+    def test_place_sources(self):
+        sources = {s["id"]: s for n, p in N.PREFABS.items() if not p["isItem"] and (s := N.source(n, p))}
+        N.place_sources(list(sources.values()))
+        self.assertEqual(sources["Bush"]["biomes"], ["Meadows", "Swamp"])  # enabled vegetation, merged
+        self.assertEqual(sources["OreRock"]["locations"], [{"location": "Lair", "dungeon": False}])
+        self.assertEqual(sources["WildHive"]["locations"], [{"location": "Lair", "dungeon": True}])  # via a room
+        self.assertEqual(sources["Stub"]["placedBy"], ["Sapling"])
+        self.assertNotIn("biomes", sources["Stub"])
+
+    def test_unplaced_sources_dont_count(self):
+        items = [{"id": "Rock"}, {"id": "Seed"}]
+        src = lambda i, **kw: {"id": i, "kind": "rock", "drops": {"items": [{"item": "Rock"}]}, **kw}
+        self.assertEqual(N.reachable(items, [], [], [], [], [src("a")], [])[0], set())
+        self.assertEqual(N.reachable(items, [], [], [], [], [src("a", biomes=["Meadows"])], [])[0], {"Rock"})
+        stages = [src("log", becomes="stub"), {"id": "stub", "kind": "log", "drops": {"items": [{"item": "Seed"}]}}]
+        self.assertEqual(N.reachable(items, [], [], [], [], stages, [])[0], set())
+        stages[0]["locations"] = [{"location": "X", "dungeon": False}]
+        self.assertEqual(N.reachable(items, [], [], [], [], stages, [])[0], {"Rock", "Seed"})  # a stage of a placed one
+
+    def test_offspring_egg_is_reached(self):
+        items, spawn_list = [{"id": "Egg"}], [{"creature": "Egg", "source": "offspring", "parent": "Hen"}]
+        spawn_list.append({"creature": "Hen", "source": "world"})
+        self.assertIn("Egg", N.reachable(items, [{"id": "Hen"}], [], [], [], [], spawn_list)[0])
+        self.assertNotIn("Egg", N.reachable(items, [{"id": "Hen"}], [], [], [], [], spawn_list[:1])[0])
+
     def test_produces(self):
         hive = N.piece("Hive", N.PREFABS["Hive"], {})["produces"]
         self.assertEqual(hive, {"item": "Nectar", "secPerUnit": 600, "max": 4, "biomes": ["Meadows", "BlackForest"]})
@@ -249,6 +274,7 @@ class EnemyOnly(FixtureCase):
         recipes = [N.recipe(r) for r in N.load("recipes.json")]
         procs = [x for n, p in N.PREFABS.items() for x in N.processing(n, p)]
         sources = [s for n, p in N.PREFABS.items() if not p["isItem"] and (s := N.source(n, p))]
+        N.place_sources(sources)
         pieces = [x for n, p in N.PREFABS.items() if (x := N.piece(n, p, {}))]
         N.mark_enemy_only(items, creatures, recipes, procs, sources, pieces)
         return {i["id"] for i in items if i.get("enemyOnly")}
@@ -271,6 +297,7 @@ class Unobtainable(FixtureCase):
         recipes = [N.recipe(r) for r in N.load("recipes.json")]
         procs = [x for n, p in N.PREFABS.items() for x in N.processing(n, p)]
         sources = [s for n, p in N.PREFABS.items() if not p["isItem"] and (s := N.source(n, p))]
+        N.place_sources(sources)
         N.mark_unobtainable(items, creatures, pieces, recipes, procs, sources, N.spawns())
         return {e["id"] for e in items + creatures + pieces if e.get("unobtainable")}
 
@@ -289,6 +316,7 @@ class Unobtainable(FixtureCase):
         recipes = [N.recipe(r) for r in N.load("recipes.json")]
         procs = [x for n, p in N.PREFABS.items() for x in N.processing(n, p)]
         sources = [s for n, p in N.PREFABS.items() if not p["isItem"] and (s := N.source(n, p))]
+        N.place_sources(sources)
         got, _, _ = N.reachable(items, creatures, pieces, recipes, procs, sources, N.spawns())  # without fishing
         self.assertTrue({"Wood", "Ore", "Ingot", "Sword", "Helmet"} <= got)  # source -> smelt -> craft (upgrader ignored)
         self.assertNotIn("Mead", got)  # needs Fish, which nothing yields

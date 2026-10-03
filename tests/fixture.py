@@ -236,6 +236,10 @@ def prefabs():
                                                                   ("vfx_Poof", 1, 1, 1), dropMax=3)))),
         prefab("Boulder", comp("MineRock", m(name="Boulder", health=50, minToolTier=0, damageModifiers={},
                                              dropItems=drop_table()))),  # yields nothing: not a source
+        prefab("Stub", comp("Pickable", m(overrideName="$piece_bush", itemPrefab=R("Ore"), amount=1,
+                                          respawnTimeMinutes=0, extraDrops=drop_table()))),
+        piece("Sapling", comp("Plant", m(growTime=100, grownPrefabs=[R("Stub")])), name="$piece_bush",
+              icon=S("Sapling"), resources=[req("Wood")]),
         prefab("vfx_Poof"),
     ]
 
@@ -288,7 +292,8 @@ def write_dump(raw: Path) -> Path:
     ]}}])
     dump("world/ZoneSystem.json", [{"name": "_GameMain", "type": "ZoneSystem", "fields": {"m_vegetation": [
         m(prefab=R("Root"), enable=True, biome="Mountain"), m(prefab=R("Root"), enable=True, biome="Swamp"),
-        m(prefab=R("Root"), enable=False, biome="Plains"), m(prefab=R("Root2"), enable=False, biome="Plains")],
+        m(prefab=R("Root"), enable=False, biome="Plains"), m(prefab=R("Root2"), enable=False, biome="Plains"),
+        m(prefab=R("Bush"), enable=True, biome="Meadows, Swamp"), m(prefab=R("Bush"), enable=True, biome="Meadows")],
         "m_locations": [
         zone_location("Camp", "Swamp"),
         zone_location("Camp", "Plains"),  # same prefab placed in a second biome
@@ -308,7 +313,7 @@ def write_dump(raw: Path) -> Path:
     dump("locations/Lair.json", {"name": "Lair", "components": [comp("Location", {}), *spawners(
         ("OfferingBowl", m(bossPrefab=R("Chief"), bossItem=R("Ore"), bossItems=3)),
         ("DungeonGenerator", m(themes="Cave")),
-    )]})
+    ), comp("MineRock", {}, path="cave/OreRock (2)")]})  # an instance of a source inside the location
     dump("locations/Ruin.json", {"name": "Ruin", "components": spawners(("CreatureSpawner", creature_spawner("Pup")),
                                                                     container(("Ore", 1, 1, 1)))})  # disabled location
     dump("locations/Market.json", {"name": "Market", "components": [comp("Location", {}), comp("Trader", {
@@ -317,8 +322,9 @@ def write_dump(raw: Path) -> Path:
         path="Stall/Vendor")]})
     dump("room_themes.json", {"None": 0, "Crypt": 1, "Cave": 4})
     dump("rooms/cave_a.json", {"name": "cave_a", "theme": 5, "enabled": True,  # Crypt|Cave: used by Lair
-                               "components": spawners(("CreatureSpawner", creature_spawner("Pup", maxLevel=2)),
-                                                       container(("Gem", 1, 1, 1), ("Wood", 2, 5, 3)))})
+                               "components": [*spawners(("CreatureSpawner", creature_spawner("Pup", maxLevel=2)),
+                                                        container(("Gem", 1, 1, 1), ("Wood", 2, 5, 3))),
+                                              comp("Destructible", {}, path="hall/WildHive")]})
     dump("rooms/cave_off.json", {"name": "cave_off", "theme": 4, "enabled": False,
                                  "components": spawners(("CreatureSpawner", creature_spawner("Raider")))})
     dump("rooms/crypt_a.json", {"name": "crypt_a", "theme": 1, "enabled": True,

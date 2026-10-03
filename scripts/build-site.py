@@ -173,14 +173,20 @@ def source_name(s: dict) -> str:
 
 
 def source_places(s: dict) -> str:
-    """Where a source is found: a fish's biomes, a trader's locations (with biomes) or a loot chest's locations
-    (dungeon rooms marked)."""
+    """Where a source is found: a fish's biomes, a trader's locations (with biomes), or a world source's biomes,
+    locations (dungeon rooms marked, long lists cut) and the pieces that plant or build it."""
     if s["kind"] == "trader":
         return ", ".join(f"{pretty_id(x['location'])} ({', '.join(BIOMES.get(b, words(b)) for b in x['biomes'])})"
                          for x in s["locations"])
     if s["kind"] == "fishing":
         return ", ".join(BIOMES.get(b, words(b)) for b in s.get("biomes", []))
-    return ", ".join(pretty_id(x["location"]) + (" dungeon" if x.get("dungeon") else "") for x in s.get("locations", []))
+    places = [BIOMES.get(b, words(b)) for b in s.get("biomes", [])]
+    locs = list(dict.fromkeys(pretty_id(x["location"]) + (" dungeon" if x.get("dungeon") else "")
+                              for x in s.get("locations", [])))
+    places += locs[:4] + ([f"{len(locs) - 4} more locations"] if len(locs) > 4 else [])
+    if s.get("placedBy"):
+        places.append("planted or built: " + ", ".join(pretty_id(p) for p in s["placedBy"]))
+    return ", ".join(places)
 
 
 def key_label(key: str) -> str:

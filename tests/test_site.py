@@ -77,6 +77,12 @@ class Site(unittest.TestCase):
         self.assertIn("Camp, Lair dungeon", gem)
         self.assertFalse((self.out / "items/Mystery.html").exists())
 
+    def test_world_source_placement(self):
+        ore = (self.out / "items/Ore.html").read_text(encoding="utf-8")  # mined from OreRock, placed in the Lair
+        self.assertIn("Lair", ore)
+        wood = (self.out / "items/Wood.html").read_text(encoding="utf-8")  # picked from a Bush in the Meadows and Swamp
+        self.assertIn("Meadows, Swamp", wood)
+
     def test_sold_by(self):
         charm = (self.out / "items/Charm.html").read_text(encoding="utf-8")
         self.assertIn("<h2>Sold by</h2>", charm)
