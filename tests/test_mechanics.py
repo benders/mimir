@@ -129,6 +129,10 @@ class Charts(unittest.TestCase):
     def points(self, svg):
         return [[tuple(map(float, p.split(","))) for p in m.split()] for m in re.findall(r'class="ln s\d" points="([^"]+)"', svg)]
 
+    def test_formula_superscripts(self):
+        self.assertIn('<span class="formula">n = 2<sup>stars</sup></span>', M.render("$n = 2^{stars}$", M.Ctx()))
+        self.assertIn("D<sup>2</sup> / 4A", M.render("$D^2 / 4A$", M.Ctx()))
+
     def test_armor_chart(self):
         svg = M.armor_chart()
         self.assertIn("<svg", svg)

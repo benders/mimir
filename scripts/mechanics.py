@@ -146,6 +146,13 @@ class Ctx:
         self.scripts: list[str] = []  # calculator scripts the rendered page needs (site-relative paths)
 
 
+def formula(f: str) -> str:
+    """Escaped formula text with superscripts: x^{a + b} and x^2 become <sup>."""
+    f = esc(f, quote=False)
+    f = re.sub(r"\^\{([^}]*)\}", r"<sup>\1</sup>", f)
+    return re.sub(r"\^([\w.]+)", r"<sup>\1</sup>", f)
+
+
 def inline(s: str, ctx: Ctx) -> str:
     stash: list[str] = []
 
@@ -154,7 +161,7 @@ def inline(s: str, ctx: Ctx) -> str:
         return f"\x00{len(stash) - 1}\x00"
 
     s = re.sub(r"`([^`]+)`", lambda m: keep(f"<code>{esc(m.group(1), quote=False)}</code>"), s)
-    s = re.sub(r"\$([^$]+)\$", lambda m: keep(f'<span class="formula">{esc(m.group(1), quote=False)}</span>'), s)
+    s = re.sub(r"\$([^$]+)\$", lambda m: keep(f'<span class="formula">{formula(m.group(1))}</span>'), s)
 
     def link(m):
         text, url = m.group(1), m.group(2).strip()
@@ -350,7 +357,7 @@ def armor_chart() -> str:
     return figure(line_chart(series, xlim=(0, 200), ylim=(0, 100), xticks=range(0, 201, 50), yticks=range(0, 101, 25),
                              xlabel="Armor", ylabel="Damage taken (% of the hit)", ysuffix="%",
                              title="Damage taken against armor", desc=desc),
-                  desc + " Dots mark armor = half the hit, where the formula changes.")
+                  "Dots: armor = D/2, where the formula switches from D − A to D²/4A.")
 
 
 def block_chart() -> str:
@@ -366,7 +373,7 @@ def block_chart() -> str:
     return figure(line_chart(series, xlim=(0, 200), ylim=(0, 200), xticks=range(0, 201, 50), yticks=range(0, 201, 50),
                              xlabel="Block power", ylabel="Damage through the block",
                              title="Damage through a block", desc=desc),
-                  desc + " Dots mark block power = half the hit, where the formula changes.")
+                  "Dots: B = D/2, where the formula switches from D − B to D²/4B.")
 
 
 def stars_chart() -> str:
@@ -381,7 +388,46 @@ def stars_chart() -> str:
             f"fixed steps.")
     return figure(line_chart(series, xlim=(0, 4), ylim=(0, 16), xticks=range(0, 5), yticks=range(0, 17, 4),
                              xlabel="Stars", ylabel="Multiplier (×)", title="Multipliers by star level", desc=desc),
-                  desc)
+                  "Health ×level, damage ×(1 + 0.5·stars), level-multiplied drops ×2^stars.")
 
 
-CHARTS = {"armor": armor_chart, "block": block_chart, "stars": stars_chart}
+STAMINA_POWERS = (40, 80, 120)
+
+
+def stamina_chart() -> str:
+    """Stamina spent on a block vs blockable damage, for three block powers (player: m_blockStaminaDrain 10)."""
+    series = [{"label": f"B {b}", "points": [(d, 10 * block_outcome(d, b)["stamina_fraction"]) for d in range(0, 301, 2)],
+               "marks": [(2 * b, 10)]} for b in STAMINA_POWERS]
+    desc = ("Stamina spent on a block against blockable damage 0 to 300, for block power "
+            f"{', '.join(map(str, STAMINA_POWERS))}. It reaches the full 10 at damage = 2 × block power.")
+    return figure(line_chart(series, xlim=(0, 300), ylim=(0, 10), xticks=range(0, 301, 100), yticks=range(0, 11, 2),
+                             xlabel="Blockable damage", ylabel="Stamina", title="Block stamina cost", desc=desc),
+                  "Dots: D = 2B, from where every block costs the full 10.")
+
+
+def pseudo_chart() -> str:
+    """Long-run drop rate of the pseudo-random countdown vs the nominal chance, 1 to 30%."""
+    ps = [x / 1000 for x in range(10, 301, 2)]
+    series = [{"label": "nominal", "points": [(p * 100, p * 100) for p in ps]},
+              {"label": "actual", "points": [(p * 100, pseudo_rate(p) * 100) for p in ps]}]
+    desc = (f"Long-run drop rate of the pseudo-random countdown against the nominal chance, 1% to 30%. "
+            f"25% gives {_fmt(pseudo_rate(0.25) * 100)}%, 10% gives {_fmt(pseudo_rate(0.1) * 100)}%.")
+    return figure(line_chart(series, xlim=(0, 30), ylim=(0, 30), xticks=range(0, 31, 10), yticks=range(0, 31, 10),
+                             xlabel="Chance p (%)", ylabel="Drops per kill (%)", ysuffix="%",
+                             title="Pseudo-random drop rate", desc=desc),
+                  "The countdown keeps the rate near p; the integer cut-off moves it slightly.")
+
+
+def upgrade_chart() -> str:
+    """Upgrade cost multiplier (× amountPerLevel) by quality."""
+    qs = range(2, 11)
+    series = [{"label": "× perLevel", "points": [(q, upgrade_cost_multiplier(q)) for q in qs],
+               "marks": [(q, upgrade_cost_multiplier(q)) for q in qs]}]
+    desc = "Resource multiplier (times amountPerLevel) to reach quality 2 to 10: 1, 2, then 4 at quality 4 and +0.5 per level."
+    return figure(line_chart(series, xlim=(2, 10), ylim=(0, 8), xticks=range(2, 11), yticks=range(0, 9, 2),
+                             xlabel="Quality", ylabel="× amountPerLevel", title="Upgrade cost by quality", desc=desc),
+                  "q − 1 below 4, then 4 + (q − 4)/2: the step to quality 4 doubles the cost.")
+
+
+CHARTS = {"armor": armor_chart, "block": block_chart, "stars": stars_chart, "stamina": stamina_chart,
+          "pseudo": pseudo_chart, "upgrade": upgrade_chart}
