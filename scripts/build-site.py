@@ -1148,9 +1148,9 @@ def mechanics_pages() -> None:
     items = "".join(f'<li><a href="mechanics/{p["id"]}.html">{esc(p["title"])}</a><span>{esc(p["summary"])}</span></li>'
                     for p in MECH_PAGES)
     body = (f'<h1>Mechanics</h1><p class="sub">How the game works, for Valheim {esc(META["gameVersion"])}.</p>'
-            f'<p>Hand-written pages. Every formula was checked against the decompiled game code and names the method it '
-            f'comes from; anything inferred rather than verified is marked. Tables of creatures, shields and items on '
-            f'these pages are generated from the same game data as the rest of the site.</p>'
+            f'<p>Derived from the decompiled game code: every formula names the method it comes from, and anything '
+            f'inferred rather than verified is marked. Tables and charts are generated from the same game data as the '
+            f'rest of the site.</p>'
             f'<ul class="mechlist">{items}</ul>')
     page("mechanics/index.html", "Mechanics", body)
 
