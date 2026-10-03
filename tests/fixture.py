@@ -141,6 +141,7 @@ TRANSLATIONS = {
     "piece_chest": "Strongbox",
     "item_wood": "Twig", "item_wood_desc": "A stick.",
     "item_ore": "Rustore", "item_ingot": "Ingot",
+    "item_buckler": "Test Buckler",
     "item_sword": "Test Sword", "item_sword_desc": "Sharp <b>enough</b>.",
     "item_helmet": "Pot Helm", "item_fish": "Glimfish", "item_pearl": "Moon Pearl", "item_mead": "Fizz Mead", "item_coins": "Coins", "item_charm": "Lucky Charm", "npc_vendor": "Old Vendor",
     "item_hammer": "Mallet", "item_bite": "Bite",
@@ -176,6 +177,8 @@ def prefabs():
              damageModifiers=[{"m_type": "Fire", "m_modifier": "Resistant"},
                               {"m_type": "Pierce", "m_modifier": "Normal"}],
              setName="tester", setSize=2, setStatusEffect=R("SE_Fizz")),
+        item("Buckler", name="$item_buckler", itemType="Shield", icons=[S("Helmet")], maxQuality=3,
+             skillType="Blocking", blockPower=20, blockPowerPerLevel=5, timedBlockBonus=2),
         item("Helmet", name="$item_helmet", itemType="Helmet", icons=[S("Helmet")], armor=4, armorPerLevel=2),
         item("HelmetFem", name="$item_helmet", itemType="Helmet", icons=[S("Helmet")], armor=5),  # "Pot Helm (female)"
         item("WoodOld", name="$item_wood", description="$item_wood_desc", icons=[S("Wood")], maxStackSize=50),  # copy

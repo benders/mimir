@@ -111,6 +111,14 @@ page; creatures list them under `attacks` (weapons) and `equipment`.
   review and commit the `data/` diff together with the code. New normalize behaviour gets a case in
   `tests/fixture.py` (invented values only, never real game data) and a unit test. `data/` must always be regenerated, never hand-edited.
 - After changing the plugin: bump `PluginVersion` in `Plugin.cs`, then `make check` (needs the runner).
+- Mechanics pages (`site/mechanics/*.md`, front matter `title/summary/order/sources`): rendered by `scripts/mechanics.py`
+  (small Markdown subset; `{{directive}}` lines embed generated tables/charts that read `data/`, registered in
+  `mech_blocks()` in `build-site.py`; `[text](item:Id)`, `creature:`, `piece:`, `effect:`, `mechanic:page` links are
+  resolved and checked). Every claim must be checked in the decompiled code and cite the method; mark anything
+  inferred with a blockquote starting `Inferred`. Formulas live in `mechanics.py` as functions with tests in
+  `tests/test_mechanics.py`; charts are inline SVG built there from the same functions. The pages replaced the old notes in
+  `docs/mechanics.md`, which keeps only topics without a page. Interactive calculators: put plain JS in `site/calc/NAME.js`
+  and put `{{calculator NAME}}` on the page (mount point `<div data-calc="NAME">`); none exist yet (#13).
 - Answering game-mechanics questions: read the decompiled code (`make decompile`, `.cache/decompiled/`) and
   cite file/method. Record verified findings in `docs/mechanics.md`. Data values come from `data/`, behavior
   from code; say so when something is inferred rather than verified in-game.

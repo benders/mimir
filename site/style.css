@@ -96,3 +96,42 @@ kbd { border: 1px solid var(--line); border-radius: 4px; padding: 0 5px; backgro
   .hero h1 { font-size: 22px; }
   .big { width: 48px; height: 48px; }
 }
+
+/* mechanics pages */
+.mech { max-width: 760px; }
+.mech h1, .mech h2, .mech h3 { scroll-margin-top: 64px; }
+.mech p, .mech li { line-height: 1.55; }
+.mech ul, .mech ol { padding-left: 22px; }
+.mech li { margin: 3px 0; }
+.mech pre { overflow-x: auto; padding: 10px 12px; background: var(--panel); border: 1px solid var(--line);
+  border-radius: 6px; font-size: 13px; }
+.mech code { font: 13px ui-monospace, SFMono-Regular, Menlo, monospace; background: var(--panel); padding: 0 4px;
+  border-radius: 3px; }
+.mech pre code { background: none; padding: 0; }
+.formula { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: .93em; padding: 0 4px;
+  background: var(--accent-soft); border-radius: 3px; white-space: nowrap; }
+.mech blockquote { margin: 12px 0; padding: 2px 12px; border-left: 3px solid var(--accent); background: var(--panel); }
+.mech blockquote.inferred { border-left-style: dashed; color: var(--muted); }
+.mech details { margin: 8px 0; }
+.mech summary { cursor: pointer; color: var(--muted); padding: 3px 0; }
+.cite { margin-top: 32px; padding-top: 12px; border-top: 1px solid var(--line); color: var(--muted); font-size: 13px;
+  line-height: 1.7; }
+.mechlist { list-style: none; padding: 0; margin: 16px 0; }
+.mechlist li { padding: 8px 0; border-bottom: 1px solid var(--line); }
+.mechlist a { display: block; font-weight: 600; }
+.mechlist span { color: var(--muted); }
+
+/* charts: inline SVG from scripts/mechanics.py, colours from the theme */
+.chartfig { margin: 16px 0; }
+.chartfig figcaption { color: var(--muted); font-size: 13px; margin-top: 4px; }
+.chart { display: block; width: 100%; max-width: 520px; height: auto; }
+.chart text { font-size: 12.5px; fill: var(--muted); }
+.chart .axt { fill: var(--text); }
+.chart .lbl { font-weight: 600; }
+.chart .grid { stroke: var(--line); stroke-width: 1; }
+.chart .axis { stroke: var(--muted); stroke-width: 1; }
+.chart .ln { fill: none; stroke-width: 1.75; stroke-linejoin: round; }
+.chart .s1 { stroke: var(--accent); } .chart .dot.s1, .chart .t1 { fill: var(--accent); }
+.chart .s2 { stroke: var(--immune); stroke-dasharray: 6 3; } .chart .dot.s2, .chart .t2 { fill: var(--immune); }
+.chart .s3 { stroke: var(--resist); stroke-dasharray: 2 3; } .chart .dot.s3, .chart .t3 { fill: var(--resist); }
+.chart .dot.s1, .chart .dot.s2, .chart .dot.s3 { stroke: none; }

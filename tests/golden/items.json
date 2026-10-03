@@ -17,6 +17,20 @@
   }
  },
  {
+  "id": "Buckler",
+  "name": "Test Buckler",
+  "type": "Shield",
+  "icon": "Helmet",
+  "weight": 1.0,
+  "stack": 1,
+  "maxQuality": 3,
+  "skill": "Blocking",
+  "backstab": 1,
+  "block": 20,
+  "blockPerLevel": 5,
+  "parryBonus": 2
+ },
+ {
   "id": "Charm",
   "name": "Lucky Charm",
   "type": "Material",

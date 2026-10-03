@@ -1,35 +1,15 @@
 # Game mechanics notes
 
-Findings from reading the decompiled game code (`make decompile`, Valheim 1.0.16). Source material for the
-site's mechanics pages. Re-check against the decompiled code after major game updates.
+Findings from reading the decompiled game code (`make decompile`, Valheim 1.0.16). Re-check against the decompiled
+code after major game updates.
 
-## Blocking (`Humanoid.BlockAttack`, `HitData`, `ItemDrop.ItemData.GetBlockPower`)
-
-- Block power `B = (block + blockPerLevel × (quality − 1)) × (1 + 0.5 × skill/100)`. Skill is the floored
-  Blocking level (status effects can modify it; none do for Blocking in vanilla), clamped to 0–100.
-- Parry (`timedBlockBonus > 1`, within 0.25 s of raising the shield): `B ×= timedBlockBonus`. Tower shields
-  have no bonus and can't parry.
-- The shield's own damage modifiers apply to the hit first (Serpent Scale: pierce Resistant = ×0.5).
-- Blockable damage `D` = blunt + slash + pierce + fire + frost + lightning + poison + spirit (+ nonPlayer).
-- Damage that gets through uses the armor formula: `D²/(4B)` if `D ≤ 2B`, else `D − B`. Never zero.
-- Stamina: `10 × clamp01((D − through)/B)`; a perfect parry costs the player's `m_perfectBlockStaminaDrain` (0).
-- The damage that gets through adds to stagger; the player is staggered (guard broken, full hit taken) at
-  `maxHP × 0.4`. Running out of stamina also fails the block.
-- Durability loss per block: `useDurabilityDrain × D/B`.
-- Parry force (knockback) depends only on shield level, not skill. Blocking XP: +1 per block, +2 per parry.
-
-## Creature drops (`CharacterDrop.GenerateDropList`)
-
-- Level multiplier `m = 2^(level − 1)` (1★ = level 2). `levelMultiplier` drops scale both chance and amount by m.
-- Amount uses `Random.Range(min, max)` (int, max exclusive) at default resource rate.
-- **Pseudo-random drops**: if effective chance `p ≤ 0.3` and the `NoPseudoDrops` global key is unset, a
-  per-item countdown replaces the roll. First countdown is uniform in [0, 2/p − 1], after a drop it's uniform
-  in [0, 2/p]; it decrements per kill and drops at ≤ 0. Same long-run rate, but at most 2/p kills between
-  drops. The counter is a static dictionary keyed by item name and resets if the chance changes.
-- Drops are rolled by the **owner** of the creature's ZDO (`CheckDeath` runs only when `IsOwner()`; damage
-  RPCs are forwarded to the owner). On a dedicated server the server never owns creatures near players (its
-  reference position is parked off-map in `Game.FixedUpdate`), so a **client** rolls the drop, and the
-  counters are per client process (reset on relog).
+**Where things live.** The site's Mechanics section (`site/mechanics/*.md`, built by `scripts/build-site.py`) is the
+source of truth for the topics it covers: blocking, drops, creature levels, damage types and armor, item upgrades.
+Those pages state every formula with its decompiled method and the game version, and replace the notes that used to be
+in this file (a few of those notes were wrong or incomplete: the Player prefab's block stamina drain is 10 although
+the field default is 25, shields without a parry bonus above 1 are not only the tower shields, and creature health
+scales with level). This file keeps only what has no page yet. When a topic gets a page, move its notes there and
+delete them here.
 
 ## Where creatures spawn
 
@@ -44,26 +24,6 @@ site's mechanics pages. Re-check against the decompiled code after major game up
 - Offspring: `Procreation.m_offspring` (Hen lays `ChickenEgg`), eggs hatch via `EggGrow.m_grownPrefab`.
 - Some creature prefabs (Hen, Leech_cave, Troll_sleeping, Deer_White, ...) aren't referenced by any of these; they
   look unused in vanilla worldgen (inferred from the dump, not verified in-game).
-
-## Damage modifiers
-
-- `Ignore` means the damage type does nothing: `HitData.ApplyModifier` returns 0, and a later modifier can't override
-  it (`DamageModifiers.ShouldOverride`). Almost every creature ignores `chop` and `pickaxe`; Jotun warriors ignore
-  `spirit`, ShadowPerson everything (#27).
-
-## Creature attacks
-
-- Damage scales by level: `1 + 0.5 × (level − 1)` (`Attack.cs`).
-
-## Item quality and upgrade costs (`ItemDrop.ItemData`, `Piece.Requirement.GetAmount`, `Recipe`)
-
-- Damage, armor, durability, block power: `base + (quality − 1) × perLevel` (`GetDamage`, `GetArmor`,
-  `GetMaxDurability`, `GetBaseBlockPower`; world level adds more on top).
-- Resource cost for quality `q`: `q = 1` → `m_amount`; `q = 2, 3` → `(q − 1) × perLevel`; `q ≥ 4` →
-  `(4 + (q − 4) / 2) × perLevel`, floored. So quality 4 costs 4 × perLevel, not 3×.
-- Required station level: `max(1, m_minStationLevel) + q − 1` (`GetRequiredStationLevel`).
-- `m_upgraderResource` requirements (battle idols) only count at a station with `m_upgrader` (the
-  `UpgradeStation` prefab), which can also upgrade past `m_maxQuality` (`InventoryGui`). Not verified in-game.
 
 ## Hildir's quests (`Trader.m_useItems`, `CharacterDrop`, `Door.m_keyItem`)
 

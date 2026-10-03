@@ -5,7 +5,8 @@
         # default: data/ + .cache/dump/public/icons -> .cache/site/public
 
 One page per item, creature, piece and status effect, plus index pages and a client-side search
-index (search.json, used by site/search.js). Derived relations (crafted from, used in, dropped by,
+index (search.json, used by site/search.js). Hand-written Markdown pages in site/mechanics/ become the
+Mechanics section (scripts/mechanics.py: renderer, formulas, charts; embedded tables read data/). Derived relations (crafted from, used in, dropped by,
 crafted at) are computed here, not stored in data/. Every page sets <base href> to the site root,
 so all links are root-relative and the site works from any sub-path or straight from disk.
 
@@ -25,10 +26,14 @@ from pathlib import Path
 from urllib.parse import quote, unquote
 
 ROOT = Path(__file__).resolve().parent.parent
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+import mechanics  # noqa: E402  (renderer, charts and formulas for the Mechanics section)
+
 DATA = Path(sys.argv[1]) if len(sys.argv) > 1 else ROOT / "data"
 ICONS = Path(sys.argv[2]) if len(sys.argv) > 2 else ROOT / ".cache/dump/public/icons"
 OUT = Path(sys.argv[3]) if len(sys.argv) > 3 else ROOT / ".cache/site/public"
 STATIC = ROOT / "site"
+MECH_SRC = STATIC / "mechanics"  # hand-written Markdown pages, see scripts/mechanics.py
 
 
 def load(name: str):
@@ -101,6 +106,24 @@ def pct(v) -> str:
 
 def rng(lo, hi) -> str:
     return num(lo) if lo == hi else f"{num(lo)}–{num(hi)}"
+
+
+def drop_amount(d: dict) -> str:
+    """Drop amounts are Random.Range(min, max) on ints, whose upper bound is exclusive (CharacterDrop.GenerateDropList)."""
+    lo, hi = d.get("min", 1), d.get("max", 1)
+    return rng(lo, hi - 1 if hi > lo else hi)
+
+
+def stars(lo, hi) -> str:
+    """Spawn data holds creature levels; stars = level - 1 (Character.SetLevel, 1 = no star)."""
+    return rng(max(0, lo - 1), max(0, hi - 1))
+
+
+def mech_link(page_id: str, text: str) -> str:
+    """Link to a mechanics page; plain text if the page has no source (so data pages never link to nothing)."""
+    if not (MECH_SRC / f"{page_id}.md").is_file():
+        return esc(text)
+    return f'<a href="mechanics/{page_id}.html">{esc(text)}</a>'
 
 
 # --- entity registry and links --------------------------------------------------------------
@@ -420,7 +443,7 @@ def home_biome(cid: str) -> str | None:
 written: list[Path] = []
 
 
-def page(path: str, title: str, body: str, kind_label: str = "") -> None:
+def page(path: str, title: str, body: str, kind_label: str = "", scripts=()) -> None:
     depth = path.count("/")
     base = "../" * depth or "./"
     doc = f"""<!doctype html>
@@ -432,11 +455,11 @@ def page(path: str, title: str, body: str, kind_label: str = "") -> None:
 <title>{esc(title)} · Mimir</title>
 <link rel="stylesheet" href="style.css">
 <script src="search.js" defer></script>
-</head>
+{"".join(f'<script src="{esc(x)}" defer></script>' for x in scripts)}</head>
 <body>
 <header class="top">
   <a class="brand" href="index.html">Mimir</a>
-  <nav>{"".join(f'<a href="{d}/index.html">{d.capitalize()}</a>' for d in KINDS.values())}</nav>
+  <nav>{"".join(f'<a href="{d}/index.html">{d.capitalize()}</a>' for d in KINDS.values())}<a href="mechanics/index.html">Mechanics</a></nav>
   <div class="search"><input id="q" type="search" placeholder="Search…  ( / )" autocomplete="off" aria-label="Search">
   <ol id="results" hidden></ol></div>
 </header>
@@ -600,9 +623,15 @@ def item_page(i: dict) -> None:
 
     body = header(i, "item", esc(TYPE_LABELS.get(t, words(t))), i.get("description"))
     body += kv(facts)
-    body += section("Stats", quality_table(i) + kv(combat))
+    stat_note = ""
+    if t == "Shield" or (t in WEAPONS and i.get("block") and i.get("skill") == "Blocking"):
+        stat_note = f'<p class="note">How block power, parrying and stagger work: {mech_link("blocking", "Blocking")}.</p>'
+    elif t in ARMOR and i.get("armor"):
+        stat_note = (f'<p class="note">How armor reduces damage: {mech_link("damage-types", "Damage types and resistances")}.</p>')
+    body += section("Stats", quality_table(i) + kv(combat) + stat_note)
     if i.get("damageModifiers"):
-        body += section("Resistances", modifiers_table(i["damageModifiers"]))
+        body += section("Resistances", modifiers_table(i["damageModifiers"]) +
+                        f'<p class="note">What the levels mean: {mech_link("damage-types", "Damage types and resistances")}.</p>')
     if i.get("food"):
         f = i["food"]
         body += section("Food", kv([("Health", num(f.get("health", 0))), ("Stamina", num(f.get("stamina", 0))),
@@ -646,9 +675,11 @@ def item_page(i: dict) -> None:
               for t, o in sold_by[i["id"]]]
     body += section("Sold by", table(["Trader", "Price", "After", "Where"], offers))
 
-    drops = [[link("creature", cid), rng(d.get("min", 1), d.get("max", 1)), pct(d.get("chance", 1))]
+    drops = [[link("creature", cid), drop_amount(d), pct(d.get("chance", 1))]
              for cid, d in dropped_by[i["id"]]]
-    body += section("Dropped by", table(["Creature", "Amount", "Chance"], drops))
+    body += section("Dropped by", table(["Creature", "Amount", "Chance"], drops) +
+                    (f'<p class="note">Amounts and chances are for an unstarred creature: {mech_link("drops", "Drops")}.</p>'
+                     if drops else ""))
     found = {}
     for s, amount in found_in[i["id"]]:
         found.setdefault((source_name(s), s["kind"], amount, source_places(s)), None)
@@ -673,13 +704,17 @@ def creature_page(c: dict) -> None:
     facts = [("Biome", ", ".join(esc(BIOMES[b]) for b in creature_biomes(c["id"]))),
              ("Faction", esc(words(c["faction"])) if c.get("faction") else None),
              ("Health", num(c["health"])),
+             ("Stars", f'health ×(1 + stars), damage ×(1 + 0.5 × stars): {mech_link("creature-levels", "Creature levels")}'
+              if not c.get("boss") else None),
              ("Speed", ", ".join(f"{k} {num(v)}" for k, v in sp.items())),
              ("Tameable", "yes" if c.get("tameable") else None),
              ("Afraid of fire", "yes" if c.get("afraidOfFire") else None),
              ("Avoids water", "yes" if c.get("avoidWater") else None),
              ("Group", esc(c["group"]) if c.get("group") else None)]
     body = header(c, "creature", sub) + kv(facts)
-    body += section("Resistances", modifiers_table(c.get("damageModifiers"), hide_tools=True))
+    mods = modifiers_table(c.get("damageModifiers"), hide_tools=True)
+    body += section("Resistances", mods + (f'<p class="note">What the levels mean: '
+                                           f'{mech_link("damage-types", "Damage types and resistances")}.</p>' if mods else ""))
     attacks = []
     for a in c.get("attacks", []):
         w = ITEMS[a]
@@ -692,11 +727,17 @@ def creature_page(c: dict) -> None:
     body += section("Equipment", reflist(gear) + ('<p class=note>Enemy copies of player gear; '
                                                    'their stats can differ from the items linked here.</p>'
                                                    if any(ITEMS[x].get("enemyOnly") for x in c.get("equipment", [])) else ""))
-    drops = [[link("item", d["item"]), rng(d.get("min", 1), d.get("max", 1)), pct(d.get("chance", 1))]
-             for d in c.get("drops", [])]
-    body += section("Drops", table(["Item", "Amount", "Chance"], drops))
+    drops = [[link("item", d["item"]) + (' <span class="qty">×stars</span>' if d.get("levelMultiplier") else "")
+              + (' <span class="qty">×players</span>' if d.get("onePerPlayer") else ""),
+              drop_amount(d), pct(d.get("chance", 1))] for d in c.get("drops", [])]
+    body += section("Drops", table(["Item", "Amount", "Chance"], drops) + (
+        f'<p class="note">Drops marked ×stars grow with the creature\'s stars, and low chances are pseudo-random: '
+        f'{mech_link("drops", "Drops")}.</p>' if drops else ""))
     body += spawn_sections(spawns_of[c["id"]])
     page(href("creature", c["id"]), name_of("creature", c["id"]), body, '<a href="creatures/index.html">Creatures</a>')
+
+
+STARS_TH = mech_link("creature-levels", "Stars")
 
 
 def biome_list(s: dict) -> str:
@@ -724,8 +765,8 @@ def spawn_sections(spawns: list[dict]) -> str:
             extra.append("weather: " + ", ".join(esc(e) for e in s["requiredEnvironments"]))
         if s.get("huntPlayer"):
             extra.append("hunts player")
-        rows.append([biome_list(s), when, rng(*s["levels"]), rng(*s["groupSize"]), "; ".join(extra)])
-    out += section("Spawns", table(["Biome", "Time", "Level", "Group", "Notes"], rows))
+        rows.append([biome_list(s), when, stars(*s["levels"]), rng(*s["groupSize"]), "; ".join(extra)])
+    out += section("Spawns", table(["Biome", "Time", STARS_TH, "Group", "Notes"], rows))
 
     rows = []
     for s in by["location"] + by["dungeon"]:
@@ -737,13 +778,13 @@ def spawn_sections(spawns: list[dict]) -> str:
         if s.get("summon"):
             sm = s["summon"]
             notes.append("summoned with " + (link("item", sm["item"], sm.get("amount")) if sm.get("item") else "an offering"))
-        rows.append([esc(pretty_id(s["location"])), biome_list(s), rng(*s["levels"]) if s.get("levels") else "",
+        rows.append([esc(pretty_id(s["location"])), biome_list(s), stars(*s["levels"]) if s.get("levels") else "",
                      "; ".join(notes)])
-    out += section("Locations", table(["Location", "Biome", "Level", "Notes"], rows))
+    out += section("Locations", table(["Location", "Biome", STARS_TH, "Notes"], rows))
 
-    rows = [[esc(pretty_id(s["event"])) + "".join(f" ({n})" for n in as_variant(s)), biome_list(s), rng(*s["levels"]),
+    rows = [[esc(pretty_id(s["event"])) + "".join(f" ({n})" for n in as_variant(s)), biome_list(s), stars(*s["levels"]),
              rng(*s["groupSize"]), esc(s.get("message") or "")] for s in by["raid"]]
-    out += section("Raids", table(["Event", "Biome", "Level", "Group", "Message"], rows))
+    out += section("Raids", table(["Event", "Biome", STARS_TH, "Group", "Message"], rows))
 
     born = [link("creature", s["parent"]) for s in by["offspring"] + by["growup"]] + \
            [link("item", s["item"]) for s in by["egg"]]
@@ -822,6 +863,209 @@ def effect_page(e: dict) -> None:
     page(href("effect", e["id"]), name_of("effect", e["id"]), body, '<a href="effects/index.html">Status effects</a>')
 
 
+# --- mechanics pages ------------------------------------------------------------------------
+# Hand-written Markdown in site/mechanics/*.md (format and directives: scripts/mechanics.py). Generated tables are
+# embedded with {{directives}} that read data/, so values never go stale; the prose and formulas are the part that
+# was verified against the decompiled game code.
+
+MECH_PAGES: list[dict] = []  # {id, title, summary, order}, filled by mechanics_pages(), used by the index and search
+
+
+def mech_resolve(scheme: str, id_: str):
+    if scheme == "mechanic":
+        return f"mechanics/{id_}.html" if (MECH_SRC / f"{id_}.md").is_file() else None
+    id_ = MERGED[scheme].get(id_, id_)
+    return href(scheme, id_) if has_page(scheme, id_) else None
+
+
+def block_shields() -> str:
+    """Every shield with its block stats and the block power it gives at skill 0 and 100 (parry in the last column)."""
+    rows = []
+    for i in sorted((x for x in ITEMS.values() if x["type"] == "Shield" and has_page("item", x["id"])),
+                    key=lambda x: (x.get("block", 0), x["id"])):
+        base, per, q = i.get("block", 0), i.get("blockPerLevel", 0), i.get("maxQuality", 1)
+        parry = i.get("parryBonus", 0)
+        p = parry if parry > 1 else 1
+        rows.append([link("item", i["id"]), num(base), num(per), f"×{num(parry)}" if parry > 1 else "none",
+                     num(mechanics.block_power(base, per, 1, 0)), num(mechanics.block_power(base, per, 1, 100)),
+                     num(mechanics.block_power(base, per, q, 100)),
+                     num(mechanics.block_power(base, per, q, 100, p)) if parry > 1 else "–"])
+    return table(["Shield", "Block", "Per level", "Parry bonus", "Power, q1 skill 0", "q1 skill 100",
+                  "max quality, skill 100", "…parried"], rows, "num")
+
+
+def block_resist_creatures() -> str:
+    """Creatures with Immune, Very resistant or Very weak damage types (Ignore, which every creature has for chop and
+    pickaxe, is left out, as on creature pages)."""
+    cols = [("Immune", "Immune"), ("VeryResistant", "Very resistant"), ("VeryWeak", "Very weak")]
+    rows = []
+    for c in sorted(CREATURES.values(), key=lambda x: name_of("creature", x["id"]).lower()):
+        if not has_page("creature", c["id"]):
+            continue
+        mods = c.get("damageModifiers") or {}
+        cells = [esc(", ".join(k for k, v in mods.items() if v == key)) for key, _ in cols]
+        if any(cells):
+            rows.append([link("creature", c["id"])] + cells)
+    return table(["Creature"] + [label for _, label in cols], rows)
+
+
+def block_resist_gear() -> str:
+    rows = [[link("item", i["id"]), modifiers_table(i["damageModifiers"])]
+            for i in sorted(ITEMS.values(), key=lambda x: name_of("item", x["id"]).lower())
+            if i.get("damageModifiers") and has_page("item", i["id"])]
+    return table(["Item", "Damage modifiers"], rows)
+
+
+def block_star_spawns() -> str:
+    """The highest star count each creature can spawn with, from its spawn entries (spawn data holds levels)."""
+    top = {}
+    for s in SPAWNS:
+        if s.get("levels") and has_page("creature", MERGED["creature"].get(s["creature"], s["creature"])):
+            cid = MERGED["creature"].get(s["creature"], s["creature"])
+            top[cid] = max(top.get(cid, 0), s["levels"][1] - 1)
+    by = defaultdict(list)
+    for cid, n in top.items():
+        if n >= 1:
+            by[n].append(cid)
+    out = ""
+    for n in sorted(by):
+        names = reflist(link("creature", c) for c in sorted(by[n], key=lambda x: name_of("creature", x).lower()))
+        body = (f"<summary>Up to {n} star{'s' if n > 1 else ''}: {len(by[n])} "
+                f"creature{'s' if len(by[n]) > 1 else ''}</summary>{names}")
+        out += f"<details{'' if len(by[n]) > 20 else ' open'}>{body}</details>"
+    return out
+
+
+def block_star_odds() -> str:
+    """Star odds for the spawn ranges that occur in the data (levels min-max) at the default 10% and SpawnArea's 15%."""
+    ranges = sorted({tuple(x["levels"]) for x in SPAWNS if x.get("levels") and x["levels"][1] > 1 and x["levels"][0] >= 1})
+    rows = []
+    for lo, hi in ranges:
+        for chance in (10, 15):
+            dist = mechanics.level_distribution(chance, lo, hi)
+            rows.append([f"{lo - 1}–{hi - 1} stars", f"{chance}%"] +
+                        [pct(dist[lv]) if lv in dist else "–" for lv in range(1, 6)])
+    return table(["Spawn range", "Chance per star"] + [f"{n} stars" if n != 1 else "1 star" for n in range(0, 5)], rows, "num")
+
+
+def block_guaranteed_stars() -> str:
+    """Spawn entries whose minimum level is above 1: always starred. One row per creature, source kind and star range."""
+    found: dict[tuple, list[str]] = {}
+    for s in SPAWNS:
+        if s.get("levels") and s["levels"][0] > 1:
+            cid = MERGED["creature"].get(s["creature"], s["creature"])
+            if not has_page("creature", cid):
+                continue
+            where = {"raid": pretty_id(s.get("event", "")), "world": ", ".join(BIOMES.get(b, words(b)) for b in s.get("biomes", []))
+                     }.get(s["source"], pretty_id(s.get("location", "")))
+            found.setdefault((name_of("creature", cid).lower(), cid, s["source"], stars(*s["levels"])), []).append(where)
+    rows = []
+    for (_, cid, source, st), wheres in sorted(found.items()):
+        wheres = list(dict.fromkeys(wheres))
+        text = ", ".join(wheres[:3]) + (f" and {len(wheres) - 3} more" if len(wheres) > 3 else "")
+        rows.append([link("creature", cid), esc(source), esc(text), st])
+    return table(["Creature", "Source", "Where", "Stars"], rows)
+
+
+def block_pseudo_drops() -> str:
+    """Drops whose base chance is 0.3 or less, the ones that use the pseudo-random countdown for an unstarred kill."""
+    by = defaultdict(list)
+    for c in CREATURES.values():
+        if not has_page("creature", c["id"]):
+            continue
+        for d in c.get("drops", []):
+            if d.get("chance", 1) <= 0.3:
+                by[d["item"]].append((c["id"], d["chance"]))
+    rows = [[link("item", item), " ".join(f'{link("creature", c)}<span class="qty">{pct(p)}</span>' for c, p in sorted(v))]
+            for item, v in sorted(by.items(), key=lambda kv: name_of("item", kv[0]).lower())]
+    n = sum(len(v) for v in by.values())
+    return f"<details><summary>{n} drops of {len(rows)} items have a base chance of 30% or less</summary>" + \
+        table(["Item", "Creatures and chance"], rows) + "</details>" if rows else ""
+
+
+def block_pseudo_table() -> str:
+    rows = [[pct(p), str(mechanics.pseudo_gap_max(p)), pct(mechanics.pseudo_rate(p))] for p in (0.05, 0.1, 0.25, 0.3)]
+    return table(["Base chance", "Most kills between drops", "Long-run drops per kill"], rows, "num")
+
+
+def block_drops_example() -> str:
+    """The Troll's drop list at 0, 1 and 2 stars, computed with the rules on the Drops page from data/."""
+    c = CREATURES.get("Troll")
+    if not c or not c.get("drops"):
+        return ""
+    rows = []
+    for d in c["drops"]:
+        cells = []
+        for st in range(3):
+            n = mechanics.star_multipliers(st)["drops"] if d.get("levelMultiplier") else 1
+            p = min(1.0, d.get("chance", 1) * n)
+            pseudo = d.get("chance", 1) * n <= 0.3
+            lo, hi = d.get("min", 1), d.get("max", 1)
+            amt = rng(lo * n, (hi - 1 if hi > lo else hi) * n)
+            cells.append(f"{amt} at {pct(p)}" + (" (pseudo-random)" if pseudo else ""))
+        rows.append([link("item", d["item"])] + cells)
+    return table(["Item", "0 stars", "1 star", "2 stars"], rows)
+
+
+def block_upgrade_costs() -> str:
+    rows = [[str(q), "base amount" if q == 1 else f"{num(mechanics.upgrade_cost_multiplier(q))} × per level",
+             f"{num(mechanics.upgrade_cost_multiplier(q))}" if q > 1 else "–", f"+{q - 1}"] for q in range(1, 7)]
+    return table(["Quality", "Cost of a resource", "Multiplier", "Station level"], rows, "num")
+
+
+def block_upgrade_example() -> str:
+    item = next((ITEMS[x] for x in ("SwordIron",) if x in ITEMS), None)
+    rec = next((r for r in RECIPES if item and r.get("item") == item["id"]), None)
+    if not rec:
+        return ""
+    cols = [(r, max(1, rec.get("stationLevel", 1))) for r in rec["resources"] if not r.get("upgrader")]
+    q_max = item.get("maxQuality", 1)
+    rows = [[str(q), str(cols[0][1] + q - 1)] + [num(req_amount(r, q)) for r, _ in cols] for q in range(1, q_max + 1)]
+    head = ["Quality", "Station level"] + [esc(name_of("item", r["item"])) for r, _ in cols]
+    return (f'<p>Example, {link("item", item["id"])} (from the recipe in data/): each resource column is '
+            f'<code>amount</code> then <code>perLevel</code> times the multiplier.</p>' + table(head, rows, "num"))
+
+
+def mech_blocks() -> dict:
+    return {"shields": block_shields, "resistant-creatures": block_resist_creatures, "resistant-gear": block_resist_gear,
+            "star-spawns": block_star_spawns, "star-odds": block_star_odds, "guaranteed-stars": block_guaranteed_stars,
+            "pseudo-drops": block_pseudo_drops, "pseudo-table": block_pseudo_table,
+            "drops-example": block_drops_example, "upgrade-costs": block_upgrade_costs,
+            "upgrade-example": block_upgrade_example,
+            "chart": lambda name: mechanics.CHARTS[name]()}
+
+
+def mechanics_pages() -> None:
+    sources = sorted(MECH_SRC.glob("*.md")) if MECH_SRC.is_dir() else []
+    for f in sources:
+        meta, text = mechanics.parse_front_matter(f.read_text(encoding="utf-8"))
+        ctx = mechanics.Ctx(mech_resolve, mech_blocks())
+        try:
+            content = mechanics.render(text, ctx)
+        except ValueError as e:
+            raise SystemExit(f"{f.name}: {e}")
+        cites = [x.strip() for x in meta.get("sources", "").split(";") if x.strip()]
+        cite = (f'<aside class="cite"><b>Verified</b> against the decompiled game code of Valheim {esc(META["gameVersion"])}: '
+                + ", ".join(f"<code>{esc(x)}</code>" for x in cites) + ". "
+                'Statements marked <i>Inferred</i> are reasoning from the code or data, not checked in the game.</aside>'
+                if cites else "")
+        title = meta.get("title", f.stem)
+        MECH_PAGES.append({"id": f.stem, "title": title, "summary": meta.get("summary", ""),
+                           "order": int(meta.get("order", 99))})
+        body = (f'<h1>{esc(title)}</h1><p class="sub">{esc(meta.get("summary", ""))}</p>'
+                f'<div class="mech">{content}</div>{cite}')
+        page(f"mechanics/{f.stem}.html", title, body, '<a href="mechanics/index.html">Mechanics</a>', ctx.scripts)
+    MECH_PAGES.sort(key=lambda p: (p["order"], p["title"]))
+    items = "".join(f'<li><a href="mechanics/{p["id"]}.html">{esc(p["title"])}</a><span>{esc(p["summary"])}</span></li>'
+                    for p in MECH_PAGES)
+    body = (f'<h1>Mechanics</h1><p class="sub">How the game works, for Valheim {esc(META["gameVersion"])}.</p>'
+            f'<p>Hand-written pages. Every formula was checked against the decompiled game code and names the method it '
+            f'comes from; anything inferred rather than verified is marked. Tables of creatures, shields and items on '
+            f'these pages are generated from the same game data as the rest of the site.</p>'
+            f'<ul class="mechlist">{items}</ul>')
+    page("mechanics/index.html", "Mechanics", body)
+
+
 # --- indexes, search, home ------------------------------------------------------------------
 
 def grid(kind: str, ids) -> str:
@@ -867,6 +1111,7 @@ def index_pages() -> None:
 
     counts = {"items": len(items), "creatures": len(CREATURES), "pieces": len(PIECES), "effects": len(EFFECTS)}
     cards = "".join(f'<li><a href="{d}/index.html"><b>{n}</b>{d}</a></li>' for d, n in counts.items())
+    cards += f'<li><a href="mechanics/index.html"><b>{len(MECH_PAGES)}</b>mechanics</a></li>'
     body = (f'<div class="home"><h1>Mimir</h1><p class="sub">A Valheim reference, rebuilt from the game data on '
             f'every update. Valheim {esc(META["gameVersion"])}.</p><p class="hint">Press <kbd>/</kbd> to search.</p>'
             f'<ul class="cards">{cards}</ul></div>')
@@ -891,13 +1136,18 @@ def search_index() -> None:
     for e in entries:
         if seen[(e[0], e[4])] > 1:
             e[4] = f"{e[4]} · {e[1]}"
+    entries += [[p["title"], p["id"], f"mechanics/{p['id']}.html", "", "Mechanics"] for p in MECH_PAGES]
     entries.sort(key=lambda x: (x[0].lower(), x[2]))
     (OUT / "search.json").write_text(json.dumps(entries, ensure_ascii=False, separators=(",", ":")), encoding="utf-8")
 
 
 def copy_assets() -> None:
     for f in STATIC.iterdir():
-        shutil.copy2(f, OUT / f.name)
+        if f.is_dir():
+            if f != MECH_SRC:  # mechanics/ holds page sources, not assets
+                shutil.copytree(f, OUT / f.name)
+        else:
+            shutil.copy2(f, OUT / f.name)
     used = {e.get("icon") for coll in (ITEMS, PIECES, EFFECTS) for e in coll.values()} & HAVE_ICONS
     (OUT / "icons").mkdir(exist_ok=True)
     for name in used:
@@ -935,6 +1185,7 @@ def main() -> int:
             piece_page(p)
     for e in EFFECTS.values():
         effect_page(e)
+    mechanics_pages()
     index_pages()
     search_index()
     copy_assets()
