@@ -19,8 +19,9 @@ freezes the animation for 0.15 s. Skills and status effects don't change attack 
 - crossbow: shot time = fire animation + reload + "reload done" animation (1.15 s), reload = m_reloadTime × (1 − 0.5 × skill / 100)
 - each hit rolls × [n − 0.15, n + 0.15], clamped to [0, 1], n = 0.4 + 0.6 × skill / 100 (× 0.85–1 at skill 100)
 
-The table uses max quality, the sum of the combat damage types (chop and pickaxe left out; creatures ignore them) and
-a skill roll of 1, so every hit connects at full damage. Staffs that fire in bursts or beams and thrown spears (the
+The table uses max quality, a skill roll of 1 (every hit connects at full damage) and the sum of the weapon's damage
+types, leaving out any type more than half of all creatures are immune to or ignore: chop and pickaxe, and spirit,
+which is marked *. Staffs that fire in bursts or beams and thrown spears (the
 spear has to be picked up again) aren't listed. Nor is the Butcher Knife, which only hits tamed creatures.
 
 > Inferred: times are computed from the animator data, not measured in game; transition blending and input latency

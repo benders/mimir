@@ -146,13 +146,24 @@ def adrenaline_drain_time(max_a: float, start: float, degen_keys: list, steps: i
     return sum(h / curve(degen_keys, (k + 0.5) * h / max_a) for k in range(steps))
 
 
-# Damage types a creature takes; nearly every creature ignores chop and pickaxe (Character m_damageModifiers).
-COMBAT_DAMAGE = ("damage", "blunt", "slash", "pierce", "fire", "frost", "lightning", "poison", "spirit")
+DAMAGE_TYPES = ("damage", "blunt", "slash", "pierce", "chop", "pickaxe", "fire", "frost", "lightning", "poison", "spirit")
+TOOL_DAMAGE = frozenset({"chop", "pickaxe"})  # for trees and rocks; nearly every creature ignores them
 
 
-def hit_damage(damages: dict) -> float:
-    """One hit's damage against a creature at full skill roll: the weapon's combat damage types summed."""
-    return sum(damages.get(k, 0) for k in COMBAT_DAMAGE)
+def ignored_damage(creatures: list[dict]) -> dict[str, tuple[int, int]]:
+    """Damage types more than half of the creatures are Immune to or Ignore (data/creatures.json damageModifiers),
+    as {type: (count, total)}. DPS leaves them out."""
+    out = {}
+    for t in DAMAGE_TYPES:
+        n = sum(1 for c in creatures if (c.get("damageModifiers") or {}).get(t) in ("Immune", "Ignore"))
+        if creatures and n * 2 > len(creatures):
+            out[t] = (n, len(creatures))
+    return out
+
+
+def hit_damage(damages: dict, skip=TOOL_DAMAGE) -> float:
+    """One hit's damage against a creature at full skill roll: the weapon's damage types summed, less `skip`."""
+    return sum(v for k, v in damages.items() if k in DAMAGE_TYPES and k not in skip)
 
 
 def skill_roll(skill: float) -> tuple[float, float]:

@@ -47,6 +47,9 @@ CREATURES = {c["id"]: c for c in load("creatures")}
 PIECES = {p["id"]: p for p in load("pieces")}
 EFFECTS = {e["id"]: e for e in load("status_effects")}
 PLAYER = load("player")
+# Damage types most creatures are immune to (chop, pickaxe, spirit): DPS leaves them out, with a note for the
+# non-tool ones (mechanics.ignored_damage)
+IGNORED = mechanics.ignored_damage([c for c in CREATURES.values() if not c.get("unobtainable")])
 RECIPES = load("recipes")
 SPAWNS = load("spawns")
 SOURCES = {s["id"]: s for s in load("sources")}
@@ -588,10 +591,13 @@ def quality_table(i: dict) -> str:
     dmg, dpl = i.get("damages", {}), i.get("damagesPerLevel", {})
     for k in dict.fromkeys([*dmg, *dpl]):
         cols.append((k.capitalize(), dmg.get(k, 0), dpl.get(k, 0)))
+    note = ""
     if t in WEAPONS and not i.get("tamedOnly"):
+        mark = "*" if dps_skipped(i) else ""
         for label, a in (("DPS", i.get("attack")), ("Secondary DPS", i.get("secondaryAttack"))):
-            if a and a.get("cycle") and (d := mechanics.dps(mechanics.hit_damage(dmg), a)) is not None:
-                cols.append((label, d, mechanics.dps(mechanics.hit_damage(dpl), a) or 0))  # linear in damage
+            if a and a.get("cycle") and (d := mechanics.dps(mechanics.hit_damage(dmg, IGNORED), a)) is not None:
+                cols.append((label + mark, d, mechanics.dps(mechanics.hit_damage(dpl, IGNORED), a) or 0))  # linear
+                note = dps_note(i) if mark else ""
     if t in ARMOR:
         cols.append(("Armor", i.get("armor", 0), i.get("armorPerLevel", 0)))
     if t in WEAPONS | {"Shield"} and i.get("block"):
@@ -603,9 +609,20 @@ def quality_table(i: dict) -> str:
     if not cols:
         return ""
     if mq <= 1:
-        return kv((c[0], num(c[1])) for c in cols)
+        return kv((c[0], num(round(c[1], 1))) for c in cols) + note
     rows = [[str(q)] + [num(round(b + (q - 1) * p, 1)) for _, b, p in cols] for q in range(1, mq + 1)]
-    return table(["Quality"] + [esc(c[0]) for c in cols], rows, "num")
+    return table(["Quality"] + [esc(c[0]) for c in cols], rows, "num") + note
+
+
+def dps_skipped(i: dict) -> list[str]:
+    """The weapon's damage types that DPS leaves out and should say so: ignored by most creatures, not tool damage."""
+    dealt = {*i.get("damages", {}), *i.get("damagesPerLevel", {})}
+    return [t for t in IGNORED if t in dealt and t not in mechanics.TOOL_DAMAGE]
+
+
+def dps_note(i: dict) -> str:
+    parts = [f"{t} damage: {n} of {total} creatures are immune to it" for t in dps_skipped(i) for n, total in [IGNORED[t]]]
+    return f'<p class="note">* DPS leaves out {"; ".join(parts)}.</p>'
 
 
 def attack_text(a: dict) -> str:
@@ -1190,15 +1207,19 @@ def block_attack_speed() -> str:
     for i in sorted(weapons, key=lambda x: (words(x.get("skill") or ""), name_of("item", x["id"]).lower())):
         q = i.get("maxQuality", 1)
         dmg = {k: i.get("damages", {}).get(k, 0) + (q - 1) * i.get("damagesPerLevel", {}).get(k, 0)
-               for k in mechanics.COMBAT_DAMAGE}
+               for k in mechanics.DAMAGE_TYPES}
+        hit, mark = mechanics.hit_damage(dmg, IGNORED), "*" if dps_skipped(i) else ""
         for label, a in (("primary", i.get("attack")), ("secondary", i.get("secondaryAttack"))):
-            d = mechanics.dps(mechanics.hit_damage(dmg), a) if a and a.get("cycle") else None
+            d = mechanics.dps(hit, a) if a and a.get("cycle") else None
             if d is None:
                 continue
             rows.append([link("item", i["id"]), esc(words(i.get("skill") or "")), label,
                          num(sum(c["hits"] for c in a["chain"])), num(a["cycle"]),
-                         num(round(mechanics.combo_damage(mechanics.hit_damage(dmg), a), 1)), num(round(d, 1))])
-    return table(["Weapon", "Skill", "Attack", "Hits", "Seconds", "Damage", "DPS"], rows, "num")
+                         num(round(mechanics.combo_damage(hit, a), 1)) + mark, num(round(d, 1)) + mark])
+    skipped = [t for t in IGNORED if t not in mechanics.TOOL_DAMAGE]
+    note = "; ".join(f"{t} damage ({n} of {total} creatures are immune to it)" for t in skipped for n, total in [IGNORED[t]])
+    return table(["Weapon", "Skill", "Attack", "Hits", "Seconds", "Damage", "DPS"], rows, "num") + (
+        f'<p class="note">* Leaves out {note}.</p>' if skipped else "")
 
 
 def block_attack_speed_ranged() -> str:

@@ -39,6 +39,10 @@ class Formulas(unittest.TestCase):
     def test_dps(self):
         a = {"chain": [{"time": 0.5, "hits": 1}, {"time": 0.7, "hits": 2}], "lastChainMultiplier": 2, "cycle": 1.65}
         self.assertEqual(M.hit_damage({"slash": 30, "fire": 5, "chop": 20, "pickaxe": 9}), 35)  # chop/pickaxe skipped
+        self.assertEqual(M.hit_damage({"slash": 30, "spirit": 5}, skip={"spirit"}), 30)
+        foes = [{"damageModifiers": {"spirit": "Immune", "chop": "Ignore"}}, {"damageModifiers": {"spirit": "Ignore"}},
+                {"damageModifiers": {"chop": "Ignore", "fire": "Immune"}}]
+        self.assertEqual(M.ignored_damage(foes), {"chop": (2, 3), "spirit": (2, 3)})  # fire: 1 of 3, not most
         self.assertEqual(M.combo_damage(10, a), 10 + 2 * 10 * 2)  # the last level's two hits doubled
         self.assertEqual(M.combo_damage(10, {**a, "damageMultiplier": 1.5}), 75)
         self.assertAlmostEqual(M.dps(10, a), 50 / 1.65)

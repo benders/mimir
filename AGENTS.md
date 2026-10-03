@@ -135,7 +135,7 @@ hit; omitted for bow draw, crossbow reload and projectile bursts, which aren't m
 projectile lands as the weapon). Bows have `draw` (m_drawDurationMin) and crossbows `reload`, `reloadBlock` and
 `reloadDone` (the "reload done" minor action, from the animator) instead of `cycle`: those depend on skill
 (`mechanics.attack_cycle`). Looping attacks have none. `tamedOnly` weapons (Butcher Knife) hit only tamed creatures.
-The site shows DPS per quality (`mechanics.dps`; bows and crossbows only seconds per shot at skill 0 and 100: their DPS depends on the ammo)
+The site shows DPS per quality (`mechanics.dps`, leaving out damage types most creatures are immune to: chop, pickaxe, spirit (footnoted); bows and crossbows only seconds per shot at skill 0 and 100: their DPS depends on the ammo)
 and lists every timed attack on the `attack-speed` mechanics page.
 Items keep only the stat fields their type uses: `armor*` for helmet/chest/legs/shoulder (shields' armor is ignored by the
 game), block/parry fields for weapons and shields, attack fields (`skill`, `damages`, `attack`...) for weapons, ammo and
