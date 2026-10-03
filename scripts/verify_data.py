@@ -111,6 +111,9 @@ def main() -> int:
     check("Hammer" in pieces.get("piece_workbench", {}).get("tools", []), "workbench built with Hammer")
     check(any(p["from"] == "CopperOre" and p["to"] == "Copper" for p in procs), "smelting CopperOre -> Copper")
     check(any(d["item"] == "CopperOre" for s in sources for d in (s.get("drops") or {}).get("items", [])), "CopperOre has a world source")
+    in_chest = {d["item"] for s in sources if s.get("kind") == "container" and s.get("locations")
+                for d in s["drops"]["items"]}
+    check({"Amber", "AmberPearl", "Ruby"} <= in_chest, "Amber, AmberPearl, Ruby are found in chests")
     mead = items.get("MeadHealthMinor", {}).get("consumeEffect")
     check(bool(mead) and bool(effects.get(mead, {}).get("stats")), "MeadHealthMinor: consume effect with stats")
     check(items.get("CookedMeat", {}).get("food", {}).get("health", 0) > 0, "CookedMeat: food values")

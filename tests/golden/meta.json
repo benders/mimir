@@ -4,20 +4,22 @@
  "dumperVersion": "test",
  "steamBuildId": "1",
  "counts": {
-  "items": 17,
+  "items": 18,
   "recipes": 4,
   "creatures": 6,
   "spawns": 12,
   "pieces": 4,
   "processing": 1,
-  "sources": 2,
+  "sources": 4,
   "status_effects": 1
  },
  "unresolvedTokens": [
   "enemy_missing",
+  "item_gem",
   "item_missing",
   "item_oddbar",
-  "item_oddbar_desc"
+  "item_oddbar_desc",
+  "piece_other"
  ],
  "skippedRefs": [
   "vfx_Poof"

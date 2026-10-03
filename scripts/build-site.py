@@ -172,6 +172,11 @@ def source_name(s: dict) -> str:
     return pretty_id(s["id"])
 
 
+def source_places(s: dict) -> str:
+    """Where a container source (loot chest) is found: its locations, dungeon rooms marked."""
+    return ", ".join(pretty_id(x["location"]) + (" dungeon" if x.get("dungeon") else "") for x in s.get("locations", []))
+
+
 # --- derived relations ----------------------------------------------------------------------
 
 crafted_by = defaultdict(list)       # item -> recipes producing it
@@ -600,9 +605,9 @@ def item_page(i: dict) -> None:
     body += section("Dropped by", table(["Creature", "Amount", "Chance"], drops))
     found = {}
     for s, amount in found_in[i["id"]]:
-        found.setdefault((source_name(s), s["kind"], amount), None)
-    body += section("Found in", table(["Source", "Kind", "Amount"],
-                                      [[esc(n), esc(k), esc(a)] for n, k, a in sorted(found)]))
+        found.setdefault((source_name(s), s["kind"], amount, source_places(s)), None)
+    body += section("Found in", table(["Source", "Kind", "Amount", "Where"],
+                                      [[esc(n), esc(k), esc(a), esc(w)] for n, k, a, w in sorted(found)]))
 
     used = [link("item", r["item"]) for r in used_in_recipe[i["id"]] if r.get("item")]
     used += [link("piece", p["id"]) for p in used_in_piece[i["id"]] if p["id"] != i["id"]]  # not "place on table"

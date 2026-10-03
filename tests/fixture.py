@@ -120,6 +120,10 @@ def spawners(*components):
     return [comp(t, f, path=f"child{i}") for i, (t, f) in enumerate(components)]
 
 
+def container(*drops, name="$piece_chest"):
+    return ("Container", {"m_name": name, **m(defaultItems=drop_table(*drops))})
+
+
 def zone_location(name, biome, enable=True):
     return m(name=name, prefabName=name, enable=enable, biome=biome)
 
@@ -134,6 +138,7 @@ SE_DEFAULTS = m(name="", tooltip="", icon=None, category="", ttl=0, cooldown=0, 
                 runStaminaDrainModifier=0)
 
 TRANSLATIONS = {
+    "piece_chest": "Strongbox",
     "item_wood": "Twig", "item_wood_desc": "A stick.",
     "item_ore": "Rustore", "item_ingot": "Ingot",
     "item_sword": "Test Sword", "item_sword_desc": "Sharp <b>enough</b>.",
@@ -181,6 +186,7 @@ def prefabs():
         item("Hammer", name="$item_hammer", itemType="Tool", icons=[S("Hammer")], buildPieces=R("_HammerTable")),
         item("Bite", name="$item_bite", itemType="OneHandedWeapon", attack=attack(attackStamina=0),
              damages=damages(pierce=12)),  # no icon: internal attack item
+        item("Gem", name="$item_gem", icons=[S("Gem")]),  # unresolved name, only in a chest: reachable, so shown
         item("Mystery", name="$item_missing"),  # unresolved token, no source: hidden
         item("OddBar", name="$item_oddbar", description="$item_oddbar_desc", icons=[S("Ingot")]),  # unresolved, craftable: shown as "Odd Bar"
         raider("Raider"),
@@ -273,17 +279,23 @@ def write_dump(raw: Path) -> Path:
         ("CreatureSpawner", creature_spawner("Raider", minLevel=1, maxLevel=2, respawnTimeMinuts=30)),
         ("SpawnArea", m(prefabs=[m(prefab=R("Pup"), weight=1, minLevel=1, maxLevel=1)])),
         ("CreatureSpawner", creature_spawner("vfx_Poof")),
+        container(("Gem", 1, 1, 1), ("Wood", 2, 5, 3)),
+        container(("Wood", 1, 1, 1), name="$piece_other"),  # unresolved name: its own source
+        container(),  # empty default items: not a source
     )]})
     dump("locations/Lair.json", {"name": "Lair", "components": [comp("Location", {}), *spawners(
         ("OfferingBowl", m(bossPrefab=R("Chief"), bossItem=R("Ore"), bossItems=3)),
         ("DungeonGenerator", m(themes="Cave")),
     )]})
-    dump("locations/Ruin.json", {"name": "Ruin", "components": spawners(("CreatureSpawner", creature_spawner("Pup")))})
+    dump("locations/Ruin.json", {"name": "Ruin", "components": spawners(("CreatureSpawner", creature_spawner("Pup")),
+                                                                    container(("Ore", 1, 1, 1)))})  # disabled location
     dump("room_themes.json", {"None": 0, "Crypt": 1, "Cave": 4})
     dump("rooms/cave_a.json", {"name": "cave_a", "theme": 5, "enabled": True,  # Crypt|Cave: used by Lair
-                               "components": spawners(("CreatureSpawner", creature_spawner("Pup", maxLevel=2)))})
+                               "components": spawners(("CreatureSpawner", creature_spawner("Pup", maxLevel=2)),
+                                                       container(("Gem", 1, 1, 1), ("Wood", 2, 5, 3)))})
     dump("rooms/cave_off.json", {"name": "cave_off", "theme": 4, "enabled": False,
                                  "components": spawners(("CreatureSpawner", creature_spawner("Raider")))})
     dump("rooms/crypt_a.json", {"name": "crypt_a", "theme": 1, "enabled": True,
-                                "components": spawners(("CreatureSpawner", creature_spawner("Raider")))})
+                                "components": spawners(("CreatureSpawner", creature_spawner("Raider")),
+                                                     container(("Ore", 1, 1, 1)))})  # theme doesn't match Lair
     return raw

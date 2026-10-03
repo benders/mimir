@@ -52,6 +52,17 @@
   "parryBonus": 1
  },
  {
+  "id": "Gem",
+  "name": "$item_gem",
+  "type": "Material",
+  "icon": "Gem",
+  "weight": 1.0,
+  "stack": 1,
+  "maxQuality": 1,
+  "backstab": 1,
+  "parryBonus": 1
+ },
+ {
   "id": "Hammer",
   "name": "Mallet",
   "type": "Tool",

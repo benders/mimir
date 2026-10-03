@@ -59,6 +59,13 @@ class Site(unittest.TestCase):
         self.assertIn("summoned with", chief)
         self.assertIn('href="items/Ore.html"', chief)
 
+    def test_container_found_in(self):
+        gem = (self.out / "items/Gem.html").read_text(encoding="utf-8")  # unresolved name, only in a chest
+        self.assertIn("<h2>Found in</h2>", gem)
+        self.assertIn("Strongbox", gem)
+        self.assertIn("Camp, Lair dungeon", gem)
+        self.assertFalse((self.out / "items/Mystery.html").exists())
+
     def test_unobtainable_hidden(self):
         for page in ("items/Mystery.html", "creatures/Wisp.html"):
             self.assertFalse((self.out / page).exists(), page)

@@ -11327,5 +11327,2578 @@
    ]
   },
   "name": "Log"
+ },
+ {
+  "id": "container_ancient_chest_84ed93",
+  "kind": "container",
+  "name": "Ancient Chest",
+  "drops": {
+   "min": 5,
+   "max": 7,
+   "chance": 1,
+   "oneOfEach": true,
+   "items": [
+    {
+     "item": "AncientCoin",
+     "min": 11,
+     "max": 55,
+     "weight": 2
+    },
+    {
+     "item": "AncientGemstoneBlack",
+     "min": 1,
+     "max": 1,
+     "weight": 0.2
+    },
+    {
+     "item": "AncientGemstoneGreen",
+     "min": 1,
+     "max": 1,
+     "weight": 0.5
+    },
+    {
+     "item": "AncientGemstoneOrange",
+     "min": 1,
+     "max": 1,
+     "weight": 0.4
+    },
+    {
+     "item": "AncientGemstonePurple",
+     "min": 1,
+     "max": 1,
+     "weight": 0.3
+    },
+    {
+     "item": "Copper",
+     "min": 1,
+     "max": 5,
+     "weight": 1
+    },
+    {
+     "item": "Bronze",
+     "min": 1,
+     "max": 5,
+     "weight": 1
+    },
+    {
+     "item": "Tin",
+     "min": 1,
+     "max": 5,
+     "weight": 1
+    },
+    {
+     "item": "Upgrader6Armor",
+     "min": 1,
+     "max": 1,
+     "weight": 0.05
+    },
+    {
+     "item": "Upgrader6Weapon",
+     "min": 1,
+     "max": 1,
+     "weight": 0.025
+    },
+    {
+     "item": "Upgrader7Armor",
+     "min": 1,
+     "max": 1,
+     "weight": 0.025
+    },
+    {
+     "item": "Upgrader7Weapon",
+     "min": 1,
+     "max": 1,
+     "weight": 0.0125
+    },
+    {
+     "item": "BlackCore",
+     "min": 1,
+     "max": 1,
+     "weight": 0.5
+    }
+   ]
+  },
+  "locations": [
+   {
+    "location": "MorkBorg"
+   },
+   {
+    "location": "MorkBorg",
+    "dungeon": true
+   }
+  ]
+ },
+ {
+  "id": "container_barrel_00aae1",
+  "kind": "container",
+  "name": "Barrel",
+  "drops": {
+   "min": 2,
+   "max": 3,
+   "chance": 1,
+   "oneOfEach": true,
+   "items": [
+    {
+     "item": "MoldAxe",
+     "min": 1,
+     "max": 1,
+     "weight": 0.1
+    },
+    {
+     "item": "MoldBow",
+     "min": 1,
+     "max": 1,
+     "weight": 0.1
+    },
+    {
+     "item": "MoldMace",
+     "min": 1,
+     "max": 1,
+     "weight": 0.1
+    },
+    {
+     "item": "MoldSword",
+     "min": 1,
+     "max": 1,
+     "weight": 0.1
+    },
+    {
+     "item": "MoldSpear",
+     "min": 1,
+     "max": 1,
+     "weight": 0.1
+    },
+    {
+     "item": "MeadTasty",
+     "min": 1,
+     "max": 5,
+     "weight": 1
+    },
+    {
+     "item": "BjornMeat",
+     "min": 1,
+     "max": 3,
+     "weight": 1
+    },
+    {
+     "item": "Bread",
+     "min": 1,
+     "max": 2,
+     "weight": 1
+    },
+    {
+     "item": "Onion",
+     "min": 1,
+     "max": 3,
+     "weight": 1
+    },
+    {
+     "item": "Upgrader6Armor",
+     "min": 1,
+     "max": 1,
+     "weight": 0.1
+    },
+    {
+     "item": "Upgrader6Weapon",
+     "min": 1,
+     "max": 1,
+     "weight": 0.05
+    }
+   ]
+  },
+  "locations": [
+   {
+    "location": "NorthVillage",
+    "dungeon": true
+   },
+   {
+    "location": "TheHole01"
+   }
+  ]
+ },
+ {
+  "id": "container_barrel_987ff0",
+  "kind": "container",
+  "name": "Barrel",
+  "drops": {
+   "min": 3,
+   "max": 6,
+   "chance": 1,
+   "oneOfEach": true,
+   "items": [
+    {
+     "item": "MoldAxe",
+     "min": 1,
+     "max": 1,
+     "weight": 0.2
+    },
+    {
+     "item": "MoldBow",
+     "min": 1,
+     "max": 1,
+     "weight": 0.2
+    },
+    {
+     "item": "MoldMace",
+     "min": 1,
+     "max": 1,
+     "weight": 0.2
+    },
+    {
+     "item": "MoldSword",
+     "min": 1,
+     "max": 1,
+     "weight": 0.2
+    },
+    {
+     "item": "MoldSpear",
+     "min": 1,
+     "max": 1,
+     "weight": 0.2
+    },
+    {
+     "item": "Barley",
+     "min": 1,
+     "max": 10,
+     "weight": 0.5
+    },
+    {
+     "item": "Flax",
+     "min": 1,
+     "max": 10,
+     "weight": 0.5
+    },
+    {
+     "item": "TurnipSeeds",
+     "min": 1,
+     "max": 10,
+     "weight": 0.5
+    },
+    {
+     "item": "CarrotSeeds",
+     "min": 1,
+     "max": 10,
+     "weight": 0.5
+    },
+    {
+     "item": "OatSeeds",
+     "min": 4,
+     "max": 10,
+     "weight": 5
+    },
+    {
+     "item": "PoteitrSeeds",
+     "min": 1,
+     "max": 10,
+     "weight": 3
+    },
+    {
+     "item": "KaleSeeds",
+     "min": 2,
+     "max": 4,
+     "weight": 1
+    }
+   ]
+  },
+  "locations": [
+   {
+    "location": "NorthVillage",
+    "dungeon": true
+   }
+  ]
+ },
+ {
+  "id": "container_charred_chest_af9c87",
+  "kind": "container",
+  "name": "Charred Chest",
+  "drops": {
+   "min": 5,
+   "max": 6,
+   "chance": 1,
+   "oneOfEach": true,
+   "items": [
+    {
+     "item": "GemstoneBlue",
+     "min": 1,
+     "max": 1,
+     "weight": 0.5
+    },
+    {
+     "item": "GemstoneGreen",
+     "min": 1,
+     "max": 1,
+     "weight": 0.5
+    },
+    {
+     "item": "GemstoneRed",
+     "min": 1,
+     "max": 1,
+     "weight": 0.5
+    },
+    {
+     "item": "Coins",
+     "min": 200,
+     "max": 500,
+     "weight": 1
+    },
+    {
+     "item": "CharredBone",
+     "min": 5,
+     "max": 10,
+     "weight": 1
+    },
+    {
+     "item": "Charredskull",
+     "min": 1,
+     "max": 2,
+     "weight": 1
+    },
+    {
+     "item": "CelestialFeather",
+     "min": 1,
+     "max": 1,
+     "weight": 0.1
+    },
+    {
+     "item": "MoltenCore",
+     "min": 1,
+     "max": 2,
+     "weight": 0.5
+    },
+    {
+     "item": "FlametalOreNew",
+     "min": 10,
+     "max": 20,
+     "weight": 1
+    },
+    {
+     "item": "Upgrader5Armor",
+     "min": 1,
+     "max": 1,
+     "weight": 0.2
+    },
+    {
+     "item": "Upgrader5Weapon",
+     "min": 1,
+     "max": 1,
+     "weight": 0.1
+    },
+    {
+     "item": "Upgrader6Armor",
+     "min": 1,
+     "max": 1,
+     "weight": 0.02
+    },
+    {
+     "item": "Upgrader6Weapon",
+     "min": 1,
+     "max": 1,
+     "weight": 0.02
+    }
+   ]
+  },
+  "locations": [
+   {
+    "location": "CharredFortress"
+   },
+   {
+    "location": "FortressRuins",
+    "dungeon": true
+   }
+  ]
+ },
+ {
+  "id": "container_chest_0d7262",
+  "kind": "container",
+  "name": "Chest",
+  "drops": {
+   "min": 2,
+   "max": 4,
+   "chance": 1,
+   "oneOfEach": true,
+   "items": [
+    {
+     "item": "MoltenCore",
+     "min": 1,
+     "max": 2,
+     "weight": 0.5
+    },
+    {
+     "item": "CharredBone",
+     "min": 3,
+     "max": 12,
+     "weight": 0.5
+    },
+    {
+     "item": "ArrowCarapace",
+     "min": 3,
+     "max": 12,
+     "weight": 0.5
+    },
+    {
+     "item": "Coins",
+     "min": 99,
+     "max": 199,
+     "weight": 0.5
+    },
+    {
+     "item": "Blackwood",
+     "min": 1,
+     "max": 2,
+     "weight": 0.5
+    },
+    {
+     "item": "Upgrader5Armor",
+     "min": 1,
+     "max": 1,
+     "weight": 0.1
+    },
+    {
+     "item": "Upgrader5Weapon",
+     "min": 1,
+     "max": 1,
+     "weight": 0.05
+    },
+    {
+     "item": "Upgrader6Armor",
+     "min": 1,
+     "max": 1,
+     "weight": 0.01
+    },
+    {
+     "item": "Upgrader6Weapon",
+     "min": 1,
+     "max": 1,
+     "weight": 0.01
+    }
+   ]
+  },
+  "locations": [
+   {
+    "location": "MorgenHole1"
+   },
+   {
+    "location": "MorgenHole2"
+   },
+   {
+    "location": "MorgenHole3"
+   }
+  ]
+ },
+ {
+  "id": "container_chest_1914de",
+  "kind": "container",
+  "name": "Chest",
+  "drops": {
+   "min": 1,
+   "max": 4,
+   "chance": 1,
+   "oneOfEach": true,
+   "items": [
+    {
+     "item": "Coins",
+     "min": 50,
+     "max": 100,
+     "weight": 5
+    },
+    {
+     "item": "AmberPearl",
+     "min": 1,
+     "max": 10,
+     "weight": 2
+    },
+    {
+     "item": "Ruby",
+     "min": 1,
+     "max": 2,
+     "weight": 1
+    },
+    {
+     "item": "Feathers",
+     "min": 3,
+     "max": 13,
+     "weight": 1
+    }
+   ]
+  },
+  "locations": [
+   {
+    "location": "ShipWreck01"
+   },
+   {
+    "location": "ShipWreck02"
+   },
+   {
+    "location": "ShipWreck03"
+   },
+   {
+    "location": "ShipWreck04"
+   }
+  ]
+ },
+ {
+  "id": "container_chest_194b8f",
+  "kind": "container",
+  "name": "Chest",
+  "drops": {
+   "min": 3,
+   "max": 5,
+   "chance": 1,
+   "oneOfEach": true,
+   "items": [
+    {
+     "item": "Obsidian",
+     "min": 3,
+     "max": 9,
+     "weight": 0.5
+    },
+    {
+     "item": "SilverNecklace",
+     "min": 1,
+     "max": 1,
+     "weight": 0.1
+    },
+    {
+     "item": "Ruby",
+     "min": 1,
+     "max": 2,
+     "weight": 0.5
+    },
+    {
+     "item": "Coins",
+     "min": 15,
+     "max": 35,
+     "weight": 1
+    },
+    {
+     "item": "Coins",
+     "min": 15,
+     "max": 35,
+     "weight": 1
+    },
+    {
+     "item": "Obsidian",
+     "min": 1,
+     "max": 5,
+     "weight": 1
+    },
+    {
+     "item": "Upgrader3Armor",
+     "min": 1,
+     "max": 1,
+     "weight": 0.1
+    },
+    {
+     "item": "Upgrader3Weapon",
+     "min": 1,
+     "max": 1,
+     "weight": 0.05
+    },
+    {
+     "item": "Upgrader4Armor",
+     "min": 1,
+     "max": 1,
+     "weight": 0.01
+    },
+    {
+     "item": "Upgrader4Weapon",
+     "min": 1,
+     "max": 1,
+     "weight": 0.01
+    }
+   ]
+  },
+  "locations": [
+   {
+    "location": "Hildir_cave",
+    "dungeon": true
+   },
+   {
+    "location": "MountainCave02",
+    "dungeon": true
+   }
+  ]
+ },
+ {
+  "id": "container_chest_1cdea1",
+  "kind": "container",
+  "name": "Chest",
+  "drops": {
+   "min": 2,
+   "max": 3,
+   "chance": 1,
+   "oneOfEach": true,
+   "items": [
+    {
+     "item": "MaceWood",
+     "min": 1,
+     "max": 1,
+     "weight": 0.1
+    },
+    {
+     "item": "Feathers",
+     "min": 1,
+     "max": 3,
+     "weight": 1
+    },
+    {
+     "item": "Torch",
+     "min": 1,
+     "max": 1,
+     "weight": 1
+    },
+    {
+     "item": "ArrowFlint",
+     "min": 10,
+     "max": 20,
+     "weight": 1
+    },
+    {
+     "item": "LeatherScraps",
+     "min": 2,
+     "max": 3,
+     "weight": 1
+    }
+   ]
+  },
+  "locations": [
+   {
+    "location": "CombatRuin01"
+   }
+  ]
+ },
+ {
+  "id": "container_chest_1f748a",
+  "kind": "container",
+  "name": "Chest",
+  "drops": {
+   "min": 2,
+   "max": 3,
+   "chance": 1,
+   "oneOfEach": true,
+   "items": [
+    {
+     "item": "Feathers",
+     "min": 2,
+     "max": 4,
+     "weight": 1
+    },
+    {
+     "item": "ArrowFlint",
+     "min": 5,
+     "max": 10,
+     "weight": 1
+    },
+    {
+     "item": "Coins",
+     "min": 5,
+     "max": 30,
+     "weight": 1
+    },
+    {
+     "item": "Amber",
+     "min": 1,
+     "max": 2,
+     "weight": 1
+    },
+    {
+     "item": "SpearWood",
+     "min": 1,
+     "max": 1,
+     "weight": 0.2
+    },
+    {
+     "item": "Upgrader1Armor",
+     "min": 1,
+     "max": 1,
+     "weight": 0.1
+    },
+    {
+     "item": "Upgrader1Weapon",
+     "min": 1,
+     "max": 1,
+     "weight": 0.05
+    },
+    {
+     "item": "Upgrader2Armor",
+     "min": 1,
+     "max": 1,
+     "weight": 0.01
+    },
+    {
+     "item": "Upgrader2Weapon",
+     "min": 1,
+     "max": 1,
+     "weight": 0.01
+    }
+   ]
+  },
+  "locations": [
+   {
+    "location": "Ruin1"
+   },
+   {
+    "location": "Ruin2"
+   },
+   {
+    "location": "StoneHouse3"
+   },
+   {
+    "location": "StoneTowerRuins03"
+   },
+   {
+    "location": "StoneTowerRuins07"
+   },
+   {
+    "location": "StoneTowerRuins08"
+   },
+   {
+    "location": "StoneTowerRuins09"
+   },
+   {
+    "location": "StoneTowerRuins09_sunk"
+   },
+   {
+    "location": "StoneTowerRuins10"
+   },
+   {
+    "location": "StoneTowerRuins10_sunk"
+   },
+   {
+    "location": "SwampHut1"
+   },
+   {
+    "location": "SwampHut1_1"
+   },
+   {
+    "location": "SwampHut2"
+   },
+   {
+    "location": "SwampHut2_1"
+   },
+   {
+    "location": "SwampHut3"
+   },
+   {
+    "location": "SwampHut3_1"
+   },
+   {
+    "location": "SwampHut4"
+   },
+   {
+    "location": "SwampHut5"
+   },
+   {
+    "location": "TrollCave02"
+   }
+  ]
+ },
+ {
+  "id": "container_chest_294292",
+  "kind": "container",
+  "name": "Chest",
+  "drops": {
+   "min": 3,
+   "max": 4,
+   "chance": 1,
+   "oneOfEach": true,
+   "items": [
+    {
+     "item": "ArrowCharred",
+     "min": 5,
+     "max": 11,
+     "weight": 1
+    },
+    {
+     "item": "BoltCharred",
+     "min": 5,
+     "max": 11,
+     "weight": 1
+    },
+    {
+     "item": "Coins",
+     "min": 22,
+     "max": 99,
+     "weight": 1
+    },
+    {
+     "item": "Torch",
+     "min": 1,
+     "max": 1,
+     "weight": 1
+    },
+    {
+     "item": "Feathers",
+     "min": 5,
+     "max": 13,
+     "weight": 1
+    },
+    {
+     "item": "Upgrader6Armor",
+     "min": 1,
+     "max": 1,
+     "weight": 0.1
+    },
+    {
+     "item": "Upgrader6Weapon",
+     "min": 1,
+     "max": 1,
+     "weight": 0.05
+    },
+    {
+     "item": "Upgrader7Armor",
+     "min": 1,
+     "max": 1,
+     "weight": 0.01
+    },
+    {
+     "item": "Upgrader7Weapon",
+     "min": 1,
+     "max": 1,
+     "weight": 0.01
+    }
+   ]
+  },
+  "locations": [
+   {
+    "location": "NorthVillage",
+    "dungeon": true
+   },
+   {
+    "location": "ShipSetting02"
+   },
+   {
+    "location": "ShipSetting03"
+   }
+  ]
+ },
+ {
+  "id": "container_chest_32e6eb",
+  "kind": "container",
+  "name": "Chest",
+  "drops": {
+   "min": 3,
+   "max": 4,
+   "chance": 1,
+   "oneOfEach": true,
+   "items": [
+    {
+     "item": "Barley",
+     "min": 2,
+     "max": 4,
+     "weight": 0.5
+    },
+    {
+     "item": "BlackMetalScrap",
+     "min": 2,
+     "max": 5,
+     "weight": 1
+    },
+    {
+     "item": "Needle",
+     "min": 2,
+     "max": 5,
+     "weight": 1
+    },
+    {
+     "item": "Coins",
+     "min": 10,
+     "max": 40,
+     "weight": 1
+    },
+    {
+     "item": "SharpeningStone",
+     "min": 1,
+     "max": 1,
+     "weight": 0.1
+    },
+    {
+     "item": "AtgeirWood",
+     "min": 1,
+     "max": 1,
+     "weight": 0.2
+    },
+    {
+     "item": "Upgrader4Armor",
+     "min": 1,
+     "max": 1,
+     "weight": 0.1
+    },
+    {
+     "item": "Upgrader4Weapon",
+     "min": 1,
+     "max": 1,
+     "weight": 0.05
+    },
+    {
+     "item": "Upgrader5Armor",
+     "min": 1,
+     "max": 1,
+     "weight": 0.01
+    },
+    {
+     "item": "Upgrader5Weapon",
+     "min": 1,
+     "max": 1,
+     "weight": 0.01
+    }
+   ]
+  },
+  "locations": [
+   {
+    "location": "GoblinCamp2",
+    "dungeon": true
+   },
+   {
+    "location": "GoblinCamp2_1",
+    "dungeon": true
+   },
+   {
+    "location": "GoblinHut02"
+   },
+   {
+    "location": "GoblinHut03"
+   },
+   {
+    "location": "Hildir_plainsfortress",
+    "dungeon": true
+   },
+   {
+    "location": "Ruin3"
+   },
+   {
+    "location": "StoneHouse1_heath"
+   },
+   {
+    "location": "StoneHouse5_heath"
+   },
+   {
+    "location": "StoneTower1"
+   },
+   {
+    "location": "StoneTower3"
+   }
+  ]
+ },
+ {
+  "id": "container_chest_39904f",
+  "kind": "container",
+  "name": "Chest",
+  "drops": {
+   "min": 2,
+   "max": 3,
+   "chance": 1,
+   "oneOfEach": true,
+   "items": [
+    {
+     "item": "Feathers",
+     "min": 1,
+     "max": 3,
+     "weight": 1
+    },
+    {
+     "item": "Coins",
+     "min": 5,
+     "max": 15,
+     "weight": 1
+    },
+    {
+     "item": "Amber",
+     "min": 1,
+     "max": 1,
+     "weight": 1
+    },
+    {
+     "item": "ArrowFlint",
+     "min": 10,
+     "max": 20,
+     "weight": 1
+    },
+    {
+     "item": "Torch",
+     "min": 1,
+     "max": 1,
+     "weight": 1
+    },
+    {
+     "item": "Flint",
+     "min": 2,
+     "max": 4,
+     "weight": 1
+    },
+    {
+     "item": "Upgrader0Armor",
+     "min": 1,
+     "max": 1,
+     "weight": 0.1
+    },
+    {
+     "item": "Upgrader0Weapon",
+     "min": 1,
+     "max": 1,
+     "weight": 0.05
+    },
+    {
+     "item": "Upgrader1Armor",
+     "min": 1,
+     "max": 1,
+     "weight": 0.01
+    },
+    {
+     "item": "Upgrader1Weapon",
+     "min": 1,
+     "max": 1,
+     "weight": 0.01
+    }
+   ]
+  },
+  "locations": [
+   {
+    "location": "WoodFarm1",
+    "dungeon": true
+   },
+   {
+    "location": "WoodHouse1"
+   },
+   {
+    "location": "WoodHouse10"
+   },
+   {
+    "location": "WoodHouse11"
+   },
+   {
+    "location": "WoodHouse12"
+   },
+   {
+    "location": "WoodHouse13"
+   },
+   {
+    "location": "WoodHouse7"
+   },
+   {
+    "location": "WoodHouse9"
+   },
+   {
+    "location": "WoodVillage1",
+    "dungeon": true
+   },
+   {
+    "location": "WoodVillage2",
+    "dungeon": true
+   }
+  ]
+ },
+ {
+  "id": "container_chest_3f3cf6",
+  "kind": "container",
+  "name": "Chest",
+  "drops": {
+   "min": 2,
+   "max": 4,
+   "chance": 1,
+   "oneOfEach": true,
+   "items": [
+    {
+     "item": "Feathers",
+     "min": 1,
+     "max": 10,
+     "weight": 1
+    },
+    {
+     "item": "ArrowFlint",
+     "min": 5,
+     "max": 10,
+     "weight": 1
+    },
+    {
+     "item": "Ruby",
+     "min": 1,
+     "max": 2,
+     "weight": 1
+    },
+    {
+     "item": "Coins",
+     "min": 10,
+     "max": 30,
+     "weight": 1
+    },
+    {
+     "item": "Amber",
+     "min": 1,
+     "max": 3,
+     "weight": 1
+    },
+    {
+     "item": "SilverNecklace",
+     "min": 1,
+     "max": 1,
+     "weight": 0.2
+    },
+    {
+     "item": "Upgrader1Armor",
+     "min": 1,
+     "max": 1,
+     "weight": 0.1
+    },
+    {
+     "item": "Upgrader1Weapon",
+     "min": 1,
+     "max": 1,
+     "weight": 0.05
+    },
+    {
+     "item": "Upgrader2Armor",
+     "min": 1,
+     "max": 1,
+     "weight": 0.01
+    },
+    {
+     "item": "Upgrader2Weapon",
+     "min": 1,
+     "max": 1,
+     "weight": 0.01
+    }
+   ]
+  },
+  "locations": [
+   {
+    "location": "Crypt2",
+    "dungeon": true
+   },
+   {
+    "location": "Crypt3",
+    "dungeon": true
+   },
+   {
+    "location": "Crypt4",
+    "dungeon": true
+   },
+   {
+    "location": "Hildir_crypt",
+    "dungeon": true
+   }
+  ]
+ },
+ {
+  "id": "container_chest_469dd9",
+  "kind": "container",
+  "name": "Chest",
+  "drops": {
+   "min": 2,
+   "max": 3,
+   "chance": 1,
+   "oneOfEach": true,
+   "items": [
+    {
+     "item": "Feathers",
+     "min": 1,
+     "max": 3,
+     "weight": 1
+    },
+    {
+     "item": "Coins",
+     "min": 5,
+     "max": 15,
+     "weight": 1
+    },
+    {
+     "item": "Amber",
+     "min": 1,
+     "max": 1,
+     "weight": 1
+    },
+    {
+     "item": "ArrowFlint",
+     "min": 10,
+     "max": 20,
+     "weight": 1
+    },
+    {
+     "item": "Torch",
+     "min": 1,
+     "max": 1,
+     "weight": 1
+    },
+    {
+     "item": "Flint",
+     "min": 2,
+     "max": 4,
+     "weight": 1
+    },
+    {
+     "item": "AxeHead1",
+     "min": 1,
+     "max": 1,
+     "weight": 2
+    }
+   ]
+  },
+  "locations": [
+   {
+    "location": "WoodHouse6"
+   }
+  ]
+ },
+ {
+  "id": "container_chest_5e70b4",
+  "kind": "container",
+  "name": "Chest",
+  "drops": {
+   "min": 5,
+   "max": 6,
+   "chance": 1,
+   "oneOfEach": true,
+   "items": [
+    {
+     "item": "AmberPearl",
+     "min": 2,
+     "max": 4,
+     "weight": 1
+    },
+    {
+     "item": "Chain",
+     "min": 2,
+     "max": 5,
+     "weight": 1
+    },
+    {
+     "item": "Coins",
+     "min": 11,
+     "max": 66,
+     "weight": 1
+    },
+    {
+     "item": "ChickenEgg",
+     "min": 1,
+     "max": 1,
+     "weight": 0.5
+    },
+    {
+     "item": "Upgrader4Armor",
+     "min": 1,
+     "max": 1,
+     "weight": 0.1
+    },
+    {
+     "item": "Upgrader4Weapon",
+     "min": 1,
+     "max": 1,
+     "weight": 0.05
+    },
+    {
+     "item": "Upgrader5Armor",
+     "min": 1,
+     "max": 1,
+     "weight": 0.01
+    },
+    {
+     "item": "Upgrader5Weapon",
+     "min": 1,
+     "max": 1,
+     "weight": 0.01
+    }
+   ]
+  },
+  "locations": [
+   {
+    "location": "Hildir_plainsfortress",
+    "dungeon": true
+   }
+  ]
+ },
+ {
+  "id": "container_chest_87dfbe",
+  "kind": "container",
+  "name": "Chest",
+  "drops": {
+   "min": 3,
+   "max": 5,
+   "chance": 1,
+   "oneOfEach": true,
+   "items": [
+    {
+     "item": "OnionSeeds",
+     "min": 3,
+     "max": 9,
+     "weight": 1
+    },
+    {
+     "item": "Amber",
+     "min": 1,
+     "max": 6,
+     "weight": 1
+    },
+    {
+     "item": "Coins",
+     "min": 46,
+     "max": 96,
+     "weight": 1
+    },
+    {
+     "item": "AmberPearl",
+     "min": 2,
+     "max": 5,
+     "weight": 1
+    },
+    {
+     "item": "Ruby",
+     "min": 1,
+     "max": 2,
+     "weight": 1
+    },
+    {
+     "item": "Obsidian",
+     "min": 5,
+     "max": 10,
+     "weight": 1
+    },
+    {
+     "item": "ArrowFrost",
+     "min": 5,
+     "max": 10,
+     "weight": 1
+    },
+    {
+     "item": "BattleaxeWood",
+     "min": 1,
+     "max": 1,
+     "weight": 0.2
+    },
+    {
+     "item": "Upgrader3Armor",
+     "min": 1,
+     "max": 1,
+     "weight": 0.1
+    },
+    {
+     "item": "Upgrader3Weapon",
+     "min": 1,
+     "max": 1,
+     "weight": 0.05
+    },
+    {
+     "item": "Upgrader4Armor",
+     "min": 1,
+     "max": 1,
+     "weight": 0.01
+    },
+    {
+     "item": "Upgrader4Weapon",
+     "min": 1,
+     "max": 1,
+     "weight": 0.01
+    }
+   ]
+  },
+  "locations": [
+   {
+    "location": "AbandonedLogCabin02"
+   },
+   {
+    "location": "AbandonedLogCabin03"
+   },
+   {
+    "location": "AbandonedLogCabin04"
+   },
+   {
+    "location": "MountainWell1"
+   },
+   {
+    "location": "StoneTowerRuins04"
+   },
+   {
+    "location": "StoneTowerRuins05"
+   },
+   {
+    "location": "StoneTowerRuins05_leet"
+   }
+  ]
+ },
+ {
+  "id": "container_chest_8afd68",
+  "kind": "container",
+  "name": "Chest",
+  "drops": {
+   "min": 2,
+   "max": 4,
+   "chance": 1,
+   "oneOfEach": true,
+   "items": [
+    {
+     "item": "Feathers",
+     "min": 5,
+     "max": 10,
+     "weight": 1
+    },
+    {
+     "item": "ArrowObsidian",
+     "min": 5,
+     "max": 10,
+     "weight": 1
+    },
+    {
+     "item": "SilverNecklace",
+     "min": 1,
+     "max": 1,
+     "weight": 0.5
+    },
+    {
+     "item": "Coins",
+     "min": 66,
+     "max": 99,
+     "weight": 1
+    },
+    {
+     "item": "GoblinTotem",
+     "min": 1,
+     "max": 1,
+     "weight": 0.1
+    }
+   ]
+  },
+  "locations": [
+   {
+    "location": "StoneHenge1"
+   },
+   {
+    "location": "StoneHenge2"
+   },
+   {
+    "location": "StoneHenge3"
+   }
+  ]
+ },
+ {
+  "id": "container_chest_9575bd",
+  "kind": "container",
+  "name": "Chest",
+  "drops": {
+   "min": 3,
+   "max": 4,
+   "chance": 1,
+   "oneOfEach": true,
+   "items": [
+    {
+     "item": "ArrowCharred",
+     "min": 5,
+     "max": 11,
+     "weight": 1
+    },
+    {
+     "item": "BoltCharred",
+     "min": 5,
+     "max": 11,
+     "weight": 1
+    },
+    {
+     "item": "Coins",
+     "min": 22,
+     "max": 99,
+     "weight": 1
+    },
+    {
+     "item": "Torch",
+     "min": 1,
+     "max": 1,
+     "weight": 1
+    },
+    {
+     "item": "Feathers",
+     "min": 5,
+     "max": 13,
+     "weight": 1
+    },
+    {
+     "item": "Upgrader6Armor",
+     "min": 1,
+     "max": 1,
+     "weight": 0.1
+    },
+    {
+     "item": "Upgrader6Weapon",
+     "min": 1,
+     "max": 1,
+     "weight": 0.05
+    },
+    {
+     "item": "Upgrader6Weapon",
+     "min": 1,
+     "max": 1,
+     "weight": 0.1
+    },
+    {
+     "item": "Upgrader6Weapon",
+     "min": 1,
+     "max": 1,
+     "weight": 0.1
+    }
+   ]
+  },
+  "locations": [
+   {
+    "location": "DN_hut01"
+   },
+   {
+    "location": "LumberCamp"
+   }
+  ]
+ },
+ {
+  "id": "container_chest_acc863",
+  "kind": "container",
+  "name": "Chest",
+  "drops": {
+   "min": 2,
+   "max": 4,
+   "chance": 1,
+   "oneOfEach": true,
+   "items": [
+    {
+     "item": "Coins",
+     "min": 50,
+     "max": 100,
+     "weight": 5
+    },
+    {
+     "item": "SilverNecklace",
+     "min": 1,
+     "max": 1,
+     "weight": 0.5
+    },
+    {
+     "item": "Feathers",
+     "min": 3,
+     "max": 13,
+     "weight": 1
+    },
+    {
+     "item": "ArrowCharred",
+     "min": 3,
+     "max": 13,
+     "weight": 0.5
+    },
+    {
+     "item": "BoltCharred",
+     "min": 3,
+     "max": 13,
+     "weight": 0.5
+    },
+    {
+     "item": "AncientGemstoneBlack",
+     "min": 1,
+     "max": 1,
+     "weight": 0.2
+    },
+    {
+     "item": "AncientGemstoneGreen",
+     "min": 1,
+     "max": 1,
+     "weight": 0.2
+    },
+    {
+     "item": "AncientGemstoneOrange",
+     "min": 1,
+     "max": 1,
+     "weight": 0.2
+    },
+    {
+     "item": "AncientGemstonePurple",
+     "min": 1,
+     "max": 1,
+     "weight": 0.2
+    },
+    {
+     "item": "Upgrader6Armor",
+     "min": 1,
+     "max": 1,
+     "weight": 0.1
+    },
+    {
+     "item": "Upgrader6Weapon",
+     "min": 1,
+     "max": 1,
+     "weight": 0.05
+    },
+    {
+     "item": "Upgrader7Armor",
+     "min": 1,
+     "max": 1,
+     "weight": 0.02
+    },
+    {
+     "item": "Upgrader7Weapon",
+     "min": 1,
+     "max": 1,
+     "weight": 0.01
+    }
+   ]
+  },
+  "locations": [
+   {
+    "location": "ShipWreck01_DN"
+   },
+   {
+    "location": "ShipWreck02_DN"
+   }
+  ]
+ },
+ {
+  "id": "container_chest_ae37e9",
+  "kind": "container",
+  "name": "Chest",
+  "drops": {
+   "min": 2,
+   "max": 3,
+   "chance": 1,
+   "oneOfEach": true,
+   "items": [
+    {
+     "item": "Feathers",
+     "min": 1,
+     "max": 3,
+     "weight": 1
+    },
+    {
+     "item": "Coins",
+     "min": 5,
+     "max": 15,
+     "weight": 1
+    },
+    {
+     "item": "Amber",
+     "min": 1,
+     "max": 1,
+     "weight": 1
+    },
+    {
+     "item": "ArrowFlint",
+     "min": 10,
+     "max": 20,
+     "weight": 1
+    },
+    {
+     "item": "Torch",
+     "min": 1,
+     "max": 1,
+     "weight": 1
+    },
+    {
+     "item": "Flint",
+     "min": 2,
+     "max": 4,
+     "weight": 1
+    },
+    {
+     "item": "MaceWood",
+     "min": 1,
+     "max": 1,
+     "weight": 1
+    }
+   ]
+  },
+  "locations": [
+   {
+    "location": "WoodVillage1",
+    "dungeon": true
+   },
+   {
+    "location": "WoodVillage2",
+    "dungeon": true
+   }
+  ]
+ },
+ {
+  "id": "container_chest_b595e4",
+  "kind": "container",
+  "name": "Chest",
+  "drops": {
+   "min": 3,
+   "max": 5,
+   "chance": 1,
+   "oneOfEach": true,
+   "items": [
+    {
+     "item": "WitheredBone",
+     "min": 1,
+     "max": 1,
+     "weight": 0.5
+    },
+    {
+     "item": "ArrowIron",
+     "min": 10,
+     "max": 15,
+     "weight": 1
+    },
+    {
+     "item": "ArrowPoison",
+     "min": 10,
+     "max": 15,
+     "weight": 1
+    },
+    {
+     "item": "Coins",
+     "min": 20,
+     "max": 60,
+     "weight": 1
+    },
+    {
+     "item": "Amber",
+     "min": 1,
+     "max": 5,
+     "weight": 1
+    },
+    {
+     "item": "AmberPearl",
+     "min": 1,
+     "max": 3,
+     "weight": 1
+    },
+    {
+     "item": "Ruby",
+     "min": 1,
+     "max": 3,
+     "weight": 1
+    },
+    {
+     "item": "Chain",
+     "min": 1,
+     "max": 1,
+     "weight": 1
+    },
+    {
+     "item": "ElderBark",
+     "min": 20,
+     "max": 30,
+     "weight": 1
+    },
+    {
+     "item": "SledgeWood",
+     "min": 1,
+     "max": 1,
+     "weight": 0.5
+    },
+    {
+     "item": "Upgrader2Armor",
+     "min": 1,
+     "max": 1,
+     "weight": 0.1
+    },
+    {
+     "item": "Upgrader2Weapon",
+     "min": 1,
+     "max": 1,
+     "weight": 0.05
+    },
+    {
+     "item": "Upgrader3Armor",
+     "min": 1,
+     "max": 1,
+     "weight": 0.01
+    },
+    {
+     "item": "Upgrader3Weapon",
+     "min": 1,
+     "max": 1,
+     "weight": 0.01
+    }
+   ]
+  },
+  "locations": [
+   {
+    "location": "Grave1"
+   },
+   {
+    "location": "SwampRuin1"
+   },
+   {
+    "location": "SwampRuin2"
+   }
+  ]
+ },
+ {
+  "id": "container_chest_b98761",
+  "kind": "container",
+  "name": "Chest",
+  "drops": {
+   "min": 2,
+   "max": 3,
+   "chance": 1,
+   "oneOfEach": true,
+   "items": [
+    {
+     "item": "ArrowFire",
+     "min": 10,
+     "max": 15,
+     "weight": 1
+    },
+    {
+     "item": "Coins",
+     "min": 20,
+     "max": 50,
+     "weight": 1
+    },
+    {
+     "item": "Ruby",
+     "min": 1,
+     "max": 3,
+     "weight": 1
+    },
+    {
+     "item": "AmberPearl",
+     "min": 1,
+     "max": 2,
+     "weight": 1
+    },
+    {
+     "item": "SilverNecklace",
+     "min": 1,
+     "max": 1,
+     "weight": 1
+    },
+    {
+     "item": "KnifeWood",
+     "min": 1,
+     "max": 1,
+     "weight": 0.2
+    },
+    {
+     "item": "AxeWood",
+     "min": 1,
+     "max": 1,
+     "weight": 0.2
+    },
+    {
+     "item": "Upgrader0Weapon",
+     "min": 1,
+     "max": 1,
+     "weight": 0.1
+    },
+    {
+     "item": "Upgrader0Armor",
+     "min": 1,
+     "max": 1,
+     "weight": 0.05
+    },
+    {
+     "item": "Upgrader1Armor",
+     "min": 1,
+     "max": 1,
+     "weight": 0.01
+    },
+    {
+     "item": "Upgrader1Weapon",
+     "min": 1,
+     "max": 1,
+     "weight": 0.01
+    }
+   ]
+  },
+  "locations": [
+   {
+    "location": "ShipSetting01"
+   }
+  ]
+ },
+ {
+  "id": "container_chest_c0c1b8",
+  "kind": "container",
+  "name": "Chest",
+  "drops": {
+   "min": 1,
+   "max": 1,
+   "chance": 1,
+   "oneOfEach": true,
+   "items": [
+    {
+     "item": "SilverNecklace",
+     "min": 1,
+     "max": 1,
+     "weight": 1
+    },
+    {
+     "item": "MoldAtgeir",
+     "min": 1,
+     "max": 1,
+     "weight": 1
+    },
+    {
+     "item": "MoldAxe",
+     "min": 1,
+     "max": 1,
+     "weight": 1
+    },
+    {
+     "item": "MoldAxe2H",
+     "min": 1,
+     "max": 1,
+     "weight": 1
+    },
+    {
+     "item": "MoldBow",
+     "min": 1,
+     "max": 1,
+     "weight": 1
+    },
+    {
+     "item": "MoldCrossbow",
+     "min": 1,
+     "max": 1,
+     "weight": 1
+    },
+    {
+     "item": "MoldFistweapon",
+     "min": 1,
+     "max": 1,
+     "weight": 1
+    },
+    {
+     "item": "MoldKnife",
+     "min": 1,
+     "max": 1,
+     "weight": 1
+    },
+    {
+     "item": "MoldMace",
+     "min": 1,
+     "max": 1,
+     "weight": 1
+    },
+    {
+     "item": "MoldMace2H",
+     "min": 1,
+     "max": 1,
+     "weight": 1
+    },
+    {
+     "item": "MoldShieldBuckler",
+     "min": 1,
+     "max": 1,
+     "weight": 1
+    },
+    {
+     "item": "MoldShieldRound",
+     "min": 1,
+     "max": 1,
+     "weight": 1
+    },
+    {
+     "item": "MoldShieldTower",
+     "min": 1,
+     "max": 1,
+     "weight": 1
+    },
+    {
+     "item": "MoldSpear",
+     "min": 1,
+     "max": 1,
+     "weight": 1
+    },
+    {
+     "item": "MoldSword",
+     "min": 1,
+     "max": 1,
+     "weight": 1
+    },
+    {
+     "item": "MoldSword2H",
+     "min": 1,
+     "max": 1,
+     "weight": 1
+    },
+    {
+     "item": "MoldStafffrostorbs",
+     "min": 1,
+     "max": 1,
+     "weight": 1
+    },
+    {
+     "item": "MoldStaffOrbofAhri",
+     "min": 1,
+     "max": 1,
+     "weight": 1
+    },
+    {
+     "item": "MoldStaffspiritcaller",
+     "min": 1,
+     "max": 1,
+     "weight": 1
+    },
+    {
+     "item": "MoldStaffthunderblood",
+     "min": 1,
+     "max": 1,
+     "weight": 1
+    }
+   ]
+  },
+  "locations": [
+   {
+    "location": "NorthMemorialPlace"
+   }
+  ]
+ },
+ {
+  "id": "container_chest_c4dbb3",
+  "kind": "container",
+  "name": "Chest",
+  "drops": {
+   "min": 3,
+   "max": 5,
+   "chance": 1,
+   "oneOfEach": true,
+   "items": [
+    {
+     "item": "Wood",
+     "min": 10,
+     "max": 30,
+     "weight": 0.5
+    },
+    {
+     "item": "Stone",
+     "min": 10,
+     "max": 30,
+     "weight": 0.5
+    },
+    {
+     "item": "Ruby",
+     "min": 1,
+     "max": 2,
+     "weight": 1
+    },
+    {
+     "item": "Coins",
+     "min": 20,
+     "max": 50,
+     "weight": 1
+    },
+    {
+     "item": "DeerHide",
+     "min": 2,
+     "max": 4,
+     "weight": 1
+    },
+    {
+     "item": "BoneFragments",
+     "min": 10,
+     "max": 15,
+     "weight": 1
+    },
+    {
+     "item": "LeatherScraps",
+     "min": 3,
+     "max": 5,
+     "weight": 1
+    },
+    {
+     "item": "SilverNecklace",
+     "min": 1,
+     "max": 1,
+     "weight": 0.2
+    },
+    {
+     "item": "Upgrader1Armor",
+     "min": 1,
+     "max": 1,
+     "weight": 0.1
+    },
+    {
+     "item": "Upgrader1Weapon",
+     "min": 1,
+     "max": 1,
+     "weight": 0.05
+    },
+    {
+     "item": "Upgrader2Armor",
+     "min": 1,
+     "max": 1,
+     "weight": 0.01
+    },
+    {
+     "item": "Upgrader2Weapon",
+     "min": 1,
+     "max": 1,
+     "weight": 0.01
+    }
+   ]
+  },
+  "locations": [
+   {
+    "location": "TrollCave02"
+   }
+  ]
+ },
+ {
+  "id": "container_chest_d3537e",
+  "kind": "container",
+  "name": "Chest",
+  "drops": {
+   "min": 2,
+   "max": 3,
+   "chance": 1,
+   "oneOfEach": true,
+   "items": [
+    {
+     "item": "Feathers",
+     "min": 1,
+     "max": 3,
+     "weight": 1
+    },
+    {
+     "item": "Coins",
+     "min": 5,
+     "max": 15,
+     "weight": 1
+    },
+    {
+     "item": "Amber",
+     "min": 1,
+     "max": 1,
+     "weight": 1
+    },
+    {
+     "item": "ArrowFlint",
+     "min": 10,
+     "max": 20,
+     "weight": 1
+    },
+    {
+     "item": "Torch",
+     "min": 1,
+     "max": 1,
+     "weight": 1
+    },
+    {
+     "item": "Flint",
+     "min": 2,
+     "max": 4,
+     "weight": 1
+    },
+    {
+     "item": "MaceWood",
+     "min": 2,
+     "max": 4,
+     "weight": 1
+    }
+   ]
+  },
+  "locations": [
+   {
+    "location": "WoodVillage1",
+    "dungeon": true
+   },
+   {
+    "location": "WoodVillage2",
+    "dungeon": true
+   }
+  ]
+ },
+ {
+  "id": "container_chest_ee7ce3",
+  "kind": "container",
+  "name": "Chest",
+  "drops": {
+   "min": 2,
+   "max": 3,
+   "chance": 1,
+   "oneOfEach": true,
+   "items": [
+    {
+     "item": "Feathers",
+     "min": 1,
+     "max": 3,
+     "weight": 1
+    },
+    {
+     "item": "Coins",
+     "min": 5,
+     "max": 15,
+     "weight": 1
+    },
+    {
+     "item": "Amber",
+     "min": 1,
+     "max": 1,
+     "weight": 1
+    },
+    {
+     "item": "ArrowFlint",
+     "min": 10,
+     "max": 20,
+     "weight": 1
+    },
+    {
+     "item": "Torch",
+     "min": 1,
+     "max": 1,
+     "weight": 1
+    },
+    {
+     "item": "Flint",
+     "min": 2,
+     "max": 4,
+     "weight": 1
+    },
+    {
+     "item": "AxeHead2",
+     "min": 1,
+     "max": 1,
+     "weight": 2
+    }
+   ]
+  },
+  "locations": [
+   {
+    "location": "WoodHouse2"
+   }
+  ]
+ },
+ {
+  "id": "container_chest_f28a8d",
+  "kind": "container",
+  "name": "Chest",
+  "drops": {
+   "min": 4,
+   "max": 5,
+   "chance": 1,
+   "oneOfEach": true,
+   "items": [
+    {
+     "item": "WitheredBone",
+     "min": 1,
+     "max": 1,
+     "weight": 0.5
+    },
+    {
+     "item": "ArrowIron",
+     "min": 10,
+     "max": 15,
+     "weight": 1
+    },
+    {
+     "item": "ArrowPoison",
+     "min": 10,
+     "max": 15,
+     "weight": 1
+    },
+    {
+     "item": "Coins",
+     "min": 20,
+     "max": 60,
+     "weight": 1
+    },
+    {
+     "item": "Amber",
+     "min": 1,
+     "max": 5,
+     "weight": 1
+    },
+    {
+     "item": "AmberPearl",
+     "min": 1,
+     "max": 3,
+     "weight": 1
+    },
+    {
+     "item": "Ruby",
+     "min": 1,
+     "max": 3,
+     "weight": 1
+    },
+    {
+     "item": "Chain",
+     "min": 1,
+     "max": 3,
+     "weight": 1
+    },
+    {
+     "item": "ElderBark",
+     "min": 20,
+     "max": 30,
+     "weight": 1
+    },
+    {
+     "item": "IronScrap",
+     "min": 10,
+     "max": 20,
+     "weight": 2
+    },
+    {
+     "item": "Upgrader2Armor",
+     "min": 1,
+     "max": 1,
+     "weight": 0.1
+    },
+    {
+     "item": "Upgrader2Weapon",
+     "min": 1,
+     "max": 1,
+     "weight": 0.05
+    },
+    {
+     "item": "Upgrader3Armor",
+     "min": 1,
+     "max": 1,
+     "weight": 0.01
+    },
+    {
+     "item": "Upgrader3Weapon",
+     "min": 1,
+     "max": 1,
+     "weight": 0.01
+    }
+   ]
+  },
+  "locations": [
+   {
+    "location": "SunkenCrypt4",
+    "dungeon": true
+   }
+  ]
+ },
+ {
+  "id": "container_dvergr_treasure_chest_00ba5d",
+  "kind": "container",
+  "name": "Dvergr Treasure Chest",
+  "drops": {
+   "min": 2,
+   "max": 3,
+   "chance": 1,
+   "oneOfEach": true,
+   "items": [
+    {
+     "item": "Coins",
+     "min": 12,
+     "max": 54,
+     "weight": 1
+    },
+    {
+     "item": "THSwordWood",
+     "min": 1,
+     "max": 1,
+     "weight": 0.1
+    },
+    {
+     "item": "Hook",
+     "min": 1,
+     "max": 1,
+     "weight": 0.5
+    },
+    {
+     "item": "Upgrader5Armor",
+     "min": 1,
+     "max": 1,
+     "weight": 0.1
+    },
+    {
+     "item": "Upgrader5Weapon",
+     "min": 1,
+     "max": 1,
+     "weight": 0.05
+    },
+    {
+     "item": "Upgrader6Armor",
+     "min": 1,
+     "max": 1,
+     "weight": 0.01
+    },
+    {
+     "item": "Upgrader6Weapon",
+     "min": 1,
+     "max": 1,
+     "weight": 0.01
+    }
+   ]
+  },
+  "locations": [
+   {
+    "location": "Mistlands_GuardTower1_ruined_new"
+   },
+   {
+    "location": "Mistlands_GuardTower1_ruined_new2"
+   },
+   {
+    "location": "Mistlands_GuardTower3_ruined_new"
+   },
+   {
+    "location": "Mistlands_RockSpire1"
+   }
+  ]
+ },
+ {
+  "id": "container_dvergr_treasure_chest_a2ae10",
+  "kind": "container",
+  "name": "Dvergr Treasure Chest",
+  "drops": {
+   "min": 4,
+   "max": 5,
+   "chance": 1,
+   "oneOfEach": true,
+   "items": [
+    {
+     "item": "MeadHealthMinor",
+     "min": 1,
+     "max": 2,
+     "weight": 1
+    },
+    {
+     "item": "MeadStaminaMinor",
+     "min": 1,
+     "max": 2,
+     "weight": 1
+    },
+    {
+     "item": "MeadPoisonResist",
+     "min": 1,
+     "max": 2,
+     "weight": 1
+    },
+    {
+     "item": "Sausages",
+     "min": 3,
+     "max": 6,
+     "weight": 1
+    },
+    {
+     "item": "Tankard_dvergr",
+     "min": 1,
+     "max": 1,
+     "weight": 0.1
+    },
+    {
+     "item": "Coins",
+     "min": 33,
+     "max": 66,
+     "weight": 1
+    },
+    {
+     "item": "Coins",
+     "min": 33,
+     "max": 66,
+     "weight": 1
+    },
+    {
+     "item": "THSwordWood",
+     "min": 1,
+     "max": 1,
+     "weight": 0.2
+    },
+    {
+     "item": "Hook",
+     "min": 1,
+     "max": 1,
+     "weight": 0.5
+    },
+    {
+     "item": "Upgrader5Armor",
+     "min": 1,
+     "max": 1,
+     "weight": 0.1
+    },
+    {
+     "item": "Upgrader5Weapon",
+     "min": 1,
+     "max": 1,
+     "weight": 0.05
+    },
+    {
+     "item": "Upgrader6Armor",
+     "min": 1,
+     "max": 1,
+     "weight": 0.01
+    },
+    {
+     "item": "Upgrader6Weapon",
+     "min": 1,
+     "max": 1,
+     "weight": 0.01
+    }
+   ]
+  },
+  "locations": [
+   {
+    "location": "Mistlands_DvergrTownEntrance1",
+    "dungeon": true
+   },
+   {
+    "location": "Mistlands_DvergrTownEntrance2",
+    "dungeon": true
+   }
+  ]
+ },
+ {
+  "id": "container_jotun_s_chest_2a6fd0",
+  "kind": "container",
+  "name": "Jotun's Chest",
+  "drops": {
+   "min": 2,
+   "max": 4,
+   "chance": 1,
+   "oneOfEach": true,
+   "items": [
+    {
+     "item": "AncientCoin",
+     "min": 4,
+     "max": 10,
+     "weight": 1
+    },
+    {
+     "item": "MeadStaminaMedium",
+     "min": 1,
+     "max": 1,
+     "weight": 1
+    },
+    {
+     "item": "MeadHealthMedium",
+     "min": 1,
+     "max": 1,
+     "weight": 1
+    },
+    {
+     "item": "MeadEitrMinor",
+     "min": 1,
+     "max": 1,
+     "weight": 1
+    },
+    {
+     "item": "ArrowCharred",
+     "min": 5,
+     "max": 11,
+     "weight": 1
+    },
+    {
+     "item": "Upgrader6Armor",
+     "min": 1,
+     "max": 1,
+     "weight": 0.05
+    },
+    {
+     "item": "Upgrader6Weapon",
+     "min": 1,
+     "max": 1,
+     "weight": 0.025
+    },
+    {
+     "item": "Upgrader7Armor",
+     "min": 1,
+     "max": 1,
+     "weight": 0.01
+    },
+    {
+     "item": "Upgrader7Weapon",
+     "min": 1,
+     "max": 1,
+     "weight": 0.01
+    }
+   ]
+  },
+  "locations": [
+   {
+    "location": "MorkBorg"
+   },
+   {
+    "location": "MorkBorg",
+    "dungeon": true
+   }
+  ]
  }
 ]

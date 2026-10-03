@@ -12,6 +12,7 @@ Conventions in the output:
   - Damage maps use the game's damage type names without the m_ prefix (slash, fire, ...).
   - "icon" is a file name stem in the icons dir (<icon>.png).
 """
+import hashlib
 import json
 import os
 import re
@@ -252,7 +253,7 @@ def mark_enemy_only(items: list, creatures: list, recipes: list, procs: list, so
     """Flag items players can't get and that only exist for enemies: no recipe, drop, source, conversion or piece
     yields them, and they are either carried by a creature (Dvergr crossbow, FW_* Fallen Warrior and SP_* Shadow
     gear) or a prefixed copy of an obtainable item with the same name (unused SP_* leftovers). Items that are merely
-    unobtainable here (fishing, chests and traders aren't modelled yet) stay visible. The site hides enemyOnly items."""
+    unobtainable here (fishing and traders aren't modelled yet) stay visible. The site hides enemyOnly items."""
     carried = {i for c in creatures for i in c.get("attacks", []) + c.get("equipment", [])}
     obtainable = {r.get("item") for r in recipes} | {p["to"] for p in procs}
     obtainable |= {d["item"] for c in creatures for d in c.get("drops", [])}
@@ -276,8 +277,8 @@ def reachable(items: list, creatures: list, pieces: list, recipes: list, procs: 
               spawn_list: list) -> tuple[set, set, set]:
     """Ids of the items, creatures and pieces a player can get to, by fixed point from what the world offers:
     sources, spawns and enabled pieces in a build menu, then enabled recipes with reachable ingredients, drops of
-    reachable creatures, conversions of reachable inputs. Incomplete while fishing, chests, traders and quests
-    aren't modelled (#20)."""
+    reachable creatures, conversions of reachable inputs. Chests in locations count (as sources). Incomplete while
+    fishing, traders and quests aren't modelled (#20)."""
     by_creature = {c["id"]: c for c in creatures}
     got_creatures = {s["creature"] for s in spawn_list}
     got_pieces = {p["id"] for p in pieces if p.get("enabled") and p.get("tools")}
@@ -599,9 +600,9 @@ def raid_spawns() -> list[dict]:
     return out
 
 
-def location_spawns() -> list[dict]:
-    """Creature spawners, spawn areas and boss altars inside world locations and the dungeons they generate.
-    A DungeonGenerator uses the rooms whose Room.Theme overlaps its m_themes."""
+def placed_in_locations():
+    """(location, biomes, prefab, dungeon) for each enabled world location's own prefab and, as dungeon, every
+    enabled room its DungeonGenerator can use (Room.Theme overlapping the generator's m_themes)."""
     locations, rooms = load_dir("locations"), load_dir("rooms")
     themes = load("room_themes.json") if (RAW / "room_themes.json").exists() else {}
 
@@ -613,22 +614,50 @@ def location_spawns() -> list[dict]:
         if z["m_enable"]:
             where[z["m_prefabName"]] += [b for b in biomes(z["m_biome"]) if b not in where[z["m_prefabName"]]]
 
-    out = []
     for name in sorted(where):
         if name not in locations:
             continue
         loc = locations[name]
-        found = [dict(x, dungeon=False) for x in spawners_in(loc)]
+        yield name, where[name], loc, False
         for g in (c["fields"] for c in loc["components"] if c["type"] == "DungeonGenerator"):
             bits = theme_bits(g["m_themes"])
             for r in rooms.values():
                 if r.get("enabled") and theme_bits(r["theme"]) & bits:
-                    found += [dict(x, dungeon=True) for x in spawners_in(r)]
+                    yield name, where[name], r, True
+
+
+def location_spawns() -> list[dict]:
+    """Creature spawners, spawn areas and boss altars inside world locations and the dungeons they generate."""
+    found, biomes_of = defaultdict(list), {}
+    for name, bs, p, dungeon in placed_in_locations():
+        found[name, dungeon] += spawners_in(p)
+        biomes_of[name] = bs
+    out = []
+    for name in sorted(biomes_of):
         for dungeon in (False, True):
-            for e in merge_spawners([x for x in found if x["dungeon"] == dungeon]):
+            for e in merge_spawners(found[name, dungeon]):
                 out.append({"creature": e.pop("creature"), "source": "dungeon" if dungeon else "location",
-                            "location": name, "biomes": where[name], **e})
+                            "location": name, "biomes": biomes_of[name], **e})
     return out
+
+
+def location_containers() -> list[dict]:
+    """Loot chests (Container default items) in locations and their dungeon rooms: one source of kind `container`
+    per distinct name + drop table, with the locations it is found in (`dungeon`: in a room the location's
+    dungeon generates)."""
+    by = {}
+    for name, bs, p, dungeon in placed_in_locations():
+        for c in (c["fields"] for c in p["components"] if c["type"] == "Container"):
+            if not (table := drop_table(c["m_defaultItems"])):
+                continue
+            title = text(c["m_name"])
+            digest = hashlib.sha1(json.dumps(table, sort_keys=True).encode()).hexdigest()[:6]
+            slug = re.sub(r"[^a-z0-9]+", "_", (title or "").lower()).strip("_")
+            e = by.setdefault((title, digest), {"id": f"container_{slug}_{digest}", "kind": "container",
+                                                "name": title, "drops": table, "locations": {}})
+            e["locations"][name, dungeon] = {"location": name, "dungeon": dungeon}
+    return sorted((dict(e, locations=[e["locations"][k] for k in sorted(e["locations"])]) for e in by.values()),
+                  key=lambda e: e["id"])
 
 
 def offspring_spawns() -> list[dict]:
@@ -697,6 +726,7 @@ def main(argv: list[str]) -> int:
         procs.extend(processing(name, p))
         if not p["isItem"] and not has(p, "Piece") and (s := source(name, p)):
             sources.append(s)
+    sources += location_containers()
 
     recipes = [recipe(r) for r in load("recipes.json")]
     mark_enemy_only(items, creatures, recipes, procs, sources, pieces)

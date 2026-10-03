@@ -201,6 +201,16 @@ class Entities(FixtureCase):
         [d] = self.spawns("dungeon")  # Crypt room and disabled room don't match the Cave generator
         self.assertEqual((d["creature"], d["location"], d["biomes"], d["levels"]), ("Pup", "Lair", ["Mountain"], [1, 2]))
 
+    def test_location_containers(self):
+        by = {c["name"]: c for c in N.location_containers()}  # empty table dropped; one source per name + table
+        self.assertEqual(set(by), {"Strongbox", "$piece_other"})
+        box = by["Strongbox"]
+        self.assertEqual(box["kind"], "container")
+        self.assertEqual([d["item"] for d in box["drops"]["items"]], ["Gem", "Wood"])
+        # in Camp and, as a dungeon room, in Lair; Ruin is disabled, the Crypt room's theme doesn't match Lair
+        self.assertEqual([(x["location"], x["dungeon"]) for x in box["locations"]], [("Camp", False), ("Lair", True)])
+        self.assertEqual(len({c["id"] for c in N.location_containers()}), 2)
+
     def test_offspring(self):
         self.assertEqual([s["parent"] for s in self.spawns("offspring")], ["Raider", "Raider_Ranged", "Raider_sleeping"])
         self.assertEqual(self.spawns("egg"), [{"creature": "Pup", "source": "egg", "item": "Egg"}])
@@ -256,6 +266,9 @@ class Unobtainable(FixtureCase):
         got, _, _ = N.reachable(items, creatures, pieces, recipes, procs, sources, N.spawns())
         self.assertTrue({"Wood", "Ore", "Ingot", "Sword", "Helmet"} <= got)  # source -> smelt -> craft (upgrader ignored)
         self.assertNotIn("Mead", got)  # needs Fish, which nothing yields
+        self.assertNotIn("Gem", got)
+        got, _, _ = N.reachable(items, creatures, pieces, recipes, procs, sources + N.location_containers(), N.spawns())
+        self.assertIn("Gem", got)  # found in a chest
 
 
 class BuildId(FixtureCase):
