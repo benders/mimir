@@ -226,8 +226,17 @@ class Site(unittest.TestCase):
         self.assertIn("<h1>Bench (world)</h1>", (self.out / "pieces/piece_bench.html").read_text(encoding="utf-8"))
         self.assertIn("<h1>Chief</h1>", (self.out / "creatures/Chief.html").read_text(encoding="utf-8"))
 
+    def test_food_comfort_skills_pages(self):
+        skills = (self.out / "mechanics/skills.html").read_text(encoding="utf-8")
+        self.assertIn("<td>Blades</td><td>1</td>", skills)  # name from $skill_swords, gain step from the Player prefab
+        self.assertIn("<td>Run</td><td>0.2</td>", skills)    # no translation: the skill id
+        self.assertIn("<td>1</td><td>90</td><td>45</td>", skills)  # death penalty 0.1
+        comfort = (self.out / "mechanics/comfort.html").read_text(encoding="utf-8")
+        self.assertNotIn("pieces/piece_bench", comfort)  # comfort 2 but not buildable: no world copies
+
     def test_mechanics_section(self):
-        for page in ("index", "blocking", "drops", "creature-levels", "damage-types", "item-upgrades", "adrenaline"):
+        for page in ("index", "blocking", "drops", "creature-levels", "damage-types", "item-upgrades", "adrenaline",
+                     "food", "comfort", "skills"):
             self.assertTrue((self.out / f"mechanics/{page}.html").is_file(), page)
         home = (self.out / "index.html").read_text(encoding="utf-8")
         self.assertIn('<a href="mechanics/index.html">Mechanics</a>', home)  # nav entry

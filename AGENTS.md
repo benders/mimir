@@ -98,7 +98,9 @@ Logs after a dump: `.cache/dump/<branch>/server.log` (Unity) and `bepinex.log` (
 ## Site data (`data/`, committed)
 
 `meta.json` (versions, counts, unresolved tokens, skipped refs), `player.json` (Player prefab constants the mechanics
-pages use: `adrenaline` gains and decay curves as [time, value] keys, no tangents), `items`, `recipes`, `creatures`, `spawns`,
+pages use: `adrenaline` gains and decay curves as [time, value] keys, no tangents; `food` base health/stamina; `rested`
+(SE_Rested base and per-comfort time, SE_Cozy delay, read from the raw dump since they equal the type defaults); `skills`
+gain step per skill, death penalty factor, hard-death cooldown), `items`, `recipes`, `creatures`, `spawns`,
 `pieces`, `processing` (smelter/cooking/fermenter conversions), `sources` (pickables, ore, trees, rocks; follow
 `becomes` for multi-stage objects (or an item id: the object breaks into that item, e.g. Dvergr altar crystal → DvergrKeyFragment); `kind: container` = loot chests, one per distinct name + `Container` drop table, with
 `locations` [{location, dungeon}] where it is placed, `dungeon` = in a room that location's dungeon generates;

@@ -37,5 +37,32 @@
   "type": "SE_Stats",
   "name": "$se_wet",
   "duration": 60
+ },
+ {
+  "id": "Wet",
+  "type": "SE_Stats",
+  "name": "Fizzy",
+  "duration": 60
+ },
+ {
+  "id": "Rested",
+  "type": "SE_Rested",
+  "name": "Fizzy",
+  "stats": {
+   "healthRegenMultiplier": 1,
+   "staminaRegenMultiplier": 1,
+   "baseTTL": 200,
+   "TTLPerComfortLevel": 30
+  }
+ },
+ {
+  "id": "Resting",
+  "type": "SE_Cozy",
+  "name": "Fizzy",
+  "stats": {
+   "healthRegenMultiplier": 1,
+   "staminaRegenMultiplier": 1,
+   "delay": 5
+  }
  }
 ]

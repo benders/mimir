@@ -218,6 +218,60 @@ def dps(per_hit: float, attack: dict | None, skill: float = 0) -> float | None:
     return combo_damage(per_hit, attack) / cycle
 
 
+def food_fraction(left: float, burn: float) -> float:
+    """Share of a food's health/stamina/eitr still given with `left` of its `burn` seconds to go
+    (Player.UpdateFood: Pow(Clamp01(m_time / m_foodBurnTime), 0.3), recomputed once per second)."""
+    return max(0.0, min(1.0, left / burn)) ** 0.3 if burn > 0 else 0.0
+
+
+def food_can_eat_again(left: float, burn: float) -> bool:
+    """The same food can be eaten again, or replaced when all three slots are full, once less than half its time is
+    left (Player.Food.CanEatAgain)."""
+    return left < burn / 2
+
+
+def comfort_level(pieces: list[tuple[str, int, str | None]], shelter: bool = True) -> int:
+    """Comfort from the comfort pieces within 10 m: (name, comfort, group or None). 1 outside shelter; in shelter
+    1 + 1 + the best piece of each group + each distinct ungrouped name (SE_Rested.CalculateComfortLevel: sorted by
+    group, then comfort descending, then name; a piece is skipped when it shares the previous one's group or name)."""
+    if not shelter:
+        return 1
+    order = sorted(pieces, key=lambda x: x[0], reverse=True)
+    order.sort(key=lambda x: (x[2] or "", -x[1]))
+    level, prev = 2, None
+    for p in order:
+        if prev and ((p[2] and p[2] == prev[2]) or p[0] == prev[0]):
+            prev = p
+            continue
+        level += p[1]
+        prev = p
+    return level
+
+
+def rested_time(comfort: int, base_ttl: float, per_comfort: float) -> float:
+    """Rested duration in seconds (SE_Rested.UpdateTTL: m_baseTTL + (comfort - 1) × m_TTLPerComfortLevel); a renewal only
+    replaces the timer when it is longer than what is left."""
+    return base_ttl + (comfort - 1) * per_comfort
+
+
+def skill_requirement(level: float) -> float:
+    """Experience to go from `level` to the next (Skills.Skill.GetNextLevelRequirement: Floor(level + 1)^1.5 × 0.5 + 0.5)."""
+    return math.floor(level + 1) ** 1.5 * 0.5 + 0.5
+
+
+def skill_raises(target: int, step: float, factor: float = 1.0, start: int = 0) -> int:
+    """Raises of size step × factor to go from level `start` to `target` (Skills.Skill.Raise: the accumulator gains
+    m_increseStep × factor per raise and resets to 0 at a level-up, so the overshoot is lost)."""
+    gain = step * factor
+    return sum(math.ceil(skill_requirement(lv) / gain - 1e-9) for lv in range(start, min(target, 100)))
+
+
+def skill_after_deaths(level: float, deaths: int, factor: float) -> float:
+    """Skill level after `deaths` deaths, each losing `factor` of the level (Skills.LowerAllSkills; also resets the
+    progress towards the next level)."""
+    return level * (1 - factor) ** deaths
+
+
 # --- markdown -------------------------------------------------------------------------------
 
 def parse_front_matter(text: str) -> tuple[dict, str]:
@@ -549,8 +603,35 @@ def adrenaline_chart(adr: dict) -> str:
                   "Dots: the curve keys in the Player prefab; linear between them (the dump has no tangents).")
 
 
+def food_chart() -> str:
+    """Share of a food's values left against the share of its time gone (Player.UpdateFood)."""
+    xs = range(0, 101)
+    series = [{"label": "value", "points": [(x, food_fraction(100 - x, 100) * 100) for x in xs],
+               "marks": [(50, food_fraction(50, 100) * 100)]}]
+    q = [food_fraction(100 - x, 100) * 100 for x in (50, 75, 90)]
+    desc = (f"Share of a food's health, stamina and eitr still given, against the share of its duration gone. "
+            f"Half way it still gives {_fmt(q[0])}%, at 75% {_fmt(q[1])}%, at 90% {_fmt(q[2])}%, then it drops to 0.")
+    return figure(line_chart(series, xlim=(0, 100), ylim=(0, 100), xticks=range(0, 101, 25), yticks=range(0, 101, 25),
+                             xlabel="Time gone (% of duration)", ylabel="Value (% of full)", ysuffix="%",
+                             title="Food value over time", desc=desc),
+                  "Dot: half the time gone, from where the food can be eaten again.")
+
+
+def skills_chart() -> str:
+    """Raises (uses) needed from level 0, for gain steps 1 and 0.5, without and with Rested (× 1.5)."""
+    lv = range(0, 101, 2)
+    series = [{"label": label, "points": [(L, skill_raises(L, step, factor) / 1000) for L in lv]}
+              for label, step, factor in (("step 0.5", 0.5, 1), ("step 1", 1, 1), ("step 1, rested", 1, 1.5))]
+    r = skill_raises(100, 1), skill_raises(50, 1)
+    desc = (f"Raises needed to reach a level from 0, in thousands. With a gain step of 1: {r[1]:,} to level 50, "
+            f"{r[0]:,} to 100. Step 0.5 needs about twice as many; Rested (× 1.5) about two thirds.")
+    return figure(line_chart(series, xlim=(0, 100), ylim=(0, 45), xticks=range(0, 101, 25), yticks=range(0, 46, 15),
+                             xlabel="Skill level", ylabel="Raises from 0 (thousands)", title="Skill experience", desc=desc),
+                  "Each level needs ⌊L + 1⌋^1.5 × 0.5 + 0.5; leftover experience is lost at every level-up.")
+
+
 CHARTS = {"armor": armor_chart, "block": block_chart, "stars": stars_chart, "stamina": stamina_chart,
-          "pseudo": pseudo_chart, "upgrade": upgrade_chart}
+          "pseudo": pseudo_chart, "upgrade": upgrade_chart, "food": food_chart, "skills": skills_chart}
 
 
 def world_piece_drop(amount: int) -> int:

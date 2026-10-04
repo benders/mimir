@@ -1410,6 +1410,66 @@ def block_stage_counts() -> str:
     return table(["Stage", "Items", "Creatures", "Pieces", "Bosses"], rows, "num")
 
 
+def block_foods() -> str:
+    """Every food (only Consumable items are eaten, Humanoid.UseItem; raw meat has values but is a Material): what it adds to max health, stamina and eitr, healing per 10 s and how long it lasts."""
+    foods = [i for i in ITEMS.values() if i.get("food") and i["type"] == "Consumable" and has_page("item", i["id"])]
+    foods.sort(key=lambda i: (stage_of("item", i["id"]), -sum(i["food"].get(k, 0) for k in ("health", "stamina", "eitr")),
+                              name_of("item", i["id"]).lower()))
+    rows = [[link("item", i["id"]), esc(BIOMES[STAGES[stage_of("item", i["id"])]]),
+             *(num(i["food"][k]) if i["food"].get(k) else "" for k in ("health", "stamina", "eitr", "regen")),
+             duration(i["food"].get("duration", 0))] for i in foods]
+    return table(["Food", "Stage", "Health", "Stamina", "Eitr", "Heals / 10 s", "Lasts"], rows, "num")
+
+
+def comfort_pieces() -> list[dict]:
+    """Buildable pieces with comfort (world-only copies, such as Hildir's campfire, can't be placed at a base)."""
+    return [p for p in PIECES.values() if p.get("comfort") and p.get("tools") and has_page("piece", p["id"])]
+
+
+def block_comfort_pieces() -> str:
+    """Comfort pieces by comfort group, best first: only the best of each group counts."""
+    groups = defaultdict(list)
+    for p in comfort_pieces():
+        groups[p["comfort"].get("group")].append(p)
+    rows = []
+    for g in sorted(groups, key=lambda g: (g is None, g or "")):
+        ps = sorted(groups[g], key=lambda p: (-p["comfort"]["value"], stage_of("piece", p["id"]), name_of("piece", p["id"]).lower()))
+        rows.append([esc(words(g)) if g else "none (each counts)", num(ps[0]["comfort"]["value"]),
+                     ", ".join(f'{link("piece", p["id"])}{" *" if p.get("season") else ""} {num(p["comfort"]["value"])}'
+                               for p in ps)])
+    return table(["Group", "Best", "Pieces"], rows) + '<p class="note">* seasonal: buildable only during its event.</p>'
+
+
+def block_max_comfort() -> str:
+    """Highest comfort level reachable with the pieces available up to each stage, and the Rested time it gives."""
+    r = PLAYER["rested"]
+    rows = []
+    for i, st in enumerate(STAGES):
+        avail = [p for p in comfort_pieces() if stage_of("piece", p["id"]) <= i]
+        lvl = lambda ps: mechanics.comfort_level([(p["id"], p["comfort"]["value"], p["comfort"].get("group")) for p in ps])
+        plain, seasonal = lvl([p for p in avail if not p.get("season")]), lvl(avail)
+        t = mechanics.rested_time(plain, r["baseTTL"], r["ttlPerComfort"])
+        rows.append([esc(BIOMES[st]), num(plain), duration(int(t)), num(seasonal) if seasonal != plain else ""])
+    return table(["Up to", "Max comfort", "Rested lasts", "With seasonal pieces"], rows, "num")
+
+
+def block_skills() -> str:
+    """Every skill's gain step and the raises it takes to reach level 50 and 100, without and with Rested."""
+    rested = 1 + (EFFECTS.get("Rested", {}).get("stats", {}).get("raiseSkillModifier") or 0)
+    rows = [[esc(s["name"]), num(s["step"]), f'{mechanics.skill_raises(50, s["step"]):,}',
+             f'{mechanics.skill_raises(100, s["step"]):,}', f'{mechanics.skill_raises(100, s["step"], rested):,}']
+            for s in sorted(PLAYER["skills"]["list"], key=lambda s: s["name"])]
+    return table(["Skill", "Gain step", "Raises to 50", "To 100", f"To 100 rested (× {num(rested)})"], rows, "num")
+
+
+def block_death_penalty() -> str:
+    """Skill level after repeated deaths, from 100 and from 50."""
+    f = PLAYER["skills"]["deathLowerFactor"]
+    rows = [[num(n), num(round(mechanics.skill_after_deaths(100, n, f), 1)),
+             num(round(mechanics.skill_after_deaths(50, n, f), 1))] for n in (1, 2, 3, 5, 10, 20)]
+    return table(["Deaths", "From 100", "From 50"], rows, "num")
+
+
 def mech_blocks() -> dict:
     return {"shields": block_shields, "resistant-creatures": block_resist_creatures, "resistant-gear": block_resist_gear,
             "star-spawns": block_star_spawns, "star-odds": block_star_odds, "guaranteed-stars": block_guaranteed_stars,
@@ -1420,6 +1480,8 @@ def mech_blocks() -> dict:
             "attack-speed-ranged": block_attack_speed_ranged, "adrenaline-attacks": block_adrenaline_attacks,
             "adrenaline-blockers": block_adrenaline_blockers, "adrenaline-effects": block_adrenaline_effects,
             "adrenaline-sources": block_adrenaline_sources,
+            "foods": block_foods, "comfort-pieces": block_comfort_pieces, "max-comfort": block_max_comfort,
+            "skills": block_skills, "death-penalty": block_death_penalty,
             "adrenaline-chart": lambda: mechanics.adrenaline_chart(PLAYER["adrenaline"]),
             "chart": lambda name: mechanics.CHARTS[name]()}
 

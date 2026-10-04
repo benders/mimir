@@ -193,7 +193,44 @@ class Charts(unittest.TestCase):
         self.assertIn("Decay goes from 1 to 4 per second; the delay from 10 s to 6 s", M.adrenaline_chart(adr))
         self.assertIn("A 100 hit leaves 60 against block power 40 and 25 against block power 100", M.block_chart())
         self.assertIn("health ×3, damage ×2, level-multiplied drops ×4", M.stars_chart())
+        self.assertIn("Half way it still gives 81.2%", M.food_chart())
+        self.assertIn(f"{M.skill_raises(100, 1):,} to 100", M.skills_chart())
 
+
+    def test_food(self):
+        # Player.UpdateFood: Pow(Clamp01(time / burn), 0.3); Player.Food.CanEatAgain: time < burn / 2
+        self.assertEqual(M.food_fraction(100, 100), 1)
+        self.assertAlmostEqual(M.food_fraction(50, 100), 0.5 ** 0.3)
+        self.assertEqual(M.food_fraction(-5, 100), 0)
+        self.assertTrue(M.food_can_eat_again(49, 100))
+        self.assertFalse(M.food_can_eat_again(50, 100))
+
+    def test_comfort(self):
+        # SE_Rested.CalculateComfortLevel: 1, +1 in shelter, best of each group, ungrouped once per name
+        pieces = [("chair", 3, "Chair"), ("stool", 1, "Chair"), ("rug", 2, "Carpet"),
+                  ("tree", 1, None), ("tree", 1, None), ("pole", 1, None)]
+        self.assertEqual(M.comfort_level(pieces), 2 + 3 + 2 + 1 + 1)
+        self.assertEqual(M.comfort_level(pieces, shelter=False), 1)
+        self.assertEqual(M.comfort_level([]), 2)
+        # SE_Rested.UpdateTTL
+        self.assertEqual(M.rested_time(1, 480, 60), 480)
+        self.assertEqual(M.rested_time(10, 480, 60), 1020)
+
+    def test_skills(self):
+        # Skills.Skill.GetNextLevelRequirement: Floor(level + 1)^1.5 * 0.5 + 0.5
+        self.assertEqual(M.skill_requirement(0), 1)
+        self.assertAlmostEqual(M.skill_requirement(1), 2 ** 1.5 * 0.5 + 0.5)
+        self.assertEqual(M.skill_requirement(99.5), 500.5)
+        # Skills.Skill.Raise: the accumulator resets at a level-up, so each level is rounded up to whole raises
+        self.assertEqual(M.skill_raises(1, 1), 1)
+        self.assertEqual(M.skill_raises(2, 1), 1 + 2)       # 1.91 needs 2 raises
+        self.assertEqual(M.skill_raises(2, 0.5), 2 + 4)
+        self.assertEqual(M.skill_raises(2, 1, factor=1.5), 1 + 2)
+        self.assertEqual(M.skill_raises(150, 1), M.skill_raises(100, 1))  # capped at 100
+        self.assertEqual(M.skill_raises(5, 1, start=3), M.skill_raises(5, 1) - M.skill_raises(3, 1))
+        # Skills.LowerAllSkills
+        self.assertEqual(M.skill_after_deaths(100, 1, 0.05), 95)
+        self.assertAlmostEqual(M.skill_after_deaths(100, 2, 0.05), 90.25)
 
     def test_world_piece_drop(self):
         self.assertEqual([M.world_piece_drop(n) for n in (1, 2, 3, 10)], [1, 1, 1, 3])

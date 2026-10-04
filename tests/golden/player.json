@@ -33,5 +33,31 @@
   "perfectDodge": 4,
   "staggerEnemy": 6,
   "nonBlockDamage": -1
+ },
+ "food": {
+  "baseHealth": 20,
+  "baseStamina": 40
+ },
+ "rested": {
+  "baseTTL": 200,
+  "ttlPerComfort": 30,
+  "restingDelay": 5,
+  "restingEffect": "Rested"
+ },
+ "skills": {
+  "deathLowerFactor": 0.1,
+  "hardDeathCooldown": 300,
+  "list": [
+   {
+    "id": "Swords",
+    "name": "Blades",
+    "step": 1
+   },
+   {
+    "id": "Run",
+    "name": "Run",
+    "step": 0.2
+   }
+  ]
  }
 }

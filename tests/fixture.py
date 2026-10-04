@@ -141,6 +141,7 @@ SE_DEFAULTS = m(name="", tooltip="", icon=None, category="", ttl=0, cooldown=0, 
 TRANSLATIONS = {
     "piece_chest": "Strongbox",
     "item_wood": "Twig", "item_wood_desc": "A stick.",
+    "skill_swords": "Blades",
     "item_ore": "Rustore", "item_ingot": "Ingot",
     "item_buckler": "Test Buckler",
     "item_sword": "Test Sword", "item_sword_desc": "Sharp <b>enough</b>.",
@@ -253,7 +254,9 @@ def prefabs():
         prefab("Player", character(name="Player"), comp("Player", m(
             maxAdrenaline=0, adrenalineDegen=[[0, 2], [1, 3]], adrenalineDegenDelay=[[0, 8], [1, 4]],
             adrenalineGainMultiplier=[[0, 1], [1, 1]], perfectDodgeAdrenaline=4, staggerEnemyAdrenaline=6,
-            attackMissAdrenaline=0, nonBlockDamageAdrenaline=-1))),
+            attackMissAdrenaline=0, nonBlockDamageAdrenaline=-1, baseHP=20, baseStamina=40, hardDeathCooldown=300)),
+               comp("Skills", m(DeathLowerFactor=0.1, skills=[{"m_skill": "Swords", "m_increseStep": 1},
+                                                             {"m_skill": "Run", "m_increseStep": 0.2}]))),  # Run: no name
         piece("Bench", comp("CraftingStation", m(name="$piece_bench", rangeBuild=20, craftRequireRoof=True,
                                                  craftRequireFire=False)),
               name="$piece_bench", icon=S("Bench"), category="Crafting", resources=[req("Wood", 10)],
@@ -344,7 +347,12 @@ def status_effects():
         percentigeDamageModifiers=damages(fire=0.1), runStaminaDrainModifier=0)}},
             {"name": "SE_Ward", "type": "SE_Stats", "fields": {**SE_DEFAULTS, **m(name="$se_ward", ttl=300)}},  # a guardian power
             {"name": "SE_Stun", "type": "SE_Stats", "fields": {**SE_DEFAULTS, **m(name="$se_stun", ttl=2)}},  # Raider's bite
-            {"name": "SE_Wet", "type": "SE_Stats", "fields": {**SE_DEFAULTS, **m(name="$se_wet", ttl=60)}}]  # nothing gives it
+            {"name": "SE_Wet", "type": "SE_Stats", "fields": {**SE_DEFAULTS, **m(name="$se_wet", ttl=60)}},  # nothing gives it
+            {"name": "Wet", "type": "SE_Stats", "fields": {**SE_DEFAULTS, **m(name="$se_fizz", ttl=60)}},  # mechanics pages link it
+            {"name": "Rested", "type": "SE_Rested", "fields": {**SE_DEFAULTS, **m(name="$se_fizz", baseTTL=200,
+                                                                                TTLPerComfortLevel=30)}},
+            {"name": "Resting", "type": "SE_Cozy", "fields": {**SE_DEFAULTS, **m(name="$se_fizz", delay=5,
+                                                                              statusEffect="Rested")}}]
 
 
 def write_dump(raw: Path) -> Path:

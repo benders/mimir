@@ -1379,7 +1379,30 @@ def player() -> dict:
         "gainMultiplier": g("m_adrenalineGainMultiplier", []),
         "perfectDodge": g("m_perfectDodgeAdrenaline"), "staggerEnemy": g("m_staggerEnemyAdrenaline"),
         "attackMiss": g("m_attackMissAdrenaline"), "nonBlockDamage": g("m_nonBlockDamageAdrenaline"),
-    }}
+    },
+        # Player.GetTotalFoodValue: these + the eaten foods' values
+        "food": {"baseHealth": g("m_baseHP"), "baseStamina": g("m_baseStamina")},
+        "rested": rested_constants(),
+        "skills": skill_constants(g("m_hardDeathCooldown")),
+    }
+
+
+def rested_constants() -> dict:
+    """SE_Cozy (Resting) gives SE_Rested after m_delay s; Rested lasts m_baseTTL + (comfort - 1) × m_TTLPerComfortLevel.
+    Read from the raw status effects: normalize drops fields equal to the type's defaults."""
+    effects = load("status_effects.json")
+    rested = next((e["fields"] for e in effects if e["type"] == "SE_Rested"), {})
+    cozy = next((e["fields"] for e in effects if e["type"] == "SE_Cozy"), {})
+    return {"baseTTL": rested.get("m_baseTTL", 0), "ttlPerComfort": rested.get("m_TTLPerComfortLevel", 0),
+            "restingDelay": cozy.get("m_delay", 0), "restingEffect": cozy.get("m_statusEffect")}
+
+
+def skill_constants(hard_death_cooldown: float) -> dict:
+    """Skills component on the Player: gain step per skill (Skills.SkillDef.m_increseStep), death penalty factor."""
+    s = comp(PREFABS["Player"], "Skills") or {}
+    return {"deathLowerFactor": s.get("m_DeathLowerFactor", 0), "hardDeathCooldown": hard_death_cooldown,
+            "list": [{"id": d["m_skill"], "name": TRANSLATIONS.get(f"skill_{d['m_skill'].lower()}", d["m_skill"]),
+                      "step": d["m_increseStep"]} for d in s.get("m_skills", [])]}
 
 
 def write(name: str, data) -> None:

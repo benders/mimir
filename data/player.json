@@ -32,5 +32,141 @@
   ],
   "perfectDodge": 5,
   "staggerEnemy": 3
+ },
+ "food": {
+  "baseHealth": 25,
+  "baseStamina": 50
+ },
+ "rested": {
+  "baseTTL": 480,
+  "ttlPerComfort": 60,
+  "restingDelay": 20,
+  "restingEffect": "Rested"
+ },
+ "skills": {
+  "deathLowerFactor": 0.05,
+  "hardDeathCooldown": 600,
+  "list": [
+   {
+    "id": "Swords",
+    "name": "Swords",
+    "step": 1
+   },
+   {
+    "id": "Bows",
+    "name": "Bows",
+    "step": 1.5
+   },
+   {
+    "id": "Axes",
+    "name": "Axes",
+    "step": 1
+   },
+   {
+    "id": "WoodCutting",
+    "name": "Wood Cutting",
+    "step": 1
+   },
+   {
+    "id": "Unarmed",
+    "name": "Fists",
+    "step": 1
+   },
+   {
+    "id": "Knives",
+    "name": "Knives",
+    "step": 1
+   },
+   {
+    "id": "Clubs",
+    "name": "Clubs",
+    "step": 1
+   },
+   {
+    "id": "Polearms",
+    "name": "Polearms",
+    "step": 1
+   },
+   {
+    "id": "Spears",
+    "name": "Spears",
+    "step": 1.5
+   },
+   {
+    "id": "Blocking",
+    "name": "Blocking",
+    "step": 0.5
+   },
+   {
+    "id": "Pickaxes",
+    "name": "Pickaxes",
+    "step": 1
+   },
+   {
+    "id": "Jump",
+    "name": "Jump",
+    "step": 0.5
+   },
+   {
+    "id": "Sneak",
+    "name": "Sneak",
+    "step": 0.5
+   },
+   {
+    "id": "Run",
+    "name": "Run",
+    "step": 0.2
+   },
+   {
+    "id": "Swim",
+    "name": "Swim",
+    "step": 0.3
+   },
+   {
+    "id": "Ride",
+    "name": "Riding",
+    "step": 0.2
+   },
+   {
+    "id": "ElementalMagic",
+    "name": "Elemental Magic",
+    "step": 1
+   },
+   {
+    "id": "BloodMagic",
+    "name": "Blood Magic",
+    "step": 1
+   },
+   {
+    "id": "Crossbows",
+    "name": "Crossbows",
+    "step": 1
+   },
+   {
+    "id": "Fishing",
+    "name": "Fishing",
+    "step": 0.25
+   },
+   {
+    "id": "Cooking",
+    "name": "Cooking",
+    "step": 0.25
+   },
+   {
+    "id": "Farming",
+    "name": "Farming",
+    "step": 0.25
+   },
+   {
+    "id": "Crafting",
+    "name": "Crafting",
+    "step": 0.25
+   },
+   {
+    "id": "Dodge",
+    "name": "Dodge",
+    "step": 0.25
+   }
+  ]
  }
 }
