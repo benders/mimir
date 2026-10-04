@@ -167,7 +167,7 @@ first biome of the progression (`normalize.STAGES`, Meadows..DeepNorth) where a 
 their extension levels, tools and tool tiers, fuel, boss keys (a boss's opens the next stage), quest hand-ins and
 persistent events. The earliest way wins (a creature's earliest spawn); Ocean alone counts as Meadows, next to land as
 that land. `STAGE_OVERRIDES` fixes what the data gets wrong, `STAGE_IGNORED_TOOLS` drops unusual tool routes (Early Axes);
-no `stage` = it couldn't be settled (shown from Meadows). The site's "Up to" header select (localStorage `mimir-stage`,
+no `stage` = it couldn't be settled (shown from Meadows). Each staged entry also has `via` (#25), the way its stage comes from (`stages(ways=...)`): `how` (`normalize.WAY_RANK` key, which also breaks ties: craft/process/build first, gathered sources before drops before loot before traders), `from` (recipe, station, source, creature, trader, piece or location id), `needs` [{item|piece|creature: id, amount?}] (cost, station + the extensions its level takes, tool, bait, the boss setting a key), `biomes` (spawn). The graph is acyclic (a tie never picks a way leading back to the entry); item and piece pages render it as a requirements tree (`build-site.requirements_tree`). The site's "Up to" header select (localStorage `mimir-stage`,
 applied as `<html data-max>` by an inline head script before render) hides later entries: `data-stage` on index grid
 items and group headings, on forward relation lists and their sections (Used in, Builds, Upgrades, Crafts, Enables
 building, Bait for; not costs or sources), and in search.json (6th field). The hiding CSS is generated

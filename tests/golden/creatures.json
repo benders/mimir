@@ -14,7 +14,14 @@
    "run": 5,
    "swim": 2
   },
-  "stage": "Mountain"
+  "stage": "Mountain",
+  "via": {
+   "how": "spawn",
+   "from": "Lair",
+   "biomes": [
+    "Mountain"
+   ]
+  }
  },
  {
   "id": "Chief_p2",
@@ -30,7 +37,16 @@
    "run": 5,
    "swim": 2
   },
-  "stage": "Mountain"
+  "stage": "Mountain",
+  "via": {
+   "how": "phase",
+   "from": "Chief",
+   "needs": [
+    {
+     "creature": "Chief"
+    }
+   ]
+  }
  },
  {
   "id": "Imp",
@@ -45,7 +61,16 @@
    "run": 5,
    "swim": 2
   },
-  "stage": "Meadows"
+  "stage": "Meadows",
+  "via": {
+   "how": "summon",
+   "from": "Rod",
+   "needs": [
+    {
+     "item": "Rod"
+    }
+   ]
+  }
  },
  {
   "id": "Moth",
@@ -60,7 +85,14 @@
    "run": 5,
    "swim": 2
   },
-  "stage": "Meadows"
+  "stage": "Meadows",
+  "via": {
+   "how": "spawn",
+   "from": "world",
+   "biomes": [
+    "Meadows"
+   ]
+  }
  },
  {
   "id": "Pup",
@@ -75,7 +107,16 @@
    "run": 5,
    "swim": 2
   },
-  "stage": "Meadows"
+  "stage": "Meadows",
+  "via": {
+   "how": "egg",
+   "from": "Egg",
+   "needs": [
+    {
+     "item": "Egg"
+    }
+   ]
+  }
  },
  {
   "id": "Raider",
@@ -118,7 +159,15 @@
    ]
   },
   "afraidOfFire": true,
-  "stage": "Meadows"
+  "stage": "Meadows",
+  "via": {
+   "how": "spawn",
+   "from": "world",
+   "biomes": [
+    "Meadows",
+    "BlackForest"
+   ]
+  }
  },
  {
   "id": "Raider_Ranged",
@@ -162,7 +211,14 @@
    ]
   },
   "afraidOfFire": true,
-  "stage": "Meadows"
+  "stage": "Meadows",
+  "via": {
+   "how": "spawn",
+   "from": "Stash",
+   "biomes": [
+    "Meadows"
+   ]
+  }
  },
  {
   "id": "Raider_sleeping",
@@ -205,7 +261,14 @@
    ]
   },
   "afraidOfFire": true,
-  "stage": "Meadows"
+  "stage": "Meadows",
+  "via": {
+   "how": "spawn",
+   "from": "world",
+   "biomes": [
+    "Meadows"
+   ]
+  }
  },
  {
   "id": "Shade",
@@ -217,7 +280,16 @@
    "run": 5,
    "swim": 2
   },
-  "stage": "Mountain"
+  "stage": "Mountain",
+  "via": {
+   "how": "phase",
+   "from": "Chief",
+   "needs": [
+    {
+     "creature": "Chief"
+    }
+   ]
+  }
  },
  {
   "id": "Singer",
@@ -232,7 +304,14 @@
    "run": 5,
    "swim": 2
   },
-  "stage": "Mountain"
+  "stage": "Mountain",
+  "via": {
+   "how": "spawn",
+   "from": "Lair",
+   "biomes": [
+    "Mountain"
+   ]
+  }
  },
  {
   "id": "Sprite",
@@ -247,7 +326,16 @@
    "run": 5,
    "swim": 2
   },
-  "stage": "Meadows"
+  "stage": "Meadows",
+  "via": {
+   "how": "summon",
+   "from": "Wand",
+   "needs": [
+    {
+     "item": "Wand"
+    }
+   ]
+  }
  },
  {
   "id": "Wisp",

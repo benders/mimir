@@ -44,7 +44,14 @@
     "chance": 1
    }
   ],
-  "stage": "Swamp"
+  "stage": "Swamp",
+  "via": {
+   "how": "spawn",
+   "from": "world",
+   "biomes": [
+    "Swamp"
+   ]
+  }
  },
  {
   "id": "Asksvin",
@@ -108,7 +115,14 @@
    ]
   },
   "avoidWater": true,
-  "stage": "AshLands"
+  "stage": "AshLands",
+  "via": {
+   "how": "spawn",
+   "from": "world",
+   "biomes": [
+    "AshLands"
+   ]
+  }
  },
  {
   "id": "Asksvin_hatchling",
@@ -151,7 +165,16 @@
    }
   ],
   "avoidWater": true,
-  "stage": "AshLands"
+  "stage": "AshLands",
+  "via": {
+   "how": "egg",
+   "from": "AsksvinEgg",
+   "needs": [
+    {
+     "item": "AsksvinEgg"
+    }
+   ]
+  }
  },
  {
   "id": "Aspect_Bonemass",
@@ -180,7 +203,16 @@
    "aspect_bonemass_attack_throw"
   ],
   "avoidWater": true,
-  "stage": "DeepNorth"
+  "stage": "DeepNorth",
+  "via": {
+   "how": "phase",
+   "from": "Aspect_Eikthyr",
+   "needs": [
+    {
+     "creature": "Aspect_Eikthyr"
+    }
+   ]
+  }
  },
  {
   "id": "Aspect_Eikthyr",
@@ -203,7 +235,16 @@
    "aspect_Eikthyr_stomp"
   ],
   "avoidWater": true,
-  "stage": "DeepNorth"
+  "stage": "DeepNorth",
+  "via": {
+   "how": "phase",
+   "from": "FrozenKing",
+   "needs": [
+    {
+     "creature": "FrozenKing"
+    }
+   ]
+  }
  },
  {
   "id": "Aspect_Elder",
@@ -229,7 +270,16 @@
    "aspect_gd_king_stomp"
   ],
   "avoidWater": true,
-  "stage": "DeepNorth"
+  "stage": "DeepNorth",
+  "via": {
+   "how": "phase",
+   "from": "Aspect_Eikthyr",
+   "needs": [
+    {
+     "creature": "Aspect_Eikthyr"
+    }
+   ]
+  }
  },
  {
   "id": "Aspect_Fader",
@@ -259,7 +309,16 @@
    "aspect_Fader_WallOfFire"
   ],
   "avoidWater": true,
-  "stage": "DeepNorth"
+  "stage": "DeepNorth",
+  "via": {
+   "how": "phase",
+   "from": "Aspect_Yagluth",
+   "needs": [
+    {
+     "creature": "Aspect_Yagluth"
+    }
+   ]
+  }
  },
  {
   "id": "Aspect_Moder",
@@ -289,7 +348,16 @@
    "aspect_dragon_taunt"
   ],
   "avoidWater": true,
-  "stage": "DeepNorth"
+  "stage": "DeepNorth",
+  "via": {
+   "how": "phase",
+   "from": "Aspect_Elder",
+   "needs": [
+    {
+     "creature": "Aspect_Elder"
+    }
+   ]
+  }
  },
  {
   "id": "Aspect_SeekerQueen",
@@ -316,7 +384,16 @@
    "aspect_SeekerQueen_Spit"
   ],
   "avoidWater": true,
-  "stage": "DeepNorth"
+  "stage": "DeepNorth",
+  "via": {
+   "how": "phase",
+   "from": "Aspect_Moder",
+   "needs": [
+    {
+     "creature": "Aspect_Moder"
+    }
+   ]
+  }
  },
  {
   "id": "Aspect_TentaRoot",
@@ -339,7 +416,16 @@
    "ShieldWood"
   ],
   "avoidWater": true,
-  "stage": "DeepNorth"
+  "stage": "DeepNorth",
+  "via": {
+   "how": "summon",
+   "from": "Aspect_Elder",
+   "needs": [
+    {
+     "creature": "Aspect_Elder"
+    }
+   ]
+  }
  },
  {
   "id": "Aspect_Yagluth",
@@ -365,7 +451,16 @@
    "aspect_GoblinKing_Taunt"
   ],
   "avoidWater": true,
-  "stage": "DeepNorth"
+  "stage": "DeepNorth",
+  "via": {
+   "how": "phase",
+   "from": "Aspect_Bonemass",
+   "needs": [
+    {
+     "creature": "Aspect_Bonemass"
+    }
+   ]
+  }
  },
  {
   "id": "Barka",
@@ -409,7 +504,14 @@
    }
   ],
   "avoidWater": true,
-  "stage": "DeepNorth"
+  "stage": "DeepNorth",
+  "via": {
+   "how": "spawn",
+   "from": "world",
+   "biomes": [
+    "DeepNorth"
+   ]
+  }
  },
  {
   "id": "Bat",
@@ -445,7 +547,14 @@
    }
   ],
   "avoidWater": true,
-  "stage": "Mountain"
+  "stage": "Mountain",
+  "via": {
+   "how": "spawn",
+   "from": "Hildir_cave",
+   "biomes": [
+    "Mountain"
+   ]
+  }
  },
  {
   "id": "Bat_Swamp",
@@ -481,7 +590,14 @@
    }
   ],
   "avoidWater": true,
-  "stage": "Swamp"
+  "stage": "Swamp",
+  "via": {
+   "how": "spawn",
+   "from": "world",
+   "biomes": [
+    "Swamp"
+   ]
+  }
  },
  {
   "id": "Bjorn",
@@ -541,7 +657,14 @@
    }
   ],
   "avoidWater": true,
-  "stage": "BlackForest"
+  "stage": "BlackForest",
+  "via": {
+   "how": "spawn",
+   "from": "world",
+   "biomes": [
+    "BlackForest"
+   ]
+  }
  },
  {
   "id": "Bjorn_sleeping",
@@ -601,7 +724,14 @@
    }
   ],
   "avoidWater": true,
-  "stage": "BlackForest"
+  "stage": "BlackForest",
+  "via": {
+   "how": "spawn",
+   "from": "BearCave",
+   "biomes": [
+    "BlackForest"
+   ]
+  }
  },
  {
   "id": "Bjorn_spiritcaller",
@@ -637,7 +767,16 @@
    ]
   },
   "avoidWater": true,
-  "stage": "DeepNorth"
+  "stage": "DeepNorth",
+  "via": {
+   "how": "summon",
+   "from": "StaffSpiritCaller",
+   "needs": [
+    {
+     "item": "StaffSpiritCaller"
+    }
+   ]
+  }
  },
  {
   "id": "Blob",
@@ -678,7 +817,14 @@
    }
   ],
   "avoidWater": true,
-  "stage": "Swamp"
+  "stage": "Swamp",
+  "via": {
+   "how": "spawn",
+   "from": "world",
+   "biomes": [
+    "Swamp"
+   ]
+  }
  },
  {
   "id": "BlobAspect",
@@ -719,7 +865,16 @@
    }
   ],
   "avoidWater": true,
-  "stage": "DeepNorth"
+  "stage": "DeepNorth",
+  "via": {
+   "how": "summon",
+   "from": "Aspect_Bonemass",
+   "needs": [
+    {
+     "creature": "Aspect_Bonemass"
+    }
+   ]
+  }
  },
  {
   "id": "BlobElite",
@@ -774,7 +929,14 @@
    }
   ],
   "avoidWater": true,
-  "stage": "Swamp"
+  "stage": "Swamp",
+  "via": {
+   "how": "spawn",
+   "from": "world",
+   "biomes": [
+    "Swamp"
+   ]
+  }
  },
  {
   "id": "BlobFrost",
@@ -815,7 +977,16 @@
    }
   ],
   "avoidWater": true,
-  "stage": "Mountain"
+  "stage": "Mountain",
+  "via": {
+   "how": "summon",
+   "from": "BombBlob_Frost",
+   "needs": [
+    {
+     "item": "BombBlob_Frost"
+    }
+   ]
+  }
  },
  {
   "id": "BlobLava",
@@ -862,7 +1033,14 @@
    }
   ],
   "avoidWater": true,
-  "stage": "AshLands"
+  "stage": "AshLands",
+  "via": {
+   "how": "spawn",
+   "from": "world",
+   "biomes": [
+    "AshLands"
+   ]
+  }
  },
  {
   "id": "BlobMork",
@@ -909,7 +1087,14 @@
    }
   ],
   "avoidWater": true,
-  "stage": "DeepNorth"
+  "stage": "DeepNorth",
+  "via": {
+   "how": "spawn",
+   "from": "MorkBorg",
+   "biomes": [
+    "DeepNorth"
+   ]
+  }
  },
  {
   "id": "BlobMorkMini",
@@ -941,7 +1126,16 @@
    }
   ],
   "avoidWater": true,
-  "stage": "DeepNorth"
+  "stage": "DeepNorth",
+  "via": {
+   "how": "drop",
+   "from": "BlobMork",
+   "needs": [
+    {
+     "creature": "BlobMork"
+    }
+   ]
+  }
  },
  {
   "id": "BlobTar",
@@ -982,7 +1176,14 @@
    }
   ],
   "avoidWater": true,
-  "stage": "Plains"
+  "stage": "Plains",
+  "via": {
+   "how": "spawn",
+   "from": "TarPit1",
+   "biomes": [
+    "Plains"
+   ]
+  }
  },
  {
   "id": "Boar",
@@ -1039,7 +1240,14 @@
   },
   "afraidOfFire": true,
   "avoidWater": true,
-  "stage": "Meadows"
+  "stage": "Meadows",
+  "via": {
+   "how": "spawn",
+   "from": "world",
+   "biomes": [
+    "Meadows"
+   ]
+  }
  },
  {
   "id": "Boar_piggy",
@@ -1059,7 +1267,16 @@
   },
   "afraidOfFire": true,
   "avoidWater": true,
-  "stage": "Meadows"
+  "stage": "Meadows",
+  "via": {
+   "how": "offspring",
+   "from": "Boar",
+   "needs": [
+    {
+     "creature": "Boar"
+    }
+   ]
+  }
  },
  {
   "id": "Boar_spiritcaller",
@@ -1092,7 +1309,16 @@
   },
   "afraidOfFire": true,
   "avoidWater": true,
-  "stage": "DeepNorth"
+  "stage": "DeepNorth",
+  "via": {
+   "how": "summon",
+   "from": "StaffSpiritCaller",
+   "needs": [
+    {
+     "item": "StaffSpiritCaller"
+    }
+   ]
+  }
  },
  {
   "id": "BogWitchKvastur",
@@ -1137,7 +1363,14 @@
    }
   ],
   "avoidWater": true,
-  "stage": "Swamp"
+  "stage": "Swamp",
+  "via": {
+   "how": "spawn",
+   "from": "BogWitch_Camp",
+   "biomes": [
+    "Swamp"
+   ]
+  }
  },
  {
   "id": "Bonemass",
@@ -1182,7 +1415,14 @@
    }
   ],
   "avoidWater": true,
-  "stage": "Swamp"
+  "stage": "Swamp",
+  "via": {
+   "how": "spawn",
+   "from": "Bonemass",
+   "biomes": [
+    "Swamp"
+   ]
+  }
  },
  {
   "id": "BonemawSerpent",
@@ -1229,7 +1469,14 @@
     "levelMultiplier": true
    }
   ],
-  "stage": "AshLands"
+  "stage": "AshLands",
+  "via": {
+   "how": "spawn",
+   "from": "world",
+   "biomes": [
+    "AshLands"
+   ]
+  }
  },
  {
   "id": "Charred_Archer",
@@ -1273,7 +1520,14 @@
    }
   ],
   "avoidWater": true,
-  "stage": "AshLands"
+  "stage": "AshLands",
+  "via": {
+   "how": "spawn",
+   "from": "world",
+   "biomes": [
+    "AshLands"
+   ]
+  }
  },
  {
   "id": "Charred_Archer_Fader",
@@ -1302,7 +1556,16 @@
    "Charred_HipCloth"
   ],
   "avoidWater": true,
-  "stage": "AshLands"
+  "stage": "AshLands",
+  "via": {
+   "how": "summon",
+   "from": "Fader",
+   "needs": [
+    {
+     "creature": "Fader"
+    }
+   ]
+  }
  },
  {
   "id": "Charred_Mage",
@@ -1347,7 +1610,14 @@
    }
   ],
   "avoidWater": true,
-  "stage": "AshLands"
+  "stage": "AshLands",
+  "via": {
+   "how": "spawn",
+   "from": "CharredFortress",
+   "biomes": [
+    "AshLands"
+   ]
+  }
  },
  {
   "id": "Charred_Melee",
@@ -1393,7 +1663,14 @@
    }
   ],
   "avoidWater": true,
-  "stage": "AshLands"
+  "stage": "AshLands",
+  "via": {
+   "how": "spawn",
+   "from": "world",
+   "biomes": [
+    "AshLands"
+   ]
+  }
  },
  {
   "id": "Charred_Melee_Dyrnwyn",
@@ -1434,7 +1711,14 @@
    }
   ],
   "avoidWater": true,
-  "stage": "AshLands"
+  "stage": "AshLands",
+  "via": {
+   "how": "spawn",
+   "from": "PlaceofMystery3",
+   "biomes": [
+    "AshLands"
+   ]
+  }
  },
  {
   "id": "Charred_Melee_Fader",
@@ -1465,7 +1749,16 @@
    "Charred_HipCloth"
   ],
   "avoidWater": true,
-  "stage": "AshLands"
+  "stage": "AshLands",
+  "via": {
+   "how": "summon",
+   "from": "Fader",
+   "needs": [
+    {
+     "creature": "Fader"
+    }
+   ]
+  }
  },
  {
   "id": "Charred_Twitcher",
@@ -1499,7 +1792,14 @@
    }
   ],
   "avoidWater": true,
-  "stage": "AshLands"
+  "stage": "AshLands",
+  "via": {
+   "how": "spawn",
+   "from": "world",
+   "biomes": [
+    "AshLands"
+   ]
+  }
  },
  {
   "id": "Charred_Twitcher_Summoned",
@@ -1533,7 +1833,16 @@
    }
   ],
   "avoidWater": true,
-  "stage": "AshLands"
+  "stage": "AshLands",
+  "via": {
+   "how": "summon",
+   "from": "Charred_Mage",
+   "needs": [
+    {
+     "creature": "Charred_Mage"
+    }
+   ]
+  }
  },
  {
   "id": "Chicken",
@@ -1569,7 +1878,16 @@
   ],
   "afraidOfFire": true,
   "avoidWater": true,
-  "stage": "Plains"
+  "stage": "Plains",
+  "via": {
+   "how": "egg",
+   "from": "ChickenEgg",
+   "needs": [
+    {
+     "item": "ChickenEgg"
+    }
+   ]
+  }
  },
  {
   "id": "Deathsquito",
@@ -1604,7 +1922,14 @@
    }
   ],
   "avoidWater": true,
-  "stage": "Plains"
+  "stage": "Plains",
+  "via": {
+   "how": "spawn",
+   "from": "world",
+   "biomes": [
+    "Plains"
+   ]
+  }
  },
  {
   "id": "Deer",
@@ -1645,7 +1970,15 @@
   ],
   "afraidOfFire": true,
   "avoidWater": true,
-  "stage": "Meadows"
+  "stage": "Meadows",
+  "via": {
+   "how": "spawn",
+   "from": "world",
+   "biomes": [
+    "Meadows",
+    "BlackForest"
+   ]
+  }
  },
  {
   "id": "Deer_White",
@@ -1724,7 +2057,14 @@
    }
   ],
   "avoidWater": true,
-  "stage": "Mountain"
+  "stage": "Mountain",
+  "via": {
+   "how": "spawn",
+   "from": "Dragonqueen",
+   "biomes": [
+    "Mountain"
+   ]
+  }
  },
  {
   "id": "Draugr",
@@ -1765,7 +2105,14 @@
    }
   ],
   "avoidWater": true,
-  "stage": "Meadows"
+  "stage": "Meadows",
+  "via": {
+   "how": "spawn",
+   "from": "world",
+   "biomes": [
+    "Meadows"
+   ]
+  }
  },
  {
   "id": "Draugr_Elite",
@@ -1801,7 +2148,14 @@
    }
   ],
   "avoidWater": true,
-  "stage": "Meadows"
+  "stage": "Meadows",
+  "via": {
+   "how": "spawn",
+   "from": "WoodVillage1",
+   "biomes": [
+    "Meadows"
+   ]
+  }
  },
  {
   "id": "Draugr_Elite_sleeping",
@@ -1873,7 +2227,14 @@
    }
   ],
   "avoidWater": true,
-  "stage": "Meadows"
+  "stage": "Meadows",
+  "via": {
+   "how": "spawn",
+   "from": "WoodVillage1",
+   "biomes": [
+    "Meadows"
+   ]
+  }
  },
  {
   "id": "Draugr_Ranged_sleeping",
@@ -2004,7 +2365,14 @@
    }
   ],
   "avoidWater": true,
-  "stage": "Mistlands"
+  "stage": "Mistlands",
+  "via": {
+   "how": "spawn",
+   "from": "world",
+   "biomes": [
+    "Mistlands"
+   ]
+  }
  },
  {
   "id": "DvergerAshlands",
@@ -2058,7 +2426,14 @@
    }
   ],
   "avoidWater": true,
-  "stage": "AshLands"
+  "stage": "AshLands",
+  "via": {
+   "how": "spawn",
+   "from": "world",
+   "biomes": [
+    "AshLands"
+   ]
+  }
  },
  {
   "id": "DvergerDeepNorth",
@@ -2129,7 +2504,14 @@
    }
   ],
   "avoidWater": true,
-  "stage": "DeepNorth"
+  "stage": "DeepNorth",
+  "via": {
+   "how": "spawn",
+   "from": "MorkBorg",
+   "biomes": [
+    "DeepNorth"
+   ]
+  }
  },
  {
   "id": "DvergerMage",
@@ -2195,7 +2577,14 @@
    }
   ],
   "avoidWater": true,
-  "stage": "Mistlands"
+  "stage": "Mistlands",
+  "via": {
+   "how": "spawn",
+   "from": "Mistlands_Excavation1",
+   "biomes": [
+    "Mistlands"
+   ]
+  }
  },
  {
   "id": "DvergerMageFire",
@@ -2461,7 +2850,14 @@
    }
   ],
   "avoidWater": true,
-  "stage": "Meadows"
+  "stage": "Meadows",
+  "via": {
+   "how": "spawn",
+   "from": "Eikthyrnir",
+   "biomes": [
+    "Meadows"
+   ]
+  }
  },
  {
   "id": "Elaking",
@@ -2506,7 +2902,14 @@
    }
   ],
   "avoidWater": true,
-  "stage": "DeepNorth"
+  "stage": "DeepNorth",
+  "via": {
+   "how": "spawn",
+   "from": "world",
+   "biomes": [
+    "DeepNorth"
+   ]
+  }
  },
  {
   "id": "ElakingLantern",
@@ -2544,7 +2947,14 @@
    }
   ],
   "avoidWater": true,
-  "stage": "DeepNorth"
+  "stage": "DeepNorth",
+  "via": {
+   "how": "spawn",
+   "from": "world",
+   "biomes": [
+    "DeepNorth"
+   ]
+  }
  },
  {
   "id": "ElakingMole",
@@ -2590,7 +3000,14 @@
    }
   ],
   "avoidWater": true,
-  "stage": "DeepNorth"
+  "stage": "DeepNorth",
+  "via": {
+   "how": "spawn",
+   "from": "army_elakingar",
+   "biomes": [
+    "DeepNorth"
+   ]
+  }
  },
  {
   "id": "Fader",
@@ -2640,7 +3057,14 @@
    }
   ],
   "avoidWater": true,
-  "stage": "AshLands"
+  "stage": "AshLands",
+  "via": {
+   "how": "spawn",
+   "from": "FaderLocation",
+   "biomes": [
+    "AshLands"
+   ]
+  }
  },
  {
   "id": "FallenValkyrie",
@@ -2681,7 +3105,14 @@
    }
   ],
   "avoidWater": true,
-  "stage": "AshLands"
+  "stage": "AshLands",
+  "via": {
+   "how": "spawn",
+   "from": "world",
+   "biomes": [
+    "AshLands"
+   ]
+  }
  },
  {
   "id": "FallenWarrior",
@@ -2746,7 +3177,14 @@
     "chance": 0.5
    }
   ],
-  "stage": "DeepNorth"
+  "stage": "DeepNorth",
+  "via": {
+   "how": "spawn",
+   "from": "NorthMemorialPlace",
+   "biomes": [
+    "DeepNorth"
+   ]
+  }
  },
  {
   "id": "Fenring",
@@ -2785,7 +3223,14 @@
    }
   ],
   "avoidWater": true,
-  "stage": "Mountain"
+  "stage": "Mountain",
+  "via": {
+   "how": "spawn",
+   "from": "world",
+   "biomes": [
+    "Mountain"
+   ]
+  }
  },
  {
   "id": "Fenring_Cultist",
@@ -2824,7 +3269,14 @@
    }
   ],
   "avoidWater": true,
-  "stage": "Mountain"
+  "stage": "Mountain",
+  "via": {
+   "how": "spawn",
+   "from": "MountainCave02",
+   "biomes": [
+    "Mountain"
+   ]
+  }
  },
  {
   "id": "Fenring_Cultist_Hildir",
@@ -2865,7 +3317,14 @@
    }
   ],
   "avoidWater": true,
-  "stage": "Mountain"
+  "stage": "Mountain",
+  "via": {
+   "how": "spawn",
+   "from": "Hildir_cave",
+   "biomes": [
+    "Mountain"
+   ]
+  }
  },
  {
   "id": "Fenring_Cultist_Hildir_nochest",
@@ -2900,7 +3359,27 @@
    }
   ],
   "avoidWater": true,
-  "stage": "Mountain"
+  "stage": "Mountain",
+  "via": {
+   "how": "spawn",
+   "from": "hildirboss2",
+   "needs": [
+    {
+     "item": "chest_hildir2"
+    }
+   ],
+   "biomes": [
+    "Meadows",
+    "Swamp",
+    "Mountain",
+    "BlackForest",
+    "Plains",
+    "AshLands",
+    "DeepNorth",
+    "Ocean",
+    "Mistlands"
+   ]
+  }
  },
  {
   "id": "FrostWisp",
@@ -2964,7 +3443,14 @@
    "FrozenKing_DoubleSweep"
   ],
   "avoidWater": true,
-  "stage": "DeepNorth"
+  "stage": "DeepNorth",
+  "via": {
+   "how": "spawn",
+   "from": "DN_Bossroom",
+   "biomes": [
+    "DeepNorth"
+   ]
+  }
  },
  {
   "id": "FrozenKing_p2",
@@ -2984,7 +3470,16 @@
    "poison": "Immune",
    "spirit": "Immune"
   },
-  "stage": "DeepNorth"
+  "stage": "DeepNorth",
+  "via": {
+   "how": "phase",
+   "from": "FrozenKing",
+   "needs": [
+    {
+     "creature": "FrozenKing"
+    }
+   ]
+  }
  },
  {
   "id": "FrozenKing_p3",
@@ -3032,7 +3527,16 @@
    }
   ],
   "avoidWater": true,
-  "stage": "DeepNorth"
+  "stage": "DeepNorth",
+  "via": {
+   "how": "phase",
+   "from": "FrozenKing_p2",
+   "needs": [
+    {
+     "creature": "FrozenKing_p2"
+    }
+   ]
+  }
  },
  {
   "id": "Frysling",
@@ -3103,7 +3607,14 @@
    }
   ],
   "avoidWater": true,
-  "stage": "BlackForest"
+  "stage": "BlackForest",
+  "via": {
+   "how": "spawn",
+   "from": "Crypt2",
+   "biomes": [
+    "BlackForest"
+   ]
+  }
  },
  {
   "id": "Ghost_Void",
@@ -3244,7 +3755,14 @@
    }
   ],
   "avoidWater": true,
-  "stage": "Mistlands"
+  "stage": "Mistlands",
+  "via": {
+   "how": "spawn",
+   "from": "world",
+   "biomes": [
+    "Mistlands"
+   ]
+  }
  },
  {
   "id": "Goblin",
@@ -3298,7 +3816,14 @@
    }
   ],
   "avoidWater": true,
-  "stage": "Plains"
+  "stage": "Plains",
+  "via": {
+   "how": "spawn",
+   "from": "world",
+   "biomes": [
+    "Plains"
+   ]
+  }
  },
  {
   "id": "GoblinArcher",
@@ -3349,7 +3874,14 @@
    }
   ],
   "avoidWater": true,
-  "stage": "Plains"
+  "stage": "Plains",
+  "via": {
+   "how": "spawn",
+   "from": "GoblinCamp2",
+   "biomes": [
+    "Plains"
+   ]
+  }
  },
  {
   "id": "GoblinBrute",
@@ -3408,7 +3940,14 @@
    }
   ],
   "avoidWater": true,
-  "stage": "Plains"
+  "stage": "Plains",
+  "via": {
+   "how": "spawn",
+   "from": "world",
+   "biomes": [
+    "Plains"
+   ]
+  }
  },
  {
   "id": "GoblinBruteBros",
@@ -3453,7 +3992,14 @@
    }
   ],
   "avoidWater": true,
-  "stage": "Plains"
+  "stage": "Plains",
+  "via": {
+   "how": "spawn",
+   "from": "Hildir_plainsfortress",
+   "biomes": [
+    "Plains"
+   ]
+  }
  },
  {
   "id": "GoblinBruteBros_nochest",
@@ -3498,7 +4044,27 @@
    }
   ],
   "avoidWater": true,
-  "stage": "Plains"
+  "stage": "Plains",
+  "via": {
+   "how": "spawn",
+   "from": "hildirboss3",
+   "needs": [
+    {
+     "item": "chest_hildir3"
+    }
+   ],
+   "biomes": [
+    "Meadows",
+    "Swamp",
+    "Mountain",
+    "BlackForest",
+    "Plains",
+    "AshLands",
+    "DeepNorth",
+    "Ocean",
+    "Mistlands"
+   ]
+  }
  },
  {
   "id": "GoblinBrute_Hildir",
@@ -3589,7 +4155,14 @@
    }
   ],
   "avoidWater": true,
-  "stage": "DeepNorth"
+  "stage": "DeepNorth",
+  "via": {
+   "how": "spawn",
+   "from": "MorkBorg",
+   "biomes": [
+    "DeepNorth"
+   ]
+  }
  },
  {
   "id": "GoblinKing",
@@ -3631,7 +4204,14 @@
    }
   ],
   "avoidWater": true,
-  "stage": "Plains"
+  "stage": "Plains",
+  "via": {
+   "how": "spawn",
+   "from": "GoblinKing",
+   "biomes": [
+    "Plains"
+   ]
+  }
  },
  {
   "id": "GoblinShaman",
@@ -3689,7 +4269,14 @@
    }
   ],
   "avoidWater": true,
-  "stage": "Plains"
+  "stage": "Plains",
+  "via": {
+   "how": "spawn",
+   "from": "GoblinCamp2",
+   "biomes": [
+    "Plains"
+   ]
+  }
  },
  {
   "id": "GoblinShaman_Hildir",
@@ -3730,7 +4317,16 @@
    }
   ],
   "avoidWater": true,
-  "stage": "Plains"
+  "stage": "Plains",
+  "via": {
+   "how": "drop",
+   "from": "GoblinBruteBros",
+   "needs": [
+    {
+     "creature": "GoblinBruteBros"
+    }
+   ]
+  }
  },
  {
   "id": "GoblinShaman_Hildir_nochest",
@@ -3765,7 +4361,16 @@
    }
   ],
   "avoidWater": true,
-  "stage": "Plains"
+  "stage": "Plains",
+  "via": {
+   "how": "drop",
+   "from": "GoblinBruteBros_nochest",
+   "needs": [
+    {
+     "creature": "GoblinBruteBros_nochest"
+    }
+   ]
+  }
  },
  {
   "id": "Goblin_Gem",
@@ -3867,7 +4472,14 @@
    }
   ],
   "avoidWater": true,
-  "stage": "Meadows"
+  "stage": "Meadows",
+  "via": {
+   "how": "spawn",
+   "from": "WoodHouse11",
+   "biomes": [
+    "Meadows"
+   ]
+  }
  },
  {
   "id": "Greydwarf_Elite",
@@ -3933,7 +4545,14 @@
    }
   ],
   "avoidWater": true,
-  "stage": "BlackForest"
+  "stage": "BlackForest",
+  "via": {
+   "how": "spawn",
+   "from": "world",
+   "biomes": [
+    "BlackForest"
+   ]
+  }
  },
  {
   "id": "Greydwarf_Frozen",
@@ -4000,7 +4619,14 @@
    }
   ],
   "avoidWater": true,
-  "stage": "DeepNorth"
+  "stage": "DeepNorth",
+  "via": {
+   "how": "spawn",
+   "from": "world",
+   "biomes": [
+    "DeepNorth"
+   ]
+  }
  },
  {
   "id": "Greydwarf_Shaman",
@@ -4061,7 +4687,14 @@
    }
   ],
   "avoidWater": true,
-  "stage": "BlackForest"
+  "stage": "BlackForest",
+  "via": {
+   "how": "spawn",
+   "from": "world",
+   "biomes": [
+    "BlackForest"
+   ]
+  }
  },
  {
   "id": "Greydwarf_Shaman_Frozen",
@@ -4129,7 +4762,14 @@
    }
   ],
   "avoidWater": true,
-  "stage": "DeepNorth"
+  "stage": "DeepNorth",
+  "via": {
+   "how": "spawn",
+   "from": "world",
+   "biomes": [
+    "DeepNorth"
+   ]
+  }
  },
  {
   "id": "Greyling",
@@ -4161,7 +4801,14 @@
    }
   ],
   "avoidWater": true,
-  "stage": "Meadows"
+  "stage": "Meadows",
+  "via": {
+   "how": "spawn",
+   "from": "world",
+   "biomes": [
+    "Meadows"
+   ]
+  }
  },
  {
   "id": "Hare",
@@ -4202,7 +4849,14 @@
   ],
   "afraidOfFire": true,
   "avoidWater": true,
-  "stage": "Mistlands"
+  "stage": "Mistlands",
+  "via": {
+   "how": "spawn",
+   "from": "world",
+   "biomes": [
+    "Mistlands"
+   ]
+  }
  },
  {
   "id": "Hatchling",
@@ -4240,7 +4894,14 @@
    }
   ],
   "avoidWater": true,
-  "stage": "Mountain"
+  "stage": "Mountain",
+  "via": {
+   "how": "spawn",
+   "from": "world",
+   "biomes": [
+    "Mountain"
+   ]
+  }
  },
  {
   "id": "Hen",
@@ -4292,7 +4953,16 @@
   },
   "afraidOfFire": true,
   "avoidWater": true,
-  "stage": "Plains"
+  "stage": "Plains",
+  "via": {
+   "how": "growup",
+   "from": "Chicken",
+   "needs": [
+    {
+     "creature": "Chicken"
+    }
+   ]
+  }
  },
  {
   "id": "Hive",
@@ -4442,7 +5112,14 @@
    }
   ],
   "avoidWater": true,
-  "stage": "DeepNorth"
+  "stage": "DeepNorth",
+  "via": {
+   "how": "spawn",
+   "from": "world",
+   "biomes": [
+    "DeepNorth"
+   ]
+  }
  },
  {
   "id": "JotunWarriorDualWield",
@@ -4545,7 +5222,14 @@
    }
   ],
   "avoidWater": true,
-  "stage": "DeepNorth"
+  "stage": "DeepNorth",
+  "via": {
+   "how": "spawn",
+   "from": "MorkBorg",
+   "biomes": [
+    "DeepNorth"
+   ]
+  }
  },
  {
   "id": "JotunWitch",
@@ -4614,7 +5298,19 @@
    }
   ],
   "avoidWater": true,
-  "stage": "DeepNorth"
+  "stage": "DeepNorth",
+  "via": {
+   "how": "spawn",
+   "from": "world",
+   "needs": [
+    {
+     "creature": "JotunWarrior"
+    }
+   ],
+   "biomes": [
+    "DeepNorth"
+   ]
+  }
  },
  {
   "id": "Leech",
@@ -4651,7 +5347,14 @@
     "levelMultiplier": true
    }
   ],
-  "stage": "Swamp"
+  "stage": "Swamp",
+  "via": {
+   "how": "spawn",
+   "from": "world",
+   "biomes": [
+    "Swamp"
+   ]
+  }
  },
  {
   "id": "Leech_cave",
@@ -4746,7 +5449,14 @@
    ]
   },
   "avoidWater": true,
-  "stage": "Plains"
+  "stage": "Plains",
+  "via": {
+   "how": "spawn",
+   "from": "world",
+   "biomes": [
+    "Plains"
+   ]
+  }
  },
  {
   "id": "Lox_Calf",
@@ -4777,7 +5487,16 @@
    }
   ],
   "avoidWater": true,
-  "stage": "Plains"
+  "stage": "Plains",
+  "via": {
+   "how": "offspring",
+   "from": "Lox",
+   "needs": [
+    {
+     "creature": "Lox"
+    }
+   ]
+  }
  },
  {
   "id": "Mistile",
@@ -4798,7 +5517,16 @@
    "Mistile_kamikaze"
   ],
   "avoidWater": true,
-  "stage": "Mistlands"
+  "stage": "Mistlands",
+  "via": {
+   "how": "summon",
+   "from": "DvergerMage",
+   "needs": [
+    {
+     "creature": "DvergerMage"
+    }
+   ]
+  }
  },
  {
   "id": "Moose",
@@ -4862,7 +5590,14 @@
    ]
   },
   "avoidWater": true,
-  "stage": "DeepNorth"
+  "stage": "DeepNorth",
+  "via": {
+   "how": "spawn",
+   "from": "world",
+   "biomes": [
+    "DeepNorth"
+   ]
+  }
  },
  {
   "id": "Moose_calf",
@@ -4889,7 +5624,16 @@
    "moose_horns"
   ],
   "avoidWater": true,
-  "stage": "DeepNorth"
+  "stage": "DeepNorth",
+  "via": {
+   "how": "offspring",
+   "from": "Moose",
+   "needs": [
+    {
+     "creature": "Moose"
+    }
+   ]
+  }
  },
  {
   "id": "Moose_spiritcaller",
@@ -4922,7 +5666,16 @@
    ]
   },
   "avoidWater": true,
-  "stage": "DeepNorth"
+  "stage": "DeepNorth",
+  "via": {
+   "how": "summon",
+   "from": "StaffSpiritCaller",
+   "needs": [
+    {
+     "item": "StaffSpiritCaller"
+    }
+   ]
+  }
  },
  {
   "id": "Morgen",
@@ -4975,7 +5728,14 @@
    }
   ],
   "avoidWater": true,
-  "stage": "AshLands"
+  "stage": "AshLands",
+  "via": {
+   "how": "spawn",
+   "from": "AshlandRuins",
+   "biomes": [
+    "AshLands"
+   ]
+  }
  },
  {
   "id": "Morgen_NonSleeping",
@@ -5028,7 +5788,14 @@
    }
   ],
   "avoidWater": true,
-  "stage": "AshLands"
+  "stage": "AshLands",
+  "via": {
+   "how": "spawn",
+   "from": "world",
+   "biomes": [
+    "AshLands"
+   ]
+  }
  },
  {
   "id": "Neck",
@@ -5066,7 +5833,14 @@
    }
   ],
   "afraidOfFire": true,
-  "stage": "Meadows"
+  "stage": "Meadows",
+  "via": {
+   "how": "spawn",
+   "from": "world",
+   "biomes": [
+    "Meadows"
+   ]
+  }
  },
  {
   "id": "Seal",
@@ -5107,7 +5881,14 @@
    }
   ],
   "afraidOfFire": true,
-  "stage": "DeepNorth"
+  "stage": "DeepNorth",
+  "via": {
+   "how": "spawn",
+   "from": "world",
+   "biomes": [
+    "DeepNorth"
+   ]
+  }
  },
  {
   "id": "Seal_Pup",
@@ -5135,7 +5916,14 @@
   ],
   "afraidOfFire": true,
   "avoidWater": true,
-  "stage": "DeepNorth"
+  "stage": "DeepNorth",
+  "via": {
+   "how": "spawn",
+   "from": "world",
+   "biomes": [
+    "DeepNorth"
+   ]
+  }
  },
  {
   "id": "Seeker",
@@ -5187,7 +5975,14 @@
    }
   ],
   "avoidWater": true,
-  "stage": "Mistlands"
+  "stage": "Mistlands",
+  "via": {
+   "how": "spawn",
+   "from": "world",
+   "biomes": [
+    "Mistlands"
+   ]
+  }
  },
  {
   "id": "SeekerBrood",
@@ -5219,7 +6014,14 @@
    }
   ],
   "avoidWater": true,
-  "stage": "Mistlands"
+  "stage": "Mistlands",
+  "via": {
+   "how": "spawn",
+   "from": "world",
+   "biomes": [
+    "Mistlands"
+   ]
+  }
  },
  {
   "id": "SeekerBrute",
@@ -5274,7 +6076,14 @@
    }
   ],
   "avoidWater": true,
-  "stage": "Mistlands"
+  "stage": "Mistlands",
+  "via": {
+   "how": "spawn",
+   "from": "world",
+   "biomes": [
+    "Mistlands"
+   ]
+  }
  },
  {
   "id": "SeekerQueen",
@@ -5318,7 +6127,14 @@
    }
   ],
   "avoidWater": true,
-  "stage": "Mistlands"
+  "stage": "Mistlands",
+  "via": {
+   "how": "spawn",
+   "from": "Mistlands_DvergrBossEntrance1",
+   "biomes": [
+    "Mistlands"
+   ]
+  }
  },
  {
   "id": "Serpent",
@@ -5365,7 +6181,14 @@
     "levelMultiplier": true
    }
   ],
-  "stage": "Meadows"
+  "stage": "Meadows",
+  "via": {
+   "how": "spawn",
+   "from": "world",
+   "biomes": [
+    "Ocean"
+   ]
+  }
  },
  {
   "id": "ShadowPerson",
@@ -5409,7 +6232,14 @@
   ],
   "afraidOfFire": true,
   "avoidWater": true,
-  "stage": "DeepNorth"
+  "stage": "DeepNorth",
+  "via": {
+   "how": "spawn",
+   "from": "world",
+   "biomes": [
+    "DeepNorth"
+   ]
+  }
  },
  {
   "id": "Skeleton",
@@ -5453,7 +6283,14 @@
    }
   ],
   "avoidWater": true,
-  "stage": "Meadows"
+  "stage": "Meadows",
+  "via": {
+   "how": "spawn",
+   "from": "CombatRuin01",
+   "biomes": [
+    "Meadows"
+   ]
+  }
  },
  {
   "id": "Skeleton_DeepNorth",
@@ -5503,7 +6340,14 @@
    }
   ],
   "avoidWater": true,
-  "stage": "DeepNorth"
+  "stage": "DeepNorth",
+  "via": {
+   "how": "spawn",
+   "from": "world",
+   "biomes": [
+    "DeepNorth"
+   ]
+  }
  },
  {
   "id": "Skeleton_Friendly",
@@ -5536,7 +6380,16 @@
    "tamingTime": 1800
   },
   "avoidWater": true,
-  "stage": "Mistlands"
+  "stage": "Mistlands",
+  "via": {
+   "how": "summon",
+   "from": "StaffSkeleton",
+   "needs": [
+    {
+     "item": "StaffSkeleton"
+    }
+   ]
+  }
  },
  {
   "id": "Skeleton_Hildir",
@@ -5577,7 +6430,14 @@
    }
   ],
   "avoidWater": true,
-  "stage": "BlackForest"
+  "stage": "BlackForest",
+  "via": {
+   "how": "spawn",
+   "from": "Hildir_crypt",
+   "biomes": [
+    "BlackForest"
+   ]
+  }
  },
  {
   "id": "Skeleton_Hildir_nochest",
@@ -5612,7 +6472,27 @@
    }
   ],
   "avoidWater": true,
-  "stage": "BlackForest"
+  "stage": "BlackForest",
+  "via": {
+   "how": "spawn",
+   "from": "hildirboss1",
+   "needs": [
+    {
+     "item": "chest_hildir1"
+    }
+   ],
+   "biomes": [
+    "Meadows",
+    "Swamp",
+    "Mountain",
+    "BlackForest",
+    "Plains",
+    "AshLands",
+    "DeepNorth",
+    "Ocean",
+    "Mistlands"
+   ]
+  }
  },
  {
   "id": "Skeleton_Meadows",
@@ -5656,7 +6536,27 @@
    }
   ],
   "avoidWater": true,
-  "stage": "BlackForest"
+  "stage": "BlackForest",
+  "via": {
+   "how": "spawn",
+   "from": "hildirboss1",
+   "needs": [
+    {
+     "item": "chest_hildir1"
+    }
+   ],
+   "biomes": [
+    "Meadows",
+    "Swamp",
+    "Mountain",
+    "BlackForest",
+    "Plains",
+    "AshLands",
+    "DeepNorth",
+    "Ocean",
+    "Mistlands"
+   ]
+  }
  },
  {
   "id": "Skeleton_Meadows_noarcher",
@@ -5699,7 +6599,15 @@
    }
   ],
   "avoidWater": true,
-  "stage": "Meadows"
+  "stage": "Meadows",
+  "via": {
+   "how": "spawn",
+   "from": "Dolmen01",
+   "biomes": [
+    "Meadows",
+    "BlackForest"
+   ]
+  }
  },
  {
   "id": "Skeleton_Mountains",
@@ -5743,7 +6651,14 @@
    }
   ],
   "avoidWater": true,
-  "stage": "Mountain"
+  "stage": "Mountain",
+  "via": {
+   "how": "spawn",
+   "from": "world",
+   "biomes": [
+    "Mountain"
+   ]
+  }
  },
  {
   "id": "Skeleton_Mountains_noarcher",
@@ -5868,7 +6783,14 @@
    }
   ],
   "avoidWater": true,
-  "stage": "BlackForest"
+  "stage": "BlackForest",
+  "via": {
+   "how": "spawn",
+   "from": "Crypt2",
+   "biomes": [
+    "BlackForest"
+   ]
+  }
  },
  {
   "id": "Skeleton_Swamps",
@@ -5912,7 +6834,14 @@
    }
   ],
   "avoidWater": true,
-  "stage": "Swamp"
+  "stage": "Swamp",
+  "via": {
+   "how": "spawn",
+   "from": "world",
+   "biomes": [
+    "Swamp"
+   ]
+  }
  },
  {
   "id": "Skeleton_Swamps_noarcher",
@@ -5999,7 +6928,16 @@
    }
   ],
   "avoidWater": true,
-  "stage": "DeepNorth"
+  "stage": "DeepNorth",
+  "via": {
+   "how": "summon",
+   "from": "Aspect_Bonemass",
+   "needs": [
+    {
+     "creature": "Aspect_Bonemass"
+    }
+   ]
+  }
  },
  {
   "id": "StoneGolem",
@@ -6055,7 +6993,14 @@
    }
   ],
   "avoidWater": true,
-  "stage": "Mountain"
+  "stage": "Mountain",
+  "via": {
+   "how": "spawn",
+   "from": "world",
+   "biomes": [
+    "Mountain"
+   ]
+  }
  },
  {
   "id": "Surtling",
@@ -6101,7 +7046,14 @@
    }
   ],
   "avoidWater": true,
-  "stage": "Swamp"
+  "stage": "Swamp",
+  "via": {
+   "how": "spawn",
+   "from": "FireHole",
+   "biomes": [
+    "Swamp"
+   ]
+  }
  },
  {
   "id": "Tendril",
@@ -6124,7 +7076,16 @@
    "ShieldWood"
   ],
   "avoidWater": true,
-  "stage": "DeepNorth"
+  "stage": "DeepNorth",
+  "via": {
+   "how": "summon",
+   "from": "FrozenKing_p3",
+   "needs": [
+    {
+     "creature": "FrozenKing_p3"
+    }
+   ]
+  }
  },
  {
   "id": "Tendril_back",
@@ -6175,7 +7136,16 @@
    "ShieldWood"
   ],
   "avoidWater": true,
-  "stage": "BlackForest"
+  "stage": "BlackForest",
+  "via": {
+   "how": "summon",
+   "from": "gd_king",
+   "needs": [
+    {
+     "creature": "gd_king"
+    }
+   ]
+  }
  },
  {
   "id": "TentaRoot_wild",
@@ -6198,7 +7168,14 @@
    "ShieldWood"
   ],
   "avoidWater": true,
-  "stage": "BlackForest"
+  "stage": "BlackForest",
+  "via": {
+   "how": "spawn",
+   "from": "world",
+   "biomes": [
+    "BlackForest"
+   ]
+  }
  },
  {
   "id": "TheHive",
@@ -6278,7 +7255,14 @@
    }
   ],
   "avoidWater": true,
-  "stage": "Mistlands"
+  "stage": "Mistlands",
+  "via": {
+   "how": "spawn",
+   "from": "Mistlands_DvergrTownEntrance1",
+   "biomes": [
+    "Mistlands"
+   ]
+  }
  },
  {
   "id": "TrainingDummy",
@@ -6360,7 +7344,14 @@
    }
   ],
   "avoidWater": true,
-  "stage": "BlackForest"
+  "stage": "BlackForest",
+  "via": {
+   "how": "spawn",
+   "from": "world",
+   "biomes": [
+    "BlackForest"
+   ]
+  }
  },
  {
   "id": "TrollFrost",
@@ -6389,7 +7380,14 @@
    "trollsnow_throw"
   ],
   "avoidWater": true,
-  "stage": "DeepNorth"
+  "stage": "DeepNorth",
+  "via": {
+   "how": "spawn",
+   "from": "world",
+   "biomes": [
+    "DeepNorth"
+   ]
+  }
  },
  {
   "id": "Troll_Summoned",
@@ -6418,7 +7416,16 @@
    "troll_summoned_throw"
   ],
   "avoidWater": true,
-  "stage": "AshLands"
+  "stage": "AshLands",
+  "via": {
+   "how": "summon",
+   "from": "StaffRedTroll",
+   "needs": [
+    {
+     "item": "StaffRedTroll"
+    }
+   ]
+  }
  },
  {
   "id": "Troll_sleeping",
@@ -6505,7 +7512,14 @@
    }
   ],
   "avoidWater": true,
-  "stage": "Mountain"
+  "stage": "Mountain",
+  "via": {
+   "how": "spawn",
+   "from": "Hildir_cave",
+   "biomes": [
+    "Mountain"
+   ]
+  }
  },
  {
   "id": "Unbjorn",
@@ -6575,7 +7589,14 @@
    }
   ],
   "avoidWater": true,
-  "stage": "Plains"
+  "stage": "Plains",
+  "via": {
+   "how": "spawn",
+   "from": "world",
+   "biomes": [
+    "Plains"
+   ]
+  }
  },
  {
   "id": "Volture",
@@ -6623,7 +7644,14 @@
    }
   ],
   "avoidWater": true,
-  "stage": "AshLands"
+  "stage": "AshLands",
+  "via": {
+   "how": "spawn",
+   "from": "world",
+   "biomes": [
+    "AshLands"
+   ]
+  }
  },
  {
   "id": "Wolf",
@@ -6690,7 +7718,14 @@
    ]
   },
   "avoidWater": true,
-  "stage": "Mountain"
+  "stage": "Mountain",
+  "via": {
+   "how": "spawn",
+   "from": "world",
+   "biomes": [
+    "Mountain"
+   ]
+  }
  },
  {
   "id": "Wolf_cub",
@@ -6709,7 +7744,16 @@
    "swim": 2
   },
   "avoidWater": true,
-  "stage": "Mountain"
+  "stage": "Mountain",
+  "via": {
+   "how": "offspring",
+   "from": "Wolf",
+   "needs": [
+    {
+     "creature": "Wolf"
+    }
+   ]
+  }
  },
  {
   "id": "Wolf_spiritcaller",
@@ -6744,7 +7788,16 @@
    ]
   },
   "avoidWater": true,
-  "stage": "DeepNorth"
+  "stage": "DeepNorth",
+  "via": {
+   "how": "summon",
+   "from": "StaffSpiritCaller",
+   "needs": [
+    {
+     "item": "StaffSpiritCaller"
+    }
+   ]
+  }
  },
  {
   "id": "Wraith",
@@ -6786,7 +7839,14 @@
    }
   ],
   "avoidWater": true,
-  "stage": "Swamp"
+  "stage": "Swamp",
+  "via": {
+   "how": "spawn",
+   "from": "world",
+   "biomes": [
+    "Swamp"
+   ]
+  }
  },
  {
   "id": "Writhan",
@@ -6826,7 +7886,14 @@
    }
   ],
   "avoidWater": true,
-  "stage": "Swamp"
+  "stage": "Swamp",
+  "via": {
+   "how": "spawn",
+   "from": "world",
+   "biomes": [
+    "Swamp"
+   ]
+  }
  },
  {
   "id": "gd_king",
@@ -6868,7 +7935,14 @@
    }
   ],
   "avoidWater": true,
-  "stage": "BlackForest"
+  "stage": "BlackForest",
+  "via": {
+   "how": "spawn",
+   "from": "GDKing",
+   "biomes": [
+    "BlackForest"
+   ]
+  }
  },
  {
   "id": "piece_TrainingDummy",
@@ -6882,7 +7956,16 @@
    "TrainingDummy_throw"
   ],
   "avoidWater": true,
-  "stage": "BlackForest"
+  "stage": "BlackForest",
+  "via": {
+   "how": "piece",
+   "from": "piece_TrainingDummy",
+   "needs": [
+    {
+     "piece": "piece_TrainingDummy"
+    }
+   ]
+  }
  },
  {
   "id": "staff_greenroots_tentaroot",
@@ -6903,6 +7986,15 @@
    "ShieldWood"
   ],
   "avoidWater": true,
-  "stage": "AshLands"
+  "stage": "AshLands",
+  "via": {
+   "how": "summon",
+   "from": "StaffGreenRoots",
+   "needs": [
+    {
+     "item": "StaffGreenRoots"
+    }
+   ]
+  }
  }
 ]

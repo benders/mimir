@@ -28,7 +28,11 @@
    "reloadDone": 1.0
   },
   "ammoType": "$ammo_dart",
-  "stage": "Meadows"
+  "stage": "Meadows",
+  "via": {
+   "how": "source",
+   "from": "container_piece_stash_4610f0"
+  }
  },
  {
   "id": "Bite",
@@ -64,7 +68,11 @@
   "blockPerLevel": 5,
   "parryBonus": 2,
   "blockAdrenaline": 3,
-  "stage": "Meadows"
+  "stage": "Meadows",
+  "via": {
+   "how": "source",
+   "from": "container_piece_stash_4610f0"
+  }
  },
  {
   "id": "Charm",
@@ -78,7 +86,17 @@
    "max": 40,
    "effect": "SE_Fizz"
   },
-  "stage": "Meadows"
+  "stage": "Meadows",
+  "via": {
+   "how": "trader",
+   "from": "Vendor",
+   "needs": [
+    {
+     "item": "Coins",
+     "amount": 50
+    }
+   ]
+  }
  },
  {
   "id": "Coins",
@@ -88,7 +106,11 @@
   "weight": 1.0,
   "stack": 1,
   "maxQuality": 1,
-  "stage": "Meadows"
+  "stage": "Meadows",
+  "via": {
+   "how": "source",
+   "from": "container_piece_stash_4610f0"
+  }
  },
  {
   "id": "Dart",
@@ -103,7 +125,11 @@
   },
   "backstab": 1,
   "ammoType": "$ammo_dart",
-  "stage": "Meadows"
+  "stage": "Meadows",
+  "via": {
+   "how": "source",
+   "from": "container_piece_stash_4610f0"
+  }
  },
  {
   "id": "DartBlunt",
@@ -118,7 +144,11 @@
   },
   "backstab": 1,
   "ammoType": "$ammo_dart",
-  "stage": "Meadows"
+  "stage": "Meadows",
+  "via": {
+   "how": "source",
+   "from": "container_piece_stash_4610f0"
+  }
  },
  {
   "id": "Dust",
@@ -138,7 +168,11 @@
   "weight": 1.0,
   "stack": 1,
   "maxQuality": 1,
-  "stage": "Meadows"
+  "stage": "Meadows",
+  "via": {
+   "how": "source",
+   "from": "container_piece_stash_4610f0"
+  }
  },
  {
   "id": "FW_Helmet",
@@ -159,7 +193,16 @@
   "weight": 1.0,
   "stack": 1,
   "maxQuality": 1,
-  "stage": "Meadows"
+  "stage": "Meadows",
+  "via": {
+   "how": "fish",
+   "from": "Fish",
+   "needs": [
+    {
+     "item": "Wood"
+    }
+   ]
+  }
  },
  {
   "id": "Gem",
@@ -169,7 +212,11 @@
   "weight": 1.0,
   "stack": 1,
   "maxQuality": 1,
-  "stage": "Swamp"
+  "stage": "Swamp",
+  "via": {
+   "how": "source",
+   "from": "container_strongbox_3bb70a"
+  }
  },
  {
   "id": "Hammer",
@@ -184,7 +231,11 @@
   "blockAdrenaline": 2,
   "parryAdrenaline": 5,
   "buildTable": "_HammerTable",
-  "stage": "Meadows"
+  "stage": "Meadows",
+  "via": {
+   "how": "source",
+   "from": "container_piece_stash_4610f0"
+  }
  },
  {
   "id": "Hat",
@@ -194,7 +245,17 @@
   "weight": 1.0,
   "stack": 1,
   "maxQuality": 1,
-  "stage": "Meadows"
+  "stage": "Meadows",
+  "via": {
+   "how": "craft",
+   "from": "Recipe_Hat",
+   "needs": [
+    {
+     "item": "Wood",
+     "amount": 1
+    }
+   ]
+  }
  },
  {
   "id": "Helmet",
@@ -206,7 +267,20 @@
   "maxQuality": 1,
   "armor": 4,
   "armorPerLevel": 2,
-  "stage": "Meadows"
+  "stage": "Meadows",
+  "via": {
+   "how": "craft",
+   "from": "Recipe_Helmet",
+   "needs": [
+    {
+     "item": "Ingot",
+     "amount": 2
+    },
+    {
+     "piece": "Bench"
+    }
+   ]
+  }
  },
  {
   "id": "HelmetFem",
@@ -217,7 +291,11 @@
   "stack": 1,
   "maxQuality": 1,
   "armor": 5,
-  "stage": "Meadows"
+  "stage": "Meadows",
+  "via": {
+   "how": "source",
+   "from": "container_piece_stash_4610f0"
+  }
  },
  {
   "id": "Ichor",
@@ -227,7 +305,16 @@
   "weight": 1.0,
   "stack": 1,
   "maxQuality": 1,
-  "stage": "Swamp"
+  "stage": "Swamp",
+  "via": {
+   "how": "produce",
+   "from": "Tap",
+   "needs": [
+    {
+     "piece": "Tap"
+    }
+   ]
+  }
  },
  {
   "id": "Ingot",
@@ -237,7 +324,22 @@
   "weight": 1.0,
   "stack": 30,
   "maxQuality": 1,
-  "stage": "Meadows"
+  "stage": "Meadows",
+  "via": {
+   "how": "process",
+   "from": "Kiln",
+   "needs": [
+    {
+     "item": "Ore"
+    },
+    {
+     "piece": "Kiln"
+    },
+    {
+     "item": "Wood"
+    }
+   ]
+  }
  },
  {
   "id": "Javelin",
@@ -300,7 +402,11 @@
    "draw": 2.5
   },
   "ammoType": "$ammo_dart",
-  "stage": "Meadows"
+  "stage": "Meadows",
+  "via": {
+   "how": "source",
+   "from": "container_piece_stash_4610f0"
+  }
  },
  {
   "id": "Mace",
@@ -336,7 +442,11 @@
    "lastChainMultiplier": 2,
    "cycle": 1.575
   },
-  "stage": "Meadows"
+  "stage": "Meadows",
+  "via": {
+   "how": "source",
+   "from": "container_piece_stash_4610f0"
+  }
  },
  {
   "id": "Marble",
@@ -346,7 +456,16 @@
   "weight": 1.0,
   "stack": 1,
   "maxQuality": 1,
-  "stage": "Mountain"
+  "stage": "Mountain",
+  "via": {
+   "how": "break",
+   "from": "LootChest",
+   "needs": [
+    {
+     "piece": "LootChest"
+    }
+   ]
+  }
  },
  {
   "id": "Mead",
@@ -357,7 +476,17 @@
   "stack": 1,
   "maxQuality": 1,
   "consumeEffect": "SE_Fizz",
-  "stage": "Meadows"
+  "stage": "Meadows",
+  "via": {
+   "how": "craft",
+   "from": "Recipe_Mead",
+   "needs": [
+    {
+     "item": "Fish",
+     "amount": 1
+    }
+   ]
+  }
  },
  {
   "id": "Mystery",
@@ -380,7 +509,16 @@
   "weight": 1.0,
   "stack": 1,
   "maxQuality": 1,
-  "stage": "Meadows"
+  "stage": "Meadows",
+  "via": {
+   "how": "produce",
+   "from": "Hive",
+   "needs": [
+    {
+     "piece": "Hive"
+    }
+   ]
+  }
  },
  {
   "id": "OddBar",
@@ -391,7 +529,17 @@
   "weight": 1.0,
   "stack": 1,
   "maxQuality": 1,
-  "stage": "Meadows"
+  "stage": "Meadows",
+  "via": {
+   "how": "craft",
+   "from": "Recipe_OddBar",
+   "needs": [
+    {
+     "item": "Wood",
+     "amount": 1
+    }
+   ]
+  }
  },
  {
   "id": "Ore",
@@ -402,7 +550,16 @@
   "stack": 30,
   "maxQuality": 1,
   "noTeleport": true,
-  "stage": "Meadows"
+  "stage": "Meadows",
+  "via": {
+   "how": "source",
+   "from": "Stub",
+   "needs": [
+    {
+     "piece": "Sapling"
+    }
+   ]
+  }
  },
  {
   "id": "Pearl",
@@ -412,7 +569,16 @@
   "weight": 1.0,
   "stack": 1,
   "maxQuality": 1,
-  "stage": "Meadows"
+  "stage": "Meadows",
+  "via": {
+   "how": "fish",
+   "from": "Fish",
+   "needs": [
+    {
+     "item": "Wood"
+    }
+   ]
+  }
  },
  {
   "id": "Rod",
@@ -432,7 +598,17 @@
    "projectile": "RodBolt",
    "adrenaline": 1
   },
-  "stage": "Meadows"
+  "stage": "Meadows",
+  "via": {
+   "how": "craft",
+   "from": "Recipe_Rod",
+   "needs": [
+    {
+     "item": "Wood",
+     "amount": 1
+    }
+   ]
+  }
  },
  {
   "id": "SP_Helmet",
@@ -461,7 +637,11 @@
    "stamina": 10,
    "adrenaline": 1
   },
-  "stage": "Meadows"
+  "stage": "Meadows",
+  "via": {
+   "how": "source",
+   "from": "container_piece_stash_4610f0"
+  }
  },
  {
   "id": "Shard",
@@ -472,7 +652,11 @@
   "stack": 1,
   "maxQuality": 1,
   "guardianPower": "SE_Ward",
-  "stage": "Mountain"
+  "stage": "Mountain",
+  "via": {
+   "how": "source",
+   "from": "Altar"
+  }
  },
  {
   "id": "Spit",
@@ -565,7 +749,27 @@
    "size": 2,
    "effect": "SE_Fizz"
   },
-  "stage": "Meadows"
+  "stage": "Meadows",
+  "via": {
+   "how": "craft",
+   "from": "Recipe_Sword",
+   "needs": [
+    {
+     "item": "Ingot",
+     "amount": 4
+    },
+    {
+     "item": "Wood",
+     "amount": 2
+    },
+    {
+     "piece": "Bench"
+    },
+    {
+     "piece": "Anvil"
+    }
+   ]
+  }
  },
  {
   "id": "Wand",
@@ -585,7 +789,17 @@
    "projectile": "WandSpawn",
    "adrenaline": 1
   },
-  "stage": "Meadows"
+  "stage": "Meadows",
+  "via": {
+   "how": "craft",
+   "from": "Recipe_Wand",
+   "needs": [
+    {
+     "item": "Wood",
+     "amount": 1
+    }
+   ]
+  }
  },
  {
   "id": "Wood",
@@ -596,7 +810,11 @@
   "weight": 1.0,
   "stack": 50,
   "maxQuality": 1,
-  "stage": "Meadows"
+  "stage": "Meadows",
+  "via": {
+   "how": "source",
+   "from": "Bush"
+  }
  },
  {
   "id": "WoodOld",
@@ -607,6 +825,10 @@
   "weight": 1.0,
   "stack": 50,
   "maxQuality": 1,
-  "stage": "Meadows"
+  "stage": "Meadows",
+  "via": {
+   "how": "source",
+   "from": "container_piece_stash_4610f0"
+  }
  }
 ]

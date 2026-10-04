@@ -301,6 +301,17 @@ class Entities(FixtureCase):
         self.assertEqual(got["Giant"], "Mountain")  # its event starts when the orb on the Peak is destroyed
         self.assertEqual(got["Serpent"], "Meadows")  # the open sea counts from the start
         self.assertEqual(got["Pebble"], "Swamp")  # a shore location: Ocean next to land is that land's shore
+        ways = {}
+        N.stages(*args, reach=reach, ways=ways)
+        way = lambda kind, k: (ways[kind][k]["how"], ways[kind][k].get("from"), ways[kind][k]["needs"])
+        self.assertEqual(way("item", "Sword"), ("craft", None, [("item", "Wood", None), ("piece", "bench", None),
+                                                               ("piece", "ext", None)]))  # level 2: an extension
+        self.assertEqual(way("item", "Bar"), ("process", "smelter", [("item", "Ore", None), ("piece", "smelter", None)]))
+        self.assertEqual(way("item", "Ore"), ("source", "vein", [("item", "Pick", None)]))  # the tool that mines it
+        self.assertEqual(way("creature", "Raider")[2], [("creature", "Boss", None)])  # the boss that sets its key
+        self.assertEqual(way("item", "Charm"), ("trader", "Vendor", [("item", "Coins", None), ("creature", "Boss", None)]))
+        self.assertEqual(way("item", "Pebble")[0], "source")  # loot, recorded as a source
+
         N.STAGE_OVERRIDES["Club"] = "Plains"
         try:
             got = N.stages(*args, reach=reach)[0]
@@ -329,6 +340,19 @@ class Entities(FixtureCase):
         effects = [{"id": x} for x in ("SE_Ward", "SE_Stun", "SE_Fizz", "SE_Wet")]
         N.effect_stages(effects, items, creatures)
         self.assertEqual([e.get("stage") for e in effects], ["Mountain", "Swamp", "Meadows", None])
+
+    def test_ways_dont_cycle(self):
+        # a crop: the planted piece (a placed item, rank 1) costs the item that a picked bush (rank 2) gives first
+        items, sources = [{"id": "Kale"}], [{"id": "bush", "kind": "pickable", "biomes": ["Meadows"],
+                                              "pickable": {"item": "Kale"}}]
+        pieces = [{"id": "Kale", "enabled": True, "tools": [], "resources": [{"item": "Kale"}]}]
+        pieces[0]["tools"] = ["Kale"]  # buildable; the tool is the seed itself
+        args = items, [], pieces, [], [], sources, []
+        reach = tuple(set(d) for d in N.stages(*args))
+        ways = {}
+        N.stages(*args, reach=reach, ways=ways)
+        self.assertEqual(ways["item"]["Kale"]["how"], "source")  # not "piece": that way needs Kale itself
+        self.assertEqual(ways["piece"]["Kale"]["needs"], [("item", "Kale", None)] * 2)
 
     def test_offspring_egg_is_reached(self):
         items, spawn_list = [{"id": "Egg"}], [{"creature": "Egg", "source": "offspring", "parent": "Hen"}]

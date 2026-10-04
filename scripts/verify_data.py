@@ -254,6 +254,46 @@ def main() -> int:
                 and not e.get("internal") and not e.get("enemyOnly")]
     check(len(unstaged) <= 20, f"{len(unstaged)} reachable entries without a stage (at most 20) {unstaged[:10]}")
 
+    # Tech tree (#25): every staged entry has the way it is got (`via`), whose needs are staged no later and never
+    # lead back to it.
+    order = {s: n for n, s in enumerate(("Meadows", "BlackForest", "Swamp", "Mountain", "Plains", "Mistlands",
+                                         "AshLands", "DeepNorth"))}
+    node = {("item", k): v for k, v in items.items()} | {("creature", k): v for k, v in creatures.items()} \
+        | {("piece", k): v for k, v in pieces.items()}
+    needs = lambda e: [(k, n[k]) for n in e.get("via", {}).get("needs", []) for k in ("item", "creature", "piece") if k in n]
+    check(all("via" in e for e in node.values() if e.get("stage")), "every staged entry has a via")
+    later = [(k, n) for k, e in node.items() for n in needs(e)
+             if n not in node or order.get(node[n].get("stage"), 99) > order.get(e.get("stage"), -1)]
+    check(not later, f"via needs exist and are staged no later than what needs them {later[:5]}")
+    state = {}  # 1 = on the current path, 2 = done
+
+    def cyclic(k) -> bool:
+        if state.get(k) == 1:
+            return True
+        if state.get(k) == 2:
+            return False
+        state[k] = 1
+        bad = any(cyclic(n) for n in needs(node.get(k, {})))
+        state[k] = 2
+        return bad
+    check(not any(cyclic(k) for k in node), "via graph is acyclic")
+
+    def requires(k, target) -> bool:  # target: a node or a test on one
+        seen, todo = set(), [k]
+        while todo:
+            x = todo.pop()
+            if x == target or callable(target) and target(x):
+                return True
+            if x not in seen:
+                seen.add(x)
+                todo += needs(node.get(x, {}))
+        return False
+    check(all(requires(k, t) for k, t in [(("piece", "piece_stonecutter"), ("item", "Iron")),
+                                          (("item", "SwordIron"), lambda x: node.get(x, {}).get("extends") == "forge"),
+                                          (("piece", "smelter"), ("item", "SurtlingCore")),
+                                          (("item", "SwordIron"), ("item", "IronScrap"))]),
+          "via spot checks: Stonecutter needs Iron, Iron Sword a forge extension, Smelter Surtling Core")
+
     print()
     if failures:
         print(f"VERIFY DATA FAILED: {len(failures)} check(s)")

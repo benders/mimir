@@ -23,4 +23,9 @@ filter shows a spoiler warning.
 > Inferred: the order of biomes is the game's intended route, not something the code enforces. Early Axes (axe heads
 > from Meadows chests) are left out as a way to cut birch and oak, an unusual early route to Fine Wood.
 
+Item and piece pages show a requirements tree: the way that gives the stage, then the same for each thing it needs,
+down to world sources and spawns. When several ways share a stage: crafting, smelting and building first, then
+gathering (trees, rocks, pickables), creature drops, loot from chests and props in locations, traders, and breaking
+world pieces last. Something needed twice is expanded once, where it is shallowest.
+
 {{stage-counts}}

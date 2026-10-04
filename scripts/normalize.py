@@ -411,8 +411,17 @@ def biome_stage(bs: list | None) -> int:
     return min((BIOME_STAGE[b] for b in land or bs or () if b in BIOME_STAGE), default=0)
 
 
+WAY_RANK = {  # how a thing is got, for the tech tree (#25): at the same stage, the lower rank is the way shown;
+    # gathering beats a creature drop, which beats loot from a chest or prop in a location ("loot")
+    "craft": 0, "process": 0, "build": 0, "piece": 1, "produce": 1, "spawn": 1, "location": 1, "source": 2,
+    "offspring": 2, "egg": 2, "growup": 2, "fish": 3, "drop": 3, "summon": 3, "phase": 3, "loot": 4, "trader": 5,
+    "break": 6}
+GATHERED = {"tree", "rock", "log", "pickable"}  # source kinds ranked as "source", the rest as "loot"
+
+
 def stages(items: list, creatures: list, pieces: list, recipes: list, procs: list, sources: list, spawn_list: list,
-           location_list=(), reach: tuple | None = None, breakage: bool = True) -> tuple[dict, dict, dict]:
+           location_list=(), reach: tuple | None = None, breakage: bool = True, ways: dict | None = None
+           ) -> tuple[dict, dict, dict]:
     """Progression stage (index into STAGES) of the items, creatures and pieces a player can get to, by fixed point:
     each way of getting a thing costs the latest stage among what it needs, and the thing takes its cheapest way.
     World sources, spawns, traders and located pieces start at their earliest biome (`location_list` gives a
@@ -430,18 +439,51 @@ def stages(items: list, creatures: list, pieces: list, recipes: list, procs: lis
         (MineRock.RPC_Hit, MineRock5/TreeBase/Destructible.RPC_Damage: CheckToolTier), except STAGE_IGNORED_TOOLS.
     `breakage=False` leaves out breaking world pieces for their cost (a sign's coal), an unusual route.
     A soft requirement on an unreachable thing is ignored; a
-    reachable thing whose stage can't be settled (a cycle through soft requirements) is left out."""
+    reachable thing whose stage can't be settled (a cycle through soft requirements) is left out.
+    With `reach` and `ways` (a dict), the way each stage came from goes into ways["item" | "creature" | "piece"][id]
+    (the tech tree, #25): {"how" (a WAY_RANK key), "from" (recipe, station, source, creature, trader, piece or
+    location id), "needs" [(kind, id, amount)] (reachable ones only), "biomes" (a spawn's)}. At the same stage the
+    lower WAY_RANK wins (a source of a kind not in GATHERED ranks as "loot", but is recorded as "source"). Each need's stage is at most the thing's own, so following needs ends."""
     I, C, P, S = (defaultdict(lambda: NEVER) for _ in range(4))
+    V = {id(d): {} for d in (I, C, P, S)}  # the way each stage came from
+    R = {id(d): {} for d in (I, C, P, S)}  # and its WAY_RANK
+    D = {"item": I, "creature": C, "piece": P}
+    KIND = {id(d): kind for kind, d in D.items()}
+    record = ways is not None and reach is not None
     item_ids, by_creature, by_piece = {i["id"] for i in items}, {c["id"]: c for c in creatures}, {p["id"]: p for p in pieces}
     overrides = {k: BIOME_STAGE[v] for k, v in STAGE_OVERRIDES.items()}
     changed = True
 
-    def lower(d: dict, k: str, v: int) -> None:
+    def lower(d: dict, k: str, v: int, how: str = "", frm: str | None = None, needs=(), **extra) -> None:
         nonlocal changed
         if v < NEVER and k in overrides:
             v = overrides[k]
+        rank, tie = WAY_RANK[how or "break"], False
         if v < d[k]:
             d[k], changed = v, True
+        elif not (tie := record and v == d[k] < NEVER and rank < R[id(d)].get(k, NEVER)):
+            return
+        if record:
+            me = (KIND.get(id(d)), k)
+            needs = [n for n in (needs() if callable(needs) else needs) if has(n) and n[:2] != me]
+            if tie and any(leads_to(n[:2], me) for n in needs):  # a better-ranked way that goes through it
+                return
+            V[id(d)][k] = {"how": "source" if how == "loot" else how, "from": frm, "needs": needs, **extra}
+            R[id(d)][k] = rank
+
+    def leads_to(n: tuple, target: tuple) -> bool:  # whether following ways from a need gets to target
+        seen, todo = set(), [n]
+        while todo:
+            x = todo.pop()
+            if x == target:
+                return True
+            if x not in seen:
+                seen.add(x)
+                todo += [m[:2] for m in V[id(D[x[0]])].get(x[1], {}).get("needs", [])]
+        return False
+
+    def has(n: tuple) -> bool:  # a need that is reachable
+        return bool(n[1]) and n[1] in reach[("item", "creature", "piece").index(n[0])]
 
     def soft(d: dict, ids: set, k: str | None) -> int:  # a soft requirement: 0 in the first pass or if unreachable
         return d[k] if reach and k in ids else 0
@@ -451,6 +493,8 @@ def stages(items: list, creatures: list, pieces: list, recipes: list, procs: lis
     soft_piece = lambda k: soft(P, reach[2] if reach else (), k)
     cost = lambda rs: max((I[r["item"]] for r in rs if not r.get("upgrader")), default=0)
     soft_cost = lambda rs: max((soft_item(r["item"]) for r in rs if not r.get("upgrader")), default=0)
+    cost_needs = lambda rs: [("item", r["item"], r.get("amount")) for r in rs if not r.get("upgrader")]
+    source_needs = lambda sid: V[id(S)].get(sid, {}).get("needs", [])
 
     killers, givers = defaultdict(list), defaultdict(list)  # global key (lowercase, ZoneSystem.GetKeyValue) ->
     for c in creatures:  # creatures that set it on death, items a trader takes for it
@@ -467,38 +511,42 @@ def stages(items: list, creatures: list, pieces: list, recipes: list, procs: lis
             starters[src["startsEvent"].lower()].append(src["id"])
     event = lambda e: min((S[x] if reach else 0 for x in starters[e.lower()]), default=0) if e else 0
 
-    def key(k: str | None) -> int:  # the earliest a global key can be set; one nothing sets doesn't hold anything back
-        k = (k or "").lower()
+    def key(k: str | None) -> tuple[int, list]:  # the earliest a global key can be set, and by what; one nothing
+        k = (k or "").lower()  # sets doesn't hold anything back
         if k not in killers and k not in givers:
-            return 0
-        return min([min(soft_creature(c) + bool(by_creature[c].get("boss")), NEVER - 1) for c in killers[k]]
-                   + [max(soft_item(i), h) for i, h in givers[k]])
+            return 0, []
+        return min([(min(soft_creature(c) + bool(by_creature[c].get("boss")), NEVER - 1), [("creature", c, None)])
+                    for c in killers[k]] + [(max(soft_item(i), h), [("item", i, None)]) for i, h in givers[k]])
 
     extensions = defaultdict(list)
     for p in pieces:
         if p.get("extends"):
             extensions[p["extends"]].append(p["id"])
 
-    def station(sid: str | None, level: int = 1) -> int:
+    def station(sid: str | None, level: int = 1) -> tuple[int, list]:  # its stage and the pieces it takes
         if not sid:
-            return 0
-        s = soft_piece(sid)
+            return 0, []
+        s, needs = soft_piece(sid), [("piece", sid, None)]
         if reach and level > 1:
-            ext = sorted(soft_piece(x) for x in extensions[sid] if x in reach[2])
-            s = max(s, ext[level - 2] if len(ext) >= level - 1 else 0)
-        return s
+            ext = sorted((soft_piece(x), x) for x in extensions[sid] if x in reach[2])
+            if len(ext) >= level - 1:
+                s = max(s, ext[level - 2][0])
+                needs += [("piece", x, None) for _, x in ext[:level - 1]]
+        return s, needs
 
-    def tool(src: dict) -> int:  # the earliest player item that can damage a source with a minimum tool tier
+    def tool(src: dict) -> tuple[int, list]:  # the earliest player item that can damage a source with a minimum tool tier
         if not reach or not (tier := src.get("minToolTier")):
-            return 0
+            return 0, []
         hurt = {t for t, m in (src.get("damageModifiers") or {}).items() if m not in ("Immune", "Ignore")}
         hurt |= {t for t in ("chop", "pickaxe") if t not in (src.get("damageModifiers") or {})}
-        return min((soft_item(i["id"]) for i in items if i["id"] in reach[0] and i.get("toolTier", 0) >= tier
-                    and not i.get("internal") and not i.get("enemyOnly") and i["id"] not in STAGE_IGNORED_TOOLS
-                    and any(v > 0 for t, v in (i.get("damages") or {}).items() if t in hurt)), default=0)
+        return min(((soft_item(i["id"]), [("item", i["id"], None)]) for i in items if i["id"] in reach[0]
+                    and i.get("toolTier", 0) >= tier and not i.get("internal") and not i.get("enemyOnly")
+                    and i["id"] not in STAGE_IGNORED_TOOLS
+                    and any(v > 0 for t, v in (i.get("damages") or {}).items() if t in hurt)), default=(0, []))
 
     loc_stage = {loc["id"]: biome_stage(loc["biomes"]) for loc in location_list}
     at = lambda locs: min((loc_stage.get(x["location"], 0) for x in locs), default=NEVER)
+    first_at = lambda locs: min(locs, key=lambda x: loc_stage.get(x["location"], 0))["location"]
     buildable = {p["id"] for p in pieces if (p.get("enabled") or p.get("season")) and p.get("tools")}
     built = lambda pc: max(P[pc], cost(by_piece[pc]["resources"])) if pc in buildable else NEVER
     traders = [src for src in sources if src["kind"] == "trader"]
@@ -510,70 +558,90 @@ def stages(items: list, creatures: list, pieces: list, recipes: list, procs: lis
         changed = False
         for p in pieces:
             if p["id"] in buildable:
-                tools = min((soft_item(t) if t in item_ids else 0 for t in p["tools"]), default=0)
-                lower(P, p["id"], max(tools, soft_cost(p["resources"]), station(p.get("station"))))
+                tv, tn = min(((soft_item(t) if t in item_ids else 0, [("item", t, None)]) for t in p["tools"]),
+                             default=(0, []))
+                sv, sn = station(p.get("station"))
+                lower(P, p["id"], max(tv, soft_cost(p["resources"]), sv), "build", None,
+                      lambda: tn + sn + cost_needs(p["resources"]))
             if p.get("locations"):
-                lower(P, p["id"], at(p["locations"]))
+                lower(P, p["id"], at(p["locations"]), "location", first_at(p["locations"]))
                 if breakage and not p.get("tools") and p.get("health"):  # breaking one drops part of its cost
                     # (Piece.DropResources)
                     for r in p.get("resources", []):
                         if not r.get("noRecover"):
-                            lower(I, r["item"], P[p["id"]])
+                            lower(I, r["item"], P[p["id"]], "break", p["id"], [("piece", p["id"], None)])
         for src in world:  # a source counts once placed: in the world, made by an affordable piece, or a stage of one
             if src["kind"] == "container" or src.get("biomes") or src.get("locations"):
                 lower(S, src["id"], min(biome_stage(src["biomes"]) if src.get("biomes") else NEVER,
                                         at(src["locations"]) if src.get("locations") else NEVER,
-                                        0 if src["kind"] == "container" and not src.get("locations") else NEVER))
+                                        0 if src["kind"] == "container" and not src.get("locations") else NEVER),
+                      "source")
             for pc in src.get("placedBy", []):
                 if pc in by_piece:
-                    lower(S, src["id"], built(pc))
-            v = max(S[src["id"]], tool(src))
+                    lower(S, src["id"], built(pc), "build", pc, [("piece", pc, None)])
+            tv, tn = tool(src)
+            v, how = max(S[src["id"]], tv), "source" if src["kind"] in GATHERED else "loot"
             if src.get("becomes") in item_ids:  # breaks into an item (Destructible.m_spawnWhenDestroyed)
-                lower(I, src["becomes"], v)
+                lower(I, src["becomes"], v, how, src["id"], lambda: source_needs(src["id"]) + tn)
             elif src.get("becomes"):
-                lower(S, src["becomes"], v)
+                lower(S, src["becomes"], v, how, src["id"], lambda: source_needs(src["id"]) + tn)
             for it in {d["item"] for d in (src.get("drops") or {}).get("items", [])} | picked_items(src):
-                lower(I, it, v)
+                lower(I, it, v, how, src["id"], lambda: source_needs(src["id"]) + tn)
         for r in recipes:
             if r.get("item") and (r.get("enabled") or r.get("season")):
-                lower(I, r["item"], max(cost(r["resources"]), station(r.get("station"), r.get("stationLevel", 1))))
+                sv, sn = station(r.get("station"), r.get("stationLevel", 1))
+                lower(I, r["item"], max(cost(r["resources"]), sv), "craft", r.get("id"),
+                      lambda: cost_needs(r["resources"]) + sn)
         for s in spawn_list:
             src, c = s["source"], s["creature"]
             if src in ("world", "location", "dungeon", "raid"):
                 keys = s.get("requiredGlobalKeys", []) + ([s["requiredGlobalKey"]] if s.get("requiredGlobalKey") else [])
-                lower(C, c, max([biome_stage(s.get("biomes")), event(s.get("requiredEvent"))] + [key(k) for k in keys]))
+                kv = [key(k) for k in keys]
+                lower(C, c, max([biome_stage(s.get("biomes")), event(s.get("requiredEvent"))] + [v for v, _ in kv]),
+                      "spawn", s.get("location") or s.get("event") or src, lambda: [n for _, ns in kv for n in ns],
+                      biomes=s.get("biomes", []))
             elif src in ("offspring", "growup"):  # counted from the start, like the parent's spawn (soft)
-                lower(C, c, soft_creature(s["parent"]))
+                lower(C, c, soft_creature(s["parent"]), src, s["parent"], [("creature", s["parent"], None)])
                 if src == "offspring" and c in item_ids:  # an egg laid by a creature we have
-                    lower(I, c, C[s["parent"]])
+                    lower(I, c, C[s["parent"]], "offspring", s["parent"], [("creature", s["parent"], None)])
             elif src == "egg":
-                lower(C, c, soft_item(s["item"]))
+                lower(C, c, soft_item(s["item"]), "egg", s["item"], [("item", s["item"], None)])
             elif src in ("summon", "phase"):  # a summon needs its summoner (the creature carrying it, else the item)
-                lower(C, c, C[s["parent"]] if "parent" in s else I[s["item"]])
+                by = ("creature", s["parent"], None) if "parent" in s else ("item", s["item"], None)
+                lower(C, c, C[s["parent"]] if "parent" in s else I[s["item"]], src, by[1], [by])
         for cid, cr in by_creature.items():
             for d in cr.get("drops", []):
-                lower(I, d["item"], C[cid])
+                lower(I, d["item"], C[cid], "drop", cid, [("creature", cid, None)])
                 if d["item"] in by_creature:  # a creature dropped by one (a miniboss's second phase)
-                    lower(C, d["item"], C[cid])
+                    lower(C, d["item"], C[cid], "drop", cid, [("creature", cid, None)])
             if cid in by_piece:  # a buildable piece that is a creature (the training dummy)
-                lower(C, cid, built(cid))
+                lower(C, cid, built(cid), "piece", cid, [("piece", cid, None)])
         for t in traders:
             here = min((biome_stage(x.get("biomes")) for x in t.get("locations", [])), default=0)
             for x in t["sells"]:
-                lower(I, x["item"], max(here if reach else 0, I["Coins"], key(x.get("requiredKey"))))
+                kv, kn = key(x.get("requiredKey"))
+                lower(I, x["item"], max(here if reach else 0, I["Coins"], kv), "trader", t["id"],
+                      [("item", "Coins", x.get("price"))] + kn)
         for p in procs:
-            lower(I, p["to"], max(I[p["from"]], station(p["station"]), soft_item(p.get("fuel"))))
+            sv, sn = station(p["station"])
+            lower(I, p["to"], max(I[p["from"]], sv, soft_item(p.get("fuel"))), "process", p["station"],
+                  lambda: [("item", p["from"], None)] + sn + [("item", p.get("fuel"), None)])
         for p in pieces:  # feasts: item and piece in one
             if p["id"] in item_ids:
-                lower(I, p["id"], built(p["id"]))
+                lower(I, p["id"], built(p["id"]), "piece", p["id"], [("piece", p["id"], None)])
         for pc in made:  # a placed piece needs its cost; sap also its root, a world object
             root = pc["produces"].get("connectsTo")
-            lower(I, pc["produces"]["item"], max(built(pc["id"]), biome_stage(root["biomes"]) if root else 0))
+            lower(I, pc["produces"]["item"], max(built(pc["id"]), biome_stage(root["biomes"]) if root else 0),
+                  "produce", pc["id"], [("piece", pc["id"], None)])
         for f in fish:
-            v = max(C[f["id"]], min((I[b["item"]] for b in f["baits"]), default=NEVER))
-            lower(I, f["id"], v)
+            v, bait = min(((I[b["item"]], b["item"]) for b in f["baits"]), default=(NEVER, None))
+            v = max(C[f["id"]], v)
+            lower(I, f["id"], v, "fish", f["id"], [("item", bait, None)])
             for d in (f.get("drops") or {}).get("items", []):
-                lower(I, d["item"], v)
+                lower(I, d["item"], v, "fish", f["id"], [("item", bait, None)])
+    if record:
+        for kind, d in zip(("item", "creature", "piece"), (I, C, P)):
+            ways[kind] = {k: V[id(d)][k] for k, v in d.items() if v < NEVER and k in V[id(d)]}
     return tuple({k: v for k, v in d.items() if v < NEVER} for d in (I, C, P))
 
 
@@ -652,17 +720,28 @@ def mark_stages(items: list, creatures: list, pieces: list, recipes: list, procs
     (Hive, SwordCheat, HealthUpgrade_*, OLD_wood_roof, unplaced *_sleeping variants). Internal and enemyOnly items
     are hidden already. The site hides unobtainable entries; verify_data guards against a source gap hiding real
     content (#35). Reachable ones get the `stage` (a biome in STAGES) where a player first gets them (#24); none =
-    it couldn't be settled."""
+    it couldn't be settled; and `via`, the way that stage comes from (the tech tree, #25; see stages())."""
     args = items, creatures, pieces, recipes, procs, sources, spawn_list, location_list
     got = tuple(set(d) for d in stages(*args))
-    staged = stages(*args, reach=got, breakage=False)  # breaking world pieces: only where nothing else gives a stage
-    staged = tuple({**more, **st} for st, more in zip(staged, stages(*args, reach=got)))
-    for entries, ids, st in zip((items, creatures, pieces), got, staged):
+    ways, broken = {}, {}
+    staged = stages(*args, reach=got, breakage=False, ways=ways)  # breaking world pieces: only where nothing else
+    # gives a stage
+    staged = tuple({**more, **st} for st, more in zip(staged, stages(*args, reach=got, ways=broken)))
+    for kind, entries, ids, st in zip(("item", "creature", "piece"), (items, creatures, pieces), got, staged):
         for e in entries:
             if e["id"] not in ids and not e.get("internal") and not e.get("enemyOnly"):
                 e["unobtainable"] = True
             elif e["id"] in st:
                 e["stage"] = STAGES[st[e["id"]]]
+                if way := ways[kind].get(e["id"]) or broken[kind].get(e["id"]):
+                    e["via"] = via_json(way)
+
+
+def via_json(way: dict) -> dict:
+    """A stages() way as stored in data/: needs as {kind: id, amount}, empty fields left out."""
+    needs = [{n[0]: n[1], **({"amount": n[2]} if n[2] else {})} for n in way["needs"]]
+    needs = list({json.dumps(n, sort_keys=True): n for n in needs}.values())  # a station that is also a cost
+    return {k: v for k, v in {**way, "needs": needs}.items() if v}
 
 
 def carried_items(c: dict) -> set[str]:

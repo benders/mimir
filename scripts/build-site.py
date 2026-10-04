@@ -278,8 +278,8 @@ def variants(kind: str, coll: dict, shown, primary=lambda id_: False, other="") 
             continue
         pages = []
         for id_ in sorted(ids, key=lambda x: (len(x), x)):  # the shortest id of identical copies keeps the page
-            same = {k: v for k, v in coll[id_].items() if k not in ("id", "stage")}  # stage: how it's reached
-            twin = next((p for p in pages if {k: v for k, v in coll[p].items() if k not in ("id", "stage")} == same), None)
+            same = {k: v for k, v in coll[id_].items() if k not in ("id", "stage", "via")}  # stage, via: how it's reached
+            twin = next((p for p in pages if {k: v for k, v in coll[p].items() if k not in ("id", "stage", "via")} == same), None)
             if twin:
                 merged[id_] = twin
             else:
@@ -838,6 +838,113 @@ def attack_damage(w: dict) -> str:
                                                 else f' <span class="qty">{h["kind"]}</span>') for h in hits)
 
 
+# --- requirements tree (#25) ---------------------------------------------------------------
+# Each reachable entry's `via` (normalize.stages()) is the way its stage comes from; following the needs gives one
+# way to get it, all the way down to world sources and spawns.
+
+HOW_LABELS = {"craft": "crafted", "build": "built", "drop": "dropped by", "produce": "produced by", "piece": "placed",
+              "break": "breaks out of", "offspring": "laid by", "growup": "grows up from", "egg": "hatches from",
+              "summon": "summoned by", "phase": "next phase of"}
+TREE_OPEN = 2  # levels shown expanded
+
+
+def short_places(biomes=(), locations=()) -> str:
+    places = [BIOMES.get(b, words(b)) for b in biomes]
+    locs = list(dict.fromkeys(pretty_id(x["location"]) for x in locations))
+    return ", ".join(places[:3] + locs[:2] + (["…"] if len(locs) > 2 or len(places) > 3 else []))
+
+
+BECOMES_FROM = {s["becomes"]: s for s in SOURCES.values() if s.get("becomes") in SOURCES}
+
+
+def via_of(kind: str, id_: str) -> dict:
+    return (entity(kind, id_) or {}).get("via") or {}
+
+
+def how_text(kind: str, id_: str) -> str:
+    """How an entry's `via` gets it, in a few words; the needs are its children."""
+    v = via_of(kind, id_)
+    how, frm = v.get("how"), v.get("from")
+    if how == "process":
+        conv = next((c for c in PROCESSING if c["station"] == frm and c["to"] == id_), {})
+        return PROCESS_LABELS.get(conv.get("kind"), "made").lower()
+    if how == "source" and frm in SOURCES:
+        s = placed = SOURCES[frm]
+        while not placed.get("biomes") and not placed.get("locations") and placed["id"] in BECOMES_FROM:
+            placed = BECOMES_FROM[placed["id"]]  # a stage of a multi-stage object: where its first stage stands
+        where = short_places(placed.get("biomes", []), placed.get("locations", []))
+        return f'{esc(s["kind"])}: {esc(source_name(s))}' + (f" ({esc(where)})" if where else "")
+    if how == "fish":
+        return f"fishing{' (' + esc(short_places(SOURCES[frm].get('biomes', []))) + ')' if frm in SOURCES else ''}"
+    if how == "trader" and frm in SOURCES:
+        return f"sold by {esc(source_name(SOURCES[frm]))}"
+    if how == "location":
+        p = entity(kind, id_) or {}
+        return f'found in {esc(short_places(locations=p.get("locations", [])) or pretty_id(frm))}'
+    if how == "spawn":
+        where = short_places(v.get("biomes", []))
+        at = "" if frm in ("world", None) or frm.startswith("army_") else pretty_id(frm)
+        raid = " in a raid" if frm and frm.startswith("army_") else ""
+        return "spawns" + raid + (f" at {esc(at)}" if at else "") + (f" ({esc(where)})" if where else "") + \
+            (", after" if v.get("needs") else "")
+    return HOW_LABELS.get(how, "")
+
+
+def need_role(kind: str, id_: str, n: dict) -> str:
+    """A station or station upgrade among a recipe's needs, a tool among a piece's."""
+    v = via_of(kind, id_)
+    if "piece" in n:
+        if v.get("how") == "craft":
+            st = next((r.get("station") for r in RECIPES if r.get("id") == v.get("from")), None)
+            return "station" if n["piece"] == st else "station upgrade" if PIECES.get(n["piece"], {}).get("extends") else ""
+        if v.get("how") in ("process", "build"):
+            return "station" if v["how"] == "process" or n["piece"] == (entity(kind, id_) or {}).get("station") else ""
+    if "item" in n and v.get("how") == "build" and n["item"] in (entity(kind, id_) or {}).get("tools", []):
+        return "tool"
+    if "item" in n and v.get("how") == "fish":
+        return "bait"
+    if "item" in n and v.get("how") == "process" and n["item"] != v["needs"][0].get("item"):
+        return "fuel"
+    if "item" in n and v.get("how") == "source":
+        return "tool"
+    return ""
+
+
+def requirements_tree(kind: str, id_: str) -> str:
+    """One way to get an entry, as a nested list: each node is something it needs and how that is got. A node
+    needed more than once is expanded at its shallowest place only, the others say where."""
+    def children(k, i):
+        return [(next(x for x in ("item", "piece", "creature") if x in n), n) for n in via_of(k, i).get("needs", [])]
+
+    claimed, queue = {(kind, id_): ()}, [((kind, id_), ())]  # node -> the path (child indices) it is expanded at
+    while queue:
+        (k, i), path = queue.pop(0)
+        for n, (ck, need) in enumerate(children(k, i)):
+            node = (ck, need[ck])
+            if node not in claimed:
+                claimed[node] = path + (n,)
+                queue.append((node, path + (n,)))
+
+    def render(k, i, path, role="", amount=None) -> str:
+        home = claimed[(k, i)]
+        how = how_text(k, i) if home == path else f'see {"above" if home < path else "below"}'
+        label = (f'{link(k, i, amount)}{f" <span class=role>{esc(role)}</span>" if role else ""}'
+                 f'{f" <span class=how>{how}</span>" if how else ""}')
+        if home != path:
+            return f"<li>{label}</li>"
+        kids = "".join(render(ck, n[ck], path + (j,), need_role(k, i, n), n.get("amount"))
+                       for j, (ck, n) in enumerate(children(k, i)))
+        if not kids:
+            return f"<li>{label}</li>"
+        return f'<li><details{" open" if len(path) < TREE_OPEN else ""}><summary>{label}</summary><ul>{kids}</ul></details></li>'
+
+    if not via_of(kind, id_):
+        return ""
+    return (f'<ul class="tree">{render(kind, id_, ())}</ul>'
+            f'<p class="note">One way to get it: at each step the earliest stage, making it before finding it. '
+            f'{mech_link("progression", "Progression")}.</p>')
+
+
 def item_page(i: dict) -> None:
     t = i["type"]
     facts = [
@@ -917,6 +1024,7 @@ def item_page(i: dict) -> None:
 
     recipes = "".join(recipe_block(r, i.get("maxQuality", 1)) for r in crafted_by[i["id"]])
     body += section("Crafting", recipes)
+    body += section("Requirements", requirements_tree("item", i["id"]))
 
     obtain = []
     for c in process_to[i["id"]]:
@@ -1106,6 +1214,7 @@ def piece_page(p: dict) -> None:
     else:
         body += section("Cost", reflist(link("item", r["item"], r["amount"]) for r in p.get("resources", [])))
         body += section("Also in the world", reflist(link("piece", w) for w in world_copies[p["id"]]))
+        body += section("Requirements", requirements_tree("piece", p["id"]))
     body += section("Resistances", modifiers_table(p.get("damageModifiers")))
     body += staged_section("Upgrades", [("piece", e["id"], link("piece", e["id"])) for e in extensions[p["id"]]])
 
