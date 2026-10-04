@@ -435,6 +435,34 @@ for i in ITEMS.values():
             effect_users[i["set"]["effect"]].append(("item", i["id"], f"set of {i['set']['size']}"))
 for s in SPAWNS:
     spawns_of[s["creature"]].append(s)
+
+EFFECT_GROUPS = {  # status effects index sections, in this order: (anchor, heading)
+    "power": "Forsaken powers", "mead": "Meads and food", "set": "Armor set bonuses",
+    "equipment": "Equipment and weapons", "debuff": "Damage and debuffs", "creature": "Creature abilities",
+    "status": "Environment and status",
+}
+DAMAGE_EFFECTS = {"Burning", "Frost", "Lightning", "Poison", "Spirit"}  # Character.AddFireDamage/AddFrostDamage/...
+
+
+def effect_group(e: dict) -> str:
+    """Where a status effect goes on the index: from what gives it (effect_users), then its stats, then its id."""
+    how = {(k, h.split(" ")[0]) for k, _, h in effect_users[e["id"]]}
+    stats = e.get("stats") or {}
+    if ("item", "offered") in how or e["id"].startswith("GP_"):
+        return "power"
+    if ("item", "set") in how or e["id"].startswith("SetEffect_"):  # the Fishing Hat's is its equip effect
+        return "set"
+    if ("item", "consumed") in how or e["id"].startswith("Potion_"):
+        return "mead"
+    if ("item", "equipped") in how or ("item", "full") in how or e["id"].startswith("Trinket"):
+        return "equipment"
+    if e["id"] in DAMAGE_EFFECTS or e["type"] == "SE_Harpooned" or (stats.get("speedModifier") or 0) < 0:
+        return "debuff"  # a damage type's effect, or one that slows (Tared, Slimed, Immobilized)
+    if ("creature", "attack") in how or e["id"].startswith("SE_Dvergr_"):
+        return "creature"
+    if ("item", "on") in how:  # a player weapon's effect on its user (staff shield)
+        return "equipment"
+    return "status"
 for kind, rels in {"item": [crafted_by, used_in_recipe, used_in_piece, process_from, process_to, dropped_by,
                             found_in, bait_for, sold_by, tool_pieces],
                    "creature": [spawns_of],
@@ -1122,7 +1150,8 @@ def effect_value(k: str, v) -> str:
 def effect_page(e: dict) -> None:
     facts = [("Duration", duration(e["duration"]) if e.get("duration") else None),
              ("Cooldown", duration(e["cooldown"]) if e.get("cooldown") else None),
-             ("Category", esc(e["category"]) if e.get("category") else None)]
+             ("Category", esc(e["category"]) if e.get("category") else None),
+             ("Group", f'<a href="effects/index.html#{(g := effect_group(e))}">{esc(EFFECT_GROUPS[g])}</a>')]
     body = header(e, "effect", esc(e["type"]), e.get("tooltip")) + kv(facts)
     body += section("Stats", kv((words(k), effect_value(k, v)) for k, v in (e.get("stats") or {}).items()))
     body += section("From", reflist(f'{link(k, x)} <span class=note>{esc(how)}</span>'
@@ -1583,7 +1612,16 @@ def index_pages() -> None:
                  f'placed in locations and dungeons.</p>{grid("piece", world)}')
     page("pieces/index.html", "Pieces", body)
 
-    body = "<h1>Status effects</h1>" + grid("effect", EFFECTS)
+    groups = defaultdict(list)
+    for e in EFFECTS.values():
+        if has_page("effect", e["id"]):
+            groups[effect_group(e)].append(e["id"])
+    order = [g for g in EFFECT_GROUPS if g in groups]
+    toc = " · ".join(f'<a href="effects/index.html#{g}"{group_stage("effect", groups[g])}>{esc(EFFECT_GROUPS[g])}</a>'
+                     for g in order)
+    body = f'<h1>Status effects</h1><p class="toc">{toc}</p>' + "".join(
+        f'<h2 id="{g}"{group_stage("effect", groups[g])}>{esc(EFFECT_GROUPS[g])}</h2>{grid("effect", groups[g])}'
+        for g in order)
     page("effects/index.html", "Status effects", body)
 
     counts = {"items": len(items), "creatures": len(CREATURES), "pieces": len(PIECES), "effects": len(EFFECTS)}

@@ -175,6 +175,8 @@ building, Bait for; not costs or sources), and in search.json (6th field). The h
 a merged page takes its earliest copy's stage. Status effects get `stage` from what gives them (`normalize.effect_stages`:
 an item's consume/equip/set/adrenaline effect, `attackEffect` (m_attackStatusEffect), a trophy's `guardianPower` (boss
 stone ItemStand), or a creature using an internal attack item); damage-type, weather and resting effects have none.
+The effects index groups effects (`build-site.effect_group`) by what gives them (boss stone, set, consumed or
+equipped item, creature attack), then damage-type/slowing debuffs, then id prefixes; the rest are environment and status.
 Alt-biome spawns' `biomes` are the overlap of the spawn's and the patch's biomes. The `progression` mechanics page explains the rules. `verify_data.py` keeps a list of known-obtainable content
 and caps the flagged share, so a source gap can't silently hide real pages; `scripts/unreached.py -v` lists what
 `reachable()` misses. Add a source to normalize rather than an exception when something real is flagged.

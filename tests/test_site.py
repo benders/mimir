@@ -344,8 +344,14 @@ class Site(unittest.TestCase):
         self.assertNotIn('html[data-max="2"] [data-stage="2"]', css)  # its own stage stays visible
         effects = (self.out / "effects/index.html").read_text(encoding="utf-8")
         self.assertIn('<li data-stage="3"><a class="ref" href="effects/SE_Ward.html"', effects)  # Shard's guardian power
+        groups = dict(re.findall(r'<h2 id="(\w+)".*?</h2><ul class="grid">(.*?)</ul>', effects))
+        self.assertIn("SE_Ward.html", groups["power"])
+        self.assertIn("SE_Stun.html", groups["creature"])  # Raider's bite
+        self.assertIn("SE_Wet.html", groups["status"])  # nothing gives it
+        self.assertLess(effects.index('id="power"'), effects.index('id="status"'))
         ward = (self.out / "effects/SE_Ward.html").read_text(encoding="utf-8")
         self.assertRegex(ward, r'href="items/Shard.html".*offered at its boss stone')
+        self.assertIn('<dt>Group</dt><dd><a href="effects/index.html#power">Forsaken powers</a>', ward)
         self.assertIn("offered at its boss stone", ward)
         stun = (self.out / "effects/SE_Stun.html").read_text(encoding="utf-8")
         self.assertRegex(stun, r'href="creatures/Raider.html".*attack')  # through its internal attack item
