@@ -152,3 +152,8 @@ kbd { border: 1px solid var(--line); border-radius: 4px; padding: 0 5px; backgro
 .tree summary::marker { color: var(--muted); }
 .tree .how, .tree .role { color: var(--muted); font-size: 13px; }
 .tree .role { font-style: italic; }
+table.num th[colspan], table th[colspan] { text-align: center; border-bottom: 1px solid var(--line); }
+h3 .skill { font-weight: normal; margin-left: 8px; }
+table.matrix td { text-align: center; }
+table.matrix thead th { writing-mode: vertical-rl; transform: rotate(180deg); text-align: left; padding: 6px 2px; }
+table.matrix thead th:first-child { writing-mode: horizontal-tb; transform: none; vertical-align: bottom; }

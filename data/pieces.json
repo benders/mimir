@@ -627,6 +627,7 @@
    "value": 1,
    "group": "Fire"
   },
+  "playerBase": true,
   "locations": [
    {
     "location": "BogWitch_Camp"
@@ -716,6 +717,7 @@
    "poison": "Immune",
    "spirit": "Immune"
   },
+  "playerBase": true,
   "stage": "Swamp",
   "via": {
    "how": "build",
@@ -3798,6 +3800,7 @@
     "noRecover": true
    }
   ],
+  "playerBase": true,
   "locations": [
    {
     "location": "MorkBorg",
@@ -10118,6 +10121,7 @@
    "poison": "Immune",
    "spirit": "Immune"
   },
+  "playerBase": true,
   "stage": "AshLands",
   "via": {
    "how": "build",
@@ -11907,6 +11911,7 @@
    "poison": "Immune",
    "spirit": "Immune"
   },
+  "playerBase": true,
   "stage": "Meadows",
   "via": {
    "how": "build",
@@ -11968,6 +11973,7 @@
    "buildRange": 20,
    "requiresRoof": true
   },
+  "playerBase": true,
   "stage": "Mistlands",
   "via": {
    "how": "build",
@@ -14450,6 +14456,7 @@
    "poison": "Immune",
    "spirit": "Immune"
   },
+  "playerBase": true,
   "stage": "Mountain",
   "via": {
    "how": "build",
@@ -14571,6 +14578,7 @@
    "poison": "Immune",
    "spirit": "Immune"
   },
+  "playerBase": true,
   "stage": "Swamp",
   "via": {
    "how": "build",
@@ -15054,6 +15062,7 @@
    "poison": "Immune",
    "spirit": "Immune"
   },
+  "playerBase": true,
   "stage": "BlackForest",
   "via": {
    "how": "build",
@@ -15111,6 +15120,7 @@
    "poison": "Immune",
    "spirit": "Immune"
   },
+  "playerBase": true,
   "unobtainable": true
  },
  {
@@ -16651,6 +16661,7 @@
    "poison": "Immune",
    "spirit": "Immune"
   },
+  "playerBase": true,
   "locations": [
    {
     "location": "CharredTowerRuins1_dvergr"
@@ -16812,6 +16823,7 @@
    "poison": "Ignore",
    "spirit": "Ignore"
   },
+  "playerBase": true,
   "stage": "Mistlands",
   "via": {
    "how": "build",
@@ -16888,6 +16900,7 @@
    "poison": "Immune",
    "spirit": "Immune"
   },
+  "playerBase": true,
   "stage": "BlackForest",
   "via": {
    "how": "build",
@@ -16952,6 +16965,7 @@
    "poison": "Immune",
    "spirit": "Immune"
   },
+  "playerBase": true,
   "stage": "Meadows",
   "via": {
    "how": "build",
@@ -16993,6 +17007,7 @@
    "value": 1,
    "group": "Fire"
   },
+  "playerBase": true,
   "locations": [
    {
     "location": "Vendor_BlackForest"
@@ -17027,6 +17042,7 @@
    "value": 1,
    "group": "Fire"
   },
+  "playerBase": true,
   "locations": [
    {
     "location": "Hildir_camp"
@@ -17077,6 +17093,7 @@
    "poison": "Immune",
    "spirit": "Immune"
   },
+  "playerBase": true,
   "stage": "Meadows",
   "via": {
    "how": "build",
@@ -17236,6 +17253,7 @@
    "buildRange": 20,
    "requiresRoof": true
   },
+  "playerBase": true,
   "stage": "BlackForest",
   "via": {
    "how": "build",
@@ -17855,6 +17873,7 @@
    "poison": "Immune",
    "spirit": "Immune"
   },
+  "playerBase": true,
   "stage": "BlackForest",
   "via": {
    "how": "build",
@@ -17938,6 +17957,7 @@
    "poison": "Immune",
    "spirit": "Immune"
   },
+  "playerBase": true,
   "stage": "Swamp",
   "via": {
    "how": "build",
@@ -18000,6 +18020,7 @@
    "poison": "Immune",
    "spirit": "Immune"
   },
+  "playerBase": true,
   "stage": "Swamp",
   "via": {
    "how": "build",
@@ -19096,6 +19117,7 @@
    "poison": "Immune",
    "spirit": "Immune"
   },
+  "playerBase": true,
   "stage": "AshLands",
   "via": {
    "how": "build",
@@ -19249,6 +19271,7 @@
    "poison": "Immune",
    "spirit": "Immune"
   },
+  "playerBase": true,
   "stage": "DeepNorth",
   "via": {
    "how": "build",
@@ -19317,6 +19340,7 @@
    "poison": "Immune",
    "spirit": "Immune"
   },
+  "playerBase": true,
   "stage": "DeepNorth",
   "via": {
    "how": "build",
@@ -19386,6 +19410,7 @@
    "poison": "Immune",
    "spirit": "Immune"
   },
+  "playerBase": true,
   "stage": "AshLands",
   "via": {
    "how": "build",
@@ -19575,6 +19600,7 @@
    "buildRange": 40,
    "requiresRoof": true
   },
+  "playerBase": true,
   "stage": "Mountain",
   "via": {
    "how": "build",
@@ -20697,6 +20723,7 @@
    "poison": "Immune",
    "spirit": "Immune"
   },
+  "playerBase": true,
   "stage": "Mountain",
   "via": {
    "how": "build",
@@ -21392,6 +21419,7 @@
    "poison": "Immune",
    "spirit": "Immune"
   },
+  "playerBase": true,
   "stage": "Swamp",
   "via": {
    "how": "build",
@@ -21461,6 +21489,7 @@
    "poison": "Immune",
    "spirit": "Immune"
   },
+  "playerBase": true,
   "stage": "Mountain",
   "via": {
    "how": "build",
@@ -21530,6 +21559,7 @@
    "poison": "Immune",
    "spirit": "Immune"
   },
+  "playerBase": true,
   "stage": "Mountain",
   "via": {
    "how": "build",
@@ -22910,6 +22940,7 @@
    "poison": "Immune",
    "spirit": "Immune"
   },
+  "playerBase": true,
   "stage": "Mistlands",
   "via": {
    "how": "build",
@@ -22981,6 +23012,7 @@
    "poison": "Immune",
    "spirit": "Immune"
   },
+  "playerBase": true,
   "stage": "Mistlands",
   "via": {
    "how": "build",
@@ -24009,6 +24041,7 @@
    "poison": "Immune",
    "spirit": "Immune"
   },
+  "playerBase": true,
   "stage": "Swamp",
   "via": {
    "how": "build",
@@ -24066,6 +24099,7 @@
    "poison": "Immune",
    "spirit": "Immune"
   },
+  "playerBase": true,
   "stage": "Swamp",
   "via": {
    "how": "build",
@@ -24123,6 +24157,7 @@
    "poison": "Immune",
    "spirit": "Immune"
   },
+  "playerBase": true,
   "stage": "Swamp",
   "via": {
    "how": "build",
@@ -24179,6 +24214,7 @@
    "poison": "Immune",
    "spirit": "Immune"
   },
+  "playerBase": true,
   "stage": "Mistlands",
   "via": {
    "how": "build",
@@ -24233,6 +24269,7 @@
    "poison": "Immune",
    "spirit": "Immune"
   },
+  "playerBase": true,
   "stage": "Meadows",
   "via": {
    "how": "build",
@@ -24347,6 +24384,7 @@
    "poison": "Immune",
    "spirit": "Immune"
   },
+  "playerBase": true,
   "stage": "DeepNorth",
   "via": {
    "how": "build",
@@ -24455,6 +24493,7 @@
    "poison": "Immune",
    "spirit": "Immune"
   },
+  "playerBase": true,
   "season": {
    "name": "Halloween",
    "start": [
@@ -24583,6 +24622,7 @@
    "buildRange": 20,
    "requiresRoof": true
   },
+  "playerBase": true,
   "stage": "Mistlands",
   "via": {
    "how": "build",
@@ -25143,6 +25183,7 @@
    "poison": "Immune",
    "spirit": "Immune"
   },
+  "playerBase": true,
   "stage": "Mountain",
   "via": {
    "how": "build",
@@ -25641,6 +25682,7 @@
     ]
    }
   },
+  "playerBase": true,
   "stage": "Mistlands",
   "via": {
    "how": "build",
@@ -25766,6 +25808,7 @@
    "poison": "Immune",
    "spirit": "Immune"
   },
+  "playerBase": true,
   "stage": "Mistlands",
   "via": {
    "how": "build",
@@ -25825,6 +25868,7 @@
    "poison": "Immune",
    "spirit": "Immune"
   },
+  "playerBase": true,
   "stage": "DeepNorth",
   "via": {
    "how": "build",
@@ -25885,6 +25929,7 @@
    "poison": "Immune",
    "spirit": "Immune"
   },
+  "playerBase": true,
   "stage": "Mountain",
   "via": {
    "how": "build",
@@ -26002,6 +26047,7 @@
    "buildRange": 20,
    "requiresRoof": true
   },
+  "playerBase": true,
   "stage": "Swamp",
   "via": {
    "how": "build",
@@ -26586,6 +26632,7 @@
    "poison": "Immune",
    "spirit": "Immune"
   },
+  "playerBase": true,
   "stage": "Mistlands",
   "via": {
    "how": "build",
@@ -26650,6 +26697,7 @@
    "poison": "Immune",
    "spirit": "Immune"
   },
+  "playerBase": true,
   "stage": "BlackForest",
   "via": {
    "how": "build",
@@ -26710,6 +26758,7 @@
    "poison": "Immune",
    "spirit": "Immune"
   },
+  "playerBase": true,
   "stage": "Plains",
   "via": {
    "how": "build",
@@ -26764,6 +26813,7 @@
    "buildRange": 20,
    "requiresRoof": true
   },
+  "playerBase": true,
   "stage": "Meadows",
   "via": {
    "how": "build",
@@ -27371,6 +27421,7 @@
    "poison": "Immune",
    "spirit": "Immune"
   },
+  "playerBase": true,
   "unobtainable": true
  },
  {
@@ -27414,6 +27465,7 @@
    "poison": "Immune",
    "spirit": "Immune"
   },
+  "playerBase": true,
   "stage": "AshLands",
   "via": {
    "how": "build",
@@ -27480,6 +27532,7 @@
    "poison": "Immune",
    "spirit": "Immune"
   },
+  "playerBase": true,
   "stage": "BlackForest",
   "via": {
    "how": "build",
@@ -29423,6 +29476,7 @@
    "poison": "Immune",
    "spirit": "Immune"
   },
+  "playerBase": true,
   "stage": "BlackForest",
   "via": {
    "how": "build",
@@ -31035,6 +31089,7 @@
    "poison": "Immune",
    "spirit": "Immune"
   },
+  "playerBase": true,
   "stage": "Mountain",
   "via": {
    "how": "build",

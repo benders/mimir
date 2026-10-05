@@ -149,15 +149,15 @@ class Site(unittest.TestCase):
         self.assertIn("×50", charm)
         self.assertIn("for ×2", charm)  # stack size
         self.assertIn("<th>After</th><", charm)
-        self.assertIn("<td>defeated_chief</td>", charm)  # no boss sets this key: shown as is
-        self.assertIn("Market (Meadows)", charm)
+        self.assertIn("<td><code>defeated_chief</code></td>", charm)  # no boss sets this key: shown as is
+        self.assertIn('Market (<a href="biomes/Meadows.html">Meadows</a>)', charm)
 
     def test_fishing(self):
         fish = (self.out / "items/Fish.html").read_text(encoding="utf-8")
         self.assertIn("<h2>Fishing</h2>", fish)
         self.assertIn("Caught with", fish)
         self.assertIn('href="items/Wood.html"', fish)  # the bait
-        self.assertIn("in Ocean", fish)
+        self.assertIn('in <a href="biomes/Ocean.html">Ocean</a>', fish)
         wood = (self.out / "items/Wood.html").read_text(encoding="utf-8")
         self.assertIn("<h2>Bait for</h2>", wood)
         self.assertIn('href="items/Fish.html"', wood)
@@ -201,8 +201,8 @@ class Site(unittest.TestCase):
         # Raider: world spawns in Meadows/Black Forest tie with a location in Swamp/Plains; earliest wins
         self.assertIn("creatures/Raider.html", index[:index.index('id="Mountain"')])
         pup = (self.out / "creatures/Pup.html").read_text(encoding="utf-8")
-        self.assertRegex(pup, r"<dt>Biome</dt><dd>Swamp, Mountain, Plains</dd>")  # dungeon outweighs the camp
-        self.assertRegex(pup, r"<dt>Faction</dt><dd>Forest monsters</dd>")
+        self.assertRegex(pup, r"<dt>Biome</dt><dd><a href=\"biomes/Swamp.html\">Swamp</a>, <a href=\"biomes/Mountain.html\">Mountain</a>, <a href=\"biomes/Plains.html\">Plains</a></dd>")  # dungeon outweighs the camp
+        self.assertRegex(pup, r"<dt>Faction</dt><dd><a href=\"factions/ForestMonsters.html\">Forest monsters</a></dd>")
 
     def test_variants(self):
         # identical copies merge into one page; links and spawns go there
@@ -295,15 +295,42 @@ class Site(unittest.TestCase):
         self.assertIn("<tr><td>1</td><td>30</td><td>5</td><td>111.1</td>", sword)
         self.assertIn("<tr><td>4</td><td>48</td><td>5</td><td>168.3</td>", sword)
         self.assertIn("2-attack combo in 1.57 s (3 hits)", sword)
-        self.assertIn('href="mechanics/attack-speed.html"', sword)
-        page = (self.out / "mechanics/attack-speed.html").read_text(encoding="utf-8")
-        self.assertIn("<td>primary</td><td>3</td><td>1.57</td><td>265</td><td>168.3</td>", page)
+        self.assertIn('href="mechanics/weapons.html"', sword)
+        page = (self.out / "mechanics/weapons.html").read_text(encoding="utf-8")
+        # grouped by category with the skill in the heading; no secondary attacks in the group: no secondary columns
+        self.assertIn('<h3 id="swords">Swords <span class="skill"><a href="mechanics/skills.html">Swords skill</a>', page)
+        self.assertIn("<td>3</td><td>1.57</td><td>265</td><td><b>168.3</b></td></tr>", page)
         bow = (self.out / "items/Longbow.html").read_text(encoding="utf-8")
         # 2.5 s full draw at skill 0; 0.5 s at 100, but the 1 s release animation is longer
         self.assertIn("full draw 2.5 s (0.5 s at skill 100), 2.5 s per shot (1 s at skill 100)", bow)
         self.assertNotIn("DPS", bow)  # depends on the ammo
         # Arbal: 1 s fire + 4 s reload (2 at skill 100) + 1 s reload done
         self.assertIn("<td>reload</td><td>4</td><td>6</td><td>4</td>", page)
+
+    def test_biome_pages(self):
+        swamp = (self.out / "biomes/Swamp.html").read_text(encoding="utf-8")
+        self.assertIn('href="mechanics/raids.html#army_test"', swamp)  # a raid that can come here
+        self.assertIn('href="creatures/Raider.html"', swamp)
+        raider = (self.out / "creatures/Raider.html").read_text(encoding="utf-8")
+        self.assertIn('<a href="biomes/Meadows.html">Meadows</a>', raider)  # biome links on the creature page
+        self.assertIn('href="factions/ForestMonsters.html"', raider)
+        self.assertIn('href="biomes/index.html"', raider)  # nav
+
+    def test_faction_pages(self):
+        f = (self.out / "factions/ForestMonsters.html").read_text(encoding="utf-8")
+        self.assertIn("Forest monsters", f)
+        self.assertIn('href="creatures/Raider.html"', f)
+        self.assertIn("<dt>Attacks</dt><dd>Players</dd>", f)  # the only other faction shown: no page, plain text
+        self.assertIn("table class=\"matrix\"", (self.out / "factions/index.html").read_text(encoding="utf-8"))
+
+    def test_raids_page(self):
+        page = (self.out / "mechanics/raids.html").read_text(encoding="utf-8")
+        self.assertIn('<h3 id="army_test">Something stirs', page)
+        self.assertIn("<dt>Until</dt><dd><code>defeated_chief</code>", page)  # no creature sets it in the fixture
+        self.assertIn("not for a player who has <code>GP_Chief</code> (nothing sets it) or has found", page)
+        self.assertIn('href="pieces/Bench.html"', page)  # a base piece
+        self.assertIn("<dt>Roll every</dt><dd>30 min</dd>", page)
+        self.assertIn("300 min", page)  # expected wait: 30 / 10%
 
     def test_destroyed_into_item(self):
         shard = (self.out / "items/Shard.html").read_text(encoding="utf-8")

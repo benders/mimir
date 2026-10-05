@@ -1,0 +1,641 @@
+{
+ "intervalMin": 46,
+ "chance": 20,
+ "events": [
+  {
+   "id": "army_bonemass",
+   "message": "A foul smell from the swamp...",
+   "endMessage": "The smell is gone",
+   "biomes": [
+    "Meadows",
+    "Swamp",
+    "Mountain",
+    "BlackForest",
+    "Plains"
+   ],
+   "duration": 150,
+   "nearBaseOnly": true,
+   "pauseIfNoPlayer": true,
+   "range": 96,
+   "requiredGlobalKeys": [
+    "defeated_gdking"
+   ],
+   "notRequiredGlobalKeys": [
+    "defeated_bonemass"
+   ],
+   "player": {
+    "knownItems": [
+     "TrophyTheElder",
+     "CryptKey"
+    ],
+    "notKnownItems": [
+     "TrophyBonemass",
+     "Wishbone"
+    ],
+    "keysAny": [
+     "GP_TheElder"
+    ],
+    "notKeys": [
+     "GP_Bonemass"
+    ]
+   },
+   "environment": "SwampRain"
+  },
+  {
+   "id": "army_charred",
+   "message": "The undead army marches",
+   "endMessage": "The army retreats",
+   "biomes": [
+    "BlackForest",
+    "Plains",
+    "AshLands",
+    "DeepNorth",
+    "Mistlands"
+   ],
+   "duration": 90,
+   "nearBaseOnly": true,
+   "pauseIfNoPlayer": true,
+   "range": 96,
+   "requiredGlobalKeys": [
+    "defeated_queen"
+   ],
+   "notRequiredGlobalKeys": [
+    "defeated_fader"
+   ]
+  },
+  {
+   "id": "army_charredspawners",
+   "message": "The dead have been summoned",
+   "endMessage": "The dead lie still once more",
+   "biomes": [
+    "BlackForest",
+    "Plains",
+    "AshLands",
+    "DeepNorth",
+    "Mistlands"
+   ],
+   "duration": 90,
+   "nearBaseOnly": true,
+   "pauseIfNoPlayer": true,
+   "range": 96,
+   "requiredGlobalKeys": [
+    "defeated_queen"
+   ],
+   "notRequiredGlobalKeys": [
+    "defeated_fader"
+   ]
+  },
+  {
+   "id": "army_eikthyr",
+   "message": "Eikthyr rallies the creatures of the forest",
+   "endMessage": "The creatures are calming down",
+   "biomes": [
+    "Meadows",
+    "BlackForest"
+   ],
+   "duration": 90,
+   "nearBaseOnly": true,
+   "pauseIfNoPlayer": true,
+   "range": 96,
+   "notRequiredGlobalKeys": [
+    "defeated_eikthyr"
+   ],
+   "player": {
+    "notKnownItems": [
+     "PickaxeAntler",
+     "PickaxeBronze",
+     "PickaxeIron",
+     "HardAntler",
+     "TrophyEikthyr"
+    ],
+    "notKeys": [
+     "GP_Eikthyr"
+    ]
+   }
+  },
+  {
+   "id": "army_elakingar",
+   "message": "They emerge from below...",
+   "endMessage": "They return to their burrows...",
+   "biomes": [
+    "DeepNorth"
+   ],
+   "duration": 90,
+   "nearBaseOnly": true,
+   "pauseIfNoPlayer": true,
+   "range": 96,
+   "requiredGlobalKeys": [
+    "elakingmole_defeated"
+   ],
+   "notRequiredGlobalKeys": [
+    "defeated_frozenking_p3"
+   ]
+  },
+  {
+   "id": "army_gjall",
+   "message": "What's up, Gjall?!",
+   "endMessage": "Good bye Gjall",
+   "biomes": [
+    "Mistlands"
+   ],
+   "duration": 90,
+   "nearBaseOnly": true,
+   "pauseIfNoPlayer": true,
+   "range": 96,
+   "requiredGlobalKeys": [
+    "defeated_goblinking"
+   ],
+   "notRequiredGlobalKeys": [
+    "defeated_queen"
+   ],
+   "player": {
+    "knownItems": [
+     "YagluthDrop",
+     "Demister",
+     "Wisp"
+    ],
+    "notKnownItems": [
+     "QueenDrop"
+    ],
+    "keysAny": [
+     "$se_yagluth_name"
+    ],
+    "notKeys": [
+     "GP_Queen"
+    ]
+   }
+  },
+  {
+   "id": "army_goblin",
+   "message": "The horde is attacking!",
+   "endMessage": "The horde is retreating",
+   "biomes": [
+    "Meadows",
+    "BlackForest",
+    "Plains"
+   ],
+   "duration": 120,
+   "nearBaseOnly": true,
+   "pauseIfNoPlayer": true,
+   "range": 96,
+   "requiredGlobalKeys": [
+    "defeated_dragon"
+   ],
+   "notRequiredGlobalKeys": [
+    "defeated_goblinking"
+   ],
+   "player": {
+    "knownItems": [
+     "DragonTear",
+     "TrophyDragonQueen"
+    ],
+    "notKnownItems": [
+     "TrophyGoblinKing",
+     "YagluthDrop"
+    ],
+    "keysAny": [
+     "$se_moder_name"
+    ],
+    "notKeys": [
+     "GP_Yagluth"
+    ]
+   }
+  },
+  {
+   "id": "army_jotuns",
+   "message": "The Jotun have found you",
+   "endMessage": "The Jotun withdraw",
+   "biomes": [
+    "Meadows",
+    "Swamp",
+    "Mountain",
+    "BlackForest",
+    "Plains",
+    "DeepNorth",
+    "Mistlands"
+   ],
+   "duration": 90,
+   "nearBaseOnly": true,
+   "pauseIfNoPlayer": true,
+   "range": 96,
+   "requiredGlobalKeys": [
+    "jotun_killed"
+   ],
+   "notRequiredGlobalKeys": [
+    "defeated_frozenking_p3"
+   ]
+  },
+  {
+   "id": "army_moder",
+   "message": "A cold wind blows from the mountains",
+   "endMessage": "The cold wind is gone",
+   "biomes": [
+    "Meadows",
+    "Swamp",
+    "Mountain",
+    "BlackForest",
+    "Plains"
+   ],
+   "duration": 150,
+   "nearBaseOnly": true,
+   "pauseIfNoPlayer": true,
+   "range": 96,
+   "requiredGlobalKeys": [
+    "defeated_bonemass"
+   ],
+   "notRequiredGlobalKeys": [
+    "defeated_dragon"
+   ],
+   "player": {
+    "knownItems": [
+     "TrophyBonemass",
+     "Wishbone"
+    ],
+    "notKnownItems": [
+     "TrophyDragonQueen",
+     "DragonTear"
+    ],
+    "keysAny": [
+     "$se_bonemass_name"
+    ],
+    "notKeys": [
+     "GP_Moder"
+    ]
+   },
+   "environment": "Snow"
+  },
+  {
+   "id": "army_seekers",
+   "message": "They sought you out",
+   "endMessage": "The search is over",
+   "biomes": [
+    "BlackForest",
+    "Plains",
+    "AshLands",
+    "DeepNorth",
+    "Mistlands"
+   ],
+   "duration": 90,
+   "nearBaseOnly": true,
+   "pauseIfNoPlayer": true,
+   "range": 96,
+   "requiredGlobalKeys": [
+    "defeated_goblinking"
+   ],
+   "notRequiredGlobalKeys": [
+    "defeated_queen"
+   ],
+   "player": {
+    "knownItems": [
+     "YagluthDrop",
+     "Demister",
+     "Wisp"
+    ],
+    "notKnownItems": [
+     "QueenDrop"
+    ],
+    "notKeys": [
+     "GP_Queen"
+    ]
+   }
+  },
+  {
+   "id": "army_theelder",
+   "message": "The forest is moving...",
+   "endMessage": "The forest rests again",
+   "biomes": [
+    "Meadows",
+    "Swamp",
+    "BlackForest",
+    "Plains"
+   ],
+   "duration": 120,
+   "nearBaseOnly": true,
+   "pauseIfNoPlayer": true,
+   "range": 96,
+   "requiredGlobalKeys": [
+    "defeated_eikthyr"
+   ],
+   "notRequiredGlobalKeys": [
+    "defeated_gdking"
+   ],
+   "player": {
+    "knownItems": [
+     "PickaxeAntler",
+     "PickaxeBronze",
+     "PickaxeIron",
+     "HardAntler",
+     "TrophyEikthyr"
+    ],
+    "notKnownItems": [
+     "TrophyTheElder",
+     "CryptKey"
+    ],
+    "keysAny": [
+     "GP_TheElder"
+    ],
+    "notKeys": [
+     "GP_TheElder"
+    ]
+   }
+  },
+  {
+   "id": "bats",
+   "message": "You stirred the cauldron",
+   "endMessage": "The cauldron calms",
+   "biomes": [
+    "Meadows",
+    "Swamp",
+    "Mountain",
+    "BlackForest",
+    "Plains",
+    "AshLands",
+    "DeepNorth",
+    "Ocean",
+    "Mistlands"
+   ],
+   "duration": 120,
+   "nearBaseOnly": true,
+   "pauseIfNoPlayer": true,
+   "range": 96,
+   "requiredGlobalKeys": [
+    "KilledBat",
+    "defeated_bonemass"
+   ],
+   "player": {
+    "keysAll": [
+     "KilledBat",
+     "defeated_bonemass"
+    ]
+   }
+  },
+  {
+   "id": "blobs",
+   "message": "A foul smell from the swamp...",
+   "endMessage": "The smell is gone",
+   "biomes": [
+    "Meadows",
+    "Swamp",
+    "BlackForest",
+    "Plains"
+   ],
+   "duration": 120,
+   "nearBaseOnly": true,
+   "pauseIfNoPlayer": true,
+   "range": 96,
+   "requiredGlobalKeys": [
+    "defeated_bonemass"
+   ],
+   "player": {
+    "knownItems": [
+     "TrophyBonemass",
+     "Wishbone"
+    ],
+    "keysAny": [
+     "GP_Bonemass"
+    ]
+   },
+   "environment": "SwampRain"
+  },
+  {
+   "id": "foresttrolls",
+   "message": "The ground is shaking",
+   "endMessage": "The shaking begins to fade",
+   "biomes": [
+    "Meadows",
+    "Swamp",
+    "BlackForest",
+    "Plains"
+   ],
+   "duration": 80,
+   "nearBaseOnly": true,
+   "pauseIfNoPlayer": true,
+   "range": 96,
+   "requiredGlobalKeys": [
+    "KilledTroll",
+    "defeated_gdking"
+   ],
+   "player": {
+    "knownItems": [
+     "TrophyTheElder",
+     "CryptKey"
+    ],
+    "keysAll": [
+     "KilledTroll",
+     "defeated_gdking"
+    ]
+   }
+  },
+  {
+   "id": "ghosts",
+   "message": "You feel a chill down your spine...",
+   "endMessage": "They have been banished, for now...",
+   "biomes": [
+    "Meadows",
+    "Swamp",
+    "Mountain",
+    "BlackForest",
+    "Plains"
+   ],
+   "duration": 150,
+   "nearBaseOnly": true,
+   "pauseIfNoPlayer": true,
+   "range": 96,
+   "requiredGlobalKeys": [
+    "defeated_bonemass"
+   ],
+   "player": {
+    "knownItems": [
+     "TrophyBonemass",
+     "Wishbone"
+    ],
+    "notKnownItems": [
+     "TrophyDragonQueen",
+     "DragonTear"
+    ],
+    "keysAny": [
+     "GP_Bonemass"
+    ],
+    "notKeys": [
+     "GP_Moder"
+    ]
+   },
+   "environment": "Ghosts"
+  },
+  {
+   "id": "hildirboss1",
+   "message": "She's hot on your tail!",
+   "endMessage": "She got burnt",
+   "biomes": [
+    "Meadows",
+    "Swamp",
+    "Mountain",
+    "BlackForest",
+    "Plains",
+    "AshLands",
+    "DeepNorth",
+    "Ocean",
+    "Mistlands"
+   ],
+   "duration": 90,
+   "nearBaseOnly": true,
+   "pauseIfNoPlayer": true,
+   "range": 96,
+   "requiredGlobalKeys": [
+    "hildir1"
+   ],
+   "player": {
+    "knownItems": [
+     "chest_hildir1"
+    ],
+    "keysAny": [
+     "BossHildir1"
+    ]
+   }
+  },
+  {
+   "id": "hildirboss2",
+   "message": "You get the chills...",
+   "endMessage": "You can chill out",
+   "biomes": [
+    "Meadows",
+    "Swamp",
+    "Mountain",
+    "BlackForest",
+    "Plains",
+    "AshLands",
+    "DeepNorth",
+    "Ocean",
+    "Mistlands"
+   ],
+   "duration": 90,
+   "nearBaseOnly": true,
+   "pauseIfNoPlayer": true,
+   "range": 96,
+   "requiredGlobalKeys": [
+    "hildir2"
+   ],
+   "player": {
+    "knownItems": [
+     "chest_hildir2"
+    ],
+    "keysAny": [
+     "BossHildir2"
+    ]
+   }
+  },
+  {
+   "id": "hildirboss3",
+   "message": "They were bros, man",
+   "endMessage": "You broke the code...again",
+   "biomes": [
+    "Meadows",
+    "Swamp",
+    "Mountain",
+    "BlackForest",
+    "Plains",
+    "AshLands",
+    "DeepNorth",
+    "Ocean",
+    "Mistlands"
+   ],
+   "duration": 90,
+   "nearBaseOnly": true,
+   "pauseIfNoPlayer": true,
+   "range": 96,
+   "requiredGlobalKeys": [
+    "hildir3"
+   ],
+   "player": {
+    "knownItems": [
+     "chest_hildir3"
+    ],
+    "keysAny": [
+     "BossHildir3"
+    ]
+   }
+  },
+  {
+   "id": "skeletons",
+   "message": "A skeleton surprise!",
+   "endMessage": "The skeletons are tired of fighting",
+   "biomes": [
+    "Meadows",
+    "Swamp",
+    "Mountain",
+    "BlackForest",
+    "Plains",
+    "Mistlands"
+   ],
+   "duration": 120,
+   "nearBaseOnly": true,
+   "pauseIfNoPlayer": true,
+   "range": 96,
+   "requiredGlobalKeys": [
+    "defeated_bonemass"
+   ],
+   "player": {
+    "knownItems": [
+     "TrophyBonemass",
+     "Wishbone"
+    ],
+    "keysAny": [
+     "GP_Bonemass"
+    ]
+   }
+  },
+  {
+   "id": "surtlings",
+   "message": "There's a smell of sulfur in the air...",
+   "endMessage": "The smell is fading",
+   "biomes": [
+    "Meadows",
+    "Swamp",
+    "BlackForest",
+    "Plains"
+   ],
+   "duration": 120,
+   "nearBaseOnly": true,
+   "pauseIfNoPlayer": true,
+   "range": 96,
+   "requiredGlobalKeys": [
+    "killed_surtling",
+    "defeated_bonemass"
+   ],
+   "player": {
+    "knownItems": [
+     "TrophyBonemass",
+     "Wishbone"
+    ],
+    "keysAll": [
+     "killed_surtling",
+     "defeated_bonemass"
+    ]
+   },
+   "environment": "Ashrain"
+  },
+  {
+   "id": "wolves",
+   "message": "You are being hunted...",
+   "endMessage": "The hunt is over",
+   "biomes": [
+    "Mountain",
+    "Plains"
+   ],
+   "duration": 120,
+   "range": 96,
+   "requiredGlobalKeys": [
+    "defeated_bonemass"
+   ],
+   "player": {
+    "knownItems": [
+     "Wishbone",
+     "TrophyBonemass"
+    ],
+    "keysAny": [
+     "GP_Bonemass"
+    ]
+   }
+  }
+ ]
+}

@@ -842,6 +842,9 @@ def piece(name: str, p: dict, tools: dict[str, list[str]]) -> dict | None:
         "extends": ref(ext["m_craftingStation"]) if ext else None,
         "produces": produces(p),
         "contains": drop_table((comp(p, "Container") or {}).get("m_defaultItems")),  # loot chests placed in the world
+        # counts toward a base for raids: an EffectArea of type PlayerBase, usually on a child (EffectArea.GetBaseValue)
+        "playerBase": any(c["type"] == "EffectArea" and "PlayerBase" in str(c["fields"].get("m_type", "")).split(", ")
+                          for c in p["components"]),
         "dlc": pc["m_dlc"],
     }
 
@@ -1118,6 +1121,38 @@ def raid_spawns() -> list[dict]:
                 "notRequiredGlobalKeys": e["m_notRequiredGlobalKeys"],
             })
     return out
+
+
+def raids() -> dict:
+    """RandEventSystem: how often a raid is rolled, and each random event's conditions (spawns are in spawns.json).
+    Non-random events (boss fights, Fimbulvinter) only change music and weather."""
+    rs = load("world/RandEventSystem.json")[0]["fields"]
+    events = []
+    for e in sorted(rs["m_events"], key=lambda e: e["m_name"]):
+        if not e["m_enabled"] or e.get("m_devDisabled") or not e.get("m_random"):
+            continue
+        events.append({
+            "id": e["m_name"],
+            "message": text(e["m_startMessage"]),
+            "endMessage": text(e.get("m_endMessage")),
+            "biomes": biomes(e["m_biome"]),
+            "duration": e.get("m_duration"),
+            "nearBaseOnly": e.get("m_nearBaseOnly"),
+            "pauseIfNoPlayer": e.get("m_pauseIfNoPlayerInArea"),
+            "range": e.get("m_eventRange"),
+            "requiredGlobalKeys": e["m_requiredGlobalKeys"],
+            "notRequiredGlobalKeys": e["m_notRequiredGlobalKeys"],
+            # with the player-based raids world modifier (GlobalKeys.PlayerEvents), these replace the global keys
+            "player": {
+                "knownItems": [ref(x) for x in e.get("m_altRequiredKnownItems", [])],
+                "notKnownItems": [ref(x) for x in e.get("m_altRequiredNotKnownItems", [])],
+                "keysAny": e.get("m_altRequiredPlayerKeysAny", []),
+                "keysAll": e.get("m_altRequiredPlayerKeysAll", []),
+                "notKeys": e.get("m_altNotRequiredPlayerKeys", []),
+            },
+            "environment": e.get("m_forceEnvironment"),
+        })
+    return {"intervalMin": rs.get("m_eventIntervalMin"), "chance": rs.get("m_eventChance"), "events": events}
 
 
 def location_biomes() -> dict[str, list[str]]:
@@ -1549,6 +1584,7 @@ def main(argv: list[str]) -> int:
     for name, v in data.items():
         write(name, v)
     write("player.json", player())
+    write("raids.json", raids())
     write("meta.json", {
         "gameVersion": m["gameVersion"], "networkVersion": m["networkVersion"], "dumperVersion": m["dumperVersion"],
         "steamBuildId": steam_build_id(),

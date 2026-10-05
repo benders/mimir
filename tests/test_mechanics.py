@@ -108,6 +108,30 @@ class Formulas(unittest.TestCase):
         self.assertEqual(M.MODIFIER_MULTIPLIER["VeryWeak"], 2.0)
         self.assertEqual(M.MODIFIER_MULTIPLIER["SlightlyResistant"], 0.75)
 
+    def test_is_enemy(self):
+        # BaseAI.IsEnemy faction switch
+        self.assertFalse(M.is_enemy("Undead", "Undead"))
+        self.assertTrue(M.is_enemy("ForestMonsters", "Undead"))
+        self.assertFalse(M.is_enemy("ForestMonsters", "AnimalsVeg"))
+        self.assertTrue(M.is_enemy("AnimalsVeg", "ForestMonsters"))  # not symmetric
+        self.assertFalse(M.is_enemy("Undead", "Demon"))
+        self.assertFalse(M.is_enemy("Demon", "Undead"))
+        self.assertFalse(M.is_enemy("Players", "Dverger"))
+        self.assertFalse(M.is_enemy("Dverger", "Players"))
+        self.assertTrue(M.is_enemy("Dverger", "Undead"))
+        self.assertFalse(M.is_enemy("Boss", "Undead"))
+        self.assertTrue(M.is_enemy("Boss", "Players"))
+        self.assertFalse(M.is_enemy("PlainsMonsters", "Boss"))
+        self.assertTrue(M.is_enemy("TrainingDummy", "Players"))
+        self.assertFalse(M.is_enemy("TrainingDummy", "Undead"))
+
+    def test_raid_roll(self):
+        # RandEventSystem.UpdateRandomEvent: every 46 min a 20% roll; eventRate scales the timer and divides the chance
+        self.assertEqual(M.raid_roll(46, 20), (46, 20))
+        self.assertEqual(M.raid_roll(46, 20, 0.5), (23, 40))
+        self.assertEqual(M.raid_wait(46, 20), 230)
+        self.assertEqual(M.raid_roll(46, 20, 0.1)[1], 100)  # chance clamps
+
 
 class Markdown(unittest.TestCase):
     def r(self, text, **kw):

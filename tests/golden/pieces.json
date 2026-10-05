@@ -68,6 +68,7 @@
    "buildRange": 20,
    "requiresRoof": true
   },
+  "playerBase": true,
   "stage": "Meadows",
   "via": {
    "how": "build",

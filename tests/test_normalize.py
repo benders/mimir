@@ -434,6 +434,19 @@ class Entities(FixtureCase):
         self.assertEqual(r["biomes"], ["Meadows", "Swamp"])  # the event's biome, not the spawner's
         self.assertEqual(r["levels"], [1, 2])
 
+    def test_raids(self):
+        r = N.raids()
+        self.assertEqual((r["intervalMin"], r["chance"]), (30, 10))
+        [e] = r["events"]  # disabled and non-random (boss fight) events dropped
+        self.assertEqual((e["id"], e["biomes"], e["duration"], e["nearBaseOnly"]), ("army_test", ["Meadows", "Swamp"], 90, True))
+        self.assertEqual(e["notRequiredGlobalKeys"], ["defeated_chief"])
+        self.assertEqual((e["player"]["notKnownItems"], e["player"]["notKeys"]), (["Ore"], ["GP_Chief"]))
+
+    def test_player_base_piece(self):
+        tools = N.piece_tools()
+        self.assertTrue(N.piece("Bench", N.PREFABS["Bench"], tools)["playerBase"])  # EffectArea on a child, flags "Heat, PlayerBase"
+        self.assertFalse(N.piece("Anvil", N.PREFABS["Anvil"], tools)["playerBase"])
+
     def test_location_spawns(self):
         s = {(x["creature"], x["location"]): x for x in self.spawns("location")}
         self.assertEqual(set(s), {("Raider", "Camp"), ("Pup", "Camp"), ("Chief", "Lair"),

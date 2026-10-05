@@ -56,6 +56,9 @@ SOURCES = {s["id"]: s for s in load("sources")}
 # normalize currently emits some conversions twice (#18)
 PROCESSING = list({json.dumps(p, sort_keys=True): p for p in load("processing")}.values())
 HAVE_ICONS = {p.stem for p in ICONS.glob("*.png")} if ICONS.is_dir() else set()
+RAIDS = load("raids")
+RAID_EVENTS = {e["id"]: e for e in RAIDS["events"]}
+LOCATIONS = load("locations")
 
 KINDS = {"item": "items", "creature": "creatures", "piece": "pieces", "effect": "effects"}
 WEAPONS = {"OneHandedWeapon", "TwoHandedWeapon", "TwoHandedWeaponLeft", "Bow", "Torch"}
@@ -203,28 +206,54 @@ def source_name(s: dict) -> str:
 
 
 def source_places(s: dict) -> str:
-    """Where a source is found: a fish's biomes, a trader's locations (with biomes), or a world source's biomes,
-    locations (dungeon rooms marked, long lists cut) and the pieces that plant or build it."""
+    """Where a source is found, as HTML: a fish's biomes, a trader's locations (with biomes), or a world source's
+    biomes, locations (dungeon rooms marked, long lists cut) and the pieces that plant or build it."""
     if s["kind"] == "trader":
-        return ", ".join(f"{pretty_id(x['location'])} ({', '.join(BIOMES.get(b, words(b)) for b in x['biomes'])})"
+        return ", ".join(f"{esc(pretty_id(x['location']))} ({', '.join(biome_link(b) for b in x['biomes'])})"
                          for x in s["locations"])
     if s["kind"] == "fishing":
-        return ", ".join(BIOMES.get(b, words(b)) for b in s.get("biomes", []))
-    places = [BIOMES.get(b, words(b)) for b in s.get("biomes", [])]
+        return ", ".join(biome_link(b) for b in s.get("biomes", []))
+    places = [biome_link(b) for b in s.get("biomes", [])]
     locs = list(dict.fromkeys(pretty_id(x["location"]) + (" dungeon" if x.get("dungeon") else "")
                               for x in s.get("locations", [])))
-    places += locs[:4] + ([f"{len(locs) - 4} more locations"] if len(locs) > 4 else [])
+    places += [esc(x) for x in locs[:4]] + ([f"{len(locs) - 4} more locations"] if len(locs) > 4 else [])
     if s.get("placedBy"):
-        places.append("planted or built: " + ", ".join(pretty_id(p) for p in s["placedBy"]))
+        places.append("planted or built: " + esc(", ".join(pretty_id(p) for p in s["placedBy"])))
     return ", ".join(places)
 
 
-def key_label(key: str) -> str:
-    """The condition behind a global key, for trader offers: the boss that sets it, Hildir's returned chest, or the key."""
-    boss = next((c for c in CREATURES.values() if c.get("defeatKey") == key and "nochest" not in c["id"]), None)
-    chest = ITEMS.get("chest_hildir" + key[6:]) if re.fullmatch(r"Hildir\d", key) else None
-    return f"defeating {link('creature', boss['id'])}" if boss else \
-        f"returning {link('item', chest['id'])}" if chest else esc(key)
+def biome_link(b: str) -> str:
+    """A biome's name, linked to its page."""
+    return f'<a href="biomes/{quote(b)}.html">{esc(BIOMES[b])}</a>' if b in BIOMES else esc(words(b))
+
+
+def key_setter(key: str) -> dict | None:
+    """The creature whose death sets a global key (shortest id of its copies), matched ignoring case as
+    ZoneSystem.GetGlobalKey does."""
+    setters = [c for c in CREATURES.values() if (c.get("defeatKey") or "").lower() == key.lower()
+               and not c.get("unobtainable") and "nochest" not in c["id"]]
+    return min(setters, key=lambda c: (len(c["id"]), c["id"])) if setters else None
+
+
+def hildir_chest(key: str) -> dict | None:
+    """Hildir's chest whose return sets the key (Hildir1..3)."""
+    return ITEMS.get("chest_hildir" + key[6:]) if re.fullmatch(r"hildir\d", key, re.I) else None
+
+
+def a_an(word: str) -> str:
+    return "an" if word[:1].lower() in "aeiou" else "a"
+
+
+def key_label(key: str, done: bool = False) -> str:
+    """The condition behind a global key (trader offers, raids): the boss or creature whose death sets it, Hildir's
+    returned chest, or the key. `done`: as a past deed ("defeated X") instead of an action ("defeating X")."""
+    if c := key_setter(key):
+        verb = ("defeated" if done else "defeating") if c.get("boss") else \
+            f'{"killed" if done else "killing"}{"" if c.get("named") else " " + a_an(name_of("creature", c["id"]))}'
+        return f"{verb} {link('creature', c['id'])}"
+    if chest := hildir_chest(key):
+        return f"{'returned' if done else 'returning'} {link('item', chest['id'])}"
+    return f"<code>{esc(key)}</code>"
 
 
 # --- derived relations ----------------------------------------------------------------------
@@ -570,7 +599,7 @@ def page(path: str, title: str, body: str, kind_label: str = "", scripts=()) -> 
 <body>
 <header class="top">
   <a class="brand" href="index.html">{esc(SITE_NAME)}</a>
-  <nav>{"".join(f'<a href="{d}/index.html">{d.capitalize()}</a>' for d in KINDS.values())}<a href="mechanics/index.html">Mechanics</a></nav>
+  <nav>{"".join(f'<a href="{d}/index.html">{d.capitalize()}</a>' for d in KINDS.values())}<a href="biomes/index.html">Biomes</a><a href="mechanics/index.html">Mechanics</a></nav>
   <label class="stagesel" title="Hide what you meet after this biome">Up to
   <select id="stage">{STAGE_OPTIONS}</select></label>
   <div class="search"><input id="q" type="search" placeholder="Search…  ( / )" autocomplete="off" aria-label="Search">
@@ -987,7 +1016,7 @@ def item_page(i: dict) -> None:
     elif t in WEAPONS and any(mechanics.attack_cycle(a) for a in (i.get("attack"), i.get("secondaryAttack"))):
         ranged = (i.get("attack") or {}).get("draw") or (i.get("attack") or {}).get("reload")  # no DPS: depends on ammo
         what = "attack speed is" if ranged else "attack speed and DPS are"
-        stat_note = f'<p class="note">How {what} worked out: {mech_link("attack-speed", "Attack speed")}.</p>'
+        stat_note = f'<p class="note">How {what} worked out, and other weapons like it: {mech_link("weapons", "Weapons")}.</p>'
     elif t in ARMOR and i.get("armor"):
         stat_note = (f'<p class="note">How armor reduces damage: {mech_link("damage-types", "Damage types and resistances")}.</p>')
     body += section("Stats", quality_table(i) + kv(combat) + stat_note)
@@ -1041,11 +1070,11 @@ def item_page(i: dict) -> None:
     fish = SOURCES.get(i["id"])
     if fish and fish["kind"] == "fishing":
         how = "Caught with " + ", ".join(link("item", b["item"]) for b in fish["baits"])
-        body += section("Fishing", f'<p>{how}{" in " + esc(source_places(fish)) if fish.get("biomes") else ""}.</p>')
+        body += section("Fishing", f'<p>{how}{" in " + source_places(fish) if fish.get("biomes") else ""}.</p>')
     body += staged_section("Bait for", [("item", f, link("item", f)) for f in bait_for[i["id"]]])
 
     offers = [[esc(source_name(t)), link("item", "Coins", o["price"]) + (f" for ×{num(o['stack'])}" if o["stack"] > 1 else ""),
-               key_label(o["requiredKey"]) if o.get("requiredKey") else "", esc(source_places(t))]
+               key_label(o["requiredKey"]) if o.get("requiredKey") else "", source_places(t)]
               for t, o in sold_by[i["id"]]]
     body += section("Sold by", table(["Trader", "Price", "After", "Where"], offers))
 
@@ -1058,7 +1087,7 @@ def item_page(i: dict) -> None:
     for s, amount in found_in[i["id"]]:
         found.setdefault((source_name(s), s["kind"], amount, source_places(s)), None)
     body += section("Found in", table(["Source", "Kind", "Amount", "Where"],
-                                      [[esc(n), esc(k), esc(a), esc(w)] for n, k, a, w in sorted(found)]))
+                                      [[esc(n), esc(k), esc(a), w] for n, k, a, w in sorted(found)]))
 
     used = [("item", r["item"], link("item", r["item"])) for r in used_in_recipe[i["id"]] if r.get("item")]
     used += [("piece", p["id"], link("piece", p["id"])) for p in used_in_piece[i["id"]]
@@ -1076,8 +1105,8 @@ def creature_page(c: dict) -> None:
     home = home_biome(c["id"])
     sub = " · ".join(x for x in (esc(BIOMES[home]) if home else "", "boss" if c.get("boss") else "") if x)
     sp = c.get("speed") or {}
-    facts = [("Biome", ", ".join(esc(BIOMES[b]) for b in creature_biomes(c["id"]))),
-             ("Faction", esc(words(c["faction"])) if c.get("faction") else None),
+    facts = [("Biome", ", ".join(biome_link(b) for b in creature_biomes(c["id"]))),
+             ("Faction", faction_link(c["faction"]) if c.get("faction") else None),
              ("Health", num(c["health"])),
              ("Stars", f'health ×(1 + stars), damage ×(1 + 0.5 × stars): {mech_link("creature-levels", "Creature levels")}'
               if not c.get("boss") else None),
@@ -1118,7 +1147,8 @@ STARS_TH = mech_link("creature-levels", "Stars")
 
 
 def biome_list(s: dict) -> str:
-    return ", ".join(esc(BIOMES.get(b, words(b))) for b in s.get("biomes", []))
+    bs = s.get("biomes", [])
+    return "any biome" if len(bs) >= len(BIOMES) else ", ".join(biome_link(b) for b in bs)
 
 
 def spawn_sections(spawns: list[dict]) -> str:
@@ -1139,7 +1169,7 @@ def spawn_sections(spawns: list[dict]) -> str:
         if s.get("altBiome"):
             extra.append(f"in {esc(words(s['altBiome']))} patches")
         if s.get("requiredGlobalKey"):
-            extra.append(f"after {esc(s['requiredGlobalKey'])}")
+            extra.append(f"after {key_label(s['requiredGlobalKey'])}")
         if s.get("requiredEnvironments"):
             extra.append("weather: " + ", ".join(esc(e) for e in s["requiredEnvironments"]))
         if s.get("huntPlayer"):
@@ -1161,9 +1191,9 @@ def spawn_sections(spawns: list[dict]) -> str:
                      "; ".join(notes)])
     out += section("Locations", table(["Location", "Biome", STARS_TH, "Notes"], rows))
 
-    rows = [[esc(pretty_id(s["event"])) + "".join(f" ({n})" for n in as_variant(s)), biome_list(s), stars(*s["levels"]),
-             rng(*s["groupSize"]), esc(s.get("message") or "")] for s in by["raid"]]
-    out += section("Raids", table(["Event", "Biome", STARS_TH, "Group", "Message"], rows))
+    rows = [[raid_link(s["event"]) + "".join(f" ({n})" for n in as_variant(s)), biome_list(s), stars(*s["levels"]),
+             rng(*s["groupSize"])] for s in by["raid"]]
+    out += section("Raids", table(["Raid", "Biome", STARS_TH, "Group"], rows))
 
     born = [link("creature", s["parent"]) for s in by["offspring"] + by["growup"]] + \
            [link("item", s["item"]) for s in by["egg"]]
@@ -1173,6 +1203,237 @@ def spawn_sections(spawns: list[dict]) -> str:
     out += section("Summoned by", reflist(summoned))
     out += section("Phase of", reflist(link("creature", s["parent"]) for s in by["phase"]))
     return out
+
+
+# --- biomes, factions, raids ---------------------------------------------------------------
+
+FACTION_LABELS = {  # Character.Faction
+    "Players": "Players", "AnimalsVeg": "Animals", "ForestMonsters": "Forest monsters", "Undead": "Undead",
+    "Demon": "Demons", "MountainMonsters": "Mountain monsters", "SeaMonsters": "Sea monsters",
+    "PlainsMonsters": "Plains monsters", "Boss": "Bosses", "MistlandsMonsters": "Mistlands monsters",
+    "Dverger": "Dvergr", "PlayerSpawned": "Player-spawned", "TrainingDummy": "Training dummies", "DeepNorth": "Deep North",
+}
+FACTION_MEMBERS = defaultdict(list)  # faction -> creature page ids
+for _c in CREATURES.values():
+    if _c.get("faction") and has_page("creature", _c["id"]):
+        FACTION_MEMBERS[_c["faction"]].append(_c["id"])
+FACTION_ORDER = [f for f in mechanics.FACTIONS if f in FACTION_MEMBERS] + \
+    sorted(f for f in FACTION_MEMBERS if f not in mechanics.FACTIONS)
+
+
+def plural(n: int, word: str) -> str:
+    return f"{n} {word}{'' if n == 1 else 's'}"
+
+
+def faction_name(f: str) -> str:
+    return FACTION_LABELS.get(f, words(f))
+
+
+def faction_link(f: str) -> str:
+    return f'<a href="factions/{quote(f)}.html">{esc(faction_name(f))}</a>' if f in FACTION_MEMBERS else esc(faction_name(f))
+
+
+def raid_title(id_: str) -> str:
+    """A raid as players know it: its start message ("The ground is shaking"), else its id."""
+    e = RAID_EVENTS.get(id_) or {}
+    return e.get("message") or pretty_id(id_)
+
+
+def raid_link(id_: str) -> str:
+    if id_ in RAID_EVENTS and (MECH_SRC / "raids.md").is_file():
+        return f'<a href="mechanics/raids.html#{quote(id_)}">{esc(raid_title(id_))}</a>'
+    return esc(raid_title(id_))
+
+
+def raid_stage(e: dict) -> int:
+    """The stage a raid can first come in: the latest of its required keys, each the stage where it is first set
+    (a boss's defeat opens the next stage; a kill, the creature's own stage; a chest, the chest's)."""
+    st = 0
+    for k in e.get("requiredGlobalKeys", []):
+        ks = [min(len(STAGES) - 1, stage_of("creature", c["id"]) + (1 if c.get("boss") else 0))
+              for c in CREATURES.values() if (c.get("defeatKey") or "").lower() == k.lower()
+              and has_page("creature", MERGED["creature"].get(c["id"], c["id"]))]
+        if chest := hildir_chest(k):
+            ks.append(stage_of("item", chest["id"]))
+        st = max(st, min(ks, default=0))
+    return st
+
+
+def by_home_biome(ids) -> list[tuple[str, list[str]]]:
+    """Creature ids grouped by home biome, in progression order; Other last."""
+    groups = defaultdict(list)
+    for c in ids:
+        groups[home_biome(c) or "Other"].append(c)
+    return [(g, groups[g]) for g in [*BIOMES, "Other"] if g in groups]
+
+
+def bosses_first(ids) -> str:
+    return "".join(grid("creature", part) for part in ([i for i in ids if CREATURES[i].get("boss")],
+                                                        [i for i in ids if not CREATURES[i].get("boss")]) if part)
+
+
+def faction_page(f: str) -> None:
+    others = [x for x in mechanics.FACTIONS if x != f and (x in FACTION_MEMBERS or x == "Players")]
+    hostile = [x for x in others if mechanics.is_enemy(f, x)]
+    hunted = [x for x in others if mechanics.is_enemy(x, f)]
+    friendly = [x for x in others if x not in hostile and x not in hunted]
+    body = (f'<div class="hero"><div><h1>{esc(faction_name(f))}</h1><p class="sub">Faction · '
+            f'{plural(len(FACTION_MEMBERS[f]), "creature")}</p></div></div>')
+    body += kv([("Attacks", ", ".join(faction_link(x) for x in hostile) or "nobody"),
+                ("Attacked by", ", ".join(faction_link(x) for x in hunted) or "nobody"),
+                ("Leaves alone", ", ".join(faction_link(x) for x in friendly))])
+    body += f'<p class="note">{FACTION_RULES} <a href="factions/index.html">All factions</a>.</p>'
+    groups = by_home_biome(FACTION_MEMBERS[f])
+    body += section("Creatures", "".join(
+        f'<h3{group_stage("creature", ids)}>{biome_link(g) if g in BIOMES else esc(g)}</h3>{bosses_first(ids)}'
+        for g, ids in groups))
+    page(f"factions/{quote(f)}.html", faction_name(f), body, '<a href="factions/index.html">Factions</a>')
+
+
+FACTION_RULES = ("From BaseAI.IsEnemy, for untamed creatures. Creatures of one faction or one group never fight each "
+                 "other. Tamed creatures attack everything except players, other tamed creatures and Dvergr that "
+                 "haven't been provoked; provoked Dvergr attack players.")
+
+
+def factions_index() -> None:
+    cols = FACTION_ORDER
+    head = "<tr><th>Attacker ↓ · target →</th>" + "".join(f'<th>{faction_link(x)}</th>' for x in cols) + "</tr>"
+    rows = "".join(f'<tr><th>{faction_link(a)}</th>' + "".join(
+        f'<td>{"✕" if mechanics.is_enemy(a, b) else ""}</td>' for b in cols) + "</tr>" for a in cols)
+    body = (f'<h1>Factions</h1><p class="sub">Who attacks whom. Every creature belongs to one faction.</p>'
+            f'<ul class="mechlist">' + "".join(
+                f'<li><a href="factions/{quote(f)}.html">{esc(faction_name(f))}</a><span>{plural(len(FACTION_MEMBERS[f]), "creature")}'
+                f'</span></li>' for f in cols) + '</ul>'
+            f'<h2>Hostility</h2><p class="note">✕: the row\'s faction treats the column\'s as an enemy. {FACTION_RULES}</p>'
+            f'<div class="tw"><table class="matrix"><thead>{head}</thead><tbody>{rows}</tbody></table></div>')
+    page("factions/index.html", "Factions", body)
+
+
+GATHERED = ("pickable", "rock", "tree", "log", "destructible")  # source kinds placed by world generation
+
+
+def source_items(s: dict) -> list[str]:
+    """Items a world source gives: its pickable, its drops, or the item it breaks into."""
+    pk = s.get("pickable") or {}
+    out = [o["item"] for o in pk.get("oneOf", [])] + ([pk["item"]] if pk.get("item") else [])
+    out += [d["item"] for d in (s.get("drops") or {}).get("items", [])]
+    if s.get("becomes") in ITEMS:
+        out.append(s["becomes"])
+    nxt = SOURCES.get(s.get("becomes"))
+    seen = {s["id"]}
+    while nxt and nxt["id"] not in seen:  # a multi-stage object: a tree's log, a rock's fragments
+        seen.add(nxt["id"])
+        out += [d["item"] for d in (nxt.get("drops") or {}).get("items", [])]
+        nxt = SOURCES.get(nxt.get("becomes"))
+    return list(dict.fromkeys(out))
+
+
+def biome_page(b: str) -> None:
+    st = STAGES.index(b) if b in STAGES else None
+    label = esc(BIOMES[b])
+    spoiler = (f'<p class="spoiler" data-stage="{st}">Spoiler: {label} is past the stage you chose to see.</p>'
+               if st else "")
+    badge = (f' <a class="stage" href="mechanics/progression.html" title="Progression stage">stage {st + 1} of '
+             f'{len(STAGES)}</a>' if st is not None else "")
+    body = f'{spoiler}<div class="hero"><div><h1>{label}</h1><p class="sub">Biome{badge}</p></div></div>'
+    creatures = [c for c in CREATURES if has_page("creature", c)]
+    home = [c for c in creatures if home_biome(c) == b]
+    also = [c for c in creatures if c not in home and b in biome_weights(c)]
+    body += section("Creatures", bosses_first(home))
+    body += section("Also spawns here", grid("creature", also) +
+                    '<p class="note">Their main biome is another, by where most of their spawns are.</p>' if also else "")
+    raids = [e for e in RAIDS["events"] if b in e.get("biomes", [])]
+    raids.sort(key=lambda e: (raid_stage(e), e["id"]))
+    body += section("Raids", '<ul class="refs">' + "".join(f'<li{stage_attr(raid_stage(e))}>{raid_link(e["id"])}</li>'
+                                                          for e in raids) + "</ul>" if raids else "")
+    rows = []
+    for src in sorted((x for x in SOURCES.values() if x["kind"] in GATHERED and b in x.get("biomes", [])),
+                      key=lambda x: (x["kind"], source_name(x).lower())):
+        items = [i for i in source_items(src) if not ITEMS.get(i, {}).get("unobtainable")]
+        if items:
+            row = [esc(source_name(src)), esc(src["kind"]), " ".join(link("item", i) for i in items)]
+            if row not in rows:  # copies of one object (three Large Bone piles)
+                rows.append(row)
+    body += section("Resources", table(["Source", "Kind", "Gives"], rows, "cost"))
+    fish = [x["id"] for x in SOURCES.values() if x["kind"] == "fishing" and b in x.get("biomes", [])]
+    body += staged_section("Fish", [("item", f, link("item", f)) for f in sorted(fish, key=lambda f: name_of("item", f).lower())])
+    locs = sorted({pretty_id(x["id"]) for x in LOCATIONS if b in x.get("biomes", [])}, key=str.lower)
+    body += section("Locations", f'<p>{esc(", ".join(locs))}</p>' if locs else "")
+    page(f"biomes/{quote(b)}.html", BIOMES[b], body, '<a href="biomes/index.html">Biomes</a>')
+
+
+def biomes_index() -> None:
+    items = ""
+    for b in BIOMES:
+        st = STAGES.index(b) if b in STAGES else 0
+        n = sum(1 for c in CREATURES if has_page("creature", c) and home_biome(c) == b)
+        items += (f'<li{stage_attr(st)}><a href="biomes/{quote(b)}.html">{esc(BIOMES[b])}</a>'
+                  f'<span>{plural(n, "creature")}</span></li>')
+    page("biomes/index.html", "Biomes", f'<h1>Biomes</h1><p class="sub">In progression order.</p>'
+                                        f'<ul class="mechlist">{items}</ul>')
+
+
+def player_key_label(key: str) -> str:
+    """A player's unique key (player-based raids): a chosen Forsaken power (Player.SetGuardianPower) or a creature
+    defeated nearby (Character.OnDeath adds its m_defeatSetGlobalKey)."""
+    if key in EFFECTS and has_page("effect", key):
+        return f"has chosen the {link('effect', key)} power"
+    if key_setter(key):
+        return "has " + key_label(key, done=True)
+    return f"has <code>{esc(key)}</code> (nothing sets it)"
+
+
+def raid_conditions(e: dict) -> list[tuple[str, str]]:
+    pl = e.get("player") or {}
+    alt = []
+    if pl.get("keysAny") or pl.get("knownItems"):
+        alt.append("only for a player who " + " or ".join(
+            [player_key_label(k) for k in pl.get("keysAny", [])] + [f"has found {link('item', i)}" for i in pl.get("knownItems", [])]))
+    if pl.get("keysAll"):
+        alt.append("only for a player who " + " and ".join(player_key_label(k) for k in pl["keysAll"]))
+    if pl.get("notKeys") or pl.get("notKnownItems"):
+        alt.append("not for a player who " + " or ".join(
+            [player_key_label(k) for k in pl.get("notKeys", [])] + [f"has found {link('item', i)}" for i in pl.get("notKnownItems", [])]))
+    return [("Where", biome_list(e)),
+            ("After", " and ".join(key_label(k) for k in e.get("requiredGlobalKeys", [])) or "from the start"),
+            ("Until", " or ".join(key_label(k) for k in e.get("notRequiredGlobalKeys", []))),
+            ("Needs a base", "yes" if e.get("nearBaseOnly") else "no: any player can draw it"),
+            ("Lasts", duration(e["duration"]) if e.get("duration") else None),
+            ("Player-based raids", "; ".join(alt) or "as above"),
+            ("Ends with", esc(e["endMessage"]) if e.get("endMessage") else None)]
+
+
+def block_raids() -> str:
+    """Each random raid, in progression order: when it can start and what it spawns."""
+    out = ""
+    for e in sorted(RAIDS["events"], key=lambda e: (raid_stage(e), e["id"])):
+        rows = []
+        for sp in (x for x in SPAWNS if x.get("source") == "raid" and x.get("event") == e["id"]):
+            cid = MERGED["creature"].get(sp["creature"], sp["creature"])
+            note = variant_note("creature", sp["creature"])
+            rows.append([link("creature", cid) + (f" ({esc(note)})" if note else ""), num(sp.get("maxSpawned", 0)),
+                         duration(sp["interval"]) if sp.get("interval") else "", f'{num(sp.get("chance", 100))}%',
+                         rng(*sp["groupSize"]), stars(*sp["levels"])])
+        st = raid_stage(e)
+        out += (f'<section{stage_attr(st)}><h3 id="{esc(e["id"])}">{esc(raid_title(e["id"]))} '
+                f'<span class="skill">{esc(BIOMES[STAGES[st]])} · <code>{esc(e["id"])}</code></span></h3>'
+                + kv(raid_conditions(e)) + table(["Spawns", "At most", "Every", "Chance", "Group", STARS_TH], rows, "num")
+                + "</section>")
+    return out
+
+
+def block_raid_timing() -> str:
+    every, p = mechanics.raid_roll(RAIDS["intervalMin"], RAIDS["chance"])
+    return kv([("Roll every", f"{num(every)} min"), ("Chance per roll", f"{num(p)}%"),
+               ("Expected wait", f'{num(round(mechanics.raid_wait(RAIDS["intervalMin"], RAIDS["chance"])))} min, '
+                                 f'while a raid is possible')])
+
+
+def block_raid_base_pieces() -> str:
+    """Buildable pieces that count toward a base (an EffectArea of type PlayerBase)."""
+    ps = sorted((p["id"] for p in PIECES.values() if p.get("playerBase") and p.get("tools") and has_page("piece", p["id"])),
+                key=lambda x: name_of("piece", x).lower())
+    return staged_list([("piece", x, link("piece", x)) for x in ps])
 
 
 # --- pieces ---------------------------------------------------------------------------------
@@ -1233,14 +1494,14 @@ def piece_page(p: dict) -> None:
     pr = p.get("produces")
     if pr:
         rows = [("Produces", link("item", pr["item"])), ("Rate", f'one per {duration(pr["secPerUnit"])}, holds up to {num(pr["max"])}'),
-                ("Works in", ", ".join(esc(BIOMES.get(b, words(b))) for b in pr.get("biomes", []))),
+                ("Works in", ", ".join(biome_link(b) for b in pr.get("biomes", []))),
                 ("Needs", esc(pretty_id(pr["connectsTo"]["id"])) + " (" + ", ".join(
-                    esc(BIOMES.get(b, words(b))) for b in pr["connectsTo"].get("biomes", [])) + ")"
+                    biome_link(b) for b in pr["connectsTo"].get("biomes", [])) + ")"
                  if pr.get("connectsTo") else None)]
         body += section("Produces", kv(rows))
     body += staged_section("Enables building", [("piece", b["id"], link("piece", b["id"])) for b in built_at[p["id"]]])
     if world:
-        body += section("Found in", f'<p>{esc(source_places({"kind": "world", "locations": p["locations"]}))}</p>')
+        body += section("Found in", f'<p>{source_places({"kind": "world", "locations": p["locations"]})}</p>')
     page(href("piece", p["id"]), name_of("piece", p["id"]), body, '<a href="pieces/index.html">Pieces</a>')
 
 
@@ -1463,40 +1724,84 @@ def block_adrenaline_attacks() -> str:
     return table(["Weapon", "Attack", "Type", "Per hit", "On use"], rows, "num")
 
 
-def block_attack_speed() -> str:
-    """Every player weapon attack with a known cycle: hits, time, and DPS at max quality (tooltip damage, skill roll 1)."""
-    rows = []
-    weapons = (x for x in ITEMS.values() if x["type"] in WEAPONS and has_page("item", x["id"]) and not x.get("tamedOnly"))
-    for i in sorted(weapons, key=lambda x: (words(x.get("skill") or ""), name_of("item", x["id"]).lower())):
-        q = i.get("maxQuality", 1)
-        dmg = {k: i.get("damages", {}).get(k, 0) + (q - 1) * i.get("damagesPerLevel", {}).get(k, 0)
-               for k in mechanics.DAMAGE_TYPES}
-        hit, mark = mechanics.hit_damage(dmg, IGNORED), "*" if dps_skipped(i) else ""
-        for label, a in (("primary", i.get("attack")), ("secondary", i.get("secondaryAttack"))):
-            d = mechanics.dps(hit, a) if a and a.get("cycle") else None
-            if d is None:
-                continue
-            rows.append([link("item", i["id"]), esc(words(i.get("skill") or "")), label,
-                         num(sum(c["hits"] for c in a["chain"])), num(a["cycle"]),
-                         num(round(mechanics.combo_damage(hit, a), 1)) + mark, num(round(d, 1)) + mark])
+WEAPON_CATEGORIES = {  # (skill, hands) -> heading, in page order: the item type tells one hand, two, or a torch
+    ("Swords", 1): "Swords", ("Swords", 2): "Two-handed swords", ("Axes", 1): "Axes", ("Axes", 2): "Battleaxes",
+    ("Clubs", 1): "Clubs and maces", ("Clubs", 2): "Sledges", ("Clubs", 0): "Torches", ("Knives", 1): "Knives",
+    ("Knives", 2): "Dual knives", ("Spears", 1): "Spears", ("Polearms", 2): "Atgeirs", ("Unarmed", 2): "Fists",
+    ("ElementalMagic", 2): "Elemental magic staffs", ("BloodMagic", 2): "Blood magic staffs", ("Pickaxes", 2): "Pickaxes",
+    ("Farming", 2): "Farming tools", ("Bows", 2): "Bows", ("Crossbows", 2): "Crossbows", ("", 1): "Bombs and throwables",
+}
+
+
+def weapon_category(i: dict) -> tuple[str, int]:
+    hands = 0 if i["type"] == "Torch" else 2 if i["type"] in ("TwoHandedWeapon", "TwoHandedWeaponLeft", "Bow") else 1
+    return i.get("skill") or "", hands
+
+
+def weapon_groups(weapons) -> list[tuple[str, str, list]]:
+    """(heading, skill, items) per weapon category, in WEAPON_CATEGORIES order; unknown categories last."""
+    by = defaultdict(list)
+    for i in weapons:
+        by[weapon_category(i)].append(i)
+    order = [k for k in WEAPON_CATEGORIES if k in by] + sorted(k for k in by if k not in WEAPON_CATEGORIES)
+    return [(WEAPON_CATEGORIES.get(k, words(k[0]) or "Other"), k[0], by[k]) for k in order]
+
+
+def category_heading(title: str, skill: str) -> str:
+    sk = f' <span class="skill">{mech_link("skills", words(skill) + " skill")}</span>' if skill else ""
+    return f'<h3 id="{mechanics.slug(title)}">{esc(title)}{sk}</h3>'
+
+
+def block_weapons() -> str:
+    """Every player weapon with a known attack cycle, by category, best primary DPS first: hits, time, combo damage
+    and DPS for the primary and secondary attack at max quality (tooltip damage, skill roll 1)."""
+    weapons = [x for x in ITEMS.values() if x["type"] in WEAPONS and has_page("item", x["id"]) and not x.get("tamedOnly")
+               and any((a or {}).get("cycle") for a in (x.get("attack"), x.get("secondaryAttack")))]
+    out = ""
+    for title, skill, items in weapon_groups(weapons):
+        rows = []
+        for i in items:
+            q = i.get("maxQuality", 1)
+            dmg = {k: i.get("damages", {}).get(k, 0) + (q - 1) * i.get("damagesPerLevel", {}).get(k, 0)
+                   for k in mechanics.DAMAGE_TYPES}
+            hit, mark = mechanics.hit_damage(dmg, IGNORED), "*" if dps_skipped(i) else ""
+            cells, best = [], []
+            for a in (i.get("attack"), i.get("secondaryAttack")):
+                d = mechanics.dps(hit, a) if a and a.get("cycle") else None
+                best.append(d if d is not None else -1)
+                cells += (["", "", "", ""] if d is None else
+                          [num(sum(c["hits"] for c in a["chain"])), num(a["cycle"]),
+                           num(round(mechanics.combo_damage(hit, a), 1)) + mark, f"<b>{num(round(d, 1))}{mark}</b>"])
+            rows.append((best, name_of("item", i["id"]).lower(), [link("item", i["id"])] + cells))
+        rows.sort(key=lambda r: ([-x for x in r[0]], r[1]))
+        two = any(r[0][1] >= 0 for r in rows)  # any secondary attack: its columns
+        top = ('<tr><th rowspan="2">Weapon</th><th colspan="4">Primary</th>'
+               + ('<th colspan="4">Secondary</th>' if two else "") + "</tr>")
+        sub = "<tr>" + "<th>Hits</th><th>Seconds</th><th>Damage</th><th>DPS</th>" * (2 if two else 1) + "</tr>"
+        body = "".join("<tr>" + "".join(f"<td>{c}</td>" for c in r[2][:9 if two else 5]) + "</tr>" for r in rows)
+        out += (category_heading(title, skill) +
+                f'<div class="tw"><table class="num weapons"><thead>{top}{sub}</thead><tbody>{body}</tbody></table></div>')
     skipped = [t for t in IGNORED if t not in mechanics.TOOL_DAMAGE]
     note = "; ".join(f"{t} damage ({n} of {total} creatures are immune to it)" for t in skipped for n, total in [IGNORED[t]])
-    return table(["Weapon", "Skill", "Attack", "Hits", "Seconds", "Damage", "DPS"], rows, "num") + (
-        f'<p class="note">* Leaves out {note}.</p>' if skipped else "")
+    return out + (f'<p class="note">* Leaves out {note}.</p>' if skipped else "")
 
 
-def block_attack_speed_ranged() -> str:
-    """Bows and crossbows: draw or reload time and seconds per shot at skill 0 and 100. No DPS: it depends on the ammo."""
-    rows = []
-    for i in sorted((x for x in ITEMS.values() if x["type"] in WEAPONS and has_page("item", x["id"])),
-                    key=lambda x: (words(x.get("skill") or ""), name_of("item", x["id"]).lower())):
-        a = i.get("attack") or {}
-        if not (a.get("draw") or a.get("reload")) or not mechanics.attack_cycle(a):
-            continue
-        rows.append([link("item", i["id"]), esc(words(i.get("skill") or "")),
-                     "draw" if a.get("draw") else "reload", num(a.get("draw") or a.get("reload")),
-                     num(round(mechanics.attack_cycle(a, 0), 2)), num(round(mechanics.attack_cycle(a, 100), 2))])
-    return table(["Weapon", "Skill", "Wait", "Seconds", "Per shot (skill 0)", "Per shot (skill 100)"], rows, "num")
+def block_weapons_ranged() -> str:
+    """Bows and crossbows by category, fastest first: draw or reload time and seconds per shot at skill 0 and 100.
+    No DPS: it depends on the ammo."""
+    ranged = [x for x in ITEMS.values() if x["type"] in WEAPONS and has_page("item", x["id"])
+              and ((x.get("attack") or {}).get("draw") or (x.get("attack") or {}).get("reload"))
+              and mechanics.attack_cycle(x["attack"])]
+    out = ""
+    for title, skill, items in weapon_groups(ranged):
+        rows = []
+        for i in sorted(items, key=lambda x: (mechanics.attack_cycle(x["attack"], 0), name_of("item", x["id"]).lower())):
+            a = i["attack"]
+            rows.append([link("item", i["id"]), "draw" if a.get("draw") else "reload", num(a.get("draw") or a.get("reload")),
+                         num(round(mechanics.attack_cycle(a, 0), 2)), num(round(mechanics.attack_cycle(a, 100), 2))])
+        out += category_heading(title, skill) + table(
+            ["Weapon", "Wait", "Seconds", "Per shot (skill 0)", "Per shot (skill 100)"], rows, "num")
+    return out
 
 
 def block_adrenaline_blockers() -> str:
@@ -1614,12 +1919,13 @@ def mech_blocks() -> dict:
             "pseudo-drops": block_pseudo_drops, "pseudo-table": block_pseudo_table,
             "drops-example": block_drops_example, "upgrade-costs": block_upgrade_costs,
             "upgrade-example": block_upgrade_example,
-            "trinkets": block_trinkets, "stage-counts": block_stage_counts, "attack-speed": block_attack_speed,
-            "attack-speed-ranged": block_attack_speed_ranged, "adrenaline-attacks": block_adrenaline_attacks,
+            "trinkets": block_trinkets, "stage-counts": block_stage_counts, "weapons": block_weapons,
+            "weapons-ranged": block_weapons_ranged, "adrenaline-attacks": block_adrenaline_attacks,
             "adrenaline-blockers": block_adrenaline_blockers, "adrenaline-effects": block_adrenaline_effects,
             "adrenaline-sources": block_adrenaline_sources,
             "foods": block_foods, "comfort-pieces": block_comfort_pieces, "max-comfort": block_max_comfort,
-            "skills": block_skills, "death-penalty": block_death_penalty,
+            "skills": block_skills, "death-penalty": block_death_penalty, "raids": block_raids,
+            "raid-timing": block_raid_timing, "raid-base-pieces": block_raid_base_pieces,
             "adrenaline-chart": lambda: mechanics.adrenaline_chart(PLAYER["adrenaline"]),
             "chart": lambda name: mechanics.CHARTS[name]()}
 
@@ -1689,11 +1995,11 @@ def index_pages() -> None:
     toc = " · ".join(f'<a href="creatures/index.html#{g}"{group_stage("creature", groups[g])}>{esc(labels[g])}</a>'
                      for g in order)
 
-    def bosses_first(ids):
-        return "".join(grid("creature", part) for part in ([i for i in ids if CREATURES[i].get("boss")],
-                                                            [i for i in ids if not CREATURES[i].get("boss")]) if part)
-    body = f'<h1>Creatures</h1><p class="toc">{toc}</p>' + "".join(
-        f'<h2 id="{g}"{group_stage("creature", groups[g])}>{esc(labels[g])}</h2>{bosses_first(groups[g])}' for g in order)
+    factions = " · ".join(faction_link(f) for f in FACTION_ORDER)
+    body = (f'<h1>Creatures</h1><p class="toc">{toc}</p><p class="toc">By <a href="factions/index.html">faction</a>: '
+            f'{factions}</p>' + "".join(
+                f'<h2 id="{g}"{group_stage("creature", groups[g])}>{biome_link(g) if g in BIOMES else esc(labels[g])}</h2>'
+                f'{bosses_first(groups[g])}' for g in order))
     page("creatures/index.html", "Creatures", body)
 
     groups, world = defaultdict(list), []  # the build menu's tags (a piece under each of its tags), then the world
@@ -1761,6 +2067,8 @@ def search_index() -> None:
         if seen[(e[0], e[4])] > 1:
             e[4] = f"{e[4]} · {e[1]}"
     entries += [[p["title"], p["id"], f"mechanics/{p['id']}.html", "", "Mechanics", 0] for p in MECH_PAGES]
+    entries += [[BIOMES[b], b, f"biomes/{quote(b)}.html", "", "Biome", STAGES.index(b) if b in STAGES else 0] for b in BIOMES]
+    entries += [[faction_name(f), f, f"factions/{quote(f)}.html", "", "Faction", 0] for f in FACTION_ORDER]
     entries.sort(key=lambda x: (x[0].lower(), x[2]))
     (OUT / "search.json").write_text(json.dumps(entries, ensure_ascii=False, separators=(",", ":")), encoding="utf-8")
 
@@ -1811,6 +2119,12 @@ def main() -> int:
             piece_page(p)
     for e in EFFECTS.values():
         effect_page(e)
+    for b in BIOMES:
+        biome_page(b)
+    biomes_index()
+    for f in FACTION_ORDER:
+        faction_page(f)
+    factions_index()
     mechanics_pages()
     index_pages()
     search_index()

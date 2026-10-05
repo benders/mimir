@@ -1,0 +1,29 @@
+{
+ "intervalMin": 30,
+ "chance": 10,
+ "events": [
+  {
+   "id": "army_test",
+   "message": "Something stirs",
+   "biomes": [
+    "Meadows",
+    "Swamp"
+   ],
+   "duration": 90,
+   "nearBaseOnly": true,
+   "pauseIfNoPlayer": true,
+   "range": 96,
+   "notRequiredGlobalKeys": [
+    "defeated_chief"
+   ],
+   "player": {
+    "notKnownItems": [
+     "Ore"
+    ],
+    "notKeys": [
+     "GP_Chief"
+    ]
+   }
+  }
+ ]
+}

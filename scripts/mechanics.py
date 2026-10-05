@@ -638,3 +638,50 @@ def world_piece_drop(amount: int) -> int:
     """What breaking a piece a player didn't place gives of one of its cost items: a third, at least 1
     (Piece.DropResources: Mathf.Max(1, dropCount / 3) unless IsPlacedByPlayer)."""
     return max(1, amount // 3)
+
+
+FACTIONS = ("Players", "AnimalsVeg", "ForestMonsters", "Undead", "Demon", "MountainMonsters", "SeaMonsters",
+            "PlainsMonsters", "Boss", "MistlandsMonsters", "Dverger", "PlayerSpawned", "TrainingDummy", "DeepNorth")  # Character.Faction
+
+
+def is_enemy(a: str, b: str) -> bool:
+    """Whether a creature of faction `a` treats one of faction `b` as an enemy, both untamed and not aggravated and
+    in different groups (BaseAI.IsEnemy(Character, Character), its faction switch). Not symmetric: animals treat
+    everyone as an enemy (they flee), forest monsters ignore animals."""
+    if a == b:
+        return False
+    if a in ("AnimalsVeg", "PlayerSpawned"):
+        return True
+    if a == "Players":
+        return b != "Dverger"
+    if a in ("ForestMonsters", "MistlandsMonsters", "DeepNorth"):
+        return b not in ("AnimalsVeg", "Boss")
+    if a == "Undead":
+        return b not in ("Demon", "Boss")
+    if a == "Demon":
+        return b not in ("Undead", "Boss")
+    if a in ("MountainMonsters", "SeaMonsters", "PlainsMonsters"):
+        return b != "Boss"
+    if a == "Dverger":
+        return b not in ("AnimalsVeg", "Boss", "Players")
+    if a == "Boss":
+        return b in ("Players", "PlayerSpawned")
+    if a == "TrainingDummy":
+        return b == "Players"
+    return False
+
+
+RAID_BASE_VALUE = 3  # RandEventSystem.CheckBase: player.baseValue >= 3
+RAID_BASE_RADIUS = 20  # Player.UpdateBaseValue: EffectArea.GetBaseValue(position, 20f)
+
+
+def raid_roll(interval_min: float, chance: float, rate: float = 1) -> tuple[float, float]:
+    """(minutes between rolls, chance per roll in %) for a random raid (RandEventSystem.UpdateRandomEvent): the timer
+    runs to m_eventIntervalMin × 60 × eventRate seconds, then a raid starts with m_eventChance / eventRate %."""
+    return interval_min * rate, min(100.0, chance / rate)
+
+
+def raid_wait(interval_min: float, chance: float, rate: float = 1) -> float:
+    """Expected minutes until a raid starts, while one is possible: rolls are independent, so interval / p."""
+    every, p = raid_roll(interval_min, chance, rate)
+    return every / (p / 100)

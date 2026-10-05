@@ -294,6 +294,22 @@ def main() -> int:
                                           (("item", "SwordIron"), ("item", "IronScrap"))]),
           "via spot checks: Stonecutter needs Iron, Iron Sword a forge extension, Smelter Surtling Core")
 
+    raids = load("raids.json")
+    ev = {e["id"]: e for e in raids["events"]}
+    check(raids.get("intervalMin", 0) > 0 and 0 < raids.get("chance", 0) <= 100, "raids: roll interval and chance set")
+    check({"army_eikthyr", "army_theelder", "army_bonemass", "army_moder", "army_goblin", "foresttrolls"} <= set(ev),
+          f"raids: known vanilla raids present ({len(ev)} raids)")
+    raid_spawns = {s["event"] for s in spawns if s.get("source") == "raid"}
+    check(set(ev) <= raid_spawns, f"raids: every raid spawns something {sorted(set(ev) - raid_spawns)}")
+    check("defeated_eikthyr" in ev.get("army_eikthyr", {}).get("notRequiredGlobalKeys", []),
+          "raids: Eikthyr's army stops once Eikthyr is defeated")
+    dangling("raid player items", [i for e in ev.values() for k in ("knownItems", "notKnownItems")
+                                   for i in (e.get("player") or {}).get(k, [])], set(items))
+    base = {p for p in pieces if pieces[p].get("playerBase")}
+    check({"piece_workbench", "bed", "fire_pit", "portal_wood"} <= base and len(base) < 100,
+          f"pieces: base pieces for raids ({len(base)}) include workbench, bed, campfire, portal")
+    check(all(c.get("faction") for c in creatures.values()), "creatures: every creature has a faction")
+
     print()
     if failures:
         print(f"VERIFY DATA FAILED: {len(failures)} check(s)")

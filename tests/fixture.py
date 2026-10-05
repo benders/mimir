@@ -130,8 +130,11 @@ def zone_location(name, biome, enable=True):
 
 
 def event(name, biome, *spawns, **kw):
-    return {**m(name=name, enabled=True, devDisabled=False, biome=biome, startMessage="$event_test",
-                requiredGlobalKeys=[], notRequiredGlobalKeys=["defeated_chief"], spawn=list(spawns)), **m(**kw)}
+    return {**m(name=name, enabled=True, devDisabled=False, random=True, duration=90, nearBaseOnly=True, eventRange=96,
+                pauseIfNoPlayerInArea=True, biome=biome, startMessage="$event_test", endMessage="",
+                requiredGlobalKeys=[], notRequiredGlobalKeys=["defeated_chief"], altRequiredKnownItems=[],
+                altRequiredNotKnownItems=[], altRequiredPlayerKeysAny=[], altRequiredPlayerKeysAll=[],
+                altNotRequiredPlayerKeys=[], forceEnvironment="", spawn=list(spawns)), **m(**kw)}
 
 
 SE_DEFAULTS = m(name="", tooltip="", icon=None, category="", ttl=0, cooldown=0, startMessage="", mods=[],
@@ -259,6 +262,7 @@ def prefabs():
                                                              {"m_skill": "Run", "m_increseStep": 0.2}]))),  # Run: no name
         piece("Bench", comp("CraftingStation", m(name="$piece_bench", rangeBuild=20, craftRequireRoof=True,
                                                  craftRequireFire=False)),
+              comp("EffectArea", {"m_type": "Heat, PlayerBase"}, path="PlayerBase"),  # counts as a base for raids
               name="$piece_bench", icon=S("Bench"), category="Crafting", resources=[req("Wood", 10)],
               usage="Crafting, Furniture"),  # listed under both tags
         piece("piece_bench", name="$piece_bench", icon=S("Bench"), comfort=2),  # not buildable: "Bench (world)"
@@ -387,9 +391,12 @@ def write_dump(raw: Path) -> Path:
         spawner("Fish", biome="Ocean"),  # a fish: its biomes go into the fishing source
         spawner("Pup", biome="-1", requiredPersistentEvent="siege"),  # only while the Orb's event runs
     ]}}])
-    dump("world/RandEventSystem.json", [{"name": "_GameMain", "type": "RandEventSystem", "fields": {"m_events": [
-        event("army_test", "Meadows, Swamp", spawner("Raider", biome="1023", minLevel=2, maxLevel=1), spawner("vfx_Poof")),
+    dump("world/RandEventSystem.json", [{"name": "_GameMain", "type": "RandEventSystem", "fields": {
+        "m_eventIntervalMin": 30, "m_eventChance": 10, "m_events": [
+        event("army_test", "Meadows, Swamp", spawner("Raider", biome="1023", minLevel=2, maxLevel=1), spawner("vfx_Poof"),
+              altRequiredNotKnownItems=[R("Ore")], altNotRequiredPlayerKeys=["GP_Chief"]),
         event("army_off", "Meadows", spawner("Pup"), enabled=False),
+        event("boss_chief", "Meadows", random=False),  # a boss fight's music, not a raid
     ]}}])
     dump("world/ZoneSystem.json", [{"name": "_GameMain", "type": "ZoneSystem", "fields": {"m_altBiomeLists": [{"$ref": "AltBiomes_Test", "component": "AltBiomeList"}], "m_vegetation": [
         m(prefab=R("Root"), enable=True, biome="Mountain"), m(prefab=R("Root"), enable=True, biome="Swamp"),

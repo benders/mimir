@@ -109,7 +109,10 @@ catch drops; fish spawn as `creature` ids in `spawns` but have no `creatures` en
 `kind: trader` = Haldor / Hildir / BogWitch (id = name in the location prefab): `sells` [{item, stack, price in Coins,
 `requiredKey` global key}], `takes` [{item, setsKey}] (quest hand-ins: Hildir's chests set `Hildir1`..3),
 `locations` [{location, biomes}]; a source that `startsEvent` starts a persistent event when destroyed (Fimbulvinter orb)),
-`status_effects`, `locations` (every enabled world location with the `biomes` it is placed in). Each `spawns` entry has a `source`: `world` (SpawnSystem; also the enabled alt biomes' spawns, `altBiome` = the patch name),
+`status_effects`, `locations` (every enabled world location with the `biomes` it is placed in), `raids` (RandEventSystem:
+`intervalMin` / `chance` of the raid roll, and per enabled random event `id`, start/end `message`, `biomes`, `duration`,
+`nearBaseOnly`, `requiredGlobalKeys` / `notRequiredGlobalKeys`, and `player` {knownItems, notKnownItems, keysAny, keysAll,
+notKeys}: the conditions the player-based raids world modifier uses instead; what spawns is in `spawns`). Each `spawns` entry has a `source`: `world` (SpawnSystem; also the enabled alt biomes' spawns, `altBiome` = the patch name),
 `raid` (RandEventSystem; the event's biomes; `requiredGlobalKeys`), world spawns may need a `requiredGlobalKey` or a
 `requiredEvent` (persistent event running), `location` / `dungeon` (spawners and boss altars in a location or its
 dungeon rooms; the location's biomes), `offspring` (`parent` creature), `egg` (`item` that hatches), `summon` (an attack `item`'s projectile or ability prefab makes it, through `subprefabs/`;
@@ -132,6 +135,7 @@ chance below 100 still counts, the chance isn't recorded. Containers, `Spawner_*
 [{location, dungeon}], found the same way (`instances`); they count as reachable. A piece with a Container has `contains`
 (its default items, a drop table). Breaking a world piece drops a third of each recoverable cost item, at least 1
 (`mechanics.world_piece_drop`, Piece.DropResources): `reachable()` counts that, stages only where nothing else gives one.
+Pieces with an EffectArea of type PlayerBase have `playerBase` (they count toward a base for raids).
 Pieces have `tags`: the build menu's tag labels (Piece.m_usage, `UsageTagFlags` with their `$tag_*` DisplayName; menu
 order in meta.json `pieceTags`); `category` is the old PieceTable tab enum (its "DeepNorth" value is not a biome) and
 isn't shown. The pieces index lists a piece under each of its tags, like the menu.
@@ -149,7 +153,10 @@ projectile lands as the weapon). Bows have `draw` (m_drawDurationMin) and crossb
 `reloadDone` (the "reload done" minor action, from the animator) instead of `cycle`: those depend on skill
 (`mechanics.attack_cycle`). Looping attacks have none. `tamedOnly` weapons (Butcher Knife) hit only tamed creatures.
 The site shows DPS per quality (`mechanics.dps`, leaving out damage types most creatures are immune to: chop, pickaxe, spirit (footnoted); bows and crossbows only seconds per shot at skill 0 and 100: their DPS depends on the ammo)
-and lists every timed attack on the `attack-speed` mechanics page.
+and lists every timed attack on the `weapons` mechanics page, by category (skill and hands, `build-site.WEAPON_CATEGORIES`),
+best DPS first. The site also builds a page per biome (`biomes/`: creatures by home biome, raids, gathered resources,
+fish, locations; biome names everywhere link to it) and per creature faction (`factions/`, hostility from
+`mechanics.is_enemy`, a copy of BaseAI.IsEnemy's faction switch); raids have the `raids` mechanics page.
 Items keep only the stat fields their type uses: `armor*` for helmet/chest/legs/shoulder (shields' armor is ignored by the
 game), block/parry fields for weapons and shields, attack fields (`skill`, `damages`, `attack`...) for weapons, ammo and
 Catapult ammo (shields keep `skill`); `internal` items keep everything. Blockers have `blockAdrenaline` / `parryAdrenaline`,
