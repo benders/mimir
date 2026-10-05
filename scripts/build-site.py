@@ -1642,7 +1642,8 @@ def block_pseudo_drops() -> str:
         for d in c.get("drops", []):
             if d.get("chance", 1) <= 0.3:
                 by[d["item"]].append((c["id"], d["chance"]))
-    rows = [[link("item", item), " ".join(f'{link("creature", c)}<span class="qty">{pct(p)}</span>' for c, p in sorted(v))]
+    rows = [[link("item", item), " ".join(f'<span{stage_attr(stage_of("creature", c))}>{link("creature", c)}<span class="qty">{pct(p)}</span></span>'
+                                           for c, p in sorted(v))]
             for item, v in sorted(by.items(), key=lambda kv: name_of("item", kv[0]).lower())]
     n = sum(len(v) for v in by.values())
     return f"<details><summary>{n} drops of {len(rows)} items have a base chance of 30% or less</summary>" + \
@@ -1747,9 +1748,9 @@ def weapon_groups(weapons) -> list[tuple[str, str, list]]:
     return [(WEAPON_CATEGORIES.get(k, words(k[0]) or "Other"), k[0], by[k]) for k in order]
 
 
-def category_heading(title: str, skill: str) -> str:
+def category_heading(title: str, skill: str, stage: str = "") -> str:
     sk = f' <span class="skill">{mech_link("skills", words(skill) + " skill")}</span>' if skill else ""
-    return f'<h3 id="{mechanics.slug(title)}">{esc(title)}{sk}</h3>'
+    return f'<h3 id="{mechanics.slug(title)}"{stage}>{esc(title)}{sk}</h3>'
 
 
 def block_weapons() -> str:
@@ -1772,15 +1773,19 @@ def block_weapons() -> str:
                 cells += (["", "", "", ""] if d is None else
                           [num(sum(c["hits"] for c in a["chain"])), num(a["cycle"]),
                            num(round(mechanics.combo_damage(hit, a), 1)) + mark, f"<b>{num(round(d, 1))}{mark}</b>"])
-            rows.append((best, name_of("item", i["id"]).lower(), [link("item", i["id"])] + cells))
+            if max(best) >= 0:  # no DPS at all (no damage): left out
+                rows.append((best, name_of("item", i["id"]).lower(), [link("item", i["id"])] + cells))
         rows.sort(key=lambda r: (r[0], r[1]))  # lowest DPS first
         two = any(r[0][1] >= 0 for r in rows)  # any secondary attack: its columns
         top = ('<tr><th rowspan="2">Weapon</th><th colspan="4">Primary</th>'
                + ('<th colspan="4">Secondary</th>' if two else "") + "</tr>")
         sub = "<tr>" + "<th>Hits</th><th>Seconds</th><th>Damage</th><th>DPS</th>" * (2 if two else 1) + "</tr>"
         body = "".join("<tr>" + "".join(f"<td>{c}</td>" for c in r[2][:9 if two else 5]) + "</tr>" for r in rows)
-        out += (category_heading(title, skill) +
-                f'<div class="tw"><table class="num weapons"><thead>{top}{sub}</thead><tbody>{body}</tbody></table></div>')
+        if not rows:
+            continue
+        st = group_stage("item", [i["id"] for i in items if any(r[1] == name_of("item", i["id"]).lower() for r in rows)])
+        out += (category_heading(title, skill, st) +
+                f'<div class="tw"{st}><table class="num weapons"><thead>{top}{sub}</thead><tbody>{body}</tbody></table></div>')
     skipped = [t for t in IGNORED if t not in mechanics.TOOL_DAMAGE]
     note = "; ".join(f"{t} damage ({n} of {total} creatures are immune to it)" for t in skipped for n, total in [IGNORED[t]])
     return out + (f'<p class="note">* Leaves out {note}.</p>' if skipped else "")
@@ -1799,7 +1804,7 @@ def block_weapons_ranged() -> str:
             a = i["attack"]
             rows.append([link("item", i["id"]), "draw" if a.get("draw") else "reload", num(a.get("draw") or a.get("reload")),
                          num(round(mechanics.attack_cycle(a, 0), 2)), num(round(mechanics.attack_cycle(a, 100), 2))])
-        out += category_heading(title, skill) + table(
+        out += category_heading(title, skill, group_stage("item", [i["id"] for i in items])) + table(
             ["Weapon", "Wait", "Seconds", "Per shot (skill 0)", "Per shot (skill 100)"], rows, "num")
     return out
 
@@ -1878,8 +1883,8 @@ def block_comfort_pieces() -> str:
     for g in sorted(groups, key=lambda g: (g is None, g or "")):
         ps = sorted(groups[g], key=lambda p: (-p["comfort"]["value"], stage_of("piece", p["id"]), name_of("piece", p["id"]).lower()))
         rows.append([esc(words(g)) if g else "none (each counts)", num(ps[0]["comfort"]["value"]),
-                     ", ".join(f'{link("piece", p["id"])}{" *" if p.get("season") else ""} {num(p["comfort"]["value"])}'
-                               for p in ps)])
+                     " ".join(f'<span{stage_attr(stage_of("piece", p["id"]))}>{link("piece", p["id"])}'
+                              f'{" *" if p.get("season") else ""} {num(p["comfort"]["value"])}</span>' for p in ps)])
     return table(["Group", "Best", "Pieces"], rows) + '<p class="note">* seasonal: buildable only during its event.</p>'
 
 
@@ -1930,13 +1935,51 @@ def mech_blocks() -> dict:
             "chart": lambda name: mechanics.CHARTS[name]()}
 
 
+ENTITY_HREF = re.compile(r'href="(items|creatures|pieces|effects)/([^"]+)\.html"')
+HREF_KIND = {v: k for k, v in KINDS.items()}
+
+
+def link_stages(fragment: str) -> list[int]:
+    return [stage_of(HREF_KIND[d], unquote(i)) for d, i in ENTITY_HREF.findall(fragment)]
+
+
+def stage_mech_tables(content: str) -> str:
+    """The stage filter for a mechanics page's tables and lists: a row or list item takes the stage of what it is
+    about, the entity linked in its first cell (else its earliest link); a table hides once all its rows do."""
+    def row(m):
+        if "data-stage" in m.group(1):
+            return m.group(0)
+        cells = re.split(r"</td>", m.group(2), maxsplit=1)
+        st = link_stages(cells[0]) or link_stages(m.group(2))
+        return f"<tr{m.group(1)}{stage_attr(min(st))}>{m.group(2)}</tr>" if st else m.group(0)
+
+    def body(m):
+        out = re.sub(r"<tr([^>]*)>(.*?)</tr>", row, m.group(0), flags=re.S)
+        return out
+
+    def tw(m):
+        rows = re.findall(r"<tbody>.*?</tbody>", m.group(2), flags=re.S)
+        trs = re.findall(r"<tr([^>]*)>", rows[0]) if rows else []
+        sts = [int(x.group(1)) if (x := re.search(r'data-stage="(\d+)"', a)) else 0 for a in trs]
+        return f'<div class="tw"{stage_attr(min(sts))}>{m.group(2)}</div>' if sts and not m.group(1) else m.group(0)
+
+    def li(m):
+        st = link_stages(m.group(1))
+        return f"<li{stage_attr(st[0])}>{m.group(1)}</li>" if st else m.group(0)
+
+    content = re.sub(r"<tbody>.*?</tbody>", body, content, flags=re.S)
+    content = re.sub(r'<div class="tw"( data-stage="\d+")?>(.*?)</div>', tw, content, flags=re.S)
+    return re.sub(r'(?<=<ul class="refs">)(.*?)(?=</ul>)',
+                  lambda m: re.sub(r"<li>(.*?)</li>", li, m.group(1), flags=re.S), content, flags=re.S)
+
+
 def mechanics_pages() -> None:
     sources = sorted(MECH_SRC.glob("*.md")) if MECH_SRC.is_dir() else []
     for f in sources:
         meta, text = mechanics.parse_front_matter(f.read_text(encoding="utf-8"))
         ctx = mechanics.Ctx(mech_resolve, mech_blocks())
         try:
-            content = mechanics.render(text, ctx)
+            content = stage_mech_tables(mechanics.render(text, ctx))
         except ValueError as e:
             raise SystemExit(f"{f.name}: {e}")
         cites = [x.strip() for x in meta.get("sources", "").split(";") if x.strip()]

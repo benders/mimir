@@ -323,6 +323,12 @@ class Site(unittest.TestCase):
         self.assertIn("<dt>Attacks</dt><dd>Players</dd>", f)  # the only other faction shown: no page, plain text
         self.assertIn("table class=\"matrix\"", (self.out / "factions/index.html").read_text(encoding="utf-8"))
 
+    def test_mechanics_tables_follow_stage_filter(self):
+        page = (self.out / "mechanics/damage-types.html").read_text(encoding="utf-8")
+        # a row takes the stage of the entity in its first cell (Chief: Mountain)
+        self.assertIn('<tr data-stage="3"><td><a class="ref" href="creatures/Chief.html"', page)
+        self.assertNotIn('<tr data-stage="3"><td><a class="ref" href="creatures/Raider.html"', page)
+
     def test_raids_page(self):
         page = (self.out / "mechanics/raids.html").read_text(encoding="utf-8")
         self.assertIn('<h3 id="army_test">Something stirs', page)
