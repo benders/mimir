@@ -193,6 +193,8 @@ and caps the flagged share, so a source gap can't silently hide real pages; `scr
 
 ## Working on this repo
 
+- One commit per issue (`Fixes #N`). After implementing each one: `make test`, then `make site` and check the
+  affected pages in a browser (`make serve`, :8000), then commit before starting the next issue.
 - After changing `normalize.py`: `make test`, then `make data verify-data` (offline, uses the local dump), then
   review and commit the `data/` diff together with the code. New normalize behaviour gets a case in
   `tests/fixture.py` (invented values only, never real game data) and a unit test. `data/` must always be regenerated, never hand-edited.
