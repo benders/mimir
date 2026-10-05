@@ -329,6 +329,16 @@ class Site(unittest.TestCase):
         self.assertIn('<tr data-stage="3"><td><a class="ref" href="creatures/Chief.html"', page)
         self.assertNotIn('<tr data-stage="3"><td><a class="ref" href="creatures/Raider.html"', page)
 
+    def test_trader_pages(self):
+        t = (self.out / "traders/Vendor.html").read_text(encoding="utf-8")
+        self.assertIn("<h1>Old Vendor</h1>", t)
+        self.assertIn("1000–4000 m from the world centre", t)
+        self.assertIn("removes the rest: one per world", t)  # unique
+        self.assertIn('href="items/Charm.html"', t)  # what it sells
+        charm = (self.out / "items/Charm.html").read_text(encoding="utf-8")
+        self.assertIn('<a href="traders/Vendor.html">Old Vendor</a>', charm)  # Sold by links the trader
+        self.assertIn('href="traders/Vendor.html"', (self.out / "biomes/Meadows.html").read_text(encoding="utf-8"))
+
     def test_raids_page(self):
         page = (self.out / "mechanics/raids.html").read_text(encoding="utf-8")
         self.assertIn('<h3 id="army_test">Something stirs', page)

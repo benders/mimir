@@ -1165,10 +1165,28 @@ def location_biomes() -> dict[str, list[str]]:
     return dict(where)
 
 
+def location_placement(z: dict) -> dict:
+    """How world generation places a ZoneSystem location (ZoneSystem.GenerateLocationsTimeSliced): up to `quantity`
+    in its biome's `biomeArea`, `minDistance`..`maxDistance` from the world centre (0 = no limit), at least
+    `minDistanceFromSimilar` apart; `prioritized` ones go first with more attempts; `unique`: the first one a player's
+    zone actually spawns removes the others (RemoveUnplacedLocations); `iconPlaced`: on the map once spawned."""
+    return {"quantity": z.get("m_quantity"), "unique": z.get("m_unique"), "prioritized": z.get("m_prioritized"),
+            "biomeArea": z.get("m_biomeArea") if z.get("m_biomeArea") != "Everything" else None,
+            "minDistance": z.get("m_minDistance"), "maxDistance": z.get("m_maxDistance"),
+            "minDistanceFromSimilar": z.get("m_minDistanceFromSimilar"),
+            "iconPlaced": z.get("m_iconPlaced"), "iconAlways": z.get("m_iconAlways")}
+
+
 def locations() -> list[dict]:
-    """Every enabled world location the dump has, with the `biomes` it is placed in."""
+    """Every enabled world location the dump has, with the `biomes` it is placed in and its `placement` (from its
+    first enabled ZoneSystem entry)."""
     have = load_dir("locations")
-    return [{"id": k, "biomes": v} for k, v in sorted(location_biomes().items()) if k in have]
+    first = {}
+    for z in load("world/ZoneSystem.json")[0]["fields"]["m_locations"]:
+        if z["m_enable"]:
+            first.setdefault(z["m_prefabName"], z)
+    return [{"id": k, "biomes": v, "placement": location_placement(first[k])}
+            for k, v in sorted(location_biomes().items()) if k in have]
 
 
 def placed_in_locations():

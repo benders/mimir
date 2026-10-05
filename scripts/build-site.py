@@ -599,7 +599,7 @@ def page(path: str, title: str, body: str, kind_label: str = "", scripts=()) -> 
 <body>
 <header class="top">
   <a class="brand" href="index.html">{esc(SITE_NAME)}</a>
-  <nav>{"".join(f'<a href="{d}/index.html">{d.capitalize()}</a>' for d in KINDS.values())}<a href="biomes/index.html">Biomes</a><a href="mechanics/index.html">Mechanics</a></nav>
+  <nav>{"".join(f'<a href="{d}/index.html">{d.capitalize()}</a>' for d in KINDS.values())}<a href="biomes/index.html">Biomes</a><a href="traders/index.html">Traders</a><a href="mechanics/index.html">Mechanics</a></nav>
   <label class="stagesel" title="Hide what you meet after this biome">Up to
   <select id="stage">{STAGE_OPTIONS}</select></label>
   <div class="search"><input id="q" type="search" placeholder="Search…  ( / )" autocomplete="off" aria-label="Search">
@@ -906,7 +906,7 @@ def how_text(kind: str, id_: str) -> str:
     if how == "fish":
         return f"fishing{' (' + esc(short_places(SOURCES[frm].get('biomes', []))) + ')' if frm in SOURCES else ''}"
     if how == "trader" and frm in SOURCES:
-        return f"sold by {esc(source_name(SOURCES[frm]))}"
+        return f"sold by {trader_link(SOURCES[frm])}"
     if how == "location":
         p = entity(kind, id_) or {}
         return f'found in {esc(short_places(locations=p.get("locations", [])) or pretty_id(frm))}'
@@ -1073,7 +1073,7 @@ def item_page(i: dict) -> None:
         body += section("Fishing", f'<p>{how}{" in " + source_places(fish) if fish.get("biomes") else ""}.</p>')
     body += staged_section("Bait for", [("item", f, link("item", f)) for f in bait_for[i["id"]]])
 
-    offers = [[esc(source_name(t)), link("item", "Coins", o["price"]) + (f" for ×{num(o['stack'])}" if o["stack"] > 1 else ""),
+    offers = [[trader_link(t), link("item", "Coins", o["price"]) + (f" for ×{num(o['stack'])}" if o["stack"] > 1 else ""),
                key_label(o["requiredKey"]) if o.get("requiredKey") else "", source_places(t)]
               for t, o in sold_by[i["id"]]]
     body += section("Sold by", table(["Trader", "Price", "After", "Where"], offers))
@@ -1245,18 +1245,20 @@ def raid_link(id_: str) -> str:
     return esc(raid_title(id_))
 
 
+def key_stage(k: str) -> int:
+    """The stage where a global key is first set: a boss's defeat opens the next stage, a kill is the creature's own
+    stage, a returned chest the chest's."""
+    ks = [min(len(STAGES) - 1, stage_of("creature", c["id"]) + (1 if c.get("boss") else 0))
+          for c in CREATURES.values() if (c.get("defeatKey") or "").lower() == k.lower()
+          and has_page("creature", MERGED["creature"].get(c["id"], c["id"]))]
+    if chest := hildir_chest(k):
+        ks.append(stage_of("item", chest["id"]))
+    return min(ks, default=0)
+
+
 def raid_stage(e: dict) -> int:
-    """The stage a raid can first come in: the latest of its required keys, each the stage where it is first set
-    (a boss's defeat opens the next stage; a kill, the creature's own stage; a chest, the chest's)."""
-    st = 0
-    for k in e.get("requiredGlobalKeys", []):
-        ks = [min(len(STAGES) - 1, stage_of("creature", c["id"]) + (1 if c.get("boss") else 0))
-              for c in CREATURES.values() if (c.get("defeatKey") or "").lower() == k.lower()
-              and has_page("creature", MERGED["creature"].get(c["id"], c["id"]))]
-        if chest := hildir_chest(k):
-            ks.append(stage_of("item", chest["id"]))
-        st = max(st, min(ks, default=0))
-    return st
+    """The stage a raid can first come in: the latest of its required keys."""
+    return max((key_stage(k) for k in e.get("requiredGlobalKeys", [])), default=0)
 
 
 def by_home_biome(ids) -> list[tuple[str, list[str]]]:
@@ -1355,6 +1357,8 @@ def biome_page(b: str) -> None:
             if row not in rows:  # copies of one object (three Large Bone piles)
                 rows.append(row)
     body += section("Resources", table(["Source", "Kind", "Gives"], rows, "cost"))
+    body += section("Traders", reflist(trader_link(t) for t in TRADERS
+                                       if any(b in x["biomes"] for x in t.get("locations", []))))
     fish = [x["id"] for x in SOURCES.values() if x["kind"] == "fishing" and b in x.get("biomes", [])]
     body += staged_section("Fish", [("item", f, link("item", f)) for f in sorted(fish, key=lambda f: name_of("item", f).lower())])
     locs = sorted({pretty_id(x["id"]) for x in LOCATIONS if b in x.get("biomes", [])}, key=str.lower)
@@ -1434,6 +1438,78 @@ def block_raid_base_pieces() -> str:
     ps = sorted((p["id"] for p in PIECES.values() if p.get("playerBase") and p.get("tools") and has_page("piece", p["id"])),
                 key=lambda x: name_of("piece", x).lower())
     return staged_list([("piece", x, link("piece", x)) for x in ps])
+
+
+# --- traders --------------------------------------------------------------------------------
+
+TRADERS = [s for s in SOURCES.values() if s["kind"] == "trader"]
+TRADER_GOODS = {  # one sentence on what each sells; data-driven fallback for a new trader
+    "Haldor": "Gear for travelling and exploring (Megingjord, the Dverger Circlet, a fishing rod and bait), rare "
+              "crafting materials such as Ymir Flesh and Thunder Stone, and the egg that starts a chicken coop.",
+    "Hildir": "Clothing and hats with no armor value, most unlocked by returning her three stolen chests, plus "
+              "fireworks, sparklers and a barber kit.",
+    "BogWitch": "Cooking ingredients, chiefly spice blends that unlock as each boss falls, with potion ingredients "
+                "and a few curios.",
+}
+
+
+def trader_href(s: dict) -> str:
+    return f"traders/{quote(s['id'])}.html"
+
+
+def trader_link(s: dict) -> str:
+    return f'<a href="{trader_href(s)}">{esc(source_name(s))}</a>'
+
+
+def trader_spawning(s: dict) -> str:
+    """How the trader's camp is placed (locations.json placement, ZoneSystem.GenerateLocationsTimeSliced)."""
+    out = []
+    for x in s.get("locations", []):
+        loc = next((l for l in LOCATIONS if l["id"] == x["location"]), {})
+        pl = loc.get("placement") or {}
+        where = " or ".join(biome_link(b) for b in x["biomes"])
+        if pl.get("biomeArea") == "Median":
+            where += ", away from the biome's edges"
+        lo, hi = pl.get("minDistance"), pl.get("maxDistance")
+        ring = (f"{num(lo)}–{num(hi)} m" if lo and hi else f"at least {num(lo)} m" if lo else f"up to {num(hi)} m"
+                if hi else "")
+        text = (f"World generation picks up to {num(pl.get('quantity', 1))} spots for the camp in the {where}"
+                + (f", {ring} from the world centre" if ring else "")
+                + (f" and at least {num(pl['minDistanceFromSimilar'])} m apart" if pl.get("minDistanceFromSimilar") else "")
+                + ".")
+        if pl.get("unique"):
+            text += " The first one to be generated, when a player comes near, removes the rest: one per world."
+        if pl.get("iconPlaced"):
+            text += " It shows on the map once generated."
+        out.append(f"<p>{text}</p>")
+    return "".join(out) + ('<p class="note">From ZoneSystem.GenerateLocationsTimeSliced and '
+                           'ZoneSystem.RemoveUnplacedLocations.</p>' if out else "")
+
+
+def trader_page(s: dict) -> None:
+    biomes = list(dict.fromkeys(b for x in s.get("locations", []) for b in x["biomes"]))
+    body = (f'<div class="hero"><div><h1>{esc(source_name(s))}</h1><p class="sub">Trader · '
+            f'{", ".join(biome_link(b) for b in biomes)}</p></div></div>')
+    goods = TRADER_GOODS.get(s["id"]) or f"Sells {len(s.get('sells', []))} items."
+    body += f'<p class="desc">{esc(goods)}</p>'
+    body += section("Where", trader_spawning(s))
+    rows = []
+    for o in sorted(s.get("sells", []), key=lambda o: (bool(o.get("requiredKey")), key_stage(o.get("requiredKey") or ""),
+                                                       o.get("requiredKey") or "", name_of("item", o["item"]).lower())):
+        rows.append([link("item", o["item"]), num(o["stack"]) if o.get("stack", 1) > 1 else "",
+                     link("item", "Coins", o["price"]), key_label(o["requiredKey"]) if o.get("requiredKey") else "always"])
+    body += section("Sells", table(["Item", "Stack", "Price", "Available after"], rows))
+    body += section("Takes", table(["Item", "Unlocks"], [
+        [link("item", t["item"]), f'{sum(1 for o in s.get("sells", []) if (o.get("requiredKey") or "").lower() == t["setsKey"].lower())} items '
+                                  f'in the list above'] for t in s.get("takes", [])]))
+    page(trader_href(s), source_name(s), stage_mech_tables(body), '<a href="traders/index.html">Traders</a>')
+
+
+def traders_index() -> None:
+    items = "".join(f'<li><a href="{trader_href(s)}">{esc(source_name(s))}</a><span>'
+                    f'{", ".join(BIOMES.get(b, b) for x in s.get("locations", []) for b in x["biomes"])} · '
+                    f'{plural(len(s.get("sells", [])), "item")}</span></li>' for s in sorted(TRADERS, key=source_name))
+    page("traders/index.html", "Traders", f'<h1>Traders</h1><ul class="mechlist">{items}</ul>')
 
 
 # --- pieces ---------------------------------------------------------------------------------
@@ -2109,6 +2185,7 @@ def search_index() -> None:
             e[4] = f"{e[4]} · {e[1]}"
     entries += [[p["title"], p["id"], f"mechanics/{p['id']}.html", "", "Mechanics", 0] for p in MECH_PAGES]
     entries += [[BIOMES[b], b, f"biomes/{quote(b)}.html", "", "Biome", STAGES.index(b) if b in STAGES else 0] for b in BIOMES]
+    entries += [[source_name(t), t["id"], trader_href(t), "", "Trader", 0] for t in TRADERS]
     entries += [[faction_name(f), f, f"factions/{quote(f)}.html", "", "Faction", 0] for f in FACTION_ORDER]
     entries.sort(key=lambda x: (x[0].lower(), x[2]))
     (OUT / "search.json").write_text(json.dumps(entries, ensure_ascii=False, separators=(",", ":")), encoding="utf-8")
@@ -2166,6 +2243,9 @@ def main() -> int:
     for f in FACTION_ORDER:
         faction_page(f)
     factions_index()
+    for t in TRADERS:
+        trader_page(t)
+    traders_index()
     mechanics_pages()
     index_pages()
     search_index()

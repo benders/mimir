@@ -4,24 +4,43 @@
   "biomes": [
    "Swamp",
    "Plains"
-  ]
+  ],
+  "placement": {
+   "quantity": 20
+  }
  },
  {
   "id": "Lair",
   "biomes": [
    "Mountain"
-  ]
+  ],
+  "placement": {
+   "quantity": 20
+  }
  },
  {
   "id": "Market",
   "biomes": [
    "Meadows"
-  ]
+  ],
+  "placement": {
+   "quantity": 5,
+   "unique": true,
+   "prioritized": true,
+   "biomeArea": "Median",
+   "minDistance": 1000,
+   "maxDistance": 4000,
+   "minDistanceFromSimilar": 500,
+   "iconPlaced": true
+  }
  },
  {
   "id": "Stash",
   "biomes": [
    "Meadows"
-  ]
+  ],
+  "placement": {
+   "quantity": 20
+  }
  }
 ]

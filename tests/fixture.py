@@ -125,8 +125,10 @@ def container(*drops, name="$piece_chest"):
     return ("Container", {"m_name": name, **m(defaultItems=drop_table(*drops))})
 
 
-def zone_location(name, biome, enable=True):
-    return m(name=name, prefabName=name, enable=enable, biome=biome)
+def zone_location(name, biome, enable=True, **kw):
+    return {**m(name=name, prefabName=name, enable=enable, biome=biome, biomeArea="Everything", quantity=20,
+                unique=False, prioritized=False, minDistance=0, maxDistance=0, minDistanceFromSimilar=0,
+                iconPlaced=False, iconAlways=False), **m(**kw)}
 
 
 def event(name, biome, *spawns, **kw):
@@ -407,7 +409,8 @@ def write_dump(raw: Path) -> Path:
         zone_location("Camp", "Plains"),  # same prefab placed in a second biome
         zone_location("Lair", "Mountain"),
         zone_location("Ruin", "Meadows", enable=False),
-        zone_location("Market", "Meadows"),
+        zone_location("Market", "Meadows", biomeArea="Median", quantity=5, unique=True, prioritized=True,
+                      minDistance=1000, maxDistance=4000, minDistanceFromSimilar=500, iconPlaced=True),  # a trader's camp
         zone_location("Stash", "Meadows"),
     ]}}])
     dump("locations/Camp.json", {"name": "Camp", "components": [comp("Location", {}), *spawners(

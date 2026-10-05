@@ -3,676 +3,1230 @@
   "id": "AbandonedLogCabin02",
   "biomes": [
    "Mountain"
-  ]
+  ],
+  "placement": {
+   "quantity": 33,
+   "minDistanceFromSimilar": 128
+  }
  },
  {
   "id": "AbandonedLogCabin03",
   "biomes": [
    "Mountain"
-  ]
+  ],
+  "placement": {
+   "quantity": 33,
+   "minDistanceFromSimilar": 128
+  }
  },
  {
   "id": "AbandonedLogCabin04",
   "biomes": [
    "Mountain"
-  ]
+  ],
+  "placement": {
+   "quantity": 50,
+   "minDistanceFromSimilar": 128
+  }
  },
  {
   "id": "AncientUpgradeStation",
   "biomes": [
    "Mountain"
-  ]
+  ],
+  "placement": {
+   "quantity": 10,
+   "unique": true,
+   "prioritized": true,
+   "biomeArea": "Median",
+   "minDistance": 200,
+   "minDistanceFromSimilar": 400,
+   "iconPlaced": true
+  }
  },
  {
   "id": "AshlandRuins",
   "biomes": [
    "AshLands"
-  ]
+  ],
+  "placement": {
+   "quantity": 100,
+   "biomeArea": "Median",
+   "minDistanceFromSimilar": 16
+  }
  },
  {
   "id": "BearCave",
   "biomes": [
    "BlackForest"
-  ]
+  ],
+  "placement": {
+   "quantity": 50,
+   "biomeArea": "Median",
+   "minDistanceFromSimilar": 256
+  }
  },
  {
   "id": "BigRockClearing",
   "biomes": [
    "BlackForest"
-  ]
+  ],
+  "placement": {
+   "quantity": 10,
+   "unique": true,
+   "biomeArea": "Median",
+   "minDistance": 1000,
+   "maxDistance": 10000,
+   "minDistanceFromSimilar": 2000
+  }
  },
  {
   "id": "BogWitch_Camp",
   "biomes": [
    "Swamp"
-  ]
+  ],
+  "placement": {
+   "quantity": 10,
+   "unique": true,
+   "prioritized": true,
+   "biomeArea": "Median",
+   "minDistance": 3000,
+   "maxDistance": 8000,
+   "minDistanceFromSimilar": 1000,
+   "iconPlaced": true
+  }
  },
  {
   "id": "Bonemass",
   "biomes": [
    "Swamp"
-  ]
+  ],
+  "placement": {
+   "quantity": 5,
+   "prioritized": true,
+   "biomeArea": "6",
+   "minDistance": 2000,
+   "maxDistance": 10000,
+   "minDistanceFromSimilar": 3000
+  }
  },
  {
   "id": "CharredFortress",
   "biomes": [
    "AshLands"
-  ]
+  ],
+  "placement": {
+   "quantity": 20,
+   "prioritized": true,
+   "biomeArea": "-1",
+   "minDistanceFromSimilar": 256
+  }
  },
  {
   "id": "CharredRuins1",
   "biomes": [
    "AshLands"
-  ]
+  ],
+  "placement": {
+   "quantity": 75,
+   "biomeArea": "Median",
+   "minDistanceFromSimilar": 256
+  }
  },
  {
   "id": "CharredRuins2",
   "biomes": [
    "AshLands"
-  ]
+  ],
+  "placement": {
+   "quantity": 100,
+   "biomeArea": "Median",
+   "minDistanceFromSimilar": 128
+  }
  },
  {
   "id": "CharredRuins3",
   "biomes": [
    "AshLands"
-  ]
+  ],
+  "placement": {
+   "quantity": 100,
+   "biomeArea": "Median",
+   "minDistanceFromSimilar": 128
+  }
  },
  {
   "id": "CharredRuins4",
   "biomes": [
    "AshLands"
-  ]
+  ],
+  "placement": {
+   "quantity": 100,
+   "biomeArea": "Median",
+   "minDistanceFromSimilar": 128
+  }
  },
  {
   "id": "CharredStone_Spawner",
   "biomes": [
    "AshLands"
-  ]
+  ],
+  "placement": {
+   "quantity": 300,
+   "minDistanceFromSimilar": 100
+  }
  },
  {
   "id": "CharredTowerRuins1",
   "biomes": [
    "AshLands"
-  ]
+  ],
+  "placement": {
+   "quantity": 30,
+   "biomeArea": "-1",
+   "minDistanceFromSimilar": 100
+  }
  },
  {
   "id": "CharredTowerRuins1_dvergr",
   "biomes": [
    "AshLands"
-  ]
+  ],
+  "placement": {
+   "quantity": 30,
+   "biomeArea": "-1",
+   "minDistanceFromSimilar": 100
+  }
  },
  {
   "id": "CharredTowerRuins2",
   "biomes": [
    "AshLands"
-  ]
+  ],
+  "placement": {
+   "quantity": 40,
+   "biomeArea": "-1"
+  }
  },
  {
   "id": "CharredTowerRuins3",
   "biomes": [
    "AshLands"
-  ]
+  ],
+  "placement": {
+   "quantity": 30,
+   "biomeArea": "-1",
+   "minDistanceFromSimilar": 500
+  }
  },
  {
   "id": "CombatRuin01",
   "biomes": [
    "Meadows"
-  ]
+  ],
+  "placement": {
+   "quantity": 5,
+   "minDistance": 1500,
+   "maxDistance": 10000,
+   "minDistanceFromSimilar": 2000
+  }
  },
  {
   "id": "Crypt2",
   "biomes": [
    "BlackForest"
-  ]
+  ],
+  "placement": {
+   "quantity": 200,
+   "biomeArea": "-1",
+   "minDistanceFromSimilar": 128
+  }
  },
  {
   "id": "Crypt3",
   "biomes": [
    "BlackForest"
-  ]
+  ],
+  "placement": {
+   "quantity": 200,
+   "minDistanceFromSimilar": 128
+  }
  },
  {
   "id": "Crypt4",
   "biomes": [
    "BlackForest"
-  ]
+  ],
+  "placement": {
+   "quantity": 200,
+   "minDistanceFromSimilar": 128
+  }
  },
  {
   "id": "DN_Bossroom",
   "biomes": [
    "DeepNorth"
-  ]
+  ],
+  "placement": {
+   "quantity": 3,
+   "prioritized": true,
+   "minDistanceFromSimilar": 1024,
+   "iconPlaced": true
+  }
  },
  {
   "id": "DN_gammeltrollFrac01",
   "biomes": [
    "DeepNorth"
-  ]
+  ],
+  "placement": {
+   "quantity": 30
+  }
  },
  {
   "id": "DN_gammeltrollFrac02",
   "biomes": [
    "DeepNorth"
-  ]
+  ],
+  "placement": {
+   "quantity": 30
+  }
  },
  {
   "id": "DN_hut01",
   "biomes": [
    "DeepNorth"
-  ]
+  ],
+  "placement": {
+   "quantity": 40,
+   "biomeArea": "Median",
+   "minDistanceFromSimilar": 100
+  }
  },
  {
   "id": "Dolmen01",
   "biomes": [
    "Meadows",
    "BlackForest"
-  ]
+  ],
+  "placement": {
+   "quantity": 100
+  }
  },
  {
   "id": "Dolmen02",
   "biomes": [
    "Meadows",
    "BlackForest"
-  ]
+  ],
+  "placement": {
+   "quantity": 100
+  }
  },
  {
   "id": "Dolmen03",
   "biomes": [
    "Meadows",
    "BlackForest"
-  ]
+  ],
+  "placement": {
+   "quantity": 50
+  }
  },
  {
   "id": "Dragonqueen",
   "biomes": [
    "Mountain"
-  ]
+  ],
+  "placement": {
+   "quantity": 3,
+   "prioritized": true,
+   "biomeArea": "Median",
+   "maxDistance": 8000,
+   "minDistanceFromSimilar": 3000
+  }
  },
  {
   "id": "DrakeLorestone",
   "biomes": [
    "Mountain"
-  ]
+  ],
+  "placement": {
+   "quantity": 50,
+   "minDistanceFromSimilar": 128
+  }
  },
  {
   "id": "DrakeNest01",
   "biomes": [
    "Mountain"
-  ]
+  ],
+  "placement": {
+   "quantity": 200,
+   "maxDistance": 10000,
+   "minDistanceFromSimilar": 100
+  }
  },
  {
   "id": "Eikthyrnir",
   "biomes": [
    "Meadows"
-  ]
+  ],
+  "placement": {
+   "quantity": 3,
+   "prioritized": true,
+   "biomeArea": "Median",
+   "maxDistance": 1000
+  }
  },
  {
   "id": "FaderLocation",
   "biomes": [
    "AshLands"
-  ]
+  ],
+  "placement": {
+   "quantity": 3,
+   "prioritized": true,
+   "biomeArea": "Median",
+   "minDistanceFromSimilar": 2048
+  }
  },
  {
   "id": "FireHole",
   "biomes": [
    "Swamp"
-  ]
+  ],
+  "placement": {
+   "quantity": 75,
+   "biomeArea": "Median",
+   "minDistanceFromSimilar": 16
+  }
  },
  {
   "id": "FortressRuins",
   "biomes": [
    "AshLands"
-  ]
+  ],
+  "placement": {
+   "quantity": 100,
+   "biomeArea": "-1"
+  }
  },
  {
   "id": "FrozenShip01_DN",
   "biomes": [
    "DeepNorth"
-  ]
+  ],
+  "placement": {
+   "quantity": 50,
+   "minDistanceFromSimilar": 64
+  }
  },
  {
   "id": "FrozenShip02_DN",
   "biomes": [
    "DeepNorth"
-  ]
+  ],
+  "placement": {
+   "quantity": 50,
+   "minDistanceFromSimilar": 64
+  }
  },
  {
   "id": "FrozenShip03_DN",
   "biomes": [
    "DeepNorth"
-  ]
+  ],
+  "placement": {
+   "quantity": 50,
+   "minDistanceFromSimilar": 64
+  }
  },
  {
   "id": "GDKing",
   "biomes": [
    "BlackForest"
-  ]
+  ],
+  "placement": {
+   "quantity": 4,
+   "prioritized": true,
+   "biomeArea": "6",
+   "minDistance": 1000,
+   "maxDistance": 7000,
+   "minDistanceFromSimilar": 3000
+  }
  },
  {
   "id": "GoblinCamp2",
   "biomes": [
    "Plains"
-  ]
+  ],
+  "placement": {
+   "quantity": 200,
+   "biomeArea": "-1",
+   "minDistanceFromSimilar": 250
+  }
  },
  {
   "id": "GoblinCamp2_1",
   "biomes": [
    "Plains"
-  ]
+  ],
+  "placement": {
+   "quantity": 5,
+   "biomeArea": "0"
+  }
  },
  {
   "id": "GoblinHut01",
   "biomes": [
    "Plains"
-  ]
+  ],
+  "placement": {
+   "quantity": 30,
+   "biomeArea": "7"
+  }
  },
  {
   "id": "GoblinHut02",
   "biomes": [
    "Plains"
-  ]
+  ],
+  "placement": {
+   "quantity": 30,
+   "biomeArea": "7"
+  }
  },
  {
   "id": "GoblinHut03",
   "biomes": [
    "Plains"
-  ]
+  ],
+  "placement": {
+   "quantity": 20,
+   "biomeArea": "7"
+  }
  },
  {
   "id": "GoblinKing",
   "biomes": [
    "Plains"
-  ]
+  ],
+  "placement": {
+   "quantity": 4,
+   "prioritized": true,
+   "biomeArea": "Median",
+   "minDistanceFromSimilar": 3000
+  }
  },
  {
   "id": "Grave1",
   "biomes": [
    "Swamp"
-  ]
+  ],
+  "placement": {
+   "quantity": 200,
+   "biomeArea": "6"
+  }
  },
  {
   "id": "Greydwarf_camp1",
   "biomes": [
    "BlackForest"
-  ]
+  ],
+  "placement": {
+   "quantity": 300,
+   "biomeArea": "Median",
+   "minDistanceFromSimilar": 128
+  }
  },
  {
   "id": "Hildir_camp",
   "biomes": [
    "Meadows"
-  ]
+  ],
+  "placement": {
+   "quantity": 10,
+   "unique": true,
+   "prioritized": true,
+   "minDistance": 3000,
+   "maxDistance": 8000,
+   "minDistanceFromSimilar": 1000,
+   "iconPlaced": true
+  }
  },
  {
   "id": "Hildir_cave",
   "biomes": [
    "Mountain"
-  ]
+  ],
+  "placement": {
+   "quantity": 3,
+   "prioritized": true,
+   "biomeArea": "Median",
+   "minDistance": 1000,
+   "maxDistance": 8000,
+   "minDistanceFromSimilar": 2000,
+   "iconPlaced": true
+  }
  },
  {
   "id": "Hildir_crypt",
   "biomes": [
    "BlackForest"
-  ]
+  ],
+  "placement": {
+   "quantity": 3,
+   "prioritized": true,
+   "biomeArea": "Median",
+   "minDistance": 3000,
+   "maxDistance": 8000,
+   "minDistanceFromSimilar": 3000,
+   "iconPlaced": true
+  }
  },
  {
   "id": "Hildir_plainsfortress",
   "biomes": [
    "Plains"
-  ]
+  ],
+  "placement": {
+   "quantity": 3,
+   "prioritized": true,
+   "biomeArea": "Median",
+   "minDistanceFromSimilar": 3000
+  }
  },
  {
   "id": "IcePond1",
   "biomes": [
    "DeepNorth"
-  ]
+  ],
+  "placement": {
+   "quantity": 40,
+   "biomeArea": "Median",
+   "minDistanceFromSimilar": 128
+  }
  },
  {
   "id": "InfestedTree01",
   "biomes": [
    "Swamp"
-  ]
+  ],
+  "placement": {
+   "quantity": 700
+  }
  },
  {
   "id": "LeviathanLava",
   "biomes": [
    "AshLands"
-  ]
+  ],
+  "placement": {
+   "quantity": 100
+  }
  },
  {
   "id": "LumberCamp",
   "biomes": [
    "DeepNorth"
-  ]
+  ],
+  "placement": {
+   "quantity": 50,
+   "biomeArea": "Median",
+   "minDistanceFromSimilar": 100
+  }
  },
  {
   "id": "Mistlands_DvergrBossEntrance1",
   "biomes": [
    "Mistlands"
-  ]
+  ],
+  "placement": {
+   "quantity": 5,
+   "prioritized": true,
+   "biomeArea": "Median",
+   "minDistanceFromSimilar": 2048
+  }
  },
  {
   "id": "Mistlands_DvergrTownEntrance1",
   "biomes": [
    "Mistlands"
-  ]
+  ],
+  "placement": {
+   "quantity": 120,
+   "prioritized": true,
+   "biomeArea": "Median",
+   "minDistanceFromSimilar": 256
+  }
  },
  {
   "id": "Mistlands_DvergrTownEntrance2",
   "biomes": [
    "Mistlands"
-  ]
+  ],
+  "placement": {
+   "quantity": 120,
+   "prioritized": true,
+   "biomeArea": "Median",
+   "minDistanceFromSimilar": 256
+  }
  },
  {
   "id": "Mistlands_Excavation1",
   "biomes": [
    "Mistlands"
-  ]
+  ],
+  "placement": {
+   "quantity": 40,
+   "biomeArea": "Median",
+   "minDistanceFromSimilar": 128
+  }
  },
  {
   "id": "Mistlands_Excavation2",
   "biomes": [
    "Mistlands"
-  ]
+  ],
+  "placement": {
+   "quantity": 40,
+   "biomeArea": "Median",
+   "minDistanceFromSimilar": 128
+  }
  },
  {
   "id": "Mistlands_Excavation3",
   "biomes": [
    "Mistlands"
-  ]
+  ],
+  "placement": {
+   "quantity": 40,
+   "biomeArea": "Median",
+   "minDistanceFromSimilar": 96
+  }
  },
  {
   "id": "Mistlands_Giant1",
   "biomes": [
    "Mistlands"
-  ]
+  ],
+  "placement": {
+   "quantity": 250,
+   "biomeArea": "Median",
+   "minDistanceFromSimilar": 180
+  }
  },
  {
   "id": "Mistlands_Giant2",
   "biomes": [
    "Mistlands"
-  ]
+  ],
+  "placement": {
+   "quantity": 85,
+   "biomeArea": "Median",
+   "minDistanceFromSimilar": 256
+  }
  },
  {
   "id": "Mistlands_GuardTower1_new",
   "biomes": [
    "Mistlands"
-  ]
+  ],
+  "placement": {
+   "quantity": 75,
+   "biomeArea": "Median",
+   "minDistanceFromSimilar": 128
+  }
  },
  {
   "id": "Mistlands_GuardTower1_ruined_new",
   "biomes": [
    "Mistlands"
-  ]
+  ],
+  "placement": {
+   "quantity": 80,
+   "biomeArea": "Median",
+   "minDistanceFromSimilar": 128
+  }
  },
  {
   "id": "Mistlands_GuardTower1_ruined_new2",
   "biomes": [
    "Mistlands"
-  ]
+  ],
+  "placement": {
+   "quantity": 20,
+   "biomeArea": "Median",
+   "minDistanceFromSimilar": 128
+  }
  },
  {
   "id": "Mistlands_GuardTower2_new",
   "biomes": [
    "Mistlands"
-  ]
+  ],
+  "placement": {
+   "quantity": 75,
+   "biomeArea": "Median",
+   "minDistanceFromSimilar": 128
+  }
  },
  {
   "id": "Mistlands_GuardTower3_new",
   "biomes": [
    "Mistlands"
-  ]
+  ],
+  "placement": {
+   "quantity": 50,
+   "biomeArea": "Median",
+   "minDistanceFromSimilar": 128
+  }
  },
  {
   "id": "Mistlands_GuardTower3_ruined_new",
   "biomes": [
    "Mistlands"
-  ]
+  ],
+  "placement": {
+   "quantity": 50,
+   "biomeArea": "Median",
+   "minDistanceFromSimilar": 128
+  }
  },
  {
   "id": "Mistlands_Harbour1",
   "biomes": [
    "Mistlands"
-  ]
+  ],
+  "placement": {
+   "quantity": 100,
+   "biomeArea": "Edge",
+   "minDistanceFromSimilar": 64
+  }
  },
  {
   "id": "Mistlands_Lighthouse1_new",
   "biomes": [
    "Mistlands"
-  ]
+  ],
+  "placement": {
+   "quantity": 100,
+   "biomeArea": "Median",
+   "minDistanceFromSimilar": 128
+  }
  },
  {
   "id": "Mistlands_RoadPost1",
   "biomes": [
    "Mistlands"
-  ]
+  ],
+  "placement": {
+   "quantity": 500
+  }
  },
  {
   "id": "Mistlands_RockSpire1",
   "biomes": [
    "Mistlands"
-  ]
+  ],
+  "placement": {
+   "quantity": 200,
+   "biomeArea": "Median",
+   "minDistanceFromSimilar": 60
+  }
  },
  {
   "id": "Mistlands_Statue1",
   "biomes": [
    "Mistlands"
-  ]
+  ],
+  "placement": {
+   "quantity": 200
+  }
  },
  {
   "id": "Mistlands_Statue2",
   "biomes": [
    "Mistlands"
-  ]
+  ],
+  "placement": {
+   "quantity": 200
+  }
  },
  {
   "id": "Mistlands_StatueGroup1",
   "biomes": [
    "Mistlands"
-  ]
+  ],
+  "placement": {
+   "quantity": 200,
+   "minDistanceFromSimilar": 32
+  }
  },
  {
   "id": "Mistlands_Swords1",
   "biomes": [
    "Mistlands"
-  ]
+  ],
+  "placement": {
+   "quantity": 33,
+   "biomeArea": "Median",
+   "minDistanceFromSimilar": 256
+  }
  },
  {
   "id": "Mistlands_Swords2",
   "biomes": [
    "Mistlands"
-  ]
+  ],
+  "placement": {
+   "quantity": 33,
+   "biomeArea": "Median",
+   "minDistanceFromSimilar": 256
+  }
  },
  {
   "id": "Mistlands_Swords3",
   "biomes": [
    "Mistlands"
-  ]
+  ],
+  "placement": {
+   "quantity": 33,
+   "biomeArea": "Median",
+   "minDistanceFromSimilar": 256
+  }
  },
  {
   "id": "Mistlands_Viaduct1",
   "biomes": [
    "Mistlands"
-  ]
+  ],
+  "placement": {
+   "quantity": 100,
+   "biomeArea": "Median",
+   "minDistanceFromSimilar": 128
+  }
  },
  {
   "id": "Mistlands_Viaduct2",
   "biomes": [
    "Mistlands"
-  ]
+  ],
+  "placement": {
+   "quantity": 150,
+   "biomeArea": "Median",
+   "minDistanceFromSimilar": 64
+  }
  },
  {
   "id": "MorgenHole1",
   "biomes": [
    "AshLands"
-  ]
+  ],
+  "placement": {
+   "quantity": 40,
+   "biomeArea": "Median",
+   "minDistanceFromSimilar": 300
+  }
  },
  {
   "id": "MorgenHole2",
   "biomes": [
    "AshLands"
-  ]
+  ],
+  "placement": {
+   "quantity": 40,
+   "biomeArea": "Median",
+   "minDistanceFromSimilar": 200
+  }
  },
  {
   "id": "MorgenHole3",
   "biomes": [
    "AshLands"
-  ]
+  ],
+  "placement": {
+   "quantity": 40,
+   "biomeArea": "Median",
+   "minDistanceFromSimilar": 200
+  }
  },
  {
   "id": "MorkBorg",
   "biomes": [
    "DeepNorth"
-  ]
+  ],
+  "placement": {
+   "quantity": 40,
+   "minDistanceFromSimilar": 275
+  }
  },
  {
   "id": "MountainCave02",
   "biomes": [
    "Mountain"
-  ]
+  ],
+  "placement": {
+   "quantity": 120,
+   "minDistanceFromSimilar": 200
+  }
  },
  {
   "id": "MountainGrave01",
   "biomes": [
    "Mountain"
-  ]
+  ],
+  "placement": {
+   "quantity": 100,
+   "minDistanceFromSimilar": 50
+  }
  },
  {
   "id": "MountainWell1",
   "biomes": [
    "Mountain"
-  ]
+  ],
+  "placement": {
+   "quantity": 25,
+   "minDistanceFromSimilar": 256
+  }
  },
  {
   "id": "NorthMemorialPlace",
   "biomes": [
    "DeepNorth"
-  ]
+  ],
+  "placement": {
+   "quantity": 15,
+   "biomeArea": "Median",
+   "minDistanceFromSimilar": 400
+  }
  },
  {
   "id": "NorthVillage",
   "biomes": [
    "DeepNorth"
-  ]
+  ],
+  "placement": {
+   "quantity": 135,
+   "biomeArea": "Median",
+   "minDistanceFromSimilar": 70
+  }
  },
  {
   "id": "PlaceofMystery1",
   "biomes": [
    "AshLands"
-  ]
+  ],
+  "placement": {
+   "quantity": 1,
+   "unique": true,
+   "prioritized": true,
+   "biomeArea": "Median",
+   "minDistanceFromSimilar": 2048
+  }
  },
  {
   "id": "PlaceofMystery2",
   "biomes": [
    "AshLands"
-  ]
+  ],
+  "placement": {
+   "quantity": 1,
+   "unique": true,
+   "prioritized": true,
+   "biomeArea": "Median",
+   "minDistanceFromSimilar": 2048
+  }
  },
  {
   "id": "PlaceofMystery3",
   "biomes": [
    "AshLands"
-  ]
+  ],
+  "placement": {
+   "quantity": 1,
+   "unique": true,
+   "prioritized": true,
+   "biomeArea": "Median",
+   "minDistanceFromSimilar": 2048
+  }
  },
  {
   "id": "Ruin1",
   "biomes": [
    "BlackForest"
-  ]
+  ],
+  "placement": {
+   "quantity": 200,
+   "biomeArea": "-1"
+  }
  },
  {
   "id": "Ruin2",
   "biomes": [
    "BlackForest"
-  ]
+  ],
+  "placement": {
+   "quantity": 200,
+   "biomeArea": "-1"
+  }
  },
  {
   "id": "Ruin3",
   "biomes": [
    "Plains"
-  ]
+  ],
+  "placement": {
+   "quantity": 50,
+   "biomeArea": "-1",
+   "minDistanceFromSimilar": 512
+  }
  },
  {
   "id": "Runestone_Ashlands",
   "biomes": [
    "AshLands"
-  ]
+  ],
+  "placement": {
+   "quantity": 70,
+   "biomeArea": "-1",
+   "minDistanceFromSimilar": 128
+  }
  },
  {
   "id": "Runestone_BlackForest",
   "biomes": [
    "BlackForest"
-  ]
+  ],
+  "placement": {
+   "quantity": 50,
+   "minDistanceFromSimilar": 128
+  }
  },
  {
   "id": "Runestone_Boars",
   "biomes": [
    "Meadows"
-  ]
+  ],
+  "placement": {
+   "quantity": 50,
+   "minDistanceFromSimilar": 128
+  }
  },
  {
   "id": "Runestone_DeepNorth",
   "biomes": [
    "DeepNorth"
-  ]
+  ],
+  "placement": {
+   "quantity": 70,
+   "minDistanceFromSimilar": 128
+  }
  },
  {
   "id": "Runestone_Draugr",
   "biomes": [
    "Swamp"
-  ]
+  ],
+  "placement": {
+   "quantity": 50,
+   "biomeArea": "-1",
+   "minDistanceFromSimilar": 128
+  }
  },
  {
   "id": "Runestone_Greydwarfs",
   "biomes": [
    "BlackForest"
-  ]
+  ],
+  "placement": {
+   "quantity": 25,
+   "biomeArea": "7",
+   "maxDistance": 2000,
+   "minDistanceFromSimilar": 128
+  }
  },
  {
   "id": "Runestone_Meadows",
   "biomes": [
    "Meadows"
-  ]
+  ],
+  "placement": {
+   "quantity": 100,
+   "minDistanceFromSimilar": 128
+  }
  },
  {
   "id": "Runestone_Mistlands",
   "biomes": [
    "Mistlands"
-  ]
+  ],
+  "placement": {
+   "quantity": 50,
+   "minDistanceFromSimilar": 128
+  }
  },
  {
   "id": "Runestone_Mountains",
   "biomes": [
    "Mountain"
-  ]
+  ],
+  "placement": {
+   "quantity": 100,
+   "minDistanceFromSimilar": 128
+  }
  },
  {
   "id": "Runestone_Plains",
   "biomes": [
    "Plains"
-  ]
+  ],
+  "placement": {
+   "quantity": 100,
+   "minDistanceFromSimilar": 128
+  }
  },
  {
   "id": "Runestone_Swamps",
   "biomes": [
    "Swamp"
-  ]
+  ],
+  "placement": {
+   "quantity": 100,
+   "minDistanceFromSimilar": 128
+  }
  },
  {
   "id": "ShipSetting01",
   "biomes": [
    "Meadows"
-  ]
+  ],
+  "placement": {
+   "quantity": 100,
+   "minDistanceFromSimilar": 128
+  }
  },
  {
   "id": "ShipSetting02",
   "biomes": [
    "DeepNorth"
-  ]
+  ],
+  "placement": {
+   "quantity": 100,
+   "minDistanceFromSimilar": 64
+  }
  },
  {
   "id": "ShipSetting03",
   "biomes": [
    "DeepNorth"
-  ]
+  ],
+  "placement": {
+   "quantity": 50,
+   "minDistanceFromSimilar": 64
+  }
  },
  {
   "id": "ShipWreck01",
@@ -681,13 +1235,20 @@
    "BlackForest",
    "Plains",
    "Ocean"
-  ]
+  ],
+  "placement": {
+   "quantity": 25,
+   "minDistanceFromSimilar": 1024
+  }
  },
  {
   "id": "ShipWreck01_DN",
   "biomes": [
    "DeepNorth"
-  ]
+  ],
+  "placement": {
+   "quantity": 170
+  }
  },
  {
   "id": "ShipWreck02",
@@ -696,13 +1257,20 @@
    "BlackForest",
    "Plains",
    "Ocean"
-  ]
+  ],
+  "placement": {
+   "quantity": 25,
+   "minDistanceFromSimilar": 1024
+  }
  },
  {
   "id": "ShipWreck02_DN",
   "biomes": [
    "DeepNorth"
-  ]
+  ],
+  "placement": {
+   "quantity": 120
+  }
  },
  {
   "id": "ShipWreck03",
@@ -711,7 +1279,11 @@
    "BlackForest",
    "Plains",
    "Ocean"
-  ]
+  ],
+  "placement": {
+   "quantity": 25,
+   "minDistanceFromSimilar": 1024
+  }
  },
  {
   "id": "ShipWreck04",
@@ -720,414 +1292,718 @@
    "BlackForest",
    "Plains",
    "Ocean"
-  ]
+  ],
+  "placement": {
+   "quantity": 25,
+   "minDistanceFromSimilar": 1024
+  }
  },
  {
   "id": "StartTemple",
   "biomes": [
    "Meadows"
-  ]
+  ],
+  "placement": {
+   "quantity": 1,
+   "prioritized": true,
+   "biomeArea": "Median",
+   "maxDistance": 10000,
+   "iconAlways": true
+  }
  },
  {
   "id": "StoneCircle",
   "biomes": [
    "Meadows"
-  ]
+  ],
+  "placement": {
+   "quantity": 25,
+   "biomeArea": "7",
+   "minDistanceFromSimilar": 200
+  }
  },
  {
   "id": "StoneHenge1",
   "biomes": [
    "Plains"
-  ]
+  ],
+  "placement": {
+   "quantity": 5,
+   "biomeArea": "-1",
+   "minDistanceFromSimilar": 1000
+  }
  },
  {
   "id": "StoneHenge2",
   "biomes": [
    "Plains"
-  ]
+  ],
+  "placement": {
+   "quantity": 5,
+   "biomeArea": "-1",
+   "minDistanceFromSimilar": 1000
+  }
  },
  {
   "id": "StoneHenge3",
   "biomes": [
    "Plains"
-  ]
+  ],
+  "placement": {
+   "quantity": 5,
+   "biomeArea": "-1",
+   "minDistanceFromSimilar": 1000
+  }
  },
  {
   "id": "StoneHenge4",
   "biomes": [
    "Plains"
-  ]
+  ],
+  "placement": {
+   "quantity": 5,
+   "biomeArea": "-1",
+   "minDistanceFromSimilar": 1000
+  }
  },
  {
   "id": "StoneHenge5",
   "biomes": [
    "Plains"
-  ]
+  ],
+  "placement": {
+   "quantity": 20,
+   "biomeArea": "-1",
+   "minDistanceFromSimilar": 500
+  }
  },
  {
   "id": "StoneHenge6",
   "biomes": [
    "Plains"
-  ]
+  ],
+  "placement": {
+   "quantity": 20,
+   "biomeArea": "-1",
+   "minDistanceFromSimilar": 500
+  }
  },
  {
   "id": "StoneHouse1_heath",
   "biomes": [
    "Plains"
-  ]
+  ],
+  "placement": {
+   "biomeArea": "-1"
+  }
  },
  {
   "id": "StoneHouse2_heath",
   "biomes": [
    "Plains"
-  ]
+  ],
+  "placement": {
+   "biomeArea": "-1"
+  }
  },
  {
   "id": "StoneHouse3",
   "biomes": [
    "BlackForest"
-  ]
+  ],
+  "placement": {
+   "quantity": 200,
+   "biomeArea": "-1"
+  }
  },
  {
   "id": "StoneHouse4",
   "biomes": [
    "BlackForest"
-  ]
+  ],
+  "placement": {
+   "quantity": 200,
+   "biomeArea": "-1"
+  }
  },
  {
   "id": "StoneHouse5_heath",
   "biomes": [
    "Plains"
-  ]
+  ],
+  "placement": {
+   "biomeArea": "-1"
+  }
  },
  {
   "id": "StoneTower1",
   "biomes": [
    "Plains"
-  ]
+  ],
+  "placement": {
+   "quantity": 50,
+   "biomeArea": "-1",
+   "minDistanceFromSimilar": 512
+  }
  },
  {
   "id": "StoneTower3",
   "biomes": [
    "Plains"
-  ]
+  ],
+  "placement": {
+   "quantity": 50,
+   "biomeArea": "-1",
+   "minDistanceFromSimilar": 512
+  }
  },
  {
   "id": "StoneTowerRuins03",
   "biomes": [
    "BlackForest"
-  ]
+  ],
+  "placement": {
+   "quantity": 80,
+   "minDistanceFromSimilar": 200
+  }
  },
  {
   "id": "StoneTowerRuins04",
   "biomes": [
    "Mountain"
-  ]
+  ],
+  "placement": {
+   "quantity": 50,
+   "minDistanceFromSimilar": 128
+  }
  },
  {
   "id": "StoneTowerRuins05",
   "biomes": [
    "Mountain"
-  ]
+  ],
+  "placement": {
+   "quantity": 50,
+   "minDistanceFromSimilar": 128
+  }
  },
  {
   "id": "StoneTowerRuins05_leet",
   "biomes": [
    "Mountain"
-  ]
+  ],
+  "placement": {
+   "quantity": 10,
+   "minDistanceFromSimilar": 32
+  }
  },
  {
   "id": "StoneTowerRuins07",
   "biomes": [
    "BlackForest"
-  ]
+  ],
+  "placement": {
+   "quantity": 80,
+   "minDistanceFromSimilar": 200
+  }
  },
  {
   "id": "StoneTowerRuins07_sunk",
   "biomes": [
    "BlackForest"
-  ]
+  ],
+  "placement": {
+   "quantity": 10,
+   "minDistanceFromSimilar": 50
+  }
  },
  {
   "id": "StoneTowerRuins08",
   "biomes": [
    "BlackForest"
-  ]
+  ],
+  "placement": {
+   "quantity": 80,
+   "minDistanceFromSimilar": 200
+  }
  },
  {
   "id": "StoneTowerRuins08_sunk",
   "biomes": [
    "BlackForest"
-  ]
+  ],
+  "placement": {
+   "quantity": 10,
+   "minDistanceFromSimilar": 50
+  }
  },
  {
   "id": "StoneTowerRuins09",
   "biomes": [
    "BlackForest"
-  ]
+  ],
+  "placement": {
+   "quantity": 80,
+   "minDistanceFromSimilar": 200
+  }
  },
  {
   "id": "StoneTowerRuins09_sunk",
   "biomes": [
    "BlackForest"
-  ]
+  ],
+  "placement": {
+   "quantity": 10,
+   "minDistanceFromSimilar": 50
+  }
  },
  {
   "id": "StoneTowerRuins10",
   "biomes": [
    "BlackForest"
-  ]
+  ],
+  "placement": {
+   "quantity": 80,
+   "minDistanceFromSimilar": 200
+  }
  },
  {
   "id": "StoneTowerRuins10_sunk",
   "biomes": [
    "BlackForest"
-  ]
+  ],
+  "placement": {
+   "quantity": 10,
+   "minDistanceFromSimilar": 50
+  }
  },
  {
   "id": "SulfurArch",
   "biomes": [
    "AshLands"
-  ]
+  ],
+  "placement": {
+   "quantity": 100,
+   "biomeArea": "Median",
+   "minDistanceFromSimilar": 40
+  }
  },
  {
   "id": "SunkenCrypt4",
   "biomes": [
    "Swamp"
-  ]
+  ],
+  "placement": {
+   "quantity": 175,
+   "prioritized": true,
+   "biomeArea": "Median",
+   "minDistanceFromSimilar": 64
+  }
  },
  {
   "id": "SwampHut1",
   "biomes": [
    "Swamp"
-  ]
+  ],
+  "placement": {
+   "quantity": 50,
+   "minDistanceFromSimilar": 128
+  }
  },
  {
   "id": "SwampHut1_1",
   "biomes": [
    "Swamp"
-  ]
+  ],
+  "placement": {
+   "quantity": 50
+  }
  },
  {
   "id": "SwampHut2",
   "biomes": [
    "Swamp"
-  ]
+  ],
+  "placement": {
+   "quantity": 50,
+   "minDistanceFromSimilar": 128
+  }
  },
  {
   "id": "SwampHut2_1",
   "biomes": [
    "Swamp"
-  ]
+  ],
+  "placement": {
+   "quantity": 50
+  }
  },
  {
   "id": "SwampHut3",
   "biomes": [
    "Swamp"
-  ]
+  ],
+  "placement": {
+   "quantity": 50,
+   "minDistanceFromSimilar": 128
+  }
  },
  {
   "id": "SwampHut3_1",
   "biomes": [
    "Swamp"
-  ]
+  ],
+  "placement": {
+   "quantity": 50
+  }
  },
  {
   "id": "SwampHut4",
   "biomes": [
    "Swamp"
-  ]
+  ],
+  "placement": {
+   "quantity": 50,
+   "minDistanceFromSimilar": 128
+  }
  },
  {
   "id": "SwampHut5",
   "biomes": [
    "Swamp"
-  ]
+  ],
+  "placement": {
+   "quantity": 25,
+   "minDistanceFromSimilar": 128
+  }
  },
  {
   "id": "SwampRuin1",
   "biomes": [
    "Swamp"
-  ]
+  ],
+  "placement": {
+   "quantity": 30,
+   "biomeArea": "6",
+   "minDistanceFromSimilar": 256
+  }
  },
  {
   "id": "SwampRuin2",
   "biomes": [
    "Swamp"
-  ]
+  ],
+  "placement": {
+   "quantity": 30,
+   "biomeArea": "6",
+   "minDistanceFromSimilar": 256
+  }
  },
  {
   "id": "SwampWell1",
   "biomes": [
    "Swamp"
-  ]
+  ],
+  "placement": {
+   "quantity": 25,
+   "minDistanceFromSimilar": 1024
+  }
  },
  {
   "id": "TarPit1",
   "biomes": [
    "Plains"
-  ]
+  ],
+  "placement": {
+   "quantity": 100,
+   "biomeArea": "Median",
+   "minDistanceFromSimilar": 128
+  }
  },
  {
   "id": "TarPit1_1",
   "biomes": [
    "Plains"
-  ]
+  ],
+  "placement": {
+   "quantity": 50,
+   "biomeArea": "Median"
+  }
  },
  {
   "id": "TarPit2",
   "biomes": [
    "Plains"
-  ]
+  ],
+  "placement": {
+   "quantity": 16,
+   "biomeArea": "Median",
+   "minDistanceFromSimilar": 128
+  }
  },
  {
   "id": "TarPit2_1",
   "biomes": [
    "Plains"
-  ]
+  ],
+  "placement": {
+   "quantity": 20,
+   "biomeArea": "Median"
+  }
  },
  {
   "id": "TarPit3",
   "biomes": [
    "Plains"
-  ]
+  ],
+  "placement": {
+   "quantity": 100,
+   "biomeArea": "Median",
+   "minDistanceFromSimilar": 128
+  }
  },
  {
   "id": "TarPit3_1",
   "biomes": [
    "Plains"
-  ]
+  ],
+  "placement": {
+   "quantity": 100,
+   "biomeArea": "Median"
+  }
  },
  {
   "id": "TheHole01",
   "biomes": [
    "DeepNorth"
-  ]
+  ],
+  "placement": {
+   "quantity": 40,
+   "biomeArea": "Median",
+   "minDistanceFromSimilar": 256
+  }
  },
  {
   "id": "TrollCave02",
   "biomes": [
    "BlackForest"
-  ]
+  ],
+  "placement": {
+   "quantity": 200,
+   "biomeArea": "Median",
+   "minDistanceFromSimilar": 256
+  }
  },
  {
   "id": "Vendor_BlackForest",
   "biomes": [
    "BlackForest"
-  ]
+  ],
+  "placement": {
+   "quantity": 10,
+   "unique": true,
+   "prioritized": true,
+   "biomeArea": "Median",
+   "minDistance": 1500,
+   "minDistanceFromSimilar": 512,
+   "iconPlaced": true
+  }
  },
  {
   "id": "VoltureNest",
   "biomes": [
    "AshLands"
-  ]
+  ],
+  "placement": {
+   "quantity": 350,
+   "minDistanceFromSimilar": 100
+  }
  },
  {
   "id": "Waymarker01",
   "biomes": [
    "Mountain"
-  ]
+  ],
+  "placement": {
+   "quantity": 50
+  }
  },
  {
   "id": "Waymarker02",
   "biomes": [
    "Mountain"
-  ]
+  ],
+  "placement": {
+   "quantity": 50
+  }
  },
  {
   "id": "WoodFarm1",
   "biomes": [
    "Meadows"
-  ]
+  ],
+  "placement": {
+   "quantity": 10,
+   "biomeArea": "7",
+   "minDistance": 500,
+   "maxDistance": 2000,
+   "minDistanceFromSimilar": 128
+  }
  },
  {
   "id": "WoodHouse1",
   "biomes": [
    "Meadows"
-  ]
+  ],
+  "placement": {
+   "quantity": 20,
+   "biomeArea": "7"
+  }
  },
  {
   "id": "WoodHouse10",
   "biomes": [
    "Meadows"
-  ]
+  ],
+  "placement": {
+   "quantity": 20,
+   "biomeArea": "7"
+  }
  },
  {
   "id": "WoodHouse11",
   "biomes": [
    "Meadows"
-  ]
+  ],
+  "placement": {
+   "quantity": 20,
+   "biomeArea": "7"
+  }
  },
  {
   "id": "WoodHouse12",
   "biomes": [
    "Meadows"
-  ]
+  ],
+  "placement": {
+   "quantity": 20,
+   "biomeArea": "7"
+  }
  },
  {
   "id": "WoodHouse13",
   "biomes": [
    "Meadows"
-  ]
+  ],
+  "placement": {
+   "quantity": 20,
+   "biomeArea": "7"
+  }
  },
  {
   "id": "WoodHouse2",
   "biomes": [
    "Meadows"
-  ]
+  ],
+  "placement": {
+   "quantity": 20,
+   "biomeArea": "7"
+  }
  },
  {
   "id": "WoodHouse3",
   "biomes": [
    "Meadows"
-  ]
+  ],
+  "placement": {
+   "quantity": 20,
+   "biomeArea": "7"
+  }
  },
  {
   "id": "WoodHouse4",
   "biomes": [
    "Meadows"
-  ]
+  ],
+  "placement": {
+   "quantity": 20,
+   "biomeArea": "7"
+  }
  },
  {
   "id": "WoodHouse5",
   "biomes": [
    "Meadows"
-  ]
+  ],
+  "placement": {
+   "quantity": 20,
+   "biomeArea": "7"
+  }
  },
  {
   "id": "WoodHouse6",
   "biomes": [
    "Meadows"
-  ]
+  ],
+  "placement": {
+   "quantity": 20,
+   "biomeArea": "7"
+  }
  },
  {
   "id": "WoodHouse7",
   "biomes": [
    "Meadows"
-  ]
+  ],
+  "placement": {
+   "quantity": 20,
+   "biomeArea": "7"
+  }
  },
  {
   "id": "WoodHouse8",
   "biomes": [
    "Meadows"
-  ]
+  ],
+  "placement": {
+   "quantity": 20,
+   "biomeArea": "7"
+  }
  },
  {
   "id": "WoodHouse9",
   "biomes": [
    "Meadows"
-  ]
+  ],
+  "placement": {
+   "quantity": 20,
+   "biomeArea": "7"
+  }
  },
  {
   "id": "WoodVillage1",
   "biomes": [
    "Meadows"
-  ]
+  ],
+  "placement": {
+   "quantity": 15,
+   "biomeArea": "7",
+   "minDistance": 2000,
+   "maxDistance": 10000,
+   "minDistanceFromSimilar": 256
+  }
  },
  {
   "id": "WoodVillage2",
   "biomes": [
    "Meadows"
-  ]
+  ],
+  "placement": {
+   "quantity": 15,
+   "biomeArea": "7",
+   "minDistance": 2000,
+   "maxDistance": 10000,
+   "minDistanceFromSimilar": 256
+  }
  }
 ]

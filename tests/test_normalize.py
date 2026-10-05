@@ -483,6 +483,13 @@ class Entities(FixtureCase):
         self.assertEqual(t["sells"], [{"item": "Charm", "stack": 2, "price": 50, "requiredKey": "defeated_chief"}])
         self.assertEqual(t["locations"], [{"location": "Market", "biomes": ["Meadows"]}])
 
+    def test_location_placement(self):
+        loc = {x["id"]: x for x in N.locations()}
+        p = loc["Market"]["placement"]
+        self.assertEqual((p["quantity"], p["unique"], p["biomeArea"], p["minDistance"], p["maxDistance"]),
+                         (5, True, "Median", 1000, 4000))
+        self.assertIsNone(loc["Camp"]["placement"]["biomeArea"])  # Everything: no restriction
+
     def test_offspring(self):
         self.assertEqual([s["parent"] for s in self.spawns("offspring")], ["Raider", "Raider_Ranged", "Raider_sleeping"])
         self.assertEqual(self.spawns("egg"), [{"creature": "Pup", "source": "egg", "item": "Egg"}])

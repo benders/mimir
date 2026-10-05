@@ -109,7 +109,8 @@ catch drops; fish spawn as `creature` ids in `spawns` but have no `creatures` en
 `kind: trader` = Haldor / Hildir / BogWitch (id = name in the location prefab): `sells` [{item, stack, price in Coins,
 `requiredKey` global key}], `takes` [{item, setsKey}] (quest hand-ins: Hildir's chests set `Hildir1`..3),
 `locations` [{location, biomes}]; a source that `startsEvent` starts a persistent event when destroyed (Fimbulvinter orb)),
-`status_effects`, `locations` (every enabled world location with the `biomes` it is placed in), `raids` (RandEventSystem:
+`status_effects`, `locations` (every enabled world location with the `biomes` it is placed in and its `placement`:
+quantity, unique, prioritized, biomeArea, min/maxDistance from the centre, minDistanceFromSimilar, iconPlaced), `raids` (RandEventSystem:
 `intervalMin` / `chance` of the raid roll, and per enabled random event `id`, start/end `message`, `biomes`, `duration`,
 `nearBaseOnly`, `requiredGlobalKeys` / `notRequiredGlobalKeys`, and `player` {knownItems, notKnownItems, keysAny, keysAll,
 notKeys}: the conditions the player-based raids world modifier uses instead; what spawns is in `spawns`). Each `spawns` entry has a `source`: `world` (SpawnSystem; also the enabled alt biomes' spawns, `altBiome` = the patch name),
@@ -156,7 +157,9 @@ The site shows DPS per quality (`mechanics.dps`, leaving out damage types most c
 and lists every timed attack on the `weapons` mechanics page, by category (skill and hands, `build-site.WEAPON_CATEGORIES`),
 lowest DPS first. The site also builds a page per biome (`biomes/`: creatures by home biome, raids, gathered resources,
 fish, locations; biome names everywhere link to it) and per creature faction (`factions/`, hostility from
-`mechanics.is_enemy`, a copy of BaseAI.IsEnemy's faction switch); raids have the `raids` mechanics page.
+`mechanics.is_enemy`, a copy of BaseAI.IsEnemy's faction switch); raids have the `raids` mechanics page. Each trader gets a page (`traders/`: one hand-written sentence on its goods in
+`build-site.TRADER_GOODS`, camp placement from `locations` placement, everything sold by unlock stage), linked from
+"Sold by" rows and its biome's page.
 Items keep only the stat fields their type uses: `armor*` for helmet/chest/legs/shoulder (shields' armor is ignored by the
 game), block/parry fields for weapons and shields, attack fields (`skill`, `damages`, `attack`...) for weapons, ammo and
 Catapult ammo (shields keep `skill`); `internal` items keep everything. Blockers have `blockAdrenaline` / `parryAdrenaline`,
