@@ -20,7 +20,7 @@ freezes the animation for 0.15 s. Skills and status effects don't change attack 
 - each hit rolls × [n − 0.15, n + 0.15], clamped to [0, 1], n = 0.4 + 0.6 × skill / 100 (× 0.85–1 at skill 100)
 
 The tables group weapons by category, with the skill each trains, lowest primary DPS first; a weapon's secondary
-attack is in the same row. They use max quality, a skill roll of 1 (every hit connects at full damage) and the sum of the weapon's damage
+attack is in the same row. They use quality 1 (not upgraded; each item page has DPS per quality), a skill roll of 1 (every hit connects at full damage) and the sum of the weapon's damage
 types, leaving out any type more than half of all creatures are immune to or ignore: chop and pickaxe, and spirit,
 which is marked *. Staffs that fire in bursts or beams and thrown spears (the
 spear has to be picked up again) aren't listed. Nor is the Butcher Knife, which only hits tamed creatures.

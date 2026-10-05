@@ -1755,16 +1755,14 @@ def category_heading(title: str, skill: str, stage: str = "") -> str:
 
 def block_weapons() -> str:
     """Every player weapon with a known attack cycle, by category, lowest primary DPS first: hits, time, combo damage
-    and DPS for the primary and secondary attack at max quality (tooltip damage, skill roll 1)."""
+    and DPS for the primary and secondary attack at quality 1, not upgraded (tooltip damage, skill roll 1)."""
     weapons = [x for x in ITEMS.values() if x["type"] in WEAPONS and has_page("item", x["id"]) and not x.get("tamedOnly")
                and any((a or {}).get("cycle") for a in (x.get("attack"), x.get("secondaryAttack")))]
     out = ""
     for title, skill, items in weapon_groups(weapons):
         rows = []
         for i in items:
-            q = i.get("maxQuality", 1)
-            dmg = {k: i.get("damages", {}).get(k, 0) + (q - 1) * i.get("damagesPerLevel", {}).get(k, 0)
-                   for k in mechanics.DAMAGE_TYPES}
+            dmg = {k: i.get("damages", {}).get(k, 0) for k in mechanics.DAMAGE_TYPES}  # quality 1, not upgraded
             hit, mark = mechanics.hit_damage(dmg, IGNORED), "*" if dps_skipped(i) else ""
             cells, best = [], []
             for a in (i.get("attack"), i.get("secondaryAttack")):
