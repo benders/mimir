@@ -1753,7 +1753,7 @@ def category_heading(title: str, skill: str) -> str:
 
 
 def block_weapons() -> str:
-    """Every player weapon with a known attack cycle, by category, best primary DPS first: hits, time, combo damage
+    """Every player weapon with a known attack cycle, by category, lowest primary DPS first: hits, time, combo damage
     and DPS for the primary and secondary attack at max quality (tooltip damage, skill roll 1)."""
     weapons = [x for x in ITEMS.values() if x["type"] in WEAPONS and has_page("item", x["id"]) and not x.get("tamedOnly")
                and any((a or {}).get("cycle") for a in (x.get("attack"), x.get("secondaryAttack")))]
@@ -1773,7 +1773,7 @@ def block_weapons() -> str:
                           [num(sum(c["hits"] for c in a["chain"])), num(a["cycle"]),
                            num(round(mechanics.combo_damage(hit, a), 1)) + mark, f"<b>{num(round(d, 1))}{mark}</b>"])
             rows.append((best, name_of("item", i["id"]).lower(), [link("item", i["id"])] + cells))
-        rows.sort(key=lambda r: ([-x for x in r[0]], r[1]))
+        rows.sort(key=lambda r: (r[0], r[1]))  # lowest DPS first
         two = any(r[0][1] >= 0 for r in rows)  # any secondary attack: its columns
         top = ('<tr><th rowspan="2">Weapon</th><th colspan="4">Primary</th>'
                + ('<th colspan="4">Secondary</th>' if two else "") + "</tr>")

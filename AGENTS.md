@@ -154,7 +154,7 @@ projectile lands as the weapon). Bows have `draw` (m_drawDurationMin) and crossb
 (`mechanics.attack_cycle`). Looping attacks have none. `tamedOnly` weapons (Butcher Knife) hit only tamed creatures.
 The site shows DPS per quality (`mechanics.dps`, leaving out damage types most creatures are immune to: chop, pickaxe, spirit (footnoted); bows and crossbows only seconds per shot at skill 0 and 100: their DPS depends on the ammo)
 and lists every timed attack on the `weapons` mechanics page, by category (skill and hands, `build-site.WEAPON_CATEGORIES`),
-best DPS first. The site also builds a page per biome (`biomes/`: creatures by home biome, raids, gathered resources,
+lowest DPS first. The site also builds a page per biome (`biomes/`: creatures by home biome, raids, gathered resources,
 fish, locations; biome names everywhere link to it) and per creature faction (`factions/`, hostility from
 `mechanics.is_enemy`, a copy of BaseAI.IsEnemy's faction switch); raids have the `raids` mechanics page.
 Items keep only the stat fields their type uses: `armor*` for helmet/chest/legs/shoulder (shields' armor is ignored by the
