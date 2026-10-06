@@ -734,8 +734,8 @@ def recipe_block(r: dict, max_q: int) -> str:
     elif rows:
         out += f'<p class="cost">{rows[0][2]}</p>'
     if upgrader:
-        out += ('<p class=note>At the Upgrade Station: '
-                + " ".join(link("item", x["item"], x.get("amount", 1)) for x in upgrader) + "</p>")
+        out += (f'<p class=note>At the {mech_link("forge-of-potential", "Forge of Potential")}: '
+                + " ".join(link("item", x["item"], x.get("amount", 1)) for x in upgrader) + " per attempt</p>")
     return out
 
 
@@ -1051,6 +1051,15 @@ def item_page(i: dict) -> None:
         eff.append(("How it fills", mech_link("adrenaline", "Adrenaline")))
     body += section("Effects", kv(eff))
 
+    if up := i.get("upgrader"):
+        o = mechanics.refine_odds(up["chance"], up["breakChance"])
+        body += section("Forge of Potential", kv([
+            ("Upgrade chance", pct(o["success"])), ("Breaks the item", pct(o["break"]) if o["break"] else None),
+            ("Lowers its level", pct(o["reduce"]) if o["reduce"] else None),
+            ("Materials back when broken", pct(up["breakReturn"]) if o["break"] else None)])
+            + f'<p class="note">Spent one per attempt to raise an item\'s quality: '
+              f'{mech_link("forge-of-potential", "Forge of Potential")}.</p>')
+
     recipes = "".join(recipe_block(r, i.get("maxQuality", 1)) for r in crafted_by[i["id"]])
     body += section("Crafting", recipes)
     body += section("Requirements", requirements_tree("item", i["id"]))
@@ -1361,8 +1370,10 @@ def biome_page(b: str) -> None:
                                        if any(b in x["biomes"] for x in t.get("locations", []))))
     fish = [x["id"] for x in SOURCES.values() if x["kind"] == "fishing" and b in x.get("biomes", [])]
     body += staged_section("Fish", [("item", f, link("item", f)) for f in sorted(fish, key=lambda f: name_of("item", f).lower())])
-    locs = sorted({pretty_id(x["id"]) for x in LOCATIONS if b in x.get("biomes", [])}, key=str.lower)
-    body += section("Locations", f'<p>{esc(", ".join(locs))}</p>' if locs else "")
+    locs = sorted({(LOCATION_PAGES.get(x["id"], ("", pretty_id(x["id"])))[1], x["id"])
+                   for x in LOCATIONS if b in x.get("biomes", [])}, key=lambda x: x[0].lower())
+    locs = [mech_link(LOCATION_PAGES[i][0], n) if i in LOCATION_PAGES else esc(n) for n, i in locs]
+    body += section("Locations", f'<p>{", ".join(locs)}</p>' if locs else "")
     page(f"biomes/{quote(b)}.html", BIOMES[b], body, '<a href="biomes/index.html">Biomes</a>')
 
 
@@ -1461,27 +1472,30 @@ def trader_link(s: dict) -> str:
     return f'<a href="{trader_href(s)}">{esc(source_name(s))}</a>'
 
 
+def placement_text(loc_id: str, biomes: list[str], what: str) -> str:
+    """How world generation places a location (locations.json placement, ZoneSystem.GenerateLocationsTimeSliced)."""
+    loc = next((l for l in LOCATIONS if l["id"] == loc_id), {})
+    pl = loc.get("placement") or {}
+    where = " or ".join(biome_link(b) for b in biomes)
+    if pl.get("biomeArea") == "Median":
+        where += ", away from the biome's edges"
+    lo, hi = pl.get("minDistance"), pl.get("maxDistance")
+    ring = (f"{num(lo)}–{num(hi)} m" if lo and hi else f"at least {num(lo)} m" if lo else f"up to {num(hi)} m"
+            if hi else "")
+    text = (f"World generation picks up to {num(pl.get('quantity', 1))} spots for {what} in the {where}"
+            + (f", {ring} from the world centre" if ring else "")
+            + (f" and at least {num(pl['minDistanceFromSimilar'])} m apart" if pl.get("minDistanceFromSimilar") else "")
+            + ".")
+    if pl.get("unique"):
+        text += " The first one to be generated, when a player comes near, removes the rest: one per world."
+    if pl.get("iconPlaced"):
+        text += " It shows on the map once generated."
+    return f"<p>{text}</p>"
+
+
 def trader_spawning(s: dict) -> str:
-    """How the trader's camp is placed (locations.json placement, ZoneSystem.GenerateLocationsTimeSliced)."""
-    out = []
-    for x in s.get("locations", []):
-        loc = next((l for l in LOCATIONS if l["id"] == x["location"]), {})
-        pl = loc.get("placement") or {}
-        where = " or ".join(biome_link(b) for b in x["biomes"])
-        if pl.get("biomeArea") == "Median":
-            where += ", away from the biome's edges"
-        lo, hi = pl.get("minDistance"), pl.get("maxDistance")
-        ring = (f"{num(lo)}–{num(hi)} m" if lo and hi else f"at least {num(lo)} m" if lo else f"up to {num(hi)} m"
-                if hi else "")
-        text = (f"World generation picks up to {num(pl.get('quantity', 1))} spots for the camp in the {where}"
-                + (f", {ring} from the world centre" if ring else "")
-                + (f" and at least {num(pl['minDistanceFromSimilar'])} m apart" if pl.get("minDistanceFromSimilar") else "")
-                + ".")
-        if pl.get("unique"):
-            text += " The first one to be generated, when a player comes near, removes the rest: one per world."
-        if pl.get("iconPlaced"):
-            text += " It shows on the map once generated."
-        out.append(f"<p>{text}</p>")
+    """How the trader's camp is placed."""
+    out = [placement_text(x["location"], x["biomes"], "the camp") for x in s.get("locations", [])]
     return "".join(out) + ('<p class="note">From ZoneSystem.GenerateLocationsTimeSliced and '
                            'ZoneSystem.RemoveUnplacedLocations.</p>' if out else "")
 
@@ -1992,6 +2006,70 @@ def block_death_penalty() -> str:
     return table(["Deaths", "From 100", "From 50"], rows, "num")
 
 
+# --- Forge of Potential ----------------------------------------------------------------------
+
+FORGE_LOCATION = "AncientUpgradeStation"
+LOCATION_PAGES = {FORGE_LOCATION: ("forge-of-potential", "Forge of Potential")}  # location -> (mechanics page, name)
+IDOLS = sorted((i for i in ITEMS.values() if i.get("upgrader") and has_page("item", i["id"])),
+               key=lambda i: (stage_of("item", i["id"]), i["id"]))
+
+
+def idol_upgrades(idol: str) -> list[str]:
+    """Items whose enabled (or seasonal) recipe takes `idol` as its upgrader resource."""
+    return sorted({r["item"] for r in used_in_recipe[idol] if (r.get("enabled") or r.get("season")) and r.get("item")
+                   and has_page("item", r["item"]) and any(x["item"] == idol and x.get("upgrader") for x in r["resources"])},
+                  key=lambda x: name_of("item", x).lower())
+
+
+def block_forge_placement() -> str:
+    loc = next((l for l in LOCATIONS if l["id"] == FORGE_LOCATION), None)
+    return placement_text(FORGE_LOCATION, loc["biomes"], "the forge") if loc else ""
+
+
+def block_forge_idols() -> str:
+    """Each idol: its odds at the forge and the items it upgrades."""
+    rows = []
+    for i in IDOLS:
+        up = i["upgrader"]
+        o = mechanics.refine_odds(up["chance"], up["breakChance"])
+        ups = idol_upgrades(i["id"])
+        rows.append([link("item", i["id"]), pct(o["success"]), pct(o["break"]), pct(o["reduce"]),
+                     pct(up["breakReturn"]), plural(len(ups), "item")])
+    head = ["Idol", "Success", "Breaks", "Level down", "Materials back", "Upgrades"]
+    if all(r[3] == pct(0) for r in rows):  # no idol can lower a level: leave the column out
+        head, rows = head[:3] + head[4:], [r[:3] + r[4:] for r in rows]
+    return table(head, rows, "num")
+
+
+def block_forge_streak() -> str:
+    """Chance to gain 1..5 levels in a row, per distinct idol success chance."""
+    chances = sorted({i["upgrader"]["chance"] for i in IDOLS})
+    rows = [[f"+{n}"] + [pct(mechanics.refine_streak(c, n)) for c in chances] for n in range(1, 6)]
+    return table(["Levels in a row"] + [f"at {pct(c)}" for c in chances], rows, "num")
+
+
+def block_forge_return_example() -> str:
+    """Materials a broken item gives back, per quality aimed for, for one armor recipe."""
+    rec = next((r for r in RECIPES if r.get("item") == "ArmorBronzeChest"), None)
+    idol = next((x for x in (rec or {}).get("resources", []) if x.get("upgrader")), None)
+    if not rec or not idol or idol["item"] not in ITEMS:
+        return ""
+    frac = ITEMS[idol["item"]]["upgrader"]["breakReturn"]
+    res = [x for x in rec["resources"] if not x.get("upgrader") and not x.get("noRecover")]
+    rows = [[str(q), num(mechanics.refine_time(q))] +
+            [num(mechanics.refine_return(x.get("amount", 0), x.get("perLevel", 0), q, frac)) for x in res]
+            for q in range(2, ITEMS[rec["item"]].get("maxQuality", 1) + 3)]
+    return (f'<p>Example, {link("item", rec["item"])} with {link("item", idol["item"])}: seconds per attempt and '
+            f'what breaking it gives back, by the quality aimed for.</p>'
+            + table(["Quality", "Seconds"] + [esc(name_of("item", x["item"])) for x in res], rows, "num"))
+
+
+def block_forge_items() -> str:
+    """Per idol, the items it upgrades."""
+    return "".join(f'<h3{stage_attr(stage_of("item", i["id"]))}>{link("item", i["id"])}</h3>' + reflist(link("item", x) for x in idol_upgrades(i["id"]))
+                   for i in IDOLS if idol_upgrades(i["id"]))
+
+
 def mech_blocks() -> dict:
     return {"shields": block_shields, "resistant-creatures": block_resist_creatures, "resistant-gear": block_resist_gear,
             "star-spawns": block_star_spawns, "star-odds": block_star_odds, "guaranteed-stars": block_guaranteed_stars,
@@ -2005,6 +2083,9 @@ def mech_blocks() -> dict:
             "foods": block_foods, "comfort-pieces": block_comfort_pieces, "max-comfort": block_max_comfort,
             "skills": block_skills, "death-penalty": block_death_penalty, "raids": block_raids,
             "raid-timing": block_raid_timing, "raid-base-pieces": block_raid_base_pieces,
+            "forge-placement": block_forge_placement, "forge-idols": block_forge_idols,
+            "forge-streak": block_forge_streak, "forge-return-example": block_forge_return_example,
+            "forge-items": block_forge_items,
             "adrenaline-chart": lambda: mechanics.adrenaline_chart(PLAYER["adrenaline"]),
             "chart": lambda name: mechanics.CHARTS[name]()}
 

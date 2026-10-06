@@ -489,6 +489,14 @@ class Entities(FixtureCase):
         self.assertEqual((p["quantity"], p["unique"], p["biomeArea"], p["minDistance"], p["maxDistance"]),
                          (5, True, "Median", 1000, 4000))
         self.assertIsNone(loc["Camp"]["placement"]["biomeArea"])  # Everything: no restriction
+        p = loc["Lair"]["placement"]
+        self.assertEqual((p["minDistance"], p["maxDistance"]), (600, 3000))
+
+    def test_upgrader_items(self):
+        items = [N.item(x, N.PREFABS[x]) for x in ("Fish", "Wood")]
+        N.upgrader_items(items, [N.recipe(r) for r in N.load("recipes.json")])
+        self.assertEqual(items[0]["upgrader"], {"chance": 0.5, "breakChance": 1, "breakReturn": 0.25})
+        self.assertNotIn("upgrader", items[1])  # a normal cost, not an upgrader resource
 
     def test_offspring(self):
         self.assertEqual([s["parent"] for s in self.spawns("offspring")], ["Raider", "Raider_Ranged", "Raider_sleeping"])

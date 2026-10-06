@@ -193,6 +193,11 @@
   "weight": 1.0,
   "stack": 1,
   "maxQuality": 1,
+  "upgrader": {
+   "chance": 0.5,
+   "breakChance": 1,
+   "breakReturn": 0.25
+  },
   "stage": "Meadows",
   "via": {
    "how": "fish",

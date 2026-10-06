@@ -200,7 +200,8 @@ def prefabs():
         item("SP_Helmet", name="$item_helmet", itemType="Helmet", icons=[S("Helmet")]),  # unused copy
         item("SP_Sword", name="Other Sword", itemType="OneHandedWeapon", icons=[S("Sword")],
              attack=attack(attackAnimation="beam", attackType="Projectile")),  # renamed: not a copy
-        with_components(item("Fish", name="$item_fish", icons=[S("Fish")]),  # caught with Wood in the Ocean
+        with_components(item("Fish", name="$item_fish", icons=[S("Fish")], upgradeChance=0.5, breakChance=1,
+                             breakReturnIngreientsAmount=0.25),  # also the Sword's upgrader resource  # caught with Wood in the Ocean
                         comp("Fish", m(name="$item_fish", baits=[m(bait=R("Wood"), chance=1)],
                                        extraDrops=drop_table(("Pearl", 1, 2, 1))))),
         item("Pearl", name="$item_pearl", icons=[S("Pearl")]),  # only from fishing
@@ -407,7 +408,8 @@ def write_dump(raw: Path) -> Path:
         "m_locations": [
         zone_location("Camp", "Swamp"),
         zone_location("Camp", "Plains"),  # same prefab placed in a second biome
-        zone_location("Lair", "Mountain"),
+        zone_location("Lair", "Mountain", minDistance=200, minDistanceFromCenter=600,
+                      maxDistanceFromCenter=3000),  # both centre-distance pairs: the tighter wins
         zone_location("Ruin", "Meadows", enable=False),
         zone_location("Market", "Meadows", biomeArea="Median", quantity=5, unique=True, prioritized=True,
                       minDistance=1000, maxDistance=4000, minDistanceFromSimilar=500, iconPlaced=True),  # a trader's camp

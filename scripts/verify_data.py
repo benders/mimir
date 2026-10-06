@@ -309,6 +309,13 @@ def main() -> int:
     check({"piece_workbench", "bed", "fire_pit", "portal_wood"} <= base and len(base) < 100,
           f"pieces: base pieces for raids ({len(base)}) include workbench, bed, campfire, portal")
     check(all(c.get("faction") for c in creatures.values()), "creatures: every creature has a faction")
+    forge = next((x for x in load("locations.json") if x["id"] == "AncientUpgradeStation"), {})
+    check(forge.get("biomes") == ["Mountain"] and forge["placement"].get("unique")
+          and forge["placement"].get("minDistance", 0) >= 500,
+          "locations: Forge of Potential is unique, in the Mountain, at least 500 m from the centre")
+    idols = [f"Upgrader{n}{k}" for n in range(8) for k in ("Weapon", "Armor")]
+    check(all(items.get(i, {}).get("upgrader") and not items[i].get("unobtainable") for i in idols),
+          "items: the 16 Battle/Protection Idols are reachable upgrader resources")
 
     print()
     if failures:

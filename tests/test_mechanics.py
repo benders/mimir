@@ -259,6 +259,20 @@ class Charts(unittest.TestCase):
     def test_world_piece_drop(self):
         self.assertEqual([M.world_piece_drop(n) for n in (1, 2, 3, 10)], [1, 1, 1, 3])
 
+    def test_refine(self):
+        # InventoryGui.DoCrafting: success r <= chance, else break when breakChance >= 1 - r, else level down
+        o = M.refine_odds(0.65, 1)
+        self.assertEqual((o["success"], o["reduce"]), (0.65, 0))
+        self.assertAlmostEqual(o["break"], 0.35)
+        o = M.refine_odds(0.65, 0.1)
+        self.assertAlmostEqual(o["break"], 0.1)
+        self.assertAlmostEqual(o["reduce"], 0.25)
+        # ⌈(GetAmount(1) + GetAmount(level - 1)) × fraction⌉: Bronze 5 + 3/level, aiming for quality 5
+        self.assertEqual(M.refine_return(5, 3, 5, 0.35), 6)    # (5 + 12) × 0.35 = 5.95
+        self.assertEqual(M.refine_return(5, 3, 2, 0.35), 4)    # (5 + 5) × 0.35 = 3.5
+        self.assertEqual(M.refine_time(5), 13)
+        self.assertAlmostEqual(M.refine_streak(0.5, 3), 0.125)
+
 
 if __name__ == "__main__":
     unittest.main()

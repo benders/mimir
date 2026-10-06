@@ -46170,6 +46170,11 @@
   "weight": 0.5,
   "stack": 20,
   "maxQuality": 1,
+  "upgrader": {
+   "chance": 0.65,
+   "breakChance": 1,
+   "breakReturn": 0.35
+  },
   "stage": "Meadows",
   "via": {
    "how": "source",
@@ -46185,6 +46190,11 @@
   "weight": 0.5,
   "stack": 20,
   "maxQuality": 1,
+  "upgrader": {
+   "chance": 0.65,
+   "breakChance": 1,
+   "breakReturn": 0.35
+  },
   "stage": "Meadows",
   "via": {
    "how": "source",
@@ -46200,6 +46210,11 @@
   "weight": 0.5,
   "stack": 20,
   "maxQuality": 1,
+  "upgrader": {
+   "chance": 0.65,
+   "breakChance": 1,
+   "breakReturn": 0.35
+  },
   "stage": "Meadows",
   "via": {
    "how": "source",
@@ -46215,6 +46230,11 @@
   "weight": 0.5,
   "stack": 20,
   "maxQuality": 1,
+  "upgrader": {
+   "chance": 0.65,
+   "breakChance": 1,
+   "breakReturn": 0.35
+  },
   "stage": "Meadows",
   "via": {
    "how": "source",
@@ -46230,6 +46250,11 @@
   "weight": 0.5,
   "stack": 20,
   "maxQuality": 1,
+  "upgrader": {
+   "chance": 0.65,
+   "breakChance": 1,
+   "breakReturn": 0.35
+  },
   "stage": "BlackForest",
   "via": {
    "how": "source",
@@ -46245,6 +46270,11 @@
   "weight": 0.5,
   "stack": 20,
   "maxQuality": 1,
+  "upgrader": {
+   "chance": 0.65,
+   "breakChance": 1,
+   "breakReturn": 0.35
+  },
   "stage": "BlackForest",
   "via": {
    "how": "source",
@@ -46260,6 +46290,11 @@
   "weight": 0.5,
   "stack": 20,
   "maxQuality": 1,
+  "upgrader": {
+   "chance": 0.65,
+   "breakChance": 1,
+   "breakReturn": 0.35
+  },
   "stage": "Swamp",
   "via": {
    "how": "source",
@@ -46275,6 +46310,11 @@
   "weight": 0.5,
   "stack": 20,
   "maxQuality": 1,
+  "upgrader": {
+   "chance": 0.65,
+   "breakChance": 1,
+   "breakReturn": 0.35
+  },
   "stage": "Swamp",
   "via": {
    "how": "source",
@@ -46290,6 +46330,11 @@
   "weight": 0.5,
   "stack": 20,
   "maxQuality": 1,
+  "upgrader": {
+   "chance": 0.65,
+   "breakChance": 1,
+   "breakReturn": 0.35
+  },
   "stage": "Mountain",
   "via": {
    "how": "source",
@@ -46305,6 +46350,11 @@
   "weight": 0.5,
   "stack": 20,
   "maxQuality": 1,
+  "upgrader": {
+   "chance": 0.65,
+   "breakChance": 1,
+   "breakReturn": 0.35
+  },
   "stage": "Mountain",
   "via": {
    "how": "source",
@@ -46320,6 +46370,11 @@
   "weight": 0.5,
   "stack": 20,
   "maxQuality": 1,
+  "upgrader": {
+   "chance": 0.65,
+   "breakChance": 1,
+   "breakReturn": 0.35
+  },
   "stage": "Plains",
   "via": {
    "how": "source",
@@ -46335,6 +46390,11 @@
   "weight": 0.5,
   "stack": 20,
   "maxQuality": 1,
+  "upgrader": {
+   "chance": 0.65,
+   "breakChance": 1,
+   "breakReturn": 0.35
+  },
   "stage": "Plains",
   "via": {
    "how": "source",
@@ -46350,6 +46410,11 @@
   "weight": 0.5,
   "stack": 20,
   "maxQuality": 1,
+  "upgrader": {
+   "chance": 0.65,
+   "breakChance": 1,
+   "breakReturn": 0.35
+  },
   "stage": "Mistlands",
   "via": {
    "how": "source",
@@ -46365,6 +46430,11 @@
   "weight": 0.5,
   "stack": 20,
   "maxQuality": 1,
+  "upgrader": {
+   "chance": 0.65,
+   "breakChance": 1,
+   "breakReturn": 0.35
+  },
   "stage": "Mistlands",
   "via": {
    "how": "source",
@@ -46380,6 +46450,11 @@
   "weight": 0.5,
   "stack": 20,
   "maxQuality": 1,
+  "upgrader": {
+   "chance": 0.65,
+   "breakChance": 1,
+   "breakReturn": 0.35
+  },
   "stage": "DeepNorth",
   "via": {
    "how": "source",
@@ -46395,6 +46470,11 @@
   "weight": 0.5,
   "stack": 20,
   "maxQuality": 1,
+  "upgrader": {
+   "chance": 0.65,
+   "breakChance": 1,
+   "breakReturn": 0.35
+  },
   "stage": "DeepNorth",
   "via": {
    "how": "source",

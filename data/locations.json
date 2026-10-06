@@ -39,7 +39,7 @@
    "unique": true,
    "prioritized": true,
    "biomeArea": "Median",
-   "minDistance": 200,
+   "minDistance": 500,
    "minDistanceFromSimilar": 400,
    "iconPlaced": true
   }
@@ -419,6 +419,8 @@
   ],
   "placement": {
    "quantity": 50,
+   "minDistance": 8000,
+   "maxDistance": 9750,
    "minDistanceFromSimilar": 64
   }
  },
@@ -429,6 +431,8 @@
   ],
   "placement": {
    "quantity": 50,
+   "minDistance": 8000,
+   "maxDistance": 9750,
    "minDistanceFromSimilar": 64
   }
  },
@@ -439,6 +443,8 @@
   ],
   "placement": {
    "quantity": 50,
+   "minDistance": 8000,
+   "maxDistance": 9750,
    "minDistanceFromSimilar": 64
   }
  },

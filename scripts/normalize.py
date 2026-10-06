@@ -363,6 +363,18 @@ def prune_item_fields(items: list[dict]) -> None:
             i.pop(k, None)
 
 
+def upgrader_items(items: list[dict], recipes: list[dict]) -> None:
+    """Items a recipe asks for as an upgrader resource (the idols, only at a CraftingStation with m_upgrader) get
+    `upgrader` {chance, breakChance, breakReturn} (InventoryGui.DoCrafting): an attempt succeeds when a roll in
+    [0, 1) is <= chance, else breaks the item when breakChance >= 1 - roll, returning breakReturn of its materials."""
+    used = {r["item"] for rec in recipes for r in rec["resources"] if r.get("upgrader")}
+    for i in items:
+        if i["id"] in used:
+            s = comp(PREFABS[i["id"]], "ItemDrop")["m_itemData"]["m_shared"]
+            i["upgrader"] = {"chance": s.get("m_upgradeChance", 0.65), "breakChance": s.get("m_breakChance", 0.1),
+                             "breakReturn": s.get("m_breakReturnIngreientsAmount", 0.5)}
+
+
 def item_type(name: str) -> str | None:
     drop = comp(PREFABS[name], "ItemDrop") if name in PREFABS else None
     return drop["m_itemData"]["m_shared"]["m_itemType"] if drop else None
@@ -1169,10 +1181,14 @@ def location_placement(z: dict) -> dict:
     """How world generation places a ZoneSystem location (ZoneSystem.GenerateLocationsTimeSliced): up to `quantity`
     in its biome's `biomeArea`, `minDistance`..`maxDistance` from the world centre (0 = no limit), at least
     `minDistanceFromSimilar` apart; `prioritized` ones go first with more attempts; `unique`: the first one a player's
-    zone actually spawns removes the others (RemoveUnplacedLocations); `iconPlaced`: on the map once spawned."""
+    zone actually spawns removes the others (RemoveUnplacedLocations); `iconPlaced`: on the map once spawned.
+    Two pairs of fields limit the distance from the centre (m_minDistance/m_maxDistance and
+    m_minDistanceFromCenter/m_maxDistanceFromCenter, both checked): the distances are the tighter of each."""
+    lo = max(z.get("m_minDistance") or 0, z.get("m_minDistanceFromCenter") or 0)
+    hi = min([d for d in (z.get("m_maxDistance"), z.get("m_maxDistanceFromCenter")) if d] or [0])
     return {"quantity": z.get("m_quantity"), "unique": z.get("m_unique"), "prioritized": z.get("m_prioritized"),
             "biomeArea": z.get("m_biomeArea") if z.get("m_biomeArea") != "Everything" else None,
-            "minDistance": z.get("m_minDistance"), "maxDistance": z.get("m_maxDistance"),
+            "minDistance": lo, "maxDistance": hi,
             "minDistanceFromSimilar": z.get("m_minDistanceFromSimilar"),
             "iconPlaced": z.get("m_iconPlaced"), "iconAlways": z.get("m_iconAlways")}
 
@@ -1583,6 +1599,7 @@ def main(argv: list[str]) -> int:
     recipes = [recipe(r) for r in load("recipes.json")]
     seasons(pieces, recipes)
     mark_enemy_only(items, creatures, recipes, procs, sources, pieces)
+    upgrader_items(items, recipes)
     guardian_powers(items)
     location_list = locations()
     mark_stages(items, creatures, pieces, recipes, procs, sources, spawn_list, location_list)

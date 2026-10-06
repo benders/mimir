@@ -634,6 +634,34 @@ CHARTS = {"armor": armor_chart, "block": block_chart, "stars": stars_chart, "sta
           "pseudo": pseudo_chart, "upgrade": upgrade_chart, "food": food_chart, "skills": skills_chart}
 
 
+FORGE_DURATION = 8  # InventoryGui.m_upgraderDuration (code default; the GUI isn't in the dump)
+FORGE_DURATION_PER_LEVEL = 1  # InventoryGui.m_upgraderDurationPerLevel
+
+
+def refine_odds(chance: float, break_chance: float) -> dict:
+    """Outcome of one Forge of Potential attempt (InventoryGui.DoCrafting): a roll r in [0, 1) succeeds when
+    r <= chance (+1 level), else breaks the item when break_chance >= 1 - r, else lowers it one level."""
+    brk = max(0.0, 1 - max(chance, 1 - break_chance))
+    return {"success": chance, "break": brk, "reduce": max(0.0, 1 - chance - brk)}
+
+
+def refine_return(amount: int, per_level: int, level: int, fraction: float) -> int:
+    """What a broken item gives back of one recoverable cost resource (InventoryGui.DoCrafting):
+    ⌈(GetAmount(1) + GetAmount(level - 1)) × fraction⌉, level being the quality the attempt aimed for."""
+    cost = lambda q: amount if q <= 1 else math.floor(upgrade_cost_multiplier(q) * per_level)
+    return math.ceil((cost(1) + cost(level - 1)) * fraction)
+
+
+def refine_time(level: int) -> float:
+    """Seconds an attempt at the forge takes to reach `level` (InventoryGui.UpdateRecipe)."""
+    return FORGE_DURATION + level * FORGE_DURATION_PER_LEVEL
+
+
+def refine_streak(chance: float, steps: int) -> float:
+    """Chance to gain `steps` levels in a row when every failure breaks the item."""
+    return chance ** steps
+
+
 def world_piece_drop(amount: int) -> int:
     """What breaking a piece a player didn't place gives of one of its cost items: a third, at least 1
     (Piece.DropResources: Mathf.Max(1, dropCount / 3) unless IsPlacedByPlayer)."""

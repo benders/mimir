@@ -15,7 +15,9 @@
    "Mountain"
   ],
   "placement": {
-   "quantity": 20
+   "quantity": 20,
+   "minDistance": 600,
+   "maxDistance": 3000
   }
  },
  {
