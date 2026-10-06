@@ -957,7 +957,8 @@ def requirements_tree(kind: str, id_: str) -> str:
     def render(k, i, path, role="", amount=None) -> str:
         home = claimed[(k, i)]
         how = how_text(k, i) if home == path else f'see {"above" if home < path else "below"}'
-        label = (f'{link(k, i, amount)}{f" <span class=role>{esc(role)}</span>" if role else ""}'
+        name = f"<b>{esc(name_of(k, i))}</b>" if not path else link(k, i, amount)  # the root is this page
+        label = (f'{name}{f" <span class=role>{esc(role)}</span>" if role else ""}'
                  f'{f" <span class=how>{how}</span>" if how else ""}')
         if home != path:
             return f"<li>{label}</li>"
@@ -969,6 +970,8 @@ def requirements_tree(kind: str, id_: str) -> str:
 
     if not via_of(kind, id_):
         return ""
+    if not children(kind, id_):  # needs nothing: no tree, just how it's got
+        return f'<p>Get it from: {how_text(kind, id_)}</p>' if how_text(kind, id_) else ""
     return (f'<ul class="tree">{render(kind, id_, ())}</ul>'
             f'<p class="note">One way to get it: at each step the earliest stage, making it before finding it. '
             f'{mech_link("progression", "Progression")}.</p>')

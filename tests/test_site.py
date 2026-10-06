@@ -371,14 +371,18 @@ class Site(unittest.TestCase):
     def test_requirements_tree(self):
         sword = (self.out / "items/Sword.html").read_text(encoding="utf-8")
         tree = re.search(r'<h2>Requirements</h2><ul class="tree">(.*?)</ul><p class="note">', sword, re.S).group(1)
-        self.assertRegex(tree, r'^<li><details open><summary><a class="ref" href="items/Sword.html">.*?'
-                               r'<span class=how>crafted</span></summary>')
+        self.assertRegex(tree, r'^<li><details open><summary><b>Test Sword</b> <span class=how>crafted</span></summary>')
+        self.assertNotIn('href="items/Sword.html"', tree)  # the root is this page: not a link
         self.assertRegex(tree, r'href="pieces/Bench.html">.*?<span class=role>station</span>')
         self.assertRegex(tree, r'href="pieces/Anvil.html">.*?<span class=role>station upgrade</span>')  # level 2
         self.assertRegex(tree, r'href="items/Ingot.html">.*?<span class="qty">×4</span>.*?<span class=how>smelting</span>')
         self.assertRegex(tree, r'href="pieces/Bench.html">[^\n]*?</a> <span class=role>station</span> <span class=how>see ')
         wood = re.findall(r'href="items/Wood.html">.*?</a> <span class=how>(\w+)', tree)
         self.assertEqual(wood.count("see"), len(wood) - 1)  # expanded once, where it's shallowest
+        page = (self.out / "items/Wood.html").read_text(encoding="utf-8")
+        req = re.search(r'<h2>Requirements</h2>(.*?)</section>', page, re.S).group(1)
+        self.assertTrue(req.startswith("<p>Get it from: "))  # needs nothing: one line, no self-link
+        self.assertNotIn('class="tree"', req)
 
     def test_stage_filter(self):
         gem = (self.out / "items/Gem.html").read_text(encoding="utf-8")
