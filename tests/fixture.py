@@ -160,7 +160,7 @@ TRANSLATIONS = {
         ("doors", "Doors and Windows"), ("seasonal", "Seasonal Items"))}, "piece_lootchest": "Loot chest", "item_marble": "Marble", "piece_anvil": "Anvil", "piece_kiln": "Kiln",
     "piece_bush": "Twig Bush", "piece_orerock": "Ore Rock", "se_fizz": "Fizzy",
     "enemy_pup": "Pup", "enemy_chief_p2": "Chief Risen", "enemy_imp": "Imp", "enemy_shade": "Shade", "enemy_sprite": "Sprite", "enemy_moth": "Moth", "enemy_singer": "Singer", "item_wand": "Wand", "item_rod": "Summoning Rod", "enemy_chief": "<color=orange>Chief</color>", "item_egg": "Egg", "item_nectar": "Nectar", "item_ichor": "Ichor", "item_dust": "Dust",
-    "item_hat": "Party Hat", "piece_tree": "Winter Tree", "piece_hive": "Hive", "piece_tap": "Tap", "piece_wildhive": "Wild Hive", "event_test": "Something stirs",
+    "item_hat": "Party Hat", "piece_tree": "Winter Tree", "piece_hive": "Hive", "piece_lure": "Lure", "piece_glow": "Glow", "piece_tap": "Tap", "piece_wildhive": "Wild Hive", "event_test": "Something stirs",
 }
 
 
@@ -307,6 +307,12 @@ def prefabs():
                                              dropItems=drop_table()))),  # yields nothing: not a source
         prefab("Stub", comp("Pickable", m(overrideName="$piece_bush", itemPrefab=R("Ore"), amount=1,
                                           respawnTimeMinutes=0, extraDrops=drop_table()))),
+        piece("Lure", comp("WispSpawner", m(spawnInterval=20, spawnChance=0.25, maxSpawned=2, maxSpawnedArea=8,
+                                            onlySpawnAtNight=True, dontSpawnInCover=True, maxCover=0.5,
+                                            wispPrefab=R("Glow"))),
+              name="$piece_lure", icon=S("Hive"), resources=[req("Shard")]),
+        prefab("Glow", comp("Pickable", m(overrideName="$piece_glow", itemPrefab=R("Ore"), amount=1,
+                                          respawnTimeMinutes=0, extraDrops=drop_table()))),  # only from the Lure
         piece("Sapling", comp("Plant", m(growTime=100, grownPrefabs=[R("Stub")])), name="$piece_bush",
               icon=S("Sapling"), resources=[req("Wood")]),
         prefab("Treasure", comp("PickableItem", m(itemPrefab=None, stack=0, randomItemPrefabs=[  # one of these
@@ -379,7 +385,7 @@ def write_dump(raw: Path) -> Path:
     dump("status_effects.json", status_effects())
     dump("status_effect_defaults.json", [{"name": "SE_Stats", "type": "SE_Stats", "fields": SE_DEFAULTS}])
     dump("piece_tables.json", [{"name": "_HammerTable", "type": "PieceTable",
-                                "fields": {"m_pieces": [R("Bench"), R("Anvil"), R("Kiln"), R("Hive"), R("Tap"), R("Tap2"), R("Tree"),
+                                "fields": {"m_pieces": [R("Bench"), R("Anvil"), R("Kiln"), R("Hive"), R("Lure"), R("Tap"), R("Tap2"), R("Tree"),
                                                        R("Sapling")]}}])
     dump("world/seasons.json", [{"name": "Winter", "type": "SeasonalItemGroup", "fields": {
         "_startDate": [1, 12], "_endDate": [6, 1], "Pieces": [R("Tree")],

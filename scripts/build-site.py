@@ -196,6 +196,13 @@ def link(kind: str, id_: str, qty=None) -> str:
     return f'<span class="ref">{label}</span>'
 
 
+def lure_text(lu: dict) -> str:
+    """When a lure (WispSpawner) makes another: its conditions and odds."""
+    return (f'{"at night, " if lu.get("night") else ""}under {pct(lu["maxCover"])} cover: a try every 10 s, '
+            f'at least {duration(lu["interval"])} apart, {pct(lu["chance"])} each; up to {num(lu["max"])} within '
+            f'{num(lu["area"])} m')
+
+
 def source_name(s: dict) -> str:
     if s.get("name") and "$" not in s["name"]:
         return clean(s["name"])
@@ -217,8 +224,9 @@ def source_places(s: dict) -> str:
     locs = list(dict.fromkeys(pretty_id(x["location"]) + (" dungeon" if x.get("dungeon") else "")
                               for x in s.get("locations", [])))
     places += [esc(x) for x in locs[:4]] + ([f"{len(locs) - 4} more locations"] if len(locs) > 4 else [])
-    if s.get("placedBy"):
-        places.append("planted or built: " + esc(", ".join(pretty_id(p) for p in s["placedBy"])))
+    if by := [p for p in s.get("placedBy", []) if has_page("piece", p)]:
+        lured = all(PIECES[p].get("lures") for p in by)
+        places.append(("lured by " if lured else "planted or built: ") + ", ".join(link("piece", p) for p in by))
     return ", ".join(places)
 
 
@@ -405,6 +413,10 @@ for p in PIECES.values():
         tool_pieces[t].append(p)
     if p.get("produces"):
         produced_by[p["produces"]["item"]].append(p)
+made_by_piece = defaultdict(list)   # piece -> world sources it plants, breeds or lures (sources' placedBy)
+for s in SOURCES.values():
+    for p in s.get("placedBy", []):
+        made_by_piece[p].append(s)
 _built = {}
 for p in PIECES.values():
     if p.get("tools") and has_page("piece", p["id"]):
@@ -1082,6 +1094,10 @@ def item_page(i: dict) -> None:
         pr = p["produces"]
         where = " near " + esc(pretty_id(pr["connectsTo"]["id"])) if pr.get("connectsTo") else ""
         obtain.append([f'Produced by {link("piece", p["id"])}{where}', "", f'{duration(pr["secPerUnit"])} each, up to ×{num(pr["max"])}'])
+    for s, _ in found_in[i["id"]]:
+        for p in s.get("placedBy", []):
+            if (lu := PIECES[p].get("lures")) and has_page("piece", p):
+                obtain.append([f'Lured by {link("piece", p)}', f'{esc(source_name(s))} (pick)', lure_text(lu)])
     body += section("Produced by", table(["How", "From", "Time"], obtain))
     laid = [s["parent"] for s in spawns_of[i["id"]] if s.get("source") == "offspring"]
     body += section("Laid by", reflist(link("creature", c) for c in laid))
@@ -1603,6 +1619,12 @@ def piece_page(p: dict) -> None:
                     biome_link(b) for b in pr["connectsTo"].get("biomes", [])) + ")"
                  if pr.get("connectsTo") else None)]
         body += section("Produces", kv(rows))
+    made = [[esc(source_name(s)), ", ".join(link("item", x) for x in source_items(s))]
+            for s in sorted(made_by_piece[p["id"]], key=source_name)]
+    if made:
+        lu = p.get("lures")
+        body += section("Lures" if lu else "Grows into", table(["What", "Gives"], made)
+                        + (f'<p class="note">{esc(lure_text(lu)[0].upper())}{lure_text(lu)[1:]}.</p>' if lu else ""))
     body += staged_section("Enables building", [("piece", b["id"], link("piece", b["id"])) for b in built_at[p["id"]]])
     if world:
         body += section("Found in", f'<p>{source_places({"kind": "world", "locations": p["locations"]})}</p>')

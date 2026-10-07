@@ -19117,6 +19117,14 @@
    "poison": "Immune",
    "spirit": "Immune"
   },
+  "lures": {
+   "source": "LuredFaderEmber",
+   "interval": 5,
+   "chance": 0.5,
+   "max": 3,
+   "area": 10,
+   "maxCover": 0.6
+  },
   "playerBase": true,
   "stage": "AshLands",
   "via": {
@@ -19167,6 +19175,14 @@
    "frost": "Resistant",
    "poison": "Immune",
    "spirit": "Immune"
+  },
+  "lures": {
+   "source": "LuredFaderEmber",
+   "interval": 5,
+   "chance": 0.5,
+   "max": 3,
+   "area": 10,
+   "maxCover": 0.6
   },
   "unobtainable": true
  },
@@ -26757,6 +26773,15 @@
    "frost": "Resistant",
    "poison": "Immune",
    "spirit": "Immune"
+  },
+  "lures": {
+   "source": "LuredWisp",
+   "interval": 30,
+   "chance": 0.5,
+   "max": 3,
+   "area": 10,
+   "night": true,
+   "maxCover": 0.6
   },
   "playerBase": true,
   "stage": "Plains",

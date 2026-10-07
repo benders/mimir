@@ -853,12 +853,24 @@ def piece(name: str, p: dict, tools: dict[str, list[str]]) -> dict | None:
         if station else None,
         "extends": ref(ext["m_craftingStation"]) if ext else None,
         "produces": produces(p),
+        "lures": lures(p),
         "contains": drop_table((comp(p, "Container") or {}).get("m_defaultItems")),  # loot chests placed in the world
         # counts toward a base for raids: an EffectArea of type PlayerBase, usually on a child (EffectArea.GetBaseValue)
         "playerBase": any(c["type"] == "EffectArea" and "PlayerBase" in str(c["fields"].get("m_type", "")).split(", ")
                           for c in p["components"]),
         "dlc": pc["m_dlc"],
     }
+
+
+def lures(p: dict) -> dict | None:
+    """A WispSpawner (Wisp Fountain): the `source` it makes (a pickable), tried every 10 s (WispSpawner.Start), at
+    least `interval` s after the last one, with `chance`; only at `night` and under `maxCover` cover, and while fewer
+    than `max` are within `area` m (GetStatus, TrySpawn)."""
+    if not (w := comp(p, "WispSpawner")):
+        return None
+    return {"source": ref(w["m_wispPrefab"]), "interval": w["m_spawnInterval"], "chance": w["m_spawnChance"],
+            "max": w["m_maxSpawned"], "area": w["m_maxSpawnedArea"], "night": w["m_onlySpawnAtNight"],
+            "maxCover": w["m_maxCover"]}  # HaveFreeSpace ignores m_dontSpawnInCover
 
 
 def produces(p: dict) -> dict | None:

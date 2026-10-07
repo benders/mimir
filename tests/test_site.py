@@ -217,7 +217,16 @@ class Site(unittest.TestCase):
         self.assertIn('9 poison <span class="qty">area</span>', ranged)  # the Spit's pool, not the item's 5 poison
         self.assertIn("<td>Spit</td>", ranged)  # internal attacks are named from their ids, not the shared placeholder
         self.assertEqual(ranged.count("<td>Bite</td>"), 1)
-        self.assertIn("<td>Bite</td><td>12 pierce</td>", ranged)  # chop left out: players are immune (#46)
+        self.assertIn("<td>Bite</td><td>12 pierce</td>", ranged)
+        # #47: a lure piece and what it lures link each other
+        lure = (self.out / "pieces/Lure.html").read_text(encoding="utf-8")
+        self.assertIn('<h2>Lures</h2>', lure)
+        self.assertIn('<td>Glow</td><td><a class="ref" href="items/Ore.html"', lure)
+        self.assertIn("At night, under 50% cover: a try every 10 s, at least 20 s apart, 25% each; up to 2 within 8 m", lure)
+        ore = (self.out / "items/Ore.html").read_text(encoding="utf-8")
+        self.assertIn('Lured by <a class="ref" href="pieces/Lure.html"', ore)
+        self.assertIn('lured by <a class="ref" href="pieces/Lure.html"', ore)  # Found in
+        self.assertIn("<h2>Grows into</h2>", (self.out / "pieces/Sapling.html").read_text(encoding="utf-8"))  # chop left out: players are immune (#46)
         self.assertIn("chop and pickaxe are left out", ranged)
         self.assertIn("<h1>Pot Helm (female)</h1>", (self.out / "items/HelmetFem.html").read_text(encoding="utf-8"))
         self.assertIn("<h1>Pot Helm</h1>", (self.out / "items/Helmet.html").read_text(encoding="utf-8"))

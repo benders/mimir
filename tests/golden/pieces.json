@@ -220,6 +220,49 @@
   }
  },
  {
+  "id": "Lure",
+  "name": "Lure",
+  "icon": "Hive",
+  "enabled": true,
+  "category": "Misc",
+  "tools": [
+   "Hammer"
+  ],
+  "resources": [
+   {
+    "item": "Shard",
+    "amount": 1
+   }
+  ],
+  "health": 400,
+  "material": "Wood",
+  "damageModifiers": {
+   "fire": "Weak"
+  },
+  "lures": {
+   "source": "Glow",
+   "interval": 20,
+   "chance": 0.25,
+   "max": 2,
+   "area": 8,
+   "night": true,
+   "maxCover": 0.5
+  },
+  "stage": "Mountain",
+  "via": {
+   "how": "build",
+   "needs": [
+    {
+     "item": "Hammer"
+    },
+    {
+     "item": "Shard",
+     "amount": 1
+    }
+   ]
+  }
+ },
+ {
   "id": "Sapling",
   "name": "Twig Bush",
   "icon": "Sapling",

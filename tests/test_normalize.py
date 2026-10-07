@@ -231,6 +231,7 @@ class Entities(FixtureCase):
         self.assertEqual(sources["Treasure"]["locations"], [{"location": "Lair", "dungeon": False}])
         self.assertNotIn("locations", sources["Gift"])  # disabled, RandomSpawn on itself
         self.assertEqual(sources["Stub"]["placedBy"], ["Sapling"])
+        self.assertEqual(sources["Glow"]["placedBy"], ["Lure"])
         self.assertNotIn("biomes", sources["Stub"])
 
     def test_place_pieces(self):
@@ -391,6 +392,12 @@ class Entities(FixtureCase):
         self.assertEqual(reached(spawn_list + [{"creature": "A", "source": "world"}]), {"A", "B", "C"})  # chained phases
         recipes = [{"item": "Rod", "enabled": True, "resources": []}]
         self.assertEqual(N.reachable(items, creatures, [], recipes, [], [], spawn_list)[1], {"Imp"})
+
+    def test_lures(self):
+        self.assertEqual(N.piece("Lure", N.PREFABS["Lure"], {})["lures"],
+                         {"source": "Glow", "interval": 20, "chance": 0.25, "max": 2, "area": 8, "night": True,
+                          "maxCover": 0.5})
+        self.assertIsNone(N.piece("Hive", N.PREFABS["Hive"], {})["lures"])
 
     def test_produces(self):
         hive = N.piece("Hive", N.PREFABS["Hive"], {})["produces"]

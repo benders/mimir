@@ -34,6 +34,18 @@
   }
  },
  {
+  "id": "Glow",
+  "kind": "pickable",
+  "name": "Glow",
+  "pickable": {
+   "item": "Ore",
+   "amount": 1
+  },
+  "placedBy": [
+   "Lure"
+  ]
+ },
+ {
   "id": "Orb",
   "kind": "destructible",
   "health": 100,

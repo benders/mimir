@@ -30,9 +30,9 @@
   "recipes": 7,
   "creatures": 12,
   "spawns": 24,
-  "pieces": 10,
+  "pieces": 11,
   "processing": 1,
-  "sources": 15,
+  "sources": 16,
   "locations": 4,
   "status_effects": 7
  },

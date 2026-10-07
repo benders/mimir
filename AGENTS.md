@@ -121,7 +121,7 @@ dungeon rooms; the location's biomes), `offspring` (`parent` creature), `egg` (`
 create it, or a death-effect projectile spawns it: a boss's next stage). `summon` and `phase` count as reachable only once their parent or item is.
 Ids are prefab names; references are ids. Empty, zero, false and "Normal" values are omitted. Text is plain: Unity
 rich-text tags are stripped; creatures whose name was colored (Hildir's minibosses) are flagged `named`. Pieces that make items on their own have `produces` (`item`, `secPerUnit`, `max`; a Beehive's working `biomes`, a
-Sap Extractor's `connectsTo` root with the biomes it grows in); sources of kind `destructible` are non-piece objects
+Sap Extractor's `connectsTo` root with the biomes it grows in); pieces with a WispSpawner (Wisp Fountain, Eternal Pyre) have `lures` {source (the pickable it makes, whose `placedBy` names the piece), interval, chance, max, area, night, maxCover}; the site links both ends (piece "Lures" / "Grows into", item "Produced by"); sources of kind `destructible` are non-piece objects
 with a drop table (wild Beehive, props in locations). Pickable/rock/tree/log/destructible sources record where they
 are placed: `biomes` (enabled ZoneSystem vegetation), `locations` [{location, dungeon}] (the object is the location,
 sits in it or in a room its dungeon generates, from the dump's `instances`, or a CreatureSpawner there makes it),
