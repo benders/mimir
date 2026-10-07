@@ -1,5 +1,5 @@
 // Client-side search over search.json: [[name, id, url, icon, label, stage], ...], loaded on first use.
-// Ranking: exact name, name prefix, word prefix, substring of name, substring of id. Entries past the stage filter
+// A leading "/" is ignored. Ranking: exact name, name prefix, word prefix, substring of name, substring of id. Entries past the stage filter
 // (<html data-max>, the header's "Up to" select, kept in localStorage) are left out.
 (() => {
   const sel = document.getElementById("stage"), root = document.documentElement, KEY = "mimir-stage";
@@ -32,8 +32,11 @@
     return -1;
   }
 
+  // a leading "/" is the focus shortcut typed by accident (#48)
+  const query = (s) => s.trim().replace(/^\/+\s*/, "").toLowerCase();
+
   function search(s) {
-    s = s.trim().toLowerCase();
+    s = query(s);
     if (!s) return [];
     const out = [], max = document.documentElement.dataset.max;
     for (const e of index) {
@@ -48,7 +51,7 @@
   const esc = (s) => s.replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" })[c]);
 
   function render() {
-    if (!q.value.trim()) { list.hidden = true; return; }
+    if (!query(q.value)) { list.hidden = true; return; }
     list.innerHTML = hits.length ? hits.map((e, i) =>
       `<li${i === sel ? ' class="sel"' : ""}><a href="${new URL(e[2], base)}">` +
       (e[3] ? `<img class="ico" src="${new URL("icons/" + encodeURIComponent(e[3]) + ".png", base)}" alt="">`
