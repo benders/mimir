@@ -221,7 +221,7 @@ def prefabs():
         item("Mead", name="$item_mead", itemType="Consumable", icons=[S("Mead")], consumeStatusEffect=R("SE_Fizz")),
         item("Hammer", name="$item_hammer", itemType="Tool", icons=[S("Hammer")], buildPieces=R("_HammerTable")),
         item("Bite", name="$item_bite", itemType="OneHandedWeapon", attack=attack(attackStamina=0), attackStatusEffect=R("SE_Stun"),
-             damages=damages(pierce=12)),  # no icon: internal attack item
+             damages=damages(pierce=12, chop=20)),  # no icon: internal attack item; players are immune to chop
         item("Spit", name="$item_bite", itemType="OneHandedWeapon", damages=damages(poison=5),
              attack=attack(attackType="Projectile", attackProjectile=R("SpitBolt"))),  # placeholder name; the pool it leaves does the damage
         prefab("SpitBolt", comp("Projectile", m(damage=damages(), spawnOnHit=R("SpitPool"), randomSpawnOnHit=[],

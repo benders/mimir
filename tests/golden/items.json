@@ -43,7 +43,8 @@
   "stack": 1,
   "maxQuality": 1,
   "damages": {
-   "pierce": 12
+   "pierce": 12,
+   "chop": 20
   },
   "backstab": 1,
   "parryBonus": 1,

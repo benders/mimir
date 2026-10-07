@@ -857,11 +857,18 @@ def attack_labels(c: dict) -> dict[str, str]:
     return labels
 
 
+def player_damage(d: dict | None) -> dict:
+    """Damage that can hurt a player: the Player prefab is immune to chop and pickaxe (#46)."""
+    return {k: v for k, v in (d or {}).items() if k not in mechanics.TOOL_DAMAGE}
+
+
 def attack_damage(w: dict) -> str:
-    """A creature attack's damage: the item's, or what its projectiles and area effects deal (`hits`)."""
+    """A creature attack's damage to players: the item's, or what its projectiles and area effects deal (`hits`)."""
     if not (hits := w.get("hits")):
-        return damages(w.get("damages"))
-    if hits[0]["kind"] == "none":
+        return damages(player_damage(w.get("damages"))) or ("—" if w.get("damages") else "")
+    hits = [dict(h, damages=player_damage(h.get("damages"))) for h in hits
+            if h["kind"] != "none" and (player_damage(h.get("damages")) or not h.get("damages"))]
+    if not hits:
         return "—"
     return " + ".join(damages(h["damages"]) + ("" if h["kind"] == "hit" or len(hits) == 1 and h["kind"] == "projectile"
                                                 else f' <span class="qty">{h["kind"]}</span>') for h in hits)
@@ -1140,7 +1147,11 @@ def creature_page(c: dict) -> None:
                  else esc(labels.get(a) or clean(w.get("name")) or pretty_id(a)))
         attacks.append([label, attack_damage(w),
                         esc(words(atk.get("type", ""))), num(w["attackForce"]) if w.get("attackForce") else ""])
-    body += section("Attacks", table(["Attack", "Damage", "Type", "Knockback"], attacks))
+    body += section("Attacks", table(["Attack", "Damage", "Type", "Knockback"], attacks)
+                    + ('<p class="note">Damage to players: chop and pickaxe are left out, players are immune to them.</p>'
+                       if any(set(d) & mechanics.TOOL_DAMAGE for a in c.get("attacks", [])
+                              for d in [ITEMS[a].get("damages") or {}] + [h.get("damages") or {}
+                                                                          for h in ITEMS[a].get("hits", [])]) else ""))
     gear = [link("item", original(x)) for x in c.get("equipment", []) if not ITEMS[x].get("internal")]
     body += section("Equipment", reflist(gear) + ('<p class=note>Enemy copies of player gear; '
                                                    'their stats can differ from the items linked here.</p>'

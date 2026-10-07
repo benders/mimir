@@ -217,6 +217,8 @@ class Site(unittest.TestCase):
         self.assertIn('9 poison <span class="qty">area</span>', ranged)  # the Spit's pool, not the item's 5 poison
         self.assertIn("<td>Spit</td>", ranged)  # internal attacks are named from their ids, not the shared placeholder
         self.assertEqual(ranged.count("<td>Bite</td>"), 1)
+        self.assertIn("<td>Bite</td><td>12 pierce</td>", ranged)  # chop left out: players are immune (#46)
+        self.assertIn("chop and pickaxe are left out", ranged)
         self.assertIn("<h1>Pot Helm (female)</h1>", (self.out / "items/HelmetFem.html").read_text(encoding="utf-8"))
         self.assertIn("<h1>Pot Helm</h1>", (self.out / "items/Helmet.html").read_text(encoding="utf-8"))
         names = [e[0] for e in json.loads((self.out / "search.json").read_text(encoding="utf-8"))]
