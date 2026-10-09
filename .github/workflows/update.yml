@@ -1,6 +1,6 @@
 # Unattended data updates and site deploys (issue #2). Only the public Steam branch is tracked.
 #
-#   poll    steamcmd: current Steam build id vs data/meta.json steamBuildId
+#   poll    steamcmd: current Steam build id vs data/meta.json steamBuildId (pushes take meta's: deploy only)
 #   update  if it changed: download server, dump, icons, normalize, verify, build site; commit data/
 #   site    build the site from data/ + icons (icons from the cache, or re-extracted on a miss)
 #   deploy  publish to GitHub Pages
@@ -40,8 +40,12 @@ jobs:
         env:
           FORCE: ${{ inputs.force || false }}
         run: |
-          build="$(make -s buildid)"
           have="$(python3 -c 'import json; print(json.load(open("data/meta.json")).get("steamBuildId", ""))')"
+          if [[ "$GITHUB_EVENT_NAME" == push ]]; then
+            build="$have"  # a push redeploys committed data/; no steamcmd (Docker) needed
+          else
+            build="$(make -s buildid)"
+          fi
           changed=false
           if [[ "$build" != "$have" || "$FORCE" == true ]]; then changed=true; fi
           echo "build=$build" >>"$GITHUB_OUTPUT"
