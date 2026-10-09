@@ -604,6 +604,7 @@ def page(path: str, title: str, body: str, kind_label: str = "", scripts=()) -> 
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <base href="{base}">
 <title>{esc(title)} · {esc(SITE_NAME)}</title>
+<script src="newrelic.js"></script>
 <link rel="stylesheet" href="style.css">
 <script>try {{ const m = localStorage.getItem("{STAGE_KEY}"); if (m) document.documentElement.dataset.max = m; }} catch (e) {{}}</script>
 <script src="search.js" defer></script>

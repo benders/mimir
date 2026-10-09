@@ -29,7 +29,7 @@ class Site(unittest.TestCase):
 
     def test_pages(self):
         for page in ("index.html", "items/Sword.html", "creatures/Raider.html", "pieces/Anvil.html",
-                     "effects/SE_Fizz.html", "search.json", "style.css", "search.js"):
+                     "effects/SE_Fizz.html", "search.json", "style.css", "search.js", "newrelic.js"):
             self.assertTrue((self.out / page).is_file(), page)
 
     def test_hidden_items_have_no_page(self):
