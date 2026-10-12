@@ -245,6 +245,15 @@ class Site(unittest.TestCase):
         comfort = (self.out / "mechanics/comfort.html").read_text(encoding="utf-8")
         self.assertNotIn("pieces/piece_bench", comfort)  # comfort 2 but not buildable: no world copies
 
+    def test_frost_page(self):
+        frost = (self.out / "mechanics/frost.html").read_text(encoding="utf-8")
+        self.assertIn('<td>Weak</td><td>×1.5</td><td>10%</td><td>150</td><td>40</td>', frost)  # fixture SE: min 0.2, Weak 2
+        self.assertIn('<tr data-stage="3"><td><a class="ref" href="creatures/Chief_p2.html"', frost)  # follows "Up to"
+        self.assertIn('<td>4</td><td></td><td>20 pierce</td><td>0.2</td>', frost)  # Longbow: 4 / 1000 hp × 40 s
+        self.assertIn("drops to 20%", frost)
+        bow = (self.out / "items/Longbow.html").read_text(encoding="utf-8")
+        self.assertIn('slows the target: <a href="mechanics/frost.html">Frost</a>', bow)
+
     def test_mechanics_section(self):
         for page in ("index", "blocking", "drops", "creature-levels", "damage-types", "item-upgrades", "adrenaline",
                      "food", "comfort", "skills"):

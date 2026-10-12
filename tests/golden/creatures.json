@@ -30,6 +30,7 @@
   "boss": true,
   "health": 1200,
   "damageModifiers": {
+   "frost": "Resistant",
    "spirit": "Immune"
   },
   "speed": {
@@ -126,6 +127,7 @@
   "damageModifiers": {
    "blunt": "Weak",
    "fire": "Immune",
+   "frost": "Weak",
    "spirit": "Ignore",
    "chop": "Ignore",
    "pickaxe": "Ignore"
@@ -177,6 +179,7 @@
   "damageModifiers": {
    "blunt": "Weak",
    "fire": "Immune",
+   "frost": "Weak",
    "spirit": "Ignore",
    "chop": "Ignore",
    "pickaxe": "Ignore"
@@ -228,6 +231,7 @@
   "damageModifiers": {
    "blunt": "Weak",
    "fire": "Immune",
+   "frost": "Weak",
    "spirit": "Ignore",
    "chop": "Ignore",
    "pickaxe": "Ignore"

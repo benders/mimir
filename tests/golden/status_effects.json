@@ -45,6 +45,28 @@
   "duration": 60
  },
  {
+  "id": "Frost",
+  "type": "SE_Frost",
+  "name": "Fizzy",
+  "stats": {
+   "healthRegenMultiplier": 1,
+   "staminaRegenMultiplier": 1,
+   "freezeTimeEnemy": 40,
+   "freezeTimePlayer": 12,
+   "minSpeedFactor": 0.2,
+   "frostSlowMultipliers": [
+    {
+     "m_modifier": "Resistant",
+     "m_multiplier": 0.5
+    },
+    {
+     "m_modifier": "Weak",
+     "m_multiplier": 2
+    }
+   ]
+  }
+ },
+ {
   "id": "Rested",
   "type": "SE_Rested",
   "name": "Fizzy",

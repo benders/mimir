@@ -386,7 +386,8 @@
   "stack": 1,
   "maxQuality": 2,
   "damages": {
-   "pierce": 20
+   "pierce": 20,
+   "frost": 4
   },
   "damagesPerLevel": {
    "pierce": 5

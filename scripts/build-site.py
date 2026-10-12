@@ -1059,6 +1059,8 @@ def item_page(i: dict) -> None:
         eff.append(("When equipped", link("effect", i["equipEffect"])))
     if i.get("attackEffect"):
         eff.append(("On hit", link("effect", i["attackEffect"])))
+    if deals_frost(i) and not i.get("internal"):
+        eff.append(("Frost damage", f'slows the target: {mech_link("frost", "Frost")}'))
     if i.get("guardianPower"):
         eff.append(("At its boss stone", link("effect", i["guardianPower"])))
     if adr := i.get("adrenaline"):
@@ -1709,6 +1711,61 @@ def block_resist_gear() -> str:
     return table(["Item", "Damage modifiers"], rows)
 
 
+# --- Frost -----------------------------------------------------------------------------------
+
+FROST = (EFFECTS.get("Frost") or {}).get("stats", {})  # SE_Frost
+FROST_MULT = {m["m_modifier"]: m.get("m_multiplier", 0) for m in FROST.get("frostSlowMultipliers", [])}
+FROST_MIN = FROST.get("minSpeedFactor", mechanics.FROST_MIN_SPEED)
+FROST_REF_HEALTH = 1000  # the example target for the weapons table
+
+
+def deals_frost(i: dict) -> bool:
+    return bool((i.get("damages") or {}).get("frost") or (i.get("damagesPerLevel") or {}).get("frost"))
+
+
+def block_frost_weapons() -> str:
+    """Items that deal frost (base or per level), earliest stage first; slow on an example target at quality 1."""
+    items = sorted((i for i in ITEMS.values() if deals_frost(i) and has_page("item", i["id"])),
+                   key=lambda i: (stage_of("item", i["id"]), -(i.get("damages") or {}).get("frost", 0),
+                                  name_of("item", i["id"]).lower()))
+    t = FROST.get("freezeTimeEnemy", 10)
+    rows = []
+    for i in items:
+        d, per = i.get("damages") or {}, i.get("damagesPerLevel") or {}
+        other = ", ".join(f"{num(v)} {k}" for k, v in d.items() if k != "frost" and v)
+        rows.append([link("item", i["id"]), esc(words(i["skill"])) if i.get("skill") not in (None, "None") else "",
+                     num(d.get("frost", 0)), f'+{num(per["frost"])}' if per.get("frost") else "", esc(other),
+                     num(round(mechanics.frost_duration(d.get("frost", 0), FROST_REF_HEALTH, t), 1))])
+    return table(["Item", "Skill", "Frost", "Per level", "Other damage", f"Slow, {FROST_REF_HEALTH:,} hp (s)"],
+                 rows, "num")
+
+
+def frost_creatures(mods) -> list[dict]:
+    return sorted((c for c in CREATURES.values() if has_page("creature", c["id"])
+                   and (c.get("damageModifiers") or {}).get("frost") in mods),
+                  key=lambda c: (stage_of("creature", c["id"]), name_of("creature", c["id"]).lower()))
+
+
+def block_frost_weak() -> str:
+    """Creatures weak to frost: more damage, a deeper slow, and a longer one per hit (their health)."""
+    t = FROST.get("freezeTimeEnemy", 10)
+    rows = []
+    for c in frost_creatures(("SlightlyWeak", "Weak", "VeryWeak")):
+        m = c["damageModifiers"]["frost"]
+        rows.append([link("creature", c["id"]), esc(words(m)), f'×{num(mechanics.MODIFIER_MULTIPLIER[m])}',
+                     pct(mechanics.frost_speed(0, m, FROST_MULT, FROST_MIN)), num(c.get("health", 0)),
+                     num(round(mechanics.frost_duration(100 * mechanics.MODIFIER_MULTIPLIER[m], c.get("health", 0), t), 1))])
+    return table(["Creature", "Frost", "Damage", "Slowed to", "Health", "Slow per 100 frost (s)"], rows, "num")
+
+
+def block_frost_resistant() -> str:
+    """Creatures that resist frost: never slowed (SE_Frost.ModifySpeed); immune ones don't get the effect at all."""
+    rows = [[link("creature", c["id"]), esc(words(c["damageModifiers"]["frost"])),
+             f'×{num(mechanics.MODIFIER_MULTIPLIER[c["damageModifiers"]["frost"]])}']
+            for c in frost_creatures(mechanics.FROST_NO_SLOW)]
+    return table(["Creature", "Frost", "Damage"], rows, "num")
+
+
 def block_star_spawns() -> str:
     """The highest star count each creature can spawn with, from its spawn entries (spawn data holds levels)."""
     top = {}
@@ -2123,6 +2180,9 @@ def mech_blocks() -> dict:
             "forge-placement": block_forge_placement, "forge-idols": block_forge_idols,
             "forge-streak": block_forge_streak, "forge-return-example": block_forge_return_example,
             "forge-items": block_forge_items,
+            "frost-weapons": block_frost_weapons, "frost-weak": block_frost_weak,
+            "frost-resistant": block_frost_resistant,
+            "frost-chart": lambda: mechanics.frost_chart(FROST_MULT, FROST_MIN),
             "adrenaline-chart": lambda: mechanics.adrenaline_chart(PLAYER["adrenaline"]),
             "chart": lambda name: mechanics.CHARTS[name]()}
 

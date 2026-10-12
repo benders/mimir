@@ -167,7 +167,7 @@ TRANSLATIONS = {
 def raider(name, **kw):
     return prefab(name,
                   character(**{**dict(name="$enemy_raider", health=150, defaultItems=[R("Bite"), R("FW_Helmet")],
-                                      damageModifiers={"m_blunt": "Weak", "m_slash": "Normal", "m_fire": "Immune",
+                                      damageModifiers={"m_blunt": "Weak", "m_slash": "Normal", "m_fire": "Immune", "m_frost": "Weak",
                                                        "m_spirit": "Ignore", "m_chop": "Ignore", "m_pickaxe": "Ignore"}),
                                **kw}),
                   comp("CharacterDrop", {"m_drops": [char_drop("Ore", amountMax=3, chance=0.5),
@@ -208,7 +208,7 @@ def prefabs():
         item("Javelin", name="$item_javelin", itemType="OneHandedWeapon", icons=[S("Sword")], damages=damages(pierce=10),
              attack=attack(attackAnimation="throw", attackType="Projectile", attackProjectile=R("JavelinBolt"))),
         prefab("JavelinBolt", comp("Projectile", m(damage=damages(), respawnItemOnHit=True))),  # lands as the item
-        item("Longbow", name="$item_longbow", itemType="Bow", icons=[S("Sword")], damages=damages(pierce=20),
+        item("Longbow", name="$item_longbow", itemType="Bow", icons=[S("Sword")], damages=damages(pierce=20, frost=4),
              damagesPerLevel=damages(pierce=5), maxQuality=2, ammoType="$ammo_dart",
              attack=attack(attackAnimation="throw", attackType="Projectile", bowDraw=True, drawDurationMin=2.5)),
         item("Arbal", name="$item_arbal", itemType="Bow", icons=[S("Sword")], damages=damages(pierce=50), ammoType="$ammo_dart",
@@ -242,7 +242,8 @@ def prefabs():
         prefab("Chief", character(name="$enemy_chief", health=900, boss=True, deathEffects={"m_effectPrefabs": [
             {"m_prefab": R("vfx_Poof")}, {"m_prefab": R("Chief_p2")},
             {"m_prefab": R("ChiefBurst")}]})),  # second phase: made when it dies; a burst that spawns a Shade
-        prefab("Chief_p2", character(name="$enemy_chief_p2", health=1200, boss=True)),
+        prefab("Chief_p2", character(name="$enemy_chief_p2", health=1200, boss=True,
+                                        damageModifiers={"m_frost": "Resistant", "m_spirit": "Immune"})),
         prefab("Imp", character(name="$enemy_imp", health=30)),  # only summoned, by the Rod
         item("Rod", name="$item_rod", itemType="OneHandedWeapon", icons=[S("Rod")],
              attack=attack(attackProjectile=R("RodBolt"))),
@@ -363,6 +364,10 @@ def status_effects():
             {"name": "SE_Stun", "type": "SE_Stats", "fields": {**SE_DEFAULTS, **m(name="$se_stun", ttl=2)}},  # Raider's bite
             {"name": "SE_Wet", "type": "SE_Stats", "fields": {**SE_DEFAULTS, **m(name="$se_wet", ttl=60)}},  # nothing gives it
             {"name": "Wet", "type": "SE_Stats", "fields": {**SE_DEFAULTS, **m(name="$se_fizz", ttl=60)}},  # mechanics pages link it
+            {"name": "Frost", "type": "SE_Frost", "fields": {**SE_DEFAULTS, **m(  # the frost mechanics page reads it
+                name="$se_fizz", freezeTimeEnemy=40, freezeTimePlayer=12, minSpeedFactor=0.2,
+                frostSlowMultipliers=[{"m_modifier": "Resistant", "m_multiplier": 0.5},
+                                      {"m_modifier": "Weak", "m_multiplier": 2}])}},
             {"name": "Rested", "type": "SE_Rested", "fields": {**SE_DEFAULTS, **m(name="$se_fizz", baseTTL=200,
                                                                                 TTLPerComfortLevel=30)}},
             {"name": "Resting", "type": "SE_Cozy", "fields": {**SE_DEFAULTS, **m(name="$se_fizz", delay=5,

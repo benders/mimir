@@ -104,6 +104,20 @@ class Formulas(unittest.TestCase):
         self.assertTrue(o("Weak", "Resistant"))
         self.assertTrue(o("Immune", "Resistant"))  # order dependent, as the code is
 
+    def test_frost(self):
+        # SE_Frost.AddDamage: Clamp01(damage / max health) * freeze time
+        self.assertAlmostEqual(M.frost_duration(88, 1000, 50), 4.4)
+        self.assertEqual(M.frost_duration(200, 100, 50), 50)
+        # SE_Frost.ModifySpeed: speed -= base * Lerp(1 - min / m, 0, t^2); resistant levels return early
+        mult = {"Weak": 1.5, "Immune": 0}
+        self.assertAlmostEqual(M.frost_speed(0), 0.1)
+        self.assertAlmostEqual(M.frost_speed(0.5), 1 - 0.9 * 0.75)
+        self.assertEqual(M.frost_speed(1), 1)
+        self.assertAlmostEqual(M.frost_speed(0, "Weak", mult), 0.1 / 1.5)
+        self.assertEqual(M.frost_speed(0, "Resistant", {"Resistant": 0.5}), 1)
+        self.assertEqual(M.frost_speed(0, "Immune", mult), 1)
+        self.assertIn("drops to 10% and is still at 32.5% half way", M.frost_chart(mult))
+
     def test_modifier_multipliers(self):
         self.assertEqual(M.MODIFIER_MULTIPLIER["VeryWeak"], 2.0)
         self.assertEqual(M.MODIFIER_MULTIPLIER["SlightlyResistant"], 0.75)

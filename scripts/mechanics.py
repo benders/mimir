@@ -630,6 +630,46 @@ def skills_chart() -> str:
                   "Each level needs ⌊L + 1⌋^1.5 × 0.5 + 0.5; leftover experience is lost at every level-up.")
 
 
+FROST_MIN_SPEED = 0.1  # SE_Frost.m_minSpeedFactor code default (the data omits values equal to the default)
+FROST_NO_SLOW = ("Immune", "VeryResistant", "Resistant", "SlightlyResistant")  # SE_Frost.ModifySpeed returns early
+
+
+def frost_duration(frost: float, max_health: float, freeze_time: float) -> float:
+    """Seconds a frost hit slows for (SE_Frost.AddDamage): Clamp01(frost / max health) × freeze time. A hit only
+    restarts the effect when this is longer than the time left."""
+    return min(1.0, max(0.0, frost / max_health)) * freeze_time if max_health > 0 else 0.0
+
+
+def frost_speed(t: float, modifier: str = "Normal", multipliers: dict | None = None,
+                min_speed: float = FROST_MIN_SPEED) -> float:
+    """Share of normal movement speed left, t = share of the slow's duration gone (SE_Frost.ModifySpeed):
+    speed −= base × Lerp(1 − min / m, 0, t²), m = the target's frost-modifier multiplier (1 when not listed)."""
+    if modifier in FROST_NO_SLOW:
+        return 1.0
+    m = (multipliers or {}).get(modifier, 1.0)
+    if m <= 0:
+        return 1.0
+    f = min(1.0, max(0.0, t)) ** 2
+    return max(0.0, 1 - (1 - min_speed / m) * (1 - f))
+
+
+def frost_chart(multipliers: dict, min_speed: float = FROST_MIN_SPEED) -> str:
+    """Movement speed against the share of the slow gone, for Normal and the weak modifiers listed."""
+    mods = ["Normal"] + [k for k in ("SlightlyWeak", "Weak", "VeryWeak") if k in multipliers]
+    names = {"Normal": "normal", "SlightlyWeak": "slightly weak", "Weak": "weak", "VeryWeak": "very weak"}
+    xs = [x / 100 for x in range(0, 101)]
+    series = [{"label": names[k], "points": [(x * 100, frost_speed(x, k, multipliers, min_speed) * 100) for x in xs],
+               "marks": [(0, frost_speed(0, k, multipliers, min_speed) * 100)]} for k in mods]
+    half = frost_speed(0.5, "Normal", multipliers, min_speed) * 100
+    desc = (f"Movement speed, as a percent of normal, against the share of the frost slow gone. A target with no frost "
+            f"modifier drops to {_fmt(min_speed * 100)}% and is still at {_fmt(half)}% half way through; "
+            f"weaker targets drop further. Resistant targets are not slowed.")
+    return figure(line_chart(series, xlim=(0, 100), ylim=(0, 100), xticks=range(0, 101, 25), yticks=range(0, 101, 25),
+                             xlabel="Time gone (% of the slow)", ylabel="Speed (% of normal)", ysuffix="%",
+                             title="Frost slow", desc=desc),
+                  "Speed = 1 − (1 − min/m)(1 − t²): the slow stays strong most of the way and lifts at the end.")
+
+
 CHARTS = {"armor": armor_chart, "block": block_chart, "stars": stars_chart, "stamina": stamina_chart,
           "pseudo": pseudo_chart, "upgrade": upgrade_chart, "food": food_chart, "skills": skills_chart}
 
