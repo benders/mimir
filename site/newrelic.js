@@ -10,5 +10,10 @@ if (location.hostname === "mimir.slackworks.com") {
     applicationID: "1103549341", sa: 1};
   const s = document.createElement("script");
   s.src = "https://js-agent.newrelic.com/nr-loader-spa-1.323.0.min.js";
+  // Group page views by top-level section (/items/maceiron.html -> /items); top-level pages keep their own name.
+  s.onload = () => {
+    const parts = location.pathname.split("/").filter(Boolean);
+    window.newrelic?.setPageViewName(parts.length > 1 ? "/" + parts[0] : location.pathname);
+  };
   document.head.appendChild(s);
 }
