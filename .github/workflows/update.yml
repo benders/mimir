@@ -3,7 +3,10 @@
 #   poll    steamcmd: current Steam build id vs data/meta.json steamBuildId (pushes take meta's: deploy only)
 #   update  if it changed: download server, dump, icons, normalize, verify, build site; commit data/
 #   site    build the site from data/ + icons (icons from the cache, or re-extracted on a miss)
-#   deploy  publish to GitHub Pages
+#   deploy  publish to GitHub Pages; record a New Relic change tracking marker on the Browser app (#50)
+#
+# The marker needs the NEW_RELIC_API_KEY secret (a User key, on the github-pages environment only) and the
+# NEW_RELIC_ENTITY_GUID variable; without the secret the step is skipped, and it can never fail a deploy.
 #
 # Schedules stop after 60 days without repo activity (GitHub emails first); re-enable in the Actions tab.
 name: update
@@ -101,10 +104,14 @@ jobs:
       (needs.update.result == 'success' || (needs.update.result == 'skipped' && github.event_name != 'schedule'))
     runs-on: ubuntu-24.04
     timeout-minutes: 60
+    outputs:
+      sha: ${{ steps.sha.outputs.sha }}
     steps:
       - uses: actions/checkout@v7
         with:
           ref: ${{ github.ref_name }}  # includes the data commit just pushed by update
+      - id: sha
+        run: echo "sha=$(git rev-parse HEAD)" >>"$GITHUB_OUTPUT"
       - id: icons
         uses: actions/cache/restore@v6
         with:
@@ -125,7 +132,7 @@ jobs:
           path: .cache/site/public
 
   deploy:
-    needs: site
+    needs: [poll, update, site]
     if: always() && needs.site.result == 'success'
     runs-on: ubuntu-24.04
     permissions:
@@ -134,6 +141,68 @@ jobs:
     environment:
       name: github-pages
       url: ${{ steps.deploy.outputs.page_url }}
+    env:
+      NEW_RELIC: ${{ secrets.NEW_RELIC_API_KEY != '' }}
     steps:
       - id: deploy
         uses: actions/deploy-pages@v5
+      # New Relic change tracking marker: a game update (update committed data/) or a site deploy.
+      - uses: actions/checkout@v7
+        if: env.NEW_RELIC == 'true'
+        continue-on-error: true
+        with:
+          ref: ${{ needs.site.outputs.sha }}
+          fetch-depth: 2
+      - id: marker
+        if: env.NEW_RELIC == 'true'
+        continue-on-error: true
+        env:
+          UPDATED: ${{ needs.update.result == 'success' }}
+          BUILD: ${{ needs.poll.outputs.build }}
+        run: |
+          if [[ "$UPDATED" == true ]]; then
+            game="$(python3 -c 'import json; print(json.load(open("data/meta.json"))["gameVersion"])')"
+            version="Valheim $game (Steam build $BUILD)"
+            description="Game update: Valheim $game (build $BUILD)"
+            if [[ "$(git log -1 --format=%s)" == "Data: "* ]]; then
+              changelog="$(git diff --stat HEAD~1 HEAD -- data)"
+            else
+              changelog="data/ unchanged"
+            fi
+          else
+            version="$(git rev-parse --short HEAD)"
+            description="Site deploy"
+            changelog="$(git log -1 --format=%B)"
+          fi
+          {
+            echo "version=$version"
+            echo "description=$description"
+            echo "changelog<<MIMIR_EOF"
+            echo "$changelog"
+            echo "MIMIR_EOF"
+          } >>"$GITHUB_OUTPUT"
+      - id: newrelic
+        if: env.NEW_RELIC == 'true' && steps.marker.outcome == 'success'
+        continue-on-error: true
+        uses: newrelic/deployment-marker-action@d88a59ea8f713ad6935e60de27273157790b1e3b  # v2.6.2
+        with:
+          apiKey: ${{ secrets.NEW_RELIC_API_KEY }}
+          guid: ${{ vars.NEW_RELIC_ENTITY_GUID }}
+          region: US
+          version: ${{ steps.marker.outputs.version }}
+          description: ${{ steps.marker.outputs.description }}
+          changelog: ${{ steps.marker.outputs.changelog }}
+          commit: ${{ needs.site.outputs.sha }}
+          user: ${{ github.actor }}
+          deeplink: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+      - name: Marker summary
+        if: env.NEW_RELIC == 'true'
+        env:
+          ID: ${{ steps.newrelic.outputs.deploymentId }}
+          VERSION: ${{ steps.marker.outputs.version }}
+        run: |
+          if [[ -n "$ID" ]]; then
+            echo "New Relic marker **$VERSION** ($ID)" >>"$GITHUB_STEP_SUMMARY"
+          else
+            echo "::warning::New Relic change tracking marker not recorded"
+          fi
