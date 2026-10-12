@@ -374,7 +374,7 @@ class Entities(FixtureCase):
 
     def test_offering_of_a_group(self):
         lair = {s["creature"]: s for s in self.spawns("location") if s["location"] == "Lair"}
-        self.assertEqual(lair["Singer"]["summon"], {"item": "Wood", "amount": 1})  # children named after a creature prefab
+        self.assertEqual(lair["Singer"]["summon"], {"item": "Wood", "amount": 2})  # children named after a creature prefab; 2 placed stands
 
     def test_creature_piece_is_reached_when_buildable(self):
         creatures, pieces = [{"id": "Dummy"}], [{"id": "Dummy", "enabled": True, "tools": ["Hammer"], "resources": []}]
@@ -463,6 +463,13 @@ class Entities(FixtureCase):
         self.assertEqual(camp["levels"], [1, 3])  # merged; swapped min/max fixed
         self.assertTrue(camp["respawning"])
         self.assertEqual(s["Chief", "Lair"]["summon"], {"item": "Ore", "amount": 3})
+
+    def test_offering_item_stands(self):
+        f = {"m_useItemStands": True, "m_itemStandPrefix": "CupHolder", "m_bossItem": None, "m_bossItems": 3}
+        inst = [{"prefab": "CupHolder", "path": "a"}, {"prefab": "CupHolder", "path": "b (1)"},
+                {"prefab": "CupHolder", "path": "c", "inactive": True}, {"prefab": "GuardStone", "path": "d"}]
+        self.assertEqual(N.offering(f, inst), {"item": "Wood", "amount": 2})  # m_bossItems ignored; item from the stand
+        self.assertEqual(N.offering({**f, "m_useItemStands": False, "m_bossItem": {"$ref": "Ore"}}, inst), {"item": "Ore", "amount": 3})
 
     def test_dungeon_spawns(self):
         [d] = self.spawns("dungeon")  # Crypt room and disabled room don't match the Cave generator

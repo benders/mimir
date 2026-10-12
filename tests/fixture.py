@@ -292,6 +292,7 @@ def prefabs():
               name="$piece_tap", icon=S("Tap"), resources=[req("Wood", 4)]),
         prefab("Altar", comp("Destructible", m(health=100, minToolTier=0, damages={}, spawnWhenDestroyed=R("Shard")))),
         prefab("GuardStone", comp("ItemStand", m(name="$guard", supportedItems=[R("Shard")], guardianPower=R("SE_Ward")))),
+        prefab("CupHolder", comp("ItemStand", m(name="$cup", supportedItems=[R("Wood")], guardianPower=None))),  # an altar's stand
         prefab("Orb", comp("Destructible", m(health=100, minToolTier=0, damages={}, spawnWhenDestroyed=None)),
                comp("TriggerPersistentEventOnDestroy", {"_eventInternalName": "siege", "_stopEvent": False})),  # no drops
         prefab("WildHive", comp("WearNTear", m(health=20, materialType="Wood", damages={"m_fire": "Weak"})),
@@ -432,7 +433,8 @@ def write_dump(raw: Path) -> Path:
     )]})
     dump("locations/Lair.json", {"name": "Lair", "components": [comp("Location", {}), *spawners(
         ("OfferingBowl", m(bossPrefab=R("Chief"), bossItem=R("Ore"), bossItems=3)),
-        ("OfferingBowl", m(bossPrefab=R("ChoirOffering"), bossItem=R("Wood"), bossItems=1)),  # a group of creatures
+        ("OfferingBowl", m(bossPrefab=R("ChoirOffering"), bossItem=None, bossItems=1, useItemStands=True,
+                           itemStandPrefix="CupHolder")),  # a group of creatures; takes one Wood per CupHolder stand
         ("DungeonGenerator", m(themes="Cave")),
     )], "instances": [
         {"prefab": "OreRock", "path": "cave/OreRock (2)"},  # an instance of a source inside the location
@@ -441,6 +443,8 @@ def write_dump(raw: Path) -> Path:
         {"prefab": "LootChest", "path": "cave/LootChest"},
         {"prefab": "Spawner_Raider", "path": "cave/Spawner_Raider"},
         {"prefab": "Pup", "path": "cave/Pup"},  # a creature placed directly
+        {"prefab": "CupHolder", "path": "altar/CupHolder"}, {"prefab": "CupHolder", "path": "altar/CupHolder (1)"},
+        {"prefab": "CupHolder", "path": "altar/CupHolder (2)", "inactive": True},  # never placed: not a stand to fill
         {"prefab": "Crate", "path": "cave/Crate", "randomSpawn": {"chance": 40}},  # may or may not be there
         {"prefab": "WildHive", "path": "cave/hive", "inactive": True},  # disabled in the asset: never placed
         {"prefab": "Treasure", "path": "cave/Treasure", "inactive": True, "randomSpawn": {"chance": 90, "path": "cave"}},

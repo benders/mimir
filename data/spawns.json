@@ -4840,7 +4840,11 @@
   "location": "Dragonqueen",
   "biomes": [
    "Mountain"
-  ]
+  ],
+  "summon": {
+   "item": "DragonEgg",
+   "amount": 3
+  }
  },
  {
   "creature": "Hatchling",
@@ -5128,7 +5132,7 @@
   ],
   "summon": {
    "item": "GoblinTotem",
-   "amount": 3
+   "amount": 5
   }
  },
  {

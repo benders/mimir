@@ -106,6 +106,9 @@ def main() -> int:
                    and all(s.get(k) == v or v in (s.get(k) or []) for k, v in kw.items()) for s in spawns)
     check(spawned("Fenring_Cultist", "dungeon", biomes="Mountain"), "Cultist: Mountain cave dungeon")
     check(spawned("Bonemass", "location", biomes="Swamp"), "Bonemass: Swamp altar")
+    check(spawned("GoblinKing", "location", summon={"item": "GoblinTotem", "amount": 5})
+          and spawned("Dragon", "location", summon={"item": "DragonEgg", "amount": 3}),
+          "item-stand altars: Yagluth takes 5 Fuling Totems, Moder 3 Dragon Eggs")
     check(spawned("Neck", "raid", event="army_eikthyr"), "Necks in the Eikthyr raid")
     check(spawned("Wolf_cub", "offspring", parent="Wolf"), "Wolf cub born from Wolf")
     check(spawned("FrozenKing_p2", "phase", parent="FrozenKing") and spawned("FrozenKing_p3", "phase", parent="FrozenKing_p2"),

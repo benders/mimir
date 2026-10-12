@@ -1047,8 +1047,20 @@ def spawners_in(p: dict) -> list[dict]:
                     for x in f["m_prefabs"] if keep(ref(x["m_prefab"]), is_creature, is_item)]
         elif t == "OfferingBowl":
             for boss in offered_creatures(ref(f["m_bossPrefab"])):
-                out.append({"creature": boss, "summon": prune({"item": ref(f["m_bossItem"]), "amount": f["m_bossItems"]})})
+                out.append({"creature": boss, "summon": prune(offering(f, p.get("instances", [])))})
     return out
+
+
+def offering(f: dict, instances: list[dict]) -> dict:
+    """What an offering bowl takes. With m_useItemStands, OfferingBowl.UseItem refuses items and Interact summons once
+    every ItemStand named m_itemStandPrefix... in range holds one (FindItemStands; m_bossItem/m_bossItems unused):
+    one of the stand's supported item per stand placed in the location."""
+    if not f.get("m_useItemStands"):
+        return {"item": ref(f["m_bossItem"]), "amount": f["m_bossItems"]}
+    pre = f["m_itemStandPrefix"]
+    stands = [i["prefab"] for i in instances if i["prefab"].startswith(pre) and is_placed(i)]
+    items = {ref(x) for s in set(stands) for x in (comp(PREFABS.get(s, {"components": []}), "ItemStand") or {}).get("m_supportedItems", [])}
+    return {"item": items.pop() if len(items) == 1 else None, "amount": len(stands)}
 
 
 def merge_spawners(found: list[dict]) -> list[dict]:
@@ -1245,7 +1257,11 @@ def placed_prefabs(p: dict) -> set[str]:
     asset, so it is never created, except under a RandomSpawn ancestor (`randomSpawn.path`), which activates its own
     object when it has no ZNetView (RandomSpawn.SetSpawned; assumed to be the disabled one). A RandomSpawn `chance`
     under 100 still counts as placed: it is rolled per location."""
-    return {i["prefab"] for i in p.get("instances", []) if not i.get("inactive") or "path" in i.get("randomSpawn", {})}
+    return {i["prefab"] for i in p.get("instances", []) if is_placed(i)}
+
+
+def is_placed(i: dict) -> bool:
+    return not i.get("inactive") or "path" in i.get("randomSpawn", {})
 
 
 def with_instances(p: dict) -> list[dict]:
@@ -1259,7 +1275,7 @@ def location_spawns() -> list[dict]:
     including those of placed `Spawner_*` objects, and creatures placed directly."""
     found, biomes_of = defaultdict(list), {}
     for name, bs, p, dungeon in placed_in_locations():
-        found[name, dungeon] += spawners_in({"components": with_instances(p)})
+        found[name, dungeon] += spawners_in({"components": with_instances(p), "instances": p.get("instances", [])})
         found[name, dungeon] += [{"creature": n} for n in sorted(placed_prefabs(p)) if n in PREFABS and is_creature(n)]
         biomes_of[name] = bs
     out = []
