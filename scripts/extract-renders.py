@@ -43,8 +43,9 @@ LOD = 1                                 # LODGroup level: the game's distance vi
 YAW, PITCH = math.radians(45), math.radians(30)
 LIGHT = np.array([0.35, 0.85, 0.4]) / np.linalg.norm([0.35, 0.85, 0.4])
 FRAME_FILL, FRAME_FILL_GROUND = 0.92, 0.8  # share of the frame the location fills (without / with drawn ground)
+INDEX_VERSION = 2                       # bump when index.json's contents change
 THREADS = 8                             # render threads (each holds ~100 MB of frame buffers)
-PROBE_SIZE, PROBE_MAX_TRIS = 200, 60000  # entrance-facing test renders: px, and the largest location worth it
+PROBE_SIZE, PROBE_MAX_TRIS = 200, 100000 # entrance-facing test renders: px, and the largest location worth it
 TERRAIN_STEP = 1.0                      # m between heightmap vertices (Heightmap.m_scale)
 GROUND_SLACK = 0.1                      # m below the ground still drawn (foundations meet the terrain)
 GROUND = np.array([0.52, 0.49, 0.42])    # terrain colour when drawn
@@ -123,12 +124,14 @@ def open_mapped(env, path: Path):
 
 def unpacked_index(bdir: Path, unpacked: Path, locations):
     """Unpack the bundles into unpacked/ (redone when the bundle set changes) and index them, each file alone so only
-    one is in memory: CAB name -> bundle, bundle -> referenced CABs, location prefab -> bundle. Cached in index.json."""
+    one is in memory: CAB name -> bundle, bundle -> referenced CABs, location -> [bundle, prefab path]. Cached in
+    index.json. A few creature prefabs share a location's name (Bonemass, GoblinKing, LeviathanLava): the location is
+    the one outside Assets/Characters/."""
     stamp = hashlib.sha1("".join(f"{b.name} {b.stat().st_size}\n" for b in sorted(bdir.iterdir())).encode()).hexdigest()
     idx = unpacked / "index.json"
     if idx.exists():
         cached = json.loads(idx.read_text())
-        if cached["stamp"] == stamp:
+        if cached["stamp"] == stamp and cached.get("version") == INDEX_VERSION:
             return cached["cab2b"], cached["ext"], cached["prefabs"]
     marker = unpacked / ".mimir-unpacked"  # only ever delete a directory this function made
     if unpacked.exists() and any(unpacked.iterdir()) and not marker.exists():
@@ -138,7 +141,7 @@ def unpacked_index(bdir: Path, unpacked: Path, locations):
     marker.touch()
     for b in sorted(bdir.iterdir()):
         unpack_bundle(b, unpacked / b.name)
-    cab2b, ext, prefabs = {}, {}, {}
+    cab2b, ext, found = {}, {}, {}
     for d in sorted(p for p in unpacked.iterdir() if p.is_dir()):
         for node in sorted(d.iterdir()):
             cab2b[node.name] = d.name
@@ -149,10 +152,16 @@ def unpacked_index(bdir: Path, unpacked: Path, locations):
             for o in (getattr(sf, "objects", None) or {}).values():
                 if o.type.name == "AssetBundle":
                     for k, _ in o.read().m_Container:
-                        if k.endswith(".prefab"):
-                            prefabs[Path(k).stem] = d.name
-    prefabs = {k: v for k, v in prefabs.items() if k in locations}
-    idx.write_text(json.dumps({"stamp": stamp, "cab2b": cab2b, "ext": ext, "prefabs": prefabs}))
+                        if k.endswith(".prefab") and Path(k).stem in locations:
+                            found.setdefault(Path(k).stem, []).append((d.name, k))
+    prefabs = {}
+    for name, cands in sorted(found.items()):
+        cands = [c for c in cands if not c[1].startswith("Assets/Characters/")] or cands
+        if len(cands) > 1:
+            raise SystemExit(f"{name}: more than one prefab could be the location: {cands}")
+        prefabs[name] = list(cands[0])
+    idx.write_text(json.dumps({"version": INDEX_VERSION, "stamp": stamp, "cab2b": cab2b, "ext": ext,
+                               "prefabs": prefabs}))
     return cab2b, ext, prefabs
 
 
@@ -502,18 +511,23 @@ def project(w, yaw):
 def facing_yaw(scene, radius):
     """Camera yaw for a location with a dungeon entrance (a Teleport outside the interior): of the four isometric
     views, the one that shows most of the entrance's own meshes (the dark doorway) in a small test render; for big
-    locations, the view nearest to looking at the entrance from the origin's side. Others keep the default."""
+    locations, or when no view shows the doorway, the view nearest to looking at the entrance from the origin's side.
+    Others keep the default."""
     yaws = [YAW + k * math.pi / 2 for k in range(4)]
     if not scene.entrance:
         return YAW
-    if sum(len(p[2]) for p in scene.parts) > PROBE_MAX_TRIS or not any(p[4] for p in scene.parts):
+
+    def toward_entrance():
         x, _, z = scene.entrance[0]
         if math.hypot(x, z) <= 1.5:
             return YAW
         want = math.atan2(-x, -z)
         return min(yaws, key=lambda y: abs((y - want + math.pi) % (2 * math.pi) - math.pi))
+
+    if sum(len(p[2]) for p in scene.parts) > PROBE_MAX_TRIS or not any(p[4] for p in scene.parts):
+        return toward_entrance()
     seen = [render(scene, radius, y, probe=True) for y in yaws]
-    return yaws[int(np.argmax(seen))]
+    return yaws[int(np.argmax(seen))] if max(seen) else toward_entrance()  # doorway hidden from every view
 
 
 def render(scene, radius, yaw=YAW, ground=True, probe=False):
@@ -654,22 +668,22 @@ def main():
             print(f"{n}: FAILED no bundle")
             failed += 1
             continue
-        jobs.append((n, deps(prefabs[n], cab2b, ext)))
+        jobs.append((n, deps(prefabs[n][0], cab2b, ext)))
     # One environment with just the bundles these locations use (~255 of 798 for all), memory-mapped.
     env = UnityPy.Environment()
     for b in sorted({b for _, ds in jobs for b in ds}):
         for node in sorted((unpacked / b).iterdir()):
             open_mapped(env, node)
     env.load_file(str(data / "Resources/unity default resources"))
-    roots = {}
-    for b in {prefabs[n] for n, _ in jobs}:
-        for f in (unpacked / b).iterdir():
+    roots, want = {}, {tuple(prefabs[n]): n for n, _ in jobs}  # (bundle, prefab path) -> location
+    for b in sorted({b for b, _ in want}):
+        for f in sorted((unpacked / b).iterdir()):
             sf = env.files.get(f.name)
             for o in (getattr(sf, "objects", None) or {}).values():
                 if o.type.name == "AssetBundle":
                     for k, v in o.read().m_Container:
-                        if k.endswith(".prefab") and Path(k).stem in prefabs:
-                            roots[Path(k).stem] = v.asset
+                        if (b, k) in want:
+                            roots[want[(b, k)]] = v.asset
     print(f"loaded {len(env.files)} files in {time.time() - t:.0f} s", flush=True)
     # Largest first, so the slowest renders don't start last. Size = the bytes each location's bundles unpack to,
     # each bundle's share split between the locations that use it (shared material/texture bundles count little).
