@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Build the static site from data/ and the extracted icons. Stdlib only.
 
-    scripts/build-site.py [data_dir] [icons_dir] [out_dir]
+    scripts/build-site.py [data_dir] [icons_dir] [out_dir] [renders_dir]
         # default: data/ + .cache/dump/public/icons -> .cache/site/public
 
 One page per item, creature, piece and status effect, plus index pages and a client-side search
@@ -32,6 +32,8 @@ import mechanics  # noqa: E402  (renderer, charts and formulas for the Mechanics
 DATA = Path(sys.argv[1]) if len(sys.argv) > 1 else ROOT / "data"
 ICONS = Path(sys.argv[2]) if len(sys.argv) > 2 else ROOT / ".cache/dump/public/icons"
 OUT = Path(sys.argv[3]) if len(sys.argv) > 3 else ROOT / ".cache/site/public"
+# Location renders (scripts/extract-renders.py, #52), next to the icons by default; optional, like the icons
+RENDERS = Path(sys.argv[4]) if len(sys.argv) > 4 else ICONS.parent / "renders"
 STATIC = ROOT / "site"
 MECH_SRC = STATIC / "mechanics"  # hand-written Markdown pages, see scripts/mechanics.py
 
@@ -56,6 +58,8 @@ SOURCES = {s["id"]: s for s in load("sources")}
 # normalize currently emits some conversions twice (#18)
 PROCESSING = list({json.dumps(p, sort_keys=True): p for p in load("processing")}.values())
 HAVE_ICONS = {p.stem for p in ICONS.glob("*.png")} if ICONS.is_dir() else set()
+HAVE_RENDERS = {p.stem for p in RENDERS.glob("*.webp")} if RENDERS.is_dir() else set()
+used_renders = set()
 RAIDS = load("raids")
 RAID_EVENTS = {e["id"]: e for e in RAIDS["events"]}
 LOCATIONS = load("locations")
@@ -222,13 +226,27 @@ def source_places(s: dict) -> str:
     if s["kind"] == "fishing":
         return ", ".join(biome_link(b) for b in s.get("biomes", []))
     places = [biome_link(b) for b in s.get("biomes", [])]
-    locs = list(dict.fromkeys(pretty_id(x["location"]) + (" dungeon" if x.get("dungeon") else "")
-                              for x in s.get("locations", [])))
-    places += [esc(x) for x in locs[:4]] + ([f"{len(locs) - 4} more locations"] if len(locs) > 4 else [])
+    locs = list({(x["location"], bool(x.get("dungeon"))): x for x in s.get("locations", [])}.values())
+    shown = [place_html(x) for x in locs[:4]]
+    places += [h for h in shown if not h.startswith("<a")] + ([f"{len(locs) - 4} more locations"] if len(locs) > 4 else [])
     if by := [p for p in s.get("placedBy", []) if has_page("piece", p)]:
         lured = all(PIECES[p].get("lures") for p in by)
         places.append(("lured by " if lured else "planted or built: ") + ", ".join(link("piece", p) for p in by))
-    return ", ".join(places)
+    thumbs = "".join(h for h in shown if h.startswith("<a"))
+    return ", ".join(places) + (f'<div class="places">{thumbs}</div>' if thumbs else "")
+
+
+def place_html(x: dict) -> str:
+    """A location a source or piece is in: its render as a thumbnail linking to the full image when there is one,
+    the name, "dungeon" for a room its dungeon generates, and the share of copies that have it (`chance`)."""
+    name = esc(pretty_id(x["location"])) + (" dungeon" if x.get("dungeon") else "")
+    if "chance" in x:
+        name += f' <span class="chance" title="Rolled when the location is placed: not every copy has it">({num(x["chance"])}% of them)</span>'
+    if x["location"] not in HAVE_RENDERS:
+        return name
+    used_renders.add(x["location"])
+    src = f'renders/{quote(x["location"])}.webp'
+    return f'<a class="place" href="{src}"><img src="{src}" alt="" loading="lazy"><span>{name}</span></a>'
 
 
 def biome_link(b: str) -> str:
@@ -1685,7 +1703,7 @@ def piece_page(p: dict) -> None:
                         + (f'<p class="note">{esc(lure_text(lu)[0].upper())}{lure_text(lu)[1:]}.</p>' if lu else ""))
     body += staged_section("Enables building", [("piece", b["id"], link("piece", b["id"])) for b in built_at[p["id"]]])
     if world:
-        body += section("Found in", f'<p>{source_places({"kind": "world", "locations": p["locations"]})}</p>')
+        body += section("Found in", f'<div>{source_places({"kind": "world", "locations": p["locations"]})}</div>')
     page(href("piece", p["id"]), name_of("piece", p["id"]), body, '<a href="pieces/index.html">Pieces</a>')
 
 
@@ -2437,6 +2455,10 @@ def copy_assets() -> None:
     (OUT / "icons").mkdir(exist_ok=True)
     for name in used:
         shutil.copy2(ICONS / f"{name}.png", OUT / "icons" / f"{name}.png")
+    if used_renders:
+        (OUT / "renders").mkdir(exist_ok=True)
+    for name in used_renders:
+        shutil.copy2(RENDERS / f"{name}.webp", OUT / "renders" / f"{name}.webp")
 
 
 def check_links() -> int:

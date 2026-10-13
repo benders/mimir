@@ -228,7 +228,7 @@ class Entities(FixtureCase):
         self.assertEqual(sources["OreRock"]["locations"], [{"location": "Lair", "dungeon": False}])
         self.assertEqual(sources["WildHive"]["locations"], [{"location": "Lair", "dungeon": True}])  # via a room
         # inactive in Lair: never placed; but under a RandomSpawn ancestor it is, with or without a netview's own
-        self.assertEqual(sources["Treasure"]["locations"], [{"location": "Lair", "dungeon": False}])
+        self.assertEqual(sources["Treasure"]["locations"], [{"location": "Lair", "dungeon": False, "chance": 90}])
         self.assertNotIn("locations", sources["Gift"])  # disabled, RandomSpawn on itself
         self.assertEqual(sources["Stub"]["placedBy"], ["Sapling"])
         self.assertEqual(sources["Glow"]["placedBy"], ["Lure"])
@@ -494,6 +494,10 @@ class Entities(FixtureCase):
         # in Camp and, as a dungeon room, in Lair; Ruin is disabled, the Crypt room's theme doesn't match Lair
         self.assertEqual([(x["location"], x["dungeon"]) for x in box["locations"]], [("Camp", False), ("Lair", True)])
         self.assertEqual(len({c["id"] for c in N.location_containers()}), 5)
+        # two RandomSpawn copies, 40% and 50%: one Lair has at least one 70% of the time; no chance = always there
+        self.assertEqual(by["Crate"]["locations"], [{"location": "Lair", "dungeon": False, "chance": 70}])
+        self.assertNotIn("chance", by["Strongbox"]["locations"][0])
+        self.assertNotIn("chance", by["Strongbox"]["locations"][1])  # dungeon rooms: never recorded
 
     def test_fishing(self):
         [f] = N.fishing(N.spawns())

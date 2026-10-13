@@ -18,16 +18,20 @@
   },
   "locations": [
    {
-    "location": "CharredRuins1"
+    "location": "CharredRuins1",
+    "chance": 99.9
    },
    {
-    "location": "CharredRuins2"
+    "location": "CharredRuins2",
+    "chance": 93.8
    },
    {
-    "location": "CharredRuins3"
+    "location": "CharredRuins3",
+    "chance": 93.8
    },
    {
-    "location": "CharredRuins4"
+    "location": "CharredRuins4",
+    "chance": 93.8
    }
   ]
  },
@@ -98,7 +102,8 @@
     "dungeon": true
    },
    {
-    "location": "CharredRuins1"
+    "location": "CharredRuins1",
+    "chance": 100
    },
    {
     "location": "CharredRuins2"
@@ -107,7 +112,8 @@
     "location": "CharredRuins3"
    },
    {
-    "location": "CharredRuins4"
+    "location": "CharredRuins4",
+    "chance": 100
    },
    {
     "location": "FortressRuins",
@@ -495,7 +501,8 @@
   "name": "Scorched Tree",
   "locations": [
    {
-    "location": "CharredTowerRuins2"
+    "location": "CharredTowerRuins2",
+    "chance": 50
    }
   ]
  },
@@ -724,7 +731,8 @@
   },
   "locations": [
    {
-    "location": "CharredRuins1"
+    "location": "CharredRuins1",
+    "chance": 100
    }
   ]
  },
@@ -758,16 +766,20 @@
   },
   "locations": [
    {
-    "location": "CharredRuins1"
+    "location": "CharredRuins1",
+    "chance": 100
    },
    {
-    "location": "CharredRuins2"
+    "location": "CharredRuins2",
+    "chance": 100
    },
    {
-    "location": "CharredRuins3"
+    "location": "CharredRuins3",
+    "chance": 100
    },
    {
-    "location": "CharredRuins4"
+    "location": "CharredRuins4",
+    "chance": 100
    }
   ]
  },
@@ -801,16 +813,20 @@
   },
   "locations": [
    {
-    "location": "CharredRuins1"
+    "location": "CharredRuins1",
+    "chance": 100
    },
    {
-    "location": "CharredRuins2"
+    "location": "CharredRuins2",
+    "chance": 100
    },
    {
-    "location": "CharredRuins3"
+    "location": "CharredRuins3",
+    "chance": 100
    },
    {
-    "location": "CharredRuins4"
+    "location": "CharredRuins4",
+    "chance": 100
    }
   ]
  },
@@ -880,10 +896,12 @@
     "dungeon": true
    },
    {
-    "location": "CharredTowerRuins1"
+    "location": "CharredTowerRuins1",
+    "chance": 100
    },
    {
-    "location": "CharredTowerRuins1_dvergr"
+    "location": "CharredTowerRuins1_dvergr",
+    "chance": 100
    },
    {
     "location": "FortressRuins",
@@ -931,10 +949,12 @@
     "dungeon": true
    },
    {
-    "location": "CharredTowerRuins1"
+    "location": "CharredTowerRuins1",
+    "chance": 100
    },
    {
-    "location": "CharredTowerRuins1_dvergr"
+    "location": "CharredTowerRuins1_dvergr",
+    "chance": 100
    },
    {
     "location": "FortressRuins",
@@ -1125,7 +1145,8 @@
     "dungeon": true
    },
    {
-    "location": "CharredTowerRuins1"
+    "location": "CharredTowerRuins1",
+    "chance": 100
    },
    {
     "location": "CharredTowerRuins1_dvergr"
@@ -1451,7 +1472,8 @@
     "dungeon": true
    },
    {
-    "location": "CharredRuins1"
+    "location": "CharredRuins1",
+    "chance": 100
    },
    {
     "location": "CharredRuins2"
@@ -1463,16 +1485,20 @@
     "location": "CharredRuins4"
    },
    {
-    "location": "CharredTowerRuins1"
+    "location": "CharredTowerRuins1",
+    "chance": 100
    },
    {
-    "location": "CharredTowerRuins1_dvergr"
+    "location": "CharredTowerRuins1_dvergr",
+    "chance": 100
    },
    {
-    "location": "CharredTowerRuins2"
+    "location": "CharredTowerRuins2",
+    "chance": 100
    },
    {
-    "location": "CharredTowerRuins3"
+    "location": "CharredTowerRuins3",
+    "chance": 100
    },
    {
     "location": "FaderLocation"
@@ -1522,16 +1548,20 @@
   },
   "locations": [
    {
-    "location": "CharredRuins1"
+    "location": "CharredRuins1",
+    "chance": 100
    },
    {
-    "location": "CharredRuins2"
+    "location": "CharredRuins2",
+    "chance": 100
    },
    {
-    "location": "CharredRuins3"
+    "location": "CharredRuins3",
+    "chance": 97.4
    },
    {
-    "location": "CharredRuins4"
+    "location": "CharredRuins4",
+    "chance": 97.4
    }
   ]
  },
@@ -1565,16 +1595,20 @@
   },
   "locations": [
    {
-    "location": "CharredRuins1"
+    "location": "CharredRuins1",
+    "chance": 100
    },
    {
-    "location": "CharredRuins2"
+    "location": "CharredRuins2",
+    "chance": 100
    },
    {
-    "location": "CharredRuins3"
+    "location": "CharredRuins3",
+    "chance": 97.4
    },
    {
-    "location": "CharredRuins4"
+    "location": "CharredRuins4",
+    "chance": 97.4
    }
   ]
  },
@@ -1608,16 +1642,20 @@
   },
   "locations": [
    {
-    "location": "CharredRuins1"
+    "location": "CharredRuins1",
+    "chance": 100
    },
    {
-    "location": "CharredRuins2"
+    "location": "CharredRuins2",
+    "chance": 100
    },
    {
-    "location": "CharredRuins3"
+    "location": "CharredRuins3",
+    "chance": 99
    },
    {
-    "location": "CharredRuins4"
+    "location": "CharredRuins4",
+    "chance": 99
    },
    {
     "location": "FaderLocation"
@@ -1654,19 +1692,24 @@
   },
   "locations": [
    {
-    "location": "CharredRuins1"
+    "location": "CharredRuins1",
+    "chance": 100
    },
    {
-    "location": "CharredRuins2"
+    "location": "CharredRuins2",
+    "chance": 100
    },
    {
-    "location": "CharredRuins3"
+    "location": "CharredRuins3",
+    "chance": 99
    },
    {
-    "location": "CharredRuins4"
+    "location": "CharredRuins4",
+    "chance": 99
    },
    {
-    "location": "FaderLocation"
+    "location": "FaderLocation",
+    "chance": 100
    }
   ]
  },
@@ -1700,19 +1743,24 @@
   },
   "locations": [
    {
-    "location": "CharredRuins1"
+    "location": "CharredRuins1",
+    "chance": 100
    },
    {
-    "location": "CharredRuins2"
+    "location": "CharredRuins2",
+    "chance": 100
    },
    {
-    "location": "CharredRuins3"
+    "location": "CharredRuins3",
+    "chance": 100
    },
    {
-    "location": "CharredRuins4"
+    "location": "CharredRuins4",
+    "chance": 100
    },
    {
-    "location": "FaderLocation"
+    "location": "FaderLocation",
+    "chance": 100
    }
   ]
  },
@@ -1750,10 +1798,12 @@
     "dungeon": true
    },
    {
-    "location": "CharredTowerRuins1"
+    "location": "CharredTowerRuins1",
+    "chance": 100
    },
    {
-    "location": "CharredTowerRuins1_dvergr"
+    "location": "CharredTowerRuins1_dvergr",
+    "chance": 100
    },
    {
     "location": "FortressRuins",
@@ -1801,20 +1851,24 @@
     "dungeon": true
    },
    {
-    "location": "CharredTowerRuins1"
+    "location": "CharredTowerRuins1",
+    "chance": 100
    },
    {
-    "location": "CharredTowerRuins1_dvergr"
+    "location": "CharredTowerRuins1_dvergr",
+    "chance": 100
    },
    {
     "location": "FortressRuins",
     "dungeon": true
    },
    {
-    "location": "PlaceofMystery1"
+    "location": "PlaceofMystery1",
+    "chance": 96.9
    },
    {
-    "location": "PlaceofMystery3"
+    "location": "PlaceofMystery3",
+    "chance": 96.9
    }
   ]
  },
@@ -1903,16 +1957,19 @@
     "dungeon": true
    },
    {
-    "location": "CharredRuins1"
+    "location": "CharredRuins1",
+    "chance": 100
    },
    {
-    "location": "CharredRuins2"
+    "location": "CharredRuins2",
+    "chance": 100
    },
    {
     "location": "CharredRuins3"
    },
    {
-    "location": "CharredRuins4"
+    "location": "CharredRuins4",
+    "chance": 100
    },
    {
     "location": "FortressRuins",
@@ -2012,16 +2069,20 @@
     "dungeon": true
    },
    {
-    "location": "CharredRuins1"
+    "location": "CharredRuins1",
+    "chance": 100
    },
    {
-    "location": "CharredRuins2"
+    "location": "CharredRuins2",
+    "chance": 100
    },
    {
-    "location": "CharredRuins3"
+    "location": "CharredRuins3",
+    "chance": 87.5
    },
    {
-    "location": "CharredRuins4"
+    "location": "CharredRuins4",
+    "chance": 75
    },
    {
     "location": "FortressRuins",
@@ -2063,16 +2124,20 @@
     "dungeon": true
    },
    {
-    "location": "CharredRuins1"
+    "location": "CharredRuins1",
+    "chance": 100
    },
    {
-    "location": "CharredRuins2"
+    "location": "CharredRuins2",
+    "chance": 100
    },
    {
-    "location": "CharredRuins3"
+    "location": "CharredRuins3",
+    "chance": 96.9
    },
    {
-    "location": "CharredRuins4"
+    "location": "CharredRuins4",
+    "chance": 96.9
    },
    {
     "location": "FortressRuins",
@@ -2114,16 +2179,20 @@
     "dungeon": true
    },
    {
-    "location": "CharredRuins1"
+    "location": "CharredRuins1",
+    "chance": 100
    },
    {
-    "location": "CharredRuins2"
+    "location": "CharredRuins2",
+    "chance": 100
    },
    {
-    "location": "CharredRuins3"
+    "location": "CharredRuins3",
+    "chance": 99.2
    },
    {
-    "location": "CharredRuins4"
+    "location": "CharredRuins4",
+    "chance": 98.4
    },
    {
     "location": "FortressRuins",
@@ -2190,16 +2259,20 @@
   },
   "locations": [
    {
-    "location": "CharredRuins1"
+    "location": "CharredRuins1",
+    "chance": 99.9
    },
    {
-    "location": "CharredRuins2"
+    "location": "CharredRuins2",
+    "chance": 93.8
    },
    {
-    "location": "CharredRuins3"
+    "location": "CharredRuins3",
+    "chance": 50
    },
    {
-    "location": "CharredRuins4"
+    "location": "CharredRuins4",
+    "chance": 50
    }
   ]
  },
@@ -2386,10 +2459,12 @@
     "dungeon": true
    },
    {
-    "location": "CharredTowerRuins2"
+    "location": "CharredTowerRuins2",
+    "chance": 100
    },
    {
-    "location": "CharredTowerRuins3"
+    "location": "CharredTowerRuins3",
+    "chance": 100
    },
    {
     "location": "FaderLocation"
@@ -2437,10 +2512,12 @@
     "dungeon": true
    },
    {
-    "location": "CharredTowerRuins2"
+    "location": "CharredTowerRuins2",
+    "chance": 100
    },
    {
-    "location": "CharredTowerRuins3"
+    "location": "CharredTowerRuins3",
+    "chance": 100
    },
    {
     "location": "FaderLocation"
@@ -2488,10 +2565,12 @@
     "dungeon": true
    },
    {
-    "location": "CharredTowerRuins2"
+    "location": "CharredTowerRuins2",
+    "chance": 100
    },
    {
-    "location": "CharredTowerRuins3"
+    "location": "CharredTowerRuins3",
+    "chance": 100
    },
    {
     "location": "FaderLocation"
@@ -2718,7 +2797,8 @@
   ],
   "locations": [
    {
-    "location": "WoodHouse13"
+    "location": "WoodHouse13",
+    "chance": 75
    }
   ]
  },
@@ -2755,7 +2835,8 @@
   ],
   "locations": [
    {
-    "location": "WoodHouse13"
+    "location": "WoodHouse13",
+    "chance": 50
    }
   ]
  },
@@ -2790,47 +2871,60 @@
   },
   "locations": [
    {
-    "location": "BearCave"
+    "location": "BearCave",
+    "chance": 50
    },
    {
-    "location": "StoneTowerRuins03"
+    "location": "StoneTowerRuins03",
+    "chance": 28.1
    },
    {
     "location": "WoodFarm1",
     "dungeon": true
    },
    {
-    "location": "WoodHouse1"
+    "location": "WoodHouse1",
+    "chance": 25
    },
    {
-    "location": "WoodHouse10"
+    "location": "WoodHouse10",
+    "chance": 25
    },
    {
-    "location": "WoodHouse11"
+    "location": "WoodHouse11",
+    "chance": 25
    },
    {
-    "location": "WoodHouse13"
+    "location": "WoodHouse13",
+    "chance": 25
    },
    {
-    "location": "WoodHouse2"
+    "location": "WoodHouse2",
+    "chance": 25
    },
    {
-    "location": "WoodHouse3"
+    "location": "WoodHouse3",
+    "chance": 25
    },
    {
-    "location": "WoodHouse4"
+    "location": "WoodHouse4",
+    "chance": 25
    },
    {
-    "location": "WoodHouse5"
+    "location": "WoodHouse5",
+    "chance": 25
    },
    {
-    "location": "WoodHouse6"
+    "location": "WoodHouse6",
+    "chance": 25
    },
    {
-    "location": "WoodHouse7"
+    "location": "WoodHouse7",
+    "chance": 25
    },
    {
-    "location": "WoodHouse9"
+    "location": "WoodHouse9",
+    "chance": 25
    },
    {
     "location": "WoodVillage1",
@@ -3322,7 +3416,8 @@
   ],
   "locations": [
    {
-    "location": "BearCave"
+    "location": "BearCave",
+    "chance": 87.5
    }
   ]
  },
@@ -3501,7 +3596,8 @@
   },
   "locations": [
    {
-    "location": "CharredFortress"
+    "location": "CharredFortress",
+    "chance": 100
    }
   ]
  },
@@ -3804,7 +3900,8 @@
   ],
   "locations": [
    {
-    "location": "BearCave"
+    "location": "BearCave",
+    "chance": 75
    }
   ],
   "placedBy": [
@@ -4461,13 +4558,16 @@
   },
   "locations": [
    {
-    "location": "CharredFortress"
+    "location": "CharredFortress",
+    "chance": 100
    },
    {
-    "location": "CharredStone_Spawner"
+    "location": "CharredStone_Spawner",
+    "chance": 100
    },
    {
-    "location": "CharredTowerRuins3"
+    "location": "CharredTowerRuins3",
+    "chance": 100
    }
   ]
  },
@@ -4531,13 +4631,16 @@
   },
   "locations": [
    {
-    "location": "CharredFortress"
+    "location": "CharredFortress",
+    "chance": 100
    },
    {
-    "location": "CharredStone_Spawner"
+    "location": "CharredStone_Spawner",
+    "chance": 100
    },
    {
-    "location": "CharredTowerRuins3"
+    "location": "CharredTowerRuins3",
+    "chance": 100
    }
   ]
  },
@@ -4570,13 +4673,16 @@
   },
   "locations": [
    {
-    "location": "PlaceofMystery1"
+    "location": "PlaceofMystery1",
+    "chance": 100
    },
    {
-    "location": "PlaceofMystery2"
+    "location": "PlaceofMystery2",
+    "chance": 100
    },
    {
-    "location": "PlaceofMystery3"
+    "location": "PlaceofMystery3",
+    "chance": 99.9
    }
   ]
  },
@@ -4609,13 +4715,16 @@
   },
   "locations": [
    {
-    "location": "PlaceofMystery1"
+    "location": "PlaceofMystery1",
+    "chance": 100
    },
    {
-    "location": "PlaceofMystery2"
+    "location": "PlaceofMystery2",
+    "chance": 100
    },
    {
-    "location": "PlaceofMystery3"
+    "location": "PlaceofMystery3",
+    "chance": 99.8
    }
   ]
  },
@@ -4711,7 +4820,8 @@
   "name": "Guck Sack",
   "locations": [
    {
-    "location": "InfestedTree01"
+    "location": "InfestedTree01",
+    "chance": 99.8
    }
   ]
  },
@@ -4745,7 +4855,8 @@
   "name": "Guck Sack",
   "locations": [
    {
-    "location": "InfestedTree01"
+    "location": "InfestedTree01",
+    "chance": 57.8
    }
   ]
  },
@@ -4817,7 +4928,8 @@
   "becomes": "HoleRock_root1_destruction",
   "locations": [
    {
-    "location": "TheHole01"
+    "location": "TheHole01",
+    "chance": 20
    },
    {
     "location": "TheHole01",
@@ -5448,7 +5560,8 @@
   "name": "$memorial_stone",
   "locations": [
    {
-    "location": "NorthMemorialPlace"
+    "location": "NorthMemorialPlace",
+    "chance": 90
    }
   ]
  },
@@ -6355,7 +6468,8 @@
   "becomes": "vfx_SawDust",
   "locations": [
    {
-    "location": "MorkBorg"
+    "location": "MorkBorg",
+    "chance": 75
    },
    {
     "location": "MorkBorg",
@@ -6494,7 +6608,8 @@
   "becomes": "vfx_SawDust",
   "locations": [
    {
-    "location": "MorkBorg"
+    "location": "MorkBorg",
+    "chance": 99.6
    },
    {
     "location": "MorkBorg",
@@ -7371,7 +7486,8 @@
     "location": "TheHole01"
    },
    {
-    "location": "WoodHouse3"
+    "location": "WoodHouse3",
+    "chance": 99.9
    }
   ]
  },
@@ -7431,14 +7547,16 @@
     "dungeon": true
    },
    {
-    "location": "GoblinHut03"
+    "location": "GoblinHut03",
+    "chance": 93.8
    },
    {
     "location": "WoodFarm1",
     "dungeon": true
    },
    {
-    "location": "WoodHouse8"
+    "location": "WoodHouse8",
+    "chance": 73.8
    }
   ]
  },
@@ -7466,16 +7584,20 @@
   },
   "locations": [
    {
-    "location": "Dolmen01"
+    "location": "Dolmen01",
+    "chance": 10
    },
    {
-    "location": "Dolmen02"
+    "location": "Dolmen02",
+    "chance": 20
    },
    {
-    "location": "Dolmen03"
+    "location": "Dolmen03",
+    "chance": 30
    },
    {
-    "location": "ShipSetting01"
+    "location": "ShipSetting01",
+    "chance": 50
    }
   ]
  },
@@ -7510,25 +7632,32 @@
   },
   "locations": [
    {
-    "location": "CharredTowerRuins1_dvergr"
+    "location": "CharredTowerRuins1_dvergr",
+    "chance": 87.5
    },
    {
-    "location": "Mistlands_DvergrBossEntrance1"
+    "location": "Mistlands_DvergrBossEntrance1",
+    "chance": 75
    },
    {
-    "location": "Mistlands_Excavation1"
+    "location": "Mistlands_Excavation1",
+    "chance": 98.4
    },
    {
-    "location": "Mistlands_Excavation2"
+    "location": "Mistlands_Excavation2",
+    "chance": 98.4
    },
    {
-    "location": "Mistlands_GuardTower1_new"
+    "location": "Mistlands_GuardTower1_new",
+    "chance": 99.2
    },
    {
-    "location": "Mistlands_GuardTower2_new"
+    "location": "Mistlands_GuardTower2_new",
+    "chance": 87.5
    },
    {
-    "location": "Mistlands_Lighthouse1_new"
+    "location": "Mistlands_Lighthouse1_new",
+    "chance": 98.4
    }
   ]
  },
@@ -7573,16 +7702,20 @@
   },
   "locations": [
    {
-    "location": "Mistlands_DvergrBossEntrance1"
+    "location": "Mistlands_DvergrBossEntrance1",
+    "chance": 96.6
    },
    {
-    "location": "Mistlands_GuardTower1_new"
+    "location": "Mistlands_GuardTower1_new",
+    "chance": 36
    },
    {
-    "location": "Mistlands_GuardTower2_new"
+    "location": "Mistlands_GuardTower2_new",
+    "chance": 20
    },
    {
-    "location": "Mistlands_Lighthouse1_new"
+    "location": "Mistlands_Lighthouse1_new",
+    "chance": 48.8
    }
   ]
  },
@@ -7612,10 +7745,12 @@
     "dungeon": true
    },
    {
-    "location": "CharredTowerRuins1"
+    "location": "CharredTowerRuins1",
+    "chance": 100
    },
    {
-    "location": "CharredTowerRuins1_dvergr"
+    "location": "CharredTowerRuins1_dvergr",
+    "chance": 100
    },
    {
     "location": "FortressRuins",
@@ -7736,7 +7871,8 @@
     "dungeon": true
    },
    {
-    "location": "TrollCave02"
+    "location": "TrollCave02",
+    "chance": 99.8
    }
   ]
  },
@@ -7762,13 +7898,16 @@
     "dungeon": true
    },
    {
-    "location": "Dolmen01"
+    "location": "Dolmen01",
+    "chance": 50
    },
    {
-    "location": "Dolmen02"
+    "location": "Dolmen02",
+    "chance": 50
    },
    {
-    "location": "Dolmen03"
+    "location": "Dolmen03",
+    "chance": 50
    },
    {
     "location": "Hildir_cave",
@@ -7785,13 +7924,16 @@
     "location": "ShipSetting01"
    },
    {
-    "location": "ShipSetting02"
+    "location": "ShipSetting02",
+    "chance": 87.5
    },
    {
-    "location": "ShipSetting03"
+    "location": "ShipSetting03",
+    "chance": 87.5
    },
    {
-    "location": "TrollCave02"
+    "location": "TrollCave02",
+    "chance": 66
    }
   ]
  },
@@ -7805,7 +7947,8 @@
   },
   "locations": [
    {
-    "location": "CombatRuin01"
+    "location": "CombatRuin01",
+    "chance": 80
    },
    {
     "location": "Crypt2",
@@ -7837,13 +7980,16 @@
     "location": "ShipSetting01"
    },
    {
-    "location": "ShipSetting02"
+    "location": "ShipSetting02",
+    "chance": 87.5
    },
    {
-    "location": "ShipSetting03"
+    "location": "ShipSetting03",
+    "chance": 87.5
    },
    {
-    "location": "TrollCave02"
+    "location": "TrollCave02",
+    "chance": 66
    }
   ]
  },
@@ -7857,10 +8003,12 @@
   },
   "locations": [
    {
-    "location": "BearCave"
+    "location": "BearCave",
+    "chance": 66
    },
    {
-    "location": "CombatRuin01"
+    "location": "CombatRuin01",
+    "chance": 80
    },
    {
     "location": "Crypt2",
@@ -7890,7 +8038,8 @@
     "location": "NorthMemorialPlace"
    },
    {
-    "location": "TrollCave02"
+    "location": "TrollCave02",
+    "chance": 66
    }
   ]
  },
@@ -8048,13 +8197,16 @@
     "dungeon": true
    },
    {
-    "location": "MorgenHole1"
+    "location": "MorgenHole1",
+    "chance": 100
    },
    {
-    "location": "MorgenHole2"
+    "location": "MorgenHole2",
+    "chance": 99.8
    },
    {
-    "location": "MorgenHole3"
+    "location": "MorgenHole3",
+    "chance": 99.8
    },
    {
     "location": "MountainCave02",
@@ -8083,13 +8235,16 @@
     "location": "CharredFortress"
    },
    {
-    "location": "MorgenHole1"
+    "location": "MorgenHole1",
+    "chance": 98.2
    },
    {
-    "location": "MorgenHole2"
+    "location": "MorgenHole2",
+    "chance": 97.6
    },
    {
-    "location": "MorgenHole3"
+    "location": "MorgenHole3",
+    "chance": 97.6
    },
    {
     "location": "PlaceofMystery1"
@@ -8135,10 +8290,12 @@
     "dungeon": true
    },
    {
-    "location": "ShipSetting02"
+    "location": "ShipSetting02",
+    "chance": 96.9
    },
    {
-    "location": "ShipSetting03"
+    "location": "ShipSetting03",
+    "chance": 87.5
    }
   ]
  },
@@ -8242,7 +8399,8 @@
   },
   "locations": [
    {
-    "location": "MountainGrave01"
+    "location": "MountainGrave01",
+    "chance": 50
    }
   ]
  },
@@ -8268,7 +8426,8 @@
     "dungeon": true
    },
    {
-    "location": "WoodHouse12"
+    "location": "WoodHouse12",
+    "chance": 79.8
    }
   ]
  },
@@ -8343,7 +8502,8 @@
   },
   "locations": [
    {
-    "location": "BearCave"
+    "location": "BearCave",
+    "chance": 100
    },
    {
     "location": "Crypt2",
@@ -8366,7 +8526,8 @@
     "dungeon": true
    },
    {
-    "location": "TrollCave02"
+    "location": "TrollCave02",
+    "chance": 100
    }
   ]
  },
@@ -8550,10 +8711,12 @@
     "dungeon": true
    },
    {
-    "location": "CharredTowerRuins1"
+    "location": "CharredTowerRuins1",
+    "chance": 79.8
    },
    {
-    "location": "CharredTowerRuins1_dvergr"
+    "location": "CharredTowerRuins1_dvergr",
+    "chance": 79.8
    },
    {
     "location": "FortressRuins",
@@ -8593,7 +8756,8 @@
     "location": "TheHole01"
    },
    {
-    "location": "WoodHouse3"
+    "location": "WoodHouse3",
+    "chance": 100
    }
   ]
  },
@@ -8638,7 +8802,8 @@
   },
   "locations": [
    {
-    "location": "SulfurArch"
+    "location": "SulfurArch",
+    "chance": 100
    }
   ]
  },
@@ -8848,7 +9013,8 @@
   },
   "locations": [
    {
-    "location": "VoltureNest"
+    "location": "VoltureNest",
+    "chance": 98.4
    }
   ]
  },
@@ -9608,13 +9774,15 @@
     "location": "StoneHenge1"
    },
    {
-    "location": "StoneHenge3"
+    "location": "StoneHenge3",
+    "chance": 99.6
    },
    {
     "location": "StoneHenge5"
    },
    {
-    "location": "StoneHenge6"
+    "location": "StoneHenge6",
+    "chance": 99.6
    }
   ]
  },
@@ -9769,10 +9937,12 @@
   ],
   "locations": [
    {
-    "location": "ShipSetting02"
+    "location": "ShipSetting02",
+    "chance": 99.6
    },
    {
-    "location": "ShipSetting03"
+    "location": "ShipSetting03",
+    "chance": 99.6
    }
   ]
  },
@@ -9884,7 +10054,8 @@
   ],
   "locations": [
    {
-    "location": "ShipSetting02"
+    "location": "ShipSetting02",
+    "chance": 100
    },
    {
     "location": "ShipSetting03"
@@ -10232,7 +10403,8 @@
   ],
   "locations": [
    {
-    "location": "LumberCamp"
+    "location": "LumberCamp",
+    "chance": 100
    }
   ]
  },
@@ -10275,7 +10447,8 @@
     "location": "CharredStone_Spawner"
    },
    {
-    "location": "CharredTowerRuins3"
+    "location": "CharredTowerRuins3",
+    "chance": 50
    }
   ]
  },
@@ -11265,7 +11438,8 @@
   ],
   "locations": [
    {
-    "location": "Mistlands_GuardTower3_ruined_new"
+    "location": "Mistlands_GuardTower3_ruined_new",
+    "chance": 96.9
    }
   ]
  },
@@ -11383,25 +11557,32 @@
   "name": "Ancient Pot",
   "locations": [
    {
-    "location": "CharredRuins1"
+    "location": "CharredRuins1",
+    "chance": 100
    },
    {
-    "location": "CharredRuins2"
+    "location": "CharredRuins2",
+    "chance": 97.3
    },
    {
-    "location": "CharredRuins3"
+    "location": "CharredRuins3",
+    "chance": 79.8
    },
    {
-    "location": "CharredRuins4"
+    "location": "CharredRuins4",
+    "chance": 69.9
    },
    {
-    "location": "MorgenHole1"
+    "location": "MorgenHole1",
+    "chance": 93.8
    },
    {
-    "location": "MorgenHole2"
+    "location": "MorgenHole2",
+    "chance": 93.8
    },
    {
-    "location": "MorgenHole3"
+    "location": "MorgenHole3",
+    "chance": 93.8
    }
   ]
  },
@@ -11502,28 +11683,36 @@
   "name": "Ancient Pot",
   "locations": [
    {
-    "location": "CharredRuins1"
+    "location": "CharredRuins1",
+    "chance": 100
    },
    {
-    "location": "CharredRuins2"
+    "location": "CharredRuins2",
+    "chance": 98.8
    },
    {
-    "location": "CharredRuins3"
+    "location": "CharredRuins3",
+    "chance": 79.8
    },
    {
-    "location": "CharredRuins4"
+    "location": "CharredRuins4",
+    "chance": 79.8
    },
    {
-    "location": "CharredTowerRuins1"
+    "location": "CharredTowerRuins1",
+    "chance": 96.9
    },
    {
-    "location": "MorgenHole1"
+    "location": "MorgenHole1",
+    "chance": 87.5
    },
    {
-    "location": "MorgenHole2"
+    "location": "MorgenHole2",
+    "chance": 87.5
    },
    {
-    "location": "MorgenHole3"
+    "location": "MorgenHole3",
+    "chance": 87.5
    }
   ]
  },
@@ -11624,25 +11813,32 @@
   "name": "Ancient Pot",
   "locations": [
    {
-    "location": "CharredRuins1"
+    "location": "CharredRuins1",
+    "chance": 100
    },
    {
-    "location": "CharredRuins2"
+    "location": "CharredRuins2",
+    "chance": 97.3
    },
    {
-    "location": "CharredRuins3"
+    "location": "CharredRuins3",
+    "chance": 79.8
    },
    {
-    "location": "CharredRuins4"
+    "location": "CharredRuins4",
+    "chance": 69.9
    },
    {
-    "location": "MorgenHole1"
+    "location": "MorgenHole1",
+    "chance": 87.5
    },
    {
-    "location": "MorgenHole2"
+    "location": "MorgenHole2",
+    "chance": 87.5
    },
    {
-    "location": "MorgenHole3"
+    "location": "MorgenHole3",
+    "chance": 87.5
    }
   ]
  },
@@ -11746,28 +11942,36 @@
   ],
   "locations": [
    {
-    "location": "CharredRuins1"
+    "location": "CharredRuins1",
+    "chance": 100
    },
    {
-    "location": "CharredRuins2"
+    "location": "CharredRuins2",
+    "chance": 98.8
    },
    {
-    "location": "CharredRuins3"
+    "location": "CharredRuins3",
+    "chance": 79.8
    },
    {
-    "location": "CharredRuins4"
+    "location": "CharredRuins4",
+    "chance": 79.8
    },
    {
-    "location": "CharredTowerRuins1"
+    "location": "CharredTowerRuins1",
+    "chance": 96.9
    },
    {
-    "location": "MorgenHole1"
+    "location": "MorgenHole1",
+    "chance": 96.9
    },
    {
-    "location": "MorgenHole2"
+    "location": "MorgenHole2",
+    "chance": 96.9
    },
    {
-    "location": "MorgenHole3"
+    "location": "MorgenHole3",
+    "chance": 96.9
    }
   ]
  },
@@ -11868,25 +12072,32 @@
   "name": "Ancient Pot",
   "locations": [
    {
-    "location": "CharredRuins1"
+    "location": "CharredRuins1",
+    "chance": 100
    },
    {
-    "location": "CharredRuins2"
+    "location": "CharredRuins2",
+    "chance": 97.3
    },
    {
-    "location": "CharredRuins3"
+    "location": "CharredRuins3",
+    "chance": 79.8
    },
    {
-    "location": "CharredRuins4"
+    "location": "CharredRuins4",
+    "chance": 69.9
    },
    {
-    "location": "MorgenHole1"
+    "location": "MorgenHole1",
+    "chance": 87.5
    },
    {
-    "location": "MorgenHole2"
+    "location": "MorgenHole2",
+    "chance": 87.5
    },
    {
-    "location": "MorgenHole3"
+    "location": "MorgenHole3",
+    "chance": 87.5
    }
   ]
  },
@@ -11987,28 +12198,36 @@
   "name": "Ancient Pot",
   "locations": [
    {
-    "location": "CharredRuins1"
+    "location": "CharredRuins1",
+    "chance": 100
    },
    {
-    "location": "CharredRuins2"
+    "location": "CharredRuins2",
+    "chance": 98.8
    },
    {
-    "location": "CharredRuins3"
+    "location": "CharredRuins3",
+    "chance": 79.8
    },
    {
-    "location": "CharredRuins4"
+    "location": "CharredRuins4",
+    "chance": 79.8
    },
    {
-    "location": "CharredTowerRuins1"
+    "location": "CharredTowerRuins1",
+    "chance": 96.9
    },
    {
-    "location": "MorgenHole1"
+    "location": "MorgenHole1",
+    "chance": 93.8
    },
    {
-    "location": "MorgenHole2"
+    "location": "MorgenHole2",
+    "chance": 93.8
    },
    {
-    "location": "MorgenHole3"
+    "location": "MorgenHole3",
+    "chance": 93.8
    }
   ]
  },
@@ -12136,7 +12355,8 @@
     "location": "MorgenHole3"
    },
    {
-    "location": "VoltureNest"
+    "location": "VoltureNest",
+    "chance": 87.5
    }
   ]
  },
@@ -12342,10 +12562,12 @@
     "location": "Mistlands_GuardTower1_new"
    },
    {
-    "location": "Mistlands_GuardTower1_ruined_new"
+    "location": "Mistlands_GuardTower1_ruined_new",
+    "chance": 50
    },
    {
-    "location": "Mistlands_GuardTower1_ruined_new2"
+    "location": "Mistlands_GuardTower1_ruined_new2",
+    "chance": 50
    },
    {
     "location": "Mistlands_GuardTower2_new"
@@ -12354,7 +12576,8 @@
     "location": "Mistlands_GuardTower3_new"
    },
    {
-    "location": "Mistlands_GuardTower3_ruined_new"
+    "location": "Mistlands_GuardTower3_ruined_new",
+    "chance": 50
    },
    {
     "location": "Mistlands_Lighthouse1_new"
@@ -12363,7 +12586,8 @@
     "location": "Mistlands_RoadPost1"
    },
    {
-    "location": "Mistlands_RockSpire1"
+    "location": "Mistlands_RockSpire1",
+    "chance": 36
    }
   ]
  },
@@ -12414,14 +12638,16 @@
   "becomes": "caverock_ice_stalagmite_destruction",
   "locations": [
    {
-    "location": "Hildir_cave"
+    "location": "Hildir_cave",
+    "chance": 100
    },
    {
     "location": "Hildir_cave",
     "dungeon": true
    },
    {
-    "location": "MountainCave02"
+    "location": "MountainCave02",
+    "chance": 99.8
    },
    {
     "location": "MountainCave02",
@@ -12448,14 +12674,16 @@
   "becomes": "caverock_ice_stalagtite_falling",
   "locations": [
    {
-    "location": "Hildir_cave"
+    "location": "Hildir_cave",
+    "chance": 100
    },
    {
     "location": "Hildir_cave",
     "dungeon": true
    },
    {
-    "location": "MountainCave02"
+    "location": "MountainCave02",
+    "chance": 100
    },
    {
     "location": "MountainCave02",
@@ -12696,19 +12924,24 @@
     "location": "MorgenHole1"
    },
    {
-    "location": "MorgenHole2"
+    "location": "MorgenHole2",
+    "chance": 99.9
    },
    {
-    "location": "MorgenHole3"
+    "location": "MorgenHole3",
+    "chance": 99.9
    },
    {
-    "location": "PlaceofMystery3"
+    "location": "PlaceofMystery3",
+    "chance": 99.9
    },
    {
-    "location": "SulfurArch"
+    "location": "SulfurArch",
+    "chance": 100
    },
    {
-    "location": "VoltureNest"
+    "location": "VoltureNest",
+    "chance": 100
    }
   ]
  },
@@ -12765,16 +12998,20 @@
   "becomes": "cliff_ashlands7_HalfArch_frac",
   "locations": [
    {
-    "location": "MorgenHole1"
+    "location": "MorgenHole1",
+    "chance": 99.9
    },
    {
-    "location": "MorgenHole2"
+    "location": "MorgenHole2",
+    "chance": 99.9
    },
    {
-    "location": "MorgenHole3"
+    "location": "MorgenHole3",
+    "chance": 99.9
    },
    {
-    "location": "PlaceofMystery3"
+    "location": "PlaceofMystery3",
+    "chance": 88.4
    }
   ]
  },
@@ -12921,10 +13158,12 @@
   ],
   "locations": [
    {
-    "location": "Mistlands_DvergrBossEntrance1"
+    "location": "Mistlands_DvergrBossEntrance1",
+    "chance": 100
    },
    {
-    "location": "Mistlands_DvergrTownEntrance2"
+    "location": "Mistlands_DvergrTownEntrance2",
+    "chance": 100
    }
   ]
  },
@@ -13308,10 +13547,12 @@
     "location": "Mistlands_GuardTower1_new"
    },
    {
-    "location": "Mistlands_GuardTower1_ruined_new"
+    "location": "Mistlands_GuardTower1_ruined_new",
+    "chance": 90
    },
    {
-    "location": "Mistlands_GuardTower1_ruined_new2"
+    "location": "Mistlands_GuardTower1_ruined_new2",
+    "chance": 86.7
    },
    {
     "location": "Mistlands_GuardTower2_new"
@@ -13365,7 +13606,8 @@
     "location": "Mistlands_DvergrBossEntrance1"
    },
    {
-    "location": "Mistlands_GuardTower3_new"
+    "location": "Mistlands_GuardTower3_new",
+    "chance": 93.8
    }
   ]
  },
@@ -13403,16 +13645,20 @@
   },
   "locations": [
    {
-    "location": "Mistlands_GuardTower1_new"
+    "location": "Mistlands_GuardTower1_new",
+    "chance": 93.8
    },
    {
-    "location": "Mistlands_GuardTower2_new"
+    "location": "Mistlands_GuardTower2_new",
+    "chance": 87.5
    },
    {
-    "location": "Mistlands_GuardTower3_new"
+    "location": "Mistlands_GuardTower3_new",
+    "chance": 75
    },
    {
-    "location": "Mistlands_Lighthouse1_new"
+    "location": "Mistlands_Lighthouse1_new",
+    "chance": 87.5
    }
   ]
  },
@@ -13450,16 +13696,20 @@
   },
   "locations": [
    {
-    "location": "Mistlands_DvergrBossEntrance1"
+    "location": "Mistlands_DvergrBossEntrance1",
+    "chance": 75
    },
    {
-    "location": "Mistlands_GuardTower1_new"
+    "location": "Mistlands_GuardTower1_new",
+    "chance": 100
    },
    {
-    "location": "Mistlands_GuardTower2_new"
+    "location": "Mistlands_GuardTower2_new",
+    "chance": 99.6
    },
    {
-    "location": "Mistlands_Lighthouse1_new"
+    "location": "Mistlands_Lighthouse1_new",
+    "chance": 98.4
    }
   ]
  },
@@ -13514,7 +13764,8 @@
     "location": "Mistlands_GuardTower3_new"
    },
    {
-    "location": "Mistlands_Harbour1"
+    "location": "Mistlands_Harbour1",
+    "chance": 99.9
    }
   ]
  },
@@ -13596,7 +13847,8 @@
     "location": "Mistlands_GuardTower3_new"
    },
    {
-    "location": "Mistlands_Harbour1"
+    "location": "Mistlands_Harbour1",
+    "chance": 66
    },
    {
     "location": "Mistlands_Lighthouse1_new"
@@ -13637,10 +13889,12 @@
     "location": "Mistlands_GuardTower1_new"
    },
    {
-    "location": "Mistlands_GuardTower1_ruined_new"
+    "location": "Mistlands_GuardTower1_ruined_new",
+    "chance": 90
    },
    {
-    "location": "Mistlands_GuardTower1_ruined_new2"
+    "location": "Mistlands_GuardTower1_ruined_new2",
+    "chance": 86.7
    },
    {
     "location": "Mistlands_GuardTower2_new"
@@ -13649,7 +13903,8 @@
     "location": "Mistlands_GuardTower3_new"
    },
    {
-    "location": "Mistlands_GuardTower3_ruined_new"
+    "location": "Mistlands_GuardTower3_ruined_new",
+    "chance": 99.2
    },
    {
     "location": "Mistlands_Lighthouse1_new"
@@ -13757,7 +14012,8 @@
     "location": "Mistlands_GuardTower3_new"
    },
    {
-    "location": "Mistlands_Harbour1"
+    "location": "Mistlands_Harbour1",
+    "chance": 96.1
    },
    {
     "location": "Mistlands_Lighthouse1_new"
@@ -13858,7 +14114,8 @@
   },
   "locations": [
    {
-    "location": "Mistlands_DvergrBossEntrance1"
+    "location": "Mistlands_DvergrBossEntrance1",
+    "chance": 75
    }
   ]
  },
@@ -13894,19 +14151,24 @@
   },
   "locations": [
    {
-    "location": "CharredTowerRuins1_dvergr"
+    "location": "CharredTowerRuins1_dvergr",
+    "chance": 93.8
    },
    {
-    "location": "Mistlands_DvergrBossEntrance1"
+    "location": "Mistlands_DvergrBossEntrance1",
+    "chance": 93.8
    },
    {
-    "location": "Mistlands_GuardTower1_new"
+    "location": "Mistlands_GuardTower1_new",
+    "chance": 99.2
    },
    {
-    "location": "Mistlands_GuardTower2_new"
+    "location": "Mistlands_GuardTower2_new",
+    "chance": 93.8
    },
    {
-    "location": "Mistlands_Lighthouse1_new"
+    "location": "Mistlands_Lighthouse1_new",
+    "chance": 99.9
    }
   ]
  },
@@ -13953,7 +14215,8 @@
     "location": "Mistlands_GuardTower2_new"
    },
    {
-    "location": "Mistlands_Lighthouse1_new"
+    "location": "Mistlands_Lighthouse1_new",
+    "chance": 93.8
    }
   ]
  },
@@ -14035,7 +14298,8 @@
   },
   "locations": [
    {
-    "location": "CharredTowerRuins1_dvergr"
+    "location": "CharredTowerRuins1_dvergr",
+    "chance": 100
    },
    {
     "location": "Mistlands_Excavation1"
@@ -14122,34 +14386,44 @@
   },
   "locations": [
    {
-    "location": "CharredTowerRuins1_dvergr"
+    "location": "CharredTowerRuins1_dvergr",
+    "chance": 100
    },
    {
-    "location": "Mistlands_DvergrTownEntrance1"
+    "location": "Mistlands_DvergrTownEntrance1",
+    "chance": 99.8
    },
    {
-    "location": "Mistlands_Excavation1"
+    "location": "Mistlands_Excavation1",
+    "chance": 100
    },
    {
-    "location": "Mistlands_Excavation2"
+    "location": "Mistlands_Excavation2",
+    "chance": 100
    },
    {
-    "location": "Mistlands_GuardTower1_new"
+    "location": "Mistlands_GuardTower1_new",
+    "chance": 99.8
    },
    {
-    "location": "Mistlands_GuardTower1_ruined_new"
+    "location": "Mistlands_GuardTower1_ruined_new",
+    "chance": 91
    },
    {
-    "location": "Mistlands_GuardTower2_new"
+    "location": "Mistlands_GuardTower2_new",
+    "chance": 99.8
    },
    {
-    "location": "Mistlands_GuardTower3_new"
+    "location": "Mistlands_GuardTower3_new",
+    "chance": 99.8
    },
    {
-    "location": "Mistlands_GuardTower3_ruined_new"
+    "location": "Mistlands_GuardTower3_ruined_new",
+    "chance": 91
    },
    {
-    "location": "Mistlands_Lighthouse1_new"
+    "location": "Mistlands_Lighthouse1_new",
+    "chance": 99.8
    }
   ]
  },
@@ -14193,7 +14467,8 @@
     "location": "Mistlands_Excavation2"
    },
    {
-    "location": "Mistlands_Excavation3"
+    "location": "Mistlands_Excavation3",
+    "chance": 100
    }
   ]
  },
@@ -15064,16 +15339,20 @@
   ],
   "locations": [
    {
-    "location": "Mistlands_Giant1"
+    "location": "Mistlands_Giant1",
+    "chance": 25
    },
    {
-    "location": "Mistlands_Swords1"
+    "location": "Mistlands_Swords1",
+    "chance": 83
    },
    {
-    "location": "Mistlands_Swords2"
+    "location": "Mistlands_Swords2",
+    "chance": 66
    },
    {
-    "location": "Mistlands_Swords3"
+    "location": "Mistlands_Swords3",
+    "chance": 91.5
    }
   ]
  },
@@ -15137,13 +15416,16 @@
   ],
   "locations": [
    {
-    "location": "Mistlands_Swords1"
+    "location": "Mistlands_Swords1",
+    "chance": 87.5
    },
    {
-    "location": "Mistlands_Swords2"
+    "location": "Mistlands_Swords2",
+    "chance": 50
    },
    {
-    "location": "Mistlands_Swords3"
+    "location": "Mistlands_Swords3",
+    "chance": 93.8
    }
   ]
  },
@@ -15223,7 +15505,8 @@
     "dungeon": true
    },
    {
-    "location": "GoblinHut03"
+    "location": "GoblinHut03",
+    "chance": 50
    },
    {
     "location": "StoneTower1"
@@ -15350,7 +15633,8 @@
     "dungeon": true
    },
    {
-    "location": "GoblinHut01"
+    "location": "GoblinHut01",
+    "chance": 93.8
    },
    {
     "location": "GoblinHut02"
@@ -15829,13 +16113,15 @@
     "location": "StoneHenge3"
    },
    {
-    "location": "StoneHenge4"
+    "location": "StoneHenge4",
+    "chance": 100
    },
    {
     "location": "StoneHenge5"
    },
    {
-    "location": "StoneHenge6"
+    "location": "StoneHenge6",
+    "chance": 93.8
    }
   ]
  },
@@ -17384,7 +17670,8 @@
   ],
   "locations": [
    {
-    "location": "MountainCave02"
+    "location": "MountainCave02",
+    "chance": 33
    }
   ]
  },
@@ -17457,7 +17744,8 @@
   ],
   "locations": [
    {
-    "location": "MountainCave02"
+    "location": "MountainCave02",
+    "chance": 33
    }
   ]
  },
@@ -18143,7 +18431,8 @@
     "location": "ShipWreck02_DN"
    },
    {
-    "location": "ShipWreck03"
+    "location": "ShipWreck03",
+    "chance": 50
    },
    {
     "location": "ShipWreck04"
@@ -18213,13 +18502,16 @@
   },
   "locations": [
    {
-    "location": "ShipWreck01"
+    "location": "ShipWreck01",
+    "chance": 50
    },
    {
-    "location": "ShipWreck03"
+    "location": "ShipWreck03",
+    "chance": 50
    },
    {
-    "location": "ShipWreck04"
+    "location": "ShipWreck04",
+    "chance": 50
    }
   ]
  },
@@ -18373,10 +18665,12 @@
   },
   "locations": [
    {
-    "location": "ShipWreck01_DN"
+    "location": "ShipWreck01_DN",
+    "chance": 93.8
    },
    {
-    "location": "ShipWreck02_DN"
+    "location": "ShipWreck02_DN",
+    "chance": 93.8
    }
   ]
  },
@@ -18652,7 +18946,8 @@
   ],
   "locations": [
    {
-    "location": "LumberCamp"
+    "location": "LumberCamp",
+    "chance": 100
    }
   ]
  },
@@ -18807,16 +19102,19 @@
     "location": "StoneHenge1"
    },
    {
-    "location": "StoneHenge2"
+    "location": "StoneHenge2",
+    "chance": 100
    },
    {
     "location": "StoneHenge3"
    },
    {
-    "location": "StoneHenge4"
+    "location": "StoneHenge4",
+    "chance": 75
    },
    {
-    "location": "StoneHenge5"
+    "location": "StoneHenge5",
+    "chance": 75
    },
    {
     "location": "StoneHenge6"
@@ -19451,16 +19749,20 @@
   },
   "locations": [
    {
-    "location": "ShipWreck01"
+    "location": "ShipWreck01",
+    "chance": 74.9
    },
    {
-    "location": "ShipWreck02"
+    "location": "ShipWreck02",
+    "chance": 74.9
    },
    {
-    "location": "ShipWreck03"
+    "location": "ShipWreck03",
+    "chance": 74.9
    },
    {
-    "location": "ShipWreck04"
+    "location": "ShipWreck04",
+    "chance": 74.9
    }
   ]
  },
@@ -19672,49 +19974,64 @@
     "location": "StoneHouse3"
    },
    {
-    "location": "StoneTowerRuins03"
+    "location": "StoneTowerRuins03",
+    "chance": 87.8
    },
    {
-    "location": "StoneTowerRuins07"
+    "location": "StoneTowerRuins07",
+    "chance": 25
    },
    {
-    "location": "StoneTowerRuins08"
+    "location": "StoneTowerRuins08",
+    "chance": 25
    },
    {
-    "location": "StoneTowerRuins09"
+    "location": "StoneTowerRuins09",
+    "chance": 50
    },
    {
-    "location": "StoneTowerRuins09_sunk"
+    "location": "StoneTowerRuins09_sunk",
+    "chance": 50
    },
    {
-    "location": "StoneTowerRuins10"
+    "location": "StoneTowerRuins10",
+    "chance": 25
    },
    {
-    "location": "StoneTowerRuins10_sunk"
+    "location": "StoneTowerRuins10_sunk",
+    "chance": 50
    },
    {
-    "location": "SwampHut1"
+    "location": "SwampHut1",
+    "chance": 10
    },
    {
-    "location": "SwampHut1_1"
+    "location": "SwampHut1_1",
+    "chance": 10
    },
    {
-    "location": "SwampHut2"
+    "location": "SwampHut2",
+    "chance": 10
    },
    {
-    "location": "SwampHut2_1"
+    "location": "SwampHut2_1",
+    "chance": 10
    },
    {
-    "location": "SwampHut3"
+    "location": "SwampHut3",
+    "chance": 10
    },
    {
-    "location": "SwampHut3_1"
+    "location": "SwampHut3_1",
+    "chance": 10
    },
    {
-    "location": "SwampHut4"
+    "location": "SwampHut4",
+    "chance": 75
    },
    {
-    "location": "SwampHut5"
+    "location": "SwampHut5",
+    "chance": 10
    },
    {
     "location": "TrollCave02"
@@ -19799,10 +20116,12 @@
     "dungeon": true
    },
    {
-    "location": "ShipSetting02"
+    "location": "ShipSetting02",
+    "chance": 50
    },
    {
-    "location": "ShipSetting03"
+    "location": "ShipSetting03",
+    "chance": 87.5
    }
   ]
  },
@@ -19888,10 +20207,12 @@
     "dungeon": true
    },
    {
-    "location": "GoblinHut02"
+    "location": "GoblinHut02",
+    "chance": 30
    },
    {
-    "location": "GoblinHut03"
+    "location": "GoblinHut03",
+    "chance": 30
    },
    {
     "location": "Hildir_plainsfortress",
@@ -19907,10 +20228,12 @@
     "location": "StoneHouse5_heath"
    },
    {
-    "location": "StoneTower1"
+    "location": "StoneTower1",
+    "chance": 50
    },
    {
-    "location": "StoneTower3"
+    "location": "StoneTower3",
+    "chance": 50
    }
   ]
  },
@@ -19992,25 +20315,32 @@
     "dungeon": true
    },
    {
-    "location": "WoodHouse1"
+    "location": "WoodHouse1",
+    "chance": 50
    },
    {
-    "location": "WoodHouse10"
+    "location": "WoodHouse10",
+    "chance": 50
    },
    {
-    "location": "WoodHouse11"
+    "location": "WoodHouse11",
+    "chance": 50
    },
    {
-    "location": "WoodHouse12"
+    "location": "WoodHouse12",
+    "chance": 50
    },
    {
-    "location": "WoodHouse13"
+    "location": "WoodHouse13",
+    "chance": 50
    },
    {
-    "location": "WoodHouse7"
+    "location": "WoodHouse7",
+    "chance": 50
    },
    {
-    "location": "WoodHouse9"
+    "location": "WoodHouse9",
+    "chance": 50
    },
    {
     "location": "WoodVillage1",
@@ -20326,7 +20656,8 @@
   },
   "locations": [
    {
-    "location": "AbandonedLogCabin02"
+    "location": "AbandonedLogCabin02",
+    "chance": 94
    },
    {
     "location": "AbandonedLogCabin03"
@@ -20335,13 +20666,16 @@
     "location": "AbandonedLogCabin04"
    },
    {
-    "location": "MountainWell1"
+    "location": "MountainWell1",
+    "chance": 75
    },
    {
-    "location": "StoneTowerRuins04"
+    "location": "StoneTowerRuins04",
+    "chance": 86.4
    },
    {
-    "location": "StoneTowerRuins05"
+    "location": "StoneTowerRuins05",
+    "chance": 50
    },
    {
     "location": "StoneTowerRuins05_leet"
@@ -20392,13 +20726,16 @@
   },
   "locations": [
    {
-    "location": "StoneHenge1"
+    "location": "StoneHenge1",
+    "chance": 50
    },
    {
-    "location": "StoneHenge2"
+    "location": "StoneHenge2",
+    "chance": 50
    },
    {
-    "location": "StoneHenge3"
+    "location": "StoneHenge3",
+    "chance": 50
    }
   ]
  },
@@ -20569,10 +20906,12 @@
   },
   "locations": [
    {
-    "location": "ShipWreck01_DN"
+    "location": "ShipWreck01_DN",
+    "chance": 75
    },
    {
-    "location": "ShipWreck02_DN"
+    "location": "ShipWreck02_DN",
+    "chance": 75
    }
   ]
  },
@@ -20739,13 +21078,16 @@
   },
   "locations": [
    {
-    "location": "Grave1"
+    "location": "Grave1",
+    "chance": 50
    },
    {
-    "location": "SwampRuin1"
+    "location": "SwampRuin1",
+    "chance": 25.1
    },
    {
-    "location": "SwampRuin2"
+    "location": "SwampRuin2",
+    "chance": 25.1
    }
   ]
  },
@@ -20829,7 +21171,8 @@
   },
   "locations": [
    {
-    "location": "ShipSetting01"
+    "location": "ShipSetting01",
+    "chance": 80
    }
   ]
  },
@@ -21057,7 +21400,8 @@
   },
   "locations": [
    {
-    "location": "TrollCave02"
+    "location": "TrollCave02",
+    "chance": 93.8
    }
   ]
  },
@@ -21182,7 +21526,8 @@
   },
   "locations": [
    {
-    "location": "WoodHouse2"
+    "location": "WoodHouse2",
+    "chance": 50
    }
   ]
  },
@@ -21354,7 +21699,8 @@
     "location": "Mistlands_GuardTower3_ruined_new"
    },
    {
-    "location": "Mistlands_RockSpire1"
+    "location": "Mistlands_RockSpire1",
+    "chance": 75
    }
   ]
  },

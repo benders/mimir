@@ -150,6 +150,10 @@ def main() -> int:
     in_chest = {d["item"] for s in sources if s.get("kind") == "container" and s.get("locations")
                 for d in s["drops"]["items"]}
     check({"Amber", "AmberPearl", "Ruby"} <= in_chest, "Amber, AmberPearl, Ruby are found in chests")
+    axe_chests = {x["location"]: x.get("chance") for s in sources if s.get("kind") == "container"
+                  and any(d["item"] in ("AxeHead1", "AxeHead2") for d in s["drops"]["items"]) for x in s.get("locations", [])}
+    check(axe_chests == {"WoodHouse6": None, "WoodHouse2": 50},
+          "Curious/Mysterious Axe Heads: chests in WoodHouse6 (always) and WoodHouse2 (50%, RandomSpawn chance)")
     fish = {s["id"]: s for s in sources if s.get("kind") == "fishing"}
     check(len(fish) >= 12 and all(f["baits"] and f["id"] in items for f in fish.values()), "fish: fishing sources with baits")
     check(fish.get("Fish1", {}).get("baits", [{}])[0].get("item") == "FishingBait" and "Meadows" in fish["Fish1"]["biomes"],

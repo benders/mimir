@@ -1341,6 +1341,24 @@ def with_instances(p: dict) -> list[dict]:
     return p["components"] + [c for n in sorted(placed_prefabs(p)) if n in PREFABS for c in PREFABS[n]["components"]]
 
 
+def place_chances(p: dict) -> dict[str, float]:
+    """prefab -> % chance that one copy of the location or room has it, for placed instances that are all under a
+    RandomSpawn rolled below 100 (RandomSpawn.Randomize: shown when Random.Range(0f, 100f) <= m_chanceToSpawn;
+    copies roll independently). Prefabs with an unconditional copy are left out. Only the nearest RandomSpawn is
+    recorded in the dump, and its biome, theme and elevation conditions are ignored."""
+    missing = defaultdict(lambda: 1.0)
+    for i in p.get("instances", []):
+        if is_placed(i):
+            missing[i["prefab"]] *= 1 - min(i.get("randomSpawn", {}).get("chance", 100), 100) / 100
+    return {n: int(c) if (c := round(100 * (1 - m), 1)).is_integer() else c for n, m in missing.items() if m > 0}
+
+
+def place(name: str, dungeon: bool, chance: float | None = None) -> dict:
+    """A {location, dungeon} entry, with `chance` (%) when a copy of the location may lack the object. Not recorded
+    for dungeons: a room is itself picked at random by the generator, so a per-room chance says little."""
+    return {"location": name, "dungeon": dungeon} | ({"chance": chance} if chance is not None and not dungeon else {})
+
+
 def location_spawns() -> list[dict]:
     """Creature spawners, spawn areas and boss altars inside world locations and the dungeons they generate,
     including those of placed `Spawner_*` objects, and creatures placed directly."""
@@ -1364,7 +1382,10 @@ def location_containers() -> list[dict]:
     dungeon generates)."""
     by = {}
     for name, bs, p, dungeon in placed_in_locations():
-        for c in (c["fields"] for c in with_instances(p) if c["type"] == "Container"):
+        chances = place_chances(p)
+        own = [(c, None) for c in p["components"]]
+        placed = [(c, chances.get(n)) for n in sorted(placed_prefabs(p)) if n in PREFABS for c in PREFABS[n]["components"]]
+        for c, chance in ((c["fields"], ch) for c, ch in own + placed if c["type"] == "Container"):
             if not (table := drop_table(c["m_defaultItems"])):
                 continue
             title = text(c["m_name"])
@@ -1372,18 +1393,19 @@ def location_containers() -> list[dict]:
             slug = re.sub(r"[^a-z0-9]+", "_", (title or "").lower()).strip("_")
             e = by.setdefault((title, digest), {"id": f"container_{slug}_{digest}", "kind": "container",
                                                 "name": title, "drops": table, "locations": {}})
-            e["locations"][name, dungeon] = {"location": name, "dungeon": dungeon}
+            e["locations"][name, dungeon] = place(name, dungeon, chance)
     return sorted((dict(e, locations=[e["locations"][k] for k in sorted(e["locations"])]) for e in by.values()),
                   key=lambda e: e["id"])
 
 
-def scene_instances() -> dict[str, set]:
-    """prefab name -> {(location, dungeon)}: the location prefab itself, or a placed instance of the prefab in the
-    location or in a room its dungeon generates."""
-    found = defaultdict(set)
+def scene_instances() -> dict[str, dict]:
+    """prefab name -> {(location, dungeon): place entry}: the location prefab itself, or a placed instance of the
+    prefab in the location or in a room its dungeon generates (with its `chance`, place_chances)."""
+    found = defaultdict(dict)
     for name, bs, p, dungeon in placed_in_locations():
+        chances = place_chances(p)
         for inst in placed_prefabs(p) | {p["name"]}:
-            found[inst].add((name, dungeon))
+            found[inst][name, dungeon] = place(name, dungeon, chances.get(inst))
     return found
 
 
@@ -1393,7 +1415,7 @@ def place_pieces(pieces: list[dict]) -> None:
     found = scene_instances()
     for pc in pieces:
         if not pc["tools"] and found.get(pc["id"]):
-            pc["locations"] = [{"location": loc, "dungeon": d} for loc, d in sorted(found[pc["id"]])]
+            pc["locations"] = [found[pc["id"]][k] for k in sorted(found[pc["id"]])]
 
 
 def place_sources(sources: list[dict]) -> None:
@@ -1406,14 +1428,14 @@ def place_sources(sources: list[dict]) -> None:
     for v in load("world/ZoneSystem.json")[0]["fields"]["m_vegetation"]:
         if v["m_enable"] and (pid := ref(v["m_prefab"])) in by:
             veg[pid] += [b for b in biomes(v["m_biome"]) if b not in veg[pid]]
-    found = defaultdict(set)
+    found = defaultdict(dict)
     for inst, places in scene_instances().items():
         if inst in by:
             found[inst] |= places
     for name, bs, p, dungeon in placed_in_locations():
         for c in with_instances(p):  # objects a spawner makes (the Charred ballista)
             if c["type"] == "CreatureSpawner" and (spawned := ref(c["fields"]["m_creaturePrefab"])) in by:
-                found[spawned].add((name, dungeon))
+                found[spawned][name, dungeon] = place(name, dungeon)
     made = defaultdict(set)
     for name, p in PREFABS.items():
         if not has(p, "Piece"):
@@ -1426,7 +1448,7 @@ def place_sources(sources: list[dict]) -> None:
         if veg[sid]:
             e["biomes"] = veg[sid]
         if found[sid]:
-            e["locations"] = [{"location": loc, "dungeon": d} for loc, d in sorted(found[sid])]
+            e["locations"] = [found[sid][k] for k in sorted(found[sid])]
         if pieces := sorted(n for n, ids in made.items() if sid in ids):
             e["placedBy"] = pieces
 

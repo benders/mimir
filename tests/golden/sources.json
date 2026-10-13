@@ -119,7 +119,8 @@
   },
   "locations": [
    {
-    "location": "Lair"
+    "location": "Lair",
+    "chance": 90
    }
   ]
  },
@@ -175,7 +176,8 @@
   },
   "locations": [
    {
-    "location": "Lair"
+    "location": "Lair",
+    "chance": 70
    }
   ]
  },

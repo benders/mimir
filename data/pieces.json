@@ -6821,49 +6821,64 @@
     "location": "StoneHouse3"
    },
    {
-    "location": "StoneTowerRuins03"
+    "location": "StoneTowerRuins03",
+    "chance": 87.8
    },
    {
-    "location": "StoneTowerRuins07"
+    "location": "StoneTowerRuins07",
+    "chance": 25
    },
    {
-    "location": "StoneTowerRuins08"
+    "location": "StoneTowerRuins08",
+    "chance": 25
    },
    {
-    "location": "StoneTowerRuins09"
+    "location": "StoneTowerRuins09",
+    "chance": 50
    },
    {
-    "location": "StoneTowerRuins09_sunk"
+    "location": "StoneTowerRuins09_sunk",
+    "chance": 50
    },
    {
-    "location": "StoneTowerRuins10"
+    "location": "StoneTowerRuins10",
+    "chance": 25
    },
    {
-    "location": "StoneTowerRuins10_sunk"
+    "location": "StoneTowerRuins10_sunk",
+    "chance": 50
    },
    {
-    "location": "SwampHut1"
+    "location": "SwampHut1",
+    "chance": 10
    },
    {
-    "location": "SwampHut1_1"
+    "location": "SwampHut1_1",
+    "chance": 10
    },
    {
-    "location": "SwampHut2"
+    "location": "SwampHut2",
+    "chance": 10
    },
    {
-    "location": "SwampHut2_1"
+    "location": "SwampHut2_1",
+    "chance": 10
    },
    {
-    "location": "SwampHut3"
+    "location": "SwampHut3",
+    "chance": 10
    },
    {
-    "location": "SwampHut3_1"
+    "location": "SwampHut3_1",
+    "chance": 10
    },
    {
-    "location": "SwampHut4"
+    "location": "SwampHut4",
+    "chance": 75
    },
    {
-    "location": "SwampHut5"
+    "location": "SwampHut5",
+    "chance": 10
    }
   ],
   "stage": "BlackForest",
@@ -7096,10 +7111,12 @@
     "dungeon": true
    },
    {
-    "location": "ShipSetting02"
+    "location": "ShipSetting02",
+    "chance": 50
    },
    {
-    "location": "ShipSetting03"
+    "location": "ShipSetting03",
+    "chance": 87.5
    }
   ],
   "stage": "DeepNorth",
@@ -7241,7 +7258,8 @@
     "location": "Mistlands_GuardTower3_ruined_new"
    },
    {
-    "location": "Mistlands_RockSpire1"
+    "location": "Mistlands_RockSpire1",
+    "chance": 75
    }
   ],
   "stage": "Mistlands",
@@ -7703,10 +7721,12 @@
     "dungeon": true
    },
    {
-    "location": "GoblinHut02"
+    "location": "GoblinHut02",
+    "chance": 30
    },
    {
-    "location": "GoblinHut03"
+    "location": "GoblinHut03",
+    "chance": 30
    },
    {
     "location": "Hildir_plainsfortress",
@@ -7722,10 +7742,12 @@
     "location": "StoneHouse5_heath"
    },
    {
-    "location": "StoneTower1"
+    "location": "StoneTower1",
+    "chance": 50
    },
    {
-    "location": "StoneTower3"
+    "location": "StoneTower3",
+    "chance": 50
    }
   ],
   "stage": "Plains",
@@ -7926,25 +7948,32 @@
     "dungeon": true
    },
    {
-    "location": "WoodHouse1"
+    "location": "WoodHouse1",
+    "chance": 50
    },
    {
-    "location": "WoodHouse10"
+    "location": "WoodHouse10",
+    "chance": 50
    },
    {
-    "location": "WoodHouse11"
+    "location": "WoodHouse11",
+    "chance": 50
    },
    {
-    "location": "WoodHouse12"
+    "location": "WoodHouse12",
+    "chance": 50
    },
    {
-    "location": "WoodHouse13"
+    "location": "WoodHouse13",
+    "chance": 50
    },
    {
-    "location": "WoodHouse7"
+    "location": "WoodHouse7",
+    "chance": 50
    },
    {
-    "location": "WoodHouse9"
+    "location": "WoodHouse9",
+    "chance": 50
    },
    {
     "location": "WoodVillage1",
@@ -8124,7 +8153,8 @@
   },
   "locations": [
    {
-    "location": "WoodHouse2"
+    "location": "WoodHouse2",
+    "chance": 50
    }
   ],
   "stage": "Meadows",
@@ -8234,7 +8264,8 @@
   },
   "locations": [
    {
-    "location": "ShipSetting01"
+    "location": "ShipSetting01",
+    "chance": 80
    }
   ],
   "stage": "Meadows",
@@ -8839,7 +8870,8 @@
   },
   "locations": [
    {
-    "location": "AbandonedLogCabin02"
+    "location": "AbandonedLogCabin02",
+    "chance": 94
    },
    {
     "location": "AbandonedLogCabin03"
@@ -8848,13 +8880,16 @@
     "location": "AbandonedLogCabin04"
    },
    {
-    "location": "MountainWell1"
+    "location": "MountainWell1",
+    "chance": 75
    },
    {
-    "location": "StoneTowerRuins04"
+    "location": "StoneTowerRuins04",
+    "chance": 86.4
    },
    {
-    "location": "StoneTowerRuins05"
+    "location": "StoneTowerRuins05",
+    "chance": 50
    },
    {
     "location": "StoneTowerRuins05_leet"
@@ -8931,13 +8966,16 @@
   },
   "locations": [
    {
-    "location": "StoneHenge1"
+    "location": "StoneHenge1",
+    "chance": 50
    },
    {
-    "location": "StoneHenge2"
+    "location": "StoneHenge2",
+    "chance": 50
    },
    {
-    "location": "StoneHenge3"
+    "location": "StoneHenge3",
+    "chance": 50
    }
   ],
   "stage": "Plains",
@@ -9235,13 +9273,16 @@
   },
   "locations": [
    {
-    "location": "Grave1"
+    "location": "Grave1",
+    "chance": 50
    },
    {
-    "location": "SwampRuin1"
+    "location": "SwampRuin1",
+    "chance": 25.1
    },
    {
-    "location": "SwampRuin2"
+    "location": "SwampRuin2",
+    "chance": 25.1
    }
   ],
   "stage": "Swamp",
@@ -9357,7 +9398,8 @@
   },
   "locations": [
    {
-    "location": "TrollCave02"
+    "location": "TrollCave02",
+    "chance": 93.8
    }
   ],
   "stage": "BlackForest",
@@ -12514,7 +12556,8 @@
     "location": "Mistlands_GuardTower3_ruined_new"
    },
    {
-    "location": "Mistlands_Harbour1"
+    "location": "Mistlands_Harbour1",
+    "chance": 100
    },
    {
     "location": "Mistlands_Lighthouse1_new"
@@ -12591,7 +12634,8 @@
     "location": "Mistlands_GuardTower3_ruined_new"
    },
    {
-    "location": "Mistlands_Harbour1"
+    "location": "Mistlands_Harbour1",
+    "chance": 98.7
    },
    {
     "location": "Mistlands_Lighthouse1_new"
@@ -12827,7 +12871,8 @@
     "location": "Mistlands_GuardTower3_ruined_new"
    },
    {
-    "location": "Mistlands_Harbour1"
+    "location": "Mistlands_Harbour1",
+    "chance": 100
    },
    {
     "location": "Mistlands_Lighthouse1_new"
@@ -13027,16 +13072,20 @@
     "location": "Mistlands_DvergrTownEntrance1"
    },
    {
-    "location": "Mistlands_GuardTower1_new"
+    "location": "Mistlands_GuardTower1_new",
+    "chance": 96.9
    },
    {
-    "location": "Mistlands_GuardTower1_ruined_new"
+    "location": "Mistlands_GuardTower1_ruined_new",
+    "chance": 76.3
    },
    {
-    "location": "Mistlands_GuardTower1_ruined_new2"
+    "location": "Mistlands_GuardTower1_ruined_new2",
+    "chance": 76.3
    },
    {
-    "location": "Mistlands_GuardTower2_new"
+    "location": "Mistlands_GuardTower2_new",
+    "chance": 96.9
    },
    {
     "location": "Mistlands_GuardTower3_new"
@@ -13045,7 +13094,8 @@
     "location": "Mistlands_GuardTower3_ruined_new"
    },
    {
-    "location": "Mistlands_Lighthouse1_new"
+    "location": "Mistlands_Lighthouse1_new",
+    "chance": 96.9
    },
    {
     "location": "Mistlands_StatueGroup1"
@@ -13468,10 +13518,12 @@
     "location": "Mistlands_GuardTower1_new"
    },
    {
-    "location": "Mistlands_GuardTower1_ruined_new"
+    "location": "Mistlands_GuardTower1_ruined_new",
+    "chance": 99.6
    },
    {
-    "location": "Mistlands_GuardTower1_ruined_new2"
+    "location": "Mistlands_GuardTower1_ruined_new2",
+    "chance": 98.4
    },
    {
     "location": "Mistlands_GuardTower2_new"
@@ -13480,10 +13532,12 @@
     "location": "Mistlands_GuardTower3_new"
    },
    {
-    "location": "Mistlands_GuardTower3_ruined_new"
+    "location": "Mistlands_GuardTower3_ruined_new",
+    "chance": 50
    },
    {
-    "location": "Mistlands_Harbour1"
+    "location": "Mistlands_Harbour1",
+    "chance": 98.7
    },
    {
     "location": "Mistlands_Lighthouse1_new"
@@ -13531,10 +13585,12 @@
     "location": "Mistlands_GuardTower1_new"
    },
    {
-    "location": "Mistlands_GuardTower1_ruined_new"
+    "location": "Mistlands_GuardTower1_ruined_new",
+    "chance": 99.6
    },
    {
-    "location": "Mistlands_GuardTower1_ruined_new2"
+    "location": "Mistlands_GuardTower1_ruined_new2",
+    "chance": 99.6
    },
    {
     "location": "Mistlands_GuardTower2_new"
@@ -13543,7 +13599,8 @@
     "location": "Mistlands_GuardTower3_new"
    },
    {
-    "location": "Mistlands_GuardTower3_ruined_new"
+    "location": "Mistlands_GuardTower3_ruined_new",
+    "chance": 99.2
    },
    {
     "location": "Mistlands_Lighthouse1_new"
@@ -13584,28 +13641,36 @@
   },
   "locations": [
    {
-    "location": "Mistlands_DvergrTownEntrance1"
+    "location": "Mistlands_DvergrTownEntrance1",
+    "chance": 87.5
    },
    {
-    "location": "Mistlands_GuardTower1_new"
+    "location": "Mistlands_GuardTower1_new",
+    "chance": 87.5
    },
    {
-    "location": "Mistlands_GuardTower1_ruined_new"
+    "location": "Mistlands_GuardTower1_ruined_new",
+    "chance": 57.8
    },
    {
-    "location": "Mistlands_GuardTower1_ruined_new2"
+    "location": "Mistlands_GuardTower1_ruined_new2",
+    "chance": 57.8
    },
    {
-    "location": "Mistlands_GuardTower2_new"
+    "location": "Mistlands_GuardTower2_new",
+    "chance": 87.5
    },
    {
-    "location": "Mistlands_GuardTower3_new"
+    "location": "Mistlands_GuardTower3_new",
+    "chance": 87.5
    },
    {
-    "location": "Mistlands_GuardTower3_ruined_new"
+    "location": "Mistlands_GuardTower3_ruined_new",
+    "chance": 48.8
    },
    {
-    "location": "Mistlands_Lighthouse1_new"
+    "location": "Mistlands_Lighthouse1_new",
+    "chance": 87.5
    },
    {
     "location": "Mistlands_RockSpire1"
@@ -13658,28 +13723,36 @@
   },
   "locations": [
    {
-    "location": "Mistlands_DvergrTownEntrance1"
+    "location": "Mistlands_DvergrTownEntrance1",
+    "chance": 75
    },
    {
-    "location": "Mistlands_GuardTower1_new"
+    "location": "Mistlands_GuardTower1_new",
+    "chance": 75
    },
    {
-    "location": "Mistlands_GuardTower1_ruined_new"
+    "location": "Mistlands_GuardTower1_ruined_new",
+    "chance": 43.8
    },
    {
-    "location": "Mistlands_GuardTower1_ruined_new2"
+    "location": "Mistlands_GuardTower1_ruined_new2",
+    "chance": 43.8
    },
    {
-    "location": "Mistlands_GuardTower2_new"
+    "location": "Mistlands_GuardTower2_new",
+    "chance": 75
    },
    {
-    "location": "Mistlands_GuardTower3_new"
+    "location": "Mistlands_GuardTower3_new",
+    "chance": 75
    },
    {
-    "location": "Mistlands_GuardTower3_ruined_new"
+    "location": "Mistlands_GuardTower3_ruined_new",
+    "chance": 36
    },
    {
-    "location": "Mistlands_Lighthouse1_new"
+    "location": "Mistlands_Lighthouse1_new",
+    "chance": 75
    },
    {
     "location": "Mistlands_RockSpire1"
@@ -13688,7 +13761,8 @@
     "location": "Mistlands_Statue2"
    },
    {
-    "location": "Mistlands_StatueGroup1"
+    "location": "Mistlands_StatueGroup1",
+    "chance": 96
    },
    {
     "location": "Mistlands_Viaduct1"
@@ -13942,16 +14016,19 @@
     "location": "Mistlands_GuardTower3_ruined_new"
    },
    {
-    "location": "Mistlands_Harbour1"
+    "location": "Mistlands_Harbour1",
+    "chance": 88.4
    },
    {
     "location": "Mistlands_Lighthouse1_new"
    },
    {
-    "location": "Mistlands_RockSpire1"
+    "location": "Mistlands_RockSpire1",
+    "chance": 75
    },
    {
-    "location": "Mistlands_StatueGroup1"
+    "location": "Mistlands_StatueGroup1",
+    "chance": 93.8
    }
   ],
   "stage": "Mistlands",
@@ -14014,7 +14091,8 @@
     "location": "Mistlands_GuardTower3_ruined_new"
    },
    {
-    "location": "Mistlands_Harbour1"
+    "location": "Mistlands_Harbour1",
+    "chance": 88.4
    },
    {
     "location": "Mistlands_Lighthouse1_new"
@@ -16721,7 +16799,8 @@
     "location": "Mistlands_GuardTower1_new"
    },
    {
-    "location": "Mistlands_GuardTower1_ruined_new"
+    "location": "Mistlands_GuardTower1_ruined_new",
+    "chance": 43.8
    },
    {
     "location": "Mistlands_GuardTower2_new"
@@ -16760,7 +16839,8 @@
     "location": "Mistlands_GuardTower3_new"
    },
    {
-    "location": "Mistlands_GuardTower3_ruined_new"
+    "location": "Mistlands_GuardTower3_ruined_new",
+    "chance": 100
    }
   ],
   "stage": "Mistlands",
@@ -17742,13 +17822,16 @@
     "dungeon": true
    },
    {
-    "location": "GoblinHut01"
+    "location": "GoblinHut01",
+    "chance": 50
    },
    {
-    "location": "GoblinHut02"
+    "location": "GoblinHut02",
+    "chance": 75
    },
    {
-    "location": "GoblinHut03"
+    "location": "GoblinHut03",
+    "chance": 87.5
    },
    {
     "location": "Hildir_plainsfortress",
@@ -17768,10 +17851,12 @@
     "dungeon": true
    },
    {
-    "location": "WoodHouse1"
+    "location": "WoodHouse1",
+    "chance": 50
    },
    {
-    "location": "WoodHouse2"
+    "location": "WoodHouse2",
+    "chance": 75
    },
    {
     "location": "WoodVillage1",
@@ -21248,13 +21333,16 @@
   },
   "locations": [
    {
-    "location": "CharredRuins1"
+    "location": "CharredRuins1",
+    "chance": 100
    },
    {
-    "location": "CharredTowerRuins1"
+    "location": "CharredTowerRuins1",
+    "chance": 100
    },
    {
-    "location": "CharredTowerRuins1_dvergr"
+    "location": "CharredTowerRuins1_dvergr",
+    "chance": 100
    }
   ],
   "stage": "AshLands",
@@ -23397,10 +23485,12 @@
     "location": "Mistlands_GuardTower1_new"
    },
    {
-    "location": "Mistlands_GuardTower1_ruined_new"
+    "location": "Mistlands_GuardTower1_ruined_new",
+    "chance": 25
    },
    {
-    "location": "Mistlands_GuardTower1_ruined_new2"
+    "location": "Mistlands_GuardTower1_ruined_new2",
+    "chance": 25
    },
    {
     "location": "Mistlands_GuardTower2_new"
@@ -23409,10 +23499,12 @@
     "location": "Mistlands_GuardTower3_new"
    },
    {
-    "location": "Mistlands_GuardTower3_ruined_new"
+    "location": "Mistlands_GuardTower3_ruined_new",
+    "chance": 50
    },
    {
-    "location": "Mistlands_Harbour1"
+    "location": "Mistlands_Harbour1",
+    "chance": 66
    },
    {
     "location": "Mistlands_Lighthouse1_new"
@@ -30564,7 +30656,8 @@
     "location": "Ruin3"
    },
    {
-    "location": "StoneTowerRuins05"
+    "location": "StoneTowerRuins05",
+    "chance": 79.8
    },
    {
     "location": "StoneTowerRuins05_leet"
@@ -33159,7 +33252,8 @@
     "location": "StoneHouse2_heath"
    },
    {
-    "location": "StoneTowerRuins03"
+    "location": "StoneTowerRuins03",
+    "chance": 50
    },
    {
     "location": "WoodFarm1",
@@ -33172,7 +33266,8 @@
     "location": "WoodHouse13"
    },
    {
-    "location": "WoodHouse8"
+    "location": "WoodHouse8",
+    "chance": 93.8
    }
   ],
   "stage": "Meadows",

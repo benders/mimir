@@ -458,6 +458,7 @@ def write_dump(raw: Path) -> Path:
         {"prefab": "CupHolder", "path": "altar/CupHolder"}, {"prefab": "CupHolder", "path": "altar/CupHolder (1)"},
         {"prefab": "CupHolder", "path": "altar/CupHolder (2)", "inactive": True},  # never placed: not a stand to fill
         {"prefab": "Crate", "path": "cave/Crate", "randomSpawn": {"chance": 40}},  # may or may not be there
+        {"prefab": "Crate", "path": "cave/Crate (1)", "randomSpawn": {"chance": 50}},  # either of two: 70%
         {"prefab": "WildHive", "path": "cave/hive", "inactive": True},  # disabled in the asset: never placed
         {"prefab": "Treasure", "path": "cave/Treasure", "inactive": True, "randomSpawn": {"chance": 90, "path": "cave"}},
         {"prefab": "Gift", "path": "cave/Gift", "inactive": True, "randomSpawn": {"chance": 90}}]})  # never placed
