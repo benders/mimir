@@ -46,6 +46,8 @@ FRAME_FILL, FRAME_FILL_GROUND = 0.92, 0.8  # share of the frame the location fil
 INDEX_VERSION = 2                       # bump when index.json's contents change
 THREADS = 8                             # render threads (each holds ~100 MB of frame buffers)
 PROBE_SIZE, PROBE_MAX_TRIS = 200, 100000 # entrance-facing test renders: px, and the largest location worth it
+ENTRANCE_WEIGHTS = {"portal": 3, "door": 2, "stairs": 1}  # per visible pixel in the entrance test
+ENTRANCE_MARGIN = 1.2                   # another view must show this much more than the default to be used
 TERRAIN_STEP = 1.0                      # m between heightmap vertices (Heightmap.m_scale)
 GROUND_SLACK = 0.1                      # m below the ground still drawn (foundations meet the terrain)
 GROUND = np.array([0.52, 0.49, 0.42])    # terrain colour when drawn
@@ -199,13 +201,12 @@ def to_world(chain, v):
 
 
 class Scene:
-    def __init__(self, modifiers=None, entrances=()):
+    def __init__(self, modifiers=None, marks=None):
         self.meshes, self.mats = {}, {}
-        self.parts = []      # (world verts (n,3), uv (n,2), faces (m,3), material, part of an entrance)
+        self.parts = []      # (world verts (n,3), uv (n,2), faces (m,3), material, entrance weight)
         self.modifiers = modifiers or {}  # path -> TerrainModifier fields (from the raw dump)
-        self.entrances = set(entrances)   # paths of the exterior dungeon entrances (Teleport)
+        self.marks = marks or {}          # path -> entrance weight of that object and what's under it
         self.terrain = []    # (world position, fields) of each active TerrainModifier
-        self.entrance = []   # world positions of the active entrances
 
     @staticmethod
     def components(g):
@@ -281,7 +282,7 @@ class Scene:
         self.mats[key] = m
         return m
 
-    def walk(self, g, chain=None, skip=None, path=None, in_entrance=False):
+    def walk(self, g, chain=None, skip=None, path=None, weight=0):
         """Collect the active renderers under g; the root's own transform is the location origin."""
         skip = set() if skip is None else skip
         if not g.m_IsActive:
@@ -292,9 +293,7 @@ class Scene:
         path = None if chain == [] else (g.m_Name if not path else f"{path}/{g.m_Name}")
         if path in self.modifiers:
             self.terrain.append((to_world(chain, np.zeros((1, 3)))[0], self.modifiers[path]))
-        if path in self.entrances:
-            self.entrance.append(to_world(chain, np.zeros((1, 3)))[0])
-            in_entrance = True
+        weight = max(weight, self.marks.get(path, 0))
         if "LODGroup" in cs:
             lods = cs["LODGroup"].m_LODs
             keep = {r.renderer.m_PathID for r in lods[min(LOD, len(lods) - 1)].renderers}
@@ -308,9 +307,9 @@ class Scene:
                 for i, f in enumerate(subs):
                     m = self.material(mats[min(i, len(mats) - 1)])
                     if len(f) and not m["skip"]:
-                        self.parts.append((w, vt, f, m, in_entrance))
+                        self.parts.append((w, vt, f, m, weight))
         for ch in tr.m_Children:
-            self.walk(ch.read().m_GameObject.read(), chain, skip, path, in_entrance)
+            self.walk(ch.read().m_GameObject.read(), chain, skip, path, weight)
 
 
 class Terrain:
@@ -412,8 +411,8 @@ def raster_ground(gs, gz, gv, gf, gd, gimg, draw, fade_in, fade_out, light, col)
 def raster_mesh(S, Dz, W, UV, F, tri_mat, tri_ent, glass_pass, tex, tex_off, tex_w, tex_h, st, tint, cutoff,
                 is_glass, gd, zb, img, light, view, glass_col):
     """Location triangles in order, z-buffered and behind-the-terrain tested. Opaque pass: textured (nearest texel,
-    wrapped, _MainTex_ST), alpha cutout, flat Lambert shade; alpha 2 marks entrance meshes. Glass pass: blended rim
-    that grows toward grazing angles, no depth write."""
+    wrapped, _MainTex_ST), alpha cutout, flat Lambert shade; alpha 1 + the triangle's entrance weight. Glass pass:
+    blended rim that grows toward grazing angles, no depth write."""
     R = zb.shape[0]
     for t in range(F.shape[0]):
         m = tri_mat[t]
@@ -469,7 +468,7 @@ def raster_mesh(S, Dz, W, UV, F, tri_mat, tri_ent, glass_pass, tex, tex_off, tex
                 img[y, x, 0] = min(max(r * tint[m, 0] * shade, 0.0), 1.0)
                 img[y, x, 1] = min(max(g * tint[m, 1] * shade, 0.0), 1.0)
                 img[y, x, 2] = min(max(b * tint[m, 2] * shade, 0.0), 1.0)
-                img[y, x, 3] = 2.0 if tri_ent[t] else 1.0
+                img[y, x, 3] = 1.0 + tri_ent[t]
 
 
 def material_table(scene):
@@ -508,32 +507,44 @@ def project(w, yaw):
     return np.stack([X, -(w[:, 1] * cp + Z * sp), -w[:, 1] * sp + Z * cp], 1)
 
 
+def entrance_marks(loc):
+    """Path -> weight of what shows a way in, from the raw dump: dungeon portals (Teleport outside the interior) 3,
+    doors and gates (Door components, door/gate prefabs) 2, stairs and ladders 1."""
+    marks = {}
+    def mark(path, w):
+        if path and not path.startswith("Interior/"):
+            marks[path] = max(marks.get(path, 0), w)
+    for c in loc["components"]:
+        if c["type"] == "Teleport":
+            mark(c.get("path"), ENTRANCE_WEIGHTS["portal"])
+        elif c["type"] == "Door":
+            mark(c.get("path"), ENTRANCE_WEIGHTS["door"])
+    for i in loc.get("instances", []):
+        name = i["prefab"].lower()
+        if "door" in name or "gate" in name:
+            mark(i["path"], ENTRANCE_WEIGHTS["door"])
+        elif "stair" in name or "ladder" in name:
+            mark(i["path"], ENTRANCE_WEIGHTS["stairs"])
+    return marks
+
+
 def facing_yaw(scene, radius):
-    """Camera yaw for a location with a dungeon entrance (a Teleport outside the interior): of the four isometric
-    views, the one that shows most of the entrance's own meshes (the dark doorway) in a small test render; for big
-    locations, or when no view shows the doorway, the view nearest to looking at the entrance from the origin's side.
-    Others keep the default."""
-    yaws = [YAW + k * math.pi / 2 for k in range(4)]
-    if not scene.entrance:
+    """Camera yaw: of the four isometric views, the one showing most of the location's ways in (entrance_marks,
+    weighted visible pixels in a small test render), but only when it beats the default view by ENTRANCE_MARGIN;
+    the default (45 degrees) suits most locations, which are built to be seen from that side (runestones). Locations
+    with no marked parts, or too big to test, keep the default."""
+    if not any(p[4] for p in scene.parts) or sum(len(p[2]) for p in scene.parts) > PROBE_MAX_TRIS:
         return YAW
-
-    def toward_entrance():
-        x, _, z = scene.entrance[0]
-        if math.hypot(x, z) <= 1.5:
-            return YAW
-        want = math.atan2(-x, -z)
-        return min(yaws, key=lambda y: abs((y - want + math.pi) % (2 * math.pi) - math.pi))
-
-    if sum(len(p[2]) for p in scene.parts) > PROBE_MAX_TRIS or not any(p[4] for p in scene.parts):
-        return toward_entrance()
+    yaws = [YAW + k * math.pi / 2 for k in range(4)]
     seen = [render(scene, radius, y, probe=True) for y in yaws]
-    return yaws[int(np.argmax(seen))] if max(seen) else toward_entrance()  # doorway hidden from every view
+    best = int(np.argmax(seen))
+    return yaws[best] if seen[best] > seen[0] * ENTRANCE_MARGIN else YAW
 
 
 def render(scene, radius, yaw=YAW, ground=True, probe=False):
     """Isometric z-buffer render of what is above ground; parts centred further than radius from the origin (or 300 m
     up/down) are left out. With ground, the terrain is drawn too, fading out just past the location. probe: return
-    how many pixels of the entrance meshes are visible, from a small render."""
+    the entrance weight of the visible pixels, from a small render."""
     kept = [p for p in scene.parts if abs(p[0].mean(0)[1]) <= 300 and math.hypot(*p[0].mean(0)[[0, 2]]) <= radius]
     if not kept:
         return 0 if probe else None
@@ -543,7 +554,7 @@ def render(scene, radius, yaw=YAW, ground=True, probe=False):
     half = max(np.abs(lo3[[0, 2]]).max(), np.abs(hi3[[0, 2]]).max()) + margin  # square around the origin
     terrain = Terrain(scene.terrain, -half, half, -half, half)
     parts = []
-    for w, vt, f, m, entrance in kept:
+    for w, vt, f, m, entrance in kept:  # entrance: weight
         above = w[:, 1] >= terrain.height(w[:, 0], w[:, 2]) - GROUND_SLACK
         parts.append((project(w, yaw), w, vt, f, m, above, entrance))
     # The drawn ground fades out between the location's footprint and the edge of the terrain grid.
@@ -572,7 +583,7 @@ def render(scene, radius, yaw=YAW, ground=True, probe=False):
     P = np.concatenate([p[0] for p in parts])
     F = np.concatenate([p[3] + b for p, b in zip(parts, base)]).astype(np.int64)
     tri_mat = np.concatenate([np.full(len(p[3]), ids[id(p[4])], np.int64) for p in parts])
-    tri_ent = np.concatenate([np.full(len(p[3]), bool(p[6])) for p in parts])
+    tri_ent = np.concatenate([np.full(len(p[3]), float(p[6])) for p in parts])
     W = np.concatenate([p[1] for p in parts])
     UV = np.concatenate([p[2] for p in parts])
     cy, sy, cp, sp = math.cos(yaw), math.sin(yaw), math.cos(PITCH), math.sin(PITCH)
@@ -582,7 +593,7 @@ def render(scene, radius, yaw=YAW, ground=True, probe=False):
                     table["tex_off"], table["tex_w"], table["tex_h"], table["st"], table["tint"], table["cutoff"],
                     table["is_glass"], gd, zb, img, LIGHT, view, GLASS)
     if probe:
-        return int((img[..., 3] == 2).sum())
+        return float(np.maximum(img[..., 3] - 1, 0).sum())
     img[..., 3] = np.minimum(img[..., 3], 1)
     ys, xs = np.nonzero(img[..., 3] > 0.02)
     if not len(xs):
@@ -613,8 +624,7 @@ def render_location(name, root, raw, out, lock):
     try:
         loc = json.loads((raw / "locations" / f"{name}.json").read_text())
         comps = [c for c in loc["components"] if c.get("path")]
-        scene = Scene({c["path"]: c["fields"] for c in comps if c["type"] == "TerrainModifier"},
-                      {c["path"] for c in comps if c["type"] == "Teleport" and not c["path"].startswith("Interior/")})
+        scene = Scene({c["path"]: c["fields"] for c in comps if c["type"] == "TerrainModifier"}, entrance_marks(loc))
         with lock:
             scene.walk(root.read())
         ext_r = next((c["fields"].get("m_exteriorRadius", 20) for c in loc["components"] if c["type"] == "Location"), 20)
@@ -637,7 +647,7 @@ def warm_up():
     s2 = np.array([[0.0, 0], [3, 0], [0, 3]])
     gd, zb, img = np.full((R, R), np.inf, np.float32), np.full((R, R), np.inf, np.float32), np.zeros((R, R, 4), np.float32)
     raster_ground(s2, np.zeros(3), v, f, gd, img, True, 1.0, 2.0, LIGHT, GROUND)
-    raster_mesh(s2, np.zeros(3), v, np.zeros((3, 2)), f, np.zeros(1, np.int64), np.zeros(1, np.bool_), False,
+    raster_mesh(s2, np.zeros(3), v, np.zeros((3, 2)), f, np.zeros(1, np.int64), np.zeros(1), False,
                 np.ones(4, np.float32), np.zeros(1, np.int64), np.ones(1, np.int64), np.ones(1, np.int64),
                 np.array([[1.0, 1, 0, 0]]), np.ones((1, 3)), np.array([-1.0]), np.zeros(1, np.bool_),
                 gd, zb, img, LIGHT, LIGHT, GLASS)
