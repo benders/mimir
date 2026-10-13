@@ -17,7 +17,8 @@ import math
 import os
 import sys
 import time
-from multiprocessing import Pool
+import threading
+from concurrent.futures import ThreadPoolExecutor, as_completed
 from pathlib import Path
 
 import numpy as np
@@ -41,20 +42,22 @@ SKIP_SHADER_PROPS = {"_CentralFade"}    # light beam effect shader (CharredFortr
 GLOSS_IN_ALPHA = "_SMOOTHNESS_TEXTURE_ALBEDO_CHANNEL_A"  # _MainTex alpha is smoothness, not transparency
 
 
-def index(bundles: Path):
-    """CAB name -> bundle file, location prefab name -> bundle file, bundle file -> referenced CABs."""
-    cab2b, prefab2b, ext = {}, {}, {}
-    for b in sorted(bundles.iterdir()):
-        e = UnityPy.load(str(b))
-        for name, f in e.file.files.items():
-            cab2b[name] = b.name
-            ext.setdefault(b.name, []).extend(x.path.split("/")[-1] for x in getattr(f, "externals", []))
-        for o in e.objects:
-            if o.type.name == "AssetBundle":
-                for k, _ in o.read().m_Container:
-                    if k.endswith(".prefab"):
-                        prefab2b[Path(k).stem] = b.name
-    return cab2b, prefab2b, ext
+def index(env):
+    """From the environment with every bundle loaded: CAB name -> bundle, bundle -> referenced CABs, and location
+    prefab name -> (bundle, root GameObject pointer)."""
+    cab2b, ext, prefabs = {}, {}, {}
+    for bname, bf in env.files.items():
+        if not hasattr(bf, "files"):
+            continue
+        for cab, f in bf.files.items():
+            cab2b[cab] = bname
+            ext.setdefault(bname, []).extend(x.path.split("/")[-1] for x in getattr(f, "externals", None) or [])
+            for o in (getattr(f, "objects", None) or {}).values():
+                if o.type.name == "AssetBundle":
+                    for k, v in o.read().m_Container:
+                        if k.endswith(".prefab"):
+                            prefabs[Path(k).stem] = (bname, v.asset)
+    return cab2b, ext, prefabs
 
 
 def deps(start, cab2b, ext):
@@ -252,7 +255,7 @@ class Terrain:
         return v, f
 
 
-@njit(cache=True)
+@njit(cache=True, nogil=True)
 def _tri_box(ax, ay, bx, by, cx, cy, R):
     x0 = max(int(math.floor(min(ax, bx, cx))), 0)
     y0 = max(int(math.floor(min(ay, by, cy))), 0)
@@ -261,7 +264,7 @@ def _tri_box(ax, ay, bx, by, cx, cy, R):
     return x0, y0, x1, y1
 
 
-@njit(cache=True)
+@njit(cache=True, nogil=True)
 def raster_ground(gs, gz, gv, gf, gd, gimg, draw, fade_in, fade_out, light, col):
     """Terrain triangles: nearest depth into gd; with draw, shaded colour and the radial fade into gimg."""
     R = gd.shape[0]
@@ -300,7 +303,7 @@ def raster_ground(gs, gz, gv, gf, gd, gimg, draw, fade_in, fade_out, light, col)
                     gimg[y, x, 3] = min(max(a, 0.0), 1.0) * 0.9
 
 
-@njit(cache=True)
+@njit(cache=True, nogil=True)
 def raster_mesh(S, Dz, W, UV, F, tri_mat, tri_ent, glass_pass, tex, tex_off, tex_w, tex_h, st, tint, cutoff,
                 is_glass, gd, zb, img, light, view, glass_col):
     """Location triangles in order, z-buffered and behind-the-terrain tested. Opaque pass: textured (nearest texel,
@@ -490,19 +493,17 @@ def render(scene, radius, yaw=YAW, ground=True, probe=False):
     return out.resize((SIZE, SIZE), Image.LANCZOS)
 
 
-def render_location(job):
-    name, bundles, extra, raw, out = job
+def render_location(name, root, raw, out, lock):
+    """Read the location from the shared environment (UnityPy isn't thread-safe: under lock), then render it (numpy
+    and the nogil kernels, in parallel with other threads)."""
     t = time.time()
     try:
-        env = UnityPy.load(*bundles, *extra)
-        ab = next(a for a in (o.read() for o in env.objects if o.type.name == "AssetBundle")
-                  if any(Path(k).stem == name for k, _ in a.m_Container))
-        root = next(v.asset for k, v in ab.m_Container if Path(k).stem == name).read()
         loc = json.loads((raw / "locations" / f"{name}.json").read_text())
         comps = [c for c in loc["components"] if c.get("path")]
         scene = Scene({c["path"]: c["fields"] for c in comps if c["type"] == "TerrainModifier"},
                       {c["path"] for c in comps if c["type"] == "Teleport" and not c["path"].startswith("Interior/")})
-        scene.walk(root)
+        with lock:
+            scene.walk(root.read())
         ext_r = next((c["fields"].get("m_exteriorRadius", 20) for c in loc["components"] if c["type"] == "Location"), 20)
         radius = max(3 * ext_r + 20, 40)
         img = render(scene, radius, facing_yaw(scene, radius))
@@ -535,27 +536,31 @@ def main():
     bdir = data / "StreamingAssets/SoftRef/Bundles"
     out.mkdir(parents=True, exist_ok=True)
     t = time.time()
-    cab2b, prefab2b, ext = index(bdir)
-    print(f"indexed {len(cab2b)} bundle files in {time.time() - t:.0f} s", flush=True)
+    # Every bundle once (most locations share two large ones): ~25 s and ~8 GB, instead of reloading per location.
+    env = UnityPy.load(*[str(b) for b in sorted(bdir.iterdir())], str(data / "Resources/unity default resources"))
+    cab2b, ext, prefabs = index(env)
+    print(f"loaded {len(cab2b)} bundle files in {time.time() - t:.0f} s", flush=True)
     names = sys.argv[4:] or [p.stem for p in sorted((raw / "locations").glob("*.json"))]
-    extra = [str(data / "Resources/unity default resources")]
     jobs, failed = [], 0
     for n in names:
-        if n not in prefab2b:
+        if n not in prefabs:
             print(f"{n}: FAILED no bundle")
             failed += 1
             continue
-        jobs.append((n, [str(bdir / b) for b in deps(prefab2b[n], cab2b, ext)], extra, raw, out))
-    # Largest first, so the slowest renders don't start last. Size = the bytes of the bundles each location loads,
-    # each bundle's share split between the locations that load it (shared material/texture bundles count little).
+        jobs.append((n, prefabs[n][1], deps(prefabs[n][0], cab2b, ext)))
+    # Largest first, so the slowest renders don't start last. Size = the bytes of the bundles each location uses,
+    # each bundle's share split between the locations that use it (shared material/texture bundles count little).
     users = {}
     for j in jobs:
-        for b in j[1]:
+        for b in j[2]:
             users[b] = users.get(b, 0) + 1
-    jobs.sort(key=lambda j: -sum(os.path.getsize(b) / users[b] for b in j[1]))
-    warm_up()  # compile the kernels once (cached on disk) before the workers load them
-    with Pool(min(8, os.cpu_count() or 1)) as pool:
-        for name, msg, dt in pool.imap_unordered(render_location, jobs, chunksize=1):
+    jobs.sort(key=lambda j: -sum(os.path.getsize(b) / users[b] for b in j[2]))
+    warm_up()  # compile the kernels once (cached on disk)
+    lock = threading.Lock()
+    with ThreadPoolExecutor(min(8, os.cpu_count() or 1)) as pool:
+        futures = [pool.submit(render_location, n, root, raw, out, lock) for n, root, _ in jobs]
+        for fut in as_completed(futures):
+            name, msg, dt = fut.result()
             print(f"{name}: {msg} ({dt:.0f} s)", flush=True)
             failed += msg.startswith("FAILED")
     print(f"{len(list(out.glob('*.webp')))} renders in {time.time() - t:.0f} s")
