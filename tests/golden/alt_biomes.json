@@ -1,0 +1,49 @@
+[
+ {
+  "id": "Moths",
+  "biomes": [
+   "Meadows",
+   "Swamp"
+  ],
+  "chance": 25.0,
+  "min": 1,
+  "max": 4,
+  "minDistance": 800,
+  "size": [
+   40,
+   150
+  ],
+  "height": [
+   30,
+   10000
+  ],
+  "incompatible": [
+   "Off"
+  ],
+  "levelUpMultiplier": 2,
+  "spawns": [
+   "Moth"
+  ],
+  "blocksSpawns": [
+   "Raider"
+  ],
+  "vegetation": [
+   "Bush"
+  ],
+  "blocksVegetation": [
+   "Root"
+  ],
+  "locations": [
+   "Stash"
+  ],
+  "blocksLocations": [
+   "Camp"
+  ],
+  "addEnvironments": [
+   "Mist"
+  ],
+  "blocksEnvironments": [
+   "Clear"
+  ]
+ }
+]

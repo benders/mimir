@@ -1122,14 +1122,85 @@ def world_spawns() -> list[dict]:
     for lst in sorted(load("world/SpawnSystemList.json"), key=lambda s: s["name"]):
         out += filter(None, (world_spawn(s, lst["name"]) for s in lst["fields"]["m_spawners"]))
     for ref_ in load("world/ZoneSystem.json")[0]["fields"].get("m_altBiomeLists", []):
+        for alt in alt_biome_list([ref_]):
+            if alt["m_enabled"]:
+                patch = biomes(alt["m_biome"])
+                for sp in filter(None, (world_spawn(s, ref_["$ref"], alt["m_name"]) for s in alt["m_spawn"])):
+                    sp["biomes"] = [b for b in sp["biomes"] if b in patch]
+                    if sp["biomes"]:
+                        out.append(sp)
+    return out
+
+
+def alt_biome_list(refs: list[dict] | None = None) -> list[dict]:
+    """The AltBiome entries of ZoneSystem's AltBiomeLists (or of `refs`), in list order."""
+    out = []
+    for ref_ in refs if refs is not None else load("world/ZoneSystem.json")[0]["fields"].get("m_altBiomeLists", []):
         for p in SUBPREFABS.get(ref_["$ref"], {"components": []})["components"]:
-            for alt in p["fields"].get("m_alts", []) if p["type"] == "AltBiomeList" else []:
-                if alt["m_enabled"]:
-                    patch = biomes(alt["m_biome"])
-                    for sp in filter(None, (world_spawn(s, ref_["$ref"], alt["m_name"]) for s in alt["m_spawn"])):
-                        sp["biomes"] = [b for b in sp["biomes"] if b in patch]
-                        if sp["biomes"]:
-                            out.append(sp)
+            out += p["fields"].get("m_alts", []) if p["type"] == "AltBiomeList" else []
+    return out
+
+
+def alt_biomes() -> list[dict]:
+    """Enabled alt biomes: variants of a whole contiguous biome region (BiomeSector, flood-filled on the world map).
+    AltBiomeWorldData.GenerateAltBiomes walks every region of each of the alt's `biomes` in a seeded random order and
+    gives it the alt with `chance` % until the alt covers `max` regions in the world (always, until it has `min`);
+    BiomeSector.CanAddModifier needs the region's centre `minDistance` m from the world centre, its border length
+    (map points) in `size` [min, max), its average border height in `height` [min, max), and none of the
+    `incompatible` alts already on it. On such a region: `spawns` are extra SpawnSystem spawns (in spawns.json with
+    `altBiome`), `blocksSpawns` the creatures of the biome's spawn entries it turns off (SpawnSystem.UpdateSpawnList,
+    m_blockSpawnNames by entry name); `vegetation` / `blocksVegetation` the objects it adds / removes
+    (ZoneSystem.PlaceVegetation; a removed object the alt adds back is left out), `locations` / `blocksLocations`
+    likewise (ZoneSystem.GenerateLocationsTimeSliced: an added location is placed only on such a region);
+    `environment` forces the weather, `addEnvironments` / `blocksEnvironments` change the biome's weather list
+    (EnvMan); `levelUpMultiplier` multiplies creatures' level-up chance (BiomeSector.GetLevelUpChanceMultiplier).
+    The game shows no name for a region (m_namePrefix/m_nameSuffix are empty in vanilla)."""
+    zs = load("world/ZoneSystem.json")[0]["fields"]
+    veg = defaultdict(list)
+    for v in zs["m_vegetation"]:
+        if v.get("m_name"):
+            veg[v["m_name"]].append(ref(v["m_prefab"]))
+    loc = {z["m_name"]: z["m_prefabName"] for z in zs["m_locations"] if z.get("m_name")}
+    spawn_names = defaultdict(list)
+    for lst in load("world/SpawnSystemList.json"):
+        for s in lst["fields"]["m_spawners"]:
+            if s.get("m_name") and s["m_enabled"] and not s.get("m_devDisabled"):
+                spawn_names[s["m_name"]].append(s)
+    out = []
+    for a in alt_biome_list():
+        if not a["m_enabled"]:
+            continue
+        own = biomes(a["m_biome"])
+        spawns = [sp["creature"] for sp in filter(None, (world_spawn(s, "") for s in a["m_spawn"]))
+                  if any(b in own for b in sp["biomes"])]
+        blocked = [w["creature"] for n in a.get("m_blockSpawnNames", []) for s in spawn_names.get(n, [])
+                   if (w := world_spawn(s, "")) and any(b in own for b in w["biomes"])]
+        adds = [ref(v["m_prefab"]) for v in a.get("m_addVegetation", []) if v.get("m_enable")]
+        removes = [p for n in a.get("m_blockVegetationNames", []) for p in veg.get(n, []) if p not in adds]
+        locs = [loc.get(z["m_name"], z.get("m_prefabName")) for z in a.get("m_addLocations", []) if z.get("m_enable")]
+        out.append({
+            "id": a["m_name"],
+            "biomes": own,
+            "chance": round(a["m_chance"] * 100, 2),
+            "min": a.get("m_minAmountSpawned"),
+            "max": a.get("m_maxAmountSpawned"),
+            "minDistance": a.get("m_minDistanceFromCenter"),
+            "size": [a.get("m_minEdgeSize"), a.get("m_maxEdgeSize")],
+            "height": [a.get("m_minAvgHeight"), a.get("m_maxAvgHeight")],
+            "incompatible": a.get("m_incompatibleAltBiomes", []),
+            "requireNeighbor": biomes(a.get("m_requireNeighbor") or "None"),
+            "notNeighbor": biomes(a.get("m_notNeighbor") or "None"),
+            "levelUpMultiplier": a.get("m_levelUpChanceMultiplier") if a.get("m_levelUpChanceMultiplier") != 1 else None,
+            "spawns": list(dict.fromkeys(spawns)),
+            "blocksSpawns": list(dict.fromkeys(blocked)),
+            "vegetation": list(dict.fromkeys(adds)),
+            "blocksVegetation": list(dict.fromkeys(removes)),
+            "locations": list(dict.fromkeys(locs)),
+            "blocksLocations": list(dict.fromkeys(loc.get(n, n) for n in a.get("m_blockLocationNames", []))),
+            "environment": a.get("m_forceEnvironment"),
+            "addEnvironments": [e.get("m_environment") for e in a.get("m_addEnvironments", [])],
+            "blocksEnvironments": a.get("m_blockEnvironments", []),
+        })
     return out
 
 
@@ -1642,6 +1713,7 @@ def main(argv: list[str]) -> int:
         "processing.json": sorted(procs, key=lambda x: (x["station"], x["from"], x["to"])),
         "sources.json": sources,
         "locations.json": location_list,
+        "alt_biomes.json": alt_biomes(),
         "status_effects.json": effects,
     }
     for name, v in data.items():

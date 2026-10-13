@@ -297,6 +297,18 @@ def main() -> int:
                                           (("item", "SwordIron"), ("item", "IronScrap"))]),
           "via spot checks: Stonecutter needs Iron, Iron Sword a forge extension, Smelter Surtling Core")
 
+    alts = {a["id"]: a for a in load("alt_biomes.json")}
+    lox = alts.get("Lox Plains", {})
+    check({"Dark Meadows", "Lox Plains", "Goblin Plains", "Wolf Mountain", "Hut Swamp"} <= set(alts)
+          and "Lox" in lox.get("spawns", []) and "Goblin" in lox.get("blocksSpawns", []) and lox.get("max"),
+          f"alt biomes: known vanilla ones present ({len(alts)}), Lox Plains spawns Lox and no Fulings")
+    alt_spawns = {s["altBiome"] for s in spawns if s.get("altBiome")}
+    check(alt_spawns <= set(alts), f"alt biomes: every altBiome spawn names one {sorted(alt_spawns - set(alts))}")
+    dangling("alt biome creatures", [c for a in alts.values() for k in ("spawns", "blocksSpawns") for c in a.get(k, [])],
+             set(creatures))
+    dangling("alt biome locations", [x for a in alts.values() for k in ("locations", "blocksLocations")
+                                     for x in a.get(k, [])], {x["id"] for x in locations})
+
     raids = load("raids.json")
     ev = {e["id"]: e for e in raids["events"]}
     check(raids.get("intervalMin", 0) > 0 and 0 < raids.get("chance", 0) <= 100, "raids: roll interval and chance set")

@@ -59,6 +59,7 @@ HAVE_ICONS = {p.stem for p in ICONS.glob("*.png")} if ICONS.is_dir() else set()
 RAIDS = load("raids")
 RAID_EVENTS = {e["id"]: e for e in RAIDS["events"]}
 LOCATIONS = load("locations")
+ALT_BIOMES = load("alt_biomes")
 
 KINDS = {"item": "items", "creature": "creatures", "piece": "pieces", "effect": "effects"}
 WEAPONS = {"OneHandedWeapon", "TwoHandedWeapon", "TwoHandedWeaponLeft", "Bow", "Torch"}
@@ -1209,7 +1210,7 @@ def spawn_sections(spawns: list[dict]) -> str:
         when = "day and night" if s.get("day") and s.get("night") else "day" if s.get("day") else "night"
         extra = as_variant(s)
         if s.get("altBiome"):
-            extra.append(f"in {esc(words(s['altBiome']))} patches")
+            extra.append(f'in <a href="{alt_biome_href(s["altBiome"], s["biomes"][0])}">{esc(s["altBiome"])}</a> regions')
         if s.get("requiredGlobalKey"):
             extra.append(f"after {key_label(s['requiredGlobalKey'])}")
         if s.get("requiredEnvironments"):
@@ -1372,6 +1373,59 @@ def source_items(s: dict) -> list[str]:
     return list(dict.fromkeys(out))
 
 
+def alt_biome_href(alt: str, b: str) -> str:
+    return f"biomes/{quote(b)}.html#{mechanics.slug(alt)}"
+
+
+def world_object(id_: str, gives=True) -> str:
+    """A vegetation prefab placed by world generation: its source name (and the items it gives), or a piece link."""
+    if src := SOURCES.get(id_):
+        items = [link("item", i) for i in source_items(src) if gives and not ITEMS.get(i, {}).get("unobtainable")]
+        return esc(source_name(src)) + (f' ({" ".join(items)})' if items else "")
+    return link("piece", id_) if has_page("piece", id_) else esc(pretty_id(id_))
+
+
+def location_name(id_: str) -> str:
+    return mech_link(*LOCATION_PAGES[id_]) if id_ in LOCATION_PAGES else esc(pretty_id(id_))
+
+
+ALT_BIOME_NOTE = ("Some regions of a biome (a whole connected area of it) get a variant that changes what spawns and "
+                  "grows there. The game doesn't name or mark them; you spot one by its creatures and plants. When a "
+                  "world is made, every region at the variant's distance from the centre and of its size gets it at "
+                  "the chance shown, until the world has the most it allows (AltBiomeWorldData.GenerateAltBiomes, "
+                  "BiomeSector.CanAddModifier).")
+
+
+def alt_biomes_section(b: str) -> str:
+    out = ""
+    for a in (a for a in ALT_BIOMES if b in a["biomes"]):
+        count = rng(a["min"], a["max"]) if a.get("min") else f"up to {num(a['max'])}" if a.get("max") else ""
+        where = [f"{num(a['chance'])}% of regions", f"{count} per world" if count else "",
+                 f"{num(a['minDistance'])} m or more from the centre" if a.get("minDistance") else ""]
+        others = [x for x in a["biomes"] if x != b]
+        if others:
+            where.append("also in " + ", ".join(biome_link(x) for x in others))
+        excl = [f'<a href="{alt_biome_href(x, next((y["biomes"][0] for y in ALT_BIOMES if y["id"] == x), b))}">'
+                f'{esc(x)}</a>' for x in a.get("incompatible", [])]
+        weather = ([f"always {esc(words(a['environment']))}"] if a.get("environment") else []) + \
+                  [f"adds {esc(words(e))}" for e in a.get("addEnvironments", [])] + \
+                  ([f"no {', '.join(esc(words(e)) for e in a['blocksEnvironments'])}"] if a.get("blocksEnvironments") else [])
+        rows = [
+            ("Spawns", " ".join(link("creature", c) for c in a.get("spawns", []))),
+            ("Doesn't spawn", " ".join(link("creature", c) for c in a.get("blocksSpawns", []))),
+            ("Creature stars", f"level-up chance ×{num(a['levelUpMultiplier'])}" if a.get("levelUpMultiplier") else ""),
+            ("Adds", ", ".join(dict.fromkeys(world_object(v) for v in a.get("vegetation", [])))),
+            ("Removes", ", ".join(dict.fromkeys(world_object(v, gives=False) for v in a.get("blocksVegetation", [])))),
+            ("Locations", ", ".join(location_name(x) for x in a.get("locations", []))),
+            ("Without", ", ".join(location_name(x) for x in a.get("blocksLocations", []))),
+            ("Weather", "; ".join(weather)),
+            ("Never with", ", ".join(excl)),
+        ]
+        out += (f'<h3 id="{mechanics.slug(a["id"])}">{esc(a["id"])}</h3><p class="sub">{", ".join(w for w in where if w)}'
+                f'</p>{kv(rows)}')
+    return out + f'<p class="note">{ALT_BIOME_NOTE}</p>' if out else ""
+
+
 def biome_page(b: str) -> None:
     st = STAGES.index(b) if b in STAGES else None
     label = esc(BIOMES[b])
@@ -1407,6 +1461,7 @@ def biome_page(b: str) -> None:
                    for x in LOCATIONS if b in x.get("biomes", [])}, key=lambda x: x[0].lower())
     locs = [mech_link(LOCATION_PAGES[i][0], n) if i in LOCATION_PAGES else esc(n) for n, i in locs]
     body += section("Locations", f'<p>{", ".join(locs)}</p>' if locs else "")
+    body += section("Alt biomes", alt_biomes_section(b))
     page(f"biomes/{quote(b)}.html", BIOMES[b], body, '<a href="biomes/index.html">Biomes</a>')
 
 

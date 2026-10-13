@@ -1,0 +1,930 @@
+[
+ {
+  "id": "Mushroom",
+  "biomes": [
+   "Meadows",
+   "BlackForest"
+  ],
+  "chance": 20.0,
+  "min": 1,
+  "max": 3,
+  "minDistance": 500,
+  "size": [
+   66,
+   199
+  ],
+  "height": [
+   30,
+   10000
+  ],
+  "vegetation": [
+   "Pickable_Mushroom"
+  ]
+ },
+ {
+  "id": "Lantern",
+  "biomes": [
+   "Meadows",
+   "Swamp",
+   "Mountain",
+   "BlackForest",
+   "Plains",
+   "DeepNorth",
+   "Mistlands"
+  ],
+  "chance": 20.0,
+  "min": 3,
+  "max": 5,
+  "minDistance": 500,
+  "size": [
+   66,
+   199
+  ],
+  "height": [
+   30,
+   10000
+  ],
+  "vegetation": [
+   "deepnorth_lantern_standing"
+  ]
+ },
+ {
+  "id": "Bones",
+  "biomes": [
+   "Swamp",
+   "Plains",
+   "Mistlands"
+  ],
+  "chance": 20.0,
+  "min": 1,
+  "max": 3,
+  "minDistance": 2000,
+  "size": [
+   66,
+   199
+  ],
+  "height": [
+   30,
+   10000
+  ],
+  "spawns": [
+   "Skeleton_Poison"
+  ],
+  "vegetation": [
+   "LargeBone",
+   "LargeBone_half01",
+   "LargeBone_half02"
+  ]
+ },
+ {
+  "id": "Menhir",
+  "biomes": [
+   "Meadows",
+   "Plains"
+  ],
+  "chance": 20.0,
+  "min": 1,
+  "max": 3,
+  "minDistance": 750,
+  "size": [
+   33,
+   199
+  ],
+  "height": [
+   30,
+   10000
+  ],
+  "incompatible": [
+   "Birch Meadows"
+  ],
+  "spawns": [
+   "Skeleton",
+   "Skeleton_Mountains"
+  ],
+  "vegetation": [
+   "Rock_7_meadows"
+  ]
+ },
+ {
+  "id": "Dark Meadows",
+  "biomes": [
+   "Meadows"
+  ],
+  "chance": 50.0,
+  "min": 2,
+  "max": 5,
+  "minDistance": 1900,
+  "size": [
+   66,
+   299
+  ],
+  "height": [
+   30,
+   10000
+  ],
+  "levelUpMultiplier": 2,
+  "spawns": [
+   "Draugr"
+  ],
+  "locations": [
+   "WoodVillage2"
+  ],
+  "blocksLocations": [
+   "WoodFarm1"
+  ],
+  "blocksEnvironments": [
+   "Clear",
+   "LightRain",
+   "DeepForest Mist"
+  ]
+ },
+ {
+  "id": "Peaceful Meadows",
+  "biomes": [
+   "Meadows"
+  ],
+  "chance": 20.0,
+  "min": 1,
+  "max": 2,
+  "minDistance": 1000,
+  "size": [
+   99,
+   299
+  ],
+  "height": [
+   30,
+   10000
+  ],
+  "incompatible": [
+   "Bones",
+   "Dark Meadows"
+  ],
+  "spawns": [
+   "Boar",
+   "Deer"
+  ],
+  "blocksSpawns": [
+   "Greyling",
+   "Greydwarf",
+   "Skeleton",
+   "Draugr"
+  ],
+  "vegetation": [
+   "FireFlies"
+  ]
+ },
+ {
+  "id": "Dandelion Meadows",
+  "biomes": [
+   "Meadows"
+  ],
+  "chance": 20.0,
+  "min": 1,
+  "max": 3,
+  "minDistance": 500,
+  "size": [
+   66,
+   199
+  ],
+  "height": [
+   30,
+   10000
+  ],
+  "vegetation": [
+   "Pickable_Dandelion"
+  ]
+ },
+ {
+  "id": "Raspberry Meadows",
+  "biomes": [
+   "Meadows"
+  ],
+  "chance": 20.0,
+  "min": 1,
+  "max": 3,
+  "minDistance": 500,
+  "size": [
+   66,
+   199
+  ],
+  "height": [
+   30,
+   10000
+  ],
+  "vegetation": [
+   "RaspberryBush"
+  ]
+ },
+ {
+  "id": "Smalltree Meadows",
+  "biomes": [
+   "Meadows"
+  ],
+  "chance": 20.0,
+  "min": 1,
+  "max": 3,
+  "minDistance": 500,
+  "size": [
+   33,
+   199
+  ],
+  "height": [
+   30,
+   10000
+  ],
+  "spawns": [
+   "Neck"
+  ],
+  "vegetation": [
+   "Beech_small1",
+   "Beech_small2",
+   "stubbe",
+   "Bush01",
+   "Beech1"
+  ],
+  "blocksVegetation": [
+   "Birch1",
+   "Birch2"
+  ]
+ },
+ {
+  "id": "Birch Meadows",
+  "biomes": [
+   "Meadows"
+  ],
+  "chance": 20.0,
+  "min": 1,
+  "max": 3,
+  "minDistance": 500,
+  "size": [
+   66,
+   199
+  ],
+  "height": [
+   30,
+   10000
+  ],
+  "spawns": [
+   "Deer"
+  ],
+  "vegetation": [
+   "Birch1",
+   "Birch2",
+   "Beech1",
+   "Oak1"
+  ]
+ },
+ {
+  "id": "Troll Black Forest",
+  "biomes": [
+   "BlackForest"
+  ],
+  "chance": 20.0,
+  "min": 1,
+  "max": 3,
+  "minDistance": 750,
+  "size": [
+   66,
+   199
+  ],
+  "height": [
+   30,
+   10000
+  ],
+  "spawns": [
+   "Troll"
+  ]
+ },
+ {
+  "id": "Root Black Forest",
+  "biomes": [
+   "BlackForest"
+  ],
+  "chance": 20.0,
+  "min": 1,
+  "max": 4,
+  "minDistance": 2000,
+  "size": [
+   99,
+   299
+  ],
+  "height": [
+   30,
+   10000
+  ],
+  "incompatible": [
+   "Rock Black Forest",
+   "Kalhygge Black Forest"
+  ],
+  "spawns": [
+   "TentaRoot_wild",
+   "Greydwarf_Elite"
+  ],
+  "blocksSpawns": [
+   "Skeleton"
+  ],
+  "vegetation": [
+   "Greydwarf_Root",
+   "Greydwarf_Surprise"
+  ]
+ },
+ {
+  "id": "Ruin Black Forest",
+  "biomes": [
+   "BlackForest"
+  ],
+  "chance": 20.0,
+  "min": 1,
+  "max": 5,
+  "minDistance": 500,
+  "size": [
+   33,
+   199
+  ],
+  "height": [
+   30,
+   10000
+  ],
+  "vegetation": [
+   "stone_wall_2x1_ruin",
+   "stone_wall_1x1_ruin",
+   "stone_wall_ruin",
+   "stone_wall_ruin_2",
+   "GhostSkull"
+  ],
+  "locations": [
+   "StoneTowerRuins07_sunk",
+   "StoneTowerRuins08_sunk",
+   "StoneTowerRuins09_sunk",
+   "StoneTowerRuins10_sunk"
+  ]
+ },
+ {
+  "id": "Rock Black Forest",
+  "biomes": [
+   "BlackForest"
+  ],
+  "chance": 20.0,
+  "min": 1,
+  "max": 5,
+  "minDistance": 750,
+  "size": [
+   33,
+   199
+  ],
+  "height": [
+   30,
+   10000
+  ],
+  "incompatible": [
+   "Pinetree Black Forest",
+   "Root Black Forest"
+  ],
+  "levelUpMultiplier": 2,
+  "vegetation": [
+   "rock4_forest",
+   "Rock_3",
+   "Rock_4",
+   "FirTree_small",
+   "stubbe",
+   "FirTree"
+  ],
+  "blocksVegetation": [
+   "Pinetree_01"
+  ],
+  "blocksLocations": [
+   "TrollCave02"
+  ]
+ },
+ {
+  "id": "Pinetree Black Forest",
+  "biomes": [
+   "BlackForest"
+  ],
+  "chance": 20.0,
+  "min": 1,
+  "max": 5,
+  "minDistance": 750,
+  "size": [
+   33,
+   199
+  ],
+  "height": [
+   30,
+   10000
+  ],
+  "incompatible": [
+   "Rock Black Forest"
+  ],
+  "levelUpMultiplier": 2,
+  "vegetation": [
+   "Pinetree_01"
+  ],
+  "blocksVegetation": [
+   "FirTree",
+   "FirTree_small"
+  ]
+ },
+ {
+  "id": "Blueberry Black Forest",
+  "biomes": [
+   "BlackForest"
+  ],
+  "chance": 20.0,
+  "min": 1,
+  "max": 5,
+  "minDistance": 500,
+  "size": [
+   33,
+   199
+  ],
+  "height": [
+   30,
+   10000
+  ],
+  "vegetation": [
+   "BlueberryBush"
+  ]
+ },
+ {
+  "id": "Hut Swamp",
+  "biomes": [
+   "Swamp"
+  ],
+  "chance": 20.0,
+  "min": 1,
+  "max": 3,
+  "minDistance": 1500,
+  "size": [
+   33,
+   199
+  ],
+  "height": [
+   30,
+   10000
+  ],
+  "incompatible": [
+   "Bog Swamp"
+  ],
+  "spawns": [
+   "Wraith"
+  ],
+  "vegetation": [
+   "SwampTree1",
+   "SwampTree2",
+   "wooden_path",
+   "wood_pole_log_4_worn"
+  ],
+  "locations": [
+   "SwampHut1_1",
+   "SwampHut2_1",
+   "SwampHut3_1"
+  ]
+ },
+ {
+  "id": "Bog Swamp",
+  "biomes": [
+   "Swamp"
+  ],
+  "chance": 20.0,
+  "min": 1,
+  "max": 5,
+  "minDistance": 1500,
+  "size": [
+   33,
+   145
+  ],
+  "height": [
+   30,
+   10000
+  ],
+  "spawns": [
+   "Abomination"
+  ],
+  "vegetation": [
+   "StatueEvil",
+   "SwampTree2_log",
+   "FirTree_small_dead",
+   "SwampTree1",
+   "SwampTree2"
+  ],
+  "blocksLocations": [
+   "InfestedTree01"
+  ]
+ },
+ {
+  "id": "Bat Swamp",
+  "biomes": [
+   "Swamp"
+  ],
+  "chance": 20.0,
+  "min": 1,
+  "max": 3,
+  "minDistance": 2000,
+  "size": [
+   33,
+   145
+  ],
+  "height": [
+   30,
+   10000
+  ],
+  "spawns": [
+   "Bat_Swamp"
+  ]
+ },
+ {
+  "id": "Abomination Swamp",
+  "biomes": [
+   "Swamp"
+  ],
+  "chance": 20.0,
+  "min": 1,
+  "max": 3,
+  "minDistance": 2000,
+  "size": [
+   66,
+   145
+  ],
+  "height": [
+   30,
+   10000
+  ],
+  "spawns": [
+   "Abomination"
+  ]
+ },
+ {
+  "id": "Wolf Mountain",
+  "biomes": [
+   "Mountain"
+  ],
+  "chance": 20.0,
+  "min": 1,
+  "max": 5,
+  "minDistance": 2000,
+  "size": [
+   199,
+   299
+  ],
+  "height": [
+   30,
+   10000
+  ],
+  "incompatible": [
+   "Drake Mountain",
+   "Fortress Mountain"
+  ],
+  "levelUpMultiplier": 2,
+  "spawns": [
+   "Wolf"
+  ],
+  "blocksSpawns": [
+   "Skeleton",
+   "Hatchling"
+  ],
+  "vegetation": [
+   "FirTree"
+  ],
+  "blocksVegetation": [
+   "rock1_mountain",
+   "rock2_mountain"
+  ]
+ },
+ {
+  "id": "Drake Mountain",
+  "biomes": [
+   "Mountain"
+  ],
+  "chance": 20.0,
+  "min": 1,
+  "max": 3,
+  "minDistance": 2000,
+  "size": [
+   199,
+   299
+  ],
+  "height": [
+   30,
+   10000
+  ],
+  "incompatible": [
+   "Wolf Mountain",
+   "Fortress Mountain"
+  ],
+  "levelUpMultiplier": 2,
+  "spawns": [
+   "Hatchling"
+  ],
+  "blocksSpawns": [
+   "Wolf",
+   "Skeleton"
+  ],
+  "vegetation": [
+   "rock3_mountain_1"
+  ],
+  "blocksVegetation": [
+   "FirTree"
+  ]
+ },
+ {
+  "id": "Fortress Mountain",
+  "biomes": [
+   "Mountain"
+  ],
+  "chance": 20.0,
+  "min": 1,
+  "max": 2,
+  "minDistance": 2000,
+  "size": [
+   199,
+   299
+  ],
+  "height": [
+   30,
+   10000
+  ],
+  "incompatible": [
+   "Wolf Mountain",
+   "Drake Mountain"
+  ],
+  "levelUpMultiplier": 3,
+  "spawns": [
+   "Skeleton_Mountains",
+   "StoneGolem"
+  ],
+  "vegetation": [
+   "stone_wall_ruin",
+   "stone_wall_ruin_2",
+   "rock3_mountain_1"
+  ],
+  "blocksVegetation": [
+   "FirTree"
+  ],
+  "locations": [
+   "StoneTowerRuins05_leet"
+  ],
+  "blocksLocations": [
+   "StoneTowerRuins05"
+  ]
+ },
+ {
+  "id": "Lox Plains",
+  "biomes": [
+   "Plains"
+  ],
+  "chance": 20.0,
+  "max": 1,
+  "minDistance": 2000,
+  "size": [
+   99,
+   299
+  ],
+  "height": [
+   30,
+   10000
+  ],
+  "incompatible": [
+   "Goblin Plains",
+   "Death Plains"
+  ],
+  "spawns": [
+   "Lox"
+  ],
+  "blocksSpawns": [
+   "Goblin"
+  ],
+  "blocksVegetation": [
+   "Birch2_aut"
+  ],
+  "blocksLocations": [
+   "GoblinCamp2",
+   "StoneTower1",
+   "StoneTower3"
+  ]
+ },
+ {
+  "id": "Goblin Plains",
+  "biomes": [
+   "Plains"
+  ],
+  "chance": 20.0,
+  "max": 2,
+  "minDistance": 2000,
+  "size": [
+   66,
+   199
+  ],
+  "height": [
+   30,
+   10000
+  ],
+  "incompatible": [
+   "Lox Plains",
+   "Death Plains"
+  ],
+  "levelUpMultiplier": 2,
+  "spawns": [
+   "Goblin"
+  ],
+  "blocksSpawns": [
+   "Lox",
+   "Deathsquito"
+  ],
+  "locations": [
+   "GoblinCamp2_1",
+   "GoblinHut01",
+   "GoblinHut02",
+   "GoblinHut03"
+  ]
+ },
+ {
+  "id": "Death Plains",
+  "biomes": [
+   "Plains"
+  ],
+  "chance": 20.0,
+  "max": 1,
+  "minDistance": 1000,
+  "size": [
+   99,
+   299
+  ],
+  "height": [
+   30,
+   10000
+  ],
+  "incompatible": [
+   "Lox Plains",
+   "Goblin Plains"
+  ],
+  "levelUpMultiplier": 2,
+  "spawns": [
+   "Deathsquito"
+  ],
+  "blocksSpawns": [
+   "Lox",
+   "Goblin"
+  ],
+  "blocksVegetation": [
+   "Birch2_aut",
+   "HeathRockPillar"
+  ],
+  "locations": [
+   "TarPit1_1",
+   "TarPit2_1",
+   "TarPit3_1"
+  ],
+  "blocksLocations": [
+   "GoblinCamp2",
+   "StoneTower1",
+   "StoneTower3",
+   "StoneHenge1",
+   "StoneHenge2",
+   "StoneHenge3"
+  ]
+ },
+ {
+  "id": "Kalhygge Black Forest",
+  "biomes": [
+   "BlackForest"
+  ],
+  "chance": 20.0,
+  "min": 1,
+  "max": 2,
+  "minDistance": 500,
+  "size": [
+   20,
+   80
+  ],
+  "height": [
+   30,
+   10000
+  ],
+  "incompatible": [
+   "Root Black Forest"
+  ],
+  "vegetation": [
+   "stubbe",
+   "Pinetree_01_Stub"
+  ],
+  "blocksVegetation": [
+   "FirTree",
+   "Pinetree_01",
+   "FirTree_small"
+  ]
+ },
+ {
+  "id": "Rockless Mistlands",
+  "biomes": [
+   "Mistlands"
+  ],
+  "chance": 20.0,
+  "min": 2,
+  "max": 5,
+  "minDistance": 2000,
+  "size": [
+   99,
+   599
+  ],
+  "height": [
+   30,
+   10000
+  ],
+  "vegetation": [
+   "cliff_mistlands1",
+   "cliff_mistlands2",
+   "rock_mistlands1",
+   "YggaShoot_small1"
+  ]
+ },
+ {
+  "id": "Trees Mistlands",
+  "biomes": [
+   "Mistlands"
+  ],
+  "chance": 20.0,
+  "min": 1,
+  "max": 5,
+  "minDistance": 2000,
+  "size": [
+   59,
+   299
+  ],
+  "height": [
+   30,
+   10000
+  ],
+  "vegetation": [
+   "YggaShoot1",
+   "YggaShoot_small1",
+   "YggdrasilRoot"
+  ]
+ },
+ {
+  "id": "Swords Mistlands",
+  "biomes": [
+   "Mistlands"
+  ],
+  "chance": 20.0,
+  "min": 1,
+  "max": 3,
+  "minDistance": 2000,
+  "size": [
+   59,
+   199
+  ],
+  "height": [
+   30,
+   10000
+  ],
+  "vegetation": [
+   "giant_sword1",
+   "giant_sword2",
+   "giant_helmet1",
+   "giant_helmet2"
+  ]
+ },
+ {
+  "id": "Hare Mistlands",
+  "biomes": [
+   "Mistlands"
+  ],
+  "chance": 20.0,
+  "min": 1,
+  "max": 3,
+  "minDistance": 2000,
+  "size": [
+   59,
+   199
+  ],
+  "height": [
+   30,
+   10000
+  ],
+  "spawns": [
+   "Hare"
+  ]
+ },
+ {
+  "id": "BroodSwarm Mistlands",
+  "biomes": [
+   "Mistlands"
+  ],
+  "chance": 20.0,
+  "min": 1,
+  "max": 3,
+  "minDistance": 2000,
+  "size": [
+   59,
+   199
+  ],
+  "height": [
+   30,
+   10000
+  ],
+  "spawns": [
+   "SeekerBrood"
+  ]
+ }
+]

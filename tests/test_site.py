@@ -87,7 +87,7 @@ class Site(unittest.TestCase):
 
     def test_alt_biome_spawn_and_summons_through_abilities(self):
         moth = (self.out / "creatures/Moth.html").read_text(encoding="utf-8")
-        self.assertIn("in Moths patches", moth)
+        self.assertIn('in <a href="biomes/Meadows.html#moths">Moths</a> regions', moth)  # links the alt biome
         sprite = (self.out / "creatures/Sprite.html").read_text(encoding="utf-8")  # the Wand's ability makes it
         self.assertIn('href="items/Wand.html"', sprite)
         shade = (self.out / "creatures/Shade.html").read_text(encoding="utf-8")
@@ -335,6 +335,11 @@ class Site(unittest.TestCase):
         self.assertIn('<a href="biomes/Meadows.html">Meadows</a>', raider)  # biome links on the creature page
         self.assertIn('href="factions/ForestMonsters.html"', raider)
         self.assertIn('href="biomes/index.html"', raider)  # nav
+        meadows = (self.out / "biomes/Meadows.html").read_text(encoding="utf-8")
+        self.assertIn('<h3 id="moths">Moths</h3>', meadows)  # alt biomes, on each of their biomes' pages
+        self.assertIn("25% of regions, 1–4 per world, 800 m or more from the centre", meadows)
+        self.assertIn('<dt>Doesn&#x27;t spawn</dt><dd><a class="ref" href="creatures/Raider.html">', meadows)
+        self.assertIn('<h3 id="moths">', swamp)
 
     def test_faction_pages(self):
         f = (self.out / "factions/ForestMonsters.html").read_text(encoding="utf-8")

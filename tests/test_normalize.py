@@ -372,6 +372,16 @@ class Entities(FixtureCase):
         alt = [s for s in self.spawns("world") if s.get("altBiome")]
         self.assertEqual([(s["creature"], s["altBiome"], s["biomes"]) for s in alt], [("Moth", "Moths", ["Meadows"])])
 
+    def test_alt_biomes(self):
+        self.assertEqual(N.prune(N.alt_biomes()), [{  # the disabled alt is left out
+            "id": "Moths", "biomes": ["Meadows", "Swamp"], "chance": 25, "min": 1, "max": 4, "minDistance": 800,
+            "size": [40, 150], "height": [30, 10000], "incompatible": ["Off"], "levelUpMultiplier": 2,
+            "spawns": ["Moth"],  # Pup's spawn has no biome in common with the alt
+            "blocksSpawns": ["Raider"],  # by spawn entry name
+            "vegetation": ["Bush"], "blocksVegetation": ["Root"],  # by vegetation name; Bush is added back
+            "locations": ["Stash"], "blocksLocations": ["Camp"],
+            "addEnvironments": ["Mist"], "blocksEnvironments": ["Clear"]}])
+
     def test_offering_of_a_group(self):
         lair = {s["creature"]: s for s in self.spawns("location") if s["location"] == "Lair"}
         self.assertEqual(lair["Singer"]["summon"], {"item": "Wood", "amount": 2})  # children named after a creature prefab; 2 placed stands

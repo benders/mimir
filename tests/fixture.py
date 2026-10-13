@@ -335,7 +335,14 @@ def subprefabs():
         {"name": "AltBiomes_Test", "components": [comp("AltBiomeList", m(alts=[
             m(name="Moths", enabled=True, biome="Meadows, Swamp", spawn=[
                 spawner("Moth", biome="Meadows, BlackForest"),  # the patch is only in Meadows and Swamp: Meadows
-                spawner("Pup", biome="Plains")]),  # no overlap: never spawns
+                spawner("Pup", biome="Plains")],  # no overlap: never spawns
+              chance=0.25, minAmountSpawned=1, maxAmountSpawned=4, minDistanceFromCenter=800, minEdgeSize=40,
+              maxEdgeSize=150, minAvgHeight=30, maxAvgHeight=10000, incompatibleAltBiomes=["Off"],
+              levelUpChanceMultiplier=2, blockSpawnNames=["night_raider"],
+              addVegetation=[m(name="bush_moths", prefab=R("Bush"), enable=True)],
+              blockVegetationNames=["root_swamp", "bush_meadows"],  # Bush is added back: not listed as removed
+              addLocations=[m(name="Stash", prefabName="Stash", enable=True)], blockLocationNames=["Camp"],
+              forceEnvironment="", addEnvironments=[m(environment="Mist")], blockEnvironments=["Clear"]),
             m(name="Off", enabled=False, biome="Meadows", spawn=[spawner("Raider")])]))]},
         {"name": "ChoirOffering", "components": [comp("Humanoid", m(name="$enemy_singer"), path=f"Singer{n}")
                                                  for n in ("", " (1)", " (2)")]},
@@ -397,7 +404,7 @@ def write_dump(raw: Path) -> Path:
         "_startDate": [1, 12], "_endDate": [6, 1], "Pieces": [R("Tree")],
         "Recipes": [{"$asset": "Recipe_Hat", "type": "Recipe"}]}}])
     dump("world/SpawnSystemList.json", [{"name": "Spawns", "type": "SpawnSystemList", "fields": {"m_spawners": [
-        spawner("Raider", biome="Meadows, BlackForest", minLevel=1, maxLevel=2, spawnAtDay=False),
+        spawner("Raider", biome="Meadows, BlackForest", minLevel=1, maxLevel=2, spawnAtDay=False, name="night_raider"),
         spawner("Raider", enabled=False),
         spawner("Raider", devDisabled=True),
         spawner("vfx_Poof"),
@@ -414,9 +421,9 @@ def write_dump(raw: Path) -> Path:
         event("boss_chief", "Meadows", random=False),  # a boss fight's music, not a raid
     ]}}])
     dump("world/ZoneSystem.json", [{"name": "_GameMain", "type": "ZoneSystem", "fields": {"m_altBiomeLists": [{"$ref": "AltBiomes_Test", "component": "AltBiomeList"}], "m_vegetation": [
-        m(prefab=R("Root"), enable=True, biome="Mountain"), m(prefab=R("Root"), enable=True, biome="Swamp"),
+        m(prefab=R("Root"), enable=True, biome="Mountain"), m(prefab=R("Root"), enable=True, biome="Swamp", name="root_swamp"),
         m(prefab=R("Root"), enable=False, biome="Plains"), m(prefab=R("Root2"), enable=False, biome="Plains"),
-        m(prefab=R("Bush"), enable=True, biome="Meadows, Swamp"), m(prefab=R("Bush"), enable=True, biome="Meadows")],
+        m(prefab=R("Bush"), enable=True, biome="Meadows, Swamp"), m(prefab=R("Bush"), enable=True, biome="Meadows", name="bush_meadows")],
         "m_locations": [
         zone_location("Camp", "Swamp"),
         zone_location("Camp", "Plains"),  # same prefab placed in a second biome

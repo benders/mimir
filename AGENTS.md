@@ -116,7 +116,11 @@ catch drops; fish spawn as `creature` ids in `spawns` but have no `creatures` en
 quantity, unique, prioritized, biomeArea, min/maxDistance from the centre (the tighter of m_min/maxDistance and m_min/maxDistanceFromCenter, both checked), minDistanceFromSimilar, iconPlaced), `raids` (RandEventSystem:
 `intervalMin` / `chance` of the raid roll, and per enabled random event `id`, start/end `message`, `biomes`, `duration`,
 `nearBaseOnly`, `requiredGlobalKeys` / `notRequiredGlobalKeys`, and `player` {knownItems, notKnownItems, keysAny, keysAll,
-notKeys}: the conditions the player-based raids world modifier uses instead; what spawns is in `spawns`). Each `spawns` entry has a `source`: `world` (SpawnSystem; also the enabled alt biomes' spawns, `altBiome` = the patch name),
+notKeys}: the conditions the player-based raids world modifier uses instead; what spawns is in `spawns`), `alt_biomes`
+(ZoneSystem's AltBiomeList: a variant given to a whole connected region of a biome at world generation, `chance` % per
+region until the world has `max` (`min` always), at least `minDistance` m from the centre, `size`/`height` limits, `incompatible` alts; what it
+`spawns` / `blocksSpawns` (creatures), `vegetation` / `blocksVegetation` (source or piece ids), `locations` /
+`blocksLocations`, weather changes, `levelUpMultiplier`; normalize.alt_biomes has the code refs). Each `spawns` entry has a `source`: `world` (SpawnSystem; also the enabled alt biomes' spawns, `altBiome` = the patch name),
 `raid` (RandEventSystem; the event's biomes; `requiredGlobalKeys`), world spawns may need a `requiredGlobalKey` or a
 `requiredEvent` (persistent event running), `location` / `dungeon` (spawners and boss altars in a location or its
 dungeon rooms; the location's biomes), `offspring` (`parent` creature), `egg` (`item` that hatches), `summon` (an attack `item`'s projectile or ability prefab makes it, through `subprefabs/`;
@@ -159,7 +163,8 @@ projectile lands as the weapon). Bows have `draw` (m_drawDurationMin) and crossb
 The site shows DPS per quality (`mechanics.dps`, leaving out damage types most creatures are immune to: chop, pickaxe, spirit (footnoted); bows and crossbows only seconds per shot at skill 0 and 100: their DPS depends on the ammo)
 and lists every timed attack on the `weapons` mechanics page, by category (skill and hands, `build-site.WEAPON_CATEGORIES`),
 lowest DPS first. The site also builds a page per biome (`biomes/`: creatures by home biome, raids, gathered resources,
-fish, locations; biome names everywhere link to it) and per creature faction (`factions/`, hostility from
+fish, locations, alt biomes (anchor = `mechanics.slug` of the name; spawn rows with `altBiome` link it); biome names
+everywhere link to it) and per creature faction (`factions/`, hostility from
 `mechanics.is_enemy`, a copy of BaseAI.IsEnemy's faction switch); raids have the `raids` mechanics page. Each trader gets a page (`traders/`: one hand-written sentence on its goods in
 `build-site.TRADER_GOODS`, camp placement from `locations` placement, everything sold by unlock stage), linked from
 "Sold by" rows and its biome's page.

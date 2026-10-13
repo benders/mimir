@@ -34,6 +34,7 @@
   "processing": 1,
   "sources": 16,
   "locations": 4,
+  "alt_biomes": 1,
   "status_effects": 8
  },
  "unresolvedTokens": [
