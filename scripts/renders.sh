@@ -10,4 +10,5 @@ in_tools python3
 [[ -d "$SERVER_DIR/valheim_server_Data" ]] || die "no server at $SERVER_DIR (run fetch-server first)"
 
 log "rendering locations"
-"$(ensure_venv)" "$ROOT/scripts/extract-renders.py" "$SERVER_DIR" "$OUT_DIR" "$WORK_DIR/renders" "$@"
+"$(ensure_venv)" "$ROOT/scripts/extract-renders.py" "$SERVER_DIR" "$OUT_DIR" "$WORK_DIR/renders" \
+  --unpacked "$CACHE/unpacked/$BRANCH" "$@"

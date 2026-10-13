@@ -6,15 +6,25 @@ in other bundles (loaded transitively through each file's externals) or in Unity
 boxes are built-in Cubes). Shaders aren't in the server data, so materials are drawn from `_MainTex` x `_Color` with
 a fixed light, a z-buffer and alpha cutout; refraction materials (trader force fields) are drawn as faint glass.
 
-    scripts/extract-renders.py <server_dir> <raw_dump_dir> <out_dir> [location ...]
+    scripts/extract-renders.py <server_dir> <raw_dump_dir> <out_dir> [--unpacked DIR] [--threads N] [location ...]
+
+The bundles are first unpacked to plain files under --unpacked (default .cache/unpacked/<server_dir name>), once per
+set of bundles: UnityPy decompresses a whole bundle in memory, while the unpacked files are memory-mapped, so only
+what is read stays resident. Only the bundles the locations depend on are loaded (about a third). A full run peaks
+around 4-5 GB with 8 threads.
 
 Writes <out_dir>/<location>.webp (transparent background) for each location with static meshes. Locations whose
 buildings come from a DungeonGenerator (camps, villages) or that hold only a creature render nothing. Needs UnityPy,
 numpy and numba (see requirements.txt; scripts/renders.sh sets up the venv).
 """
+import hashlib
 import json
 import math
+import mmap
 import os
+import resource
+import shutil
+import struct
 import sys
 import time
 import threading
@@ -24,6 +34,8 @@ from pathlib import Path
 import numpy as np
 import UnityPy
 from numba import njit
+from UnityPy.enums.BundleFile import CompressionFlags
+from UnityPy.helpers import CompressionHelper
 from PIL import Image
 
 SIZE, SS = 800, 2                       # output px, supersampling factor
@@ -32,6 +44,7 @@ YAW, PITCH = math.radians(45), math.radians(30)
 LIGHT = np.array([0.35, 0.85, 0.4]) / np.linalg.norm([0.35, 0.85, 0.4])
 ENTRANCE_ANGLE = math.radians(30)       # camera this far round from straight at a dungeon entrance
 FRAME_FILL, FRAME_FILL_GROUND = 0.92, 0.8  # share of the frame the location fills (without / with drawn ground)
+THREADS = 8                             # render threads (each holds ~100 MB of frame buffers)
 PROBE_SIZE, PROBE_MAX_TRIS = 200, 60000  # entrance-facing test renders: px, and the largest location worth it
 TERRAIN_STEP = 1.0                      # m between heightmap vertices (Heightmap.m_scale)
 GROUND_SLACK = 0.1                      # m below the ground still drawn (foundations meet the terrain)
@@ -42,21 +55,105 @@ SKIP_SHADER_PROPS = {"_CentralFade"}    # light beam effect shader (CharredFortr
 GLOSS_IN_ALPHA = "_SMOOTHNESS_TEXTURE_ALBEDO_CHANNEL_A"  # _MainTex alpha is smoothness, not transparency
 
 
-def index(env):
-    """From the environment with every bundle loaded: CAB name -> bundle, bundle -> referenced CABs, and location
-    prefab name -> (bundle, root GameObject pointer)."""
+def _cstr(f):
+    out = bytearray()
+    while (c := f.read(1)) not in (b"\0", b""):
+        out += c
+    return out.decode()
+
+
+def unpack_bundle(path: Path, dest: Path):
+    """Stream-decompress one UnityFS bundle (the layout BundleFile.read_fs reads) block by block into dest/<node> files,
+    holding one block in memory. .resource nodes (audio, video) are left out: renders never read them."""
+    with open(path, "rb") as f:
+        assert _cstr(f) == "UnityFS", path
+        version, = struct.unpack(">I", f.read(4))
+        _cstr(f), _cstr(f)  # player and engine versions
+        size, csize, usize, flags = struct.unpack(">qIII", f.read(20))
+        if version >= 7:
+            f.seek((f.tell() + 15) & ~15)
+        if flags & 0x80:  # ArchiveFlags.BlocksInfoAtTheEnd
+            pos = f.tell()
+            f.seek(size - csize)
+            info = f.read(csize)
+            f.seek(pos)
+        else:
+            info = f.read(csize)
+        info = CompressionHelper.DECOMPRESSION_MAP[CompressionFlags(flags & 0x3F)](info, usize)
+        o = 16  # uncompressed data hash
+        count, = struct.unpack_from(">i", info, o)
+        blocks = [struct.unpack_from(">IIH", info, o + 4 + 10 * i) for i in range(count)]
+        o += 4 + 10 * count
+        count, = struct.unpack_from(">i", info, o)
+        o += 4
+        nodes = []
+        for _ in range(count):
+            offset, length, _flags = struct.unpack_from(">qqI", info, o)
+            end = info.index(b"\0", o + 20)
+            nodes.append((offset, length, info[o + 20:end].decode()))
+            o = end + 1
+        if flags & 0x200:  # ArchiveFlags.BlockInfoNeedPaddingAtStart
+            f.seek((f.tell() + 15) & ~15)
+        dest.mkdir(parents=True, exist_ok=True)
+        data = dest / ".data"
+        with open(data, "wb") as w:
+            for usize, csize, bflags in blocks:
+                block = f.read(csize)
+                comp = CompressionFlags(bflags & 0x3F)
+                w.write(block if comp == CompressionFlags.NONE else
+                        CompressionHelper.DECOMPRESSION_MAP[comp](block, usize))
+    with open(data, "rb") as r:
+        for offset, length, name in nodes:
+            if name.endswith(".resource"):
+                continue
+            r.seek(offset)
+            with open(dest / Path(name).name, "wb") as w:
+                while length:
+                    chunk = r.read(min(1 << 20, length))
+                    w.write(chunk)
+                    length -= len(chunk)
+    data.unlink()
+
+
+def open_mapped(env, path: Path):
+    """Load an unpacked file into env from a read-only memory map (pages are read on demand, and can be dropped)."""
+    with open(path, "rb") as f:
+        mm = mmap.mmap(f.fileno(), 0, access=mmap.ACCESS_READ)
+    return env.load_file(memoryview(mm), name=path.name)
+
+
+def unpacked_index(bdir: Path, unpacked: Path, locations):
+    """Unpack the bundles into unpacked/ (redone when the bundle set changes) and index them, each file alone so only
+    one is in memory: CAB name -> bundle, bundle -> referenced CABs, location prefab -> bundle. Cached in index.json."""
+    stamp = hashlib.sha1("".join(f"{b.name} {b.stat().st_size}\n" for b in sorted(bdir.iterdir())).encode()).hexdigest()
+    idx = unpacked / "index.json"
+    if idx.exists():
+        cached = json.loads(idx.read_text())
+        if cached["stamp"] == stamp:
+            return cached["cab2b"], cached["ext"], cached["prefabs"]
+    marker = unpacked / ".mimir-unpacked"  # only ever delete a directory this function made
+    if unpacked.exists() and any(unpacked.iterdir()) and not marker.exists():
+        raise SystemExit(f"{unpacked} exists and wasn't made by extract-renders.py; not replacing it")
+    shutil.rmtree(unpacked, ignore_errors=True)
+    unpacked.mkdir(parents=True)
+    marker.touch()
+    for b in sorted(bdir.iterdir()):
+        unpack_bundle(b, unpacked / b.name)
     cab2b, ext, prefabs = {}, {}, {}
-    for bname, bf in env.files.items():
-        if not hasattr(bf, "files"):
-            continue
-        for cab, f in bf.files.items():
-            cab2b[cab] = bname
-            ext.setdefault(bname, []).extend(x.path.split("/")[-1] for x in getattr(f, "externals", None) or [])
-            for o in (getattr(f, "objects", None) or {}).values():
+    for d in sorted(p for p in unpacked.iterdir() if p.is_dir()):
+        for node in sorted(d.iterdir()):
+            cab2b[node.name] = d.name
+            if node.name.endswith(".resS"):
+                continue
+            sf = open_mapped(UnityPy.Environment(), node)
+            ext.setdefault(d.name, []).extend(x.path.split("/")[-1] for x in getattr(sf, "externals", None) or [])
+            for o in (getattr(sf, "objects", None) or {}).values():
                 if o.type.name == "AssetBundle":
-                    for k, v in o.read().m_Container:
+                    for k, _ in o.read().m_Container:
                         if k.endswith(".prefab"):
-                            prefabs[Path(k).stem] = (bname, v.asset)
+                            prefabs[Path(k).stem] = d.name
+    prefabs = {k: v for k, v in prefabs.items() if k in locations}
+    idx.write_text(json.dumps({"stamp": stamp, "cab2b": cab2b, "ext": ext, "prefabs": prefabs}))
     return cab2b, ext, prefabs
 
 
@@ -531,39 +628,65 @@ def warm_up():
 
 
 def main():
-    server, raw, out = Path(sys.argv[1]), Path(sys.argv[2]), Path(sys.argv[3])
+    args = sys.argv[1:]
+    opts = {}
+    for opt in ("--unpacked", "--threads"):
+        if opt in args:
+            i = args.index(opt)
+            opts[opt] = args[i + 1]
+            del args[i:i + 2]
+    server, raw, out = Path(args[0]), Path(args[1]), Path(args[2])
+    unpacked = Path(opts.get("--unpacked", Path(".cache/unpacked") / server.name))
+    threads = int(opts.get("--threads", THREADS))
     data = server / "valheim_server_Data"
     bdir = data / "StreamingAssets/SoftRef/Bundles"
     out.mkdir(parents=True, exist_ok=True)
     t = time.time()
-    # Every bundle once (most locations share two large ones): ~25 s and ~8 GB, instead of reloading per location.
-    env = UnityPy.load(*[str(b) for b in sorted(bdir.iterdir())], str(data / "Resources/unity default resources"))
-    cab2b, ext, prefabs = index(env)
-    print(f"loaded {len(cab2b)} bundle files in {time.time() - t:.0f} s", flush=True)
-    names = sys.argv[4:] or [p.stem for p in sorted((raw / "locations").glob("*.json"))]
+    locations = {p.stem for p in (raw / "locations").glob("*.json")}
+    cab2b, ext, prefabs = unpacked_index(bdir, unpacked, locations)
+    print(f"indexed {len(cab2b)} unpacked files in {time.time() - t:.0f} s", flush=True)
+    names = args[3:] or sorted(locations)
     jobs, failed = [], 0
     for n in names:
         if n not in prefabs:
             print(f"{n}: FAILED no bundle")
             failed += 1
             continue
-        jobs.append((n, prefabs[n][1], deps(prefabs[n][0], cab2b, ext)))
-    # Largest first, so the slowest renders don't start last. Size = the bytes of the bundles each location uses,
+        jobs.append((n, deps(prefabs[n], cab2b, ext)))
+    # One environment with just the bundles these locations use (~255 of 798 for all), memory-mapped.
+    env = UnityPy.Environment()
+    for b in sorted({b for _, ds in jobs for b in ds}):
+        for node in sorted((unpacked / b).iterdir()):
+            open_mapped(env, node)
+    env.load_file(str(data / "Resources/unity default resources"))
+    roots = {}
+    for b in {prefabs[n] for n, _ in jobs}:
+        for f in (unpacked / b).iterdir():
+            sf = env.files.get(f.name)
+            for o in (getattr(sf, "objects", None) or {}).values():
+                if o.type.name == "AssetBundle":
+                    for k, v in o.read().m_Container:
+                        if k.endswith(".prefab") and Path(k).stem in prefabs:
+                            roots[Path(k).stem] = v.asset
+    print(f"loaded {len(env.files)} files in {time.time() - t:.0f} s", flush=True)
+    # Largest first, so the slowest renders don't start last. Size = the bytes each location's bundles unpack to,
     # each bundle's share split between the locations that use it (shared material/texture bundles count little).
     users = {}
-    for j in jobs:
-        for b in j[2]:
+    for _, ds in jobs:
+        for b in ds:
             users[b] = users.get(b, 0) + 1
-    jobs.sort(key=lambda j: -sum(os.path.getsize(b) / users[b] for b in j[2]))
+    size = {b: sum(f.stat().st_size for f in (unpacked / b).iterdir()) for b in users}
+    jobs.sort(key=lambda j: -sum(size[b] / users[b] for b in j[1]))
     warm_up()  # compile the kernels once (cached on disk)
     lock = threading.Lock()
-    with ThreadPoolExecutor(min(8, os.cpu_count() or 1)) as pool:
-        futures = [pool.submit(render_location, n, root, raw, out, lock) for n, root, _ in jobs]
+    with ThreadPoolExecutor(threads) as pool:
+        futures = [pool.submit(render_location, n, roots[n], raw, out, lock) for n, _ in jobs]
         for fut in as_completed(futures):
             name, msg, dt = fut.result()
             print(f"{name}: {msg} ({dt:.0f} s)", flush=True)
             failed += msg.startswith("FAILED")
-    print(f"{len(list(out.glob('*.webp')))} renders in {time.time() - t:.0f} s")
+    peak = resource.getrusage(resource.RUSAGE_SELF).ru_maxrss / (1e9 if sys.platform == "darwin" else 1e6)
+    print(f"{len(list(out.glob('*.webp')))} renders in {time.time() - t:.0f} s, peak RSS {peak:.1f} GB")
     return 1 if failed else 0
 
 
