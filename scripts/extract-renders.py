@@ -22,6 +22,7 @@ import json
 import math
 import mmap
 import os
+import re
 import resource
 import shutil
 import struct
@@ -47,6 +48,8 @@ INDEX_VERSION = 2                       # bump when index.json's contents change
 THREADS = 8                             # render threads (each holds ~100 MB of frame buffers)
 PROBE_SIZE, PROBE_MAX_TRIS = 200, 100000 # entrance-facing test renders: px, and the largest location worth it
 ENTRANCE_WEIGHTS = {"portal": 3, "door": 2, "stairs": 1}  # per visible pixel in the entrance test
+RANDOM_SPAWN_MIN = 50                   # % chance below which decoration RandomSpawn objects are left out
+RANDOM_DECORATION = re.compile(r"vine|ivy|beehive|mushroom|^pickable_", re.I)  # RandomSpawn object names
 ENTRANCE_MARGIN = 1.2                   # another view must show this much more than the default to be used
 TERRAIN_STEP = 1.0                      # m between heightmap vertices (Heightmap.m_scale)
 GROUND_SLACK = 0.1                      # m below the ground still drawn (foundations meet the terrain)
@@ -201,11 +204,12 @@ def to_world(chain, v):
 
 
 class Scene:
-    def __init__(self, modifiers=None, marks=None):
+    def __init__(self, modifiers=None, marks=None, shown=None):
         self.meshes, self.mats = {}, {}
         self.parts = []      # (world verts (n,3), uv (n,2), faces (m,3), material, entrance weight)
         self.modifiers = modifiers or {}  # path -> TerrainModifier fields (from the raw dump)
         self.marks = marks or {}          # path -> entrance weight of that object and what's under it
+        self.shown = shown or {}          # path -> drawn or not, overriding the asset (random_spawns)
         self.terrain = []    # (world position, fields) of each active TerrainModifier
 
     @staticmethod
@@ -285,12 +289,13 @@ class Scene:
     def walk(self, g, chain=None, skip=None, path=None, weight=0):
         """Collect the active renderers under g; the root's own transform is the location origin."""
         skip = set() if skip is None else skip
-        if not g.m_IsActive:
+        own = None if chain is None else (g.m_Name if not path else f"{path}/{g.m_Name}")
+        if not self.shown.get(own, g.m_IsActive):
             return
         cs = self.components(g)
         tr = cs["Transform"]
         chain = [] if chain is None else chain + [tr]
-        path = None if chain == [] else (g.m_Name if not path else f"{path}/{g.m_Name}")
+        path = own
         if path in self.modifiers:
             self.terrain.append((to_world(chain, np.zeros((1, 3)))[0], self.modifiers[path]))
         weight = max(weight, self.marks.get(path, 0))
@@ -507,6 +512,27 @@ def project(w, yaw):
     return np.stack([X, -(w[:, 1] * cp + Z * sp), -w[:, 1] * sp + Z * cp], 1)
 
 
+def random_spawns(loc):
+    """Path -> shown, for a recognisable look: RandomSpawn objects (rolled when the location is placed, ZoneSystem ->
+    RandomSpawn.Randomize: shown if Random.Range(0, 100) <= m_chanceToSpawn) are left out when they are decoration
+    (RANDOM_DECORATION: vines, beehives, mushrooms, pickables) under RANDOM_SPAWN_MIN %, so houses aren't buried in
+    rare ivy; structural ones (roof and wall parts, rocks, props) are kept whatever their chance, since they make the
+    shape players recognise. A left-out object's m_OffObject (shown when it isn't spawned) is drawn instead. Only active objects are rolled
+    (Utils.GetEnabledComponentsInChildren), so others stay as they are. Lava and elevation conditions depend on where
+    the location lands and are taken as met; locations have no biome or dungeon-theme conditions."""
+    shown = {}
+    for c in loc["components"]:
+        if c["type"] == "RandomSpawn" and c.get("path"):
+            name = re.sub(r" \(\d+\)$", "", c["path"].rsplit("/", 1)[-1])
+            spawned = c["fields"].get("m_chanceToSpawn", 100) >= RANDOM_SPAWN_MIN or not RANDOM_DECORATION.search(name)
+            if not spawned:  # spawned leaves the object as the asset has it
+                shown[c["path"]] = False
+            off = c["fields"].get("m_OffObject")
+            if isinstance(off, dict) and off.get("path"):
+                shown[off["path"]] = not spawned
+    return shown
+
+
 def entrance_marks(loc):
     """Path -> weight of what shows a way in, from the raw dump: dungeon portals (Teleport outside the interior) 3,
     doors and gates (Door components, door/gate prefabs) 2, stairs and ladders 1."""
@@ -624,7 +650,8 @@ def render_location(name, root, raw, out, lock):
     try:
         loc = json.loads((raw / "locations" / f"{name}.json").read_text())
         comps = [c for c in loc["components"] if c.get("path")]
-        scene = Scene({c["path"]: c["fields"] for c in comps if c["type"] == "TerrainModifier"}, entrance_marks(loc))
+        scene = Scene({c["path"]: c["fields"] for c in comps if c["type"] == "TerrainModifier"}, entrance_marks(loc),
+                      random_spawns(loc))
         with lock:
             scene.walk(root.read())
         ext_r = next((c["fields"].get("m_exteriorRadius", 20) for c in loc["components"] if c["type"] == "Location"), 20)
