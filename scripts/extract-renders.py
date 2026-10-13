@@ -28,7 +28,12 @@ SIZE, SS = 800, 2                       # output px, supersampling factor
 LOD = 1                                 # LODGroup level: the game's distance view, simpler and closer to how players spot it
 YAW, PITCH = math.radians(45), math.radians(30)
 LIGHT = np.array([0.35, 0.85, 0.4]) / np.linalg.norm([0.35, 0.85, 0.4])
+ENTRANCE_ANGLE = math.radians(30)       # camera this far round from straight at a dungeon entrance
+FRAME_FILL, FRAME_FILL_GROUND = 0.92, 0.8  # share of the frame the location fills (without / with drawn ground)
+PROBE_SIZE, PROBE_MAX_TRIS = 200, 60000  # entrance-facing test renders: px, and the largest location worth it
+TERRAIN_STEP = 1.0                      # m between heightmap vertices (Heightmap.m_scale)
 GROUND_SLACK = 0.1                      # m below the ground still drawn (foundations meet the terrain)
+GROUND = np.array([0.52, 0.49, 0.42])    # terrain colour when drawn
 GLASS = np.array([0.75, 0.88, 1.0])     # colour of refraction (force field) surfaces
 RENDER_COMPONENTS = {"Transform", "RectTransform", "LODGroup", "MeshFilter", "MeshRenderer"}
 SKIP_SHADER_PROPS = {"_CentralFade"}    # light beam effect shader (CharredFortress beacon)
@@ -85,11 +90,13 @@ def to_world(chain, v):
 
 
 class Scene:
-    def __init__(self, levels=None):
+    def __init__(self, modifiers=None, entrances=()):
         self.meshes, self.mats = {}, {}
-        self.parts = []   # (world verts (n,3), uv (n,2), faces (m,3), material)
-        self.levels = levels or {}  # path -> leveling TerrainModifier fields (from the raw dump)
-        self.ground = []  # (x, height, z, radius, square) of each active leveling modifier
+        self.parts = []      # (world verts (n,3), uv (n,2), faces (m,3), material, part of an entrance)
+        self.modifiers = modifiers or {}  # path -> TerrainModifier fields (from the raw dump)
+        self.entrances = set(entrances)   # paths of the exterior dungeon entrances (Teleport)
+        self.terrain = []    # (world position, fields) of each active TerrainModifier
+        self.entrance = []   # world positions of the active entrances
 
     @staticmethod
     def components(g):
@@ -143,7 +150,8 @@ class Scene:
             if "_Color" in colors:
                 c = colors["_Color"]
                 m["tint"] = np.array([c.r, c.g, c.b])
-            m["glass"] = "_RefractionIntensity" in floats
+            textured = any(k == "_MainTex" and t.m_Texture.m_PathID for k, t in props.m_TexEnvs)
+            m["glass"] = "_RefractionIntensity" in floats and not textured  # force field, not a textured rock
             m["skip"] = bool(SKIP_SHADER_PROPS & floats.keys())
             # The shaders aren't in the server data, so their keywords all land in m_InvalidKeywords.
             keywords = set(getattr(mat, "m_ValidKeywords", None) or []) | set(getattr(mat, "m_InvalidKeywords", None) or [])
@@ -164,7 +172,7 @@ class Scene:
         self.mats[key] = m
         return m
 
-    def walk(self, g, chain=None, skip=None, path=None):
+    def walk(self, g, chain=None, skip=None, path=None, in_entrance=False):
         """Collect the active renderers under g; the root's own transform is the location origin."""
         skip = set() if skip is None else skip
         if not g.m_IsActive:
@@ -173,10 +181,11 @@ class Scene:
         tr = cs["Transform"]
         chain = [] if chain is None else chain + [tr]
         path = None if chain == [] else (g.m_Name if not path else f"{path}/{g.m_Name}")
-        if path in self.levels:
-            f = self.levels[path]
-            x, y, z = to_world(chain, np.zeros((1, 3)))[0]
-            self.ground.append((x, y + f.get("m_levelOffset", 0), z, f.get("m_levelRadius", 0), f.get("m_square", False)))
+        if path in self.modifiers:
+            self.terrain.append((to_world(chain, np.zeros((1, 3)))[0], self.modifiers[path]))
+        if path in self.entrances:
+            self.entrance.append(to_world(chain, np.zeros((1, 3)))[0])
+            in_entrance = True
         if "LODGroup" in cs:
             lods = cs["LODGroup"].m_LODs
             keep = {r.renderer.m_PathID for r in lods[min(LOD, len(lods) - 1)].renderers}
@@ -190,20 +199,56 @@ class Scene:
                 for i, f in enumerate(subs):
                     m = self.material(mats[min(i, len(mats) - 1)])
                     if len(f) and not m["skip"]:
-                        self.parts.append((w, vt, f, m))
+                        self.parts.append((w, vt, f, m, in_entrance))
         for ch in tr.m_Children:
-            self.walk(ch.read().m_GameObject.read(), chain, skip, path)
+            self.walk(ch.read().m_GameObject.read(), chain, skip, path, in_entrance)
 
-    def ground_height(self, x, z):
-        """Terrain height under (x, z): the location origin, or the height a leveling TerrainModifier sets there
-        (TerrainComp.LevelTerrain at the modifier's position + m_levelOffset); the smallest covering one wins."""
-        h, best = np.zeros_like(x), np.full_like(x, np.inf)
-        for gx, gy, gz, r, square in self.ground:
-            dx, dz = np.abs(x - gx), np.abs(z - gz)
-            inside = ((dx <= r) & (dz <= r)) if square else (dx * dx + dz * dz <= r * r)
-            sel = inside & (r < best)
-            h[sel], best[sel] = gy, r
-        return h
+
+class Terrain:
+    """Heightmap around a location: flat at the origin's height (where the game places it), then each TerrainModifier
+    in m_sortOrder as Heightmap.ApplyModifier does: LevelTerrain sets the disc (or square) to the modifier's height +
+    m_levelOffset, SmoothTerrain2 lerps toward it with t = 1 - (d / m_smoothRadius) ^ m_smoothPower."""
+
+    def __init__(self, modifiers, x0, x1, z0, z1):
+        self.x0, self.z0 = math.floor(x0), math.floor(z0)
+        self.xs = np.arange(self.x0, math.ceil(x1) + TERRAIN_STEP, TERRAIN_STEP)
+        self.zs = np.arange(self.z0, math.ceil(z1) + TERRAIN_STEP, TERRAIN_STEP)
+        X, Z = np.meshgrid(self.xs, self.zs)
+        h = np.zeros_like(X)
+        for (mx, my, mz), f in sorted(modifiers, key=lambda m: m[1].get("m_sortOrder", 0)):
+            target = my + f.get("m_levelOffset", 0)
+            d = np.hypot(X - mx, Z - mz)
+            if f.get("m_level"):
+                r = f.get("m_levelRadius", 0)
+                inside = (np.abs(X - mx) <= r) & (np.abs(Z - mz) <= r) if f.get("m_square") else d <= r
+                h[inside] = target
+            if f.get("m_smooth") and f.get("m_smoothRadius", 0) > 0:
+                r = f["m_smoothRadius"]
+                inside = d <= r
+                t = 1 - (d[inside] / r) ** f.get("m_smoothPower", 3)
+                h[inside] += (target - h[inside]) * t
+        self.h = h
+
+    def height(self, x, z):
+        """Bilinear height; flat (0) outside the grid."""
+        fx, fz = (x - self.x0) / TERRAIN_STEP, (z - self.z0) / TERRAIN_STEP
+        nx, nz = len(self.xs) - 1, len(self.zs) - 1
+        ok = (fx >= 0) & (fz >= 0) & (fx <= nx) & (fz <= nz)
+        ix, iz = np.clip(fx.astype(int), 0, nx - 1), np.clip(fz.astype(int), 0, nz - 1)
+        tx, tz = np.clip(fx - ix, 0, 1), np.clip(fz - iz, 0, 1)
+        h = self.h
+        v = (h[iz, ix] * (1 - tx) * (1 - tz) + h[iz, ix + 1] * tx * (1 - tz)
+             + h[iz + 1, ix] * (1 - tx) * tz + h[iz + 1, ix + 1] * tx * tz)
+        return np.where(ok, v, 0.0)
+
+    def mesh(self):
+        """World vertices (n,3) and triangles (m,3) of the grid."""
+        X, Z = np.meshgrid(self.xs, self.zs)
+        v = np.stack([X.ravel(), self.h.ravel(), Z.ravel()], 1)
+        nx = len(self.xs)
+        i = (np.arange(len(self.zs) - 1)[:, None] * nx + np.arange(nx - 1)[None, :]).ravel()
+        f = np.concatenate([np.stack([i, i + nx, i + 1], 1), np.stack([i + 1, i + nx, i + nx + 1], 1)])
+        return v, f
 
 
 def sample(m, uv):
@@ -237,82 +282,88 @@ def triangles(s, f, R):
             yield fi, px[ins].astype(int), py[ins].astype(int), np.stack([l0[ins], l1[ins], l2[ins]], 1)
 
 
-def ground_depth(scene, lo, sc, off, R):
-    """Per pixel, the view depth where the ray meets the terrain: the plane through the location origin, the discs
-    (or squares) leveling modifiers set to their own height, and the vertical walls between them."""
-    cy, sy, cp, sp = math.cos(YAW), math.sin(YAW), math.cos(PITCH), math.sin(PITCH)
-    pix = np.arange(R) + 0.5
-    X = ((pix - off[0]) / sc + lo[0])[None, :]
-    Y = -((pix - off[1]) / sc + lo[1])[:, None]       # screen up
-    def at(D):  # world x, y, z at depth D along each pixel's ray
-        return (X * cy + Y * sp * sy + D * cp * sy, Y * cp - D * sp, -X * sy + Y * sp * cy + D * cp * cy)
-    best = np.full((R, R), np.inf)
-    def consider(D, ok):
-        np.minimum(best, np.where(ok, D, np.inf), out=best)
-    heights = [0.0] + [g[1] for g in scene.ground]
-    for h in heights:  # horizontal ground pieces
-        D = (Y * cp - h) / sp + 0 * X
-        x, _, z = at(D)
-        consider(D, np.isclose(scene.ground_height(x, z), h))
-    for gx, gy, gz, r, square in scene.ground:  # walls of the leveled areas
-        if square:
-            walls = [(0, gx - r), (0, gx + r), (2, gz - r), (2, gz + r)]
-            for axis, c in walls:  # plane x = c or z = c
-                if axis == 0:
-                    k, b = cp * sy, X * cy + Y * sp * sy
-                else:
-                    k, b = cp * cy, -X * sy + Y * sp * cy
-                if abs(k) < 1e-9:
-                    continue
-                D = (c - b) / k
-                x, y, z = at(D)
-                other = np.abs(z - gz) if axis == 0 else np.abs(x - gx)
-                consider(D, (other <= r) & (y <= max(gy, 0)) & (y >= min(gy, 0)))
-        else:  # ray vs vertical cylinder: |(x0 - gx, z0 - gz) + D (kx, kz)| = r, with |(kx, kz)| = cp
-            x0, z0 = X * cy + Y * sp * sy - gx, -X * sy + Y * sp * cy - gz
-            kx, kz = cp * sy, cp * cy
-            a, b, c = cp * cp, 2 * (x0 * kx + z0 * kz), x0 * x0 + z0 * z0 - r * r
-            disc = b * b - 4 * a * c
-            root = np.sqrt(np.maximum(disc, 0))
-            for D in ((-b - root) / (2 * a), (-b + root) / (2 * a)):
-                y = at(D)[1]
-                consider(D, (disc >= 0) & (y <= max(gy, 0)) & (y >= min(gy, 0)))
-    return best
+def project(w, yaw):
+    """World (n,3) -> screen x, screen y (down), depth (away from the camera), for the isometric camera at yaw."""
+    cy, sy, cp, sp = math.cos(yaw), math.sin(yaw), math.cos(PITCH), math.sin(PITCH)
+    X = w[:, 0] * cy - w[:, 2] * sy
+    Z = w[:, 0] * sy + w[:, 2] * cy
+    return np.stack([X, -(w[:, 1] * cp + Z * sp), -w[:, 1] * sp + Z * cp], 1)
 
 
-def render(scene, radius):
+def facing_yaw(scene, radius):
+    """Camera yaw for a location with a dungeon entrance (a Teleport outside the interior): of 8 directions, the one
+    that shows most of the entrance's own meshes (the dark doorway) in a small test render; for big locations, the
+    direction from the origin to the entrance. Others keep the default."""
+    if not scene.entrance:
+        return YAW
+    if sum(len(p[2]) for p in scene.parts) > PROBE_MAX_TRIS or not any(p[4] for p in scene.parts):
+        x, _, z = scene.entrance[0]
+        return math.atan2(-x, -z) + ENTRANCE_ANGLE if math.hypot(x, z) > 1.5 else YAW
+    yaws = [YAW + k * math.pi / 4 for k in range(8)]
+    seen = [render(scene, radius, y, probe=True) for y in yaws]
+    return yaws[int(np.argmax(seen))]
+
+
+def render(scene, radius, yaw=YAW, ground=True, probe=False):
     """Isometric z-buffer render of what is above ground; parts centred further than radius from the origin (or 300 m
-    up/down) are left out."""
-    cy, sy, cp, sp = math.cos(YAW), math.sin(YAW), math.cos(PITCH), math.sin(PITCH)
+    up/down) are left out. With ground, the terrain is drawn too, fading out just past the location. probe: return
+    how many pixels of the entrance meshes are visible, from a small render."""
+    kept = [p for p in scene.parts if abs(p[0].mean(0)[1]) <= 300 and math.hypot(*p[0].mean(0)[[0, 2]]) <= radius]
+    if not kept:
+        return 0 if probe else None
+    allw = np.concatenate([p[0][np.unique(p[2])] for p in kept])
+    margin = min(40.0, max(4.0, 1.8 * max(0.0, -allw[:, 1].min())))  # rays from buried geometry cross this much ground
+    lo3, hi3 = allw.min(0), allw.max(0)
+    half = max(np.abs(lo3[[0, 2]]).max(), np.abs(hi3[[0, 2]]).max()) + margin  # square around the origin
+    terrain = Terrain(scene.terrain, -half, half, -half, half)
     parts = []
-    for w, vt, f, m in scene.parts:
-        c = w.mean(0)
-        if abs(c[1]) > 300 or math.hypot(c[0], c[2]) > radius:
-            continue
-        X = w[:, 0] * cy - w[:, 2] * sy
-        Z = w[:, 0] * sy + w[:, 2] * cy
-        above = w[:, 1] >= scene.ground_height(w[:, 0], w[:, 2]) - GROUND_SLACK
-        parts.append((np.stack([X, -(w[:, 1] * cp + Z * sp), -w[:, 1] * sp + Z * cp], 1), w, vt, f, m, above))
+    for w, vt, f, m, entrance in kept:
+        above = w[:, 1] >= terrain.height(w[:, 0], w[:, 2]) - GROUND_SLACK
+        parts.append((project(w, yaw), w, vt, f, m, above, entrance))
+    # The drawn ground fades out between the location's footprint and the edge of the terrain grid.
+    fade_out = half - 1
+    fade_in = min(np.hypot(allw[:, 0], allw[:, 2]).max(), fade_out - 4)
     pts = [p[0][np.unique(p[3])][p[5][np.unique(p[3])]] for p in parts]
     pts = np.concatenate(pts) if pts else np.zeros((0, 3))
     if not len(pts):
         return None
     lo, hi = pts[:, :2].min(0), pts[:, :2].max(0)
-    R = SIZE * SS
-    sc = R * 0.92 / max(hi - lo)
+    R = PROBE_SIZE if probe else SIZE * SS
+    sc = R * (FRAME_FILL_GROUND * 0.95 if ground else FRAME_FILL) / max(hi - lo)  # room for the ground's fade
     off = (R - (hi - lo) * sc) / 2
-    gd = ground_depth(scene, lo, sc, off, R) + GROUND_SLACK / math.sin(PITCH)
+    # The terrain hides what is behind it: its depth per pixel, drawn only into gd.
+    gd = np.full((R, R), np.inf, np.float32)
+    gimg = np.zeros((R, R, 4), np.float32)
+    gv, gf = terrain.mesh()
+    gp = project(gv, yaw)
+    gs = (gp[:, :2] - lo) * sc + off
+    for fi, px, py, l in triangles(gs, gf, R):
+        tri = gf[fi]
+        d = l @ gp[tri, 2]
+        vis = d < gd[py, px]
+        if not vis.any():
+            continue
+        px, py, d, l = px[vis], py[vis], d[vis], l[vis]
+        gd[py, px] = d
+        if ground and not probe:
+            n = np.cross(gv[tri[1]] - gv[tri[0]], gv[tri[2]] - gv[tri[0]])
+            shade = 0.55 + 0.5 * abs(float(n @ LIGHT)) / (np.linalg.norm(n) or 1)
+            wp = l @ gv[tri]
+            r = np.hypot(wp[:, 0], wp[:, 2])
+            gimg[py, px, :3] = GROUND * shade
+            gimg[py, px, 3] = np.clip((fade_out - r) / max(fade_out - fade_in, 1), 0, 1) * 0.9
+    gd += GROUND_SLACK / math.sin(PITCH)
     zb = np.full((R, R), np.inf, np.float32)
     img = np.zeros((R, R, 4), np.float32)
     for glass_pass in (False, True):  # glass after everything opaque, blended, no depth write
-        for p, w, vt, f, m, above in parts:
+        for p, w, vt, f, m, above, entrance in parts:
             if m["glass"] != glass_pass:
                 continue
             s = (p[:, :2] - lo) * sc + off
             for fi, px, py, l in triangles(s, f, R):
                 tri = f[fi]
                 d = l @ p[tri, 2]
-                vis = (d < zb[py, px]) & (d <= gd[py, px])  # gd: hidden by the terrain
+                vis = (d < zb[py, px]) & (d <= gd[py, px])
                 if not vis.any():
                     continue
                 px, py, d, l = px[vis], py[vis], d[vis], l[vis]
@@ -333,13 +384,28 @@ def render(scene, radius):
                 shade = 0.5 + 0.6 * abs(float(n @ LIGHT)) / (np.linalg.norm(n) or 1)
                 zb[py, px] = d
                 img[py, px, :3] = np.clip(col[:, :3] * m["tint"] * shade, 0, 1)
-                img[py, px, 3] = 1
+                img[py, px, 3] = 2 if entrance else 1
+    if probe:
+        return int((img[..., 3] == 2).sum())
+    img[..., 3] = np.minimum(img[..., 3], 1)
     ys, xs = np.nonzero(img[..., 3] > 0.02)
     if not len(xs):
         return None
-    # Frame what is visible (the terrain hides some of what the bounds counted): a square around it, 4% margin.
-    cx, cy_, half = (xs.min() + xs.max()) / 2, (ys.min() + ys.max()) / 2, max(np.ptp(xs), np.ptp(ys)) / 2 / 0.92
+    # Frame what is visible (the terrain hides some of what the bounds counted): a square around it, with a margin
+    # for the ground, which fades out toward the frame's edge.
+    fill = FRAME_FILL_GROUND if ground else FRAME_FILL
+    cx, cy_, half = (xs.min() + xs.max()) / 2, (ys.min() + ys.max()) / 2, max(np.ptp(xs), np.ptp(ys)) / 2 / fill
     box = tuple(int(round(v)) for v in (cx - half, cy_ - half, cx + half, cy_ + half))
+    if ground:  # geometry over the terrain
+        gy_, gx_ = np.mgrid[0:R, 0:R]
+        # round vignette inside the frame (and the canvas, which the frame can overhang)
+        reach = min(half, cx, R - cx, cy_, R - cy_)
+        rn = np.hypot(gx_ - cx, gy_ - cy_) / max(reach, 1)
+        ga = gimg[..., 3:] * np.clip((1 - rn) / 0.3, 0, 1)[..., None]
+        a = img[..., 3:]
+        alpha = a + ga * (1 - a)
+        img[..., :3] = (img[..., :3] * a + gimg[..., :3] * ga * (1 - a)) / np.maximum(alpha, 1e-6)
+        img[..., 3:] = alpha
     out = Image.fromarray((img * 255).astype(np.uint8), "RGBA").crop(box)
     return out.resize((SIZE, SIZE), Image.LANCZOS)
 
@@ -353,11 +419,13 @@ def render_location(job):
                   if any(Path(k).stem == name for k, _ in a.m_Container))
         root = next(v.asset for k, v in ab.m_Container if Path(k).stem == name).read()
         loc = json.loads((raw / "locations" / f"{name}.json").read_text())
-        scene = Scene({c["path"]: c["fields"] for c in loc["components"]
-                       if c["type"] == "TerrainModifier" and c.get("path") and c["fields"].get("m_level")})
+        comps = [c for c in loc["components"] if c.get("path")]
+        scene = Scene({c["path"]: c["fields"] for c in comps if c["type"] == "TerrainModifier"},
+                      {c["path"] for c in comps if c["type"] == "Teleport" and not c["path"].startswith("Interior/")})
         scene.walk(root)
         ext_r = next((c["fields"].get("m_exteriorRadius", 20) for c in loc["components"] if c["type"] == "Location"), 20)
-        img = render(scene, max(3 * ext_r + 20, 40))
+        radius = max(3 * ext_r + 20, 40)
+        img = render(scene, radius, facing_yaw(scene, radius))
         ntri = sum(len(p[2]) for p in scene.parts)
         if img is None:
             return name, f"nothing to render ({ntri} tris)", time.time() - t
