@@ -42,7 +42,6 @@ SIZE, SS = 800, 2                       # output px, supersampling factor
 LOD = 1                                 # LODGroup level: the game's distance view, simpler and closer to how players spot it
 YAW, PITCH = math.radians(45), math.radians(30)
 LIGHT = np.array([0.35, 0.85, 0.4]) / np.linalg.norm([0.35, 0.85, 0.4])
-ENTRANCE_ANGLE = math.radians(30)       # camera this far round from straight at a dungeon entrance
 FRAME_FILL, FRAME_FILL_GROUND = 0.92, 0.8  # share of the frame the location fills (without / with drawn ground)
 THREADS = 8                             # render threads (each holds ~100 MB of frame buffers)
 PROBE_SIZE, PROBE_MAX_TRIS = 200, 60000  # entrance-facing test renders: px, and the largest location worth it
@@ -501,15 +500,18 @@ def project(w, yaw):
 
 
 def facing_yaw(scene, radius):
-    """Camera yaw for a location with a dungeon entrance (a Teleport outside the interior): of 8 directions, the one
-    that shows most of the entrance's own meshes (the dark doorway) in a small test render; for big locations, the
-    direction from the origin to the entrance. Others keep the default."""
+    """Camera yaw for a location with a dungeon entrance (a Teleport outside the interior): of the four isometric
+    views, the one that shows most of the entrance's own meshes (the dark doorway) in a small test render; for big
+    locations, the view nearest to looking at the entrance from the origin's side. Others keep the default."""
+    yaws = [YAW + k * math.pi / 2 for k in range(4)]
     if not scene.entrance:
         return YAW
     if sum(len(p[2]) for p in scene.parts) > PROBE_MAX_TRIS or not any(p[4] for p in scene.parts):
         x, _, z = scene.entrance[0]
-        return math.atan2(-x, -z) + ENTRANCE_ANGLE if math.hypot(x, z) > 1.5 else YAW
-    yaws = [YAW + k * math.pi / 4 for k in range(8)]
+        if math.hypot(x, z) <= 1.5:
+            return YAW
+        want = math.atan2(-x, -z)
+        return min(yaws, key=lambda y: abs((y - want + math.pi) % (2 * math.pi) - math.pi))
     seen = [render(scene, radius, y, probe=True) for y in yaws]
     return yaws[int(np.argmax(seen))]
 
