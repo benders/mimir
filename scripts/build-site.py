@@ -1142,9 +1142,14 @@ def item_page(i: dict) -> None:
                      if drops else ""))
     found = {}
     for s, amount in found_in[i["id"]]:
-        found.setdefault((source_name(s), s["kind"], amount, source_places(s)), None)
-    body += section("Found in", table(["Source", "Kind", "Amount", "Where"],
-                                      [[esc(n), esc(k), esc(a), w] for n, k, a, w in sorted(found)]))
+        rolled = s.get("drops") and any(d["item"] == i["id"] for d in s["drops"].get("items", []))
+        chance = pct(mechanics.drop_table_has(s["drops"], i["id"])) if rolled else ""
+        found.setdefault((source_name(s), s["kind"], amount, chance, source_places(s)), None)
+    note = ('<p class="note">Chance: that one chest or object holds it (DropTable.GetDropListItems: the number of picks, '
+            'their weights, no item twice when the table says so). A percentage under a location is the share of its '
+            'copies that have the chest or object at all.</p>') if any(f[3] for f in found) else ""
+    body += section("Found in", table(["Source", "Kind", "Amount", "Chance", "Where"],
+                                      [[esc(n), esc(k), esc(a), c, w] for n, k, a, c, w in sorted(found)]) + note)
 
     used = [("item", r["item"], link("item", r["item"])) for r in used_in_recipe[i["id"]] if r.get("item")]
     used += [("piece", p["id"], link("piece", p["id"])) for p in used_in_piece[i["id"]]

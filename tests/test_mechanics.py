@@ -270,6 +270,17 @@ class Charts(unittest.TestCase):
         self.assertEqual(M.skill_after_deaths(100, 1, 0.05), 95)
         self.assertAlmostEqual(M.skill_after_deaths(100, 2, 0.05), 90.25)
 
+    def test_drop_table_has(self):
+        t = {"min": 1, "max": 1, "items": [{"item": "A", "weight": 1}, {"item": "B", "weight": 3}]}
+        self.assertAlmostEqual(M.drop_table_has(t, "A"), 0.25)
+        self.assertAlmostEqual(M.drop_table_has(t | {"max": 2}, "A"), (0.25 + (1 - 0.75 ** 2)) / 2)  # 1 or 2 picks
+        # no item twice: 2 picks from A, B, C (equal weight) always take two of the three
+        u = {"min": 2, "max": 2, "oneOfEach": True, "items": [{"item": x} for x in "ABC"]}
+        self.assertAlmostEqual(M.drop_table_has(u, "A"), 2 / 3)
+        self.assertAlmostEqual(M.drop_table_has(u | {"min": 5, "max": 5}, "A"), 1)  # more picks than entries
+        self.assertAlmostEqual(M.drop_table_has(u | {"chance": 0.5}, "A"), 1 / 3)  # m_dropChance
+        self.assertEqual(M.drop_table_has(u, "Z"), 0)
+
     def test_world_piece_drop(self):
         self.assertEqual([M.world_piece_drop(n) for n in (1, 2, 3, 10)], [1, 1, 1, 3])
 

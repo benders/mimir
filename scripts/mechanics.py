@@ -702,6 +702,39 @@ def refine_streak(chance: float, steps: int) -> float:
     return chance ** steps
 
 
+def drop_table_has(table: dict, item: str) -> float:
+    """Chance that one roll of a drop table (a chest's default items, a destructible's drops) gives `item` at least once
+    (DropTable.GetDropListItems): nothing unless Random.value <= m_dropChance, then Random.Range(min, max + 1) picks,
+    each weighted by m_weight; with m_oneOfEach a picked entry is removed (no item twice), and picks past the last
+    entry give nothing."""
+    entries = [(d["item"], d.get("weight", 1)) for d in table.get("items", [])]
+    if not entries:
+        return 0.0
+    lo, hi = table.get("min", 1), table.get("max", 1)
+    seen = {}
+
+    def miss(left: tuple, picks: int) -> float:  # chance that `picks` picks from `left` never give the item
+        if picks == 0 or not left:
+            return 1.0
+        if (left, picks) not in seen:
+            total = sum(entries[i][1] for i in left)
+            out = 0.0
+            for i in left:
+                if entries[i][0] != item and total > 0:
+                    out += entries[i][1] / total * miss(tuple(j for j in left if j != i), picks - 1)
+            seen[left, picks] = out
+        return seen[left, picks]
+
+    def miss_with_replacement(picks: int) -> float:
+        total = sum(w for _, w in entries)
+        return (1 - sum(w for n, w in entries if n == item) / total) ** picks if total > 0 else 1.0
+
+    every = tuple(range(len(entries)))
+    counts = range(lo, hi + 1) if hi >= lo else [lo]
+    has = sum(1 - (miss(every, k) if table.get("oneOfEach") else miss_with_replacement(k)) for k in counts) / len(counts)
+    return table.get("chance", 1) * has
+
+
 def world_piece_drop(amount: int) -> int:
     """What breaking a piece a player didn't place gives of one of its cost items: a third, at least 1
     (Piece.DropResources: Mathf.Max(1, dropCount / 3) unless IsPlacedByPlayer)."""
