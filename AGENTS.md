@@ -27,8 +27,9 @@ steam-buildid.sh steamcmd (container, x86_64) -> current public Steam build id
 ```
 
 CI: `.github/workflows/update.yml` polls the build id every 6 h; when it differs from `data/meta.json`
-`steamBuildId` it runs `make check-local`, commits `data/` as github-actions[bot], and deploys the site to
-GitHub Pages. Pushes to `data/`, `site/` or `build-site.py` redeploy. Only the public branch is tracked.
+`steamBuildId` it runs `make check-local`, then `make test-renders renders` (cached per build id and renderer version; a
+failure only warns: the site deploys without thumbnails), commits `data/` as github-actions[bot], and deploys the site to
+GitHub Pages. Pushes to `data/`, `site/`, `build-site.py`, `extract-renders.py` or `requirements.txt` redeploy. Only the public branch is tracked.
 Each deploy records a New Relic change tracking marker on the Browser app ("Site deploy" with the short sha, or
 "Game update: Valheim X (build N)" with the `data/` diffstat), using the `NEW_RELIC_API_KEY` User key (secret on the
 `github-pages` environment, so only `deploy` can read it) and the `NEW_RELIC_ENTITY_GUID` repo variable; no secret = skipped.

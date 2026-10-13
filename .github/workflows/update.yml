@@ -1,8 +1,12 @@
 # Unattended data updates and site deploys (issue #2). Only the public Steam branch is tracked.
 #
 #   poll    steamcmd: current Steam build id vs data/meta.json steamBuildId (pushes take meta's: deploy only)
-#   update  if it changed: download server, dump, icons, normalize, verify, build site; commit data/
-#   site    build the site from data/ + icons (icons from the cache, or re-extracted on a miss)
+#   update  if it changed: download server, dump, icons, normalize, verify, build site, renders; commit data/
+#   site    build the site from data/ + icons + location renders (from the cache, or re-extracted on a miss)
+#
+# Renders (#52, #53) are cached per build id and renderer version (extract-renders.py + requirements.txt), so a
+# renderer change re-renders on its next deploy. They are optional: a failed render run leaves the site without
+# thumbnails (with a warning) rather than blocking the data update or the deploy.
 #   deploy  publish to GitHub Pages; record a New Relic change tracking marker on the Browser app (#50)
 #
 # The marker needs the NEW_RELIC_API_KEY secret (a User key, on the github-pages environment only) and the
@@ -22,7 +26,8 @@ on:
         default: false
   push:
     branches: [main]
-    paths: [data/**, site/**, scripts/build-site.py, .github/workflows/update.yml]
+    paths: [data/**, site/**, scripts/build-site.py, scripts/extract-renders.py, requirements.txt,
+            .github/workflows/update.yml]
 
 concurrency:
   group: update
@@ -83,6 +88,21 @@ jobs:
         with:
           path: .cache/dump/public/icons
           key: icons-${{ needs.poll.outputs.build }}
+      - name: Render locations
+        id: renders
+        continue-on-error: true
+        env:
+          MIMIR_RENDER_THREADS: 4  # the runner's cores; about 4 GB peak instead of 5
+        run: make test-renders renders
+      - name: Warn on failed renders
+        if: steps.renders.outcome == 'failure'
+        run: echo "::warning::location renders failed; the site deploys without thumbnails"
+      - name: Cache renders
+        if: steps.renders.outcome == 'success'
+        uses: actions/cache/save@v6
+        with:
+          path: .cache/dump/public/renders
+          key: renders-${{ needs.poll.outputs.build }}-${{ hashFiles('scripts/extract-renders.py', 'requirements.txt') }}
       - name: Commit data/
         env:
           BUILD: ${{ needs.poll.outputs.build }}
@@ -117,8 +137,14 @@ jobs:
         with:
           path: .cache/dump/public/icons
           key: icons-${{ needs.poll.outputs.build }}
-      - name: Re-extract icons (cache miss)
-        if: steps.icons.outputs.cache-hit != 'true'
+      - id: renders
+        uses: actions/cache/restore@v6
+        with:
+          path: .cache/dump/public/renders
+          key: renders-${{ needs.poll.outputs.build }}-${{ hashFiles('scripts/extract-renders.py', 'requirements.txt') }}
+      # Renders need the raw dump and the server download too, so a miss on either re-extracts.
+      - name: Re-extract (cache miss)
+        if: steps.icons.outputs.cache-hit != 'true' || steps.renders.outputs.cache-hit != 'true'
         run: make extract
       - name: Save icons
         if: steps.icons.outputs.cache-hit != 'true'
@@ -126,6 +152,22 @@ jobs:
         with:
           path: .cache/dump/public/icons
           key: icons-${{ needs.poll.outputs.build }}
+      - name: Render locations (cache miss)
+        id: render
+        if: steps.renders.outputs.cache-hit != 'true'
+        continue-on-error: true
+        env:
+          MIMIR_RENDER_THREADS: 4  # the runner's cores; about 4 GB peak instead of 5
+        run: make test-renders renders
+      - name: Warn on failed renders
+        if: steps.render.outcome == 'failure'
+        run: echo "::warning::location renders failed; the site deploys without thumbnails"
+      - name: Save renders
+        if: steps.render.outcome == 'success'
+        uses: actions/cache/save@v6
+        with:
+          path: .cache/dump/public/renders
+          key: renders-${{ needs.poll.outputs.build }}-${{ hashFiles('scripts/extract-renders.py', 'requirements.txt') }}
       - run: make site
       - uses: actions/upload-pages-artifact@v5
         with:

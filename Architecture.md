@@ -71,7 +71,7 @@ free for public repos). Only the public Steam branch is tracked.
 flowchart LR
     S[schedule 6h /<br/>push / manual] --> P[poll<br/>steamcmd build id]
     P -->|differs from<br/>data/meta.json steamBuildId| U[update<br/>make check-local<br/>commit data/]
-    U --> B[site<br/>data/ + cached icons]
+    U --> B[site<br/>data/ + cached icons, renders]
     P -->|push / manual,<br/>no new build| B
     B --> D[deploy<br/>GitHub Pages]
 ```
@@ -80,6 +80,10 @@ flowchart LR
   stores it as `steamBuildId` in `meta.json` (from `$MIMIR_STEAM_BUILDID`, otherwise carried over).
 - Icons are cached per build id (`actions/cache`, evicted after 7 days unused); on a miss the site job
   re-extracts them. They are deployed with the site, never committed.
+- Location renders are made after the update (`make test-renders renders`) and cached per build id and renderer
+  version (`hashFiles` of `extract-renders.py` and `requirements.txt`); on a miss the site job re-extracts and
+  re-renders. A failed render run warns and deploys the site without thumbnails; it never blocks data or deploy.
+  Pushes that change the renderer redeploy.
 - Commits made with `GITHUB_TOKEN` don't trigger workflows, so the deploy runs in the same workflow run.
 - GitHub disables scheduled workflows after 60 days without repo activity (it emails first); re-enable in the
   Actions tab.
