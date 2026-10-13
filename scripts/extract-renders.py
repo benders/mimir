@@ -9,8 +9,8 @@ a fixed light, a z-buffer and alpha cutout; refraction materials (trader force f
     scripts/extract-renders.py <server_dir> <raw_dump_dir> <out_dir> [location ...]
 
 Writes <out_dir>/<location>.webp (transparent background) for each location with static meshes. Locations whose
-buildings come from a DungeonGenerator (camps, villages) or that hold only a creature render nothing. Needs UnityPy
-and numpy (see requirements.txt; scripts/renders.sh sets up the venv).
+buildings come from a DungeonGenerator (camps, villages) or that hold only a creature render nothing. Needs UnityPy,
+numpy and numba (see requirements.txt; scripts/renders.sh sets up the venv).
 """
 import json
 import math
@@ -22,6 +22,7 @@ from pathlib import Path
 
 import numpy as np
 import UnityPy
+from numba import njit
 from PIL import Image
 
 SIZE, SS = 800, 2                       # output px, supersampling factor
@@ -251,35 +252,144 @@ class Terrain:
         return v, f
 
 
-def sample(m, uv):
-    if m["tex"] is None:
-        return np.broadcast_to(np.array([0.6, 0.6, 0.6, 1.0]), (len(uv), 4))
-    tex = m["tex"]
-    h, w = tex.shape[:2]
-    sx, sy, ox, oy = m["st"]
-    u, v = (uv[:, 0] * sx + ox) % 1.0, (uv[:, 1] * sy + oy) % 1.0
-    return tex[np.minimum(((1 - v) * h).astype(int), h - 1), np.minimum((u * w).astype(int), w - 1)]
+@njit(cache=True)
+def _tri_box(ax, ay, bx, by, cx, cy, R):
+    x0 = max(int(math.floor(min(ax, bx, cx))), 0)
+    y0 = max(int(math.floor(min(ay, by, cy))), 0)
+    x1 = min(int(math.ceil(max(ax, bx, cx))), R - 1)
+    y1 = min(int(math.ceil(max(ay, by, cy))), R - 1)
+    return x0, y0, x1, y1
 
 
-def triangles(s, f, R):
-    """Yield (face index, pixel xs, ys, barycentrics (k,3)) for each triangle's covered pixels."""
-    for fi, tri in enumerate(f):
-        a, b, c = s[tri]
-        x0, y0 = np.maximum(np.floor(np.minimum(np.minimum(a, b), c)).astype(int), 0)
-        x1, y1 = np.minimum(np.ceil(np.maximum(np.maximum(a, b), c)).astype(int), R - 1)
-        if x1 < x0 or y1 < y0:
-            continue
-        den = (b[1] - c[1]) * (a[0] - c[0]) + (c[0] - b[0]) * (a[1] - c[1])
+@njit(cache=True)
+def raster_ground(gs, gz, gv, gf, gd, gimg, draw, fade_in, fade_out, light, col):
+    """Terrain triangles: nearest depth into gd; with draw, shaded colour and the radial fade into gimg."""
+    R = gd.shape[0]
+    for t in range(gf.shape[0]):
+        i0, i1, i2 = gf[t, 0], gf[t, 1], gf[t, 2]
+        ax, ay, bx, by, cx, cy = gs[i0, 0], gs[i0, 1], gs[i1, 0], gs[i1, 1], gs[i2, 0], gs[i2, 1]
+        den = (by - cy) * (ax - cx) + (cx - bx) * (ay - cy)
         if abs(den) < 1e-9:
             continue
-        ys, xs = np.mgrid[y0:y1 + 1, x0:x1 + 1]
-        px, py = xs.ravel() + 0.5, ys.ravel() + 0.5
-        l0 = ((b[1] - c[1]) * (px - c[0]) + (c[0] - b[0]) * (py - c[1])) / den
-        l1 = ((c[1] - a[1]) * (px - c[0]) + (a[0] - c[0]) * (py - c[1])) / den
-        l2 = 1 - l0 - l1
-        ins = (l0 >= 0) & (l1 >= 0) & (l2 >= 0)
-        if ins.any():
-            yield fi, px[ins].astype(int), py[ins].astype(int), np.stack([l0[ins], l1[ins], l2[ins]], 1)
+        x0, y0, x1, y1 = _tri_box(ax, ay, bx, by, cx, cy, R)
+        shade = 0.0
+        if draw:
+            ux, uy, uz = gv[i1, 0] - gv[i0, 0], gv[i1, 1] - gv[i0, 1], gv[i1, 2] - gv[i0, 2]
+            vx, vy, vz = gv[i2, 0] - gv[i0, 0], gv[i2, 1] - gv[i0, 1], gv[i2, 2] - gv[i0, 2]
+            nx, ny, nz = uy * vz - uz * vy, uz * vx - ux * vz, ux * vy - uy * vx
+            nl = math.sqrt(nx * nx + ny * ny + nz * nz)
+            shade = 0.55 + 0.5 * abs(nx * light[0] + ny * light[1] + nz * light[2]) / (nl if nl > 0 else 1.0)
+        for y in range(y0, y1 + 1):
+            for x in range(x0, x1 + 1):
+                px, py = x + 0.5, y + 0.5
+                l0 = ((by - cy) * (px - cx) + (cx - bx) * (py - cy)) / den
+                l1 = ((cy - ay) * (px - cx) + (ax - cx) * (py - cy)) / den
+                l2 = 1 - l0 - l1
+                if l0 < 0 or l1 < 0 or l2 < 0:
+                    continue
+                d = l0 * gz[i0] + l1 * gz[i1] + l2 * gz[i2]
+                if d >= gd[y, x]:
+                    continue
+                gd[y, x] = d
+                if draw:
+                    wx = l0 * gv[i0, 0] + l1 * gv[i1, 0] + l2 * gv[i2, 0]
+                    wz = l0 * gv[i0, 2] + l1 * gv[i1, 2] + l2 * gv[i2, 2]
+                    a = (fade_out - math.sqrt(wx * wx + wz * wz)) / max(fade_out - fade_in, 1.0)
+                    for k in range(3):
+                        gimg[y, x, k] = col[k] * shade
+                    gimg[y, x, 3] = min(max(a, 0.0), 1.0) * 0.9
+
+
+@njit(cache=True)
+def raster_mesh(S, Dz, W, UV, F, tri_mat, tri_ent, glass_pass, tex, tex_off, tex_w, tex_h, st, tint, cutoff,
+                is_glass, gd, zb, img, light, view, glass_col):
+    """Location triangles in order, z-buffered and behind-the-terrain tested. Opaque pass: textured (nearest texel,
+    wrapped, _MainTex_ST), alpha cutout, flat Lambert shade; alpha 2 marks entrance meshes. Glass pass: blended rim
+    that grows toward grazing angles, no depth write."""
+    R = zb.shape[0]
+    for t in range(F.shape[0]):
+        m = tri_mat[t]
+        if is_glass[m] != glass_pass:
+            continue
+        i0, i1, i2 = F[t, 0], F[t, 1], F[t, 2]
+        ax, ay, bx, by, cx, cy = S[i0, 0], S[i0, 1], S[i1, 0], S[i1, 1], S[i2, 0], S[i2, 1]
+        den = (by - cy) * (ax - cx) + (cx - bx) * (ay - cy)
+        if abs(den) < 1e-9:
+            continue
+        x0, y0, x1, y1 = _tri_box(ax, ay, bx, by, cx, cy, R)
+        if x1 < x0 or y1 < y0:
+            continue
+        ux, uy, uz = W[i1, 0] - W[i0, 0], W[i1, 1] - W[i0, 1], W[i1, 2] - W[i0, 2]
+        vx, vy, vz = W[i2, 0] - W[i0, 0], W[i2, 1] - W[i0, 1], W[i2, 2] - W[i0, 2]
+        nx, ny, nz = uy * vz - uz * vy, uz * vx - ux * vz, ux * vy - uy * vx
+        nl = math.sqrt(nx * nx + ny * ny + nz * nz)
+        if nl == 0:
+            nl = 1.0
+        shade = 0.5 + 0.6 * abs(nx * light[0] + ny * light[1] + nz * light[2]) / nl
+        facing = abs(nx * view[0] + ny * view[1] + nz * view[2]) / nl
+        rim = 0.06 + 0.5 * (1 - facing) ** 3
+        off, tw, th = tex_off[m], tex_w[m], tex_h[m]
+        for y in range(y0, y1 + 1):
+            for x in range(x0, x1 + 1):
+                px, py = x + 0.5, y + 0.5
+                l0 = ((by - cy) * (px - cx) + (cx - bx) * (py - cy)) / den
+                l1 = ((cy - ay) * (px - cx) + (ax - cx) * (py - cy)) / den
+                l2 = 1 - l0 - l1
+                if l0 < 0 or l1 < 0 or l2 < 0:
+                    continue
+                d = l0 * Dz[i0] + l1 * Dz[i1] + l2 * Dz[i2]
+                if d >= zb[y, x] or d > gd[y, x]:
+                    continue
+                if glass_pass:
+                    for k in range(3):
+                        img[y, x, k] = img[y, x, k] * (1 - rim) + glass_col[k] * rim
+                    img[y, x, 3] = max(img[y, x, 3], rim)
+                    continue
+                r, g, b, a = 0.6, 0.6, 0.6, 1.0
+                if off >= 0:
+                    u = l0 * UV[i0, 0] + l1 * UV[i1, 0] + l2 * UV[i2, 0]
+                    v = l0 * UV[i0, 1] + l1 * UV[i1, 1] + l2 * UV[i2, 1]
+                    u = (u * st[m, 0] + st[m, 2]) % 1.0
+                    v = (v * st[m, 1] + st[m, 3]) % 1.0
+                    tx = min(int(u * tw), tw - 1)
+                    ty = min(int((1 - v) * th), th - 1)
+                    k = off + (ty * tw + tx) * 4
+                    r, g, b, a = tex[k], tex[k + 1], tex[k + 2], tex[k + 3]
+                if cutoff[m] >= 0 and a < cutoff[m]:
+                    continue
+                zb[y, x] = d
+                img[y, x, 0] = min(max(r * tint[m, 0] * shade, 0.0), 1.0)
+                img[y, x, 1] = min(max(g * tint[m, 1] * shade, 0.0), 1.0)
+                img[y, x, 2] = min(max(b * tint[m, 2] * shade, 0.0), 1.0)
+                img[y, x, 3] = 2.0 if tri_ent[t] else 1.0
+
+
+def material_table(scene):
+    """Every material of the scene packed for raster_mesh (built once per scene): id by object, flat RGBA texels."""
+    if getattr(scene, "_table", None) is None:
+        mats, ids = [], {}
+        for p in scene.parts:
+            if id(p[3]) not in ids:
+                ids[id(p[3])] = len(mats)
+                mats.append(p[3])
+        texs, offs, off = [], [], 0
+        for m in mats:
+            if m["tex"] is None:
+                offs.append(-1)
+            else:
+                offs.append(off)
+                texs.append(m["tex"].ravel())
+                off += m["tex"].size
+        scene._table = (ids, dict(
+            tex=np.concatenate(texs).astype(np.float32) if texs else np.zeros(4, np.float32),
+            tex_off=np.array(offs, np.int64),
+            tex_w=np.array([0 if m["tex"] is None else m["tex"].shape[1] for m in mats], np.int64),
+            tex_h=np.array([0 if m["tex"] is None else m["tex"].shape[0] for m in mats], np.int64),
+            st=np.array([m["st"] for m in mats], np.float64).reshape(-1, 4),
+            tint=np.array([m["tint"] for m in mats], np.float64).reshape(-1, 3),
+            cutoff=np.array([-1.0 if m["cutoff"] is None else m["cutoff"] for m in mats], np.float64),
+            is_glass=np.array([m["glass"] for m in mats], np.bool_)))
+    return scene._table
 
 
 def project(w, yaw):
@@ -331,60 +441,30 @@ def render(scene, radius, yaw=YAW, ground=True, probe=False):
     R = PROBE_SIZE if probe else SIZE * SS
     sc = R * (FRAME_FILL_GROUND * 0.95 if ground else FRAME_FILL) / max(hi - lo)  # room for the ground's fade
     off = (R - (hi - lo) * sc) / 2
-    # The terrain hides what is behind it: its depth per pixel, drawn only into gd.
+    # The terrain hides what is behind it: its depth per pixel into gd (and, drawn, its colour into gimg).
     gd = np.full((R, R), np.inf, np.float32)
     gimg = np.zeros((R, R, 4), np.float32)
     gv, gf = terrain.mesh()
     gp = project(gv, yaw)
-    gs = (gp[:, :2] - lo) * sc + off
-    for fi, px, py, l in triangles(gs, gf, R):
-        tri = gf[fi]
-        d = l @ gp[tri, 2]
-        vis = d < gd[py, px]
-        if not vis.any():
-            continue
-        px, py, d, l = px[vis], py[vis], d[vis], l[vis]
-        gd[py, px] = d
-        if ground and not probe:
-            n = np.cross(gv[tri[1]] - gv[tri[0]], gv[tri[2]] - gv[tri[0]])
-            shade = 0.55 + 0.5 * abs(float(n @ LIGHT)) / (np.linalg.norm(n) or 1)
-            wp = l @ gv[tri]
-            r = np.hypot(wp[:, 0], wp[:, 2])
-            gimg[py, px, :3] = GROUND * shade
-            gimg[py, px, 3] = np.clip((fade_out - r) / max(fade_out - fade_in, 1), 0, 1) * 0.9
+    raster_ground((gp[:, :2] - lo) * sc + off, gp[:, 2].copy(), gv, gf.astype(np.int64), gd, gimg,
+                  ground and not probe, float(fade_in), float(fade_out), LIGHT, GROUND)
     gd += GROUND_SLACK / math.sin(PITCH)
     zb = np.full((R, R), np.inf, np.float32)
     img = np.zeros((R, R, 4), np.float32)
+    ids, table = material_table(scene)
+    base = np.cumsum([0] + [len(p[1]) for p in parts])
+    P = np.concatenate([p[0] for p in parts])
+    F = np.concatenate([p[3] + b for p, b in zip(parts, base)]).astype(np.int64)
+    tri_mat = np.concatenate([np.full(len(p[3]), ids[id(p[4])], np.int64) for p in parts])
+    tri_ent = np.concatenate([np.full(len(p[3]), bool(p[6])) for p in parts])
+    W = np.concatenate([p[1] for p in parts])
+    UV = np.concatenate([p[2] for p in parts])
+    cy, sy, cp, sp = math.cos(yaw), math.sin(yaw), math.cos(PITCH), math.sin(PITCH)
+    view = np.array([cp * sy, -sp, cp * cy])  # depth direction
     for glass_pass in (False, True):  # glass after everything opaque, blended, no depth write
-        for p, w, vt, f, m, above, entrance in parts:
-            if m["glass"] != glass_pass:
-                continue
-            s = (p[:, :2] - lo) * sc + off
-            for fi, px, py, l in triangles(s, f, R):
-                tri = f[fi]
-                d = l @ p[tri, 2]
-                vis = (d < zb[py, px]) & (d <= gd[py, px])
-                if not vis.any():
-                    continue
-                px, py, d, l = px[vis], py[vis], d[vis], l[vis]
-                if glass_pass:
-                    e = np.cross(p[tri[1]] - p[tri[0]], p[tri[2]] - p[tri[0]])
-                    facing = abs(e[2]) / (np.linalg.norm(e) or 1)
-                    a = 0.06 + 0.5 * (1 - facing) ** 3  # fresnel-ish rim
-                    img[py, px, :3] = img[py, px, :3] * (1 - a) + GLASS * a
-                    img[py, px, 3] = np.maximum(img[py, px, 3], a)
-                    continue
-                col = sample(m, l @ vt[tri])
-                if m["cutoff"] is not None:
-                    keep = col[:, 3] >= m["cutoff"]
-                    px, py, d, col = px[keep], py[keep], d[keep], col[keep]
-                    if not len(px):
-                        continue
-                n = np.cross(w[tri[1]] - w[tri[0]], w[tri[2]] - w[tri[0]])
-                shade = 0.5 + 0.6 * abs(float(n @ LIGHT)) / (np.linalg.norm(n) or 1)
-                zb[py, px] = d
-                img[py, px, :3] = np.clip(col[:, :3] * m["tint"] * shade, 0, 1)
-                img[py, px, 3] = 2 if entrance else 1
+        raster_mesh((P[:, :2] - lo) * sc + off, P[:, 2].copy(), W, UV, F, tri_mat, tri_ent, glass_pass, table["tex"],
+                    table["tex_off"], table["tex_w"], table["tex_h"], table["st"], table["tint"], table["cutoff"],
+                    table["is_glass"], gd, zb, img, LIGHT, view, GLASS)
     if probe:
         return int((img[..., 3] == 2).sum())
     img[..., 3] = np.minimum(img[..., 3], 1)
@@ -435,6 +515,20 @@ def render_location(job):
         return name, f"FAILED {type(e).__name__}: {e}", time.time() - t
 
 
+def warm_up():
+    """Run each kernel once on a single triangle, so numba compiles (or loads its cache) here."""
+    R = 4
+    v = np.array([[0.0, 0, 0], [1, 0, 0], [0, 0, 1]])
+    f = np.array([[0, 1, 2]], np.int64)
+    s2 = np.array([[0.0, 0], [3, 0], [0, 3]])
+    gd, zb, img = np.full((R, R), np.inf, np.float32), np.full((R, R), np.inf, np.float32), np.zeros((R, R, 4), np.float32)
+    raster_ground(s2, np.zeros(3), v, f, gd, img, True, 1.0, 2.0, LIGHT, GROUND)
+    raster_mesh(s2, np.zeros(3), v, np.zeros((3, 2)), f, np.zeros(1, np.int64), np.zeros(1, np.bool_), False,
+                np.ones(4, np.float32), np.zeros(1, np.int64), np.ones(1, np.int64), np.ones(1, np.int64),
+                np.array([[1.0, 1, 0, 0]]), np.ones((1, 3)), np.array([-1.0]), np.zeros(1, np.bool_),
+                gd, zb, img, LIGHT, LIGHT, GLASS)
+
+
 def main():
     server, raw, out = Path(sys.argv[1]), Path(sys.argv[2]), Path(sys.argv[3])
     data = server / "valheim_server_Data"
@@ -452,8 +546,16 @@ def main():
             failed += 1
             continue
         jobs.append((n, [str(bdir / b) for b in deps(prefab2b[n], cab2b, ext)], extra, raw, out))
+    # Largest first, so the slowest renders don't start last. Size = the bytes of the bundles each location loads,
+    # each bundle's share split between the locations that load it (shared material/texture bundles count little).
+    users = {}
+    for j in jobs:
+        for b in j[1]:
+            users[b] = users.get(b, 0) + 1
+    jobs.sort(key=lambda j: -sum(os.path.getsize(b) / users[b] for b in j[1]))
+    warm_up()  # compile the kernels once (cached on disk) before the workers load them
     with Pool(min(8, os.cpu_count() or 1)) as pool:
-        for name, msg, dt in pool.imap_unordered(render_location, jobs):
+        for name, msg, dt in pool.imap_unordered(render_location, jobs, chunksize=1):
             print(f"{name}: {msg} ({dt:.0f} s)", flush=True)
             failed += msg.startswith("FAILED")
     print(f"{len(list(out.glob('*.webp')))} renders in {time.time() - t:.0f} s")
