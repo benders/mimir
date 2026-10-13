@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+# Render every dumped location from the server's asset bundles -> $WORK_DIR/renders/ (#52, experimental).
+# Runs anywhere with python3 (no x86_64 needed); UnityPy and numpy go into a per-platform venv.
+source "$(dirname "$0")/lib.sh"
+# Distro pythons may lack venv/ensurepip (python3-venv); the tools image has it.
+python3 -c 'import ensurepip, venv' 2>/dev/null || MIMIR_NEED_TOOLS="python3-venv"
+in_tools python3
+
+[[ -f "$OUT_DIR/manifest.json" ]] || die "no raw dump at $OUT_DIR (run dump first)"
+[[ -d "$SERVER_DIR/valheim_server_Data" ]] || die "no server at $SERVER_DIR (run fetch-server first)"
+
+log "rendering locations"
+"$(ensure_venv)" "$ROOT/scripts/extract-renders.py" "$SERVER_DIR" "$OUT_DIR" "$WORK_DIR/renders" "$@"

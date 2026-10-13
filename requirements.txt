@@ -1,2 +1,3 @@
-# Python deps for scripts/extract-icons.py and extract-anims.py (installed into .cache/venv by ensure_venv in scripts/lib.sh).
+# Python deps for scripts/extract-icons.py, extract-anims.py and extract-renders.py (installed into .cache/venv by ensure_venv in scripts/lib.sh).
 UnityPy==1.25.3
+numpy==2.5.4
