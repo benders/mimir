@@ -1423,7 +1423,7 @@ def alt_biomes_section(b: str) -> str:
         ]
         out += (f'<h3 id="{mechanics.slug(a["id"])}">{esc(a["id"])}</h3><p class="sub">{", ".join(w for w in where if w)}'
                 f'</p>{kv(rows)}')
-    return out + f'<p class="note">{ALT_BIOME_NOTE}</p>' if out else ""
+    return f'<p class="note">{ALT_BIOME_NOTE}</p>' + out if out else ""
 
 
 def biome_page(b: str) -> None:
