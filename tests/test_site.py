@@ -113,6 +113,22 @@ class Site(unittest.TestCase):
         wood = (self.out / "items/Wood.html").read_text(encoding="utf-8")
         self.assertIn("one of 2: ×2–4", wood)
 
+    def test_found_in_chances(self):
+        ore = (self.out / "items/Ore.html").read_text(encoding="utf-8")
+        # Chance column: one roll of the drop table gives it (mechanics.drop_table_has): the Crate always; OreRock
+        # 1-3 picks at 1 of 1.25 weight: (0.8 + 0.96 + 0.992) / 3
+        self.assertIn("<th>Chance</th>", ore)
+        self.assertIn("<td>1</td><td>100%</td>", ore)
+        self.assertIn("<td>91.7%</td>", ore)
+        self.assertIn("<td>pick ×3</td><td></td>", ore)  # a pickable always gives it: no chance
+        # share of the location's copies that have the object (RandomSpawn), and the camp room that holds it
+        self.assertIn("Lair <span class=\"chance\"", ore)
+        self.assertIn("(70% of them)", ore)
+        self.assertIn("Village: Hut", ore)
+        self.assertIn("Village: Well", ore)
+        self.assertNotIn('class="place"', ore)  # no renders given: no thumbnails
+        self.assertFalse((self.out / "renders").exists())
+
     def test_piece_found_in(self):
         bench = (self.out / "pieces/piece_bench.html").read_text(encoding="utf-8")  # world copy, placed in the Lair
         self.assertIn("<h2>Found in</h2>", bench)
@@ -441,6 +457,46 @@ class Site(unittest.TestCase):
         self.assertRegex(stun, r'href="creatures/Raider.html".*attack')  # through its internal attack item
         page = (self.out / "mechanics/progression.html").read_text(encoding="utf-8")
         self.assertRegex(page, r"<td>Mountain</td><td>\d+</td>")
+
+
+
+class SiteRenders(unittest.TestCase):
+    """The same site with location renders (scripts/extract-renders.py): thumbnails in Found in, only the renders
+    used copied. The files only need to exist."""
+
+    @classmethod
+    def setUpClass(cls):
+        cls.tmp = tempfile.TemporaryDirectory()
+        tmp = Path(cls.tmp.name)
+        renders = tmp / "renders"
+        (renders / "rooms").mkdir(parents=True)
+        for f in ("Lair.webp", "Unused.webp", "rooms/village_hut.webp"):  # no render of village_well
+            (renders / f).write_bytes(b"RIFF")
+        cls.out = tmp / "site"
+        cls.build = subprocess.run(
+            [sys.executable, ROOT / "scripts/build-site.py", ROOT / "tests/golden", tmp / "no-icons", cls.out, renders],
+            capture_output=True, text=True)
+
+    @classmethod
+    def tearDownClass(cls):
+        cls.tmp.cleanup()
+
+    def test_builds(self):
+        self.assertEqual(self.build.returncode, 0, self.build.stdout + self.build.stderr)
+
+    def test_thumbnails(self):
+        ore = (self.out / "items/Ore.html").read_text(encoding="utf-8")
+        self.assertIn('<a class="place" href="renders/Lair.webp"><img src="renders/Lair.webp"', ore)
+        self.assertIn('<a class="place" href="renders/rooms/village_hut.webp">', ore)
+        self.assertRegex(ore, r'village_hut\.webp" alt="" loading="lazy"><span>Village: Hut <span class="chance"[^>]*>'
+                              r'\(50% of them\)')
+        self.assertIn("Village: Well", ore)  # no render: plain text
+        self.assertNotIn("village_well.webp", ore)
+
+    def test_copied(self):
+        self.assertTrue((self.out / "renders/Lair.webp").is_file())
+        self.assertTrue((self.out / "renders/rooms/village_hut.webp").is_file())
+        self.assertFalse((self.out / "renders/Unused.webp").exists())
 
 
 if __name__ == "__main__":

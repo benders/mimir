@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Render every dumped location from the server's asset bundles -> $WORK_DIR/renders/ (#52, experimental).
+# Render every dumped location (and camp room) from the server's asset bundles -> $WORK_DIR/renders/ (#52, #53).
 # Runs anywhere with python3 (no x86_64 needed); UnityPy and numpy go into a per-platform venv.
 source "$(dirname "$0")/lib.sh"
 # Distro pythons may lack venv/ensurepip (python3-venv); the tools image has it.

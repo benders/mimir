@@ -47,6 +47,9 @@ Each deploy records a New Relic change tracking marker on the Browser app ("Site
 - `make buildid` — print the current public Steam build id.
 - `make site` / `make serve` — build the static site (offline, from `data/` + local icons); serve on :8000.
 - `make icons` — icons only; runs anywhere with python3 (needs the server download in `.cache/server`).
+- `make renders` — location and camp-room renders (`extract-renders.py`, `.cache/dump/<branch>/renders/`, about 1.5 min,
+  ~5 GB peak; needs the server download and a raw dump). The site picks them up when present. `make test-renders` runs
+  its unit tests in the venv (`make test` skips them). Design notes: [Architecture.md](Architecture.md#location-renders).
 - `make dump` — run the server locally. Only practical on x86_64 Linux; on macOS it uses a qemu x86_64 VM and is very slow.
 - `make decompile` — decompile game assemblies into `.cache/decompiled/` for reference.
 - `BRANCH=public-test make check` — same for the public test branch.
@@ -141,7 +144,9 @@ object roll independently, `normalize.place_chances`). A `dungeon` entry of an o
 CampRadial/CampGrid generators, Fuling and abandoned villages) lists `rooms` [{room, chance?}] that hold it (chance per copy of
 the room); underground dungeon entries don't. Containers, `Spawner_*` objects (their CreatureSpawners become
 `location`/`dungeon` spawns) and creatures placed in `instances` are handled the same way.
-`placedBy` (pieces that plant/build it: Plant, Procreation, WispSpawner). `reachable()` counts only placed sources
+`placedBy` (pieces that plant/build it: Plant, Procreation, WispSpawner). The site's "Found in" shows a location's render
+as a thumbnail when one exists, and a Chance column (`mechanics.drop_table_has`: one roll of the drop table gives the item);
+`build-site.LOCATION_NAMES` gives player names to camps (GoblinCamp2 → Fuling village). `reachable()` counts only placed sources
 (or a `becomes` stage of one); sources with none are not in the world (Meteorite rock, MushroomBlue pickable). Creatures that grow up from another have a `growup` spawn
 (`parent`). Pieces with no build menu that stand in a location or dungeon room (loot chests, ruin walls, props) have `locations`
 [{location, dungeon}], found the same way (`instances`); they count as reachable. A piece with a Container has `contains`

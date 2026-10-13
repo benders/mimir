@@ -492,9 +492,9 @@ def write_dump(raw: Path) -> Path:
     # an outdoor camp: rooms laid out in the open (CampRadial), so the room that holds an object is recorded
     dump("locations/Village.json", {"name": "Village", "components": [
         comp("Location", {}), *spawners(("DungeonGenerator", m(themes="Hamlet", algorithm="CampRadial")))]})
-    dump("rooms/hut_a.json", {"name": "hut_a", "theme": 8, "enabled": True, "components": [],
+    dump("rooms/village_hut.json", {"name": "village_hut", "theme": 8, "enabled": True, "components": [],
                               "instances": [{"prefab": "OreRock", "path": "OreRock", "randomSpawn": {"chance": 50}}]})
-    dump("rooms/hut_b.json", {"name": "hut_b", "theme": 8, "enabled": True, "components": [],
+    dump("rooms/village_well.json", {"name": "village_well", "theme": 8, "enabled": True, "components": [],
                               "instances": [{"prefab": "OreRock", "path": "OreRock"}]})
     dump("rooms/cave_a.json", {"name": "cave_a", "theme": 5, "enabled": True,  # Crypt|Cave: used by Lair
                                "components": [*spawners(("CreatureSpawner", creature_spawner("Pup", maxLevel=2)),

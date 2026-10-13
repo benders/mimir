@@ -93,11 +93,11 @@
     "dungeon": true,
     "rooms": [
      {
-      "room": "hut_a",
+      "room": "village_hut",
       "chance": 50
      },
      {
-      "room": "hut_b"
+      "room": "village_well"
      }
     ]
    }

@@ -233,7 +233,7 @@ class Entities(FixtureCase):
         # in an outdoor camp's rooms: which rooms, with the chance per room; not for a cave's rooms
         village = next(x for x in sources["OreRock"]["locations"] if x["location"] == "Village")
         self.assertEqual(village, {"location": "Village", "dungeon": True,
-                                   "rooms": [{"room": "hut_a", "chance": 50}, {"room": "hut_b"}]})
+                                   "rooms": [{"room": "village_hut", "chance": 50}, {"room": "village_well"}]})
         self.assertTrue(all("rooms" not in x for x in sources["WildHive"]["locations"]))
         self.assertEqual(sources["Stub"]["placedBy"], ["Sapling"])
         self.assertEqual(sources["Glow"]["placedBy"], ["Lure"])

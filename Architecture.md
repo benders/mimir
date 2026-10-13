@@ -26,14 +26,17 @@ flowchart LR
 
     SRV -->|UnityPy| ICONS[(icons/*.png)]
     RAW -->|sprite names| ICONS
+    SRV -->|UnityPy, numpy, numba| RENDERS[(renders/*.webp<br/>locations, camp rooms)]
+    RAW -->|locations, rooms| RENDERS
 
     RAW -->|normalize.py| DATA[(data/*.json<br/>committed, ~1.6 MB)]
     DATA --> SITE[Static site<br/>build-site.py]
     ICONS --> SITE
+    RENDERS -.->|optional| SITE
 ```
 
 Everything in `.cache/` is downloaded or generated and gitignored. Only `data/` is committed. That gives a
-readable diff per game update and keeps Iron Gate's files (binaries, assets, icons) out of git.
+readable diff per game update and keeps Iron Gate's files (binaries, assets, icons, renders) out of git.
 
 ## Where things run
 
@@ -149,6 +152,28 @@ links, relations and spawns of the copy go there. The rest get a qualifier from 
 mapped through `QUALIFIERS` in `build-site.py`: "Skeleton (Swamp, no bow)", "Kall Fimbulbringer (phase 2)",
 "Plains Pie Picnic (material)". For pieces, the one buildable piece of a group keeps the plain name; other pieces
 whose ids add nothing are labelled "(world)".
+
+## Location renders
+
+`scripts/extract-renders.py` (`make renders`, #52, #53) draws each world location as an isometric image so players
+can recognise the structure that holds what they want, straight from the server's `SoftRef` asset bundles. The
+bundles are stream-unpacked once to `.cache/unpacked/<branch>` and memory-mapped (UnityPy decompresses a bundle
+whole in memory); only the ones locations depend on are loaded. A numba rasterizer draws the game's distance
+meshes (LODGroup level 1) textured, z-buffered and flat-lit, over a heightmap rebuilt from the location's terrain
+modifiers, which also hides what is below ground. Shaders aren't in the server data, so materials are drawn from
+`_MainTex` × `_Color`: alpha cutout only where the alpha isn't a gloss map, refraction materials as glass, beam
+effects skipped, emission only for fires that start lit.
+
+What is drawn follows the raw dump: rare decoration under a RandomSpawn (ivy, beehives, mushrooms, pickables under
+50%) is left out, structural parts are kept; the camera keeps the default 45° unless another of the four isometric
+views shows clearly more of a way in (portals, doors and gates, stairs). Locations built by a camp generator
+(Fuling and abandoned villages) are drawn room by room instead (`renders/rooms/`), since their layout is random.
+A full run takes about 1.5 minutes and peaks around 5 GB with 8 threads.
+
+The site build shows a render as a thumbnail wherever a location (or camp room) is named in "Found in", with the
+share of copies that have the object (`chance`, from RandomSpawn), and copies only the renders it uses. Renders
+are optional: without them the site builds the same, with names only. Unit tests: `make test-renders`
+(`tests/test_renders.py`, in the extractors' venv; skipped by `make test`).
 
 ## Verification
 

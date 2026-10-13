@@ -9,7 +9,7 @@ BRANCH ?= public
 REMOTE ?= nic@mini
 export MIMIR_BRANCH := $(BRANCH)
 
-.PHONY: help server buildid bepinex plugin dump icons anims renders extract remote-extract verify data verify-data site serve test check check-local clean decompile
+.PHONY: help server buildid bepinex plugin dump icons anims renders extract remote-extract verify data verify-data site serve test test-renders check check-local clean decompile
 
 help:
 	@grep -E '^[a-z-]+:.*## ' $(MAKEFILE_LIST) | awk -F':.*## ' '{printf "  %-12s %s\n", $$1, $$2}'
@@ -35,7 +35,7 @@ icons: ## Extract icons referenced by the dump -> .cache/dump/$(BRANCH)/icons
 anims: ## Extract the player's attack animation timing -> .cache/dump/$(BRANCH)/raw/anims
 	scripts/anims.sh
 
-renders: ## Render location images from the bundles -> .cache/dump/$(BRANCH)/renders (experimental, #52)
+renders: ## Render locations and camp rooms from the bundles -> .cache/dump/$(BRANCH)/renders (#52, #53)
 	scripts/renders.sh
 
 extract: dump icons anims ## dump + icons + anims on this host
@@ -65,6 +65,9 @@ serve: site ## Build the site and serve it on http://localhost:8000
 test: ## Offline tests: unit + golden files (tests/), site smoke test, verify committed data/
 	python3 -m unittest discover -s tests
 	scripts/verify_data.py data .cache/no-icons
+
+test-renders: ## Renderer unit tests (tests/test_renders.py) in the extractors' venv (numpy, numba, UnityPy)
+	bash -c 'source scripts/lib.sh && "$$(ensure_venv)" -m unittest -v tests.test_renders'
 
 check: remote-extract verify data verify-data ## Full end-to-end on $(REMOTE): extract, verify, normalize, verify
 
