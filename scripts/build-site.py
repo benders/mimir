@@ -1444,14 +1444,14 @@ def biome_page(b: str) -> None:
     raids.sort(key=lambda e: (raid_stage(e), e["id"]))
     body += section("Raids", '<ul class="refs">' + "".join(f'<li{stage_attr(raid_stage(e))}>{raid_link(e["id"])}</li>'
                                                           for e in raids) + "</ul>" if raids else "")
-    rows = []
+    groups = {}  # (kind, items) -> source names: one row per kind and yield (four kinds of rock giving Stone)
     for src in sorted((x for x in SOURCES.values() if x["kind"] in GATHERED and b in x.get("biomes", [])),
                       key=lambda x: (x["kind"], source_name(x).lower())):
-        items = [i for i in source_items(src) if not ITEMS.get(i, {}).get("unobtainable")]
+        items = tuple(i for i in source_items(src) if not ITEMS.get(i, {}).get("unobtainable"))
         if items:
-            row = [esc(source_name(src)), esc(src["kind"]), " ".join(link("item", i) for i in items)]
-            if row not in rows:  # copies of one object (three Large Bone piles)
-                rows.append(row)
+            groups.setdefault((src["kind"], items), []).append(source_name(src))
+    rows = [[esc(", ".join(dict.fromkeys(names))), esc(kind), " ".join(link("item", i) for i in items)]
+            for (kind, items), names in groups.items()]
     body += section("Resources", table(["Source", "Kind", "Gives"], rows, "cost"))
     body += section("Traders", reflist(trader_link(t) for t in TRADERS
                                        if any(b in x["biomes"] for x in t.get("locations", []))))
