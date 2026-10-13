@@ -225,11 +225,16 @@ class Entities(FixtureCase):
         sources = {s["id"]: s for n, p in N.PREFABS.items() if not p["isItem"] and (s := N.source(n, p))}
         N.place_sources(list(sources.values()))
         self.assertEqual(sources["Bush"]["biomes"], ["Meadows", "Swamp"])  # enabled vegetation, merged
-        self.assertEqual(sources["OreRock"]["locations"], [{"location": "Lair", "dungeon": False}])
+        self.assertEqual(sources["OreRock"]["locations"][0], {"location": "Lair", "dungeon": False})
         self.assertEqual(sources["WildHive"]["locations"], [{"location": "Lair", "dungeon": True}])  # via a room
         # inactive in Lair: never placed; but under a RandomSpawn ancestor it is, with or without a netview's own
         self.assertEqual(sources["Treasure"]["locations"], [{"location": "Lair", "dungeon": False, "chance": 90}])
         self.assertNotIn("locations", sources["Gift"])  # disabled, RandomSpawn on itself
+        # in an outdoor camp's rooms: which rooms, with the chance per room; not for a cave's rooms
+        village = next(x for x in sources["OreRock"]["locations"] if x["location"] == "Village")
+        self.assertEqual(village, {"location": "Village", "dungeon": True,
+                                   "rooms": [{"room": "hut_a", "chance": 50}, {"room": "hut_b"}]})
+        self.assertTrue(all("rooms" not in x for x in sources["WildHive"]["locations"]))
         self.assertEqual(sources["Stub"]["placedBy"], ["Sapling"])
         self.assertEqual(sources["Glow"]["placedBy"], ["Lure"])
         self.assertNotIn("biomes", sources["Stub"])

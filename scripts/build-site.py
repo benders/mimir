@@ -58,7 +58,7 @@ SOURCES = {s["id"]: s for s in load("sources")}
 # normalize currently emits some conversions twice (#18)
 PROCESSING = list({json.dumps(p, sort_keys=True): p for p in load("processing")}.values())
 HAVE_ICONS = {p.stem for p in ICONS.glob("*.png")} if ICONS.is_dir() else set()
-HAVE_RENDERS = {p.stem for p in RENDERS.glob("*.webp")} if RENDERS.is_dir() else set()
+HAVE_RENDERS = {str(p.relative_to(RENDERS).with_suffix("")) for p in RENDERS.glob("**/*.webp")} if RENDERS.is_dir() else set()
 used_renders = set()
 RAIDS = load("raids")
 RAID_EVENTS = {e["id"]: e for e in RAIDS["events"]}
@@ -227,7 +227,7 @@ def source_places(s: dict) -> str:
         return ", ".join(biome_link(b) for b in s.get("biomes", []))
     places = [biome_link(b) for b in s.get("biomes", [])]
     locs = list({(x["location"], bool(x.get("dungeon"))): x for x in s.get("locations", [])}.values())
-    shown = [place_html(x) for x in locs[:4]]
+    shown = list(dict.fromkeys(h for x in locs[:4] for h in place_html(x)))  # Fuling village variants look alike
     places += [h for h in shown if not h.startswith("<a")] + ([f"{len(locs) - 4} more locations"] if len(locs) > 4 else [])
     if by := [p for p in s.get("placedBy", []) if has_page("piece", p)]:
         lured = all(PIECES[p].get("lures") for p in by)
@@ -236,17 +236,42 @@ def source_places(s: dict) -> str:
     return ", ".join(places) + (f'<div class="places">{thumbs}</div>' if thumbs else "")
 
 
-def place_html(x: dict) -> str:
+# Locations named by players differently from their prefab (camps built by a DungeonGenerator)
+LOCATION_NAMES = {"GoblinCamp2": "Fuling village", "GoblinCamp2_1": "Fuling village"}
+
+
+def location_label(id_: str) -> str:
+    return LOCATION_NAMES.get(id_) or pretty_id(id_)
+
+
+def thumb(path: str, label: str) -> str:
+    """A render (renders/<path>.webp) as a thumbnail linking to the full image, with its label under it."""
+    used_renders.add(path)
+    src = f'renders/{quote(path)}.webp'
+    return f'<a class="place" href="{src}"><img src="{src}" alt="" loading="lazy"><span>{label}</span></a>'
+
+
+def chance_note(chance, title: str) -> str:
+    return f' <span class="chance" title="{esc(title)}">({num(chance)}% of them)</span>'
+
+
+def place_html(x: dict) -> list[str]:
     """A location a source or piece is in: its render as a thumbnail linking to the full image when there is one,
-    the name, "dungeon" for a room its dungeon generates, and the share of copies that have it (`chance`)."""
-    name = esc(pretty_id(x["location"])) + (" dungeon" if x.get("dungeon") else "")
+    the name, and the share of copies that have it (`chance`). In an outdoor camp, each room that holds it (`rooms`:
+    the bonfire of a Fuling village), with the room's render and the share of copies of that room that have it;
+    in an underground dungeon, "dungeon"."""
+    if x.get("rooms"):
+        out = []
+        for r in x["rooms"]:
+            label = f'{esc(location_label(x["location"]))}: {esc(pretty_id(re.sub(r"^[a-z]+_", "", r["room"])))}'
+            if "chance" in r:
+                label += chance_note(r["chance"], "Rolled per copy of this part of the camp: not every one has it")
+            out.append(thumb(f'rooms/{r["room"]}', label) if f'rooms/{r["room"]}' in HAVE_RENDERS else label)
+        return out
+    name = esc(location_label(x["location"])) + (" dungeon" if x.get("dungeon") else "")
     if "chance" in x:
-        name += f' <span class="chance" title="Rolled when the location is placed: not every copy has it">({num(x["chance"])}% of them)</span>'
-    if x["location"] not in HAVE_RENDERS:
-        return name
-    used_renders.add(x["location"])
-    src = f'renders/{quote(x["location"])}.webp'
-    return f'<a class="place" href="{src}"><img src="{src}" alt="" loading="lazy"><span>{name}</span></a>'
+        name += chance_note(x["chance"], "Rolled when the location is placed: not every copy has it")
+    return [thumb(x["location"], name) if x["location"] in HAVE_RENDERS else name]
 
 
 def biome_link(b: str) -> str:
@@ -918,7 +943,7 @@ TREE_OPEN = 2  # levels shown expanded
 
 def short_places(biomes=(), locations=()) -> str:
     places = [BIOMES.get(b, words(b)) for b in biomes]
-    locs = list(dict.fromkeys(pretty_id(x["location"]) for x in locations))
+    locs = list(dict.fromkeys(location_label(x["location"]) for x in locations))
     return ", ".join(places[:3] + locs[:2] + (["…"] if len(locs) > 2 or len(places) > 3 else []))
 
 
@@ -1409,7 +1434,7 @@ def world_object(id_: str, gives=True) -> str:
 
 
 def location_name(id_: str) -> str:
-    return mech_link(*LOCATION_PAGES[id_]) if id_ in LOCATION_PAGES else esc(pretty_id(id_))
+    return mech_link(*LOCATION_PAGES[id_]) if id_ in LOCATION_PAGES else esc(location_label(id_))
 
 
 ALT_BIOME_NOTE = ("Some regions of a biome (a whole connected area of it) get a variant that changes what spawns and "
@@ -2460,9 +2485,8 @@ def copy_assets() -> None:
     (OUT / "icons").mkdir(exist_ok=True)
     for name in used:
         shutil.copy2(ICONS / f"{name}.png", OUT / "icons" / f"{name}.png")
-    if used_renders:
-        (OUT / "renders").mkdir(exist_ok=True)
-    for name in used_renders:
+    for name in used_renders:  # a location, or rooms/<room>
+        (OUT / "renders" / name).parent.mkdir(parents=True, exist_ok=True)
         shutil.copy2(RENDERS / f"{name}.webp", OUT / "renders" / f"{name}.webp")
 
 

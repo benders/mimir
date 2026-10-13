@@ -22,6 +22,7 @@ verify.py        invariant checks on the raw dump (+ anims) + icons
 normalize.py     raw dump -> data/*.json (compact, English text resolved, committed)
 verify_data.py   counts, referential integrity, known content in data/ (+ icons)
 build-site.py    data/ + icons (+ location renders, optional) -> .cache/site/<branch>/ (static HTML + search.json; fails on broken links)
+renders.sh       extract-renders.py (UnityPy, numpy, numba) -> .cache/dump/<branch>/renders/<location>.webp, rooms/<camp room>.webp
 steam-buildid.sh steamcmd (container, x86_64) -> current public Steam build id
 ```
 
@@ -136,7 +137,9 @@ sits in it or in a room its dungeon generates, from the dump's `instances`, or a
 (max inclusive; no min/max = the item's own stack). Placement counts an `instances` entry unless it is `inactive` (disabled in
 the asset, never created) and has no RandomSpawn ancestor (`randomSpawn.path`, which re-enables its own object); a RandomSpawn
 chance below 100 still counts; the location entry then has `chance` (% of copies of the location that have it: copies of the
-object roll independently, `normalize.place_chances`; not recorded for `dungeon` entries). Containers, `Spawner_*` objects (their CreatureSpawners become
+object roll independently, `normalize.place_chances`). A `dungeon` entry of an outdoor camp (`normalize.camp_locations`:
+CampRadial/CampGrid generators, Fuling and abandoned villages) lists `rooms` [{room, chance?}] that hold it (chance per copy of
+the room); underground dungeon entries don't. Containers, `Spawner_*` objects (their CreatureSpawners become
 `location`/`dungeon` spawns) and creatures placed in `instances` are handled the same way.
 `placedBy` (pieces that plant/build it: Plant, Procreation, WispSpawner). `reachable()` counts only placed sources
 (or a `becomes` stage of one); sources with none are not in the world (Meteorite rock, MushroomBlue pickable). Creatures that grow up from another have a `growup` spawn

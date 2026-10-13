@@ -87,6 +87,19 @@
   "locations": [
    {
     "location": "Lair"
+   },
+   {
+    "location": "Village",
+    "dungeon": true,
+    "rooms": [
+     {
+      "room": "hut_a",
+      "chance": 50
+     },
+     {
+      "room": "hut_b"
+     }
+    ]
    }
   ]
  },

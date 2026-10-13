@@ -433,6 +433,7 @@ def write_dump(raw: Path) -> Path:
         zone_location("Market", "Meadows", biomeArea="Median", quantity=5, unique=True, prioritized=True,
                       minDistance=1000, maxDistance=4000, minDistanceFromSimilar=500, iconPlaced=True),  # a trader's camp
         zone_location("Stash", "Meadows"),
+        zone_location("Village", "Mountain"),
     ]}}])
     dump("locations/Camp.json", {"name": "Camp", "components": [comp("Location", {}), *spawners(
         ("CreatureSpawner", creature_spawner("Raider", minLevel=3, maxLevel=1)),  # swapped levels
@@ -487,7 +488,14 @@ def write_dump(raw: Path) -> Path:
         "beam": {"state": "upperbody.beam", "layer": 1, "speed": 1.0, "clip": "Beam", "length": 0.5, "exit": None,
                  "offset": 0.0, "events": [[0.1, "Hit"]]},  # loops until released: no timing
     }})
-    dump("room_themes.json", {"None": 0, "Crypt": 1, "Cave": 4})
+    dump("room_themes.json", {"None": 0, "Crypt": 1, "Cave": 4, "Hamlet": 8})
+    # an outdoor camp: rooms laid out in the open (CampRadial), so the room that holds an object is recorded
+    dump("locations/Village.json", {"name": "Village", "components": [
+        comp("Location", {}), *spawners(("DungeonGenerator", m(themes="Hamlet", algorithm="CampRadial")))]})
+    dump("rooms/hut_a.json", {"name": "hut_a", "theme": 8, "enabled": True, "components": [],
+                              "instances": [{"prefab": "OreRock", "path": "OreRock", "randomSpawn": {"chance": 50}}]})
+    dump("rooms/hut_b.json", {"name": "hut_b", "theme": 8, "enabled": True, "components": [],
+                              "instances": [{"prefab": "OreRock", "path": "OreRock"}]})
     dump("rooms/cave_a.json", {"name": "cave_a", "theme": 5, "enabled": True,  # Crypt|Cave: used by Lair
                                "components": [*spawners(("CreatureSpawner", creature_spawner("Pup", maxLevel=2)),
                                                         container(("Gem", 1, 1, 1), ("Wood", 2, 5, 3))),

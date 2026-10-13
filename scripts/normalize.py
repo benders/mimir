@@ -12,6 +12,7 @@ Conventions in the output:
   - Damage maps use the game's damage type names without the m_ prefix (slash, fire, ...).
   - "icon" is a file name stem in the icons dir (<icon>.png).
 """
+import functools
 import hashlib
 import json
 import os
@@ -1353,10 +1354,27 @@ def place_chances(p: dict) -> dict[str, float]:
     return {n: int(c) if (c := round(100 * (1 - m), 1)).is_integer() else c for n, m in missing.items() if m > 0}
 
 
-def place(name: str, dungeon: bool, chance: float | None = None) -> dict:
-    """A {location, dungeon} entry, with `chance` (%) when a copy of the location may lack the object. Not recorded
-    for dungeons: a room is itself picked at random by the generator, so a per-room chance says little."""
-    return {"location": name, "dungeon": dungeon} | ({"chance": chance} if chance is not None and not dungeon else {})
+@functools.cache
+def camp_locations(raw: Path) -> frozenset:
+    """Locations whose DungeonGenerator lays rooms out in the open around it (m_algorithm CampRadial / CampGrid,
+    DungeonGenerator.GenerateCampRadial: Fuling villages, abandoned villages) rather than as connected interiors.
+    Cached per raw dump directory."""
+    return frozenset(n for n, loc in load_dir("locations").items() for c in loc["components"]
+                     if c["type"] == "DungeonGenerator" and c["fields"].get("m_algorithm", "").startswith("Camp"))
+
+
+def add_place(places: dict, name: str, dungeon: bool, chance: float | None = None, room: str | None = None) -> None:
+    """Record a {location, dungeon} entry in places[(name, dungeon)]. Outside a dungeon it has `chance` (%) when a
+    copy of the location may lack the object. The dungeon entry of an outdoor camp (camp_locations) lists the
+    `rooms` [{room, chance?}] that hold it, since a player sees those from outside: the generator picks rooms at
+    random, so the chance is per copy of the room, not per location. Underground dungeon rooms aren't listed."""
+    e = places.setdefault((name, dungeon), {"location": name, "dungeon": dungeon})
+    if not dungeon:
+        if chance is not None:
+            e["chance"] = chance
+    elif room and name in camp_locations(RAW) and all(r["room"] != room for r in e.setdefault("rooms", [])):
+        e["rooms"] = sorted(e["rooms"] + [{"room": room} | ({"chance": chance} if chance is not None else {})],
+                            key=lambda r: r["room"])
 
 
 def location_spawns() -> list[dict]:
@@ -1393,7 +1411,7 @@ def location_containers() -> list[dict]:
             slug = re.sub(r"[^a-z0-9]+", "_", (title or "").lower()).strip("_")
             e = by.setdefault((title, digest), {"id": f"container_{slug}_{digest}", "kind": "container",
                                                 "name": title, "drops": table, "locations": {}})
-            e["locations"][name, dungeon] = place(name, dungeon, chance)
+            add_place(e["locations"], name, dungeon, chance, p["name"])
     return sorted((dict(e, locations=[e["locations"][k] for k in sorted(e["locations"])]) for e in by.values()),
                   key=lambda e: e["id"])
 
@@ -1405,7 +1423,7 @@ def scene_instances() -> dict[str, dict]:
     for name, bs, p, dungeon in placed_in_locations():
         chances = place_chances(p)
         for inst in placed_prefabs(p) | {p["name"]}:
-            found[inst][name, dungeon] = place(name, dungeon, chances.get(inst))
+            add_place(found[inst], name, dungeon, chances.get(inst), p["name"])
     return found
 
 
@@ -1431,11 +1449,11 @@ def place_sources(sources: list[dict]) -> None:
     found = defaultdict(dict)
     for inst, places in scene_instances().items():
         if inst in by:
-            found[inst] |= places
+            found[inst] |= places  # no overlap yet: spawner-made objects are added below
     for name, bs, p, dungeon in placed_in_locations():
         for c in with_instances(p):  # objects a spawner makes (the Charred ballista)
             if c["type"] == "CreatureSpawner" and (spawned := ref(c["fields"]["m_creaturePrefab"])) in by:
-                found[spawned][name, dungeon] = place(name, dungeon)
+                add_place(found[spawned], name, dungeon, room=p["name"])
     made = defaultdict(set)
     for name, p in PREFABS.items():
         if not has(p, "Piece"):

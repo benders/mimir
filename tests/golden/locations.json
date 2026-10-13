@@ -44,5 +44,14 @@
   "placement": {
    "quantity": 20
   }
+ },
+ {
+  "id": "Village",
+  "biomes": [
+   "Mountain"
+  ],
+  "placement": {
+   "quantity": 20
+  }
  }
 ]

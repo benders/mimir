@@ -7004,7 +7004,13 @@
    },
    {
     "location": "FortressRuins",
-    "dungeon": true
+    "dungeon": true,
+    "rooms": [
+     {
+      "room": "FortressRuins_new01",
+      "chance": 75
+     }
+    ]
    }
   ],
   "stage": "AshLands",
@@ -7108,7 +7114,25 @@
    },
    {
     "location": "NorthVillage",
-    "dungeon": true
+    "dungeon": true,
+    "rooms": [
+     {
+      "room": "northvillage_granary",
+      "chance": 80
+     },
+     {
+      "room": "northvillage_house1",
+      "chance": 50
+     },
+     {
+      "room": "northvillage_house2",
+      "chance": 50
+     },
+     {
+      "room": "northvillage_tower",
+      "chance": 50
+     }
+    ]
    },
    {
     "location": "ShipSetting02",
@@ -7714,11 +7738,53 @@
   "locations": [
    {
     "location": "GoblinCamp2",
-    "dungeon": true
+    "dungeon": true,
+    "rooms": [
+     {
+      "room": "gobvill_crafting"
+     },
+     {
+      "room": "gobvill_hut02",
+      "chance": 30
+     },
+     {
+      "room": "gobvill_hut03",
+      "chance": 30
+     },
+     {
+      "room": "gobvill_tent02",
+      "chance": 20
+     },
+     {
+      "room": "gobvill_tent1",
+      "chance": 30
+     }
+    ]
    },
    {
     "location": "GoblinCamp2_1",
-    "dungeon": true
+    "dungeon": true,
+    "rooms": [
+     {
+      "room": "gobvill_crafting"
+     },
+     {
+      "room": "gobvill_hut02",
+      "chance": 30
+     },
+     {
+      "room": "gobvill_hut03",
+      "chance": 30
+     },
+     {
+      "room": "gobvill_tent02",
+      "chance": 20
+     },
+     {
+      "room": "gobvill_tent1",
+      "chance": 30
+     }
+    ]
    },
    {
     "location": "GoblinHut02",
@@ -7945,7 +8011,16 @@
   "locations": [
    {
     "location": "WoodFarm1",
-    "dungeon": true
+    "dungeon": true,
+    "rooms": [
+     {
+      "room": "woodfarm_farmhouse2"
+     },
+     {
+      "room": "woodfarm_farmhouse3",
+      "chance": 90
+     }
+    ]
    },
    {
     "location": "WoodHouse1",
@@ -7977,11 +8052,47 @@
    },
    {
     "location": "WoodVillage1",
-    "dungeon": true
+    "dungeon": true,
+    "rooms": [
+     {
+      "room": "meadowsvillage_greathall",
+      "chance": 98.4
+     },
+     {
+      "room": "meadowsvillage_house1",
+      "chance": 50
+     },
+     {
+      "room": "meadowsvillage_house2",
+      "chance": 50
+     },
+     {
+      "room": "meadowsvillage_longhouse",
+      "chance": 75
+     }
+    ]
    },
    {
     "location": "WoodVillage2",
-    "dungeon": true
+    "dungeon": true,
+    "rooms": [
+     {
+      "room": "meadowsvillage_greathall",
+      "chance": 98.4
+     },
+     {
+      "room": "meadowsvillage_house1",
+      "chance": 50
+     },
+     {
+      "room": "meadowsvillage_house2",
+      "chance": 50
+     },
+     {
+      "room": "meadowsvillage_longhouse",
+      "chance": 75
+     }
+    ]
    }
   ],
   "stage": "Meadows",
@@ -17815,11 +17926,39 @@
   "locations": [
    {
     "location": "GoblinCamp2",
-    "dungeon": true
+    "dungeon": true,
+    "rooms": [
+     {
+      "room": "gobvill_hut02",
+      "chance": 75
+     },
+     {
+      "room": "gobvill_hut03",
+      "chance": 87.5
+     },
+     {
+      "room": "gobvill_hut1",
+      "chance": 50
+     }
+    ]
    },
    {
     "location": "GoblinCamp2_1",
-    "dungeon": true
+    "dungeon": true,
+    "rooms": [
+     {
+      "room": "gobvill_hut02",
+      "chance": 75
+     },
+     {
+      "room": "gobvill_hut03",
+      "chance": 87.5
+     },
+     {
+      "room": "gobvill_hut1",
+      "chance": 50
+     }
+    ]
    },
    {
     "location": "GoblinHut01",
@@ -17848,7 +17987,21 @@
    },
    {
     "location": "WoodFarm1",
-    "dungeon": true
+    "dungeon": true,
+    "rooms": [
+     {
+      "room": "woodfarm_farmhouse1",
+      "chance": 50
+     },
+     {
+      "room": "woodfarm_farmhouse2",
+      "chance": 75
+     },
+     {
+      "room": "woodfarm_farmhouse3",
+      "chance": 87.5
+     }
+    ]
    },
    {
     "location": "WoodHouse1",
@@ -17860,11 +18013,47 @@
    },
    {
     "location": "WoodVillage1",
-    "dungeon": true
+    "dungeon": true,
+    "rooms": [
+     {
+      "room": "meadowsvillage_house1",
+      "chance": 75
+     },
+     {
+      "room": "meadowsvillage_house2",
+      "chance": 75
+     },
+     {
+      "room": "meadowsvillage_longhouse",
+      "chance": 87.5
+     },
+     {
+      "room": "meadowsvillage_longhouseruin",
+      "chance": 87.5
+     }
+    ]
    },
    {
     "location": "WoodVillage2",
-    "dungeon": true
+    "dungeon": true,
+    "rooms": [
+     {
+      "room": "meadowsvillage_house1",
+      "chance": 75
+     },
+     {
+      "room": "meadowsvillage_house2",
+      "chance": 75
+     },
+     {
+      "room": "meadowsvillage_longhouse",
+      "chance": 87.5
+     },
+     {
+      "room": "meadowsvillage_longhouseruin",
+      "chance": 87.5
+     }
+    ]
    }
   ],
   "stage": "Meadows",
@@ -18831,7 +19020,13 @@
   "locations": [
    {
     "location": "NorthVillage",
-    "dungeon": true
+    "dungeon": true,
+    "rooms": [
+     {
+      "room": "northvillage_granary",
+      "chance": 99.9
+     }
+    ]
    }
   ],
   "stage": "DeepNorth",
@@ -18944,7 +19139,13 @@
   "locations": [
    {
     "location": "NorthVillage",
-    "dungeon": true
+    "dungeon": true,
+    "rooms": [
+     {
+      "room": "northvillage_house2",
+      "chance": 98.4
+     }
+    ]
    },
    {
     "location": "TheHole01"
@@ -29503,7 +29704,16 @@
   "locations": [
    {
     "location": "WoodFarm1",
-    "dungeon": true
+    "dungeon": true,
+    "rooms": [
+     {
+      "room": "woodfarm_road1",
+      "chance": 48.8
+     },
+     {
+      "room": "woodfarm_signpost"
+     }
+    ]
    }
   ],
   "stage": "Meadows",
@@ -33257,7 +33467,13 @@
    },
    {
     "location": "WoodFarm1",
-    "dungeon": true
+    "dungeon": true,
+    "rooms": [
+     {
+      "room": "woodfarm_henpen",
+      "chance": 93.8
+     }
+    ]
    },
    {
     "location": "WoodHouse11"

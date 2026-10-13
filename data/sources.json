@@ -99,7 +99,13 @@
   "locations": [
    {
     "location": "AshlandRuins",
-    "dungeon": true
+    "dungeon": true,
+    "rooms": [
+     {
+      "room": "CharredRuins_new01",
+      "chance": 100
+     }
+    ]
    },
    {
     "location": "CharredRuins1",
@@ -117,7 +123,13 @@
    },
    {
     "location": "FortressRuins",
-    "dungeon": true
+    "dungeon": true,
+    "rooms": [
+     {
+      "room": "FortressRuins_new01",
+      "chance": 100
+     }
+    ]
    }
   ]
  },
@@ -893,7 +905,33 @@
   "locations": [
    {
     "location": "AshlandRuins",
-    "dungeon": true
+    "dungeon": true,
+    "rooms": [
+     {
+      "room": "CharredRuins15",
+      "chance": 93.8
+     },
+     {
+      "room": "CharredRuins_new01",
+      "chance": 99.6
+     },
+     {
+      "room": "CharredRuins_new02",
+      "chance": 98.7
+     },
+     {
+      "room": "CharredRuins_new03",
+      "chance": 98.7
+     },
+     {
+      "room": "CharredRuins_new04",
+      "chance": 100
+     },
+     {
+      "room": "CharredRuins_new05",
+      "chance": 100
+     }
+    ]
    },
    {
     "location": "CharredTowerRuins1",
@@ -905,7 +943,21 @@
    },
    {
     "location": "FortressRuins",
-    "dungeon": true
+    "dungeon": true,
+    "rooms": [
+     {
+      "room": "CharredRuins15",
+      "chance": 93.8
+     },
+     {
+      "room": "CharredRuins_new02",
+      "chance": 98.7
+     },
+     {
+      "room": "CharredRuins_new03",
+      "chance": 98.7
+     }
+    ]
    },
    {
     "location": "PlaceofMystery1"
@@ -946,7 +998,33 @@
   "locations": [
    {
     "location": "AshlandRuins",
-    "dungeon": true
+    "dungeon": true,
+    "rooms": [
+     {
+      "room": "CharredRuins15",
+      "chance": 93.8
+     },
+     {
+      "room": "CharredRuins_new01",
+      "chance": 99.6
+     },
+     {
+      "room": "CharredRuins_new02",
+      "chance": 100
+     },
+     {
+      "room": "CharredRuins_new03",
+      "chance": 100
+     },
+     {
+      "room": "CharredRuins_new04",
+      "chance": 100
+     },
+     {
+      "room": "CharredRuins_new05",
+      "chance": 100
+     }
+    ]
    },
    {
     "location": "CharredTowerRuins1",
@@ -958,7 +1036,21 @@
    },
    {
     "location": "FortressRuins",
-    "dungeon": true
+    "dungeon": true,
+    "rooms": [
+     {
+      "room": "CharredRuins15",
+      "chance": 93.8
+     },
+     {
+      "room": "CharredRuins_new02",
+      "chance": 100
+     },
+     {
+      "room": "CharredRuins_new03",
+      "chance": 100
+     }
+    ]
    },
    {
     "location": "PlaceofMystery1"
@@ -1142,7 +1234,26 @@
   "locations": [
    {
     "location": "AshlandRuins",
-    "dungeon": true
+    "dungeon": true,
+    "rooms": [
+     {
+      "room": "CharredRuins17",
+      "chance": 99.9
+     },
+     {
+      "room": "CharredRuins_new02"
+     },
+     {
+      "room": "CharredRuins_new03"
+     },
+     {
+      "room": "CharredRuins_new04"
+     },
+     {
+      "room": "CharredRuins_new05",
+      "chance": 100
+     }
+    ]
    },
    {
     "location": "CharredTowerRuins1",
@@ -1153,7 +1264,23 @@
    },
    {
     "location": "FortressRuins",
-    "dungeon": true
+    "dungeon": true,
+    "rooms": [
+     {
+      "room": "CharredRuins17",
+      "chance": 99.9
+     },
+     {
+      "room": "CharredRuins_new02"
+     },
+     {
+      "room": "CharredRuins_new03"
+     },
+     {
+      "room": "FortressRuins_shieldgen",
+      "chance": 99.8
+     }
+    ]
    },
    {
     "location": "PlaceofMystery1"
@@ -1469,7 +1596,51 @@
   "locations": [
    {
     "location": "AshlandRuins",
-    "dungeon": true
+    "dungeon": true,
+    "rooms": [
+     {
+      "room": "CharredRuins12",
+      "chance": 100
+     },
+     {
+      "room": "CharredRuins13",
+      "chance": 75
+     },
+     {
+      "room": "CharredRuins14",
+      "chance": 100
+     },
+     {
+      "room": "CharredRuins23",
+      "chance": 100
+     },
+     {
+      "room": "CharredRuins24",
+      "chance": 99.8
+     },
+     {
+      "room": "CharredRuins25"
+     },
+     {
+      "room": "CharredRuins9",
+      "chance": 100
+     },
+     {
+      "room": "CharredRuins_new01"
+     },
+     {
+      "room": "CharredRuins_new02",
+      "chance": 100
+     },
+     {
+      "room": "CharredRuins_new04",
+      "chance": 100
+     },
+     {
+      "room": "CharredRuins_new05",
+      "chance": 100
+     }
+    ]
    },
    {
     "location": "CharredRuins1",
@@ -1505,7 +1676,35 @@
    },
    {
     "location": "FortressRuins",
-    "dungeon": true
+    "dungeon": true,
+    "rooms": [
+     {
+      "room": "CharredRuins12",
+      "chance": 100
+     },
+     {
+      "room": "CharredRuins13",
+      "chance": 75
+     },
+     {
+      "room": "CharredRuins14",
+      "chance": 100
+     },
+     {
+      "room": "CharredRuins25"
+     },
+     {
+      "room": "CharredRuins_new02",
+      "chance": 100
+     },
+     {
+      "room": "FortressRuins23",
+      "chance": 100
+     },
+     {
+      "room": "FortressRuins_new01"
+     }
+    ]
    },
    {
     "location": "PlaceofMystery1"
@@ -1795,7 +1994,29 @@
   "locations": [
    {
     "location": "AshlandRuins",
-    "dungeon": true
+    "dungeon": true,
+    "rooms": [
+     {
+      "room": "CharredRuins_new01",
+      "chance": 99.8
+     },
+     {
+      "room": "CharredRuins_new02",
+      "chance": 96.9
+     },
+     {
+      "room": "CharredRuins_new03",
+      "chance": 96.9
+     },
+     {
+      "room": "CharredRuins_new04",
+      "chance": 99.6
+     },
+     {
+      "room": "CharredRuins_new05",
+      "chance": 100
+     }
+    ]
    },
    {
     "location": "CharredTowerRuins1",
@@ -1807,7 +2028,21 @@
    },
    {
     "location": "FortressRuins",
-    "dungeon": true
+    "dungeon": true,
+    "rooms": [
+     {
+      "room": "CharredRuins_new02",
+      "chance": 96.9
+     },
+     {
+      "room": "CharredRuins_new03",
+      "chance": 96.9
+     },
+     {
+      "room": "FortressRuins_new01",
+      "chance": 99.8
+     }
+    ]
    },
    {
     "location": "PlaceofMystery1"
@@ -1848,7 +2083,29 @@
   "locations": [
    {
     "location": "AshlandRuins",
-    "dungeon": true
+    "dungeon": true,
+    "rooms": [
+     {
+      "room": "CharredRuins_new01",
+      "chance": 99.8
+     },
+     {
+      "room": "CharredRuins_new02",
+      "chance": 96.9
+     },
+     {
+      "room": "CharredRuins_new03",
+      "chance": 96.9
+     },
+     {
+      "room": "CharredRuins_new04",
+      "chance": 99.6
+     },
+     {
+      "room": "CharredRuins_new05",
+      "chance": 100
+     }
+    ]
    },
    {
     "location": "CharredTowerRuins1",
@@ -1860,7 +2117,21 @@
    },
    {
     "location": "FortressRuins",
-    "dungeon": true
+    "dungeon": true,
+    "rooms": [
+     {
+      "room": "CharredRuins_new02",
+      "chance": 96.9
+     },
+     {
+      "room": "CharredRuins_new03",
+      "chance": 96.9
+     },
+     {
+      "room": "FortressRuins_new01",
+      "chance": 93.8
+     }
+    ]
    },
    {
     "location": "PlaceofMystery1",
@@ -1903,14 +2174,42 @@
   "locations": [
    {
     "location": "AshlandRuins",
-    "dungeon": true
+    "dungeon": true,
+    "rooms": [
+     {
+      "room": "CharredRuins15",
+      "chance": 93.8
+     },
+     {
+      "room": "CharredRuins_new01",
+      "chance": 100
+     },
+     {
+      "room": "CharredRuins_new03",
+      "chance": 100
+     }
+    ]
    },
    {
     "location": "FaderLocation"
    },
    {
     "location": "FortressRuins",
-    "dungeon": true
+    "dungeon": true,
+    "rooms": [
+     {
+      "room": "CharredRuins15",
+      "chance": 93.8
+     },
+     {
+      "room": "CharredRuins_new03",
+      "chance": 100
+     },
+     {
+      "room": "FortressRuins_new01",
+      "chance": 100
+     }
+    ]
    },
    {
     "location": "PlaceofMystery1"
@@ -1954,7 +2253,13 @@
   "locations": [
    {
     "location": "AshlandRuins",
-    "dungeon": true
+    "dungeon": true,
+    "rooms": [
+     {
+      "room": "CharredRuins_new01",
+      "chance": 100
+     }
+    ]
    },
    {
     "location": "CharredRuins1",
@@ -1973,7 +2278,13 @@
    },
    {
     "location": "FortressRuins",
-    "dungeon": true
+    "dungeon": true,
+    "rooms": [
+     {
+      "room": "FortressRuins_new01",
+      "chance": 100
+     }
+    ]
    }
   ]
  },
@@ -2066,7 +2377,13 @@
   "locations": [
    {
     "location": "AshlandRuins",
-    "dungeon": true
+    "dungeon": true,
+    "rooms": [
+     {
+      "room": "CharredRuins_new01",
+      "chance": 100
+     }
+    ]
    },
    {
     "location": "CharredRuins1",
@@ -2086,7 +2403,13 @@
    },
    {
     "location": "FortressRuins",
-    "dungeon": true
+    "dungeon": true,
+    "rooms": [
+     {
+      "room": "FortressRuins_new01",
+      "chance": 100
+     }
+    ]
    }
   ]
  },
@@ -2121,7 +2444,13 @@
   "locations": [
    {
     "location": "AshlandRuins",
-    "dungeon": true
+    "dungeon": true,
+    "rooms": [
+     {
+      "room": "CharredRuins_new01",
+      "chance": 100
+     }
+    ]
    },
    {
     "location": "CharredRuins1",
@@ -2141,7 +2470,13 @@
    },
    {
     "location": "FortressRuins",
-    "dungeon": true
+    "dungeon": true,
+    "rooms": [
+     {
+      "room": "FortressRuins_new01",
+      "chance": 100
+     }
+    ]
    }
   ]
  },
@@ -2176,7 +2511,13 @@
   "locations": [
    {
     "location": "AshlandRuins",
-    "dungeon": true
+    "dungeon": true,
+    "rooms": [
+     {
+      "room": "CharredRuins_new01",
+      "chance": 100
+     }
+    ]
    },
    {
     "location": "CharredRuins1",
@@ -2196,7 +2537,13 @@
    },
    {
     "location": "FortressRuins",
-    "dungeon": true
+    "dungeon": true,
+    "rooms": [
+     {
+      "room": "FortressRuins_new01",
+      "chance": 100
+     }
+    ]
    }
   ]
  },
@@ -2336,11 +2683,23 @@
   "locations": [
    {
     "location": "AshlandRuins",
-    "dungeon": true
+    "dungeon": true,
+    "rooms": [
+     {
+      "room": "CharredRuins_new01",
+      "chance": 100
+     }
+    ]
    },
    {
     "location": "FortressRuins",
-    "dungeon": true
+    "dungeon": true,
+    "rooms": [
+     {
+      "room": "FortressRuins_new01",
+      "chance": 100
+     }
+    ]
    }
   ]
  },
@@ -2375,14 +2734,26 @@
   "locations": [
    {
     "location": "AshlandRuins",
-    "dungeon": true
+    "dungeon": true,
+    "rooms": [
+     {
+      "room": "CharredRuins_new01",
+      "chance": 100
+     }
+    ]
    },
    {
     "location": "FaderLocation"
    },
    {
     "location": "FortressRuins",
-    "dungeon": true
+    "dungeon": true,
+    "rooms": [
+     {
+      "room": "FortressRuins_new01",
+      "chance": 100
+     }
+    ]
    }
   ]
  },
@@ -2417,11 +2788,23 @@
   "locations": [
    {
     "location": "AshlandRuins",
-    "dungeon": true
+    "dungeon": true,
+    "rooms": [
+     {
+      "room": "CharredRuins_new01",
+      "chance": 100
+     }
+    ]
    },
    {
     "location": "FortressRuins",
-    "dungeon": true
+    "dungeon": true,
+    "rooms": [
+     {
+      "room": "FortressRuins_new01",
+      "chance": 100
+     }
+    ]
    }
   ]
  },
@@ -2456,7 +2839,33 @@
   "locations": [
    {
     "location": "AshlandRuins",
-    "dungeon": true
+    "dungeon": true,
+    "rooms": [
+     {
+      "room": "CharredRuins12",
+      "chance": 100
+     },
+     {
+      "room": "CharredRuins13",
+      "chance": 75
+     },
+     {
+      "room": "CharredRuins14",
+      "chance": 100
+     },
+     {
+      "room": "CharredRuins23",
+      "chance": 100
+     },
+     {
+      "room": "CharredRuins24",
+      "chance": 96
+     },
+     {
+      "room": "CharredRuins9",
+      "chance": 100
+     }
+    ]
    },
    {
     "location": "CharredTowerRuins2",
@@ -2471,7 +2880,25 @@
    },
    {
     "location": "FortressRuins",
-    "dungeon": true
+    "dungeon": true,
+    "rooms": [
+     {
+      "room": "CharredRuins12",
+      "chance": 100
+     },
+     {
+      "room": "CharredRuins13",
+      "chance": 75
+     },
+     {
+      "room": "CharredRuins14",
+      "chance": 100
+     },
+     {
+      "room": "FortressRuins23",
+      "chance": 100
+     }
+    ]
    },
    {
     "location": "PlaceofMystery2"
@@ -2509,7 +2936,48 @@
   "locations": [
    {
     "location": "AshlandRuins",
-    "dungeon": true
+    "dungeon": true,
+    "rooms": [
+     {
+      "room": "CharredRuins12",
+      "chance": 100
+     },
+     {
+      "room": "CharredRuins13",
+      "chance": 50
+     },
+     {
+      "room": "CharredRuins14",
+      "chance": 100
+     },
+     {
+      "room": "CharredRuins17",
+      "chance": 75
+     },
+     {
+      "room": "CharredRuins23",
+      "chance": 100
+     },
+     {
+      "room": "CharredRuins24",
+      "chance": 95
+     },
+     {
+      "room": "CharredRuins25"
+     },
+     {
+      "room": "CharredRuins9",
+      "chance": 100
+     },
+     {
+      "room": "CharredRuins_new01",
+      "chance": 100
+     },
+     {
+      "room": "CharredRuins_new03",
+      "chance": 100
+     }
+    ]
    },
    {
     "location": "CharredTowerRuins2",
@@ -2524,7 +2992,40 @@
    },
    {
     "location": "FortressRuins",
-    "dungeon": true
+    "dungeon": true,
+    "rooms": [
+     {
+      "room": "CharredRuins12",
+      "chance": 100
+     },
+     {
+      "room": "CharredRuins13",
+      "chance": 50
+     },
+     {
+      "room": "CharredRuins14",
+      "chance": 100
+     },
+     {
+      "room": "CharredRuins17",
+      "chance": 75
+     },
+     {
+      "room": "CharredRuins25"
+     },
+     {
+      "room": "CharredRuins_new03",
+      "chance": 100
+     },
+     {
+      "room": "FortressRuins23",
+      "chance": 100
+     },
+     {
+      "room": "FortressRuins_new01",
+      "chance": 100
+     }
+    ]
    },
    {
     "location": "PlaceofMystery2"
@@ -2562,7 +3063,33 @@
   "locations": [
    {
     "location": "AshlandRuins",
-    "dungeon": true
+    "dungeon": true,
+    "rooms": [
+     {
+      "room": "CharredRuins12",
+      "chance": 100
+     },
+     {
+      "room": "CharredRuins13",
+      "chance": 50
+     },
+     {
+      "room": "CharredRuins14",
+      "chance": 100
+     },
+     {
+      "room": "CharredRuins23",
+      "chance": 100
+     },
+     {
+      "room": "CharredRuins24",
+      "chance": 90
+     },
+     {
+      "room": "CharredRuins9",
+      "chance": 99.9
+     }
+    ]
    },
    {
     "location": "CharredTowerRuins2",
@@ -2577,7 +3104,25 @@
    },
    {
     "location": "FortressRuins",
-    "dungeon": true
+    "dungeon": true,
+    "rooms": [
+     {
+      "room": "CharredRuins12",
+      "chance": 100
+     },
+     {
+      "room": "CharredRuins13",
+      "chance": 50
+     },
+     {
+      "room": "CharredRuins14",
+      "chance": 100
+     },
+     {
+      "room": "FortressRuins23",
+      "chance": 100
+     }
+    ]
    },
    {
     "location": "PlaceofMystery2"
@@ -2600,7 +3145,24 @@
   "locations": [
    {
     "location": "AshlandRuins",
-    "dungeon": true
+    "dungeon": true,
+    "rooms": [
+     {
+      "room": "CharredRuins_new01"
+     },
+     {
+      "room": "CharredRuins_new02"
+     },
+     {
+      "room": "CharredRuins_new03"
+     },
+     {
+      "room": "CharredRuins_new04"
+     },
+     {
+      "room": "CharredRuins_new05"
+     }
+    ]
    },
    {
     "location": "CharredTowerRuins1"
@@ -2610,7 +3172,18 @@
    },
    {
     "location": "FortressRuins",
-    "dungeon": true
+    "dungeon": true,
+    "rooms": [
+     {
+      "room": "CharredRuins_new02"
+     },
+     {
+      "room": "CharredRuins_new03"
+     },
+     {
+      "room": "FortressRuins_new01"
+     }
+    ]
    },
    {
     "location": "PlaceofMystery1"
@@ -2880,7 +3453,21 @@
    },
    {
     "location": "WoodFarm1",
-    "dungeon": true
+    "dungeon": true,
+    "rooms": [
+     {
+      "room": "woodfarm_farmhouse2",
+      "chance": 20
+     },
+     {
+      "room": "woodfarm_farmhouse3",
+      "chance": 20
+     },
+     {
+      "room": "woodfarm_tower",
+      "chance": 20
+     }
+    ]
    },
    {
     "location": "WoodHouse1",
@@ -2928,11 +3515,63 @@
    },
    {
     "location": "WoodVillage1",
-    "dungeon": true
+    "dungeon": true,
+    "rooms": [
+     {
+      "room": "meadowsvillage_greathallruin",
+      "chance": 33
+     },
+     {
+      "room": "meadowsvillage_house1",
+      "chance": 20
+     },
+     {
+      "room": "meadowsvillage_house2",
+      "chance": 20
+     },
+     {
+      "room": "meadowsvillage_longhouseruin",
+      "chance": 33
+     },
+     {
+      "room": "meadowsvillage_tower",
+      "chance": 33
+     },
+     {
+      "room": "meadowsvillage_towerruin",
+      "chance": 33
+     }
+    ]
    },
    {
     "location": "WoodVillage2",
-    "dungeon": true
+    "dungeon": true,
+    "rooms": [
+     {
+      "room": "meadowsvillage_greathallruin",
+      "chance": 33
+     },
+     {
+      "room": "meadowsvillage_house1",
+      "chance": 20
+     },
+     {
+      "room": "meadowsvillage_house2",
+      "chance": 20
+     },
+     {
+      "room": "meadowsvillage_longhouseruin",
+      "chance": 33
+     },
+     {
+      "room": "meadowsvillage_tower",
+      "chance": 33
+     },
+     {
+      "room": "meadowsvillage_towerruin",
+      "chance": 33
+     }
+    ]
    }
   ]
  },
@@ -3480,7 +4119,13 @@
   "locations": [
    {
     "location": "NorthVillage",
-    "dungeon": true
+    "dungeon": true,
+    "rooms": [
+     {
+      "room": "northvillage_turnipfield",
+      "chance": 100
+     }
+    ]
    }
   ]
  },
@@ -5503,7 +6148,13 @@
   "locations": [
    {
     "location": "NorthVillage",
-    "dungeon": true
+    "dungeon": true,
+    "rooms": [
+     {
+      "room": "northvillage_stable",
+      "chance": 93.8
+     }
+    ]
    }
   ]
  },
@@ -7429,11 +8080,21 @@
   "locations": [
    {
     "location": "GoblinCamp2",
-    "dungeon": true
+    "dungeon": true,
+    "rooms": [
+     {
+      "room": "gobvill_barley"
+     }
+    ]
    },
    {
     "location": "GoblinCamp2_1",
-    "dungeon": true
+    "dungeon": true,
+    "rooms": [
+     {
+      "room": "gobvill_barley"
+     }
+    ]
    }
   ]
  },
@@ -7540,11 +8201,31 @@
   "locations": [
    {
     "location": "GoblinCamp2",
-    "dungeon": true
+    "dungeon": true,
+    "rooms": [
+     {
+      "room": "gobvill_hut03",
+      "chance": 93.8
+     },
+     {
+      "room": "gobvill_refusepit",
+      "chance": 93.8
+     }
+    ]
    },
    {
     "location": "GoblinCamp2_1",
-    "dungeon": true
+    "dungeon": true,
+    "rooms": [
+     {
+      "room": "gobvill_hut03",
+      "chance": 93.8
+     },
+     {
+      "room": "gobvill_refusepit",
+      "chance": 93.8
+     }
+    ]
    },
    {
     "location": "GoblinHut03",
@@ -7552,7 +8233,13 @@
    },
    {
     "location": "WoodFarm1",
-    "dungeon": true
+    "dungeon": true,
+    "rooms": [
+     {
+      "room": "woodfarm_henpen",
+      "chance": 73.8
+     }
+    ]
    },
    {
     "location": "WoodHouse8",
@@ -7742,7 +8429,33 @@
   "locations": [
    {
     "location": "AshlandRuins",
-    "dungeon": true
+    "dungeon": true,
+    "rooms": [
+     {
+      "room": "CharredRuins15",
+      "chance": 96.9
+     },
+     {
+      "room": "CharredRuins_new01",
+      "chance": 96.5
+     },
+     {
+      "room": "CharredRuins_new02",
+      "chance": 73.8
+     },
+     {
+      "room": "CharredRuins_new03",
+      "chance": 83.2
+     },
+     {
+      "room": "CharredRuins_new04",
+      "chance": 97.2
+     },
+     {
+      "room": "CharredRuins_new05",
+      "chance": 99.9
+     }
+    ]
    },
    {
     "location": "CharredTowerRuins1",
@@ -7754,7 +8467,25 @@
    },
    {
     "location": "FortressRuins",
-    "dungeon": true
+    "dungeon": true,
+    "rooms": [
+     {
+      "room": "CharredRuins15",
+      "chance": 96.9
+     },
+     {
+      "room": "CharredRuins_new02",
+      "chance": 73.8
+     },
+     {
+      "room": "CharredRuins_new03",
+      "chance": 83.2
+     },
+     {
+      "room": "FortressRuins_new01",
+      "chance": 77.1
+     }
+    ]
    }
   ]
  },
@@ -7806,11 +8537,21 @@
   "locations": [
    {
     "location": "GoblinCamp2",
-    "dungeon": true
+    "dungeon": true,
+    "rooms": [
+     {
+      "room": "gobvill_flax"
+     }
+    ]
    },
    {
     "location": "GoblinCamp2_1",
-    "dungeon": true
+    "dungeon": true,
+    "rooms": [
+     {
+      "room": "gobvill_flax"
+     }
+    ]
    }
   ]
  },
@@ -8423,7 +9164,13 @@
    },
    {
     "location": "WoodFarm1",
-    "dungeon": true
+    "dungeon": true,
+    "rooms": [
+     {
+      "room": "woodfarm_outhouse",
+      "chance": 79.8
+     }
+    ]
    },
    {
     "location": "WoodHouse12",
@@ -8708,7 +9455,25 @@
   "locations": [
    {
     "location": "AshlandRuins",
-    "dungeon": true
+    "dungeon": true,
+    "rooms": [
+     {
+      "room": "CharredRuins_new02",
+      "chance": 91
+     },
+     {
+      "room": "CharredRuins_new03",
+      "chance": 79.8
+     },
+     {
+      "room": "CharredRuins_new04",
+      "chance": 98.2
+     },
+     {
+      "room": "CharredRuins_new05",
+      "chance": 100
+     }
+    ]
    },
    {
     "location": "CharredTowerRuins1",
@@ -8720,7 +9485,17 @@
    },
    {
     "location": "FortressRuins",
-    "dungeon": true
+    "dungeon": true,
+    "rooms": [
+     {
+      "room": "CharredRuins_new02",
+      "chance": 91
+     },
+     {
+      "room": "CharredRuins_new03",
+      "chance": 79.8
+     }
+    ]
    }
   ]
  },
@@ -9493,7 +10268,13 @@
    },
    {
     "location": "WoodFarm1",
-    "dungeon": true
+    "dungeon": true,
+    "rooms": [
+     {
+      "room": "woodfarm_turnipfield",
+      "chance": 95.3
+     }
+    ]
    }
   ]
  },
@@ -15498,11 +16279,63 @@
   "locations": [
    {
     "location": "GoblinCamp2",
-    "dungeon": true
+    "dungeon": true,
+    "rooms": [
+     {
+      "room": "gobvill_guardplatform",
+      "chance": 50
+     },
+     {
+      "room": "gobvill_guardtower",
+      "chance": 50
+     },
+     {
+      "room": "gobvill_hut03",
+      "chance": 50
+     },
+     {
+      "room": "gobvill_platform",
+      "chance": 50
+     },
+     {
+      "room": "gobvill_tent02",
+      "chance": 50
+     },
+     {
+      "room": "gobvill_tent1",
+      "chance": 50
+     }
+    ]
    },
    {
     "location": "GoblinCamp2_1",
-    "dungeon": true
+    "dungeon": true,
+    "rooms": [
+     {
+      "room": "gobvill_guardplatform",
+      "chance": 50
+     },
+     {
+      "room": "gobvill_guardtower",
+      "chance": 50
+     },
+     {
+      "room": "gobvill_hut03",
+      "chance": 50
+     },
+     {
+      "room": "gobvill_platform",
+      "chance": 50
+     },
+     {
+      "room": "gobvill_tent02",
+      "chance": 50
+     },
+     {
+      "room": "gobvill_tent1",
+      "chance": 50
+     }
+    ]
    },
    {
     "location": "GoblinHut03",
@@ -15542,11 +16375,43 @@
   "locations": [
    {
     "location": "GoblinCamp2",
-    "dungeon": true
+    "dungeon": true,
+    "rooms": [
+     {
+      "room": "gobvill_guardplatform",
+      "chance": 75
+     },
+     {
+      "room": "gobvill_guardtower",
+      "chance": 93.8
+     },
+     {
+      "room": "gobvill_woodwall"
+     },
+     {
+      "room": "gobvill_woodwall2"
+     }
+    ]
    },
    {
     "location": "GoblinCamp2_1",
-    "dungeon": true
+    "dungeon": true,
+    "rooms": [
+     {
+      "room": "gobvill_guardplatform",
+      "chance": 75
+     },
+     {
+      "room": "gobvill_guardtower",
+      "chance": 93.8
+     },
+     {
+      "room": "gobvill_woodwall"
+     },
+     {
+      "room": "gobvill_woodwall2"
+     }
+    ]
    },
    {
     "location": "StoneTower1"
@@ -15582,11 +16447,51 @@
   "locations": [
    {
     "location": "GoblinCamp2",
-    "dungeon": true
+    "dungeon": true,
+    "rooms": [
+     {
+      "room": "gobvill_guardplatform"
+     },
+     {
+      "room": "gobvill_guardtower"
+     },
+     {
+      "room": "gobvill_hut03"
+     },
+     {
+      "room": "gobvill_hut1"
+     },
+     {
+      "room": "gobvill_platform"
+     },
+     {
+      "room": "gobvill_tent02"
+     }
+    ]
    },
    {
     "location": "GoblinCamp2_1",
-    "dungeon": true
+    "dungeon": true,
+    "rooms": [
+     {
+      "room": "gobvill_guardplatform"
+     },
+     {
+      "room": "gobvill_guardtower"
+     },
+     {
+      "room": "gobvill_hut03"
+     },
+     {
+      "room": "gobvill_hut1"
+     },
+     {
+      "room": "gobvill_platform"
+     },
+     {
+      "room": "gobvill_tent02"
+     }
+    ]
    },
    {
     "location": "GoblinHut01"
@@ -15626,11 +16531,65 @@
   "locations": [
    {
     "location": "GoblinCamp2",
-    "dungeon": true
+    "dungeon": true,
+    "rooms": [
+     {
+      "room": "gobvill_guardplatform"
+     },
+     {
+      "room": "gobvill_guardtower"
+     },
+     {
+      "room": "gobvill_hut02"
+     },
+     {
+      "room": "gobvill_hut03"
+     },
+     {
+      "room": "gobvill_hut1",
+      "chance": 93.8
+     },
+     {
+      "room": "gobvill_platform"
+     },
+     {
+      "room": "gobvill_tent02"
+     },
+     {
+      "room": "gobvill_tent1"
+     }
+    ]
    },
    {
     "location": "GoblinCamp2_1",
-    "dungeon": true
+    "dungeon": true,
+    "rooms": [
+     {
+      "room": "gobvill_guardplatform"
+     },
+     {
+      "room": "gobvill_guardtower"
+     },
+     {
+      "room": "gobvill_hut02"
+     },
+     {
+      "room": "gobvill_hut03"
+     },
+     {
+      "room": "gobvill_hut1",
+      "chance": 93.8
+     },
+     {
+      "room": "gobvill_platform"
+     },
+     {
+      "room": "gobvill_tent02"
+     },
+     {
+      "room": "gobvill_tent1"
+     }
+    ]
    },
    {
     "location": "GoblinHut01",
@@ -15676,11 +16635,51 @@
   "locations": [
    {
     "location": "GoblinCamp2",
-    "dungeon": true
+    "dungeon": true,
+    "rooms": [
+     {
+      "room": "gobvill_guardplatform"
+     },
+     {
+      "room": "gobvill_guardtower"
+     },
+     {
+      "room": "gobvill_hut02"
+     },
+     {
+      "room": "gobvill_hut03"
+     },
+     {
+      "room": "gobvill_platform"
+     },
+     {
+      "room": "gobvill_tent1"
+     }
+    ]
    },
    {
     "location": "GoblinCamp2_1",
-    "dungeon": true
+    "dungeon": true,
+    "rooms": [
+     {
+      "room": "gobvill_guardplatform"
+     },
+     {
+      "room": "gobvill_guardtower"
+     },
+     {
+      "room": "gobvill_hut02"
+     },
+     {
+      "room": "gobvill_hut03"
+     },
+     {
+      "room": "gobvill_platform"
+     },
+     {
+      "room": "gobvill_tent1"
+     }
+    ]
    },
    {
     "location": "GoblinHut02"
@@ -15726,11 +16725,39 @@
   "locations": [
    {
     "location": "GoblinCamp2",
-    "dungeon": true
+    "dungeon": true,
+    "rooms": [
+     {
+      "room": "gobvill_hut02"
+     },
+     {
+      "room": "gobvill_hut03"
+     },
+     {
+      "room": "gobvill_hut1"
+     },
+     {
+      "room": "gobvill_tent02"
+     }
+    ]
    },
    {
     "location": "GoblinCamp2_1",
-    "dungeon": true
+    "dungeon": true,
+    "rooms": [
+     {
+      "room": "gobvill_hut02"
+     },
+     {
+      "room": "gobvill_hut03"
+     },
+     {
+      "room": "gobvill_hut1"
+     },
+     {
+      "room": "gobvill_tent02"
+     }
+    ]
    },
    {
     "location": "GoblinHut01"
@@ -15775,11 +16802,21 @@
   "locations": [
    {
     "location": "GoblinCamp2",
-    "dungeon": true
+    "dungeon": true,
+    "rooms": [
+     {
+      "room": "gobvill_hut02"
+     }
+    ]
    },
    {
     "location": "GoblinCamp2_1",
-    "dungeon": true
+    "dungeon": true,
+    "rooms": [
+     {
+      "room": "gobvill_hut02"
+     }
+    ]
    },
    {
     "location": "GoblinHut02"
@@ -15796,11 +16833,23 @@
   "locations": [
    {
     "location": "GoblinCamp2",
-    "dungeon": true
+    "dungeon": true,
+    "rooms": [
+     {
+      "room": "gobvill_bonfire",
+      "chance": 50
+     }
+    ]
    },
    {
     "location": "GoblinCamp2_1",
-    "dungeon": true
+    "dungeon": true,
+    "rooms": [
+     {
+      "room": "gobvill_bonfire",
+      "chance": 50
+     }
+    ]
    },
    {
     "location": "StoneTower1"
@@ -15888,11 +16937,51 @@
   "locations": [
    {
     "location": "GoblinCamp2",
-    "dungeon": true
+    "dungeon": true,
+    "rooms": [
+     {
+      "room": "gobvill_guardplatform"
+     },
+     {
+      "room": "gobvill_guardtower"
+     },
+     {
+      "room": "gobvill_hut02"
+     },
+     {
+      "room": "gobvill_hut03"
+     },
+     {
+      "room": "gobvill_hut1"
+     },
+     {
+      "room": "gobvill_platform"
+     }
+    ]
    },
    {
     "location": "GoblinCamp2_1",
-    "dungeon": true
+    "dungeon": true,
+    "rooms": [
+     {
+      "room": "gobvill_guardplatform"
+     },
+     {
+      "room": "gobvill_guardtower"
+     },
+     {
+      "room": "gobvill_hut02"
+     },
+     {
+      "room": "gobvill_hut03"
+     },
+     {
+      "room": "gobvill_hut1"
+     },
+     {
+      "room": "gobvill_platform"
+     }
+    ]
    },
    {
     "location": "GoblinHut01"
@@ -15941,11 +17030,45 @@
   "locations": [
    {
     "location": "GoblinCamp2",
-    "dungeon": true
+    "dungeon": true,
+    "rooms": [
+     {
+      "room": "gobvill_guardplatform"
+     },
+     {
+      "room": "gobvill_guardtower"
+     },
+     {
+      "room": "gobvill_hut02"
+     },
+     {
+      "room": "gobvill_hut03"
+     },
+     {
+      "room": "gobvill_hut1"
+     }
+    ]
    },
    {
     "location": "GoblinCamp2_1",
-    "dungeon": true
+    "dungeon": true,
+    "rooms": [
+     {
+      "room": "gobvill_guardplatform"
+     },
+     {
+      "room": "gobvill_guardtower"
+     },
+     {
+      "room": "gobvill_hut02"
+     },
+     {
+      "room": "gobvill_hut03"
+     },
+     {
+      "room": "gobvill_hut1"
+     }
+    ]
    },
    {
     "location": "GoblinHut01"
@@ -15988,11 +17111,49 @@
   "locations": [
    {
     "location": "GoblinCamp2",
-    "dungeon": true
+    "dungeon": true,
+    "rooms": [
+     {
+      "room": "gobvill_guardplatform",
+      "chance": 50
+     },
+     {
+      "room": "gobvill_hut02"
+     },
+     {
+      "room": "gobvill_hut03"
+     },
+     {
+      "room": "gobvill_hut1"
+     },
+     {
+      "room": "gobvill_tent1",
+      "chance": 50
+     }
+    ]
    },
    {
     "location": "GoblinCamp2_1",
-    "dungeon": true
+    "dungeon": true,
+    "rooms": [
+     {
+      "room": "gobvill_guardplatform",
+      "chance": 50
+     },
+     {
+      "room": "gobvill_hut02"
+     },
+     {
+      "room": "gobvill_hut03"
+     },
+     {
+      "room": "gobvill_hut1"
+     },
+     {
+      "room": "gobvill_tent1",
+      "chance": 50
+     }
+    ]
    },
    {
     "location": "GoblinHut01"
@@ -16749,7 +17910,13 @@
   "locations": [
    {
     "location": "NorthVillage",
-    "dungeon": true
+    "dungeon": true,
+    "rooms": [
+     {
+      "room": "northvillage_house2",
+      "chance": 50
+     }
+    ]
    }
   ]
  },
@@ -16772,7 +17939,13 @@
   "locations": [
    {
     "location": "NorthVillage",
-    "dungeon": true
+    "dungeon": true,
+    "rooms": [
+     {
+      "room": "northvillage_house1",
+      "chance": 50
+     }
+    ]
    },
    {
     "location": "TheHole01"
@@ -16798,7 +17971,16 @@
   "locations": [
    {
     "location": "NorthVillage",
-    "dungeon": true
+    "dungeon": true,
+    "rooms": [
+     {
+      "room": "northvillage_house1"
+     },
+     {
+      "room": "northvillage_house2",
+      "chance": 93.8
+     }
+    ]
    },
    {
     "location": "TheHole01"
@@ -16855,7 +18037,17 @@
   "locations": [
    {
     "location": "NorthVillage",
-    "dungeon": true
+    "dungeon": true,
+    "rooms": [
+     {
+      "room": "northvillage_house1",
+      "chance": 50
+     },
+     {
+      "room": "northvillage_house2",
+      "chance": 50
+     }
+    ]
    }
   ]
  },
@@ -16991,7 +18183,13 @@
   "locations": [
    {
     "location": "NorthVillage",
-    "dungeon": true
+    "dungeon": true,
+    "rooms": [
+     {
+      "room": "northvillage_house1",
+      "chance": 50
+     }
+    ]
    }
   ]
  },
@@ -17014,7 +18212,13 @@
   "locations": [
    {
     "location": "NorthVillage",
-    "dungeon": true
+    "dungeon": true,
+    "rooms": [
+     {
+      "room": "northvillage_house2",
+      "chance": 50
+     }
+    ]
    }
   ]
  },
@@ -17037,7 +18241,13 @@
   "locations": [
    {
     "location": "NorthVillage",
-    "dungeon": true
+    "dungeon": true,
+    "rooms": [
+     {
+      "room": "northvillage_house2",
+      "chance": 50
+     }
+    ]
    }
   ]
  },
@@ -17060,7 +18270,13 @@
   "locations": [
    {
     "location": "NorthVillage",
-    "dungeon": true
+    "dungeon": true,
+    "rooms": [
+     {
+      "room": "northvillage_house2",
+      "chance": 50
+     }
+    ]
    }
   ]
  },
@@ -17083,7 +18299,13 @@
   "locations": [
    {
     "location": "NorthVillage",
-    "dungeon": true
+    "dungeon": true,
+    "rooms": [
+     {
+      "room": "northvillage_house2",
+      "chance": 76
+     }
+    ]
    }
   ]
  },
@@ -17113,7 +18335,13 @@
   "locations": [
    {
     "location": "NorthVillage",
-    "dungeon": true
+    "dungeon": true,
+    "rooms": [
+     {
+      "room": "northvillage_house1",
+      "chance": 40
+     }
+    ]
    }
   ]
  },
@@ -17167,7 +18395,13 @@
   "locations": [
    {
     "location": "NorthVillage",
-    "dungeon": true
+    "dungeon": true,
+    "rooms": [
+     {
+      "room": "northvillage_house1",
+      "chance": 50
+     }
+    ]
    }
   ]
  },
@@ -17197,7 +18431,13 @@
   "locations": [
    {
     "location": "NorthVillage",
-    "dungeon": true
+    "dungeon": true,
+    "rooms": [
+     {
+      "room": "northvillage_house1",
+      "chance": 75
+     }
+    ]
    }
   ]
  },
@@ -17251,7 +18491,13 @@
   "locations": [
    {
     "location": "NorthVillage",
-    "dungeon": true
+    "dungeon": true,
+    "rooms": [
+     {
+      "room": "northvillage_house1",
+      "chance": 30
+     }
+    ]
    }
   ]
  },
@@ -17313,7 +18559,16 @@
   "locations": [
    {
     "location": "NorthVillage",
-    "dungeon": true
+    "dungeon": true,
+    "rooms": [
+     {
+      "room": "northvillage_house1"
+     },
+     {
+      "room": "northvillage_house2",
+      "chance": 50
+     }
+    ]
    }
   ]
  },
@@ -17358,7 +18613,13 @@
   "locations": [
    {
     "location": "NorthVillage",
-    "dungeon": true
+    "dungeon": true,
+    "rooms": [
+     {
+      "room": "northvillage_house1",
+      "chance": 93.8
+     }
+    ]
    }
   ]
  },
@@ -17381,7 +18642,13 @@
   "locations": [
    {
     "location": "NorthVillage",
-    "dungeon": true
+    "dungeon": true,
+    "rooms": [
+     {
+      "room": "northvillage_granary",
+      "chance": 50
+     }
+    ]
    }
   ]
  },
@@ -17407,7 +18674,13 @@
    },
    {
     "location": "NorthVillage",
-    "dungeon": true
+    "dungeon": true,
+    "rooms": [
+     {
+      "room": "northvillage_house1",
+      "chance": 50
+     }
+    ]
    }
   ]
  },
@@ -17430,7 +18703,13 @@
   "locations": [
    {
     "location": "NorthVillage",
-    "dungeon": true
+    "dungeon": true,
+    "rooms": [
+     {
+      "room": "northvillage_house2",
+      "chance": 50
+     }
+    ]
    }
   ]
  },
@@ -17456,7 +18735,13 @@
    },
    {
     "location": "NorthVillage",
-    "dungeon": true
+    "dungeon": true,
+    "rooms": [
+     {
+      "room": "northvillage_house1",
+      "chance": 50
+     }
+    ]
    }
   ]
  },
@@ -17479,7 +18764,13 @@
   "locations": [
    {
     "location": "NorthVillage",
-    "dungeon": true
+    "dungeon": true,
+    "rooms": [
+     {
+      "room": "northvillage_house2",
+      "chance": 50
+     }
+    ]
    }
   ]
  },
@@ -17527,7 +18818,13 @@
    },
    {
     "location": "NorthVillage",
-    "dungeon": true
+    "dungeon": true,
+    "rooms": [
+     {
+      "room": "northvillage_house1",
+      "chance": 50
+     }
+    ]
    }
   ]
  },
@@ -19435,7 +20732,12 @@
   "locations": [
    {
     "location": "NorthVillage",
-    "dungeon": true
+    "dungeon": true,
+    "rooms": [
+     {
+      "room": "northvillage_house2"
+     }
+    ]
    },
    {
     "location": "TheHole01"
@@ -19529,7 +20831,12 @@
   "locations": [
    {
     "location": "NorthVillage",
-    "dungeon": true
+    "dungeon": true,
+    "rooms": [
+     {
+      "room": "northvillage_granary"
+     }
+    ]
    }
   ]
  },
@@ -19629,7 +20936,12 @@
    },
    {
     "location": "FortressRuins",
-    "dungeon": true
+    "dungeon": true,
+    "rooms": [
+     {
+      "room": "FortressRuins_new01"
+     }
+    ]
    }
   ]
  },
@@ -20113,7 +21425,21 @@
    },
    {
     "location": "NorthVillage",
-    "dungeon": true
+    "dungeon": true,
+    "rooms": [
+     {
+      "room": "northvillage_granary"
+     },
+     {
+      "room": "northvillage_house1"
+     },
+     {
+      "room": "northvillage_house2"
+     },
+     {
+      "room": "northvillage_tower"
+     }
+    ]
    },
    {
     "location": "ShipSetting02",
@@ -20200,11 +21526,45 @@
   "locations": [
    {
     "location": "GoblinCamp2",
-    "dungeon": true
+    "dungeon": true,
+    "rooms": [
+     {
+      "room": "gobvill_crafting"
+     },
+     {
+      "room": "gobvill_hut02"
+     },
+     {
+      "room": "gobvill_hut03"
+     },
+     {
+      "room": "gobvill_tent02"
+     },
+     {
+      "room": "gobvill_tent1"
+     }
+    ]
    },
    {
     "location": "GoblinCamp2_1",
-    "dungeon": true
+    "dungeon": true,
+    "rooms": [
+     {
+      "room": "gobvill_crafting"
+     },
+     {
+      "room": "gobvill_hut02"
+     },
+     {
+      "room": "gobvill_hut03"
+     },
+     {
+      "room": "gobvill_tent02"
+     },
+     {
+      "room": "gobvill_tent1"
+     }
+    ]
    },
    {
     "location": "GoblinHut02",
@@ -20312,7 +21672,15 @@
   "locations": [
    {
     "location": "WoodFarm1",
-    "dungeon": true
+    "dungeon": true,
+    "rooms": [
+     {
+      "room": "woodfarm_farmhouse2"
+     },
+     {
+      "room": "woodfarm_farmhouse3"
+     }
+    ]
    },
    {
     "location": "WoodHouse1",
@@ -20344,11 +21712,41 @@
    },
    {
     "location": "WoodVillage1",
-    "dungeon": true
+    "dungeon": true,
+    "rooms": [
+     {
+      "room": "meadowsvillage_greathall",
+      "chance": 98.4
+     },
+     {
+      "room": "meadowsvillage_house1"
+     },
+     {
+      "room": "meadowsvillage_house2"
+     },
+     {
+      "room": "meadowsvillage_longhouse"
+     }
+    ]
    },
    {
     "location": "WoodVillage2",
-    "dungeon": true
+    "dungeon": true,
+    "rooms": [
+     {
+      "room": "meadowsvillage_greathall",
+      "chance": 98.4
+     },
+     {
+      "room": "meadowsvillage_house1"
+     },
+     {
+      "room": "meadowsvillage_house2"
+     },
+     {
+      "room": "meadowsvillage_longhouse"
+     }
+    ]
    }
   ]
  },
@@ -20972,11 +22370,21 @@
   "locations": [
    {
     "location": "WoodVillage1",
-    "dungeon": true
+    "dungeon": true,
+    "rooms": [
+     {
+      "room": "meadowsvillage_greathall"
+     }
+    ]
    },
    {
     "location": "WoodVillage2",
-    "dungeon": true
+    "dungeon": true,
+    "rooms": [
+     {
+      "room": "meadowsvillage_greathall"
+     }
+    ]
    }
   ]
  },
@@ -21462,11 +22870,21 @@
   "locations": [
    {
     "location": "WoodVillage1",
-    "dungeon": true
+    "dungeon": true,
+    "rooms": [
+     {
+      "room": "meadowsvillage_greathall"
+     }
+    ]
    },
    {
     "location": "WoodVillage2",
-    "dungeon": true
+    "dungeon": true,
+    "rooms": [
+     {
+      "room": "meadowsvillage_greathall"
+     }
+    ]
    }
   ]
  },
