@@ -5,11 +5,15 @@ the extractors' venv. Invented values only."""
 import importlib.util
 import json
 import math
+import os
 import tempfile
 import unittest
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
+# Kernels compiled here belong to a module loaded from a spec ('<dynamic>'); in the shared __pycache__ they would be
+# picked up by the script itself, which can't unpickle them. Give the tests their own numba cache.
+os.environ["NUMBA_CACHE_DIR"] = tempfile.mkdtemp(prefix="mimir-numba-")
 try:
     spec = importlib.util.spec_from_file_location("extract_renders", ROOT / "scripts/extract-renders.py")
     R = importlib.util.module_from_spec(spec)
