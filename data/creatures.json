@@ -29,7 +29,8 @@
     "item": "TrophyAbomination",
     "min": 1,
     "max": 1,
-    "chance": 0.5
+    "chance": 0.5,
+    "levelMultiplier": true
    },
    {
     "item": "Root",
@@ -81,7 +82,8 @@
     "item": "TrophyAsksvin",
     "min": 1,
     "max": 1,
-    "chance": 0.1
+    "chance": 0.1,
+    "levelMultiplier": true
    },
    {
     "item": "AskBladder",
@@ -494,7 +496,8 @@
     "item": "TrophyBarka",
     "min": 1,
     "max": 1,
-    "chance": 0.1
+    "chance": 0.1,
+    "levelMultiplier": true
    },
    {
     "item": "BarkaBranch",
@@ -653,7 +656,8 @@
     "item": "TrophyBjorn",
     "min": 1,
     "max": 1,
-    "chance": 0.1
+    "chance": 0.1,
+    "levelMultiplier": true
    }
   ],
   "avoidWater": true,
@@ -720,7 +724,8 @@
     "item": "TrophyBjorn",
     "min": 1,
     "max": 1,
-    "chance": 0.1
+    "chance": 0.1,
+    "levelMultiplier": true
    }
   ],
   "avoidWater": true,
@@ -806,7 +811,8 @@
     "item": "TrophyBlob",
     "min": 1,
     "max": 1,
-    "chance": 0.1
+    "chance": 0.1,
+    "levelMultiplier": true
    },
    {
     "item": "Ooze",
@@ -854,7 +860,8 @@
     "item": "TrophyBlob",
     "min": 1,
     "max": 1,
-    "chance": 0.1
+    "chance": 0.1,
+    "levelMultiplier": true
    },
    {
     "item": "Ooze",
@@ -918,7 +925,8 @@
     "item": "TrophyBlob",
     "min": 1,
     "max": 1,
-    "chance": 0.1
+    "chance": 0.1,
+    "levelMultiplier": true
    },
    {
     "item": "Blob",
@@ -973,7 +981,8 @@
     "item": "TrophyBlob_Frost",
     "min": 1,
     "max": 1,
-    "chance": 0.1
+    "chance": 0.1,
+    "levelMultiplier": true
    }
   ],
   "avoidWater": true,
@@ -1029,7 +1038,8 @@
     "item": "TrophyBlob_Lava",
     "min": 1,
     "max": 1,
-    "chance": 0.1
+    "chance": 0.1,
+    "levelMultiplier": true
    }
   ],
   "avoidWater": true,
@@ -1083,7 +1093,8 @@
     "item": "OozeMork",
     "min": 1,
     "max": 1,
-    "chance": 0.5
+    "chance": 0.5,
+    "levelMultiplier": true
    }
   ],
   "avoidWater": true,
@@ -1165,7 +1176,8 @@
     "item": "TrophyGrowth",
     "min": 1,
     "max": 1,
-    "chance": 0.1
+    "chance": 0.1,
+    "levelMultiplier": true
    },
    {
     "item": "Tar",
@@ -1223,7 +1235,8 @@
     "item": "TrophyBoar",
     "min": 1,
     "max": 1,
-    "chance": 0.15
+    "chance": 0.15,
+    "levelMultiplier": true
    }
   ],
   "tameable": {
@@ -1359,7 +1372,8 @@
     "item": "TrophyKvastur",
     "min": 1,
     "max": 1,
-    "chance": 1
+    "chance": 1,
+    "levelMultiplier": true
    }
   ],
   "avoidWater": true,
@@ -1404,7 +1418,8 @@
     "item": "TrophyBonemass",
     "min": 1,
     "max": 1,
-    "chance": 1
+    "chance": 1,
+    "levelMultiplier": true
    },
    {
     "item": "Wishbone",
@@ -1452,7 +1467,8 @@
     "item": "TrophyBonemawSerpent",
     "min": 1,
     "max": 1,
-    "chance": 0.33
+    "chance": 0.33,
+    "levelMultiplier": true
    },
    {
     "item": "BoneMawSerpentMeat",
@@ -1516,7 +1532,8 @@
     "item": "TrophyCharredArcher",
     "min": 1,
     "max": 1,
-    "chance": 0.05
+    "chance": 0.05,
+    "levelMultiplier": true
    }
   ],
   "avoidWater": true,
@@ -1606,7 +1623,8 @@
     "item": "TrophyCharredMage",
     "min": 1,
     "max": 1,
-    "chance": 0.05
+    "chance": 0.05,
+    "levelMultiplier": true
    }
   ],
   "avoidWater": true,
@@ -1659,7 +1677,8 @@
     "item": "TrophyCharredMelee",
     "min": 1,
     "max": 1,
-    "chance": 0.05
+    "chance": 0.05,
+    "levelMultiplier": true
    }
   ],
   "avoidWater": true,
@@ -1918,7 +1937,8 @@
     "item": "TrophyDeathsquito",
     "min": 1,
     "max": 1,
-    "chance": 0.05
+    "chance": 0.05,
+    "levelMultiplier": true
    }
   ],
   "avoidWater": true,
@@ -1965,7 +1985,8 @@
     "item": "TrophyDeer",
     "min": 1,
     "max": 1,
-    "chance": 0.5
+    "chance": 0.5,
+    "levelMultiplier": true
    }
   ],
   "afraidOfFire": true,
@@ -2007,7 +2028,8 @@
     "item": "TrophyDeerWhite",
     "min": 1,
     "max": 1,
-    "chance": 1
+    "chance": 1,
+    "levelMultiplier": true
    }
   ],
   "afraidOfFire": true,
@@ -2047,7 +2069,8 @@
     "item": "TrophyDragonQueen",
     "min": 1,
     "max": 1,
-    "chance": 1
+    "chance": 1,
+    "levelMultiplier": true
    },
    {
     "item": "DragonTear",
@@ -2101,7 +2124,8 @@
     "item": "TrophyDraugr",
     "min": 1,
     "max": 1,
-    "chance": 0.1
+    "chance": 0.1,
+    "levelMultiplier": true
    }
   ],
   "avoidWater": true,
@@ -2144,7 +2168,8 @@
     "item": "TrophyDraugrElite",
     "min": 1,
     "max": 1,
-    "chance": 0.1
+    "chance": 0.1,
+    "levelMultiplier": true
    }
   ],
   "avoidWater": true,
@@ -2187,7 +2212,8 @@
     "item": "TrophyDraugrElite",
     "min": 1,
     "max": 1,
-    "chance": 0.1
+    "chance": 0.1,
+    "levelMultiplier": true
    }
   ],
   "avoidWater": true,
@@ -2223,7 +2249,8 @@
     "item": "TrophyDraugr",
     "min": 1,
     "max": 1,
-    "chance": 0.1
+    "chance": 0.1,
+    "levelMultiplier": true
    }
   ],
   "avoidWater": true,
@@ -2266,7 +2293,8 @@
     "item": "TrophyDraugr",
     "min": 1,
     "max": 1,
-    "chance": 0.1
+    "chance": 0.1,
+    "levelMultiplier": true
    }
   ],
   "avoidWater": true,
@@ -2307,7 +2335,8 @@
     "item": "TrophyDraugr",
     "min": 1,
     "max": 1,
-    "chance": 0.1
+    "chance": 0.1,
+    "levelMultiplier": true
    }
   ],
   "avoidWater": true,
@@ -2361,7 +2390,8 @@
     "item": "TrophyDvergr",
     "min": 1,
     "max": 1,
-    "chance": 0.05
+    "chance": 0.05,
+    "levelMultiplier": true
    }
   ],
   "avoidWater": true,
@@ -2422,7 +2452,8 @@
     "item": "TrophyDvergr",
     "min": 1,
     "max": 1,
-    "chance": 0.05
+    "chance": 0.05,
+    "levelMultiplier": true
    }
   ],
   "avoidWater": true,
@@ -2573,7 +2604,8 @@
     "item": "TrophyDvergr",
     "min": 1,
     "max": 1,
-    "chance": 0.05
+    "chance": 0.05,
+    "levelMultiplier": true
    }
   ],
   "avoidWater": true,
@@ -2637,7 +2669,8 @@
     "item": "TrophyDvergr",
     "min": 1,
     "max": 1,
-    "chance": 0.05
+    "chance": 0.05,
+    "levelMultiplier": true
    }
   ],
   "avoidWater": true,
@@ -2694,7 +2727,8 @@
     "item": "TrophyDvergr",
     "min": 1,
     "max": 1,
-    "chance": 0.05
+    "chance": 0.05,
+    "levelMultiplier": true
    }
   ],
   "avoidWater": true,
@@ -2751,7 +2785,8 @@
     "item": "TrophyDvergr",
     "min": 1,
     "max": 1,
-    "chance": 0.05
+    "chance": 0.05,
+    "levelMultiplier": true
    }
   ],
   "avoidWater": true,
@@ -2840,7 +2875,8 @@
     "item": "TrophyEikthyr",
     "min": 1,
     "max": 1,
-    "chance": 1
+    "chance": 1,
+    "levelMultiplier": true
    },
    {
     "item": "HardAntler",
@@ -2892,7 +2928,8 @@
     "item": "TrophyElaking",
     "min": 1,
     "max": 1,
-    "chance": 0.1
+    "chance": 0.1,
+    "levelMultiplier": true
    },
    {
     "item": "MoldKeys",
@@ -2943,7 +2980,8 @@
     "item": "TrophyElaking",
     "min": 1,
     "max": 1,
-    "chance": 0.1
+    "chance": 0.1,
+    "levelMultiplier": true
    }
   ],
   "avoidWater": true,
@@ -2983,7 +3021,8 @@
     "item": "TrophyMole",
     "min": 1,
     "max": 1,
-    "chance": 0.1
+    "chance": 0.1,
+    "levelMultiplier": true
    },
    {
     "item": "MoleClaws",
@@ -3047,7 +3086,8 @@
     "item": "TrophyFader",
     "min": 1,
     "max": 1,
-    "chance": 1
+    "chance": 1,
+    "levelMultiplier": true
    },
    {
     "item": "FaderDrop",
@@ -3101,7 +3141,8 @@
     "item": "TrophyFallenValkyrie",
     "min": 1,
     "max": 1,
-    "chance": 0.05
+    "chance": 0.05,
+    "levelMultiplier": true
    }
   ],
   "avoidWater": true,
@@ -3219,7 +3260,8 @@
     "item": "TrophyFenring",
     "min": 1,
     "max": 1,
-    "chance": 0.1
+    "chance": 0.1,
+    "levelMultiplier": true
    }
   ],
   "avoidWater": true,
@@ -3265,7 +3307,8 @@
     "item": "TrophyCultist",
     "min": 1,
     "max": 1,
-    "chance": 0.1
+    "chance": 0.1,
+    "levelMultiplier": true
    }
   ],
   "avoidWater": true,
@@ -3313,7 +3356,8 @@
     "item": "TrophyCultist_Hildir",
     "min": 1,
     "max": 1,
-    "chance": 1
+    "chance": 1,
+    "levelMultiplier": true
    }
   ],
   "avoidWater": true,
@@ -3603,7 +3647,8 @@
     "item": "TrophyGhost",
     "min": 1,
     "max": 1,
-    "chance": 0.1
+    "chance": 0.1,
+    "levelMultiplier": true
    }
   ],
   "avoidWater": true,
@@ -3712,7 +3757,8 @@
     "item": "TrophyGhost",
     "min": 1,
     "max": 1,
-    "chance": 0.1
+    "chance": 0.1,
+    "levelMultiplier": true
    }
   ],
   "avoidWater": true,
@@ -3751,7 +3797,8 @@
     "item": "TrophyGjall",
     "min": 1,
     "max": 1,
-    "chance": 0.3
+    "chance": 0.3,
+    "levelMultiplier": true
    }
   ],
   "avoidWater": true,
@@ -3812,7 +3859,8 @@
     "item": "TrophyGoblin",
     "min": 1,
     "max": 1,
-    "chance": 0.1
+    "chance": 0.1,
+    "levelMultiplier": true
    }
   ],
   "avoidWater": true,
@@ -3870,7 +3918,8 @@
     "item": "TrophyGoblin",
     "min": 1,
     "max": 1,
-    "chance": 0.1
+    "chance": 0.1,
+    "levelMultiplier": true
    }
   ],
   "avoidWater": true,
@@ -3936,7 +3985,8 @@
     "item": "TrophyGoblinBrute",
     "min": 1,
     "max": 1,
-    "chance": 0.05
+    "chance": 0.05,
+    "levelMultiplier": true
    }
   ],
   "avoidWater": true,
@@ -3988,7 +4038,8 @@
     "item": "TrophyGoblinBruteBrosBrute",
     "min": 1,
     "max": 1,
-    "chance": 1
+    "chance": 1,
+    "levelMultiplier": true
    }
   ],
   "avoidWater": true,
@@ -4040,7 +4091,8 @@
     "item": "TrophyGoblinBruteBrosBrute",
     "min": 1,
     "max": 1,
-    "chance": 1
+    "chance": 1,
+    "levelMultiplier": true
    }
   ],
   "avoidWater": true,
@@ -4313,7 +4365,8 @@
     "item": "TrophyGoblinBruteBrosShaman",
     "min": 1,
     "max": 1,
-    "chance": 1
+    "chance": 1,
+    "levelMultiplier": true
    }
   ],
   "avoidWater": true,
@@ -4468,7 +4521,8 @@
     "item": "TrophyGreydwarf",
     "min": 1,
     "max": 1,
-    "chance": 0.05
+    "chance": 0.05,
+    "levelMultiplier": true
    }
   ],
   "avoidWater": true,
@@ -4541,7 +4595,8 @@
     "item": "TrophyGreydwarfBrute",
     "min": 1,
     "max": 1,
-    "chance": 0.1
+    "chance": 0.1,
+    "levelMultiplier": true
    }
   ],
   "avoidWater": true,
@@ -4676,7 +4731,8 @@
     "item": "TrophyGreydwarfShaman",
     "min": 1,
     "max": 1,
-    "chance": 0.1
+    "chance": 0.1,
+    "levelMultiplier": true
    },
    {
     "item": "Pukeberries",
@@ -4844,7 +4900,8 @@
     "item": "TrophyHare",
     "min": 1,
     "max": 1,
-    "chance": 0.05
+    "chance": 0.05,
+    "levelMultiplier": true
    }
   ],
   "afraidOfFire": true,
@@ -4883,7 +4940,8 @@
     "item": "TrophyHatchling",
     "min": 1,
     "max": 1,
-    "chance": 0.1
+    "chance": 0.1,
+    "levelMultiplier": true
    },
    {
     "item": "FreezeGland",
@@ -5080,7 +5138,8 @@
     "item": "TrophyJotunWarrior",
     "min": 1,
     "max": 1,
-    "chance": 0.1
+    "chance": 0.1,
+    "levelMultiplier": true
    },
    {
     "item": "Leatherstraps",
@@ -5190,7 +5249,8 @@
     "item": "TrophyJotunWarrior",
     "min": 1,
     "max": 1,
-    "chance": 0.1
+    "chance": 0.1,
+    "levelMultiplier": true
    },
    {
     "item": "Leatherstraps",
@@ -5270,7 +5330,8 @@
     "item": "TrophyJotunWitch",
     "min": 1,
     "max": 1,
-    "chance": 0.1
+    "chance": 0.1,
+    "levelMultiplier": true
    },
    {
     "item": "BloodGoldKey",
@@ -5337,7 +5398,8 @@
     "item": "TrophyLeech",
     "min": 1,
     "max": 1,
-    "chance": 0.1
+    "chance": 0.1,
+    "levelMultiplier": true
    },
    {
     "item": "Bloodbag",
@@ -5429,7 +5491,8 @@
     "item": "TrophyLox",
     "min": 1,
     "max": 1,
-    "chance": 0.1
+    "chance": 0.1,
+    "levelMultiplier": true
    },
    {
     "item": "LoxPelt",
@@ -5565,7 +5628,8 @@
     "item": "TrophyMoose",
     "min": 1,
     "max": 1,
-    "chance": 0.1
+    "chance": 0.1,
+    "levelMultiplier": true
    },
    {
     "item": "MooseHide",
@@ -5724,7 +5788,8 @@
     "item": "TrophyMorgen",
     "min": 1,
     "max": 1,
-    "chance": 0.05
+    "chance": 0.05,
+    "levelMultiplier": true
    }
   ],
   "avoidWater": true,
@@ -5784,7 +5849,8 @@
     "item": "TrophyMorgen",
     "min": 1,
     "max": 1,
-    "chance": 0.05
+    "chance": 0.05,
+    "levelMultiplier": true
    }
   ],
   "avoidWater": true,
@@ -5829,7 +5895,8 @@
     "item": "TrophyNeck",
     "min": 1,
     "max": 1,
-    "chance": 0.05
+    "chance": 0.05,
+    "levelMultiplier": true
    }
   ],
   "afraidOfFire": true,
@@ -5870,7 +5937,8 @@
     "item": "TrophySeal",
     "min": 1,
     "max": 1,
-    "chance": 0.1
+    "chance": 0.1,
+    "levelMultiplier": true
    },
    {
     "item": "SealBlubber",
@@ -5971,7 +6039,8 @@
     "item": "TrophySeeker",
     "min": 1,
     "max": 1,
-    "chance": 0.05
+    "chance": 0.05,
+    "levelMultiplier": true
    }
   ],
   "avoidWater": true,
@@ -6066,7 +6135,8 @@
     "item": "TrophySeekerBrute",
     "min": 1,
     "max": 1,
-    "chance": 0.05
+    "chance": 0.05,
+    "levelMultiplier": true
    },
    {
     "item": "Mandible",
@@ -6117,7 +6187,8 @@
     "item": "TrophySeekerQueen",
     "min": 1,
     "max": 1,
-    "chance": 1
+    "chance": 1,
+    "levelMultiplier": true
    },
    {
     "item": "QueenDrop",
@@ -6164,7 +6235,8 @@
     "item": "TrophySerpent",
     "min": 1,
     "max": 1,
-    "chance": 0.33
+    "chance": 0.33,
+    "levelMultiplier": true
    },
    {
     "item": "SerpentMeat",
@@ -6272,7 +6344,8 @@
     "item": "TrophySkeleton",
     "min": 1,
     "max": 1,
-    "chance": 0.1
+    "chance": 0.1,
+    "levelMultiplier": true
    },
    {
     "item": "BoneFragments",
@@ -6322,7 +6395,8 @@
     "item": "TrophySkeleton",
     "min": 1,
     "max": 1,
-    "chance": 0.1
+    "chance": 0.1,
+    "levelMultiplier": true
    },
    {
     "item": "BoneFragments",
@@ -6426,7 +6500,8 @@
     "item": "TrophySkeletonHildir",
     "min": 1,
     "max": 1,
-    "chance": 1
+    "chance": 1,
+    "levelMultiplier": true
    }
   ],
   "avoidWater": true,
@@ -6525,7 +6600,8 @@
     "item": "TrophySkeleton",
     "min": 1,
     "max": 1,
-    "chance": 0.1
+    "chance": 0.1,
+    "levelMultiplier": true
    },
    {
     "item": "BoneFragments",
@@ -6640,7 +6716,8 @@
     "item": "TrophySkeleton",
     "min": 1,
     "max": 1,
-    "chance": 0.1
+    "chance": 0.1,
+    "levelMultiplier": true
    },
    {
     "item": "BoneFragments",
@@ -6690,7 +6767,8 @@
     "item": "TrophySkeleton",
     "min": 1,
     "max": 1,
-    "chance": 0.1
+    "chance": 0.1,
+    "levelMultiplier": true
    },
    {
     "item": "BoneFragments",
@@ -6733,7 +6811,8 @@
     "item": "TrophySkeleton",
     "min": 1,
     "max": 1,
-    "chance": 0.1
+    "chance": 0.1,
+    "levelMultiplier": true
    },
    {
     "item": "BoneFragments",
@@ -6772,7 +6851,8 @@
     "item": "TrophySkeletonPoison",
     "min": 1,
     "max": 1,
-    "chance": 0.1
+    "chance": 0.1,
+    "levelMultiplier": true
    },
    {
     "item": "BoneFragments",
@@ -6823,7 +6903,8 @@
     "item": "TrophySkeleton",
     "min": 1,
     "max": 1,
-    "chance": 0.1
+    "chance": 0.1,
+    "levelMultiplier": true
    },
    {
     "item": "BoneFragments",
@@ -6873,7 +6954,8 @@
     "item": "TrophySkeleton",
     "min": 1,
     "max": 1,
-    "chance": 0.1
+    "chance": 0.1,
+    "levelMultiplier": true
    },
    {
     "item": "BoneFragments",
@@ -6917,7 +6999,8 @@
     "item": "TrophySkeleton",
     "min": 1,
     "max": 1,
-    "chance": 0.1
+    "chance": 0.1,
+    "levelMultiplier": true
    },
    {
     "item": "BoneFragments",
@@ -6975,7 +7058,8 @@
     "item": "TrophySGolem",
     "min": 1,
     "max": 1,
-    "chance": 0.05
+    "chance": 0.05,
+    "levelMultiplier": true
    },
    {
     "item": "Stone",
@@ -7042,7 +7126,8 @@
     "item": "TrophySurtling",
     "min": 1,
     "max": 1,
-    "chance": 0.05
+    "chance": 0.05,
+    "levelMultiplier": true
    }
   ],
   "avoidWater": true,
@@ -7251,7 +7336,8 @@
     "item": "TrophyTick",
     "min": 1,
     "max": 1,
-    "chance": 0.05
+    "chance": 0.05,
+    "levelMultiplier": true
    }
   ],
   "avoidWater": true,
@@ -7333,7 +7419,8 @@
     "item": "TrophyFrostTroll",
     "min": 1,
     "max": 1,
-    "chance": 0.5
+    "chance": 0.5,
+    "levelMultiplier": true
    },
    {
     "item": "TrollHide",
@@ -7464,7 +7551,8 @@
     "item": "TrophyFrostTroll",
     "min": 1,
     "max": 1,
-    "chance": 0.5
+    "chance": 0.5,
+    "levelMultiplier": true
    },
    {
     "item": "TrollHide",
@@ -7508,7 +7596,8 @@
     "item": "TrophyUlv",
     "min": 1,
     "max": 1,
-    "chance": 0.1
+    "chance": 0.1,
+    "levelMultiplier": true
    }
   ],
   "avoidWater": true,
@@ -7622,7 +7711,8 @@
     "item": "TrophyVolture",
     "min": 1,
     "max": 1,
-    "chance": 0.1
+    "chance": 0.1,
+    "levelMultiplier": true
    },
    {
     "item": "VoltureMeat",
@@ -7679,7 +7769,8 @@
     "item": "TrophyWolf",
     "min": 1,
     "max": 1,
-    "chance": 0.1
+    "chance": 0.1,
+    "levelMultiplier": true
    },
    {
     "item": "WolfMeat",
@@ -7828,7 +7919,8 @@
     "item": "TrophyWraith",
     "min": 1,
     "max": 1,
-    "chance": 0.05
+    "chance": 0.05,
+    "levelMultiplier": true
    },
    {
     "item": "Chain",
@@ -7875,7 +7967,8 @@
     "item": "TrophyWrithan",
     "min": 1,
     "max": 1,
-    "chance": 0.1
+    "chance": 0.1,
+    "levelMultiplier": true
    },
    {
     "item": "WrithanRoots",
@@ -7924,7 +8017,8 @@
     "item": "TrophyTheElder",
     "min": 1,
     "max": 1,
-    "chance": 1
+    "chance": 1,
+    "levelMultiplier": true
    },
    {
     "item": "CryptKey",

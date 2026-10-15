@@ -1,8 +1,8 @@
 {
- "gameVersion": "1.0.17",
- "networkVersion": 40,
+ "gameVersion": "1.0.20",
+ "networkVersion": 41,
  "dumperVersion": "0.4.0",
- "steamBuildId": "25730807",
+ "steamBuildId": "25909431",
  "pieceTags": [
   "Misc.",
   "Crafting",
