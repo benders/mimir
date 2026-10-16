@@ -217,23 +217,59 @@ def source_name(s: dict) -> str:
     return pretty_id(s["id"])
 
 
-def source_places(s: dict) -> str:
-    """Where a source is found, as HTML: a fish's biomes, a trader's locations (with biomes), or a world source's
-    biomes, locations (dungeon rooms marked, long lists cut) and the pieces that plant or build it."""
+def biome_stage(b: str) -> int:
+    """A biome's progression stage index; Ocean (not a stage) counts as the first."""
+    return STAGES.index(b) if b in STAGES else 0
+
+
+def place_parts(s: dict) -> tuple[list[tuple[int, str]], list[tuple[int, str]]]:
+    """Where a source is found, as (stage, html) text parts and (stage, html) render thumbnails: a fish's biomes, a
+    trader's locations (with biomes), or a world source's biomes, locations (dungeon rooms marked, long lists cut) and
+    the pieces that plant or build it. A location's stage is its earliest biome's."""
     if s["kind"] == "trader":
-        return ", ".join(f"{esc(pretty_id(x['location']))} ({', '.join(biome_link(b) for b in x['biomes'])})"
-                         for x in s["locations"])
+        return [(LOCATION_STAGE.get(x["location"], 0),
+                 f"{esc(pretty_id(x['location']))} ({', '.join(biome_link(b) for b in x['biomes'])})")
+                for x in s["locations"]], []
+    places = [(biome_stage(b), biome_link(b)) for b in s.get("biomes", [])]
     if s["kind"] == "fishing":
-        return ", ".join(biome_link(b) for b in s.get("biomes", []))
-    places = [biome_link(b) for b in s.get("biomes", [])]
+        return places, []
     locs = list({(x["location"], bool(x.get("dungeon"))): x for x in s.get("locations", [])}.values())
-    shown = list(dict.fromkeys(h for x in locs[:4] for h in place_html(x)))  # Fuling village variants look alike
-    places += [h for h in shown if not h.startswith("<a")] + ([f"{len(locs) - 4} more locations"] if len(locs) > 4 else [])
+    locs.sort(key=lambda x: LOCATION_STAGE.get(x["location"], 0))  # the earliest shown when the list is cut
+    shown = list(dict.fromkeys((LOCATION_STAGE.get(x["location"], 0), h) for x in locs[:4]
+                               for h in place_html(x, LOCATION_STAGE.get(x["location"], 0))))  # Fuling villages look alike
+    places += [p for p in shown if not p[1].startswith("<a")]
+    if len(locs) > 4:
+        places.append((min(LOCATION_STAGE.get(x["location"], 0) for x in locs[4:]), f"{len(locs) - 4} more location{'s' if len(locs) > 5 else ''}"))
     if by := [p for p in s.get("placedBy", []) if has_page("piece", p)]:
         lured = all(PIECES[p].get("lures") for p in by)
-        places.append(("lured by " if lured else "planted or built: ") + ", ".join(link("piece", p) for p in by))
-    thumbs = "".join(h for h in shown if h.startswith("<a"))
-    return ", ".join(places) + (f'<div class="places">{thumbs}</div>' if thumbs else "")
+        places.append((min(stage_of("piece", p) for p in by),
+                       ("lured by " if lured else "planted or built: ") + ", ".join(link("piece", p) for p in by)))
+    return places, [p for p in shown if p[1].startswith("<a")]
+
+
+def staged_join(parts: list[tuple[int, str]]) -> str:
+    """Comma-separated (stage, html) parts, each past the reader's stage hidden with its comma. Sorted by stage so
+    the hidden ones trail (a hidden part never leaves a dangling comma)."""
+    out = ""
+    for n, (st, h) in enumerate(sorted(parts, key=lambda p: p[0])):
+        out += f'<span{stage_attr(st)}>{", " if n else ""}{h}</span>' if st else f'{", " if n else ""}{h}'
+    return out
+
+
+def source_places(s: dict) -> str:
+    places, thumbs = place_parts(s)
+    return staged_join(places) + (f'<div class="places">{"".join(h for _, h in thumbs)}</div>' if thumbs else "")
+
+
+def source_stage(s: dict) -> int:
+    """The earliest stage where a source is placed (its row's stage in Found in); a later stage of a multi-stage
+    object takes its first stage's. One placed nowhere we know (tree stumps, ruin pieces) could be anywhere: it
+    shows only with no filter."""
+    places, thumbs = place_parts(s)
+    if places or thumbs:
+        return min(st for st, _ in places + thumbs)
+    parent = next((p for p in SOURCES.values() if p.get("becomes") == s["id"]), None)
+    return source_stage(parent) if parent else len(STAGES) - 1
 
 
 # Locations named by players differently from their prefab (camps built by a DungeonGenerator)
@@ -244,18 +280,19 @@ def location_label(id_: str) -> str:
     return LOCATION_NAMES.get(id_) or pretty_id(id_)
 
 
-def thumb(path: str, label: str) -> str:
+def thumb(path: str, label: str, stage: int = 0) -> str:
     """A render (renders/<path>.webp) as a thumbnail linking to the full image, with its label under it."""
     used_renders.add(path)
     src = f'renders/{quote(path)}.webp'
-    return f'<a class="place" href="{src}"><img src="{src}" alt="" loading="lazy"><span>{label}</span></a>'
+    return (f'<a class="place" href="{src}"{stage_attr(stage)}><img src="{src}" alt="" loading="lazy">'
+            f'<span>{label}</span></a>')
 
 
 def chance_note(chance, title: str) -> str:
     return f' <span class="chance" title="{esc(title)}">({num(chance)}% of them)</span>'
 
 
-def place_html(x: dict) -> list[str]:
+def place_html(x: dict, stage: int = 0) -> list[str]:
     """A location a source or piece is in: its render as a thumbnail linking to the full image when there is one,
     the name, and the share of copies that have it (`chance`). In an outdoor camp, each room that holds it (`rooms`:
     the bonfire of a Fuling village), with the room's render and the share of copies of that room that have it;
@@ -266,12 +303,12 @@ def place_html(x: dict) -> list[str]:
             label = f'{esc(location_label(x["location"]))}: {esc(pretty_id(re.sub(r"^[a-z]+_", "", r["room"])))}'
             if "chance" in r:
                 label += chance_note(r["chance"], "Rolled per copy of this part of the camp: not every one has it")
-            out.append(thumb(f'rooms/{r["room"]}', label) if f'rooms/{r["room"]}' in HAVE_RENDERS else label)
+            out.append(thumb(f'rooms/{r["room"]}', label, stage) if f'rooms/{r["room"]}' in HAVE_RENDERS else label)
         return out
     name = esc(location_label(x["location"])) + (" dungeon" if x.get("dungeon") else "")
     if "chance" in x:
         name += chance_note(x["chance"], "Rolled when the location is placed: not every copy has it")
-    return [thumb(x["location"], name) if x["location"] in HAVE_RENDERS else name]
+    return [thumb(x["location"], name, stage) if x["location"] in HAVE_RENDERS else name]
 
 
 def biome_link(b: str) -> str:
@@ -562,6 +599,7 @@ BIOMES = {  # game progression order (creatures index)
     "Plains": "Plains", "Mistlands": "Mistlands", "AshLands": "Ashlands", "DeepNorth": "Deep North", "Ocean": "Ocean",
 }
 STAGES = ["Meadows", "BlackForest", "Swamp", "Mountain", "Plains", "Mistlands", "AshLands", "DeepNorth"]  # normalize.STAGES
+LOCATION_STAGE = {x["id"]: min((biome_stage(b) for b in x.get("biomes", [])), default=0) for x in LOCATIONS}  # earliest biome
 STAGE_KEY = "mimir-stage"  # localStorage: the last stage the reader wants to see (index into STAGES)
 PAGE_STAGE = {k: {} for k in KINDS}  # page id -> stage index; a merged page takes its earliest copy's
 for _kind, _coll in (("item", ITEMS), ("creature", CREATURES), ("piece", PIECES), ("effect", EFFECTS)):
@@ -587,7 +625,17 @@ def stage_css() -> str:
     later = [(m, s) for m in range(len(STAGES) - 1) for s in range(m + 1, len(STAGES))]
     hide = ",\n".join(f'html[data-max="{m}"] [data-stage="{s}"]' for m, s in later)
     show = ",\n".join(f'html[data-max="{m}"] p.spoiler[data-stage="{s}"]' for m, s in later)
-    return f"\n/* stage filter (#24), generated by build-site.py */\n{hide} {{ display: none; }}\n{show} {{ display: block; }}\n"
+    hint = ",\n".join(f'html[data-max="{m}"] p.stagehint[data-later="{s}"]' for m, s in later)
+    return (f"\n/* stage filter (#24), generated by build-site.py */\n{hide} {{ display: none; }}\n"
+            f"{show},\n{hint} {{ display: block; }}\n")
+
+
+def stage_hint(fragment: str, what: str) -> str:
+    """A note under staged HTML (a table), shown only while the filter hides some of it (data-later: the latest
+    data-stage in it)."""
+    last = max(map(int, re.findall(r'data-stage="(\d+)"', fragment)), default=0)
+    return (f'<p class="note stagehint" data-later="{last}">Some {what} are hidden: they come after the biome '
+            f'chosen in "Up to".</p>') if last else ""
 
 
 def biome_weights(cid: str, seen: frozenset = frozenset()) -> dict[str, float]:
@@ -687,11 +735,13 @@ def kv(rows) -> str:
     return '<dl class="kv">' + "".join(f"<dt>{esc(k)}</dt><dd>{v}</dd>" for k, v in rows) + "</dl>"
 
 
-def table(head, rows, cls="") -> str:
+def table(head, rows, cls="", stages=None) -> str:
+    """`stages`: a stage per row, hiding it past the reader's stage filter."""
     if not rows:
         return ""
     th = "".join(f"<th>{h}</th>" for h in head)
-    tr = "".join("<tr>" + "".join(f"<td>{c}</td>" for c in r) + "</tr>" for r in rows)
+    tr = "".join(f"<tr{stage_attr(stages[n]) if stages else ''}>" + "".join(f"<td>{c}</td>" for c in r) + "</tr>"
+                 for n, r in enumerate(rows))
     return f'<div class="tw"><table class="{cls}"><thead><tr>{th}</tr></thead><tbody>{tr}</tbody></table></div>'
 
 
@@ -1160,21 +1210,34 @@ def item_page(i: dict) -> None:
               for t, o in sold_by[i["id"]]]
     body += section("Sold by", table(["Trader", "Price", "After", "Where"], offers))
 
-    drops = [[link("creature", cid), drop_amount(d), pct(d.get("chance", 1))]
-             for cid, d in dropped_by[i["id"]]]
-    body += section("Dropped by", table(["Creature", "Amount", "Chance"], drops) +
-                    (f'<p class="note">Amounts and chances are for an unstarred creature: {mech_link("drops", "Drops")}.</p>'
-                     if drops else ""))
-    found = {}
+    found = {}  # (chance, stage, name, kind, amount, where): one row each, the surest first
+    drops = defaultdict(set)  # (creature page, amount, chance) -> biomes of its copies
+    for cid, d in dropped_by[i["id"]]:
+        drops[MERGED["creature"].get(cid, cid), drop_amount(d), d.get("chance", 1)] |= set(creature_biomes(cid))
+    for (cid, amount, chance), bs in drops.items():
+        where = staged_join([(biome_stage(b), biome_link(b)) for b in BIOMES if b in bs])
+        found.setdefault((chance, stage_of("creature", cid), name_of("creature", cid), "creature", amount,
+                          link("creature", cid), where), None)
+    rolled = False
     for s, amount in found_in[i["id"]]:
-        rolled = s.get("drops") and any(d["item"] == i["id"] for d in s["drops"].get("items", []))
-        chance = pct(mechanics.drop_table_has(s["drops"], i["id"])) if rolled else ""
-        found.setdefault((source_name(s), s["kind"], amount, chance, source_places(s)), None)
-    note = ('<p class="note">Chance: that one chest or object holds it (DropTable.GetDropListItems: the number of picks, '
-            'their weights, no item twice when the table says so). A percentage under a location is the share of its '
-            'copies that have the chest or object at all.</p>') if any(f[3] for f in found) else ""
-    body += section("Found in", table(["Source", "Kind", "Amount", "Chance", "Where"],
-                                      [[esc(n), esc(k), esc(a), c, w] for n, k, a, c, w in sorted(found)]) + note)
+        chance = 1
+        if s.get("drops") and any(d["item"] == i["id"] for d in s["drops"].get("items", [])):
+            chance, rolled = mechanics.drop_table_has(s["drops"], i["id"]), True
+        found.setdefault((chance, source_stage(s), source_name(s), s["kind"], amount, esc(source_name(s)),
+                          source_places(s)), None)
+    rows = sorted(found, key=lambda f: (-f[0], f[1], f[2], f[3], f[4]))
+    note = []  # (stage, text): hidden with the rows it explains
+    if creature_rows := [f[1] for f in rows if f[3] == "creature"]:
+        note.append((min(creature_rows),
+                     f'For creatures, amounts and chances are for an unstarred one: {mech_link("drops", "Drops")}.'))
+    if rolled:
+        note.append((0, 'For chests and objects, the chance that one holds it (DropTable.GetDropListItems: the number of '
+                    'picks, their weights, no item twice when the table says so). A percentage under a location is '
+                    'the share of its copies that have the chest or object at all.'))
+    tab = table(["Source", "Kind", "Amount", "Chance", "Where"],
+                [[src, esc(k), esc(a), pct(c), w] for c, _, _, k, a, src, w in rows], stages=[f[1] for f in rows])
+    body += section("Found in", tab + stage_hint(tab, "sources and places") +
+                    "".join(f'<p class="note"{stage_attr(st)}>{n}</p>' for st, n in note))
 
     used = [("item", r["item"], link("item", r["item"])) for r in used_in_recipe[i["id"]] if r.get("item")]
     used += [("piece", p["id"], link("piece", p["id"])) for p in used_in_piece[i["id"]]

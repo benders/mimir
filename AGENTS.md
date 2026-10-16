@@ -147,6 +147,9 @@ the room); underground dungeon entries don't. Containers, `Spawner_*` objects (t
 `location`/`dungeon` spawns) and creatures placed in `instances` are handled the same way.
 `placedBy` (pieces that plant/build it: Plant, Procreation, WispSpawner). The site's "Found in" shows a location's render
 as a thumbnail when one exists, and a Chance column (`mechanics.drop_table_has`: one roll of the drop table gives the item);
+it also holds creature drops (no separate "Dropped by"), surest first, and follows "Up to": a row takes its earliest place's
+stage (`build-site.source_stage`; a location's = its earliest biome's, unplaced sources only show unfiltered), later places
+in a row are hidden one by one, and a `stagehint` note says when anything is hidden;
 `build-site.LOCATION_NAMES` gives player names to camps (GoblinCamp2 → Fuling village). `reachable()` counts only placed sources
 (or a `becomes` stage of one); sources with none are not in the world (Meteorite rock, MushroomBlue pickable). Creatures that grow up from another have a `growup` spawn
 (`parent`). Pieces with no build menu that stand in a location or dungeon room (loot chests, ruin walls, props) have `locations`

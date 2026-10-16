@@ -97,7 +97,7 @@ class Site(unittest.TestCase):
         gem = (self.out / "items/Gem.html").read_text(encoding="utf-8")  # unresolved name, only in a chest
         self.assertIn("<h2>Found in</h2>", gem)
         self.assertIn("Strongbox", gem)
-        self.assertIn("Camp, Lair dungeon", gem)
+        self.assertIn('<span data-stage="2">Camp</span><span data-stage="3">, Lair dungeon</span>', gem)
         self.assertFalse((self.out / "items/Mystery.html").exists())
 
     def test_world_source_placement(self):
@@ -120,7 +120,7 @@ class Site(unittest.TestCase):
         self.assertIn("<th>Chance</th>", ore)
         self.assertIn("<td>1</td><td>100%</td>", ore)
         self.assertIn("<td>91.7%</td>", ore)
-        self.assertIn("<td>pick ×3</td><td></td>", ore)  # a pickable always gives it: no chance
+        self.assertIn("<td>pick ×3</td><td>100%</td>", ore)  # a pickable always gives it
         # share of the location's copies that have the object (RandomSpawn), and the camp room that holds it
         self.assertIn("Lair <span class=\"chance\"", ore)
         self.assertIn("(70% of them)", ore)
@@ -128,6 +128,21 @@ class Site(unittest.TestCase):
         self.assertIn("Village: Well", ore)
         self.assertNotIn('class="place"', ore)  # no renders given: no thumbnails
         self.assertFalse((self.out / "renders").exists())
+
+    def test_found_in_merges_drops_sorted_and_staged(self):
+        ore = (self.out / "items/Ore.html").read_text(encoding="utf-8")
+        self.assertNotIn("<h2>Dropped by</h2>", ore)  # creature drops are rows of Found in
+        found = re.search(r"<h2>Found in</h2>(.*?)</section>", ore, re.S).group(1)
+        chances = [float(c) for c in re.findall(r"<td>([\d.]+)%</td>", found)]
+        self.assertEqual(chances, sorted(chances, reverse=True))  # the surest first
+        self.assertEqual(found.count('href="creatures/Raider.html"'), 1)  # merged copies: one row
+        self.assertIn('<tr data-stage="3"><td>Crate</td>', found)  # only in the Lair (Mountain)
+        self.assertIn('<span data-stage="1">, <a href="biomes/BlackForest.html">', found)  # a later biome of a row
+        self.assertIn('<tr data-stage="7"><td>Gift</td>', found)  # placed nowhere known: only with no filter
+        self.assertIn('<p class="note stagehint" data-later="7">', found)
+        css = (self.out / "style.css").read_text(encoding="utf-8")
+        self.assertIn('html[data-max="3"] p.stagehint[data-later="4"]', css)
+        self.assertNotIn('p.stagehint[data-later="4"],\nhtml[data-max="4"]', css)
 
     def test_piece_found_in(self):
         bench = (self.out / "pieces/piece_bench.html").read_text(encoding="utf-8")  # world copy, placed in the Lair
@@ -302,7 +317,7 @@ class Site(unittest.TestCase):
         buckler = (self.out / "items/Buckler.html").read_text(encoding="utf-8")  # shield stats link to Blocking
         self.assertIn('href="mechanics/blocking.html"', buckler)
         self.assertIn("Test Buckler", (self.out / "mechanics/blocking.html").read_text(encoding="utf-8"))  # shields table
-        dropped = [f for f in items if "<h2>Dropped by</h2>" in f.read_text(encoding="utf-8")]
+        dropped = [f for f in items if "<td>creature</td>" in f.read_text(encoding="utf-8")]
         self.assertTrue(dropped)
         self.assertIn('href="mechanics/drops.html"', dropped[0].read_text(encoding="utf-8"))
         raider = (self.out / "creatures/Raider.html").read_text(encoding="utf-8")
@@ -486,8 +501,8 @@ class SiteRenders(unittest.TestCase):
 
     def test_thumbnails(self):
         ore = (self.out / "items/Ore.html").read_text(encoding="utf-8")
-        self.assertIn('<a class="place" href="renders/Lair.webp"><img src="renders/Lair.webp"', ore)
-        self.assertIn('<a class="place" href="renders/rooms/village_hut.webp">', ore)
+        self.assertIn('<a class="place" href="renders/Lair.webp" data-stage="3"><img src="renders/Lair.webp"', ore)
+        self.assertIn('<a class="place" href="renders/rooms/village_hut.webp" data-stage="3">', ore)
         self.assertRegex(ore, r'village_hut\.webp" alt="" loading="lazy"><span>Village: Hut <span class="chance"[^>]*>'
                               r'\(50% of them\)')
         self.assertIn("Village: Well", ore)  # no render: plain text
