@@ -407,6 +407,19 @@
     "requiredKey": "defeated_chief"
    }
   ],
+  "upgrades": [
+   {
+    "name": "Big Satchel",
+    "tooltip": "A roomy bag.",
+    "price": 500,
+    "requiredKey": "defeated_chief",
+    "buyKey": "satchel1",
+    "increment": {
+     "key": "invrows",
+     "amount": 1
+    }
+   }
+  ],
   "takes": [
    {
     "item": "Gem",

@@ -165,6 +165,9 @@ def main() -> int:
     check(sold["Haldor"].get("BeltStrength", {}).get("price", 0) > 0 and "Coins" in items, "Haldor sells Megingjord for coins")
     check({"FishingBait", "Thunderstone"} <= set(sold["Haldor"]) and "BarberKit" in sold["Hildir"]
           and "SpiceOceans" in sold["BogWitch"], "Haldor sells bait and thunderstones, Hildir the barber kit, the Bog Witch spices")
+    pockets = {u.get("name"): u for u in shops.get("Haldor", {}).get("upgrades", [])}
+    check(all((pockets.get(n) or {}).get("increment", {}).get("key") == "invrows" for n in ("Wider Pockets", "Deeper Pockets")),
+          "Haldor sells Wider and Deeper Pockets, each adding inventory rows")
     check(any(o.get("requiredKey") for o in sold["Hildir"].values()), "Hildir's offers unlock with global keys")
     mc = next((s for s in sources if s["id"] == "Pickable_MountainCaveRandom"), {})
     check("WolfClaw" in {x["item"] for x in mc.get("pickable", {}).get("oneOf", [])} and mc.get("locations"),

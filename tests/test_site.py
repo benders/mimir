@@ -391,6 +391,7 @@ class Site(unittest.TestCase):
         self.assertIn("1000–4000 m from the world centre", t)
         self.assertIn("removes the rest: one per world", t)  # unique
         self.assertIn('href="items/Charm.html"', t)  # what it sells
+        self.assertIn("<td>Big Satchel</td><td>Adds 1 inventory row (8 slots), once per character.</td>", t)  # upgrades
         charm = (self.out / "items/Charm.html").read_text(encoding="utf-8")
         self.assertIn('<a href="traders/Vendor.html">Old Vendor</a>', charm)  # Sold by links the trader
         self.assertIn('href="traders/Vendor.html"', (self.out / "biomes/Meadows.html").read_text(encoding="utf-8"))

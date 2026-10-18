@@ -150,7 +150,7 @@ TRANSLATIONS = {
     "item_ore": "Rustore", "item_ingot": "Ingot",
     "item_buckler": "Test Buckler",
     "item_sword": "Test Sword", "item_sword_desc": "Sharp <b>enough</b>.",
-    "item_helmet": "Pot Helm", "item_fish": "Glimfish", "item_pearl": "Moon Pearl", "item_javelin": "Test Javelin", "item_mace": "Mace", "item_longbow": "Longbow", "item_arbal": "Arbal", "item_dart": "Dart", "item_mead": "Fizz Mead", "item_coins": "Coins", "item_charm": "Lucky Charm", "npc_vendor": "Old Vendor",
+    "item_helmet": "Pot Helm", "item_fish": "Glimfish", "item_pearl": "Moon Pearl", "item_javelin": "Test Javelin", "item_mace": "Mace", "item_longbow": "Longbow", "item_arbal": "Arbal", "item_dart": "Dart", "item_mead": "Fizz Mead", "item_coins": "Coins", "item_charm": "Lucky Charm", "npc_vendor": "Old Vendor", "hud_satchel": "Big Satchel", "hud_satchel_tooltip": "A roomy bag.",
     "item_hammer": "Mallet", "item_shard": "Shard", "item_bite": "Bite",
     "enemy_raider": "Raider", "piece_bench": "Bench", **{f"tag_{k}": v for k, v in (  # build menu tags (Piece.UsageTagFlags)
         ("misc", "Misc."), ("crafting", "Crafting"), ("building", "Building"), ("floor", "Flooring"), ("wall", "Walls"),
@@ -472,7 +472,10 @@ def write_dump(raw: Path) -> Path:
         "instances": [{"prefab": "Raider_Ranged", "path": "Raider_Ranged"}]})
     dump("locations/Market.json", {"name": "Market", "components": [comp("Location", {}), comp("Trader", {
         **m(name="$npc_vendor"), "m_items": [m(prefab=R("Charm"), stack=2, price=50, requiredGlobalKey="defeated_chief"),
-                                             m(prefab=R("vfx_Poof"), stack=1, price=1, requiredGlobalKey="")],
+                                             m(prefab=R("vfx_Poof"), stack=1, price=1, requiredGlobalKey=""),
+                                             m(prefab=None, stack=1, price=500, requiredGlobalKey="defeated_chief",  # an upgrade
+                                               name="$hud_satchel", tooltip="$hud_satchel_tooltip", buyKey="satchel1",
+                                               incrementKey="invrows", incrementAmount=1)],
         "m_useItems": [m(prefab=R("Gem"), setsGlobalKey="Quest1", removesItem=True, dialog="")]},  # a quest hand-in
         path="Stall/Vendor")]})
     dump("anims/Player_animator.json", {"controller": "Player_animator", "triggers": {  # extract-anims.py

@@ -514,6 +514,9 @@ class Entities(FixtureCase):
         [t] = N.traders()  # the id is the last path segment; the item-less vfx entry is skipped
         self.assertEqual((t["id"], t["kind"], t["name"]), ("Vendor", "trader", "Old Vendor"))
         self.assertEqual(t["sells"], [{"item": "Charm", "stack": 2, "price": 50, "requiredKey": "defeated_chief"}])
+        self.assertEqual(t["upgrades"], [{"name": "Big Satchel", "tooltip": "A roomy bag.", "price": 500,  # no item, a buy key
+                                          "requiredKey": "defeated_chief", "buyKey": "satchel1",
+                                          "increment": {"key": "invrows", "amount": 1}}])
         self.assertEqual(t["locations"], [{"location": "Market", "biomes": ["Meadows"]}])
 
     def test_location_placement(self):

@@ -1493,8 +1493,10 @@ def fishing(spawn_list: list[dict]) -> list[dict]:
 def traders() -> list[dict]:
     """Traders (Trader component) standing in a world location, as sources of kind `trader`: what they `sell`
     (item, stack, price in coins, `requiredKey` global key that unlocks the offer), what they `take` (an item handed
-    over that `setsKey`, a global key: Hildir's quest chests; Trader.m_useItems) and the `locations` (with biomes)
-    they are found in. The id is the trader's name in the location prefab (Haldor, Hildir, BogWitch)."""
+    over that `setsKey`, a global key: Hildir's quest chests; Trader.m_useItems), the `upgrades` they sell (offers with
+    no item and an `m_buyKey`: Haldor's Wider/Deeper Pockets; StoreGui.OnBuyItem sets the player unique `buyKey`, so it
+    is bought once per character (Trader.GetAvailableItems), and adds `increment` {key, amount} to a player value,
+    "invrows" = inventory rows via Player.SetInventorySize) and the `locations` (with biomes) they are found in. The id is the trader's name in the location prefab (Haldor, Hildir, BogWitch)."""
     by = {}
     for name, bs, p, dungeon in placed_in_locations():
         for c in p["components"]:
@@ -1505,6 +1507,12 @@ def traders() -> list[dict]:
                               "sells": [{"item": ref(i["m_prefab"]), "stack": i["m_stack"], "price": i["m_price"],
                                          "requiredKey": i["m_requiredGlobalKey"]} for i in f["m_items"]
                                         if keep(ref(i["m_prefab"]), is_item)],
+                              "upgrades": [{"name": text(i.get("m_name")), "tooltip": text(i.get("m_tooltip")),
+                                            "price": i["m_price"], "requiredKey": i["m_requiredGlobalKey"],
+                                            "buyKey": i["m_buyKey"],
+                                            "increment": {"key": i["m_incrementKey"], "amount": i.get("m_incrementAmount", 1)}
+                                            if i.get("m_incrementKey") else None}
+                                           for i in f["m_items"] if not i.get("m_prefab") and i.get("m_buyKey")],
                               "takes": [{"item": ref(u["m_prefab"]), "setsKey": u["m_setsGlobalKey"]}
                                         for u in f.get("m_useItems") or [] if u.get("m_setsGlobalKey")],
                               "locations": []})

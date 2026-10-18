@@ -116,6 +116,8 @@ gain step per skill, death penalty factor, hard-death cooldown), `items`, `recip
 catch drops; fish spawn as `creature` ids in `spawns` but have no `creatures` entry;
 `kind: trader` = Haldor / Hildir / BogWitch (id = name in the location prefab): `sells` [{item, stack, price in Coins,
 `requiredKey` global key}], `takes` [{item, setsKey}] (quest hand-ins: Hildir's chests set `Hildir1`..3),
+`upgrades` [{name, tooltip, price, requiredKey, buyKey, increment {key, amount}}] (offers with no item: Haldor's
+Wider/Deeper Pockets, once per character, `invrows` = inventory rows; the trader page's Upgrades section),
 `locations` [{location, biomes}]; a source that `startsEvent` starts a persistent event when destroyed (Fimbulvinter orb)),
 `status_effects`, `locations` (every enabled world location with the `biomes` it is placed in and its `placement`:
 quantity, unique, prioritized, biomeArea, min/maxDistance from the centre (the tighter of m_min/maxDistance and m_min/maxDistanceFromCenter, both checked), minDistanceFromSimilar, iconPlaced), `raids` (RandEventSystem:

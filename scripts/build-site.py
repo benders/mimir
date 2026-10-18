@@ -1655,12 +1655,29 @@ def block_raid_base_pieces() -> str:
 TRADERS = [s for s in SOURCES.values() if s["kind"] == "trader"]
 TRADER_GOODS = {  # one sentence on what each sells; data-driven fallback for a new trader
     "Haldor": "Gear for travelling and exploring (Megingjord, the Dverger Circlet, a fishing rod and bait), rare "
-              "crafting materials such as Ymir Flesh and Thunder Stone, and the egg that starts a chicken coop.",
+              "crafting materials such as Ymir Flesh and Thunder Stone, the egg that starts a chicken coop, and two "
+              "pocket upgrades that each add a row to the inventory.",
     "Hildir": "Clothing and hats with no armor value, most unlocked by returning her three stolen chests, plus "
               "fireworks, sparklers and a barber kit.",
     "BogWitch": "Cooking ingredients, chiefly spice blends that unlock as each boss falls, with potion ingredients "
                 "and a few curios.",
 }
+
+
+INVENTORY_WIDTH = 8  # slots per inventory row (Humanoid.m_inventory = new Inventory("Inventory", null, 8, 4))
+
+
+def upgrade_effect(u: dict) -> str:
+    """What buying a trader upgrade does (StoreGui.OnBuyItem): its player value increment, once per character."""
+    inc = u.get("increment") or {}
+    n = inc.get("amount", 1)
+    if inc.get("key") == "invrows":
+        what = f"Adds {plural(n, 'inventory row')} ({num(n * INVENTORY_WIDTH)} slots)"
+    elif inc:
+        what = f"Adds {num(n)} to <code>{esc(inc['key'])}</code>"
+    else:
+        what = f"Sets <code>{esc(u['buyKey'])}</code>"
+    return what + ", once per character."
 
 
 def trader_href(s: dict) -> str:
@@ -1712,6 +1729,14 @@ def trader_page(s: dict) -> None:
         rows.append([link("item", o["item"]), num(o["stack"]) if o.get("stack", 1) > 1 else "",
                      link("item", "Coins", o["price"]), key_label(o["requiredKey"]) if o.get("requiredKey") else "always"])
     body += section("Sells", table(["Item", "Stack", "Price", "Available after"], rows))
+    ups = sorted(s.get("upgrades", []), key=lambda u: (key_stage(u.get("requiredKey") or ""), u.get("price", 0)))
+    body += section("Upgrades", table(["Upgrade", "Effect", "Price", "Available after"], [
+        [esc(u.get("name") or u["buyKey"]), upgrade_effect(u), link("item", "Coins", u["price"]),
+         key_label(u["requiredKey"]) if u.get("requiredKey") else "always"] for u in ups],
+        stages=[key_stage(u.get("requiredKey") or "") for u in ups]) + (
+        '<p class="note">An upgrade is no item: buying it sets a key on the character, which hides it from the '
+        'trader for good. Inventory rows are kept with the character and capped at 9 '
+        '(StoreGui.OnBuyItem, Trader.GetAvailableItems, Player.SetInventorySize).</p>' if ups else ""))
     body += section("Takes", table(["Item", "Unlocks"], [
         [link("item", t["item"]), f'{sum(1 for o in s.get("sells", []) if (o.get("requiredKey") or "").lower() == t["setsKey"].lower())} items '
                                   f'in the list above'] for t in s.get("takes", [])]))

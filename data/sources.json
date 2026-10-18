@@ -23886,6 +23886,30 @@
     "price": 100
    }
   ],
+  "upgrades": [
+   {
+    "name": "Wider Pockets",
+    "tooltip": "A convenient belt pouch to store your items.",
+    "price": 1000,
+    "requiredKey": "defeated_dragon",
+    "buyKey": "invslot1",
+    "increment": {
+     "key": "invrows",
+     "amount": 1
+    }
+   },
+   {
+    "name": "Deeper Pockets",
+    "tooltip": "A practical belt bag to store your items.",
+    "price": 2000,
+    "requiredKey": "defeated_queen",
+    "buyKey": "invslot2",
+    "increment": {
+     "key": "invrows",
+     "amount": 1
+    }
+   }
+  ],
   "locations": [
    {
     "location": "Vendor_BlackForest",
