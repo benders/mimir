@@ -29,6 +29,7 @@
   "faction": "ForestMonsters",
   "boss": true,
   "health": 1200,
+  "regenTime": 1800,
   "damageModifiers": {
    "frost": "Resistant",
    "spirit": "Immune"

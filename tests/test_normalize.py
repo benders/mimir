@@ -184,6 +184,11 @@ class Entities(FixtureCase):
         self.assertIn("vfx_Poof", N.skipped_refs)
         self.assertEqual(c["tameable"]["food"], ["Fish"])
 
+    def test_creature_regen_time_only_when_not_default(self):
+        self.assertIsNone(N.creature("Chief", N.PREFABS["Chief"])["regenTime"])
+        self.assertEqual(N.creature("Chief_p2", N.PREFABS["Chief_p2"])["regenTime"], 1800)
+        self.assertEqual(N.player()["dayLength"], 600)
+
     def test_player_is_not_a_creature(self):
         self.assertIsNone(N.creature("Player", N.PREFABS["Player"]))
         self.assertFalse(N.is_creature("Player"))

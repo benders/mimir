@@ -608,6 +608,7 @@
   "faction": "ForestMonsters",
   "group": "bjorn",
   "health": 500,
+  "regenTime": 3000,
   "damageModifiers": {
    "blunt": "Resistant",
    "pierce": "Resistant",
@@ -676,6 +677,7 @@
   "faction": "ForestMonsters",
   "group": "bjorn",
   "health": 500,
+  "regenTime": 3000,
   "damageModifiers": {
    "blunt": "Resistant",
    "pierce": "Resistant",
@@ -742,6 +744,7 @@
   "id": "Bjorn_spiritcaller",
   "faction": "Players",
   "health": 1500,
+  "regenTime": 3000,
   "damageModifiers": {
    "blunt": "Resistant",
    "pierce": "Resistant",
@@ -3502,6 +3505,7 @@
   "faction": "Boss",
   "boss": true,
   "health": 7000,
+  "regenTime": 3.6e+16,
   "damageModifiers": {
    "blunt": "Immune",
    "slash": "Immune",
@@ -7616,6 +7620,7 @@
   "faction": "PlainsMonsters",
   "group": "bjorn",
   "health": 1200,
+  "regenTime": 3000,
   "damageModifiers": {
    "blunt": "Resistant",
    "slash": "Resistant",
@@ -8043,6 +8048,7 @@
   "name": "T.W.I.G.",
   "faction": "TrainingDummy",
   "health": 2500,
+  "regenTime": 30,
   "attacks": [
    "TrainingDummy_attack",
    "TrainingDummy_attack2",

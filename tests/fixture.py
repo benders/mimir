@@ -67,7 +67,7 @@ def item(name, /, **kw):
 
 def character(type_="Humanoid", **kw):
     return comp(type_, {**m(
-        name="", faction="ForestMonsters", group="", boss=False, defeatSetGlobalKey="", health=100,
+        name="", faction="ForestMonsters", group="", boss=False, defeatSetGlobalKey="", health=100, regenAllHPTime=3600,
         damageModifiers={**{f"m_{k}": "Normal" for k in ("blunt", "slash", "pierce", "fire", "frost", "poison")},
                          "m_spirit": "Immune"},  # most creatures, as in the game
         walkSpeed=2, runSpeed=5, swimSpeed=2, canSwim=True, flyFastSpeed=0, flying=False, defaultItems=[],
@@ -242,7 +242,7 @@ def prefabs():
         prefab("Chief", character(name="$enemy_chief", health=900, boss=True, deathEffects={"m_effectPrefabs": [
             {"m_prefab": R("vfx_Poof")}, {"m_prefab": R("Chief_p2")},
             {"m_prefab": R("ChiefBurst")}]})),  # second phase: made when it dies; a burst that spawns a Shade
-        prefab("Chief_p2", character(name="$enemy_chief_p2", health=1200, boss=True,
+        prefab("Chief_p2", character(name="$enemy_chief_p2", health=1200, boss=True, regenAllHPTime=1800,
                                         damageModifiers={"m_frost": "Resistant", "m_spirit": "Immune"})),
         prefab("Imp", character(name="$enemy_imp", health=30)),  # only summoned, by the Rod
         item("Rod", name="$item_rod", itemType="OneHandedWeapon", icons=[S("Rod")],
@@ -420,6 +420,7 @@ def write_dump(raw: Path) -> Path:
         event("army_off", "Meadows", spawner("Pup"), enabled=False),
         event("boss_chief", "Meadows", random=False),  # a boss fight's music, not a raid
     ]}}])
+    dump("world/EnvMan.json", [{"name": "_GameMain", "type": "EnvMan", "fields": {"m_dayLengthSec": 600}}])
     dump("world/ZoneSystem.json", [{"name": "_GameMain", "type": "ZoneSystem", "fields": {"m_altBiomeLists": [{"$ref": "AltBiomes_Test", "component": "AltBiomeList"}], "m_vegetation": [
         m(prefab=R("Root"), enable=True, biome="Mountain"), m(prefab=R("Root"), enable=True, biome="Swamp", name="root_swamp"),
         m(prefab=R("Root"), enable=False, biome="Plains"), m(prefab=R("Root2"), enable=False, biome="Plains"),

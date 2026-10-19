@@ -1260,6 +1260,9 @@ def creature_page(c: dict) -> None:
              ("Health", num(c["health"])),
              ("Stars", f'health ×(1 + stars), damage ×(1 + 0.5 × stars): {mech_link("creature-levels", "Creature levels")}'
               if not c.get("boss") else None),
+             ("Regenerates", ("never" if regen_full(c) == "never" else
+                              f'all its health in {regen_full(c)} of world time, also while away or asleep')
+              + f': {mech_link("healing", "Creature healing")}' if c.get("boss") else None),
              ("Speed", ", ".join(f"{k} {num(v)}" for k, v in sp.items())),
              ("Tameable", "yes" if c.get("tameable") else None),
              ("Afraid of fire", "yes" if c.get("afraidOfFire") else None),
@@ -1957,6 +1960,49 @@ def block_frost_resistant() -> str:
     return table(["Creature", "Frost", "Damage"], rows, "num")
 
 
+def regen_full(c: dict) -> str:
+    """How long a creature takes to regenerate from 0 to full health: m_regenAllHPTime."""
+    t = c.get("regenTime") or mechanics.REGEN_TIME
+    return ("never" if t > 1e9 else f"{num(round(t / 3600, 1))} h" if t >= 3600
+            else f"{num(round(t / 60, 1))} min" if t >= 60 else f"{num(t)} s")
+
+
+def regen_rows(cs: list[dict], sleeps: bool) -> list[list[str]]:
+    day = PLAYER.get("dayLength", 0)
+    rows = []
+    for c in sorted(cs, key=lambda c: (stage_of("creature", c["id"]), c["health"], c["id"])):
+        rate = mechanics.regen_rate(c["health"], c.get("regenTime"))
+        row = [link("creature", c["id"]), num(c["health"]), num(round(rate, 2)), regen_full(c)]
+        if sleeps:
+            row += [num(round(mechanics.regen_over(c["health"], mechanics.sleep_skip(b, day), c.get("regenTime"))))
+                    for b in (mechanics.AFTERNOON, mechanics.DUSK)]
+        rows.append(row)
+    return rows
+
+
+def block_regen_bosses() -> str:
+    """Bosses and their phases: health regained per second, and over the longest and a dusk-to-morning sleep."""
+    cs = [c for c in CREATURES.values() if c.get("boss") and has_page("creature", c["id"])]
+    return table(["Boss", "Health", "Per second", "Full again in", "Sleep from afternoon", "Sleep from dusk"],
+                 regen_rows(cs, True), "num")
+
+
+def block_regen_other() -> str:
+    """Creatures that aren't bosses whose m_regenAllHPTime isn't the code default."""
+    cs = [c for c in CREATURES.values() if c.get("regenTime") and not c.get("boss") and has_page("creature", c["id"])]
+    return table(["Creature", "Health", "Per second", "Full again in"], regen_rows(cs, False), "num")
+
+
+def block_sleep_skip() -> str:
+    """World time a sleep skips, by bedtime (EnvMan.SkipToMorning), and the share of health that is regenerated."""
+    day = PLAYER.get("dayLength", 0)
+    rows = [[label, f"{num(round(mechanics.sleep_skip(b, day)))} s",
+             pct(mechanics.regen_over(1, mechanics.sleep_skip(b, day)))]
+            for label, b in (("Afternoon (earliest)", mechanics.AFTERNOON), ("Dusk", mechanics.DUSK),
+                             ("Midnight", 0.0))]
+    return table(["Bedtime", "World time skipped", "Health regenerated"], rows, "num")
+
+
 def block_star_spawns() -> str:
     """The highest star count each creature can spawn with, from its spawn entries (spawn data holds levels)."""
     top = {}
@@ -2373,6 +2419,7 @@ def mech_blocks() -> dict:
             "forge-items": block_forge_items,
             "frost-weapons": block_frost_weapons, "frost-weak": block_frost_weak,
             "frost-resistant": block_frost_resistant,
+            "regen-bosses": block_regen_bosses, "regen-other": block_regen_other, "sleep-skip": block_sleep_skip,
             "frost-chart": lambda: mechanics.frost_chart(FROST_MULT, FROST_MIN),
             "adrenaline-chart": lambda: mechanics.adrenaline_chart(PLAYER["adrenaline"]),
             "chart": lambda name: mechanics.CHARTS[name]()}

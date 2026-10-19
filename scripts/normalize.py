@@ -769,6 +769,9 @@ def carried_items(c: dict) -> set[str]:
     return {a for a in carried if keep(a, is_item)}
 
 
+REGEN_TIME = 3600  # Character.m_regenAllHPTime code default: seconds a creature takes to regenerate all its health
+
+
 def creature(name: str, p: dict) -> dict | None:
     c = comp(p, "Humanoid") or comp(p, "Character")
     if c is None or has(p, "Player"):
@@ -791,6 +794,8 @@ def creature(name: str, p: dict) -> dict | None:
         "boss": c["m_boss"],
         "defeatKey": c.get("m_defeatSetGlobalKey"),
         "health": c["m_health"],
+        # BaseAI.UpdateRegeneration heals max health / this per second of world time; omitted at the code default
+        "regenTime": c["m_regenAllHPTime"] if c.get("m_regenAllHPTime", REGEN_TIME) != REGEN_TIME else None,
         "damageModifiers": modifiers(c["m_damageModifiers"]),
         "speed": {"walk": c["m_walkSpeed"], "run": c["m_runSpeed"], "swim": c["m_swimSpeed"] if c["m_canSwim"] else 0,
                   "fly": c["m_flyFastSpeed"] if c["m_flying"] else 0},
@@ -1679,7 +1684,14 @@ def player() -> dict:
         "food": {"baseHealth": g("m_baseHP"), "baseStamina": g("m_baseStamina")},
         "rested": rested_constants(),
         "skills": skill_constants(g("m_hardDeathCooldown")),
+        "dayLength": day_length(),
     }
+
+
+def day_length() -> float:
+    """EnvMan.m_dayLengthSec: seconds of world time per day (sleeping skips part of one, EnvMan.SkipToMorning)."""
+    f = RAW / "world/EnvMan.json"
+    return load("world/EnvMan.json")[0]["fields"].get("m_dayLengthSec", 0) if f.is_file() else 0
 
 
 def rested_constants() -> dict:

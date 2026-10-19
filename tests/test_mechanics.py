@@ -104,6 +104,17 @@ class Formulas(unittest.TestCase):
         self.assertTrue(o("Weak", "Resistant"))
         self.assertTrue(o("Immune", "Resistant"))  # order dependent, as the code is
 
+    def test_regen_and_sleep(self):
+        # BaseAI.UpdateRegeneration: max health / m_regenAllHPTime per world second
+        self.assertAlmostEqual(M.regen_rate(5000), 5000 / 3600)
+        self.assertEqual(M.regen_rate(300, 30), 10)
+        # EnvMan.SkipToMorning: to 0.15 of the next day, or of this one when still before it
+        self.assertAlmostEqual(M.sleep_skip(0.5, 1800), 1170)
+        self.assertAlmostEqual(M.sleep_skip(0.85, 1800), 540)
+        self.assertAlmostEqual(M.sleep_skip(0.1, 1800), 90)
+        self.assertEqual(M.regen_over(100, 1e9), 100)
+        self.assertAlmostEqual(M.regen_over(3600, 1170), 1170)
+
     def test_frost(self):
         # SE_Frost.AddDamage: Clamp01(damage / max health) * freeze time
         self.assertAlmostEqual(M.frost_duration(88, 1000, 50), 4.4)

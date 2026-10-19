@@ -786,3 +786,26 @@ def raid_wait(interval_min: float, chance: float, rate: float = 1) -> float:
     """Expected minutes until a raid starts, while one is possible: rolls are independent, so interval / p."""
     every, p = raid_roll(interval_min, chance, rate)
     return every / (p / 100)
+
+
+REGEN_TIME = 3600  # Character.m_regenAllHPTime code default (creatures.json omits it at this value)
+REGEN_TICK = 2  # BaseAI.UpdateRegeneration heals once the timer passes this many seconds
+MORNING = 0.15  # EnvMan.GetMorningStartSec: share of the (unscaled) day where morning starts
+DUSK = 0.85  # EnvMan.RescaleDayFraction: the shown evening (0.75) is 0.85 of the real day
+AFTERNOON = 0.5  # EnvMan.CalculateAfternoon on the rescaled fraction 0.5, which is 0.5 of the real day too
+
+
+def regen_rate(max_health: float, regen_time: float | None = None) -> float:
+    """Health a creature regains per second of world time (BaseAI.UpdateRegeneration): max health / m_regenAllHPTime."""
+    return max_health / (regen_time or REGEN_TIME)
+
+
+def sleep_skip(bed_time: float, day_length: float) -> float:
+    """World seconds a sleep skips (EnvMan.SkipToMorning): from bed_time (share of the real day) to the next
+    morning start, 0.15 into a day. Before 0.15 that is the same day's morning."""
+    return ((MORNING if bed_time < MORNING else 1 + MORNING) - bed_time) * day_length
+
+
+def regen_over(max_health: float, seconds: float, regen_time: float | None = None) -> float:
+    """Health regained over `seconds` of world time, capped at max health."""
+    return min(max_health, regen_rate(max_health, regen_time) * seconds)
