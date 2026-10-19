@@ -299,8 +299,8 @@ class Site(unittest.TestCase):
         self.assertFalse((self.out / "mechanics/blocking.md").exists())
         blocking = (self.out / "mechanics/blocking.html").read_text(encoding="utf-8")
         self.assertIn("Humanoid.BlockAttack", blocking)
-        version = json.loads((ROOT / "tests/golden/meta.json").read_text(encoding="utf-8"))["gameVersion"]
-        self.assertIn(f"decompiled game code of Valheim {version}", blocking)
+        version = json.loads((ROOT / "site/mechanics/verified.json").read_text(encoding="utf-8"))["blocking"]["version"]
+        self.assertIn(f"decompiled game code of Valheim {version}", blocking)  # the page's own, not the data's
         names = [e[0] for e in json.loads((self.out / "search.json").read_text(encoding="utf-8"))]
         self.assertIn("Blocking", names)
 

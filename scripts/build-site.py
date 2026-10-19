@@ -36,6 +36,8 @@ OUT = Path(sys.argv[3]) if len(sys.argv) > 3 else ROOT / ".cache/site/public"
 RENDERS = Path(sys.argv[4]) if len(sys.argv) > 4 else ICONS.parent / "renders"
 STATIC = ROOT / "site"
 MECH_SRC = STATIC / "mechanics"  # hand-written Markdown pages, see scripts/mechanics.py
+# per page: the game version its cited code was verified against, and what changed since (scripts/mechanics_sources.py)
+MECH_VERIFIED = json.loads((MECH_SRC / "verified.json").read_text(encoding="utf-8")) if (MECH_SRC / "verified.json").is_file() else {}
 
 
 def load(name: str):
@@ -2473,14 +2475,19 @@ def mechanics_pages() -> None:
         except ValueError as e:
             raise SystemExit(f"{f.name}: {e}")
         cites = [x.strip() for x in meta.get("sources", "").split(";") if x.strip()]
-        cite = (f'<aside class="cite"><b>Verified</b> against the decompiled game code of Valheim {esc(META["gameVersion"])}: '
+        rec = MECH_VERIFIED.get(f.stem, {})
+        stale = (f'<p class="stale"><b>Not re-checked yet:</b> the game code this page cites changed in Valheim '
+                 f'{esc(rec["changedIn"])} (' + ", ".join(f"<code>{esc(x)}</code>" for x in rec["changed"]) + ').</p>'
+                 if rec.get("changed") else "")
+        version = f' of Valheim {esc(rec["version"])}' if rec.get("version") else ""
+        cite = (f'<aside class="cite"><b>Verified</b> against the decompiled game code{version}: '
                 + ", ".join(f"<code>{esc(x)}</code>" for x in cites) + ". "
                 'Statements marked <i>Inferred</i> are reasoning from the code or data, not checked in the game.</aside>'
                 if cites else "")
         title = meta.get("title", f.stem)
         MECH_PAGES.append({"id": f.stem, "title": title, "summary": meta.get("summary", ""),
                            "order": int(meta.get("order", 99))})
-        body = (f'<h1>{esc(title)}</h1><p class="sub">{esc(meta.get("summary", ""))}</p>'
+        body = (f'<h1>{esc(title)}</h1><p class="sub">{esc(meta.get("summary", ""))}</p>{stale}'
                 f'<div class="mech">{content}</div>{cite}')
         page(f"mechanics/{f.stem}.html", title, body, '<a href="mechanics/index.html">Mechanics</a>', ctx.scripts)
     MECH_PAGES.sort(key=lambda p: (p["order"], p["title"]))

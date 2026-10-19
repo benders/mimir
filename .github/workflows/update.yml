@@ -1,7 +1,8 @@
 # Unattended data updates and site deploys (issue #2). Only the public Steam branch is tracked.
 #
 #   poll    steamcmd: current Steam build id vs data/meta.json steamBuildId (pushes take meta's: deploy only)
-#   update  if it changed: download server, dump, icons, normalize, verify, build site, renders; commit data/
+#   update  if it changed: download server, dump, icons, normalize, verify, build site, renders, check the game code
+#           the mechanics pages cite (#60); commit data/ and site/mechanics/verified.json
 #   site    build the site from data/ + icons + location renders (from the cache, or re-extracted on a miss)
 #
 # Renders (#52, #53) are cached per build id and renderer version (extract-renders.py + requirements.txt), so a
@@ -67,12 +68,33 @@ jobs:
     timeout-minutes: 60
     permissions:
       contents: write
+      issues: write  # mechanics sources check
     steps:
       - uses: actions/checkout@v7
       - name: Extract, normalize, verify, build site
         env:
           MIMIR_STEAM_BUILDID: ${{ needs.poll.outputs.build }}
         run: make check-local
+      # Mechanics pages (#60): pages whose cited methods are unchanged move to the new version in
+      # site/mechanics/verified.json; changed ones are flagged on the site and get an issue. Never blocks the update.
+      - name: Check mechanics sources
+        continue-on-error: true
+        env:
+          GH_TOKEN: ${{ github.token }}
+          BUILD: ${{ needs.poll.outputs.build }}
+        run: |
+          make decompile >&2
+          scripts/mechanics_sources.py check >.cache/mechanics-report.md
+          if [[ ! -s .cache/mechanics-report.md ]]; then
+            echo "Mechanics pages: the game code they cite is unchanged" >>"$GITHUB_STEP_SUMMARY"; exit 0
+          fi
+          echo "::warning::game code cited by mechanics pages changed; see the job summary"
+          cat .cache/mechanics-report.md >>"$GITHUB_STEP_SUMMARY"
+          version="$(python3 -c 'import json; print(json.load(open("data/meta.json"))["gameVersion"])')"
+          if [[ -z "$(gh issue list --state all --label mechanics --search "\"build $BUILD\" in:title" --json number -q '.[].number')" ]]; then
+            gh issue create --label mechanics --body-file .cache/mechanics-report.md \
+              --title "Mechanics: cited game code changed in Valheim $version (build $BUILD)"
+          fi
       - name: Upload logs
         if: always()
         uses: actions/upload-artifact@v7
@@ -107,7 +129,7 @@ jobs:
         env:
           BUILD: ${{ needs.poll.outputs.build }}
         run: |
-          git add data
+          git add data site/mechanics/verified.json
           if git diff --cached --quiet; then echo "data/ unchanged"; exit 0; fi
           version="$(python3 -c 'import json; print(json.load(open("data/meta.json"))["gameVersion"])')"
           git -c user.name="github-actions[bot]" -c user.email="41898282+github-actions[bot]@users.noreply.github.com" \

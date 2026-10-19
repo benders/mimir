@@ -9,7 +9,7 @@ BRANCH ?= public
 REMOTE ?= nic@mini
 export MIMIR_BRANCH := $(BRANCH)
 
-.PHONY: help server buildid bepinex plugin dump icons anims renders extract remote-extract verify data verify-data site serve test test-renders check check-local clean decompile
+.PHONY: help server buildid bepinex plugin dump icons anims renders extract remote-extract verify data verify-data site serve test test-renders check check-local clean decompile mechanics-check mechanics-accept
 
 help:
 	@grep -E '^[a-z-]+:.*## ' $(MAKEFILE_LIST) | awk -F':.*## ' '{printf "  %-12s %s\n", $$1, $$2}'
@@ -74,9 +74,13 @@ check: remote-extract verify data verify-data ## Full end-to-end on $(REMOTE): e
 check-local: test extract verify data verify-data site ## Tests, then full end-to-end on this x86_64 Linux host + site (CI)
 
 decompile: server ## Decompile game assemblies to .cache/decompiled (reference only, never commit)
-	dotnet tool restore
-	for a in assembly_valheim assembly_utils assembly_guiutils SoftReferenceableAssets; do \
-	  dotnet ilspycmd -p -o .cache/decompiled/$$a .cache/server/$(BRANCH)/valheim_server_Data/Managed/$$a.dll >/dev/null; done
+	scripts/decompile.sh
+
+mechanics-check: decompile ## Compare the code the mechanics pages cite with site/mechanics/verified.json (#60)
+	scripts/mechanics_sources.py check
+
+mechanics-accept: ## Record PAGES="healing ..." (or ALL=1) as verified against the decompiled code (#60)
+	scripts/mechanics_sources.py accept $(if $(ALL),--all,$(PAGES))
 
 clean: ## Remove build outputs and dumps (keeps the server download)
 	rm -rf .cache/build .cache/dump .cache/site

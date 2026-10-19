@@ -28,8 +28,9 @@ steam-buildid.sh steamcmd (container, x86_64) -> current public Steam build id
 
 CI: `.github/workflows/update.yml` polls the build id every 6 h; when it differs from `data/meta.json`
 `steamBuildId` it runs `make check-local`, then `make test-renders renders` (cached per build id and renderer version; a
-failure only warns: the site deploys without thumbnails), commits `data/` as github-actions[bot], and deploys the site to
-GitHub Pages. Pushes to `data/`, `site/`, `build-site.py`, `extract-renders.py` or `requirements.txt` redeploy. Only the public branch is tracked.
+failure only warns: the site deploys without thumbnails), decompiles and runs `mechanics_sources.py check` (#60: a
+page whose cited methods changed gets a warning, a `mechanics` issue and a "Not re-checked yet" notice; never blocks),
+commits `data/` and `site/mechanics/verified.json` as github-actions[bot], and deploys the site to GitHub Pages. Pushes to `data/`, `site/`, `build-site.py`, `extract-renders.py` or `requirements.txt` redeploy. Only the public branch is tracked.
 Each deploy records a New Relic change tracking marker on the Browser app ("Site deploy" with the short sha, or
 "Game update: Valheim X (build N)" with the `data/` diffstat), using the `NEW_RELIC_API_KEY` User key (secret on the
 `github-pages` environment, so only `deploy` can read it) and the `NEW_RELIC_ENTITY_GUID` repo variable; no secret = skipped.
@@ -53,6 +54,8 @@ Each deploy records a New Relic change tracking marker on the Browser app ("Site
   its unit tests in the venv (`make test` skips them). Design notes: [Architecture.md](Architecture.md#location-renders).
 - `make dump` — run the server locally. Only practical on x86_64 Linux; on macOS it uses a qemu x86_64 VM and is very slow.
 - `make decompile` — decompile game assemblies into `.cache/decompiled/` for reference.
+- `make mechanics-check` — decompile, then compare the methods the mechanics pages cite with `site/mechanics/verified.json`.
+  `make mechanics-accept PAGES="healing ..."` (or `ALL=1`) records pages as verified against the current decompile.
 - `BRANCH=public-test make check` — same for the public test branch.
 
 Logs after a dump: `.cache/dump/<branch>/server.log` (Unity) and `bepinex.log` (plugin; look for `MIMIR_DUMP_OK` / `MIMIR_DUMP_FAILED`).
@@ -227,7 +230,9 @@ and caps the flagged share, so a source gap can't silently hide real pages; `scr
   (small Markdown subset; `{{directive}}` lines embed generated tables/charts that read `data/`, registered in
   `mech_blocks()` in `build-site.py`; `[text](item:Id)`, `creature:`, `piece:`, `effect:`, `mechanic:page` links are
   resolved and checked). Every claim must be checked in the decompiled code and cite the method; mark anything
-  inferred with a blockquote starting `Inferred`. Formulas live in `mechanics.py` as functions with tests in
+  inferred with a blockquote starting `Inferred`. After writing or re-checking a page (or changing its `sources:`), run
+  `make mechanics-accept PAGES=<page>`: `site/mechanics/verified.json` keeps a hash of every cited method and the game
+  version it was verified against (shown in the page footer), and `make test` fails on a citation with no hash. Formulas live in `mechanics.py` as functions with tests in
   `tests/test_mechanics.py`; charts are inline SVG built there from the same functions. The pages replaced the old notes in
   `docs/mechanics.md`, which keeps only topics without a page. Interactive calculators: put plain JS in `site/calc/NAME.js`
   and put `{{calculator NAME}}` on the page (mount point `<div data-calc="NAME">`); none exist yet (#13).

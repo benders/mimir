@@ -133,6 +133,7 @@ kbd { border: 1px solid var(--line); border-radius: 4px; padding: 0 5px; backgro
 .mech summary { cursor: pointer; color: var(--muted); padding: 3px 0; }
 .cite { margin-top: 32px; padding-top: 12px; border-top: 1px solid var(--line); color: var(--muted); font-size: 13px;
   line-height: 1.7; }
+.stale { margin: 0 0 16px; padding: 8px 12px; border-left: 3px solid var(--accent); background: var(--accent-soft); }
 .mechlist { list-style: none; padding: 0; margin: 16px 0; }
 .mechlist li { padding: 8px 0; border-bottom: 1px solid var(--line); }
 .mechlist a { display: block; font-weight: 600; }

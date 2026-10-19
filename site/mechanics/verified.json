@@ -1,0 +1,279 @@
+{
+ "adrenaline": {
+  "methods": {
+   "Attack.DoAreaAttack": "11fbd33bf5a92ce6",
+   "Attack.DoMeleeAttack": "6f62bd9ec51aa482",
+   "Attack.FireProjectileBurst": "2955e01185cf4c2e",
+   "Attack.OnAttackTrigger": "6411bb4005a1049b",
+   "Character.AddStaggerDamage": "24199ca2154a174f",
+   "Character.RPC_Damage": "8146c8fe271c338e",
+   "Humanoid.BlockAttack": "dde323942b9fe222",
+   "Player.ActivateGuardianPower": "fec5913813eeff99",
+   "Player.AddAdrenaline": "0556c94e5f5705eb",
+   "Player.GetMaxAdrenaline": "52a00816abbc10df",
+   "Player.RPC_HitWhileDodging": "3c3787b36c524098",
+   "Player.UpdateModifiers": "389ee2d79518547b",
+   "Player.UpdateStats": "e9ed6610251b46ec",
+   "Projectile.OnHit": "9cc9daec4ec0fc05",
+   "SE_Stats.ModifyAdrenaline": "c2be2d0e7b34cd5f"
+  },
+  "version": "1.0.20"
+ },
+ "blocking": {
+  "methods": {
+   "Character.AddStaggerDamage": "24199ca2154a174f",
+   "Character.RPC_Damage": "8146c8fe271c338e",
+   "Character.UpdateStagger": "40b2069fc0fb3cbe",
+   "HitData.ApplyResistance": "04af7b9bbf1fbdce",
+   "HitData.BlockDamage": "8bf1542b949a0a62",
+   "HitData.DamageTypes.ApplyArmor": "72f80d0a9b6ef766",
+   "Humanoid.BlockAttack": "dde323942b9fe222",
+   "Humanoid.GetCurrentBlocker": "e75ab929797d9e8f",
+   "Humanoid.UpdateBlock": "398d822a8fce9217",
+   "ItemDrop.ItemData.GetBaseBlockPower": "de66a8188e09111b",
+   "ItemDrop.ItemData.GetBlockPower": "b97b35d6dee09001",
+   "ItemDrop.ItemData.GetDeflectionForce": "322307d8fb1ba0db",
+   "SE_Stats.ModifyTimedBlockBonus": "0fca3b2caa7b1dc4",
+   "Skills.GetSkillFactor": "6f41779459992af6",
+   "Skills.GetSkillLevel": "141f9c6b3a5cdda7"
+  },
+  "version": "1.0.20"
+ },
+ "comfort": {
+  "methods": {
+   "Piece.GetAllComfortPiecesInRadius": "965481d68f6bcb4b",
+   "Piece.GetComfort": "e8a2f1365e18c977",
+   "Player.SetSleeping": "4f0827abd8fd8093",
+   "Player.UpdateBaseValue": "5ebf8b78419fcbc3",
+   "Player.UpdateEnvStatusEffects": "129db61b57554af7",
+   "SE_Cozy.UpdateStatusEffect": "320bd988c1f42a33",
+   "SE_Rested.CalculateComfortLevel": "162eae4ffe1dac85",
+   "SE_Rested.Setup": "b65cefd031c2008b",
+   "SE_Rested.UpdateTTL": "111d3cf695fe8f13"
+  },
+  "version": "1.0.20"
+ },
+ "creature-levels": {
+  "methods": {
+   "Attack.GetLevelDamageFactor": "6f76a3339e9204d4",
+   "Attack.ModifyDamage": "c3fbddde58d4659a",
+   "BiomeSector.GetLevelUpChanceMultiplier": "5b1a314eb2be46df",
+   "Character.SetLevel": "953abc212c4f2ba3",
+   "Character.SetupMaxHealth": "955e9855f069fd88",
+   "CharacterDrop.GenerateDropList": "91001eaf79a4f6fc",
+   "CreatureSpawner.Spawn": "5701e92d82df09ba",
+   "EnemyHud.UpdateHuds": "93a39d01790a004b",
+   "Growup.GrowUpdate": "e87dfe6a079d2d22",
+   "LevelEffects.SetupLevelVisualization": "5a0f8d47949d18db",
+   "Procreation.Procreate": "7f5079117b996262",
+   "SpawnArea.GetLevelUpChance": "ea34a482ea2b3925",
+   "SpawnArea.SpawnOne": "ec1cc0be8bafa295",
+   "SpawnSystem.GetLevelUpChance": "bf7acc7ec63d6481",
+   "SpawnSystem.Spawn": "4767d706bb463912",
+   "TriggerSpawner.Spawn": "7091c5a823d3b31d"
+  },
+  "version": "1.0.20"
+ },
+ "damage-types": {
+  "methods": {
+   "Character.ApplyDamage": "5a51e3b518f7c758",
+   "Character.GetDamageModifiers": "0cb18f2b7b04fb3c",
+   "Character.RPC_Damage": "8146c8fe271c338e",
+   "DamageText.ShowText": "a78ff7bdc15a821c",
+   "HitData.ApplyModifier": "e0d50fc4d188bbb3",
+   "HitData.ApplyResistance": "04af7b9bbf1fbdce",
+   "HitData.DamageModifier": "78f7cd7e415b9e46",
+   "HitData.DamageModifiers.Apply": "cdcf53de9a1bf5ed",
+   "HitData.DamageModifiers.ShouldOverride": "c117477dbca46da3",
+   "HitData.DamageType": "45372e51912f7b40",
+   "HitData.DamageTypes": "39c305fb9c674e54",
+   "HitData.DamageTypes.ApplyArmor": "72f80d0a9b6ef766",
+   "Player.ApplyArmorDamageMods": "46e433ab4de64e72",
+   "Player.GetBodyArmor": "1f6c0de02a0c2133",
+   "SEMan.ApplyDamageMods": "e8b67a3135142cbd"
+  },
+  "version": "1.0.20"
+ },
+ "drops": {
+  "methods": {
+   "Character.CheckDeath": "00b4025a846c176d",
+   "Character.CustomFixedUpdate": "62f956d5dc7fde6b",
+   "CharacterDrop.DropItems": "3e2b648b5247848f",
+   "CharacterDrop.GenerateDropList": "91001eaf79a4f6fc",
+   "CharacterDrop.OnDeath": "aceab901d570ff0c",
+   "Game.FixedUpdate": "8356afb4dfb5b8dd",
+   "Game.ScaleDrops": "8cbac20e0cd9595a",
+   "Player.LateUpdate": "69158421ca394d76",
+   "ZNet.GetNrOfPlayers": "7f30b14b98d970d0"
+  },
+  "version": "1.0.20"
+ },
+ "food": {
+  "methods": {
+   "Humanoid.UseItem": "9905047c84a04592",
+   "Player.CanEat": "9ad9c913e59f2e71",
+   "Player.EatFood": "394e63e0ae50363d",
+   "Player.Food.CanEatAgain": "bbacdfe03d5cd64f",
+   "Player.GetMostDepletedFood": "b066340b6f7a7932",
+   "Player.GetTotalFoodValue": "680613cce3d96133",
+   "Player.OnDeath": "84902f26ebea8add",
+   "Player.UpdateFood": "8fe79a2110dca46e",
+   "Player.UpdateStats": "e9ed6610251b46ec"
+  },
+  "version": "1.0.20"
+ },
+ "forge-of-potential": {
+  "methods": {
+   "InventoryGui.DoCrafting": "e2e1ef44166a6915",
+   "InventoryGui.UpdateRecipe": "df487183528a5751",
+   "InventoryGui.UpdateRecipeList": "62d4cbb2b1de3228",
+   "Piece.Requirement.GetAmount": "865d5669682df3e6",
+   "Player.ConsumeResources": "9f216fba84092b77",
+   "Player.HaveRequirements": "6b668da568103ca4",
+   "Player.RequiredCraftingStation": "314ef1787dde3961",
+   "ZoneSystem.GenerateLocationsTimeSliced": "acddf7956b8a57a7",
+   "ZoneSystem.RemoveUnplacedLocations": "4bebcbce14b7575f"
+  },
+  "version": "1.0.20"
+ },
+ "frost": {
+  "methods": {
+   "Character.AddFrostDamage": "593bd5e151a392d9",
+   "Character.RPC_Damage": "8146c8fe271c338e",
+   "Character.UpdateSwimming": "87fbd1f4f5270def",
+   "Character.UpdateWalking": "bfd1c9f3ff86dee3",
+   "HitData.DamageModifiers.ShouldOverride": "c117477dbca46da3",
+   "SEMan.ApplyStatusEffectSpeedMods": "8383369de46fdd49",
+   "SE_Frost.AddDamage": "ba807658815e82ba",
+   "SE_Frost.ModifySpeed": "ef875c558e43d91d"
+  },
+  "version": "1.0.20"
+ },
+ "healing": {
+  "methods": {
+   "Attack.DoAreaAttack": "11fbd33bf5a92ce6",
+   "Attack.DoMeleeAttack": "6f62bd9ec51aa482",
+   "BaseAI.GetWorldTimeDelta": "0858e086591ee9bc",
+   "BaseAI.UpdateAI": "74dd8c8cc28f2057",
+   "BaseAI.UpdateRegeneration": "28fa577192699179",
+   "Character.Heal": "a499d2e3940eadff",
+   "Character.RPC_Heal": "539dd303d74e4827",
+   "EnvMan.CalculateCanSleep": "0a1a488f9bb32cbe",
+   "EnvMan.RescaleDayFraction": "bb3b8e512958d901",
+   "EnvMan.SkipToMorning": "5bf9c65d2d89872e",
+   "EnvMan.UpdateTimeSkip": "47cc4cfb797f6546",
+   "Game.UpdateSleeping": "333b2b1c25128bd1",
+   "Projectile.OnHit": "9cc9daec4ec0fc05",
+   "ZNet.GetTime": "c1bb8e512a0f37af"
+  },
+  "version": "1.0.20"
+ },
+ "item-upgrades": {
+  "methods": {
+   "InventoryGui.SetupRequirementList": "93f504c14480f3ce",
+   "InventoryGui.UpdateRecipe": "df487183528a5751",
+   "InventoryGui.UpdateRecipeList": "62d4cbb2b1de3228",
+   "ItemDrop.ItemData.GetArmor": "a431ab5d64359196",
+   "ItemDrop.ItemData.GetBaseBlockPower": "de66a8188e09111b",
+   "ItemDrop.ItemData.GetDamage": "6efb9bb03529fc72",
+   "ItemDrop.ItemData.GetDeflectionForce": "322307d8fb1ba0db",
+   "ItemDrop.ItemData.GetMaxDurability": "b91f09570fd71816",
+   "Piece.Requirement.GetAmount": "865d5669682df3e6",
+   "Recipe.GetRequiredStationLevel": "f1fd98db0749ea7c"
+  },
+  "version": "1.0.20"
+ },
+ "progression": {
+  "methods": {
+   "CraftingStation.GetLevel": "84d2963d0a92a9fa",
+   "Destructible.RPC_Damage": "fed83eb21f2eb15d",
+   "MineRock.RPC_Hit": "c77136db56b64cf4",
+   "MineRock5.RPC_Damage": "341d8a19b91052cd",
+   "RandEventSystem.HaveGlobalKeys": "6097108281ca89ad",
+   "SpawnSystem.UpdateSpawnList": "55066c5eeb964399",
+   "StationExtension.FindExtensions": "45e8d8a82278cdec",
+   "Trader.UseItem": "52718f5a6be27dc2",
+   "TreeBase.RPC_Damage": "7f7ac4cd8dabc551",
+   "TriggerPersistentEventOnDestroy": "d88c690f36974cd2",
+   "ZoneSystem.GetKeyValue": "bb4f5e6788e884e0"
+  },
+  "version": "1.0.20"
+ },
+ "raids": {
+  "methods": {
+   "Character.OnDeath": "317e84cb7306e021",
+   "EffectArea.GetBaseValue": "db6f88c3ed2b741a",
+   "Player.SetGuardianPower": "bd3ceeadb782c356",
+   "Player.UpdateEvents": "449da92ef13510c5",
+   "RandEventSystem.CheckBase": "7ad1bccd5cc74dd3",
+   "RandEventSystem.GetPossibleRandomEvents": "5f44ac05054c25bc",
+   "RandEventSystem.GetValidEventPoints": "ab535d5c267425ba",
+   "RandEventSystem.HaveGlobalKeys": "6097108281ca89ad",
+   "RandEventSystem.InValidBiome": "5034eeb666368986",
+   "RandEventSystem.PlayerIsReadyForEvent": "91c8b81e5ef34db5",
+   "RandEventSystem.StartRandomEvent": "457834a430bf58fe",
+   "RandEventSystem.UpdateRandomEvent": "51252a7366072bcd",
+   "RandomEvent.Update": "264d88e653db60dd",
+   "SpawnSystem.UpdateSpawning": "c812f23d14b2c2ac",
+   "ZoneSystem.GetGlobalKey": "d3d3af903c977fb3"
+  },
+  "version": "1.0.20"
+ },
+ "skills": {
+  "methods": {
+   "Attack.DoAreaAttack": "11fbd33bf5a92ce6",
+   "Attack.DoMeleeAttack": "6f62bd9ec51aa482",
+   "Character.Jump": "c0663552eaefacaf",
+   "CookingStation.OnInteract": "f7d80c6043ad0ce5",
+   "FishingFloat.FixedUpdate": "087c0d7cb78688ac",
+   "Humanoid.BlockAttack": "dde323942b9fe222",
+   "InventoryGui.DoCrafting": "e2e1ef44166a6915",
+   "InventoryGui.RepairOneItem": "2443a079899c5b62",
+   "Pickable.Interact": "a5d946edd2b8c6aa",
+   "Player.CheckRun": "73384b5b8a9ad0da",
+   "Player.Dodge": "ad7feb046b996397",
+   "Player.HardDeath": "b493ef2f7f83239f",
+   "Player.OnDeath": "84902f26ebea8add",
+   "Player.OnSneaking": "5b7c6004286a5333",
+   "Player.OnSwimming": "57cf453bb811003b",
+   "Player.RPC_HitWhileDodging": "3c3787b36c524098",
+   "Player.RaiseSkill": "43c538ebb61e6098",
+   "Player.UpdatePlacement": "d892f42c8b1b25eb",
+   "Projectile.OnHit": "9cc9daec4ec0fc05",
+   "SE_Stats.ModifyRaiseSkill": "80b496a3fa3b62c8",
+   "Sadle.UpdateRidingSkill": "58331fa9cffc598a",
+   "Skills.GetSkillLevel": "141f9c6b3a5cdda7",
+   "Skills.LowerAllSkills": "a22314989a96d952",
+   "Skills.OnDeath": "3cbdae6cc463fac2",
+   "Skills.RaiseSkill": "81283a63a707c7ff",
+   "Skills.Skill.GetNextLevelRequirement": "363e6715f72b2d7c",
+   "Skills.Skill.Raise": "9431d3cc640e48d5"
+  },
+  "version": "1.0.20"
+ },
+ "weapons": {
+  "methods": {
+   "Attack.CanStartChainAttack": "0fa0e0a9e83aa94a",
+   "Attack.DoAreaAttack": "11fbd33bf5a92ce6",
+   "Attack.DoMeleeAttack": "6f62bd9ec51aa482",
+   "Attack.FireProjectileBurst": "2955e01185cf4c2e",
+   "Attack.ModifyDamage": "c3fbddde58d4659a",
+   "Attack.OnAttackTrigger": "6411bb4005a1049b",
+   "Attack.Start": "9740df9181dbc183",
+   "Attack.Update": "1db488d42948038b",
+   "CharacterAnimEvent.CustomFixedUpdate": "983cb5f99cd22166",
+   "CharacterAnimEvent.Speed": "3c3ecd35b8fa43e6",
+   "Humanoid.GetAttackDrawPercentage": "67f5a2552b4757f8",
+   "Humanoid.StartAttack": "6f3af883e50425fb",
+   "ItemData.GetWeaponLoadingTime": "3b84db36995a6d54",
+   "Player.InAttack": "a5857177e78d4a86",
+   "Player.InMinorAction": "71f1b0c2300f14b0",
+   "Player.QueueReloadAction": "76969268d7af5f21",
+   "Player.UpdateActionQueue": "db32db438c3ef094",
+   "Player.UpdateAttackBowDraw": "43b861a1aac3bbdb",
+   "Projectile.Setup": "dd747bb34dc0e0da",
+   "Skills.GetRandomSkillFactor": "eed31230d5a5bd6e"
+  },
+  "version": "1.0.20"
+ }
+}
