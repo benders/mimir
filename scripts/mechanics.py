@@ -449,8 +449,9 @@ def _fmt(v: float) -> str:
 
 
 def line_chart(series: list[dict], *, xlim, ylim, xticks, yticks, xlabel: str, ylabel: str, title: str, desc: str,
-               ysuffix: str = "", W: int = 440, H: int = 290) -> str:
-    """One inline SVG, thin lines, direct labels at the right end of each line.
+               ysuffix: str = "", labels: str = "right", W: int = 440, H: int = 290) -> str:
+    """One inline SVG, thin lines, direct labels at the right end of each line (labels="end": just above and left of
+    each line's last point, for lines that end at the same height before the right edge).
     series: {"label", "points": [(x, y), ...], "marks": [(x, y), ...]}; series i is styled by class s{i+1}."""
     left, right, top, bottom = 46, 98, 12, 44
     pw, ph = W - left - right, H - top - bottom
@@ -481,6 +482,13 @@ def line_chart(series: list[dict], *, xlim, ylim, xticks, yticks, xlabel: str, y
         for x, y in s.get("marks", []):
             g.append(f'<circle class="dot s{n}" cx="{px(x):.1f}" cy="{py(y):.1f}" r="3"/>')
         ends.append([py(s["points"][-1][1]), n, s["label"]])
+        if labels == "end":
+            x, y = s["points"][-1]
+            g.append(f'<circle class="dot s{n}" cx="{px(x):.1f}" cy="{py(y):.1f}" r="3"/>')
+            g.append(f'<text class="lbl t{n}" x="{px(x) - 4:.1f}" y="{py(y) - 7:.1f}" text-anchor="end">'
+                     f'{esc(s["label"])}</text>')
+    if labels == "end":
+        ends = []
     # direct labels, nudged apart so they never overlap
     ends.sort()
     for k in range(1, len(ends)):
@@ -620,13 +628,14 @@ def food_chart() -> str:
 def skills_chart() -> str:
     """Raises (uses) needed from level 0, for gain steps 1 and 0.5, without and with Rested (× 1.5)."""
     lv = range(0, 101, 2)
-    series = [{"label": label, "points": [(L, skill_raises(L, step, factor) / 1000) for L in lv]}
+    series = [{"label": label, "points": [(skill_raises(L, step, factor) / 1000, L) for L in lv]}
               for label, step, factor in (("step 0.5", 0.5, 1), ("step 1", 1, 1), ("step 1, rested", 1, 1.5))]
     r = skill_raises(100, 1), skill_raises(50, 1)
     desc = (f"Raises needed to reach a level from 0, in thousands. With a gain step of 1: {r[1]:,} to level 50, "
             f"{r[0]:,} to 100. Step 0.5 needs about twice as many; Rested (× 1.5) about two thirds.")
-    return figure(line_chart(series, xlim=(0, 100), ylim=(0, 45), xticks=range(0, 101, 25), yticks=range(0, 46, 15),
-                             xlabel="Skill level", ylabel="Raises from 0 (thousands)", title="Skill experience", desc=desc),
+    return figure(line_chart(series, xlim=(0, 45), ylim=(0, 110), xticks=range(0, 46, 15), yticks=range(0, 101, 25),
+                             xlabel="Raises from 0 (thousands)", ylabel="Skill level", title="Skill experience", desc=desc,
+                             labels="end"),
                   "Each level needs ⌊L + 1⌋^1.5 × 0.5 + 0.5; leftover experience is lost at every level-up.")
 
 
