@@ -626,14 +626,15 @@ def food_chart() -> str:
 
 
 def skills_chart() -> str:
-    """Raises (uses) needed from level 0, for gain steps 1 and 0.5, without and with Rested (× 1.5)."""
-    lv = range(0, 101, 2)
+    """Skill level 0 to 50 against raises (uses) from level 0, for gain steps 1 and 0.5, without and with Rested
+    (× 1.5)."""
+    lv = range(0, 51)
     series = [{"label": label, "points": [(skill_raises(L, step, factor) / 1000, L) for L in lv]}
               for label, step, factor in (("step 0.5", 0.5, 1), ("step 1", 1, 1), ("step 1, rested", 1, 1.5))]
     r = skill_raises(100, 1), skill_raises(50, 1)
-    desc = (f"Raises needed to reach a level from 0, in thousands. With a gain step of 1: {r[1]:,} to level 50, "
+    desc = (f"Skill level 0 to 50 against raises from 0, in thousands. With a gain step of 1: {r[1]:,} to level 50, "
             f"{r[0]:,} to 100. Step 0.5 needs about twice as many; Rested (× 1.5) about two thirds.")
-    return figure(line_chart(series, xlim=(0, 45), ylim=(0, 110), xticks=range(0, 46, 15), yticks=range(0, 101, 25),
+    return figure(line_chart(series, xlim=(0, 8), ylim=(0, 55), xticks=range(0, 9, 2), yticks=range(0, 51, 10),
                              xlabel="Raises from 0 (thousands)", ylabel="Skill level", title="Skill experience", desc=desc,
                              labels="end"),
                   "Each level needs ⌊L + 1⌋^1.5 × 0.5 + 0.5; leftover experience is lost at every level-up.")
