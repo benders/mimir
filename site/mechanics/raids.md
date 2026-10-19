@@ -9,13 +9,14 @@ The server rolls for a raid on a timer. On a hit it collects every enabled rando
 and that has at least one valid player, then starts one of them at random, centred on a random valid player. A player
 is valid when standing in one of the event's biomes, below 3000 m (not in a dungeon) and, for raids that need a base,
 within 20 m of at least 3 base pieces. A raid ends after its duration; its clock stops while no player is within its
-range. With the world modifier for player-based raids, the world keys are ignored for raids that list player conditions: each player
+range, unless its Lasts row says otherwise. With the world modifier for player-based raids, the world keys are ignored for raids that list player conditions: each player
 qualifies on their own Forsaken power choices, the creatures killed near them and the items they have discovered.
 
 - roll every m_eventIntervalMin × eventRate minutes, starting a raid with m_eventChance / eventRate %
 - base = number of PlayerBase effect areas within 20 m of the player; a raid that needs a base needs base ≥ 3
 - world keys: every required key set and none of the "until" keys; keys are compared ignoring case
-- player-based: none of the "not for" conditions, then any "only for" condition, or no "only for" list at all
+- player-based: no "not for" item or key; then any one "only for" item or key qualifies; a raid with no such list
+  needs every key of its "only for … and …" list instead
 
 {{raid-timing}}
 

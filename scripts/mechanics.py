@@ -107,14 +107,14 @@ def should_override(a: str, b: str) -> bool:
 
 
 def pseudo_gap_max(chance: float) -> int:
-    """Most kills between two pseudo-random drops: after a drop the countdown is Random.Range(0, int(1/p*2 + 1)),
+    """Most kills between two pseudo-random drops: after a drop the countdown is Random.Range(0, (int)(1/p*2) + 2),
     decremented per kill, dropping at <= 0 (CharacterDrop.GenerateDropList), so the gap is max(1, countdown)."""
-    return max(1, int(1 / chance * 2 + 1) - 1)
+    return max(1, int(1 / chance * 2) + 1)
 
 
 def pseudo_rate(chance: float) -> float:
     """Long-run drops per kill of the pseudo-random scheme: 1 / mean gap, gap = max(1, uniform 0..pseudo_gap_max)."""
-    m = int(1 / chance * 2 + 1)  # Range(0, m): 0..m-1
+    m = int(1 / chance * 2) + 2  # Range(0, m): 0..m-1
     return m / (1 + sum(range(m)))  # gaps 1,1,2,...,m-1 over m outcomes
 
 

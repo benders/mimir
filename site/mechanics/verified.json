@@ -6,6 +6,7 @@
    "Attack.FireProjectileBurst": "2955e01185cf4c2e",
    "Attack.OnAttackTrigger": "6411bb4005a1049b",
    "Character.AddStaggerDamage": "24199ca2154a174f",
+   "Character.GetMaxAdrenaline": "b51f16a6232316ed",
    "Character.RPC_Damage": "8146c8fe271c338e",
    "Humanoid.BlockAttack": "dde323942b9fe222",
    "Player.ActivateGuardianPower": "fec5913813eeff99",
@@ -22,11 +23,14 @@
  "blocking": {
   "methods": {
    "Character.AddStaggerDamage": "24199ca2154a174f",
+   "Character.GetStaggerTreshold": "6df7780146f73a39",
    "Character.RPC_Damage": "8146c8fe271c338e",
    "Character.UpdateStagger": "40b2069fc0fb3cbe",
    "HitData.ApplyResistance": "04af7b9bbf1fbdce",
    "HitData.BlockDamage": "8bf1542b949a0a62",
    "HitData.DamageTypes.ApplyArmor": "72f80d0a9b6ef766",
+   "HitData.DamageTypes.GetTotalBlockableDamage": "b4a71715992c2229",
+   "HitData.DamageTypes.GetTotalStaggerDamage": "1db99e148c57c5cb",
    "Humanoid.BlockAttack": "dde323942b9fe222",
    "Humanoid.GetCurrentBlocker": "e75ab929797d9e8f",
    "Humanoid.UpdateBlock": "398d822a8fce9217",
@@ -48,6 +52,8 @@
    "Player.UpdateEnvStatusEffects": "129db61b57554af7",
    "SE_Cozy.UpdateStatusEffect": "320bd988c1f42a33",
    "SE_Rested.CalculateComfortLevel": "162eae4ffe1dac85",
+   "SE_Rested.GetNearbyComfortPieces": "71b29d8d50b5ac51",
+   "SE_Rested.PieceComfortSort": "c932378c4a3bc12a",
    "SE_Rested.Setup": "b65cefd031c2008b",
    "SE_Rested.UpdateTTL": "111d3cf695fe8f13"
   },
@@ -84,6 +90,7 @@
    "HitData.ApplyResistance": "04af7b9bbf1fbdce",
    "HitData.DamageModifier": "78f7cd7e415b9e46",
    "HitData.DamageModifiers.Apply": "cdcf53de9a1bf5ed",
+   "HitData.DamageModifiers.ApplyIfBetter": "5b9eb33e952115f9",
    "HitData.DamageModifiers.ShouldOverride": "c117477dbca46da3",
    "HitData.DamageType": "45372e51912f7b40",
    "HitData.DamageTypes": "39c305fb9c674e54",
@@ -112,13 +119,15 @@
   "methods": {
    "Humanoid.UseItem": "9905047c84a04592",
    "Player.CanEat": "9ad9c913e59f2e71",
+   "Player.ClearFood": "89ce1c894c9f0c27",
    "Player.EatFood": "394e63e0ae50363d",
    "Player.Food.CanEatAgain": "bbacdfe03d5cd64f",
    "Player.GetMostDepletedFood": "b066340b6f7a7932",
    "Player.GetTotalFoodValue": "680613cce3d96133",
    "Player.OnDeath": "84902f26ebea8add",
    "Player.UpdateFood": "8fe79a2110dca46e",
-   "Player.UpdateStats": "e9ed6610251b46ec"
+   "Player.UpdateStats": "e9ed6610251b46ec",
+   "SE_Stats.ModifyHealthRegen": "c45d7305c256055a"
   },
   "version": "1.0.20"
  },
@@ -129,6 +138,7 @@
    "InventoryGui.UpdateRecipeList": "62d4cbb2b1de3228",
    "Piece.Requirement.GetAmount": "865d5669682df3e6",
    "Player.ConsumeResources": "9f216fba84092b77",
+   "Player.GetItemUpgradeChance": "ea48ed8f057fb667",
    "Player.HaveRequirements": "6b668da568103ca4",
    "Player.RequiredCraftingStation": "314ef1787dde3961",
    "ZoneSystem.GenerateLocationsTimeSliced": "acddf7956b8a57a7",
@@ -265,6 +275,7 @@
    "CharacterAnimEvent.Speed": "3c3ecd35b8fa43e6",
    "Humanoid.GetAttackDrawPercentage": "67f5a2552b4757f8",
    "Humanoid.StartAttack": "6f3af883e50425fb",
+   "Humanoid.UpdateAttack": "635fb70bd1947998",
    "ItemData.GetWeaponLoadingTime": "3b84db36995a6d54",
    "Player.InAttack": "a5857177e78d4a86",
    "Player.InMinorAction": "71f1b0c2300f14b0",

@@ -2,12 +2,13 @@
 title: Weapons
 summary: Every weapon by category, with attack speed and damage per second.
 order: 7
-sources: Attack.Start; Projectile.Setup; Attack.FireProjectileBurst; Attack.OnAttackTrigger; Player.UpdateAttackBowDraw; Player.UpdateActionQueue; Player.QueueReloadAction; Player.InMinorAction; Humanoid.GetAttackDrawPercentage; ItemData.GetWeaponLoadingTime; Attack.Update; Attack.CanStartChainAttack; Attack.ModifyDamage; Attack.DoMeleeAttack; Attack.DoAreaAttack; Humanoid.StartAttack; Player.InAttack; CharacterAnimEvent.Speed; CharacterAnimEvent.CustomFixedUpdate; Skills.GetRandomSkillFactor
+sources: Attack.Start; Projectile.Setup; Attack.FireProjectileBurst; Attack.OnAttackTrigger; Player.UpdateAttackBowDraw; Player.UpdateActionQueue; Player.QueueReloadAction; Player.InMinorAction; Humanoid.GetAttackDrawPercentage; ItemData.GetWeaponLoadingTime; Attack.Update; Attack.CanStartChainAttack; Attack.ModifyDamage; Attack.DoMeleeAttack; Attack.DoAreaAttack; Humanoid.StartAttack; Player.InAttack; CharacterAnimEvent.Speed; CharacterAnimEvent.CustomFixedUpdate; Skills.GetRandomSkillFactor; Humanoid.UpdateAttack
 ---
 
 No item field sets attack speed. The animator does: an attack fires the trigger `m_attackAnimation` + chain level and
 lasts while the player's animator state is tagged attack, until the state's exit time. A new attack can't start
-before then, except the next chain level, which may start at the clip's Chain event. Speed events in the clip change
+before then, except the next chain level, which may start at the clip's Chain event; more than 0.2 s out of an
+attack restarts the combo at its first level. Speed events in the clip change
 the playback speed part-way through. Each Hit event deals the attack's damage once. A melee hit that connects
 freezes the animation for 0.15 s. Skills and status effects don't change attack speed.
 

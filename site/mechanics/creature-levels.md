@@ -6,10 +6,11 @@ sources: SpawnSystem.Spawn; SpawnSystem.GetLevelUpChance; SpawnArea.SpawnOne; Sp
 ---
 
 Stars = level − 1. Spawners start at their minimum level and step up one level per successful roll of the level-up
-chance until a roll fails or the maximum is reached. Chance: world spawns 10% (per-entry override), spawn areas 15%,
-creature and trigger spawners 10%; locations can override min/max/chance. World modifiers multiply it; at world level
-$w > 0$ it becomes $min(70, c^{1.15w})$. Offspring keep the larger of parent level and their minimum; grown-up
-creatures keep theirs.
+chance $c$ until a roll fails or the maximum is reached. Each spawner sets $c$ (defaults: world and raid spawns 10%,
+spawn areas 15%, creature and trigger spawners 10%; a creature spawner set to 0 uses 10%); locations can override
+min/max/chance. The world modifier and the alt-biome patch multiply $c$, except for trigger spawners; at world level
+$w > 0$ it becomes $min(70, c^{1.15w})$ × the patch's multiplier. Offspring keep the larger of parent level and their
+minimum; grown-up creatures keep theirs.
 
 - health $= base × level$
 - damage $= × (1 + 0.5 × stars)$
@@ -19,6 +20,11 @@ creatures keep theirs.
 {{chart stars}}
 
 {{star-odds}}
+
+World and raid spawns with their own chance, or that level up only farther from the world centre (closer in they
+spawn at their minimum level):
+
+{{level-distance}}
 
 ## Always starred
 

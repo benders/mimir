@@ -5,15 +5,16 @@ order: 2
 sources: CharacterDrop.GenerateDropList; CharacterDrop.OnDeath; CharacterDrop.DropItems; Game.ScaleDrops; Character.CheckDeath; Character.CustomFixedUpdate; Game.FixedUpdate; Player.LateUpdate; ZNet.GetNrOfPlayers
 ---
 
-Level-multiplied drops scale with stars: $n = 2^{stars}$ multiplies both chance and amount (cap 100). The amount is
-`Random.Range(min, max)` on integers, max exclusive, so pages show min to max − 1. One-per-player drops give one per
-connected player. At $p > 0.3$ (or with `NoPseudoDrops`) a drop is a plain roll; at $p ≤ 0.3$ a per-item countdown
-replaces it: at most about $2/p$ kills between drops, shared by every creature dropping that item, reset when $p$
-changes or the game restarts.
+Level-multiplied drops scale with stars: $n = 2^{stars}$ multiplies the chance and, except for trophies, the amount
+(cap 100). The amount is `Random.Range(min, max)` on integers, max exclusive, so pages show min to max − 1 (the
+resource-rate world modifier scales it). One-per-player drops give one per connected player. At $p > 0.3$ (or with
+`NoPseudoDrops`) a drop is a plain roll; at $p ≤ 0.3$ a countdown replaces it: at most about $2/p$ kills between drops,
+one countdown per item and chance, shared by every creature dropping that item at that chance, lost when the game
+restarts.
 
 - chance $p = chance × n$
-- amount $= Random.Range(min, max) × n$
-- countdown after a drop: $Random.Range(0, ⌊2/p + 1⌋)$, −1 per kill, drops at ≤ 0
+- amount $= Random.Range(min, max) × n$ (trophies: $× 1$)
+- first countdown: $Random.Range(0, ⌊2/p⌋)$; after a drop: $Random.Range(0, ⌊2/p⌋ + 2)$; −1 per kill, drops at ≤ 0
 
 {{chart pseudo}}
 

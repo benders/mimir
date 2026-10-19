@@ -91,8 +91,8 @@ class Formulas(unittest.TestCase):
         self.assertEqual([M.upgrade_cost_multiplier(q) for q in range(1, 7)], [0, 1, 2, 4, 4.5, 5])
 
     def test_pseudo(self):
-        self.assertEqual(M.pseudo_gap_max(0.25), 8)  # Range(0, 9) -> 0..8
-        self.assertAlmostEqual(M.pseudo_rate(0.25), 9 / 37)
+        self.assertEqual(M.pseudo_gap_max(0.25), 9)  # Range(0, (int)8 + 2) -> 0..9
+        self.assertAlmostEqual(M.pseudo_rate(0.25), 10 / 46)  # gaps 1,1,2..9 over 10 outcomes
 
     def test_should_override(self):
         o = M.should_override

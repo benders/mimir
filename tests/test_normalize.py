@@ -4,6 +4,7 @@
     MIMIR_UPDATE_GOLDEN=1 python3 -m unittest tests/test_normalize.py   # rewrite tests/golden/ after a deliberate change
 """
 import contextlib
+import copy
 import importlib.util
 import io
 import json
@@ -181,6 +182,10 @@ class Entities(FixtureCase):
         self.assertEqual(c["attacks"], ["Bite"])
         self.assertEqual(c["equipment"], ["FW_Helmet"])
         self.assertEqual([d["item"] for d in c["drops"]], ["Ore"])
+        self.assertFalse(c["drops"][0]["levelChanceOnly"])
+        p = copy.deepcopy(N.PREFABS["Raider"])
+        N.comp(p, "CharacterDrop")["m_drops"][0]["m_levelMultiplierNotAmount"] = True  # a trophy: stars raise the chance only
+        self.assertTrue(N.creature("Raider", p)["drops"][0]["levelChanceOnly"])
         self.assertIn("vfx_Poof", N.skipped_refs)
         self.assertEqual(c["tameable"]["food"], ["Fish"])
 
@@ -452,6 +457,8 @@ class Entities(FixtureCase):
         self.assertEqual(len(s), 6)  # disabled, devDisabled and non-creature spawners dropped; a fish is kept, so is the alt biome's Moth
         self.assertEqual([x["requiredEvent"] for x in s if x.get("requiredEvent")], ["siege"])
         self.assertEqual((s[0]["creature"], s[0]["biomes"]), ("Raider", ["Meadows", "BlackForest"]))
+        self.assertEqual((s[0]["levelUpChance"], s[0]["levelUpDistance"]), (25, 500))  # SpawnSystem.GetLevelUpChance
+        self.assertNotIn("levelUpChance", N.prune(s[1]))  # -1: the default 10
         self.assertEqual(s[1]["creature"], "Raider")  # placed via Spawner_Raider
         self.assertEqual(len(s[1]["biomes"]), len(N.BIOME_BITS))
 
@@ -460,6 +467,7 @@ class Entities(FixtureCase):
         self.assertEqual((r["creature"], r["event"], r["message"]), ("Raider", "army_test", "Something stirs"))
         self.assertEqual(r["biomes"], ["Meadows", "Swamp"])  # the event's biome, not the spawner's
         self.assertEqual(r["levels"], [1, 2])
+        self.assertNotIn("levelUpChance", N.prune(r))  # 0 doesn't override: still 10
 
     def test_raids(self):
         r = N.raids()

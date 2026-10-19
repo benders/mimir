@@ -2,7 +2,7 @@
 title: Forge of Potential
 summary: Where the idol forge stands, and how refining with Battle and Protection Idols works.
 order: 6
-sources: ZoneSystem.GenerateLocationsTimeSliced; ZoneSystem.RemoveUnplacedLocations; InventoryGui.UpdateRecipeList; InventoryGui.UpdateRecipe; InventoryGui.DoCrafting; Player.RequiredCraftingStation; Player.HaveRequirements; Player.ConsumeResources; Piece.Requirement.GetAmount
+sources: ZoneSystem.GenerateLocationsTimeSliced; ZoneSystem.RemoveUnplacedLocations; InventoryGui.UpdateRecipeList; InventoryGui.UpdateRecipe; InventoryGui.DoCrafting; Player.RequiredCraftingStation; Player.HaveRequirements; Player.ConsumeResources; Piece.Requirement.GetAmount; Player.GetItemUpgradeChance
 ---
 
 An ancient forge among broken statues of Thor and Freya in the Mountains. It can't be built: there is
@@ -14,8 +14,9 @@ destroying it. Each tier of gear asks for the idol of its material.
 
 At the forge the crafting menu lists only items you carry that can be upgraded and whose recipe names an idol. The
 recipe's station and station level don't apply, and only the idol is charged: one per attempt, used up whatever happens.
-Normal stations ignore the idol. A failed attempt destroys the item and gives back part of its materials (never the
-idol).
+Normal stations ignore the idol. A break destroys the item and gives back part of its materials (never the idol). The
+roll comes from a random sequence per character, item and target level, seeded from the character's name and saved
+with the character: reloading doesn't change the next outcome.
 
 - outcome: roll r in [0, 1); r ≤ chance → +1 level; else breakChance ≥ 1 − r → the item breaks; else −1 level
 - returned per recoverable material $= ⌈(amount + cost(q - 1)) × breakReturn⌉$, $q$ = the quality aimed for, cost as on [item upgrades](mechanic:item-upgrades)

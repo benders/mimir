@@ -30,7 +30,8 @@
     "min": 1,
     "max": 1,
     "chance": 0.5,
-    "levelMultiplier": true
+    "levelMultiplier": true,
+    "levelChanceOnly": true
    },
    {
     "item": "Root",
@@ -83,7 +84,8 @@
     "min": 1,
     "max": 1,
     "chance": 0.1,
-    "levelMultiplier": true
+    "levelMultiplier": true,
+    "levelChanceOnly": true
    },
    {
     "item": "AskBladder",
@@ -497,7 +499,8 @@
     "min": 1,
     "max": 1,
     "chance": 0.1,
-    "levelMultiplier": true
+    "levelMultiplier": true,
+    "levelChanceOnly": true
    },
    {
     "item": "BarkaBranch",
@@ -658,7 +661,8 @@
     "min": 1,
     "max": 1,
     "chance": 0.1,
-    "levelMultiplier": true
+    "levelMultiplier": true,
+    "levelChanceOnly": true
    }
   ],
   "avoidWater": true,
@@ -727,7 +731,8 @@
     "min": 1,
     "max": 1,
     "chance": 0.1,
-    "levelMultiplier": true
+    "levelMultiplier": true,
+    "levelChanceOnly": true
    }
   ],
   "avoidWater": true,
@@ -815,7 +820,8 @@
     "min": 1,
     "max": 1,
     "chance": 0.1,
-    "levelMultiplier": true
+    "levelMultiplier": true,
+    "levelChanceOnly": true
    },
    {
     "item": "Ooze",
@@ -864,7 +870,8 @@
     "min": 1,
     "max": 1,
     "chance": 0.1,
-    "levelMultiplier": true
+    "levelMultiplier": true,
+    "levelChanceOnly": true
    },
    {
     "item": "Ooze",
@@ -929,7 +936,8 @@
     "min": 1,
     "max": 1,
     "chance": 0.1,
-    "levelMultiplier": true
+    "levelMultiplier": true,
+    "levelChanceOnly": true
    },
    {
     "item": "Blob",
@@ -985,7 +993,8 @@
     "min": 1,
     "max": 1,
     "chance": 0.1,
-    "levelMultiplier": true
+    "levelMultiplier": true,
+    "levelChanceOnly": true
    }
   ],
   "avoidWater": true,
@@ -1042,7 +1051,8 @@
     "min": 1,
     "max": 1,
     "chance": 0.1,
-    "levelMultiplier": true
+    "levelMultiplier": true,
+    "levelChanceOnly": true
    }
   ],
   "avoidWater": true,
@@ -1097,7 +1107,8 @@
     "min": 1,
     "max": 1,
     "chance": 0.5,
-    "levelMultiplier": true
+    "levelMultiplier": true,
+    "levelChanceOnly": true
    }
   ],
   "avoidWater": true,
@@ -1180,7 +1191,8 @@
     "min": 1,
     "max": 1,
     "chance": 0.1,
-    "levelMultiplier": true
+    "levelMultiplier": true,
+    "levelChanceOnly": true
    },
    {
     "item": "Tar",
@@ -1239,7 +1251,8 @@
     "min": 1,
     "max": 1,
     "chance": 0.15,
-    "levelMultiplier": true
+    "levelMultiplier": true,
+    "levelChanceOnly": true
    }
   ],
   "tameable": {
@@ -1376,7 +1389,8 @@
     "min": 1,
     "max": 1,
     "chance": 1,
-    "levelMultiplier": true
+    "levelMultiplier": true,
+    "levelChanceOnly": true
    }
   ],
   "avoidWater": true,
@@ -1422,7 +1436,8 @@
     "min": 1,
     "max": 1,
     "chance": 1,
-    "levelMultiplier": true
+    "levelMultiplier": true,
+    "levelChanceOnly": true
    },
    {
     "item": "Wishbone",
@@ -1471,7 +1486,8 @@
     "min": 1,
     "max": 1,
     "chance": 0.33,
-    "levelMultiplier": true
+    "levelMultiplier": true,
+    "levelChanceOnly": true
    },
    {
     "item": "BoneMawSerpentMeat",
@@ -1536,7 +1552,8 @@
     "min": 1,
     "max": 1,
     "chance": 0.05,
-    "levelMultiplier": true
+    "levelMultiplier": true,
+    "levelChanceOnly": true
    }
   ],
   "avoidWater": true,
@@ -1627,7 +1644,8 @@
     "min": 1,
     "max": 1,
     "chance": 0.05,
-    "levelMultiplier": true
+    "levelMultiplier": true,
+    "levelChanceOnly": true
    }
   ],
   "avoidWater": true,
@@ -1681,7 +1699,8 @@
     "min": 1,
     "max": 1,
     "chance": 0.05,
-    "levelMultiplier": true
+    "levelMultiplier": true,
+    "levelChanceOnly": true
    }
   ],
   "avoidWater": true,
@@ -1941,7 +1960,8 @@
     "min": 1,
     "max": 1,
     "chance": 0.05,
-    "levelMultiplier": true
+    "levelMultiplier": true,
+    "levelChanceOnly": true
    }
   ],
   "avoidWater": true,
@@ -1989,7 +2009,8 @@
     "min": 1,
     "max": 1,
     "chance": 0.5,
-    "levelMultiplier": true
+    "levelMultiplier": true,
+    "levelChanceOnly": true
    }
   ],
   "afraidOfFire": true,
@@ -2032,7 +2053,8 @@
     "min": 1,
     "max": 1,
     "chance": 1,
-    "levelMultiplier": true
+    "levelMultiplier": true,
+    "levelChanceOnly": true
    }
   ],
   "afraidOfFire": true,
@@ -2073,7 +2095,8 @@
     "min": 1,
     "max": 1,
     "chance": 1,
-    "levelMultiplier": true
+    "levelMultiplier": true,
+    "levelChanceOnly": true
    },
    {
     "item": "DragonTear",
@@ -2128,7 +2151,8 @@
     "min": 1,
     "max": 1,
     "chance": 0.1,
-    "levelMultiplier": true
+    "levelMultiplier": true,
+    "levelChanceOnly": true
    }
   ],
   "avoidWater": true,
@@ -2172,7 +2196,8 @@
     "min": 1,
     "max": 1,
     "chance": 0.1,
-    "levelMultiplier": true
+    "levelMultiplier": true,
+    "levelChanceOnly": true
    }
   ],
   "avoidWater": true,
@@ -2216,7 +2241,8 @@
     "min": 1,
     "max": 1,
     "chance": 0.1,
-    "levelMultiplier": true
+    "levelMultiplier": true,
+    "levelChanceOnly": true
    }
   ],
   "avoidWater": true,
@@ -2253,7 +2279,8 @@
     "min": 1,
     "max": 1,
     "chance": 0.1,
-    "levelMultiplier": true
+    "levelMultiplier": true,
+    "levelChanceOnly": true
    }
   ],
   "avoidWater": true,
@@ -2297,7 +2324,8 @@
     "min": 1,
     "max": 1,
     "chance": 0.1,
-    "levelMultiplier": true
+    "levelMultiplier": true,
+    "levelChanceOnly": true
    }
   ],
   "avoidWater": true,
@@ -2339,7 +2367,8 @@
     "min": 1,
     "max": 1,
     "chance": 0.1,
-    "levelMultiplier": true
+    "levelMultiplier": true,
+    "levelChanceOnly": true
    }
   ],
   "avoidWater": true,
@@ -2394,7 +2423,8 @@
     "min": 1,
     "max": 1,
     "chance": 0.05,
-    "levelMultiplier": true
+    "levelMultiplier": true,
+    "levelChanceOnly": true
    }
   ],
   "avoidWater": true,
@@ -2456,7 +2486,8 @@
     "min": 1,
     "max": 1,
     "chance": 0.05,
-    "levelMultiplier": true
+    "levelMultiplier": true,
+    "levelChanceOnly": true
    }
   ],
   "avoidWater": true,
@@ -2520,7 +2551,8 @@
     "min": 1,
     "max": 1,
     "chance": 0.1,
-    "levelMultiplier": true
+    "levelMultiplier": true,
+    "levelChanceOnly": true
    },
    {
     "item": "AncientGemstoneOrange",
@@ -2608,7 +2640,8 @@
     "min": 1,
     "max": 1,
     "chance": 0.05,
-    "levelMultiplier": true
+    "levelMultiplier": true,
+    "levelChanceOnly": true
    }
   ],
   "avoidWater": true,
@@ -2673,7 +2706,8 @@
     "min": 1,
     "max": 1,
     "chance": 0.05,
-    "levelMultiplier": true
+    "levelMultiplier": true,
+    "levelChanceOnly": true
    }
   ],
   "avoidWater": true,
@@ -2731,7 +2765,8 @@
     "min": 1,
     "max": 1,
     "chance": 0.05,
-    "levelMultiplier": true
+    "levelMultiplier": true,
+    "levelChanceOnly": true
    }
   ],
   "avoidWater": true,
@@ -2789,7 +2824,8 @@
     "min": 1,
     "max": 1,
     "chance": 0.05,
-    "levelMultiplier": true
+    "levelMultiplier": true,
+    "levelChanceOnly": true
    }
   ],
   "avoidWater": true,
@@ -2879,7 +2915,8 @@
     "min": 1,
     "max": 1,
     "chance": 1,
-    "levelMultiplier": true
+    "levelMultiplier": true,
+    "levelChanceOnly": true
    },
    {
     "item": "HardAntler",
@@ -2932,7 +2969,8 @@
     "min": 1,
     "max": 1,
     "chance": 0.1,
-    "levelMultiplier": true
+    "levelMultiplier": true,
+    "levelChanceOnly": true
    },
    {
     "item": "MoldKeys",
@@ -2984,7 +3022,8 @@
     "min": 1,
     "max": 1,
     "chance": 0.1,
-    "levelMultiplier": true
+    "levelMultiplier": true,
+    "levelChanceOnly": true
    }
   ],
   "avoidWater": true,
@@ -3025,7 +3064,8 @@
     "min": 1,
     "max": 1,
     "chance": 0.1,
-    "levelMultiplier": true
+    "levelMultiplier": true,
+    "levelChanceOnly": true
    },
    {
     "item": "MoleClaws",
@@ -3090,7 +3130,8 @@
     "min": 1,
     "max": 1,
     "chance": 1,
-    "levelMultiplier": true
+    "levelMultiplier": true,
+    "levelChanceOnly": true
    },
    {
     "item": "FaderDrop",
@@ -3145,7 +3186,8 @@
     "min": 1,
     "max": 1,
     "chance": 0.05,
-    "levelMultiplier": true
+    "levelMultiplier": true,
+    "levelChanceOnly": true
    }
   ],
   "avoidWater": true,
@@ -3264,7 +3306,8 @@
     "min": 1,
     "max": 1,
     "chance": 0.1,
-    "levelMultiplier": true
+    "levelMultiplier": true,
+    "levelChanceOnly": true
    }
   ],
   "avoidWater": true,
@@ -3311,7 +3354,8 @@
     "min": 1,
     "max": 1,
     "chance": 0.1,
-    "levelMultiplier": true
+    "levelMultiplier": true,
+    "levelChanceOnly": true
    }
   ],
   "avoidWater": true,
@@ -3360,7 +3404,8 @@
     "min": 1,
     "max": 1,
     "chance": 1,
-    "levelMultiplier": true
+    "levelMultiplier": true,
+    "levelChanceOnly": true
    }
   ],
   "avoidWater": true,
@@ -3652,7 +3697,8 @@
     "min": 1,
     "max": 1,
     "chance": 0.1,
-    "levelMultiplier": true
+    "levelMultiplier": true,
+    "levelChanceOnly": true
    }
   ],
   "avoidWater": true,
@@ -3762,7 +3808,8 @@
     "min": 1,
     "max": 1,
     "chance": 0.1,
-    "levelMultiplier": true
+    "levelMultiplier": true,
+    "levelChanceOnly": true
    }
   ],
   "avoidWater": true,
@@ -3802,7 +3849,8 @@
     "min": 1,
     "max": 1,
     "chance": 0.3,
-    "levelMultiplier": true
+    "levelMultiplier": true,
+    "levelChanceOnly": true
    }
   ],
   "avoidWater": true,
@@ -3864,7 +3912,8 @@
     "min": 1,
     "max": 1,
     "chance": 0.1,
-    "levelMultiplier": true
+    "levelMultiplier": true,
+    "levelChanceOnly": true
    }
   ],
   "avoidWater": true,
@@ -3923,7 +3972,8 @@
     "min": 1,
     "max": 1,
     "chance": 0.1,
-    "levelMultiplier": true
+    "levelMultiplier": true,
+    "levelChanceOnly": true
    }
   ],
   "avoidWater": true,
@@ -3990,7 +4040,8 @@
     "min": 1,
     "max": 1,
     "chance": 0.05,
-    "levelMultiplier": true
+    "levelMultiplier": true,
+    "levelChanceOnly": true
    }
   ],
   "avoidWater": true,
@@ -4043,7 +4094,8 @@
     "min": 1,
     "max": 1,
     "chance": 1,
-    "levelMultiplier": true
+    "levelMultiplier": true,
+    "levelChanceOnly": true
    }
   ],
   "avoidWater": true,
@@ -4096,7 +4148,8 @@
     "min": 1,
     "max": 1,
     "chance": 1,
-    "levelMultiplier": true
+    "levelMultiplier": true,
+    "levelChanceOnly": true
    }
   ],
   "avoidWater": true,
@@ -4370,7 +4423,8 @@
     "min": 1,
     "max": 1,
     "chance": 1,
-    "levelMultiplier": true
+    "levelMultiplier": true,
+    "levelChanceOnly": true
    }
   ],
   "avoidWater": true,
@@ -4464,7 +4518,8 @@
     "min": 2,
     "max": 4,
     "chance": 1,
-    "levelMultiplier": true
+    "levelMultiplier": true,
+    "levelChanceOnly": true
    }
   ],
   "afraidOfFire": true,
@@ -4526,7 +4581,8 @@
     "min": 1,
     "max": 1,
     "chance": 0.05,
-    "levelMultiplier": true
+    "levelMultiplier": true,
+    "levelChanceOnly": true
    }
   ],
   "avoidWater": true,
@@ -4600,7 +4656,8 @@
     "min": 1,
     "max": 1,
     "chance": 0.1,
-    "levelMultiplier": true
+    "levelMultiplier": true,
+    "levelChanceOnly": true
    }
   ],
   "avoidWater": true,
@@ -4736,7 +4793,8 @@
     "min": 1,
     "max": 1,
     "chance": 0.1,
-    "levelMultiplier": true
+    "levelMultiplier": true,
+    "levelChanceOnly": true
    },
    {
     "item": "Pukeberries",
@@ -4905,7 +4963,8 @@
     "min": 1,
     "max": 1,
     "chance": 0.05,
-    "levelMultiplier": true
+    "levelMultiplier": true,
+    "levelChanceOnly": true
    }
   ],
   "afraidOfFire": true,
@@ -4945,7 +5004,8 @@
     "min": 1,
     "max": 1,
     "chance": 0.1,
-    "levelMultiplier": true
+    "levelMultiplier": true,
+    "levelChanceOnly": true
    },
    {
     "item": "FreezeGland",
@@ -5143,7 +5203,8 @@
     "min": 1,
     "max": 1,
     "chance": 0.1,
-    "levelMultiplier": true
+    "levelMultiplier": true,
+    "levelChanceOnly": true
    },
    {
     "item": "Leatherstraps",
@@ -5254,7 +5315,8 @@
     "min": 1,
     "max": 1,
     "chance": 0.1,
-    "levelMultiplier": true
+    "levelMultiplier": true,
+    "levelChanceOnly": true
    },
    {
     "item": "Leatherstraps",
@@ -5335,7 +5397,8 @@
     "min": 1,
     "max": 1,
     "chance": 0.1,
-    "levelMultiplier": true
+    "levelMultiplier": true,
+    "levelChanceOnly": true
    },
    {
     "item": "BloodGoldKey",
@@ -5403,7 +5466,8 @@
     "min": 1,
     "max": 1,
     "chance": 0.1,
-    "levelMultiplier": true
+    "levelMultiplier": true,
+    "levelChanceOnly": true
    },
    {
     "item": "Bloodbag",
@@ -5496,7 +5560,8 @@
     "min": 1,
     "max": 1,
     "chance": 0.1,
-    "levelMultiplier": true
+    "levelMultiplier": true,
+    "levelChanceOnly": true
    },
    {
     "item": "LoxPelt",
@@ -5633,7 +5698,8 @@
     "min": 1,
     "max": 1,
     "chance": 0.1,
-    "levelMultiplier": true
+    "levelMultiplier": true,
+    "levelChanceOnly": true
    },
    {
     "item": "MooseHide",
@@ -5793,7 +5859,8 @@
     "min": 1,
     "max": 1,
     "chance": 0.05,
-    "levelMultiplier": true
+    "levelMultiplier": true,
+    "levelChanceOnly": true
    }
   ],
   "avoidWater": true,
@@ -5854,7 +5921,8 @@
     "min": 1,
     "max": 1,
     "chance": 0.05,
-    "levelMultiplier": true
+    "levelMultiplier": true,
+    "levelChanceOnly": true
    }
   ],
   "avoidWater": true,
@@ -5900,7 +5968,8 @@
     "min": 1,
     "max": 1,
     "chance": 0.05,
-    "levelMultiplier": true
+    "levelMultiplier": true,
+    "levelChanceOnly": true
    }
   ],
   "afraidOfFire": true,
@@ -5942,7 +6011,8 @@
     "min": 1,
     "max": 1,
     "chance": 0.1,
-    "levelMultiplier": true
+    "levelMultiplier": true,
+    "levelChanceOnly": true
    },
    {
     "item": "SealBlubber",
@@ -6044,7 +6114,8 @@
     "min": 1,
     "max": 1,
     "chance": 0.05,
-    "levelMultiplier": true
+    "levelMultiplier": true,
+    "levelChanceOnly": true
    }
   ],
   "avoidWater": true,
@@ -6140,7 +6211,8 @@
     "min": 1,
     "max": 1,
     "chance": 0.05,
-    "levelMultiplier": true
+    "levelMultiplier": true,
+    "levelChanceOnly": true
    },
    {
     "item": "Mandible",
@@ -6192,7 +6264,8 @@
     "min": 1,
     "max": 1,
     "chance": 1,
-    "levelMultiplier": true
+    "levelMultiplier": true,
+    "levelChanceOnly": true
    },
    {
     "item": "QueenDrop",
@@ -6240,7 +6313,8 @@
     "min": 1,
     "max": 1,
     "chance": 0.33,
-    "levelMultiplier": true
+    "levelMultiplier": true,
+    "levelChanceOnly": true
    },
    {
     "item": "SerpentMeat",
@@ -6349,7 +6423,8 @@
     "min": 1,
     "max": 1,
     "chance": 0.1,
-    "levelMultiplier": true
+    "levelMultiplier": true,
+    "levelChanceOnly": true
    },
    {
     "item": "BoneFragments",
@@ -6400,7 +6475,8 @@
     "min": 1,
     "max": 1,
     "chance": 0.1,
-    "levelMultiplier": true
+    "levelMultiplier": true,
+    "levelChanceOnly": true
    },
    {
     "item": "BoneFragments",
@@ -6505,7 +6581,8 @@
     "min": 1,
     "max": 1,
     "chance": 1,
-    "levelMultiplier": true
+    "levelMultiplier": true,
+    "levelChanceOnly": true
    }
   ],
   "avoidWater": true,
@@ -6605,7 +6682,8 @@
     "min": 1,
     "max": 1,
     "chance": 0.1,
-    "levelMultiplier": true
+    "levelMultiplier": true,
+    "levelChanceOnly": true
    },
    {
     "item": "BoneFragments",
@@ -6721,7 +6799,8 @@
     "min": 1,
     "max": 1,
     "chance": 0.1,
-    "levelMultiplier": true
+    "levelMultiplier": true,
+    "levelChanceOnly": true
    },
    {
     "item": "BoneFragments",
@@ -6772,7 +6851,8 @@
     "min": 1,
     "max": 1,
     "chance": 0.1,
-    "levelMultiplier": true
+    "levelMultiplier": true,
+    "levelChanceOnly": true
    },
    {
     "item": "BoneFragments",
@@ -6816,7 +6896,8 @@
     "min": 1,
     "max": 1,
     "chance": 0.1,
-    "levelMultiplier": true
+    "levelMultiplier": true,
+    "levelChanceOnly": true
    },
    {
     "item": "BoneFragments",
@@ -6856,7 +6937,8 @@
     "min": 1,
     "max": 1,
     "chance": 0.1,
-    "levelMultiplier": true
+    "levelMultiplier": true,
+    "levelChanceOnly": true
    },
    {
     "item": "BoneFragments",
@@ -6908,7 +6990,8 @@
     "min": 1,
     "max": 1,
     "chance": 0.1,
-    "levelMultiplier": true
+    "levelMultiplier": true,
+    "levelChanceOnly": true
    },
    {
     "item": "BoneFragments",
@@ -6959,7 +7042,8 @@
     "min": 1,
     "max": 1,
     "chance": 0.1,
-    "levelMultiplier": true
+    "levelMultiplier": true,
+    "levelChanceOnly": true
    },
    {
     "item": "BoneFragments",
@@ -7004,7 +7088,8 @@
     "min": 1,
     "max": 1,
     "chance": 0.1,
-    "levelMultiplier": true
+    "levelMultiplier": true,
+    "levelChanceOnly": true
    },
    {
     "item": "BoneFragments",
@@ -7063,7 +7148,8 @@
     "min": 1,
     "max": 1,
     "chance": 0.05,
-    "levelMultiplier": true
+    "levelMultiplier": true,
+    "levelChanceOnly": true
    },
    {
     "item": "Stone",
@@ -7131,7 +7217,8 @@
     "min": 1,
     "max": 1,
     "chance": 0.05,
-    "levelMultiplier": true
+    "levelMultiplier": true,
+    "levelChanceOnly": true
    }
   ],
   "avoidWater": true,
@@ -7341,7 +7428,8 @@
     "min": 1,
     "max": 1,
     "chance": 0.05,
-    "levelMultiplier": true
+    "levelMultiplier": true,
+    "levelChanceOnly": true
    }
   ],
   "avoidWater": true,
@@ -7424,7 +7512,8 @@
     "min": 1,
     "max": 1,
     "chance": 0.5,
-    "levelMultiplier": true
+    "levelMultiplier": true,
+    "levelChanceOnly": true
    },
    {
     "item": "TrollHide",
@@ -7556,7 +7645,8 @@
     "min": 1,
     "max": 1,
     "chance": 0.5,
-    "levelMultiplier": true
+    "levelMultiplier": true,
+    "levelChanceOnly": true
    },
    {
     "item": "TrollHide",
@@ -7601,7 +7691,8 @@
     "min": 1,
     "max": 1,
     "chance": 0.1,
-    "levelMultiplier": true
+    "levelMultiplier": true,
+    "levelChanceOnly": true
    }
   ],
   "avoidWater": true,
@@ -7651,7 +7742,8 @@
     "min": 1,
     "max": 1,
     "chance": 0.1,
-    "levelMultiplier": true
+    "levelMultiplier": true,
+    "levelChanceOnly": true
    },
    {
     "item": "BjornMeat",
@@ -7717,7 +7809,8 @@
     "min": 1,
     "max": 1,
     "chance": 0.1,
-    "levelMultiplier": true
+    "levelMultiplier": true,
+    "levelChanceOnly": true
    },
    {
     "item": "VoltureMeat",
@@ -7775,7 +7868,8 @@
     "min": 1,
     "max": 1,
     "chance": 0.1,
-    "levelMultiplier": true
+    "levelMultiplier": true,
+    "levelChanceOnly": true
    },
    {
     "item": "WolfMeat",
@@ -7925,7 +8019,8 @@
     "min": 1,
     "max": 1,
     "chance": 0.05,
-    "levelMultiplier": true
+    "levelMultiplier": true,
+    "levelChanceOnly": true
    },
    {
     "item": "Chain",
@@ -7973,7 +8068,8 @@
     "min": 1,
     "max": 1,
     "chance": 0.1,
-    "levelMultiplier": true
+    "levelMultiplier": true,
+    "levelChanceOnly": true
    },
    {
     "item": "WrithanRoots",
@@ -8023,7 +8119,8 @@
     "min": 1,
     "max": 1,
     "chance": 1,
-    "levelMultiplier": true
+    "levelMultiplier": true,
+    "levelChanceOnly": true
    },
    {
     "item": "CryptKey",

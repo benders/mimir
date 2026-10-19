@@ -132,10 +132,12 @@ region until the world has `max` (`min` always), at least `minDistance` m from t
 `spawns` / `blocksSpawns` (creatures), `vegetation` / `blocksVegetation` (source or piece ids), `locations` /
 `blocksLocations`, weather changes, `levelUpMultiplier`; normalize.alt_biomes has the code refs). Each `spawns` entry has a `source`: `world` (SpawnSystem; also the enabled alt biomes' spawns, `altBiome` = the patch name),
 `raid` (RandEventSystem; the event's biomes; `requiredGlobalKeys`), world spawns may need a `requiredGlobalKey` or a
-`requiredEvent` (persistent event running), `location` / `dungeon` (spawners and boss altars in a location or its
+`requiredEvent` (persistent event running); world and raid entries have `levelUpChance` (% per star, when not the default
+10) and `levelUpDistance` (m from the centre beyond which they level up), `location` / `dungeon` (spawners and boss altars in a location or its
 dungeon rooms; the location's biomes), `offspring` (`parent` creature), `egg` (`item` that hatches), `summon` (an attack `item`'s projectile or ability prefab makes it, through `subprefabs/`;
 `parent` creature carrying the item, none if only players can use it) or `phase` (the `parent` creature's death effects
 create it, or a death-effect projectile spawns it: a boss's next stage). `summon` and `phase` count as reachable only once their parent or item is.
+Creature `drops` with `levelChanceOnly` (trophies) get the star multiplier on their chance but not their amount.
 Ids are prefab names; references are ids. Empty, zero, false and "Normal" values are omitted. Text is plain: Unity
 rich-text tags are stripped; creatures whose name was colored (Hildir's minibosses) are flagged `named`. Pieces that make items on their own have `produces` (`item`, `secPerUnit`, `max`; a Beehive's working `biomes`, a
 Sap Extractor's `connectsTo` root with the biomes it grows in); pieces with a WispSpawner (Wisp Fountain, Eternal Pyre) have `lures` {source (the pickable it makes, whose `placedBy` names the piece), interval, chance, max, area, night, maxCover}; the site links both ends (piece "Lures" / "Grows into", item "Produced by"); sources of kind `destructible` are non-piece objects

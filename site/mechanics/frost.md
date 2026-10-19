@@ -5,7 +5,7 @@ order: 4
 sources: Character.RPC_Damage; Character.AddFrostDamage; SE_Frost.AddDamage; SE_Frost.ModifySpeed; SEMan.ApplyStatusEffectSpeedMods; Character.UpdateWalking; Character.UpdateSwimming; HitData.DamageModifiers.ShouldOverride
 ---
 
-Frost is dealt once, like physical damage, with no damage over time. After resistances (and, on players, armor), any
+Frost is dealt once, like physical damage, with no damage over time. After resistances and armor, any
 frost left on a hit applies the [Frost](effect:Frost) effect, which cuts movement speed (walking, running,
 swimming). Attack speed is unchanged. The effect doesn't stack: a new hit restarts it only when its duration
 would be longer than the time left. Creatures immune to frost never get the effect. Resistant, very resistant and

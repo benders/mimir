@@ -19,6 +19,8 @@
    1,
    2
   ],
+  "levelUpChance": 25,
+  "levelUpDistance": 500,
   "night": true,
   "altitude": [
    0,

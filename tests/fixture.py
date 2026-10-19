@@ -75,7 +75,8 @@ def character(type_="Humanoid", **kw):
 
 
 def char_drop(item, **kw):
-    return {**m(prefab=R(item), amountMin=1, amountMax=1, chance=1, onePerPlayer=False, levelMultiplier=True), **m(**kw)}
+    return {**m(prefab=R(item), amountMin=1, amountMax=1, chance=1, onePerPlayer=False, levelMultiplier=True,
+                levelMultiplierNotAmount=False), **m(**kw)}
 
 
 def req(item, amount=1, per_level=0, recover=True, upgrader=None):
@@ -109,7 +110,7 @@ def spawner(creature, **kw):
     return {**m(prefab=R(creature), enabled=True, devDisabled=False, biome="Meadows", biomeArea="Everything",
                 maxSpawned=2, spawnInterval=90, spawnChance=50, groupSizeMin=1, groupSizeMax=1, minLevel=1, maxLevel=3,
                 spawnAtDay=True, spawnAtNight=True, minAltitude=0, maxAltitude=1000, requiredGlobalKey="",
-                requiredEnvironments=[], huntPlayer=False), **m(**kw)}
+                requiredEnvironments=[], huntPlayer=False, overrideLevelupChance=-1, levelUpMinCenterDistance=0), **m(**kw)}
 
 
 def creature_spawner(creature, **kw):
@@ -404,7 +405,8 @@ def write_dump(raw: Path) -> Path:
         "_startDate": [1, 12], "_endDate": [6, 1], "Pieces": [R("Tree")],
         "Recipes": [{"$asset": "Recipe_Hat", "type": "Recipe"}]}}])
     dump("world/SpawnSystemList.json", [{"name": "Spawns", "type": "SpawnSystemList", "fields": {"m_spawners": [
-        spawner("Raider", biome="Meadows, BlackForest", minLevel=1, maxLevel=2, spawnAtDay=False, name="night_raider"),
+        spawner("Raider", biome="Meadows, BlackForest", minLevel=1, maxLevel=2, spawnAtDay=False, name="night_raider",
+                overrideLevelupChance=25, levelUpMinCenterDistance=500),
         spawner("Raider", enabled=False),
         spawner("Raider", devDisabled=True),
         spawner("vfx_Poof"),
@@ -415,7 +417,7 @@ def write_dump(raw: Path) -> Path:
     ]}}])
     dump("world/RandEventSystem.json", [{"name": "_GameMain", "type": "RandEventSystem", "fields": {
         "m_eventIntervalMin": 30, "m_eventChance": 10, "m_events": [
-        event("army_test", "Meadows, Swamp", spawner("Raider", biome="1023", minLevel=2, maxLevel=1), spawner("vfx_Poof"),
+        event("army_test", "Meadows, Swamp", spawner("Raider", biome="1023", minLevel=2, maxLevel=1, overrideLevelupChance=0), spawner("vfx_Poof"),
               altRequiredNotKnownItems=[R("Ore")], altNotRequiredPlayerKeys=["GP_Chief"]),
         event("army_off", "Meadows", spawner("Pup"), enabled=False),
         event("boss_chief", "Meadows", random=False),  # a boss fight's music, not a raid

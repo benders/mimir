@@ -2,7 +2,7 @@
 title: Adrenaline
 summary: How the bar fills and drains; trinket effects when it is full.
 order: 6
-sources: Player.GetMaxAdrenaline; Player.UpdateModifiers; Player.AddAdrenaline; Player.UpdateStats; Player.RPC_HitWhileDodging; Player.ActivateGuardianPower; Attack.OnAttackTrigger; Attack.FireProjectileBurst; Attack.DoMeleeAttack; Attack.DoAreaAttack; Projectile.OnHit; Humanoid.BlockAttack; Character.AddStaggerDamage; Character.RPC_Damage; SE_Stats.ModifyAdrenaline
+sources: Player.GetMaxAdrenaline; Player.UpdateModifiers; Player.AddAdrenaline; Player.UpdateStats; Player.RPC_HitWhileDodging; Player.ActivateGuardianPower; Attack.OnAttackTrigger; Attack.FireProjectileBurst; Attack.DoMeleeAttack; Attack.DoAreaAttack; Projectile.OnHit; Humanoid.BlockAttack; Character.AddStaggerDamage; Character.RPC_Damage; SE_Stats.ModifyAdrenaline; Character.GetMaxAdrenaline
 ---
 
 The bar holds the sum of the equipped items' max adrenaline; the player's own base is 0, so without a trinket nothing
@@ -20,6 +20,8 @@ the delay runs out the bar drains every frame.
 > so the game's curves may bend between keys.
 
 ## Gains
+
+A creature's multiplier is its `m_enemyAdrenalineMultiplier` (1 on every creature in this version).
 
 {{adrenaline-sources}}
 

@@ -2,7 +2,7 @@
 title: Comfort and rest
 summary: Comfort level, Resting, how long Rested lasts.
 order: 9
-sources: SE_Rested.CalculateComfortLevel; SE_Rested.UpdateTTL; SE_Rested.Setup; SE_Cozy.UpdateStatusEffect; Player.UpdateBaseValue; Player.UpdateEnvStatusEffects; Player.SetSleeping; Piece.GetComfort; Piece.GetAllComfortPiecesInRadius
+sources: SE_Rested.CalculateComfortLevel; SE_Rested.UpdateTTL; SE_Rested.Setup; SE_Cozy.UpdateStatusEffect; Player.UpdateBaseValue; Player.UpdateEnvStatusEffects; Player.SetSleeping; Piece.GetComfort; Piece.GetAllComfortPiecesInRadius; SE_Rested.PieceComfortSort; SE_Rested.GetNearbyComfortPieces
 ---
 
 Comfort is 1 outside shelter. In shelter it is 2 plus the comfort pieces within 10 m: only the best piece of each

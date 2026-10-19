@@ -782,6 +782,8 @@ def creature(name: str, p: dict) -> dict | None:
     drops = [{
         "item": ref(d["m_prefab"]), "min": d["m_amountMin"], "max": d["m_amountMax"], "chance": d["m_chance"],
         "onePerPlayer": d["m_onePerPlayer"], "levelMultiplier": d["m_levelMultiplier"],
+        # stars multiply the chance but not the amount (trophies; CharacterDrop.GenerateDropList)
+        "levelChanceOnly": d["m_levelMultiplier"] and d.get("m_levelMultiplierNotAmount", False),
     } for d in (comp(p, "CharacterDrop") or {}).get("m_drops", []) if keep(ref(d["m_prefab"]), is_item, is_creature)]
     tame = comp(p, "Tameable")
     ai = comp(p, "MonsterAI") or comp(p, "AnimalAI") or {}
@@ -1090,6 +1092,13 @@ def load_dir(rel: str) -> dict[str, dict]:
         if d.is_dir() else {}
 
 
+def level_up(s: dict) -> dict:
+    """A SpawnSystem entry's level-up rules (SpawnSystem.Spawn, GetLevelUpChance): `levelUpChance` (%) when it overrides
+    the default 10 (only values above 0 do), `levelUpDistance` (m) when it levels up only farther from the centre."""
+    chance = s.get("m_overrideLevelupChance", -1)
+    return {"levelUpChance": chance if chance > 0 else None, "levelUpDistance": s.get("m_levelUpMinCenterDistance")}
+
+
 def world_spawn(s: dict, lst: str, alt: str = "") -> dict | None:
     prefab = ref(s["m_prefab"])
     # some entries place a CreatureSpawner prefab rather than the creature itself
@@ -1109,6 +1118,7 @@ def world_spawn(s: dict, lst: str, alt: str = "") -> dict | None:
         "chance": s["m_spawnChance"],
         "groupSize": [s["m_groupSizeMin"], s["m_groupSizeMax"]],
         "levels": [s["m_minLevel"], s["m_maxLevel"]],
+        **level_up(s),
         "day": s["m_spawnAtDay"],
         "night": s["m_spawnAtNight"],
         "altitude": [s["m_minAltitude"], s["m_maxAltitude"]],
@@ -1230,6 +1240,7 @@ def raid_spawns() -> list[dict]:
                 "chance": s["m_spawnChance"],
                 "groupSize": [s["m_groupSizeMin"], s["m_groupSizeMax"]],
                 "levels": levels(s["m_minLevel"], s["m_maxLevel"]),
+                **level_up(s),
                 "requiredGlobalKeys": e["m_requiredGlobalKeys"],
                 "notRequiredGlobalKeys": e["m_notRequiredGlobalKeys"],
             })

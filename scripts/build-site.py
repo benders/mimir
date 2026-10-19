@@ -1292,7 +1292,8 @@ def creature_page(c: dict) -> None:
     body += section("Equipment", reflist(gear) + ('<p class=note>Enemy copies of player gear; '
                                                    'their stats can differ from the items linked here.</p>'
                                                    if any(ITEMS[x].get("enemyOnly") for x in c.get("equipment", [])) else ""))
-    drops = [[link("item", d["item"]) + (' <span class="qty">×stars</span>' if d.get("levelMultiplier") else "")
+    drops = [[link("item", d["item"]) + (' <span class="qty">chance ×stars</span>' if d.get("levelChanceOnly") else
+                                         ' <span class="qty">×stars</span>' if d.get("levelMultiplier") else "")
               + (' <span class="qty">×players</span>' if d.get("onePerPlayer") else ""),
               drop_amount(d), pct(d.get("chance", 1))] for d in c.get("drops", [])]
     body += section("Drops", table(["Item", "Amount", "Chance"], drops) + (
@@ -1608,7 +1609,8 @@ def raid_conditions(e: dict) -> list[tuple[str, str]]:
     if pl.get("keysAny") or pl.get("knownItems"):
         alt.append("only for a player who " + " or ".join(
             [player_key_label(k) for k in pl.get("keysAny", [])] + [f"has found {link('item', i)}" for i in pl.get("knownItems", [])]))
-    if pl.get("keysAll"):
+    if pl.get("keysAll") and not (pl.get("keysAny") or pl.get("knownItems")):
+        # RandEventSystem.PlayerIsReadyForEvent: with an any-list the all-list can only refuse, never admit
         alt.append("only for a player who " + " and ".join(player_key_label(k) for k in pl["keysAll"]))
     if pl.get("notKeys") or pl.get("notKnownItems"):
         alt.append("not for a player who " + " or ".join(
@@ -1617,7 +1619,8 @@ def raid_conditions(e: dict) -> list[tuple[str, str]]:
             ("After", " and ".join(key_label(k) for k in e.get("requiredGlobalKeys", [])) or "from the start"),
             ("Until", " or ".join(key_label(k) for k in e.get("notRequiredGlobalKeys", []))),
             ("Needs a base", "yes" if e.get("nearBaseOnly") else "no: any player can draw it"),
-            ("Lasts", duration(e["duration"]) if e.get("duration") else None),
+            ("Lasts", (duration(e["duration"]) + ("" if e.get("pauseIfNoPlayer") else ", even with no player near"))
+             if e.get("duration") else None),
             ("Player-based raids", "; ".join(alt) or "as above"),
             ("Ends with", esc(e["endMessage"]) if e.get("endMessage") else None)]
 
@@ -2037,6 +2040,22 @@ def block_star_odds() -> str:
     return table(["Spawn range", "Chance per star"] + [f"{n} stars" if n != 1 else "1 star" for n in range(0, 5)], rows, "num")
 
 
+def block_level_distance() -> str:
+    """World and raid spawn entries that level up only beyond a distance from the world centre (SpawnSystem.Spawn),
+    and entries with their own level-up chance (SpawnSystem.GetLevelUpChance)."""
+    found = {}
+    for s in SPAWNS:
+        if (s["source"] in ("world", "raid") and (s.get("levelUpDistance") or s.get("levelUpChance"))
+                and s.get("levels") and s["levels"][1] > s["levels"][0]):  # a fixed level never rolls
+            cid = MERGED["creature"].get(s["creature"], s["creature"])
+            if has_page("creature", cid):
+                found[(name_of("creature", cid).lower(), cid, stars(*s["levels"]), s.get("levelUpChance", 10),
+                       s.get("levelUpDistance", 0))] = True
+    rows = [[link("creature", cid), st, f"{num(ch)}%", f"{num(d)} m" if d else "–"]
+            for _, cid, st, ch, d in sorted(found)]
+    return table(["Creature", "Stars", "Chance per star", "Only beyond"], rows, "num")
+
+
 def block_guaranteed_stars() -> str:
     """Spawn entries whose minimum level is above 1: always starred. One row per creature, source kind and star range."""
     found: dict[tuple, list[str]] = {}
@@ -2091,7 +2110,8 @@ def block_drops_example() -> str:
             p = min(1.0, d.get("chance", 1) * n)
             pseudo = d.get("chance", 1) * n <= 0.3
             lo, hi = d.get("min", 1), d.get("max", 1)
-            amt = rng(lo * n, (hi - 1 if hi > lo else hi) * n)
+            k = 1 if d.get("levelChanceOnly") else n
+            amt = rng(lo * k, (hi - 1 if hi > lo else hi) * k)
             cells.append(f"{amt} at {pct(p)}" + (" (pseudo-random)" if pseudo else ""))
         rows.append([link("item", d["item"])] + cells)
     return table(["Item", "0 stars", "1 star", "2 stars"], rows)
@@ -2245,15 +2265,17 @@ def block_adrenaline_sources() -> str:
     """What adds or removes adrenaline. Player values from data/player.json; the guardian power's 10 is a code constant
     (Player.m_adrenalineGuardianPower, not serialized)."""
     adr = PLAYER["adrenaline"]
-    rows = [("Melee hit", "the attack's per-hit value, for each creature hit", "Attack.DoMeleeAttack"),
-            ("Area attack", "the attack's per-hit value, once if an enemy is hit", "Attack.DoAreaAttack"),
+    rows = [("Melee hit", "the attack's per-hit value × the creature's multiplier, for each creature hit",
+             "Attack.DoMeleeAttack"),
+            ("Area attack", "the attack's per-hit value × the highest multiplier among the enemies hit, once",
+             "Attack.DoAreaAttack"),
             ("Projectile hit", "the projectile's value (2 by default), when it damages a creature", "Projectile.OnHit"),
             ("Attack used", "the attack's on-use value; again per burst for attacks that pay per burst",
              "Attack.OnAttackTrigger"),
             ("Block", "the blocker's per-block value, unless it is a parry; even if the block breaks", "Humanoid.BlockAttack"),
             ("Parry", "the blocker's per-parry value, if the block holds", "Humanoid.BlockAttack"),
             ("Perfect dodge", num(adr.get("perfectDodge", 0)), "Player.RPC_HitWhileDodging"),
-            ("Stagger an enemy", num(adr.get("staggerEnemy", 0)), "Character.AddStaggerDamage"),
+            ("Stagger an enemy", num(adr.get("staggerEnemy", 0)) + " × the creature's multiplier", "Character.AddStaggerDamage"),
             ("Guardian power used", "10", "Player.ActivateGuardianPower"),
             ("Melee attack hits nothing", num(adr.get("attackMiss", 0)), "Attack.DoMeleeAttack"),
             ("Hit taken without blocking", num(adr.get("nonBlockDamage", 0)), "Character.RPC_Damage")]
@@ -2406,6 +2428,7 @@ def block_forge_items() -> str:
 def mech_blocks() -> dict:
     return {"shields": block_shields, "resistant-creatures": block_resist_creatures, "resistant-gear": block_resist_gear,
             "star-spawns": block_star_spawns, "star-odds": block_star_odds, "guaranteed-stars": block_guaranteed_stars,
+            "level-distance": block_level_distance,
             "pseudo-drops": block_pseudo_drops, "pseudo-table": block_pseudo_table,
             "drops-example": block_drops_example, "upgrade-costs": block_upgrade_costs,
             "upgrade-example": block_upgrade_example,
