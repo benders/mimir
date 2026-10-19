@@ -1,7 +1,6 @@
 ---
 title: Blocking
 summary: Block power, parry, damage through, stamina, stagger, durability.
-order: 1
 sources: Humanoid.BlockAttack; Humanoid.GetCurrentBlocker; Humanoid.UpdateBlock; ItemDrop.ItemData.GetBlockPower; ItemDrop.ItemData.GetBaseBlockPower; ItemDrop.ItemData.GetDeflectionForce; Skills.GetSkillFactor; Skills.GetSkillLevel; HitData.DamageTypes.ApplyArmor; HitData.ApplyResistance; HitData.BlockDamage; Character.RPC_Damage; Character.AddStaggerDamage; Character.UpdateStagger; SE_Stats.ModifyTimedBlockBonus; HitData.DamageTypes.GetTotalBlockableDamage; HitData.DamageTypes.GetTotalStaggerDamage; Character.GetStaggerTreshold
 ---
 

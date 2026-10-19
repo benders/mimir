@@ -1,7 +1,6 @@
 ---
 title: Item upgrades
 summary: Stats per quality, upgrade cost, station level.
-order: 5
 sources: ItemDrop.ItemData.GetDamage; ItemDrop.ItemData.GetArmor; ItemDrop.ItemData.GetMaxDurability; ItemDrop.ItemData.GetBaseBlockPower; ItemDrop.ItemData.GetDeflectionForce; Piece.Requirement.GetAmount; Recipe.GetRequiredStationLevel; InventoryGui.UpdateRecipeList; InventoryGui.UpdateRecipe; InventoryGui.SetupRequirementList
 ---
 

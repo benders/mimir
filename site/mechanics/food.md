@@ -1,7 +1,6 @@
 ---
 title: Food
 summary: Three slots, values that fade, max health, stamina and eitr, healing.
-order: 8
 sources: Humanoid.UseItem; Player.CanEat; Player.EatFood; Player.Food.CanEatAgain; Player.GetMostDepletedFood; Player.UpdateFood; Player.GetTotalFoodValue; Player.UpdateStats; Player.OnDeath; SE_Stats.ModifyHealthRegen; Player.ClearFood
 ---
 

@@ -423,6 +423,9 @@ def write_dump(raw: Path) -> Path:
         event("boss_chief", "Meadows", random=False),  # a boss fight's music, not a raid
     ]}}])
     dump("world/EnvMan.json", [{"name": "_GameMain", "type": "EnvMan", "fields": {"m_dayLengthSec": 600}}])
+    dump("world/Game.json", [{"name": "_GameMain", "type": "Game", "fields": {
+        "m_difficultyScaleRange": 50, "m_difficultyScaleMaxPlayers": 3, "m_healthScalePerPlayer": 0.5,
+        "m_damageScalePerPlayer": 0.1}}])
     dump("world/ZoneSystem.json", [{"name": "_GameMain", "type": "ZoneSystem", "fields": {"m_altBiomeLists": [{"$ref": "AltBiomes_Test", "component": "AltBiomeList"}], "m_vegetation": [
         m(prefab=R("Root"), enable=True, biome="Mountain"), m(prefab=R("Root"), enable=True, biome="Swamp", name="root_swamp"),
         m(prefab=R("Root"), enable=False, biome="Plains"), m(prefab=R("Root2"), enable=False, biome="Plains"),

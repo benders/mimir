@@ -1,7 +1,6 @@
 ---
 title: Raids
 summary: When each raid can start, and what it sends.
-order: 11
 sources: RandEventSystem.UpdateRandomEvent; RandEventSystem.StartRandomEvent; RandEventSystem.GetPossibleRandomEvents; RandEventSystem.GetValidEventPoints; RandEventSystem.InValidBiome; RandEventSystem.CheckBase; RandEventSystem.HaveGlobalKeys; RandEventSystem.PlayerIsReadyForEvent; RandomEvent.Update; Player.UpdateEvents; Player.SetGuardianPower; Character.OnDeath; EffectArea.GetBaseValue; ZoneSystem.GetGlobalKey; SpawnSystem.UpdateSpawning
 ---
 

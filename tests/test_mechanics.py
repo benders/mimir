@@ -104,6 +104,15 @@ class Formulas(unittest.TestCase):
         self.assertTrue(o("Weak", "Resistant"))
         self.assertTrue(o("Immune", "Resistant"))  # order dependent, as the code is
 
+    def test_player_count_scaling(self):
+        mp = {"maxPlayers": 5, "healthScalePerPlayer": 0.3, "damageScalePerPlayer": 0.04}
+        self.assertEqual(M.damage_taken_scale(1, mp), 1)
+        self.assertAlmostEqual(M.damage_taken_scale(3, mp), 1 / 1.6)
+        self.assertAlmostEqual(M.damage_taken_scale(9, mp), 1 / 2.2)  # capped at maxPlayers
+        self.assertEqual(M.damage_taken_scale(0, mp), 1)
+        self.assertAlmostEqual(M.damage_dealt_scale(2, mp), 1.04)
+        self.assertAlmostEqual(M.damage_dealt_scale(7, mp), 1.16)
+
     def test_regen_and_sleep(self):
         # BaseAI.UpdateRegeneration: max health / m_regenAllHPTime per world second
         self.assertAlmostEqual(M.regen_rate(5000), 5000 / 3600)

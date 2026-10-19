@@ -60,5 +60,11 @@
    }
   ]
  },
- "dayLength": 600
+ "dayLength": 600,
+ "multiplayer": {
+  "range": 50,
+  "maxPlayers": 3,
+  "healthScalePerPlayer": 0.5,
+  "damageScalePerPlayer": 0.1
+ }
 }

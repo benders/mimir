@@ -1,7 +1,6 @@
 ---
 title: Drops
 summary: Star multiplier, amount roll, pseudo-random countdown.
-order: 2
 sources: CharacterDrop.GenerateDropList; CharacterDrop.OnDeath; CharacterDrop.DropItems; Game.ScaleDrops; Character.CheckDeath; Character.CustomFixedUpdate; Game.FixedUpdate; Player.LateUpdate; ZNet.GetNrOfPlayers
 ---
 

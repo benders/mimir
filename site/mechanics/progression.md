@@ -1,7 +1,6 @@
 ---
 title: Progression stages
 summary: The biome where you first get each item, creature and piece, and the site's stage filter.
-order: 8
 sources: SpawnSystem.UpdateSpawnList; RandEventSystem.HaveGlobalKeys; Trader.UseItem; TriggerPersistentEventOnDestroy; CraftingStation.GetLevel; StationExtension.FindExtensions; MineRock.RPC_Hit; MineRock5.RPC_Damage; TreeBase.RPC_Damage; Destructible.RPC_Damage; ZoneSystem.GetKeyValue
 ---
 

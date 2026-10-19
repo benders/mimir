@@ -1,7 +1,6 @@
 ---
 title: Adrenaline
 summary: How the bar fills and drains; trinket effects when it is full.
-order: 6
 sources: Player.GetMaxAdrenaline; Player.UpdateModifiers; Player.AddAdrenaline; Player.UpdateStats; Player.RPC_HitWhileDodging; Player.ActivateGuardianPower; Attack.OnAttackTrigger; Attack.FireProjectileBurst; Attack.DoMeleeAttack; Attack.DoAreaAttack; Projectile.OnHit; Humanoid.BlockAttack; Character.AddStaggerDamage; Character.RPC_Damage; SE_Stats.ModifyAdrenaline; Character.GetMaxAdrenaline
 ---
 

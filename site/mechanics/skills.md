@@ -1,7 +1,6 @@
 ---
 title: Skills
 summary: Experience per level, what raises each skill, Rested, death penalty.
-order: 10
 sources: Skills.Skill.Raise; Skills.Skill.GetNextLevelRequirement; Skills.RaiseSkill; Player.RaiseSkill; SE_Stats.ModifyRaiseSkill; Skills.GetSkillLevel; Skills.OnDeath; Skills.LowerAllSkills; Player.OnDeath; Player.HardDeath; Attack.DoMeleeAttack; Attack.DoAreaAttack; Projectile.OnHit; Humanoid.BlockAttack; Player.Dodge; Player.RPC_HitWhileDodging; Player.CheckRun; Player.OnSwimming; Player.OnSneaking; Character.Jump; InventoryGui.DoCrafting; InventoryGui.RepairOneItem; Player.UpdatePlacement; CookingStation.OnInteract; Pickable.Interact; FishingFloat.FixedUpdate; Sadle.UpdateRidingSkill
 ---
 

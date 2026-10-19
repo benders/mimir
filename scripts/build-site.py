@@ -1862,7 +1862,7 @@ def effect_page(e: dict) -> None:
 # embedded with {{directives}} that read data/, so values never go stale; the prose and formulas are the part that
 # was verified against the decompiled game code.
 
-MECH_PAGES: list[dict] = []  # {id, title, summary, order}, filled by mechanics_pages(), used by the index and search
+MECH_PAGES: list[dict] = []  # {id, title, summary}, alphabetical, filled by mechanics_pages(), used by the index and search
 
 
 def mech_resolve(scheme: str, id_: str):
@@ -2006,6 +2006,29 @@ def block_sleep_skip() -> str:
             for label, b in (("Afternoon (earliest)", mechanics.AFTERNOON), ("Dusk", mechanics.DUSK),
                              ("Midnight", 0.0))]
     return table(["Bedtime", "World time skipped", "Health regenerated"], rows, "num")
+
+
+def block_player_scaling() -> str:
+    """Damage a creature takes and deals per player count (Game.GetDifficultyDamageScaleEnemy/Player)."""
+    mp = PLAYER["multiplayer"]
+    rows = [[num(n), f"×{num(round(mechanics.damage_taken_scale(n, mp), 3))}",
+             f"×{num(round(1 / mechanics.damage_taken_scale(n, mp), 2))}",
+             pct(1 / mechanics.damage_taken_scale(n, mp) / n),
+             f"×{num(round(mechanics.damage_dealt_scale(n, mp), 2))}"]
+            for n in range(1, mp["maxPlayers"] + 1)]
+    return table(["Players in range", "Damage creatures take", "Effective health", "Each player's share",
+                  "Damage creatures deal"], rows, "num")
+
+
+def block_boss_scaling() -> str:
+    """Bosses' effective health (health / damage taken scale) per player count."""
+    mp = PLAYER["multiplayer"]
+    cs = sorted((c for c in CREATURES.values() if c.get("boss") and has_page("creature", c["id"])),
+                key=lambda c: (stage_of("creature", c["id"]), c["health"], c["id"]))
+    ns = range(1, mp["maxPlayers"] + 1)
+    rows = [[link("creature", c["id"])] + [num(round(c["health"] / mechanics.damage_taken_scale(n, mp))) for n in ns]
+            for c in cs]
+    return table(["Boss"] + [f"{n} player{'s' if n > 1 else ''}" for n in ns], rows, "num")
 
 
 def block_star_spawns() -> str:
@@ -2445,6 +2468,7 @@ def mech_blocks() -> dict:
             "frost-weapons": block_frost_weapons, "frost-weak": block_frost_weak,
             "frost-resistant": block_frost_resistant,
             "regen-bosses": block_regen_bosses, "regen-other": block_regen_other, "sleep-skip": block_sleep_skip,
+            "player-scaling": block_player_scaling, "boss-scaling": block_boss_scaling,
             "frost-chart": lambda: mechanics.frost_chart(FROST_MULT, FROST_MIN),
             "adrenaline-chart": lambda: mechanics.adrenaline_chart(PLAYER["adrenaline"]),
             "chart": lambda name: mechanics.CHARTS[name]()}
@@ -2508,12 +2532,11 @@ def mechanics_pages() -> None:
                 'Statements marked <i>Inferred</i> are reasoning from the code or data, not checked in the game.</aside>'
                 if cites else "")
         title = meta.get("title", f.stem)
-        MECH_PAGES.append({"id": f.stem, "title": title, "summary": meta.get("summary", ""),
-                           "order": int(meta.get("order", 99))})
+        MECH_PAGES.append({"id": f.stem, "title": title, "summary": meta.get("summary", "")})
         body = (f'<h1>{esc(title)}</h1><p class="sub">{esc(meta.get("summary", ""))}</p>{stale}'
                 f'<div class="mech">{content}</div>{cite}')
         page(f"mechanics/{f.stem}.html", title, body, '<a href="mechanics/index.html">Mechanics</a>', ctx.scripts)
-    MECH_PAGES.sort(key=lambda p: (p["order"], p["title"]))
+    MECH_PAGES.sort(key=lambda p: p["title"].lower())
     items = "".join(f'<li><a href="mechanics/{p["id"]}.html">{esc(p["title"])}</a><span>{esc(p["summary"])}</span></li>'
                     for p in MECH_PAGES)
     body = (f'<h1>Mechanics</h1><p class="sub">How the game works, for Valheim {esc(META["gameVersion"])}.</p>'

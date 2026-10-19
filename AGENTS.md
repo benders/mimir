@@ -111,7 +111,8 @@ Logs after a dump: `.cache/dump/<branch>/server.log` (Unity) and `bepinex.log` (
 `meta.json` (versions, counts, unresolved tokens, skipped refs), `player.json` (Player prefab constants the mechanics
 pages use: `adrenaline` gains and decay curves as [time, value] keys, no tangents; `food` base health/stamina; `rested`
 (SE_Rested base and per-comfort time, SE_Cozy delay, read from the raw dump since they equal the type defaults); `skills`
-gain step per skill, death penalty factor, hard-death cooldown), `items`, `recipes`, `creatures`, `spawns`,
+gain step per skill, death penalty factor, hard-death cooldown; `multiplayer` from world/Game.json: player-count
+damage scaling range, maxPlayers, health/damage scale per player), `items`, `recipes`, `creatures`, `spawns`,
 `pieces`, `processing` (smelter/cooking/fermenter conversions), `sources` (pickables, ore, trees, rocks; follow
 `becomes` for multi-stage objects (or an item id: the object breaks into that item, e.g. Dvergr altar crystal → DvergrKeyFragment); `kind: container` = loot chests, one per distinct name + `Container` drop table, with
 `locations` [{location, dungeon}] where it is placed, `dungeon` = in a room that location's dungeon generates;
@@ -228,7 +229,7 @@ and caps the flagged share, so a source gap can't silently hide real pages; `scr
   review and commit the `data/` diff together with the code. New normalize behaviour gets a case in
   `tests/fixture.py` (invented values only, never real game data) and a unit test. `data/` must always be regenerated, never hand-edited.
 - After changing the plugin: bump `PluginVersion` in `Plugin.cs`, then `make check` (needs the runner).
-- Mechanics pages (`site/mechanics/*.md`, front matter `title/summary/order/sources`): rendered by `scripts/mechanics.py`
+- Mechanics pages (`site/mechanics/*.md`, front matter `title/summary/sources`; the index lists them by title): rendered by `scripts/mechanics.py`
   (small Markdown subset; `{{directive}}` lines embed generated tables/charts that read `data/`, registered in
   `mech_blocks()` in `build-site.py`; `[text](item:Id)`, `creature:`, `piece:`, `effect:`, `mechanic:page` links are
   resolved and checked). Every claim must be checked in the decompiled code and cite the method; mark anything

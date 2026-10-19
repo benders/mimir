@@ -194,6 +194,10 @@ class Entities(FixtureCase):
         self.assertEqual(N.creature("Chief_p2", N.PREFABS["Chief_p2"])["regenTime"], 1800)
         self.assertEqual(N.player()["dayLength"], 600)
 
+    def test_player_multiplayer_constants(self):
+        self.assertEqual(N.player()["multiplayer"], {"range": 50, "maxPlayers": 3, "healthScalePerPlayer": 0.5,
+                                                     "damageScalePerPlayer": 0.1})
+
     def test_player_is_not_a_creature(self):
         self.assertIsNone(N.creature("Player", N.PREFABS["Player"]))
         self.assertFalse(N.is_creature("Player"))

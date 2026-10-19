@@ -1,7 +1,6 @@
 ---
 title: Weapons
 summary: Every weapon by category, with attack speed and damage per second.
-order: 7
 sources: Attack.Start; Projectile.Setup; Attack.FireProjectileBurst; Attack.OnAttackTrigger; Player.UpdateAttackBowDraw; Player.UpdateActionQueue; Player.QueueReloadAction; Player.InMinorAction; Humanoid.GetAttackDrawPercentage; ItemData.GetWeaponLoadingTime; Attack.Update; Attack.CanStartChainAttack; Attack.ModifyDamage; Attack.DoMeleeAttack; Attack.DoAreaAttack; Humanoid.StartAttack; Player.InAttack; CharacterAnimEvent.Speed; CharacterAnimEvent.CustomFixedUpdate; Skills.GetRandomSkillFactor; Humanoid.UpdateAttack
 ---
 

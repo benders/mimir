@@ -1,7 +1,6 @@
 ---
 title: Forge of Potential
 summary: Where the idol forge stands, and how refining with Battle and Protection Idols works.
-order: 6
 sources: ZoneSystem.GenerateLocationsTimeSliced; ZoneSystem.RemoveUnplacedLocations; InventoryGui.UpdateRecipeList; InventoryGui.UpdateRecipe; InventoryGui.DoCrafting; Player.RequiredCraftingStation; Player.HaveRequirements; Player.ConsumeResources; Piece.Requirement.GetAmount; Player.GetItemUpgradeChance
 ---
 

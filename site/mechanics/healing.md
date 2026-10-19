@@ -1,7 +1,6 @@
 ---
 title: Creature healing
 summary: How creatures and bosses regenerate, while away and while players sleep.
-order: 3
 sources: BaseAI.UpdateAI; BaseAI.UpdateRegeneration; BaseAI.GetWorldTimeDelta; Character.Heal; Character.RPC_Heal; ZNet.GetTime; EnvMan.SkipToMorning; EnvMan.UpdateTimeSkip; EnvMan.RescaleDayFraction; EnvMan.CalculateCanSleep; Game.UpdateSleeping; Attack.DoMeleeAttack; Attack.DoAreaAttack; Projectile.OnHit
 ---
 

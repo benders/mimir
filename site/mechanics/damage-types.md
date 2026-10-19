@@ -1,7 +1,6 @@
 ---
 title: Damage types and resistances
 summary: Modifier multipliers, override rule, armor formula, hit order.
-order: 4
 sources: HitData.DamageTypes; HitData.DamageType; HitData.DamageModifier; HitData.ApplyModifier; HitData.ApplyResistance; HitData.DamageModifiers.Apply; HitData.DamageModifiers.ShouldOverride; HitData.DamageTypes.ApplyArmor; Character.RPC_Damage; Character.GetDamageModifiers; Character.ApplyDamage; Player.ApplyArmorDamageMods; Player.GetBodyArmor; SEMan.ApplyDamageMods; DamageText.ShowText; HitData.DamageModifiers.ApplyIfBetter
 ---
 
@@ -29,8 +28,9 @@ resistances; tool and generic damage are not reduced.
 
 - taken $= D - A$ if $A < D/2$
 - taken $= D^2 / 4A$ otherwise
-- hit order: difficulty and world damage rate (creature attackers) → backstab × the weapon's bonus → staggered target ×2 →
-  [block](mechanic:blocking) → resistances → armor → fire/poison/spirit to DoT
+- hit order: [player count](mechanic:multiplayer) and world damage rate (creature attackers) → backstab × the weapon's bonus → staggered target ×2 →
+  [block](mechanic:blocking) → resistances → armor → fire/poison/spirit to DoT → player count and world player damage
+  rate (creatures hit)
 
 {{chart armor}}
 

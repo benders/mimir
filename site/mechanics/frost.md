@@ -1,7 +1,6 @@
 ---
 title: Frost
 summary: How frost damage slows, for how long, and who it doesn't slow.
-order: 4
 sources: Character.RPC_Damage; Character.AddFrostDamage; SE_Frost.AddDamage; SE_Frost.ModifySpeed; SEMan.ApplyStatusEffectSpeedMods; Character.UpdateWalking; Character.UpdateSwimming; HitData.DamageModifiers.ShouldOverride
 ---
 

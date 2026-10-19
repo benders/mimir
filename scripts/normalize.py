@@ -1696,7 +1696,18 @@ def player() -> dict:
         "rested": rested_constants(),
         "skills": skill_constants(g("m_hardDeathCooldown")),
         "dayLength": day_length(),
+        "multiplayer": multiplayer_constants(),
     }
+
+
+def multiplayer_constants() -> dict:
+    """Game's player-count difficulty (Game.GetPlayerDifficulty, GetDifficultyDamageScaleEnemy/Player): players within
+    `range` m (XZ) of the hit character, at most `maxPlayers`."""
+    f = RAW / "world/Game.json"
+    g = load("world/Game.json")[0]["fields"] if f.is_file() else {}
+    return {"range": g.get("m_difficultyScaleRange", 0), "maxPlayers": g.get("m_difficultyScaleMaxPlayers", 0),
+            "healthScalePerPlayer": g.get("m_healthScalePerPlayer", 0),
+            "damageScalePerPlayer": g.get("m_damageScalePerPlayer", 0)}
 
 
 def day_length() -> float:

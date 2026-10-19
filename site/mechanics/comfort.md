@@ -1,7 +1,6 @@
 ---
 title: Comfort and rest
 summary: Comfort level, Resting, how long Rested lasts.
-order: 9
 sources: SE_Rested.CalculateComfortLevel; SE_Rested.UpdateTTL; SE_Rested.Setup; SE_Cozy.UpdateStatusEffect; Player.UpdateBaseValue; Player.UpdateEnvStatusEffects; Player.SetSleeping; Piece.GetComfort; Piece.GetAllComfortPiecesInRadius; SE_Rested.PieceComfortSort; SE_Rested.GetNearbyComfortPieces
 ---
 

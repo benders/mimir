@@ -1,7 +1,6 @@
 ---
 title: Creature levels (stars)
 summary: Star rolls by spawner; health, damage and drop multipliers.
-order: 3
 sources: SpawnSystem.Spawn; SpawnSystem.GetLevelUpChance; SpawnArea.SpawnOne; SpawnArea.GetLevelUpChance; CreatureSpawner.Spawn; TriggerSpawner.Spawn; BiomeSector.GetLevelUpChanceMultiplier; Character.SetLevel; Character.SetupMaxHealth; Attack.ModifyDamage; Attack.GetLevelDamageFactor; CharacterDrop.GenerateDropList; Procreation.Procreate; Growup.GrowUpdate; EnemyHud.UpdateHuds; LevelEffects.SetupLevelVisualization
 ---
 

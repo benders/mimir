@@ -816,6 +816,21 @@ def sleep_skip(bed_time: float, day_length: float) -> float:
     return ((MORNING if bed_time < MORNING else 1 + MORNING) - bed_time) * day_length
 
 
+def players_counted(players: int, max_players: int) -> int:
+    """Game.GetPlayerDifficulty: players within range of the hit character, at least 1, at most max_players."""
+    return max(1, min(players, max_players))
+
+
+def damage_taken_scale(players: int, mp: dict) -> float:
+    """Game.GetDifficultyDamageScaleEnemy, applied in Character.ApplyDamage to damage a creature takes."""
+    return 1 / (1 + (players_counted(players, mp["maxPlayers"]) - 1) * mp["healthScalePerPlayer"])
+
+
+def damage_dealt_scale(players: int, mp: dict) -> float:
+    """Game.GetDifficultyDamageScalePlayer, applied in Character.RPC_Damage to a creature's hit on anyone."""
+    return 1 + (players_counted(players, mp["maxPlayers"]) - 1) * mp["damageScalePerPlayer"]
+
+
 def regen_over(max_health: float, seconds: float, regen_time: float | None = None) -> float:
     """Health regained over `seconds` of world time, capped at max health."""
     return min(max_health, regen_rate(max_health, regen_time) * seconds)
