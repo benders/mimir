@@ -6,7 +6,7 @@ source "$(dirname "$0")/lib.sh"
 TIMEOUT="${MIMIR_DUMP_TIMEOUT:-900}"
 IMAGE=mimir-runtime:latest
 
-[[ -f "$SERVER_DIR/valheim_server.x86_64" ]] || "$ROOT/scripts/fetch-server.sh"
+"$ROOT/scripts/fetch-server.sh"  # every run: a cached download would dump the old game after an update (#59)
 PACK="$("$ROOT/scripts/fetch-bepinex.sh")"
 DLL="$("$ROOT/scripts/build-plugin.sh")"
 

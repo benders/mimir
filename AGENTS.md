@@ -10,7 +10,7 @@ notes: [docs/mechanics.md](docs/mechanics.md).
 ## Pipeline
 
 ```
-fetch-server.sh  DepotDownloader -> .cache/server/<branch>/          (2 GB, cached)
+fetch-server.sh  DepotDownloader -> .cache/server/<branch>/          (2 GB, cached; updated before every dump)
 fetch-bepinex.sh Thunderstore BepInExPack_Valheim (pinned) -> .cache/tools/
 build-plugin.sh  plugin/Mimir.Dumper -> .cache/build/plugin/Mimir.Dumper.dll
 dump.sh          server + BepInEx in Docker (amd64) -> .cache/dump/<branch>/raw/
