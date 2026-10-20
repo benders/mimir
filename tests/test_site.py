@@ -97,7 +97,9 @@ class Site(unittest.TestCase):
         gem = (self.out / "items/Gem.html").read_text(encoding="utf-8")  # unresolved name, only in a chest
         self.assertIn("<h2>Found in</h2>", gem)
         self.assertIn("Strongbox", gem)
-        self.assertIn('<span data-stage="2">Camp</span><span data-stage="3">, Lair dungeon</span>', gem)
+        self.assertIn('<span data-stage="2">Camp <span class="biomes">(<a href="biomes/Swamp.html">Swamp</a>, '
+                      '<a href="biomes/Plains.html">Plains</a>)</span></span><span data-stage="3">, Lair dungeon '
+                      '<span class="biomes">(<a href="biomes/Mountain.html">Mountain</a>)</span></span>', gem)
         self.assertFalse((self.out / "items/Mystery.html").exists())
 
     def test_world_source_placement(self):

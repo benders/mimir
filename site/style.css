@@ -65,6 +65,7 @@ a.place img { width: 96px; height: 96px; object-fit: contain; border-radius: 6px
   border: 1px solid var(--line); }
 a.place:hover img { outline: 2px solid var(--accent); }
 .chance { color: var(--muted); font-size: 12px; }
+a.place .biomes { color: var(--muted); font-size: 12px; }
 h2 { font-size: 17px; margin: 28px 0 8px; padding-bottom: 4px; border-bottom: 1px solid var(--line); }
 h3 { font-size: 14px; margin: 14px 0 6px; color: var(--muted); }
 .kv { display: grid; grid-template-columns: max-content 1fr; gap: 4px 16px; margin: 8px 0; }

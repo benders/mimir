@@ -305,12 +305,25 @@ def place_html(x: dict, stage: int = 0) -> list[str]:
             label = f'{esc(location_label(x["location"]))}: {esc(pretty_id(re.sub(r"^[a-z]+_", "", r["room"])))}'
             if "chance" in r:
                 label += chance_note(r["chance"], "Rolled per copy of this part of the camp: not every one has it")
-            out.append(thumb(f'rooms/{r["room"]}', label, stage) if f'rooms/{r["room"]}' in HAVE_RENDERS else label)
+            render = f'rooms/{r["room"]}' in HAVE_RENDERS
+            label += location_biomes(x["location"], linked=not render)
+            out.append(thumb(f'rooms/{r["room"]}', label, stage) if render else label)
         return out
     name = esc(location_label(x["location"])) + (" dungeon" if x.get("dungeon") else "")
     if "chance" in x:
         name += chance_note(x["chance"], "Rolled when the location is placed: not every copy has it")
-    return [thumb(x["location"], name, stage) if x["location"] in HAVE_RENDERS else name]
+    render = x["location"] in HAVE_RENDERS
+    name += location_biomes(x["location"], linked=not render)
+    return [thumb(x["location"], name, stage) if render else name]
+
+
+def location_biomes(loc: str, linked: bool = True) -> str:
+    """The biomes a location is placed in, after its name: linked, or plain inside a thumbnail (already a link)."""
+    bs = LOCATION_BIOMES.get(loc, [])
+    if not bs:
+        return ""
+    names = ", ".join(biome_link(b) if linked else esc(BIOMES.get(b, words(b))) for b in bs)
+    return f' <span class="biomes">({names})</span>'
 
 
 def biome_link(b: str) -> str:
@@ -601,6 +614,7 @@ BIOMES = {  # game progression order (creatures index)
     "Plains": "Plains", "Mistlands": "Mistlands", "AshLands": "Ashlands", "DeepNorth": "Deep North", "Ocean": "Ocean",
 }
 STAGES = ["Meadows", "BlackForest", "Swamp", "Mountain", "Plains", "Mistlands", "AshLands", "DeepNorth"]  # normalize.STAGES
+LOCATION_BIOMES = {x["id"]: x.get("biomes", []) for x in LOCATIONS}
 LOCATION_STAGE = {x["id"]: min((biome_stage(b) for b in x.get("biomes", [])), default=0) for x in LOCATIONS}  # earliest biome
 STAGE_KEY = "mimir-stage"  # localStorage: the last stage the reader wants to see (index into STAGES)
 PAGE_STAGE = {k: {} for k in KINDS}  # page id -> stage index; a merged page takes its earliest copy's
