@@ -9714,7 +9714,7 @@
    "poison": "Immune",
    "spirit": "Immune"
   },
-  "stage": "Mistlands",
+  "stage": "AshLands",
   "via": {
    "how": "build",
    "needs": [
@@ -9998,7 +9998,7 @@
    "spirit": "Immune"
   },
   "extends": "piece_artisanstation",
-  "stage": "Mistlands",
+  "stage": "AshLands",
   "via": {
    "how": "build",
    "needs": [
@@ -14646,7 +14646,7 @@
    "spirit": "Immune"
   },
   "playerBase": true,
-  "stage": "Mountain",
+  "stage": "Plains",
   "via": {
    "how": "build",
    "needs": [
@@ -19412,7 +19412,7 @@
    "maxCover": 0.6
   },
   "playerBase": true,
-  "stage": "AshLands",
+  "stage": "DeepNorth",
   "via": {
    "how": "build",
    "needs": [
@@ -19903,7 +19903,7 @@
    "requiresRoof": true
   },
   "playerBase": true,
-  "stage": "Mountain",
+  "stage": "Plains",
   "via": {
    "how": "build",
    "needs": [
@@ -25493,7 +25493,7 @@
    "spirit": "Immune"
   },
   "playerBase": true,
-  "stage": "Mountain",
+  "stage": "Plains",
   "via": {
    "how": "build",
    "needs": [
@@ -26118,7 +26118,7 @@
    "spirit": "Immune"
   },
   "playerBase": true,
-  "stage": "Mistlands",
+  "stage": "AshLands",
   "via": {
    "how": "build",
    "needs": [
@@ -26239,7 +26239,7 @@
    "spirit": "Immune"
   },
   "playerBase": true,
-  "stage": "Mountain",
+  "stage": "Plains",
   "via": {
    "how": "build",
    "needs": [
@@ -27077,7 +27077,7 @@
    "maxCover": 0.6
   },
   "playerBase": true,
-  "stage": "Plains",
+  "stage": "Mistlands",
   "via": {
    "how": "build",
    "needs": [
@@ -31418,7 +31418,7 @@
    "spirit": "Immune"
   },
   "playerBase": true,
-  "stage": "Mountain",
+  "stage": "Plains",
   "via": {
    "how": "build",
    "needs": [

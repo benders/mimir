@@ -317,7 +317,8 @@ class Entities(FixtureCase):
         self.assertEqual(got["Boss"], "BlackForest")
         self.assertEqual(got["Raider"], "Swamp")  # a boss's key opens the next stage
         self.assertEqual(got["Charm"], "Swamp")
-        self.assertEqual(got["Ghost"], "BlackForest")  # the key comes from handing over the Boss's chest
+        self.assertEqual(got["Chest"], "Swamp")  # a boss's drop belongs to the stage it opens
+        self.assertEqual(got["Ghost"], "Swamp")  # the key comes from handing over the Boss's chest
         self.assertEqual(got["Giant"], "Mountain")  # its event starts when the orb on the Peak is destroyed
         self.assertEqual(got["Serpent"], "Meadows")  # the open sea counts from the start
         self.assertEqual(got["Pebble"], "Swamp")  # a shore location: Ocean next to land is that land's shore

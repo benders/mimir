@@ -245,7 +245,9 @@ def main() -> int:
         "BlackMetal": "Plains", "Eitr": "Mistlands", "FlametalNew": "AshLands",
         "SwordBronze": "BlackForest", "SwordIron": "Swamp", "SwordBlackmetal": "Plains",
         "ArmorFlametalChest": "AshLands",  # black forge level 3: two extensions
-        "forge": "BlackForest", "blastfurnace": "Mountain", "Karve": "BlackForest", "VikingShip": "Swamp",
+        "forge": "BlackForest", "blastfurnace": "Plains",  # at the artisan table, which costs a Dragon Tear
+        "HardAntler": "BlackForest", "CryptKey": "Swamp", "DragonTear": "Plains",  # a boss's drop: the stage it opens
+        "piece_artisanstation": "Plains", "Karve": "BlackForest", "VikingShip": "Swamp",
         "Eikthyr": "Meadows", "gd_king": "BlackForest", "Bonemass": "Swamp", "Dragon": "Mountain",
         "GoblinKing": "Plains", "SeekerQueen": "Mistlands", "Fader": "AshLands", "FrozenKing": "DeepNorth",
         "Hatchling": "Mountain",  # the drake raid only comes after Bonemass
@@ -254,7 +256,7 @@ def main() -> int:
         "Serpent": "Meadows",  # the sea counts from the start
     }
     effects = {e["id"]: e for e in load("status_effects.json")}
-    stages |= {"GP_Eikthyr": "Meadows", "GP_Moder": "Mountain", "GP_Fader": "AshLands",  # trophy at the boss stone
+    stages |= {"GP_Eikthyr": "BlackForest", "GP_Moder": "Plains", "GP_Fader": "DeepNorth",  # trophy at the boss stone
                "Staff_shield": "Mistlands", "Tared": "Plains",  # a weapon's hit, a creature's attack
                "Skeleton_Poison": "BlackForest"}  # its alt-biome patch is only in later biomes
     every = {**every, **effects}

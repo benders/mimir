@@ -204,7 +204,7 @@ page; creatures list them under `attacks` (weapons) and `equipment`. Items, crea
 content) get no page, search entry or relation rows either. Reachable items, creatures and pieces carry `stage` (#24): the
 first biome of the progression (`normalize.STAGES`, Meadows..DeepNorth) where a player can get them, from
 `normalize.stages()`, the same fixed point as `reachable()` (its first pass) with a second pass that adds stations and
-their extension levels, tools and tool tiers, fuel, boss keys (a boss's opens the next stage), quest hand-ins and
+their extension levels, tools and tool tiers, fuel, boss keys and drops (a boss's open the next stage), quest hand-ins and
 persistent events. The earliest way wins (a creature's earliest spawn); Ocean alone counts as Meadows, next to land as
 that land. `STAGE_OVERRIDES` fixes what the data gets wrong, `STAGE_IGNORED_TOOLS` drops unusual tool routes (Early Axes);
 no `stage` = it couldn't be settled (shown from Meadows). Each staged entry also has `via` (#25), the way its stage comes from (`stages(ways=...)`): `how` (`normalize.WAY_RANK` key, which also breaks ties: craft/process/build first, gathered sources before drops before loot before traders), `from` (recipe, station, source, creature, trader, piece or location id), `needs` [{item|piece|creature: id, amount?}] (cost, station + the extensions its level takes, tool, bait, the boss setting a key), `biomes` (spawn). The graph is acyclic (a tie never picks a way leading back to the entry); item and piece pages render it as a requirements tree (`build-site.requirements_tree`). The site's "Up to" header select (localStorage `mimir-stage`,

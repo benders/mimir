@@ -17,6 +17,8 @@ filter shows a spoiler warning.
 - rock, tree, log: a player tool of its minimum tier that deals damage it isn't immune to.
 - global key: the earliest creature that sets it on death, or the item a trader takes for it (Hildir's chests).
   A boss's key opens the next stage, so a raid that needs it comes one stage later.
+- boss drops (trophy, Hard Antler, Dragon Tear...): the stage the boss opens, like its key. What they make, such as the
+  Artisan Table, comes with them.
 - persistent event: the object whose destruction starts it (the Fimbulvinter orb).
 
 > Inferred: the order of biomes is the game's intended route, not something the code enforces. Early Axes (axe heads

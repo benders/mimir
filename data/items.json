@@ -11749,7 +11749,7 @@
   "weight": 2,
   "stack": 30,
   "maxQuality": 1,
-  "stage": "Mistlands",
+  "stage": "AshLands",
   "via": {
    "how": "craft",
    "from": "Recipe_CeramicPlate",
@@ -13293,7 +13293,7 @@
   "weight": 0.1,
   "stack": 1,
   "maxQuality": 1,
-  "stage": "BlackForest",
+  "stage": "Swamp",
   "via": {
    "how": "drop",
    "from": "gd_king",
@@ -13527,7 +13527,7 @@
   "stack": 1,
   "maxQuality": 1,
   "equipEffect": "Demister",
-  "stage": "Plains",
+  "stage": "Mistlands",
   "via": {
    "how": "craft",
    "from": "Recipe_Demister",
@@ -13571,7 +13571,7 @@
   "weight": 1,
   "stack": 50,
   "maxQuality": 1,
-  "stage": "Mountain",
+  "stage": "Plains",
   "via": {
    "how": "drop",
    "from": "Dragon",
@@ -15848,7 +15848,7 @@
   "weight": 1,
   "stack": 30,
   "maxQuality": 1,
-  "stage": "AshLands",
+  "stage": "DeepNorth",
   "via": {
    "how": "drop",
    "from": "Fader",
@@ -15868,7 +15868,7 @@
   "weight": 0.5,
   "stack": 50,
   "maxQuality": 1,
-  "stage": "AshLands",
+  "stage": "DeepNorth",
   "via": {
    "how": "source",
    "from": "LuredFaderEmber",
@@ -23477,7 +23477,7 @@
   "weight": 2,
   "stack": 50,
   "maxQuality": 1,
-  "stage": "Meadows",
+  "stage": "BlackForest",
   "via": {
    "how": "drop",
    "from": "Eikthyr",
@@ -32774,7 +32774,7 @@
   "modifiers": {
    "movement": -0.05
   },
-  "stage": "Meadows",
+  "stage": "BlackForest",
   "via": {
    "how": "craft",
    "from": "Recipe_PickaxeAntler",
@@ -33393,7 +33393,7 @@
   "weight": 1,
   "stack": 30,
   "maxQuality": 1,
-  "stage": "Mistlands",
+  "stage": "AshLands",
   "via": {
    "how": "drop",
    "from": "SeekerQueen",
@@ -36112,7 +36112,7 @@
   "weight": 1,
   "stack": 20,
   "maxQuality": 1,
-  "stage": "Mistlands",
+  "stage": "AshLands",
   "via": {
    "how": "craft",
    "from": "Recipe_ShieldCore",
@@ -37038,7 +37038,7 @@
    "lastChainMultiplier": 2,
    "cycle": 1.384
   },
-  "stage": "AshLands",
+  "stage": "DeepNorth",
   "via": {
    "how": "craft",
    "from": "Recipe_SnowShovel",
@@ -44649,7 +44649,7 @@
   "stack": 20,
   "maxQuality": 1,
   "guardianPower": "GP_Bonemass",
-  "stage": "Swamp",
+  "stage": "Mountain",
   "via": {
    "how": "drop",
    "from": "Bonemass",
@@ -44841,7 +44841,7 @@
   "stack": 20,
   "maxQuality": 1,
   "guardianPower": "GP_Moder",
-  "stage": "Mountain",
+  "stage": "Plains",
   "via": {
    "how": "drop",
    "from": "Dragon",
@@ -44933,7 +44933,7 @@
   "stack": 20,
   "maxQuality": 1,
   "guardianPower": "GP_Eikthyr",
-  "stage": "Meadows",
+  "stage": "BlackForest",
   "via": {
    "how": "drop",
    "from": "Eikthyr",
@@ -44974,7 +44974,7 @@
   "stack": 20,
   "maxQuality": 1,
   "guardianPower": "GP_Fader",
-  "stage": "AshLands",
+  "stage": "DeepNorth",
   "via": {
    "how": "drop",
    "from": "Fader",
@@ -45186,7 +45186,7 @@
   "stack": 20,
   "maxQuality": 1,
   "guardianPower": "GP_Yagluth",
-  "stage": "Plains",
+  "stage": "Mistlands",
   "via": {
    "how": "drop",
    "from": "GoblinKing",
@@ -45607,7 +45607,7 @@
   "stack": 20,
   "maxQuality": 1,
   "guardianPower": "GP_Queen",
-  "stage": "Mistlands",
+  "stage": "AshLands",
   "via": {
    "how": "drop",
    "from": "SeekerQueen",
@@ -45728,7 +45728,7 @@
   "stack": 20,
   "maxQuality": 1,
   "guardianPower": "GP_TheElder",
-  "stage": "BlackForest",
+  "stage": "Swamp",
   "via": {
    "how": "drop",
    "from": "gd_king",
@@ -46070,7 +46070,7 @@
   "attackForce": 45,
   "backstab": 3,
   "ammoType": "$ammo_turretbolt",
-  "stage": "Mountain",
+  "stage": "Plains",
   "via": {
    "how": "craft",
    "from": "Recipe_TurretBoltWood",
@@ -46697,7 +46697,7 @@
   "stack": 1,
   "maxQuality": 1,
   "equipEffect": "Wishbone",
-  "stage": "Swamp",
+  "stage": "Mountain",
   "via": {
    "how": "drop",
    "from": "Bonemass",
@@ -46717,7 +46717,7 @@
   "weight": 0.5,
   "stack": 50,
   "maxQuality": 1,
-  "stage": "Plains",
+  "stage": "Mistlands",
   "via": {
    "how": "source",
    "from": "LuredWisp",
@@ -47044,7 +47044,7 @@
   "weight": 1,
   "stack": 30,
   "maxQuality": 1,
-  "stage": "Plains",
+  "stage": "Mistlands",
   "via": {
    "how": "drop",
    "from": "GoblinKing",

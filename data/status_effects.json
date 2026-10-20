@@ -160,7 +160,7 @@
    "characterVelocityFactor": 3,
    "rotationSpeed": 8
   },
-  "stage": "Plains"
+  "stage": "Mistlands"
  },
  {
   "id": "Encumbered",
@@ -248,7 +248,7 @@
     "pierce": "SlightlyResistant"
    }
   },
-  "stage": "Swamp"
+  "stage": "Mountain"
  },
  {
   "id": "GP_Eikthyr",
@@ -264,7 +264,7 @@
    "jumpStaminaUseModifier": -0.6,
    "swimStaminaUseModifier": -0.6
   },
-  "stage": "Meadows"
+  "stage": "BlackForest"
  },
  {
   "id": "GP_Fader",
@@ -282,7 +282,7 @@
     "fire": "Resistant"
    }
   },
-  "stage": "AshLands"
+  "stage": "DeepNorth"
  },
  {
   "id": "GP_Moder",
@@ -301,7 +301,7 @@
    "addMaxCarryWeight": 300,
    "speedModifier": 0.1
   },
-  "stage": "Mountain"
+  "stage": "Plains"
  },
  {
   "id": "GP_Queen",
@@ -319,7 +319,7 @@
     "poison": "Resistant"
    }
   },
-  "stage": "Mistlands"
+  "stage": "AshLands"
  },
  {
   "id": "GP_TheElder",
@@ -337,7 +337,7 @@
     "pickaxe": 0.6
    }
   },
-  "stage": "BlackForest"
+  "stage": "Swamp"
  },
  {
   "id": "GP_Yagluth",
@@ -369,7 +369,7 @@
     "spirit": 0.1
    }
   },
-  "stage": "Plains"
+  "stage": "Mistlands"
  },
  {
   "id": "GoblinShaman_shield",
@@ -1453,6 +1453,6 @@
    "repeatInterval": 60,
    "closeFrequency": 0.5
   },
-  "stage": "Swamp"
+  "stage": "Mountain"
  }
 ]

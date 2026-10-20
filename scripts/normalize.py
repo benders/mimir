@@ -445,7 +445,7 @@ def stages(items: list, creatures: list, pieces: list, recipes: list, procs: lis
         distinct StationExtensions in range, none stack), and smelter fuel;
       - a piece's tool, station and cost;
       - a spawn's or trader offer's global key: the earliest creature that sets it as `defeatKey` (a boss's opens the
-        next stage), or an item a trader `takes` for it (Hildir's chests); a key nothing sets holds nothing back;
+        next stage, and so do its drops), or an item a trader `takes` for it (Hildir's chests); a key nothing sets holds nothing back;
       - a world spawn's persistent event (SpawnSystem m_requiredPersistentEvent): the source that `startsEvent`;
       - the parent of offspring and hatchlings;
       - for a source with `minToolTier`, a player item of that tier dealing a damage type it isn't immune to
@@ -623,8 +623,9 @@ def stages(items: list, creatures: list, pieces: list, recipes: list, procs: lis
                 by = ("creature", s["parent"], None) if "parent" in s else ("item", s["item"], None)
                 lower(C, c, C[s["parent"]] if "parent" in s else I[s["item"]], src, by[1], [by])
         for cid, cr in by_creature.items():
-            for d in cr.get("drops", []):
-                lower(I, d["item"], C[cid], "drop", cid, [("creature", cid, None)])
+            for d in cr.get("drops", []):  # a boss's drops belong to the stage it opens, like its key
+                lower(I, d["item"], min(C[cid] + bool(cr.get("boss")), NEVER - 1) if C[cid] < NEVER else NEVER,
+                      "drop", cid, [("creature", cid, None)])
                 if d["item"] in by_creature:  # a creature dropped by one (a miniboss's second phase)
                     lower(C, d["item"], C[cid], "drop", cid, [("creature", cid, None)])
             if cid in by_piece:  # a buildable piece that is a creature (the training dummy)
