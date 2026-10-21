@@ -18,6 +18,12 @@
   "via": {
    "how": "spawn",
    "from": "Lair",
+   "needs": [
+    {
+     "item": "Ore",
+     "amount": 3
+    }
+   ],
    "biomes": [
     "Mountain"
    ]
@@ -313,6 +319,12 @@
   "via": {
    "how": "spawn",
    "from": "Lair",
+   "needs": [
+    {
+     "item": "Wood",
+     "amount": 2
+    }
+   ],
    "biomes": [
     "Mountain"
    ]

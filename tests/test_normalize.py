@@ -169,6 +169,8 @@ class Entities(FixtureCase):
         self.assertEqual((bow["draw"], "cycle" in bow), (2.5, False))  # skill-dependent: mechanics.attack_cycle
         xbow = N.item("Arbal", N.PREFABS["Arbal"])["attack"]
         self.assertEqual((xbow["reload"], xbow["reloadDone"], "cycle" in xbow), (4, 1.0, False))
+        self.assertEqual(N.tool_hits("BombBolt"), [{"toolTier": 6, "damages": {"blunt": 50, "pickaxe": 40}}])
+        self.assertEqual(N.tool_hits("SpitBolt"), [])  # inherits nothing, but deals no tool damage
         javelin = N.item("Javelin", N.PREFABS["Javelin"])["attack"]
         self.assertTrue(javelin["thrown"])  # the projectile respawns the item: no repeatable cycle
         self.assertEqual((javelin["chain"], "cycle" in javelin), ([{"time": 1.0, "hits": 1}], False))
@@ -276,7 +278,9 @@ class Entities(FixtureCase):
         drops = lambda *xs: {"items": [{"item": x} for x in xs]}
         items = [{"id": x} for x in ("Wood", "Ore", "Bar", "Sword", "Club", "Gem", "Coins", "Charm", "Chest", "Hammer",
                                       "Pebble")]
-        items += [{"id": "Pick", "toolTier": 2, "damages": {"pickaxe": 10}}, {"id": "Axe", "toolTier": 3, "damages": {"chop": 9}}]
+        items += [{"id": "Pick", "toolTier": 2, "damages": {"pickaxe": 10}}, {"id": "Axe", "toolTier": 3, "damages": {"chop": 9}},
+                  {"id": "Bomb", "toolTier": 6, "toolHits": [{"toolTier": 6, "damages": {"blunt": 40}}]}]
+        items += [{"id": x} for x in ("Ice", "Nugget", "Rubble", "Blood")]
         pieces = [{"id": "bench", "enabled": True, "tools": ["Hammer"], "resources": [{"item": "Wood"}]},
                   {"id": "ext", "enabled": True, "tools": ["Hammer"], "extends": "bench", "resources": [{"item": "Bar"}]},
                   {"id": "smelter", "enabled": True, "tools": ["Hammer"], "resources": [{"item": "Wood"}]}]
@@ -284,21 +288,27 @@ class Entities(FixtureCase):
                    {"item": "Pick", "enabled": True, "station": "bench", "resources": [{"item": "Gem"}]},
                    {"item": "Axe", "enabled": True, "station": "bench", "resources": [{"item": "Wood"}]},
                    {"item": "Club", "enabled": True, "station": "bench", "resources": [{"item": "Wood"}]},
+                   {"item": "Bomb", "enabled": True, "station": "bench", "resources": [{"item": "Wood"}]},
                    {"item": "Sword", "enabled": True, "station": "bench", "stationLevel": 2, "resources": [{"item": "Wood"}]}]
         procs = [{"station": "smelter", "from": "Ore", "to": "Bar"}]
         sources = [src("tree", "tree", biomes=["Meadows"], drops=drops("Wood")),
                    src("vein", biomes=["Meadows"], minToolTier=2, drops=drops("Ore"),  # the pick needs a Mountain gem
-                       damageModifiers={"chop": "Immune"}),
+                       damageModifiers={"chop": "Immune", "blunt": "Immune"}),
+                   src("pond", biomes=["Meadows"], drops=drops("Ice"), damageModifiers={  # tier 0, but only a pick hurts it
+                       t: "Immune" for t in ("blunt", "slash", "pierce", "chop", "fire", "frost", "lightning", "poison", "spirit")}),
+                   src("troll", biomes=["Meadows"], minToolTier=6, drops=drops("Nugget"), damageModifiers={"chop": "Immune"}),
+                   src("wall", biomes=["Meadows"], minToolTier=7, drops=drops("Rubble")),  # nothing a player holds breaks it
                    src("chest", "container", locations=[{"location": "Peak"}], drops=drops("Gem")),
                    src("purse", "container", locations=[{"location": "Camp"}], drops=drops("Coins")),
                    src("wreck", "destructible", locations=[{"location": "Shore"}], drops=drops("Pebble")),
                    src("orb", "destructible", locations=[{"location": "Peak"}], startsEvent="Siege"),
+                   src("core", "destructible", stopsEvent="siege", drops=drops("Blood")),  # the siege places it
                    {"id": "Vendor", "kind": "trader", "locations": [{"location": "Camp", "biomes": ["Meadows"]}],
                     "sells": [{"item": "Charm", "requiredKey": "defeated_boss"}],
                     "takes": [{"item": "Chest", "setsKey": "Quest1"}]}]
         creatures = [{"id": "Boss", "boss": True, "defeatKey": "defeated_boss", "drops": [{"item": "Chest"}]},
                      {"id": "Raider"}, {"id": "Ghost"}, {"id": "Giant"}, {"id": "Serpent"}]
-        spawn_list = [{"creature": "Boss", "source": "location", "biomes": ["BlackForest"]},
+        spawn_list = [{"creature": "Boss", "source": "location", "biomes": ["BlackForest"], "summon": {"item": "Wood", "amount": 2}},
                       {"creature": "Raider", "source": "raid", "biomes": ["Meadows"], "requiredGlobalKeys": ["defeated_boss"]},
                       {"creature": "Ghost", "source": "raid", "biomes": ["Meadows"], "requiredGlobalKeys": ["quest1"]},
                       {"creature": "Giant", "source": "world", "biomes": ["Meadows", "DeepNorth"], "requiredEvent": "siege"},
@@ -322,6 +332,10 @@ class Entities(FixtureCase):
         self.assertEqual(got["Giant"], "Mountain")  # its event starts when the orb on the Peak is destroyed
         self.assertEqual(got["Serpent"], "Meadows")  # the open sea counts from the start
         self.assertEqual(got["Pebble"], "Swamp")  # a shore location: Ocean next to land is that land's shore
+        self.assertEqual(got["Ice"], "Mountain")  # the Mountain pick, though the rock has no minimum tier
+        self.assertEqual(got["Nugget"], "Meadows")  # the bomb's explosion has the tier
+        self.assertNotIn("Rubble", got)
+        self.assertEqual(got["Blood"], "Mountain")  # the siege's core: the siege starts at the Peak
         ways = {}
         N.stages(*args, reach=reach, ways=ways)
         way = lambda kind, k: (ways[kind][k]["how"], ways[kind][k].get("from"), ways[kind][k]["needs"])
@@ -332,6 +346,8 @@ class Entities(FixtureCase):
         self.assertEqual(way("creature", "Raider")[2], [("creature", "Boss", None)])  # the boss that sets its key
         self.assertEqual(way("item", "Charm"), ("trader", "Vendor", [("item", "Coins", None), ("creature", "Boss", None)]))
         self.assertEqual(way("item", "Pebble")[0], "source")  # loot, recorded as a source
+        self.assertEqual(way("item", "Nugget"), ("source", "troll", [("item", "Bomb", None)]))
+        self.assertEqual(way("creature", "Boss")[2], [("item", "Wood", 2)])  # its offering
 
         N.STAGE_OVERRIDES["Club"] = "Plains"
         try:

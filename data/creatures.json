@@ -1452,6 +1452,12 @@
   "via": {
    "how": "spawn",
    "from": "Bonemass",
+   "needs": [
+    {
+     "item": "WitheredBone",
+     "amount": 10
+    }
+   ],
    "biomes": [
     "Swamp"
    ]
@@ -2110,6 +2116,12 @@
   "via": {
    "how": "spawn",
    "from": "Dragonqueen",
+   "needs": [
+    {
+     "item": "DragonEgg",
+     "amount": 3
+    }
+   ],
    "biomes": [
     "Mountain"
    ]
@@ -2930,6 +2942,12 @@
   "via": {
    "how": "spawn",
    "from": "Eikthyrnir",
+   "needs": [
+    {
+     "item": "TrophyDeer",
+     "amount": 2
+    }
+   ],
    "biomes": [
     "Meadows"
    ]
@@ -3145,6 +3163,12 @@
   "via": {
    "how": "spawn",
    "from": "FaderLocation",
+   "needs": [
+    {
+     "item": "Bell",
+     "amount": 3
+    }
+   ],
    "biomes": [
     "AshLands"
    ]
@@ -3267,6 +3291,12 @@
   "via": {
    "how": "spawn",
    "from": "NorthMemorialPlace",
+   "needs": [
+    {
+     "item": "MemorialCoal",
+     "amount": 3
+    }
+   ],
    "biomes": [
     "DeepNorth"
    ]
@@ -3539,6 +3569,12 @@
   "via": {
    "how": "spawn",
    "from": "DN_Bossroom",
+   "needs": [
+    {
+     "item": "HatefulBlood",
+     "amount": 3
+    }
+   ],
    "biomes": [
     "DeepNorth"
    ]
@@ -4317,6 +4353,12 @@
   "via": {
    "how": "spawn",
    "from": "GoblinKing",
+   "needs": [
+    {
+     "item": "GoblinTotem",
+     "amount": 5
+    }
+   ],
    "biomes": [
     "Plains"
    ]
@@ -6279,6 +6321,12 @@
   "via": {
    "how": "spawn",
    "from": "Mistlands_DvergrBossEntrance1",
+   "needs": [
+    {
+     "item": "TrophySeekerBrute",
+     "amount": 3
+    }
+   ],
    "biomes": [
     "Mistlands"
    ]
@@ -8135,6 +8183,12 @@
   "via": {
    "how": "spawn",
    "from": "GDKing",
+   "needs": [
+    {
+     "item": "AncientSeed",
+     "amount": 3
+    }
+   ],
    "biomes": [
     "BlackForest"
    ]

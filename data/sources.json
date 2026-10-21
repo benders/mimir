@@ -3970,6 +3970,7 @@
    "poison": "Immune"
   },
   "becomes": "HatefulBlood",
+  "stopsEvent": "jotun_invasion",
   "name": "Malicious Ice"
  },
  {

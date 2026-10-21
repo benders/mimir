@@ -228,6 +228,9 @@ def prefabs():
         prefab("SpitBolt", comp("Projectile", m(damage=damages(), spawnOnHit=R("SpitPool"), randomSpawnOnHit=[],
                                                 onlySpawnedProjectilesDealDamage=True, projectilesInheritHitData=False))),
         prefab("SpitPool", comp("Aoe", m(damage=damages(poison=9), useAttackSettings=True))),
+        prefab("BombBolt", comp("Projectile", m(damage=damages(pickaxe=1), spawnOnHit=R("BombBlast"), randomSpawnOnHit=[],
+                                                projectilesInheritHitData=False))),  # a thrown bomb's explosion mines
+        prefab("BombBlast", comp("Aoe", m(damage=damages(blunt=50, pickaxe=40), useAttackSettings=False, toolTier=6))),
         item("Marble", name="$item_marble", icons=[S("Marble")]),  # only from breaking the LootChest
         item("Gem", name="$item_gem", icons=[S("Gem")]),  # unresolved name, only in a chest: reachable, so shown
         item("Shard", name="$item_shard", icons=[S("Shard")]),  # only from breaking the Altar
@@ -297,6 +300,9 @@ def prefabs():
         prefab("CupHolder", comp("ItemStand", m(name="$cup", supportedItems=[R("Wood")], guardianPower=None))),  # an altar's stand
         prefab("Orb", comp("Destructible", m(health=100, minToolTier=0, damages={}, spawnWhenDestroyed=None)),
                comp("TriggerPersistentEventOnDestroy", {"_eventInternalName": "siege", "_stopEvent": False})),  # no drops
+        prefab("SiegeCore", comp("Destructible", m(health=100, minToolTier=0, damages={}, spawnWhenDestroyed=R("Shard"))),
+               comp("TriggerPersistentEventOnDestroy", {"_eventInternalName": "siege", "_stopEvent": True})),  # the
+        # siege places it: never in the world otherwise
         prefab("WildHive", comp("WearNTear", m(health=20, materialType="Wood", damages={"m_fire": "Weak"})),
                comp("DropOnDestroyed", m(dropWhenDestroyed=drop_table(("Wood", 1, 3, 1), ("Ore", 1, 1, 1))))),
         prefab("Bush", comp("Pickable", m(overrideName="$piece_bush", itemPrefab=R("Wood"), amount=2,

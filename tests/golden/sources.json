@@ -104,6 +104,13 @@
   ]
  },
  {
+  "id": "SiegeCore",
+  "kind": "destructible",
+  "health": 100,
+  "becomes": "Shard",
+  "stopsEvent": "siege"
+ },
+ {
   "id": "Stub",
   "kind": "pickable",
   "name": "Twig Bush",

@@ -297,6 +297,7 @@ def item(name: str, p: dict) -> dict | None:
         "toolTier": s["m_toolTier"],
         "damages": damages(s["m_damages"]),
         "damagesPerLevel": damages(s["m_damagesPerLevel"]),
+        "toolHits": tool_hits(ref(s["m_attack"].get("m_attackProjectile"))) if icons else None,
         "attackForce": s["m_attackForce"],
         "backstab": s["m_backstabBonus"],
         "armor": s["m_armor"],
@@ -333,8 +334,23 @@ ARMOR_FIELDS = {"armor", "armorPerLevel"}  # Player.GetBodyArmor sums helmet, ch
 BLOCK_FIELDS = {"block", "blockPerLevel", "parryForce", "parryForcePerLevel", "parryBonus", "blockAdrenaline",
                 "parryAdrenaline"}  # Humanoid.GetCurrentBlocker:
 # the left-hand item (shield, bow, torch), else the weapon
-ATTACK_FIELDS = {"tamedOnly", "skill", "toolTier", "damages", "damagesPerLevel", "attackForce", "backstab", "attack", "secondaryAttack",
+ATTACK_FIELDS = {"tamedOnly", "skill", "toolTier", "damages", "toolHits", "damagesPerLevel", "attackForce", "backstab", "attack", "secondaryAttack",
                  "attackEffect"}
+
+
+def tool_hits(target: str | None, seen: frozenset = frozenset()) -> list[dict]:
+    """[{toolTier, damages}] of an Aoe an attack's projectile spawns and that keeps its own damage and tool tier
+    (Aoe.Setup: no inherited HitData, or m_useAttackSettings off): BombDynamite's explosion, tier 6, the only player
+    way to mine gold veins and petrified Gammeltrolls."""
+    if not target or target in seen or not (p := PREFABS.get(target) or SUBPREFABS.get(target)):
+        return []
+    if (pr := comp(p, "Projectile")) and not pr.get("m_projectilesInheritHitData"):
+        return tool_hits(ref(pr.get("m_spawnOnHit")), seen | {target})
+    if pr:
+        return []
+    a = comp(p, "Aoe")
+    d = damages(a["m_damage"]) if a else {}
+    return [{"toolTier": a.get("m_toolTier", 0), "damages": d}] if d.get("chop") or d.get("pickaxe") else []
 
 
 def catapult_ammo() -> set[str]:
@@ -430,6 +446,8 @@ WAY_RANK = {  # how a thing is got, for the tech tree (#25): at the same stage, 
     "offspring": 2, "egg": 2, "growup": 2, "fish": 3, "drop": 3, "summon": 3, "phase": 3, "loot": 4, "trader": 5,
     "break": 6}
 GATHERED = {"tree", "rock", "log", "pickable"}  # source kinds ranked as "source", the rest as "loot"
+TOOLED = {"tree", "rock", "log", "destructible"}  # sources with a minimum tool tier and damage modifiers
+DAMAGE_TYPES = ("blunt", "slash", "pierce", "chop", "pickaxe", "fire", "frost", "lightning", "poison", "spirit")
 
 
 def stages(items: list, creatures: list, pieces: list, recipes: list, procs: list, sources: list, spawn_list: list,
@@ -446,7 +464,8 @@ def stages(items: list, creatures: list, pieces: list, recipes: list, procs: lis
       - a piece's tool, station and cost;
       - a spawn's or trader offer's global key: the earliest creature that sets it as `defeatKey` (a boss's opens the
         next stage, and so do its drops), or an item a trader `takes` for it (Hildir's chests); a key nothing sets holds nothing back;
-      - a world spawn's persistent event (SpawnSystem m_requiredPersistentEvent): the source that `startsEvent`;
+      - a world spawn's persistent event (SpawnSystem m_requiredPersistentEvent): the source that `startsEvent`; a
+        source that `stopsEvent` is placed by that event (inferred: PersistentEventSystem isn't dumped);
       - the parent of offspring and hatchlings;
       - for a source with `minToolTier`, a player item of that tier dealing a damage type it isn't immune to
         (MineRock.RPC_Hit, MineRock5/TreeBase/Destructible.RPC_Damage: CheckToolTier), except STAGE_IGNORED_TOOLS.
@@ -467,20 +486,26 @@ def stages(items: list, creatures: list, pieces: list, recipes: list, procs: lis
     overrides = {k: BIOME_STAGE[v] for k, v in STAGE_OVERRIDES.items()}
     changed = True
 
+    latest = lambda ns: max((D[n[0]][n[1]] for n in ns if n[0] in D), default=0)
+
     def lower(d: dict, k: str, v: int, how: str = "", frm: str | None = None, needs=(), **extra) -> None:
         nonlocal changed
         if v < NEVER and k in overrides:
             v = overrides[k]
-        rank, tie = WAY_RANK[how or "break"], False
+        rank, tie, again = WAY_RANK[how or "break"], False, False
         if v < d[k]:
             d[k], changed = v, True
-        elif not (tie := record and v == d[k] < NEVER and rank < R[id(d)].get(k, NEVER)):
+        elif not (tie := record and v == d[k] < NEVER and rank < R[id(d)].get(k, NEVER)) and not (
+                again := record and v == d[k] < NEVER and how in ("source", "loot") and frm
+                and V[id(d)].get(k, {}).get("from") == frm):
             return
         if record:
             me = (KIND.get(id(d)), k)
             needs = [n for n in (needs() if callable(needs) else needs) if has(n) and n[:2] != me]
-            if tie and any(leads_to(n[:2], me) for n in needs):  # a better-ranked way that goes through it
+            if (tie or again) and any(leads_to(n[:2], me) for n in needs):  # a better-ranked way that goes through it
                 return
+            if again and latest(needs) >= latest(V[id(d)][k]["needs"]):  # the same way, needing something earlier
+                return  # now (a tool settled after it)
             V[id(d)][k] = {"how": "source" if how == "loot" else how, "from": frm, "needs": needs, **extra}
             R[id(d)][k] = rank
 
@@ -508,6 +533,12 @@ def stages(items: list, creatures: list, pieces: list, recipes: list, procs: lis
     soft_cost = lambda rs: max((soft_item(r["item"]) for r in rs if not r.get("upgrader")), default=0)
     cost_needs = lambda rs: [("item", r["item"], r.get("amount")) for r in rs if not r.get("upgrader")]
     source_needs = lambda sid: V[id(S)].get(sid, {}).get("needs", [])
+
+    def with_tool(sid: str, tn: list) -> list:  # one tool for a multi-stage object (tree, log): the later one, which
+        # breaks the earlier stage too; a source's needs hold no other items
+        prev = source_needs(sid)
+        tools = [n for n in prev if n[0] == "item"] + tn
+        return [n for n in prev if n[0] != "item"] + ([max(tools, key=lambda n: soft_item(n[1]))] if tools else [])
 
     killers, givers = defaultdict(list), defaultdict(list)  # global key (lowercase, ZoneSystem.GetKeyValue) ->
     for c in creatures:  # creatures that set it on death, items a trader takes for it
@@ -547,15 +578,20 @@ def stages(items: list, creatures: list, pieces: list, recipes: list, procs: lis
                 needs += [("piece", x, None) for _, x in ext[:level - 1]]
         return s, needs
 
-    def tool(src: dict) -> tuple[int, list]:  # the earliest player item that can damage a source with a minimum tool tier
-        if not reach or not (tier := src.get("minToolTier")):
+    def tool(src: dict) -> tuple[int, list]:  # the earliest player item that can damage a tool-only or tiered source
+        if not reach or src["kind"] not in TOOLED:
             return 0, []
-        hurt = {t for t, m in (src.get("damageModifiers") or {}).items() if m not in ("Immune", "Ignore")}
-        hurt |= {t for t in ("chop", "pickaxe") if t not in (src.get("damageModifiers") or {})}
-        return min(((soft_item(i["id"]), [("item", i["id"], None)]) for i in items if i["id"] in reach[0]
-                    and i.get("toolTier", 0) >= tier and not i.get("internal") and not i.get("enemyOnly")
-                    and i["id"] not in STAGE_IGNORED_TOOLS
-                    and any(v > 0 for t, v in (i.get("damages") or {}).items() if t in hurt)), default=(0, []))
+        tier, mods = src.get("minToolTier", 0), src.get("damageModifiers") or {}
+        hurt = {t for t, m in mods.items() if m not in ("Immune", "Ignore")} | {t for t in DAMAGE_TYPES if t not in mods}
+        if not tier and hurt - {"chop", "pickaxe"}:  # bare hands do
+            return 0, []
+        hits = lambda i: [(i.get("toolTier", 0), i.get("damages") or {})] + [
+            (h["toolTier"], h["damages"]) for h in i.get("toolHits", [])]
+        return min(((soft_item(i["id"]), not any(d.get(t) for _, d in hits(i) for t in hurt & {"chop", "pickaxe"}),
+                     [("item", i["id"], None)]) for i in items if i["id"] in reach[0]
+                    and not i.get("internal") and not i.get("enemyOnly") and i["id"] not in STAGE_IGNORED_TOOLS
+                    and any(t >= tier and any(v > 0 for k, v in d.items() if k in hurt) for t, d in hits(i))),
+                   default=(NEVER, False, []))[::2]  # nothing a player holds breaks it
 
     loc_stage = {loc["id"]: biome_stage(loc["biomes"]) for loc in location_list}
     at = lambda locs: min((loc_stage.get(x["location"], 0) for x in locs), default=NEVER)
@@ -584,6 +620,9 @@ def stages(items: list, creatures: list, pieces: list, recipes: list, procs: lis
                         if not r.get("noRecover"):
                             lower(I, r["item"], P[p["id"]], "break", p["id"], [("piece", p["id"], None)])
         for src in world:  # a source counts once placed: in the world, made by an affordable piece, or a stage of one
+            if (e := src.get("stopsEvent")) and starters[e.lower()]:  # PersistentEventSystem places it while its
+                # event runs (its spawn lists aren't in the dump: inferred from what ends the event)
+                lower(S, src["id"], event(e), "source")
             if src["kind"] == "container" or src.get("biomes") or src.get("locations"):
                 lower(S, src["id"], min(biome_stage(src["biomes"]) if src.get("biomes") else NEVER,
                                         at(src["locations"]) if src.get("locations") else NEVER,
@@ -593,13 +632,13 @@ def stages(items: list, creatures: list, pieces: list, recipes: list, procs: lis
                 if pc in by_piece:
                     lower(S, src["id"], built(pc), "build", pc, [("piece", pc, None)])
             tv, tn = tool(src)
-            v, how = max(S[src["id"]], tv), "source" if src["kind"] in GATHERED else "loot"
+            v, how = max(S[src["id"]], tv), "source" if src["kind"] in GATHERED or tn else "loot"  # mined: gathered
             if src.get("becomes") in item_ids:  # breaks into an item (Destructible.m_spawnWhenDestroyed)
-                lower(I, src["becomes"], v, how, src["id"], lambda: source_needs(src["id"]) + tn)
+                lower(I, src["becomes"], v, how, src["id"], lambda: with_tool(src["id"], tn))
             elif src.get("becomes"):
-                lower(S, src["becomes"], v, how, src["id"], lambda: source_needs(src["id"]) + tn)
+                lower(S, src["becomes"], v, how, src["id"], lambda: with_tool(src["id"], tn))
             for it in {d["item"] for d in (src.get("drops") or {}).get("items", [])} | picked_items(src):
-                lower(I, it, v, how, src["id"], lambda: source_needs(src["id"]) + tn)
+                lower(I, it, v, how, src["id"], lambda: with_tool(src["id"], tn))
         for r in recipes:
             if r.get("item") and (r.get("enabled") or r.get("season")):
                 sv, sn = station(r.get("station"), r.get("stationLevel", 1))
@@ -610,6 +649,8 @@ def stages(items: list, creatures: list, pieces: list, recipes: list, procs: lis
             if src in ("world", "location", "dungeon", "raid"):
                 keys = s.get("requiredGlobalKeys", []) + ([s["requiredGlobalKey"]] if s.get("requiredGlobalKey") else [])
                 kv = [key(k) for k in keys]
+                if off := s.get("summon"):  # a boss's offering (OfferingBowl): soft, like a key
+                    kv.append((soft_item(off["item"]), [("item", off["item"], off["amount"])]))
                 lower(C, c, max([biome_stage(s.get("biomes")), event(s.get("requiredEvent"))] + [v for v, _ in kv]),
                       "spawn", s.get("location") or s.get("event") or src, lambda: [n for _, ns in kv for n in ns],
                       biomes=s.get("biomes", []))
@@ -956,6 +997,8 @@ def source(name: str, p: dict) -> dict | None:
         return None
     if (ev := comp(p, "TriggerPersistentEventOnDestroy")) and not ev["_stopEvent"]:
         entry["startsEvent"] = ev["_eventInternalName"]  # destroying it starts a persistent event (Fimbulvinter orb)
+    elif ev:  # destroying it ends the event (Malicious Ice core): the event places it, see stages()
+        entry["stopsEvent"] = ev["_eventInternalName"]
     if not entry.get("drops") and not entry.get("pickable") and not entry.get("becomes") and not entry.get("startsEvent"):
         return None
     if hover := comp(p, "HoverText"):

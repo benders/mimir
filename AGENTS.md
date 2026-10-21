@@ -122,7 +122,7 @@ catch drops; fish spawn as `creature` ids in `spawns` but have no `creatures` en
 `requiredKey` global key}], `takes` [{item, setsKey}] (quest hand-ins: Hildir's chests set `Hildir1`..3),
 `upgrades` [{name, tooltip, price, requiredKey, buyKey, increment {key, amount}}] (offers with no item: Haldor's
 Wider/Deeper Pockets, once per character, `invrows` = inventory rows; the trader page's Upgrades section),
-`locations` [{location, biomes}]; a source that `startsEvent` starts a persistent event when destroyed (Fimbulvinter orb)),
+`locations` [{location, biomes}]; a source that `startsEvent` starts a persistent event when destroyed (Fimbulvinter orb); one that `stopsEvent` ends it and counts as placed while the event runs (Malicious Ice core; inferred, PersistentEventSystem isn't dumped)),
 `status_effects`, `locations` (every enabled world location with the `biomes` it is placed in and its `placement`:
 quantity, unique, prioritized, biomeArea, min/maxDistance from the centre (the tighter of m_min/maxDistance and m_min/maxDistanceFromCenter, both checked), minDistanceFromSimilar, iconPlaced), `raids` (RandEventSystem:
 `intervalMin` / `chance` of the raid roll, and per enabled random event `id`, start/end `message`, `biomes`, `duration`,
@@ -194,7 +194,7 @@ Items keep only the stat fields their type uses: `armor*` for helmet/chest/legs/
 game), block/parry fields for weapons and shields, attack fields (`skill`, `damages`, `attack`...) for weapons, ammo and
 Catapult ammo (shields keep `skill`); `internal` items keep everything. Blockers have `blockAdrenaline` / `parryAdrenaline`,
 attacks `adrenaline` (per melee hit, once per area attack) and `useAdrenaline`; items with an adrenaline bar (trinkets) have
-`adrenaline` {max, effect fired when full}. A creature attack item whose damage goes through
+`adrenaline` {max, effect fired when full}. Player weapons whose projectile spawns an Aoe with its own tool tier have `toolHits` [{toolTier, damages}] (Dynamite: the only player tool for tier 6 rock). A creature attack item whose damage goes through
 spawned objects has `hits` [{kind: projectile | area | hit (the item's own melee hit), damages}]: projectiles carry the
 attack's damage unless they only spawn, Aoe use their own `m_damage` unless they inherit the attack's, SpawnAbility
 projectiles and Aoe deal their own; `[{kind: none}]` = it deals no damage (summons, heals, buffs). No `hits` = the item's
