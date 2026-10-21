@@ -13334,7 +13334,7 @@
   "weight": 2,
   "stack": 5,
   "maxQuality": 1,
-  "stage": "DeepNorth",
+  "stage": "PostGame",
   "via": {
    "how": "drop",
    "from": "FrozenKing_p3",
@@ -16617,7 +16617,7 @@
    "duration": 3000,
    "regen": 7
   },
-  "stage": "DeepNorth",
+  "stage": "PostGame",
   "via": {
    "how": "piece",
    "from": "FeastDeepNorth",
@@ -16637,7 +16637,7 @@
   "weight": 10,
   "stack": 5,
   "maxQuality": 1,
-  "stage": "DeepNorth",
+  "stage": "PostGame",
   "via": {
    "how": "craft",
    "from": "Recipe_FeastDeepNorth",
@@ -19374,7 +19374,7 @@
   "weight": 1,
   "stack": 30,
   "maxQuality": 1,
-  "stage": "DeepNorth",
+  "stage": "PostGame",
   "via": {
    "how": "drop",
    "from": "FrozenKing_p3",
@@ -23926,7 +23926,7 @@
    "runStamina": -0.2
   },
   "equipEffect": "Crowned",
-  "stage": "DeepNorth",
+  "stage": "PostGame",
   "via": {
    "how": "craft",
    "from": "Recipe_HelmetCrownOfValheim",
@@ -39519,7 +39519,7 @@
   "weight": 0.1,
   "stack": 100,
   "maxQuality": 1,
-  "stage": "DeepNorth",
+  "stage": "PostGame",
   "via": {
    "how": "trader",
    "from": "BogWitch",

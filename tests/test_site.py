@@ -140,8 +140,8 @@ class Site(unittest.TestCase):
         self.assertEqual(found.count('href="creatures/Raider.html"'), 1)  # merged copies: one row
         self.assertIn('<tr data-stage="3"><td>Crate</td>', found)  # only in the Lair (Mountain)
         self.assertIn('<span data-stage="1">, <a href="biomes/BlackForest.html">', found)  # a later biome of a row
-        self.assertIn('<tr data-stage="7"><td>Gift</td>', found)  # placed nowhere known: only with no filter
-        self.assertIn('<p class="note stagehint" data-later="7">', found)
+        self.assertIn('<tr data-stage="8"><td>Gift</td>', found)  # placed nowhere known: only with no filter
+        self.assertIn('<p class="note stagehint" data-later="8">', found)
         css = (self.out / "style.css").read_text(encoding="utf-8")
         self.assertIn('html[data-max="3"] p.stagehint[data-later="4"]', css)
         self.assertNotIn('p.stagehint[data-later="4"],\nhtml[data-max="4"]', css)
@@ -451,7 +451,7 @@ class Site(unittest.TestCase):
         self.assertRegex(wood, r'<a class="stage"[^>]*>Meadows</a>')
         self.assertNotIn('class="spoiler"', wood)
         self.assertIn('<select id="stage">', wood)
-        self.assertRegex(wood, r'<option value="6">Ashlands</option><option value="">Deep North</option></select>')
+        self.assertRegex(wood, r'<option value="7">Deep North</option><option value="">Post-game</option></select>')
         self.assertIn('localStorage.getItem("mimir-stage")', wood)
         index = (self.out / "items/index.html").read_text(encoding="utf-8")
         self.assertIn('<li data-stage="2"><a class="ref" href="items/Gem.html"', index)

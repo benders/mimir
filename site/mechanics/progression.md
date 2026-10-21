@@ -21,6 +21,7 @@ filter shows a spoiler warning.
   A boss's key opens the next stage, so a raid that needs it comes one stage later.
 - boss drops (trophy, Hard Antler, Dragon Tear...): the stage the boss opens, like its key. What they make, such as the
   Artisan Table, comes with them.
+  The last boss opens Post-game, a stage that isn't a biome: the Crown Jewel, the Crown of Valheim, Sacrificial Blood.
 - persistent event: the object whose destruction starts it (the Fimbulvinter orb).
   What ends it (Malicious Ice) comes with it.
 

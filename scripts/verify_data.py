@@ -250,6 +250,7 @@ def main() -> int:
         "piece_artisanstation": "Plains", "Karve": "BlackForest", "VikingShip": "Swamp",
         "Eikthyr": "Meadows", "gd_king": "BlackForest", "Bonemass": "Swamp", "Dragon": "Mountain",
         "GoblinKing": "Plains", "SeekerQueen": "Mistlands", "Fader": "AshLands", "FrozenKing": "DeepNorth",
+        "CrownJewel": "PostGame", "HelmetCrownofValheim": "PostGame",  # the last boss's drop: after Deep North
         "Hatchling": "Mountain",  # the drake raid only comes after Bonemass
         "Goblin": "Plains",  # Hildir's fuling raid needs her third chest
         "JotunWarrior": "DeepNorth",  # its everywhere spawn needs the Fimbulvinter event
@@ -269,7 +270,7 @@ def main() -> int:
     # Tech tree (#25): every staged entry has the way it is got (`via`), whose needs are staged no later and never
     # lead back to it.
     order = {s: n for n, s in enumerate(("Meadows", "BlackForest", "Swamp", "Mountain", "Plains", "Mistlands",
-                                         "AshLands", "DeepNorth"))}
+                                         "AshLands", "DeepNorth", "PostGame"))}
     node = {("item", k): v for k, v in items.items()} | {("creature", k): v for k, v in creatures.items()} \
         | {("piece", k): v for k, v in pieces.items()}
     needs = lambda e: [(k, n[k]) for n in e.get("via", {}).get("needs", []) for k in ("item", "creature", "piece") if k in n]

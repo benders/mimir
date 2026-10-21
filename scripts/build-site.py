@@ -613,7 +613,9 @@ BIOMES = {  # game progression order (creatures index)
     "Meadows": "Meadows", "BlackForest": "Black Forest", "Swamp": "Swamp", "Mountain": "Mountain",
     "Plains": "Plains", "Mistlands": "Mistlands", "AshLands": "Ashlands", "DeepNorth": "Deep North", "Ocean": "Ocean",
 }
-STAGES = ["Meadows", "BlackForest", "Swamp", "Mountain", "Plains", "Mistlands", "AshLands", "DeepNorth"]  # normalize.STAGES
+STAGES = ["Meadows", "BlackForest", "Swamp", "Mountain", "Plains", "Mistlands", "AshLands", "DeepNorth",
+          "PostGame"]  # normalize.STAGES
+STAGE_NAMES = BIOMES | {"PostGame": "Post-game"}  # PostGame isn't a biome: after the last boss
 LOCATION_BIOMES = {x["id"]: x.get("biomes", []) for x in LOCATIONS}
 LOCATION_STAGE = {x["id"]: min((biome_stage(b) for b in x.get("biomes", [])), default=0) for x in LOCATIONS}  # earliest biome
 STAGE_KEY = "mimir-stage"  # localStorage: the last stage the reader wants to see (index into STAGES)
@@ -698,8 +700,8 @@ def home_biome(cid: str) -> str | None:
 written: list[Path] = []
 
 
-STAGE_OPTIONS = "".join(f'<option value="{i}">{esc(BIOMES[s])}</option>' for i, s in enumerate(STAGES[:-1])) + \
-    f'<option value="">{esc(BIOMES[STAGES[-1]])}</option>'  # the last stage: no filter
+STAGE_OPTIONS = "".join(f'<option value="{i}">{esc(STAGE_NAMES[s])}</option>' for i, s in enumerate(STAGES[:-1])) + \
+    f'<option value="">{esc(STAGE_NAMES[STAGES[-1]])}</option>'  # the last stage: no filter
 
 
 def page(path: str, title: str, body: str, kind_label: str = "", scripts=()) -> None:
@@ -788,7 +790,7 @@ def header(e: dict, kind: str, subtitle: str, desc: str = "") -> str:
     badge = spoiler = ""
     if (page_id := MERGED.get(kind, {}).get(e["id"], e["id"])) in PAGE_STAGE.get(kind, {}):
         s = PAGE_STAGE[kind][page_id]
-        label = esc(BIOMES[STAGES[s]])
+        label = esc(STAGE_NAMES[STAGES[s]])
         badge = (f' <a class="stage" href="mechanics/progression.html" title="Progression stage: the first biome where '
                  f'you can get it">{label}</a>')
         spoiler = (f'<p class="spoiler" data-stage="{s}">Spoiler: this is {label} content, past the stage you '
@@ -1652,7 +1654,7 @@ def block_raids() -> str:
                          rng(*sp["groupSize"]), stars(*sp["levels"])])
         st = raid_stage(e)
         out += (f'<section{stage_attr(st)}><h3 id="{esc(e["id"])}">{esc(raid_title(e["id"]))} '
-                f'<span class="skill">{esc(BIOMES[STAGES[st]])} · <code>{esc(e["id"])}</code></span></h3>'
+                f'<span class="skill">{esc(STAGE_NAMES[STAGES[st]])} · <code>{esc(e["id"])}</code></span></h3>'
                 + kv(raid_conditions(e)) + table(["Spawns", "At most", "Every", "Chance", "Group", STARS_TH], rows, "num")
                 + "</section>")
     return out
@@ -2333,7 +2335,7 @@ def block_stage_counts() -> str:
         n = {k: sum(1 for x, s in PAGE_STAGE[k].items() if s == i and has_page(k, x)) for k in ("item", "creature", "piece")}
         boss = sorted(c for c, s in PAGE_STAGE["creature"].items() if s == i and CREATURES[c].get("boss")
                       and has_page("creature", c) and (CREATURES[c].get("defeatKey") or "").startswith("defeated_"))
-        rows.append([esc(BIOMES[st]), num(n["item"]), num(n["creature"]), num(n["piece"]),
+        rows.append([esc(STAGE_NAMES[st]), num(n["item"]), num(n["creature"]), num(n["piece"]),
                      ", ".join(link("creature", c) for c in boss)])
     return table(["Stage", "Items", "Creatures", "Pieces", "Bosses"], rows, "num")
 
@@ -2343,7 +2345,7 @@ def block_foods() -> str:
     foods = [i for i in ITEMS.values() if i.get("food") and i["type"] == "Consumable" and has_page("item", i["id"])]
     foods.sort(key=lambda i: (stage_of("item", i["id"]), -sum(i["food"].get(k, 0) for k in ("health", "stamina", "eitr")),
                               name_of("item", i["id"]).lower()))
-    rows = [[link("item", i["id"]), esc(BIOMES[STAGES[stage_of("item", i["id"])]]),
+    rows = [[link("item", i["id"]), esc(STAGE_NAMES[STAGES[stage_of("item", i["id"])]]),
              *(num(i["food"][k]) if i["food"].get(k) else "" for k in ("health", "stamina", "eitr", "regen")),
              duration(i["food"].get("duration", 0))] for i in foods]
     return table(["Food", "Stage", "Health", "Stamina", "Eitr", "Heals / 10 s", "Lasts"], rows, "num")
@@ -2377,7 +2379,7 @@ def block_max_comfort() -> str:
         lvl = lambda ps: mechanics.comfort_level([(p["id"], p["comfort"]["value"], p["comfort"].get("group")) for p in ps])
         plain, seasonal = lvl([p for p in avail if not p.get("season")]), lvl(avail)
         t = mechanics.rested_time(plain, r["baseTTL"], r["ttlPerComfort"])
-        rows.append([esc(BIOMES[st]), num(plain), duration(int(t)), num(seasonal) if seasonal != plain else ""])
+        rows.append([esc(STAGE_NAMES[st]), num(plain), duration(int(t)), num(seasonal) if seasonal != plain else ""])
     return table(["Up to", "Max comfort", "Rested lasts", "With seasonal pieces"], rows, "num")
 
 

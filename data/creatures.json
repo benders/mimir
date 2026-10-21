@@ -3103,7 +3103,7 @@
   "stage": "DeepNorth",
   "via": {
    "how": "spawn",
-   "from": "army_elakingar",
+   "from": "TheHole01",
    "biomes": [
     "DeepNorth"
    ]
@@ -5283,7 +5283,15 @@
    "how": "spawn",
    "from": "world",
    "biomes": [
-    "DeepNorth"
+    "Meadows",
+    "Swamp",
+    "Mountain",
+    "BlackForest",
+    "Plains",
+    "AshLands",
+    "DeepNorth",
+    "Ocean",
+    "Mistlands"
    ]
   }
  },
@@ -5472,13 +5480,16 @@
   "via": {
    "how": "spawn",
    "from": "world",
-   "needs": [
-    {
-     "creature": "JotunWarrior"
-    }
-   ],
    "biomes": [
-    "DeepNorth"
+    "Meadows",
+    "Swamp",
+    "Mountain",
+    "BlackForest",
+    "Plains",
+    "AshLands",
+    "DeepNorth",
+    "Ocean",
+    "Mistlands"
    ]
   }
  },

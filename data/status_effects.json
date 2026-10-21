@@ -129,7 +129,7 @@
   "name": "Royalty",
   "tooltip": "The creatures of Valheim will not harm the one who has mastered them.",
   "icon": "CrownofValheim",
-  "stage": "DeepNorth"
+  "stage": "PostGame"
  },
  {
   "id": "Demister",

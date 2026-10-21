@@ -202,7 +202,7 @@ projectiles and Aoe deal their own; `[{kind: none}]` = it deals no damage (summo
 page; creatures list them under `attacks` (weapons) and `equipment`. Items, creatures and pieces flagged
 `unobtainable` (`normalize.reachable()` can't get to them from any source: unreleased, test, cheat, legacy or unplaced
 content) get no page, search entry or relation rows either. Reachable items, creatures and pieces carry `stage` (#24): the
-first biome of the progression (`normalize.STAGES`, Meadows..DeepNorth) where a player can get them, from
+first biome of the progression (`normalize.STAGES`, Meadows..DeepNorth, then PostGame: not a biome, what the last boss's drops open) where a player can get them, from
 `normalize.stages()`, the same fixed point as `reachable()` (its first pass) with a second pass that adds stations and
 their extension levels, tools and tool tiers, fuel, boss keys and drops (a boss's open the next stage), quest hand-ins and
 persistent events. The earliest way wins (a creature's earliest spawn); Ocean alone counts as Meadows, next to land as

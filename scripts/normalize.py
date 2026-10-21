@@ -426,8 +426,9 @@ def mark_enemy_only(items: list, creatures: list, recipes: list, procs: list, so
             i["enemyOnly"] = True
 
 
-STAGES = ("Meadows", "BlackForest", "Swamp", "Mountain", "Plains", "Mistlands", "AshLands", "DeepNorth")
-BIOME_STAGE = {b: i for i, b in enumerate(STAGES)} | {"Ocean": 0}  # the sea counts from the start (#24)
+STAGES = ("Meadows", "BlackForest", "Swamp", "Mountain", "Plains", "Mistlands", "AshLands", "DeepNorth",
+          "PostGame")  # PostGame: not a biome, what the last boss's death opens (Crown Jewel, Crown of Valheim)
+BIOME_STAGE = {b: i for i, b in enumerate(STAGES[:-1])} | {"Ocean": 0}  # the sea counts from the start (#24)
 NEVER = len(STAGES)
 STAGE_OVERRIDES: dict[str, str] = {}  # id -> stage, where the data gets the progression wrong
 STAGE_IGNORED_TOOLS = {"AxeEarly"}  # Early Axes (Meadows chest axe heads, tier 2): an unusual path to FineWood
@@ -559,7 +560,7 @@ def stages(items: list, creatures: list, pieces: list, recipes: list, procs: lis
         k = (k or "").lower()  # sets doesn't hold anything back
         if k not in killers and k not in givers:
             return 0, []
-        return min([(min(soft_creature(c) + bool(by_creature[c].get("boss")), NEVER - 1), [("creature", c, None)])
+        return min([(soft_creature(c) + bool(by_creature[c].get("boss")), [("creature", c, None)])
                     for c in killers[k]] + [(max(soft_item(i), h), [("item", i, None)]) for i, h in givers[k]])
 
     extensions = defaultdict(list)
@@ -665,7 +666,7 @@ def stages(items: list, creatures: list, pieces: list, recipes: list, procs: lis
                 lower(C, c, C[s["parent"]] if "parent" in s else I[s["item"]], src, by[1], [by])
         for cid, cr in by_creature.items():
             for d in cr.get("drops", []):  # a boss's drops belong to the stage it opens, like its key
-                lower(I, d["item"], min(C[cid] + bool(cr.get("boss")), NEVER - 1) if C[cid] < NEVER else NEVER,
+                lower(I, d["item"], C[cid] + bool(cr.get("boss")) if C[cid] < NEVER else NEVER,
                       "drop", cid, [("creature", cid, None)])
                 if d["item"] in by_creature:  # a creature dropped by one (a miniboss's second phase)
                     lower(C, d["item"], C[cid], "drop", cid, [("creature", cid, None)])

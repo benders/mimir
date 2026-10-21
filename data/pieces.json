@@ -1669,7 +1669,7 @@
   ],
   "health": 50,
   "material": "Wood",
-  "stage": "DeepNorth",
+  "stage": "PostGame",
   "via": {
    "how": "build",
    "needs": [
