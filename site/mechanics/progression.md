@@ -1,7 +1,7 @@
 ---
 title: Progression stages
 summary: The biome where you first get each item, creature and piece, and the site's stage filter.
-sources: SpawnSystem.UpdateSpawnList; OfferingBowl.UseItem; Aoe.Setup; HitData.CheckToolTier; RandEventSystem.HaveGlobalKeys; Trader.UseItem; TriggerPersistentEventOnDestroy; CraftingStation.GetLevel; StationExtension.FindExtensions; MineRock.RPC_Hit; MineRock5.RPC_Damage; TreeBase.RPC_Damage; Destructible.RPC_Damage; ZoneSystem.GetKeyValue
+sources: SpawnSystem.UpdateSpawnList; InventoryGui.UpdateRecipeList; OfferingBowl.UseItem; Aoe.Setup; HitData.CheckToolTier; RandEventSystem.HaveGlobalKeys; Trader.UseItem; TriggerPersistentEventOnDestroy; CraftingStation.GetLevel; StationExtension.FindExtensions; MineRock.RPC_Hit; MineRock5.RPC_Damage; TreeBase.RPC_Damage; Destructible.RPC_Damage; ZoneSystem.GetKeyValue
 ---
 
 Each entry's stage is the first biome, in order, where a player can get it. A way of getting something counts at the
@@ -13,6 +13,7 @@ filter shows a spoiler warning.
   ocean next to land counts as that land (shipwrecks).
 - recipe: its ingredients and its station, with an extension for each level above 1. Extensions of the same kind
   don't stack.
+  A recipe that only upgrades an item you have (the Nord weapons' at the Black Forge) is not a way to get it.
 - smelting and other processing: the input, the station and the fuel.
 - rock, tree, log, destructible: a player tool of its minimum tier that deals damage it isn't immune to (an explosion
   counts at its own tier: Dynamite). Bare hands do when the minimum tier is 0 and it takes weapon damage.

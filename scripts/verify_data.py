@@ -218,7 +218,7 @@ def main() -> int:
         "Wood", "Stone", "Hammer", "Coins", "Amber", "AmberPearl", "Ruby", "SilverNecklace", "FishRaw", "Fish1",
         "MeadHealthMinor", "BeltStrength", "Thunderstone", "Honey", "QueenBee", "Sap", "FlametalOreNew", "FlametalNew",
         "WolfClaw", "CrownJewel", "DvergrKeyFragment", "ChickenEgg", "AsksvinEgg", "HelmetMidsummerCrown", "HelmetYule",
-        "TrophyEikthyr", "BlackMetal", "Eitr", "OrbFrostFire", "darkwood_beam_67", "HatefulBlood", "GoldOre",
+        "TrophyEikthyr", "BlackMetal", "Eitr", "OrbFrostFire", "darkwood_beam_67", "HatefulBlood", "GoldOre", "FrozenFuel",
         "Boar", "Eikthyr", "Troll", "Draugr", "Skeleton", "Leech", "Serpent", "Lox", "Hen", "Chicken", "DvergerMage",
         "Troll_Summoned", "Bat_Swamp", "Aspect_Eikthyr", "FrozenKing", "FallenWarrior", "Skeleton_Hildir",
         "piece_workbench", "forge", "portal_wood", "piece_xmastree", "TreasureChest_meadows", "piece_TrainingDummy",
@@ -306,9 +306,11 @@ def main() -> int:
                                           (("piece", "smelter"), ("item", "SurtlingCore")),
                                           (("item", "SwordIron"), ("item", "IronScrap")),
                                           (("item", "Gold"), ("item", "BombDynamite")),
-                                          (("item", "Ice"), lambda x: node.get(x, {}).get("skill") == "Pickaxes")]),
+                                          (("item", "Ice"), lambda x: node.get(x, {}).get("skill") == "Pickaxes"),
+                                          (("item", "SwordGold"), ("item", "SwordGoldUncooked")),
+                                          (("item", "SwordGold"), ("piece", "piece_FrostKiln"))]),
           "via spot checks: Stonecutter needs Iron, Iron Sword a forge extension, Smelter Surtling Core, "
-          "Gold Dynamite, Ice a pickaxe")
+          "Gold Dynamite, Ice a pickaxe, Nord Sword its cast and Liquid Frost from the Frigid Kiln")
 
     alts = {a["id"]: a for a in load("alt_biomes.json")}
     lox = alts.get("Lox Plains", {})

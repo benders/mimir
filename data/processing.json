@@ -492,6 +492,17 @@
   "fuel": "FrozenFuel"
  },
  {
+  "station": "piece_FrostKiln",
+  "kind": "smelter",
+  "from": "Ice",
+  "to": "FrozenFuel",
+  "amount": 1,
+  "time": 30,
+  "fuel": "Ice",
+  "fuelPerProduct": 5,
+  "fuelOnly": true
+ },
+ {
   "station": "piece_cookingstation",
   "kind": "cooking",
   "from": "BjornMeat",

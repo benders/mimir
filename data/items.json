@@ -727,36 +727,17 @@
   },
   "stage": "DeepNorth",
   "via": {
-   "how": "craft",
-   "from": "Recipe_ArmorGoldChest",
+   "how": "process",
+   "from": "piece_FrostFoundry",
    "needs": [
     {
-     "item": "Gold",
-     "amount": 20
+     "item": "ArmorGoldHeavyChestUncooked"
     },
     {
-     "item": "MoldArmorGoldChest",
-     "amount": 1
+     "piece": "piece_FrostFoundry"
     },
     {
-     "item": "MooseHide",
-     "amount": 8
-    },
-    {
-     "item": "Leatherstraps",
-     "amount": 4
-    },
-    {
-     "piece": "blackforge"
-    },
-    {
-     "piece": "blackforge_ext1"
-    },
-    {
-     "piece": "blackforge_ext2_vise"
-    },
-    {
-     "piece": "blackforge_ext3_metalcutter"
+     "item": "FrozenFuel"
     }
    ]
   }
@@ -780,36 +761,17 @@
   },
   "stage": "DeepNorth",
   "via": {
-   "how": "craft",
-   "from": "Recipe_ArmorGoldLegs",
+   "how": "process",
+   "from": "piece_FrostFoundry",
    "needs": [
     {
-     "item": "Gold",
-     "amount": 20
+     "item": "ArmorGoldHeavyLegsUncooked"
     },
     {
-     "item": "MoldArmorGoldLegs",
-     "amount": 1
+     "piece": "piece_FrostFoundry"
     },
     {
-     "item": "MooseHide",
-     "amount": 8
-    },
-    {
-     "item": "Leatherstraps",
-     "amount": 4
-    },
-    {
-     "piece": "blackforge"
-    },
-    {
-     "piece": "blackforge_ext1"
-    },
-    {
-     "piece": "blackforge_ext2_vise"
-    },
-    {
-     "piece": "blackforge_ext3_metalcutter"
+     "item": "FrozenFuel"
     }
    ]
   }
@@ -840,33 +802,17 @@
   },
   "stage": "DeepNorth",
   "via": {
-   "how": "craft",
-   "from": "Recipe_ArmorGoldMageChest",
+   "how": "process",
+   "from": "piece_FrostFoundry",
    "needs": [
     {
-     "item": "Gold",
-     "amount": 6
+     "item": "ArmorGoldMageChestUncooked"
     },
     {
-     "item": "MoldArmorMageChest",
-     "amount": 1
+     "piece": "piece_FrostFoundry"
     },
     {
-     "item": "MooseHide",
-     "amount": 6
-    },
-    {
-     "item": "NornThread",
-     "amount": 5
-    },
-    {
-     "piece": "piece_magetable"
-    },
-    {
-     "piece": "piece_magetable_ext"
-    },
-    {
-     "piece": "piece_magetable_ext2"
+     "item": "FrozenFuel"
     }
    ]
   }
@@ -894,33 +840,17 @@
   },
   "stage": "DeepNorth",
   "via": {
-   "how": "craft",
-   "from": "Recipe_ArmorGoldMageLegs",
+   "how": "process",
+   "from": "piece_FrostFoundry",
    "needs": [
     {
-     "item": "Gold",
-     "amount": 6
+     "item": "ArmorGoldMageLegsUncooked"
     },
     {
-     "item": "MoldArmorMageLegs",
-     "amount": 1
+     "piece": "piece_FrostFoundry"
     },
     {
-     "item": "MooseHide",
-     "amount": 6
-    },
-    {
-     "item": "NornThread",
-     "amount": 5
-    },
-    {
-     "piece": "piece_magetable"
-    },
-    {
-     "piece": "piece_magetable_ext"
-    },
-    {
-     "piece": "piece_magetable_ext2"
+     "item": "FrozenFuel"
     }
    ]
   }
@@ -952,36 +882,17 @@
   },
   "stage": "DeepNorth",
   "via": {
-   "how": "craft",
-   "from": "Recipe_ArmorGoldMediumChest",
+   "how": "process",
+   "from": "piece_FrostFoundry",
    "needs": [
     {
-     "item": "Gold",
-     "amount": 12
+     "item": "ArmorGoldMediumChestUncooked"
     },
     {
-     "item": "MoldArmormediumChest",
-     "amount": 1
+     "piece": "piece_FrostFoundry"
     },
     {
-     "item": "ElakingHairBundle",
-     "amount": 8
-    },
-    {
-     "item": "Leatherstraps",
-     "amount": 4
-    },
-    {
-     "piece": "blackforge"
-    },
-    {
-     "piece": "blackforge_ext1"
-    },
-    {
-     "piece": "blackforge_ext2_vise"
-    },
-    {
-     "piece": "blackforge_ext3_metalcutter"
+     "item": "FrozenFuel"
     }
    ]
   }
@@ -1010,36 +921,17 @@
   },
   "stage": "DeepNorth",
   "via": {
-   "how": "craft",
-   "from": "Recipe_ArmorGoldMediumLegs",
+   "how": "process",
+   "from": "piece_FrostFoundry",
    "needs": [
     {
-     "item": "Gold",
-     "amount": 12
+     "item": "ArmorGoldMediumLegsUncooked"
     },
     {
-     "item": "MoldArmorMediumLegs",
-     "amount": 1
+     "piece": "piece_FrostFoundry"
     },
     {
-     "item": "ElakingHairBundle",
-     "amount": 8
-    },
-    {
-     "item": "SealHide",
-     "amount": 4
-    },
-    {
-     "piece": "blackforge"
-    },
-    {
-     "piece": "blackforge_ext1"
-    },
-    {
-     "piece": "blackforge_ext2_vise"
-    },
-    {
-     "piece": "blackforge_ext3_metalcutter"
+     "item": "FrozenFuel"
     }
    ]
   }
@@ -4351,32 +4243,17 @@
   },
   "stage": "DeepNorth",
   "via": {
-   "how": "craft",
-   "from": "Recipe_AtgeirGold",
+   "how": "process",
+   "from": "piece_FrostFoundry",
    "needs": [
     {
-     "item": "Gold",
-     "amount": 20
+     "item": "AtgeirGoldUncooked"
     },
     {
-     "item": "MoldAtgeir",
-     "amount": 1
+     "piece": "piece_FrostFoundry"
     },
     {
-     "item": "Frostwood",
-     "amount": 10
-    },
-    {
-     "piece": "blackforge"
-    },
-    {
-     "piece": "blackforge_ext1"
-    },
-    {
-     "piece": "blackforge_ext2_vise"
-    },
-    {
-     "piece": "blackforge_ext3_metalcutter"
+     "item": "FrozenFuel"
     }
    ]
   }
@@ -5853,32 +5730,17 @@
   },
   "stage": "DeepNorth",
   "via": {
-   "how": "craft",
-   "from": "Recipe_AxeGold",
+   "how": "process",
+   "from": "piece_FrostFoundry",
    "needs": [
     {
-     "item": "Gold",
-     "amount": 20
+     "item": "AxeGoldUncooked"
     },
     {
-     "item": "MoldAxe",
-     "amount": 1
+     "piece": "piece_FrostFoundry"
     },
     {
-     "item": "Frostwood",
-     "amount": 10
-    },
-    {
-     "piece": "blackforge"
-    },
-    {
-     "piece": "blackforge_ext1"
-    },
-    {
-     "piece": "blackforge_ext2_vise"
-    },
-    {
-     "piece": "blackforge_ext3_metalcutter"
+     "item": "FrozenFuel"
     }
    ]
   }
@@ -7287,32 +7149,17 @@
   },
   "stage": "DeepNorth",
   "via": {
-   "how": "craft",
-   "from": "Recipe_BattleaxeGold",
+   "how": "process",
+   "from": "piece_FrostFoundry",
    "needs": [
     {
-     "item": "Gold",
-     "amount": 20
+     "item": "BattleaxeGoldUncooked"
     },
     {
-     "item": "MoldAxe2H",
-     "amount": 1
+     "piece": "piece_FrostFoundry"
     },
     {
-     "item": "Frostwood",
-     "amount": 10
-    },
-    {
-     "piece": "blackforge"
-    },
-    {
-     "piece": "blackforge_ext1"
-    },
-    {
-     "piece": "blackforge_ext2_vise"
-    },
-    {
-     "piece": "blackforge_ext3_metalcutter"
+     "item": "FrozenFuel"
     }
    ]
   }
@@ -8679,6 +8526,9 @@
     },
     {
      "piece": "piece_FrostFoundry"
+    },
+    {
+     "item": "FrozenFuel"
     }
    ]
   }
@@ -10475,32 +10325,17 @@
   },
   "stage": "DeepNorth",
   "via": {
-   "how": "craft",
-   "from": "Recipe_BowGold",
+   "how": "process",
+   "from": "piece_FrostFoundry",
    "needs": [
     {
-     "item": "Gold",
-     "amount": 20
+     "item": "BowGoldUncooked"
     },
     {
-     "item": "MoldBow",
-     "amount": 1
+     "piece": "piece_FrostFoundry"
     },
     {
-     "item": "Frostwood",
-     "amount": 10
-    },
-    {
-     "piece": "blackforge"
-    },
-    {
-     "piece": "blackforge_ext1"
-    },
-    {
-     "piece": "blackforge_ext2_vise"
-    },
-    {
-     "piece": "blackforge_ext3_metalcutter"
+     "item": "FrozenFuel"
     }
    ]
   }
@@ -12773,32 +12608,17 @@
   },
   "stage": "DeepNorth",
   "via": {
-   "how": "craft",
-   "from": "Recipe_CrossbowGold",
+   "how": "process",
+   "from": "piece_FrostFoundry",
    "needs": [
     {
-     "item": "Gold",
-     "amount": 20
+     "item": "CrossbowGoldUncooked"
     },
     {
-     "item": "MoldCrossbow",
-     "amount": 1
+     "piece": "piece_FrostFoundry"
     },
     {
-     "item": "Frostwood",
-     "amount": 10
-    },
-    {
-     "piece": "blackforge"
-    },
-    {
-     "piece": "blackforge_ext1"
-    },
-    {
-     "piece": "blackforge_ext2_vise"
-    },
-    {
-     "piece": "blackforge_ext3_metalcutter"
+     "item": "FrozenFuel"
     }
    ]
   }
@@ -18894,32 +18714,17 @@
   },
   "stage": "DeepNorth",
   "via": {
-   "how": "craft",
-   "from": "Recipe_FistweaponGold",
+   "how": "process",
+   "from": "piece_FrostFoundry",
    "needs": [
     {
-     "item": "Gold",
-     "amount": 20
+     "item": "FistGoldUncooked"
     },
     {
-     "item": "MoldFistweapon",
-     "amount": 1
+     "piece": "piece_FrostFoundry"
     },
     {
-     "item": "Frostwood",
-     "amount": 10
-    },
-    {
-     "piece": "blackforge"
-    },
-    {
-     "piece": "blackforge_ext1"
-    },
-    {
-     "piece": "blackforge_ext2_vise"
-    },
-    {
-     "piece": "blackforge_ext3_metalcutter"
+     "item": "FrozenFuel"
     }
    ]
   }
@@ -19363,7 +19168,19 @@
   "weight": 2,
   "stack": 50,
   "maxQuality": 1,
-  "unobtainable": true
+  "stage": "DeepNorth",
+  "via": {
+   "how": "process",
+   "from": "piece_FrostKiln",
+   "needs": [
+    {
+     "item": "Ice"
+    },
+    {
+     "piece": "piece_FrostKiln"
+    }
+   ]
+  }
  },
  {
   "id": "FrozenKingDrop",
@@ -23973,32 +23790,17 @@
   },
   "stage": "DeepNorth",
   "via": {
-   "how": "craft",
-   "from": "Recipe_HelmetGold",
+   "how": "process",
+   "from": "piece_FrostFoundry",
    "needs": [
     {
-     "item": "Gold",
-     "amount": 20
+     "item": "ArmorGoldHeavyHelmetUncooked"
     },
     {
-     "item": "MoldArmorGoldHelmet",
-     "amount": 1
+     "piece": "piece_FrostFoundry"
     },
     {
-     "item": "MooseHide",
-     "amount": 4
-    },
-    {
-     "piece": "blackforge"
-    },
-    {
-     "piece": "blackforge_ext1"
-    },
-    {
-     "piece": "blackforge_ext2_vise"
-    },
-    {
-     "piece": "blackforge_ext3_metalcutter"
+     "item": "FrozenFuel"
     }
    ]
   }
@@ -24025,33 +23827,17 @@
   },
   "stage": "DeepNorth",
   "via": {
-   "how": "craft",
-   "from": "Recipe_HelmetGoldMage",
+   "how": "process",
+   "from": "piece_FrostFoundry",
    "needs": [
     {
-     "item": "MooseSinew",
-     "amount": 2
+     "item": "ArmorGoldMageHelmetUncooked"
     },
     {
-     "item": "MoldArmorMageHelmet",
-     "amount": 1
+     "piece": "piece_FrostFoundry"
     },
     {
-     "item": "TrophyMoose",
-     "amount": 1
-    },
-    {
-     "item": "NornThread",
-     "amount": 3
-    },
-    {
-     "piece": "piece_magetable"
-    },
-    {
-     "piece": "piece_magetable_ext"
-    },
-    {
-     "piece": "piece_magetable_ext2"
+     "item": "FrozenFuel"
     }
    ]
   }
@@ -24080,36 +23866,17 @@
   },
   "stage": "DeepNorth",
   "via": {
-   "how": "craft",
-   "from": "Recipe_HelmetGoldMedium",
+   "how": "process",
+   "from": "piece_FrostFoundry",
    "needs": [
     {
-     "item": "SealHide",
-     "amount": 5
+     "item": "ArmorGoldMediumHelmetUncooked"
     },
     {
-     "item": "MoldArmorMediumHelmet",
-     "amount": 1
+     "piece": "piece_FrostFoundry"
     },
     {
-     "item": "MooseHide",
-     "amount": 5
-    },
-    {
-     "item": "MooseSinew",
-     "amount": 1
-    },
-    {
-     "piece": "blackforge"
-    },
-    {
-     "piece": "blackforge_ext1"
-    },
-    {
-     "piece": "blackforge_ext3_metalcutter"
-    },
-    {
-     "piece": "blackforge_ext4_gemcutter"
+     "item": "FrozenFuel"
     }
    ]
   }
@@ -27169,32 +26936,17 @@
   },
   "stage": "DeepNorth",
   "via": {
-   "how": "craft",
-   "from": "Recipe_KnifeGold",
+   "how": "process",
+   "from": "piece_FrostFoundry",
    "needs": [
     {
-     "item": "Gold",
-     "amount": 20
+     "item": "KnifeGoldUncooked"
     },
     {
-     "item": "MoldKnife",
-     "amount": 1
+     "piece": "piece_FrostFoundry"
     },
     {
-     "item": "Frostwood",
-     "amount": 10
-    },
-    {
-     "piece": "blackforge"
-    },
-    {
-     "piece": "blackforge_ext1"
-    },
-    {
-     "piece": "blackforge_ext2_vise"
-    },
-    {
-     "piece": "blackforge_ext3_metalcutter"
+     "item": "FrozenFuel"
     }
    ]
   }
@@ -28734,32 +28486,17 @@
   },
   "stage": "DeepNorth",
   "via": {
-   "how": "craft",
-   "from": "Recipe_MaceGold",
+   "how": "process",
+   "from": "piece_FrostFoundry",
    "needs": [
     {
-     "item": "Gold",
-     "amount": 20
+     "item": "MaceGoldUncooked"
     },
     {
-     "item": "MoldMace",
-     "amount": 1
+     "piece": "piece_FrostFoundry"
     },
     {
-     "item": "Frostwood",
-     "amount": 10
-    },
-    {
-     "piece": "blackforge"
-    },
-    {
-     "piece": "blackforge_ext1"
-    },
-    {
-     "piece": "blackforge_ext2_vise"
-    },
-    {
-     "piece": "blackforge_ext3_metalcutter"
+     "item": "FrozenFuel"
     }
    ]
   }
@@ -36405,32 +36142,17 @@
   },
   "stage": "DeepNorth",
   "via": {
-   "how": "craft",
-   "from": "Recipe_ShieldRoundGold",
+   "how": "process",
+   "from": "piece_FrostFoundry",
    "needs": [
     {
-     "item": "Gold",
-     "amount": 15
+     "item": "ShieldRoundGoldUncooked"
     },
     {
-     "item": "MoldShieldRound",
-     "amount": 1
+     "piece": "piece_FrostFoundry"
     },
     {
-     "item": "Frostwood",
-     "amount": 10
-    },
-    {
-     "piece": "blackforge"
-    },
-    {
-     "piece": "blackforge_ext1"
-    },
-    {
-     "piece": "blackforge_ext2_vise"
-    },
-    {
-     "piece": "blackforge_ext3_metalcutter"
+     "item": "FrozenFuel"
     }
    ]
   }
@@ -36462,32 +36184,17 @@
   },
   "stage": "DeepNorth",
   "via": {
-   "how": "craft",
-   "from": "Recipe_ShieldBucklerGold",
+   "how": "process",
+   "from": "piece_FrostFoundry",
    "needs": [
     {
-     "item": "Gold",
-     "amount": 10
+     "item": "ShieldBucklerGoldUncooked"
     },
     {
-     "item": "MoldShieldBuckler",
-     "amount": 1
+     "piece": "piece_FrostFoundry"
     },
     {
-     "item": "Frostwood",
-     "amount": 10
-    },
-    {
-     "piece": "blackforge"
-    },
-    {
-     "piece": "blackforge_ext1"
-    },
-    {
-     "piece": "blackforge_ext2_vise"
-    },
-    {
-     "piece": "blackforge_ext3_metalcutter"
+     "item": "FrozenFuel"
     }
    ]
   }
@@ -36526,32 +36233,17 @@
   },
   "stage": "DeepNorth",
   "via": {
-   "how": "craft",
-   "from": "Recipe_ShieldTowerGold",
+   "how": "process",
+   "from": "piece_FrostFoundry",
    "needs": [
     {
-     "item": "Gold",
-     "amount": 20
+     "item": "ShieldTowerGoldUncooked"
     },
     {
-     "item": "MoldShieldTower",
-     "amount": 1
+     "piece": "piece_FrostFoundry"
     },
     {
-     "item": "Frostwood",
-     "amount": 20
-    },
-    {
-     "piece": "blackforge"
-    },
-    {
-     "piece": "blackforge_ext1"
-    },
-    {
-     "piece": "blackforge_ext2_vise"
-    },
-    {
-     "piece": "blackforge_ext3_metalcutter"
+     "item": "FrozenFuel"
     }
    ]
   }
@@ -37457,32 +37149,17 @@
   },
   "stage": "DeepNorth",
   "via": {
-   "how": "craft",
-   "from": "Recipe_SledgeGold",
+   "how": "process",
+   "from": "piece_FrostFoundry",
    "needs": [
     {
-     "item": "Gold",
-     "amount": 20
+     "item": "SledgeGoldUncooked"
     },
     {
-     "item": "MoldMace2H",
-     "amount": 1
+     "piece": "piece_FrostFoundry"
     },
     {
-     "item": "Frostwood",
-     "amount": 10
-    },
-    {
-     "piece": "blackforge"
-    },
-    {
-     "piece": "blackforge_ext1"
-    },
-    {
-     "piece": "blackforge_ext2_vise"
-    },
-    {
-     "piece": "blackforge_ext3_metalcutter"
+     "item": "FrozenFuel"
     }
    ]
   }
@@ -38694,32 +38371,17 @@
   },
   "stage": "DeepNorth",
   "via": {
-   "how": "craft",
-   "from": "Recipe_SpearGold",
+   "how": "process",
+   "from": "piece_FrostFoundry",
    "needs": [
     {
-     "item": "Gold",
-     "amount": 20
+     "item": "SpearGoldUncooked"
     },
     {
-     "item": "MoldSpear",
-     "amount": 1
+     "piece": "piece_FrostFoundry"
     },
     {
-     "item": "Frostwood",
-     "amount": 10
-    },
-    {
-     "piece": "blackforge"
-    },
-    {
-     "piece": "blackforge_ext1"
-    },
-    {
-     "piece": "blackforge_ext2_vise"
-    },
-    {
-     "piece": "blackforge_ext3_metalcutter"
+     "item": "FrozenFuel"
     }
    ]
   }
@@ -39979,29 +39641,17 @@
   "attackEffect": "Staff_FrostOrbs",
   "stage": "DeepNorth",
   "via": {
-   "how": "craft",
-   "from": "Recipe_StaffFrostOrbs_Upgrade",
+   "how": "process",
+   "from": "piece_FrostFoundry",
    "needs": [
     {
-     "item": "Ice",
-     "amount": 10
+     "item": "StaffFrostOrbsUncooked"
     },
     {
-     "item": "NornThread",
-     "amount": 5
+     "piece": "piece_FrostFoundry"
     },
     {
-     "item": "TrophyJotunWitch",
-     "amount": 1
-    },
-    {
-     "piece": "piece_magetable"
-    },
-    {
-     "piece": "piece_magetable_ext"
-    },
-    {
-     "piece": "piece_magetable_ext2"
+     "item": "FrozenFuel"
     }
    ]
   }
@@ -40321,29 +39971,17 @@
   },
   "stage": "DeepNorth",
   "via": {
-   "how": "craft",
-   "from": "Recipe_StaffOrbOfAhri_Upgrade",
+   "how": "process",
+   "from": "piece_FrostFoundry",
    "needs": [
     {
-     "item": "Gold",
-     "amount": 10
+     "item": "StaffOrbofAhriUncooked"
     },
     {
-     "item": "NornThread",
-     "amount": 4
+     "piece": "piece_FrostFoundry"
     },
     {
-     "item": "OrbFrostFire",
-     "amount": 1
-    },
-    {
-     "piece": "piece_magetable"
-    },
-    {
-     "piece": "piece_magetable_ext"
-    },
-    {
-     "piece": "piece_magetable_ext2"
+     "item": "FrozenFuel"
     }
    ]
   }
@@ -40633,29 +40271,17 @@
   },
   "stage": "DeepNorth",
   "via": {
-   "how": "craft",
-   "from": "Recipe_StaffSpiritCaller_Upgrade",
+   "how": "process",
+   "from": "piece_FrostFoundry",
    "needs": [
     {
-     "item": "BarkaBranch",
-     "amount": 8
+     "item": "StaffSpiritCallerUncooked"
     },
     {
-     "item": "NornThread",
-     "amount": 5
+     "piece": "piece_FrostFoundry"
     },
     {
-     "item": "TrophyMoose",
-     "amount": 1
-    },
-    {
-     "piece": "piece_magetable"
-    },
-    {
-     "piece": "piece_magetable_ext"
-    },
-    {
-     "piece": "piece_magetable_ext2"
+     "item": "FrozenFuel"
     }
    ]
   }
@@ -40750,29 +40376,17 @@
   },
   "stage": "DeepNorth",
   "via": {
-   "how": "craft",
-   "from": "Recipe_StaffThunderBlood_Upgrade",
+   "how": "process",
+   "from": "piece_FrostFoundry",
    "needs": [
     {
-     "item": "Gold",
-     "amount": 10
+     "item": "StaffThunderbloodUncooked"
     },
     {
-     "item": "NornThread",
-     "amount": 5
+     "piece": "piece_FrostFoundry"
     },
     {
-     "item": "OrbThunderBlood",
-     "amount": 1
-    },
-    {
-     "piece": "piece_magetable"
-    },
-    {
-     "piece": "piece_magetable_ext"
-    },
-    {
-     "piece": "piece_magetable_ext2"
+     "item": "FrozenFuel"
     }
    ]
   }
@@ -41422,32 +41036,17 @@
   },
   "stage": "DeepNorth",
   "via": {
-   "how": "craft",
-   "from": "Recipe_SwordGold",
+   "how": "process",
+   "from": "piece_FrostFoundry",
    "needs": [
     {
-     "item": "Gold",
-     "amount": 20
+     "item": "SwordGoldUncooked"
     },
     {
-     "item": "MoldSword",
-     "amount": 1
+     "piece": "piece_FrostFoundry"
     },
     {
-     "item": "Frostwood",
-     "amount": 10
-    },
-    {
-     "piece": "blackforge"
-    },
-    {
-     "piece": "blackforge_ext1"
-    },
-    {
-     "piece": "blackforge_ext2_vise"
-    },
-    {
-     "piece": "blackforge_ext3_metalcutter"
+     "item": "FrozenFuel"
     }
    ]
   }
@@ -42625,32 +42224,17 @@
   },
   "stage": "DeepNorth",
   "via": {
-   "how": "craft",
-   "from": "Recipe_THSwordGold",
+   "how": "process",
+   "from": "piece_FrostFoundry",
    "needs": [
     {
-     "item": "Gold",
-     "amount": 20
+     "item": "THSwordGoldUncooked"
     },
     {
-     "item": "MoldSword2H",
-     "amount": 1
+     "piece": "piece_FrostFoundry"
     },
     {
-     "item": "BarkaBranch",
-     "amount": 2
-    },
-    {
-     "piece": "blackforge"
-    },
-    {
-     "piece": "blackforge_ext1"
-    },
-    {
-     "piece": "blackforge_ext2_vise"
-    },
-    {
-     "piece": "blackforge_ext3_metalcutter"
+     "item": "FrozenFuel"
     }
    ]
   }

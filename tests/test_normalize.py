@@ -216,6 +216,10 @@ class Entities(FixtureCase):
     def test_processing_skips_incomplete_and_duplicate_conversions(self):
         p = N.processing("Kiln", N.PREFABS["Kiln"])
         self.assertEqual([(x["from"], x["to"], x["fuel"]) for x in p], [("Ore", "Ingot", "Wood")])
+        kiln = json.loads(json.dumps(N.PREFABS["Kiln"]))  # no source item: made from the fuel (the Frigid Kiln)
+        N.comp(kiln, "Smelter")["m_conversion"] = [{"m_from": None, "m_to": {"$ref": "Ingot"}}]
+        self.assertEqual([(x["from"], x["fuel"], x.get("fuelOnly")) for x in N.processing("Kiln", kiln)],
+                         [("Wood", "Wood", True)])
 
     def test_sources(self):
         self.assertIsNone(N.source("Boulder", N.PREFABS["Boulder"]))  # yields nothing
@@ -289,6 +293,7 @@ class Entities(FixtureCase):
                    {"item": "Axe", "enabled": True, "station": "bench", "resources": [{"item": "Wood"}]},
                    {"item": "Club", "enabled": True, "station": "bench", "resources": [{"item": "Wood"}]},
                    {"item": "Bomb", "enabled": True, "station": "bench", "resources": [{"item": "Wood"}]},
+                   {"item": "Bar", "enabled": True, "upgradeOnly": True, "resources": [{"item": "Wood"}]},  # upgrades one
                    {"item": "Sword", "enabled": True, "station": "bench", "stationLevel": 2, "resources": [{"item": "Wood"}]}]
         procs = [{"station": "smelter", "from": "Ore", "to": "Bar"}]
         sources = [src("tree", "tree", biomes=["Meadows"], drops=drops("Wood")),

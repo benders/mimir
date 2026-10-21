@@ -1204,7 +1204,8 @@ def item_page(i: dict) -> None:
     obtain = []
     for c in process_to[i["id"]]:
         obtain.append([f'{esc(PROCESS_LABELS.get(c["kind"], c["kind"]))} at {link("piece", c["station"])}',
-                       f'{link("item", c["from"])} → ×{num(c["amount"])}', duration(c["time"])])
+                       f'{link("item", c["from"])}{f" ×{num(c["fuelPerProduct"])}" if c.get("fuelOnly") else ""}'
+                       f' → ×{num(c["amount"])}', duration(c["time"])])  # fuelOnly: the fuel is the input
     for p in produced_by[i["id"]]:
         pr = p["produces"]
         where = " near " + esc(pretty_id(pr["connectsTo"]["id"])) if pr.get("connectsTo") else ""

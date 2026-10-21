@@ -641,7 +641,8 @@ def stages(items: list, creatures: list, pieces: list, recipes: list, procs: lis
             for it in {d["item"] for d in (src.get("drops") or {}).get("items", [])} | picked_items(src):
                 lower(I, it, v, how, src["id"], lambda: with_tool(src["id"], tn))
         for r in recipes:
-            if r.get("item") and (r.get("enabled") or r.get("season")):
+            if r.get("item") and (r.get("enabled") or r.get("season")) and not r.get("upgradeOnly"):  # upgrades one
+                # you have (InventoryGui.UpdateRecipeList: m_noCraftOnlyUpgrade), the Frost Foundry's Nord weapons
                 sv, sn = station(r.get("station"), r.get("stationLevel", 1))
                 lower(I, r["item"], max(cost(r["resources"]), sv), "craft", r.get("id"),
                       lambda: cost_needs(r["resources"]) + sn)
@@ -681,7 +682,7 @@ def stages(items: list, creatures: list, pieces: list, recipes: list, procs: lis
         for p in procs:
             sv, sn = station(p["station"])
             lower(I, p["to"], max(I[p["from"]], sv, soft_item(p.get("fuel"))), "process", p["station"],
-                  lambda: [("item", p["from"], None)] + sn + [("item", p.get("fuel"), None)])
+                  lambda: [("item", p["from"], None)] + sn + ([("item", p.get("fuel"), None)] if p.get("fuel") != p["from"] else []))
         for p in pieces:  # feasts: item and piece in one
             if p["id"] in item_ids:
                 lower(I, p["id"], built(p["id"]), "piece", p["id"], [("piece", p["id"], None)])
@@ -946,10 +947,12 @@ def processing(name: str, p: dict) -> list[dict]:
     """Smelter / CookingStation / Fermenter conversions, one entry per (station, from, to)."""
     out = []
     if s := comp(p, "Smelter"):
-        for c in s["m_conversion"]:
-            out.append({"station": name, "kind": "smelter", "from": ref(c["m_from"]), "to": ref(c["m_to"]), "amount": 1,
-                        "time": s["m_secPerProduct"], "fuel": ref(s["m_fuelItem"]),
-                        "fuelPerProduct": s["m_fuelPerProduct"] if s["m_fuelItem"] else 0, "capacity": s["m_maxOre"]})
+        for c in s["m_conversion"]:  # no m_from: made from the fuel alone (Smelter.m_noSourceConversion, Frigid
+            # Kiln: Ice -> Liquid Frost), recorded as a conversion of the fuel
+            out.append({"station": name, "kind": "smelter", "from": ref(c["m_from"]) or ref(s["m_fuelItem"]),
+                        "to": ref(c["m_to"]), "amount": 1, "time": s["m_secPerProduct"], "fuel": ref(s["m_fuelItem"]),
+                        "fuelPerProduct": s["m_fuelPerProduct"] if s["m_fuelItem"] else 0, "capacity": s["m_maxOre"],
+                        **({"fuelOnly": True} if not c["m_from"] else {})})
     if s := comp(p, "CookingStation"):
         for c in s["m_conversion"]:
             out.append({"station": name, "kind": "cooking", "from": ref(c["m_from"]), "to": ref(c["m_to"]), "amount": 1,

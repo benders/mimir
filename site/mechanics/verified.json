@@ -240,6 +240,7 @@
    "CraftingStation.GetLevel": "84d2963d0a92a9fa",
    "Destructible.RPC_Damage": "fed83eb21f2eb15d",
    "HitData.CheckToolTier": "ccb6143e87dd1e06",
+   "InventoryGui.UpdateRecipeList": "62d4cbb2b1de3228",
    "MineRock.RPC_Hit": "c77136db56b64cf4",
    "MineRock5.RPC_Damage": "341d8a19b91052cd",
    "OfferingBowl.UseItem": "e513d0cc672004e4",

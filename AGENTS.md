@@ -113,7 +113,7 @@ pages use: `adrenaline` gains and decay curves as [time, value] keys, no tangent
 (SE_Rested base and per-comfort time, SE_Cozy delay, read from the raw dump since they equal the type defaults); `skills`
 gain step per skill, death penalty factor, hard-death cooldown; `multiplayer` from world/Game.json: player-count
 damage scaling range, maxPlayers, health/damage scale per player), `items`, `recipes`, `creatures`, `spawns`,
-`pieces`, `processing` (smelter/cooking/fermenter conversions), `sources` (pickables, ore, trees, rocks; follow
+`pieces`, `processing` (smelter/cooking/fermenter conversions; `fuelOnly`: made from the fuel alone, `from` = the fuel, Frigid Kiln), `sources` (pickables, ore, trees, rocks; follow
 `becomes` for multi-stage objects (or an item id: the object breaks into that item, e.g. Dvergr altar crystal → DvergrKeyFragment); `kind: container` = loot chests, one per distinct name + `Container` drop table, with
 `locations` [{location, dungeon}] where it is placed, `dungeon` = in a room that location's dungeon generates;
 `kind: fishing` = one per fish prefab, id = the caught item: `baits` [{item, chance}], `biomes` from its spawns, `drops` = extra
