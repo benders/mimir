@@ -258,6 +258,8 @@ class Entities(FixtureCase):
         self.assertEqual(sources["Stub"]["placedBy"], ["Sapling"])
         self.assertEqual(sources["Glow"]["placedBy"], ["Lure"])
         self.assertNotIn("biomes", sources["Stub"])
+        self.assertEqual(sources["Lode"]["foundWith"], ["Dowser"])  # sunk into the ground, with a beacon
+        self.assertNotIn("foundWith", sources["Bush"])
 
     def test_place_pieces(self):
         pieces = [N.piece(n, p, N.piece_tools()) for n, p in N.PREFABS.items() if N.has(p, "Piece")]
@@ -385,6 +387,19 @@ class Entities(FixtureCase):
         self.assertEqual(ways["item"]["Scrap"]["needs"], [("item", "Key", None), ("item", "Pick", None)])  # key and tool
         self.assertEqual(ways["creature"]["Draugr"]["needs"], [("item", "Key", None)])
         self.assertEqual(ways["item"]["Moss"]["needs"], [])  # outside the dungeon
+
+    def test_found_with(self):
+        # a buried vein waits for the item that finds it; a tool still breaks it
+        items = [{"id": "Bone"}, {"id": "Ore"}, {"id": "Pick", "toolTier": 1, "damages": {"pickaxe": 5}}]
+        sources = [{"id": "chest", "kind": "container", "locations": [{"location": "Peak"}], "drops": {"items": [{"item": "Bone"}]}},
+                   {"id": "vein", "kind": "rock", "biomes": ["Meadows"], "foundWith": ["Bone"], "drops": {"items": [{"item": "Ore"}]},
+                    "damageModifiers": {t: "Immune" for t in N.DAMAGE_TYPES if t != "pickaxe"}}]
+        recipes = [{"item": "Pick", "enabled": True, "resources": []}]
+        args = items, [], [], recipes, [], sources, [], [{"id": "Peak", "biomes": ["Mountain"]}]
+        reach = tuple(set(d) for d in N.stages(*args))
+        ways = {}
+        self.assertEqual(N.STAGES[N.stages(*args, reach=reach, ways=ways)[0]["Ore"]], "Mountain")
+        self.assertEqual(ways["item"]["Ore"]["needs"], [("item", "Bone", None), ("item", "Pick", None)])
 
     def test_usage_tags(self):
         self.assertEqual(N.usage_tags("Building, Roof"), ["Building", "Roofing"])  # the build menu's labels

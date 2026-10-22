@@ -152,6 +152,17 @@
   }
  },
  {
+  "id": "Dowser",
+  "name": "Dowser",
+  "type": "Utility",
+  "icon": "Dowser",
+  "weight": 1.0,
+  "stack": 1,
+  "maxQuality": 1,
+  "equipEffect": "Dowser",
+  "unobtainable": true
+ },
+ {
   "id": "Dust",
   "name": "Dust",
   "type": "Material",

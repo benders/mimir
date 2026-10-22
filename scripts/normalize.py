@@ -469,6 +469,7 @@ def stages(items: list, creatures: list, pieces: list, recipes: list, procs: lis
         source that `stopsEvent` is placed by that event (inferred: PersistentEventSystem isn't dumped);
       - the parent of offspring and hatchlings;
       - for what a location's dungeon holds (sources, chests, pieces, spawns), the `key` its door takes;
+      - for a buried source in the world (`foundWith`), the earliest item that finds it;
       - for a source with `minToolTier`, a player item of that tier dealing a damage type it isn't immune to
         (MineRock.RPC_Hit, MineRock5/TreeBase/Destructible.RPC_Damage: CheckToolTier), except STAGE_IGNORED_TOOLS.
     `breakage=False` leaves out breaking world pieces for their cost (a sign's coal), an unusual route.
@@ -537,10 +538,10 @@ def stages(items: list, creatures: list, pieces: list, recipes: list, procs: lis
     source_needs = lambda sid: V[id(S)].get(sid, {}).get("needs", [])
 
     def with_tool(sid: str, tn: list) -> list:  # one tool for a multi-stage object (tree, log): the later one, which
-        # breaks the earlier stage too; a source's other item needs are door keys
+        # breaks the earlier stage too; a source's other item needs are door keys and finders
         prev = source_needs(sid)
-        tools = [n for n in prev if n[0] == "item" and n[1] not in door_keys] + tn
-        return [n for n in prev if n[0] != "item" or n[1] in door_keys] + (
+        tools = [n for n in prev if n[0] == "item" and n[1] not in not_tools] + tn
+        return [n for n in prev if n[0] != "item" or n[1] in not_tools] + (
             [max(tools, key=lambda n: soft_item(n[1]))] if tools else [])
 
     killers, givers = defaultdict(list), defaultdict(list)  # global key (lowercase, ZoneSystem.GetKeyValue) ->
@@ -598,7 +599,7 @@ def stages(items: list, creatures: list, pieces: list, recipes: list, procs: lis
 
     loc_stage = {loc["id"]: biome_stage(loc["biomes"]) for loc in location_list}
     loc_key = {loc["id"]: loc["key"] for loc in location_list if loc.get("key")}
-    door_keys = set(loc_key.values())
+    not_tools = set(loc_key.values()) | {i for src in sources for i in src.get("foundWith", [])}
 
     def inside(loc: str, dungeon: bool) -> tuple[int, list]:  # a place's stage, with the key to its dungeon
         k = loc_key.get(loc) if dungeon else None
@@ -636,9 +637,11 @@ def stages(items: list, creatures: list, pieces: list, recipes: list, procs: lis
                 lower(S, src["id"], event(e), "source")
             if src["kind"] == "container" or src.get("biomes") or src.get("locations"):
                 lv, ln = placed(src.get("locations", []))
-                v = min(biome_stage(src["biomes"]) if src.get("biomes") else NEVER,
-                        0 if src["kind"] == "container" and not src.get("locations") else NEVER)
-                lower(S, src["id"], min(v, lv), "source", None, ln if lv < v else [])
+                fv, fn = min(((soft_item(i), [("item", i, None)]) for i in src.get("foundWith", [])
+                              if not reach or i in reach[0]), default=(0, []))  # buried: found with the Wishbone
+                v, vn = (max(biome_stage(src["biomes"]), fv), fn) if src.get("biomes") else (NEVER, [])
+                v = min(v, 0 if src["kind"] == "container" and not src.get("locations") else NEVER)
+                lower(S, src["id"], min(v, lv), "source", None, ln if lv < v else vn)
             for pc in src.get("placedBy", []):
                 if pc in by_piece:
                     lower(S, src["id"], built(pc), "build", pc, [("piece", pc, None)])
@@ -1522,13 +1525,17 @@ def place_pieces(pieces: list[dict]) -> None:
 def place_sources(sources: list[dict]) -> None:
     """Record where each world source is placed: `biomes` (enabled ZoneSystem vegetation), `locations`
     [{location, dungeon}] (the location is the object, or an instance of it sits in the location or in a room its
-    dungeon generates), `placedBy` (pieces that create it: Plant, Procreation, WispSpawner).
+    dungeon generates), `placedBy` (pieces that create it: Plant, Procreation, WispSpawner), `foundWith` (a buried
+    object with a Beacon, silver veins: the items whose equip effect finds it, the Wishbone).
     Sources with none of these are not found anywhere in the world."""
     by = {s["id"]: s for s in sources if s["kind"] not in ("fishing", "trader", "container")}
-    veg = defaultdict(list)
+    veg, sunk = defaultdict(list), defaultdict(list)
     for v in load("world/ZoneSystem.json")[0]["fields"]["m_vegetation"]:
         if v["m_enable"] and (pid := ref(v["m_prefab"])) in by:
             veg[pid] += [b for b in biomes(v["m_biome"]) if b not in veg[pid]]
+            sunk[pid].append((v.get("m_groundOffset") or 0) < 0)
+    finders = sorted(n for n, p in PREFABS.items() if (c := comp(p, "ItemDrop")) and (
+        c["m_itemData"]["m_shared"].get("m_equipStatusEffect") or {}).get("type") == "SE_Finder")
     found = defaultdict(dict)
     for inst, places in scene_instances().items():
         if inst in by:
@@ -1548,6 +1555,9 @@ def place_sources(sources: list[dict]) -> None:
     for sid, e in by.items():
         if veg[sid]:
             e["biomes"] = veg[sid]
+            # buried (ZoneSystem.PlaceVegetation: y += m_groundOffset), found by a finder's pings (SE_Finder: Beacon)
+            if all(sunk[sid]) and finders and any(c["type"] == "Beacon" for c in PREFABS.get(sid, {}).get("components", [])):
+                e["foundWith"] = finders
         if found[sid]:
             e["locations"] = [found[sid][k] for k in sorted(found[sid])]
         if pieces := sorted(n for n, ids in made.items() if sid in ids):

@@ -347,6 +347,9 @@ def main() -> int:
     check(keys.get("SunkenCrypt4") == "CryptKey" and keys.get("Mistlands_DvergrBossEntrance1") == "DvergrKey"
           and {"item": "CryptKey"} in items["IronScrap"].get("via", {}).get("needs", []),
           "locations: Sunken Crypt and the Queen's door take their keys; scrap iron from the crypt needs the Swamp key")
+    found = {s["id"]: s.get("foundWith") for s in load("sources.json")}
+    check(found.get("silvervein") == ["Wishbone"] and {"item": "Wishbone"} in items["SilverOre"]["via"]["needs"]
+          and not found.get("rock4_copper"), "sources: buried silver veins are found with the Wishbone, copper isn't")
     idols = [f"Upgrader{n}{k}" for n in range(8) for k in ("Weapon", "Armor")]
     check(all(items.get(i, {}).get("upgrader") and not items[i].get("unobtainable") for i in idols),
           "items: the 16 Battle/Protection Idols are reachable upgrader resources")

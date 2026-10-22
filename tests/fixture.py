@@ -233,6 +233,8 @@ def prefabs():
         prefab("BombBlast", comp("Aoe", m(damage=damages(blunt=50, pickaxe=40), useAttackSettings=False, toolTier=6))),
         item("Marble", name="$item_marble", icons=[S("Marble")]),  # only from breaking the LootChest
         item("Gem", name="$item_gem", icons=[S("Gem")]),  # unresolved name, only in a chest: reachable, so shown
+        item("Dowser", name="Dowser", itemType="Utility", icons=[S("Dowser")],
+             equipStatusEffect={"$asset": "Dowser", "type": "SE_Finder"}),  # finds buried beacons
         item("Shard", name="$item_shard", icons=[S("Shard")]),  # only from breaking the Altar
         item("Coins", name="$item_coins", icons=[S("Coins")]),
         item("Charm", name="$item_charm", itemType="Trinket", icons=[S("Charm")], maxAdrenaline=40,
@@ -312,6 +314,9 @@ def prefabs():
                                              damageModifiers={"m_chop": "Immune", "m_pickaxe": "Normal"},
                                              dropItems=drop_table(("Ore", 1, 2, 1), ("Wood", 2, 1, 0.25),  # Wood: min above max
                                                                   ("vfx_Poof", 1, 1, 1), dropMax=3)))),
+        prefab("Lode", comp("MineRock", m(name="Lode", health=50, minToolTier=0, damageModifiers={},
+                                          dropItems=drop_table(("Ore", 1, 1, 1)))),
+               comp("Beacon", m(range=50), path="Beacon")),  # buried in the Mountain: the Dowser finds it
         prefab("Boulder", comp("MineRock", m(name="Boulder", health=50, minToolTier=0, damageModifiers={},
                                              dropItems=drop_table()))),  # yields nothing: not a source
         prefab("Stub", comp("Pickable", m(overrideName="$piece_bush", itemPrefab=R("Ore"), amount=1,
@@ -435,7 +440,8 @@ def write_dump(raw: Path) -> Path:
     dump("world/ZoneSystem.json", [{"name": "_GameMain", "type": "ZoneSystem", "fields": {"m_altBiomeLists": [{"$ref": "AltBiomes_Test", "component": "AltBiomeList"}], "m_vegetation": [
         m(prefab=R("Root"), enable=True, biome="Mountain"), m(prefab=R("Root"), enable=True, biome="Swamp", name="root_swamp"),
         m(prefab=R("Root"), enable=False, biome="Plains"), m(prefab=R("Root2"), enable=False, biome="Plains"),
-        m(prefab=R("Bush"), enable=True, biome="Meadows, Swamp"), m(prefab=R("Bush"), enable=True, biome="Meadows", name="bush_meadows")],
+        m(prefab=R("Bush"), enable=True, biome="Meadows, Swamp"), m(prefab=R("Bush"), enable=True, biome="Meadows", name="bush_meadows"),
+        m(prefab=R("Lode"), enable=True, biome="Mountain", groundOffset=-3)],
         "m_locations": [
         zone_location("Camp", "Swamp"),
         zone_location("Camp", "Plains"),  # same prefab placed in a second biome

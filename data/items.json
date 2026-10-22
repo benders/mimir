@@ -36931,6 +36931,9 @@
    "from": "silvervein_frac",
    "needs": [
     {
+     "item": "Wishbone"
+    },
+    {
      "item": "PickaxeIron"
     }
    ]

@@ -154,7 +154,9 @@ object roll independently, `normalize.place_chances`). A `dungeon` entry of an o
 CampRadial/CampGrid generators, Fuling and abandoned villages) lists `rooms` [{room, chance?}] that hold it (chance per copy of
 the room); underground dungeon entries don't. Containers, `Spawner_*` objects (their CreatureSpawners become
 `location`/`dungeon` spawns) and creatures placed in `instances` are handled the same way.
-`placedBy` (pieces that plant/build it: Plant, Procreation, WispSpawner). The site's "Found in" shows a location's render
+`placedBy` (pieces that plant/build it: Plant, Procreation, WispSpawner). `foundWith` (sources buried by world generation,
+vegetation m_groundOffset < 0, that have a Beacon: silver veins, Swamp scrap piles) lists the items whose equip effect is an
+SE_Finder (the Wishbone); `stages()` makes it a soft need of the world placement. The site's "Found in" shows a location's render
 as a thumbnail when one exists, and a Chance column (`mechanics.drop_table_has`: one roll of the drop table gives the item);
 it also holds creature drops (no separate "Dropped by"), surest first, and follows "Up to": a row takes its earliest place's
 stage (`build-site.source_stage`; a location's = its earliest biome's, unplaced sources only show unfiltered), later places
