@@ -135,7 +135,7 @@ print(len(sel), "nodes", sum(len(p) for p in par.values()), "edges", sum(len(p) 
 # --- layout: the well is a cylinder seen from slightly above. Each stage is a band as tall as its rings; inside it a
 # ring per rank (longest path inside the stage; top gear, then the boss, last). Round each ring the most important nodes
 # face the viewer: importance = how many nodes need it, directly or not. Depth shows as size, brightness and fog.
-W, BANDPAD, ROWH, R, TILT, NMIN, BETA, SAMPLES = 1200, 60, 76, 440, 44, 18, 1.5, 12
+W, BANDPAD, ROWH, R, TILT, NMIN, CROWD, SPLAY, BETA, SAMPLES = 1200, 60, 76, 440, 44, 9, 18, .4, 1.5, 12
 CX, TOP = W / 2, TILT + 24
 GATE = GEAR = 1000
 BOSS = GEAR + 1  # the boss is the last thing done in a tier
@@ -168,7 +168,7 @@ imp = {x: len(desc(x)) for x in sel}
 byrank = collections.defaultdict(lambda: collections.defaultdict(list))
 for x in sel:
     byrank[stage(x)][rank[x]].append(x)
-ring_h = lambda n: ROWH * (1 + .5 * max(0, n - NMIN) / NMIN)  # a ring that wraps round the back gets more room
+ring_h = lambda n: ROWH * (1 + .5 * max(0, n - CROWD) / CROWD)  # a crowded ring gets more room
 rings, ypos, bands, y = [], {}, [], TOP
 for si, s in enumerate(S):
     top, y = y, y + BANDPAD
@@ -181,11 +181,14 @@ for si, s in enumerate(S):
     bands.append((s, top, counts[s], sum(len(v) for v in byrank[si].values())))
 H = y + TILT + 24
 
-# angles: a ring's nodes take evenly spaced slots on an arc centred on the front (the whole circle once it is full);
+# angles: a ring's nodes take evenly spaced slots on an arc centred on the front (the whole circle from NMIN nodes);
 # each pass, a node wants the angle where its neighbours are, pulled to the front by importance (log share of the
 # stage's most important node), and takes the free slot nearest it, the most important first
 wrap = lambda a: (a + math.pi) % math.tau - math.pi
-slots = lambda n: [(j - (n - 1) / 2) * math.tau / max(n, NMIN) for j in range(n)]
+# A ring is turned by its own fraction of a slot (golden-ratio steps, within ±SPLAY) so that consecutive rings don't
+# stack their nodes, and the edges between them, straight above one another.
+phase = {id(r): ((j * .6180339887) % 1 - .5) * 2 * SPLAY for j, r in enumerate(rings)}
+slots = lambda ring: [(j - (len(ring) - 1) / 2 + phase[id(ring)]) * math.tau / max(len(ring), NMIN) for j in range(len(ring))]
 nb = {x: dpar[x] | dkids[x] for x in sel}
 top_imp = collections.defaultdict(int)
 for x in sel:
@@ -195,13 +198,13 @@ theta = {}
 for ring in rings:  # start: by importance, the most important in the middle, the rest to alternate sides
     order = sorted(ring, key=lambda x: (-imp[x], ent[x].get("name", "")))
     ring[:] = order[1::2][::-1] + order[0::2]
-    theta.update(zip(ring, slots(len(ring))))
+    theta.update(zip(ring, slots(ring)))
 for it in range(24):
     for ring in (rings if it % 2 == 0 else rings[::-1]):
         want = {x: math.atan2(sum(math.sin(theta[n]) for n in nb[x]),
                               sum(math.cos(theta[n]) for n in nb[x]) + BETA * front[x] * max(1, len(nb[x])))
                 for x in ring}
-        free = slots(len(ring))
+        free = slots(ring)
         for x in sorted(ring, key=lambda x: (-imp[x], ent[x].get("name", ""))):  # the most important choose first
             theta[x] = min(free, key=lambda a: abs(wrap(a - want[x])))
             free.remove(theta[x])
