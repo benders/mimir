@@ -35,7 +35,6 @@ def needs(x):
 
 
 srcs = {x["id"]: x for x in L("sources")}
-NATURAL = {"tree", "rock", "log", "pickable", "destructible"}
 COOKING = {"piece_cauldron", "piece_cookingstation", "piece_cookingstation_iron", "piece_oven", "fermenter",
            "piece_MeadCauldron", "piece_preptable", "windmill"}
 COOKING |= {k for (t, k), e in ent.items() if t == "piece" and e.get("extends") in COOKING}
@@ -49,7 +48,12 @@ def way_needs(x):
 
 # 1-2: every obtainable item but consumables and what cooking stations make (food and mead intermediates)
 cooked = lambda x: any(k == "piece" and i in COOKING for k, i, _ in way_needs(x))
-sel = {x for x, e in ent.items() if x[0] == "item" and e.get("type") != "Consumable" and not cooked(x)}
+# ...and fishing: fish, bait, the rod and the hat made of fish lead nowhere else (their catch drops and the trophies
+# only bait needs then connect to nothing and are dropped)
+FISHING = {"FishingRod", "HelmetFishingHat"} | {i for s in srcs.values() if s["kind"] == "fishing"
+                                                for i in [s["id"]] + [b["item"] for b in s.get("baits", [])]}
+sel = {x for x, e in ent.items() if x[0] == "item" and e.get("type") != "Consumable" and not cooked(x)
+       and x[1] not in FISHING}
 # 3: bosses (their drops are items already)
 sel |= bosses
 # ...but keep a consumable or cooked item something kept needs (Blueberries for Berserker armour, bait for fish)
@@ -57,7 +61,7 @@ todo = list(sel)
 while todo:
     x = todo.pop()
     for k, i, _ in way_needs(x):
-        if k == "item" and (k, i) in ent and (k, i) not in sel:
+        if k == "item" and (k, i) in ent and (k, i) not in sel and i not in FISHING:
             sel.add((k, i))
             todo.append((k, i))
 # 4: the non-cooking pieces those need, and the pieces those pieces need
@@ -78,26 +82,11 @@ def boss_of(c):  # a boss's later phase stands for the boss (the Frozen King's t
     return c
 
 
-# 5: the natural source of each item gathered with a tool; the source needs the tool, the item the source (a source
-# needing no tool would only repeat the item: the chain starts at the item)
+# 5: links to what each needs (no source nodes: an item gathered with a tool links straight to the tool)
 par = {}
-for x in list(sel):
-    v = ent[x].get("via", {})
+for x in sel:
     ns = {boss_of((k, i)) if k == "creature" else (k, i) for k, i, _ in way_needs(x)}
-    ns = {n for n in ns if n in sel}
-    if x[0] == "item" and v.get("how") == "source" and (sd := srcs.get(v.get("from"))) and sd["kind"] in NATURAL \
-            and any(n[0] == "item" for n in ns):
-        sx = ("source", sd["id"])
-        if sx not in ent:
-            ent[sx] = {"name": sd.get("name") or f'{ent[x].get("name", x[1])} {sd["kind"]}', "stage": ent[x]["stage"], "kind": sd["kind"],
-                       "icon": ent[x].get("icon"), "gives": x}
-            sel.add(sx)
-            par[sx] = set()
-        elif S.index(ent[x]["stage"]) < S.index(ent[sx]["stage"]):
-            ent[sx]["stage"] = ent[x]["stage"]
-        par[sx] |= {n for n in ns if n[0] == "item"}  # its tool
-        ns = {n for n in ns if n[0] != "item"} | {sx}
-    par[x] = ns
+    par[x] = {n for n in ns if n in sel}
 # 6: drop what connects to nothing
 kids = collections.defaultdict(set)
 for x, ps in par.items():
@@ -248,10 +237,9 @@ for row in rows:
         s = ent[x]["stage"]
         ic = ent[x].get("icon") if x[0] != "creature" else next(
             (items[d["item"]].get("icon") for d in ent[x].get("drops", []) if items.get(d["item"], {}).get("type") == "Trophy"), None)
-        hx = ent[x]["gives"] if x[0] == "source" else x
-        href = f'{ {"item": "items", "piece": "pieces", "creature": "creatures"}[hx[0]]}/{hx[1]}.html'
+        href = f'{ {"item": "items", "piece": "pieces", "creature": "creatures"}[x[0]]}/{x[1]}.html'
         name = ent[x].get("name", x[1])
-        cls = "node" + (" boss" if x in bosses else " gear" if x in gear else " src" if x[0] == "source" else "")
+        cls = "node" + (" boss" if x in bosses else " gear" if x in gear else "")
         img = f'<image href="icons/{ic}.png" x="-16" y="-16" width="32" height="32"/>' if ic in ICONS else ""
         svg.append(f'<a href="{href}" class="{cls}" data-id="{e(nid(x))}" style="--tier:{COL[s]}" '
                    f'transform="translate({xpos[x]:.1f},{ypos[x]})"><title>{e(name)}</title>'
@@ -270,14 +258,13 @@ page = f"""<!doctype html><html><head><meta charset="utf-8"><meta name="viewport
 .edge{{fill:none;stroke-width:1.5;stroke-opacity:.55;transition:stroke-opacity .15s}}
 .node rect{{fill:#1d2024;stroke:var(--tier);stroke-width:1.5}}
 .node.gear rect{{stroke-width:2.5}}
-.node.src rect{{stroke-dasharray:4 3;fill:#16181b}}
 .node.boss rect{{fill:#2a1f14;stroke:#e0a24a;stroke-width:2.5}}
 .node text{{fill:var(--tier);font-size:11.5px;text-anchor:middle}}
 .node:hover text{{text-decoration:underline}}
 .well.focus .edge{{stroke-opacity:.07}} .well.focus .node{{opacity:.3}}
 .well.focus .edge.on{{stroke-opacity:1;stroke-width:2.4}} .well.focus .node.on{{opacity:1}}
 </style></head><body><main><h1>Tech tree</h1><p class="sub">Prototype: every obtainable item but food and meads, the bosses, the stations
-they need and the natural sources they come from ({len(sel)} nodes). Dashed boxes are sources. Hover to trace a path.</p>
+they need ({len(sel)} nodes). Hover to trace a path.</p>
 <div class="wellbox">{''.join(svg)}</div></main>
 <script>
 const P={json.dumps(par_ids)},K={{}};for(const[k,v]of Object.entries(P))for(const p of v)(K[p]=K[p]||[]).push(k);
@@ -297,8 +284,6 @@ if "--audit" in sys.argv:
     miss = collections.Counter()
     ex = collections.defaultdict(list)
     for x in sel:
-        if x[0] == "source":
-            continue
         for k, i, _ in way_needs(x):
             n = boss_of((k, i)) if k == "creature" else (k, i)
             if n in sel:
