@@ -276,7 +276,7 @@ function place(off,vh){{  // the nodes in view (and a screen either side) that h
  for(let n=0;n<N;n++){{if(seen[n]===rot||D.y[n]<off-vh||D.y[n]>off+2*vh)continue;seen[n]=rot;
   const t=D.a[n]+rot,c=Math.cos(t),d=(c+1)/2,s=nodes[n].style;
   s.transform=`translate(${{(R*Math.sin(t)).toFixed(1)}}px,${{(TILT*c).toFixed(1)}}px) scale(${{(.55+.45*d).toFixed(3)}})`;
-  s.opacity=(.35+.65*d).toFixed(3);s.zIndex=Math.round(100+99*c);
+  s.opacity=(.35+.65*d).toFixed(3);s.zIndex=Math.round(100+99*c);s.pointerEvents=c<0?'none':'';  // behind the fog: not a target
   lbs[n].style.opacity=Math.min(1,Math.max(0,(c*R*D.k[n]-64)/8)).toFixed(2)}}}}
 function draw(){{queued=false;
  const off=cv[0].getBoundingClientRect().top-well.getBoundingClientRect().top,vh=cv[0].clientHeight,mid=W/2;place(off,vh);
