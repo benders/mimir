@@ -233,6 +233,8 @@ and caps the flagged share, so a source gap can't silently hide real pages; `scr
 - After changing `normalize.py`: `make test`, then `make data verify-data` (offline, uses the local dump), then
   review and commit the `data/` diff together with the code. New normalize behaviour gets a case in
   `tests/fixture.py` (invented values only, never real game data) and a unit test. `data/` must always be regenerated, never hand-edited.
+- The well (`scripts/well.py`, the home page's tech tree, #68): every change comes with tests in `tests/test_well.py`
+  (or `tests/test_site.py` for the page) and builds through `make site`; no untested changes.
 - After changing the plugin: bump `PluginVersion` in `Plugin.cs`, then `make check` (needs the runner).
 - Mechanics pages (`site/mechanics/*.md`, front matter `title/summary/sources`; the index lists them by title): rendered by `scripts/mechanics.py`
   (small Markdown subset; `{{directive}}` lines embed generated tables/charts that read `data/`, registered in
