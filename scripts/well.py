@@ -132,8 +132,8 @@ counts = collections.Counter(ent[x]["stage"] for x in ent if x[0] in ("item", "p
 print(len(sel), "nodes", sum(len(p) for p in par.values()), "edges", sum(len(p) for p in dpar.values()), "drawn",
       [sum(1 for x in sel if stage(x) == i) for i in range(len(S))], "gear", len(gear), file=sys.stderr)
 
-# --- layout: the well is a cylinder seen from slightly above. Each stage is a band of the same height; inside it a ring
-# per rank (longest path inside the stage; top gear, then the boss, last). Round each ring the most important nodes
+# --- layout: the well is a cylinder seen from slightly above. Each stage is a band as tall as its rings; inside it a
+# ring per rank (longest path inside the stage; top gear, then the boss, last). Round each ring the most important nodes
 # face the viewer: importance = how many nodes need it, directly or not. Depth shows as size, brightness and fog.
 W, BANDPAD, ROWH, R, TILT, NMIN, BETA, SAMPLES = 1200, 60, 76, 440, 44, 18, 1.5, 12
 CX, TOP = W / 2, TILT + 24
@@ -168,17 +168,18 @@ imp = {x: len(desc(x)) for x in sel}
 byrank = collections.defaultdict(lambda: collections.defaultdict(list))
 for x in sel:
     byrank[stage(x)][rank[x]].append(x)
-BANDH = BANDPAD + ROWH * max(len(v) for v in byrank.values())  # every stage the same height
-rings, ypos, bands = [], {}, []
+ring_h = lambda n: ROWH * (1 + .5 * max(0, n - NMIN) / NMIN)  # a ring that wraps round the back gets more room
+rings, ypos, bands, y = [], {}, [], TOP
 for si, s in enumerate(S):
-    top = TOP + si * BANDH
-    ranks = sorted(byrank[si])
-    for j, rk in enumerate(ranks):  # the stage's rings spread evenly over its band
-        rings.append(byrank[si][rk])
-        for x in byrank[si][rk]:
-            ypos[x] = top + BANDPAD + (BANDH - BANDPAD) * (j + .5) / len(ranks)
+    top, y = y, y + BANDPAD
+    for rk in sorted(byrank[si]):
+        ring = byrank[si][rk]
+        rings.append(ring)
+        for x in ring:
+            ypos[x] = y + ring_h(len(ring)) / 2
+        y += ring_h(len(ring))
     bands.append((s, top, counts[s], sum(len(v) for v in byrank[si].values())))
-H = TOP + len(S) * BANDH + TILT + 24
+H = y + TILT + 24
 
 # angles: a ring's nodes take evenly spaced slots on an arc centred on the front (the whole circle once it is full);
 # each pass, a node wants the angle where its neighbours are, pulled to the front by importance (log share of the
@@ -229,7 +230,7 @@ labels = "".join(f'<div class="bandname" style="top:{top + 12:.0f}px;--tier:{COL
                  f'<a href="items/index.html">{n_shown} of {n_all} →</a></div>' for s, top, n_all, n_shown in bands)
 fog = ",".join(f"rgba(18,20,23,{.62 * math.sqrt(max(0, 1 - u * u)):.3f}) {(u + 1) * 50:.0f}%" for u in [k / 10 - 1 for k in range(21)])
 data = {"a": [round(theta[x], 4) for x in order], "y": [round(ypos[x]) for x in order], "c": [stage(x) for x in order], "k": [round(math.tau / max(len(r), NMIN), 4) for r in rings for _ in r],
-        "col": [COL[s] for s in S], "bands": [round(top) for _, top, _, _ in bands] + [round(TOP + len(S) * BANDH)],
+        "col": [COL[s] for s in S], "bands": [round(top) for _, top, _, _ in bands] + [round(H - TILT - 24)],
         "par": [sorted(idx[p] for p in par[x]) for x in order]}
 css = open(ROOT / "site/style.css").read()
 page = f"""<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
