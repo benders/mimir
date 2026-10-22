@@ -267,7 +267,7 @@ const D={json.dumps(data, separators=(",", ":"))};
 const well=document.querySelector('.well'),cv=[...well.querySelectorAll('canvas')],cx=cv.map(c=>c.getContext('2d'));
 const nodes=[...well.querySelectorAll('.node')].sort((a,b)=>a.dataset.n-b.dataset.n),lbs=nodes.map(a=>a.querySelector('.lb')),N=D.a.length,seen=new Float64Array(N).fill(NaN),KID=D.a.map(()=>[]),EDGES=[];
 D.par.forEach((ps,c)=>ps.forEach(p=>{{KID[p].push(c);EDGES.push([p,c])}}));
-let rot=0,R=348,TILT=44,W=0,dpr=1,on=null,queued=false;
+let rot=0,R=348,TILT=44,W=0,dpr=1,on=null,up=null,down=null,queued=false;
 function walk(n,m,s){{for(const q of m[n])if(!s.has(q)){{s.add(q);walk(q,m,s)}}return s}}
 function size(){{W=well.clientWidth;R=W<600?W*.75:Math.min(440,W*.37);TILT=R/10;dpr=devicePixelRatio||1;
  well.style.setProperty('--R',R.toFixed(1));well.style.setProperty('--tilt',TILT.toFixed(1));seen.fill(NaN);
@@ -287,7 +287,7 @@ function draw(){{queued=false;
  const lit=[];
  for(const ed of EDGES){{const[p,c]=ed,y0=D.y[p]+22,y1=D.y[c]-22;
   if(Math.max(y0,y1)<off-TILT||Math.min(y0,y1)>off+vh+TILT)continue;
-  const hot=on&&on.has(p)&&on.has(c);if(hot){{lit.push(ed);continue}}edge(p,c,y0,y1,false)}}
+  const hot=on&&(up.has(p)&&up.has(c)||down.has(p)&&down.has(c));/* on a path through it */if(hot){{lit.push(ed);continue}}edge(p,c,y0,y1,false)}}
  for(const[p,c]of lit)edge(p,c,D.y[p]+22,D.y[c]-22,true)}}
 function edge(p,c,y0,y1,hot){{  // along the cylinder's surface, a stroke per run on one side
  const a0=D.a[p]+rot,da=((D.a[c]-D.a[p]+Math.PI)%(2*Math.PI)+2*Math.PI)%(2*Math.PI)-Math.PI,S=12,pts=[];
@@ -300,7 +300,8 @@ function edge(p,c,y0,y1,hot){{  // along the cylinder's surface, a stroke per ru
   else{{const gr=g.createLinearGradient(0,y0,0,y1);gr.addColorStop(0,D.col[D.c[p]]);gr.addColorStop(1,D.col[D.c[c]]);g.strokeStyle=gr}}
   g.beginPath();g.moveTo(run[0][0],run[0][1]);for(const q of run.slice(1))g.lineTo(q[0],q[1]);g.stroke();s=k}}}}
 function later(){{if(!queued){{queued=true;requestAnimationFrame(draw)}}}}
-function focus(n){{on=n==null?null:new Set([n,...walk(n,D.par,new Set()),...walk(n,KID,new Set())]);
+function focus(n){{up=n==null?null:walk(n,D.par,new Set([n]));down=n==null?null:walk(n,KID,new Set([n]));
+ on=n==null?null:new Set([...up,...down]);
  well.classList.toggle('focus',!!on);for(const a of nodes)a.classList.toggle('on',!!on&&on.has(+a.dataset.n));later()}}
 // turning: horizontal drags (vertical ones scroll the page), then it coasts
 let drag=null,moved=false,vel=0,touch=false;
