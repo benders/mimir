@@ -29403,7 +29403,7 @@
   "stack": 1,
   "maxQuality": 1,
   "consumeEffect": "Potion_eitr_lingering",
-  "stage": "Mistlands",
+  "stage": "AshLands",
   "via": {
    "how": "craft",
    "from": "Recipe_MeadBaseEitrLingering",
@@ -30035,7 +30035,7 @@
   "maxQuality": 1,
   "ammoType": "mead",
   "consumeEffect": "Potion_eitr_lingering",
-  "stage": "Mistlands",
+  "stage": "AshLands",
   "via": {
    "how": "process",
    "from": "fermenter",
@@ -46302,15 +46302,10 @@
    "duration": 900,
    "regen": 1
   },
-  "stage": "Swamp",
+  "stage": "AshLands",
   "via": {
    "how": "source",
-   "from": "VineGreen",
-   "needs": [
-    {
-     "piece": "VineGreen_sapling"
-    }
-   ]
+   "from": "VineAsh"
   }
  },
  {

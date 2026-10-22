@@ -1838,6 +1838,7 @@ def piece_page(p: dict) -> None:
                     biome_link(b) for b in pr["connectsTo"].get("biomes", [])) + ")"
                  if pr.get("connectsTo") else None)]
         body += section("Produces", kv(rows))
+    body += section("Growing", growing(p["plant"])) if p.get("plant") else ""
     made = [[esc(source_name(s)), ", ".join(link("item", x) for x in source_items(s))]
             for s in sorted(made_by_piece[p["id"]], key=source_name)]
     if made:
@@ -1848,6 +1849,50 @@ def piece_page(p: dict) -> None:
     if world:
         body += section("Found in", f'<div>{source_places({"kind": "world", "locations": p["locations"]})}</div>')
     page(href("piece", p["id"]), name_of("piece", p["id"]), body, '<a href="pieces/index.html">Pieces</a>')
+
+
+def growing(pl: dict) -> str:
+    """A sapling's needs (normalize.plant) and, for a vine, how it spreads (normalize.vine, mechanics.vine_growth)."""
+    needs = (["cultivated ground"] if pl.get("cultivated") else []) + ["open sky"]
+    needs += [f'no other plant within {num(pl["space"])} m'] if pl.get("space") else []
+    needs += [f'no vine within {num(pl["vineSpace"])} m'] if pl.get("vineSpace") else []
+    needs += [f'a building piece within {num(pl["attach"])} m to cling to'] if pl.get("attach") else []
+    shield = ("; " + " and ".join(biome_link(b) for b in pl["shieldIn"]) + " only inside a " +
+              link("piece", "piece_shieldgenerator") + " dome") if pl.get("shieldIn") else ""
+    lo, hi = pl["time"]
+    span = (f"{num(round(lo / 60))}–{num(round(hi / 60))} min" if lo >= 600 else f"{num(lo)}–{num(hi)} s") \
+        if hi > lo else duration(lo)
+    out = kv([("Grows in", ", ".join(biome_link(b) for b in pl.get("biomes", [])) + shield),
+              ("Needs", esc(", ".join(needs))),
+              ("Time", span
+               + (", dies if a need isn't met" if pl.get("dies") else ", waits while a need isn't met"))])
+    if not (v := pl.get("vine")):
+        return out
+    heights = range(5)
+    rows = []
+    for nb in (1, 2, 3):
+        g = [mechanics.vine_growth(v, nb, h) for h in heights]
+        rows.append([f"{nb}+" if nb == 3 else str(nb), duration(g[0]["interval"]),
+                     *(pct(x["grow"]) if x["grow"] > 0 else "never" for x in g)])
+    dirs = ", ".join(v.get("directions", []))
+    out += "<h3>Spreading</h3>" + kv([
+        ("Segment", f'{num(v["size"])} m, {num(v["health"])} health' if v.get("health") else f'{num(v["size"])} m'),
+        ("Grows", f'{esc(dirs)}; sideways up to {num(v.get("width", 0))} + {num(v.get("widthPerHeight", 0))} × height '
+                  f'segments from the first ({pct(v.get("ignoreLimits", 0))} of tries ignore it)'),
+        ("Support", f'{pct(v.get("support", 0))} of a new segment must touch a piece or rock; a segment with nothing '
+                    "behind it falls off within 7 s"),
+        ("Berries", "never" if not v.get("berries") else
+         f'on segments with at least 2 vine neighbours and fewer than {num(v["berries"])} berried vines around them')])
+    out += table(["Neighbours", "Tries every", *(f"Height {h}" for h in heights)], rows)
+    out += ('<p class="note">Chance that one try grows a new segment in a given direction, by the segment\'s vine '
+            "neighbours and its height in segments above the first. Each try checks a direction with "
+            f'{pct(v.get("tryChance", 0))} − {pct(-v.get("tryChancePerBranch", 0))} per neighbour past the first, then '
+            f'stops instead with {pct(v["closeChance"]) + " + " if v.get("closeChance") else ""}'
+            f'{pct(v.get("closeChancePerBranch", 0))} per '
+            f'neighbour past the first + {pct(v.get("closeChancePerHeight", 0))} per height (at most '
+            f'{pct(v.get("maxCloseChance", 0))}). Time spent unloaded is caught up. '
+            "Vine.UpdateGrow, CheckGrow.</p>")
+    return out
 
 
 # --- status effects -------------------------------------------------------------------------

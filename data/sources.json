@@ -12034,31 +12034,6 @@
   ]
  },
  {
-  "id": "VineGreen",
-  "kind": "pickable",
-  "pickable": {
-   "item": "Vineberry",
-   "amount": 3,
-   "respawnMinutes": 200
-  },
-  "drops": {
-   "min": 1,
-   "max": 3,
-   "chance": 0.2,
-   "items": [
-    {
-     "item": "VineGreenSeeds",
-     "min": 1,
-     "max": 3,
-     "weight": 1
-    }
-   ]
-  },
-  "placedBy": [
-   "VineGreen_sapling"
-  ]
- },
- {
   "id": "YggaShoot1",
   "kind": "tree",
   "health": 100,

@@ -346,6 +346,10 @@ def main() -> int:
     idols = [f"Upgrader{n}{k}" for n in range(8) for k in ("Weapon", "Armor")]
     check(all(items.get(i, {}).get("upgrader") and not items[i].get("unobtainable") for i in idols),
           "items: the 16 Battle/Protection Idols are reachable upgrader resources")
+    vine_src = {s["id"] for s in sources if "Vineberry" in json.dumps(s)}
+    ivy = (pieces.get("VineGreen_sapling", {}).get("plant") or {}).get("vine") or {}
+    check(vine_src == {"VineAsh"} and not ivy.get("berries") and ivy.get("interval"),
+          f"sources: Vineberries only from Ashvine, Ivy spreads but never bears ({sorted(vine_src)})")
 
     print()
     if failures:

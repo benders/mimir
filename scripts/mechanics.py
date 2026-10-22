@@ -745,6 +745,19 @@ def drop_table_has(table: dict, item: str) -> float:
     return table.get("chance", 1) * has
 
 
+def vine_growth(vine: dict, neighbours: int, height: float = 0) -> dict:
+    """One vine segment's growth with `neighbours` vine segments around it, `height` segments above the first: the
+    seconds between tries (Vine.UpdateGrow), and per direction per try the chance to check it (CheckGrowChance), to
+    stop instead (CheckGrow; a stop only closes the direction once n > 1, and a closed one is still checked 40% of the
+    time) and to grow (the rest, times m_growChance, when the spot is free and supported). n = neighbours - 1."""
+    n = max(0, neighbours - 1)
+    check = min(1.0, max(0.0, vine.get("tryChance", 0) + vine.get("tryChancePerBranch", 0) * n))
+    stop = min(vine.get("maxCloseChance", 0), vine.get("closeChance", 0) + vine.get("closeChancePerBranch", 0) * n
+               + vine.get("closeChancePerHeight", 0) * height)
+    return {"interval": vine.get("interval", 0) + vine.get("intervalPerBranch", 0) * n, "check": check, "stop": stop,
+            "grow": check * (1 - stop) * vine.get("growChance", 0)}
+
+
 def world_piece_drop(amount: int) -> int:
     """What breaking a piece a player didn't place gives of one of its cost items: a third, at least 1
     (Piece.DropResources: Mathf.Max(1, dropCount / 3) unless IsPlacedByPlayer)."""
