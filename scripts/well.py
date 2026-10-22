@@ -142,7 +142,7 @@ print(len(sel), "nodes", sum(len(p) for p in par.values()), "edges", sum(len(p) 
 # --- layout: the well is a cylinder seen from slightly above. Each stage is a band as tall as its rings; inside it a
 # ring per rank (longest path inside the stage; top gear, then the boss, last). Round each ring the most important nodes
 # face the viewer: importance = how many nodes need it, directly or not. Depth shows as size, brightness and fog.
-W, BANDPAD, ROWH, R, TILT, NMIN, CROWD, SPLAY, BETA, SAMPLES = 1200, 60, 76, 440, 44, 9, 18, .4, 1.5, 12
+W, BANDPAD, ROWH, R, TILT, NMIN, CROWD, SPLIT, SPLAY, BETA, SAMPLES = 1200, 60, 76, 440, 44, 9, 18, 20, .4, 1.5, 12
 CX, TOP = W / 2, TILT + 24
 GATE = GEAR = 1000
 BOSS = GEAR + 1  # the boss is the last thing done in a tier
@@ -178,7 +178,8 @@ imp = {x: len(desc(x)) for x in sel}
 byrank = collections.defaultdict(lambda: collections.defaultdict(list))
 for x in sel:
     byrank[stage(x)][rank[x]].append(x)
-ring_h = lambda n: ROWH * (1 + .5 * max(0, n - CROWD) / CROWD)  # a crowded ring gets more room
+ring_h = lambda n: 2 * ROWH if n > SPLIT else ROWH * (1 + .5 * max(0, n - CROWD) / CROWD)  # a crowded ring gets more
+# room; one over SPLIT is drawn as two staggered rows
 rings, ypos, bands, y = [], {}, [], TOP
 for si, s in enumerate(S):
     top, y = y, y + BANDPAD
@@ -218,6 +219,12 @@ for it in range(24):
         for x in sorted(ring, key=lambda x: (-imp[x], ent[x].get("name", ""))):  # the most important choose first
             theta[x] = min(free, key=lambda a: abs(wrap(a - want[x])))
             free.remove(theta[x])
+slot = {x: math.tau / max(len(ring), NMIN) for ring in rings for x in ring}  # slot width per unit of radius
+for ring in rings:  # a ring over SPLIT nodes: every other node, round the circle, half a row up or down
+    if len(ring) > SPLIT:
+        for j, x in enumerate(sorted(ring, key=lambda x: theta[x])):
+            ypos[x] += ROWH / 2 * (1 if j % 2 else -1)
+            slot[x] *= 2  # its neighbours in the row are two slots away
 
 
 # --- page: nodes are links placed by CSS from their angle (the first render, and without JavaScript); turning the
@@ -228,7 +235,6 @@ order = [x for ring in rings for x in ring]
 idx = {x: n for n, x in enumerate(order)}
 nodes = []
 for ring in rings:
-    k = math.tau / max(len(ring), NMIN)  # slot width per unit of radius
     for x in ring:
         ic = ent[x].get("icon") if x[0] != "creature" else next(
             (items[dd["item"]].get("icon") for dd in ent[x].get("drops", []) if items.get(dd["item"], {}).get("type") == "Trophy"), None)
@@ -237,12 +243,12 @@ for ring in rings:
         cls = "node" + (" boss" if x in bosses else " gear" if x in gear else "")
         img = f'<img src="icons/{ic}.png" alt="" loading="lazy" draggable="false">' if ic in ICONS else ""
         nodes.append(f'<a href="{href}" class="{cls}" data-n="{idx[x]}" draggable="false" title="{e(name)}" '
-                     f'style="--a:{theta[x]:.4f}rad;--k:{k:.4f};top:{ypos[x]:.0f}px;--tier:{COL[ent[x]["stage"]]}">'
+                     f'style="--a:{theta[x]:.4f}rad;--k:{slot[x]:.4f};top:{ypos[x]:.0f}px;--tier:{COL[ent[x]["stage"]]}">'
                      f'<span class="ic">{img}</span><span class="lb">{e(name)}</span></a>')
 labels = "".join(f'<div class="bandname" style="top:{top + 12:.0f}px;--tier:{COL[s]}">{e(NAMES.get(s, s))} '
                  f'<a href="items/index.html">{n_shown} of {n_all} →</a></div>' for s, top, n_all, n_shown in bands)
 fog = ",".join(f"rgba(18,20,23,{.62 * math.sqrt(max(0, 1 - u * u)):.3f}) {(u + 1) * 50:.0f}%" for u in [k / 10 - 1 for k in range(21)])
-data = {"a": [round(theta[x], 4) for x in order], "y": [round(ypos[x]) for x in order], "c": [stage(x) for x in order], "k": [round(math.tau / max(len(r), NMIN), 4) for r in rings for _ in r],
+data = {"a": [round(theta[x], 4) for x in order], "y": [round(ypos[x]) for x in order], "c": [stage(x) for x in order], "k": [round(slot[x], 4) for x in order],
         "col": [COL[s] for s in S], "bands": [round(top) for _, top, _, _ in bands] + [round(H - TILT - 24)],
         "par": [sorted(idx[p] for p in par[x]) for x in order]}
 css = open(ROOT / "site/style.css").read()
