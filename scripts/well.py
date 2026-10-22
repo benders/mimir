@@ -1,6 +1,6 @@
 """Prototype (#25): the 'well' tech tree. Reads data/, writes .cache/site/public/well.html (uses the built site's icons;
 run `make site` first, then `python3 scripts/well.py [--audit]` and open http://localhost:8000/well.html)."""
-import json, collections, html, sys
+import json, collections, html, math, sys
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -135,8 +135,11 @@ counts = collections.Counter(ent[x]["stage"] for x in ent if x[0] in ("item", "p
 print(len(sel), "nodes", sum(len(p) for p in par.values()), "edges", sum(len(p) for p in dpar.values()), "drawn",
       [sum(1 for x in sel if stage(x) == i) for i in range(len(S))], "gear", len(gear), file=sys.stderr)
 
-# --- layout: a band per stage; rows by longest path inside it; top gear, then the boss, last ---
-W, ROWH, BANDPAD, MAXROW, MARGIN = 1000, 104, 64, 10, 50
+# --- layout: the well is a cylinder seen from slightly above. Each stage is a band of the same height; inside it a ring
+# per rank (longest path inside the stage; top gear, then the boss, last). Round each ring the most important nodes
+# face the viewer: importance = how many nodes need it, directly or not. Depth shows as size, brightness and fog.
+W, BANDPAD, ROWH, R, TILT, NMIN, BETA, SAMPLES = 1200, 60, 76, 440, 44, 18, 1.5, 12
+CX, TOP = W / 2, TILT + 24
 GATE = GEAR = 1000
 BOSS = GEAR + 1  # the boss is the last thing done in a tier
 rank = {}
@@ -155,44 +158,61 @@ for si in range(len(S)):  # as late as possible: a node with no parent in its ti
             users = [r(k) for k in dkids[x] if stage(k) == si]
             if users:
                 rank[x] = max(rank[x], min(users) - 1)
-rows, ypos, bands, y = [], {}, [], 0
+desc_memo = {}
+
+
+def desc(x):
+    if x not in desc_memo:
+        desc_memo[x] = set().union(*[{k} | desc(k) for k in dkids[x]]) if dkids[x] else set()
+    return desc_memo[x]
+
+
+imp = {x: len(desc(x)) for x in sel}
+byrank = collections.defaultdict(lambda: collections.defaultdict(list))
+for x in sel:
+    byrank[stage(x)][rank[x]].append(x)
+BANDH = BANDPAD + ROWH * max(len(v) for v in byrank.values())  # every stage the same height
+rings, ypos, bands = [], {}, []
 for si, s in enumerate(S):
-    members = [x for x in sel if stage(x) == si]
-    top = y
-    y += BANDPAD
-    byrank = collections.defaultdict(list)
-    for x in members:
-        byrank[rank[x]].append(x)
-    for r in sorted(byrank):
-        row = sorted(byrank[r], key=lambda x: ent[x].get("name", ""))
-        n = -(-len(row) // MAXROW)  # split evenly over as few rows as fit
-        for k in range(n):
-            chunk = row[k::n]
-            rows.append(chunk)
-            for x in chunk:
-                ypos[x] = y + 24
-            y += ROWH
-    y += 12
-    bands.append((s, top, y, counts[s], len(members)))
-H = y + 20
+    top = TOP + si * BANDH
+    ranks = sorted(byrank[si])
+    for j, rk in enumerate(ranks):  # the stage's rings spread evenly over its band
+        rings.append(byrank[si][rk])
+        for x in byrank[si][rk]:
+            ypos[x] = top + BANDPAD + (BANDH - BANDPAD) * (j + .5) / len(ranks)
+    bands.append((s, top, counts[s], sum(len(v) for v in byrank[si].values())))
+H = TOP + len(S) * BANDH + TILT + 24
+
+# angles: a ring's nodes take evenly spaced slots on an arc centred on the front (the whole circle once it is full);
+# each pass, a node wants the angle where its neighbours are, pulled to the front by importance (log share of the
+# stage's most important node), and takes the free slot nearest it, the most important first
+wrap = lambda a: (a + math.pi) % math.tau - math.pi
+slots = lambda n: [(j - (n - 1) / 2) * math.tau / max(n, NMIN) for j in range(n)]
+nb = {x: dpar[x] | dkids[x] for x in sel}
+top_imp = collections.defaultdict(int)
+for x in sel:
+    top_imp[stage(x)] = max(top_imp[stage(x)], imp[x])
+front = {x: math.log1p(imp[x]) / math.log1p(top_imp[stage(x)]) if top_imp[stage(x)] else 0 for x in sel}
+theta = {}
+for ring in rings:  # start: by importance, the most important in the middle, the rest to alternate sides
+    order = sorted(ring, key=lambda x: (-imp[x], ent[x].get("name", "")))
+    ring[:] = order[1::2][::-1] + order[0::2]
+    theta.update(zip(ring, slots(len(ring))))
+for it in range(24):
+    for ring in (rings if it % 2 == 0 else rings[::-1]):
+        want = {x: math.atan2(sum(math.sin(theta[n]) for n in nb[x]),
+                              sum(math.cos(theta[n]) for n in nb[x]) + BETA * front[x] * max(1, len(nb[x])))
+                for x in ring}
+        free = slots(len(ring))
+        for x in sorted(ring, key=lambda x: (-imp[x], ent[x].get("name", ""))):  # the most important choose first
+            theta[x] = min(free, key=lambda a: abs(wrap(a - want[x])))
+            free.remove(theta[x])
 
 
-def spread(n):
-    """n evenly spaced x positions across the shaft."""
-    return [MARGIN + (W - 2 * MARGIN) * (i + .5) / n for i in range(n)]
+def proj(a, y):
+    """A point on the cylinder (angle, height) on screen, and its depth: 1 in front, 0 at the back."""
+    return CX + R * math.sin(a), y + TILT * math.cos(a), (math.cos(a) + 1) / 2
 
-
-xpos = {}
-for row in rows:
-    for x, p in zip(row, spread(len(row))):
-        xpos[x] = p
-for it in range(16):  # crossing reduction: order each row by its neighbours' mean x, then spread it evenly
-    for row in (rows if it % 2 == 0 else rows[::-1]):
-        nbrs = lambda x: (dpar[x] if it % 2 == 0 else dkids[x]) | (dpar[x] | dkids[x] if it >= 10 else set())
-        want = {x: sum(xpos[n] for n in nbrs(x)) / len(nbrs(x)) if nbrs(x) else xpos[x] for x in row}
-        row.sort(key=lambda x: want[x])
-        for x, p in zip(row, spread(len(row))):
-            xpos[x] = p
 
 e = html.escape
 nid = lambda x: f"{x[0]}:{x[1]}"
@@ -213,37 +233,59 @@ def label(name, width):
     return f'<text y="36">{e(a)}</text>' + (f'<text y="50">{e(b)}</text>' if b else "")
 
 
-svg = [f'<svg viewBox="0 0 {W} {H}" class="well" role="img" aria-label="Tech tree, by progression stage"><defs>']
+svg = [f'<svg viewBox="0 0 {W} {H:.0f}" class="well" role="img" aria-label="Tech tree, by progression stage"><defs>']
 pairs = {(ent[p]["stage"], ent[x]["stage"]) for x in sel for p in dpar[x]}
 for a, b in pairs:
     svg.append(f'<linearGradient id="g-{a}-{b}" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="{COL[a]}"/>'
                f'<stop offset="1" stop-color="{COL[b]}"/></linearGradient>')
-svg.append("</defs>")
-for i, (s, top, bot, n_all, n_shown) in enumerate(bands):
-    svg.append(f'<g class="band" style="--tier:{COL[s]}"><line x1="{MARGIN / 2}" x2="{W - MARGIN / 2}" y1="{top + 8}" '
-               f'y2="{top + 8}"/><text x="{MARGIN / 2}" y="{top + 34}" class="bandname">{e(NAMES.get(s, s))}</text>'
-               f'<a href="items/index.html"><text x="{W - MARGIN / 2}" y="{top + 34}" class="bandmore" '
-               f'text-anchor="end">{n_shown} of {n_all} →</text></a></g>')
+# fog inside the cylinder: as thick as the chord a line of sight crosses
+stops = "".join(f'<stop offset="{(u + 1) / 2:.3f}" stop-opacity="{.62 * math.sqrt(max(0, 1 - u * u)):.3f}" stop-color="#121417"/>'
+                for u in [k / 10 - 1 for k in range(21)])
+svg.append(f'<linearGradient id="fog" x1="0" x2="1" y1="0" y2="0">{stops}</linearGradient></defs>')
+back, fore = [], []  # drawn behind / in front of the fog
+for s, top, n_all, n_shown in bands:
+    arc = lambda sweep: f'<path class="ring" style="--tier:{COL[s]}" d="M{CX - R},{top} A{R},{TILT} 0 0 {sweep} {CX + R},{top}"/>'
+    back.append(arc(1))
+    fore.append(arc(0) + f'<g style="--tier:{COL[s]}"><text x="12" y="{top + 30}" class="bandname">{e(NAMES.get(s, s))}</text>'
+                f'<a href="items/index.html"><text x="{W - 12}" y="{top + 30}" class="bandmore" text-anchor="end">'
+                f'{n_shown} of {n_all} →</text></a></g>')
+edges = [[], []]
 for x in sel:
-    for p in dpar[x]:
-        x1, y1, x2, y2 = xpos[p], ypos[p] + (52 if len(ent[p].get("name", "")) > 12 else 40), xpos[x], ypos[x] - 22
-        x2 += .5 if abs(x2 - x1) < .5 else 0  # a gradient needs a box with width
-        d = (y2 - y1) * 0.5
-        svg.append(f'<path class="edge" stroke="url(#g-{ent[p]["stage"]}-{ent[x]["stage"]})" data-a="{e(nid(p))}" '
-                   f'data-b="{e(nid(x))}" d="M{x1:.1f},{y1:.0f} C{x1:.1f},{y1 + d:.0f} {x2:.1f},{y2 - d:.0f} {x2:.1f},{y2:.0f}"/>')
-for row in rows:
-    slot = (W - 2 * MARGIN) / len(row)
-    for x in row:
+    for p in dpar[x]:  # sampled along the cylinder's surface, split where it passes round the side
+        a0, da, y0, y1 = theta[p], wrap(theta[x] - theta[p]), ypos[p] + 22, ypos[x] - 22
+        pts = [proj(a0 + da * t, y0 + (y1 - y0) * (3 * t * t - 2 * t ** 3)) for t in (k / SAMPLES for k in range(SAMPLES + 1))]
+        runs = [[pts[0]]]
+        for q in pts[1:]:
+            if (q[2] >= .5) != (runs[-1][-1][2] >= .5):
+                runs.append([runs[-1][-1]])
+            runs[-1].append(q)
+        for run in runs:
+            if len(run) < 2:
+                continue
+            if max(q[0] for q in run) - min(q[0] for q in run) < .5:  # a gradient needs a box with width
+                run[-1] = (run[-1][0] + .5, *run[-1][1:])
+            d = sum(q[2] for q in run) / len(run)
+            edges[d >= .5].append((d, f'<path class="edge" style="--d:{d:.2f}" stroke="url(#g-{ent[p]["stage"]}-{ent[x]["stage"]})" '
+                                      f'data-a="{e(nid(p))}" data-b="{e(nid(x))}" d="M'
+                                      + " L".join(f"{q[0]:.1f},{q[1]:.1f}" for q in run) + '"/>'))
+nodes = [[], []]
+for ring in rings:
+    step = R * math.tau / max(len(ring), NMIN)  # slot width on the cylinder; on screen, times cos(angle)
+    for x in ring:
         s = ent[x]["stage"]
+        px, py, d = proj(theta[x], ypos[x])
         ic = ent[x].get("icon") if x[0] != "creature" else next(
-            (items[d["item"]].get("icon") for d in ent[x].get("drops", []) if items.get(d["item"], {}).get("type") == "Trophy"), None)
+            (items[dd["item"]].get("icon") for dd in ent[x].get("drops", []) if items.get(dd["item"], {}).get("type") == "Trophy"), None)
         href = f'{ {"item": "items", "piece": "pieces", "creature": "creatures"}[x[0]]}/{x[1]}.html'
         name = ent[x].get("name", x[1])
-        cls = "node" + (" boss" if x in bosses else " gear" if x in gear else "")
+        cls = "node" + (" boss" if x in bosses else " gear" if x in gear else "") + (" far" if step * math.cos(theta[x]) < 64 else "")
         img = f'<image href="icons/{ic}.png" x="-16" y="-16" width="32" height="32"/>' if ic in ICONS else ""
-        svg.append(f'<a href="{href}" class="{cls}" data-id="{e(nid(x))}" style="--tier:{COL[s]}" '
-                   f'transform="translate({xpos[x]:.1f},{ypos[x]})"><title>{e(name)}</title>'
-                   f'<rect x="-22" y="-22" width="44" height="44" rx="8"/>{img}{label(name, min(slot, 120))}</a>')
+        nodes[d >= .5].append((d, f'<a href="{href}" class="{cls}" data-id="{e(nid(x))}" style="--tier:{COL[s]};--d:{d:.2f}" '
+                                  f'transform="translate({px:.1f},{py:.1f}) scale({.55 + .45 * d:.2f})"><title>{e(name)}</title>'
+                                  f'<rect x="-22" y="-22" width="44" height="44" rx="8"/>{img}{label(name, min(130, step))}</a>'))
+svg += back + [p for _, p in sorted(edges[0])] + [p for _, p in sorted(nodes[0])]
+svg.append(f'<rect x="{CX - R}" y="0" width="{2 * R}" height="{H:.0f}" fill="url(#fog)" pointer-events="none"/>')
+svg += [p for _, p in sorted(edges[1])] + [p for _, p in sorted(nodes[1])] + fore
 svg.append("</svg>")
 
 par_ids = {nid(x): [nid(p) for p in par[x]] for x in sel}
@@ -252,16 +294,17 @@ page = f"""<!doctype html><html><head><meta charset="utf-8"><meta name="viewport
 <title>Tech well (prototype)</title><style>{css}
 .wellbox{{background:#121417;border-radius:10px;padding:8px 0;margin-top:12px}}
 .well{{width:100%;height:auto;display:block;font-family:system-ui,-apple-system,"Segoe UI",sans-serif}}
-.band line{{stroke:var(--tier);stroke-opacity:.35}}
+.ring{{fill:none;stroke:var(--tier);stroke-opacity:.35}}
 .bandname{{fill:var(--tier);font-size:18px;font-weight:700;letter-spacing:.04em}}
 .bandmore{{fill:#9a9387;font-size:13px}}
-.edge{{fill:none;stroke-width:1.5;stroke-opacity:.55;transition:stroke-opacity .15s}}
+.edge{{fill:none;stroke-width:1.2;stroke-opacity:calc(.04 + .26 * var(--d) * var(--d));transition:stroke-opacity .15s}}
+.node{{opacity:calc(.35 + .65 * var(--d))}} .node.far text{{display:none}}
 .node rect{{fill:#1d2024;stroke:var(--tier);stroke-width:1.5}}
 .node.gear rect{{stroke-width:2.5}}
 .node.boss rect{{fill:#2a1f14;stroke:#e0a24a;stroke-width:2.5}}
 .node text{{fill:var(--tier);font-size:11.5px;text-anchor:middle}}
 .node:hover text{{text-decoration:underline}}
-.well.focus .edge{{stroke-opacity:.07}} .well.focus .node{{opacity:.3}}
+.well.focus .edge{{stroke-opacity:.04}} .well.focus .node{{opacity:.15}} .well.focus .node.on text{{display:inline}}
 .well.focus .edge.on{{stroke-opacity:1;stroke-width:2.4}} .well.focus .node.on{{opacity:1}}
 </style></head><body><main><h1>Tech tree</h1><p class="sub">Prototype: every obtainable item but food and meads, the bosses, the stations
 they need ({len(sel)} nodes). Hover to trace a path.</p>
