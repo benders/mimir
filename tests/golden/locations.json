@@ -18,7 +18,8 @@
    "quantity": 20,
    "minDistance": 600,
    "maxDistance": 3000
-  }
+  },
+  "key": "Gem"
  },
  {
   "id": "Market",

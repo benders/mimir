@@ -3752,7 +3752,12 @@
   "stage": "DeepNorth",
   "via": {
    "how": "location",
-   "from": "MorkBorg"
+   "from": "MorkBorg",
+   "needs": [
+    {
+     "item": "BloodGoldKey"
+    }
+   ]
   }
  },
  {
@@ -3810,7 +3815,12 @@
   "stage": "DeepNorth",
   "via": {
    "how": "location",
-   "from": "MorkBorg"
+   "from": "MorkBorg",
+   "needs": [
+    {
+     "item": "BloodGoldKey"
+    }
+   ]
   }
  },
  {
@@ -8721,7 +8731,12 @@
   "stage": "DeepNorth",
   "via": {
    "how": "location",
-   "from": "MorkBorg"
+   "from": "MorkBorg",
+   "needs": [
+    {
+     "item": "BloodGoldKey"
+    }
+   ]
   }
  },
  {
@@ -9262,7 +9277,12 @@
   "stage": "Swamp",
   "via": {
    "how": "location",
-   "from": "SunkenCrypt4"
+   "from": "SunkenCrypt4",
+   "needs": [
+    {
+     "item": "CryptKey"
+    }
+   ]
   }
  },
  {
@@ -13260,7 +13280,12 @@
   "stage": "Mistlands",
   "via": {
    "how": "location",
-   "from": "Mistlands_DvergrBossEntrance1"
+   "from": "Mistlands_DvergrBossEntrance1",
+   "needs": [
+    {
+     "item": "DvergrKey"
+    }
+   ]
   }
  },
  {
@@ -13299,7 +13324,12 @@
   "stage": "Mistlands",
   "via": {
    "how": "location",
-   "from": "Mistlands_DvergrBossEntrance1"
+   "from": "Mistlands_DvergrBossEntrance1",
+   "needs": [
+    {
+     "item": "DvergrKey"
+    }
+   ]
   }
  },
  {
@@ -13347,7 +13377,7 @@
   "stage": "Mistlands",
   "via": {
    "how": "location",
-   "from": "Mistlands_DvergrBossEntrance1"
+   "from": "Mistlands_DvergrTownEntrance1"
   }
  },
  {
@@ -13386,7 +13416,12 @@
   "stage": "Mistlands",
   "via": {
    "how": "location",
-   "from": "Mistlands_DvergrBossEntrance1"
+   "from": "Mistlands_DvergrBossEntrance1",
+   "needs": [
+    {
+     "item": "DvergrKey"
+    }
+   ]
   }
  },
  {
@@ -13426,7 +13461,12 @@
   "stage": "Mistlands",
   "via": {
    "how": "location",
-   "from": "Mistlands_DvergrBossEntrance1"
+   "from": "Mistlands_DvergrBossEntrance1",
+   "needs": [
+    {
+     "item": "DvergrKey"
+    }
+   ]
   }
  },
  {

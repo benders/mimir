@@ -365,6 +365,27 @@ class Entities(FixtureCase):
         N.mark_stages(*args)
         self.assertEqual({i["id"]: i.get("stage") for i in items}["Sword"], "Mountain")
 
+    def test_dungeon_key(self):
+        # what a location's dungeon holds is behind its door's key; outside it isn't
+        items = [{"id": "Key"}, {"id": "Scrap"}, {"id": "Moss"}, {"id": "Pick", "toolTier": 1, "damages": {"pickaxe": 5}}]
+        immune = {t: "Immune" for t in ("blunt", "slash", "pierce", "chop", "fire", "frost", "lightning", "poison", "spirit")}
+        sources = [{"id": "chest", "kind": "container", "locations": [{"location": "Peak"}], "drops": {"items": [{"item": "Key"}]}},
+                   {"id": "pile", "kind": "rock", "locations": [{"location": "Crypt", "dungeon": True}],
+                    "damageModifiers": immune, "drops": {"items": [{"item": "Scrap"}]}},
+                   {"id": "tuft", "kind": "pickable", "locations": [{"location": "Crypt"}], "pickable": {"item": "Moss"}}]
+        recipes = [{"item": "Pick", "enabled": True, "resources": [{"item": "Moss"}]}]
+        spawn_list = [{"creature": "Draugr", "source": "dungeon", "location": "Crypt", "biomes": ["Swamp"]}]
+        location_list = [{"id": "Peak", "biomes": ["Mountain"]}, {"id": "Crypt", "biomes": ["Swamp"], "key": "Key"}]
+        args = items, [{"id": "Draugr"}], [], recipes, [], sources, spawn_list, location_list
+        reach = tuple(set(d) for d in N.stages(*args))
+        self.assertIn("Scrap", reach[0])  # soft: the key never makes it unreachable
+        ways = {}
+        got = {k: N.STAGES[v] for d in N.stages(*args, reach=reach, ways=ways) for k, v in d.items()}
+        self.assertEqual((got["Scrap"], got["Draugr"], got["Moss"]), ("Mountain", "Mountain", "Swamp"))
+        self.assertEqual(ways["item"]["Scrap"]["needs"], [("item", "Key", None), ("item", "Pick", None)])  # key and tool
+        self.assertEqual(ways["creature"]["Draugr"]["needs"], [("item", "Key", None)])
+        self.assertEqual(ways["item"]["Moss"]["needs"], [])  # outside the dungeon
+
     def test_usage_tags(self):
         self.assertEqual(N.usage_tags("Building, Roof"), ["Building", "Roofing"])  # the build menu's labels
         self.assertEqual(N.usage_tags(0x80 | 0x2), ["Crafting", "Furniture"])  # a number: menu order

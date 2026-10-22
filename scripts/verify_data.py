@@ -343,6 +343,10 @@ def main() -> int:
     check(forge.get("biomes") == ["Mountain"] and forge["placement"].get("unique")
           and forge["placement"].get("minDistance", 0) >= 500,
           "locations: Forge of Potential is unique, in the Mountain, at least 500 m from the centre")
+    keys = {x["id"]: x.get("key") for x in load("locations.json")}
+    check(keys.get("SunkenCrypt4") == "CryptKey" and keys.get("Mistlands_DvergrBossEntrance1") == "DvergrKey"
+          and {"item": "CryptKey"} in items["IronScrap"].get("via", {}).get("needs", []),
+          "locations: Sunken Crypt and the Queen's door take their keys; scrap iron from the crypt needs the Swamp key")
     idols = [f"Upgrader{n}{k}" for n in range(8) for k in ("Weapon", "Armor")]
     check(all(items.get(i, {}).get("upgrader") and not items[i].get("unobtainable") for i in idols),
           "items: the 16 Battle/Protection Idols are reachable upgrader resources")

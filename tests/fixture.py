@@ -461,6 +461,7 @@ def write_dump(raw: Path) -> Path:
         ("OfferingBowl", m(bossPrefab=R("ChoirOffering"), bossItem=None, bossItems=1, useItemStands=True,
                            itemStandPrefix="CupHolder")),  # a group of creatures; takes one Wood per CupHolder stand
         ("DungeonGenerator", m(themes="Cave")),
+        ("Door", m(name="$piece_irongate", keyItem=R("Gem"))),  # its dungeon is behind a locked gate
     )], "instances": [
         {"prefab": "OreRock", "path": "cave/OreRock (2)"},  # an instance of a source inside the location
         {"prefab": "Orb", "path": "cave/Orb"},

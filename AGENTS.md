@@ -124,7 +124,8 @@ catch drops; fish spawn as `creature` ids in `spawns` but have no `creatures` en
 Wider/Deeper Pockets, once per character, `invrows` = inventory rows; the trader page's Upgrades section),
 `locations` [{location, biomes}]; a source that `startsEvent` starts a persistent event when destroyed (Fimbulvinter orb); one that `stopsEvent` ends it and counts as placed while the event runs (Malicious Ice core; inferred, PersistentEventSystem isn't dumped)),
 `status_effects`, `locations` (every enabled world location with the `biomes` it is placed in and its `placement`:
-quantity, unique, prioritized, biomeArea, min/maxDistance from the centre (the tighter of m_min/maxDistance and m_min/maxDistanceFromCenter, both checked), minDistanceFromSimilar, iconPlaced), `raids` (RandEventSystem:
+quantity, unique, prioritized, biomeArea, min/maxDistance from the centre (the tighter of m_min/maxDistance and m_min/maxDistanceFromCenter, both checked), minDistanceFromSimilar, iconPlaced) and `key` (the item its Door takes, Door.m_keyItem: what its dungeon holds, sources, chests, pieces and
+spawns, needs it in `stages()`, a soft requirement), `raids` (RandEventSystem:
 `intervalMin` / `chance` of the raid roll, and per enabled random event `id`, start/end `message`, `biomes`, `duration`,
 `nearBaseOnly`, `requiredGlobalKeys` / `notRequiredGlobalKeys`, and `player` {knownItems, notKnownItems, keysAny, keysAll,
 notKeys}: the conditions the player-based raids world modifier uses instead; what spawns is in `spawns`), `alt_biomes`

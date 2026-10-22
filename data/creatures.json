@@ -2586,6 +2586,11 @@
   "via": {
    "how": "spawn",
    "from": "MorkBorg",
+   "needs": [
+    {
+     "item": "BloodGoldKey"
+    }
+   ],
    "biomes": [
     "DeepNorth"
    ]
@@ -4304,6 +4309,11 @@
   "via": {
    "how": "spawn",
    "from": "MorkBorg",
+   "needs": [
+    {
+     "item": "BloodGoldKey"
+    }
+   ],
    "biomes": [
     "DeepNorth"
    ]
@@ -5402,6 +5412,11 @@
   "via": {
    "how": "spawn",
    "from": "MorkBorg",
+   "needs": [
+    {
+     "item": "BloodGoldKey"
+    }
+   ],
    "biomes": [
     "DeepNorth"
    ]
@@ -6333,6 +6348,9 @@
    "how": "spawn",
    "from": "Mistlands_DvergrBossEntrance1",
    "needs": [
+    {
+     "item": "DvergrKey"
+    },
     {
      "item": "TrophySeekerBrute",
      "amount": 3

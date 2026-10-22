@@ -653,7 +653,8 @@
    "prioritized": true,
    "biomeArea": "Median",
    "minDistanceFromSimilar": 2048
-  }
+  },
+  "key": "DvergrKey"
  },
  {
   "id": "Mistlands_DvergrTownEntrance1",
@@ -966,7 +967,8 @@
   "placement": {
    "quantity": 40,
    "minDistanceFromSimilar": 275
-  }
+  },
+  "key": "BloodGoldKey"
  },
  {
   "id": "MountainCave02",
@@ -1604,7 +1606,8 @@
    "prioritized": true,
    "biomeArea": "Median",
    "minDistanceFromSimilar": 64
-  }
+  },
+  "key": "CryptKey"
  },
  {
   "id": "SwampHut1",

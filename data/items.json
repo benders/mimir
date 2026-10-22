@@ -1831,10 +1831,10 @@
      "piece": "blackforge_ext1"
     },
     {
-     "piece": "blackforge_ext3_metalcutter"
+     "piece": "blackforge_ext2_vise"
     },
     {
-     "piece": "blackforge_ext4_gemcutter"
+     "piece": "blackforge_ext3_metalcutter"
     }
    ]
   }
@@ -25353,6 +25353,9 @@
    "from": "mudpile2_frac",
    "needs": [
     {
+     "item": "CryptKey"
+    },
+    {
      "item": "PickaxeAntler"
     }
    ]
@@ -30980,7 +30983,7 @@
   "stage": "DeepNorth",
   "via": {
    "how": "source",
-   "from": "Morkhalla_WeaponStand"
+   "from": "Spawner_Hole"
   }
  },
  {
@@ -30995,7 +30998,7 @@
   "stage": "DeepNorth",
   "via": {
    "how": "source",
-   "from": "Morkhalla_WeaponStand"
+   "from": "Spawner_Hole"
   }
  },
  {
@@ -31010,7 +31013,7 @@
   "stage": "DeepNorth",
   "via": {
    "how": "source",
-   "from": "Morkhalla_WeaponStand"
+   "from": "Spawner_Hole"
   }
  },
  {
@@ -31025,7 +31028,7 @@
   "stage": "DeepNorth",
   "via": {
    "how": "source",
-   "from": "Morkhalla_WeaponStand"
+   "from": "Spawner_Hole"
   }
  },
  {
@@ -31040,7 +31043,7 @@
   "stage": "DeepNorth",
   "via": {
    "how": "source",
-   "from": "Morkhalla_WeaponStand"
+   "from": "Spawner_Hole"
   }
  },
  {
@@ -31055,7 +31058,7 @@
   "stage": "DeepNorth",
   "via": {
    "how": "source",
-   "from": "Morkhalla_WeaponStand"
+   "from": "Spawner_Hole"
   }
  },
  {
@@ -31090,7 +31093,7 @@
   "stage": "DeepNorth",
   "via": {
    "how": "source",
-   "from": "Morkhalla_WeaponStand"
+   "from": "Spawner_Hole"
   }
  },
  {
@@ -31105,7 +31108,7 @@
   "stage": "DeepNorth",
   "via": {
    "how": "source",
-   "from": "Morkhalla_WeaponStand"
+   "from": "Spawner_Hole"
   }
  },
  {
@@ -31120,7 +31123,7 @@
   "stage": "DeepNorth",
   "via": {
    "how": "source",
-   "from": "Morkhalla_WeaponStand"
+   "from": "Spawner_Hole"
   }
  },
  {
@@ -31135,7 +31138,7 @@
   "stage": "DeepNorth",
   "via": {
    "how": "source",
-   "from": "Morkhalla_WeaponStand"
+   "from": "Spawner_Hole"
   }
  },
  {
@@ -31150,7 +31153,7 @@
   "stage": "DeepNorth",
   "via": {
    "how": "source",
-   "from": "Morkhalla_WeaponStand"
+   "from": "Spawner_Hole"
   }
  },
  {
@@ -31165,7 +31168,7 @@
   "stage": "DeepNorth",
   "via": {
    "how": "source",
-   "from": "Morkhalla_WeaponStand"
+   "from": "Spawner_Hole"
   }
  },
  {
@@ -31191,7 +31194,7 @@
   "stage": "DeepNorth",
   "via": {
    "how": "source",
-   "from": "Morkhalla_WeaponStand"
+   "from": "Spawner_Hole"
   }
  },
  {
@@ -31206,7 +31209,7 @@
   "stage": "DeepNorth",
   "via": {
    "how": "source",
-   "from": "Morkhalla_WeaponStand"
+   "from": "elaking_trashpile"
   }
  },
  {
@@ -31221,7 +31224,7 @@
   "stage": "DeepNorth",
   "via": {
    "how": "source",
-   "from": "Morkhalla_WeaponStand"
+   "from": "elaking_trashpile"
   }
  },
  {
@@ -31236,7 +31239,7 @@
   "stage": "DeepNorth",
   "via": {
    "how": "source",
-   "from": "Morkhalla_WeaponStand"
+   "from": "elaking_trashpile"
   }
  },
  {
@@ -31251,7 +31254,7 @@
   "stage": "DeepNorth",
   "via": {
    "how": "source",
-   "from": "Morkhalla_WeaponStand"
+   "from": "elaking_trashpile"
   }
  },
  {
@@ -31266,7 +31269,7 @@
   "stage": "DeepNorth",
   "via": {
    "how": "source",
-   "from": "Morkhalla_WeaponStand"
+   "from": "Spawner_Hole"
   }
  },
  {
@@ -31281,7 +31284,7 @@
   "stage": "DeepNorth",
   "via": {
    "how": "source",
-   "from": "Morkhalla_WeaponStand"
+   "from": "Spawner_Hole"
   }
  },
  {
@@ -46439,7 +46442,12 @@
   "stage": "Swamp",
   "via": {
    "how": "source",
-   "from": "Pickable_SunkenCryptRandom"
+   "from": "Pickable_SunkenCryptRandom",
+   "needs": [
+    {
+     "item": "CryptKey"
+    }
+   ]
   }
  },
  {

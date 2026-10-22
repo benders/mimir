@@ -468,6 +468,7 @@ def stages(items: list, creatures: list, pieces: list, recipes: list, procs: lis
       - a world spawn's persistent event (SpawnSystem m_requiredPersistentEvent): the source that `startsEvent`; a
         source that `stopsEvent` is placed by that event (inferred: PersistentEventSystem isn't dumped);
       - the parent of offspring and hatchlings;
+      - for what a location's dungeon holds (sources, chests, pieces, spawns), the `key` its door takes;
       - for a source with `minToolTier`, a player item of that tier dealing a damage type it isn't immune to
         (MineRock.RPC_Hit, MineRock5/TreeBase/Destructible.RPC_Damage: CheckToolTier), except STAGE_IGNORED_TOOLS.
     `breakage=False` leaves out breaking world pieces for their cost (a sign's coal), an unusual route.
@@ -536,10 +537,11 @@ def stages(items: list, creatures: list, pieces: list, recipes: list, procs: lis
     source_needs = lambda sid: V[id(S)].get(sid, {}).get("needs", [])
 
     def with_tool(sid: str, tn: list) -> list:  # one tool for a multi-stage object (tree, log): the later one, which
-        # breaks the earlier stage too; a source's needs hold no other items
+        # breaks the earlier stage too; a source's other item needs are door keys
         prev = source_needs(sid)
-        tools = [n for n in prev if n[0] == "item"] + tn
-        return [n for n in prev if n[0] != "item"] + ([max(tools, key=lambda n: soft_item(n[1]))] if tools else [])
+        tools = [n for n in prev if n[0] == "item" and n[1] not in door_keys] + tn
+        return [n for n in prev if n[0] != "item" or n[1] in door_keys] + (
+            [max(tools, key=lambda n: soft_item(n[1]))] if tools else [])
 
     killers, givers = defaultdict(list), defaultdict(list)  # global key (lowercase, ZoneSystem.GetKeyValue) ->
     for c in creatures:  # creatures that set it on death, items a trader takes for it
@@ -595,8 +597,15 @@ def stages(items: list, creatures: list, pieces: list, recipes: list, procs: lis
                    default=(NEVER, False, []))[::2]  # nothing a player holds breaks it
 
     loc_stage = {loc["id"]: biome_stage(loc["biomes"]) for loc in location_list}
-    at = lambda locs: min((loc_stage.get(x["location"], 0) for x in locs), default=NEVER)
-    first_at = lambda locs: min(locs, key=lambda x: loc_stage.get(x["location"], 0))["location"]
+    loc_key = {loc["id"]: loc["key"] for loc in location_list if loc.get("key")}
+    door_keys = set(loc_key.values())
+
+    def inside(loc: str, dungeon: bool) -> tuple[int, list]:  # a place's stage, with the key to its dungeon
+        k = loc_key.get(loc) if dungeon else None
+        return max(loc_stage.get(loc, 0), soft_item(k) if k else 0), [("item", k, None)] if k else []
+
+    placed = lambda locs: min((inside(x["location"], x.get("dungeon")) for x in locs), default=(NEVER, []))
+    first_at = lambda locs: min(locs, key=lambda x: inside(x["location"], x.get("dungeon")))["location"]
     buildable = {p["id"] for p in pieces if (p.get("enabled") or p.get("season")) and p.get("tools")}
     built = lambda pc: max(P[pc], cost(by_piece[pc]["resources"])) if pc in buildable else NEVER
     traders = [src for src in sources if src["kind"] == "trader"]
@@ -614,7 +623,8 @@ def stages(items: list, creatures: list, pieces: list, recipes: list, procs: lis
                 lower(P, p["id"], max(tv, soft_cost(p["resources"]), sv), "build", None,
                       lambda: tn + sn + cost_needs(p["resources"]))
             if p.get("locations"):
-                lower(P, p["id"], at(p["locations"]), "location", first_at(p["locations"]))
+                lv, ln = placed(p["locations"])
+                lower(P, p["id"], lv, "location", first_at(p["locations"]), ln)
                 if breakage and not p.get("tools") and p.get("health"):  # breaking one drops part of its cost
                     # (Piece.DropResources)
                     for r in p.get("resources", []):
@@ -625,10 +635,10 @@ def stages(items: list, creatures: list, pieces: list, recipes: list, procs: lis
                 # event runs (its spawn lists aren't in the dump: inferred from what ends the event)
                 lower(S, src["id"], event(e), "source")
             if src["kind"] == "container" or src.get("biomes") or src.get("locations"):
-                lower(S, src["id"], min(biome_stage(src["biomes"]) if src.get("biomes") else NEVER,
-                                        at(src["locations"]) if src.get("locations") else NEVER,
-                                        0 if src["kind"] == "container" and not src.get("locations") else NEVER),
-                      "source")
+                lv, ln = placed(src.get("locations", []))
+                v = min(biome_stage(src["biomes"]) if src.get("biomes") else NEVER,
+                        0 if src["kind"] == "container" and not src.get("locations") else NEVER)
+                lower(S, src["id"], min(v, lv), "source", None, ln if lv < v else [])
             for pc in src.get("placedBy", []):
                 if pc in by_piece:
                     lower(S, src["id"], built(pc), "build", pc, [("piece", pc, None)])
@@ -651,6 +661,8 @@ def stages(items: list, creatures: list, pieces: list, recipes: list, procs: lis
             if src in ("world", "location", "dungeon", "raid"):
                 keys = s.get("requiredGlobalKeys", []) + ([s["requiredGlobalKey"]] if s.get("requiredGlobalKey") else [])
                 kv = [key(k) for k in keys]
+                if src == "dungeon" and s.get("location") in loc_key:  # behind the location's door
+                    kv.append(inside(s["location"], True))
                 if off := s.get("summon"):  # a boss's offering (OfferingBowl): soft, like a key
                     kv.append((soft_item(off["item"]), [("item", off["item"], off["amount"])]))
                 lower(C, c, max([biome_stage(s.get("biomes")), event(s.get("requiredEvent"))] + [v for v, _ in kv]),
@@ -1353,15 +1365,22 @@ def location_placement(z: dict) -> dict:
             "iconPlaced": z.get("m_iconPlaced"), "iconAlways": z.get("m_iconAlways")}
 
 
+def location_key(loc: dict) -> str | None:
+    """The item a Door in the location opens with (Door.m_keyItem, checked in Door.Interact: the Sunken Crypt's gate
+    takes the Swamp key); what the location's dungeon holds is behind it."""
+    return next((ref(c["fields"]["m_keyItem"]) for c in loc.get("components", [])
+                 if c.get("type") == "Door" and c.get("fields", {}).get("m_keyItem")), None)
+
+
 def locations() -> list[dict]:
-    """Every enabled world location the dump has, with the `biomes` it is placed in and its `placement` (from its
-    first enabled ZoneSystem entry)."""
+    """Every enabled world location the dump has, with the `biomes` it is placed in, its `placement` (from its
+    first enabled ZoneSystem entry) and the `key` its door takes."""
     have = load_dir("locations")
     first = {}
     for z in load("world/ZoneSystem.json")[0]["fields"]["m_locations"]:
         if z["m_enable"]:
             first.setdefault(z["m_prefabName"], z)
-    return [{"id": k, "biomes": v, "placement": location_placement(first[k])}
+    return [{"id": k, "biomes": v, "placement": location_placement(first[k]), "key": location_key(have[k])}
             for k, v in sorted(location_biomes().items()) if k in have]
 
 
