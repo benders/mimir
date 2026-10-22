@@ -27,7 +27,7 @@ on:
         default: false
   push:
     branches: [main]
-    paths: [data/**, site/**, scripts/build-site.py, scripts/extract-renders.py, requirements.txt,
+    paths: [data/**, site/**, scripts/build-site.py, scripts/well.py, scripts/extract-renders.py, requirements.txt,
             .github/workflows/update.yml]
 
 concurrency:
