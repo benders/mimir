@@ -4,11 +4,19 @@
 (() => {
   const sel = document.getElementById("stage"), root = document.documentElement, KEY = "mimir-stage";
   if (!sel) return;
+  const chips = [...document.querySelectorAll("[data-upto]")];  // the home page's stage chips (#78)
+  const mark = () => chips.forEach((c) => c.setAttribute("aria-pressed", String(c.dataset.upto === sel.value)));
   sel.value = root.dataset.max ?? "";
   sel.addEventListener("change", () => {
     if (sel.value === "") delete root.dataset.max; else root.dataset.max = sel.value;
     try { sel.value === "" ? localStorage.removeItem(KEY) : localStorage.setItem(KEY, sel.value); } catch (e) {}
+    mark();
   });
+  chips.forEach((c) => c.addEventListener("click", () => {
+    sel.value = c.dataset.upto;
+    sel.dispatchEvent(new Event("change"));
+  }));
+  mark();
 })();
 
 (() => {

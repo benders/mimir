@@ -1,11 +1,10 @@
 #!/usr/bin/env python3
-"""The well (#25, #68): the tech tree drawn as a cylinder, one band per progression stage.
+"""The well (#25, #68): the tech tree drawn as a cylinder, one band per progression stage, on the home page.
 
-    scripts/well.py [DATA_DIR [SITE_DIR]] [--audit]
+    scripts/well.py [DATA_DIR] [--audit]     # stats; --audit lists the needs left out of the graph and its roots
 
-Reads DATA_DIR (default data/), writes SITE_DIR/well.html (default .cache/site/public; icons from SITE_DIR/icons,
-so run build-site.py first: `make site` does both). --audit lists the needs left out of the graph and its roots.
-graph() picks the nodes and edges, layout() places them, page() writes the HTML; tests/test_well.py tests each."""
+graph() picks the nodes and edges, layout() places them, markup() writes the HTML that build-site.py puts on the home
+page (with site/well.js and the .well rules in site/style.css); tests/test_well.py tests each."""
 import collections
 import html
 import json
@@ -250,12 +249,12 @@ def layout(g: SimpleNamespace) -> SimpleNamespace:
     return SimpleNamespace(rings=rings, theta=theta, ypos=ypos, slot=slot, bands=bands, H=y + TILT + 24, rank=rank, imp=imp)
 
 
-def page(g: SimpleNamespace, lay: SimpleNamespace, icons: set, css: str) -> str:
-    """The HTML page. Nodes are links placed by CSS from their angle (the first render, and without JavaScript);
-    turning the well sets each visible node's transform from JavaScript instead (CSS trig on every node costs ~4x more
-    per frame). Edges and rings are drawn on two screen-sized canvases, behind and in front of the fog."""
+def markup(g: SimpleNamespace, lay: SimpleNamespace, icons: set, links: dict | None = None) -> str:
+    """The well's HTML for the home page (build-site.py): nodes as links placed by CSS from their angle (site/style.css,
+    the first render and without JavaScript), the band names (linked through `links`: stage -> href), two canvases and
+    the fog for site/well.js, and its data in <script id="well-data">."""
     ent, items, theta, ypos, slot, H = g.ent, g.items, lay.theta, lay.ypos, lay.slot, lay.H
-    e = html.escape
+    e, links = html.escape, links or {}
     order = [x for ring in lay.rings for x in ring]
     idx = {x: n for n, x in enumerate(order)}
     nodes = []
@@ -269,102 +268,17 @@ def page(g: SimpleNamespace, lay: SimpleNamespace, icons: set, css: str) -> str:
         nodes.append(f'<a href="{href}" class="{cls}" data-n="{idx[x]}" draggable="false" title="{e(name)}" '
                      f'style="--a:{theta[x]:.4f}rad;--k:{slot[x]:.4f};top:{ypos[x]:.0f}px;--tier:{COL[ent[x]["stage"]]}">'
                      f'<span class="ic">{img}</span><span class="lb">{e(name)}</span></a>')
-    labels = "".join(f'<div class="bandname" style="top:{top + 12:.0f}px;--tier:{COL[s]}">{e(NAMES.get(s, s))} '
-                     f'<a href="items/index.html">{n_shown} of {n_all} →</a></div>' for s, top, n_all, n_shown in lay.bands)
-    fog = ",".join(f"rgba(18,20,23,{.62 * math.sqrt(max(0, 1 - u * u)):.3f}) {(u + 1) * 50:.0f}%" for u in [k / 10 - 1 for k in range(21)])
-    data = {"a": [round(theta[x], 4) for x in order], "y": [round(ypos[x]) for x in order], "c": [g.stage(x) for x in order], "k": [round(slot[x], 4) for x in order],
+    name = lambda s: f'<a href="{links[s]}">{e(NAMES.get(s, s))}</a>' if s in links else e(NAMES.get(s, s))
+    labels = "".join(f'<div class="bandname" style="top:{top + 12:.0f}px;--tier:{COL[s]}">{name(s)}'
+                     f'<span>{n_shown} of {n_all}</span></div>' for s, top, n_all, n_shown in lay.bands)
+    data = {"a": [round(theta[x], 4) for x in order], "y": [round(ypos[x]) for x in order],
+            "c": [g.stage(x) for x in order], "k": [round(slot[x], 4) for x in order],
             "col": [COL[s] for s in S], "bands": [round(top) for _, top, _, _ in lay.bands] + [round(H - TILT - 24)],
             "par": [sorted(idx[p] for p in g.par[x]) for x in order]}
-    return f"""<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Tech well (prototype)</title><style>{css}
-.well{{position:relative;height:{H:.0f}px;margin-top:12px;background:#121417;border-radius:10px;overflow:clip;
- touch-action:pan-y;user-select:none;-webkit-user-select:none;--rot:0rad;--R:348;--tilt:44;
- font-family:system-ui,-apple-system,"Segoe UI",sans-serif}}
-.well canvas{{position:sticky;top:0;display:block;width:100%;height:100vh;margin-bottom:-100vh;pointer-events:none}}
-.well .back{{z-index:0}} .well .front{{z-index:100}}
-.fog{{position:absolute;top:0;bottom:0;left:calc(50% - var(--R) * 1px);width:calc(var(--R) * 2px);z-index:100;
- pointer-events:none;background:linear-gradient(to right,{fog})}}
-.node{{--t:calc(var(--a) + var(--rot));--w:min(130, var(--R) * var(--k));--d:calc((cos(var(--t)) + 1) / 2);
- position:absolute;left:50%;width:calc(var(--w) * 1px);margin:-22px 0 0 calc(var(--w) * -.5px);
- display:flex;flex-direction:column;align-items:center;text-decoration:none;transform-origin:50% 22px;
- transform:translate(calc(var(--R) * sin(var(--t)) * 1px), calc(var(--tilt) * cos(var(--t)) * 1px)) scale(calc(.55 + .45 * var(--d)));
- opacity:calc(.35 + .65 * var(--d));z-index:calc(100 + 99 * cos(var(--t)));-webkit-user-drag:none}}
-.node .ic{{width:44px;height:44px;box-sizing:border-box;border:1.5px solid var(--tier);border-radius:8px;background:#1d2024;
- display:flex;align-items:center;justify-content:center}}
-.node img{{width:32px;height:32px}}
-.node.gear .ic{{border-width:2.5px}} .node.boss .ic{{background:#2a1f14;border:2.5px solid #e0a24a}}
-.node .lb{{color:var(--tier);font-size:11.5px;line-height:13px;text-align:center;margin-top:4px;max-width:100%;
- display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;
- opacity:clamp(0, (cos(var(--t)) * var(--R) * var(--k) - 64) / 8, 1)}}
-.node:hover .lb{{text-decoration:underline}}
-.bandname{{position:absolute;left:12px;z-index:300;color:var(--tier);font-size:18px;font-weight:700;letter-spacing:.04em;
- pointer-events:none}}
-.bandname a{{pointer-events:auto;color:#9a9387;font-size:13px;font-weight:400;letter-spacing:0;margin-left:6px}}
-.well.focus .node{{opacity:.15 !important}} .well.focus .node.on{{opacity:1 !important}} .well.focus .node.on .lb{{opacity:1 !important}}
-.well.dragging .node{{pointer-events:none}}
-</style></head><body><main><h1>Tech tree</h1><p class="sub">Prototype: every obtainable item but food and meads, the bosses, the stations
-they need ({len(g.sel)} nodes). Drag sideways to turn the well; hover (or tap) to trace a path.</p>
-<div class="well"><canvas class="back"></canvas><div class="fog"></div><canvas class="front"></canvas>{labels}{''.join(nodes)}</div></main>
-<script>
-const D={json.dumps(data, separators=(",", ":"))};
-const well=document.querySelector('.well'),cv=[...well.querySelectorAll('canvas')],cx=cv.map(c=>c.getContext('2d'));
-const nodes=[...well.querySelectorAll('.node')].sort((a,b)=>a.dataset.n-b.dataset.n),lbs=nodes.map(a=>a.querySelector('.lb')),N=D.a.length,seen=new Float64Array(N).fill(NaN),KID=D.a.map(()=>[]),EDGES=[];
-D.par.forEach((ps,c)=>ps.forEach(p=>{{KID[p].push(c);EDGES.push([p,c])}}));
-let rot=0,R=348,TILT=44,W=0,dpr=1,on=null,up=null,down=null,queued=false;
-function walk(n,m,s){{for(const q of m[n])if(!s.has(q)){{s.add(q);walk(q,m,s)}}return s}}
-function size(){{W=well.clientWidth;R=W<600?W*.75:Math.min(440,W*.37);TILT=R/10;dpr=devicePixelRatio||1;
- well.style.setProperty('--R',R.toFixed(1));well.style.setProperty('--tilt',TILT.toFixed(1));seen.fill(NaN);
- for(const c of cv){{c.width=Math.round(c.clientWidth*dpr);c.height=Math.round(c.clientHeight*dpr)}}draw()}}
-function place(off,vh){{  // the nodes in view (and a screen either side) that haven't been placed at this rotation
- for(let n=0;n<N;n++){{if(seen[n]===rot||D.y[n]<off-vh||D.y[n]>off+2*vh)continue;seen[n]=rot;
-  const t=D.a[n]+rot,c=Math.cos(t),d=(c+1)/2,s=nodes[n].style;
-  s.transform=`translate(${{(R*Math.sin(t)).toFixed(1)}}px,${{(TILT*c).toFixed(1)}}px) scale(${{(.55+.45*d).toFixed(3)}})`;
-  s.opacity=(.35+.65*d).toFixed(3);s.zIndex=Math.round(100+99*c);s.pointerEvents=c<0?'none':'';  // behind the fog: not a target
-  lbs[n].style.opacity=Math.min(1,Math.max(0,(c*R*D.k[n]-64)/8)).toFixed(2)}}}}
-function draw(){{queued=false;
- const off=cv[0].getBoundingClientRect().top-well.getBoundingClientRect().top,vh=cv[0].clientHeight,mid=W/2;place(off,vh);
- for(const g of cx){{g.setTransform(dpr,0,0,dpr,0,-off*dpr);g.clearRect(0,off,W,vh)}}
- for(const[i,y]of D.bands.entries()){{if(y<off-TILT-10||y>off+vh+TILT+10)continue;  // rings: back half, front half
-  for(const f of[0,1]){{const g=cx[f];g.strokeStyle=D.col[Math.min(i,D.col.length-1)];g.globalAlpha=f?.35:.2;g.lineWidth=1;
-   g.beginPath();g.ellipse(mid,y,R,TILT,0,f?0:Math.PI,f?Math.PI:2*Math.PI);g.stroke()}}}}
- const lit=[];
- for(const ed of EDGES){{const[p,c]=ed,y0=D.y[p]+22,y1=D.y[c]-22;
-  if(Math.max(y0,y1)<off-TILT||Math.min(y0,y1)>off+vh+TILT)continue;
-  const hot=on&&(up.has(p)&&up.has(c)||down.has(p)&&down.has(c));/* on a path through it */if(hot){{lit.push(ed);continue}}edge(p,c,y0,y1,false)}}
- for(const[p,c]of lit)edge(p,c,D.y[p]+22,D.y[c]-22,true)}}
-function edge(p,c,y0,y1,hot){{  // along the cylinder's surface, a stroke per run on one side
- const a0=D.a[p]+rot,da=((D.a[c]-D.a[p]+Math.PI)%(2*Math.PI)+2*Math.PI)%(2*Math.PI)-Math.PI,S=12,pts=[];
- for(let k=0;k<=S;k++){{const t=k/S,a=a0+da*t,y=y0+(y1-y0)*(3*t*t-2*t*t*t);
-  pts.push([W/2+R*Math.sin(a),y+TILT*Math.cos(a),Math.cos(a)])}}
- let s=0;for(let k=1;k<=S;k++)if(k==S||(pts[k+1][2]>=0)!=(pts[k][2]>=0)){{
-  const run=pts.slice(s,k+1),d=run.reduce((m,q)=>m+q[2],0)/run.length,g=cx[d>=0?1:0],dd=(d+1)/2;
-  g.globalAlpha=hot?1:on?.04:.04+.26*dd*dd;g.lineWidth=hot?2.4:1.2;
-  if(D.c[p]==D.c[c])g.strokeStyle=D.col[D.c[c]];
-  else{{const gr=g.createLinearGradient(0,y0,0,y1);gr.addColorStop(0,D.col[D.c[p]]);gr.addColorStop(1,D.col[D.c[c]]);g.strokeStyle=gr}}
-  g.beginPath();g.moveTo(run[0][0],run[0][1]);for(const q of run.slice(1))g.lineTo(q[0],q[1]);g.stroke();s=k}}}}
-function later(){{if(!queued){{queued=true;requestAnimationFrame(draw)}}}}
-function focus(n){{up=n==null?null:walk(n,D.par,new Set([n]));down=n==null?null:walk(n,KID,new Set([n]));
- on=n==null?null:new Set([...up,...down]);
- well.classList.toggle('focus',!!on);for(const a of nodes)a.classList.toggle('on',!!on&&on.has(+a.dataset.n));later()}}
-// turning: horizontal drags (vertical ones scroll the page), then it coasts
-let drag=null,moved=false,vel=0,touch=false;
-well.addEventListener('pointerdown',ev=>{{touch=ev.pointerType!='mouse';drag={{x:ev.clientX,t:ev.timeStamp}};moved=false;vel=0}});
-well.addEventListener('pointermove',ev=>{{if(!drag)return;const dx=ev.clientX-drag.x;
- if(!moved){{if(Math.abs(dx)<6)return;moved=true;well.setPointerCapture(ev.pointerId);well.classList.add('dragging')}}
- rot+=dx/R;vel=dx/R/Math.max(8,ev.timeStamp-drag.t);drag={{x:ev.clientX,t:ev.timeStamp}};later()}});
-function release(){{if(!drag)return;drag=null;well.classList.remove('dragging');
- if(moved){{let last=performance.now();(function coast(now){{vel*=Math.pow(.995,now-last);rot+=vel*(now-last);last=now;draw();
-  if(Math.abs(vel)>2e-5&&!drag)requestAnimationFrame(coast)}})(last)}}}}
-well.addEventListener('pointerup',release);well.addEventListener('pointercancel',()=>{{drag=null;well.classList.remove('dragging')}});
-well.addEventListener('click',ev=>{{if(moved){{ev.preventDefault();moved=false;return}}
- const a=ev.target.closest('.node');
- if(a&&touch&&!(on&&on.has(+a.dataset.n)&&a.classList.contains('tapped'))){{  // touch: tap traces, a second tap opens
-  ev.preventDefault();nodes.forEach(n=>n.classList.remove('tapped'));a.classList.add('tapped');focus(+a.dataset.n)}}
- else if(!a)focus(null)}});
-well.addEventListener('pointerover',ev=>{{const a=ev.target.closest('.node');if(ev.pointerType=='mouse'&&a&&!drag)focus(+a.dataset.n)}});
-well.addEventListener('pointerleave',ev=>{{if(ev.pointerType=='mouse')focus(null)}});
-addEventListener('scroll',later,{{passive:true}});addEventListener('resize',size);size();
-</script></body></html>"""
+    blob = json.dumps(data, separators=(",", ":")).replace("</", "<\\/")  # can't close the <script> early
+    return (f'<div class="well" style="height:{H:.0f}px"><canvas class="back"></canvas><div class="fog"></div>'
+            f'<canvas class="front"></canvas>{labels}{"".join(nodes)}</div>\n'
+            f'<script type="application/json" id="well-data">{blob}</script>')
 
 
 def audit(g: SimpleNamespace) -> None:
@@ -396,16 +310,10 @@ def audit(g: SimpleNamespace) -> None:
 
 def main(argv: list[str]) -> int:
     args = [a for a in argv if not a.startswith("--")]
-    data_dir = Path(args[0]) if args else ROOT / "data"
-    site_dir = Path(args[1]) if len(args) > 1 else ROOT / ".cache/site/public"
-    g = graph(load(data_dir))
-    lay = layout(g)
-    icons = {p.stem for p in (site_dir / "icons").glob("*.png")}
-    out = site_dir / "well.html"
-    out.write_text(page(g, lay, icons, (ROOT / "site/style.css").read_text()))
+    g = graph(load(Path(args[0]) if args else ROOT / "data"))
     print(f"well: {len(g.sel)} nodes, {sum(len(p) for p in g.par.values())} edges, "
           f"{[sum(1 for x in g.sel if g.stage(x) == i) for i in range(len(S))]} per stage, {len(g.gear)} top gear, "
-          f"{len(g.lonely)} unconnected dropped -> {out}", file=sys.stderr)
+          f"{len(g.lonely)} unconnected dropped", file=sys.stderr)
     if "--audit" in argv:
         audit(g)
     return 0

@@ -58,7 +58,6 @@ SITE_DIR := .cache/site/$(BRANCH)
 
 site: ## Build the static site from $(DATA_DIR) + icons -> .cache/site/$(BRANCH)
 	scripts/build-site.py $(DATA_DIR) .cache/dump/$(BRANCH)/icons $(SITE_DIR)
-	scripts/well.py $(DATA_DIR) $(SITE_DIR)
 
 serve: site ## Build the site and serve it on http://localhost:8000
 	python3 -m http.server -d $(SITE_DIR) 8000

@@ -1,5 +1,5 @@
 """Tests for scripts/well.py (#79): node selection, graph rules and layout on small invented graphs, checks on the
-committed data/, and a smoke test of the page (its script parses; the hover rule)."""
+committed data/, and the home page's markup and site/well.js (it parses; the hover rule)."""
 import importlib.util
 import json
 import os
@@ -167,18 +167,13 @@ class Layout(unittest.TestCase):
         self.assertEqual(a.ypos, b.ypos)
 
     def test_same_output_whatever_the_hash_seed(self):  # set order must never decide a tie
-        with tempfile.TemporaryDirectory() as tmp:
-            data, outs = Path(tmp) / "data", []
-            data.mkdir()
-            for k, v in world().items():
-                (data / f"{k}.json").write_text(json.dumps(v))
-            for seed in ("1", "2"):
-                site = Path(tmp) / seed
-                site.mkdir()
-                subprocess.run([sys.executable, ROOT / "scripts/well.py", data, site], check=True, capture_output=True,
-                               env={**os.environ, "PYTHONHASHSEED": seed})
-                outs.append((site / "well.html").read_text())
-            self.assertEqual(outs[0], outs[1])
+        code = ("import importlib.util, json, sys; spec = importlib.util.spec_from_file_location('w', sys.argv[1]); "
+                "w = importlib.util.module_from_spec(spec); spec.loader.exec_module(w); "
+                "g = w.graph(json.loads(sys.argv[2])); print(w.markup(g, w.layout(g), set()))")
+        outs = [subprocess.run([sys.executable, "-c", code, ROOT / "scripts/well.py", json.dumps(world())],
+                               check=True, capture_output=True, text=True, env={**os.environ, "PYTHONHASHSEED": seed}).stdout
+                for seed in ("1", "2")]
+        self.assertEqual(outs[0], outs[1])
 
 
 class RealData(unittest.TestCase):
@@ -214,16 +209,29 @@ class RealData(unittest.TestCase):
         self.assertTrue(all(len(r) <= 40 for r in self.lay.rings), max(map(len, self.lay.rings)))
 
 
-class Page(unittest.TestCase):
-    """The page itself, built from data/ without icons."""
+class Markup(unittest.TestCase):
+    """The well's markup on the home page, from data/ without icons, and site/well.js."""
     @classmethod
     def setUpClass(cls):
-        g = WELL.graph(WELL.load(ROOT / "data"))
-        cls.html = WELL.page(g, WELL.layout(g), set(), (ROOT / "site/style.css").read_text())
-        cls.script = cls.html[cls.html.rindex("<script>") + 8:cls.html.rindex("</script>")]
+        cls.g = WELL.graph(WELL.load(ROOT / "data"))
+        cls.html = WELL.markup(cls.g, WELL.layout(cls.g), set(), {"Meadows": "biomes/Meadows.html"})
+        cls.script = (ROOT / "site/well.js").read_text()
+
+    def test_every_node_once(self):
+        self.assertEqual(len(re.findall(r'<a href="[^"]+" class="node', self.html)), len(self.g.sel))
+
+    def test_data(self):
+        blob = re.search(r'<script type="application/json" id="well-data">(.*?)</script>', self.html, re.S).group(1)
+        data = json.loads(blob)
+        self.assertEqual(len(data["a"]), len(self.g.sel))
+        self.assertEqual(sum(map(len, data["par"])), sum(map(len, self.g.par.values())))
+
+    def test_band_links(self):
+        self.assertIn('<a href="biomes/Meadows.html">Meadows</a>', self.html)
+        self.assertNotIn('href="biomes/Swamp.html"', self.html)  # no link given
 
     def test_size_budget(self):
-        self.assertLess(len(self.html.encode()), 300_000)  # 220 KB now; #76 will set the real budget
+        self.assertLess(len(self.html.encode()), 250_000)  # 170 KB now; #76 will set the real budget
 
     def node(self, js: str) -> str:
         if not shutil.which("node"):

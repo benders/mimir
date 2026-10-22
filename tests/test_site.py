@@ -27,6 +27,18 @@ class Site(unittest.TestCase):
     def test_builds(self):
         self.assertEqual(self.build.returncode, 0, self.build.stdout + self.build.stderr)
 
+    def test_home_page(self):  # #78: stage chips, the sections, the well
+        home = (self.out / "index.html").read_text()
+        self.assertEqual(len(re.findall(r'<button type="button" data-upto=', home)), 9)  # every stage, Post-game last
+        self.assertIn('data-upto="" ', home)
+        for d in ("items", "creatures", "pieces", "effects", "biomes", "traders", "mechanics"):
+            self.assertIn(f'<a href="{d}/index.html"><b>', home)
+        self.assertIn('<div class="well"', home)
+        self.assertIn('id="well-data"', home)
+        self.assertIn('<script src="well.js" defer>', home)
+        self.assertTrue((self.out / "well.js").is_file())
+        self.assertFalse((self.out / "well.html").exists())  # the well lives on the home page now
+
     def test_pages(self):
         for page in ("index.html", "items/Sword.html", "creatures/Raider.html", "pieces/Anvil.html",
                      "effects/SE_Fizz.html", "search.json", "style.css", "search.js", "newrelic.js"):

@@ -22,7 +22,7 @@ verify.py        invariant checks on the raw dump (+ anims) + icons
 normalize.py     raw dump -> data/*.json (compact, English text resolved, committed)
 verify_data.py   counts, referential integrity, known content in data/ (+ icons)
 build-site.py    data/ + icons (+ location renders, optional) -> .cache/site/<branch>/ (static HTML + search.json; fails on broken links)
-well.py          data/ + built icons -> .cache/site/<branch>/well.html (the tech tree as a cylinder, #68; run by `make site`)
+well.py          the home page's tech tree as a cylinder (#68): graph, layout and markup, imported by build-site.py
 renders.sh       extract-renders.py (UnityPy, numpy, numba) -> .cache/dump/<branch>/renders/<location>.webp, rooms/<camp room>.webp
 steam-buildid.sh steamcmd (container, x86_64) -> current public Steam build id
 ```
@@ -48,8 +48,8 @@ Each deploy records a New Relic change tracking marker on the Browser app ("Site
   on committed `data/`. Seconds; run it after any script change. `MIMIR_UPDATE_GOLDEN=1` to accept output changes.
 - `make check-local` — `make test`, then the same plus the site, on this host (x86_64 Linux only; what CI runs).
 - `make buildid` — print the current public Steam build id.
-- `make site` / `make serve` — build the static site (offline, from `data/` + local icons) and the well
-  (`scripts/well.py`, tested by `tests/test_well.py`); serve on :8000.
+- `make site` / `make serve` — build the static site (offline, from `data/` + local icons); serve on :8000. The home
+  page holds the well (`scripts/well.py`, `site/well.js`, `.well` rules in `site/style.css`; `tests/test_well.py`).
 - `make icons` — icons only; runs anywhere with python3 (needs the server download in `.cache/server`).
 - `make renders` — location and camp-room renders (`extract-renders.py`, `.cache/dump/<branch>/renders/`, about 1.5 min,
   ~5 GB peak; needs the server download and a raw dump). The site picks them up when present. `make test-renders` runs

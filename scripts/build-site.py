@@ -28,6 +28,7 @@ from urllib.parse import quote, unquote
 ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 import mechanics  # noqa: E402  (renderer, charts and formulas for the Mechanics section)
+import well  # noqa: E402  (the home page's tech tree, #68)
 
 DATA = Path(sys.argv[1]) if len(sys.argv) > 1 else ROOT / "data"
 ICONS = Path(sys.argv[2]) if len(sys.argv) > 2 else ROOT / ".cache/dump/public/icons"
@@ -2642,13 +2643,29 @@ def index_pages() -> None:
         for g in order)
     page("effects/index.html", "Status effects", body)
 
-    counts = {"items": len(items), "creatures": len(CREATURES), "pieces": len(PIECES), "effects": len(EFFECTS)}
+    home_page(len(items))
+
+
+def home_page(n_items: int) -> None:
+    """The home page (#78): title, "Up to" as stage chips (search.js keeps them in step with the header select), the
+    sections with their counts, then the well reaching down (scripts/well.py, site/well.js)."""
+    counts = {"items": n_items, "creatures": len(CREATURES), "pieces": len(PIECES), "effects": len(EFFECTS),
+              "biomes": len(BIOMES), "traders": len(TRADERS), "mechanics": len(MECH_PAGES)}
     cards = "".join(f'<li><a href="{d}/index.html"><b>{n}</b>{d}</a></li>' for d, n in counts.items())
-    cards += f'<li><a href="mechanics/index.html"><b>{len(MECH_PAGES)}</b>mechanics</a></li>'
-    body = (f'<div class="home"><h1>{esc(SITE_NAME)}</h1><p class="sub">A Valheim reference, rebuilt from the game data on '
-            f'every update. Valheim {esc(META["gameVersion"])}.</p><p class="hint">Press <kbd>/</kbd> to search.</p>'
-            f'<ul class="cards">{cards}</ul></div>')
-    page("index.html", "Valheim reference", body)
+    chips = "".join(f'<li><button type="button" data-upto="{i if s != STAGES[-1] else ""}" style="--tier:{well.COL[s]}" '
+                    f'aria-pressed="false">{esc(STAGE_NAMES[s])}</button></li>' for i, s in enumerate(STAGES))
+    g = well.graph({"items": list(ITEMS.values()), "pieces": list(PIECES.values()),
+                    "creatures": list(CREATURES.values()), "sources": list(SOURCES.values()), "locations": LOCATIONS})
+    tree = well.markup(g, well.layout(g), HAVE_ICONS, {b: f"biomes/{quote(b)}.html" for b in STAGES if b in BIOMES})
+    body = (f'<div class="home"><h1>{esc(SITE_NAME)}</h1><p class="sub">A Valheim reference, rebuilt from the game data '
+            f'on every update. Valheim {esc(META["gameVersion"])}.</p>'
+            f'<section class="upto"><h2>How far have you got?</h2><ol>{chips}</ol>'
+            f'<p>Pages, lists and search leave out what comes after it. Change it any time in the header.</p></section>'
+            f'<ul class="cards">{cards}</ul><p class="hint">Press <kbd>/</kbd> to search.</p></div>'
+            f'<div class="wellhead"><h2>The tech tree</h2><p>Every item, station and boss in the order you can get them, '
+            f'a band of the well per biome, the deepest last. Drag sideways to turn it; hover or tap to trace what something needs '
+            f'and what needs it.</p></div>{tree}')
+    page("index.html", "Valheim reference", body, scripts=("well.js",))
 
 
 def search_index() -> None:
