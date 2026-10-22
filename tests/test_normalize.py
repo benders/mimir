@@ -493,6 +493,17 @@ class Entities(FixtureCase):
                           "maxCover": 0.5})
         self.assertIsNone(N.piece("Hive", N.PREFABS["Hive"], {})["lures"])
 
+    def test_plant(self):
+        self.assertEqual(N.piece("Sapling", N.PREFABS["Sapling"], {})["plant"],
+                         {"time": [100, 150], "biomes": ["Meadows"], "cultivated": True, "shieldIn": [], "space": 0.5,
+                          "vineSpace": 0, "attach": 0, "dies": False, "vine": None})
+        creeper = N.piece("CreeperSapling", N.PREFABS["CreeperSapling"], {})["plant"]
+        self.assertEqual((creeper["shieldIn"], creeper["attach"]), (["Mountain"], 2))  # too cold without a shield
+        self.assertEqual({k: creeper["vine"][k] for k in ("interval", "directions", "berries", "health")},
+                         {"interval": 60, "directions": ["left", "right", "up"], "berries": 0, "health": 20})
+        self.assertIsNone(N.source("Creeper", N.PREFABS["Creeper"]))  # never bears berries
+        self.assertIsNone(N.piece("Bench", N.PREFABS["Bench"], {})["plant"])
+
     def test_produces(self):
         hive = N.piece("Hive", N.PREFABS["Hive"], {})["produces"]
         self.assertEqual(hive, {"item": "Nectar", "secPerUnit": 600, "max": 4, "biomes": ["Meadows", "BlackForest"]})

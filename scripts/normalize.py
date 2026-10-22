@@ -925,6 +925,7 @@ def piece(name: str, p: dict, tools: dict[str, list[str]]) -> dict | None:
         "extends": ref(ext["m_craftingStation"]) if ext else None,
         "produces": produces(p),
         "lures": lures(p),
+        "plant": plant(p),
         "contains": drop_table((comp(p, "Container") or {}).get("m_defaultItems")),  # loot chests placed in the world
         # counts toward a base for raids: an EffectArea of type PlayerBase, usually on a child (EffectArea.GetBaseValue)
         "playerBase": any(c["type"] == "EffectArea" and "PlayerBase" in str(c["fields"].get("m_type", "")).split(", ")
@@ -942,6 +943,47 @@ def lures(p: dict) -> dict | None:
     return {"source": ref(w["m_wispPrefab"]), "interval": w["m_spawnInterval"], "chance": w["m_spawnChance"],
             "max": w["m_maxSpawned"], "area": w["m_maxSpawnedArea"], "night": w["m_onlySpawnAtNight"],
             "maxCover": w["m_maxCover"]}  # HaveFreeSpace ignores m_dontSpawnInCover
+
+
+def plant(p: dict) -> dict | None:
+    """A Plant (Cultivator sapling): grows after `time` [min, max] s (Plant.GetGrowTime: a fixed point between them per
+    sapling) while healthy (Plant.UpdateHealth, checked every 10 s from planting, SUpdate): in one of its `biomes`, on
+    cultivated ground if `cultivated`, inside a Shield Generator's dome in the `shieldIn` biomes (too cold: Mountain and
+    DeepNorth unless m_tolerateCold, too hot: AshLands unless m_tolerateHeat), with nothing above it (HaveRoof), no
+    other healthy plant within `space` m and no vine within `vineSpace` m (HaveGrowSpace), and a building piece within
+    `attach` m to cling to (GetClosestAttachObject; no vanilla piece sets m_noVines). An unhealthy one waits, or is
+    destroyed if `dies` (Grow). `vine`: how what it grows into spreads (vine())."""
+    if not (pl := comp(p, "Plant")):
+        return None
+    where = biomes(pl["m_biome"])
+    shield = ([] if pl["m_tolerateCold"] else ["Mountain", "DeepNorth"]) + ([] if pl["m_tolerateHeat"] else ["AshLands"])
+    grown = [PREFABS.get(ref(g)) for g in pl["m_grownPrefabs"]]
+    return {"time": [pl["m_growTime"], max(pl["m_growTime"], pl["m_growTimeMax"])], "biomes": where,
+            "cultivated": pl["m_needCultivatedGround"], "shieldIn": [b for b in shield if b in where],
+            "space": pl["m_growRadius"], "vineSpace": pl["m_growRadiusVines"], "attach": pl["m_attachDistance"],
+            "dies": pl["m_destroyIfCantGrow"], "vine": next((v for g in grown if g and (v := vine(g))), None)}
+
+
+def vine(p: dict) -> dict | None:
+    """A Vine (Ivy, Ashvine): segments `size` m square. Each segment checks every `checkEvery` s and grows once
+    `interval` + `intervalPerBranch` x n s have passed since its last try (n = vine neighbours it has found minus
+    one, Vine.GetBranches; time spent unloaded is caught up), trying each of its `directions` (mechanics.vine_growth
+    has the odds: CheckGrowChance, CheckGrow); sideways only within `width` + `widthPerHeight` x height segments of
+    the first one, up to `maxUp` segments (UpdateGrow), each check ignoring both with `ignoreLimits`; a new segment
+    needs `support` of its grow sensor touching a piece or solid object, and one with nothing behind it is destroyed
+    (CheckSupport, every 7 s). Berries (its Pickable) only on a segment with n > 0 and fewer than `berries` berried
+    vines around it (CheckBerryBlocker): none when 0. `health` of a segment (WearNTear)."""
+    if not (v := comp(p, "Vine")):
+        return None
+    dirs = (["left", "right"] if v["m_growSides"] else []) + (["up"] if v["m_growUp"] else []) + (["down"] if v["m_growDown"] else [])
+    return {"size": v["m_size"], "checkEvery": v["m_growCheckTime"], "interval": v["m_growTime"],
+            "intervalPerBranch": v["m_growTimePerBranch"], "tryChance": v["m_growCheckChance"],
+            "tryChancePerBranch": v["m_growCheckChancePerBranch"], "growChance": v["m_growChance"],
+            "closeChance": v["m_closeEndChance"], "closeChancePerBranch": v["m_closeEndChancePerBranch"],
+            "closeChancePerHeight": v["m_closeEndChancePerHeight"], "maxCloseChance": v["m_maxCloseEndChance"],
+            "width": v["m_maxGrowWidth"], "widthPerHeight": v["m_extraGrowWidthPerHeight"], "maxUp": v["m_maxGrowUp"],
+            "ignoreLimits": v["m_maxGrowEdgeIgnoreChance"], "directions": dirs, "support": v["m_growCollidersMinimum"],
+            "berries": v["m_maxBerriesWithinBlocker"], "health": (comp(p, "WearNTear") or {}).get("m_health")}
 
 
 def produces(p: dict) -> dict | None:
@@ -987,7 +1029,9 @@ def processing(name: str, p: dict) -> list[dict]:
 def source(name: str, p: dict) -> dict | None:
     """World objects that yield items: pickables, ore veins, rocks, trees, logs, breakables."""
     entry: dict = {"id": name}
-    if pk := comp(p, "Pickable"):
+    if (pk := comp(p, "Pickable")) and (v := comp(p, "Vine")) and v["m_maxBerriesWithinBlocker"] <= 0:
+        return None  # never bears (Vine.CheckBerryBlocker keeps it picked): Ivy
+    if pk:
         entry.update(kind="pickable", name=text(pk["m_overrideName"]), pickable={
             "item": ref(pk["m_itemPrefab"]), "amount": pk["m_amount"], "respawnMinutes": pk["m_respawnTimeMinutes"]},
             drops=drop_table(pk["m_extraDrops"]))

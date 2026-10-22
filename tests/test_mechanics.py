@@ -301,6 +301,17 @@ class Charts(unittest.TestCase):
         self.assertAlmostEqual(M.drop_table_has(u | {"chance": 0.5}, "A"), 1 / 3)  # m_dropChance
         self.assertEqual(M.drop_table_has(u, "Z"), 0)
 
+    def test_vine_growth(self):
+        # Vine.CheckGrowChance / CheckGrow: check = tryChance + perBranch * n, stop = min(max, close + perBranch * n
+        # + perHeight * height), n = neighbours - 1 (GetBranches), interval = growTime + perBranch * n
+        v = {"interval": 100, "intervalPerBranch": 100, "tryChance": 0.7, "tryChancePerBranch": -0.5, "growChance": 1,
+             "closeChancePerBranch": 0.9, "closeChancePerHeight": 0.3, "maxCloseChance": 0.98}
+        self.assertEqual(M.vine_growth(v, 0), {"interval": 100, "check": 0.7, "stop": 0, "grow": 0.7})
+        self.assertEqual(M.vine_growth(v, 1, 1)["grow"], 0.7 * 0.7)
+        g = M.vine_growth(v, 2, 1)
+        self.assertEqual((g["interval"], round(g["check"], 6), g["stop"]), (200, 0.2, 0.98))
+        self.assertEqual(M.vine_growth(v, 3)["grow"], 0)  # check chance below zero
+
     def test_world_piece_drop(self):
         self.assertEqual([M.world_piece_drop(n) for n in (1, 2, 3, 10)], [1, 1, 1, 3])
 

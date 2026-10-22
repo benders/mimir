@@ -84,6 +84,80 @@
   }
  },
  {
+  "id": "CreeperSapling",
+  "name": "Creeper",
+  "icon": "Sapling",
+  "enabled": true,
+  "category": "Misc",
+  "tools": [
+   "Hammer"
+  ],
+  "resources": [
+   {
+    "item": "Wood",
+    "amount": 1
+   }
+  ],
+  "health": 400,
+  "material": "Wood",
+  "damageModifiers": {
+   "fire": "Weak"
+  },
+  "plant": {
+   "time": [
+    100,
+    150
+   ],
+   "biomes": [
+    "Meadows",
+    "Mountain"
+   ],
+   "cultivated": true,
+   "shieldIn": [
+    "Mountain"
+   ],
+   "space": 0.5,
+   "vineSpace": 2,
+   "attach": 2,
+   "vine": {
+    "size": 1.5,
+    "checkEvery": 30,
+    "interval": 60,
+    "intervalPerBranch": 40,
+    "tryChance": 0.8,
+    "tryChancePerBranch": -0.5,
+    "growChance": 1,
+    "closeChancePerBranch": 0.9,
+    "closeChancePerHeight": 0.25,
+    "maxCloseChance": 0.95,
+    "width": 1,
+    "widthPerHeight": 0.5,
+    "maxUp": 1000,
+    "ignoreLimits": 0.25,
+    "directions": [
+     "left",
+     "right",
+     "up"
+    ],
+    "support": 0.75,
+    "health": 20
+   }
+  },
+  "stage": "Meadows",
+  "via": {
+   "how": "build",
+   "needs": [
+    {
+     "item": "Hammer"
+    },
+    {
+     "item": "Wood",
+     "amount": 1
+    }
+   ]
+  }
+ },
+ {
   "id": "Hive",
   "name": "Hive",
   "icon": "Hive",
@@ -281,6 +355,17 @@
   "material": "Wood",
   "damageModifiers": {
    "fire": "Weak"
+  },
+  "plant": {
+   "time": [
+    100,
+    150
+   ],
+   "biomes": [
+    "Meadows"
+   ],
+   "cultivated": true,
+   "space": 0.5
   },
   "stage": "Meadows",
   "via": {

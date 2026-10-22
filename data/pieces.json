@@ -411,6 +411,19 @@
     "noRecover": true
    }
   ],
+  "plant": {
+   "time": [
+    3000,
+    5000
+   ],
+   "biomes": [
+    "Meadows",
+    "BlackForest",
+    "Plains"
+   ],
+   "space": 2,
+   "dies": true
+  },
   "stage": "BlackForest",
   "via": {
    "how": "build",
@@ -446,6 +459,19 @@
     "noRecover": true
    }
   ],
+  "plant": {
+   "time": [
+    5000,
+    7000
+   ],
+   "biomes": [
+    "Meadows",
+    "BlackForest",
+    "Plains"
+   ],
+   "space": 2,
+   "dies": true
+  },
   "stage": "BlackForest",
   "via": {
    "how": "build",
@@ -1992,6 +2018,20 @@
     "noRecover": true
    }
   ],
+  "plant": {
+   "time": [
+    3000,
+    5000
+   ],
+   "biomes": [
+    "Meadows",
+    "Mountain",
+    "BlackForest",
+    "Plains"
+   ],
+   "space": 2,
+   "dies": true
+  },
   "stage": "BlackForest",
   "via": {
    "how": "build",
@@ -2027,6 +2067,20 @@
     "noRecover": true
    }
   ],
+  "plant": {
+   "time": [
+    3000,
+    5000
+   ],
+   "biomes": [
+    "Meadows",
+    "Mountain",
+    "BlackForest",
+    "Plains"
+   ],
+   "space": 2,
+   "dies": true
+  },
   "stage": "DeepNorth",
   "via": {
    "how": "build",
@@ -2744,7 +2798,7 @@
   },
   "health": 10,
   "material": "Wood",
-  "stage": "Mistlands",
+  "stage": "AshLands",
   "via": {
    "how": "build",
    "needs": [
@@ -4247,6 +4301,19 @@
     "noRecover": true
    }
   ],
+  "plant": {
+   "time": [
+    6000,
+    8000
+   ],
+   "biomes": [
+    "Meadows",
+    "BlackForest",
+    "Plains"
+   ],
+   "space": 3,
+   "dies": true
+  },
   "stage": "BlackForest",
   "via": {
    "how": "build",
@@ -5588,6 +5655,19 @@
     "noRecover": true
    }
   ],
+  "plant": {
+   "time": [
+    3000,
+    5000
+   ],
+   "biomes": [
+    "Meadows",
+    "BlackForest",
+    "Plains"
+   ],
+   "space": 2,
+   "dies": true
+  },
   "stage": "BlackForest",
   "via": {
    "how": "build",
@@ -9784,6 +9864,49 @@
     "noRecover": true
    }
   ],
+  "plant": {
+   "time": [
+    200,
+    300
+   ],
+   "biomes": [
+    "Meadows",
+    "Swamp",
+    "BlackForest",
+    "Plains",
+    "AshLands",
+    "Ocean",
+    "Mistlands"
+   ],
+   "cultivated": true,
+   "space": 0.5,
+   "vineSpace": 1.8,
+   "attach": 1.8,
+   "vine": {
+    "size": 1.5,
+    "checkEvery": 45,
+    "interval": 120,
+    "intervalPerBranch": 120,
+    "tryChance": 0.5,
+    "tryChancePerBranch": -0.495,
+    "growChance": 1,
+    "closeChancePerBranch": 0.973,
+    "closeChancePerHeight": 0.305,
+    "maxCloseChance": 0.98,
+    "width": 0.8,
+    "widthPerHeight": 0.25,
+    "maxUp": 1000,
+    "ignoreLimits": 0.291,
+    "directions": [
+     "left",
+     "right",
+     "up"
+    ],
+    "support": 0.75,
+    "berries": 1,
+    "health": 30
+   }
+  },
   "stage": "AshLands",
   "via": {
    "how": "build",
@@ -9819,6 +9942,53 @@
     "noRecover": true
    }
   ],
+  "plant": {
+   "time": [
+    200,
+    300
+   ],
+   "biomes": [
+    "Meadows",
+    "Swamp",
+    "Mountain",
+    "BlackForest",
+    "Plains",
+    "DeepNorth",
+    "Ocean",
+    "Mistlands"
+   ],
+   "cultivated": true,
+   "shieldIn": [
+    "Mountain",
+    "DeepNorth"
+   ],
+   "space": 0.5,
+   "vineSpace": 1.8,
+   "attach": 1.8,
+   "vine": {
+    "size": 1.5,
+    "checkEvery": 45,
+    "interval": 100,
+    "intervalPerBranch": 100,
+    "tryChance": 0.7,
+    "tryChancePerBranch": -0.495,
+    "growChance": 1,
+    "closeChancePerBranch": 0.973,
+    "closeChancePerHeight": 0.305,
+    "maxCloseChance": 0.98,
+    "width": 0.8,
+    "widthPerHeight": 0.25,
+    "maxUp": 1000,
+    "ignoreLimits": 0.291,
+    "directions": [
+     "left",
+     "right",
+     "up"
+    ],
+    "support": 0.75,
+    "health": 30
+   }
+  },
   "stage": "Swamp",
   "via": {
    "how": "build",
@@ -9855,7 +10025,7 @@
   ],
   "health": 10,
   "material": "Wood",
-  "stage": "Swamp",
+  "stage": "AshLands",
   "via": {
    "how": "build",
    "needs": [
@@ -28440,6 +28610,24 @@
     "noRecover": true
    }
   ],
+  "plant": {
+   "time": [
+    4000,
+    5000
+   ],
+   "biomes": [
+    "Meadows",
+    "BlackForest",
+    "Plains",
+    "AshLands"
+   ],
+   "cultivated": true,
+   "shieldIn": [
+    "AshLands"
+   ],
+   "space": 0.5,
+   "dies": true
+  },
   "stage": "DeepNorth",
   "via": {
    "how": "build",
@@ -28475,6 +28663,18 @@
     "noRecover": true
    }
   ],
+  "plant": {
+   "time": [
+    4000,
+    5000
+   ],
+   "biomes": [
+    "Plains"
+   ],
+   "cultivated": true,
+   "space": 0.5,
+   "dies": true
+  },
   "stage": "Plains",
   "via": {
    "how": "build",
@@ -28510,6 +28710,24 @@
     "noRecover": true
    }
   ],
+  "plant": {
+   "time": [
+    4000,
+    5000
+   ],
+   "biomes": [
+    "Meadows",
+    "BlackForest",
+    "Plains",
+    "AshLands"
+   ],
+   "cultivated": true,
+   "shieldIn": [
+    "AshLands"
+   ],
+   "space": 0.5,
+   "dies": true
+  },
   "stage": "BlackForest",
   "via": {
    "how": "build",
@@ -28545,6 +28763,18 @@
     "noRecover": true
    }
   ],
+  "plant": {
+   "time": [
+    4000,
+    5000
+   ],
+   "biomes": [
+    "Plains"
+   ],
+   "cultivated": true,
+   "space": 0.5,
+   "dies": true
+  },
   "stage": "Plains",
   "via": {
    "how": "build",
@@ -28580,6 +28810,18 @@
     "noRecover": true
    }
   ],
+  "plant": {
+   "time": [
+    4000,
+    5000
+   ],
+   "biomes": [
+    "Mistlands"
+   ],
+   "cultivated": true,
+   "space": 0.5,
+   "dies": true
+  },
   "stage": "Mistlands",
   "via": {
    "how": "build",
@@ -28615,6 +28857,18 @@
     "noRecover": true
    }
   ],
+  "plant": {
+   "time": [
+    4000,
+    5000
+   ],
+   "biomes": [
+    "Mistlands"
+   ],
+   "cultivated": true,
+   "space": 0.8,
+   "dies": true
+  },
   "stage": "Mistlands",
   "via": {
    "how": "build",
@@ -28650,6 +28904,24 @@
     "noRecover": true
    }
   ],
+  "plant": {
+   "time": [
+    4000,
+    5000
+   ],
+   "biomes": [
+    "Meadows",
+    "BlackForest",
+    "Plains",
+    "AshLands"
+   ],
+   "cultivated": true,
+   "shieldIn": [
+    "AshLands"
+   ],
+   "space": 0.5,
+   "dies": true
+  },
   "stage": "DeepNorth",
   "via": {
    "how": "build",
@@ -28685,6 +28957,24 @@
     "noRecover": true
    }
   ],
+  "plant": {
+   "time": [
+    4000,
+    5000
+   ],
+   "biomes": [
+    "Meadows",
+    "BlackForest",
+    "Plains",
+    "AshLands"
+   ],
+   "cultivated": true,
+   "shieldIn": [
+    "AshLands"
+   ],
+   "space": 0.5,
+   "dies": true
+  },
   "stage": "Swamp",
   "via": {
    "how": "build",
@@ -28720,6 +29010,24 @@
     "noRecover": true
    }
   ],
+  "plant": {
+   "time": [
+    4000,
+    5000
+   ],
+   "biomes": [
+    "Meadows",
+    "BlackForest",
+    "Plains",
+    "AshLands"
+   ],
+   "cultivated": true,
+   "shieldIn": [
+    "AshLands"
+   ],
+   "space": 0.5,
+   "dies": true
+  },
   "stage": "DeepNorth",
   "via": {
    "how": "build",
@@ -28755,6 +29063,24 @@
     "noRecover": true
    }
   ],
+  "plant": {
+   "time": [
+    4000,
+    5000
+   ],
+   "biomes": [
+    "Meadows",
+    "BlackForest",
+    "Plains",
+    "AshLands"
+   ],
+   "cultivated": true,
+   "shieldIn": [
+    "AshLands"
+   ],
+   "space": 0.5,
+   "dies": true
+  },
   "stage": "BlackForest",
   "via": {
    "how": "build",
@@ -28790,6 +29116,24 @@
     "noRecover": true
    }
   ],
+  "plant": {
+   "time": [
+    4000,
+    5000
+   ],
+   "biomes": [
+    "Meadows",
+    "BlackForest",
+    "Plains",
+    "AshLands"
+   ],
+   "cultivated": true,
+   "shieldIn": [
+    "AshLands"
+   ],
+   "space": 0.5,
+   "dies": true
+  },
   "stage": "DeepNorth",
   "via": {
    "how": "build",
@@ -28825,6 +29169,24 @@
     "noRecover": true
    }
   ],
+  "plant": {
+   "time": [
+    4000,
+    5000
+   ],
+   "biomes": [
+    "Meadows",
+    "BlackForest",
+    "Plains",
+    "AshLands"
+   ],
+   "cultivated": true,
+   "shieldIn": [
+    "AshLands"
+   ],
+   "space": 0.5,
+   "dies": true
+  },
   "stage": "Swamp",
   "via": {
    "how": "build",
@@ -28860,6 +29222,26 @@
     "noRecover": true
    }
   ],
+  "plant": {
+   "time": [
+    4000,
+    5000
+   ],
+   "biomes": [
+    "Meadows",
+    "Swamp",
+    "BlackForest",
+    "Plains",
+    "AshLands",
+    "Mistlands"
+   ],
+   "cultivated": true,
+   "shieldIn": [
+    "AshLands"
+   ],
+   "space": 0.5,
+   "dies": true
+  },
   "stage": "Swamp",
   "via": {
    "how": "build",
@@ -28895,6 +29277,26 @@
     "noRecover": true
    }
   ],
+  "plant": {
+   "time": [
+    4000,
+    5000
+   ],
+   "biomes": [
+    "Meadows",
+    "Swamp",
+    "BlackForest",
+    "Plains",
+    "AshLands",
+    "Mistlands"
+   ],
+   "cultivated": true,
+   "shieldIn": [
+    "AshLands"
+   ],
+   "space": 0.5,
+   "dies": true
+  },
   "stage": "Swamp",
   "via": {
    "how": "build",

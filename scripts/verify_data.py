@@ -356,6 +356,10 @@ def main() -> int:
     dlc = [i for i in items.values() if i.get("dlc")]
     check(dlc and all(i.get("unobtainable") and not i.get("stage") for i in dlc),
           f"items: the {len(dlc)} DLC items (Cape of Oden...) are unobtainable, DLCMan gates their recipes (#75)")
+    vine_src = {s["id"] for s in sources if "Vineberry" in json.dumps(s)}
+    ivy = (pieces.get("VineGreen_sapling", {}).get("plant") or {}).get("vine") or {}
+    check(vine_src == {"VineAsh"} and not ivy.get("berries") and ivy.get("interval"),
+          f"sources: Vineberries only from Ashvine, Ivy spreads but never bears ({sorted(vine_src)})")
 
     print()
     if failures:

@@ -347,7 +347,16 @@ class Site(unittest.TestCase):
         ore = (self.out / "items/Ore.html").read_text(encoding="utf-8")
         self.assertIn('Lured by <a class="ref" href="pieces/Lure.html"', ore)
         self.assertIn('lured by <a class="ref" href="pieces/Lure.html"', ore)  # Found in
-        self.assertIn("<h2>Grows into</h2>", (self.out / "pieces/Sapling.html").read_text(encoding="utf-8"))  # chop left out: players are immune (#46)
+        self.assertIn("<h2>Grows into</h2>", (self.out / "pieces/Sapling.html").read_text(encoding="utf-8"))
+        creeper = (self.out / "pieces/CreeperSapling.html").read_text(encoding="utf-8")
+        self.assertIn("<h2>Growing</h2>", creeper)
+        self.assertIn("only inside a", creeper)  # too cold in the Mountain
+        self.assertIn("<dt>Time</dt><dd>100–150 s, waits while a need isn't met</dd>", creeper)
+        self.assertIn("a building piece within 2 m to cling to", creeper)
+        self.assertIn("<h3>Spreading</h3>", creeper)
+        self.assertIn("<tr><td>1</td><td>1 min</td><td>80%</td><td>60%</td>", creeper)  # vine_growth by height
+        self.assertIn("<dt>Berries</dt><dd>never</dd>", creeper)
+        self.assertNotIn("<h2>Grows into</h2>", creeper)  # its vine bears nothing  # chop left out: players are immune (#46)
         self.assertIn("chop and pickaxe are left out", ranged)
         self.assertIn("<h1>Pot Helm (female)</h1>", (self.out / "items/HelmetFem.html").read_text(encoding="utf-8"))
         self.assertIn("<h1>Pot Helm</h1>", (self.out / "items/Helmet.html").read_text(encoding="utf-8"))

@@ -28,6 +28,12 @@ def comp(type_, fields, path=None):
     return c
 
 
+def plant(**kw):
+    return {**m(growTime=100, growTimeMax=150, biome="Meadows", needCultivatedGround=True, tolerateCold=False,
+                tolerateHeat=True, growRadius=0.5, growRadiusVines=0, attachDistance=0, destroyIfCantGrow=False),
+            **m(**kw)}
+
+
 def prefab(name, *components, is_item=False):
     return {"name": name, "isItem": is_item, "components": [comp("ZNetView", {}), *components]}
 
@@ -159,7 +165,7 @@ TRANSLATIONS = {
         ("decor", "Decor"), ("storage", "Storage"), ("transport", "Transportation"), ("food", "Food"), ("mead", "Mead"),
         ("feasts", "Feasts"), ("defense", "Defence"), ("stacks", "Piles and Stacks"), ("stairs", "Stairs"),
         ("doors", "Doors and Windows"), ("seasonal", "Seasonal Items"))}, "piece_lootchest": "Loot chest", "item_marble": "Marble", "piece_anvil": "Anvil", "piece_kiln": "Kiln",
-    "piece_bush": "Twig Bush", "piece_orerock": "Ore Rock", "se_fizz": "Fizzy",
+    "piece_bush": "Twig Bush", "piece_creeper": "Creeper", "piece_orerock": "Ore Rock", "se_fizz": "Fizzy",
     "enemy_pup": "Pup", "enemy_chief_p2": "Chief Risen", "enemy_imp": "Imp", "enemy_shade": "Shade", "enemy_sprite": "Sprite", "enemy_moth": "Moth", "enemy_singer": "Singer", "item_wand": "Wand", "item_rod": "Summoning Rod", "enemy_chief": "<color=orange>Chief</color>", "item_egg": "Egg", "item_nectar": "Nectar", "item_ichor": "Ichor", "item_dust": "Dust",
     "item_hat": "Party Hat", "piece_tree": "Winter Tree", "piece_hive": "Hive", "piece_lure": "Lure", "piece_glow": "Glow", "piece_tap": "Tap", "piece_wildhive": "Wild Hive", "event_test": "Something stirs",
 }
@@ -327,8 +333,20 @@ def prefabs():
               name="$piece_lure", icon=S("Hive"), resources=[req("Shard")]),
         prefab("Glow", comp("Pickable", m(overrideName="$piece_glow", itemPrefab=R("Ore"), amount=1,
                                           respawnTimeMinutes=0, extraDrops=drop_table()))),  # only from the Lure
-        piece("Sapling", comp("Plant", m(growTime=100, grownPrefabs=[R("Stub")])), name="$piece_bush",
+        piece("Sapling", comp("Plant", plant(grownPrefabs=[R("Stub")])), name="$piece_bush",
               icon=S("Sapling"), resources=[req("Wood")]),
+        piece("CreeperSapling", comp("Plant", plant(grownPrefabs=[R("Creeper")], biome="Meadows, Mountain",
+                                                    growRadiusVines=2, attachDistance=2)),
+              name="$piece_creeper", icon=S("Sapling"), resources=[req("Wood")]),
+        prefab("Creeper", comp("Vine", m(  # a vine that never bears: no source
+            size=1.5, growCheckTime=30, growTime=60, growTimePerBranch=40, growCheckChance=0.8,
+            growCheckChancePerBranch=-0.5, growChance=1, closeEndChance=0, closeEndChancePerBranch=0.9,
+            closeEndChancePerHeight=0.25, maxCloseEndChance=0.95, maxGrowUp=1000, maxGrowWidth=1,
+            extraGrowWidthPerHeight=0.5, maxGrowEdgeIgnoreChance=0.25, growSides=True, growUp=True, growDown=False,
+            growCollidersMinimum=0.75, maxBerriesWithinBlocker=0)),
+               comp("WearNTear", m(health=20, materialType="Wood", damages={})),
+               comp("Pickable", m(overrideName="", itemPrefab=R("Ore"), amount=3, respawnTimeMinutes=100,
+                                  extraDrops=drop_table()))),
         prefab("Treasure", comp("PickableItem", m(itemPrefab=None, stack=0, randomItemPrefabs=[  # one of these
             m(itemPrefab=R("Wood"), stackMin=2, stackMax=4), m(itemPrefab=R("Ore"), stackMin=0, stackMax=0)]))),
         prefab("Gift", comp("PickableItem", m(itemPrefab=R("Ore"), stack=3, randomItemPrefabs=[]))),
@@ -411,7 +429,7 @@ def write_dump(raw: Path) -> Path:
     dump("status_effect_defaults.json", [{"name": "SE_Stats", "type": "SE_Stats", "fields": SE_DEFAULTS}])
     dump("piece_tables.json", [{"name": "_HammerTable", "type": "PieceTable",
                                 "fields": {"m_pieces": [R("Bench"), R("Anvil"), R("Kiln"), R("Hive"), R("Lure"), R("Tap"), R("Tap2"), R("Tree"),
-                                                       R("Sapling")]}}])
+                                                       R("Sapling"), R("CreeperSapling")]}}])
     dump("world/seasons.json", [{"name": "Winter", "type": "SeasonalItemGroup", "fields": {
         "_startDate": [1, 12], "_endDate": [6, 1], "Pieces": [R("Tree")],
         "Recipes": [{"$asset": "Recipe_Hat", "type": "Recipe"}]}}])
