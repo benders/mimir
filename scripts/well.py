@@ -52,7 +52,15 @@ cooked = lambda x: any(k == "piece" and i in COOKING for k, i, _ in way_needs(x)
 # only bait needs then connect to nothing and are dropped)
 FISHING = {"FishingRod", "HelmetFishingHat"} | {i for s in srcs.values() if s["kind"] == "fishing"
                                                 for i in [s["id"]] + [b["item"] for b in s.get("baits", [])]}
-sel = {x for x, e in ent.items() if x[0] == "item" and e.get("type") not in ("Consumable", "Trophy") and not cooked(x)
+# ...and food in the wider sense: fireworks (lit in a Fireplace, m_fireworkItemList, which data/ doesn't have) and what
+# only goes into food (the Bog Witch's seasonings and ingredients)
+users = collections.defaultdict(list)
+for u in ent:
+    for k, i, _ in way_needs(u):
+        users[(k, i)].append(u)
+eaten = lambda x: x[1].startswith("FireworksRocket") or ent[x].get("type") == "Consumable" or cooked(x)
+food_only = lambda x: bool(users[x]) and all(eaten(u) for u in users[x])
+sel = {x for x, e in ent.items() if x[0] == "item" and e.get("type") != "Trophy" and not eaten(x) and not food_only(x)
        and x[1] not in FISHING}
 # 3: bosses (their drops are items already)
 sel |= bosses
