@@ -237,7 +237,7 @@ data = {"a": [round(theta[x], 4) for x in order], "y": [round(ypos[x]) for x in 
 css = open(ROOT / "site/style.css").read()
 page = f"""<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Tech well (prototype)</title><style>{css}
-.well{{position:relative;height:{H:.0f}px;margin-top:12px;background:#121417;border-radius:10px;overflow:hidden;
+.well{{position:relative;height:{H:.0f}px;margin-top:12px;background:#121417;border-radius:10px;overflow:clip;
  touch-action:pan-y;user-select:none;-webkit-user-select:none;--rot:0rad;--R:348;--tilt:44;
  font-family:system-ui,-apple-system,"Segoe UI",sans-serif}}
 .well canvas{{position:sticky;top:0;display:block;width:100%;height:100vh;margin-bottom:-100vh;pointer-events:none}}
