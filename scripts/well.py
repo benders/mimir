@@ -154,14 +154,17 @@ for x in sorted(sel, key=lambda x: (stage(x), len(anc(x)))):
         rank[x] = GEAR
     else:
         rank[x] = max([rank[p] + 1 for p in dpar[x] if stage(p) == stage(x) and rank.get(p, GATE) < GATE], default=0)
-for si in range(len(S)):  # as late as possible: a node with no parent in its tier sits just above its first user
-    last = max([rank[x] for x in sel if stage(x) == si and rank[x] < GATE], default=0)
+for si in range(len(S)):  # a node with no parent in its tier (moulds, drops, loot) takes the least crowded rank above
+    # its first user, the later on a tie; the most constrained go first. Its users have a parent in the tier: they stay
+    tier = [x for x in sel if stage(x) == si and rank[x] < GATE]
+    last = max([rank[x] for x in tier], default=0)
     r = lambda k: last + 1 if rank[k] >= GATE else rank[k]
-    for x in sorted((x for x in sel if stage(x) == si and rank[x] < GATE), key=lambda x: -rank[x]):
-        if not any(stage(p) == si for p in dpar[x]):
-            users = [r(k) for k in dkids[x] if stage(k) == si]
-            if users:
-                rank[x] = max(rank[x], min(users) - 1)
+    first = {x: min(r(k) for k in dkids[x] if stage(k) == si) for x in tier
+             if not any(stage(p) == si for p in dpar[x]) and any(stage(k) == si for k in dkids[x])}
+    load = collections.Counter(rank[x] for x in tier if x not in first)
+    for x in sorted(first, key=lambda x: (first[x], ent[x].get("name", ""))):
+        rank[x] = min(range(first[x]), key=lambda q: (load[q], -q))
+        load[rank[x]] += 1
 desc_memo = {}
 
 
