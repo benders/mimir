@@ -60,10 +60,15 @@ for u in ent:
         users[(k, i)].append(u)
 eaten = lambda x: x[1].startswith("FireworksRocket") or ent[x].get("type") == "Consumable" or cooked(x)
 food_only = lambda x: bool(users[x]) and all(eaten(u) for u in users[x])
+# ...and Hildir's quest chests and cosmetic clothing: a helmet, chest or legs with base armour 1 or less, but the Rag
+# set a player starts in (Hildir's clothes, seasonal hats; capes stay)
+TAKEN = {t["item"] for s in srcs.values() for t in s.get("takes", [])}
+cosmetic = lambda e: e.get("type") in ("Helmet", "Chest", "Legs") and e.get("armor", 0) <= 1 and not e["id"].startswith("ArmorRags")
+SKIP = FISHING | TAKEN | {x for (k, x), e in ent.items() if k == "item" and cosmetic(e)}
 sel = {x for x, e in ent.items() if x[0] == "item" and e.get("type") != "Trophy" and not eaten(x) and not food_only(x)
-       and x[1] not in FISHING}
-# 3: bosses (their drops are items already)
-sel |= bosses
+       and x[1] not in SKIP}
+# 3: bosses (their drops are items already), ships and carts
+sel |= bosses | {x for x, e in ent.items() if x[0] == "piece" and "Transportation" in e.get("tags", [])}
 # ...but keep a consumable, trophy or cooked item something kept needs (Blueberries for Berserker armour, the Deer
 # trophy for Eikthyr's altar), and 4: the non-cooking pieces they need; one fixed point, so an item only a piece needs
 # is kept too (the Asksvin trophy for the Galdr table's upgrade)
@@ -74,7 +79,7 @@ while todo:
         if (k, i) not in ent or (k, i) in sel:
             continue
         food = x[0] == "item" and ent[x].get("type") in ("Consumable", "Material", "Misc")
-        if k == "item" and i not in FISHING or k == "piece" and not (i in COOKING and food):
+        if k == "item" and i not in SKIP or k == "piece" and not (i in COOKING and food):
             sel.add((k, i))
             todo.append((k, i))
 
@@ -94,11 +99,21 @@ for x in sel:
     par[x] = {n for n in ns if n in sel}
 # ...and a crafted item that only goes into one processed item folds into it (the Deep North casts, forged at the
 # Frost Foundry: the gear needs the mould, Gold and the rest directly)
-users = collections.Counter(q for ps in par.values() for q in ps)
+n_users = collections.Counter(q for ps in par.values() for q in ps)
 for x in [x for x in sel if ent[x].get("via", {}).get("how") == "process"]:
-    for c in [q for q in par[x] if q[0] == "item" and ent[q].get("via", {}).get("how") == "craft" and users[q] == 1]:
+    for c in [q for q in par[x] if q[0] == "item" and ent[q].get("via", {}).get("how") == "craft" and n_users[q] == 1]:
         par[x] = par[x] - {c} | par.pop(c)
         sel.discard(c)
+# ...and dead ends: an item or piece nothing kept needs, unless it is an end in itself: gear (any item type but
+# Material and Misc, or one with an attack: siege ammo), a door key, a saddle (Tameable.m_saddleItem, not in data/), a
+# ship or cart, a boss. Dropping one can leave what only it needed a dead end too (Turnip, then its sapling)
+door_keys = {loc["key"] for loc in L("locations") if loc.get("key")}
+end = lambda x: x[0] == "creature" or "Transportation" in ent[x].get("tags", []) or x[0] == "item" and (
+    ent[x].get("type") not in ("Material", "Misc") or ent[x].get("attack") or x[1] in door_keys or x[1].startswith("Saddle"))
+while dead := {x for x in sel if not end(x)} - {q for x in sel for q in par[x]}:
+    sel -= dead
+    for x in dead:
+        del par[x]
 # 6: drop what connects to nothing
 kids = collections.defaultdict(set)
 for x, ps in par.items():
