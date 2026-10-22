@@ -209,115 +209,120 @@ for it in range(24):
             free.remove(theta[x])
 
 
-def proj(a, y):
-    """A point on the cylinder (angle, height) on screen, and its depth: 1 in front, 0 at the back."""
-    return CX + R * math.sin(a), y + TILT * math.cos(a), (math.cos(a) + 1) / 2
-
-
+# --- page: nodes are links placed by CSS from their angle (the first render, and without JavaScript); turning the
+# well sets each visible node's transform from JavaScript instead (CSS trig on every node costs ~4x more per frame).
+# Edges and rings are drawn on two screen-sized canvases, behind and in front of the fog
 e = html.escape
-nid = lambda x: f"{x[0]}:{x[1]}"
-
-
-def label(name, width):
-    """One or two lines that fit the node's slot."""
-    chars = max(8, int(width / 6.4))
-    if len(name) <= chars:
-        return f'<text y="36">{e(name)}</text>'
-    words, a = name.split(), ""
-    while words and len(a + " " + words[0]) <= chars + 1:
-        a = (a + " " + words.pop(0)).strip()
-    b = " ".join(words)
-    if not a:
-        a, b = name[:chars - 1] + "…", ""
-    b = b if len(b) <= chars else b[:chars - 1] + "…"
-    return f'<text y="36">{e(a)}</text>' + (f'<text y="50">{e(b)}</text>' if b else "")
-
-
-svg = [f'<svg viewBox="0 0 {W} {H:.0f}" class="well" role="img" aria-label="Tech tree, by progression stage"><defs>']
-pairs = {(ent[p]["stage"], ent[x]["stage"]) for x in sel for p in dpar[x]}
-for a, b in pairs:
-    svg.append(f'<linearGradient id="g-{a}-{b}" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="{COL[a]}"/>'
-               f'<stop offset="1" stop-color="{COL[b]}"/></linearGradient>')
-# fog inside the cylinder: as thick as the chord a line of sight crosses
-stops = "".join(f'<stop offset="{(u + 1) / 2:.3f}" stop-opacity="{.62 * math.sqrt(max(0, 1 - u * u)):.3f}" stop-color="#121417"/>'
-                for u in [k / 10 - 1 for k in range(21)])
-svg.append(f'<linearGradient id="fog" x1="0" x2="1" y1="0" y2="0">{stops}</linearGradient></defs>')
-back, fore = [], []  # drawn behind / in front of the fog
-for s, top, n_all, n_shown in bands:
-    arc = lambda sweep: f'<path class="ring" style="--tier:{COL[s]}" d="M{CX - R},{top} A{R},{TILT} 0 0 {sweep} {CX + R},{top}"/>'
-    back.append(arc(1))
-    fore.append(arc(0) + f'<g style="--tier:{COL[s]}"><text x="12" y="{top + 30}" class="bandname">{e(NAMES.get(s, s))}</text>'
-                f'<a href="items/index.html"><text x="{W - 12}" y="{top + 30}" class="bandmore" text-anchor="end">'
-                f'{n_shown} of {n_all} →</text></a></g>')
-edges = [[], []]
-for x in sel:
-    for p in dpar[x]:  # sampled along the cylinder's surface, split where it passes round the side
-        a0, da, y0, y1 = theta[p], wrap(theta[x] - theta[p]), ypos[p] + 22, ypos[x] - 22
-        pts = [proj(a0 + da * t, y0 + (y1 - y0) * (3 * t * t - 2 * t ** 3)) for t in (k / SAMPLES for k in range(SAMPLES + 1))]
-        runs = [[pts[0]]]
-        for q in pts[1:]:
-            if (q[2] >= .5) != (runs[-1][-1][2] >= .5):
-                runs.append([runs[-1][-1]])
-            runs[-1].append(q)
-        for run in runs:
-            if len(run) < 2:
-                continue
-            if max(q[0] for q in run) - min(q[0] for q in run) < .5:  # a gradient needs a box with width
-                run[-1] = (run[-1][0] + .5, *run[-1][1:])
-            d = sum(q[2] for q in run) / len(run)
-            edges[d >= .5].append((d, f'<path class="edge" style="--d:{d:.2f}" stroke="url(#g-{ent[p]["stage"]}-{ent[x]["stage"]})" '
-                                      f'data-a="{e(nid(p))}" data-b="{e(nid(x))}" d="M'
-                                      + " L".join(f"{q[0]:.1f},{q[1]:.1f}" for q in run) + '"/>'))
-nodes = [[], []]
+order = [x for ring in rings for x in ring]
+idx = {x: n for n, x in enumerate(order)}
+nodes = []
 for ring in rings:
-    step = R * math.tau / max(len(ring), NMIN)  # slot width on the cylinder; on screen, times cos(angle)
+    k = math.tau / max(len(ring), NMIN)  # slot width per unit of radius
     for x in ring:
-        s = ent[x]["stage"]
-        px, py, d = proj(theta[x], ypos[x])
         ic = ent[x].get("icon") if x[0] != "creature" else next(
             (items[dd["item"]].get("icon") for dd in ent[x].get("drops", []) if items.get(dd["item"], {}).get("type") == "Trophy"), None)
         href = f'{ {"item": "items", "piece": "pieces", "creature": "creatures"}[x[0]]}/{x[1]}.html'
         name = ent[x].get("name", x[1])
-        cls = "node" + (" boss" if x in bosses else " gear" if x in gear else "") + (" far" if step * math.cos(theta[x]) < 64 else "")
-        img = f'<image href="icons/{ic}.png" x="-16" y="-16" width="32" height="32"/>' if ic in ICONS else ""
-        nodes[d >= .5].append((d, f'<a href="{href}" class="{cls}" data-id="{e(nid(x))}" style="--tier:{COL[s]};--d:{d:.2f}" '
-                                  f'transform="translate({px:.1f},{py:.1f}) scale({.55 + .45 * d:.2f})"><title>{e(name)}</title>'
-                                  f'<rect x="-22" y="-22" width="44" height="44" rx="8"/>{img}{label(name, min(130, step))}</a>'))
-svg += back + [p for _, p in sorted(edges[0])] + [p for _, p in sorted(nodes[0])]
-svg.append(f'<rect x="{CX - R}" y="0" width="{2 * R}" height="{H:.0f}" fill="url(#fog)" pointer-events="none"/>')
-svg += [p for _, p in sorted(edges[1])] + [p for _, p in sorted(nodes[1])] + fore
-svg.append("</svg>")
-
-par_ids = {nid(x): [nid(p) for p in par[x]] for x in sel}
+        cls = "node" + (" boss" if x in bosses else " gear" if x in gear else "")
+        img = f'<img src="icons/{ic}.png" alt="" loading="lazy" draggable="false">' if ic in ICONS else ""
+        nodes.append(f'<a href="{href}" class="{cls}" data-n="{idx[x]}" draggable="false" title="{e(name)}" '
+                     f'style="--a:{theta[x]:.4f}rad;--k:{k:.4f};top:{ypos[x]:.0f}px;--tier:{COL[ent[x]["stage"]]}">'
+                     f'<span class="ic">{img}</span><span class="lb">{e(name)}</span></a>')
+labels = "".join(f'<div class="bandname" style="top:{top + 12:.0f}px;--tier:{COL[s]}">{e(NAMES.get(s, s))} '
+                 f'<a href="items/index.html">{n_shown} of {n_all} →</a></div>' for s, top, n_all, n_shown in bands)
+fog = ",".join(f"rgba(18,20,23,{.62 * math.sqrt(max(0, 1 - u * u)):.3f}) {(u + 1) * 50:.0f}%" for u in [k / 10 - 1 for k in range(21)])
+data = {"a": [round(theta[x], 4) for x in order], "y": [round(ypos[x]) for x in order], "c": [stage(x) for x in order], "k": [round(math.tau / max(len(r), NMIN), 4) for r in rings for _ in r],
+        "col": [COL[s] for s in S], "bands": [round(top) for _, top, _, _ in bands] + [round(TOP + len(S) * BANDH)],
+        "par": [sorted(idx[p] for p in par[x]) for x in order]}
 css = open(ROOT / "site/style.css").read()
 page = f"""<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Tech well (prototype)</title><style>{css}
-.wellbox{{background:#121417;border-radius:10px;padding:8px 0;margin-top:12px}}
-.well{{width:100%;height:auto;display:block;font-family:system-ui,-apple-system,"Segoe UI",sans-serif}}
-.ring{{fill:none;stroke:var(--tier);stroke-opacity:.35}}
-.bandname{{fill:var(--tier);font-size:18px;font-weight:700;letter-spacing:.04em}}
-.bandmore{{fill:#9a9387;font-size:13px}}
-.edge{{fill:none;stroke-width:1.2;stroke-opacity:calc(.04 + .26 * var(--d) * var(--d));transition:stroke-opacity .15s}}
-.node{{opacity:calc(.35 + .65 * var(--d))}} .node.far text{{display:none}}
-.node rect{{fill:#1d2024;stroke:var(--tier);stroke-width:1.5}}
-.node.gear rect{{stroke-width:2.5}}
-.node.boss rect{{fill:#2a1f14;stroke:#e0a24a;stroke-width:2.5}}
-.node text{{fill:var(--tier);font-size:11.5px;text-anchor:middle}}
-.node:hover text{{text-decoration:underline}}
-.well.focus .edge{{stroke-opacity:.04}} .well.focus .node{{opacity:.15}} .well.focus .node.on text{{display:inline}}
-.well.focus .edge.on{{stroke-opacity:1;stroke-width:2.4}} .well.focus .node.on{{opacity:1}}
+.well{{position:relative;height:{H:.0f}px;margin-top:12px;background:#121417;border-radius:10px;overflow:hidden;
+ touch-action:pan-y;user-select:none;-webkit-user-select:none;--rot:0rad;--R:348;--tilt:44;
+ font-family:system-ui,-apple-system,"Segoe UI",sans-serif}}
+.well canvas{{position:sticky;top:0;display:block;width:100%;height:100vh;margin-bottom:-100vh;pointer-events:none}}
+.well .back{{z-index:0}} .well .front{{z-index:100}}
+.fog{{position:absolute;top:0;bottom:0;left:calc(50% - var(--R) * 1px);width:calc(var(--R) * 2px);z-index:100;
+ pointer-events:none;background:linear-gradient(to right,{fog})}}
+.node{{--t:calc(var(--a) + var(--rot));--w:min(130, var(--R) * var(--k));--d:calc((cos(var(--t)) + 1) / 2);
+ position:absolute;left:50%;width:calc(var(--w) * 1px);margin:-22px 0 0 calc(var(--w) * -.5px);
+ display:flex;flex-direction:column;align-items:center;text-decoration:none;transform-origin:50% 22px;
+ transform:translate(calc(var(--R) * sin(var(--t)) * 1px), calc(var(--tilt) * cos(var(--t)) * 1px)) scale(calc(.55 + .45 * var(--d)));
+ opacity:calc(.35 + .65 * var(--d));z-index:calc(100 + 99 * cos(var(--t)));-webkit-user-drag:none}}
+.node .ic{{width:44px;height:44px;box-sizing:border-box;border:1.5px solid var(--tier);border-radius:8px;background:#1d2024;
+ display:flex;align-items:center;justify-content:center}}
+.node img{{width:32px;height:32px}}
+.node.gear .ic{{border-width:2.5px}} .node.boss .ic{{background:#2a1f14;border:2.5px solid #e0a24a}}
+.node .lb{{color:var(--tier);font-size:11.5px;line-height:13px;text-align:center;margin-top:4px;max-width:100%;
+ display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;
+ opacity:clamp(0, (cos(var(--t)) * var(--R) * var(--k) - 64) / 8, 1)}}
+.node:hover .lb{{text-decoration:underline}}
+.bandname{{position:absolute;left:12px;z-index:300;color:var(--tier);font-size:18px;font-weight:700;letter-spacing:.04em;
+ pointer-events:none}}
+.bandname a{{pointer-events:auto;color:#9a9387;font-size:13px;font-weight:400;letter-spacing:0;margin-left:6px}}
+.well.focus .node{{opacity:.15 !important}} .well.focus .node.on{{opacity:1 !important}} .well.focus .node.on .lb{{opacity:1 !important}}
+.well.dragging .node{{pointer-events:none}}
 </style></head><body><main><h1>Tech tree</h1><p class="sub">Prototype: every obtainable item but food and meads, the bosses, the stations
-they need ({len(sel)} nodes). Hover to trace a path.</p>
-<div class="wellbox">{''.join(svg)}</div></main>
+they need ({len(sel)} nodes). Drag sideways to turn the well; hover (or tap) to trace a path.</p>
+<div class="well"><canvas class="back"></canvas><div class="fog"></div><canvas class="front"></canvas>{labels}{''.join(nodes)}</div></main>
 <script>
-const P={json.dumps(par_ids)},K={{}};for(const[k,v]of Object.entries(P))for(const p of v)(K[p]=K[p]||[]).push(k);
-const svg=document.querySelector('.well');
-function walk(id,m,s){{for(const n of m[id]||[])if(!s.has(n)){{s.add(n);walk(n,m,s)}}return s}}
-svg.addEventListener('mouseover',ev=>{{const a=ev.target.closest('.node');if(!a)return;const id=a.dataset.id;
- const on=new Set([id,...walk(id,P,new Set()),...walk(id,K,new Set())]);svg.classList.add('focus');
- svg.querySelectorAll('.node').forEach(n=>n.classList.toggle('on',on.has(n.dataset.id)));
- svg.querySelectorAll('.edge').forEach(n=>n.classList.toggle('on',on.has(n.dataset.a)&&on.has(n.dataset.b)))}});
-svg.addEventListener('mouseleave',()=>svg.classList.remove('focus'));
+const D={json.dumps(data, separators=(",", ":"))};
+const well=document.querySelector('.well'),cv=[...well.querySelectorAll('canvas')],cx=cv.map(c=>c.getContext('2d'));
+const nodes=[...well.querySelectorAll('.node')].sort((a,b)=>a.dataset.n-b.dataset.n),lbs=nodes.map(a=>a.querySelector('.lb')),N=D.a.length,seen=new Float64Array(N).fill(NaN),KID=D.a.map(()=>[]),EDGES=[];
+D.par.forEach((ps,c)=>ps.forEach(p=>{{KID[p].push(c);EDGES.push([p,c])}}));
+let rot=0,R=348,TILT=44,W=0,dpr=1,on=null,queued=false;
+function walk(n,m,s){{for(const q of m[n])if(!s.has(q)){{s.add(q);walk(q,m,s)}}return s}}
+function size(){{W=well.clientWidth;R=W<600?W*.75:Math.min(440,W*.37);TILT=R/10;dpr=devicePixelRatio||1;
+ well.style.setProperty('--R',R.toFixed(1));well.style.setProperty('--tilt',TILT.toFixed(1));seen.fill(NaN);
+ for(const c of cv){{c.width=Math.round(c.clientWidth*dpr);c.height=Math.round(c.clientHeight*dpr)}}draw()}}
+function place(off,vh){{  // the nodes in view (and a screen either side) that haven't been placed at this rotation
+ for(let n=0;n<N;n++){{if(seen[n]===rot||D.y[n]<off-vh||D.y[n]>off+2*vh)continue;seen[n]=rot;
+  const t=D.a[n]+rot,c=Math.cos(t),d=(c+1)/2,s=nodes[n].style;
+  s.transform=`translate(${{(R*Math.sin(t)).toFixed(1)}}px,${{(TILT*c).toFixed(1)}}px) scale(${{(.55+.45*d).toFixed(3)}})`;
+  s.opacity=(.35+.65*d).toFixed(3);s.zIndex=Math.round(100+99*c);
+  lbs[n].style.opacity=Math.min(1,Math.max(0,(c*R*D.k[n]-64)/8)).toFixed(2)}}}}
+function draw(){{queued=false;
+ const off=cv[0].getBoundingClientRect().top-well.getBoundingClientRect().top,vh=cv[0].clientHeight,mid=W/2;place(off,vh);
+ for(const g of cx){{g.setTransform(dpr,0,0,dpr,0,-off*dpr);g.clearRect(0,off,W,vh)}}
+ for(const[i,y]of D.bands.entries()){{if(y<off-TILT-10||y>off+vh+TILT+10)continue;  // rings: back half, front half
+  for(const f of[0,1]){{const g=cx[f];g.strokeStyle=D.col[Math.min(i,D.col.length-1)];g.globalAlpha=f?.35:.2;g.lineWidth=1;
+   g.beginPath();g.ellipse(mid,y,R,TILT,0,f?0:Math.PI,f?Math.PI:2*Math.PI);g.stroke()}}}}
+ const lit=[];
+ for(const ed of EDGES){{const[p,c]=ed,y0=D.y[p]+22,y1=D.y[c]-22;
+  if(Math.max(y0,y1)<off-TILT||Math.min(y0,y1)>off+vh+TILT)continue;
+  const hot=on&&on.has(p)&&on.has(c);if(hot){{lit.push(ed);continue}}edge(p,c,y0,y1,false)}}
+ for(const[p,c]of lit)edge(p,c,D.y[p]+22,D.y[c]-22,true)}}
+function edge(p,c,y0,y1,hot){{  // along the cylinder's surface, a stroke per run on one side
+ const a0=D.a[p]+rot,da=((D.a[c]-D.a[p]+Math.PI)%(2*Math.PI)+2*Math.PI)%(2*Math.PI)-Math.PI,S=12,pts=[];
+ for(let k=0;k<=S;k++){{const t=k/S,a=a0+da*t,y=y0+(y1-y0)*(3*t*t-2*t*t*t);
+  pts.push([W/2+R*Math.sin(a),y+TILT*Math.cos(a),Math.cos(a)])}}
+ let s=0;for(let k=1;k<=S;k++)if(k==S||(pts[k+1][2]>=0)!=(pts[k][2]>=0)){{
+  const run=pts.slice(s,k+1),d=run.reduce((m,q)=>m+q[2],0)/run.length,g=cx[d>=0?1:0],dd=(d+1)/2;
+  g.globalAlpha=hot?1:on?.04:.04+.26*dd*dd;g.lineWidth=hot?2.4:1.2;
+  if(D.c[p]==D.c[c])g.strokeStyle=D.col[D.c[c]];
+  else{{const gr=g.createLinearGradient(0,y0,0,y1);gr.addColorStop(0,D.col[D.c[p]]);gr.addColorStop(1,D.col[D.c[c]]);g.strokeStyle=gr}}
+  g.beginPath();g.moveTo(run[0][0],run[0][1]);for(const q of run.slice(1))g.lineTo(q[0],q[1]);g.stroke();s=k}}}}
+function later(){{if(!queued){{queued=true;requestAnimationFrame(draw)}}}}
+function focus(n){{on=n==null?null:new Set([n,...walk(n,D.par,new Set()),...walk(n,KID,new Set())]);
+ well.classList.toggle('focus',!!on);for(const a of nodes)a.classList.toggle('on',!!on&&on.has(+a.dataset.n));later()}}
+// turning: horizontal drags (vertical ones scroll the page), then it coasts
+let drag=null,moved=false,vel=0,touch=false;
+well.addEventListener('pointerdown',ev=>{{touch=ev.pointerType!='mouse';drag={{x:ev.clientX,t:ev.timeStamp}};moved=false;vel=0}});
+well.addEventListener('pointermove',ev=>{{if(!drag)return;const dx=ev.clientX-drag.x;
+ if(!moved){{if(Math.abs(dx)<6)return;moved=true;well.setPointerCapture(ev.pointerId);well.classList.add('dragging')}}
+ rot+=dx/R;vel=dx/R/Math.max(8,ev.timeStamp-drag.t);drag={{x:ev.clientX,t:ev.timeStamp}};later()}});
+function release(){{if(!drag)return;drag=null;well.classList.remove('dragging');
+ if(moved){{let last=performance.now();(function coast(now){{vel*=Math.pow(.995,now-last);rot+=vel*(now-last);last=now;draw();
+  if(Math.abs(vel)>2e-5&&!drag)requestAnimationFrame(coast)}})(last)}}}}
+well.addEventListener('pointerup',release);well.addEventListener('pointercancel',()=>{{drag=null;well.classList.remove('dragging')}});
+well.addEventListener('click',ev=>{{if(moved){{ev.preventDefault();moved=false;return}}
+ const a=ev.target.closest('.node');
+ if(a&&touch&&!(on&&on.has(+a.dataset.n)&&a.classList.contains('tapped'))){{  // touch: tap traces, a second tap opens
+  ev.preventDefault();nodes.forEach(n=>n.classList.remove('tapped'));a.classList.add('tapped');focus(+a.dataset.n)}}
+ else if(!a)focus(null)}});
+well.addEventListener('pointerover',ev=>{{const a=ev.target.closest('.node');if(ev.pointerType=='mouse'&&a&&!drag)focus(+a.dataset.n)}});
+well.addEventListener('pointerleave',ev=>{{if(ev.pointerType=='mouse')focus(null)}});
+addEventListener('scroll',later,{{passive:true}});addEventListener('resize',size);size();
 </script></body></html>"""
 OUT.write_text(page)
 print(OUT, file=sys.stderr)
