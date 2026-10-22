@@ -84,6 +84,13 @@ par = {}
 for x in sel:
     ns = {boss_of((k, i)) if k == "creature" else (k, i) for k, i, _ in way_needs(x)}
     par[x] = {n for n in ns if n in sel}
+# ...and a crafted item that only goes into one processed item folds into it (the Deep North casts, forged at the
+# Frost Foundry: the gear needs the mould, Gold and the rest directly)
+users = collections.Counter(q for ps in par.values() for q in ps)
+for x in [x for x in sel if ent[x].get("via", {}).get("how") == "process"]:
+    for c in [q for q in par[x] if q[0] == "item" and ent[q].get("via", {}).get("how") == "craft" and users[q] == 1]:
+        par[x] = par[x] - {c} | par.pop(c)
+        sel.discard(c)
 # 6: drop what connects to nothing
 kids = collections.defaultdict(set)
 for x, ps in par.items():
