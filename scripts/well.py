@@ -46,34 +46,31 @@ def way_needs(x):
             for k in ("item", "piece", "creature") if k in n]
 
 
-# 1-2: every obtainable item but consumables and what cooking stations make (food and mead intermediates)
+# 1-2: every obtainable item but consumables, trophies and what cooking stations make (food and mead intermediates)
 cooked = lambda x: any(k == "piece" and i in COOKING for k, i, _ in way_needs(x))
 # ...and fishing: fish, bait, the rod and the hat made of fish lead nowhere else (their catch drops and the trophies
 # only bait needs then connect to nothing and are dropped)
 FISHING = {"FishingRod", "HelmetFishingHat"} | {i for s in srcs.values() if s["kind"] == "fishing"
                                                 for i in [s["id"]] + [b["item"] for b in s.get("baits", [])]}
-sel = {x for x, e in ent.items() if x[0] == "item" and e.get("type") != "Consumable" and not cooked(x)
+sel = {x for x, e in ent.items() if x[0] == "item" and e.get("type") not in ("Consumable", "Trophy") and not cooked(x)
        and x[1] not in FISHING}
 # 3: bosses (their drops are items already)
 sel |= bosses
-# ...but keep a consumable or cooked item something kept needs (Blueberries for Berserker armour, bait for fish)
+# ...but keep a consumable, trophy or cooked item something kept needs (Blueberries for Berserker armour, the Deer
+# trophy for Eikthyr's altar), and 4: the non-cooking pieces they need; one fixed point, so an item only a piece needs
+# is kept too (the Asksvin trophy for the Galdr table's upgrade)
 todo = list(sel)
 while todo:
     x = todo.pop()
     for k, i, _ in way_needs(x):
-        if k == "item" and (k, i) in ent and (k, i) not in sel and i not in FISHING:
-            sel.add((k, i))
-            todo.append((k, i))
-# 4: the non-cooking pieces those need, and the pieces those pieces need
-todo = list(sel)
-while todo:
-    x = todo.pop()
-    for k, i, _ in way_needs(x):
+        if (k, i) not in ent or (k, i) in sel:
+            continue
         food = x[0] == "item" and ent[x].get("type") in ("Consumable", "Material", "Misc")
-        if k == "piece" and (k, i) in ent and not (i in COOKING and food) and (k, i) not in sel:  # bait: the
-            # preparation table
+        if k == "item" and i not in FISHING or k == "piece" and not (i in COOKING and food):
             sel.add((k, i))
             todo.append((k, i))
+
+
 def boss_of(c):  # a boss's later phase stands for the boss (the Frozen King's third phase drops the Crown Jewel)
     seen = set()
     while c not in bosses and c in ent and c not in seen and ent[c].get("via", {}).get("how") == "phase":
