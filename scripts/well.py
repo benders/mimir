@@ -249,6 +249,21 @@ def layout(g: SimpleNamespace) -> SimpleNamespace:
     return SimpleNamespace(rings=rings, theta=theta, ypos=ypos, slot=slot, bands=bands, H=y + TILT + 24, rank=rank, imp=imp)
 
 
+def icon(g: SimpleNamespace, x: tuple) -> str | None:
+    """A node's icon; a creature's is its trophy, from it or a later phase, else its last phase's last drop (the Frozen
+    King has no trophy: the Crown Jewel)."""
+    if x[0] != "creature":
+        return g.ent[x].get("icon")
+    phases = [x] + sorted(c for c in g.ent if c[0] == "creature" and c != x and g.boss_of(c) == x)
+    drops = [g.items[d["item"]] for c in phases for d in g.ent[c].get("drops", []) if d.get("item") in g.items]
+    return next((i.get("icon") for i in drops if i.get("type") == "Trophy"), drops[-1].get("icon") if drops else None)
+
+
+def stage_bosses(g: SimpleNamespace) -> dict:
+    """Stage index -> the boss that closes it (the home page's "Up to" picker); Post-game has none."""
+    return {g.stage(b): b for b in sorted(g.bosses)}
+
+
 def markup(g: SimpleNamespace, lay: SimpleNamespace, icons: set, links: dict | None = None) -> str:
     """The well's HTML for the home page (build-site.py): nodes as links placed by CSS from their angle (site/style.css,
     the first render and without JavaScript), the band names (linked through `links`: stage -> href), two canvases and
@@ -259,8 +274,7 @@ def markup(g: SimpleNamespace, lay: SimpleNamespace, icons: set, links: dict | N
     idx = {x: n for n, x in enumerate(order)}
     nodes = []
     for x in order:
-        ic = ent[x].get("icon") if x[0] != "creature" else next(
-            (items[dd["item"]].get("icon") for dd in ent[x].get("drops", []) if items.get(dd["item"], {}).get("type") == "Trophy"), None)
+        ic = icon(g, x)
         href = f'{ {"item": "items", "piece": "pieces", "creature": "creatures"}[x[0]]}/{x[1]}.html'
         name = ent[x].get("name", x[1])
         cls = "node" + (" boss" if x in g.bosses else " gear" if x in g.gear else "")

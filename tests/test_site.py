@@ -2,6 +2,7 @@
 build-site.py itself fails on any broken internal link."""
 import json
 import re
+import shutil
 import subprocess
 import sys
 import tempfile
@@ -27,17 +28,36 @@ class Site(unittest.TestCase):
     def test_builds(self):
         self.assertEqual(self.build.returncode, 0, self.build.stdout + self.build.stderr)
 
-    def test_home_page(self):  # #78: stage chips, the sections, the well
+    def test_home_page(self):  # #78: no header; search, "Show data up to…", the sections, the well
         home = (self.out / "index.html").read_text()
-        self.assertEqual(len(re.findall(r'<button type="button" data-upto=', home)), 9)  # every stage, Post-game last
-        self.assertIn('data-upto="" ', home)
+        self.assertNotIn('<header class="top">', home)
+        self.assertNotIn('id="stage"', home)  # the picker takes the header select's place
+        self.assertIn('<input id="q" type="search"', home)
+        self.assertRegex(home, r'</h1><p class="sub">A Valheim reference, .*? Valheim [\d.]+\.</p>')  # under the name
+        self.assertLess(home.index('id="q"'), home.index('id="upto-b"'))
+        self.assertLess(home.index('id="upto-b"'), home.index('class="cards"'))
+        self.assertLess(home.index('class="cards"'), home.index('<div class="well"'))
+        self.assertEqual(len(re.findall(r'<li role="option" id="upto-\d" data-upto=', home)), 9)  # Post-game last
+        self.assertIn('id="upto-8" data-upto="" ', home)
+        crown = {i["id"]: i for i in json.loads((ROOT / "data/items.json").read_text())}["HelmetCrownofValheim"]
+        self.assertEqual((crown["icon"], crown["stage"]), ("CrownofValheim", "PostGame"))  # Post-game's icon in the picker
         for d in ("items", "creatures", "pieces", "effects", "biomes", "traders", "mechanics"):
-            self.assertIn(f'<a href="{d}/index.html"><b>', home)
+            m = re.search(rf'<a href="{d}/index.html"><b data-counts="([\d ]+)">(\d+)</b>', home)
+            self.assertTrue(m, d)
+            n = [int(x) for x in m.group(1).split()]
+            self.assertEqual(len(n), 9)
+            self.assertEqual(n, sorted(n), d)  # a later stage holds at least as much
+            self.assertEqual(n[-1], int(m.group(2)), d)  # unfiltered = the total shown without JavaScript
+        items = re.search(r'<a href="items/index.html"><b data-counts="(\d+)[\d ]* (\d+)"', home)
+        self.assertLess(int(items.group(1)), int(items.group(2)))  # Meadows alone holds fewer
+        self.assertNotIn("wellhead", home)
         self.assertIn('<div class="well"', home)
         self.assertIn('id="well-data"', home)
-        self.assertIn('<script src="well.js" defer>', home)
-        self.assertTrue((self.out / "well.js").is_file())
+        for js in ("home.js", "well.js"):
+            self.assertIn(f'<script src="{js}" defer>', home)
+            self.assertTrue((self.out / js).is_file())
         self.assertFalse((self.out / "well.html").exists())  # the well lives on the home page now
+        self.assertIn('<header class="top">', (self.out / "items/Sword.html").read_text())  # other pages keep it
 
     def test_pages(self):
         for page in ("index.html", "items/Sword.html", "creatures/Raider.html", "pieces/Anvil.html",
@@ -304,8 +324,10 @@ class Site(unittest.TestCase):
                      "food", "comfort", "skills"):
             self.assertTrue((self.out / f"mechanics/{page}.html").is_file(), page)
         home = (self.out / "index.html").read_text(encoding="utf-8")
-        self.assertIn('<a href="mechanics/index.html">Mechanics</a>', home)  # nav entry
-        self.assertIn('<a class="brand" href="index.html">Mimir&#x27;s Well</a>', home)
+        self.assertIn('<a href="mechanics/index.html"><b', home)  # a section
+        self.assertIn('<a class="brand" href="index.html">Mimir&#x27;s Well</a>',
+                      (self.out / "mechanics/index.html").read_text(encoding="utf-8"))  # nav entry
+        self.assertIn('<a href="mechanics/index.html">Mechanics</a>', (self.out / "mechanics/index.html").read_text(encoding="utf-8"))
         self.assertIn("<h1>Mimir&#x27;s Well</h1>", home)
         index = (self.out / "mechanics/index.html").read_text(encoding="utf-8")
         for page in ("blocking", "drops", "creature-levels", "damage-types"):
@@ -465,10 +487,22 @@ class Site(unittest.TestCase):
         self.assertIn('<select id="stage">', wood)
         self.assertRegex(wood, r'<option value="7">Deep North</option><option value="">Post-game</option></select>')
         self.assertIn('localStorage.getItem("mimir-stage")', wood)
+        if shutil.which("node"):  # nothing stored: Meadows; "all": no filter; a stage: that stage
+            init = re.search(r'<script>(let m = null;.*?)</script>', wood).group(1)
+            for stored, want in (("null", "0"), ('"all"', "none"), ('"3"', "3")):
+                js = (f"const localStorage={{getItem:()=>{stored}}}, document={{documentElement:{{dataset:{{}}}}}};"
+                      f"{init}; console.log(document.documentElement.dataset.max ?? 'none')")
+                out = subprocess.run(["node", "-e", js], capture_output=True, text=True, check=True).stdout.strip()
+                self.assertEqual(out, want, stored)
         index = (self.out / "items/index.html").read_text(encoding="utf-8")
         self.assertIn('<li data-stage="2"><a class="ref" href="items/Gem.html"', index)
         self.assertIn('<li><a class="ref" href="items/Wood.html"', index)
         css = (self.out / "style.css").read_text(encoding="utf-8")
+        depth = 0  # a stray "}" once made the browser drop the generated hiding rule that follows
+        for n, line in enumerate(re.sub(r"/\*.*?\*/", "", css, flags=re.S).split("\n"), 1):
+            depth += line.count("{") - line.count("}")
+            self.assertGreaterEqual(depth, 0, f"style.css line {n}: unmatched }}")
+        self.assertEqual(depth, 0)
         self.assertIn('html[data-max="0"] [data-stage="2"]', css)
         self.assertIn('html[data-max="1"] p.spoiler[data-stage="2"]', css)
         self.assertNotIn('html[data-max="2"] [data-stage="2"]', css)  # its own stage stays visible

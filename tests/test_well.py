@@ -176,6 +176,26 @@ class Layout(unittest.TestCase):
         self.assertEqual(outs[0], outs[1])
 
 
+class Icons(unittest.TestCase):  # the home page's "Up to" picker shows the boss closing each stage (#78)
+    def setUp(self):
+        data = world(items=[item("Jewel", icon="jewel"), item("Gem", icon="gem")], creatures=[
+            {"id": "King", "name": "King", "boss": True, "stage": "BlackForest", "via": via("spawn", "item:Wood")},
+            {"id": "King_p2", "name": "King", "boss": True, "stage": "BlackForest", "via": via("phase", frm="King"),
+             "drops": [{"item": "Gem"}, {"item": "Jewel"}]}])
+        data["items"] = [dict(i, icon="deer") if i["id"] == "TrophyDeer" else i for i in data["items"]]
+        self.g = WELL.graph(data)
+
+    def test_trophy(self):
+        self.assertEqual(WELL.icon(self.g, ("creature", "Boss")), "deer")
+        self.assertEqual(WELL.icon(self.g, ("item", "Jewel")), "jewel")
+
+    def test_no_trophy_last_phase_last_drop(self):
+        self.assertEqual(WELL.icon(self.g, ("creature", "King")), "jewel")
+
+    def test_stage_bosses(self):  # a later phase isn't a boss of its own
+        self.assertEqual(WELL.stage_bosses(self.g), {0: ("creature", "Boss"), 1: ("creature", "King")})
+
+
 class RealData(unittest.TestCase):
     """The committed data/: known content in, known exclusions out."""
     @classmethod
@@ -203,6 +223,12 @@ class RealData(unittest.TestCase):
         self.assertIn("CryptKey", par("IronScrap"))  # behind the Sunken Crypt's door
         self.assertIn("Wishbone", par("SilverOre"))  # found with it
         self.assertIn("Gold", par("THSwordGold"))  # the cast folded in
+
+    def test_stage_bosses(self):
+        b = WELL.stage_bosses(self.g)
+        self.assertEqual(sorted(b), list(range(8)))  # every biome closes with a boss; Post-game has none
+        self.assertEqual(WELL.icon(self.g, b[0]), "TrophyEikthyr")
+        self.assertEqual(WELL.icon(self.g, b[7]), "crownjewel")  # the Frozen King has no trophy
 
     def test_size(self):
         self.assertTrue(400 <= len(self.g.sel) <= 800, len(self.g.sel))

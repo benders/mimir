@@ -619,7 +619,11 @@ STAGES = ["Meadows", "BlackForest", "Swamp", "Mountain", "Plains", "Mistlands", 
 STAGE_NAMES = BIOMES | {"PostGame": "Post-game"}  # PostGame isn't a biome: after the last boss
 LOCATION_BIOMES = {x["id"]: x.get("biomes", []) for x in LOCATIONS}
 LOCATION_STAGE = {x["id"]: min((biome_stage(b) for b in x.get("biomes", [])), default=0) for x in LOCATIONS}  # earliest biome
-STAGE_KEY = "mimir-stage"  # localStorage: the last stage the reader wants to see (index into STAGES)
+STAGE_KEY = "mimir-stage"  # localStorage: the last stage the reader wants to see (index into STAGES, or "all")
+# the head script setting <html data-max> before the page renders; a new reader (nothing stored) starts at Meadows
+STAGE_INIT = (f'let m = null; try {{ m = localStorage.getItem("{STAGE_KEY}"); }} catch (e) {{}} '
+              f'if (m !== "all") document.documentElement.dataset.max = m ?? "0";')
+POSTGAME_ICON = "HelmetCrownofValheim"  # the home page's "Up to" picker: no boss closes Post-game; the Crown of Valheim
 PAGE_STAGE = {k: {} for k in KINDS}  # page id -> stage index; a merged page takes its earliest copy's
 for _kind, _coll in (("item", ITEMS), ("creature", CREATURES), ("piece", PIECES), ("effect", EFFECTS)):
     for _id, _e in _coll.items():
@@ -703,9 +707,19 @@ written: list[Path] = []
 
 STAGE_OPTIONS = "".join(f'<option value="{i}">{esc(STAGE_NAMES[s])}</option>' for i, s in enumerate(STAGES[:-1])) + \
     f'<option value="">{esc(STAGE_NAMES[STAGES[-1]])}</option>'  # the last stage: no filter
+HEADER = f"""<header class="top">
+  <a class="brand" href="index.html">{esc(SITE_NAME)}</a>
+  <nav>{"".join(f'<a href="{d}/index.html">{d.capitalize()}</a>' for d in KINDS.values())}<a href="biomes/index.html">Biomes</a><a href="traders/index.html">Traders</a><a href="mechanics/index.html">Mechanics</a></nav>
+  <label class="stagesel" title="Hide what you meet after this biome">Up to
+  <select id="stage">{STAGE_OPTIONS}</select></label>
+  <div class="search"><input id="q" type="search" placeholder="Search…  ( / )" autocomplete="off" aria-label="Search">
+  <ol id="results" hidden></ol></div>
+</header>
+"""
 
 
-def page(path: str, title: str, body: str, kind_label: str = "", scripts=()) -> None:
+def page(path: str, title: str, body: str, kind_label: str = "", scripts=(), header: bool = True) -> None:
+    """Write one page; `header` False leaves out the site header (the home page has its own search and "Up to")."""
     depth = path.count("/")
     base = "../" * depth or "./"
     doc = f"""<!doctype html>
@@ -717,19 +731,11 @@ def page(path: str, title: str, body: str, kind_label: str = "", scripts=()) -> 
 <title>{esc(title)} · {esc(SITE_NAME)}</title>
 <script src="newrelic.js"></script>
 <link rel="stylesheet" href="style.css">
-<script>try {{ const m = localStorage.getItem("{STAGE_KEY}"); if (m) document.documentElement.dataset.max = m; }} catch (e) {{}}</script>
+<script>{STAGE_INIT}</script>
 <script src="search.js" defer></script>
 {"".join(f'<script src="{esc(x)}" defer></script>' for x in scripts)}</head>
 <body>
-<header class="top">
-  <a class="brand" href="index.html">{esc(SITE_NAME)}</a>
-  <nav>{"".join(f'<a href="{d}/index.html">{d.capitalize()}</a>' for d in KINDS.values())}<a href="biomes/index.html">Biomes</a><a href="traders/index.html">Traders</a><a href="mechanics/index.html">Mechanics</a></nav>
-  <label class="stagesel" title="Hide what you meet after this biome">Up to
-  <select id="stage">{STAGE_OPTIONS}</select></label>
-  <div class="search"><input id="q" type="search" placeholder="Search…  ( / )" autocomplete="off" aria-label="Search">
-  <ol id="results" hidden></ol></div>
-</header>
-<main>
+{HEADER if header else ""}<main>
 {f'<p class="crumb">{kind_label}</p>' if kind_label else ""}{body}
 </main>
 <footer>Valheim {esc(META["gameVersion"])} · data extracted from the dedicated server ·
@@ -2643,29 +2649,47 @@ def index_pages() -> None:
         for g in order)
     page("effects/index.html", "Status effects", body)
 
-    home_page(len(items))
+    home_page(items)
 
 
-def home_page(n_items: int) -> None:
-    """The home page (#78): title, "Up to" as stage chips (search.js keeps them in step with the header select), the
-    sections with their counts, then the well reaching down (scripts/well.py, site/well.js)."""
-    counts = {"items": n_items, "creatures": len(CREATURES), "pieces": len(PIECES), "effects": len(EFFECTS),
-              "biomes": len(BIOMES), "traders": len(TRADERS), "mechanics": len(MECH_PAGES)}
-    cards = "".join(f'<li><a href="{d}/index.html"><b>{n}</b>{d}</a></li>' for d, n in counts.items())
-    chips = "".join(f'<li><button type="button" data-upto="{i if s != STAGES[-1] else ""}" style="--tier:{well.COL[s]}" '
-                    f'aria-pressed="false">{esc(STAGE_NAMES[s])}</button></li>' for i, s in enumerate(STAGES))
+def home_page(items: list) -> None:
+    """The home page (#78), with no site header, centred: the name, a line on the site and a big search box, "Show data up to…" as a listbox of the
+    stages with the boss that closes each (site/home.js keeps it and localStorage in step, like the header select on
+    other pages), the sections with what they hold up to that stage, then the well reaching down (scripts/well.py,
+    site/well.js)."""
+    trader_stage = lambda t: min((biome_stage(b) for l in t.get("locations", []) for b in l.get("biomes", [])), default=0)
+    stages = {  # section -> the stage of each page it lists
+        "items": [stage_of("item", i["id"]) for i in items],
+        "creatures": [stage_of("creature", c) for c in CREATURES if has_page("creature", c)],
+        "pieces": [stage_of("piece", p) for p in PIECES if has_page("piece", p)],
+        "effects": [stage_of("effect", e) for e in EFFECTS if has_page("effect", e)],
+        "biomes": [biome_stage(b) for b in BIOMES],
+        "traders": [trader_stage(t) for t in TRADERS],
+        "mechanics": [0] * len(MECH_PAGES)}
+    cards = "".join(f'<li><a href="{d}/index.html"><b data-counts="{" ".join(str(sum(x <= m for x in st)) for m in range(len(STAGES)))}">'
+                    f'{len(st)}</b>{d}</a></li>' for d, st in stages.items())
     g = well.graph({"items": list(ITEMS.values()), "pieces": list(PIECES.values()),
                     "creatures": list(CREATURES.values()), "sources": list(SOURCES.values()), "locations": LOCATIONS})
+    bosses = well.stage_bosses(g)
+
+    def disc(i):
+        ic = well.icon(g, bosses[i]) if i in bosses else ITEMS.get(POSTGAME_ICON, {}).get("icon")
+        img = f'<img src="icons/{ic}.png" alt="">' if ic in HAVE_ICONS else ""
+        return f'<span class="disc">{img}</span>'
+    opts = "".join(f'<li role="option" id="upto-{i}" data-upto="{i if s != STAGES[-1] else ""}" aria-selected="false" '
+                   f'style="--tier:{well.COL[s]}">{disc(i)}<span>{esc(STAGE_NAMES[s])}</span></li>' for i, s in enumerate(STAGES))
+    last = len(STAGES) - 1
     tree = well.markup(g, well.layout(g), HAVE_ICONS, {b: f"biomes/{quote(b)}.html" for b in STAGES if b in BIOMES})
-    body = (f'<div class="home"><h1>{esc(SITE_NAME)}</h1><p class="sub">A Valheim reference, rebuilt from the game data '
-            f'on every update. Valheim {esc(META["gameVersion"])}.</p>'
-            f'<section class="upto"><h2>How far have you got?</h2><ol>{chips}</ol>'
-            f'<p>Pages, lists and search leave out what comes after it. Change it any time in the header.</p></section>'
-            f'<ul class="cards">{cards}</ul><p class="hint">Press <kbd>/</kbd> to search.</p></div>'
-            f'<div class="wellhead"><h2>The tech tree</h2><p>Every item, station and boss in the order you can get them, '
-            f'a band of the well per biome, the deepest last. Drag sideways to turn it; hover or tap to trace what something needs '
-            f'and what needs it.</p></div>{tree}')
-    page("index.html", "Valheim reference", body, scripts=("well.js",))
+    body = (f'<div class="home"><div class="ask"><h1>{esc(SITE_NAME)}</h1><p class="sub">A Valheim reference, rebuilt from the game '
+            f'data on every update. Valheim {esc(META["gameVersion"])}.</p><div class="search">'
+            f'<input id="q" type="search" placeholder="Search items, creatures, pieces…" autocomplete="off" aria-label="Search">'
+            f'<ol id="results" hidden></ol></div></div>'
+            f'<div class="upto"><span id="upto-l">Show data up to…</span><div class="pick">'
+            f'<button type="button" id="upto-b" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="upto-l upto-b" '
+            f'style="--tier:{well.COL[STAGES[-1]]}">{disc(last)}<span>{esc(STAGE_NAMES[STAGES[-1]])}</span></button>'
+            f'<ul role="listbox" id="upto-list" aria-labelledby="upto-l" tabindex="-1" hidden>{opts}</ul></div></div>'
+            f'<ul class="cards">{cards}</ul></div>{tree}')
+    page("index.html", "Valheim reference", body, scripts=("home.js", "well.js"), header=False)
 
 
 def search_index() -> None:

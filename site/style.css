@@ -97,28 +97,36 @@ span.ico { display: inline-block; }
 .grid { list-style: none; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
   gap: 4px 12px; }
 .grid li { padding: 3px 0; }
-.home { text-align: center; padding: 40px 0 8px; }
-.home h1 { font-size: 44px; margin: 0; color: var(--accent); letter-spacing: .05em; }
-.home .sub { margin: 6px 0 0; }
-/* home: "Up to" as a row of stage chips, in the well's tier colours (#78); search.js keeps them and the header
-   select in step */
-.upto { margin: 28px auto 0; }
-.upto h2 { font-size: 15px; font-weight: 600; margin: 0 0 10px; color: var(--text); border: 0; padding: 0; }
-.upto ol { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; justify-content: center; gap: 6px; }
-.upto button { font: inherit; font-size: 13.5px; color: var(--text); background: var(--panel); cursor: pointer;
-  border: 1.5px solid var(--line); border-radius: 999px; padding: 5px 11px 5px 9px; display: flex; gap: 6px;
-  align-items: center; }
-.upto button::before { content: ""; width: 10px; height: 10px; border-radius: 50%; background: var(--tier); }
-.upto button:hover { border-color: var(--tier); }
-.upto button[aria-pressed="true"] { background: var(--tier); border-color: var(--tier); color: #15171a; font-weight: 600; }
-.upto button[aria-pressed="true"]::before { background: #15171a; }
-.upto p { margin: 10px 0 0; font-size: 13px; color: var(--muted); }
-.wellhead { margin: 44px 0 0; text-align: center; }
-.wellhead h2 { margin: 0; font-size: 22px; border: 0; padding: 0; }
-.wellhead p { margin: 6px auto 0; color: var(--muted); max-width: 640px; }
-.hint { color: var(--muted); }
+/* home (#78), no site header, centred: the name, a line on the site, a big search box, "Show data up to…" as a listbox of the stages
+   (site/home.js), the sections with their counts up to that stage, then the well */
+.home { padding: 36px 0 0; --big: 24px; text-align: center; }
+.ask h1 { margin: 0; font-size: 52px; line-height: 1.1; letter-spacing: .04em; color: var(--accent); }
+.ask .sub { margin: 6px 0 0; color: var(--muted); }
+.ask .search { max-width: 680px; margin: 24px auto 0; text-align: left; }
+.ask #q { font-size: var(--big); padding: 12px 16px; background: var(--panel); border-width: 1.5px; border-radius: 10px; }
+.ask #results { font-size: 15px; z-index: 20; }
+.upto { display: flex; align-items: center; justify-content: center; flex-wrap: wrap; gap: 8px 16px; margin-top: 18px; font-size: var(--big); }
+.upto > span { color: var(--muted); }
+.pick { position: relative; text-align: left; }
+.pick button { font: inherit; color: var(--text); background: var(--panel); cursor: pointer; display: flex;
+  align-items: center; gap: 12px; padding: 6px 16px 6px 8px; border: 1.5px solid var(--tier); border-radius: 10px; }
+.pick button::after { content: ""; width: 9px; height: 9px; margin: -5px 0 0 6px; border: solid var(--muted);
+  border-width: 0 2px 2px 0; transform: rotate(45deg); }
+.pick button:focus-visible, .pick ul:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.disc { flex: none; display: grid; place-items: center; width: 44px; height: 44px; border-radius: 50%;
+  border: 2px solid var(--tier); background: color-mix(in srgb, var(--tier) 18%, var(--panel)); }
+.disc img { width: 32px; height: 32px; }
+.pick ul { position: absolute; z-index: 20; top: calc(100% + 6px); left: 0; min-width: 100%; margin: 0; padding: 6px;
+  list-style: none; background: var(--panel); border: 1px solid var(--line); border-radius: 10px;
+  box-shadow: 0 8px 24px rgb(0 0 0 / .18); font-size: 19px; max-height: 70vh; overflow-y: auto; }
+.pick li { display: flex; align-items: center; gap: 12px; padding: 5px 16px 5px 6px; border-radius: 8px;
+  cursor: pointer; white-space: nowrap; }
+.pick li .disc { width: 36px; height: 36px; } .pick li .disc img { width: 26px; height: 26px; }
+.pick li.active { background: var(--accent-soft); }
+.pick li[aria-selected="true"] { font-weight: 600; }
+.home + .well { margin-top: 28px; }
 kbd { border: 1px solid var(--line); border-radius: 4px; padding: 0 5px; background: var(--panel); }
-.cards { list-style: none; padding: 0; margin: 28px auto 0; display: grid;
+.cards { list-style: none; padding: 0; margin: 24px auto 0; display: grid;
   grid-template-columns: repeat(auto-fit, minmax(112px, 1fr)); gap: 10px; max-width: 860px; }
 .cards a { display: block; padding: 18px; background: var(--panel); border: 1px solid var(--line); border-radius: 8px;
   color: var(--text); text-transform: capitalize; }
@@ -190,14 +198,14 @@ table.matrix thead th:first-child { writing-mode: horizontal-tb; transform: none
 /* the well: the tech tree as a cylinder seen from slightly above (scripts/well.py, site/well.js). Dark in both
    themes, like a picture. Nodes are placed by CSS trig from their angle --a and the well's --rot (first render, no
    JavaScript); well.js overrides the transform of the nodes in view while it turns */
-.well { position: relative; margin-top: 16px; background: #121417; border-radius: 10px; overflow: clip;
+.well { position: relative; isolation: isolate; margin-top: 16px; background: #15171a; border-radius: 10px; overflow: clip;
   touch-action: pan-y; user-select: none; -webkit-user-select: none; --rot: 0rad; --R: 348; --tilt: 44; }
 .well canvas { position: sticky; top: 0; display: block; width: 100%; height: 100vh; margin-bottom: -100vh;
   pointer-events: none; }
 .well .back { z-index: 0; } .well .front { z-index: 100; }
 .well .fog { position: absolute; top: 0; bottom: 0; left: calc(50% - var(--R) * 1px); width: calc(var(--R) * 2px);
   z-index: 100; pointer-events: none;  /* as thick as the chord a line of sight crosses */
-  background: linear-gradient(to right,rgba(18,20,23,0.000) 0%,rgba(18,20,23,0.270) 5%,rgba(18,20,23,0.372) 10%,rgba(18,20,23,0.443) 15%,rgba(18,20,23,0.496) 20%,rgba(18,20,23,0.537) 25%,rgba(18,20,23,0.568) 30%,rgba(18,20,23,0.591) 35%,rgba(18,20,23,0.607) 40%,rgba(18,20,23,0.617) 45%,rgba(18,20,23,0.620) 50%,rgba(18,20,23,0.617) 55%,rgba(18,20,23,0.607) 60%,rgba(18,20,23,0.591) 65%,rgba(18,20,23,0.568) 70%,rgba(18,20,23,0.537) 75%,rgba(18,20,23,0.496) 80%,rgba(18,20,23,0.443) 85%,rgba(18,20,23,0.372) 90%,rgba(18,20,23,0.270) 95%,rgba(18,20,23,0.000) 100%); }
+  background: linear-gradient(to right,rgba(21,23,26,0.000) 0%,rgba(21,23,26,0.270) 5%,rgba(21,23,26,0.372) 10%,rgba(21,23,26,0.443) 15%,rgba(21,23,26,0.496) 20%,rgba(21,23,26,0.537) 25%,rgba(21,23,26,0.568) 30%,rgba(21,23,26,0.591) 35%,rgba(21,23,26,0.607) 40%,rgba(21,23,26,0.617) 45%,rgba(21,23,26,0.620) 50%,rgba(21,23,26,0.617) 55%,rgba(21,23,26,0.607) 60%,rgba(21,23,26,0.591) 65%,rgba(21,23,26,0.568) 70%,rgba(21,23,26,0.537) 75%,rgba(21,23,26,0.496) 80%,rgba(21,23,26,0.443) 85%,rgba(21,23,26,0.372) 90%,rgba(21,23,26,0.270) 95%,rgba(21,23,26,0.000) 100%); }
 .well .node { --t: calc(var(--a) + var(--rot)); --w: min(130, var(--R) * var(--k)); --d: calc((cos(var(--t)) + 1) / 2);
   position: absolute; left: 50%; width: calc(var(--w) * 1px); margin: -22px 0 0 calc(var(--w) * -.5px);
   display: flex; flex-direction: column; align-items: center; text-decoration: none; transform-origin: 50% 22px;
@@ -218,12 +226,12 @@ table.matrix thead th:first-child { writing-mode: horizontal-tb; transform: none
 .well.focus .node { opacity: .15 !important; } .well.focus .node.on { opacity: 1 !important; }
 .well.focus .node.on .lb { opacity: 1 !important; }
 .well.dragging .node { pointer-events: none; }
-@media (max-width: 600px) {  /* home on a phone: the sections in two compact rows, so the well starts on screen 2 */
-  .home { padding-top: 24px; }
-  .home h1 { font-size: 34px; }
-  .cards { grid-template-columns: repeat(4, 1fr); gap: 6px; margin-top: 20px; }
-  .cards a { padding: 9px 2px; font-size: 12px; }
+@media (max-width: 600px) {  /* home on a phone: the sections in two compact rows */
+  .home { padding-top: 16px; --big: 19px; }
+  .ask h1 { font-size: 36px; }
+  .ask .search { margin-top: 16px; }
+  .disc { width: 36px; height: 36px; } .disc img { width: 26px; height: 26px; }
+  .cards { grid-template-columns: repeat(4, 1fr); gap: 6px; margin-top: 18px; }
+  .cards a { padding: 9px 10px; font-size: 12px; }
   .cards b { font-size: 18px; }
-  .upto { margin-top: 20px; }
-  .wellhead { margin-top: 28px; }
 }
