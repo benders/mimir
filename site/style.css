@@ -204,8 +204,9 @@ table.matrix thead th:first-child { writing-mode: horizontal-tb; transform: none
 .well canvas { position: sticky; top: 0; display: block; width: 100%; height: 100vh; margin-bottom: -100vh;
   pointer-events: none; }
 .well .back { z-index: 0; } .well .front { z-index: 100; }
-.well .fog { position: absolute; top: 0; bottom: 0; left: calc(50% - var(--R) * 1px); width: calc(var(--R) * 2px);
-  z-index: 100; pointer-events: none;  /* as thick as the chord a line of sight crosses */
+.well .fog { position: absolute; top: 0; bottom: 0; left: calc(50% - 1px); width: 2px; transform: scaleX(var(--R));
+  z-index: 100; pointer-events: none;  /* as thick as the chord a line of sight crosses; scaled, not sized, so a new
+  --R from well.js moves no layout box (#80: CLS 0.035) */
   background: linear-gradient(to right,rgba(21,23,26,0.000) 0%,rgba(21,23,26,0.270) 5%,rgba(21,23,26,0.372) 10%,rgba(21,23,26,0.443) 15%,rgba(21,23,26,0.496) 20%,rgba(21,23,26,0.537) 25%,rgba(21,23,26,0.568) 30%,rgba(21,23,26,0.591) 35%,rgba(21,23,26,0.607) 40%,rgba(21,23,26,0.617) 45%,rgba(21,23,26,0.620) 50%,rgba(21,23,26,0.617) 55%,rgba(21,23,26,0.607) 60%,rgba(21,23,26,0.591) 65%,rgba(21,23,26,0.568) 70%,rgba(21,23,26,0.537) 75%,rgba(21,23,26,0.496) 80%,rgba(21,23,26,0.443) 85%,rgba(21,23,26,0.372) 90%,rgba(21,23,26,0.270) 95%,rgba(21,23,26,0.000) 100%); }
 .well .node { --t: calc(var(--a) + var(--rot)); --w: min(130, var(--R) * var(--k)); --d: calc((cos(var(--t)) + 1) / 2);
   position: absolute; left: 50%; width: calc(var(--w) * 1px); margin: -22px 0 0 calc(var(--w) * -.5px);

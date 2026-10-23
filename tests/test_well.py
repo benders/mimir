@@ -275,6 +275,12 @@ class Markup(unittest.TestCase):
                 self.assertIn(a, i)
         self.assertNotIn('icons/Wood.png', self.html)  # no icon extracted: none linked
 
+    def test_fog_never_shifts_layout(self):  # #80: well.js sets --R after first render; only a transform may follow it
+        css = (ROOT / "site/style.css").read_text()
+        fog = re.search(r"\.well \.fog \{(.*?)\}", css, re.S).group(1)
+        self.assertIn("transform: scaleX(var(--R))", fog)
+        self.assertNotIn("var(--R)", fog.replace("transform: scaleX(var(--R))", ""))
+
     def test_canvas_and_motion(self):  # #76: the canvases' density is capped; no coasting with reduced motion
         self.assertIn("dpr=Math.min(devicePixelRatio||1,1.5)", self.script)
         self.assertIn("matchMedia('(prefers-reduced-motion: reduce)')", self.script)
