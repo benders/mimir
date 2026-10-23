@@ -11876,10 +11876,15 @@
   "weight": 2,
   "stack": 50,
   "maxQuality": 1,
-  "stage": "Meadows",
+  "stage": "BlackForest",
   "via": {
    "how": "source",
-   "from": "Leviathan"
+   "from": "Leviathan",
+   "needs": [
+    {
+     "item": "PickaxeAntler"
+    }
+   ]
   }
  },
  {

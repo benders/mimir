@@ -579,12 +579,15 @@ def stages(items: list, creatures: list, pieces: list, recipes: list, procs: lis
                 needs += [("piece", x, None) for _, x in ext[:level - 1]]
         return s, needs
 
+    hands = {t for i in items if i["id"] == "PlayerUnarmed" for t in i.get("damages") or {}} or {"blunt"}  # Player
+    # m_unarmedWeapon: Leviathan ignores blunt but not lightning, which no bare hand deals
+
     def tool(src: dict) -> tuple[int, list]:  # the earliest player item that can damage a tool-only or tiered source
         if not reach or src["kind"] not in TOOLED:
             return 0, []
         tier, mods = src.get("minToolTier", 0), src.get("damageModifiers") or {}
         hurt = {t for t, m in mods.items() if m not in ("Immune", "Ignore")} | {t for t in DAMAGE_TYPES if t not in mods}
-        if not tier and hurt - {"chop", "pickaxe"}:  # bare hands do
+        if not tier and hurt & hands:  # bare hands do
             return 0, []
         hits = lambda i: [(i.get("toolTier", 0), i.get("damages") or {})] + [
             (h["toolTier"], h["damages"]) for h in i.get("toolHits", [])]

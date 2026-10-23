@@ -284,7 +284,7 @@ class Entities(FixtureCase):
                                       "Pebble")]
         items += [{"id": "Pick", "toolTier": 2, "damages": {"pickaxe": 10}}, {"id": "Axe", "toolTier": 3, "damages": {"chop": 9}},
                   {"id": "Bomb", "toolTier": 6, "toolHits": [{"toolTier": 6, "damages": {"blunt": 40}}]}]
-        items += [{"id": x} for x in ("Ice", "Nugget", "Rubble", "Blood")]
+        items += [{"id": x} for x in ("Ice", "Nugget", "Rubble", "Blood", "Scute")]
         pieces = [{"id": "bench", "enabled": True, "tools": ["Hammer"], "resources": [{"item": "Wood"}]},
                   {"id": "ext", "enabled": True, "tools": ["Hammer"], "extends": "bench", "resources": [{"item": "Bar"}]},
                   {"id": "smelter", "enabled": True, "tools": ["Hammer"], "resources": [{"item": "Wood"}]}]
@@ -301,6 +301,8 @@ class Entities(FixtureCase):
                        damageModifiers={"chop": "Immune", "blunt": "Immune"}),
                    src("pond", biomes=["Meadows"], drops=drops("Ice"), damageModifiers={  # tier 0, but only a pick hurts it
                        t: "Immune" for t in ("blunt", "slash", "pierce", "chop", "fire", "frost", "lightning", "poison", "spirit")}),
+                   src("shell", biomes=["Meadows"], drops=drops("Scute"), damageModifiers={  # pickaxe, lightning
+                       t: "Ignore" for t in ("blunt", "slash", "pierce", "chop", "fire", "frost", "poison", "spirit")}),
                    src("troll", biomes=["Meadows"], minToolTier=6, drops=drops("Nugget"), damageModifiers={"chop": "Immune"}),
                    src("wall", biomes=["Meadows"], minToolTier=7, drops=drops("Rubble")),  # nothing a player holds breaks it
                    src("chest", "container", locations=[{"location": "Peak"}], drops=drops("Gem")),
@@ -338,6 +340,7 @@ class Entities(FixtureCase):
         self.assertEqual(got["Serpent"], "Meadows")  # the open sea counts from the start
         self.assertEqual(got["Pebble"], "Swamp")  # a shore location: Ocean next to land is that land's shore
         self.assertEqual(got["Ice"], "Mountain")  # the Mountain pick, though the rock has no minimum tier
+        self.assertEqual(got["Scute"], "Mountain")  # bare hands deal only blunt, not lightning
         self.assertEqual(got["Nugget"], "Meadows")  # the bomb's explosion has the tier
         self.assertNotIn("Rubble", got)
         self.assertEqual(got["Blood"], "Mountain")  # the siege's core: the siege starts at the Peak
