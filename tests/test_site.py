@@ -1,5 +1,6 @@
 """Smoke test for scripts/build-site.py: build the site from tests/golden/ (no icons) and check its shape.
 build-site.py itself fails on any broken internal link."""
+import hashlib
 import json
 import re
 import shutil
@@ -54,9 +55,13 @@ class Site(unittest.TestCase):
         self.assertIn('<div class="well"', home)
         self.assertIn('id="well-data"', home)
         for js in ("home.js", "well.js"):
-            self.assertIn(f'<script src="{js}" defer>', home)
+            self.assertRegex(home, rf'<script src="{js}\?v=\w+" defer>')
             self.assertTrue((self.out / js).is_file())
         self.assertFalse((self.out / "well.html").exists())  # the well lives on the home page now
+        for name in ("style.css", "search.js", "home.js", "well.js"):  # #76: versioned by what is served
+            v = re.search(rf'"{re.escape(name)}\?v=([0-9a-f]{{10}})"', home)
+            self.assertTrue(v, name)
+            self.assertEqual(v.group(1), hashlib.sha256((self.out / name).read_bytes()).hexdigest()[:10], name)
         self.assertIn('<header class="top">', (self.out / "items/Sword.html").read_text())  # other pages keep it
 
     def test_pages(self):

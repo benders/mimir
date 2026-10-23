@@ -7,17 +7,19 @@ const well = document.querySelector('.well'), src = document.getElementById('wel
 if (!well || !src) return;
 const D=JSON.parse(src.textContent);
 const cv=[...well.querySelectorAll('canvas')],cx=cv.map(c=>c.getContext('2d'));
-const nodes=[...well.querySelectorAll('.node')].sort((a,b)=>a.dataset.n-b.dataset.n),lbs=nodes.map(a=>a.querySelector('.lb')),N=D.a.length,seen=new Float64Array(N).fill(NaN),KID=D.a.map(()=>[]),EDGES=[];
+const nodes=[...well.querySelectorAll('.node')].sort((a,b)=>a.dataset.n-b.dataset.n),lbs=nodes.map(a=>a.querySelector('.lb')),imgs=nodes.map(a=>a.querySelector('img[data-src]')),N=D.a.length,seen=new Float64Array(N).fill(NaN),KID=D.a.map(()=>[]),EDGES=[];
 D.par.forEach((ps,c)=>ps.forEach(p=>{KID[p].push(c);EDGES.push([p,c])}));
 const root=document.documentElement,lim=()=>root.dataset.max===undefined?99:+root.dataset.max;let MAX=lim();
 let rot=0,R=348,TILT=44,W=0,dpr=1,on=null,up=null,down=null,queued=false;
 function walk(n,m,s){for(const q of m[n])if(!s.has(q)&&D.c[q]<=MAX){s.add(q);walk(q,m,s)}return s}
-function size(){W=well.clientWidth;R=W<600?W*.75:Math.min(440,W*.37);TILT=R/10;dpr=devicePixelRatio||1;
+function size(){W=well.clientWidth;R=W<600?W*.75:Math.min(440,W*.37);TILT=R/10;dpr=Math.min(devicePixelRatio||1,1.5);  // #76: two screen-sized canvases at 3x took ~24 MB
+
  well.style.setProperty('--R',R.toFixed(1));well.style.setProperty('--tilt',TILT.toFixed(1));seen.fill(NaN);
  for(const c of cv){c.width=Math.round(c.clientWidth*dpr);c.height=Math.round(c.clientHeight*dpr)}draw()}
 function place(off,vh){  // the nodes in view (and a screen either side) that haven't been placed at this rotation
  for(let n=0;n<N;n++){if(seen[n]===rot||D.c[n]>MAX||D.y[n]<off-vh||D.y[n]>off+2*vh)continue;seen[n]=rot;
-  const t=D.a[n]+rot,c=Math.cos(t),d=(c+1)/2,s=nodes[n].style;
+  const t=D.a[n]+rot,c=Math.cos(t),d=(c+1)/2,s=nodes[n].style,im=imgs[n];
+  if(im&&!im.src)im.src=im.dataset.src;  // its icon, now that it is near the screen (#76)
   s.transform=`translate(${(R*Math.sin(t)).toFixed(1)}px,${(TILT*c).toFixed(1)}px) scale(${(.55+.45*d).toFixed(3)})`;
   s.opacity=(.35+.65*d).toFixed(3);s.zIndex=Math.round(100+99*c);s.pointerEvents=c<0?'none':'';  // behind the fog: not a target
   lbs[n].style.opacity=Math.min(1,Math.max(0,(c*R*D.k[n]-64)/8)).toFixed(2)}}
@@ -47,13 +49,13 @@ function focus(n){up=n==null?null:walk(n,D.par,new Set([n]));down=n==null?null:w
  on=n==null?null:new Set([...up,...down]);
  well.classList.toggle('focus',!!on);for(const a of nodes)a.classList.toggle('on',!!on&&on.has(+a.dataset.n));later()}
 // turning: horizontal drags (vertical ones scroll the page), then it coasts
-let drag=null,moved=false,vel=0,touch=false;
+let drag=null,moved=false,vel=0,touch=false;const still=matchMedia('(prefers-reduced-motion: reduce)');  // no coasting
 well.addEventListener('pointerdown',ev=>{touch=ev.pointerType!='mouse';drag={x:ev.clientX,t:ev.timeStamp};moved=false;vel=0});
 well.addEventListener('pointermove',ev=>{if(!drag)return;const dx=ev.clientX-drag.x;
  if(!moved){if(Math.abs(dx)<6)return;moved=true;well.setPointerCapture(ev.pointerId);well.classList.add('dragging')}
  rot+=dx/R;vel=dx/R/Math.max(8,ev.timeStamp-drag.t);drag={x:ev.clientX,t:ev.timeStamp};later()});
 function release(){if(!drag)return;drag=null;well.classList.remove('dragging');
- if(moved){let last=performance.now();(function coast(now){vel*=Math.pow(.995,now-last);rot+=vel*(now-last);last=now;draw();
+ if(moved&&!still.matches){let last=performance.now();(function coast(now){vel*=Math.pow(.995,now-last);rot+=vel*(now-last);last=now;draw();
   if(Math.abs(vel)>2e-5&&!drag)requestAnimationFrame(coast)})(last)}}
 well.addEventListener('pointerup',release);well.addEventListener('pointercancel',()=>{drag=null;well.classList.remove('dragging')});
 well.addEventListener('click',ev=>{if(moved){ev.preventDefault();moved=false;return}

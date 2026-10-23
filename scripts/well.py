@@ -280,7 +280,11 @@ def markup(g: SimpleNamespace, lay: SimpleNamespace, icons: set, links: dict | N
         href = f'{ {"item": "items", "piece": "pieces", "creature": "creatures"}[x[0]]}/{x[1]}.html'
         name = ent[x].get("name", x[1])
         cls = "node" + (" boss" if x in g.bosses else " gear" if x in g.gear else "")
-        img = f'<img src="icons/{ic}.png" alt="" loading="lazy" draggable="false">' if ic in icons else ""
+        # past the first stage the icon waits in data-src until well.js places the node on screen: loading=lazy
+        # alone still fetched ~160 hidden ones while parsing (#76)
+        src = "src" if not g.stage(x) else "data-src"
+        img = (f'<img {src}="icons/{ic}.png" alt="" width="32" height="32" loading="lazy" decoding="async" draggable="false">'
+               if ic in icons else "")
         nodes.append(f'<a href="{href}" class="{cls}" data-n="{idx[x]}"{hide(g.stage(x))} draggable="false" title="{e(name)}" '
                      f'style="--a:{theta[x]:.4f}rad;--k:{slot[x]:.4f};top:{ypos[x]:.0f}px;--tier:{COL[ent[x]["stage"]]}">'
                      f'<span class="ic">{img}</span><span class="lb">{e(name)}</span></a>')

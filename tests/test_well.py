@@ -1,6 +1,7 @@
 """Tests for scripts/well.py (#79): node selection, graph rules and layout on small invented graphs, checks on the
 committed data/, and the home page's markup and site/well.js (it parses; the hover rule)."""
 import importlib.util
+import gzip
 import json
 import os
 import re
@@ -240,7 +241,8 @@ class Markup(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
         cls.g = WELL.graph(WELL.load(ROOT / "data"))
-        cls.html = WELL.markup(cls.g, WELL.layout(cls.g), set(), {"Meadows": "biomes/Meadows.html"})
+        icons = {WELL.icon(cls.g, x) for x in cls.g.sel} - {"Wood"}  # as if every icon but one were extracted
+        cls.html = WELL.markup(cls.g, WELL.layout(cls.g), icons, {"Meadows": "biomes/Meadows.html"})
         cls.script = (ROOT / "site/well.js").read_text()
 
     def test_every_node_once(self):
@@ -256,8 +258,28 @@ class Markup(unittest.TestCase):
         self.assertIn('<a href="biomes/Meadows.html">Meadows</a>', self.html)
         self.assertNotIn('href="biomes/Swamp.html"', self.html)  # no link given
 
-    def test_size_budget(self):
-        self.assertLess(len(self.html.encode()), 250_000)  # 170 KB now; #76 will set the real budget
+    def test_size_budget(self):  # #76: 212 KB, 23 KB gzipped (October 2026)
+        self.assertLess(len(self.html.encode()), 240_000)
+        self.assertLess(len(gzip.compress(self.html.encode(), 9)), 28_000)
+
+    def test_icons(self):  # #76: sized (no layout shift), lazy (hidden by "Up to": never fetched), decoded off-thread
+        imgs = re.findall(r'<img [^>]*>', self.html)
+        data = json.loads(re.search(r'id="well-data">(.*?)</script>', self.html, re.S).group(1))
+        for n, img in re.findall(r'data-n="(\d+)"[^>]*><span class="ic">(<img [^>]*>)', self.html):
+            first = data["c"][int(n)] == 0  # Meadows: fetched at once; later: when well.js places it
+            self.assertEqual(img.startswith('<img src="icons/'), first, img)
+            self.assertEqual(img.startswith('<img data-src="icons/'), not first, img)
+        self.assertEqual(len(imgs), len(self.g.sel) - sum(1 for x in self.g.sel if WELL.icon(self.g, x) in (None, "Wood")))
+        for i in imgs:
+            for a in ('width="32"', 'height="32"', 'loading="lazy"', 'decoding="async"'):
+                self.assertIn(a, i)
+        self.assertNotIn('icons/Wood.png', self.html)  # no icon extracted: none linked
+
+    def test_canvas_and_motion(self):  # #76: the canvases' density is capped; no coasting with reduced motion
+        self.assertIn("dpr=Math.min(devicePixelRatio||1,1.5)", self.script)
+        self.assertIn("matchMedia('(prefers-reduced-motion: reduce)')", self.script)
+        self.assertIn("if(moved&&!still.matches)", self.script)
+        self.assertIn("if(im&&!im.src)im.src=im.dataset.src", self.script)
 
     def node(self, js: str) -> str:
         if not shutil.which("node"):

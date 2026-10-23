@@ -15,6 +15,8 @@ Item stats per quality level follow the game's own formulas (assembly_valheim):
   Piece.Requirement.GetAmount(q):     q=1 amount; q=2,3 (q-1)*perLevel; q>=4 (4+(q-4)/2)*perLevel
   Recipe.GetRequiredStationLevel(q):  max(1, stationLevel) + q - 1
 """
+import functools
+import hashlib
 import html
 import json
 import math
@@ -718,6 +720,14 @@ HEADER = f"""<header class="top">
 """
 
 
+@functools.cache
+def asset(name: str) -> str:
+    """A site/ file's URL with a hash of what will be served (style.css gets stage_css() appended), so a deploy
+    reaches browsers holding the previous copy (#76)."""
+    data = (STATIC / name).read_bytes() + (stage_css().encode() if name == "style.css" else b"")
+    return f"{quote(name)}?v={hashlib.sha256(data).hexdigest()[:10]}"
+
+
 def page(path: str, title: str, body: str, kind_label: str = "", scripts=(), header: bool = True) -> None:
     """Write one page; `header` False leaves out the site header (the home page has its own search and "Up to")."""
     depth = path.count("/")
@@ -729,11 +739,11 @@ def page(path: str, title: str, body: str, kind_label: str = "", scripts=(), hea
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <base href="{base}">
 <title>{esc(title)} · {esc(SITE_NAME)}</title>
-<script src="newrelic.js"></script>
-<link rel="stylesheet" href="style.css">
+<script src="{asset("newrelic.js")}"></script>
+<link rel="stylesheet" href="{asset("style.css")}">
 <script>{STAGE_INIT}</script>
-<script src="search.js" defer></script>
-{"".join(f'<script src="{esc(x)}" defer></script>' for x in scripts)}</head>
+<script src="{asset("search.js")}" defer></script>
+{"".join(f'<script src="{asset(x)}" defer></script>' for x in scripts)}</head>
 <body>
 {HEADER if header else ""}<main>
 {f'<p class="crumb">{kind_label}</p>' if kind_label else ""}{body}
@@ -2742,6 +2752,7 @@ def check_links() -> int:
     pat = re.compile(r'(?:href|src)="([^"#]+)')
     for f in written:
         for target in pat.findall(f.read_text(encoding="utf-8")):
+            target = target.split("?")[0]  # asset() versions
             if target.startswith(("http:", "https:", "../", "./")):
                 continue
             if not (OUT / unquote(target)).exists():
