@@ -751,7 +751,8 @@ def page(path: str, title: str, body: str, kind_label: str = "", scripts=(), hea
 <title>{esc(title)} · {esc(SITE_NAME)}</title>
 <meta name="description" content="{esc(meta_description(title, body))}">
 <link rel="icon" href="{asset("favicon.svg")}" type="image/svg+xml">
-<script src="{asset("newrelic.js")}"></script>
+<link rel="preconnect" href="https://js-agent.newrelic.com" crossorigin>
+<script src="{asset("newrelic.js")}" async></script>
 <link rel="stylesheet" href="{asset("style.css")}">
 <script>{STAGE_INIT}</script>
 <script src="{asset("search.js")}" defer></script>
@@ -2694,12 +2695,13 @@ def home_page(items: list) -> None:
                     "creatures": list(CREATURES.values()), "sources": list(SOURCES.values()), "locations": LOCATIONS})
     bosses = well.stage_bosses(g)
 
-    def disc(i):
+    def disc(i, lazy=False):  # the listbox's are hidden until it opens: fetched then (#82)
         ic = well.icon(g, bosses[i]) if i in bosses else ITEMS.get(POSTGAME_ICON, {}).get("icon")
-        img = f'<img src="icons/{ic}.png" alt="">' if ic in HAVE_ICONS else ""
+        attr = ' loading="lazy"' if lazy else ""
+        img = f'<img src="icons/{ic}.png" alt=""{attr}>' if ic in HAVE_ICONS else ""
         return f'<span class="disc">{img}</span>'
     opts = "".join(f'<li role="option" id="upto-{i}" data-upto="{i if s != STAGES[-1] else ""}" aria-selected="false" '
-                   f'style="--tier:{well.COL[s]}">{disc(i)}<span>{esc(STAGE_NAMES[s])}</span></li>' for i, s in enumerate(STAGES))
+                   f'style="--tier:{well.COL[s]}">{disc(i, lazy=True)}<span>{esc(STAGE_NAMES[s])}</span></li>' for i, s in enumerate(STAGES))
     last = len(STAGES) - 1
     tree = well.markup(g, well.layout(g), HAVE_ICONS, {b: f"biomes/{quote(b)}.html" for b in STAGES if b in BIOMES})
     body = (f'<div class="home"><div class="ask"><h1>{esc(SITE_NAME)}</h1><p class="sub">A Valheim reference, rebuilt from the game '

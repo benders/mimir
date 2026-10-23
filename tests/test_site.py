@@ -84,6 +84,13 @@ class Site(unittest.TestCase):
         self.assertIn('<meta name="description" content="Biomes in Valheim', biomes)
         self.assertTrue((self.out / "favicon.svg").is_file())
 
+    def test_head_loads_nothing_blocking(self):  # #82: New Relic's config script is async, its origin preconnected
+        doc = (self.out / "items/Sword.html").read_text(encoding="utf-8")
+        self.assertRegex(doc, r'<script src="newrelic.js\?v=\w+" async></script>')
+        self.assertIn('<link rel="preconnect" href="https://js-agent.newrelic.com" crossorigin>', doc)
+        head = doc.split("</head>")[0]
+        self.assertEqual(re.findall(r'<script src="[^"]+"(?! async| defer)>', head), [])  # nothing else blocking
+
     def test_hidden_items_have_no_page(self):
         for item in ("Bite", "FW_Helmet", "SP_Helmet"):
             self.assertFalse((self.out / f"items/{item}.html").exists(), item)
