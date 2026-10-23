@@ -1,6 +1,7 @@
 // The home page (#78): "Show data up to…", a listbox of the stages that sets the stage filter as the header select
 // does on other pages (<html data-max>, localStorage; search.js), and the section counts, which follow it
-// (data-counts: what each section holds up to each stage, the last = everything).
+// (data-counts: what each section holds up to each stage, the last = everything). The deeper bands listed under the
+// well (scripts/well.py cut()) set it too.
 (() => {
   const root = document.documentElement, KEY = "mimir-stage";
   const btn = document.getElementById("upto-b"), list = document.getElementById("upto-list");
@@ -59,6 +60,14 @@
     else if (ev.key === "Escape") close();
     else { if (ev.key === "Tab") close(false); return; }
     ev.preventDefault();
+  });
+  document.querySelectorAll(".deeper [data-upto]").forEach((b) => b.addEventListener("click", () =>
+    choose(opts.findIndex((o) => o.dataset.upto === b.dataset.upto))));
+  addEventListener("storage", (ev) => {  // changed in another tab (as the head script reads it: nothing stored = Meadows)
+    if (ev.key !== KEY && ev.key !== null) return;
+    const m = ev.key === null ? null : ev.newValue;
+    if (m === "all") delete root.dataset.max; else root.dataset.max = m ?? "0";
+    show();
   });
   opts.forEach((o, n) => {
     o.addEventListener("click", () => choose(n));

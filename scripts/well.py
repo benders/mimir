@@ -267,32 +267,52 @@ def stage_bosses(g: SimpleNamespace) -> dict:
 def markup(g: SimpleNamespace, lay: SimpleNamespace, icons: set, links: dict | None = None) -> str:
     """The well's HTML for the home page (build-site.py): nodes as links placed by CSS from their angle (site/style.css,
     the first render and without JavaScript), the band names (linked through `links`: stage -> href), two canvases and
-    the fog for site/well.js, and its data in <script id="well-data">."""
+    the fog for site/well.js, and its data in <script id="well-data">. The "Up to" filter (#77): nodes and band names
+    carry data-stage, so the site's stage CSS hides what is past <html data-max> before any script runs; cut() ends
+    the well at that stage and lists the deeper bands below it."""
     ent, items, theta, ypos, slot, H = g.ent, g.items, lay.theta, lay.ypos, lay.slot, lay.H
     e, links = html.escape, links or {}
     order = [x for ring in lay.rings for x in ring]
     idx = {x: n for n, x in enumerate(order)}
-    nodes = []
+    nodes, hide = [], lambda i: f' data-stage="{i}"' if i else ""  # the site's stage CSS hides it past "Up to"
     for x in order:
         ic = icon(g, x)
         href = f'{ {"item": "items", "piece": "pieces", "creature": "creatures"}[x[0]]}/{x[1]}.html'
         name = ent[x].get("name", x[1])
         cls = "node" + (" boss" if x in g.bosses else " gear" if x in g.gear else "")
         img = f'<img src="icons/{ic}.png" alt="" loading="lazy" draggable="false">' if ic in icons else ""
-        nodes.append(f'<a href="{href}" class="{cls}" data-n="{idx[x]}" draggable="false" title="{e(name)}" '
+        nodes.append(f'<a href="{href}" class="{cls}" data-n="{idx[x]}"{hide(g.stage(x))} draggable="false" title="{e(name)}" '
                      f'style="--a:{theta[x]:.4f}rad;--k:{slot[x]:.4f};top:{ypos[x]:.0f}px;--tier:{COL[ent[x]["stage"]]}">'
                      f'<span class="ic">{img}</span><span class="lb">{e(name)}</span></a>')
     name = lambda s: f'<a href="{links[s]}">{e(NAMES.get(s, s))}</a>' if s in links else e(NAMES.get(s, s))
-    labels = "".join(f'<div class="bandname" style="top:{top + 12:.0f}px;--tier:{COL[s]}">{name(s)}'
+    labels = "".join(f'<div class="bandname" data-s="{S.index(s)}"{hide(S.index(s))} '
+                     f'style="top:{top + 12:.0f}px;--tier:{COL[s]}">{name(s)}'
                      f'<span>{n_shown} of {n_all}</span></div>' for s, top, n_all, n_shown in lay.bands)
     data = {"a": [round(theta[x], 4) for x in order], "y": [round(ypos[x]) for x in order],
             "c": [g.stage(x) for x in order], "k": [round(slot[x], 4) for x in order],
             "col": [COL[s] for s in S], "bands": [round(top) for _, top, _, _ in lay.bands] + [round(H - TILT - 24)],
             "par": [sorted(idx[p] for p in g.par[x]) for x in order]}
     blob = json.dumps(data, separators=(",", ":")).replace("</", "<\\/")  # can't close the <script> early
-    return (f'<div class="well" style="height:{H:.0f}px"><canvas class="back"></canvas><div class="fog"></div>'
-            f'<canvas class="front"></canvas>{labels}{"".join(nodes)}</div>\n'
+    return (f'<div class="well" style="--h:{H:.0f}px"><canvas class="back"></canvas><div class="fog"></div>'
+            f'<canvas class="front"></canvas>{labels}{"".join(nodes)}</div>\n{cut(lay)}'
             f'<script type="application/json" id="well-data">{blob}</script>')
+
+
+def cut(lay: SimpleNamespace) -> str:
+    """The well under the "Up to" filter (#77): rules ending it at the chosen stage's floor (the next band's ring; it
+    eases there, site/style.css), and the deeper bands as a list below it with how many nodes each holds, each a
+    button setting "Up to" there (site/home.js). Post-game (no data-max) shows it all and no list."""
+    tops = [top for _, top, _, _ in lay.bands]
+    rules = []
+    for m in range(len(S) - 1):
+        rules.append(f'html[data-max="{m}"] .well{{--cut:{tops[m + 1] + TILT + 24:.0f}px}}')
+        rules.append(f'html[data-max="{m}"] .well .bandname[data-s="{m}"]{{font-size:22px}}')
+        rules += [f'html[data-max="{m}"] .deeper li[data-s="{s}"]{{display:flex}}' for s in range(m + 1, len(S))]
+    rows = "".join(f'<li data-s="{i}" style="--tier:{COL[s]}"><button type="button" data-upto="{i if i < len(S) - 1 else ""}">'
+                   f'{html.escape(NAMES.get(s, s))}</button><span>{n} more</span></li>'
+                   for i, (s, _, _, n) in enumerate(lay.bands) if i)
+    return f'<style>{"".join(rules)}</style><ol class="deeper" aria-label="Deeper in the well">{rows}</ol>\n'
+
 
 
 def audit(g: SimpleNamespace) -> None:

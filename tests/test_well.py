@@ -271,10 +271,40 @@ class Markup(unittest.TestCase):
         walk = re.search(r"function walk\(.*?return s\}", self.script).group(0)
         hot = re.search(r"const hot=(.*?);", self.script).group(1)
         # 0 -> 1 -> 2, and 0 -> 3: hovering 1, the edge 0 -> 3 skips it
-        js = (f"{walk}; const D={{par:[[],[0],[1],[0]]}}, KID=[[1,3],[2],[],[]], on=true;"
+        js = (f"{walk}; const D={{par:[[],[0],[1],[0]],c:[0,0,0,0]}}, KID=[[1,3],[2],[],[]], on=true, MAX=99;"
               f"const up=walk(1,D.par,new Set([1])), down=walk(1,KID,new Set([1]));"
               f"const lit=(p,c)=>!!({hot}); console.log([lit(0,1),lit(1,2),lit(0,3)].join())")
         self.assertEqual(self.node(js), "true,true,false")
+
+    def test_trace_stops_at_the_stage(self):  # #77: hovering can't trace into what "Up to" hides
+        walk = re.search(r"function walk\(.*?return s\}", self.script).group(0)
+        js = (f"{walk}; const D={{c:[0,1,2]}}, KID=[[1],[2],[]], MAX=1;"
+              f"console.log([...walk(0,KID,new Set([0]))].join())")
+        self.assertEqual(self.node(js), "0,1")
+
+    def test_hidden_nodes_carry_their_stage(self):  # #77: the site's stage CSS hides them with no script
+        data = json.loads(re.search(r'id="well-data">(.*?)</script>', self.html, re.S).group(1))
+        for n, st in re.findall(r'class="node[^"]*" data-n="(\d+)"(?: data-stage="(\d)")?', self.html):
+            self.assertEqual(int(st or 0), data["c"][int(n)], n)
+        self.assertEqual(len(re.findall(r'class="node[^"]*" data-n=', self.html)), len(self.g.sel))
+        for i in range(1, len(WELL.S)):
+            self.assertIn(f'<div class="bandname" data-s="{i}" data-stage="{i}"', self.html)
+
+    def test_cut_at_the_stage(self):  # #77: the well ends at the chosen stage's floor, the deeper bands listed below
+        data = json.loads(re.search(r'id="well-data">(.*?)</script>', self.html, re.S).group(1))
+        H = int(re.search(r'<div class="well" style="--h:(\d+)px"', self.html).group(1))
+        cuts = [int(c) for c in re.findall(r'\.well\{--cut:(\d+)px\}', self.html)]
+        self.assertEqual(len(cuts), len(WELL.S) - 1)  # Post-game: no cut
+        self.assertEqual(cuts, sorted(cuts))
+        self.assertLess(cuts[-1], H)
+        for m, cut in enumerate(cuts):  # past every node of the stage, short of the next band's
+            self.assertGreater(cut, max(y for y, c in zip(data["y"], data["c"]) if c <= m))
+            self.assertLess(cut, min(y for y, c in zip(data["y"], data["c"]) if c > m))
+        self.assertIn('html[data-max="2"] .deeper li[data-s="3"]{display:flex}', self.html)
+        self.assertNotIn('html[data-max="2"] .deeper li[data-s="2"]', self.html)
+        self.assertEqual(len(re.findall(r'<li data-s="\d" style="--tier:[^"]+"><button type="button" data-upto=', self.html)),
+                         len(WELL.S) - 1)
+        self.assertIn('<button type="button" data-upto="">Post-game</button>', self.html)
 
 
 if __name__ == "__main__":

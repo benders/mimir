@@ -9,6 +9,12 @@
     if (sel.value === "") delete root.dataset.max; else root.dataset.max = sel.value;
     try { localStorage.setItem(KEY, sel.value === "" ? "all" : sel.value); } catch (e) {}
   });
+  addEventListener("storage", (ev) => {  // changed in another tab (as the head script reads it: nothing stored = Meadows)
+    if (ev.key !== KEY && ev.key !== null) return;
+    const m = ev.key === null ? null : ev.newValue;
+    if (m === "all") delete root.dataset.max; else root.dataset.max = m ?? "0";
+    sel.value = root.dataset.max ?? "";
+  });
 })();
 
 (() => {

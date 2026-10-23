@@ -199,6 +199,7 @@ table.matrix thead th:first-child { writing-mode: horizontal-tb; transform: none
    themes, like a picture. Nodes are placed by CSS trig from their angle --a and the well's --rot (first render, no
    JavaScript); well.js overrides the transform of the nodes in view while it turns */
 .well { position: relative; isolation: isolate; margin-top: 16px; background: #15171a; border-radius: 10px; overflow: clip;
+  height: var(--cut, var(--h)); transition: height .6s ease;
   touch-action: pan-y; user-select: none; -webkit-user-select: none; --rot: 0rad; --R: 348; --tilt: 44; }
 .well canvas { position: sticky; top: 0; display: block; width: 100%; height: 100vh; margin-bottom: -100vh;
   pointer-events: none; }
@@ -226,6 +227,16 @@ table.matrix thead th:first-child { writing-mode: horizontal-tb; transform: none
 .well.focus .node { opacity: .15 !important; } .well.focus .node.on { opacity: 1 !important; }
 .well.focus .node.on .lb { opacity: 1 !important; }
 .well.dragging .node { pointer-events: none; }
+/* below a well cut at the chosen stage (#77): the deeper bands, fogged, each a button setting "Up to" there */
+.deeper { display: none; list-style: none; margin: 0; padding: 18px 0 8px; text-align: center;
+  -webkit-mask-image: linear-gradient(#000 30%, rgb(0 0 0 / .35)); mask-image: linear-gradient(#000 30%, rgb(0 0 0 / .35)); }
+html[data-max] .deeper { display: block; }
+.deeper li { display: none; justify-content: center; align-items: baseline; gap: 8px; padding: 3px 0; }
+.deeper button { font: inherit; font-size: 17px; font-weight: 700; letter-spacing: .04em; color: var(--tier);
+  background: none; border: 0; padding: 0; cursor: pointer; }
+.deeper button:hover { text-decoration: underline; }
+.deeper span { color: var(--muted); font-size: 13px; }
+@media (prefers-reduced-motion: reduce) { .well { transition: none; } }
 @media (max-width: 600px) {  /* home on a phone: the sections in two compact rows */
   .home { padding-top: 16px; --big: 19px; }
   .ask h1 { font-size: 36px; }

@@ -1,6 +1,7 @@
 // The well on the home page (scripts/well.py, #68): turning it, edges and rings on two screen-sized canvases, and
 // tracing a node's chain. Nodes are links placed by CSS for the first render; while turning, the nodes in view get
 // their transform from here (CSS trig on every node costs ~4x more per frame). Data: <script id="well-data">.
+// Past the "Up to" stage (<html data-max>, #77) nothing is placed, drawn or traced; it redraws when that changes.
 (() => {
 const well = document.querySelector('.well'), src = document.getElementById('well-data');
 if (!well || !src) return;
@@ -8,13 +9,14 @@ const D=JSON.parse(src.textContent);
 const cv=[...well.querySelectorAll('canvas')],cx=cv.map(c=>c.getContext('2d'));
 const nodes=[...well.querySelectorAll('.node')].sort((a,b)=>a.dataset.n-b.dataset.n),lbs=nodes.map(a=>a.querySelector('.lb')),N=D.a.length,seen=new Float64Array(N).fill(NaN),KID=D.a.map(()=>[]),EDGES=[];
 D.par.forEach((ps,c)=>ps.forEach(p=>{KID[p].push(c);EDGES.push([p,c])}));
+const root=document.documentElement,lim=()=>root.dataset.max===undefined?99:+root.dataset.max;let MAX=lim();
 let rot=0,R=348,TILT=44,W=0,dpr=1,on=null,up=null,down=null,queued=false;
-function walk(n,m,s){for(const q of m[n])if(!s.has(q)){s.add(q);walk(q,m,s)}return s}
+function walk(n,m,s){for(const q of m[n])if(!s.has(q)&&D.c[q]<=MAX){s.add(q);walk(q,m,s)}return s}
 function size(){W=well.clientWidth;R=W<600?W*.75:Math.min(440,W*.37);TILT=R/10;dpr=devicePixelRatio||1;
  well.style.setProperty('--R',R.toFixed(1));well.style.setProperty('--tilt',TILT.toFixed(1));seen.fill(NaN);
  for(const c of cv){c.width=Math.round(c.clientWidth*dpr);c.height=Math.round(c.clientHeight*dpr)}draw()}
 function place(off,vh){  // the nodes in view (and a screen either side) that haven't been placed at this rotation
- for(let n=0;n<N;n++){if(seen[n]===rot||D.y[n]<off-vh||D.y[n]>off+2*vh)continue;seen[n]=rot;
+ for(let n=0;n<N;n++){if(seen[n]===rot||D.c[n]>MAX||D.y[n]<off-vh||D.y[n]>off+2*vh)continue;seen[n]=rot;
   const t=D.a[n]+rot,c=Math.cos(t),d=(c+1)/2,s=nodes[n].style;
   s.transform=`translate(${(R*Math.sin(t)).toFixed(1)}px,${(TILT*c).toFixed(1)}px) scale(${(.55+.45*d).toFixed(3)})`;
   s.opacity=(.35+.65*d).toFixed(3);s.zIndex=Math.round(100+99*c);s.pointerEvents=c<0?'none':'';  // behind the fog: not a target
@@ -22,11 +24,11 @@ function place(off,vh){  // the nodes in view (and a screen either side) that ha
 function draw(){queued=false;
  const off=cv[0].getBoundingClientRect().top-well.getBoundingClientRect().top,vh=cv[0].clientHeight,mid=W/2;place(off,vh);
  for(const g of cx){g.setTransform(dpr,0,0,dpr,0,-off*dpr);g.clearRect(0,off,W,vh)}
- for(const[i,y]of D.bands.entries()){if(y<off-TILT-10||y>off+vh+TILT+10)continue;  // rings: back half, front half
+ for(const[i,y]of D.bands.entries()){if(i>MAX+1||y<off-TILT-10||y>off+vh+TILT+10)continue;  // rings: back half, front half
   for(const f of[0,1]){const g=cx[f];g.strokeStyle=D.col[Math.min(i,D.col.length-1)];g.globalAlpha=f?.35:.2;g.lineWidth=1;
    g.beginPath();g.ellipse(mid,y,R,TILT,0,f?0:Math.PI,f?Math.PI:2*Math.PI);g.stroke()}}
  const lit=[];
- for(const ed of EDGES){const[p,c]=ed,y0=D.y[p]+22,y1=D.y[c]-22;
+ for(const ed of EDGES){const[p,c]=ed;if(D.c[p]>MAX||D.c[c]>MAX)continue;const y0=D.y[p]+22,y1=D.y[c]-22;
   if(Math.max(y0,y1)<off-TILT||Math.min(y0,y1)>off+vh+TILT)continue;
   const hot=on&&(up.has(p)&&up.has(c)||down.has(p)&&down.has(c));/* on a path through it */if(hot){lit.push(ed);continue}edge(p,c,y0,y1,false)}
  for(const[p,c]of lit)edge(p,c,D.y[p]+22,D.y[c]-22,true)}
@@ -61,5 +63,7 @@ well.addEventListener('click',ev=>{if(moved){ev.preventDefault();moved=false;ret
  else if(!a)focus(null)});
 well.addEventListener('pointerover',ev=>{const a=ev.target.closest('.node');if(ev.pointerType=='mouse'&&a&&!drag)focus(+a.dataset.n)});
 well.addEventListener('pointerleave',ev=>{if(ev.pointerType=='mouse')focus(null)});
+new MutationObserver(()=>{MAX=lim();focus(null)}).observe(root,{attributeFilter:['data-max']});
+well.addEventListener('transitionend',later);  // the well eases to its new depth
 addEventListener('scroll',later,{passive:true});addEventListener('resize',size);size();
 })();
