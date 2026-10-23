@@ -720,6 +720,16 @@ HEADER = f"""<header class="top">
 """
 
 
+def meta_description(title: str, body: str) -> str:
+    """A page's meta description (#81): its entry's description (p.desc), else its subtitle (p.sub), else a line on
+    the site; plain text, at most about 160 characters."""
+    m = re.search(r'<p class="desc">(.*?)</p>', body, re.S) or re.search(r'<p class="sub">(.*?)</p>', body, re.S)
+    text = " ".join(html.unescape(re.sub(r"<[^>]+>", "", m.group(1))).split()) if m else ""
+    if len(text) < 40:  # "In progression order.", a bare type label: not a description
+        text = f"{title} in Valheim {META['gameVersion']}: {SITE_NAME}, a reference rebuilt from the game data."
+    return text if len(text) <= 160 else text[:157].rsplit(" ", 1)[0] + "…"
+
+
 @functools.cache
 def asset(name: str) -> str:
     """A site/ file's URL with a hash of what will be served (style.css gets stage_css() appended), so a deploy
@@ -739,6 +749,8 @@ def page(path: str, title: str, body: str, kind_label: str = "", scripts=(), hea
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <base href="{base}">
 <title>{esc(title)} · {esc(SITE_NAME)}</title>
+<meta name="description" content="{esc(meta_description(title, body))}">
+<link rel="icon" href="{asset("favicon.svg")}" type="image/svg+xml">
 <script src="{asset("newrelic.js")}"></script>
 <link rel="stylesheet" href="{asset("style.css")}">
 <script>{STAGE_INIT}</script>

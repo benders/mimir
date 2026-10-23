@@ -217,7 +217,7 @@ table.matrix thead th:first-child { writing-mode: horizontal-tb; transform: none
   display: flex; align-items: center; justify-content: center; }
 .well .ic img { width: 32px; height: 32px; }
 .well .gear .ic { border-width: 2.5px; } .well .boss .ic { background: #2a1f14; border: 2.5px solid #e0a24a; }
-.well .lb { color: var(--tier); font-size: 11.5px; line-height: 13px; text-align: center; margin-top: 4px; max-width: 100%;
+.well .lb { color: var(--tier); font-size: 12px; line-height: 13px; text-align: center; margin-top: 4px; max-width: 100%;
   display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;
   opacity: clamp(0, (cos(var(--t)) * var(--R) * var(--k) - 64) / 8, 1); }
 .well .node:hover .lb { text-decoration: underline; }

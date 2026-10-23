@@ -275,6 +275,11 @@ class Markup(unittest.TestCase):
                 self.assertIn(a, i)
         self.assertNotIn('icons/Wood.png', self.html)  # no icon extracted: none linked
 
+    def test_labels_legible(self):  # #81: Lighthouse counts text under 12 px as illegible
+        css = (ROOT / "site/style.css").read_text()
+        size = float(re.search(r"\.well \.lb \{[^}]*?font-size: ([\d.]+)px", css).group(1))
+        self.assertGreaterEqual(size, 12)
+
     def test_fog_never_shifts_layout(self):  # #80: well.js sets --R after first render; only a transform may follow it
         css = (ROOT / "site/style.css").read_text()
         fog = re.search(r"\.well \.fog \{(.*?)\}", css, re.S).group(1)

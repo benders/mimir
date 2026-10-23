@@ -1,6 +1,7 @@
 """Smoke test for scripts/build-site.py: build the site from tests/golden/ (no icons) and check its shape.
 build-site.py itself fails on any broken internal link."""
 import hashlib
+import html
 import json
 import re
 import shutil
@@ -68,6 +69,20 @@ class Site(unittest.TestCase):
         for page in ("index.html", "items/Sword.html", "creatures/Raider.html", "pieces/Anvil.html",
                      "effects/SE_Fizz.html", "search.json", "style.css", "search.js", "newrelic.js"):
             self.assertTrue((self.out / page).is_file(), page)
+
+    def test_meta_and_icon(self):  # #81: every page has a description and the site's own icon
+        for page in ("index.html", "items/Sword.html", "creatures/Raider.html", "mechanics/index.html", "biomes/index.html"):
+            doc = (self.out / page).read_text(encoding="utf-8")
+            m = re.search(r'<meta name="description" content="([^"]+)">', doc)
+            self.assertTrue(m, page)
+            self.assertLessEqual(len(html.unescape(m.group(1))), 160, page)
+            self.assertNotIn("<", html.unescape(m.group(1)), page)
+            self.assertRegex(doc, r'<link rel="icon" href="favicon.svg\?v=\w+" type="image/svg\+xml">')
+        home = (self.out / "index.html").read_text(encoding="utf-8")
+        self.assertIn('<meta name="description" content="A Valheim reference, rebuilt from the game data', home)
+        biomes = (self.out / "biomes/index.html").read_text(encoding="utf-8")  # a short subtitle: the line on the site
+        self.assertIn('<meta name="description" content="Biomes in Valheim', biomes)
+        self.assertTrue((self.out / "favicon.svg").is_file())
 
     def test_hidden_items_have_no_page(self):
         for item in ("Bite", "FW_Helmet", "SP_Helmet"):
