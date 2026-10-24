@@ -91,6 +91,30 @@ class Site(unittest.TestCase):
         head = doc.split("</head>")[0]
         self.assertEqual(re.findall(r'<script src="[^"]+"(?! async| defer)>', head), [])  # nothing else blocking
 
+    def test_agent_files(self):  # #83: sitemap, robots.txt, llms.txt and the data for crawlers and AI agents
+        site = "https://mimir.slackworks.com/"
+        urls = re.findall(r"<loc>([^<]+)</loc>", (self.out / "sitemap.xml").read_text(encoding="utf-8"))
+        pages = sorted(f.relative_to(self.out).as_posix() for f in self.out.rglob("*.html"))
+        self.assertEqual(len(urls), len(pages))
+        self.assertIn(site, urls)  # index.html as the directory
+        self.assertIn(site + "items/", urls)
+        self.assertIn(site + "items/Sword.html", urls)
+        for u in urls:
+            self.assertTrue(u.startswith(site), u)
+            path = u.removeprefix(site)
+            self.assertTrue((self.out / (path or "index.html")).is_file() or (self.out / path / "index.html").is_file(), u)
+        self.assertIn(f"Sitemap: {site}sitemap.xml", (self.out / "robots.txt").read_text())
+        names = sorted(f.stem for f in (ROOT / "data").glob("*.json"))
+        self.assertEqual(sorted(f.stem for f in (self.out / "data").glob("*.json")), names)  # every data file, described
+        llms = (self.out / "llms.txt").read_text(encoding="utf-8")
+        self.assertTrue(llms.startswith("# Mimir's Well\n\n> A Valheim reference"))
+        for n in names:
+            self.assertRegex(llms, rf"- \[{n}\.json\]\({site}data/{n}\.json\): \w")
+        self.assertRegex(llms, rf"- \[Items\]\({site}items/\): \d+ pages")
+        self.assertIn(f"]({site}mechanics/drops.html): ", llms)
+        for target in re.findall(rf"\]\({re.escape(site)}([^)]*)\)", llms):  # every link resolves
+            self.assertTrue((self.out / target).is_file() or (self.out / target / "index.html").is_file(), target)
+
     def test_hidden_items_have_no_page(self):
         for item in ("Bite", "FW_Helmet", "SP_Helmet"):
             self.assertFalse((self.out / f"items/{item}.html").exists(), item)

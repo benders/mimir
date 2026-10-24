@@ -5,7 +5,8 @@
         # default: data/ + .cache/dump/public/icons -> .cache/site/public
 
 One page per item, creature, piece and status effect, plus index pages and a client-side search
-index (search.json, used by site/search.js). Hand-written Markdown pages in site/mechanics/ become the
+index (search.json, used by site/search.js), and for crawlers and AI agents sitemap.xml, robots.txt, llms.txt and
+data/*.json (#83). Hand-written Markdown pages in site/mechanics/ become the
 Mechanics section (scripts/mechanics.py: renderer, formulas, charts; embedded tables read data/). Derived relations (crafted from, used in, dropped by,
 crafted at) are computed here, not stored in data/. Every page sets <base href> to the site root,
 so all links are root-relative and the site works from any sub-path or straight from disk.
@@ -2742,6 +2743,87 @@ def search_index() -> None:
     (OUT / "search.json").write_text(json.dumps(entries, ensure_ascii=False, separators=(",", ":")), encoding="utf-8")
 
 
+SITE_URL = "https://mimir.slackworks.com/"  # where it is deployed (GitHub Pages): the sitemap and llms.txt need absolute URLs
+DATA_FILES = {  # data/<name>.json, published at data/ (#83): a line on each for llms.txt
+    "meta": "game version, Steam build id, dumper version, counts, the build menu's piece tags in order",
+    "player": "Player constants: adrenaline gains and decay, base food health/stamina, rested, skill gain, death penalty, "
+              "multiplayer scaling",
+    "items": "every item: type, stats per quality, damages, attacks with timing, food, set and equip effects, stage and via",
+    "recipes": "crafting recipes: item, amount, station and level, resources (amount, perLevel for each quality above 1)",
+    "creatures": "creatures: health, faction, damage modifiers, attacks, drops (chance, amount, per-star), boss keys, taming",
+    "spawns": "where each creature comes from: source world | raid | location | dungeon | offspring | egg | summon | phase | "
+              "growup, with biomes, levels and conditions",
+    "pieces": "buildable and world pieces: cost, tools, station, comfort, tags, produces, contains, locations",
+    "processing": "smelter, cooking station and fermenter conversions",
+    "sources": "pickables, ore, trees, rocks, loot chests, fishing and traders: what they give and where they are placed",
+    "status_effects": "status effects: stats, duration, cooldown, tooltip, stage",
+    "locations": "world locations: biomes, placement rules, the key their dungeon door takes",
+    "raids": "random events (raids): roll interval and chance, biomes, duration, the keys or player state they need",
+    "alt_biomes": "alternative biome patches: chance and size, what they spawn, grow and block",
+}
+SITE_SECTIONS = {  # directory -> (name, what its index lists), in llms.txt order
+    "items": ("Items", "by type"), "creatures": ("Creatures", "by home biome"), "pieces": ("Pieces", "by build menu tag"),
+    "effects": ("Status effects", "by what gives them"), "biomes": ("Biomes", "creatures, resources, locations, raids"),
+    "traders": ("Traders", "goods by unlock stage"), "factions": ("Factions", "who attacks whom"),
+    "mechanics": ("Mechanics", "game rules checked against the game code, with formulas and tables")}
+
+
+def agent_files() -> None:
+    """For crawlers and AI agents (#83): sitemap.xml and robots.txt; llms.txt (https://llmstxt.org), a map of the site
+    and its data; and data/*.json itself, the same files the pages are built from."""
+    urls = sorted(SITE_URL + quote(str(f.relative_to(OUT))).removesuffix("index.html") for f in written)
+    (OUT / "sitemap.xml").write_text(
+        '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
+        + "".join(f"<url><loc>{esc(u)}</loc></url>\n" for u in urls) + "</urlset>\n", encoding="utf-8")
+    (OUT / "robots.txt").write_text(f"User-agent: *\nAllow: /\n\nSitemap: {SITE_URL}sitemap.xml\n", encoding="utf-8")
+    (OUT / "data").mkdir()
+    for name in DATA_FILES:
+        shutil.copy2(DATA / f"{name}.json", OUT / "data" / f"{name}.json")
+    pages = defaultdict(int)
+    for f in written:
+        if f.name != "index.html" and len(f.relative_to(OUT).parts) == 2:
+            pages[f.parent.name] += 1
+    sections = "".join(f"- [{name}]({SITE_URL}{d}/): {pages[d]} pages, {what}\n" for d, (name, what) in SITE_SECTIONS.items())
+    mech = "".join(f"- [{p['title']}]({SITE_URL}mechanics/{quote(p['id'])}.html): {p['summary']}\n" for p in MECH_PAGES)
+    data = "".join(f"- [{n}.json]({SITE_URL}data/{n}.json): {d}\n" for n, d in DATA_FILES.items())
+    stages = ", ".join(STAGES)
+    (OUT / "llms.txt").write_text(f"""# {SITE_NAME}
+
+> A Valheim reference rebuilt from the game data on every game update: items, creatures, building pieces, status
+> effects, biomes, traders and game mechanics. Valheim {META["gameVersion"]} (Steam build {META["steamBuildId"]}),
+> public branch, vanilla. Not affiliated with Iron Gate.
+
+Everything is extracted from the dedicated server by a plugin and normalized by scripts; nothing is entered by hand.
+For questions about numbers (costs, drops, damage, spawn conditions), the JSON files under Data are the most
+direct source: they are what the pages are built from.
+
+- Ids are the game's prefab names (SwordIron, Troll, piece_workbench). Each has a page at items/<id>.html,
+  creatures/<id>.html, pieces/<id>.html or effects/<id>.html; references between entries are ids.
+- `stage` is the first stage of the progression where a player can get it: {stages}. PostGame is what the last
+  boss opens, not a biome. The site's "Up to" filter hides later stages; pages hold everything.
+- `via` is how that stage is reached: `how` (craft, build, drop, ...), `from` and `needs`. Item and piece pages
+  show it as a requirements tree.
+- Entries flagged `unobtainable`, `internal` (creature attacks) or `enemyOnly` are in the game files but not
+  available to players, and have no page.
+- Empty, zero and false values are left out of the JSON.
+
+## Sections
+
+- [Home]({SITE_URL}): search, and the tech tree drawn as a well, by stage
+{sections}
+## Mechanics
+
+{mech}
+## Data
+
+{data}- [search.json]({SITE_URL}search.json): every page as [name, id, path, icon, label, stage index]
+
+## Optional
+
+- [Source code and pipeline](https://github.com/benders/mimir): how the data is extracted, data/ in git with its history
+""", encoding="utf-8")
+
+
 def copy_assets() -> None:
     for f in STATIC.iterdir():
         if f.is_dir():
@@ -2805,6 +2887,7 @@ def main() -> int:
     index_pages()
     search_index()
     copy_assets()
+    agent_files()
     bad = check_links()
     print(f"site: {len(written)} pages, {len(list((OUT / 'icons').iterdir()))} icons -> {OUT}")
     return 1 if bad else 0
