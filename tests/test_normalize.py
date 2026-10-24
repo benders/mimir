@@ -468,6 +468,13 @@ class Entities(FixtureCase):
         self.assertEqual(N.reachable([], creatures, pieces, [], [], [], [])[1], {"Dummy"})
         self.assertEqual(N.reachable([], creatures, [{**pieces[0], "tools": []}], [], [], [], [])[1], set())
 
+    def test_dlc_is_not_reached(self):  # #75: DLCMan.IsDLCInstalled gates crafting and building
+        items, recipes = [{"id": "Cape"}, {"id": "Tankard", "dlc": "beta"}], [
+            {"item": i, "enabled": True, "resources": []} for i in ("Cape", "Tankard")]
+        pieces = [{"id": "Statue", "enabled": True, "tools": ["Hammer"], "resources": [], "dlc": "beta"}]
+        self.assertEqual(N.reachable(items, [], pieces, recipes, [], [], []), ({"Cape"}, set(), set()))
+        self.assertEqual(N.reachable(items, [], [{**pieces[0], "dlc": None}], recipes, [], [], [])[2], {"Statue"})
+
     def test_summon_and_phase_need_their_parent(self):
         items, creatures = [{"id": "Rod"}], [{"id": "Imp"}, {"id": "A"}, {"id": "B"}, {"id": "C"}]
         spawn_list = [{"creature": "Imp", "source": "summon", "item": "Rod"},

@@ -607,7 +607,10 @@ def stages(items: list, creatures: list, pieces: list, recipes: list, procs: lis
 
     placed = lambda locs: min((inside(x["location"], x.get("dungeon")) for x in locs), default=(NEVER, []))
     first_at = lambda locs: min(locs, key=lambda x: inside(x["location"], x.get("dungeon")))["location"]
-    buildable = {p["id"] for p in pieces if (p.get("enabled") or p.get("season")) and p.get("tools")}
+    # a DLC (the "beta" entitlement of the early testers) gates crafting and building: Player.HaveRequirements,
+    # InventoryGui.DoCrafting and Player.GetAvailableRecipes check DLCMan.IsDLCInstalled(m_dlc) (#75)
+    dlc_items = {i["id"] for i in items if i.get("dlc")}
+    buildable = {p["id"] for p in pieces if (p.get("enabled") or p.get("season")) and p.get("tools") and not p.get("dlc")}
     built = lambda pc: max(P[pc], cost(by_piece[pc]["resources"])) if pc in buildable else NEVER
     traders = [src for src in sources if src["kind"] == "trader"]
     fish = [src for src in sources if src["kind"] == "fishing"]
@@ -654,7 +657,8 @@ def stages(items: list, creatures: list, pieces: list, recipes: list, procs: lis
             for it in {d["item"] for d in (src.get("drops") or {}).get("items", [])} | picked_items(src):
                 lower(I, it, v, how, src["id"], lambda: with_tool(src["id"], tn))
         for r in recipes:
-            if r.get("item") and (r.get("enabled") or r.get("season")) and not r.get("upgradeOnly"):  # upgrades one
+            if (r.get("item") and r["item"] not in dlc_items and (r.get("enabled") or r.get("season"))
+                    and not r.get("upgradeOnly")):  # upgrades one
                 # you have (InventoryGui.UpdateRecipeList: m_noCraftOnlyUpgrade), the Frost Foundry's Nord weapons
                 sv, sn = station(r.get("station"), r.get("stationLevel", 1))
                 lower(I, r["item"], max(cost(r["resources"]), sv), "craft", r.get("id"),

@@ -207,7 +207,8 @@ projectiles and Aoe deal their own; `[{kind: none}]` = it deals no damage (summo
 `damages` is what it deals. Items flagged `internal` (creature attack items) or `enemyOnly` (FW_/SP_ gear copies, Dvergr crossbow) get no site
 page; creatures list them under `attacks` (weapons) and `equipment`. Items, creatures and pieces flagged
 `unobtainable` (`normalize.reachable()` can't get to them from any source: unreleased, test, cheat, legacy or unplaced
-content) get no page, search entry or relation rows either. Reachable items, creatures and pieces carry `stage` (#24): the
+content) get no page, search entry or relation rows either. Items and pieces with `dlc` (the `beta` entitlement: Cape and Hood of Oden, Odin's tankard) can't be
+crafted or built without it (Player.HaveRequirements, DLCMan.IsDLCInstalled), so `stages()` skips their recipes and they are flagged too (#75). Reachable items, creatures and pieces carry `stage` (#24): the
 first biome of the progression (`normalize.STAGES`, Meadows..DeepNorth, then PostGame: not a biome, what the last boss's drops open) where a player can get them, from
 `normalize.stages()`, the same fixed point as `reachable()` (its first pass) with a second pass that adds stations and
 their extension levels, tools and tool tiers, fuel, boss keys and drops (a boss's open the next stage), quest hand-ins and

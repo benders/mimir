@@ -353,6 +353,9 @@ def main() -> int:
     idols = [f"Upgrader{n}{k}" for n in range(8) for k in ("Weapon", "Armor")]
     check(all(items.get(i, {}).get("upgrader") and not items[i].get("unobtainable") for i in idols),
           "items: the 16 Battle/Protection Idols are reachable upgrader resources")
+    dlc = [i for i in items.values() if i.get("dlc")]
+    check(dlc and all(i.get("unobtainable") and not i.get("stage") for i in dlc),
+          f"items: the {len(dlc)} DLC items (Cape of Oden...) are unobtainable, DLCMan gates their recipes (#75)")
 
     print()
     if failures:

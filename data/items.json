@@ -11268,24 +11268,7 @@
    "drain": 1,
    "repairable": true
   },
-  "stage": "BlackForest",
-  "via": {
-   "how": "craft",
-   "from": "Recipe_CapeOdin",
-   "needs": [
-    {
-     "item": "LeatherScraps",
-     "amount": 10
-    },
-    {
-     "item": "Coal",
-     "amount": 4
-    },
-    {
-     "piece": "piece_workbench"
-    }
-   ]
-  }
+  "unobtainable": true
  },
  {
   "id": "CapeTest",
@@ -24721,24 +24704,7 @@
    "drain": 1,
    "repairable": true
   },
-  "stage": "BlackForest",
-  "via": {
-   "how": "craft",
-   "from": "Recipe_HelmetOdin",
-   "needs": [
-    {
-     "item": "LeatherScraps",
-     "amount": 10
-    },
-    {
-     "item": "Coal",
-     "amount": 4
-    },
-    {
-     "piece": "piece_workbench"
-    }
-   ]
-  }
+  "unobtainable": true
  },
  {
   "id": "HelmetPadded",
@@ -43187,28 +43153,7 @@
    "cycle": 4.276
   },
   "ammoType": "mead",
-  "stage": "BlackForest",
-  "via": {
-   "how": "craft",
-   "from": "Recipe_TankardOdin",
-   "needs": [
-    {
-     "item": "FineWood",
-     "amount": 4
-    },
-    {
-     "item": "TrophyDeer",
-     "amount": 1
-    },
-    {
-     "item": "Resin",
-     "amount": 2
-    },
-    {
-     "piece": "piece_workbench"
-    }
-   ]
-  }
+  "unobtainable": true
  },
  {
   "id": "Tankard_dvergr",
