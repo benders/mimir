@@ -103,6 +103,11 @@ class Site(unittest.TestCase):
             self.assertTrue(u.startswith(site), u)
             path = u.removeprefix(site)
             self.assertTrue((self.out / (path or "index.html")).is_file() or (self.out / path / "index.html").is_file(), u)
+        canon = lambda p: re.findall(r'<link rel="canonical" href="([^"]+)">', (self.out / p).read_text(encoding="utf-8"))
+        self.assertEqual(canon("index.html"), [site])
+        self.assertEqual(canon("items/index.html"), [site + "items/"])
+        self.assertEqual(canon("items/Sword.html"), [site + "items/Sword.html"])
+        self.assertEqual(sorted(canon(p)[0] for p in pages), sorted(urls))  # the sitemap lists the canonical URLs
         self.assertIn(f"Sitemap: {site}sitemap.xml", (self.out / "robots.txt").read_text())
         names = sorted(f.stem for f in (ROOT / "data").glob("*.json"))
         self.assertEqual(sorted(f.stem for f in (self.out / "data").glob("*.json")), names)  # every data file, described

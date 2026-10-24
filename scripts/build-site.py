@@ -50,6 +50,7 @@ def load(name: str):
 
 META = load("meta")
 SITE_NAME = "Mimir's Well"  # shown on the site; the project itself is "mimir"
+SITE_URL = "https://mimir.slackworks.com/"  # where it is deployed (GitHub Pages): canonical links, the sitemap and llms.txt
 ITEMS = {i["id"]: i for i in load("items")}
 CREATURES = {c["id"]: c for c in load("creatures")}
 PIECES = {p["id"]: p for p in load("pieces")}
@@ -739,6 +740,11 @@ def asset(name: str) -> str:
     return f"{quote(name)}?v={hashlib.sha256(data).hexdigest()[:10]}"
 
 
+def page_url(path: str) -> str:
+    """A page's absolute URL, as its canonical link and the sitemap give it: an index as its directory (#83)."""
+    return SITE_URL + quote(path).removesuffix("index.html")
+
+
 def page(path: str, title: str, body: str, kind_label: str = "", scripts=(), header: bool = True) -> None:
     """Write one page; `header` False leaves out the site header (the home page has its own search and "Up to")."""
     depth = path.count("/")
@@ -750,6 +756,7 @@ def page(path: str, title: str, body: str, kind_label: str = "", scripts=(), hea
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <base href="{base}">
 <title>{esc(title)} · {esc(SITE_NAME)}</title>
+<link rel="canonical" href="{esc(page_url(path))}">
 <meta name="description" content="{esc(meta_description(title, body))}">
 <link rel="icon" href="{asset("favicon.svg")}" type="image/svg+xml">
 <link rel="preconnect" href="https://js-agent.newrelic.com" crossorigin>
@@ -2743,7 +2750,6 @@ def search_index() -> None:
     (OUT / "search.json").write_text(json.dumps(entries, ensure_ascii=False, separators=(",", ":")), encoding="utf-8")
 
 
-SITE_URL = "https://mimir.slackworks.com/"  # where it is deployed (GitHub Pages): the sitemap and llms.txt need absolute URLs
 DATA_FILES = {  # data/<name>.json, published at data/ (#83): a line on each for llms.txt
     "meta": "game version, Steam build id, dumper version, counts, the build menu's piece tags in order",
     "player": "Player constants: adrenaline gains and decay, base food health/stamina, rested, skill gain, death penalty, "
@@ -2771,7 +2777,7 @@ SITE_SECTIONS = {  # directory -> (name, what its index lists), in llms.txt orde
 def agent_files() -> None:
     """For crawlers and AI agents (#83): sitemap.xml and robots.txt; llms.txt (https://llmstxt.org), a map of the site
     and its data; and data/*.json itself, the same files the pages are built from."""
-    urls = sorted(SITE_URL + quote(str(f.relative_to(OUT))).removesuffix("index.html") for f in written)
+    urls = sorted(page_url(f.relative_to(OUT).as_posix()) for f in written)
     (OUT / "sitemap.xml").write_text(
         '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
         + "".join(f"<url><loc>{esc(u)}</loc></url>\n" for u in urls) + "</urlset>\n", encoding="utf-8")
