@@ -15,6 +15,7 @@ dedicated server, so the site follows game updates without anyone editing pages 
 | `scripts/` | The pipeline: download, run, extract icons and location renders, normalize, verify, build the site. |
 | `tests/` | Offline tests (`make test`): a tiny synthetic dump, golden output, site smoke test. |
 | `site/` | Stylesheet and search script copied into the built site. |
+| `skills/mimir/` | A Claude skill that answers Valheim questions from the site's data. Download [mimir-skill.zip](https://mimir.slackworks.com/mimir-skill.zip) and upload it in claude.ai under Settings → Capabilities → Skills; code execution needs network access to `mimir.slackworks.com`. |
 | `docs/mechanics.md` | Notes on game mechanics (blocking, drop rates, ...) taken from the game code. |
 | [Architecture.md](Architecture.md) | How it all fits together, with diagrams. |
 

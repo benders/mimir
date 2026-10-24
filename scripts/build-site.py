@@ -24,6 +24,7 @@ import math
 import re
 import shutil
 import sys
+import zipfile
 from collections import defaultdict
 from pathlib import Path
 from urllib.parse import quote, unquote
@@ -39,6 +40,7 @@ OUT = Path(sys.argv[3]) if len(sys.argv) > 3 else ROOT / ".cache/site/public"
 # Location renders (scripts/extract-renders.py, #52), next to the icons by default; optional, like the icons
 RENDERS = Path(sys.argv[4]) if len(sys.argv) > 4 else ICONS.parent / "renders"
 STATIC = ROOT / "site"
+SKILL = ROOT / "skills/mimir"  # the Claude skill (#84), published as mimir-skill.zip
 MECH_SRC = STATIC / "mechanics"  # hand-written Markdown pages, see scripts/mechanics.py
 # per page: the game version its cited code was verified against, and what changed since (scripts/mechanics_sources.py)
 MECH_VERIFIED = json.loads((MECH_SRC / "verified.json").read_text(encoding="utf-8")) if (MECH_SRC / "verified.json").is_file() else {}
@@ -2827,6 +2829,11 @@ def agent_files() -> None:
         '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
         + "".join(f"<url><loc>{esc(u)}</loc></url>\n" for u in urls) + "</urlset>\n", encoding="utf-8")
     (OUT / "robots.txt").write_text(f"User-agent: *\nAllow: /\n\nSitemap: {SITE_URL}sitemap.xml\n", encoding="utf-8")
+    with zipfile.ZipFile(OUT / "mimir-skill.zip", "w", zipfile.ZIP_DEFLATED) as z:  # the skill folder at the root
+        for f in sorted(SKILL.rglob("*")):
+            if f.is_file() and "__pycache__" not in f.parts:
+                z.writestr(zipfile.ZipInfo(f"mimir/{f.relative_to(SKILL).as_posix()}", (2026, 1, 1, 0, 0, 0)),
+                           f.read_bytes())  # fixed timestamps: the same zip from the same files
     (OUT / "data").mkdir()
     for name in DATA_FILES:
         shutil.copy2(DATA / f"{name}.json", OUT / "data" / f"{name}.json")
@@ -2871,6 +2878,8 @@ direct source: they are what the pages are built from.
 
 ## Optional
 
+- [Claude skill]({SITE_URL}mimir-skill.zip): a skill for Claude (claude.ai, Claude Code) that answers Valheim
+  questions from this data with a small Python script; upload it under Settings → Capabilities → Skills
 - [Source code and pipeline](https://github.com/benders/mimir): how the data is extracted, data/ in git with its history
 """, encoding="utf-8")
 

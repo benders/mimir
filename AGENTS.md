@@ -22,7 +22,8 @@ verify.py        invariant checks on the raw dump (+ anims) + icons
 normalize.py     raw dump -> data/*.json (compact, English text resolved, committed)
 verify_data.py   counts, referential integrity, known content in data/ (+ icons)
 build-site.py    data/ + icons (+ location renders, optional) -> .cache/site/<branch>/ (static HTML + search.json, sitemap.xml,
-                 robots.txt, llms.txt, data/*.json for agents; fails on broken links)
+                 robots.txt, llms.txt, data/*.json for agents, mimir-skill.zip; fails on broken links)
+skills/mimir     the Claude skill (#84): SKILL.md + scripts/mimir.py (stdlib) querying the live data/*.json; tests/test_skill.py
 well.py          the home page's tech tree as a cylinder (#68): graph, layout and markup, imported by build-site.py
 renders.sh       extract-renders.py (UnityPy, numpy, numba) -> .cache/dump/<branch>/renders/<location>.webp, rooms/<camp room>.webp
 steam-buildid.sh steamcmd (container, x86_64) -> current public Steam build id
