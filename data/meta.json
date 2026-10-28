@@ -1,8 +1,8 @@
 {
- "gameVersion": "1.0.20",
+ "gameVersion": "1.0.21",
  "networkVersion": 41,
  "dumperVersion": "0.4.0",
- "steamBuildId": "25909431",
+ "steamBuildId": "26266951",
  "pieceTags": [
   "Misc.",
   "Crafting",
@@ -29,7 +29,7 @@
   "items": 1519,
   "recipes": 481,
   "creatures": 161,
-  "spawns": 438,
+  "spawns": 437,
   "pieces": 664,
   "processing": 105,
   "sources": 619,

@@ -2906,8 +2906,8 @@
   "item": "BakedPoteitrUncooked",
   "amount": 1,
   "enabled": true,
-  "station": "piece_cauldron",
-  "stationLevel": 7,
+  "station": "piece_preptable",
+  "stationLevel": 1,
   "resources": [
    {
     "item": "SealBlubber",
@@ -6455,8 +6455,7 @@
    },
    {
     "item": "TrophyMoose",
-    "amount": 1,
-    "perLevel": 1
+    "amount": 1
    },
    {
     "item": "NornThread",
@@ -7225,8 +7224,8 @@
   "item": "KaleChipsUncooked",
   "amount": 4,
   "enabled": true,
-  "station": "piece_cauldron",
-  "stationLevel": 6,
+  "station": "piece_preptable",
+  "stationLevel": 1,
   "resources": [
    {
     "item": "Kale",
@@ -8905,8 +8904,8 @@
   "item": "OvenPancakeUncooked",
   "amount": 1,
   "enabled": true,
-  "station": "piece_cauldron",
-  "stationLevel": 6,
+  "station": "piece_preptable",
+  "stationLevel": 1,
   "resources": [
    {
     "item": "MooseMeat",

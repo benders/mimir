@@ -1,5 +1,9 @@
 {
  "adrenaline": {
+  "changed": [
+   "Player.UpdateStats"
+  ],
+  "changedIn": "1.0.21",
   "methods": {
    "Attack.DoAreaAttack": "11fbd33bf5a92ce6",
    "Attack.DoMeleeAttack": "6f62bd9ec51aa482",
@@ -41,9 +45,13 @@
    "Skills.GetSkillFactor": "6f41779459992af6",
    "Skills.GetSkillLevel": "141f9c6b3a5cdda7"
   },
-  "version": "1.0.20"
+  "version": "1.0.21"
  },
  "comfort": {
+  "changed": [
+   "Player.UpdateBaseValue"
+  ],
+  "changedIn": "1.0.21",
   "methods": {
    "Piece.GetAllComfortPiecesInRadius": "965481d68f6bcb4b",
    "Piece.GetComfort": "e8a2f1365e18c977",
@@ -78,7 +86,7 @@
    "SpawnSystem.Spawn": "4767d706bb463912",
    "TriggerSpawner.Spawn": "7091c5a823d3b31d"
   },
-  "version": "1.0.20"
+  "version": "1.0.21"
  },
  "damage-types": {
   "methods": {
@@ -99,7 +107,7 @@
    "Player.GetBodyArmor": "1f6c0de02a0c2133",
    "SEMan.ApplyDamageMods": "e8b67a3135142cbd"
   },
-  "version": "1.0.20"
+  "version": "1.0.21"
  },
  "drops": {
   "methods": {
@@ -113,9 +121,13 @@
    "Player.LateUpdate": "69158421ca394d76",
    "ZNet.GetNrOfPlayers": "7f30b14b98d970d0"
   },
-  "version": "1.0.20"
+  "version": "1.0.21"
  },
  "food": {
+  "changed": [
+   "Player.UpdateStats"
+  ],
+  "changedIn": "1.0.21",
   "methods": {
    "Humanoid.UseItem": "9905047c84a04592",
    "Player.CanEat": "9ad9c913e59f2e71",
@@ -144,9 +156,13 @@
    "ZoneSystem.GenerateLocationsTimeSliced": "acddf7956b8a57a7",
    "ZoneSystem.RemoveUnplacedLocations": "4bebcbce14b7575f"
   },
-  "version": "1.0.20"
+  "version": "1.0.21"
  },
  "frost": {
+  "changed": [
+   "Character.UpdateWalking"
+  ],
+  "changedIn": "1.0.21",
   "methods": {
    "Character.AddFrostDamage": "593bd5e151a392d9",
    "Character.RPC_Damage": "8146c8fe271c338e",
@@ -176,7 +192,7 @@
    "Projectile.OnHit": "9cc9daec4ec0fc05",
    "ZNet.GetTime": "c1bb8e512a0f37af"
   },
-  "version": "1.0.20"
+  "version": "1.0.21"
  },
  "item-upgrades": {
   "methods": {
@@ -191,7 +207,7 @@
    "Piece.Requirement.GetAmount": "865d5669682df3e6",
    "Recipe.GetRequiredStationLevel": "f1fd98db0749ea7c"
   },
-  "version": "1.0.20"
+  "version": "1.0.21"
  },
  "multiplayer": {
   "methods": {
@@ -232,7 +248,7 @@
    "ZNetScene.PointInsideActiveArea": "5e494e69b37c5320",
    "ZoneSystem.GetZonePos": "e4c05fae3d00a2f1"
   },
-  "version": "1.0.20"
+  "version": "1.0.21"
  },
  "progression": {
   "methods": {
@@ -252,7 +268,7 @@
    "TriggerPersistentEventOnDestroy": "d88c690f36974cd2",
    "ZoneSystem.GetKeyValue": "bb4f5e6788e884e0"
   },
-  "version": "1.0.20"
+  "version": "1.0.21"
  },
  "raids": {
   "methods": {
@@ -272,7 +288,7 @@
    "SpawnSystem.UpdateSpawning": "c812f23d14b2c2ac",
    "ZoneSystem.GetGlobalKey": "d3d3af903c977fb3"
   },
-  "version": "1.0.20"
+  "version": "1.0.21"
  },
  "skills": {
   "methods": {
@@ -304,7 +320,7 @@
    "Skills.Skill.GetNextLevelRequirement": "363e6715f72b2d7c",
    "Skills.Skill.Raise": "9431d3cc640e48d5"
   },
-  "version": "1.0.20"
+  "version": "1.0.21"
  },
  "weapons": {
   "methods": {
@@ -330,6 +346,6 @@
    "Projectile.Setup": "dd747bb34dc0e0da",
    "Skills.GetRandomSkillFactor": "eed31230d5a5bd6e"
   },
-  "version": "1.0.20"
+  "version": "1.0.21"
  }
 }

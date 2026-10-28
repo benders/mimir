@@ -7208,11 +7208,6 @@
   "parent": "Wolf_cub"
  },
  {
-  "creature": "Wolf_cub",
-  "source": "offspring",
-  "parent": "Wolf_spiritcaller"
- },
- {
   "creature": "BlobFrost",
   "source": "summon",
   "item": "BombBlob_Frost"

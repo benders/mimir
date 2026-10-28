@@ -6452,25 +6452,7 @@
      "amount": 2
     },
     {
-     "piece": "piece_cauldron"
-    },
-    {
-     "piece": "cauldron_ext1_spice"
-    },
-    {
-     "piece": "cauldron_ext3_butchertable"
-    },
-    {
-     "piece": "cauldron_ext4_pots"
-    },
-    {
-     "piece": "cauldron_ext5_mortarandpestle"
-    },
-    {
-     "piece": "cauldron_ext6_rollingpins"
-    },
-    {
-     "piece": "cauldron_ext7_smoker"
+     "piece": "piece_preptable"
     }
    ]
   }
@@ -17306,7 +17288,7 @@
   "stage": "DeepNorth",
   "via": {
    "how": "source",
-   "from": "FirTree_Snow_log_half",
+   "from": "SnowFirTree",
    "needs": [
     {
      "item": "AxeStone"
@@ -26326,22 +26308,7 @@
      "amount": 12
     },
     {
-     "piece": "piece_cauldron"
-    },
-    {
-     "piece": "cauldron_ext4_pots"
-    },
-    {
-     "piece": "cauldron_ext1_spice"
-    },
-    {
-     "piece": "cauldron_ext3_butchertable"
-    },
-    {
-     "piece": "cauldron_ext5_mortarandpestle"
-    },
-    {
-     "piece": "cauldron_ext6_rollingpins"
+     "piece": "piece_preptable"
     }
    ]
   }
@@ -32455,22 +32422,7 @@
      "amount": 2
     },
     {
-     "piece": "piece_cauldron"
-    },
-    {
-     "piece": "cauldron_ext4_pots"
-    },
-    {
-     "piece": "cauldron_ext1_spice"
-    },
-    {
-     "piece": "cauldron_ext3_butchertable"
-    },
-    {
-     "piece": "cauldron_ext5_mortarandpestle"
-    },
-    {
-     "piece": "cauldron_ext6_rollingpins"
+     "piece": "piece_preptable"
     }
    ]
   }
@@ -47190,7 +47142,7 @@
    {
     "kind": "area",
     "damages": {
-     "fire": 250
+     "fire": 125
     }
    }
   ]
@@ -51596,7 +51548,7 @@
   "stack": 1,
   "maxQuality": 1,
   "skill": "Swords",
-  "toolTier": 6,
+  "toolTier": 4,
   "damages": {
    "blunt": 220,
    "chop": 100,
@@ -51625,7 +51577,7 @@
   "stack": 1,
   "maxQuality": 1,
   "skill": "Swords",
-  "toolTier": 6,
+  "toolTier": 4,
   "damages": {
    "blunt": 220,
    "chop": 100,
