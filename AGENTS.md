@@ -171,6 +171,7 @@ in a row are hidden one by one, and a `stagehint` note says when anything is hid
 [{location, dungeon}], found the same way (`instances`); they count as reachable. A piece with a Container has `contains`
 (its default items, a drop table). Breaking a world piece drops a third of each recoverable cost item, at least 1
 (`mechanics.world_piece_drop`, Piece.DropResources): `reachable()` counts that, stages only where nothing else gives one.
+Foods, meads and feasts set out with the Serving Tray (`Feaster` build menu, one material: `normalize.tray_food`) are not pieces; a feast's eaten item (FeastMeadows, the stats) has `servedFrom` = the crafted item it is set out from (FeastMeadows_Material), `via.how` `serve`; the site links both ways (Produced by / Used in, the tray's "Sets out").
 Pieces with an EffectArea of type PlayerBase have `playerBase` (they count toward a base for raids).
 Pieces have `tags`: the build menu's tag labels (Piece.m_usage, `UsageTagFlags` with their `$tag_*` DisplayName; menu
 order in meta.json `pieceTags`); `category` is the old PieceTable tab enum (its "DeepNorth" value is not a biome) and

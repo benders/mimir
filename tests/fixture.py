@@ -158,7 +158,7 @@ TRANSLATIONS = {
     "item_buckler": "Test Buckler",
     "item_sword": "Test Sword", "item_sword_desc": "Sharp <b>enough</b>.",
     "item_helmet": "Pot Helm", "item_fish": "Glimfish", "item_pearl": "Moon Pearl", "item_javelin": "Test Javelin", "item_mace": "Mace", "item_longbow": "Longbow", "item_arbal": "Arbal", "item_dart": "Dart", "item_mead": "Fizz Mead", "item_coins": "Coins", "item_charm": "Lucky Charm", "npc_vendor": "Old Vendor", "hud_satchel": "Big Satchel", "hud_satchel_tooltip": "A roomy bag.",
-    "item_hammer": "Mallet", "item_shard": "Shard", "item_bite": "Bite",
+    "item_hammer": "Mallet", "item_tray": "Tray", "item_feast": "Feast", "item_feast_material": "Feast to set out", "piece_platter": "Platter", "item_shard": "Shard", "item_bite": "Bite",
     "enemy_raider": "Raider", "piece_bench": "Bench", **{f"tag_{k}": v for k, v in (  # build menu tags (Piece.UsageTagFlags)
         ("misc", "Misc."), ("crafting", "Crafting"), ("building", "Building"), ("floor", "Flooring"), ("wall", "Walls"),
         ("roof", "Roofing"), ("architecture", "Architecture"), ("furniture", "Furniture"), ("lighting", "Lighting"),
@@ -225,8 +225,14 @@ def prefabs():
              damages=damages(blunt=10, spirit=5), attack=attack(attackChainLevels=2)),  # spirit: left out of DPS
         item("Dart", name="$item_dart", itemType="Ammo", icons=[S("Sword")], damages=damages(pierce=10), ammoType="$ammo_dart"),
         item("DartBlunt", name="$item_dart", itemType="Ammo", icons=[S("Sword")], damages=damages(blunt=4), ammoType="$ammo_dart"),
-        item("Mead", name="$item_mead", itemType="Consumable", icons=[S("Mead")], consumeStatusEffect=R("SE_Fizz")),
+        with_components(item("Mead", name="$item_mead", itemType="Consumable", icons=[S("Mead")], consumeStatusEffect=R("SE_Fizz")),
+                        *piece("Mead", name="$item_mead", resources=[req("Mead")])["components"][1:]),  # set out with the Tray
         item("Hammer", name="$item_hammer", itemType="Tool", icons=[S("Hammer")], buildPieces=R("_HammerTable")),
+        item("Feaster", name="$item_tray", itemType="Tool", icons=[S("Hammer")], buildPieces=R("_FeasterTable")),
+        piece("Platter", name="$piece_platter", resources=[req("Mead"), req("Wood", 2)]),  # two materials: still a piece
+        item("Feast_Material", name="$item_feast_material", icons=[S("Mead")]),  # crafted, set out as the Feast
+        with_components(item("Feast", name="$item_feast", itemType="Consumable", icons=[S("Mead")], food=30),
+                        *piece("Feast", name="$item_feast", resources=[req("Feast_Material")])["components"][1:]),
         item("Bite", name="$item_bite", itemType="OneHandedWeapon", attack=attack(attackStamina=0), attackStatusEffect=R("SE_Stun"),
              damages=damages(pierce=12, chop=20)),  # no icon: internal attack item; players are immune to chop
         item("Spit", name="$item_bite", itemType="OneHandedWeapon", damages=damages(poison=5),
@@ -389,6 +395,8 @@ def recipes():
         recipe("Recipe_OddBar", "OddBar", resources=[req("Wood", 1)]),
         recipe("Recipe_Rod", "Rod", resources=[req("Wood", 1)]),
         recipe("Recipe_Wand", "Wand", resources=[req("Wood", 1)]),
+        recipe("Recipe_Feaster", "Feaster", resources=[req("Wood", 1)]),
+        recipe("Recipe_Feast", "Feast_Material", resources=[req("Wood", 3)]),
     ]
 
 
@@ -429,7 +437,9 @@ def write_dump(raw: Path) -> Path:
     dump("status_effect_defaults.json", [{"name": "SE_Stats", "type": "SE_Stats", "fields": SE_DEFAULTS}])
     dump("piece_tables.json", [{"name": "_HammerTable", "type": "PieceTable",
                                 "fields": {"m_pieces": [R("Bench"), R("Anvil"), R("Kiln"), R("Hive"), R("Lure"), R("Tap"), R("Tap2"), R("Tree"),
-                                                       R("Sapling"), R("CreeperSapling")]}}])
+                                                       R("Sapling"), R("CreeperSapling")]}},
+                               {"name": "_FeasterTable", "type": "PieceTable", "fields": {"m_pieces": [R("Mead"), R("Platter"),
+                                                                                                      R("Feast")]}}])
     dump("world/seasons.json", [{"name": "Winter", "type": "SeasonalItemGroup", "fields": {
         "_startDate": [1, 12], "_endDate": [6, 1], "Pieces": [R("Tree")],
         "Recipes": [{"$asset": "Recipe_Hat", "type": "Recipe"}]}}])

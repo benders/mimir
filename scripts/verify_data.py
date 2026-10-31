@@ -230,11 +230,17 @@ def main() -> int:
         n = sum(1 for e in coll.values() if e.get("unobtainable"))
         check(n <= share * len(coll), f"{kind}: {n} unobtainable, at most {share:.0%} of {len(coll)}")
 
-    tagged = {"wood_roof_67": "Roofing", "sign": "Decor", "FeastMeadows": "Feasts", "piece_chest_wood": "Storage"}
+    tagged = {"wood_roof_67": "Roofing", "sign": "Decor", "piece_chest_wood": "Storage"}
     check(all(t in pieces[x].get("tags", []) for x, t in tagged.items()), "pieces: build menu tags (Piece.m_usage)")
     check(all(p.get("tags") for p in pieces.values() if p.get("tools") and not p.get("unobtainable")),
           "every buildable piece has a build menu tag")
     check(not pieces["sign_notext"].get("tags"), "world copies are in no build menu (sign_notext)")
+    check(not [p for p in pieces.values() if "Feaster" in p.get("tools", []) and len(p.get("resources", [])) == 1]
+          and "BakedPoteitr" not in pieces and "FeastMeadows" not in pieces, "foods set out with the Serving Tray aren't pieces")
+    feast = items["FeastMeadows"]
+    check(feast.get("servedFrom") == "FeastMeadows_Material" and not feast.get("unobtainable")
+          and feast.get("via", {}).get("how") == "serve" and feast.get("food"),
+          "a feast is eaten from the one set out with the Serving Tray (FeastMeadows <- FeastMeadows_Material)")
 
     # Progression stages (#24): the metal ladder, a boss per biome, and rules that would break silently.
     locations = load("locations.json")

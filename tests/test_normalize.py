@@ -269,6 +269,14 @@ class Entities(FixtureCase):
         self.assertNotIn("locations", by["Bench"])  # not placed
         self.assertNotIn("locations", by["Anvil"])
 
+    def test_tray_food_is_not_a_piece(self):
+        tools = N.piece_tools()
+        self.assertEqual(tools["Mead"], ["Feaster"])
+        self.assertTrue(N.tray_food(N.piece("Mead", N.PREFABS["Mead"], tools)))  # the item itself, one material
+        self.assertFalse(N.tray_food(N.piece("Platter", N.PREFABS["Platter"], tools)))
+        self.assertFalse(N.tray_food(N.piece("Bench", N.PREFABS["Bench"], tools)))
+        self.assertTrue(N.tray_food(N.piece("Feast", N.PREFABS["Feast"], tools)))
+
     def test_unplaced_sources_dont_count(self):
         items = [{"id": "Rock"}, {"id": "Seed"}]
         src = lambda i, **kw: {"id": i, "kind": "rock", "drops": {"items": [{"item": "Rock"}]}, **kw}
@@ -278,6 +286,21 @@ class Entities(FixtureCase):
         self.assertEqual(N.reachable(items, [], [], [], [], stages, [])[0], set())
         stages[0]["locations"] = [{"location": "X", "dungeon": False}]
         self.assertEqual(N.reachable(items, [], [], [], [], stages, [])[0], {"Rock", "Seed"})  # a stage of a placed one
+
+    def test_served_feast(self):  # eaten from the one set out with the Serving Tray: after its material and the tray
+        items = [{"id": "Wood"}, {"id": "Meat"}, {"id": N.TRAY}, {"id": "Mat"}, {"id": "Feast", "servedFrom": "Mat"}]
+        recipes = [{"item": N.TRAY, "enabled": True, "resources": [{"item": "Wood"}]},
+                   {"item": "Mat", "enabled": True, "resources": [{"item": "Meat"}]}]
+        sources = [{"id": "tree", "kind": "tree", "biomes": ["Meadows"], "drops": {"items": [{"item": "Wood"}]}},
+                   {"id": "bush", "kind": "pickable", "biomes": ["Swamp"], "pickable": {"item": "Meat", "amount": 1}}]
+        args = items, [], [], recipes, [], sources, []
+        reach = N.reachable(*args)
+        self.assertIn("Feast", reach[0])
+        ways = {}
+        got = {k: N.STAGES[v] for k, v in N.stages(*args, reach=reach, ways=ways)[0].items()}
+        self.assertEqual(got["Feast"], "Swamp")
+        self.assertEqual(ways["item"]["Feast"], {"how": "serve", "from": "Mat", "needs": [("item", "Mat", None), ("item", N.TRAY, None)]})
+        self.assertNotIn("Feast", N.reachable([{"id": "Feast", "servedFrom": "Mat"}, {"id": "Mat"}], [], [], [], [], [], [])[0])
 
     def test_stages(self):
         src = lambda i, kind="rock", **kw: {"id": i, "kind": kind, **kw}

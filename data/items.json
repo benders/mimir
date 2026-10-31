@@ -16279,13 +16279,17 @@
    "duration": 3000,
    "regen": 6
   },
+  "servedFrom": "FeastAshlands_Material",
   "stage": "DeepNorth",
   "via": {
-   "how": "piece",
-   "from": "FeastAshlands",
+   "how": "serve",
+   "from": "FeastAshlands_Material",
    "needs": [
     {
-     "piece": "FeastAshlands"
+     "item": "FeastAshlands_Material"
+    },
+    {
+     "item": "Feaster"
     }
    ]
   }
@@ -16340,13 +16344,17 @@
    "duration": 3000,
    "regen": 3
   },
+  "servedFrom": "FeastBlackforest_Material",
   "stage": "Swamp",
   "via": {
-   "how": "piece",
-   "from": "FeastBlackforest",
+   "how": "serve",
+   "from": "FeastBlackforest_Material",
    "needs": [
     {
-     "piece": "FeastBlackforest"
+     "item": "FeastBlackforest_Material"
+    },
+    {
+     "item": "Feaster"
     }
    ]
   }
@@ -16402,13 +16410,17 @@
    "duration": 3000,
    "regen": 7
   },
+  "servedFrom": "FeastDeepNorth_Material",
   "stage": "PostGame",
   "via": {
-   "how": "piece",
-   "from": "FeastDeepNorth",
+   "how": "serve",
+   "from": "FeastDeepNorth_Material",
    "needs": [
     {
-     "piece": "FeastDeepNorth"
+     "item": "FeastDeepNorth_Material"
+    },
+    {
+     "item": "Feaster"
     }
    ]
   }
@@ -16463,13 +16475,17 @@
    "duration": 3000,
    "regen": 2
   },
+  "servedFrom": "FeastMeadows_Material",
   "stage": "Swamp",
   "via": {
-   "how": "piece",
-   "from": "FeastMeadows",
+   "how": "serve",
+   "from": "FeastMeadows_Material",
    "needs": [
     {
-     "piece": "FeastMeadows"
+     "item": "FeastMeadows_Material"
+    },
+    {
+     "item": "Feaster"
     }
    ]
   }
@@ -16525,13 +16541,17 @@
    "duration": 3000,
    "regen": 5
   },
+  "servedFrom": "FeastMistlands_Material",
   "stage": "AshLands",
   "via": {
-   "how": "piece",
-   "from": "FeastMistlands",
+   "how": "serve",
+   "from": "FeastMistlands_Material",
    "needs": [
     {
-     "piece": "FeastMistlands"
+     "item": "FeastMistlands_Material"
+    },
+    {
+     "item": "Feaster"
     }
    ]
   }
@@ -16586,13 +16606,17 @@
    "duration": 3000,
    "regen": 3
   },
+  "servedFrom": "FeastMountains_Material",
   "stage": "Plains",
   "via": {
-   "how": "piece",
-   "from": "FeastMountains",
+   "how": "serve",
+   "from": "FeastMountains_Material",
    "needs": [
     {
-     "piece": "FeastMountains"
+     "item": "FeastMountains_Material"
+    },
+    {
+     "item": "Feaster"
     }
    ]
   }
@@ -16647,13 +16671,17 @@
    "duration": 3000,
    "regen": 3
   },
+  "servedFrom": "FeastOceans_Material",
   "stage": "DeepNorth",
   "via": {
-   "how": "piece",
-   "from": "FeastOceans",
+   "how": "serve",
+   "from": "FeastOceans_Material",
    "needs": [
     {
-     "piece": "FeastOceans"
+     "item": "FeastOceans_Material"
+    },
+    {
+     "item": "Feaster"
     }
    ]
   }
@@ -16708,13 +16736,17 @@
    "duration": 3000,
    "regen": 4
   },
+  "servedFrom": "FeastPlains_Material",
   "stage": "Mistlands",
   "via": {
-   "how": "piece",
-   "from": "FeastPlains",
+   "how": "serve",
+   "from": "FeastPlains_Material",
    "needs": [
     {
-     "piece": "FeastPlains"
+     "item": "FeastPlains_Material"
+    },
+    {
+     "item": "Feaster"
     }
    ]
   }
@@ -16769,13 +16801,17 @@
    "duration": 3000,
    "regen": 3
   },
+  "servedFrom": "FeastSwamps_Material",
   "stage": "Swamp",
   "via": {
-   "how": "piece",
-   "from": "FeastSwamps",
+   "how": "serve",
+   "from": "FeastSwamps_Material",
    "needs": [
     {
-     "piece": "FeastSwamps"
+     "item": "FeastSwamps_Material"
+    },
+    {
+     "item": "Feaster"
     }
    ]
   }

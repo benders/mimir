@@ -443,7 +443,7 @@ def biome_stage(bs: list | None) -> int:
 
 WAY_RANK = {  # how a thing is got, for the tech tree (#25): at the same stage, the lower rank is the way shown;
     # gathering beats a creature drop, which beats loot from a chest or prop in a location ("loot")
-    "craft": 0, "process": 0, "build": 0, "piece": 1, "produce": 1, "spawn": 1, "location": 1, "source": 2,
+    "craft": 0, "process": 0, "build": 0, "serve": 0, "piece": 1, "produce": 1, "spawn": 1, "location": 1, "source": 2,
     "offspring": 2, "egg": 2, "growup": 2, "fish": 3, "drop": 3, "summon": 3, "phase": 3, "loot": 4, "trader": 5,
     "break": 6}
 GATHERED = {"tree", "rock", "log", "pickable"}  # source kinds ranked as "source", the rest as "loot"
@@ -702,7 +702,10 @@ def stages(items: list, creatures: list, pieces: list, recipes: list, procs: lis
             sv, sn = station(p["station"])
             lower(I, p["to"], max(I[p["from"]], sv, soft_item(p.get("fuel"))), "process", p["station"],
                   lambda: [("item", p["from"], None)] + sn + ([("item", p.get("fuel"), None)] if p.get("fuel") != p["from"] else []))
-        for p in pieces:  # feasts: item and piece in one
+        for i in items:  # a feast: eaten from the one set out with the Serving Tray
+            if m := i.get("servedFrom"):
+                lower(I, i["id"], max(I[m], I[TRAY]), "serve", m, [("item", m, None), ("item", TRAY, None)])
+        for p in pieces:  # item and piece in one
             if p["id"] in item_ids:
                 lower(I, p["id"], built(p["id"]), "piece", p["id"], [("piece", p["id"], None)])
         for pc in made:  # a placed piece needs its cost; sap also its root, a world object
@@ -932,6 +935,16 @@ def piece(name: str, p: dict, tools: dict[str, list[str]]) -> dict | None:
                           for c in p["components"]),
         "dlc": pc["m_dlc"],
     }
+
+
+TRAY = "Feaster"  # the Serving Tray
+
+
+def tray_food(pc: dict) -> bool:
+    """A food, mead or feast set out with the Serving Tray: its only material is an item, so it isn't kept as a piece.
+    For a food or mead that is the item itself; a feast's prefab is the eaten item (the stats), its material is the
+    crafted one (FeastMeadows_Material): that item gets `servedFrom`."""
+    return TRAY in pc["tools"] and len(pc["resources"]) == 1
 
 
 def lures(p: dict) -> dict | None:
@@ -1883,13 +1896,16 @@ def main(argv: list[str]) -> int:
     defaults = {d["type"]: d["fields"] for d in load("status_effect_defaults.json")}
 
     items, creatures, pieces, procs, sources = [], [], [], [], []
+    served = {}  # feast item -> the item set out with the Serving Tray to make it
     for name, p in PREFABS.items():
-        if p["isItem"] and (i := item(name, p)):
-            items.append(i)
         if c := creature(name, p):
             creatures.append(c)
-        if pc := piece(name, p, tools):
+        if (pc := piece(name, p, tools)) and not tray_food(pc):
             pieces.append(pc)
+        elif pc and pc["resources"][0]["item"] != name:
+            served[name] = pc["resources"][0]["item"]
+        if p["isItem"] and (i := item(name, p)):
+            items.append({**i, "servedFrom": served.get(name)})
         procs.extend(processing(name, p))
         if not p["isItem"] and not has(p, "Piece") and (s := source(name, p)):
             sources.append(s)

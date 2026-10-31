@@ -198,6 +198,77 @@
   "enemyOnly": true
  },
  {
+  "id": "Feast",
+  "name": "Feast",
+  "type": "Consumable",
+  "icon": "Mead",
+  "weight": 1.0,
+  "stack": 1,
+  "maxQuality": 1,
+  "food": {
+   "health": 30
+  },
+  "servedFrom": "Feast_Material",
+  "stage": "Meadows",
+  "via": {
+   "how": "serve",
+   "from": "Feast_Material",
+   "needs": [
+    {
+     "item": "Feast_Material"
+    },
+    {
+     "item": "Feaster"
+    }
+   ]
+  }
+ },
+ {
+  "id": "Feast_Material",
+  "name": "Feast to set out",
+  "type": "Material",
+  "icon": "Mead",
+  "weight": 1.0,
+  "stack": 1,
+  "maxQuality": 1,
+  "stage": "Meadows",
+  "via": {
+   "how": "craft",
+   "from": "Recipe_Feast",
+   "needs": [
+    {
+     "item": "Wood",
+     "amount": 3
+    }
+   ]
+  }
+ },
+ {
+  "id": "Feaster",
+  "name": "Tray",
+  "type": "Tool",
+  "icon": "Hammer",
+  "weight": 1.0,
+  "stack": 1,
+  "maxQuality": 1,
+  "backstab": 1,
+  "parryBonus": 1,
+  "blockAdrenaline": 2,
+  "parryAdrenaline": 5,
+  "buildTable": "_FeasterTable",
+  "stage": "Meadows",
+  "via": {
+   "how": "craft",
+   "from": "Recipe_Feaster",
+   "needs": [
+    {
+     "item": "Wood",
+     "amount": 1
+    }
+   ]
+  }
+ },
+ {
   "id": "Fish",
   "name": "Glimfish",
   "type": "Material",

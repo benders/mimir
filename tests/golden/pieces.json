@@ -337,6 +337,47 @@
   }
  },
  {
+  "id": "Platter",
+  "name": "Platter",
+  "enabled": true,
+  "category": "Misc",
+  "tools": [
+   "Feaster"
+  ],
+  "resources": [
+   {
+    "item": "Mead",
+    "amount": 1
+   },
+   {
+    "item": "Wood",
+    "amount": 2
+   }
+  ],
+  "health": 400,
+  "material": "Wood",
+  "damageModifiers": {
+   "fire": "Weak"
+  },
+  "stage": "Meadows",
+  "via": {
+   "how": "build",
+   "needs": [
+    {
+     "item": "Feaster"
+    },
+    {
+     "item": "Mead",
+     "amount": 1
+    },
+    {
+     "item": "Wood",
+     "amount": 2
+    }
+   ]
+  }
+ },
+ {
   "id": "Sapling",
   "name": "Twig Bush",
   "icon": "Sapling",

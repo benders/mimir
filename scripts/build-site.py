@@ -74,6 +74,7 @@ RAID_EVENTS = {e["id"]: e for e in RAIDS["events"]}
 LOCATIONS = load("locations")
 ALT_BIOMES = load("alt_biomes")
 
+TRAY = "Feaster"  # the Serving Tray (normalize.TRAY): items with `servedFrom` are set out with it
 KINDS = {"item": "items", "creature": "creatures", "piece": "pieces", "effect": "effects"}
 WEAPONS = {"OneHandedWeapon", "TwoHandedWeapon", "TwoHandedWeaponLeft", "Bow", "Torch"}
 ARMOR = {"Helmet", "Chest", "Legs", "Shoulder"}
@@ -472,6 +473,7 @@ sold_by = defaultdict(list)          # item -> (trader, offer)
 effect_users = defaultdict(list)     # effect -> (kind, id, how): items, and creatures through their attack items
 spawns_of = defaultdict(list)        # creature -> spawn entries
 tool_pieces = defaultdict(list)      # tool item -> pieces
+served_as = defaultdict(list)        # item set out with the Serving Tray -> the feast items eaten from it
 set_members = defaultdict(list)      # set name -> items
 world_copies = defaultdict(list)     # buildable piece -> world pieces with the same name (Hildir's campfire)
 
@@ -563,6 +565,8 @@ for c in CREATURES.values():  # creature attacks (internal items) that apply an 
 for i in ITEMS.values():
     if i.get("internal") or i.get("enemyOnly") or i.get("unobtainable"):
         continue
+    if i.get("servedFrom"):
+        served_as[i["servedFrom"]].append(i["id"])
     if i.get("consumeEffect"):
         effect_users[i["consumeEffect"]].append(("item", i["id"], "consumed"))
     if i.get("equipEffect"):
@@ -608,7 +612,7 @@ def effect_group(e: dict) -> str:
         return "equipment"
     return "status"
 for kind, rels in {"item": [crafted_by, used_in_recipe, used_in_piece, process_from, process_to, dropped_by,
-                            found_in, bait_for, sold_by, tool_pieces],
+                            found_in, bait_for, sold_by, tool_pieces, served_as],
                    "creature": [spawns_of],
                    "piece": [crafted_at, built_at, extensions, process_at]}.items():
     for variant, page_id in MERGED[kind].items():  # a merged copy's relations show on its page
@@ -1045,7 +1049,7 @@ def attack_damage(w: dict) -> str:
 
 HOW_LABELS = {"craft": "crafted", "build": "built", "drop": "dropped by", "produce": "produced by", "piece": "placed",
               "break": "breaks out of", "offspring": "laid by", "growup": "grows up from", "egg": "hatches from",
-              "summon": "summoned by", "phase": "next phase of"}
+              "summon": "summoned by", "phase": "next phase of", "serve": "set out with the Serving Tray"}
 TREE_OPEN = 2  # levels shown expanded
 
 
@@ -1104,6 +1108,8 @@ def need_role(kind: str, id_: str, n: dict) -> str:
         return "tool"
     if "item" in n and v.get("how") == "fish":
         return "bait"
+    if "item" in n and v.get("how") == "serve" and n["item"] != v.get("from"):
+        return "tool"
     if "item" in n and v.get("how") == "process" and n["item"] != v["needs"][0].get("item"):
         return "fuel"
     if "item" in n and v.get("how") == "source":
@@ -1250,6 +1256,8 @@ def item_page(i: dict) -> None:
         pr = p["produces"]
         where = " near " + esc(pretty_id(pr["connectsTo"]["id"])) if pr.get("connectsTo") else ""
         obtain.append([f'Produced by {link("piece", p["id"])}{where}', "", f'{duration(pr["secPerUnit"])} each, up to ×{num(pr["max"])}'])
+    if m := i.get("servedFrom"):  # a feast: set out with the Serving Tray, then eaten from
+        obtain.append([f'Set out with {link("item", TRAY)}', link("item", m), ""])
     for s, _ in found_in[i["id"]]:
         for p in s.get("placedBy", []):
             if (lu := PIECES[p].get("lures")) and has_page("piece", p):
@@ -1302,9 +1310,12 @@ def item_page(i: dict) -> None:
     used += [("piece", p["id"], link("piece", p["id"])) for p in used_in_piece[i["id"]]
              if p["id"] != i["id"]]  # not "place on table"
     used += [("item", c["to"], link("item", c["to"])) for c in process_from[i["id"]]]
+    used += [("item", f, link("item", f)) for f in served_as[i["id"]]]
     body += staged_section("Used in", used)
     if i.get("buildTable"):
         body += staged_section("Builds", [("piece", p["id"], link("piece", p["id"])) for p in tool_pieces[i["id"]]])
+    if i["id"] == TRAY:
+        body += staged_section("Sets out", [("item", f, link("item", f)) for m in sorted(served_as) for f in served_as[m]])
     page(href("item", i["id"]), name_of("item", i["id"]), body, '<a href="items/index.html">Items</a>')
 
 
