@@ -324,6 +324,7 @@ def item(name: str, p: dict) -> dict | None:
         "attackEffect": ref(s.get("m_attackStatusEffect")),  # applied to what the attack hits (or the user: shields)
         "set": {"name": s["m_setName"], "size": s["m_setSize"], "effect": ref(s["m_setStatusEffect"])} if s["m_setName"] else None,
         "buildTable": ref(s["m_buildPieces"]),
+        "hatch": hatch(p),
     }
 
 
@@ -838,6 +839,63 @@ def carried_items(c: dict) -> set[str]:
 REGEN_TIME = 3600  # Character.m_regenAllHPTime code default: seconds a creature takes to regenerate all its health
 
 
+def tameable(p: dict, tame: dict, ai: dict) -> dict:
+    """What taming, feeding, breeding and riding read (#87). Tameable.TamingUpdate counts the taming time down while
+    the creature is fed and not alerted (MonsterAI alerts it on seeing an enemy within m_alertRange); a hungry one
+    looks for food on the ground within searchRange and eats it from eatRange (MonsterAI.UpdateConsumeItem).
+    `procreation` is Procreation.Procreate's numbers, `saddle` the Sadle (on a child object) and its item."""
+    proc = comp(p, "Procreation")
+    sadle = next((c["fields"] for c in p["components"] if c["type"] == "Sadle"), None)
+    return {
+        "fedDuration": tame["m_fedDuration"], "tamingTime": tame["m_tamingTime"],
+        "commandable": tame["m_commandable"], "startsTamed": tame.get("m_startsTamed", False),
+        "food": sorted(filter(None, map(ref, ai.get("m_consumeItems") or []))),
+        "searchRange": ai.get("m_consumeSearchRange", 5) if ai.get("m_consumeItems") else None,
+        "eatRange": ai.get("m_consumeRange", 2) if ai.get("m_consumeItems") else None,
+        "alertRange": ai.get("m_alertRange", 9999),
+        # MonsterAI.UpdateAI: runs from a sensed enemy while not alerted and further than m_alertRange
+        "flees": ai.get("m_fleeIfNotAlerted", False),
+        "saddle": {
+            "item": ref(tame["m_saddleItem"]), "stamina": sadle.get("m_maxStamina", 100),
+            "runDrain": sadle.get("m_runStaminaDrain", 10), "swimDrain": sadle.get("m_swimStaminaDrain", 10),
+            "regen": sadle.get("m_staminaRegen", 10), "regenHungry": sadle.get("m_staminaRegenHungry", 10),
+        } if sadle and ref(tame.get("m_saddleItem")) else None,
+        "procreation": {
+            "offspring": ref(proc["m_offspring"]), "interval": proc.get("m_updateInterval", 10),
+            "range": proc.get("m_totalCheckRange", 10), "max": proc.get("m_maxCreatures", 4),
+            "partnerRange": proc.get("m_partnerCheckRange", 3),
+            # Procreate returns when Random.value <= m_pregnancyChance: the chance a check does NOT add a love point
+            "pregnancyChance": proc.get("m_pregnancyChance", 0.5), "pregnancyTime": proc.get("m_pregnancyDuration", 10),
+            "lovePoints": proc.get("m_requiredLovePoints", 4), "minLevel": proc.get("m_minOffspringLevel", 0),
+        } if proc and ref(proc.get("m_offspring")) else None,
+    }
+
+
+def trample(p: dict) -> dict | None:
+    """MovementDamage.Update: while the creature moves faster than `speed` m/s its run Aoe (a child object) is on,
+    hitting every `interval` s; `enemies` = it hits characters it is hostile to, `objects` = trees, rocks, pieces."""
+    if not (md := comp(p, "MovementDamage")) or not (path := (md.get("m_runDamageObject") or {}).get("path")):
+        return None
+    aoe = next((c["fields"] for c in p["components"] if c["type"] == "Aoe" and c.get("path") == path), None)
+    if not aoe:
+        return None
+    return {"speed": md.get("m_speedTreshold", 6), "damages": damages(aoe["m_damage"]),
+            "interval": aoe.get("m_hitInterval", 1),
+            "enemies": aoe.get("m_hitEnemy", True) and aoe.get("m_hitCharacters", True),
+            "objects": aoe.get("m_hitProps", True)}
+
+
+def hatch(p: dict) -> dict | None:
+    """An egg item's EggGrow: what hatches, after `time` s of world time warm (EggGrow.CanGrow: alone, not in a stack,
+    inside a Heat EffectArea when `fire`, under a roof with at least `cover` when `roof`)."""
+    if not (e := comp(p, "EggGrow")) or not ref(e.get("m_grownPrefab")):
+        return None
+    roof = e.get("m_requireUnderRoof", True)
+    return {"creature": ref(e["m_grownPrefab"]), "time": e.get("m_growTime", 60), "tamed": e.get("m_tamed", False),
+            "fire": e.get("m_requireNearbyFire", True), "roof": roof,
+            "cover": e.get("m_requireCoverPercentige", 0.7) if roof else None}
+
+
 def creature(name: str, p: dict) -> dict | None:
     c = comp(p, "Humanoid") or comp(p, "Character")
     if c is None or has(p, "Player"):
@@ -870,10 +928,9 @@ def creature(name: str, p: dict) -> dict | None:
         "attacks": sorted(attacks),
         "equipment": sorted(carried - attacks),
         "drops": drops,
-        "tameable": {
-            "fedDuration": tame["m_fedDuration"], "tamingTime": tame["m_tamingTime"],
-            "commandable": tame["m_commandable"], "food": sorted(filter(None, map(ref, ai.get("m_consumeItems") or []))),
-        } if tame else None,
+        "tameable": tameable(p, tame, ai) if tame else None,
+        "growTime": (comp(p, "Growup") or {}).get("m_growTime"),  # Growup.GrowUpdate: s since spawned
+        "trample": trample(p),
         "afraidOfFire": ai.get("m_afraidOfFire"),
         "avoidWater": ai.get("m_avoidWater"),
     }

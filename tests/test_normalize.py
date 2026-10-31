@@ -191,6 +191,27 @@ class Entities(FixtureCase):
         self.assertIn("vfx_Poof", N.skipped_refs)
         self.assertEqual(c["tameable"]["food"], ["Fish"])
 
+    def test_tameable_breeding_saddle_and_growth(self):
+        t = N.creature("Raider", N.PREFABS["Raider"])["tameable"]
+        self.assertEqual((t["searchRange"], t["eatRange"], t["alertRange"]), (8, 1.5, 7))
+        self.assertFalse(t["startsTamed"])
+        # the Sadle sits on a child object; its item comes from Tameable.m_saddleItem
+        self.assertEqual(t["saddle"], {"item": "Saddle", "stamina": 150, "runDrain": 2, "swimDrain": 6,
+                                       "regen": 0.3, "regenHungry": 0.15})
+        self.assertEqual(t["procreation"], {"offspring": "Pup", "interval": 20, "range": 12, "max": 6,
+                                            "partnerRange": 2, "pregnancyChance": 0.25, "pregnancyTime": 40,
+                                            "lovePoints": 2, "minLevel": 0})
+        self.assertTrue(t["flees"])
+        self.assertEqual(N.creature("Raider", N.PREFABS["Raider"])["trample"],
+                         {"speed": 4, "damages": {"blunt": 15, "chop": 25}, "interval": 3, "enemies": True,
+                          "objects": True})
+        self.assertIsNone(N.creature("Pup", N.PREFABS["Pup"])["trample"])
+        self.assertEqual(N.creature("Pup", N.PREFABS["Pup"])["growTime"], 900)
+        egg = N.item("Egg", N.PREFABS["Egg"])["hatch"]
+        self.assertEqual(egg, {"creature": "Pup", "time": 500, "tamed": True, "fire": True, "roof": False,
+                               "cover": None})  # no roof needed: no cover share either
+        self.assertIsNone(N.item("Fish", N.PREFABS["Fish"])["hatch"])
+
     def test_creature_regen_time_only_when_not_default(self):
         self.assertIsNone(N.creature("Chief", N.PREFABS["Chief"])["regenTime"])
         self.assertEqual(N.creature("Chief_p2", N.PREFABS["Chief_p2"])["regenTime"], 1800)

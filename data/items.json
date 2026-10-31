@@ -3833,6 +3833,12 @@
    "duration": 600,
    "regen": 2
   },
+  "hatch": {
+   "creature": "Asksvin_hatchling",
+   "time": 1800,
+   "tamed": true,
+   "fire": true
+  },
   "stage": "AshLands",
   "via": {
    "how": "offspring",
@@ -11799,6 +11805,14 @@
    "stamina": 30,
    "duration": 600,
    "regen": 2
+  },
+  "hatch": {
+   "creature": "Chicken",
+   "time": 1800,
+   "tamed": true,
+   "fire": true,
+   "roof": true,
+   "cover": 0.7
   },
   "stage": "Plains",
   "via": {

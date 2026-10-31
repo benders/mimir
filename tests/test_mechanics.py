@@ -2,6 +2,7 @@
 and the SVG charts."""
 import importlib.util
 import re
+import math
 import unittest
 from pathlib import Path
 
@@ -123,6 +124,24 @@ class Formulas(unittest.TestCase):
         self.assertAlmostEqual(M.sleep_skip(0.1, 1800), 90)
         self.assertEqual(M.regen_over(100, 1e9), 100)
         self.assertAlmostEqual(M.regen_over(3600, 1170), 1170)
+
+    def test_taming_breeding_riding(self):
+        # Tameable.DecreaseRemainingTime: 3 s per 3 s tick, ×2 per boosted player nearby
+        self.assertEqual(M.taming_seconds(1800), 1800)
+        self.assertEqual(M.taming_seconds(1800, 1), 900)
+        self.assertEqual(M.taming_seconds(1800, 2), 450)
+        self.assertEqual(M.taming_seconds(100, 1), 51)  # 17 whole ticks of 6
+        # Procreation.Procreate: 3 points at 2/3 per 30 s check, then the first check > 60 s later (90 s)
+        proc = {"interval": 30, "pregnancyChance": 1 / 3, "lovePoints": 3, "pregnancyTime": 60}
+        self.assertAlmostEqual(M.breed_seconds(proc), 135 + 90)
+        self.assertAlmostEqual(M.breed_seconds({**proc, "pregnancyTime": 50}), 135 + 60)
+        # Sadle: drain × Lerp(1, 0.5, skill); regen r(2 - s/M) fills in M ln2 / r
+        self.assertEqual(M.ride_seconds(240, 1), 240)
+        self.assertEqual(M.ride_seconds(240, 1, 100), 480)
+        self.assertEqual(M.ride_seconds(240, 5, 50), 64)
+        self.assertAlmostEqual(M.saddle_refill_seconds(240, 0.2), 1200 * math.log(2))
+        self.assertEqual(M.mount_drown_damage(1000), 50)
+        self.assertEqual(M.mount_drown_damage(1010), 51)
 
     def test_frost(self):
         # SE_Frost.AddDamage: Clamp01(damage / max health) * freeze time

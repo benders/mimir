@@ -115,6 +115,7 @@
    "run": 5,
    "swim": 2
   },
+  "growTime": 900,
   "stage": "Meadows",
   "via": {
    "how": "egg",
@@ -165,7 +166,39 @@
    "commandable": true,
    "food": [
     "Fish"
-   ]
+   ],
+   "searchRange": 8,
+   "eatRange": 1.5,
+   "alertRange": 7,
+   "flees": true,
+   "saddle": {
+    "item": "Saddle",
+    "stamina": 150,
+    "runDrain": 2,
+    "swimDrain": 6,
+    "regen": 0.3,
+    "regenHungry": 0.15
+   },
+   "procreation": {
+    "offspring": "Pup",
+    "interval": 20,
+    "range": 12,
+    "max": 6,
+    "partnerRange": 2,
+    "pregnancyChance": 0.25,
+    "pregnancyTime": 40,
+    "lovePoints": 2
+   }
+  },
+  "trample": {
+   "speed": 4,
+   "damages": {
+    "blunt": 15,
+    "chop": 25
+   },
+   "interval": 3,
+   "enemies": true,
+   "objects": true
   },
   "afraidOfFire": true,
   "stage": "Meadows",
@@ -218,7 +251,39 @@
    "commandable": true,
    "food": [
     "Fish"
-   ]
+   ],
+   "searchRange": 8,
+   "eatRange": 1.5,
+   "alertRange": 7,
+   "flees": true,
+   "saddle": {
+    "item": "Saddle",
+    "stamina": 150,
+    "runDrain": 2,
+    "swimDrain": 6,
+    "regen": 0.3,
+    "regenHungry": 0.15
+   },
+   "procreation": {
+    "offspring": "Pup",
+    "interval": 20,
+    "range": 12,
+    "max": 6,
+    "partnerRange": 2,
+    "pregnancyChance": 0.25,
+    "pregnancyTime": 40,
+    "lovePoints": 2
+   }
+  },
+  "trample": {
+   "speed": 4,
+   "damages": {
+    "blunt": 15,
+    "chop": 25
+   },
+   "interval": 3,
+   "enemies": true,
+   "objects": true
   },
   "afraidOfFire": true,
   "stage": "Meadows",
@@ -269,7 +334,39 @@
    "commandable": true,
    "food": [
     "Fish"
-   ]
+   ],
+   "searchRange": 8,
+   "eatRange": 1.5,
+   "alertRange": 7,
+   "flees": true,
+   "saddle": {
+    "item": "Saddle",
+    "stamina": 150,
+    "runDrain": 2,
+    "swimDrain": 6,
+    "regen": 0.3,
+    "regenHungry": 0.15
+   },
+   "procreation": {
+    "offspring": "Pup",
+    "interval": 20,
+    "range": 12,
+    "max": 6,
+    "partnerRange": 2,
+    "pregnancyChance": 0.25,
+    "pregnancyTime": 40,
+    "lovePoints": 2
+   }
+  },
+  "trample": {
+   "speed": 4,
+   "damages": {
+    "blunt": 15,
+    "chop": 25
+   },
+   "interval": 3,
+   "enemies": true,
+   "objects": true
   },
   "afraidOfFire": true,
   "stage": "Meadows",

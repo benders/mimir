@@ -180,6 +180,12 @@
   "weight": 1.0,
   "stack": 1,
   "maxQuality": 1,
+  "hatch": {
+   "creature": "Pup",
+   "time": 500,
+   "tamed": true,
+   "fire": true
+  },
   "stage": "Meadows",
   "via": {
    "how": "source",
@@ -731,6 +737,16 @@
    "how": "source",
    "from": "container_piece_stash_4610f0"
   }
+ },
+ {
+  "id": "Saddle",
+  "name": "Saddle",
+  "type": "Material",
+  "icon": "Saddle",
+  "weight": 1.0,
+  "stack": 1,
+  "maxQuality": 1,
+  "unobtainable": true
  },
  {
   "id": "Shard",

@@ -116,7 +116,28 @@
     "Fiddleheadfern",
     "MushroomSmokePuff",
     "Vineberry"
-   ]
+   ],
+   "searchRange": 10,
+   "eatRange": 4,
+   "alertRange": 10,
+   "saddle": {
+    "item": "SaddleAsksvin",
+    "stamina": 240,
+    "runDrain": 1,
+    "swimDrain": 5,
+    "regen": 0.2,
+    "regenHungry": 0.1
+   },
+   "procreation": {
+    "offspring": "AsksvinEgg",
+    "interval": 30,
+    "range": 10,
+    "max": 10,
+    "partnerRange": 4,
+    "pregnancyChance": 0.33,
+    "pregnancyTime": 60,
+    "lovePoints": 3
+   }
   },
   "avoidWater": true,
   "stage": "AshLands",
@@ -168,6 +189,7 @@
     "levelMultiplier": true
    }
   ],
+  "growTime": 3000,
   "avoidWater": true,
   "stage": "AshLands",
   "via": {
@@ -312,6 +334,15 @@
    "aspect_Fader_Spin",
    "aspect_Fader_WallOfFire"
   ],
+  "trample": {
+   "speed": 1,
+   "damages": {
+    "chop": 300,
+    "pickaxe": 300
+   },
+   "interval": 4,
+   "objects": true
+  },
   "avoidWater": true,
   "stage": "DeepNorth",
   "via": {
@@ -387,6 +418,15 @@
    "aspect_SeekerQueen_Slap",
    "aspect_SeekerQueen_Spit"
   ],
+  "trample": {
+   "speed": 1,
+   "damages": {
+    "blunt": 200,
+    "chop": 40
+   },
+   "interval": 4,
+   "objects": true
+  },
   "avoidWater": true,
   "stage": "DeepNorth",
   "via": {
@@ -775,9 +815,13 @@
   "tameable": {
    "fedDuration": 600,
    "tamingTime": 1800,
+   "startsTamed": true,
    "food": [
     "Blueberries"
-   ]
+   ],
+   "searchRange": 10,
+   "eatRange": 4,
+   "alertRange": 40
   },
   "avoidWater": true,
   "stage": "DeepNorth",
@@ -1265,7 +1309,21 @@
     "Onion",
     "Raspberry",
     "Turnip"
-   ]
+   ],
+   "searchRange": 10,
+   "eatRange": 1,
+   "alertRange": 6,
+   "flees": true,
+   "procreation": {
+    "offspring": "Boar_piggy",
+    "interval": 30,
+    "range": 10,
+    "max": 5,
+    "partnerRange": 3,
+    "pregnancyChance": 0.33,
+    "pregnancyTime": 60,
+    "lovePoints": 3
+   }
   },
   "afraidOfFire": true,
   "avoidWater": true,
@@ -1294,6 +1352,7 @@
    "run": 6,
    "swim": 2
   },
+  "growTime": 3000,
   "afraidOfFire": true,
   "avoidWater": true,
   "stage": "Meadows",
@@ -1327,6 +1386,7 @@
   "tameable": {
    "fedDuration": 600,
    "tamingTime": 1800,
+   "startsTamed": true,
    "food": [
     "Blueberries",
     "Carrot",
@@ -1334,7 +1394,11 @@
     "Onion",
     "Raspberry",
     "Turnip"
-   ]
+   ],
+   "searchRange": 10,
+   "eatRange": 1,
+   "alertRange": 40,
+   "flees": true
   },
   "afraidOfFire": true,
   "avoidWater": true,
@@ -1923,6 +1987,7 @@
     "levelMultiplier": true
    }
   ],
+  "growTime": 3000,
   "afraidOfFire": true,
   "avoidWater": true,
   "stage": "Plains",
@@ -3163,6 +3228,15 @@
     "chance": 1
    }
   ],
+  "trample": {
+   "speed": 1,
+   "damages": {
+    "chop": 300,
+    "pickaxe": 300
+   },
+   "interval": 4,
+   "objects": true
+  },
   "avoidWater": true,
   "stage": "AshLands",
   "via": {
@@ -3569,6 +3643,15 @@
    "FrozenKing_ChainWhirl",
    "FrozenKing_DoubleSweep"
   ],
+  "trample": {
+   "speed": 1,
+   "damages": {
+    "chop": 300,
+    "pickaxe": 300
+   },
+   "interval": 4,
+   "objects": true
+  },
   "avoidWater": true,
   "stage": "DeepNorth",
   "via": {
@@ -3660,6 +3743,15 @@
     "chance": 1
    }
   ],
+  "trample": {
+   "speed": 1,
+   "damages": {
+    "chop": 300,
+    "pickaxe": 300
+   },
+   "interval": 4,
+   "objects": true
+  },
   "avoidWater": true,
   "stage": "DeepNorth",
   "via": {
@@ -5115,6 +5207,7 @@
   "tameable": {
    "fedDuration": 600,
    "tamingTime": 1800,
+   "startsTamed": true,
    "food": [
     "Barley",
     "BeechSeeds",
@@ -5123,7 +5216,21 @@
     "Dandelion",
     "OnionSeeds",
     "TurnipSeeds"
-   ]
+   ],
+   "searchRange": 10,
+   "eatRange": 1,
+   "alertRange": 6,
+   "flees": true,
+   "procreation": {
+    "offspring": "ChickenEgg",
+    "interval": 30,
+    "range": 10,
+    "max": 10,
+    "partnerRange": 4,
+    "pregnancyChance": 0.33,
+    "pregnancyTime": 60,
+    "lovePoints": 3
+   }
   },
   "afraidOfFire": true,
   "avoidWater": true,
@@ -5646,7 +5753,38 @@
     "Barley",
     "Cloudberry",
     "Flax"
-   ]
+   ],
+   "searchRange": 10,
+   "eatRange": 4,
+   "alertRange": 6,
+   "saddle": {
+    "item": "SaddleLox",
+    "stamina": 240,
+    "runDrain": 1,
+    "swimDrain": 5,
+    "regen": 0.2,
+    "regenHungry": 0.1
+   },
+   "procreation": {
+    "offspring": "Lox_Calf",
+    "interval": 30,
+    "range": 20,
+    "max": 4,
+    "partnerRange": 8,
+    "pregnancyChance": 0.33,
+    "pregnancyTime": 120,
+    "lovePoints": 4
+   }
+  },
+  "trample": {
+   "speed": 5,
+   "damages": {
+    "blunt": 20,
+    "chop": 40
+   },
+   "interval": 4,
+   "enemies": true,
+   "objects": true
   },
   "avoidWater": true,
   "stage": "Plains",
@@ -5686,6 +5824,7 @@
     "chance": 1
    }
   ],
+  "growTime": 6000,
   "avoidWater": true,
   "stage": "Plains",
   "via": {
@@ -5789,7 +5928,36 @@
    "tamingTime": 1800,
    "food": [
     "Lingonberry"
-   ]
+   ],
+   "searchRange": 10,
+   "eatRange": 4,
+   "alertRange": 6,
+   "saddle": {
+    "item": "SaddleMoose",
+    "stamina": 240,
+    "runDrain": 1,
+    "swimDrain": 5,
+    "regen": 0.2,
+    "regenHungry": 0.1
+   },
+   "procreation": {
+    "offspring": "Moose_calf",
+    "interval": 30,
+    "range": 10,
+    "max": 5,
+    "partnerRange": 3,
+    "pregnancyChance": 0.33,
+    "pregnancyTime": 60,
+    "lovePoints": 3
+   }
+  },
+  "trample": {
+   "speed": 5,
+   "damages": {
+    "chop": 30
+   },
+   "interval": 4,
+   "objects": true
   },
   "avoidWater": true,
   "stage": "DeepNorth",
@@ -5825,6 +5993,7 @@
    "moose_hooves",
    "moose_horns"
   ],
+  "growTime": 3000,
   "avoidWater": true,
   "stage": "DeepNorth",
   "via": {
@@ -5863,9 +6032,29 @@
   "tameable": {
    "fedDuration": 600,
    "tamingTime": 1800,
+   "startsTamed": true,
    "food": [
     "Lingonberry"
-   ]
+   ],
+   "searchRange": 10,
+   "eatRange": 4,
+   "alertRange": 40,
+   "saddle": {
+    "item": "SaddleMoose",
+    "stamina": 240,
+    "runDrain": 1,
+    "swimDrain": 5,
+    "regen": 0.2,
+    "regenHungry": 0.1
+   }
+  },
+  "trample": {
+   "speed": 5,
+   "damages": {
+    "chop": 30
+   },
+   "interval": 4,
+   "objects": true
   },
   "avoidWater": true,
   "stage": "DeepNorth",
@@ -6342,6 +6531,15 @@
     "chance": 1
    }
   ],
+  "trample": {
+   "speed": 1,
+   "damages": {
+    "blunt": 200,
+    "chop": 40
+   },
+   "interval": 4,
+   "objects": true
+  },
   "avoidWater": true,
   "stage": "Mistlands",
   "via": {
@@ -6608,7 +6806,9 @@
   ],
   "tameable": {
    "fedDuration": 30,
-   "tamingTime": 1800
+   "tamingTime": 1800,
+   "startsTamed": true,
+   "alertRange": 20
   },
   "avoidWater": true,
   "stage": "Mistlands",
@@ -7982,7 +8182,20 @@
     "NeckTail",
     "RawMeat",
     "Sausages"
-   ]
+   ],
+   "searchRange": 10,
+   "eatRange": 1.4,
+   "alertRange": 20,
+   "procreation": {
+    "offspring": "Wolf_cub",
+    "interval": 30,
+    "range": 10,
+    "max": 4,
+    "partnerRange": 3,
+    "pregnancyChance": 0.33,
+    "pregnancyTime": 60,
+    "lovePoints": 3
+   }
   },
   "avoidWater": true,
   "stage": "Mountain",
@@ -8010,6 +8223,7 @@
    "run": 4,
    "swim": 2
   },
+  "growTime": 3000,
   "avoidWater": true,
   "stage": "Mountain",
   "via": {
@@ -8044,6 +8258,7 @@
   "tameable": {
    "fedDuration": 600,
    "tamingTime": 1800,
+   "startsTamed": true,
    "food": [
     "ChickenMeat",
     "DeerMeat",
@@ -8052,7 +8267,10 @@
     "NeckTail",
     "RawMeat",
     "Sausages"
-   ]
+   ],
+   "searchRange": 10,
+   "eatRange": 1.4,
+   "alertRange": 40
   },
   "avoidWater": true,
   "stage": "DeepNorth",

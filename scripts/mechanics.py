@@ -847,3 +847,44 @@ def damage_dealt_scale(players: int, mp: dict) -> float:
 def regen_over(max_health: float, seconds: float, regen_time: float | None = None) -> float:
     """Health regained over `seconds` of world time, capped at max health."""
     return min(max_health, regen_rate(max_health, regen_time) * seconds)
+
+
+TAME_TICK = 3  # Tameable.TamingUpdate: every 3 s (InvokeRepeating), counting 3 s off the taming time
+TAMING_BOOST = 2  # Tameable.m_tamingBoostMultiplier, per player within m_tamingSpeedMultiplierRange with TamingBoost
+TAMING_BOOST_RANGE = 60  # Tameable.m_tamingSpeedMultiplierRange
+
+
+def taming_seconds(taming_time: float, boosted: int = 0) -> float:
+    """Seconds of being fed and calm a creature needs to tame (Tameable.DecreaseRemainingTime): each 3 s tick takes
+    3 s off, doubled once per nearby player under a TamingBoost effect (Brew of Animal Whispers), so 2 boosted
+    players make it 4×. Ticks are whole, so the time rounds up to one."""
+    step = TAME_TICK * TAMING_BOOST ** boosted
+    return math.ceil(taming_time / step) * TAME_TICK
+
+
+def breed_seconds(proc: dict) -> float:
+    """Expected seconds from a fed, tamed pair standing together to the birth (Procreation.Procreate): every
+    `interval` s a check adds a love point with chance 1 - m_pregnancyChance (it returns when Random.value <=
+    m_pregnancyChance), `lovePoints` of them make it pregnant, and the birth comes at the first check more than
+    `pregnancyTime` s later (IsDue)."""
+    gain = 1 - proc["pregnancyChance"]
+    return proc["lovePoints"] * proc["interval"] / gain + (proc["pregnancyTime"] // proc["interval"] + 1) * proc["interval"]
+
+
+RIDE_SKILL_SAVING = 0.5  # Sadle.UpdateRiding: stamina use × Lerp(1, 0.5, Ride skill factor)
+
+
+def ride_seconds(stamina: float, drain: float, skill: float = 0) -> float:
+    """Seconds a full saddle lasts at `drain` per second (running on land, or swimming) at a Ride skill of 0..100."""
+    return stamina / (drain * (1 - RIDE_SKILL_SAVING * skill / 100))
+
+
+def saddle_refill_seconds(stamina: float, regen: float) -> float:
+    """Seconds from empty to full (Sadle.UpdateStamina): stamina grows at regen × (2 - s / max) per second, so
+    s(t) = 2·max·(1 - e^(-regen·t/max)), full at max·ln 2 / regen. Not while swimming or attacking, nor 1 s after use."""
+    return stamina * math.log(2) / regen
+
+
+def mount_drown_damage(max_health: float) -> float:
+    """Damage per second to a ridden mount swimming with no stamina left (Sadle.UpdateDrown): ceil(max health / 20)."""
+    return math.ceil(max_health / 20)

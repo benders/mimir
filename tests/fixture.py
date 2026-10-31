@@ -166,7 +166,7 @@ TRANSLATIONS = {
         ("feasts", "Feasts"), ("defense", "Defence"), ("stacks", "Piles and Stacks"), ("stairs", "Stairs"),
         ("doors", "Doors and Windows"), ("seasonal", "Seasonal Items"))}, "piece_lootchest": "Loot chest", "item_marble": "Marble", "piece_anvil": "Anvil", "piece_kiln": "Kiln",
     "piece_bush": "Twig Bush", "piece_creeper": "Creeper", "piece_orerock": "Ore Rock", "se_fizz": "Fizzy",
-    "enemy_pup": "Pup", "enemy_chief_p2": "Chief Risen", "enemy_imp": "Imp", "enemy_shade": "Shade", "enemy_sprite": "Sprite", "enemy_moth": "Moth", "enemy_singer": "Singer", "item_wand": "Wand", "item_rod": "Summoning Rod", "enemy_chief": "<color=orange>Chief</color>", "item_egg": "Egg", "item_nectar": "Nectar", "item_ichor": "Ichor", "item_dust": "Dust",
+    "enemy_pup": "Pup", "enemy_chief_p2": "Chief Risen", "enemy_imp": "Imp", "enemy_shade": "Shade", "enemy_sprite": "Sprite", "enemy_moth": "Moth", "enemy_singer": "Singer", "item_wand": "Wand", "item_rod": "Summoning Rod", "enemy_chief": "<color=orange>Chief</color>", "item_egg": "Egg", "item_saddle": "Saddle", "item_nectar": "Nectar", "item_ichor": "Ichor", "item_dust": "Dust",
     "item_hat": "Party Hat", "piece_tree": "Winter Tree", "piece_hive": "Hive", "piece_lure": "Lure", "piece_glow": "Glow", "piece_tap": "Tap", "piece_wildhive": "Wild Hive", "event_test": "Something stirs",
 }
 
@@ -179,9 +179,17 @@ def raider(name, **kw):
                                **kw}),
                   comp("CharacterDrop", {"m_drops": [char_drop("Ore", amountMax=3, chance=0.5),
                                                       char_drop("vfx_Poof")]}),  # effect prefab: skipped ref
-                  comp("Tameable", m(fedDuration=600, tamingTime=1800, commandable=True)),
-                  comp("MonsterAI", m(consumeItems=[R("Fish")], afraidOfFire=True, avoidWater=False)),
-                  comp("Procreation", m(offspring=R("Pup"))))
+                  comp("Tameable", m(fedDuration=600, tamingTime=1800, commandable=True, saddleItem=R("Saddle"))),
+                  comp("MonsterAI", m(consumeItems=[R("Fish")], afraidOfFire=True, avoidWater=False, consumeRange=1.5,
+                                      consumeSearchRange=8, alertRange=7, fleeIfNotAlerted=True)),
+                  comp("Procreation", m(offspring=R("Pup"), updateInterval=20, totalCheckRange=12, maxCreatures=6,
+                                        partnerCheckRange=2, pregnancyChance=0.25, pregnancyDuration=40,
+                                        requiredLovePoints=2)),
+                  comp("Sadle", m(maxStamina=150, runStaminaDrain=2, swimStaminaDrain=6, staminaRegen=0.3,
+                                  staminaRegenHungry=0.15), path="Visual/Saddle"),  # on a child object
+                  comp("MovementDamage", m(runDamageObject={"$ref": name, "path": "Visual/Run"}, speedTreshold=4)),
+                  comp("Aoe", m(damage=damages(blunt=15, chop=25), hitInterval=3, hitEnemy=True, hitCharacters=True,
+                                hitProps=True), path="Visual/Run"))
 
 
 def prefabs():
@@ -256,7 +264,7 @@ def prefabs():
         raider("Raider"),
         raider("Raider_sleeping"),  # identical copy: merged into Raider's page
         raider("Raider_Ranged", health=120, defaultItems=[R("Bite"), R("Spit"), R("FW_Helmet")]),  # differs: "Raider (archer)"
-        prefab("Pup", character(name="$enemy_pup", health=20), comp("Growup", m(grownPrefab=R("Raider")))),
+        prefab("Pup", character(name="$enemy_pup", health=20), comp("Growup", m(grownPrefab=R("Raider"), growTime=900))),
         prefab("Chief", character(name="$enemy_chief", health=900, boss=True, deathEffects={"m_effectPrefabs": [
             {"m_prefab": R("vfx_Poof")}, {"m_prefab": R("Chief_p2")},
             {"m_prefab": R("ChiefBurst")}]})),  # second phase: made when it dies; a burst that spawns a Shade
@@ -274,7 +282,9 @@ def prefabs():
         prefab("Moth", character(name="$enemy_moth", health=5)),  # only in an alt biome
         prefab("Singer", character(name="$enemy_singer", health=50)),  # one of the offering's three
         prefab("Wisp", character(name="$enemy_missing", health=10)),  # unresolved name, never spawns: hidden
-        with_components(item("Egg", name="$item_egg", icons=[S("Egg")]), comp("EggGrow", m(grownPrefab=R("Pup")))),
+        with_components(item("Egg", name="$item_egg", icons=[S("Egg")]), comp("EggGrow", m(grownPrefab=R("Pup"), growTime=500, tamed=True, requireNearbyFire=True,
+                                                                      requireUnderRoof=False))),
+        item("Saddle", name="$item_saddle", icons=[S("Saddle")]),  # rides the Raider (its Sadle)
         prefab("Spawner_Raider", comp("CreatureSpawner", creature_spawner("Raider"))),
         prefab("Player", character(name="Player"), comp("Player", m(
             maxAdrenaline=0, adrenalineDegen=[[0, 2], [1, 3]], adrenalineDegenDelay=[[0, 8], [1, 4]],

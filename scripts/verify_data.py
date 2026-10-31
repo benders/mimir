@@ -366,6 +366,14 @@ def main() -> int:
     ivy = (pieces.get("VineGreen_sapling", {}).get("plant") or {}).get("vine") or {}
     check(vine_src == {"VineAsh"} and not ivy.get("berries") and ivy.get("interval"),
           f"sources: Vineberries only from Ashvine, Ivy spreads but never bears ({sorted(vine_src)})")
+    tame = {c: creatures[c].get("tameable") or {} for c in ("Boar", "Wolf", "Lox", "Hen", "Asksvin")}
+    check(all((t.get("procreation") or {}).get("offspring") and t.get("food") for t in tame.values())
+          and {c for c, t in tame.items() if t.get("saddle")} == {"Lox", "Asksvin"}
+          and tame["Lox"]["saddle"]["item"] == "SaddleLox" and tame["Hen"].get("startsTamed")
+          and tame["Hen"]["procreation"]["offspring"] == "ChickenEgg"
+          and (items["ChickenEgg"].get("hatch") or {}).get("creature") == "Chicken"
+          and creatures["Boar_piggy"].get("growTime"),
+          "creatures: Boar, Wolf, Lox, Hen, Asksvin breed; Lox and Asksvin take saddles; Hen eggs hatch into chicks")
 
     print()
     if failures:

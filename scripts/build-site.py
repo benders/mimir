@@ -1162,6 +1162,11 @@ def item_page(i: dict) -> None:
         ("Value", f'{num(i["value"])} coins' if i.get("value") else None),
         ("Max quality", num(i["maxQuality"]) if i.get("maxQuality", 1) > 1 else None),
         ("Teleport", "no" if i.get("noTeleport") else None), ("DLC", esc(i["dlc"]) if i.get("dlc") else None),
+        ("Saddle for", ", ".join(link("creature", c["id"]) for c in CREATURES.values()
+                                 if ((c.get("tameable") or {}).get("saddle") or {}).get("item") == i["id"]
+                                 and has_page("creature", c["id"])) + f': {mech_link("taming", "Taming")}'
+         if any(((c.get("tameable") or {}).get("saddle") or {}).get("item") == i["id"] for c in CREATURES.values())
+         else None),
     ]
     combat = []
     if t in WEAPONS | {"Shield", "Tool", "Ammo", "AmmoNonEquipable"}:
@@ -1179,7 +1184,7 @@ def item_page(i: dict) -> None:
             combat.append(("Adrenaline", f'+{num(i.get("blockAdrenaline", 0))} per block, '
                                          f'+{num(i.get("parryAdrenaline", 0))} per parry'))
         if i.get("tamedOnly"):
-            combat.append(("Hits", "only tamed creatures"))
+            combat.append(("Hits", f'only tamed creatures: {mech_link("taming", "Taming")}'))
         if {"chop", "pickaxe"} & set(i.get("damages", {})):
             combat.append(("Tool tier", num(i.get("toolTier", 0))))
     if i.get("ammoType") and t in WEAPONS | {"Ammo", "AmmoNonEquipable"}:
@@ -1334,7 +1339,8 @@ def creature_page(c: dict) -> None:
                               f'all its health in {regen_full(c)} of world time, also while away or asleep')
               + f': {mech_link("healing", "Creature healing")}' if c.get("boss") else None),
              ("Speed", ", ".join(f"{k} {num(v)}" for k, v in sp.items())),
-             ("Tameable", "yes" if c.get("tameable") else None),
+             ("Tameable", ("starts tame" if c["tameable"].get("startsTamed") else "yes")
+              + f': {mech_link("taming", "Taming")}' if c.get("tameable") else None),
              ("Afraid of fire", "yes" if c.get("afraidOfFire") else None),
              ("Avoids water", "yes" if c.get("avoidWater") else None),
              ("Group", esc(c["group"]) if c.get("group") else None)]
@@ -2561,6 +2567,142 @@ def block_forge_items() -> str:
                    for i in IDOLS if idol_upgrades(i["id"]))
 
 
+def tames() -> list[dict]:
+    """Creatures a player tames or breeds: a Tameable with a page, and some way into the world besides a summon
+    (the spiritcaller summons and Skeleton_Friendly start tamed from a staff); in progression order."""
+    out = [c for c in CREATURES.values() if c.get("tameable") and has_page("creature", c["id"])
+           and any(s.get("source") != "summon" for s in spawns_of[c["id"]])]
+    return sorted(out, key=lambda c: (stage_of("creature", c["id"]), c["health"], c["id"]))
+
+
+def young(cid: str) -> list[tuple[str, str]]:
+    """What a tame's offspring goes through before it is an adult again: [(kind, id)], the egg item first."""
+    t = (CREATURES[cid].get("tameable") or {}).get("procreation") or {}
+    out, x = [], t.get("offspring")
+    if x in ITEMS:
+        out.append(("item", x))
+        x = (ITEMS[x].get("hatch") or {}).get("creature")
+    if x in CREATURES and x != cid:
+        out.append(("creature", x))
+    return out
+
+
+def grow_text(kind: str, id_: str) -> str:
+    """How an egg hatches or a young creature grows up (EggGrow.GrowUpdate / Growup.GrowUpdate, world time)."""
+    if kind == "item":
+        h = ITEMS[id_]["hatch"]
+        needs = (["near a fire"] if h.get("fire") else []) + (
+            [f"under a roof ({pct(h['cover'])} cover)"] if h.get("roof") else [])
+        return f"hatches in {duration(h['time'])}, alone (not stacked)" + (", " + " and ".join(needs) if needs else "")
+    t = CREATURES[id_].get("growTime")
+    return f"grows up in {duration(t)}" if t else ""
+
+
+def block_tame_list() -> str:
+    """Every tameable creature: what it eats, how long taming and a meal take, the range that alerts it."""
+    rows = []
+    for c in tames():
+        t = c["tameable"]
+        rows.append([link("creature", c["id"]), " ".join(link("item", i) for i in t.get("food", [])),
+                     "starts tame" if t.get("startsTamed") else duration(mechanics.taming_seconds(t["tamingTime"])),
+                     duration(t["fedDuration"]), f'{num(t["alertRange"])} m' if not t.get("startsTamed") else "",
+                     "follow / stay" if t.get("commandable") else "",
+                     link("item", t["saddle"]["item"]) if t.get("saddle") else ""])
+    return table(["Creature", "Eats", "Taming", "Fed for", "Alerted within", "Commands", "Saddle"], rows)
+
+
+def block_tame_breeding() -> str:
+    """Procreation per tame: the love point odds, expected time to a birth, the partner range and the crowd cap."""
+    rows = []
+    for c in tames():
+        p = c["tameable"].get("procreation")
+        if not p:
+            continue
+        rows.append([link("creature", c["id"]), pct(1 - p["pregnancyChance"]) + f' per {duration(p["interval"])}',
+                     num(p["lovePoints"]), duration(p["pregnancyTime"]),
+                     f'{num(round(mechanics.breed_seconds(p) / 60, 1))} min',
+                     f'{num(p["partnerRange"])} m', f'{num(p["max"])} within {num(p["range"])} m',
+                     " → ".join(link(k, i) for k, i in young(c["id"]))])
+    return table(["Creature", "Love point", "Points", "Pregnant for", "Birth after (avg)", "Partner within",
+                  "Stops at", "Young"], rows)
+
+
+def block_tame_saddles() -> str:
+    """Saddled mounts: stamina, how long it lasts running and swimming at Ride skill 0 and 100, and refill times."""
+    rows = []
+    for c in tames():
+        sd = c["tameable"].get("saddle")
+        if not sd:
+            continue
+        rows.append([link("item", sd["item"]), link("creature", c["id"]), num(sd["stamina"]),
+                     " / ".join(duration(round(mechanics.ride_seconds(sd["stamina"], sd["runDrain"], k)))
+                                for k in (0, 100)),
+                     " / ".join(duration(round(mechanics.ride_seconds(sd["stamina"], sd["swimDrain"], k)))
+                                for k in (0, 100)),
+                     " / ".join(duration(round(mechanics.saddle_refill_seconds(sd["stamina"], r) / 60) * 60)
+                                for r in (sd["regen"], sd["regenHungry"])),
+                     num(mechanics.mount_drown_damage(c["health"]))])
+    return table(["Saddle", "Mount", "Stamina", "Running, skill 0 / 100", "Swimming, skill 0 / 100",
+                  "Refill, fed / hungry", "Drowning per s"], rows)
+
+
+def block_tame_boost() -> str:
+    """Items whose effect has the TamingBoost attribute (Tameable.DecreaseRemainingTime doubles taming per player)."""
+    fx = {e["id"] for e in EFFECTS.values() if "TamingBoost" in str((e.get("stats") or {}).get("attributes", ""))}
+    rows = [[link("item", i["id"]), link("effect", i["consumeEffect"]),
+             duration(EFFECTS[i["consumeEffect"]].get("duration", 0))]
+            for i in ITEMS.values() if i.get("consumeEffect") in fx and i["type"] == "Consumable"  # not the mead base
+            and has_page("item", i["id"])]
+    return table(["Item", "Effect", "Lasts"], rows)
+
+
+def block_tame_knives() -> str:
+    """Weapons that hit only tamed creatures (m_tamedOnly, Attack.DoMeleeAttack / DoAreaAttack)."""
+    rows = [[link("item", i["id"]), damages(i.get("damages"))]
+            for i in ITEMS.values() if i.get("tamedOnly") and has_page("item", i["id"])]
+    return table(["Weapon", "Damage"], rows)
+
+
+TAME_NOTES = {  # a sentence on what sets a tame apart, under its heading on the taming page
+    "Wolf": "The only tame that takes commands.",
+    "Hen": "Hens only come from eggs (chicks grow up into them) and start tame, so there is nothing to tame. "
+           "They lay eggs instead of giving birth.",
+    "Asksvin": "Lays eggs, which need fire but no roof.",
+}
+
+
+def block_tame(cid: str) -> str:
+    """One tame's section: its name, a note, and its facts (where it lives, stats, attacks, food, wild behaviour,
+    its young), hidden past the reader's stage like the tables."""
+    c = CREATURES.get(cid)
+    if not c or not c.get("tameable") or not has_page("creature", cid):
+        return ""
+    t, sp = c["tameable"], c.get("speed") or {}
+    labels = attack_labels(c)
+    attacks = [f'{esc(labels.get(a) or clean(ITEMS[a].get("name")) or pretty_id(a))} {attack_damage(ITEMS[a])}'
+               for a in c.get("attacks", [])]
+    wild = ("flees from enemies further than " + f'{num(t["alertRange"])} m, fights closer' if t.get("flees")
+            else "attacks enemies" if attacks else "never attacks")
+    tr = c.get("trample")
+    facts = [("Lives in", ", ".join(biome_link(b) for b in creature_biomes(cid))),
+             ("Health", num(c["health"]) + " ×(1 + stars)"),
+             ("Speed", ", ".join(f"{k} {num(v)}" for k, v in sp.items())),
+             ("Attacks", "; ".join(attacks)),
+             ("Running hits", f'above {num(tr["speed"])} m/s, every {duration(tr["interval"])}: '
+              + damages(tr["damages"]) + (" to enemies and objects" if tr.get("enemies") else " to objects only")
+              if tr else None),
+             ("Behaviour", wild + ("; afraid of fire while wild" if c.get("afraidOfFire") else "")),
+             ("Avoids water", "yes" if c.get("avoidWater") else None),
+             ("Eats", " ".join(link("item", i) for i in t.get("food", []))),
+             ("Looks for food", f'within {num(t["searchRange"])} m, eats from {num(t["eatRange"])} m'
+              if t.get("searchRange") else None),
+             ("Young", "; ".join(f"{link(k, i)} {esc(grow_text(k, i))}" for k, i in young(cid)))]
+    name = name_of("creature", cid)
+    note = f"<p>{esc(TAME_NOTES[cid])}</p>" if cid in TAME_NOTES else ""
+    return (f'<section{stage_attr(stage_of("creature", cid))}><h3 id="{mechanics.slug(name)}">{esc(name)}</h3>'
+            f'{note}{kv(facts)}</section>')
+
+
 def mech_blocks() -> dict:
     return {"shields": block_shields, "resistant-creatures": block_resist_creatures, "resistant-gear": block_resist_gear,
             "star-spawns": block_star_spawns, "star-odds": block_star_odds, "guaranteed-stars": block_guaranteed_stars,
@@ -2582,6 +2724,9 @@ def mech_blocks() -> dict:
             "frost-resistant": block_frost_resistant,
             "regen-bosses": block_regen_bosses, "regen-other": block_regen_other, "sleep-skip": block_sleep_skip,
             "player-scaling": block_player_scaling, "boss-scaling": block_boss_scaling,
+            "tame-list": block_tame_list, "tame-breeding": block_tame_breeding,
+            "tame-saddles": block_tame_saddles, "tame-boost": block_tame_boost, "tame-knives": block_tame_knives,
+            "tame": block_tame,
             "frost-chart": lambda: mechanics.frost_chart(FROST_MULT, FROST_MIN),
             "adrenaline-chart": lambda: mechanics.adrenaline_chart(PLAYER["adrenaline"]),
             "chart": lambda name: mechanics.CHARTS[name]()}

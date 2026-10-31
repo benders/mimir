@@ -405,6 +405,18 @@ class Site(unittest.TestCase):
         names = [e[0] for e in json.loads((self.out / "search.json").read_text(encoding="utf-8"))]
         self.assertIn("Blocking", names)
 
+    def test_taming_page(self):
+        page = (self.out / "mechanics/taming.html").read_text(encoding="utf-8")
+        # tame-list: taming time, fed time, alert range, commands, saddle (fixture Raider)
+        self.assertIn("<td>30 min</td><td>10 min</td><td>7 m</td><td>follow / stay</td>", page)
+        # tame-breeding: 1 - 0.25 per 20 s check, 2 points: 2 × 20 / 0.75 + 3 × 20 s ≈ 1.9 min
+        self.assertIn("<td>75% per 20 s</td><td>2</td><td>40 s</td><td>1.9 min</td><td>2 m</td><td>6 within 12 m</td>",
+                      page)
+        # tame-saddles: 150 stamina at 2/s (×0.5 at skill 100), 6/s swimming; 150 ln2 / 0.3 ≈ 6 min; ⌈150 / 20⌉
+        self.assertIn("<td>150</td><td>75 s / 150 s</td><td>25 s / 50 s</td><td>6 min / 12 min</td><td>8</td>", page)
+        raider = (self.out / "creatures/Raider.html").read_text(encoding="utf-8")
+        self.assertIn('<dt>Tameable</dt><dd>yes: <a href="mechanics/taming.html">Taming</a></dd>', raider)
+
     def test_charts(self):
         for page, text in (("damage-types", "Damage taken against armor"), ("blocking", "Damage through a block"),
                            ("creature-levels", "Multipliers by star level")):
