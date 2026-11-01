@@ -1,9 +1,5 @@
 {
  "adrenaline": {
-  "changed": [
-   "Player.UpdateStats"
-  ],
-  "changedIn": "1.0.21",
   "methods": {
    "Attack.DoAreaAttack": "11fbd33bf5a92ce6",
    "Attack.DoMeleeAttack": "6f62bd9ec51aa482",
@@ -18,11 +14,11 @@
    "Player.GetMaxAdrenaline": "52a00816abbc10df",
    "Player.RPC_HitWhileDodging": "3c3787b36c524098",
    "Player.UpdateModifiers": "389ee2d79518547b",
-   "Player.UpdateStats": "e9ed6610251b46ec",
+   "Player.UpdateStats": "18583f01de714bd5",
    "Projectile.OnHit": "9cc9daec4ec0fc05",
    "SE_Stats.ModifyAdrenaline": "c2be2d0e7b34cd5f"
   },
-  "version": "1.0.20"
+  "version": "1.0.21"
  },
  "blocking": {
   "methods": {
@@ -48,15 +44,11 @@
   "version": "1.0.21"
  },
  "comfort": {
-  "changed": [
-   "Player.UpdateBaseValue"
-  ],
-  "changedIn": "1.0.21",
   "methods": {
    "Piece.GetAllComfortPiecesInRadius": "965481d68f6bcb4b",
    "Piece.GetComfort": "e8a2f1365e18c977",
    "Player.SetSleeping": "4f0827abd8fd8093",
-   "Player.UpdateBaseValue": "5ebf8b78419fcbc3",
+   "Player.UpdateBaseValue": "9e568fd60650e72d",
    "Player.UpdateEnvStatusEffects": "129db61b57554af7",
    "SE_Cozy.UpdateStatusEffect": "320bd988c1f42a33",
    "SE_Rested.CalculateComfortLevel": "162eae4ffe1dac85",
@@ -65,7 +57,7 @@
    "SE_Rested.Setup": "b65cefd031c2008b",
    "SE_Rested.UpdateTTL": "111d3cf695fe8f13"
   },
-  "version": "1.0.20"
+  "version": "1.0.21"
  },
  "creature-levels": {
   "methods": {
@@ -124,10 +116,6 @@
   "version": "1.0.21"
  },
  "food": {
-  "changed": [
-   "Player.UpdateStats"
-  ],
-  "changedIn": "1.0.21",
   "methods": {
    "Humanoid.UseItem": "9905047c84a04592",
    "Player.CanEat": "9ad9c913e59f2e71",
@@ -138,10 +126,10 @@
    "Player.GetTotalFoodValue": "680613cce3d96133",
    "Player.OnDeath": "84902f26ebea8add",
    "Player.UpdateFood": "8fe79a2110dca46e",
-   "Player.UpdateStats": "e9ed6610251b46ec",
+   "Player.UpdateStats": "18583f01de714bd5",
    "SE_Stats.ModifyHealthRegen": "c45d7305c256055a"
   },
-  "version": "1.0.20"
+  "version": "1.0.21"
  },
  "forge-of-potential": {
   "methods": {
@@ -159,21 +147,17 @@
   "version": "1.0.21"
  },
  "frost": {
-  "changed": [
-   "Character.UpdateWalking"
-  ],
-  "changedIn": "1.0.21",
   "methods": {
    "Character.AddFrostDamage": "593bd5e151a392d9",
    "Character.RPC_Damage": "8146c8fe271c338e",
    "Character.UpdateSwimming": "87fbd1f4f5270def",
-   "Character.UpdateWalking": "bfd1c9f3ff86dee3",
+   "Character.UpdateWalking": "8050e21e26218ef9",
    "HitData.DamageModifiers.ShouldOverride": "c117477dbca46da3",
    "SEMan.ApplyStatusEffectSpeedMods": "8383369de46fdd49",
    "SE_Frost.AddDamage": "ba807658815e82ba",
    "SE_Frost.ModifySpeed": "ef875c558e43d91d"
   },
-  "version": "1.0.20"
+  "version": "1.0.21"
  },
  "healing": {
   "methods": {
