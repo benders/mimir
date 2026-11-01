@@ -470,6 +470,21 @@ class Site(unittest.TestCase):
         self.assertNotIn("DPS", bow)  # depends on the ammo
         # Arbal: 1 s fire + 4 s reload (2 at skill 100) + 1 s reload done
         self.assertIn("<td>reload</td><td>4</td><td>6</td><td>4</td>", page)
+        frost = (self.out / "items/FrostRod.html").read_text(encoding="utf-8")
+        self.assertIn("5 eitr per shot", frost)
+        self.assertIn("held: a shot every 0.2 s (5 per second, 25 eitr/s)", frost)
+        self.assertIn("<dt>DPS</dt><dd>150</dd>", frost)  # 30 frost / 0.2 s
+        thunder = (self.out / "items/ThunderRod.html").read_text(encoding="utf-8")
+        # 12 x 20 lightning per 1 s throw + 2 s reload (1 s at skill 100), no reload-done state
+        self.assertIn("<dt>DPS (skill 0)†</dt><dd>80</dd><dt>DPS (skill 100)†</dt><dd>120</dd>", thunder)
+        self.assertIn("reloading drains 25 eitr/s (50 per shot, 25 at skill 100)", thunder)
+        self.assertIn("If all 12 projectiles of a shot hit", thunder)
+        self.assertIn('weapon damage <span class="qty">projectile</span> + 400 lightning <span class="qty">area</span>', thunder)
+        self.assertIn('75 lightning <span class="qty">chain, may spread</span>', thunder)
+        cluster = (self.out / "items/ClusterRod.html").read_text(encoding="utf-8")
+        self.assertIn("<dt>DPS†</dt><dd>48</dd>", cluster)  # 4 splinters x 12 fire / 1 s
+        self.assertIn("<td><b>150</b></td>", page)  # FrostRod in the weapons table
+        self.assertNotIn("ThunderRod", page.split("Bows and crossbows")[1])  # no ammo: not a ranged-speed row
 
     def test_biome_pages(self):
         swamp = (self.out / "biomes/Swamp.html").read_text(encoding="utf-8")

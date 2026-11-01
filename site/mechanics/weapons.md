@@ -1,7 +1,7 @@
 ---
 title: Weapons
 summary: Every weapon by category, with attack speed and damage per second.
-sources: Attack.Start; Projectile.Setup; Attack.FireProjectileBurst; Attack.OnAttackTrigger; Player.UpdateAttackBowDraw; Player.UpdateActionQueue; Player.QueueReloadAction; Player.InMinorAction; Humanoid.GetAttackDrawPercentage; ItemData.GetWeaponLoadingTime; Attack.Update; Attack.CanStartChainAttack; Attack.ModifyDamage; Attack.DoMeleeAttack; Attack.DoAreaAttack; Humanoid.StartAttack; Player.InAttack; CharacterAnimEvent.Speed; CharacterAnimEvent.CustomFixedUpdate; Skills.GetRandomSkillFactor; Humanoid.UpdateAttack
+sources: Attack.Start; Projectile.Setup; Projectile.SpawnOnHit; Aoe.Setup; Attack.FireProjectileBurst; Attack.ProjectileAttackTriggered; Attack.UpdateProjectile; Attack.Stop; Player.PlayerAttackInput; Player.UpdateWeaponLoading; Attack.GetAttackEitr; Attack.OnAttackTrigger; Player.UpdateAttackBowDraw; Player.UpdateActionQueue; Player.QueueReloadAction; Player.InMinorAction; Humanoid.GetAttackDrawPercentage; ItemData.GetWeaponLoadingTime; Attack.Update; Attack.CanStartChainAttack; Attack.ModifyDamage; Attack.DoMeleeAttack; Attack.DoAreaAttack; Humanoid.StartAttack; Player.InAttack; CharacterAnimEvent.Speed; CharacterAnimEvent.CustomFixedUpdate; Skills.GetRandomSkillFactor; Humanoid.UpdateAttack
 ---
 
 No item field sets attack speed. The animator does: an attack fires the trigger `m_attackAnimation` + chain level and
@@ -18,15 +18,23 @@ freezes the animation for 0.15 s. Skills and status effects don't change attack 
 - bow: shot time = max(draw, release animation), draw = m_drawDurationMin × (1 − 0.8 × skill / 100)
 - crossbow: shot time = fire animation + reload + "reload done" animation (1.15 s), reload = m_reloadTime × (1 − 0.5 × skill / 100)
 - each hit rolls × [n − 0.15, n + 0.15], clamped to [0, 1], n = 0.4 + 0.6 × skill / 100 (× 0.85–1 at skill 100)
+- held staff (Staff of Frost): shot time = m_burstInterval (0.2 s) after a 0.35 s wind-up, each shot paying the eitr cost; released or out of eitr, it stops
+- Dundr: shot time = fire animation + reload, as a crossbow with no "reload done"; reloading drains 25 eitr/s, so a shot costs 25 × reload
+- eitr, stamina and health cost = cost × (1 − 0.33 × skill / 100)
+- shot damage = weapon damage × projectiles (Dundr 12) × spawned copies that carry it (Staff of Fracturing: 12 splinters)
 
 The tables group weapons by category, with the skill each trains, lowest primary DPS first; a weapon's secondary
 attack is in the same row. They use quality 1 (not upgraded; each item page has DPS per quality), a skill roll of 1 (every hit connects at full damage) and the sum of the weapon's damage
 types, leaving out any type more than half of all creatures are immune to or ignore: chop and pickaxe, and spirit,
-which is marked *. Staffs that fire in bursts or beams and thrown spears (the
-spear has to be picked up again) aren't listed. Nor is the Butcher Knife, which only hits tamed creatures.
+which is marked *. Weapons that fire several projectiles (†) count all of them hitting one target, and Dundr's time is
+at skill 0. A staff's projectile may spawn more on hit: copies that carry the weapon's damage count, objects with their
+own fixed damage (Lightning Strike's 400 + 80 lightning strike, Echo Spike's blasts) don't; each item page lists them
+under Damage dealt. Thrown spears (the spear has to be picked up again) and summoning staffs aren't listed, nor is the
+Butcher Knife, which only hits tamed creatures.
 
 > Inferred: times are computed from the animator data, not measured in game; transition blending and input latency
-> (about one frame) aren't counted. Bows assume the next draw starts the moment the arrow is released.
+> (about one frame) aren't counted. Bows assume the next draw starts the moment the arrow is released. Burst
+> timers count down in fixed-update steps, which may add a step to each 0.2 s shot.
 
 ## Melee, staffs and throwables
 

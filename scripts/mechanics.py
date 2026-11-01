@@ -166,6 +166,22 @@ def hit_damage(damages: dict, skip=TOOL_DAMAGE) -> float:
     return sum(v for k, v in damages.items() if k in DAMAGE_TYPES and k not in skip)
 
 
+def shot_damage(damages: dict, attack: dict | None, hits: list[dict] | None = None, skip=TOOL_DAMAGE) -> float:
+    """One hit of an attack against one target, everything it fires connecting: the weapon's damage (hit_damage)
+    × m_projectiles (Attack.FireProjectileBurst). When the damage goes through spawned objects (data/items.json
+    `hits`), only the hits that carry the weapon's damage count, × how many one shot makes (the Staff of Fracturing's
+    12 splinters, Projectile.SpawnOnHit); hits with their own fixed damage (Lightning Strike's strike) don't."""
+    n = (attack or {}).get("projectiles") or 1
+    if hits is None:
+        return hit_damage(damages, skip) * n
+    return sum(hit_damage(damages, skip) * h.get("count", 1) for h in hits if h.get("inherits")) * n
+
+
+def attack_cost(cost: float, skill: float) -> float:
+    """Attack.GetAttackStamina / GetAttackEitr / GetAttackHealth: the attack's cost × (1 − 0.33 × skill / 100)."""
+    return cost * (1 - 0.33 * skill / 100)
+
+
 def skill_roll(skill: float) -> tuple[float, float]:
     """Skills.GetRandomSkillFactor: each hit's damage × a uniform roll in [n - 0.15, n + 0.15] clamped to [0, 1],
     n = lerp(0.4, 1, skill / 100)."""
@@ -196,7 +212,8 @@ def attack_cycle(attack: dict | None, skill: float = 0) -> float | None:
     needs both a full draw and the end of the release animation (Humanoid.StartAttack refuses while InAttack), so
     max(draw, release). Crossbows: firing unloads (Attack.OnAttackTrigger); the reload runs once the attack ends and
     m_blockReloadTime has passed (Player.UpdateActionQueue, QueueReloadAction), then Attack.Start waits out the
-    "reload done" minor action."""
+    "reload done" minor action (none for Dundr, whose recharge has no done state: `reloadDone` omitted = 0).
+    Held looping attacks (Staff of Frost): `cycle` is one burst."""
     if not attack or not attack.get("chain") or attack.get("thrown") or attack.get("random"):
         return None
     if attack.get("cycle"):
@@ -204,14 +221,14 @@ def attack_cycle(attack: dict | None, skill: float = 0) -> float | None:
     anim = sum(c["time"] for c in attack["chain"])
     if attack.get("draw"):
         return max(draw_time(attack["draw"], skill), anim)
-    if attack.get("reload") and attack.get("reloadDone") is not None:
-        return max(anim, attack.get("reloadBlock", 0)) + reload_time(attack["reload"], skill) + attack["reloadDone"]
+    if attack.get("reload"):
+        return max(anim, attack.get("reloadBlock", 0)) + reload_time(attack["reload"], skill) + attack.get("reloadDone", 0)
     return None
 
 
 def dps(per_hit: float, attack: dict | None, skill: float = 0) -> float | None:
     """Damage per second holding the attack, every hit connecting: combo damage / attack_cycle. Skill only changes
-    bow draw and crossbow reload. None when the cycle isn't known (projectile bursts, loops, thrown)."""
+    bow draw and crossbow reload. None when the cycle isn't known (thrown, random variants). `per_hit`: shot_damage."""
     cycle = attack_cycle(attack, skill)
     if not cycle or not per_hit:
         return None

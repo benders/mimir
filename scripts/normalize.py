@@ -183,6 +183,11 @@ def comp(p: dict, type_name: str) -> dict | None:
     return next((c["fields"] for c in p["components"] if c["type"] == type_name and "path" not in c), None)
 
 
+def comps(p: dict, type_name: str) -> list[dict]:
+    """Fields of every such component on the prefab, the root object's first (GetComponentInChildren order)."""
+    return [c["fields"] for c in sorted(p["components"], key=lambda c: "path" in c) if c["type"] == type_name]
+
+
 HIT_EVENTS = {"Hit", "OnAttackTrigger"}  # CharacterAnimEvent -> Humanoid.OnAttackTrigger: one damage application
 HIT_FREEZE = 0.15  # Attack.DoMeleeAttack: FreezeFrame(0.15) when a melee hit connects
 
@@ -235,13 +240,22 @@ def attack_timing(a: dict) -> dict | None:
         done = ANIMS.get(a.get("m_reloadAnimation", "") + "_done")  # Player.UpdateActionQueue sets <anim>_done
         out["reload"] = a.get("m_reloadTime", 0)  # ItemData.GetWeaponLoadingTime: × lerp(1, 0.5, skill)
         out["reloadBlock"] = a.get("m_blockReloadTime", 0)  # Attack.FireProjectileBurst: no reload queued before this
-        # Attack.Start refuses while Player.InMinorAction: the "reload done" state, until its exit transition ends
+        out["reloadEitr"] = a.get("m_reloadEitrDrain", 0)  # per second of reloading (Player.UpdateActionQueue)
+        # Attack.Start refuses while Player.InMinorAction: the "reload done" state, until its exit transition ends.
+        # No such state (Dundr's recharge_lightningstaff): the trigger plays nothing and the next attack can start.
         out["reloadDone"] = round(done["exit"] * done["length"] / done["speed"] + (
-            done["exitDuration"] if done["exitFixed"] else done["exitDuration"] * done["length"]), 3) if done else None
+            done["exitDuration"] if done["exitFixed"] else done["exitDuration"] * done["length"]), 3) if done else (
+            0 if a.get("m_reloadAnimation") in ANIMS else None)
+    bursts = a.get("m_projectileBursts", 1)
+    if bursts > 1 and a.get("m_loopingAttack"):
+        # Held (Player.PlayerAttackInput aborts a looping attack on release): from the trigger on, Attack.UpdateProjectile
+        # fires a burst every m_burstInterval, each paying the attack's cost with m_perBurstResourceUsage
+        # (Attack.FireProjectileBurst stops the attack when it can't); the cycle is one burst
+        out.update(looping=True, burstInterval=a.get("m_burstInterval", 0),
+                   perBurst=bool(a.get("m_perBurstResourceUsage")), cycle=a.get("m_burstInterval", 0))
     # The whole combo (or the one attack), every hit connecting. Draw and reload depend on skill: no fixed cycle
-    # (mechanics.attack_cycle). Projectile bursts (m_burstInterval) aren't modelled yet.
-    if not out["random"] and not thrown and a.get("m_projectileBursts", 1) <= 1 and not (
-            a.get("m_bowDraw") or a.get("m_requiresReload")):
+    # (mechanics.attack_cycle). Bursts that aren't held (no player weapon has any) aren't modelled.
+    elif not out["random"] and not thrown and bursts <= 1 and not (a.get("m_bowDraw") or a.get("m_requiresReload")):
         out["cycle"] = round(sum(c["time"] + (HIT_FREEZE * c["hits"] if melee else 0) for c in chain), 3)
     return out
 
@@ -1770,50 +1784,79 @@ def summoned_by(item_name: str) -> list[str]:
                    for c in summoned_creatures(ref(a.get("m_attackProjectile")))})
 
 
-def spawned_hits(target: str, inherited: dict | None, seen: frozenset = frozenset()) -> list[dict]:
+def spawned_hits(target: str, inherited: dict | None, seen: frozenset = frozenset(), count: int = 1) -> list[dict]:
     """Damage dealt by an attack's spawned object and what it spawns in turn. `inherited` is the attack's damage when
     the game passes its HitData on (Attack.FireProjectileBurst -> Projectile.Setup / Aoe.Setup), else None and the
-    object deals its own m_damage (SpawnAbility, Attack.m_spawnOnTrigger, ItemData m_spawnOnHit)."""
+    object deals its own m_damage (SpawnAbility, Attack.m_spawnOnTrigger, ItemData m_spawnOnHit). A hit carrying the
+    attack's damage is marked `inherits` (it scales with the weapon's quality); `count` (when above 1) is how many
+    copies one attack makes: Projectile.SpawnOnHit spawns m_spawnCount, each with the whole HitData unless the
+    parent has m_divideDamageBetweenProjectiles."""
     if not target or target in seen:
         return []
     p, seen = PREFABS.get(target) or SUBPREFABS.get(target), seen | {target}
-    if not p:
+    if not p or is_creature(target):  # a summon: its own attacks (and footstep Aoe children) aren't this attack's
         return []
+
+    def hit(kind: str, d: dict, inherits: bool) -> dict:
+        return {"kind": kind, "damages": d, **({"inherits": True} if inherits else {}), **({"count": count} if count > 1 else {})}
+
     if pr := comp(p, "Projectile"):
         spawn = ref(pr.get("m_spawnOnHit"))
         own = inherited if inherited is not None else damages(pr.get("m_damage"))
-        out = [] if spawn and pr.get("m_onlySpawnedProjectilesDealDamage") else [{"kind": "projectile", "damages": own}]
-        out += spawned_hits(spawn, inherited if pr.get("m_projectilesInheritHitData") else None, seen)
-        return out + [h for r in pr.get("m_randomSpawnOnHit") or [] for h in spawned_hits(ref(r), None, seen)]
-    if a := comp(p, "Aoe"):  # Aoe.Setup takes the attack's damage only with m_useAttackSettings
-        return [{"kind": "area", "damages": inherited if inherited is not None and a.get("m_useAttackSettings", True)
-                 else damages(a["m_damage"])}]
+        out = [] if spawn and pr.get("m_onlySpawnedProjectilesDealDamage") else [hit("projectile", own, inherited is not None)]
+        passed = inherited if pr.get("m_projectilesInheritHitData") else None
+        n = pr.get("m_spawnCount", 1) or 1
+        if passed is not None and pr.get("m_divideDamageBetweenProjectiles") and n > 1:
+            passed = {k: v / n for k, v in passed.items()}
+        out += spawned_hits(spawn, passed, seen, count * n)
+        return out + [h for r in pr.get("m_randomSpawnOnHit") or [] for h in spawned_hits(ref(r), None, seen, count)]
+    if aoes := comps(p, "Aoe"):
+        # Projectile.SpawnOnHit sets up the first IProjectile only (GetComponentInChildren), and Aoe.Setup takes the
+        # attack's damage only with m_useAttackSettings; other Aoe children (Lightning Strike's) deal their own.
+        # m_chainObj: Aoe.CustomFixedUpdate may spread a copy to nearby targets (random, m_chainChancePerTarget)
+        out = []
+        for k, a in enumerate(aoes):
+            takes = k == 0 and inherited is not None and a.get("m_useAttackSettings", True)
+            out.append(hit("area", inherited if takes else damages(a["m_damage"]), takes))
+            out += [dict(h, kind="chain") for h in spawned_hits(ref(a.get("m_chainObj")), None, seen, count)]
+        return out
     if sa := comp(p, "SpawnAbility"):  # SpawnAbility.SetupProjectile / spawned Aoe: no HitData
-        return [h for x in sa["m_spawnPrefab"] for h in spawned_hits(ref(x), None, seen)]
+        return [h for x in sa["m_spawnPrefab"] for h in spawned_hits(ref(x), None, seen, count)]
     return []
 
 
 def attack_hits(name: str) -> list[dict] | None:
-    """What a creature's attack item hits with when the damage goes through spawned objects (#9), None when the
-    item's own damage is all there is. Only the primary attack: MonsterAI uses m_attack."""
+    """What an attack item hits with when the damage goes through spawned objects (#9), None when the item's own
+    damage is all there is. Only the primary attack: MonsterAI uses m_attack, and no player weapon that spawns
+    anything has a secondary one."""
     s = comp(PREFABS[name], "ItemDrop")["m_itemData"]["m_shared"]
     a, own = s["m_attack"], damages(s["m_damages"])
     hits, spawned = [], False
-    if a["m_attackType"] == "Projectile":
+    if a["m_attackType"] == "Projectile" and ref(a.get("m_attackProjectile")):  # none: a bow's ammo brings its own
         hits, spawned = spawned_hits(ref(a.get("m_attackProjectile")), own), True
     else:
         hits = [{"kind": "hit", "damages": own}]
     for extra in (ref(a.get("m_spawnOnTrigger")), ref(s.get("m_spawnOnHit")), ref(s.get("m_spawnOnHitTerrain"))):
         if extra:
             hits, spawned = hits + spawned_hits(extra, None), True
-    hits = [h for h in hits if h["damages"]]
-    return hits if spawned and hits != [{"kind": "projectile", "damages": own}] else None
+    merged = {}  # the same hit from two stages (Echo Spike's blast where the spike lands and where it returns): one, counted
+    for h in hits:
+        if h["damages"]:
+            key = json.dumps({k: v for k, v in h.items() if k != "count"}, sort_keys=True)
+            n = merged[key].get("count", 1) + h.get("count", 1) if key in merged else h.get("count", 1)
+            merged[key] = {**h, **({"count": n} if n > 1 else {})}
+    hits = list(merged.values())
+    return hits if spawned and hits != [{"kind": "projectile", "damages": own, "inherits": True}] else None
 
 
 def resolve_hits(items: list[dict], creatures: list[dict]) -> None:
+    """`hits` of creature attack items and player weapons (staffs: Echo Spike's own projectile damage, the Staff of
+    Fracturing's splinters, Lightning Strike's strike)."""
     attacks = {a for c in creatures for a in c.get("attacks", [])}
     for i in items:
-        if i["id"] in attacks and (h := attack_hits(i["id"])) is not None:
+        player = (i["type"] in WEAPON_TYPES and not i.get("internal") and not i.get("ammoType")  # ammo: its own projectile
+                  and (i.get("attack") or {}).get("type") == "Projectile")
+        if (i["id"] in attacks or player) and (h := attack_hits(i["id"])) is not None:
             i["hits"] = h or [{"kind": "none"}]  # spawns only creatures or effects: no damage
 
 

@@ -175,9 +175,23 @@ class Entities(FixtureCase):
         self.assertTrue(javelin["thrown"])  # the projectile respawns the item: no repeatable cycle
         self.assertEqual((javelin["chain"], "cycle" in javelin), ([{"time": 1.0, "hits": 1}], False))
 
+    def test_staff_timing(self):
+        rod = N.item("FrostRod", N.PREFABS["FrostRod"])["attack"]  # held: one burst per interval, paid per burst
+        self.assertEqual((rod["looping"], rod["burstInterval"], rod["perBurst"], rod["cycle"]), (True, 0.2, True, 0.2))
+        thunder = N.item("ThunderRod", N.PREFABS["ThunderRod"])["attack"]
+        self.assertEqual((thunder["reload"], thunder["reloadEitr"], thunder["reloadDone"], thunder["projectiles"]), (2, 25, 0, 12))
+
     def test_attack_hits(self):
         self.assertIsNone(N.attack_hits("Bite"))  # melee: the item's own damage
         self.assertEqual(N.attack_hits("Spit"), [{"kind": "area", "damages": {"poison": 9}}])  # the pool, not the bolt
+        # only the splinters deal damage, each the whole attack's
+        self.assertEqual(N.attack_hits("ClusterRod"), [{"kind": "projectile", "damages": {"fire": 12}, "inherits": True, "count": 4}])
+        # the bolt carries the rod's damage; every Aoe child of what it spawns deals its own, and the chain spreads
+        self.assertEqual(N.attack_hits("ThunderRod"), [
+            {"kind": "projectile", "damages": {"lightning": 20}, "inherits": True},
+            {"kind": "area", "damages": {"lightning": 400}}, {"kind": "area", "damages": {"lightning": 80}},
+            {"kind": "chain", "damages": {"lightning": 75}}])
+        self.assertIsNone(N.attack_hits("Longbow"))  # no projectile of its own
 
     def test_creature_splits_attacks_and_equipment(self):
         c = N.creature("Raider", N.PREFABS["Raider"])

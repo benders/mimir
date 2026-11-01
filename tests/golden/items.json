@@ -31,7 +31,7 @@
   "stage": "Meadows",
   "via": {
    "how": "source",
-   "from": "container_piece_stash_4610f0"
+   "from": "container_piece_stash_ad045a"
   }
  },
  {
@@ -72,7 +72,7 @@
   "stage": "Meadows",
   "via": {
    "how": "source",
-   "from": "container_piece_stash_4610f0"
+   "from": "container_piece_stash_ad045a"
   }
  },
  {
@@ -100,6 +100,51 @@
   }
  },
  {
+  "id": "ClusterRod",
+  "name": "Cluster Rod",
+  "type": "TwoHandedWeapon",
+  "icon": "Sword",
+  "weight": 1.0,
+  "stack": 1,
+  "maxQuality": 1,
+  "skill": "ElementalMagic",
+  "damages": {
+   "fire": 12
+  },
+  "backstab": 1,
+  "parryBonus": 1,
+  "blockAdrenaline": 2,
+  "parryAdrenaline": 5,
+  "attack": {
+   "type": "Projectile",
+   "stamina": 10,
+   "projectile": "ClusterBolt",
+   "adrenaline": 1,
+   "chain": [
+    {
+     "time": 1.0,
+     "hits": 1
+    }
+   ],
+   "cycle": 1.0
+  },
+  "hits": [
+   {
+    "kind": "projectile",
+    "damages": {
+     "fire": 12
+    },
+    "inherits": true,
+    "count": 4
+   }
+  ],
+  "stage": "Meadows",
+  "via": {
+   "how": "source",
+   "from": "container_piece_stash_ad045a"
+  }
+ },
+ {
   "id": "Coins",
   "name": "Coins",
   "type": "Material",
@@ -110,7 +155,7 @@
   "stage": "Meadows",
   "via": {
    "how": "source",
-   "from": "container_piece_stash_4610f0"
+   "from": "container_piece_stash_ad045a"
   }
  },
  {
@@ -129,7 +174,7 @@
   "stage": "Meadows",
   "via": {
    "how": "source",
-   "from": "container_piece_stash_4610f0"
+   "from": "container_piece_stash_ad045a"
   }
  },
  {
@@ -148,7 +193,7 @@
   "stage": "Meadows",
   "via": {
    "how": "source",
-   "from": "container_piece_stash_4610f0"
+   "from": "container_piece_stash_ad045a"
   }
  },
  {
@@ -189,7 +234,7 @@
   "stage": "Meadows",
   "via": {
    "how": "source",
-   "from": "container_piece_stash_4610f0"
+   "from": "container_piece_stash_ad045a"
   }
  },
  {
@@ -299,6 +344,43 @@
   }
  },
  {
+  "id": "FrostRod",
+  "name": "Frost Rod",
+  "type": "TwoHandedWeapon",
+  "icon": "Sword",
+  "weight": 1.0,
+  "stack": 1,
+  "maxQuality": 1,
+  "skill": "ElementalMagic",
+  "damages": {
+   "frost": 30
+  },
+  "backstab": 1,
+  "parryBonus": 1,
+  "blockAdrenaline": 2,
+  "parryAdrenaline": 5,
+  "attack": {
+   "type": "Projectile",
+   "eitr": 5,
+   "adrenaline": 1,
+   "chain": [
+    {
+     "time": 0.4,
+     "hits": 1
+    }
+   ],
+   "looping": true,
+   "burstInterval": 0.2,
+   "perBurst": true,
+   "cycle": 0.2
+  },
+  "stage": "Meadows",
+  "via": {
+   "how": "source",
+   "from": "container_piece_stash_ad045a"
+  }
+ },
+ {
   "id": "Gem",
   "name": "$item_gem",
   "type": "Material",
@@ -328,7 +410,7 @@
   "stage": "Meadows",
   "via": {
    "how": "source",
-   "from": "container_piece_stash_4610f0"
+   "from": "container_piece_stash_ad045a"
   }
  },
  {
@@ -388,7 +470,7 @@
   "stage": "Meadows",
   "via": {
    "how": "source",
-   "from": "container_piece_stash_4610f0"
+   "from": "container_piece_stash_ad045a"
   }
  },
  {
@@ -500,7 +582,7 @@
   "stage": "Meadows",
   "via": {
    "how": "source",
-   "from": "container_piece_stash_4610f0"
+   "from": "container_piece_stash_ad045a"
   }
  },
  {
@@ -540,7 +622,7 @@
   "stage": "Meadows",
   "via": {
    "how": "source",
-   "from": "container_piece_stash_4610f0"
+   "from": "container_piece_stash_ad045a"
   }
  },
  {
@@ -735,7 +817,7 @@
   "stage": "Meadows",
   "via": {
    "how": "source",
-   "from": "container_piece_stash_4610f0"
+   "from": "container_piece_stash_ad045a"
   }
  },
  {
@@ -877,6 +959,70 @@
   }
  },
  {
+  "id": "ThunderRod",
+  "name": "Thunder Rod",
+  "type": "TwoHandedWeapon",
+  "icon": "Sword",
+  "weight": 1.0,
+  "stack": 1,
+  "maxQuality": 1,
+  "skill": "ElementalMagic",
+  "damages": {
+   "lightning": 20
+  },
+  "backstab": 1,
+  "parryBonus": 1,
+  "blockAdrenaline": 2,
+  "parryAdrenaline": 5,
+  "attack": {
+   "type": "Projectile",
+   "stamina": 10,
+   "projectile": "StrikeBolt",
+   "projectiles": 12,
+   "adrenaline": 1,
+   "chain": [
+    {
+     "time": 1.0,
+     "hits": 1
+    }
+   ],
+   "reload": 2,
+   "reloadEitr": 25
+  },
+  "hits": [
+   {
+    "kind": "projectile",
+    "damages": {
+     "lightning": 20
+    },
+    "inherits": true
+   },
+   {
+    "kind": "area",
+    "damages": {
+     "lightning": 400
+    }
+   },
+   {
+    "kind": "area",
+    "damages": {
+     "lightning": 80
+    }
+   },
+   {
+    "kind": "chain",
+    "damages": {
+     "lightning": 75
+    }
+   }
+  ],
+  "stage": "Meadows",
+  "via": {
+   "how": "source",
+   "from": "container_piece_stash_ad045a"
+  }
+ },
+ {
   "id": "Wand",
   "name": "Wand",
   "type": "OneHandedWeapon",
@@ -933,7 +1079,7 @@
   "stage": "Meadows",
   "via": {
    "how": "source",
-   "from": "container_piece_stash_4610f0"
+   "from": "container_piece_stash_ad045a"
   }
  }
 ]

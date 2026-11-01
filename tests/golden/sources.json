@@ -279,7 +279,7 @@
   ]
  },
  {
-  "id": "container_piece_stash_4610f0",
+  "id": "container_piece_stash_ad045a",
   "kind": "container",
   "name": "$piece_stash",
   "drops": {
@@ -355,6 +355,24 @@
     },
     {
      "item": "Mace",
+     "min": 1,
+     "max": 1,
+     "weight": 1
+    },
+    {
+     "item": "FrostRod",
+     "min": 1,
+     "max": 1,
+     "weight": 1
+    },
+    {
+     "item": "ThunderRod",
+     "min": 1,
+     "max": 1,
+     "weight": 1
+    },
+    {
+     "item": "ClusterRod",
      "min": 1,
      "max": 1,
      "weight": 1

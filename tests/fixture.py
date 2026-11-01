@@ -157,7 +157,7 @@ TRANSLATIONS = {
     "item_ore": "Rustore", "item_ingot": "Ingot",
     "item_buckler": "Test Buckler",
     "item_sword": "Test Sword", "item_sword_desc": "Sharp <b>enough</b>.",
-    "item_helmet": "Pot Helm", "item_fish": "Glimfish", "item_pearl": "Moon Pearl", "item_javelin": "Test Javelin", "item_mace": "Mace", "item_longbow": "Longbow", "item_arbal": "Arbal", "item_dart": "Dart", "item_mead": "Fizz Mead", "item_coins": "Coins", "item_charm": "Lucky Charm", "npc_vendor": "Old Vendor", "hud_satchel": "Big Satchel", "hud_satchel_tooltip": "A roomy bag.",
+    "item_helmet": "Pot Helm", "item_fish": "Glimfish", "item_pearl": "Moon Pearl", "item_javelin": "Test Javelin", "item_mace": "Mace", "item_frostrod": "Frost Rod", "item_thunderrod": "Thunder Rod", "item_clusterrod": "Cluster Rod", "item_longbow": "Longbow", "item_arbal": "Arbal", "item_dart": "Dart", "item_mead": "Fizz Mead", "item_coins": "Coins", "item_charm": "Lucky Charm", "npc_vendor": "Old Vendor", "hud_satchel": "Big Satchel", "hud_satchel_tooltip": "A roomy bag.",
     "item_hammer": "Mallet", "item_tray": "Tray", "item_feast": "Feast", "item_feast_material": "Feast to set out", "piece_platter": "Platter", "item_shard": "Shard", "item_bite": "Bite",
     "enemy_raider": "Raider", "piece_bench": "Bench", **{f"tag_{k}": v for k, v in (  # build menu tags (Piece.UsageTagFlags)
         ("misc", "Misc."), ("crafting", "Crafting"), ("building", "Building"), ("floor", "Flooring"), ("wall", "Walls"),
@@ -229,6 +229,27 @@ def prefabs():
         item("Arbal", name="$item_arbal", itemType="Bow", icons=[S("Sword")], damages=damages(pierce=50), ammoType="$ammo_dart",
              attack=attack(attackAnimation="throw", attackType="Projectile", requiresReload=True, reloadTime=4,
                            reloadAnimation="reload_test", blockReloadTime=0)),
+        item("FrostRod", name="$item_frostrod", itemType="TwoHandedWeapon", icons=[S("Sword")], skillType="ElementalMagic",
+             damages=damages(frost=30), attack=attack(attackAnimation="rapid", attackType="Projectile", attackStamina=0,
+                                                      attackEitr=5, loopingAttack=True, projectileBursts=999,
+                                                      burstInterval=0.2, perBurstResourceUsage=True)),  # held: a shard per 0.2 s
+        item("ThunderRod", name="$item_thunderrod", itemType="TwoHandedWeapon", icons=[S("Sword")], skillType="ElementalMagic",
+             damages=damages(lightning=20), attack=attack(attackAnimation="throw", attackType="Projectile", projectiles=12,
+                                                          requiresReload=True, reloadTime=2, reloadEitrDrain=25,
+                                                          reloadAnimation="recharge_test", blockReloadTime=0,
+                                                          attackProjectile=R("StrikeBolt"))),  # recharges with eitr, no ammo
+        prefab("StrikeBolt", comp("Projectile", m(damage=damages(), spawnOnHit=R("StrikeAoe"), randomSpawnOnHit=[],
+                                                  spawnCount=1, projectilesInheritHitData=False))),
+        prefab("StrikeAoe", comp("Aoe", m(damage=damages(lightning=400), useAttackSettings=False), path="ROD"),
+               comp("Aoe", m(damage=damages(lightning=80), useAttackSettings=False, chainObj=R("ChainBolt")), path="AREA")),
+        prefab("ChainBolt", comp("Aoe", m(damage=damages(lightning=75), useAttackSettings=False, chainObj=R("ChainBolt")))),
+        item("ClusterRod", name="$item_clusterrod", itemType="TwoHandedWeapon", icons=[S("Sword")], skillType="ElementalMagic",
+             damages=damages(fire=12), attack=attack(attackAnimation="throw", attackType="Projectile",
+                                                     attackProjectile=R("ClusterBolt"))),
+        prefab("ClusterBolt", comp("Projectile", m(damage=damages(fire=60), spawnOnHit=R("Splinter"), randomSpawnOnHit=[],
+                                                   spawnCount=4, projectilesInheritHitData=True,
+                                                   onlySpawnedProjectilesDealDamage=True))),  # 4 splinters, each the whole hit
+        prefab("Splinter", comp("Projectile", m(damage=damages(), randomSpawnOnHit=[]))),
         item("Mace", name="$item_mace", itemType="OneHandedWeapon", icons=[S("Sword")], skillType="Clubs",
              damages=damages(blunt=10, spirit=5), attack=attack(attackChainLevels=2)),  # spirit: left out of DPS
         item("Dart", name="$item_dart", itemType="Ammo", icons=[S("Sword")], damages=damages(pierce=10), ammoType="$ammo_dart"),
@@ -525,7 +546,8 @@ def write_dump(raw: Path) -> Path:
     dump("locations/Stash.json", {"name": "Stash", "components": [comp("Location", {}), *spawners(
         container(("Coins", 1, 1, 1), ("Hammer", 1, 1, 1), ("Buckler", 1, 1, 1), ("HelmetFem", 1, 1, 1), ("SP_Sword", 1, 1, 1),
                   ("WoodOld", 1, 1, 1), ("Egg", 1, 1, 1), ("Longbow", 1, 1, 1), ("Arbal", 1, 1, 1),
-                  ("Dart", 1, 1, 1), ("DartBlunt", 1, 1, 1), ("Mace", 1, 1, 1), name="$piece_stash"))],  # so the site tests' items are obtainable
+                  ("Dart", 1, 1, 1), ("DartBlunt", 1, 1, 1), ("Mace", 1, 1, 1), ("FrostRod", 1, 1, 1),
+                  ("ThunderRod", 1, 1, 1), ("ClusterRod", 1, 1, 1), name="$piece_stash"))],  # so the site tests' items are obtainable
         "instances": [{"prefab": "Raider_Ranged", "path": "Raider_Ranged"}]})
     dump("locations/Market.json", {"name": "Market", "components": [comp("Location", {}), comp("Trader", {
         **m(name="$npc_vendor"), "m_items": [m(prefab=R("Charm"), stack=2, price=50, requiredGlobalKey="defeated_chief"),
@@ -545,6 +567,10 @@ def write_dump(raw: Path) -> Path:
         "reload_test_done": {"state": "upperbody.reload done", "layer": 1, "tag": "minoraction_fast", "speed": 2.0,
                              "clip": "Done", "length": 1.6, "exit": 1.0, "exitDuration": 0.2, "exitFixed": True,
                              "offset": 0.0, "events": []},  # blocks attacks for 1.6 / 2 + 0.2 s
+        "rapid": {"state": "upperbody.rapid", "layer": 1, "speed": 1.0, "clip": "Rapid", "length": 0.5, "exit": 0.8,
+                  "offset": 0.0, "events": [[0.35, "Hit"]]},
+        "recharge_test": {"state": "upperbody.recharge", "layer": 1, "tag": "minoraction_fast", "speed": 1.0,
+                          "clip": "Recharge", "length": 1.5, "exit": None, "offset": 0.0, "events": []},  # no _done state
         "beam": {"state": "upperbody.beam", "layer": 1, "speed": 1.0, "clip": "Beam", "length": 0.5, "exit": None,
                  "offset": 0.0, "events": [[0.1, "Hit"]]},  # loops until released: no timing
     }})

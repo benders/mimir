@@ -361,14 +361,19 @@
  },
  "weapons": {
   "methods": {
+   "Aoe.Setup": "25991ae88f637e9e",
    "Attack.CanStartChainAttack": "0fa0e0a9e83aa94a",
    "Attack.DoAreaAttack": "11fbd33bf5a92ce6",
    "Attack.DoMeleeAttack": "6f62bd9ec51aa482",
    "Attack.FireProjectileBurst": "2955e01185cf4c2e",
+   "Attack.GetAttackEitr": "2b62d55e77656983",
    "Attack.ModifyDamage": "c3fbddde58d4659a",
    "Attack.OnAttackTrigger": "6411bb4005a1049b",
+   "Attack.ProjectileAttackTriggered": "a09a134a494627c4",
    "Attack.Start": "9740df9181dbc183",
+   "Attack.Stop": "9c4aa83edbe72f7e",
    "Attack.Update": "1db488d42948038b",
+   "Attack.UpdateProjectile": "dd07719eb8b6911c",
    "CharacterAnimEvent.CustomFixedUpdate": "983cb5f99cd22166",
    "CharacterAnimEvent.Speed": "3c3ecd35b8fa43e6",
    "Humanoid.GetAttackDrawPercentage": "67f5a2552b4757f8",
@@ -377,10 +382,13 @@
    "ItemData.GetWeaponLoadingTime": "3b84db36995a6d54",
    "Player.InAttack": "a5857177e78d4a86",
    "Player.InMinorAction": "71f1b0c2300f14b0",
+   "Player.PlayerAttackInput": "9faa88c55ecd21ab",
    "Player.QueueReloadAction": "76969268d7af5f21",
    "Player.UpdateActionQueue": "db32db438c3ef094",
    "Player.UpdateAttackBowDraw": "43b861a1aac3bbdb",
+   "Player.UpdateWeaponLoading": "1570ea46810536ba",
    "Projectile.Setup": "dd747bb34dc0e0da",
+   "Projectile.SpawnOnHit": "d7c061cf1c197f66",
    "Skills.GetRandomSkillFactor": "eed31230d5a5bd6e"
   },
   "version": "1.0.21"

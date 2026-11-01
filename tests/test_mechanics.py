@@ -47,7 +47,7 @@ class Formulas(unittest.TestCase):
         self.assertEqual(M.combo_damage(10, a), 10 + 2 * 10 * 2)  # the last level's two hits doubled
         self.assertEqual(M.combo_damage(10, {**a, "damageMultiplier": 1.5}), 75)
         self.assertAlmostEqual(M.dps(10, a), 50 / 1.65)
-        self.assertIsNone(M.dps(10, {"chain": a["chain"]}))  # no cycle: bow draw, reload, bursts
+        self.assertIsNone(M.dps(10, {"chain": a["chain"]}))  # no cycle, draw or reload
         self.assertIsNone(M.dps(0, a))
         bow = {"chain": [{"time": 0.6, "hits": 1}], "draw": 2.5}
         self.assertEqual(M.attack_cycle(bow, 0), 2.5)
@@ -57,6 +57,15 @@ class Formulas(unittest.TestCase):
         self.assertEqual(M.attack_cycle(xbow, 0), 0.8 + 4 + 1)  # the block outlasts the attack
         self.assertEqual(M.attack_cycle(xbow, 100), 0.8 + 2 + 1)
         self.assertIsNone(M.attack_cycle({"chain": bow["chain"], "thrown": True}))
+        dundr = {"chain": [{"time": 0.5, "hits": 1}], "reload": 1.9, "projectiles": 12}  # no reload-done state
+        self.assertEqual(M.attack_cycle(dundr, 100), 0.5 + 0.95)
+        self.assertEqual(M.shot_damage({"lightning": 20}, dundr), 240)  # every projectile hitting
+        frac = [{"kind": "projectile", "damages": {"fire": 12}, "inherits": True, "count": 12},
+                {"kind": "area", "damages": {"lightning": 400}}]  # its own damage: not counted
+        self.assertEqual(M.shot_damage({"fire": 12, "blunt": 12}, {}, frac), 288)
+        self.assertEqual(M.shot_damage({"fire": 6}, {}, frac), 72)  # per quality level: only what inherits scales
+        self.assertEqual(M.shot_damage({"fire": 6}, {}, [{"kind": "none"}]), 0)
+        self.assertAlmostEqual(M.attack_cost(5, 100), 3.35)
         self.assertEqual(M.skill_roll(100), (0.85, 1.0))  # Skills.GetRandomSkillFactor, clamped at 1
         self.assertEqual(tuple(round(x, 2) for x in M.skill_roll(0)), (0.25, 0.55))
 

@@ -915,12 +915,15 @@ def quality_table(i: dict) -> str:
     for k in dict.fromkeys([*dmg, *dpl]):
         cols.append((k.capitalize(), dmg.get(k, 0), dpl.get(k, 0)))
     note = ""
-    if t in WEAPONS and not i.get("tamedOnly"):
+    if t in WEAPONS and not i.get("tamedOnly") and not i.get("ammoType"):  # ammo: DPS depends on it
         mark = "*" if dps_skipped(i) else ""
         for label, a in (("DPS", i.get("attack")), ("Secondary DPS", i.get("secondaryAttack"))):
-            if a and a.get("cycle") and (d := mechanics.dps(mechanics.hit_damage(dmg, IGNORED), a)) is not None:
-                cols.append((label + mark, d, mechanics.dps(mechanics.hit_damage(dpl, IGNORED), a) or 0))  # linear
-                note = dps_note(i) if mark else ""
+            # a reload (Dundr) depends on skill: DPS at skill 0 and 100
+            for skill in (0, 100) if (a or {}).get("reload") else (0,):
+                if (d := weapon_dps(i, a, dmg, skill)) is not None and d > 0:
+                    lbl = label + (f" (skill {skill})" if a.get("reload") else "")
+                    cols.append((lbl + mark + volley_mark(i, a), d, weapon_dps(i, a, dpl, skill) or 0))  # linear
+                    note = (dps_note(i) if mark else "") + volley_note(i, a)
     if t in ARMOR:
         cols.append(("Armor", i.get("armor", 0), i.get("armorPerLevel", 0)))
     if t in WEAPONS | {"Shield"} and i.get("block"):
@@ -935,6 +938,34 @@ def quality_table(i: dict) -> str:
         return kv((c[0], num(round(c[1], 1))) for c in cols) + note
     rows = [[str(q)] + [num(round(b + (q - 1) * p, 1)) for _, b, p in cols] for q in range(1, mq + 1)]
     return table(["Quality"] + [esc(c[0]) for c in cols], rows, "num") + note
+
+
+def weapon_hits(i: dict, a: dict | None) -> list[dict] | None:
+    """The item's `hits` (damage through spawned objects) belong to its primary attack (normalize.attack_hits)."""
+    return i.get("hits") if a is not None and a is i.get("attack") else None
+
+
+def weapon_dps(i: dict, a: dict | None, dmg: dict, skill: float = 0) -> float | None:
+    """DPS of one of the weapon's attacks with damage `dmg` (a quality's, or the per-level increase): every hit and
+    projectile connecting, skill roll 1, leaving out the damage types most creatures ignore."""
+    if not a or not mechanics.attack_cycle(a, skill):
+        return None
+    return mechanics.dps(mechanics.shot_damage(dmg, a, weapon_hits(i, a), IGNORED), a, skill)
+
+
+def volleys(i: dict, a: dict | None) -> int:
+    """Damaging projectiles one shot of the attack makes (Dundr's 12, the Staff of Fracturing's 12 splinters)."""
+    hits = [h for h in weapon_hits(i, a) or [] if h.get("inherits")]
+    return ((a or {}).get("projectiles") or 1) * (max(h.get("count", 1) for h in hits) if hits else 1)
+
+
+def volley_mark(i: dict, a: dict | None) -> str:
+    return "†" if volleys(i, a) > 1 else ""
+
+
+def volley_note(i: dict, a: dict | None) -> str:
+    n = volleys(i, a)
+    return f'<p class="note">† If all {n} projectiles of a shot hit the target.</p>' if n > 1 else ""
 
 
 def dps_skipped(i: dict) -> list[str]:
@@ -953,20 +984,27 @@ def attack_text(a: dict) -> str:
     if a.get("stamina"):
         parts.append(f"{num(a['stamina'])} stamina")
     if a.get("eitr"):
-        parts.append(f"{num(a['eitr'])} eitr")
+        parts.append(f"{num(a['eitr'])} eitr" + (" per shot" if a.get("perBurst") else ""))
     if a.get("damageMultiplier") and a["damageMultiplier"] != 1:
         parts.append(f"×{num(a['damageMultiplier'])} damage")
     if a.get("projectile"):
-        parts.append(f"projectile {esc(pretty_id(a['projectile']))}")
+        parts.append(f"projectile {esc(pretty_id(a['projectile']))}" + (f" ×{a['projectiles']}" if a.get("projectiles") else ""))
     if a.get("thrown"):
         parts.append("thrown (the weapon lands where it hits)")
     if a.get("draw"):
         parts.append(f"full draw {num(a['draw'])} s ({num(mechanics.draw_time(a['draw'], 100))} s at skill 100)")
     if a.get("reload"):
         parts.append(f"reload {num(a['reload'])} s ({num(mechanics.reload_time(a['reload'], 100))} s at skill 100)")
+    if a.get("reloadEitr"):  # drained per second of reloading; the reload gets shorter with skill, the drain doesn't
+        parts.append(f"reloading drains {num(a['reloadEitr'])} eitr/s ({num(round(a['reloadEitr'] * a['reload'], 1))} per shot, "
+                     f"{num(round(a['reloadEitr'] * mechanics.reload_time(a['reload'], 100), 1))} at skill 100)")
     if (a.get("draw") or a.get("reload")) and (c0 := mechanics.attack_cycle(a, 0)):
         parts.append(f"{num(round(c0, 2))} s per shot ({num(round(mechanics.attack_cycle(a, 100), 2))} s at skill 100)")
-    if a.get("cycle"):
+    if a.get("looping"):
+        per_s = 1 / a["burstInterval"]
+        parts.append(f"held: a shot every {num(a['burstInterval'])} s ({num(round(per_s, 1))} per second"
+                     + (f", {num(round(a['eitr'] * per_s, 1))} eitr/s" if a.get("eitr") and a.get("perBurst") else "") + ")")
+    elif a.get("cycle"):
         hits = sum(c["hits"] for c in a["chain"])
         n = len(a["chain"])
         parts.append((f"{n}-attack combo in {num(a['cycle'])} s" if n > 1 else f"{num(a['cycle'])} s")
@@ -1041,6 +1079,19 @@ def attack_damage(w: dict) -> str:
         return "—"
     return " + ".join(damages(h["damages"]) + ("" if h["kind"] == "hit" or len(hits) == 1 and h["kind"] == "projectile"
                                                 else f' <span class="qty">{h["kind"]}</span>') for h in hits)
+
+
+def spawned_damage(i: dict) -> str:
+    """A player weapon's `hits`: what its projectile and what that spawns deal, per shot. The weapon's own damage
+    (quality-scaled) is "weapon damage"; the rest is fixed."""
+    parts = []
+    for h in i["hits"]:
+        if h["kind"] == "none":
+            return "none (summons or effects only)"
+        what = "weapon damage" if h.get("inherits") else damages(h["damages"])
+        parts.append(what + (f" ×{h['count']}" if h.get("count") else "")
+                     + f' <span class="qty">{ {"chain": "chain, may spread"}.get(h["kind"], h["kind"]) }</span>')
+    return " + ".join(parts)
 
 
 # --- requirements tree (#25) ---------------------------------------------------------------
@@ -1185,6 +1236,8 @@ def item_page(i: dict) -> None:
                                          f'+{num(i.get("parryAdrenaline", 0))} per parry'))
         if i.get("tamedOnly"):
             combat.append(("Hits", f'only tamed creatures: {mech_link("taming", "Taming")}'))
+        elif i.get("hits") and t in WEAPONS:
+            combat.append(("Damage dealt", spawned_damage(i)))
         if {"chop", "pickaxe"} & set(i.get("damages", {})):
             combat.append(("Tool tier", num(i.get("toolTier", 0))))
     if i.get("ammoType") and t in WEAPONS | {"Ammo", "AmmoNonEquipable"}:
@@ -1200,8 +1253,8 @@ def item_page(i: dict) -> None:
     if t == "Shield" or (t in WEAPONS and i.get("block") and i.get("skill") == "Blocking"):
         stat_note = f'<p class="note">How block power, parrying and stagger work: {mech_link("blocking", "Blocking")}.</p>'
     elif t in WEAPONS and any(mechanics.attack_cycle(a) for a in (i.get("attack"), i.get("secondaryAttack"))):
-        ranged = (i.get("attack") or {}).get("draw") or (i.get("attack") or {}).get("reload")  # no DPS: depends on ammo
-        what = "attack speed is" if ranged else "attack speed and DPS are"
+        dealt = not i.get("ammoType") and any(weapon_dps(i, a, i.get("damages", {})) for a in (i.get("attack"), i.get("secondaryAttack")))
+        what = "attack speed and DPS are" if dealt else "attack speed is"  # no DPS: ammo decides, or nothing dealt
         stat_note = f'<p class="note">How {what} worked out, and other weapons like it: {mech_link("weapons", "Weapons")}.</p>'
     elif t in ARMOR and i.get("armor"):
         stat_note = (f'<p class="note">How armor reduces damage: {mech_link("damage-types", "Damage types and resistances")}.</p>')
@@ -2342,20 +2395,21 @@ def block_weapons() -> str:
     """Every player weapon with a known attack cycle, by category, lowest primary DPS first: hits, time, combo damage
     and DPS for the primary and secondary attack at quality 1, not upgraded (tooltip damage, skill roll 1)."""
     weapons = [x for x in ITEMS.values() if x["type"] in WEAPONS and has_page("item", x["id"]) and not x.get("tamedOnly")
-               and any((a or {}).get("cycle") for a in (x.get("attack"), x.get("secondaryAttack")))]
+               and not x.get("ammoType") and any(mechanics.attack_cycle(a) for a in (x.get("attack"), x.get("secondaryAttack")))]
     out = ""
     for title, skill, items in weapon_groups(weapons):
         rows = []
         for i in items:
             dmg = {k: i.get("damages", {}).get(k, 0) for k in mechanics.DAMAGE_TYPES}  # quality 1, not upgraded
-            hit, mark = mechanics.hit_damage(dmg, IGNORED), "*" if dps_skipped(i) else ""
+            mark = "*" if dps_skipped(i) else ""
             cells, best = [], []
             for a in (i.get("attack"), i.get("secondaryAttack")):
-                d = mechanics.dps(hit, a) if a and a.get("cycle") else None
-                best.append(d if d is not None else -1)
-                cells += (["", "", "", ""] if d is None else
-                          [num(sum(c["hits"] for c in a["chain"])), num(a["cycle"]),
-                           num(round(mechanics.combo_damage(hit, a), 1)) + mark, f"<b>{num(round(d, 1))}{mark}</b>"])
+                d = weapon_dps(i, a, dmg)
+                best.append(d if d else -1)
+                hit, vm = mechanics.shot_damage(dmg, a, weapon_hits(i, a), IGNORED), volley_mark(i, a)
+                cells += (["", "", "", ""] if not d else
+                          [num(sum(c["hits"] for c in a["chain"]) * volleys(i, a)), num(round(mechanics.attack_cycle(a), 3)),
+                           num(round(mechanics.combo_damage(hit, a), 1)) + mark + vm, f"<b>{num(round(d, 1))}{mark}{vm}</b>"])
             if max(best) >= 0:  # no DPS at all (no damage): left out
                 rows.append((best, name_of("item", i["id"]).lower(), [link("item", i["id"])] + cells))
         rows.sort(key=lambda r: (r[0], r[1]))  # lowest DPS first
@@ -2371,13 +2425,15 @@ def block_weapons() -> str:
                 f'<div class="tw"{st}><table class="num weapons"><thead>{top}{sub}</thead><tbody>{body}</tbody></table></div>')
     skipped = [t for t in IGNORED if t not in mechanics.TOOL_DAMAGE]
     note = "; ".join(f"{t} damage ({n} of {total} creatures are immune to it)" for t in skipped for n, total in [IGNORED[t]])
-    return out + (f'<p class="note">* Leaves out {note}.</p>' if skipped else "")
+    return (out + (f'<p class="note">* Leaves out {note}.</p>' if skipped else "")
+            + ('<p class="note">† Every projectile of a shot hitting one target.</p>'
+               if any(volleys(i, i.get("attack")) > 1 for i in weapons) else ""))
 
 
 def block_weapons_ranged() -> str:
     """Bows and crossbows by category, fastest first: draw or reload time and seconds per shot at skill 0 and 100.
     No DPS: it depends on the ammo."""
-    ranged = [x for x in ITEMS.values() if x["type"] in WEAPONS and has_page("item", x["id"])
+    ranged = [x for x in ITEMS.values() if x["type"] in WEAPONS and has_page("item", x["id"]) and x.get("ammoType")
               and ((x.get("attack") or {}).get("draw") or (x.get("attack") or {}).get("reload"))
               and mechanics.attack_cycle(x["attack"])]
     out = ""

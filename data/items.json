@@ -8927,6 +8927,22 @@
    ],
    "cycle": 0.633
   },
+  "hits": [
+   {
+    "kind": "projectile",
+    "damages": {
+     "blunt": 5
+    },
+    "inherits": true
+   },
+   {
+    "kind": "area",
+    "damages": {
+     "fire": 15,
+     "poison": 30
+    }
+   }
+  ],
   "stage": "Mistlands",
   "via": {
    "how": "craft",
@@ -9313,6 +9329,16 @@
    ],
    "cycle": 0.633
   },
+  "hits": [
+   {
+    "kind": "area",
+    "damages": {
+     "blunt": 140,
+     "chop": 100,
+     "pickaxe": 50
+    }
+   }
+  ],
   "stage": "DeepNorth",
   "via": {
    "how": "craft",
@@ -9361,6 +9387,11 @@
    ],
    "cycle": 0.633
   },
+  "hits": [
+   {
+    "kind": "none"
+   }
+  ],
   "stage": "AshLands",
   "via": {
    "how": "craft",
@@ -9415,6 +9446,21 @@
    ],
    "cycle": 0.633
   },
+  "hits": [
+   {
+    "kind": "projectile",
+    "damages": {
+     "blunt": 5
+    },
+    "inherits": true
+   },
+   {
+    "kind": "area",
+    "damages": {
+     "poison": 40
+    }
+   }
+  ],
   "stage": "Swamp",
   "via": {
    "how": "craft",
@@ -13793,7 +13839,8 @@
     "kind": "projectile",
     "damages": {
      "fire": 100
-    }
+    },
+    "inherits": true
    },
    {
     "kind": "area",
@@ -13838,7 +13885,8 @@
     "kind": "projectile",
     "damages": {
      "fire": 130
-    }
+    },
+    "inherits": true
    },
    {
     "kind": "area",
@@ -17074,7 +17122,8 @@
     "kind": "area",
     "damages": {
      "fire": 50
-    }
+    },
+    "inherits": true
    }
   ]
  },
@@ -17108,7 +17157,8 @@
     "kind": "area",
     "damages": {
      "frost": 100
-    }
+    },
+    "inherits": true
    }
   ]
  },
@@ -34019,6 +34069,11 @@
   "modifiers": {
    "movement": -0.05
   },
+  "hits": [
+   {
+    "kind": "none"
+   }
+  ],
   "enemyOnly": true
  },
  {
@@ -39470,6 +39525,17 @@
   "modifiers": {
    "movement": -0.05
   },
+  "hits": [
+   {
+    "kind": "projectile",
+    "damages": {
+     "blunt": 12,
+     "fire": 12
+    },
+    "inherits": true,
+    "count": 12
+   }
+  ],
   "stage": "AshLands",
   "via": {
    "how": "craft",
@@ -39613,6 +39679,11 @@
    "movement": -0.05
   },
   "attackEffect": "Staff_FrostOrbs",
+  "hits": [
+   {
+    "kind": "none"
+   }
+  ],
   "stage": "DeepNorth",
   "via": {
    "how": "process",
@@ -39796,7 +39867,11 @@
      "time": 0.399,
      "hits": 1
     }
-   ]
+   ],
+   "looping": true,
+   "burstInterval": 0.2,
+   "perBurst": true,
+   "cycle": 0.2
   },
   "modifiers": {
    "movement": -0.05
@@ -39867,7 +39942,8 @@
      "hits": 1
     }
    ],
-   "reload": 1.9
+   "reload": 1.9,
+   "reloadEitr": 25
   },
   "modifiers": {
    "movement": -0.05
@@ -39943,6 +40019,30 @@
   "modifiers": {
    "movement": -0.05
   },
+  "hits": [
+   {
+    "kind": "projectile",
+    "damages": {
+     "fire": 50,
+     "frost": 50
+    }
+   },
+   {
+    "kind": "area",
+    "damages": {
+     "lightning": 400
+    },
+    "count": 2
+   },
+   {
+    "kind": "area",
+    "damages": {
+     "fire": 60,
+     "frost": 60
+    },
+    "count": 2
+   }
+  ],
   "stage": "DeepNorth",
   "via": {
    "how": "process",
@@ -40042,6 +40142,11 @@
   "modifiers": {
    "movement": -0.05
   },
+  "hits": [
+   {
+    "kind": "none"
+   }
+  ],
   "stage": "AshLands",
   "via": {
    "how": "craft",
@@ -40115,6 +40220,11 @@
    "movement": -0.05
   },
   "attackEffect": "Staff_shield",
+  "hits": [
+   {
+    "kind": "none"
+   }
+  ],
   "stage": "Mistlands",
   "via": {
    "how": "craft",
@@ -40179,6 +40289,11 @@
   "modifiers": {
    "movement": -0.05
   },
+  "hits": [
+   {
+    "kind": "none"
+   }
+  ],
   "stage": "Mistlands",
   "via": {
    "how": "craft",
@@ -40243,6 +40358,11 @@
   "modifiers": {
    "movement": -0.05
   },
+  "hits": [
+   {
+    "kind": "none"
+   }
+  ],
   "stage": "DeepNorth",
   "via": {
    "how": "process",
@@ -40348,6 +40468,33 @@
   "modifiers": {
    "movement": -0.05
   },
+  "hits": [
+   {
+    "kind": "projectile",
+    "damages": {
+     "lightning": 300
+    },
+    "inherits": true
+   },
+   {
+    "kind": "area",
+    "damages": {
+     "lightning": 400
+    }
+   },
+   {
+    "kind": "area",
+    "damages": {
+     "lightning": 80
+    }
+   },
+   {
+    "kind": "chain",
+    "damages": {
+     "lightning": 75
+    }
+   }
+  ],
   "stage": "DeepNorth",
   "via": {
    "how": "process",
@@ -47398,7 +47545,8 @@
     "kind": "area",
     "damages": {
      "poison": 200
-    }
+    },
+    "inherits": true
    }
   ]
  },
@@ -48165,7 +48313,8 @@
     "kind": "area",
     "damages": {
      "poison": 130
-    }
+    },
+    "inherits": true
    }
   ]
  },
@@ -48703,7 +48852,8 @@
     "kind": "projectile",
     "damages": {
      "pierce": 100
-    }
+    },
+    "inherits": true
    },
    {
     "kind": "area",
@@ -49778,7 +49928,8 @@
     "kind": "area",
     "damages": {
      "spirit": 200
-    }
+    },
+    "inherits": true
    }
   ]
  },
@@ -50389,7 +50540,8 @@
     "kind": "area",
     "damages": {
      "fire": 75
-    }
+    },
+    "inherits": true
    }
   ]
  },
