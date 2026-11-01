@@ -485,6 +485,11 @@ class Site(unittest.TestCase):
         self.assertIn("<dt>DPS†</dt><dd>48</dd>", cluster)  # 4 splinters x 12 fire / 1 s
         self.assertIn("<td><b>150</b></td>", page)  # FrostRod in the weapons table
         self.assertNotIn("ThunderRod", page.split("Bows and crossbows")[1])  # no ammo: not a ranged-speed row
+        wand = (self.out / "items/Wand.html").read_text(encoding="utf-8")
+        self.assertIn('<dt>Summons</dt><dd><a class="ref" href="creatures/Sprite.html"', wand)
+        self.assertIn("capped at the staff's quality", wand)
+        self.assertIn("×3 at skill 100", wand)
+        self.assertIn("<dt>Summons following</dt><dd>1</dd>", wand)
 
     def test_biome_pages(self):
         swamp = (self.out / "biomes/Swamp.html").read_text(encoding="utf-8")

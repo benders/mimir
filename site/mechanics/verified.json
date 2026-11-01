@@ -374,6 +374,7 @@
    "Attack.Stop": "9c4aa83edbe72f7e",
    "Attack.Update": "1db488d42948038b",
    "Attack.UpdateProjectile": "dd07719eb8b6911c",
+   "Character.GetRandomSkillFactor": "1149ce7be51f548b",
    "CharacterAnimEvent.CustomFixedUpdate": "983cb5f99cd22166",
    "CharacterAnimEvent.Speed": "3c3ecd35b8fa43e6",
    "Humanoid.GetAttackDrawPercentage": "67f5a2552b4757f8",
@@ -389,7 +390,11 @@
    "Player.UpdateWeaponLoading": "1570ea46810536ba",
    "Projectile.Setup": "dd747bb34dc0e0da",
    "Projectile.SpawnOnHit": "d7c061cf1c197f66",
-   "Skills.GetRandomSkillFactor": "eed31230d5a5bd6e"
+   "Skills.GetRandomSkillFactor": "eed31230d5a5bd6e",
+   "SpawnAbility.Spawn": "f63a6e47950c18fc",
+   "SpawnSystem.GetNrOfInstances": "a7b760be5275e651",
+   "Tameable.Command": "43667d1a85e4dcba",
+   "Tameable.UnsummonMaxInstances": "191a9eee30479530"
   },
   "version": "1.0.21"
  }

@@ -312,6 +312,7 @@ def item(name: str, p: dict) -> dict | None:
         "damages": damages(s["m_damages"]),
         "damagesPerLevel": damages(s["m_damagesPerLevel"]),
         "toolHits": tool_hits(ref(s["m_attack"].get("m_attackProjectile"))) if icons else None,
+        "summons": summon_ability(ref(s["m_attack"].get("m_attackProjectile"))) if icons else None,
         "attackForce": s["m_attackForce"],
         "backstab": s["m_backstabBonus"],
         "armor": s["m_armor"],
@@ -349,7 +350,7 @@ ARMOR_FIELDS = {"armor", "armorPerLevel"}  # Player.GetBodyArmor sums helmet, ch
 BLOCK_FIELDS = {"block", "blockPerLevel", "parryForce", "parryForcePerLevel", "parryBonus", "blockAdrenaline",
                 "parryAdrenaline"}  # Humanoid.GetCurrentBlocker:
 # the left-hand item (shield, bow, torch), else the weapon
-ATTACK_FIELDS = {"tamedOnly", "skill", "toolTier", "damages", "toolHits", "damagesPerLevel", "attackForce", "backstab", "attack", "secondaryAttack",
+ATTACK_FIELDS = {"tamedOnly", "skill", "toolTier", "damages", "toolHits", "summons", "damagesPerLevel", "attackForce", "backstab", "attack", "secondaryAttack",
                  "attackEffect"}
 
 
@@ -1772,6 +1773,28 @@ def summoned_creatures(target: str, seen: frozenset = frozenset()) -> list[str]:
         return [c for t in [ref(pr.get("m_spawnOnHit"))] + [ref(x) for x in pr.get("m_randomSpawnOnHit") or []]
                 for c in summoned_creatures(t, seen | {target})]
     return [target] if is_creature(target) else []
+
+
+def summon_ability(target: str | None, seen: frozenset = frozenset()) -> dict | None:
+    """A player staff's summons (SpawnAbility.Spawn), from its attack projectile (or what that spawns on hit):
+    `creatures`; `max` = m_maxSpawned, the limit on loaded copies of the picked creature (SpawnSystem.GetNrOfInstances,
+    range 0: anyone's); `perQuality` when each player's following copies are capped at the staff's quality
+    (m_setMaxInstancesFromWeaponLevel sets ZDO maxInstances, which only Tameable.Command reads, unsummoning the
+    oldest); `skill` and `skillDamage` (m_copySkillToRandomFactor): the summon's hits × (1 + skillDamage × skill
+    level), copied to its ZDO (Character.GetRandomSkillFactor). m_levelUpSettings' m_maxSpawns only reaches that
+    same ZDO value, so it does nothing for summons without a Tameable (Staff of the Wild), and every staff sets level 1."""
+    if not target or target in seen or not (p := PREFABS.get(target) or SUBPREFABS.get(target)):
+        return None
+    if pr := comp(p, "Projectile"):
+        return next((x for t in [ref(pr.get("m_spawnOnHit"))] + [ref(r) for r in pr.get("m_randomSpawnOnHit") or []]
+                     if (x := summon_ability(t, seen | {target}))), None)
+    if not (sa := comp(p, "SpawnAbility")) or not (cs := [r for x in sa["m_spawnPrefab"] if is_creature(r := ref(x))]):
+        return None
+    tame = all(has(PREFABS[c], "Tameable") for c in cs)
+    return {"creatures": cs, "max": sa.get("m_maxSpawned", 0),
+            "perQuality": bool(sa.get("m_setMaxInstancesFromWeaponLevel") and sa.get("m_levelUpSettings") and tame),
+            "skill": sa.get("m_copySkill") if sa.get("m_copySkillToRandomFactor") else None,
+            "skillDamage": sa.get("m_copySkillToRandomFactor", 0)}
 
 
 def summoned_by(item_name: str) -> list[str]:

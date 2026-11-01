@@ -924,6 +924,8 @@ def quality_table(i: dict) -> str:
                     lbl = label + (f" (skill {skill})" if a.get("reload") else "")
                     cols.append((lbl + mark + volley_mark(i, a), d, weapon_dps(i, a, dpl, skill) or 0))  # linear
                     note = (dps_note(i) if mark else "") + volley_note(i, a)
+    if (i.get("summons") or {}).get("perQuality"):
+        cols.append(("Summons following", 1, 1))  # SpawnAbility m_setMaxInstancesFromWeaponLevel: the staff's quality
     if t in ARMOR:
         cols.append(("Armor", i.get("armor", 0), i.get("armorPerLevel", 0)))
     if t in WEAPONS | {"Shield"} and i.get("block"):
@@ -1081,6 +1083,22 @@ def attack_damage(w: dict) -> str:
                                                 else f' <span class="qty">{h["kind"]}</span>') for h in hits)
 
 
+def summons_text(sm: dict) -> str:
+    """A summoning staff's creatures, how many can be out and how its skill scales their damage (normalize.summon_ability)."""
+    out = ", ".join(link("creature", c) for c in sm["creatures"] if has_page("creature", c)) or "—"
+    if len(sm["creatures"]) > 1:
+        out += " (one at random)"
+    caps = []
+    if sm.get("perQuality"):
+        caps.append("each player's following summons of one kind are capped at the staff's quality (the oldest leaves)")
+    if sm.get("max"):
+        caps.append(f"no new one while {num(sm['max'])} of that creature are loaded nearby")
+    if sm.get("skillDamage") and sm.get("skill"):
+        f = sm["skillDamage"]
+        caps.append(f"their damage × (1 + {num(f)} × {esc(words(sm['skill']))} level): ×{num(1 + f * 100)} at skill 100")
+    return out + ("; " + "; ".join(caps) if caps else "")
+
+
 def spawned_damage(i: dict) -> str:
     """A player weapon's `hits`: what its projectile and what that spawns deal, per shot. The weapon's own damage
     (quality-scaled) is "weapon damage"; the rest is fixed."""
@@ -1236,8 +1254,10 @@ def item_page(i: dict) -> None:
                                          f'+{num(i.get("parryAdrenaline", 0))} per parry'))
         if i.get("tamedOnly"):
             combat.append(("Hits", f'only tamed creatures: {mech_link("taming", "Taming")}'))
-        elif i.get("hits") and t in WEAPONS:
+        elif i.get("hits") and t in WEAPONS and not (i.get("summons") and i["hits"] == [{"kind": "none"}]):
             combat.append(("Damage dealt", spawned_damage(i)))
+        if i.get("summons"):
+            combat.append(("Summons", summons_text(i["summons"])))
         if {"chop", "pickaxe"} & set(i.get("damages", {})):
             combat.append(("Tool tier", num(i.get("toolTier", 0))))
     if i.get("ammoType") and t in WEAPONS | {"Ammo", "AmmoNonEquipable"}:

@@ -1,7 +1,7 @@
 ---
 title: Weapons
 summary: Every weapon by category, with attack speed and damage per second.
-sources: Attack.Start; Projectile.Setup; Projectile.SpawnOnHit; Aoe.Setup; Attack.FireProjectileBurst; Attack.ProjectileAttackTriggered; Attack.UpdateProjectile; Attack.Stop; Player.PlayerAttackInput; Player.UpdateWeaponLoading; Attack.GetAttackEitr; Attack.OnAttackTrigger; Player.UpdateAttackBowDraw; Player.UpdateActionQueue; Player.QueueReloadAction; Player.InMinorAction; Humanoid.GetAttackDrawPercentage; ItemData.GetWeaponLoadingTime; Attack.Update; Attack.CanStartChainAttack; Attack.ModifyDamage; Attack.DoMeleeAttack; Attack.DoAreaAttack; Humanoid.StartAttack; Player.InAttack; CharacterAnimEvent.Speed; CharacterAnimEvent.CustomFixedUpdate; Skills.GetRandomSkillFactor; Humanoid.UpdateAttack
+sources: Attack.Start; Projectile.Setup; Projectile.SpawnOnHit; Aoe.Setup; Attack.FireProjectileBurst; Attack.ProjectileAttackTriggered; Attack.UpdateProjectile; Attack.Stop; Player.PlayerAttackInput; Player.UpdateWeaponLoading; Attack.GetAttackEitr; SpawnAbility.Spawn; Character.GetRandomSkillFactor; Tameable.Command; Tameable.UnsummonMaxInstances; SpawnSystem.GetNrOfInstances; Attack.OnAttackTrigger; Player.UpdateAttackBowDraw; Player.UpdateActionQueue; Player.QueueReloadAction; Player.InMinorAction; Humanoid.GetAttackDrawPercentage; ItemData.GetWeaponLoadingTime; Attack.Update; Attack.CanStartChainAttack; Attack.ModifyDamage; Attack.DoMeleeAttack; Attack.DoAreaAttack; Humanoid.StartAttack; Player.InAttack; CharacterAnimEvent.Speed; CharacterAnimEvent.CustomFixedUpdate; Skills.GetRandomSkillFactor; Humanoid.UpdateAttack
 ---
 
 No item field sets attack speed. The animator does: an attack fires the trigger `m_attackAnimation` + chain level and
@@ -22,6 +22,9 @@ freezes the animation for 0.15 s. Skills and status effects don't change attack 
 - Dundr: shot time = fire animation + reload, as a crossbow with no "reload done"; reloading drains 25 eitr/s, so a shot costs 25 × reload
 - eitr, stamina and health cost = cost × (1 − 0.33 × skill / 100)
 - shot damage = weapon damage × projectiles (Dundr 12) × spawned copies that carry it (Staff of Fracturing: 12 splinters)
+- summon's hit = its damage × √U(0.75, 1) × (1 + 0.02 × the staff's skill level when summoned): up to ×3 at skill 100
+- summons out: no new one while m_maxSpawned of that creature are loaded (anyone's); Dead Raiser and Spirit Caller summons
+  follow you, and each new one unsummons your oldest of that creature beyond the staff's quality (1–4)
 
 The tables group weapons by category, with the skill each trains, lowest primary DPS first; a weapon's secondary
 attack is in the same row. They use quality 1 (not upgraded; each item page has DPS per quality), a skill roll of 1 (every hit connects at full damage) and the sum of the weapon's damage

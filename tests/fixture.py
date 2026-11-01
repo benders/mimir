@@ -297,7 +297,8 @@ def prefabs():
         prefab("RodBolt", comp("Projectile", m(spawnOnHit=R("RodSpawn"), randomSpawnOnHit=[]))),
         prefab("Shade", character(name="$enemy_shade", health=10, damageModifiers={"m_spirit": "Normal"})),  # made by the Chief's death burst
         prefab("ChiefBurst", comp("Projectile", m(spawnOnHit=R("BurstSpawn"), randomSpawnOnHit=[]))),
-        prefab("Sprite", character(name="$enemy_sprite", health=10)),  # only summoned, by the Wand's ability
+        prefab("Sprite", character(name="$enemy_sprite", health=10),  # only summoned, by the Wand's ability
+               comp("Tameable", m(fedDuration=0, tamingTime=0, commandable=True, saddleItem=None, startsTamed=True))),
         item("Wand", name="$item_wand", itemType="OneHandedWeapon", icons=[S("Rod")],
              attack=attack(attackProjectile=R("WandSpawn"))),  # the attack's prefab is the ability itself
         prefab("Moth", character(name="$enemy_moth", health=5)),  # only in an alt biome
@@ -396,9 +397,12 @@ def prefabs():
 def subprefabs():
     """Non-networked prefabs (no ZNetView) referenced from the others: summon abilities, alt biomes, offerings."""
     return [
-        {"name": "RodSpawn", "components": [comp("SpawnAbility", m(spawnPrefab=[R("Imp"), R("Wood")]))]},  # creatures only
+        {"name": "RodSpawn", "components": [comp("SpawnAbility", m(spawnPrefab=[R("Imp"), R("Wood")], maxSpawned=2,
+            setMaxInstancesFromWeaponLevel=True, levelUpSettings=[m(skill="BloodMagic", skillLevel=0, setLevel=1, maxSpawns=1)]))]},  # creatures only; no Tameable: no per-player cap
         {"name": "BurstSpawn", "components": [comp("SpawnAbility", m(spawnPrefab=[R("Shade")]))]},
-        {"name": "WandSpawn", "components": [comp("SpawnAbility", m(spawnPrefab=[R("Sprite")]))]},
+        {"name": "WandSpawn", "components": [comp("SpawnAbility", m(  # follows its summoner: capped at the Wand's quality
+            spawnPrefab=[R("Sprite")], maxSpawned=10, setMaxInstancesFromWeaponLevel=True, copySkill="BloodMagic",
+            copySkillToRandomFactor=0.02, levelUpSettings=[m(skill="BloodMagic", skillLevel=0, setLevel=1, maxSpawns=1)]))]},
         {"name": "AltBiomes_Test", "components": [comp("AltBiomeList", m(alts=[
             m(name="Moths", enabled=True, biome="Meadows, Swamp", spawn=[
                 spawner("Moth", biome="Meadows, BlackForest"),  # the patch is only in Meadows and Swamp: Meadows

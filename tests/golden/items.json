@@ -765,6 +765,12 @@
   "weight": 1.0,
   "stack": 1,
   "maxQuality": 1,
+  "summons": {
+   "creatures": [
+    "Imp"
+   ],
+   "max": 2
+  },
   "backstab": 1,
   "parryBonus": 1,
   "blockAdrenaline": 2,
@@ -1030,6 +1036,15 @@
   "weight": 1.0,
   "stack": 1,
   "maxQuality": 1,
+  "summons": {
+   "creatures": [
+    "Sprite"
+   ],
+   "max": 10,
+   "perQuality": true,
+   "skill": "BloodMagic",
+   "skillDamage": 0.02
+  },
   "backstab": 1,
   "parryBonus": 1,
   "blockAdrenaline": 2,

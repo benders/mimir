@@ -39762,6 +39762,14 @@
    "blunt": 20,
    "poison": 20
   },
+  "summons": {
+   "creatures": [
+    "staff_greenroots_tentaroot"
+   ],
+   "max": 10,
+   "skill": "ElementalMagic",
+   "skillDamage": 0.02
+  },
   "attackForce": 100,
   "backstab": 1,
   "block": 48,
@@ -40113,6 +40121,14 @@
   "maxQuality": 4,
   "skill": "BloodMagic",
   "toolTier": 5,
+  "summons": {
+   "creatures": [
+    "Troll_Summoned"
+   ],
+   "max": 2,
+   "skill": "BloodMagic",
+   "skillDamage": 0.02
+  },
   "backstab": 1,
   "block": 48,
   "parryForce": 20,
@@ -40259,6 +40275,15 @@
   "maxQuality": 4,
   "skill": "BloodMagic",
   "toolTier": 5,
+  "summons": {
+   "creatures": [
+    "Skeleton_Friendly"
+   ],
+   "max": 10,
+   "perQuality": true,
+   "skill": "BloodMagic",
+   "skillDamage": 0.02
+  },
   "backstab": 1,
   "block": 48,
   "parryForce": 20,
@@ -40328,6 +40353,18 @@
   "maxQuality": 4,
   "skill": "BloodMagic",
   "toolTier": 5,
+  "summons": {
+   "creatures": [
+    "Bjorn_spiritcaller",
+    "Moose_spiritcaller",
+    "Wolf_spiritcaller",
+    "Boar_spiritcaller"
+   ],
+   "max": 10,
+   "perQuality": true,
+   "skill": "BloodMagic",
+   "skillDamage": 0.02
+  },
   "backstab": 1,
   "block": 48,
   "parryForce": 20,

@@ -503,6 +503,13 @@ class Entities(FixtureCase):
         self.assertEqual(self.spawns("phase"), [{"creature": "Chief_p2", "source": "phase", "parent": "Chief"},
                                                 {"creature": "Shade", "source": "phase", "parent": "Chief"}])  # death burst
 
+    def test_summon_staffs(self):
+        rod = N.item("Rod", N.PREFABS["Rod"])["summons"]  # through the projectile; Wood isn't a creature
+        self.assertEqual(rod, {"creatures": ["Imp"], "max": 2, "perQuality": False, "skill": None, "skillDamage": 0})
+        wand = N.item("Wand", N.PREFABS["Wand"])["summons"]  # a Tameable summon: each player's capped at the quality
+        self.assertEqual(wand, {"creatures": ["Sprite"], "max": 10, "perQuality": True, "skill": "BloodMagic", "skillDamage": 0.02})
+        self.assertIsNone(N.item("Sword", N.PREFABS["Sword"])["summons"])
+
     def test_alt_biome_spawns(self):
         alt = [s for s in self.spawns("world") if s.get("altBiome")]
         self.assertEqual([(s["creature"], s["altBiome"], s["biomes"]) for s in alt], [("Moth", "Moths", ["Meadows"])])

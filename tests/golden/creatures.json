@@ -440,6 +440,11 @@
    "run": 5,
    "swim": 2
   },
+  "tameable": {
+   "commandable": true,
+   "startsTamed": true,
+   "alertRange": 9999
+  },
   "stage": "Meadows",
   "via": {
    "how": "summon",
