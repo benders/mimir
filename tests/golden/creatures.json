@@ -59,7 +59,7 @@
  {
   "id": "Imp",
   "name": "Imp",
-  "faction": "ForestMonsters",
+  "faction": "Dverger",
   "health": 30,
   "damageModifiers": {
    "spirit": "Immune"
@@ -69,6 +69,8 @@
    "run": 5,
    "swim": 2
   },
+  "aggravatable": true,
+  "guardHits": 5,
   "stage": "Meadows",
   "via": {
    "how": "summon",

@@ -291,7 +291,8 @@ def prefabs():
             {"m_prefab": R("ChiefBurst")}]})),  # second phase: made when it dies; a burst that spawns a Shade
         prefab("Chief_p2", character(name="$enemy_chief_p2", health=1200, boss=True, regenAllHPTime=1800,
                                         damageModifiers={"m_frost": "Resistant", "m_spirit": "Immune"})),
-        prefab("Imp", character(name="$enemy_imp", health=30)),  # only summoned, by the Rod
+        prefab("Imp", character(name="$enemy_imp", health=30, faction="Dverger"),  # only summoned, by the Rod
+               comp("MonsterAI", m(aggravatable=True, privateAreaTriggerTreshold=5))),  # neutral until provoked
         item("Rod", name="$item_rod", itemType="OneHandedWeapon", icons=[S("Rod")],
              attack=attack(attackProjectile=R("RodBolt"))),
         prefab("RodBolt", comp("Projectile", m(spawnOnHit=R("RodSpawn"), randomSpawnOnHit=[]))),

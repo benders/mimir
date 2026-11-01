@@ -491,6 +491,12 @@ class Site(unittest.TestCase):
         self.assertIn("×3 at skill 100", wand)
         self.assertIn("<dt>Summons following</dt><dd>1</dd>", wand)
 
+    def test_creature_behavior(self):
+        page = (self.out / "mechanics/creature-behavior.html").read_text(encoding="utf-8")
+        self.assertIn('<td><a class="ref" href="creatures/Imp.html"', page)  # aggravatable: in the neutral table
+        self.assertIn("<td>until provoked</td><td>5</td>", page)  # Dverger faction, 5 guard stone hits let pass
+        self.assertNotIn('href="creatures/Raider.html"', page.split("Neutral to players")[1])
+
     def test_biome_pages(self):
         swamp = (self.out / "biomes/Swamp.html").read_text(encoding="utf-8")
         self.assertIn('href="mechanics/raids.html#army_test"', swamp)  # a raid that can come here
@@ -509,7 +515,10 @@ class Site(unittest.TestCase):
         f = (self.out / "factions/ForestMonsters.html").read_text(encoding="utf-8")
         self.assertIn("Forest monsters", f)
         self.assertIn('href="creatures/Raider.html"', f)
-        self.assertIn("<dt>Attacks</dt><dd>Players</dd>", f)  # the only other faction shown: no page, plain text
+        # Players has no page: plain text; the Imp makes a Dverger faction page
+        self.assertIn('<dt>Attacks</dt><dd>Players, <a href="factions/Dverger.html">Dvergr</a></dd>', f)
+        imp = (self.out / "factions/Dverger.html").read_text(encoding="utf-8")
+        self.assertIn("<dt>Attacks</dt><dd>" + '<a href="factions/ForestMonsters.html">', imp)  # not players
         self.assertIn("table class=\"matrix\"", (self.out / "factions/index.html").read_text(encoding="utf-8"))
 
     def test_mechanics_tables_follow_stage_filter(self):

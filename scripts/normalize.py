@@ -948,6 +948,10 @@ def creature(name: str, p: dict) -> dict | None:
         "trample": trample(p),
         "afraidOfFire": ai.get("m_afraidOfFire"),
         "avoidWater": ai.get("m_avoidWater"),
+        # BaseAI.m_aggravatable: player hits and damage in its faction's guard stone area make it hostile
+        # (MonsterAI.OnPrivateAreaAttacked: after more than m_privateAreaTriggerTreshold hits)
+        "aggravatable": ai.get("m_aggravatable"),
+        "guardHits": ai.get("m_privateAreaTriggerTreshold") if ai.get("m_aggravatable") else None,  # MonsterAI only
     }
 
 

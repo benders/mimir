@@ -59,6 +59,32 @@
   },
   "version": "1.0.21"
  },
+ "creature-behavior": {
+  "methods": {
+   "Aoe.ShouldHit": "aa15cf57892cd81a",
+   "Attack.DoAreaAttack": "11fbd33bf5a92ce6",
+   "Attack.DoMeleeAttack": "6f62bd9ec51aa482",
+   "BaseAI.AggravateAllInArea": "da3c505e537eace3",
+   "BaseAI.IsAggravated": "f59b7ed339678bda",
+   "BaseAI.IsEnemy": "1c724d5c75f70a6f",
+   "BaseAI.RPC_SetAggravated": "4e092e9abf87155a",
+   "BaseAI.SetAggravated": "221c6093d80162bd",
+   "Character.RPC_Damage": "8146c8fe271c338e",
+   "Container.Interact": "f6d47deca565c172",
+   "Destructible.RPC_Damage": "fed83eb21f2eb15d",
+   "MineRock5.RPC_Damage": "341d8a19b91052cd",
+   "MonsterAI.OnPrivateAreaAttacked": "9163fe2d38fa0bd8",
+   "MonsterAI.UpdateTarget": "7bed73481ceff78a",
+   "NpcTalk.OnPrivateAreaAttacked": "cae1b2ebba71a1d4",
+   "Pickable.RPC_Pick": "d67e2312b132233c",
+   "PrivateArea.CheckAccess": "06604636d2706431",
+   "PrivateArea.OnObjectDamaged": "789ec0d6a1d71ca5",
+   "Projectile.IsValidTarget": "00e9f21e94eaf593",
+   "SpawnAbility.Spawn": "f63a6e47950c18fc",
+   "WearNTear.RPC_Damage": "bed29f2b376cd823"
+  },
+  "version": "1.0.21"
+ },
  "creature-levels": {
   "methods": {
    "Attack.GetLevelDamageFactor": "6f76a3339e9204d4",

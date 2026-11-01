@@ -1458,6 +1458,8 @@
    }
   ],
   "avoidWater": true,
+  "aggravatable": true,
+  "guardHits": 1,
   "stage": "Swamp",
   "via": {
    "how": "spawn",
@@ -2505,6 +2507,8 @@
    }
   ],
   "avoidWater": true,
+  "aggravatable": true,
+  "guardHits": 5,
   "stage": "Mistlands",
   "via": {
    "how": "spawn",
@@ -2568,6 +2572,8 @@
    }
   ],
   "avoidWater": true,
+  "aggravatable": true,
+  "guardHits": 5,
   "stage": "AshLands",
   "via": {
    "how": "spawn",
@@ -2647,6 +2653,8 @@
    }
   ],
   "avoidWater": true,
+  "aggravatable": true,
+  "guardHits": 5,
   "stage": "DeepNorth",
   "via": {
    "how": "spawn",
@@ -2727,6 +2735,8 @@
    }
   ],
   "avoidWater": true,
+  "aggravatable": true,
+  "guardHits": 5,
   "stage": "Mistlands",
   "via": {
    "how": "spawn",
@@ -2793,6 +2803,8 @@
    }
   ],
   "avoidWater": true,
+  "aggravatable": true,
+  "guardHits": 5,
   "unobtainable": true
  },
  {
@@ -2852,6 +2864,8 @@
    }
   ],
   "avoidWater": true,
+  "aggravatable": true,
+  "guardHits": 5,
   "unobtainable": true
  },
  {
@@ -2911,6 +2925,8 @@
    }
   ],
   "avoidWater": true,
+  "aggravatable": true,
+  "guardHits": 5,
   "unobtainable": true
  },
  {
@@ -2968,6 +2984,8 @@
    }
   ],
   "avoidWater": true,
+  "aggravatable": true,
+  "guardHits": 5,
   "unobtainable": true
  },
  {
@@ -5856,6 +5874,8 @@
    "Mistile_kamikaze"
   ],
   "avoidWater": true,
+  "aggravatable": true,
+  "guardHits": 4,
   "stage": "Mistlands",
   "via": {
    "how": "summon",
@@ -6280,6 +6300,7 @@
    }
   ],
   "afraidOfFire": true,
+  "aggravatable": true,
   "stage": "DeepNorth",
   "via": {
    "how": "spawn",

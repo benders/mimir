@@ -503,6 +503,11 @@ class Entities(FixtureCase):
         self.assertEqual(self.spawns("phase"), [{"creature": "Chief_p2", "source": "phase", "parent": "Chief"},
                                                 {"creature": "Shade", "source": "phase", "parent": "Chief"}])  # death burst
 
+    def test_aggravatable(self):
+        imp = N.creature("Imp", N.PREFABS["Imp"])
+        self.assertEqual((imp["aggravatable"], imp["guardHits"]), (True, 5))
+        self.assertIsNone(N.creature("Raider", N.PREFABS["Raider"])["guardHits"])
+
     def test_summon_staffs(self):
         rod = N.item("Rod", N.PREFABS["Rod"])["summons"]  # through the projectile; Wood isn't a creature
         self.assertEqual(rod, {"creatures": ["Imp"], "max": 2, "perQuality": False, "skill": None, "skillDamage": 0})

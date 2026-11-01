@@ -2687,6 +2687,20 @@ def block_tame_list() -> str:
     return table(["Creature", "Eats", "Taming", "Fed for", "Alerted within", "Commands", "Saddle"], rows)
 
 
+def block_neutral_creatures() -> str:
+    """Aggravatable creatures (BaseAI.m_aggravatable): whether their faction leaves players alone until provoked, and
+    how many hits in their guard stone area each one takes before it turns (MonsterAI.OnPrivateAreaAttacked)."""
+    rows = []
+    for c in sorted((c for c in CREATURES.values() if c.get("aggravatable") and has_page("creature", c["id"])),
+                    key=lambda c: (stage_of("creature", c["id"]), name_of("creature", c["id"]).lower())):
+        f = c["faction"]
+        neutral = not mechanics.is_enemy("Players", f) and not mechanics.is_enemy(f, "Players")
+        rows.append([link("creature", c["id"]), faction_link(f),
+                     "until provoked" if neutral else "no: hostile anyway",
+                     num(c["guardHits"]) if c.get("guardHits") else ""])
+    return table(["Creature", "Faction", "Neutral to players", "Guard stone area hits it lets pass"], rows)
+
+
 def block_tame_breeding() -> str:
     """Procreation per tame: the love point odds, expected time to a birth, the partner range and the crowd cap."""
     rows = []
@@ -2802,7 +2816,7 @@ def mech_blocks() -> dict:
             "player-scaling": block_player_scaling, "boss-scaling": block_boss_scaling,
             "tame-list": block_tame_list, "tame-breeding": block_tame_breeding,
             "tame-saddles": block_tame_saddles, "tame-boost": block_tame_boost, "tame-knives": block_tame_knives,
-            "tame": block_tame,
+            "tame": block_tame, "neutral-creatures": block_neutral_creatures,
             "frost-chart": lambda: mechanics.frost_chart(FROST_MULT, FROST_MIN),
             "adrenaline-chart": lambda: mechanics.adrenaline_chart(PLAYER["adrenaline"]),
             "chart": lambda name: mechanics.CHARTS[name]()}
