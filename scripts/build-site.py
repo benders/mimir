@@ -72,6 +72,7 @@ used_renders = set()
 RAIDS = load("raids")
 RAID_EVENTS = {e["id"]: e for e in RAIDS["events"]}
 LOCATIONS = load("locations")
+LOCATION_BY_ID = {x["id"]: x for x in LOCATIONS}
 ALT_BIOMES = load("alt_biomes")
 
 TRAY = "Feaster"  # the Serving Tray (normalize.TRAY): items with `servedFrom` are set out with it
@@ -282,12 +283,17 @@ def source_stage(s: dict) -> int:
     return source_stage(parent) if parent else len(STAGES) - 1
 
 
-# Locations named by players differently from their prefab (camps built by a DungeonGenerator)
+# Player names for locations the game doesn't name (camps built by a DungeonGenerator)
 LOCATION_NAMES = {"GoblinCamp2": "Fuling village", "GoblinCamp2_1": "Fuling village"}
 
 
-def location_label(id_: str) -> str:
-    return LOCATION_NAMES.get(id_) or pretty_id(id_)
+def location_label(id_: str, variant: bool = True, part: str = "") -> str:
+    """A location's player-visible name (locations.json `name`, or LOCATION_NAMES) and `part` ("dungeon"), followed
+    by its prefab id to tell variants apart ("Infested Mine (Mistlands_DvergrTownEntrance1)"); the prettified id
+    when it has none."""
+    name = LOCATION_NAMES.get(id_) or LOCATION_BY_ID.get(id_, {}).get("name")
+    label = (name or pretty_id(id_)) + (f" {part}" if part else "")
+    return f"{label} ({id_})" if name and variant else label
 
 
 def thumb(path: str, label: str, stage: int = 0) -> str:
@@ -317,7 +323,7 @@ def place_html(x: dict, stage: int = 0) -> list[str]:
             label += location_biomes(x["location"], linked=not render)
             out.append(thumb(f'rooms/{r["room"]}', label, stage) if render else label)
         return out
-    name = esc(location_label(x["location"])) + (" dungeon" if x.get("dungeon") else "")
+    name = esc(location_label(x["location"], part="dungeon" if x.get("dungeon") else ""))
     if "chance" in x:
         name += chance_note(x["chance"], "Rolled when the location is placed: not every copy has it")
     render = x["location"] in HAVE_RENDERS
@@ -1124,7 +1130,7 @@ TREE_OPEN = 2  # levels shown expanded
 
 def short_places(biomes=(), locations=()) -> str:
     places = [BIOMES.get(b, words(b)) for b in biomes]
-    locs = list(dict.fromkeys(location_label(x["location"]) for x in locations))
+    locs = list(dict.fromkeys(location_label(x["location"], variant=False) for x in locations))
     return ", ".join(places[:3] + locs[:2] + (["…"] if len(locs) > 2 or len(places) > 3 else []))
 
 
@@ -1494,7 +1500,7 @@ def spawn_sections(spawns: list[dict]) -> str:
         if s.get("summon"):
             sm = s["summon"]
             notes.append("summoned with " + (link("item", sm["item"], sm.get("amount")) if sm.get("item") else "an offering"))
-        rows.append([esc(pretty_id(s["location"])), biome_list(s), stars(*s["levels"]) if s.get("levels") else "",
+        rows.append([esc(location_label(s["location"])), biome_list(s), stars(*s["levels"]) if s.get("levels") else "",
                      "; ".join(notes)])
     out += section("Locations", table(["Location", "Biome", STARS_TH, "Notes"], rows))
 
@@ -1721,7 +1727,7 @@ def biome_page(b: str) -> None:
                                        if any(b in x["biomes"] for x in t.get("locations", []))))
     fish = [x["id"] for x in SOURCES.values() if x["kind"] == "fishing" and b in x.get("biomes", [])]
     body += staged_section("Fish", [("item", f, link("item", f)) for f in sorted(fish, key=lambda f: name_of("item", f).lower())])
-    locs = sorted({(LOCATION_PAGES.get(x["id"], ("", pretty_id(x["id"])))[1], x["id"])
+    locs = sorted({(LOCATION_PAGES.get(x["id"], ("", location_label(x["id"])))[1], x["id"])
                    for x in LOCATIONS if b in x.get("biomes", [])}, key=lambda x: x[0].lower())
     locs = [mech_link(LOCATION_PAGES[i][0], n) if i in LOCATION_PAGES else esc(n) for n, i in locs]
     body += section("Locations", f'<p>{", ".join(locs)}</p>' if locs else "")
@@ -1845,7 +1851,7 @@ def trader_link(s: dict) -> str:
 
 def placement_text(loc_id: str, biomes: list[str], what: str) -> str:
     """How world generation places a location (locations.json placement, ZoneSystem.GenerateLocationsTimeSliced)."""
-    loc = next((l for l in LOCATIONS if l["id"] == loc_id), {})
+    loc = LOCATION_BY_ID.get(loc_id, {})
     pl = loc.get("placement") or {}
     where = " or ".join(biome_link(b) for b in biomes)
     if pl.get("biomeArea") == "Median":

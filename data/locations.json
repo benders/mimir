@@ -31,6 +31,7 @@
  },
  {
   "id": "AncientUpgradeStation",
+  "name": "Forge of Potential",
   "biomes": [
    "Mountain"
   ],
@@ -57,6 +58,7 @@
  },
  {
   "id": "BearCave",
+  "name": "Bear Cave",
   "biomes": [
    "BlackForest"
   ],
@@ -112,6 +114,7 @@
  },
  {
   "id": "CharredFortress",
+  "name": "Charred Fortress",
   "biomes": [
    "AshLands"
   ],
@@ -233,6 +236,7 @@
  },
  {
   "id": "Crypt2",
+  "name": "Burial Chambers",
   "biomes": [
    "BlackForest"
   ],
@@ -244,6 +248,7 @@
  },
  {
   "id": "Crypt3",
+  "name": "Burial Chambers",
   "biomes": [
    "BlackForest"
   ],
@@ -254,6 +259,7 @@
  },
  {
   "id": "Crypt4",
+  "name": "Burial Chambers",
   "biomes": [
    "BlackForest"
   ],
@@ -264,6 +270,7 @@
  },
  {
   "id": "DN_Bossroom",
+  "name": "Aesir Passage",
   "biomes": [
    "DeepNorth"
   ],
@@ -563,6 +570,7 @@
  },
  {
   "id": "Hildir_cave",
+  "name": "Howling Cavern",
   "biomes": [
    "Mountain"
   ],
@@ -578,6 +586,7 @@
  },
  {
   "id": "Hildir_crypt",
+  "name": "Smouldering Tomb",
   "biomes": [
    "BlackForest"
   ],
@@ -593,6 +602,7 @@
  },
  {
   "id": "Hildir_plainsfortress",
+  "name": "Sealed Tower",
   "biomes": [
    "Plains"
   ],
@@ -645,6 +655,7 @@
  },
  {
   "id": "Mistlands_DvergrBossEntrance1",
+  "name": "Infested Citadel",
   "biomes": [
    "Mistlands"
   ],
@@ -658,6 +669,7 @@
  },
  {
   "id": "Mistlands_DvergrTownEntrance1",
+  "name": "Infested Mine",
   "biomes": [
    "Mistlands"
   ],
@@ -670,6 +682,7 @@
  },
  {
   "id": "Mistlands_DvergrTownEntrance2",
+  "name": "Infested Mine",
   "biomes": [
    "Mistlands"
   ],
@@ -928,6 +941,7 @@
  },
  {
   "id": "MorgenHole1",
+  "name": "Putrid Hole",
   "biomes": [
    "AshLands"
   ],
@@ -939,6 +953,7 @@
  },
  {
   "id": "MorgenHole2",
+  "name": "Putrid Hole",
   "biomes": [
    "AshLands"
   ],
@@ -950,6 +965,7 @@
  },
  {
   "id": "MorgenHole3",
+  "name": "Putrid Hole",
   "biomes": [
    "AshLands"
   ],
@@ -961,6 +977,7 @@
  },
  {
   "id": "MorkBorg",
+  "name": "Mörkhalla",
   "biomes": [
    "DeepNorth"
   ],
@@ -972,6 +989,7 @@
  },
  {
   "id": "MountainCave02",
+  "name": "Frost Caves",
   "biomes": [
    "Mountain"
   ],
@@ -1050,6 +1068,7 @@
  },
  {
   "id": "PlaceofMystery3",
+  "name": "Tomb of Lord Reto",
   "biomes": [
    "AshLands"
   ],
@@ -1598,6 +1617,7 @@
  },
  {
   "id": "SunkenCrypt4",
+  "name": "Sunken Crypts",
   "biomes": [
    "Swamp"
   ],
@@ -1783,6 +1803,7 @@
  },
  {
   "id": "TheHole01",
+  "name": "Winding tunnels",
   "biomes": [
    "DeepNorth"
   ],
@@ -1794,6 +1815,7 @@
  },
  {
   "id": "TrollCave02",
+  "name": "Troll Cave",
   "biomes": [
    "BlackForest"
   ],

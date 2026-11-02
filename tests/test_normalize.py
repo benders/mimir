@@ -691,6 +691,12 @@ class Entities(FixtureCase):
         p = loc["Lair"]["placement"]
         self.assertEqual((p["minDistance"], p["maxDistance"]), (600, 3000))
 
+    def test_location_name(self):
+        loc = {x["id"]: x.get("name") for x in N.locations()}
+        self.assertEqual(loc["Lair"], "Chief's Lair")  # an entrance Teleport's enter text
+        self.assertEqual(loc["Stash"], "Hidden Stash")  # Location.m_discoverLabel
+        self.assertIsNone(loc["Camp"])  # no name: the site shows the prefab's
+
     def test_upgrader_items(self):
         items = [N.item(x, N.PREFABS[x]) for x in ("Fish", "Wood")]
         N.upgrader_items(items, [N.recipe(r) for r in N.load("recipes.json")])

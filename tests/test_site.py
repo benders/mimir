@@ -186,7 +186,7 @@ class Site(unittest.TestCase):
         self.assertIn("<h2>Found in</h2>", gem)
         self.assertIn("Strongbox", gem)
         self.assertIn('<span data-stage="2">Camp <span class="biomes">(<a href="biomes/Swamp.html">Swamp</a>, '
-                      '<a href="biomes/Plains.html">Plains</a>)</span></span><span data-stage="3">, Lair dungeon '
+                      '<a href="biomes/Plains.html">Plains</a>)</span></span><span data-stage="3">, Chief&#x27;s Lair dungeon (Lair) '
                       '<span class="biomes">(<a href="biomes/Mountain.html">Mountain</a>)</span></span>', gem)
         self.assertFalse((self.out / "items/Mystery.html").exists())
 
@@ -212,7 +212,7 @@ class Site(unittest.TestCase):
         self.assertIn("<td>91.7%</td>", ore)
         self.assertIn("<td>pick ×3</td><td>100%</td>", ore)  # a pickable always gives it
         # share of the location's copies that have the object (RandomSpawn), and the camp room that holds it
-        self.assertIn("Lair <span class=\"chance\"", ore)
+        self.assertIn("Chief&#x27;s Lair (Lair) <span class=\"chance\"", ore)  # player name, then the prefab
         self.assertIn("(70% of them)", ore)
         self.assertIn("Village: Hut", ore)
         self.assertIn("Village: Well", ore)

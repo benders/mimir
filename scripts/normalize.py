@@ -1512,15 +1512,23 @@ def location_key(loc: dict) -> str | None:
                  if c.get("type") == "Door" and c.get("fields", {}).get("m_keyItem")), None)
 
 
+def location_name(loc: dict) -> str | None:
+    """The name a player sees for the location: its Location.m_discoverLabel (added to the player's known location
+    names on entering it, Player.UpdateBiome), else an entrance Teleport's m_enterText (shown on going through it,
+    Teleport.Teleport: "Infested Mine"). Variants of one location share it."""
+    fields = [c.get("fields", {}) for c in loc.get("components", [])]
+    return next((text(f[k]) for k in ("m_discoverLabel", "m_enterText") for f in fields if f.get(k)), None)
+
+
 def locations() -> list[dict]:
-    """Every enabled world location the dump has, with the `biomes` it is placed in, its `placement` (from its
-    first enabled ZoneSystem entry) and the `key` its door takes."""
+    """Every enabled world location the dump has, with its player-visible `name`, the `biomes` it is placed in, its
+    `placement` (from its first enabled ZoneSystem entry) and the `key` its door takes."""
     have = load_dir("locations")
     first = {}
     for z in load("world/ZoneSystem.json")[0]["fields"]["m_locations"]:
         if z["m_enable"]:
             first.setdefault(z["m_prefabName"], z)
-    return [{"id": k, "biomes": v, "placement": location_placement(first[k]), "key": location_key(have[k])}
+    return [{"id": k, "name": location_name(have[k]), "biomes": v, "placement": location_placement(first[k]), "key": location_key(have[k])}
             for k, v in sorted(location_biomes().items()) if k in have]
 
 

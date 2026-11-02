@@ -154,6 +154,7 @@ TRANSLATIONS = {
     "piece_chest": "Strongbox",
     "item_wood": "Twig", "item_wood_desc": "A stick.",
     "skill_swords": "Blades",
+    "location_lair": "Chief's Lair", "location_stash": "Hidden Stash",
     "item_ore": "Rustore", "item_ingot": "Ingot",
     "item_buckler": "Test Buckler",
     "item_sword": "Test Sword", "item_sword_desc": "Sharp <b>enough</b>.",
@@ -532,6 +533,7 @@ def write_dump(raw: Path) -> Path:
                            itemStandPrefix="CupHolder")),  # a group of creatures; takes one Wood per CupHolder stand
         ("DungeonGenerator", m(themes="Cave")),
         ("Door", m(name="$piece_irongate", keyItem=R("Gem"))),  # its dungeon is behind a locked gate
+        ("Teleport", m(hoverText="$location_enter", enterText="$location_lair")),  # its name, shown on entering
     )], "instances": [
         {"prefab": "OreRock", "path": "cave/OreRock (2)"},  # an instance of a source inside the location
         {"prefab": "Orb", "path": "cave/Orb"},
@@ -548,7 +550,7 @@ def write_dump(raw: Path) -> Path:
         {"prefab": "Gift", "path": "cave/Gift", "inactive": True, "randomSpawn": {"chance": 90}}]})  # never placed
     dump("locations/Ruin.json", {"name": "Ruin", "components": spawners(("CreatureSpawner", creature_spawner("Pup")),
                                                                     container(("Ore", 1, 1, 1)))})  # disabled location
-    dump("locations/Stash.json", {"name": "Stash", "components": [comp("Location", {}), *spawners(
+    dump("locations/Stash.json", {"name": "Stash", "components": [comp("Location", m(discoverLabel="$location_stash")), *spawners(
         container(("Coins", 1, 1, 1), ("Hammer", 1, 1, 1), ("Buckler", 1, 1, 1), ("HelmetFem", 1, 1, 1), ("SP_Sword", 1, 1, 1),
                   ("WoodOld", 1, 1, 1), ("Egg", 1, 1, 1), ("Longbow", 1, 1, 1), ("Arbal", 1, 1, 1),
                   ("Dart", 1, 1, 1), ("DartBlunt", 1, 1, 1), ("Mace", 1, 1, 1), ("FrostRod", 1, 1, 1),

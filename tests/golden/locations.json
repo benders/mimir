@@ -11,6 +11,7 @@
  },
  {
   "id": "Lair",
+  "name": "Chief's Lair",
   "biomes": [
    "Mountain"
   ],
@@ -39,6 +40,7 @@
  },
  {
   "id": "Stash",
+  "name": "Hidden Stash",
   "biomes": [
    "Meadows"
   ],
