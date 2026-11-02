@@ -181,12 +181,30 @@ class Site(unittest.TestCase):
         shade = (self.out / "creatures/Shade.html").read_text(encoding="utf-8")
         self.assertIn("<h2>Phase of</h2>", shade)
 
+    def test_dungeon_pages(self):
+        lair = (self.out / "dungeons/chief-s-lair.html").read_text(encoding="utf-8")  # a Teleport's enter text names it
+        self.assertIn("<h1>Chief&#x27;s Lair</h1>", lair)
+        self.assertIn("World generation picks up to 20 spots for it", lair)
+        self.assertIn('Its door takes <a class="ref" href="items/Gem.html">', lair)
+        self.assertIn("rooms picked by weight", lair)
+        self.assertIn("1 of the required rooms (<code>cave_a</code>)", lair)
+        self.assertRegex(lair, r"<td>Door</td><td>entrance</td><td>1</td><td></td>")  # role and weight, nothing in it
+        self.assertRegex(lair, r"<td>A</td><td>required</td><td>3</td><td>.*?Pup.*?Strongbox")  # what the room holds
+        self.assertIn("<td>Strongbox</td><td>container</td><td>inside", lair)  # resources: inside the dungeon
+        idx = (self.out / "dungeons/index.html").read_text(encoding="utf-8")
+        self.assertIn('<a href="dungeons/chief-s-lair.html">Chief&#x27;s Lair</a>', idx)
+        self.assertNotIn("Village", idx)  # a camp: not entered
+        self.assertIn('<a href="dungeons/index.html">Dungeons</a>', idx)  # in the header
+        search = json.loads((self.out / "search.json").read_text(encoding="utf-8"))
+        self.assertIn(["Chief's Lair", "Lair", "dungeons/chief-s-lair.html", "", "Dungeon", 3], search)
+
     def test_container_found_in(self):
         gem = (self.out / "items/Gem.html").read_text(encoding="utf-8")  # unresolved name, only in a chest
         self.assertIn("<h2>Found in</h2>", gem)
         self.assertIn("Strongbox", gem)
         self.assertIn('<span data-stage="2">Camp <span class="biomes">(<a href="biomes/Swamp.html">Swamp</a>, '
-                      '<a href="biomes/Plains.html">Plains</a>)</span></span><span data-stage="3">, Chief&#x27;s Lair dungeon (Lair) '
+                      '<a href="biomes/Plains.html">Plains</a>)</span></span><span data-stage="3">, <a href="dungeons/chief-s-lair.html">'
+                      'Chief&#x27;s Lair dungeon (Lair)</a> '
                       '<span class="biomes">(<a href="biomes/Mountain.html">Mountain</a>)</span></span>', gem)
         self.assertFalse((self.out / "items/Mystery.html").exists())
 
@@ -212,7 +230,7 @@ class Site(unittest.TestCase):
         self.assertIn("<td>91.7%</td>", ore)
         self.assertIn("<td>pick ×3</td><td>100%</td>", ore)  # a pickable always gives it
         # share of the location's copies that have the object (RandomSpawn), and the camp room that holds it
-        self.assertIn("Chief&#x27;s Lair (Lair) <span class=\"chance\"", ore)  # player name, then the prefab
+        self.assertIn("Chief&#x27;s Lair (Lair)</a> <span class=\"chance\"", ore)  # player name, then the prefab
         self.assertIn("(70% of them)", ore)
         self.assertIn("Village: Hut", ore)
         self.assertIn("Village: Well", ore)
@@ -656,7 +674,7 @@ class SiteRenders(unittest.TestCase):
 
     def test_thumbnails(self):
         ore = (self.out / "items/Ore.html").read_text(encoding="utf-8")
-        self.assertIn('<a class="place" href="renders/Lair.webp" data-stage="3"><img src="renders/Lair.webp"', ore)
+        self.assertIn('<a class="place" href="dungeons/chief-s-lair.html" data-stage="3"><img src="renders/Lair.webp"', ore)  # to its dungeon page
         self.assertIn('<a class="place" href="renders/rooms/village_hut.webp" data-stage="3">', ore)
         self.assertRegex(ore, r'village_hut\.webp" alt="" loading="lazy"><span>Village: Hut <span class="chance"[^>]*>'
                               r'\(50% of them\)')

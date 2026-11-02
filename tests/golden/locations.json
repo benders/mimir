@@ -20,7 +20,21 @@
    "minDistance": 600,
    "maxDistance": 3000
   },
-  "key": "Gem"
+  "key": "Gem",
+  "interior": true,
+  "dungeon": {
+   "minRooms": 3,
+   "maxRooms": 9,
+   "requiredRooms": [
+    "cave_a"
+   ],
+   "minRequired": 1,
+   "weighted": true,
+   "rooms": [
+    "cave_a",
+    "cave_door"
+   ]
+  }
  },
  {
   "id": "Market",

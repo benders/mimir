@@ -527,11 +527,12 @@ def write_dump(raw: Path) -> Path:
         container(("Wood", 1, 1, 1), name="$piece_other"),  # unresolved name: its own source
         container(),  # empty default items: not a source
     )]})
-    dump("locations/Lair.json", {"name": "Lair", "components": [comp("Location", {}), *spawners(
+    dump("locations/Lair.json", {"name": "Lair", "components": [comp("Location", m(hasInterior=True)), *spawners(
         ("OfferingBowl", m(bossPrefab=R("Chief"), bossItem=R("Ore"), bossItems=3)),
         ("OfferingBowl", m(bossPrefab=R("ChoirOffering"), bossItem=None, bossItems=1, useItemStands=True,
                            itemStandPrefix="CupHolder")),  # a group of creatures; takes one Wood per CupHolder stand
-        ("DungeonGenerator", m(themes="Cave")),
+        ("DungeonGenerator", m(themes="Cave", algorithm="Dungeon", minRooms=3, maxRooms=9, requiredRooms=["cave_a"],
+                               minRequiredRooms=1, alternativeFunctionality=True)),  # rooms picked by weight
         ("Door", m(name="$piece_irongate", keyItem=R("Gem"))),  # its dungeon is behind a locked gate
         ("Teleport", m(hoverText="$location_enter", enterText="$location_lair")),  # its name, shown on entering
     )], "instances": [
@@ -590,10 +591,13 @@ def write_dump(raw: Path) -> Path:
     dump("rooms/village_well.json", {"name": "village_well", "theme": 8, "enabled": True, "components": [],
                               "instances": [{"prefab": "OreRock", "path": "OreRock"}]})
     dump("rooms/cave_a.json", {"name": "cave_a", "theme": 5, "enabled": True,  # Crypt|Cave: used by Lair
-                               "components": [*spawners(("CreatureSpawner", creature_spawner("Pup", maxLevel=2)),
+                               "components": [comp("Room", m(weight=3)),
+                                              *spawners(("CreatureSpawner", creature_spawner("Pup", maxLevel=2)),
                                                         container(("Gem", 1, 1, 1), ("Wood", 2, 5, 3))),
                                               ], "instances": [{"prefab": "WildHive", "path": "hall/WildHive"},
                                                                {"prefab": "Altar", "path": "hall/Altar"}]})
+    dump("rooms/cave_door.json", {"name": "cave_door", "theme": 4, "enabled": True,  # the Lair's start room
+                                  "components": [comp("Room", m(entrance=True, weight=1))]})
     dump("rooms/cave_off.json", {"name": "cave_off", "theme": 4, "enabled": False,
                                  "components": spawners(("CreatureSpawner", creature_spawner("Raider")))})
     dump("rooms/crypt_a.json", {"name": "crypt_a", "theme": 1, "enabled": True,

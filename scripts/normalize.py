@@ -1532,6 +1532,59 @@ def locations() -> list[dict]:
             for k, v in sorted(location_biomes().items()) if k in have]
 
 
+ROOM_ROLES = ("entrance", "endCap", "divider")
+
+
+def dungeons(location_list: list[dict], ids: set[str]) -> list[dict]:
+    """Record `interior` (Location.m_hasInterior: entered through a Teleport into a separate space) on each location
+    and, for a DungeonGenerator with the Dungeon algorithm, `dungeon`: `minRooms` / `maxRooms`, the `requiredRooms`
+    of which `minRequired` must be placed, `weighted` (m_alternativeFunctionality: rooms are picked by their weight
+    instead of uniformly) and the `rooms` it can use (DungeonGenerator.SetupAvailableRooms: enabled, theme overlaps).
+    Returns those rooms: `role` (Room m_entrance: the start room, m_endCap: closes an open connection, m_divider:
+    joins mismatched connections), `weight` (m_weight) and what each `contains` [{id, chance?}]: the `ids` (sources,
+    pieces, creatures) placed in it, creatures its spawners make and its loot chests (container sources)."""
+    have, rooms = load_dir("locations"), load_dir("rooms")
+    themes = load("room_themes.json") if (RAW / "room_themes.json").exists() else {}
+
+    def theme_bits(v) -> int:
+        return v if isinstance(v, int) else int(v) if v.isdigit() else sum(themes.get(t, 0) for t in v.split(", "))
+
+    def room(name: str) -> dict:
+        r = rooms[name]
+        chances, out = place_chances(r), {}
+        for n in sorted(placed_prefabs(r)):
+            if n in ids:
+                out[n] = chances.get(n)
+        for x in spawners_in({"components": with_instances(r), "instances": r.get("instances", [])}):
+            out.setdefault(x["creature"], None)
+        own = [(c, None) for c in r["components"]]
+        placed = [(c, chances.get(n)) for n in sorted(placed_prefabs(r)) if n in PREFABS for c in PREFABS[n]["components"]]
+        for c, chance in own + placed:
+            if c["type"] == "Container" and (cid := container_id(c["fields"])):
+                out[cid] = None if cid in out and out[cid] is None else chance
+        rf = next((c["fields"] for c in r["components"] if c["type"] == "Room"), {})
+        return {"id": name, "role": next((x for x in ROOM_ROLES if rf.get(f"m_{x}")), None),
+                "weight": rf.get("m_weight", 1) if rf.get("m_weight", 1) != 1 else None,
+                "contains": [{"id": k} | ({"chance": v} if v is not None else {}) for k, v in out.items()]}
+
+    used = set()
+    for loc in location_list:
+        p = have[loc["id"]]
+        lf = next((c["fields"] for c in p["components"] if c["type"] == "Location"), {})
+        loc["interior"] = lf.get("m_hasInterior")
+        g = next((c["fields"] for c in p["components"]
+                  if c["type"] == "DungeonGenerator" and c["fields"].get("m_algorithm") == "Dungeon"), None)
+        if not g:
+            continue
+        names = sorted(n for n, r in rooms.items() if r.get("enabled") and theme_bits(r["theme"]) & theme_bits(g["m_themes"]))
+        used |= set(names)
+        loc["dungeon"] = {"minRooms": g["m_minRooms"], "maxRooms": g["m_maxRooms"],
+                          "requiredRooms": g.get("m_requiredRooms"), "minRequired": g.get("m_minRequiredRooms")
+                          if g.get("m_requiredRooms") else None,
+                          "weighted": bool(g.get("m_alternativeFunctionality")), "rooms": names}
+    return [room(n) for n in sorted(used)]
+
+
 def placed_in_locations():
     """(location, biomes, prefab, dungeon) for each enabled world location's own prefab and, as dungeon, every
     enabled room its DungeonGenerator can use (Room.Theme overlapping the generator's m_themes)."""
@@ -1625,6 +1678,14 @@ def location_spawns() -> list[dict]:
     return out
 
 
+def container_id(c: dict) -> str | None:
+    """The source id of a loot chest (Container fields): its name and a digest of its default items; None when empty."""
+    if not (table := drop_table(c["m_defaultItems"])):
+        return None
+    digest = hashlib.sha1(json.dumps(table, sort_keys=True).encode()).hexdigest()[:6]
+    return f'container_{re.sub(r"[^a-z0-9]+", "_", (text(c["m_name"]) or "").lower()).strip("_")}_{digest}'
+
+
 def location_containers() -> list[dict]:
     """Loot chests (Container default items) in locations and their dungeon rooms: one source of kind `container`
     per distinct name + drop table, with the locations it is found in (`dungeon`: in a room the location's
@@ -1635,13 +1696,10 @@ def location_containers() -> list[dict]:
         own = [(c, None) for c in p["components"]]
         placed = [(c, chances.get(n)) for n in sorted(placed_prefabs(p)) if n in PREFABS for c in PREFABS[n]["components"]]
         for c, chance in ((c["fields"], ch) for c, ch in own + placed if c["type"] == "Container"):
-            if not (table := drop_table(c["m_defaultItems"])):
+            if not (cid := container_id(c)):
                 continue
-            title = text(c["m_name"])
-            digest = hashlib.sha1(json.dumps(table, sort_keys=True).encode()).hexdigest()[:6]
-            slug = re.sub(r"[^a-z0-9]+", "_", (title or "").lower()).strip("_")
-            e = by.setdefault((title, digest), {"id": f"container_{slug}_{digest}", "kind": "container",
-                                                "name": title, "drops": table, "locations": {}})
+            e = by.setdefault(cid, {"id": cid, "kind": "container", "name": text(c["m_name"]),
+                                    "drops": drop_table(c["m_defaultItems"]), "locations": {}})
             add_place(e["locations"], name, dungeon, chance, p["name"])
     return sorted((dict(e, locations=[e["locations"][k] for k in sorted(e["locations"])]) for e in by.values()),
                   key=lambda e: e["id"])
@@ -2059,6 +2117,7 @@ def main(argv: list[str]) -> int:
     upgrader_items(items, recipes)
     guardian_powers(items)
     location_list = locations()
+    room_list = dungeons(location_list, {x["id"] for x in sources + pieces + creatures})
     mark_stages(items, creatures, pieces, recipes, procs, sources, spawn_list, location_list)
     effects = [status_effect(e, defaults) for e in load("status_effects.json")]
     effect_stages(effects, items, creatures)
@@ -2071,6 +2130,7 @@ def main(argv: list[str]) -> int:
         "processing.json": sorted(procs, key=lambda x: (x["station"], x["from"], x["to"])),
         "sources.json": sources,
         "locations.json": location_list,
+        "rooms.json": room_list,
         "alt_biomes.json": alt_biomes(),
         "status_effects.json": effects,
     }

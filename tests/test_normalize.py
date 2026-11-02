@@ -691,6 +691,23 @@ class Entities(FixtureCase):
         p = loc["Lair"]["placement"]
         self.assertEqual((p["minDistance"], p["maxDistance"]), (600, 3000))
 
+    def test_dungeons(self):
+        locs = N.locations()
+        ids = {"WildHive", "Altar", "Pup", "OreRock"}
+        rooms = {r["id"]: r for r in N.prune(N.dungeons(locs, ids))}
+        loc = {x["id"]: N.prune(x) for x in locs}
+        self.assertTrue(loc["Lair"]["interior"])
+        self.assertEqual(loc["Lair"]["dungeon"], {"minRooms": 3, "maxRooms": 9, "requiredRooms": ["cave_a"],
+                                                  "minRequired": 1, "weighted": True,
+                                                  "rooms": ["cave_a", "cave_door"]})  # not disabled or other themes
+        self.assertNotIn("dungeon", loc["Village"])  # a camp: rooms in the open
+        self.assertEqual(set(rooms), {"cave_a", "cave_door"})
+        self.assertEqual(rooms["cave_door"], {"id": "cave_door", "role": "entrance"})
+        a = rooms["cave_a"]
+        self.assertEqual(a["weight"], 3)
+        self.assertEqual([c["id"] for c in a["contains"]][:3], ["Altar", "WildHive", "Pup"])  # placed, then spawned
+        self.assertTrue(a["contains"][3]["id"].startswith("container_"))  # its loot chest
+
     def test_location_name(self):
         loc = {x["id"]: x.get("name") for x in N.locations()}
         self.assertEqual(loc["Lair"], "Chief's Lair")  # an entrance Teleport's enter text

@@ -1,0 +1,24 @@
+[
+ {
+  "id": "cave_a",
+  "weight": 3,
+  "contains": [
+   {
+    "id": "Altar"
+   },
+   {
+    "id": "WildHive"
+   },
+   {
+    "id": "Pup"
+   },
+   {
+    "id": "container_strongbox_3bb70a"
+   }
+  ]
+ },
+ {
+  "id": "cave_door",
+  "role": "entrance"
+ }
+]
