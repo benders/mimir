@@ -678,6 +678,10 @@ class SiteRenders(unittest.TestCase):
         self.assertIn('<a class="place" href="renders/rooms/village_hut.webp" data-stage="3">', ore)
         self.assertRegex(ore, r'village_hut\.webp" alt="" loading="lazy"><span>Village: Hut <span class="chance"[^>]*>'
                               r'\(50% of them\)')
+        # the prefab id on its own line under the name: a long one doesn't spill into the next thumbnail
+        self.assertIn('loading="lazy"><span>Chief&#x27;s Lair dungeon <span class="variant">Lair</span> <span class="biomes">', ore)
+        lair = (self.out / "dungeons/chief-s-lair.html").read_text(encoding="utf-8")
+        self.assertIn('<span>Chief&#x27;s Lair <span class="variant">Lair</span></span></a>', lair)
         self.assertIn("Village: Well", ore)  # no render: plain text
         self.assertNotIn("village_well.webp", ore)
 

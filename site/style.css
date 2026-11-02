@@ -59,13 +59,14 @@ span.big { display: inline-block; }
 /* location render thumbnails in "Found in" (build-site.place_html) */
 .places { display: flex; flex-wrap: wrap; gap: 4px; }
 a.place { display: inline-flex; flex-direction: column; align-items: center; gap: 2px; margin: 4px 2px;
-  vertical-align: top; max-width: 128px; text-align: center; color: var(--link); }
+  vertical-align: top; width: 128px; text-align: center; overflow-wrap: anywhere; color: var(--link); }
 /* white in both themes: the renders' ground fades to transparent and reads best on white, as in the game's daylight */
 a.place img { width: 96px; height: 96px; object-fit: contain; border-radius: 6px; background: #fff;
   border: 1px solid var(--line); }
 a.place:hover img { outline: 2px solid var(--accent); }
 .chance { color: var(--muted); font-size: 12px; }
 a.place .biomes { color: var(--muted); font-size: 12px; }
+a.place .variant { display: block; color: var(--muted); font-size: 12px; overflow-wrap: anywhere; }
 h2 { font-size: 17px; margin: 28px 0 8px; padding-bottom: 4px; border-bottom: 1px solid var(--line); }
 h3 { font-size: 14px; margin: 14px 0 6px; color: var(--muted); }
 .kv { display: grid; grid-template-columns: max-content 1fr; gap: 4px 16px; margin: 8px 0; }

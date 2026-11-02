@@ -298,6 +298,14 @@ def location_label(id_: str, variant: bool = True, part: str = "") -> str:
     return f"{label} ({id_})" if name and variant else label
 
 
+def thumb_label(id_: str, part: str = "", after: str = "") -> str:
+    """location_label for a thumbnail: the name (then `after`, markup), then the prefab id on its own smaller line,
+    breaking after an underscore, or anywhere (a long id is wider than the thumbnail)."""
+    label = esc(location_label(id_, variant=False, part=part)) + after
+    named = LOCATION_NAMES.get(id_) or LOCATION_BY_ID.get(id_, {}).get("name")
+    return label + (f' <span class="variant">{esc(id_).replace("_", "_<wbr>")}</span>' if named else "")
+
+
 # Dungeons (#89): locations players enter (an interior, or a generated underground dungeon), one page per player
 # name with its variants (Crypt2/3/4: Burial Chambers)
 DUNGEONS: dict[str, list[str]] = {}
@@ -339,16 +347,18 @@ def place_html(x: dict, stage: int = 0) -> list[str]:
     if x.get("rooms"):
         out = []
         for r in x["rooms"]:
-            label = f'{esc(location_label(x["location"]))}: {esc(pretty_id(re.sub(r"^[a-z]+_", "", r["room"])))}'
+            render = f'rooms/{r["room"]}' in HAVE_RENDERS
+            room = esc(pretty_id(re.sub(r"^[a-z]+_", "", r["room"])))
+            label = (thumb_label(x["location"], after=f": {room}") if render
+                     else f'{esc(location_label(x["location"]))}: {room}')
             if "chance" in r:
                 label += chance_note(r["chance"], "Rolled per copy of this part of the camp: not every one has it")
-            render = f'rooms/{r["room"]}' in HAVE_RENDERS
             label += location_biomes(x["location"], linked=not render)
             out.append(thumb(f'rooms/{r["room"]}', label, stage) if render else label)
         return out
     render = x["location"] in HAVE_RENDERS
     part = "dungeon" if x.get("dungeon") else ""
-    name = esc(location_label(x["location"], part=part)) if render else location_ref(x["location"], part)
+    name = thumb_label(x["location"], part) if render else location_ref(x["location"], part)
     if "chance" in x:
         name += chance_note(x["chance"], "Rolled when the location is placed: not every copy has it")
     name += location_biomes(x["location"], linked=not render)
@@ -2010,7 +2020,7 @@ def dungeon_page(name: str) -> None:
     if many:
         body += f'<p class="desc">{len(ids)} variants: {", ".join(f"<code>{esc(i)}</code>" for i in ids)}.</p>'
     where = ""
-    if thumbs := [thumb(i, esc(location_label(i))) for i in ids if i in HAVE_RENDERS]:
+    if thumbs := [thumb(i, thumb_label(i)) for i in ids if i in HAVE_RENDERS]:
         where += f'<div class="places">{"".join(thumbs)}</div>'
     texts = {}
     for i in ids:
