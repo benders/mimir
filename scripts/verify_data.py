@@ -101,6 +101,9 @@ def main() -> int:
     troll = creatures.get("Troll", {})
     check(troll.get("health", 0) > 0 and any(d["item"] == "TrollHide" for d in troll.get("drops", [])), "Troll: health + TrollHide drop")
     check(any(s["creature"] == "Troll" and "BlackForest" in s.get("biomes", []) for s in spawns), "Troll spawns in BlackForest")
+    check(any(w["name"] == "head" and w["damageModifiers"].get("pierce") == "VeryWeak" for w in troll.get("weakSpots", [])),
+          "Troll: head weak spot, pierce VeryWeak")
+    check(any(w["name"] == "eye" for w in creatures.get("TheHive", {}).get("weakSpots", [])), "TheHive: eye weak spots")
     def spawned(creature, source, **kw):
         return any(s["creature"] == creature and s.get("source") == source
                    and all(s.get(k) == v or v in (s.get(k) or []) for k, v in kw.items()) for s in spawns)

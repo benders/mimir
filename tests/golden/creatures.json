@@ -40,6 +40,22 @@
    "frost": "Resistant",
    "spirit": "Immune"
   },
+  "weakSpots": [
+   {
+    "name": "horn",
+    "damageModifiers": {
+     "blunt": "Weak"
+    }
+   },
+   {
+    "name": "gem",
+    "damageModifiers": {
+     "pierce": "VeryWeak",
+     "spirit": "Immune"
+    },
+    "count": 2
+   }
+  ],
   "speed": {
    "walk": 2,
    "run": 5,

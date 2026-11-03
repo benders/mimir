@@ -911,6 +911,31 @@ def hatch(p: dict) -> dict | None:
             "cover": e.get("m_requireCoverPercentige", 0.7) if roof else None}
 
 
+WEAK_SPOT_NAMES = {"ass": "rear"}
+
+
+def weak_spots(p: dict, c: dict) -> list[dict]:
+    """Character.m_weakSpots: a hit on one of these colliders takes the spot's damage modifiers in place of the body's
+    (Character.Damage -> FindWeakSpotIndex, RPC_Damage -> GetDamageModifiers(weakSpot)). Only the listed ones count: a
+    WeakSpot component the list leaves out is never looked up. Name from the object's name (WEAKSPOT_HEAD -> head);
+    spots with the same name and modifiers merge into one with a `count` (TheHive's two eyes)."""
+    out = []
+    for r in c.get("m_weakSpots") or []:
+        path = r.get("path") if isinstance(r, dict) else None
+        w = next((x["fields"] for x in p["components"] if x["type"] == "WeakSpot" and x.get("path") == path), None)
+        if w is None:
+            continue
+        leaf = re.sub(r" \(\d+\)$", "", path.rsplit("/", 1)[-1]).lower()
+        leaf = re.sub(r"^weak_?spot_?", "", leaf) or "spot"
+        spot = {"name": WEAK_SPOT_NAMES.get(leaf, leaf), "damageModifiers": modifiers(w.get("m_damageModifiers"))}
+        if same := next((s for s in out if s["name"] == spot["name"]
+                         and s["damageModifiers"] == spot["damageModifiers"]), None):
+            same["count"] = same.get("count", 1) + 1
+        else:
+            out.append(spot)
+    return out
+
+
 def creature(name: str, p: dict) -> dict | None:
     c = comp(p, "Humanoid") or comp(p, "Character")
     if c is None or has(p, "Player"):
@@ -938,6 +963,7 @@ def creature(name: str, p: dict) -> dict | None:
         # BaseAI.UpdateRegeneration heals max health / this per second of world time; omitted at the code default
         "regenTime": c["m_regenAllHPTime"] if c.get("m_regenAllHPTime", REGEN_TIME) != REGEN_TIME else None,
         "damageModifiers": modifiers(c["m_damageModifiers"]),
+        "weakSpots": weak_spots(p, c),
         "speed": {"walk": c["m_walkSpeed"], "run": c["m_runSpeed"], "swim": c["m_swimSpeed"] if c["m_canSwim"] else 0,
                   "fly": c["m_flyFastSpeed"] if c["m_flying"] else 0},
         "attacks": sorted(attacks),

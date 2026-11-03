@@ -3977,6 +3977,17 @@
    "fire": "Resistant",
    "spirit": "Immune"
   },
+  "weakSpots": [
+   {
+    "name": "eggs",
+    "damageModifiers": {
+     "pierce": "VeryWeak",
+     "chop": "Ignore",
+     "pickaxe": "Ignore",
+     "spirit": "Immune"
+    }
+   }
+  ],
   "speed": {
    "walk": 5,
    "run": 2,
@@ -6458,6 +6469,22 @@
    "pickaxe": "Ignore",
    "spirit": "Immune"
   },
+  "weakSpots": [
+   {
+    "name": "rear",
+    "damageModifiers": {
+     "blunt": "Weak",
+     "slash": "Weak",
+     "pierce": "Weak",
+     "chop": "Ignore",
+     "pickaxe": "Ignore",
+     "fire": "Weak",
+     "frost": "Weak",
+     "lightning": "Weak",
+     "spirit": "Immune"
+    }
+   }
+  ],
   "speed": {
    "walk": 2,
    "run": 6,
@@ -7669,6 +7696,16 @@
    "poison": "Immune",
    "spirit": "Immune"
   },
+  "weakSpots": [
+   {
+    "name": "eye",
+    "damageModifiers": {
+     "chop": "Ignore",
+     "pickaxe": "Ignore"
+    },
+    "count": 2
+   }
+  ],
   "speed": {
    "walk": 5,
    "run": 3,
@@ -7785,6 +7822,17 @@
    "pickaxe": "Ignore",
    "spirit": "Immune"
   },
+  "weakSpots": [
+   {
+    "name": "head",
+    "damageModifiers": {
+     "pierce": "VeryWeak",
+     "chop": "Ignore",
+     "pickaxe": "Ignore",
+     "spirit": "Immune"
+    }
+   }
+  ],
   "speed": {
    "walk": 5,
    "run": 6,
@@ -7846,6 +7894,16 @@
    "frost": "Resistant",
    "spirit": "Immune"
   },
+  "weakSpots": [
+   {
+    "name": "head",
+    "damageModifiers": {
+     "chop": "Ignore",
+     "pickaxe": "VeryWeak",
+     "spirit": "Immune"
+    }
+   }
+  ],
   "speed": {
    "walk": 2,
    "run": 3
@@ -7881,6 +7939,17 @@
    "frost": "Weak",
    "spirit": "Immune"
   },
+  "weakSpots": [
+   {
+    "name": "head",
+    "damageModifiers": {
+     "pierce": "VeryWeak",
+     "chop": "Ignore",
+     "pickaxe": "Ignore",
+     "spirit": "Immune"
+    }
+   }
+  ],
   "speed": {
    "walk": 5,
    "run": 6,
@@ -7918,6 +7987,17 @@
    "pickaxe": "Ignore",
    "spirit": "Immune"
   },
+  "weakSpots": [
+   {
+    "name": "head",
+    "damageModifiers": {
+     "pierce": "VeryWeak",
+     "chop": "Ignore",
+     "pickaxe": "Ignore",
+     "spirit": "Immune"
+    }
+   }
+  ],
   "speed": {
    "walk": 5,
    "run": 6,

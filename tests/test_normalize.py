@@ -231,6 +231,12 @@ class Entities(FixtureCase):
         self.assertEqual(N.creature("Chief_p2", N.PREFABS["Chief_p2"])["regenTime"], 1800)
         self.assertEqual(N.player()["dayLength"], 600)
 
+    def test_creature_weak_spots(self):
+        self.assertEqual(N.creature("Chief_p2", N.PREFABS["Chief_p2"])["weakSpots"], [
+            {"name": "horn", "damageModifiers": {"blunt": "Weak"}},
+            {"name": "gem", "damageModifiers": {"pierce": "VeryWeak", "spirit": "Immune"}, "count": 2}])
+        self.assertEqual(N.creature("Chief", N.PREFABS["Chief"])["weakSpots"], [])
+
     def test_player_multiplayer_constants(self):
         self.assertEqual(N.player()["multiplayer"], {"range": 50, "maxPlayers": 3, "healthScalePerPlayer": 0.5,
                                                      "damageScalePerPlayer": 0.1})

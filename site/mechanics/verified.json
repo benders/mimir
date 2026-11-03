@@ -109,6 +109,8 @@
  "damage-types": {
   "methods": {
    "Character.ApplyDamage": "5a51e3b518f7c758",
+   "Character.Damage": "b1781ef7070ea687",
+   "Character.FindWeakSpotIndex": "f878cff7f21220ba",
    "Character.GetDamageModifiers": "0cb18f2b7b04fb3c",
    "Character.RPC_Damage": "8146c8fe271c338e",
    "DamageText.ShowText": "a78ff7bdc15a821c",

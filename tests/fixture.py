@@ -291,7 +291,13 @@ def prefabs():
             {"m_prefab": R("vfx_Poof")}, {"m_prefab": R("Chief_p2")},
             {"m_prefab": R("ChiefBurst")}]})),  # second phase: made when it dies; a burst that spawns a Shade
         prefab("Chief_p2", character(name="$enemy_chief_p2", health=1200, boss=True, regenAllHPTime=1800,
-                                        damageModifiers={"m_frost": "Resistant", "m_spirit": "Immune"})),
+                                        damageModifiers={"m_frost": "Resistant", "m_spirit": "Immune"},
+                                        weakSpots=[{"$ref": "Chief_p2", "path": f"Body/{n}", "component": "WeakSpot"}
+                                                   for n in ("WEAKSPOT_HORN", "Gem", "Gem (1)")]),
+               *(comp("WeakSpot", {"m_damageModifiers": {"m_pierce": "VeryWeak", "m_spirit": "Immune"}}, path=f"Body/{n}")
+                 for n in ("Gem", "Gem (1)")),
+               comp("WeakSpot", {"m_damageModifiers": {"m_blunt": "Weak", "m_spirit": "Normal"}}, path="Body/WEAKSPOT_HORN"),
+               comp("WeakSpot", {"m_damageModifiers": {"m_fire": "VeryWeak"}}, path="Body/WeakSpot_tail")),  # not listed: unused
         prefab("Imp", character(name="$enemy_imp", health=30, faction="Dverger"),  # only summoned, by the Rod
                comp("MonsterAI", m(aggravatable=True, privateAreaTriggerTreshold=5))),  # neutral until provoked
         item("Rod", name="$item_rod", itemType="OneHandedWeapon", icons=[S("Rod")],

@@ -172,6 +172,12 @@ class Site(unittest.TestCase):
         phase = (self.out / "creatures/Chief_p2.html").read_text(encoding="utf-8")
         self.assertIn("<h2>Phase of</h2>", phase)
         self.assertIn('href="creatures/Chief.html"', phase)
+        # weak spots: each its own full table (spirit always shown), merged copies counted
+        self.assertIn("<h3>Weak spot: horn</h3>", phase)
+        self.assertIn("<h3>Weak spot: gem (×2)</h3>", phase)
+        self.assertIn('<li class="m-veryweak"><span>pierce</span>', phase)
+        self.assertIn("in place of the body", phase)
+        self.assertNotIn("Weak spot", (self.out / "creatures/Imp.html").read_text(encoding="utf-8"))
 
     def test_alt_biome_spawn_and_summons_through_abilities(self):
         moth = (self.out / "creatures/Moth.html").read_text(encoding="utf-8")

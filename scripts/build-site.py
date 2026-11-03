@@ -1459,8 +1459,15 @@ def creature_page(c: dict) -> None:
              ("Avoids water", "yes" if c.get("avoidWater") else None),
              ("Group", esc(c["group"]) if c.get("group") else None)]
     body = header(c, "creature", sub) + kv(facts)
-    mods = modifiers_table(c.get("damageModifiers"), hide_tools=True,
-                           always=[t for t in IGNORED if t not in mechanics.TOOL_DAMAGE])  # spirit
+    always = [t for t in IGNORED if t not in mechanics.TOOL_DAMAGE]  # spirit
+    mods = modifiers_table(c.get("damageModifiers"), hide_tools=True, always=always)
+    # Character.RPC_Damage: a hit on a weak spot's collider uses the spot's modifiers instead of the body's
+    for w in c.get("weakSpots", []):
+        n = w.get("count", 1)
+        mods += (f'<h3>Weak spot: {esc(w["name"])}{f" (×{n})" if n > 1 else ""}</h3>'
+                 + modifiers_table(w.get("damageModifiers"), hide_tools=True, always=always))
+    if c.get("weakSpots"):
+        mods += '<p class="note">A hit on a weak spot uses its levels in place of the body\'s.</p>'
     body += section("Resistances", mods + (f'<p class="note">What the levels mean: '
                                            f'{mech_link("damage-types", "Damage types and resistances")}.</p>' if mods else ""))
     attacks, labels = [], attack_labels(c)
@@ -2294,6 +2301,22 @@ def block_resist_creatures() -> str:
     return table(["Creature"] + [label for _, label in cols], rows)
 
 
+def block_weak_spots() -> str:
+    """Creatures' weak spots (Character.m_weakSpots) and the levels in which each differs from the body's."""
+    rows = []
+    for c in sorted(CREATURES.values(), key=lambda x: name_of("creature", x["id"]).lower()):
+        if not has_page("creature", c["id"]):
+            continue
+        body = c.get("damageModifiers") or {}
+        for w in c.get("weakSpots", []):
+            spot = w.get("damageModifiers") or {}
+            diff = [f'{k} {words(spot.get(k, "Normal")).lower()} (body {words(body.get(k, "Normal")).lower()})'
+                    for k in mechanics.DAMAGE_TYPES[1:] if k not in mechanics.TOOL_DAMAGE and spot.get(k, "Normal") != body.get(k, "Normal")]
+            n = w.get("count", 1)
+            rows.append([link("creature", c["id"]), esc(w["name"]) + (f" (×{n})" if n > 1 else ""), esc(", ".join(diff))])
+    return table(["Creature", "Weak spot", "Differs from the body"], rows)
+
+
 def block_resist_gear() -> str:
     rows = [[link("item", i["id"]), modifiers_table(i["damageModifiers"])]
             for i in sorted(ITEMS.values(), key=lambda x: name_of("item", x["id"]).lower())
@@ -2993,7 +3016,7 @@ def block_tame(cid: str) -> str:
 
 
 def mech_blocks() -> dict:
-    return {"shields": block_shields, "resistant-creatures": block_resist_creatures, "resistant-gear": block_resist_gear,
+    return {"shields": block_shields, "resistant-creatures": block_resist_creatures, "weak-spots": block_weak_spots, "resistant-gear": block_resist_gear,
             "star-spawns": block_star_spawns, "star-odds": block_star_odds, "guaranteed-stars": block_guaranteed_stars,
             "level-distance": block_level_distance,
             "pseudo-drops": block_pseudo_drops, "pseudo-table": block_pseudo_table,

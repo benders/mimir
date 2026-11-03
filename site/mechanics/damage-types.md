@@ -1,7 +1,7 @@
 ---
 title: Damage types and resistances
 summary: Modifier multipliers, override rule, armor formula, hit order.
-sources: HitData.DamageTypes; HitData.DamageType; HitData.DamageModifier; HitData.ApplyModifier; HitData.ApplyResistance; HitData.DamageModifiers.Apply; HitData.DamageModifiers.ShouldOverride; HitData.DamageTypes.ApplyArmor; Character.RPC_Damage; Character.GetDamageModifiers; Character.ApplyDamage; Player.ApplyArmorDamageMods; Player.GetBodyArmor; SEMan.ApplyDamageMods; DamageText.ShowText; HitData.DamageModifiers.ApplyIfBetter
+sources: HitData.DamageTypes; Character.Damage; Character.FindWeakSpotIndex; HitData.DamageType; HitData.DamageModifier; HitData.ApplyModifier; HitData.ApplyResistance; HitData.DamageModifiers.Apply; HitData.DamageModifiers.ShouldOverride; HitData.DamageTypes.ApplyArmor; Character.RPC_Damage; Character.GetDamageModifiers; Character.ApplyDamage; Player.ApplyArmorDamageMods; Player.GetBodyArmor; SEMan.ApplyDamageMods; DamageText.ShowText; HitData.DamageModifiers.ApplyIfBetter
 ---
 
 Each hit carries one value per damage type: blunt, slash, pierce (physical); chop, pickaxe (tools); fire, frost,
@@ -37,6 +37,14 @@ resistances; tool and generic damage are not reduced.
 ## Notable resistances
 
 {{resistant-creatures}}
+
+## Weak spots
+
+A hit whose collider is one of the creature's weak spots (`Character.Damage` → `FindWeakSpotIndex`) uses that
+spot's whole modifier set instead of the body's (`Character.GetDamageModifiers`). A `WeakSpot` the creature doesn't list
+is never checked (the Queen's head).
+
+{{weak-spots}}
 
 ## Gear with damage modifiers
 
