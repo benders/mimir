@@ -21,11 +21,22 @@ def m(**kw):
     return {f"m_{k}": v for k, v in kw.items()}
 
 
-def comp(type_, fields, path=None):
+def comp(type_, fields, path=None, **shape):
+    """shape: the plugin's physical extent keys (colliders, scale, inactive, forceField)."""
     c = {"type": type_, "fields": fields}
     if path:
         c["path"] = path
+    c.update(shape)
     return c
+
+
+def sphere(radius, **kw):
+    return {"type": "SphereCollider", "radius": radius, "center": [0, 0, 0], "trigger": True, "enabled": True, **kw}
+
+
+def capsule(radius, height):
+    return {"type": "CapsuleCollider", "radius": radius, "height": height, "direction": 1, "center": [0, 0, 0],
+            "trigger": True, "enabled": True}
 
 
 def plant(**kw):
@@ -160,7 +171,7 @@ TRANSLATIONS = {
     "item_sword": "Test Sword", "item_sword_desc": "Sharp <b>enough</b>.",
     "item_helmet": "Pot Helm", "item_fish": "Glimfish", "item_pearl": "Moon Pearl", "item_javelin": "Test Javelin", "item_mace": "Mace", "item_frostrod": "Frost Rod", "item_thunderrod": "Thunder Rod", "item_clusterrod": "Cluster Rod", "item_longbow": "Longbow", "item_arbal": "Arbal", "item_dart": "Dart", "item_mead": "Fizz Mead", "item_coins": "Coins", "item_charm": "Lucky Charm", "npc_vendor": "Old Vendor", "hud_satchel": "Big Satchel", "hud_satchel_tooltip": "A roomy bag.",
     "item_hammer": "Mallet", "item_tray": "Tray", "item_feast": "Feast", "item_feast_material": "Feast to set out", "piece_platter": "Platter", "item_shard": "Shard", "item_bite": "Bite",
-    "enemy_raider": "Raider", "piece_bench": "Bench", **{f"tag_{k}": v for k, v in (  # build menu tags (Piece.UsageTagFlags)
+    "enemy_raider": "Raider", "piece_bench": "Bench", "piece_dome": "Dome", "piece_pyre": "Pyre", **{f"tag_{k}": v for k, v in (  # build menu tags (Piece.UsageTagFlags)
         ("misc", "Misc."), ("crafting", "Crafting"), ("building", "Building"), ("floor", "Flooring"), ("wall", "Walls"),
         ("roof", "Roofing"), ("architecture", "Architecture"), ("furniture", "Furniture"), ("lighting", "Lighting"),
         ("decor", "Decor"), ("storage", "Storage"), ("transport", "Transportation"), ("food", "Food"), ("mead", "Mead"),
@@ -324,9 +335,20 @@ def prefabs():
                                                              {"m_skill": "Run", "m_increseStep": 0.2}]))),  # Run: no name
         piece("Bench", comp("CraftingStation", m(name="$piece_bench", rangeBuild=20, craftRequireRoof=True,
                                                  craftRequireFire=False)),
-              comp("EffectArea", {"m_type": "Heat, PlayerBase"}, path="PlayerBase"),  # counts as a base for raids
+              comp("EffectArea", {"m_type": "Heat, PlayerBase"}, path="PlayerBase",  # counts as a base for raids
+                   colliders=[capsule(20, 200)]),
               name="$piece_bench", icon=S("Bench"), category="Crafting", resources=[req("Wood", 10)],
               usage="Crafting, Furniture"),  # listed under both tags
+        piece("Dome", comp("ShieldGenerator", m(minShieldRadius=10, maxShieldRadius=25, shieldDome=R("Dome") | {"path": "Field"})),
+              comp("EffectArea", {"m_type": "PlayerBase"}, path="PlayerBase", inactive=True, colliders=[capsule(30, 200)]),  # spare: off
+              comp("EffectArea", {"m_type": "PlayerBase"}, path="PlayerBase", scale=[0.5, 0.5, 0.5], colliders=[sphere(20)]),
+              comp("EffectArea", {"m_type": "NoMonsters"}, path="Field/Inner/NoMonsters", inactive=True,
+                   scale=[2, 2, 2], colliders=[sphere(0.5)]),  # under the dome: scales with its radius
+              comp("Demister", m(disableForcefieldDelay=0), path="Mist",
+                   forceField={"shape": "Sphere", "startRange": 0, "endRange": 12}),
+              name="$piece_dome", blockRadius=15, blockingPieces=[R("Dome") | {"component": "Piece"}]),
+        piece("Pyre", comp("EffectArea", {"m_type": "PlayerBase"}, path="PlayerBase", scale=[0, 0, 0], colliders=[sphere(20)]),
+              name="$piece_pyre"),  # scaled to nothing: no base
         piece("piece_bench", name="$piece_bench", icon=S("Bench"), comfort=2),  # not buildable: "Bench (world)"
         piece("LootChest", comp(*container(("Gem", 1, 2, 3), ("Coins", 5, 10, 1), name="$piece_lootchest")),
               name="$piece_lootchest", resources=[req("Marble", 7), req("Wood", 2, recover=False)]),  # breaks: 2 Marble

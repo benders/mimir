@@ -1846,10 +1846,23 @@ def block_raid_timing() -> str:
                                  f'while a raid is possible')])
 
 
+def base_pieces() -> list[dict]:
+    """Pieces with a PlayerBase area that players can build (has_page: not unobtainable)."""
+    return [p for p in PIECES.values() if p.get("playerBase") and p.get("tools") and has_page("piece", p["id"])]
+
+
+def block_player_base_radii() -> str:
+    """Every buildable base piece's PlayerBase radius next to the other areas it shows or uses, by radius."""
+    ps = sorted(base_pieces(), key=lambda p: (p["playerBase"]["radius"], name_of("piece", p["id"]).lower()))
+    rows = [[link("piece", p["id"]), next(r for k, _, r, _ in area_rows(p) if k == "playerBase"),
+             ", ".join(f'{esc(AREA_TEXT.get(k, (k,))[0].lower())} {r}' for k, _, r, _ in area_rows(p) if k != "playerBase")]
+            for p in ps]
+    return table(["Piece", "Player base", "Other areas"], rows, stages=[stage_of("piece", p["id"]) for p in ps])
+
+
 def block_raid_base_pieces() -> str:
     """Buildable pieces that count toward a base (an EffectArea of type PlayerBase)."""
-    ps = sorted((p["id"] for p in PIECES.values() if p.get("playerBase") and p.get("tools") and has_page("piece", p["id"])),
-                key=lambda x: name_of("piece", x).lower())
+    ps = sorted((p["id"] for p in base_pieces()), key=lambda x: name_of("piece", x).lower())
     return staged_list([("piece", x, link("piece", x)) for x in ps])
 
 
@@ -2138,8 +2151,9 @@ def piece_page(p: dict) -> None:
              ("Only in", esc(p["onlyInBiome"]) if p.get("onlyInBiome") else None)]
     cs = p.get("craftingStation")
     if cs:
-        facts += [("Build range", num(cs.get("buildRange"))), ("Needs roof", "yes" if cs.get("requiresRoof") else None)]
+        facts += [("Needs roof", "yes" if cs.get("requiresRoof") else None)]
     body = header(p, "piece", sub, p.get("description")) + kv(facts)
+    body += section("Areas", areas_table(p))
     if p.get("season"):
         body += f"<p class=note>{season_note(p)}</p>"
     if world:  # nobody builds it: what it holds and what breaking it gives instead of a cost
@@ -2185,6 +2199,46 @@ def piece_page(p: dict) -> None:
     if world:
         body += section("Found in", f'<div>{source_places({"kind": "world", "locations": p["locations"]})}</div>')
     page(href("piece", p["id"]), name_of("piece", p["id"]), body, '<a href="pieces/index.html">Pieces</a>')
+
+
+AREA_TEXT = {  # normalize.areas kind -> (label, what it does); the player-base mechanics page has the code refs
+    "playerBase": ("Player base", "no world or location spawns inside (nests still spawn); counts toward raids from 20 m outside it"),
+    "build": ("Build range", "pieces that need this station can be built"),
+    "ward": ("Ward", "while on, only permitted players build, dig, and open doors, chests, portals and other devices"),
+    "shield": ("Shield dome", "while fuelled, stops projectiles fired from outside"),
+    "noMonsters": ("Monsters keep out", "untamed creatures won't chase targets inside it, or come within 7.5 m of it"),
+    "mist": ("Mist clearing", "clears the Mistlands mist"),
+    "heat": ("Warmth", "near a fire: warmth and resting; beds and eggs need one"),
+    "fire": ("Fire", "creatures afraid of fire won't walk into it"),
+    "burning": ("Flames", "a cooking station above it cooks"),
+    "cozy": ("Cozy", "keeps you from getting cold"),
+    "spacing": ("Spacing", "no other copy within it"),
+    "teleport": ("Teleport", "teleport area"),
+    "private": ("Private", "private property"),
+}
+
+
+def area_rows(p: dict) -> list[tuple[str, float, str, str]]:
+    """(kind, radius, radius text, effect) for a piece's PlayerBase area and its other areas (normalize.areas)."""
+    rows = []
+    if pb := p.get("playerBase"):
+        r = f'{num(pb["radius"])} m' + (f' (column {num(pb["height"])} m tall)' if pb.get("height") else "")
+        rows.append(("playerBase", pb["radius"], r, AREA_TEXT["playerBase"][1]))
+    for a in p.get("areas") or []:
+        label, what = AREA_TEXT.get(a["kind"], (a["kind"], ""))
+        r = f'{num(a["radius"])} m' + (f' + {num(a["perExtension"])} m per extension' if a.get("perExtension") else "")
+        if a.get("also"):
+            what += "; " + "; ".join(AREA_TEXT[k][1] for k in a["also"] if k in AREA_TEXT)
+        rows.append((a["kind"], a["radius"], r, what))
+    return rows
+
+
+def areas_table(p: dict) -> str:
+    rows = area_rows(p)
+    if not rows:
+        return ""
+    return table(["Area", "Radius", "Effect"], [[esc(AREA_TEXT.get(k, (k,))[0]), r, esc(w)] for k, _, r, w in rows]) + \
+        f'<p class="note">Radii from the piece\'s centre. See {mech_link("player-base", "Player base")}.</p>'
 
 
 def growing(pl: dict) -> str:
@@ -3029,6 +3083,7 @@ def mech_blocks() -> dict:
             "foods": block_foods, "comfort-pieces": block_comfort_pieces, "max-comfort": block_max_comfort,
             "skills": block_skills, "death-penalty": block_death_penalty, "raids": block_raids,
             "raid-timing": block_raid_timing, "raid-base-pieces": block_raid_base_pieces,
+            "player-base-radii": block_player_base_radii,
             "forge-placement": block_forge_placement, "forge-idols": block_forge_idols,
             "forge-streak": block_forge_streak, "forge-return-example": block_forge_return_example,
             "forge-items": block_forge_items,

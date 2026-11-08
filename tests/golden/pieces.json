@@ -68,7 +68,20 @@
    "buildRange": 20,
    "requiresRoof": true
   },
-  "playerBase": true,
+  "playerBase": {
+   "radius": 20,
+   "height": 200
+  },
+  "areas": [
+   {
+    "kind": "build",
+    "radius": 20
+   },
+   {
+    "kind": "heat",
+    "radius": 20
+   }
+  ],
   "stage": "Meadows",
   "via": {
    "how": "build",
@@ -156,6 +169,42 @@
     }
    ]
   }
+ },
+ {
+  "id": "Dome",
+  "name": "Dome",
+  "enabled": true,
+  "category": "Misc",
+  "health": 400,
+  "material": "Wood",
+  "damageModifiers": {
+   "fire": "Weak"
+  },
+  "playerBase": {
+   "radius": 10.0
+  },
+  "areas": [
+   {
+    "kind": "shield",
+    "radius": 25
+   },
+   {
+    "kind": "noMonsters",
+    "radius": 25.0
+   },
+   {
+    "kind": "spacing",
+    "radius": 15,
+    "pieces": [
+     "Dome"
+    ]
+   },
+   {
+    "kind": "mist",
+    "radius": 12
+   }
+  ],
+  "unobtainable": true
  },
  {
   "id": "Hive",
@@ -376,6 +425,18 @@
     }
    ]
   }
+ },
+ {
+  "id": "Pyre",
+  "name": "Pyre",
+  "enabled": true,
+  "category": "Misc",
+  "health": 400,
+  "material": "Wood",
+  "damageModifiers": {
+   "fire": "Weak"
+  },
+  "unobtainable": true
  },
  {
   "id": "Sapling",

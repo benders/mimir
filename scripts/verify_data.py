@@ -347,6 +347,15 @@ def main() -> int:
     base = {p for p in pieces if pieces[p].get("playerBase")}
     check({"piece_workbench", "bed", "fire_pit", "portal_wood"} <= base and len(base) < 100,
           f"pieces: base pieces for raids ({len(base)}) include workbench, bed, campfire, portal")
+    pb = {p: (pieces.get(p, {}).get("playerBase") or {}) for p in ("piece_workbench", "hearth", "piece_groundtorch_mist")}
+    arr = {a["kind"]: a["radius"] for a in pieces.get("piece_groundtorch_mist", {}).get("areas") or []}
+    shield = {a["kind"]: a["radius"] for a in pieces.get("piece_shieldgenerator", {}).get("areas") or []}
+    check(pb["piece_workbench"] == {"radius": 20, "height": 200} and pb["hearth"].get("radius") == 30
+          and pb["piece_groundtorch_mist"].get("radius") == 20 and arr.get("mist", 0) > 20
+          and (pieces.get("piece_shieldgenerator", {}).get("playerBase") or {}).get("radius") == 20
+          and shield.get("shield") == 30 and shield.get("noMonsters") == 30,
+          "pieces: PlayerBase radii (Workbench 20 m capsule, Hearth 30 m, Wisp Torch 20 m inside its mist clearing, "
+          "Shield Generator 20 m inside its 30 m dome)")
     check(all(c.get("faction") for c in creatures.values()), "creatures: every creature has a faction")
     forge = next((x for x in load("locations.json") if x["id"] == "AncientUpgradeStation"), {})
     check(forge.get("biomes") == ["Mountain"] and forge["placement"].get("unique")

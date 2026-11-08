@@ -104,6 +104,7 @@ Logs after a dump: `.cache/dump/<branch>/server.log` (Unity) and `bepinex.log` (
 - `world/seasons.json` (0.4.0+) — `SeasonalItemGroup` assets (Yule, Midsummer, Halloween...): `fields._startDate` /
   `_endDate` are `[day, month]`, `Pieces` are `$ref` prefabs, `Recipes` are `$asset` recipe names.
 - `localization/English.json` — `$token` → text (keys without the `$`).
+- Components (plugin 0.5.0+) also carry their GameObject's physical extent, which the game reads from Unity components: `colliders` [{type, radius?, height?, direction?, center, size?, trigger, enabled}], `scale` (product of local scales up to the root, when not 1), `inactive` (the object or an ancestor is disabled in the prefab) and `forceField` {shape, startRange, endRange} (a Demister's mist clearing).
 - `anims/Player_animator.json` (written by `extract-anims.py`, not the plugin: the animator state machine is editor-only
   API at runtime) — per animator trigger that leads to an `attack` or `minoraction(_fast)`-tagged state: `state`, `layer`,
   `tag`, `speed` (state speed), `clip`, `length` (s), `exit` (normalized exit time; null = loops until `attack_abort`),
@@ -172,7 +173,7 @@ in a row are hidden one by one, and a `stagehint` note says when anything is hid
 (its default items, a drop table). Breaking a world piece drops a third of each recoverable cost item, at least 1
 (`mechanics.world_piece_drop`, Piece.DropResources): `reachable()` counts that, stages only where nothing else gives one.
 Foods, meads and feasts set out with the Serving Tray (`Feaster` build menu, one material: `normalize.tray_food`) are not pieces; a feast's eaten item (FeastMeadows, the stats) has `servedFrom` = the crafted item it is set out from (FeastMeadows_Material), `via.how` `serve`; the site links both ways (Produced by / Used in, the tray's "Sets out").
-Pieces with an EffectArea of type PlayerBase have `playerBase` (they count toward a base for raids).
+Pieces with an active EffectArea of type PlayerBase have `playerBase` {radius, height? (capsule)} in m (blocks spawns, counts toward raids; `normalize.player_base`), and `areas` [{kind, radius, ...}]: their other radii (build range + `perExtension`, ward, shield dome, mist clearing, spacing, heat/fire/burning/noMonsters/cozy EffectAreas; `normalize.areas`), shown together on the piece page's Areas table and the `player-base` mechanics page (#91).
 Pieces have `tags`: the build menu's tag labels (Piece.m_usage, `UsageTagFlags` with their `$tag_*` DisplayName; menu
 order in meta.json `pieceTags`); `category` is the old PieceTable tab enum (its "DeepNorth" value is not a biome) and
 isn't shown. The pieces index lists a piece under each of its tags, like the menu.

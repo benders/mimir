@@ -185,6 +185,7 @@ namespace Mimir.Dumper
                 w.BeginObject();
                 w.Key("type"); w.Value(mb.GetType().Name);
                 if (mb.transform != go.transform) { w.Key("path"); w.Value(Serializer.PathOf(mb.transform)); }
+                WriteShape(w, mb, go.transform);
                 w.Key("fields");
                 w.BeginObject();
                 Serializer.WriteFields(w, mb);
@@ -198,6 +199,71 @@ namespace Mimir.Dumper
             var file = SafeFileName(name);
             if (!usedFiles.Add(file)) { file += "__" + (name.GetHashCode() & 0x7fffffff); usedFiles.Add(file); }
             return Write(Path.Combine(dir, file + ".json"), w);
+        }
+
+        /// <summary>
+        /// The physical extent of a component's GameObject, which the game reads from Unity components rather than
+        /// fields (EffectArea: its collider; Demister: its ParticleSystemForceField):
+        /// "inactive": true when the object or an ancestor below the root is disabled in the prefab;
+        /// "scale": the product of local scales from the object up to (not including) the root, when not 1;
+        /// "colliders": [{type, radius?, height?, direction?, center, size?, trigger, enabled}] (local units);
+        /// "forceField": {shape, startRange, endRange}.
+        /// </summary>
+        private static void WriteShape(JsonWriter w, MonoBehaviour mb, Transform root)
+        {
+            var t = mb.transform;
+            bool inactive = false;
+            var scale = Vector3.one;
+            for (var cur = t; cur != null && cur != root; cur = cur.parent)
+            {
+                if (!cur.gameObject.activeSelf) inactive = true;
+                scale = Vector3.Scale(scale, cur.localScale);
+            }
+            if (inactive) { w.Key("inactive"); w.Value(true); }
+            if (scale != Vector3.one) { w.Key("scale"); Serializer.WriteValue(w, scale, typeof(Vector3), 0); }
+            var cols = t.GetComponents<Collider>();
+            if (cols.Length > 0)
+            {
+                w.Key("colliders");
+                w.BeginArray();
+                foreach (var c in cols)
+                {
+                    if (c == null) continue;
+                    w.BeginObject();
+                    w.Key("type"); w.Value(c.GetType().Name);
+                    switch (c)
+                    {
+                        case SphereCollider s:
+                            w.Key("radius"); w.Value(s.radius, true);
+                            w.Key("center"); Serializer.WriteValue(w, s.center, typeof(Vector3), 0);
+                            break;
+                        case CapsuleCollider k:
+                            w.Key("radius"); w.Value(k.radius, true);
+                            w.Key("height"); w.Value(k.height, true);
+                            w.Key("direction"); w.Value(k.direction);
+                            w.Key("center"); Serializer.WriteValue(w, k.center, typeof(Vector3), 0);
+                            break;
+                        case BoxCollider b:
+                            w.Key("size"); Serializer.WriteValue(w, b.size, typeof(Vector3), 0);
+                            w.Key("center"); Serializer.WriteValue(w, b.center, typeof(Vector3), 0);
+                            break;
+                    }
+                    w.Key("trigger"); w.Value(c.isTrigger);
+                    w.Key("enabled"); w.Value(c.enabled);
+                    w.EndObject();
+                }
+                w.EndArray();
+            }
+            var ff = t.GetComponent<ParticleSystemForceField>();
+            if (ff != null)
+            {
+                w.Key("forceField");
+                w.BeginObject();
+                w.Key("shape"); w.Value(ff.shape.ToString());
+                w.Key("startRange"); w.Value(ff.startRange, true);
+                w.Key("endRange"); w.Value(ff.endRange, true);
+                w.EndObject();
+            }
         }
 
         /// <summary>

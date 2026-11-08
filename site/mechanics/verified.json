@@ -262,6 +262,37 @@
   },
   "version": "1.0.21"
  },
+ "player-base": {
+  "methods": {
+   "Attack.SpawnOnHitTerrain": "859c3c262719af9c",
+   "CraftingStation.GetExtensions": "886110f3306d8456",
+   "CreatureSpawner.UpdateSpawner": "5e851aecbbab6925",
+   "EffectArea.Awake": "fba50533845c6297",
+   "EffectArea.GetBaseValue": "db6f88c3ed2b741a",
+   "EffectArea.IsPointInsideArea": "1288e2f87481042f",
+   "ItemDrop.IsInsideBase": "42e838bb5d523bb1",
+   "ItemDrop.TimedDestruction": "7651888afdc85197",
+   "MonsterAI.UpdateAI": "e587ca37dd75cd38",
+   "Player.IsSafeInHome": "39e02f71a27611f7",
+   "Player.RemovePiece": "2a068968aa754140",
+   "Player.Repair": "285503b364c7e4a0",
+   "Player.UpdateBaseValue": "9e568fd60650e72d",
+   "Player.UpdatePlacementGhost": "3ea6d3719bf020d3",
+   "PrivateArea.CheckAccess": "06604636d2706431",
+   "PrivateArea.HaveLocalAccess": "14cd3df5103fe1c3",
+   "PrivateArea.Interact": "dee06327a9d885ff",
+   "PrivateArea.IsInside": "4a24454ad37c7b59",
+   "PrivateArea.OnObjectDamaged": "789ec0d6a1d71ca5",
+   "PrivateArea.RPC_ToggleEnabled": "77438105d96bef5a",
+   "PrivateArea.RPC_TogglePermitted": "57ea3a2a7a063e2d",
+   "RandEventSystem.CheckBase": "7ad1bccd5cc74dd3",
+   "ShieldGenerator.CheckProjectile": "c27adc1547e98625",
+   "ShieldGenerator.UpdateShield": "abc0ad3b75e335bb",
+   "SpawnSystem.IsSpawnPointGood": "723bd1187401b05c",
+   "WearNTear.RPC_Damage": "bed29f2b376cd823"
+  },
+  "version": "1.0.21"
+ },
  "progression": {
   "methods": {
    "Aoe.Setup": "25991ae88f637e9e",

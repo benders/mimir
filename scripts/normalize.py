@@ -1032,11 +1032,96 @@ def piece(name: str, p: dict, tools: dict[str, list[str]]) -> dict | None:
         "lures": lures(p),
         "plant": plant(p),
         "contains": drop_table((comp(p, "Container") or {}).get("m_defaultItems")),  # loot chests placed in the world
-        # counts toward a base for raids: an EffectArea of type PlayerBase, usually on a child (EffectArea.GetBaseValue)
-        "playerBase": any(c["type"] == "EffectArea" and "PlayerBase" in str(c["fields"].get("m_type", "")).split(", ")
-                          for c in p["components"]),
+        "playerBase": player_base(p),
+        "areas": areas(p),
         "dlc": pc["m_dlc"],
     }
+
+
+def effect_types(c: dict) -> list[str]:
+    """EffectArea.m_type (a flags enum: "Heat, PlayerBase") as a list."""
+    return [t for t in str(c["fields"].get("m_type", "")).split(", ") if t and t != "None"]
+
+
+def collider_extent(c: dict) -> dict | None:
+    """The reach of a component's trigger collider in m, with the object's scale (plugin 0.5.0 `colliders`, `scale`):
+    {radius, height?} (height: a capsule's, along its axis), None without an enabled collider or with no size. A box
+    counts as its largest half extent. EffectArea.IsPointInsideArea overlaps a point with the collider's real shape."""
+    sc = [abs(x) for x in c.get("scale", [1, 1, 1])]
+    best = None
+    for k in c.get("colliders", []):
+        if not k.get("enabled", True):
+            continue
+        if k["type"] == "CapsuleCollider":
+            axis = k.get("direction", 1)
+            r = k["radius"] * max(s for i, s in enumerate(sc) if i != axis)
+            e = {"radius": r, "height": k["height"] * sc[axis]}
+        elif k["type"] == "SphereCollider":
+            e = {"radius": k["radius"] * max(sc)}
+        elif k["type"] == "BoxCollider":
+            e = {"radius": max(s * x / 2 for s, x in zip(sc, k["size"]))}
+        else:
+            continue
+        if e["radius"] > 0 and (best is None or e["radius"] > best["radius"]):
+            best = e
+    return best
+
+
+def player_base(p: dict) -> dict | None:
+    """The PlayerBase area (EffectArea type PlayerBase, usually a child object): {radius, height?} in m, the largest
+    active one. Inside it world spawns and location spawners don't spawn (SpawnSystem.IsSpawnPointGood,
+    CreatureSpawner.UpdateSpawner) and dropped items don't despawn (ItemDrop.TimedDestruction); within 20 m of a player
+    it counts toward the raid base value (EffectArea.GetBaseValue). Objects disabled in the prefab don't count (the
+    Shield Generator's spare 30 m capsule, the Dvergr ward's); nor does an area scaled to nothing (Eternal Pyre)."""
+    found = [e for c in p["components"] if c["type"] == "EffectArea" and "PlayerBase" in effect_types(c)
+             and not c.get("inactive") and (e := collider_extent(c))]
+    return max(found, key=lambda e: e["radius"]) if found else None
+
+
+AREA_EFFECTS = {  # EffectArea types other than PlayerBase -> area kind (see the player-base mechanics page)
+    "Heat": "heat", "Fire": "fire", "Burning": "burning", "NoMonsters": "noMonsters", "WarmCozyArea": "cozy",
+    "Teleport": "teleport", "PrivateProperty": "private",
+}
+
+
+def areas(p: dict) -> list[dict] | None:
+    """The other radii a piece has, to compare with its PlayerBase area: [{kind, radius, ...}], largest first.
+    build: CraftingStation.m_rangeBuild, + `perExtension` m per extension in range (CraftingStation.GetExtensions);
+    ward: PrivateArea.m_radius, horizontal distance (PrivateArea.IsInside); shield: the Shield Generator's dome,
+    ShieldGenerator.m_maxShieldRadius (the dome's scale follows the radius, UpdateShield); mist: a Demister's
+    ParticleSystemForceField.endRange (cleared mist); spacing: Piece.m_blockRadius, no other copy of `pieces` within it
+    (Player.UpdatePlacementGhost); EffectAreas of other types by AREA_EFFECTS kind (the ones under the dome scale with it:
+    the shield's NoMonsters area). Effect objects disabled in the prefab are kept (fires light their _enabled object)."""
+    out = []
+    if st := comp(p, "CraftingStation"):
+        out.append({"kind": "build", "radius": st["m_rangeBuild"], "perExtension": st.get("m_extraRangePerLevel")})
+    if pa := comp(p, "PrivateArea"):
+        out.append({"kind": "ward", "radius": pa["m_radius"]})
+    dome = None
+    if sg := comp(p, "ShieldGenerator"):
+        out.append({"kind": "shield", "radius": sg["m_maxShieldRadius"]})
+        dome = (sg.get("m_shieldDome") or {}).get("path")
+    pc = comp(p, "Piece") or {}
+    if pc.get("m_blockRadius"):
+        out.append({"kind": "spacing", "radius": pc["m_blockRadius"],
+                    "pieces": sorted({ref(x) for x in pc.get("m_blockingPieces") or [] if ref(x)})})
+    for c in p["components"]:
+        if c["type"] == "Demister" and (ff := c.get("forceField")) and ff["endRange"] > 0:
+            out.append({"kind": "mist", "radius": ff["endRange"]})
+        if c["type"] != "EffectArea" or not (e := collider_extent(c)):
+            continue
+        kinds = [AREA_EFFECTS[t] for t in effect_types(c) if t in AREA_EFFECTS]
+        if not kinds:
+            continue
+        r = e["radius"]
+        if dome and (c.get("path", "") + "/").startswith(dome + "/"):
+            r *= sg["m_maxShieldRadius"]
+        a = {"kind": kinds[0], "radius": round(r, 2)}
+        if len(kinds) > 1:
+            a["also"] = kinds[1:]
+        if a not in out:
+            out.append(a)
+    return sorted(out, key=lambda a: -a["radius"]) or None
 
 
 TRAY = "Feaster"  # the Serving Tray

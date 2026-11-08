@@ -293,6 +293,15 @@
    "poison": "Immune",
    "spirit": "Immune"
   },
+  "areas": [
+   {
+    "kind": "heat",
+    "radius": 2.35,
+    "also": [
+     "fire"
+    ]
+   }
+  ],
   "stage": "AshLands",
   "via": {
    "how": "build",
@@ -437,7 +446,22 @@
    "value": 1,
    "group": "Fire"
   },
-  "playerBase": true,
+  "playerBase": {
+   "radius": 20
+  },
+  "areas": [
+   {
+    "kind": "heat",
+    "radius": 8,
+    "also": [
+     "fire"
+    ]
+   },
+   {
+    "kind": "burning",
+    "radius": 0.7
+   }
+  ],
   "locations": [
    {
     "location": "BogWitch_Camp"
@@ -491,7 +515,9 @@
    "poison": "Immune",
    "spirit": "Immune"
   },
-  "playerBase": true,
+  "playerBase": {
+   "radius": 10
+  },
   "stage": "Swamp",
   "via": {
    "how": "build",
@@ -1044,7 +1070,22 @@
     "noRecover": true
    }
   ],
-  "playerBase": true,
+  "playerBase": {
+   "radius": 4
+  },
+  "areas": [
+   {
+    "kind": "heat",
+    "radius": 8,
+    "also": [
+     "fire"
+    ]
+   },
+   {
+    "kind": "burning",
+    "radius": 0.7
+   }
+  ],
   "locations": [
    {
     "location": "MorkBorg",
@@ -6101,7 +6142,9 @@
    "poison": "Immune",
    "spirit": "Immune"
   },
-  "playerBase": true,
+  "playerBase": {
+   "radius": 20
+  },
   "stage": "AshLands",
   "via": {
    "how": "build",
@@ -7891,7 +7934,9 @@
    "poison": "Immune",
    "spirit": "Immune"
   },
-  "playerBase": true,
+  "playerBase": {
+   "radius": 20
+  },
   "stage": "Meadows",
   "via": {
    "how": "build",
@@ -7953,7 +7998,24 @@
    "buildRange": 20,
    "requiresRoof": true
   },
-  "playerBase": true,
+  "playerBase": {
+   "radius": 20,
+   "height": 200
+  },
+  "areas": [
+   {
+    "kind": "build",
+    "radius": 20,
+    "perExtension": 3
+   },
+   {
+    "kind": "heat",
+    "radius": 5.38,
+    "also": [
+     "fire"
+    ]
+   }
+  ],
   "stage": "Mistlands",
   "via": {
    "how": "build",
@@ -10492,7 +10554,18 @@
    "poison": "Immune",
    "spirit": "Immune"
   },
-  "playerBase": true,
+  "playerBase": {
+   "radius": 20
+  },
+  "areas": [
+   {
+    "kind": "heat",
+    "radius": 4.5,
+    "also": [
+     "fire"
+    ]
+   }
+  ],
   "stage": "Plains",
   "via": {
    "how": "build",
@@ -10614,7 +10687,29 @@
    "poison": "Immune",
    "spirit": "Immune"
   },
-  "playerBase": true,
+  "playerBase": {
+   "radius": 30
+  },
+  "areas": [
+   {
+    "kind": "heat",
+    "radius": 15,
+    "also": [
+     "fire"
+    ]
+   },
+   {
+    "kind": "heat",
+    "radius": 12,
+    "also": [
+     "fire"
+    ]
+   },
+   {
+    "kind": "burning",
+    "radius": 1.8
+   }
+  ],
   "stage": "Swamp",
   "via": {
    "how": "build",
@@ -11098,7 +11193,18 @@
    "poison": "Immune",
    "spirit": "Immune"
   },
-  "playerBase": true,
+  "playerBase": {
+   "radius": 20
+  },
+  "areas": [
+   {
+    "kind": "heat",
+    "radius": 5,
+    "also": [
+     "fire"
+    ]
+   }
+  ],
   "stage": "BlackForest",
   "via": {
    "how": "build",
@@ -11156,7 +11262,26 @@
    "poison": "Immune",
    "spirit": "Immune"
   },
-  "playerBase": true,
+  "playerBase": {
+   "radius": 20
+  },
+  "areas": [
+   {
+    "kind": "shield",
+    "radius": 30
+   },
+   {
+    "kind": "noMonsters",
+    "radius": 30.0
+   },
+   {
+    "kind": "heat",
+    "radius": 5,
+    "also": [
+     "fire"
+    ]
+   }
+  ],
   "unobtainable": true
  },
  {
@@ -12697,7 +12822,12 @@
    "poison": "Immune",
    "spirit": "Immune"
   },
-  "playerBase": true,
+  "areas": [
+   {
+    "kind": "ward",
+    "radius": 32
+   }
+  ],
   "locations": [
    {
     "location": "CharredTowerRuins1_dvergr"
@@ -12861,7 +12991,9 @@
    "poison": "Ignore",
    "spirit": "Ignore"
   },
-  "playerBase": true,
+  "playerBase": {
+   "radius": 20
+  },
   "stage": "Mistlands",
   "via": {
    "how": "build",
@@ -12938,7 +13070,9 @@
    "poison": "Immune",
    "spirit": "Immune"
   },
-  "playerBase": true,
+  "playerBase": {
+   "radius": 20
+  },
   "stage": "BlackForest",
   "via": {
    "how": "build",
@@ -13003,7 +13137,22 @@
    "poison": "Immune",
    "spirit": "Immune"
   },
-  "playerBase": true,
+  "playerBase": {
+   "radius": 25
+  },
+  "areas": [
+   {
+    "kind": "heat",
+    "radius": 8,
+    "also": [
+     "fire"
+    ]
+   },
+   {
+    "kind": "burning",
+    "radius": 0.45
+   }
+  ],
   "stage": "Meadows",
   "via": {
    "how": "build",
@@ -13045,7 +13194,22 @@
    "value": 1,
    "group": "Fire"
   },
-  "playerBase": true,
+  "playerBase": {
+   "radius": 20
+  },
+  "areas": [
+   {
+    "kind": "heat",
+    "radius": 8,
+    "also": [
+     "fire"
+    ]
+   },
+   {
+    "kind": "burning",
+    "radius": 0.45
+   }
+  ],
   "locations": [
    {
     "location": "Vendor_BlackForest"
@@ -13080,7 +13244,22 @@
    "value": 1,
    "group": "Fire"
   },
-  "playerBase": true,
+  "playerBase": {
+   "radius": 20
+  },
+  "areas": [
+   {
+    "kind": "heat",
+    "radius": 8,
+    "also": [
+     "fire"
+    ]
+   },
+   {
+    "kind": "burning",
+    "radius": 0.7
+   }
+  ],
   "locations": [
    {
     "location": "Hildir_camp"
@@ -13131,7 +13310,22 @@
    "poison": "Immune",
    "spirit": "Immune"
   },
-  "playerBase": true,
+  "playerBase": {
+   "radius": 25
+  },
+  "areas": [
+   {
+    "kind": "heat",
+    "radius": 8,
+    "also": [
+     "fire"
+    ]
+   },
+   {
+    "kind": "burning",
+    "radius": 0.6
+   }
+  ],
   "stage": "Meadows",
   "via": {
    "how": "build",
@@ -13291,7 +13485,24 @@
    "buildRange": 20,
    "requiresRoof": true
   },
-  "playerBase": true,
+  "playerBase": {
+   "radius": 20,
+   "height": 200
+  },
+  "areas": [
+   {
+    "kind": "build",
+    "radius": 20,
+    "perExtension": 3
+   },
+   {
+    "kind": "heat",
+    "radius": 5.38,
+    "also": [
+     "fire"
+    ]
+   }
+  ],
   "stage": "BlackForest",
   "via": {
    "how": "build",
@@ -13994,7 +14205,15 @@
    "poison": "Immune",
    "spirit": "Immune"
   },
-  "playerBase": true,
+  "playerBase": {
+   "radius": 20
+  },
+  "areas": [
+   {
+    "kind": "ward",
+    "radius": 32
+   }
+  ],
   "stage": "BlackForest",
   "via": {
    "how": "build",
@@ -14038,6 +14257,12 @@
   ],
   "health": 5000,
   "material": "Stone",
+  "areas": [
+   {
+    "kind": "ward",
+    "radius": 32
+   }
+  ],
   "unobtainable": true
  },
  {
@@ -14078,7 +14303,22 @@
    "poison": "Immune",
    "spirit": "Immune"
   },
-  "playerBase": true,
+  "playerBase": {
+   "radius": 30
+  },
+  "areas": [
+   {
+    "kind": "heat",
+    "radius": 13,
+    "also": [
+     "fire"
+    ]
+   },
+   {
+    "kind": "burning",
+    "radius": 1.44
+   }
+  ],
   "stage": "Swamp",
   "via": {
    "how": "build",
@@ -14141,7 +14381,9 @@
    "poison": "Immune",
    "spirit": "Immune"
   },
-  "playerBase": true,
+  "playerBase": {
+   "radius": 10
+  },
   "stage": "Swamp",
   "via": {
    "how": "build",
@@ -15258,7 +15500,6 @@
    "area": 10,
    "maxCover": 0.6
   },
-  "playerBase": true,
   "stage": "DeepNorth",
   "via": {
    "how": "build",
@@ -15317,6 +15558,12 @@
    "area": 10,
    "maxCover": 0.6
   },
+  "areas": [
+   {
+    "kind": "mist",
+    "radius": 6
+   }
+  ],
   "unobtainable": true
  },
  {
@@ -15420,7 +15667,9 @@
    "poison": "Immune",
    "spirit": "Immune"
   },
-  "playerBase": true,
+  "playerBase": {
+   "radius": 20
+  },
   "stage": "DeepNorth",
   "via": {
    "how": "build",
@@ -15489,7 +15738,18 @@
    "poison": "Immune",
    "spirit": "Immune"
   },
-  "playerBase": true,
+  "playerBase": {
+   "radius": 20
+  },
+  "areas": [
+   {
+    "kind": "heat",
+    "radius": 5,
+    "also": [
+     "fire"
+    ]
+   }
+  ],
   "stage": "DeepNorth",
   "via": {
    "how": "build",
@@ -15559,7 +15819,9 @@
    "poison": "Immune",
    "spirit": "Immune"
   },
-  "playerBase": true,
+  "playerBase": {
+   "radius": 10
+  },
   "stage": "AshLands",
   "via": {
    "how": "build",
@@ -15629,6 +15891,12 @@
    "buildRange": 20,
    "requiresFire": true
   },
+  "areas": [
+   {
+    "kind": "build",
+    "radius": 20
+   }
+  ],
   "stage": "BlackForest",
   "via": {
    "how": "build",
@@ -15749,7 +16017,17 @@
    "buildRange": 40,
    "requiresRoof": true
   },
-  "playerBase": true,
+  "playerBase": {
+   "radius": 20,
+   "height": 200
+  },
+  "areas": [
+   {
+    "kind": "build",
+    "radius": 40,
+    "perExtension": 3
+   }
+  ],
   "stage": "Plains",
   "via": {
    "how": "build",
@@ -16790,6 +17068,19 @@
    "poison": "Immune",
    "spirit": "Immune"
   },
+  "areas": [
+   {
+    "kind": "heat",
+    "radius": 2.54,
+    "also": [
+     "fire"
+    ]
+   },
+   {
+    "kind": "cozy",
+    "radius": 1.45
+   }
+  ],
   "stage": "Plains",
   "via": {
    "how": "build",
@@ -16872,7 +17163,9 @@
    "poison": "Immune",
    "spirit": "Immune"
   },
-  "playerBase": true,
+  "playerBase": {
+   "radius": 20
+  },
   "stage": "Mountain",
   "via": {
    "how": "build",
@@ -17571,7 +17864,22 @@
    "poison": "Immune",
    "spirit": "Immune"
   },
-  "playerBase": true,
+  "playerBase": {
+   "radius": 20
+  },
+  "areas": [
+   {
+    "kind": "heat",
+    "radius": 8,
+    "also": [
+     "fire"
+    ]
+   },
+   {
+    "kind": "burning",
+    "radius": 0.6
+   }
+  ],
   "stage": "Swamp",
   "via": {
    "how": "build",
@@ -17641,7 +17949,22 @@
    "poison": "Immune",
    "spirit": "Immune"
   },
-  "playerBase": true,
+  "playerBase": {
+   "radius": 20
+  },
+  "areas": [
+   {
+    "kind": "heat",
+    "radius": 5,
+    "also": [
+     "fire"
+    ]
+   },
+   {
+    "kind": "burning",
+    "radius": 0.6
+   }
+  ],
   "stage": "Mountain",
   "via": {
    "how": "build",
@@ -17711,7 +18034,22 @@
    "poison": "Immune",
    "spirit": "Immune"
   },
-  "playerBase": true,
+  "playerBase": {
+   "radius": 20
+  },
+  "areas": [
+   {
+    "kind": "heat",
+    "radius": 5,
+    "also": [
+     "fire"
+    ]
+   },
+   {
+    "kind": "burning",
+    "radius": 0.6
+   }
+  ],
   "stage": "Mountain",
   "via": {
    "how": "build",
@@ -17854,6 +18192,13 @@
    "buildRange": 20,
    "requiresFire": true
   },
+  "areas": [
+   {
+    "kind": "build",
+    "radius": 20,
+    "perExtension": 3
+   }
+  ],
   "stage": "BlackForest",
   "via": {
    "how": "build",
@@ -19092,7 +19437,9 @@
    "poison": "Immune",
    "spirit": "Immune"
   },
-  "playerBase": true,
+  "playerBase": {
+   "radius": 20
+  },
   "stage": "Mistlands",
   "via": {
    "how": "build",
@@ -19164,7 +19511,9 @@
    "poison": "Immune",
    "spirit": "Immune"
   },
-  "playerBase": true,
+  "playerBase": {
+   "radius": 10
+  },
   "stage": "Mistlands",
   "via": {
    "how": "build",
@@ -20197,7 +20546,15 @@
    "poison": "Immune",
    "spirit": "Immune"
   },
-  "playerBase": true,
+  "playerBase": {
+   "radius": 20
+  },
+  "areas": [
+   {
+    "kind": "fire",
+    "radius": 6
+   }
+  ],
   "stage": "Swamp",
   "via": {
    "how": "build",
@@ -20255,7 +20612,15 @@
    "poison": "Immune",
    "spirit": "Immune"
   },
-  "playerBase": true,
+  "playerBase": {
+   "radius": 20
+  },
+  "areas": [
+   {
+    "kind": "fire",
+    "radius": 3
+   }
+  ],
   "stage": "Swamp",
   "via": {
    "how": "build",
@@ -20313,7 +20678,15 @@
    "poison": "Immune",
    "spirit": "Immune"
   },
-  "playerBase": true,
+  "playerBase": {
+   "radius": 20
+  },
+  "areas": [
+   {
+    "kind": "fire",
+    "radius": 3
+   }
+  ],
   "stage": "Swamp",
   "via": {
    "how": "build",
@@ -20370,7 +20743,15 @@
    "poison": "Immune",
    "spirit": "Immune"
   },
-  "playerBase": true,
+  "playerBase": {
+   "radius": 20
+  },
+  "areas": [
+   {
+    "kind": "mist",
+    "radius": 24
+   }
+  ],
   "stage": "Mistlands",
   "via": {
    "how": "build",
@@ -20425,7 +20806,15 @@
    "poison": "Immune",
    "spirit": "Immune"
   },
-  "playerBase": true,
+  "playerBase": {
+   "radius": 20
+  },
+  "areas": [
+   {
+    "kind": "fire",
+    "radius": 3
+   }
+  ],
   "stage": "Meadows",
   "via": {
    "how": "build",
@@ -20540,7 +20929,9 @@
    "poison": "Immune",
    "spirit": "Immune"
   },
-  "playerBase": true,
+  "playerBase": {
+   "radius": 10
+  },
   "stage": "DeepNorth",
   "via": {
    "how": "build",
@@ -20649,7 +21040,9 @@
    "poison": "Immune",
    "spirit": "Immune"
   },
-  "playerBase": true,
+  "playerBase": {
+   "radius": 10
+  },
   "season": {
    "name": "Halloween",
    "start": [
@@ -20778,7 +21171,17 @@
    "buildRange": 20,
    "requiresRoof": true
   },
-  "playerBase": true,
+  "playerBase": {
+   "radius": 20,
+   "height": 200
+  },
+  "areas": [
+   {
+    "kind": "build",
+    "radius": 20,
+    "perExtension": 3
+   }
+  ],
   "stage": "Mistlands",
   "via": {
    "how": "build",
@@ -21339,7 +21742,18 @@
    "poison": "Immune",
    "spirit": "Immune"
   },
-  "playerBase": true,
+  "playerBase": {
+   "radius": 20
+  },
+  "areas": [
+   {
+    "kind": "heat",
+    "radius": 8,
+    "also": [
+     "fire"
+    ]
+   }
+  ],
   "stage": "Plains",
   "via": {
    "how": "build",
@@ -21763,6 +22177,12 @@
    "buildRange": 20,
    "requiresRoof": true
   },
+  "areas": [
+   {
+    "kind": "build",
+    "radius": 20
+   }
+  ],
   "stage": "Swamp",
   "via": {
    "how": "build",
@@ -21838,7 +22258,18 @@
     ]
    }
   },
-  "playerBase": true,
+  "playerBase": {
+   "radius": 10
+  },
+  "areas": [
+   {
+    "kind": "spacing",
+    "radius": 2,
+    "pieces": [
+     "piece_sapcollector"
+    ]
+   }
+  ],
   "stage": "Mistlands",
   "via": {
    "how": "build",
@@ -21964,7 +22395,26 @@
    "poison": "Immune",
    "spirit": "Immune"
   },
-  "playerBase": true,
+  "playerBase": {
+   "radius": 20
+  },
+  "areas": [
+   {
+    "kind": "shield",
+    "radius": 30
+   },
+   {
+    "kind": "noMonsters",
+    "radius": 30.0
+   },
+   {
+    "kind": "spacing",
+    "radius": 15,
+    "pieces": [
+     "piece_shieldgenerator"
+    ]
+   }
+  ],
   "stage": "AshLands",
   "via": {
    "how": "build",
@@ -22024,7 +22474,9 @@
    "poison": "Immune",
    "spirit": "Immune"
   },
-  "playerBase": true,
+  "playerBase": {
+   "radius": 20
+  },
   "stage": "DeepNorth",
   "via": {
    "how": "build",
@@ -22085,7 +22537,9 @@
    "poison": "Immune",
    "spirit": "Immune"
   },
-  "playerBase": true,
+  "playerBase": {
+   "radius": 20
+  },
   "stage": "Plains",
   "via": {
    "how": "build",
@@ -22203,7 +22657,15 @@
    "buildRange": 20,
    "requiresRoof": true
   },
-  "playerBase": true,
+  "playerBase": {
+   "radius": 20
+  },
+  "areas": [
+   {
+    "kind": "build",
+    "radius": 20
+   }
+  ],
   "stage": "Swamp",
   "via": {
    "how": "build",
@@ -22788,7 +23250,9 @@
    "poison": "Immune",
    "spirit": "Immune"
   },
-  "playerBase": true,
+  "playerBase": {
+   "radius": 20
+  },
   "stage": "Mistlands",
   "via": {
    "how": "build",
@@ -22853,7 +23317,15 @@
    "poison": "Immune",
    "spirit": "Immune"
   },
-  "playerBase": true,
+  "playerBase": {
+   "radius": 20
+  },
+  "areas": [
+   {
+    "kind": "fire",
+    "radius": 6
+   }
+  ],
   "stage": "BlackForest",
   "via": {
    "how": "build",
@@ -22923,7 +23395,15 @@
    "night": true,
    "maxCover": 0.6
   },
-  "playerBase": true,
+  "playerBase": {
+   "radius": 20
+  },
+  "areas": [
+   {
+    "kind": "mist",
+    "radius": 6
+   }
+  ],
   "stage": "Mistlands",
   "via": {
    "how": "build",
@@ -22978,7 +23458,17 @@
    "buildRange": 20,
    "requiresRoof": true
   },
-  "playerBase": true,
+  "playerBase": {
+   "radius": 20,
+   "height": 200
+  },
+  "areas": [
+   {
+    "kind": "build",
+    "radius": 20,
+    "perExtension": 4
+   }
+  ],
   "stage": "Meadows",
   "via": {
    "how": "build",
@@ -23586,7 +24076,9 @@
    "poison": "Immune",
    "spirit": "Immune"
   },
-  "playerBase": true,
+  "playerBase": {
+   "radius": 15
+  },
   "unobtainable": true
  },
  {
@@ -23630,7 +24122,9 @@
    "poison": "Immune",
    "spirit": "Immune"
   },
-  "playerBase": true,
+  "playerBase": {
+   "radius": 20
+  },
   "stage": "AshLands",
   "via": {
    "how": "build",
@@ -23697,7 +24191,9 @@
    "poison": "Immune",
    "spirit": "Immune"
   },
-  "playerBase": true,
+  "playerBase": {
+   "radius": 20
+  },
   "stage": "BlackForest",
   "via": {
    "how": "build",
@@ -25882,7 +26378,18 @@
    "poison": "Immune",
    "spirit": "Immune"
   },
-  "playerBase": true,
+  "playerBase": {
+   "radius": 20
+  },
+  "areas": [
+   {
+    "kind": "heat",
+    "radius": 4.5,
+    "also": [
+     "fire"
+    ]
+   }
+  ],
   "stage": "BlackForest",
   "via": {
    "how": "build",
@@ -27496,7 +28003,9 @@
    "poison": "Immune",
    "spirit": "Immune"
   },
-  "playerBase": true,
+  "playerBase": {
+   "radius": 20
+  },
   "stage": "Plains",
   "via": {
    "how": "build",

@@ -635,8 +635,21 @@ class Entities(FixtureCase):
 
     def test_player_base_piece(self):
         tools = N.piece_tools()
-        self.assertTrue(N.piece("Bench", N.PREFABS["Bench"], tools)["playerBase"])  # EffectArea on a child, flags "Heat, PlayerBase"
-        self.assertFalse(N.piece("Anvil", N.PREFABS["Anvil"], tools)["playerBase"])
+        bench = N.piece("Bench", N.PREFABS["Bench"], tools)
+        self.assertEqual(bench["playerBase"], {"radius": 20, "height": 200})  # EffectArea on a child, flags "Heat, PlayerBase"
+        self.assertEqual(bench["areas"], [{"kind": "build", "radius": 20, "perExtension": None},
+                                          {"kind": "heat", "radius": 20}])  # the same EffectArea is also Heat
+        self.assertIsNone(N.piece("Anvil", N.PREFABS["Anvil"], tools)["playerBase"])
+        self.assertIsNone(N.piece("Pyre", N.PREFABS["Pyre"], tools)["playerBase"])  # scale 0
+
+    def test_piece_areas(self):
+        dome = N.piece("Dome", N.PREFABS["Dome"], N.piece_tools())
+        self.assertEqual(dome["playerBase"], {"radius": 10})  # the disabled 30 m capsule doesn't count; scale 0.5
+        self.assertEqual(dome["areas"], [
+            {"kind": "shield", "radius": 25},
+            {"kind": "noMonsters", "radius": 25},  # 0.5 × 2 × the dome's radius
+            {"kind": "spacing", "radius": 15, "pieces": ["Dome"]},
+            {"kind": "mist", "radius": 12}])
 
     def test_location_spawns(self):
         s = {(x["creature"], x["location"]): x for x in self.spawns("location")}

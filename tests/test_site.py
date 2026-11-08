@@ -571,6 +571,18 @@ class Site(unittest.TestCase):
         self.assertIn("<dt>Roll every</dt><dd>30 min</dd>", page)
         self.assertIn("300 min", page)  # expected wait: 30 / 10%
 
+    def test_player_base_areas(self):  # #91: the PlayerBase radius next to the piece's other areas
+        bench = (self.out / "pieces/Bench.html").read_text(encoding="utf-8")
+        self.assertIn("<h2>Areas</h2>", bench)
+        self.assertIn("<td>Player base</td><td>20 m (column 200 m tall)</td>", bench)
+        self.assertIn("<td>Build range</td><td>20 m</td>", bench)
+        self.assertIn('href="mechanics/player-base.html"', bench)
+        self.assertNotIn("<dt>Build range</dt>", bench)  # in the table instead of the facts
+        page = (self.out / "mechanics/player-base.html").read_text(encoding="utf-8")
+        self.assertRegex(page, r'href="pieces/Bench.html">.*?Bench</span></a></td><td>20 m \(column 200 m tall\)</td>'
+                               r'<td>build range 20 m, warmth 20 m</td>')
+        self.assertNotIn("pieces/Pyre.html", page)  # scaled to nothing: no base (and not buildable)
+
     def test_destroyed_into_item(self):
         shard = (self.out / "items/Shard.html").read_text(encoding="utf-8")
         self.assertIn("when destroyed", shard)
