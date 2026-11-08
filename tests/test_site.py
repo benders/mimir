@@ -583,6 +583,12 @@ class Site(unittest.TestCase):
                                r'<td>build range 20 m, warmth 20 m</td>')
         self.assertNotIn("pieces/Pyre.html", page)  # scaled to nothing: no base (and not buildable)
 
+    def test_player_base_conditions(self):  # Fireplace: on only when player-built; a candle's only while fuelled
+        torch = (self.out / "pieces/Torch.html").read_text(encoding="utf-8")
+        self.assertIn("counts toward raids from 20 m outside it (only once a player builds it)", torch)
+        candle = (self.out / "pieces/Candle.html").read_text(encoding="utf-8")
+        self.assertIn("(while it has fuel)", candle)
+
     def test_destroyed_into_item(self):
         shard = (self.out / "items/Shard.html").read_text(encoding="utf-8")
         self.assertIn("when destroyed", shard)

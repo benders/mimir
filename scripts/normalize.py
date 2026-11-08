@@ -1032,7 +1032,7 @@ def piece(name: str, p: dict, tools: dict[str, list[str]]) -> dict | None:
         "lures": lures(p),
         "plant": plant(p),
         "contains": drop_table((comp(p, "Container") or {}).get("m_defaultItems")),  # loot chests placed in the world
-        "playerBase": player_base(p),
+        "playerBase": player_base(p, bool(tools.get(name))),
         "areas": areas(p),
         "dlc": pc["m_dlc"],
     }
@@ -1067,15 +1067,41 @@ def collider_extent(c: dict) -> dict | None:
     return best
 
 
-def player_base(p: dict) -> dict | None:
-    """The PlayerBase area (EffectArea type PlayerBase, usually a child object): {radius, height?} in m, the largest
-    active one. Inside it world spawns and location spawners don't spawn (SpawnSystem.IsSpawnPointGood,
-    CreatureSpawner.UpdateSpawner) and dropped items don't despawn (ItemDrop.TimedDestruction); within 20 m of a player
-    it counts toward the raid base value (EffectArea.GetBaseValue). Objects disabled in the prefab don't count (the
-    Shield Generator's spare 30 m capsule, the Dvergr ward's); nor does an area scaled to nothing (Eternal Pyre)."""
-    found = [e for c in p["components"] if c["type"] == "EffectArea" and "PlayerBase" in effect_types(c)
-             and not c.get("inactive") and (e := collider_extent(c))]
-    return max(found, key=lambda e: e["radius"]) if found else None
+def under(path: str, obj) -> bool:
+    """Whether a component path is the referenced child object (a {"$ref", "path"}) or below it."""
+    top = (obj or {}).get("path")
+    return bool(top) and (path == top or path.startswith(top + "/"))
+
+
+def player_base(p: dict, buildable: bool = True) -> dict | None:
+    """The PlayerBase area (EffectArea type PlayerBase, usually a child object): {radius, height?, builtOnly?, when?} in
+    m, the largest one that can be on. Inside it world spawns and location spawners don't spawn
+    (SpawnSystem.IsSpawnPointGood, CreatureSpawner.UpdateSpawner) and dropped items don't despawn
+    (ItemDrop.TimedDestruction); within 20 m of a player it counts toward the raid base value (EffectArea.GetBaseValue).
+    Objects disabled in the prefab don't count (the Shield Generator's spare 30 m capsule, the Dvergr ward's), nor does an
+    area scaled to nothing (Eternal Pyre). A Fireplace's m_playerBaseObject is on only when a player built the piece
+    (Fireplace.Start: Piece.IsPlacedByPlayer): `builtOnly`, and none at all for one players can't build (trader camp
+    fires). One inside the Fireplace's fuel objects (m_fullObject / m_halfObject, off once empty) or flame objects
+    (m_enabledObject*, on while burning; Fireplace.UpdateState) is on only then: `when` "fuel" / "lit", the least
+    restrictive of its areas (Resin Candle: fuel)."""
+    fp = comp(p, "Fireplace") or {}
+    found = []
+    for c in p["components"]:
+        if c["type"] != "EffectArea" or "PlayerBase" not in effect_types(c) or not (e := collider_extent(c)):
+            continue
+        path = c.get("path", "")
+        when = ("fuel" if any(under(path, fp.get(k)) for k in ("m_fullObject", "m_halfObject")) else
+                "lit" if any(under(path, fp.get(k)) for k in ("m_enabledObject", "m_enabledObjectLow", "m_enabledObjectHigh"))
+                else None)
+        if c.get("inactive") and not when:  # disabled and nothing turns it on
+            continue
+        rank = {None: 0, "fuel": 1, "lit": 2}[when]
+        if under(path, fp.get("m_playerBaseObject")):
+            if not buildable:
+                continue
+            e = {**e, "builtOnly": True}
+        found.append((rank, -e["radius"], e | ({"when": when} if when else {})))
+    return min(found, key=lambda x: x[:2])[2] if found else None
 
 
 AREA_EFFECTS = {  # EffectArea types other than PlayerBase -> area kind (see the player-base mechanics page)

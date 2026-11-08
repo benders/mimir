@@ -2223,7 +2223,10 @@ def area_rows(p: dict) -> list[tuple[str, float, str, str]]:
     rows = []
     if pb := p.get("playerBase"):
         r = f'{num(pb["radius"])} m' + (f' (column {num(pb["height"])} m tall)' if pb.get("height") else "")
-        rows.append(("playerBase", pb["radius"], r, AREA_TEXT["playerBase"][1]))
+        cond = [c for c in ("only once a player builds it" if pb.get("builtOnly") else None,
+                            {"fuel": "while it has fuel", "lit": "while lit"}.get(pb.get("when"))) if c]
+        rows.append(("playerBase", pb["radius"], r,
+                     AREA_TEXT["playerBase"][1] + (" (" + ", ".join(cond) + ")" if cond else "")))
     for a in p.get("areas") or []:
         label, what = AREA_TEXT.get(a["kind"], (a["kind"], ""))
         r = f'{num(a["radius"])} m' + (f' + {num(a["perExtension"])} m per extension' if a.get("perExtension") else "")

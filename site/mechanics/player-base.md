@@ -1,13 +1,13 @@
 ---
 title: Player base
 summary: Where creatures stop spawning, what counts as a base for raids, and what a Ward protects.
-sources: EffectArea.IsPointInsideArea; EffectArea.GetBaseValue; EffectArea.Awake; SpawnSystem.IsSpawnPointGood; CreatureSpawner.UpdateSpawner; Player.UpdateBaseValue; Player.IsSafeInHome; RandEventSystem.CheckBase; ItemDrop.TimedDestruction; ItemDrop.IsInsideBase; MonsterAI.UpdateAI; ShieldGenerator.UpdateShield; ShieldGenerator.CheckProjectile; CraftingStation.GetExtensions; Player.UpdatePlacementGhost; Player.RemovePiece; Player.Repair; Attack.SpawnOnHitTerrain; PrivateArea.CheckAccess; PrivateArea.IsInside; PrivateArea.HaveLocalAccess; PrivateArea.Interact; PrivateArea.RPC_ToggleEnabled; PrivateArea.RPC_TogglePermitted; PrivateArea.OnObjectDamaged; WearNTear.RPC_Damage
+sources: EffectArea.IsPointInsideArea; Fireplace.Start; Fireplace.UpdateState; Piece.IsPlacedByPlayer; EffectArea.GetBaseValue; EffectArea.Awake; SpawnSystem.IsSpawnPointGood; CreatureSpawner.UpdateSpawner; Player.UpdateBaseValue; Player.IsSafeInHome; RandEventSystem.CheckBase; ItemDrop.TimedDestruction; ItemDrop.IsInsideBase; MonsterAI.UpdateAI; ShieldGenerator.UpdateShield; ShieldGenerator.CheckProjectile; CraftingStation.GetExtensions; Player.UpdatePlacementGhost; Player.RemovePiece; Player.Repair; Attack.SpawnOnHitTerrain; PrivateArea.CheckAccess; PrivateArea.IsInside; PrivateArea.HaveLocalAccess; PrivateArea.Interact; PrivateArea.RPC_ToggleEnabled; PrivateArea.RPC_TogglePermitted; PrivateArea.OnObjectDamaged; WearNTear.RPC_Damage
 ---
 
 Many pieces carry a PlayerBase area: an invisible trigger, a sphere around the piece (a 200 m tall capsule for the
 crafting stations, so only the horizontal distance matters). No world spawn picks a point inside one, and no
 location spawner inside one spawns; only the Ashlands cinder rain spawns ignore it, and spawner objects such as
-Greydwarf nests never check it. Dropped items inside one (above 28 m altitude) never despawn. The area is
+Greydwarf nests never check it. Dropped items inside one (above 28 m altitude) never despawn. Torches, fires and braziers have theirs only when a player built them, lit or not, even with no fuel; the camp fires that come with the world (Fuling villages, the traders') have none. A Resin Candle's sits in its fuel states, so it counts only while it has fuel. The area is
 not what the piece shows: a Workbench's build circle and its base area are both 20 m, but the Wisp Torch clears mist
 to 24 m, a Ward guards 32 m and the Shield Generator's dome reaches 30 m, beyond their 20 m base areas.
 

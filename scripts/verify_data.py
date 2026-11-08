@@ -356,6 +356,9 @@ def main() -> int:
           and shield.get("shield") == 30 and shield.get("noMonsters") == 30,
           "pieces: PlayerBase radii (Workbench 20 m capsule, Hearth 30 m, Wisp Torch 20 m inside its mist clearing, "
           "Shield Generator 20 m inside its 30 m dome)")
+    check(not pieces.get("fire_pit_haldor", {}).get("playerBase") and (pieces.get("fire_pit", {}).get("playerBase") or {}).get("builtOnly")
+          and (pieces.get("Candle_resin", {}).get("playerBase") or {}).get("when") == "fuel",
+          "pieces: fires have a base area only when player-built (none at Haldor's camp fire); the Resin Candle only while fuelled")
     check(all(c.get("faction") for c in creatures.values()), "creatures: every creature has a faction")
     forge = next((x for x in load("locations.json") if x["id"] == "AncientUpgradeStation"), {})
     check(forge.get("biomes") == ["Mountain"] and forge["placement"].get("unique")

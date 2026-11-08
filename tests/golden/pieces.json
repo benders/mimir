@@ -97,6 +97,45 @@
   }
  },
  {
+  "id": "CampFire",
+  "name": "Torch",
+  "enabled": true,
+  "category": "Misc",
+  "health": 400,
+  "material": "Wood",
+  "damageModifiers": {
+   "fire": "Weak"
+  },
+  "unobtainable": true
+ },
+ {
+  "id": "Candle",
+  "name": "Candle",
+  "enabled": true,
+  "category": "Misc",
+  "tools": [
+   "Hammer"
+  ],
+  "health": 400,
+  "material": "Wood",
+  "damageModifiers": {
+   "fire": "Weak"
+  },
+  "playerBase": {
+   "radius": 10,
+   "when": "fuel"
+  },
+  "stage": "Meadows",
+  "via": {
+   "how": "build",
+   "needs": [
+    {
+     "item": "Hammer"
+    }
+   ]
+  }
+ },
+ {
   "id": "CreeperSapling",
   "name": "Creeper",
   "icon": "Sapling",
@@ -567,6 +606,33 @@
     {
      "item": "Wood",
      "amount": 4
+    }
+   ]
+  }
+ },
+ {
+  "id": "Torch",
+  "name": "Torch",
+  "enabled": true,
+  "category": "Misc",
+  "tools": [
+   "Hammer"
+  ],
+  "health": 400,
+  "material": "Wood",
+  "damageModifiers": {
+   "fire": "Weak"
+  },
+  "playerBase": {
+   "radius": 20,
+   "builtOnly": true
+  },
+  "stage": "Meadows",
+  "via": {
+   "how": "build",
+   "needs": [
+    {
+     "item": "Hammer"
     }
    ]
   }

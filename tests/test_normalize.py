@@ -642,6 +642,12 @@ class Entities(FixtureCase):
         self.assertIsNone(N.piece("Anvil", N.PREFABS["Anvil"], tools)["playerBase"])
         self.assertIsNone(N.piece("Pyre", N.PREFABS["Pyre"], tools)["playerBase"])  # scale 0
 
+    def test_player_base_conditions(self):
+        tools = N.piece_tools()
+        self.assertEqual(N.piece("Torch", N.PREFABS["Torch"], tools)["playerBase"], {"radius": 20, "builtOnly": True})
+        self.assertIsNone(N.piece("CampFire", N.PREFABS["CampFire"], tools)["playerBase"])  # not buildable
+        self.assertEqual(N.piece("Candle", N.PREFABS["Candle"], tools)["playerBase"], {"radius": 10, "when": "fuel"})
+
     def test_piece_areas(self):
         dome = N.piece("Dome", N.PREFABS["Dome"], N.piece_tools())
         self.assertEqual(dome["playerBase"], {"radius": 10})  # the disabled 30 m capsule doesn't count; scale 0.5

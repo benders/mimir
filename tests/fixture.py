@@ -171,7 +171,7 @@ TRANSLATIONS = {
     "item_sword": "Test Sword", "item_sword_desc": "Sharp <b>enough</b>.",
     "item_helmet": "Pot Helm", "item_fish": "Glimfish", "item_pearl": "Moon Pearl", "item_javelin": "Test Javelin", "item_mace": "Mace", "item_frostrod": "Frost Rod", "item_thunderrod": "Thunder Rod", "item_clusterrod": "Cluster Rod", "item_longbow": "Longbow", "item_arbal": "Arbal", "item_dart": "Dart", "item_mead": "Fizz Mead", "item_coins": "Coins", "item_charm": "Lucky Charm", "npc_vendor": "Old Vendor", "hud_satchel": "Big Satchel", "hud_satchel_tooltip": "A roomy bag.",
     "item_hammer": "Mallet", "item_tray": "Tray", "item_feast": "Feast", "item_feast_material": "Feast to set out", "piece_platter": "Platter", "item_shard": "Shard", "item_bite": "Bite",
-    "enemy_raider": "Raider", "piece_bench": "Bench", "piece_dome": "Dome", "piece_pyre": "Pyre", **{f"tag_{k}": v for k, v in (  # build menu tags (Piece.UsageTagFlags)
+    "enemy_raider": "Raider", "piece_bench": "Bench", "piece_dome": "Dome", "piece_torch": "Torch", "piece_candle": "Candle", "piece_pyre": "Pyre", **{f"tag_{k}": v for k, v in (  # build menu tags (Piece.UsageTagFlags)
         ("misc", "Misc."), ("crafting", "Crafting"), ("building", "Building"), ("floor", "Flooring"), ("wall", "Walls"),
         ("roof", "Roofing"), ("architecture", "Architecture"), ("furniture", "Furniture"), ("lighting", "Lighting"),
         ("decor", "Decor"), ("storage", "Storage"), ("transport", "Transportation"), ("food", "Food"), ("mead", "Mead"),
@@ -347,6 +347,18 @@ def prefabs():
               comp("Demister", m(disableForcefieldDelay=0), path="Mist",
                    forceField={"shape": "Sphere", "startRange": 0, "endRange": 12}),
               name="$piece_dome", blockRadius=15, blockingPieces=[R("Dome") | {"component": "Piece"}]),
+        piece("Torch", comp("Fireplace", m(playerBaseObject=R("Torch") | {"path": "PlayerBase"},
+                                           enabledObject=R("Torch") | {"path": "_enabled"})),
+              comp("EffectArea", {"m_type": "PlayerBase"}, path="PlayerBase", colliders=[sphere(20)]),
+              name="$piece_torch"),  # on only when a player built it, lit or not
+        piece("CampFire", comp("Fireplace", m(playerBaseObject=R("CampFire") | {"path": "PlayerBase"})),
+              comp("EffectArea", {"m_type": "PlayerBase"}, path="PlayerBase", colliders=[sphere(20)]),
+              name="$piece_torch"),  # a trader's: nobody builds it, so no base
+        piece("Candle", comp("Fireplace", m(fullObject=R("Candle") | {"path": "full"}, halfObject=R("Candle") | {"path": "half"},
+                                            enabledObjectHigh=R("Candle") | {"path": "high"})),
+              comp("EffectArea", {"m_type": "PlayerBase"}, path="high/PlayerBase", colliders=[sphere(10)]),
+              comp("EffectArea", {"m_type": "PlayerBase"}, path="half/PlayerBase", inactive=True, colliders=[sphere(10)]),
+              name="$piece_candle"),  # on while it has fuel
         piece("Pyre", comp("EffectArea", {"m_type": "PlayerBase"}, path="PlayerBase", scale=[0, 0, 0], colliders=[sphere(20)]),
               name="$piece_pyre"),  # scaled to nothing: no base
         piece("piece_bench", name="$piece_bench", icon=S("Bench"), comfort=2),  # not buildable: "Bench (world)"
@@ -502,7 +514,7 @@ def write_dump(raw: Path) -> Path:
     dump("status_effect_defaults.json", [{"name": "SE_Stats", "type": "SE_Stats", "fields": SE_DEFAULTS}])
     dump("piece_tables.json", [{"name": "_HammerTable", "type": "PieceTable",
                                 "fields": {"m_pieces": [R("Bench"), R("Anvil"), R("Kiln"), R("Hive"), R("Lure"), R("Tap"), R("Tap2"), R("Tree"),
-                                                       R("Sapling"), R("CreeperSapling")]}},
+                                                       R("Sapling"), R("CreeperSapling"), R("Torch"), R("Candle")]}},
                                {"name": "_FeasterTable", "type": "PieceTable", "fields": {"m_pieces": [R("Mead"), R("Platter"),
                                                                                                       R("Feast")]}}])
     dump("world/seasons.json", [{"name": "Winter", "type": "SeasonalItemGroup", "fields": {

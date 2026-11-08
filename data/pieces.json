@@ -446,9 +446,6 @@
    "value": 1,
    "group": "Fire"
   },
-  "playerBase": {
-   "radius": 20
-  },
   "areas": [
    {
     "kind": "heat",
@@ -516,7 +513,8 @@
    "spirit": "Immune"
   },
   "playerBase": {
-   "radius": 10
+   "radius": 10,
+   "when": "fuel"
   },
   "stage": "Swamp",
   "via": {
@@ -1070,9 +1068,6 @@
     "noRecover": true
    }
   ],
-  "playerBase": {
-   "radius": 4
-  },
   "areas": [
    {
     "kind": "heat",
@@ -10688,7 +10683,8 @@
    "spirit": "Immune"
   },
   "playerBase": {
-   "radius": 30
+   "radius": 30,
+   "builtOnly": true
   },
   "areas": [
    {
@@ -13138,7 +13134,8 @@
    "spirit": "Immune"
   },
   "playerBase": {
-   "radius": 25
+   "radius": 25,
+   "builtOnly": true
   },
   "areas": [
    {
@@ -13194,9 +13191,6 @@
    "value": 1,
    "group": "Fire"
   },
-  "playerBase": {
-   "radius": 20
-  },
   "areas": [
    {
     "kind": "heat",
@@ -13243,9 +13237,6 @@
   "comfort": {
    "value": 1,
    "group": "Fire"
-  },
-  "playerBase": {
-   "radius": 20
   },
   "areas": [
    {
@@ -13311,7 +13302,8 @@
    "spirit": "Immune"
   },
   "playerBase": {
-   "radius": 25
+   "radius": 25,
+   "builtOnly": true
   },
   "areas": [
    {
@@ -14304,7 +14296,8 @@
    "spirit": "Immune"
   },
   "playerBase": {
-   "radius": 30
+   "radius": 30,
+   "builtOnly": true
   },
   "areas": [
    {
@@ -17865,7 +17858,8 @@
    "spirit": "Immune"
   },
   "playerBase": {
-   "radius": 20
+   "radius": 20,
+   "builtOnly": true
   },
   "areas": [
    {
@@ -17950,7 +17944,8 @@
    "spirit": "Immune"
   },
   "playerBase": {
-   "radius": 20
+   "radius": 20,
+   "builtOnly": true
   },
   "areas": [
    {
@@ -18035,7 +18030,8 @@
    "spirit": "Immune"
   },
   "playerBase": {
-   "radius": 20
+   "radius": 20,
+   "builtOnly": true
   },
   "areas": [
    {
@@ -20547,7 +20543,8 @@
    "spirit": "Immune"
   },
   "playerBase": {
-   "radius": 20
+   "radius": 20,
+   "builtOnly": true
   },
   "areas": [
    {
@@ -20613,7 +20610,8 @@
    "spirit": "Immune"
   },
   "playerBase": {
-   "radius": 20
+   "radius": 20,
+   "builtOnly": true
   },
   "areas": [
    {
@@ -20679,7 +20677,8 @@
    "spirit": "Immune"
   },
   "playerBase": {
-   "radius": 20
+   "radius": 20,
+   "builtOnly": true
   },
   "areas": [
    {
@@ -20807,7 +20806,8 @@
    "spirit": "Immune"
   },
   "playerBase": {
-   "radius": 20
+   "radius": 20,
+   "builtOnly": true
   },
   "areas": [
    {
@@ -22475,7 +22475,8 @@
    "spirit": "Immune"
   },
   "playerBase": {
-   "radius": 20
+   "radius": 20,
+   "builtOnly": true
   },
   "stage": "DeepNorth",
   "via": {
@@ -23318,7 +23319,8 @@
    "spirit": "Immune"
   },
   "playerBase": {
-   "radius": 20
+   "radius": 20,
+   "builtOnly": true
   },
   "areas": [
    {
