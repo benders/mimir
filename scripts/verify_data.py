@@ -122,6 +122,10 @@ def main() -> int:
     check(spawned("Mistile", "summon", parent="DvergerMage") and spawned("Aspect_Eikthyr", "phase", parent="FrozenKing"),
           "Dvergr mage's Mistiles; FrozenKing's death burst spawns the Eikthyr aspect")
     check(spawned("Bat_Swamp", "world", biomes="Swamp"), "alt biome spawns (Bat_Swamp)")
+    counts = [s["count"] for s in spawns if s.get("count")]
+    giant = next((s.get("count") or {} for s in spawns if s.get("location") == "Mistlands_Giant1" and s["creature"] == "Tick"), {})
+    check(len(counts) > 100 and all(c.get("min", 0) <= c.get("max", 0) and (c.get("max") or c.get("atOnce")) for c in counts)
+          and giant.get("max", 0) >= 1, f"location spawn counts: {len(counts)}, min <= max, Ticks at the giant remains")
     check(spawned("FallenWarrior", "location", location="NorthMemorialPlace"), "memorial offering summons Fallen Warriors")
     check(spawned("TrollFrost", "world", biomes="DeepNorth"), "TrollFrost: spawner-placed world spawn")
     check(all(s.get("biomes") for s in spawns if s.get("source") not in ("offspring", "egg", "growup", "summon", "phase")),

@@ -143,7 +143,9 @@ region until the world has `max` (`min` always), at least `minDistance` m from t
 `raid` (RandEventSystem; the event's biomes; `requiredGlobalKeys`), world spawns may need a `requiredGlobalKey` or a
 `requiredEvent` (persistent event running); world and raid entries have `levelUpChance` (% per star, when not the default
 10) and `levelUpDistance` (m from the centre beyond which they level up), `location` / `dungeon` (spawners and boss altars in a location or its
-dungeon rooms; the location's biomes), `offspring` (`parent` creature), `egg` (`item` that hatches), `summon` (an attack `item`'s projectile or ability prefab makes it, through `subprefabs/`;
+dungeon rooms; the location's biomes; a `location` entry has `count` {min, max, mean?, atOnce?} per copy of the location,
+`normalize.spawn_counts`: spawners always there / every one there / RandomSpawn chances summed, SpawnArea m_maxNear summed;
+shown as a Count column on location, dungeon and creature pages), `offspring` (`parent` creature), `egg` (`item` that hatches), `summon` (an attack `item`'s projectile or ability prefab makes it, through `subprefabs/`;
 `parent` creature carrying the item, none if only players can use it) or `phase` (the `parent` creature's death effects
 create it, or a death-effect projectile spawns it: a boss's next stage). `summon` and `phase` count as reachable only once their parent or item is.
 Creature `drops` with `levelChanceOnly` (trophies) get the star multiplier on their chance but not their amount.

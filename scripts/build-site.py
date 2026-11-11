@@ -1568,8 +1568,12 @@ def spawn_sections(spawns: list[dict]) -> str:
             sm = s["summon"]
             notes.append("summoned with " + (link("item", sm["item"], sm.get("amount")) if sm.get("item") else "an offering"))
         rows.append([location_ref(s["location"]), biome_list(s), stars(*s["levels"]) if s.get("levels") else "",
-                     "; ".join(notes)])
-    out += section("Locations", table(["Location", "Biome", STARS_TH, "Notes"], rows))
+                     spawn_count(s), "; ".join(notes)])
+    counted = any(r[3] for r in rows)
+    if not counted:
+        rows = [r[:3] + r[4:] for r in rows]
+    out += section("Locations", table(["Location", "Biome", STARS_TH] + (["Count"] if counted else []) + ["Notes"], rows)
+                   + (COUNT_NOTE if counted else ""))
 
     rows = [[raid_link(s["event"]) + "".join(f" ({n})" for n in as_variant(s)), biome_list(s), stars(*s["levels"]),
              rng(*s["groupSize"])] for s in by["raid"]]
@@ -2056,6 +2060,27 @@ def place_stage(ids: list[str]) -> int:
     return min(LOCATION_STAGE.get(i, 0) for i in ids)
 
 
+def spawn_count(s: dict) -> str:
+    """How many of a creature one copy of a location holds (spawns.json `count`): spawners always there, every one
+    there, the average with their chances; a spawn area's respawning cap."""
+    c = s.get("count") or {}
+    lo, hi, mean, at = c.get("min", 0), c.get("max", 0), c.get("mean"), c.get("atOnce")
+    parts = []
+    if hi:
+        parts.append(num(hi) if lo == hi else (f"{num(lo)}–{num(hi)}" if lo else f"up to {num(hi)}")
+                     + (f", {num(mean)} on average" if mean is not None else ""))
+    if at:
+        parts.append(f"up to {num(at)} at a time")
+    return "; ".join(parts)
+
+
+COUNT_NOTE = ('<p class="note">Count: per copy of the location. Each spawner makes one creature when a player comes '
+              'within its trigger distance, then no more, or one again after its respawn time once that one is gone '
+              '(CreatureSpawner.UpdateSpawner); spawners that may be missing from a copy (RandomSpawn) give a range and '
+              'an average. A spawn area keeps spawning while a player is near, up to a cap nearby (SpawnArea.SpawnOne). '
+              'Inside a generated dungeon the count depends on the rooms it is built from.</p>')
+
+
 def chance_tag(c) -> str:
     return f' <span class="chance">({num(c)}%)</span>' if c is not None else ""
 
@@ -2161,17 +2186,27 @@ def location_page(name: str, dungeon: bool = False) -> None:
             notes.append("summoned with " + (link("item", sm["item"], sm.get("amount")) if sm.get("item") else "an offering"))
         key = (s["creature"], s["source"])
         e = rows.setdefault(key, [link("creature", s["creature"]), stars(*s["levels"]) if s.get("levels") else "",
-                                  "; ".join(notes), set()])
+                                  "; ".join(notes), set(), {}])
         e[3].add(s["location"])
+        if n := spawn_count(s):
+            e[4][s["location"]] = n
         stages[key] = stage_of("creature", s["creature"])
     crows = []
     for key in sorted(rows, key=lambda k: (k[1], name_of("creature", k[0]).lower())):
-        c, st, notes, at = rows[key]
+        c, st, notes, at, counts = rows[key]
         if many and len(at) < len(ids):
             notes += "; only in " + ", ".join(sorted(at))
-        crows.append([c, st, notes])
-    body += section("Creatures", table(["Creature", STARS_TH, "Notes"], crows, stages=[stages[k] for k in sorted(
-        rows, key=lambda k: (k[1], name_of("creature", k[0]).lower()))]))
+        if len(set(counts.values())) > 1 or (counts and len(counts) < len(at)):  # variants differ
+            count = "<br>".join(f"{esc(i)}: {counts.get(i, '–')}" for i in sorted(at))
+        else:
+            count = next(iter(counts.values()), "")
+        crows.append([c, st, count, notes])
+    counted = any(r[2] for r in crows)
+    if not counted:
+        crows = [r[:2] + r[3:] for r in crows]
+    body += section("Creatures", table(["Creature", STARS_TH] + (["Count"] if counted else []) + ["Notes"], crows,
+                                       stages=[stages[k] for k in sorted(rows, key=lambda k: (k[1], name_of("creature", k[0]).lower()))])
+                    + (COUNT_NOTE if counted else ""))
 
     res = []
     for src in SOURCES.values():

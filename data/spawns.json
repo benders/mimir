@@ -4443,7 +4443,11 @@
   "levels": [
    1,
    1
-  ]
+  ],
+  "count": {
+   "max": 2,
+   "mean": 0.6
+  }
  },
  {
   "creature": "Skeleton_Mountains",
@@ -4455,7 +4459,11 @@
   "levels": [
    1,
    3
-  ]
+  ],
+  "count": {
+   "max": 2,
+   "mean": 1.0
+  }
  },
  {
   "creature": "StoneGolem",
@@ -4467,7 +4475,11 @@
   "levels": [
    1,
    1
-  ]
+  ],
+  "count": {
+   "max": 1,
+   "mean": 0.1
+  }
  },
  {
   "creature": "Skeleton_Mountains",
@@ -4479,7 +4491,11 @@
   "levels": [
    1,
    3
-  ]
+  ],
+  "count": {
+   "max": 2,
+   "mean": 1.0
+  }
  },
  {
   "creature": "StoneGolem",
@@ -4491,7 +4507,11 @@
   "levels": [
    1,
    1
-  ]
+  ],
+  "count": {
+   "max": 2,
+   "mean": 0.2
+  }
  },
  {
   "creature": "Morgen",
@@ -4515,7 +4535,11 @@
   "levels": [
    1,
    1
-  ]
+  ],
+  "count": {
+   "max": 1,
+   "mean": 0.8
+  }
  },
  {
   "creature": "BogWitchKvastur",
@@ -4528,7 +4552,12 @@
    1,
    1
   ],
-  "respawning": true
+  "respawning": true,
+  "count": {
+   "min": 1,
+   "max": 1,
+   "atOnce": 1
+  }
  },
  {
   "creature": "Bonemass",
@@ -4553,7 +4582,13 @@
    1,
    3
   ],
-  "respawning": true
+  "respawning": true,
+  "count": {
+   "min": 1,
+   "max": 5,
+   "atOnce": 8,
+   "mean": 3.4
+  }
  },
  {
   "creature": "Charred_Mage",
@@ -4566,7 +4601,13 @@
    1,
    3
   ],
-  "respawning": true
+  "respawning": true,
+  "count": {
+   "min": 1,
+   "max": 3,
+   "atOnce": 8,
+   "mean": 2.2
+  }
  },
  {
   "creature": "Charred_Melee",
@@ -4579,7 +4620,10 @@
    1,
    3
   ],
-  "respawning": true
+  "respawning": true,
+  "count": {
+   "atOnce": 8
+  }
  },
  {
   "creature": "Charred_Melee",
@@ -4592,7 +4636,10 @@
    1,
    3
   ],
-  "respawning": true
+  "respawning": true,
+  "count": {
+   "atOnce": 3
+  }
  },
  {
   "creature": "Charred_Twitcher",
@@ -4605,7 +4652,10 @@
    1,
    3
   ],
-  "respawning": true
+  "respawning": true,
+  "count": {
+   "atOnce": 3
+  }
  },
  {
   "creature": "DvergerAshlands",
@@ -4617,7 +4667,12 @@
   "levels": [
    1,
    3
-  ]
+  ],
+  "count": {
+   "min": 2,
+   "max": 5,
+   "mean": 4.2
+  }
  },
  {
   "creature": "Charred_Melee",
@@ -4630,7 +4685,10 @@
    1,
    3
   ],
-  "respawning": true
+  "respawning": true,
+  "count": {
+   "atOnce": 3
+  }
  },
  {
   "creature": "Charred_Twitcher",
@@ -4643,7 +4701,10 @@
    1,
    3
   ],
-  "respawning": true
+  "respawning": true,
+  "count": {
+   "atOnce": 3
+  }
  },
  {
   "creature": "Skeleton",
@@ -4656,7 +4717,10 @@
    1,
    3
   ],
-  "respawning": true
+  "respawning": true,
+  "count": {
+   "atOnce": 2
+  }
  },
  {
   "creature": "Skeleton",
@@ -4669,7 +4733,11 @@
    1,
    3
   ],
-  "respawning": true
+  "respawning": true,
+  "count": {
+   "min": 3,
+   "max": 3
+  }
  },
  {
   "creature": "Ghost",
@@ -4719,7 +4787,11 @@
    1,
    3
   ],
-  "respawning": true
+  "respawning": true,
+  "count": {
+   "min": 3,
+   "max": 3
+  }
  },
  {
   "creature": "Ghost",
@@ -4769,7 +4841,11 @@
    1,
    3
   ],
-  "respawning": true
+  "respawning": true,
+  "count": {
+   "min": 3,
+   "max": 3
+  }
  },
  {
   "creature": "Ghost",
@@ -4831,7 +4907,11 @@
   "levels": [
    1,
    3
-  ]
+  ],
+  "count": {
+   "max": 1,
+   "mean": 0.5
+  }
  },
  {
   "creature": "Skeleton_Meadows_noarcher",
@@ -4844,7 +4924,11 @@
   "levels": [
    1,
    3
-  ]
+  ],
+  "count": {
+   "max": 1,
+   "mean": 0.5
+  }
  },
  {
   "creature": "Skeleton_Meadows_noarcher",
@@ -4857,7 +4941,11 @@
   "levels": [
    1,
    3
-  ]
+  ],
+  "count": {
+   "max": 1,
+   "mean": 0.5
+  }
  },
  {
   "creature": "Dragon",
@@ -4881,7 +4969,11 @@
   "levels": [
    1,
    1
-  ]
+  ],
+  "count": {
+   "max": 3,
+   "mean": 2.0
+  }
  },
  {
   "creature": "Eikthyr",
@@ -4918,7 +5010,11 @@
    1,
    3
   ],
-  "respawning": true
+  "respawning": true,
+  "count": {
+   "min": 3,
+   "max": 3
+  }
  },
  {
   "creature": "Charred_Twitcher",
@@ -5062,7 +5158,11 @@
   "levels": [
    1,
    3
-  ]
+  ],
+  "count": {
+   "max": 3,
+   "mean": 1.5
+  }
  },
  {
   "creature": "Goblin",
@@ -5074,7 +5174,11 @@
   "levels": [
    1,
    3
-  ]
+  ],
+  "count": {
+   "max": 3,
+   "mean": 1.5
+  }
  },
  {
   "creature": "GoblinBrute",
@@ -5086,7 +5190,11 @@
   "levels": [
    1,
    3
-  ]
+  ],
+  "count": {
+   "max": 1,
+   "mean": 0.1
+  }
  },
  {
   "creature": "GoblinShaman",
@@ -5098,7 +5206,11 @@
   "levels": [
    1,
    1
-  ]
+  ],
+  "count": {
+   "max": 1,
+   "mean": 0.5
+  }
  },
  {
   "creature": "Goblin",
@@ -5110,7 +5222,11 @@
   "levels": [
    1,
    3
-  ]
+  ],
+  "count": {
+   "max": 5,
+   "mean": 2.5
+  }
  },
  {
   "creature": "GoblinArcher",
@@ -5122,7 +5238,11 @@
   "levels": [
    1,
    3
-  ]
+  ],
+  "count": {
+   "min": 1,
+   "max": 1
+  }
  },
  {
   "creature": "GoblinBrute",
@@ -5134,7 +5254,11 @@
   "levels": [
    1,
    3
-  ]
+  ],
+  "count": {
+   "max": 1,
+   "mean": 0.1
+  }
  },
  {
   "creature": "GoblinShaman",
@@ -5146,7 +5270,11 @@
   "levels": [
    1,
    1
-  ]
+  ],
+  "count": {
+   "max": 1,
+   "mean": 0.5
+  }
  },
  {
   "creature": "GoblinKing",
@@ -5171,7 +5299,10 @@
    1,
    3
   ],
-  "respawning": true
+  "respawning": true,
+  "count": {
+   "atOnce": 4
+  }
  },
  {
   "creature": "Draugr_Elite",
@@ -5184,7 +5315,10 @@
    1,
    3
   ],
-  "respawning": true
+  "respawning": true,
+  "count": {
+   "atOnce": 4
+  }
  },
  {
   "creature": "Draugr_Ranged",
@@ -5197,7 +5331,10 @@
    1,
    3
   ],
-  "respawning": true
+  "respawning": true,
+  "count": {
+   "atOnce": 4
+  }
  },
  {
   "creature": "Skeleton_Swamps",
@@ -5210,7 +5347,10 @@
    1,
    3
   ],
-  "respawning": true
+  "respawning": true,
+  "count": {
+   "atOnce": 2
+  }
  },
  {
   "creature": "Greydwarf",
@@ -5223,7 +5363,10 @@
    1,
    3
   ],
-  "respawning": true
+  "respawning": true,
+  "count": {
+   "atOnce": 3
+  }
  },
  {
   "creature": "Greydwarf_Elite",
@@ -5236,7 +5379,10 @@
    1,
    3
   ],
-  "respawning": true
+  "respawning": true,
+  "count": {
+   "atOnce": 3
+  }
  },
  {
   "creature": "Greydwarf_Shaman",
@@ -5249,7 +5395,10 @@
    1,
    3
   ],
-  "respawning": true
+  "respawning": true,
+  "count": {
+   "atOnce": 3
+  }
  },
  {
   "creature": "Bat",
@@ -5311,7 +5460,11 @@
    1,
    3
   ],
-  "respawning": true
+  "respawning": true,
+  "count": {
+   "min": 3,
+   "max": 3
+  }
  },
  {
   "creature": "Ghost",
@@ -5408,7 +5561,11 @@
   "levels": [
    1,
    3
-  ]
+  ],
+  "count": {
+   "min": 4,
+   "max": 4
+  }
  },
  {
   "creature": "SeekerQueen",
@@ -5432,7 +5589,11 @@
   "levels": [
    1,
    3
-  ]
+  ],
+  "count": {
+   "min": 5,
+   "max": 5
+  }
  },
  {
   "creature": "Seeker",
@@ -5483,7 +5644,12 @@
   "levels": [
    1,
    3
-  ]
+  ],
+  "count": {
+   "min": 2,
+   "max": 4,
+   "mean": 3.0
+  }
  },
  {
   "creature": "Seeker",
@@ -5534,7 +5700,11 @@
   "levels": [
    1,
    3
-  ]
+  ],
+  "count": {
+   "max": 8,
+   "mean": 3.3
+  }
  },
  {
   "creature": "DvergerMage",
@@ -5546,7 +5716,11 @@
   "levels": [
    1,
    3
-  ]
+  ],
+  "count": {
+   "max": 4,
+   "mean": 2.0
+  }
  },
  {
   "creature": "Dverger",
@@ -5558,7 +5732,11 @@
   "levels": [
    1,
    3
-  ]
+  ],
+  "count": {
+   "max": 8,
+   "mean": 3.5
+  }
  },
  {
   "creature": "DvergerMage",
@@ -5570,7 +5748,11 @@
   "levels": [
    1,
    3
-  ]
+  ],
+  "count": {
+   "max": 4,
+   "mean": 2.0
+  }
  },
  {
   "creature": "Seeker",
@@ -5582,7 +5764,12 @@
   "levels": [
    1,
    3
-  ]
+  ],
+  "count": {
+   "min": 2,
+   "max": 6,
+   "mean": 4.0
+  }
  },
  {
   "creature": "Tick",
@@ -5594,7 +5781,11 @@
   "levels": [
    1,
    3
-  ]
+  ],
+  "count": {
+   "min": 5,
+   "max": 5
+  }
  },
  {
   "creature": "Dverger",
@@ -5606,7 +5797,12 @@
   "levels": [
    1,
    3
-  ]
+  ],
+  "count": {
+   "min": 3,
+   "max": 4,
+   "mean": 3.5
+  }
  },
  {
   "creature": "DvergerMage",
@@ -5618,7 +5814,12 @@
   "levels": [
    1,
    3
-  ]
+  ],
+  "count": {
+   "min": 2,
+   "max": 4,
+   "mean": 3.0
+  }
  },
  {
   "creature": "Seeker",
@@ -5630,7 +5831,11 @@
   "levels": [
    1,
    3
-  ]
+  ],
+  "count": {
+   "max": 7,
+   "mean": 3.8
+  }
  },
  {
   "creature": "Seeker",
@@ -5642,7 +5847,11 @@
   "levels": [
    1,
    3
-  ]
+  ],
+  "count": {
+   "max": 3,
+   "mean": 1.5
+  }
  },
  {
   "creature": "Dverger",
@@ -5654,7 +5863,12 @@
   "levels": [
    1,
    3
-  ]
+  ],
+  "count": {
+   "min": 3,
+   "max": 4,
+   "mean": 3.5
+  }
  },
  {
   "creature": "DvergerMage",
@@ -5666,7 +5880,12 @@
   "levels": [
    1,
    3
-  ]
+  ],
+  "count": {
+   "min": 2,
+   "max": 4,
+   "mean": 3.0
+  }
  },
  {
   "creature": "Dverger",
@@ -5678,7 +5897,12 @@
   "levels": [
    1,
    3
-  ]
+  ],
+  "count": {
+   "min": 2,
+   "max": 4,
+   "mean": 3.0
+  }
  },
  {
   "creature": "DvergerMage",
@@ -5690,7 +5914,12 @@
   "levels": [
    1,
    3
-  ]
+  ],
+  "count": {
+   "min": 2,
+   "max": 3,
+   "mean": 2.5
+  }
  },
  {
   "creature": "Seeker",
@@ -5702,7 +5931,11 @@
   "levels": [
    1,
    3
-  ]
+  ],
+  "count": {
+   "max": 4,
+   "mean": 2.0
+  }
  },
  {
   "creature": "Dverger",
@@ -5714,7 +5947,11 @@
   "levels": [
    1,
    3
-  ]
+  ],
+  "count": {
+   "max": 2,
+   "mean": 1.2
+  }
  },
  {
   "creature": "DvergerMage",
@@ -5726,7 +5963,11 @@
   "levels": [
    1,
    3
-  ]
+  ],
+  "count": {
+   "max": 3,
+   "mean": 1.2
+  }
  },
  {
   "creature": "Dverger",
@@ -5738,7 +5979,12 @@
   "levels": [
    1,
    3
-  ]
+  ],
+  "count": {
+   "min": 2,
+   "max": 3,
+   "mean": 2.5
+  }
  },
  {
   "creature": "DvergerMage",
@@ -5750,7 +5996,11 @@
   "levels": [
    1,
    3
-  ]
+  ],
+  "count": {
+   "min": 3,
+   "max": 3
+  }
  },
  {
   "creature": "Dverger",
@@ -5762,7 +6012,11 @@
   "levels": [
    1,
    3
-  ]
+  ],
+  "count": {
+   "max": 1,
+   "mean": 0.5
+  }
  },
  {
   "creature": "DvergerMage",
@@ -5774,7 +6028,11 @@
   "levels": [
    1,
    3
-  ]
+  ],
+  "count": {
+   "max": 1,
+   "mean": 0.5
+  }
  },
  {
   "creature": "Seeker",
@@ -5787,7 +6045,11 @@
    1,
    3
   ],
-  "respawning": true
+  "respawning": true,
+  "count": {
+   "max": 1,
+   "mean": 0.8
+  }
  },
  {
   "creature": "Morgen",
@@ -5799,7 +6061,11 @@
   "levels": [
    1,
    3
-  ]
+  ],
+  "count": {
+   "min": 1,
+   "max": 1
+  }
  },
  {
   "creature": "Morgen",
@@ -5811,7 +6077,11 @@
   "levels": [
    1,
    3
-  ]
+  ],
+  "count": {
+   "min": 1,
+   "max": 1
+  }
  },
  {
   "creature": "Morgen",
@@ -5823,7 +6093,11 @@
   "levels": [
    1,
    3
-  ]
+  ],
+  "count": {
+   "min": 1,
+   "max": 1
+  }
  },
  {
   "creature": "BlobMork",
@@ -6019,7 +6293,10 @@
    2,
    3
   ],
-  "respawning": true
+  "respawning": true,
+  "count": {
+   "atOnce": 3
+  }
  },
  {
   "creature": "Charred_Mage",
@@ -6032,7 +6309,10 @@
    2,
    3
   ],
-  "respawning": true
+  "respawning": true,
+  "count": {
+   "atOnce": 3
+  }
  },
  {
   "creature": "Charred_Melee",
@@ -6045,7 +6325,10 @@
    2,
    3
   ],
-  "respawning": true
+  "respawning": true,
+  "count": {
+   "atOnce": 3
+  }
  },
  {
   "creature": "Charred_Twitcher",
@@ -6058,7 +6341,10 @@
    2,
    3
   ],
-  "respawning": true
+  "respawning": true,
+  "count": {
+   "atOnce": 3
+  }
  },
  {
   "creature": "Charred_Archer",
@@ -6071,7 +6357,10 @@
    2,
    3
   ],
-  "respawning": true
+  "respawning": true,
+  "count": {
+   "atOnce": 3
+  }
  },
  {
   "creature": "Charred_Mage",
@@ -6084,7 +6373,10 @@
    2,
    3
   ],
-  "respawning": true
+  "respawning": true,
+  "count": {
+   "atOnce": 3
+  }
  },
  {
   "creature": "Charred_Melee",
@@ -6097,7 +6389,10 @@
    2,
    3
   ],
-  "respawning": true
+  "respawning": true,
+  "count": {
+   "atOnce": 3
+  }
  },
  {
   "creature": "Charred_Twitcher",
@@ -6110,7 +6405,10 @@
    2,
    3
   ],
-  "respawning": true
+  "respawning": true,
+  "count": {
+   "atOnce": 3
+  }
  },
  {
   "creature": "Charred_Archer",
@@ -6123,7 +6421,10 @@
    2,
    3
   ],
-  "respawning": true
+  "respawning": true,
+  "count": {
+   "atOnce": 3
+  }
  },
  {
   "creature": "Charred_Mage",
@@ -6136,7 +6437,10 @@
    2,
    3
   ],
-  "respawning": true
+  "respawning": true,
+  "count": {
+   "atOnce": 3
+  }
  },
  {
   "creature": "Charred_Melee",
@@ -6149,7 +6453,10 @@
    2,
    3
   ],
-  "respawning": true
+  "respawning": true,
+  "count": {
+   "atOnce": 3
+  }
  },
  {
   "creature": "Charred_Melee_Dyrnwyn",
@@ -6161,7 +6468,11 @@
   "levels": [
    3,
    3
-  ]
+  ],
+  "count": {
+   "min": 1,
+   "max": 1
+  }
  },
  {
   "creature": "Charred_Twitcher",
@@ -6174,7 +6485,10 @@
    2,
    3
   ],
-  "respawning": true
+  "respawning": true,
+  "count": {
+   "atOnce": 3
+  }
  },
  {
   "creature": "Greydwarf",
@@ -6186,7 +6500,11 @@
   "levels": [
    1,
    3
-  ]
+  ],
+  "count": {
+   "min": 5,
+   "max": 5
+  }
  },
  {
   "creature": "Greydwarf_Shaman",
@@ -6198,7 +6516,11 @@
   "levels": [
    1,
    3
-  ]
+  ],
+  "count": {
+   "min": 1,
+   "max": 1
+  }
  },
  {
   "creature": "Greydwarf",
@@ -6210,7 +6532,12 @@
   "levels": [
    1,
    3
-  ]
+  ],
+  "count": {
+   "min": 6,
+   "max": 7,
+   "mean": 6.2
+  }
  },
  {
   "creature": "Greydwarf_Elite",
@@ -6222,7 +6549,11 @@
   "levels": [
    1,
    3
-  ]
+  ],
+  "count": {
+   "max": 1,
+   "mean": 0.2
+  }
  },
  {
   "creature": "Goblin",
@@ -6234,7 +6565,11 @@
   "levels": [
    1,
    3
-  ]
+  ],
+  "count": {
+   "min": 2,
+   "max": 2
+  }
  },
  {
   "creature": "Boar",
@@ -6246,7 +6581,12 @@
   "levels": [
    1,
    3
-  ]
+  ],
+  "count": {
+   "min": 1,
+   "max": 9,
+   "mean": 5.0
+  }
  },
  {
   "creature": "Draugr",
@@ -6258,7 +6598,11 @@
   "levels": [
    1,
    3
-  ]
+  ],
+  "count": {
+   "min": 3,
+   "max": 3
+  }
  },
  {
   "creature": "Greydwarf",
@@ -6282,7 +6626,11 @@
   "levels": [
    1,
    3
-  ]
+  ],
+  "count": {
+   "max": 1,
+   "mean": 0.5
+  }
  },
  {
   "creature": "GoblinBrute",
@@ -6294,7 +6642,11 @@
   "levels": [
    1,
    3
-  ]
+  ],
+  "count": {
+   "max": 3,
+   "mean": 1.5
+  }
  },
  {
   "creature": "GoblinBrute",
@@ -6306,7 +6658,11 @@
   "levels": [
    1,
    3
-  ]
+  ],
+  "count": {
+   "max": 3,
+   "mean": 1.5
+  }
  },
  {
   "creature": "GoblinBrute",
@@ -6318,7 +6674,11 @@
   "levels": [
    1,
    3
-  ]
+  ],
+  "count": {
+   "max": 3,
+   "mean": 1.5
+  }
  },
  {
   "creature": "GoblinBrute",
@@ -6330,7 +6690,11 @@
   "levels": [
    1,
    3
-  ]
+  ],
+  "count": {
+   "max": 2,
+   "mean": 1.0
+  }
  },
  {
   "creature": "Goblin",
@@ -6342,7 +6706,11 @@
   "levels": [
    1,
    3
-  ]
+  ],
+  "count": {
+   "max": 3,
+   "mean": 1.6
+  }
  },
  {
   "creature": "Goblin",
@@ -6354,7 +6722,11 @@
   "levels": [
    1,
    3
-  ]
+  ],
+  "count": {
+   "min": 2,
+   "max": 2
+  }
  },
  {
   "creature": "Goblin",
@@ -6366,7 +6738,11 @@
   "levels": [
    1,
    3
-  ]
+  ],
+  "count": {
+   "min": 2,
+   "max": 2
+  }
  },
  {
   "creature": "Greydwarf",
@@ -6378,7 +6754,11 @@
   "levels": [
    1,
    3
-  ]
+  ],
+  "count": {
+   "min": 1,
+   "max": 1
+  }
  },
  {
   "creature": "Greydwarf",
@@ -6390,7 +6770,11 @@
   "levels": [
    1,
    3
-  ]
+  ],
+  "count": {
+   "max": 2,
+   "mean": 1.0
+  }
  },
  {
   "creature": "Goblin",
@@ -6402,7 +6786,11 @@
   "levels": [
    1,
    3
-  ]
+  ],
+  "count": {
+   "max": 9,
+   "mean": 4.9
+  }
  },
  {
   "creature": "Goblin",
@@ -6414,7 +6802,11 @@
   "levels": [
    1,
    3
-  ]
+  ],
+  "count": {
+   "max": 12,
+   "mean": 6.5
+  }
  },
  {
   "creature": "Greydwarf",
@@ -6426,7 +6818,11 @@
   "levels": [
    1,
    3
-  ]
+  ],
+  "count": {
+   "max": 4,
+   "mean": 2.0
+  }
  },
  {
   "creature": "Greydwarf_Elite",
@@ -6438,7 +6834,11 @@
   "levels": [
    1,
    3
-  ]
+  ],
+  "count": {
+   "max": 1,
+   "mean": 0.5
+  }
  },
  {
   "creature": "Skeleton",
@@ -6450,7 +6850,11 @@
   "levels": [
    1,
    3
-  ]
+  ],
+  "count": {
+   "max": 6,
+   "mean": 2.0
+  }
  },
  {
   "creature": "Skeleton_Mountains",
@@ -6462,7 +6866,11 @@
   "levels": [
    1,
    3
-  ]
+  ],
+  "count": {
+   "max": 5,
+   "mean": 2.0
+  }
  },
  {
   "creature": "Skeleton",
@@ -6475,7 +6883,10 @@
    1,
    3
   ],
-  "respawning": true
+  "respawning": true,
+  "count": {
+   "atOnce": 2
+  }
  },
  {
   "creature": "Skeleton_Mountains",
@@ -6487,7 +6898,11 @@
   "levels": [
    1,
    3
-  ]
+  ],
+  "count": {
+   "max": 19,
+   "mean": 6.3
+  }
  },
  {
   "creature": "Skeleton",
@@ -6500,7 +6915,10 @@
    1,
    3
   ],
-  "respawning": true
+  "respawning": true,
+  "count": {
+   "atOnce": 2
+  }
  },
  {
   "creature": "Skeleton_Mountains",
@@ -6512,7 +6930,11 @@
   "levels": [
    1,
    3
-  ]
+  ],
+  "count": {
+   "max": 19,
+   "mean": 7.0
+  }
  },
  {
   "creature": "Skeleton",
@@ -6524,7 +6946,12 @@
   "levels": [
    1,
    3
-  ]
+  ],
+  "count": {
+   "min": 2,
+   "max": 6,
+   "mean": 3.2
+  }
  },
  {
   "creature": "Skeleton",
@@ -6536,7 +6963,12 @@
   "levels": [
    1,
    3
-  ]
+  ],
+  "count": {
+   "min": 3,
+   "max": 6,
+   "mean": 4.5
+  }
  },
  {
   "creature": "Skeleton",
@@ -6548,7 +6980,11 @@
   "levels": [
    1,
    3
-  ]
+  ],
+  "count": {
+   "max": 7,
+   "mean": 2.3
+  }
  },
  {
   "creature": "Skeleton",
@@ -6560,7 +6996,11 @@
   "levels": [
    1,
    3
-  ]
+  ],
+  "count": {
+   "max": 2,
+   "mean": 0.7
+  }
  },
  {
   "creature": "Skeleton",
@@ -6572,7 +7012,11 @@
   "levels": [
    1,
    3
-  ]
+  ],
+  "count": {
+   "max": 7,
+   "mean": 3.5
+  }
  },
  {
   "creature": "Skeleton",
@@ -6584,7 +7028,11 @@
   "levels": [
    1,
    3
-  ]
+  ],
+  "count": {
+   "max": 1,
+   "mean": 0.5
+  }
  },
  {
   "creature": "BlobElite",
@@ -6596,7 +7044,11 @@
   "levels": [
    1,
    1
-  ]
+  ],
+  "count": {
+   "max": 1,
+   "mean": 0.3
+  }
  },
  {
   "creature": "Draugr",
@@ -6608,7 +7060,11 @@
   "levels": [
    1,
    3
-  ]
+  ],
+  "count": {
+   "max": 1,
+   "mean": 0.3
+  }
  },
  {
   "creature": "Blob",
@@ -6671,7 +7127,11 @@
   "levels": [
    1,
    1
-  ]
+  ],
+  "count": {
+   "max": 1,
+   "mean": 0.1
+  }
  },
  {
   "creature": "Wraith",
@@ -6683,7 +7143,11 @@
   "levels": [
    1,
    1
-  ]
+  ],
+  "count": {
+   "max": 1,
+   "mean": 0.1
+  }
  },
  {
   "creature": "Wraith",
@@ -6695,7 +7159,11 @@
   "levels": [
    1,
    1
-  ]
+  ],
+  "count": {
+   "max": 1,
+   "mean": 0.1
+  }
  },
  {
   "creature": "Wraith",
@@ -6707,7 +7175,11 @@
   "levels": [
    1,
    1
-  ]
+  ],
+  "count": {
+   "max": 1,
+   "mean": 0.1
+  }
  },
  {
   "creature": "Wraith",
@@ -6719,7 +7191,11 @@
   "levels": [
    1,
    1
-  ]
+  ],
+  "count": {
+   "max": 1,
+   "mean": 0.1
+  }
  },
  {
   "creature": "Wraith",
@@ -6731,7 +7207,11 @@
   "levels": [
    1,
    1
-  ]
+  ],
+  "count": {
+   "max": 1,
+   "mean": 0.1
+  }
  },
  {
   "creature": "Draugr",
@@ -6743,7 +7223,11 @@
   "levels": [
    1,
    3
-  ]
+  ],
+  "count": {
+   "max": 2,
+   "mean": 1.5
+  }
  },
  {
   "creature": "Draugr_Ranged",
@@ -6755,7 +7239,11 @@
   "levels": [
    1,
    3
-  ]
+  ],
+  "count": {
+   "max": 2,
+   "mean": 0.5
+  }
  },
  {
   "creature": "Wraith",
@@ -6767,7 +7255,11 @@
   "levels": [
    1,
    1
-  ]
+  ],
+  "count": {
+   "max": 1,
+   "mean": 0.1
+  }
  },
  {
   "creature": "Draugr",
@@ -6780,7 +7272,12 @@
    1,
    3
   ],
-  "respawning": true
+  "respawning": true,
+  "count": {
+   "max": 2,
+   "atOnce": 2,
+   "mean": 1.0
+  }
  },
  {
   "creature": "Draugr_Elite",
@@ -6793,7 +7290,12 @@
    1,
    3
   ],
-  "respawning": true
+  "respawning": true,
+  "count": {
+   "max": 1,
+   "atOnce": 2,
+   "mean": 0.3
+  }
  },
  {
   "creature": "Draugr_Ranged",
@@ -6806,7 +7308,10 @@
    1,
    3
   ],
-  "respawning": true
+  "respawning": true,
+  "count": {
+   "atOnce": 2
+  }
  },
  {
   "creature": "Draugr",
@@ -6819,7 +7324,12 @@
    1,
    3
   ],
-  "respawning": true
+  "respawning": true,
+  "count": {
+   "max": 2,
+   "atOnce": 2,
+   "mean": 1.0
+  }
  },
  {
   "creature": "Draugr_Elite",
@@ -6832,7 +7342,12 @@
    1,
    3
   ],
-  "respawning": true
+  "respawning": true,
+  "count": {
+   "max": 1,
+   "atOnce": 2,
+   "mean": 0.3
+  }
  },
  {
   "creature": "Draugr_Ranged",
@@ -6845,7 +7360,10 @@
    1,
    3
   ],
-  "respawning": true
+  "respawning": true,
+  "count": {
+   "atOnce": 2
+  }
  },
  {
   "creature": "Draugr_Elite",
@@ -6857,7 +7375,11 @@
   "levels": [
    1,
    3
-  ]
+  ],
+  "count": {
+   "max": 2,
+   "mean": 0.6
+  }
  },
  {
   "creature": "BlobTar",
@@ -6870,7 +7392,12 @@
    1,
    1
   ],
-  "respawning": true
+  "respawning": true,
+  "count": {
+   "min": 2,
+   "max": 9,
+   "mean": 5.5
+  }
  },
  {
   "creature": "BlobTar",
@@ -6883,7 +7410,12 @@
    1,
    1
   ],
-  "respawning": true
+  "respawning": true,
+  "count": {
+   "min": 2,
+   "max": 9,
+   "mean": 5.5
+  }
  },
  {
   "creature": "BlobTar",
@@ -6896,7 +7428,12 @@
    1,
    1
   ],
-  "respawning": true
+  "respawning": true,
+  "count": {
+   "min": 2,
+   "max": 9,
+   "mean": 5.5
+  }
  },
  {
   "creature": "BlobTar",
@@ -6909,7 +7446,12 @@
    1,
    1
   ],
-  "respawning": true
+  "respawning": true,
+  "count": {
+   "min": 2,
+   "max": 9,
+   "mean": 5.5
+  }
  },
  {
   "creature": "BlobTar",
@@ -6922,7 +7464,12 @@
    1,
    1
   ],
-  "respawning": true
+  "respawning": true,
+  "count": {
+   "min": 2,
+   "max": 6,
+   "mean": 4.0
+  }
  },
  {
   "creature": "BlobTar",
@@ -6935,7 +7482,12 @@
    1,
    1
   ],
-  "respawning": true
+  "respawning": true,
+  "count": {
+   "min": 2,
+   "max": 6,
+   "mean": 4.0
+  }
  },
  {
   "creature": "ShadowPerson",
@@ -6947,7 +7499,11 @@
   "levels": [
    1,
    3
-  ]
+  ],
+  "count": {
+   "max": 4,
+   "mean": 2.0
+  }
  },
  {
   "creature": "Elaking",
@@ -6997,7 +7553,11 @@
   "levels": [
    1,
    3
-  ]
+  ],
+  "count": {
+   "max": 2,
+   "mean": 1.1
+  }
  },
  {
   "creature": "Volture",
@@ -7009,7 +7569,12 @@
   "levels": [
    1,
    1
-  ]
+  ],
+  "count": {
+   "min": 1,
+   "max": 4,
+   "mean": 2.5
+  }
  },
  {
   "creature": "Boar",

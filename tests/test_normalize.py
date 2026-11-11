@@ -711,6 +711,19 @@ class Entities(FixtureCase):
                                           "increment": {"key": "invrows", "amount": 1}}])
         self.assertEqual(t["locations"], [{"location": "Market", "biomes": ["Meadows"]}])
 
+    def test_spawn_counts(self):
+        loc = {"components": [
+            {"type": "CreatureSpawner", "path": "a", "fields": {"m_creaturePrefab": {"$ref": "Raider"}}},
+            {"type": "CreatureSpawner", "path": "b", "fields": {"m_creaturePrefab": {"$ref": "Raider"}}},
+            {"type": "CreatureSpawner", "path": "c", "fields": {"m_creaturePrefab": {"$ref": "Raider"}}},
+            {"type": "SpawnArea", "path": "d", "fields": {"m_maxNear": 4, "m_prefabs": [{"m_prefab": {"$ref": "Pup"}}]}}],
+            "instances": [{"prefab": "Spawner_Raider", "path": "b", "randomSpawn": {"chance": 33}},
+                          {"prefab": "Spawner_Raider", "path": "c", "inactive": True},  # never created
+                          {"prefab": "Pup", "path": "e", "randomSpawn": {"chance": 50}}]}  # placed directly
+        got = N.spawn_counts(loc)
+        self.assertEqual(N.prune(got["Raider"]), {"min": 1, "max": 2, "mean": 1.3})
+        self.assertEqual(N.prune(got["Pup"]), {"max": 1, "mean": 0.5, "atOnce": 4})
+
     def test_location_placement(self):
         loc = {x["id"]: x for x in N.locations()}
         p = loc["Market"]["placement"]

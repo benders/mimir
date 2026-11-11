@@ -572,7 +572,7 @@ def write_dump(raw: Path) -> Path:
     dump("locations/Camp.json", {"name": "Camp", "components": [comp("Location", {}), *spawners(
         ("CreatureSpawner", creature_spawner("Raider", minLevel=3, maxLevel=1)),  # swapped levels
         ("CreatureSpawner", creature_spawner("Raider", minLevel=1, maxLevel=2, respawnTimeMinuts=30)),
-        ("SpawnArea", m(prefabs=[m(prefab=R("Pup"), weight=1, minLevel=1, maxLevel=1)])),
+        ("SpawnArea", m(maxNear=3, prefabs=[m(prefab=R("Pup"), weight=1, minLevel=1, maxLevel=1)])),
         ("CreatureSpawner", creature_spawner("vfx_Poof")),
         container(("Gem", 1, 1, 1), ("Wood", 2, 5, 3)),
         container(("Wood", 1, 1, 1), name="$piece_other"),  # unresolved name: its own source
@@ -592,6 +592,7 @@ def write_dump(raw: Path) -> Path:
         {"prefab": "piece_bench", "path": "cave/piece_bench (1)"},  # a non-buildable piece standing there
         {"prefab": "LootChest", "path": "cave/LootChest"},
         {"prefab": "Spawner_Raider", "path": "cave/Spawner_Raider"},
+        {"prefab": "Spawner_Raider", "path": "cave/Spawner_Raider (1)", "randomSpawn": {"chance": 50}},  # count 1-2
         {"prefab": "Pup", "path": "cave/Pup"},  # a creature placed directly
         {"prefab": "CupHolder", "path": "altar/CupHolder"}, {"prefab": "CupHolder", "path": "altar/CupHolder (1)"},
         {"prefab": "CupHolder", "path": "altar/CupHolder (2)", "inactive": True},  # never placed: not a stand to fill

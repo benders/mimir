@@ -1822,11 +1822,63 @@ def add_place(places: dict, name: str, dungeon: bool, chance: float | None = Non
                             key=lambda r: r["room"])
 
 
+def spawn_counts(p: dict) -> dict[str, dict]:
+    """creature -> how many one copy of a location (its own prefab, not dungeon rooms) holds. Each CreatureSpawner
+    makes one creature once a player is within m_triggerDistance (respawning ones: one at a time) and a creature
+    placed directly is one (CreatureSpawner.UpdateSpawner): `min` (spawners always there), `max` (every one there),
+    `mean` (their RandomSpawn chances summed, when not `max`). A SpawnArea keeps spawning its weighted prefabs while a
+    player is near, up to m_maxNear of them within m_nearRadius (SpawnArea.SpawnOne): `atOnce` sums those caps.
+    Spawner groups (m_spawnGroupRadius) occur only in dungeon rooms and aren't modelled."""
+    inst = {i["path"]: i for i in p.get("instances", [])}
+
+    def chance(path) -> float:  # % that the object is created in a copy of the location
+        i = inst.get(path)
+        if i is None:
+            return 100
+        return min(i.get("randomSpawn", {}).get("chance", 100), 100) if is_placed(i) else 0
+
+    acc = defaultdict(lambda: {"min": 0, "max": 0, "mean": 0.0, "atOnce": 0})
+
+    def one(creature: str, ch: float) -> None:
+        if ch > 0:
+            e = acc[creature]
+            e["min"] += ch >= 100
+            e["max"] += 1
+            e["mean"] += ch / 100
+
+    for c in p["components"]:
+        f, ch = c["fields"], chance(c.get("path"))
+        if c["type"] == "CreatureSpawner" and keep(ref(f["m_creaturePrefab"]), is_creature, is_item):
+            one(ref(f["m_creaturePrefab"]), ch)
+        elif c["type"] == "SpawnArea" and ch > 0:
+            for x in f["m_prefabs"]:
+                if keep(ref(x["m_prefab"]), is_creature, is_item):
+                    acc[ref(x["m_prefab"])]["atOnce"] += f["m_maxNear"]
+    listed = {c.get("path") for c in p["components"]}
+    for i in p.get("instances", []):
+        if i["prefab"] not in PREFABS:
+            continue
+        if is_creature(i["prefab"]):
+            one(i["prefab"], chance(i["path"]))
+        elif i["path"] not in listed:  # a spawner object whose components the dump didn't repeat in the location
+            for c in PREFABS[i["prefab"]]["components"]:
+                if c["type"] == "CreatureSpawner" and keep(ref(c["fields"]["m_creaturePrefab"]), is_creature, is_item):
+                    one(ref(c["fields"]["m_creaturePrefab"]), chance(i["path"]))
+    return {k: {"min": e["min"], "max": e["max"], "atOnce": e["atOnce"],
+                "mean": num_or_int(round(e["mean"], 1)) if e["mean"] < e["max"] else None} for k, e in acc.items()}
+
+
+def num_or_int(v: float) -> float | int:
+    return int(v) if float(v).is_integer() else v
+
+
 def location_spawns() -> list[dict]:
     """Creature spawners, spawn areas and boss altars inside world locations and the dungeons they generate,
     including those of placed `Spawner_*` objects, and creatures placed directly."""
-    found, biomes_of = defaultdict(list), {}
+    found, biomes_of, counts = defaultdict(list), {}, {}
     for name, bs, p, dungeon in placed_in_locations():
+        if not dungeon:
+            counts[name] = spawn_counts(p)
         found[name, dungeon] += spawners_in({"components": with_instances(p), "instances": p.get("instances", [])})
         found[name, dungeon] += [{"creature": n} for n in sorted(placed_prefabs(p)) if n in PREFABS and is_creature(n)]
         biomes_of[name] = bs
@@ -1834,8 +1886,10 @@ def location_spawns() -> list[dict]:
     for name in sorted(biomes_of):
         for dungeon in (False, True):
             for e in merge_spawners(found[name, dungeon]):
-                out.append({"creature": e.pop("creature"), "source": "dungeon" if dungeon else "location",
-                            "location": name, "biomes": biomes_of[name], **e})
+                c = e.pop("creature")
+                n = None if dungeon or "summon" in e else counts[name].get(c)
+                out.append({"creature": c, "source": "dungeon" if dungeon else "location",
+                            "location": name, "biomes": biomes_of[name], **e, "count": n})
     return out
 
 

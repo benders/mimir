@@ -211,7 +211,10 @@
    1,
    1
   ],
-  "respawning": true
+  "respawning": true,
+  "count": {
+   "atOnce": 3
+  }
  },
  {
   "creature": "Raider",
@@ -225,7 +228,11 @@
    1,
    3
   ],
-  "respawning": true
+  "respawning": true,
+  "count": {
+   "min": 2,
+   "max": 2
+  }
  },
  {
   "creature": "Chief",
@@ -245,7 +252,11 @@
   "location": "Lair",
   "biomes": [
    "Mountain"
-  ]
+  ],
+  "count": {
+   "min": 1,
+   "max": 1
+  }
  },
  {
   "creature": "Raider",
@@ -257,7 +268,12 @@
   "levels": [
    2,
    2
-  ]
+  ],
+  "count": {
+   "min": 1,
+   "max": 2,
+   "mean": 1.5
+  }
  },
  {
   "creature": "Singer",
@@ -289,7 +305,11 @@
   "location": "Stash",
   "biomes": [
    "Meadows"
-  ]
+  ],
+  "count": {
+   "min": 1,
+   "max": 1
+  }
  },
  {
   "creature": "Pup",

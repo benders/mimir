@@ -225,6 +225,13 @@ class Site(unittest.TestCase):
         self.assertNotIn("away from the biome", market_where.split("<ul")[0])  # Median: said in the list only
         self.assertIn("<li>away from biome edges", market_where)
         self.assertNotIn("<h2>Rooms</h2>", village)  # not a dungeon
+        camp = (self.out / "locations/camp.html").read_text(encoding="utf-8")  # how many per copy
+        self.assertRegex(camp, r"<th>Count</th>")
+        self.assertRegex(camp, r"Raider</span></a></td><td>[^<]*</td><td>2</td><td>respawns")
+        self.assertRegex(camp, r"Pup</span></a></td><td>[^<]*</td><td>up to 3 at a time</td>")
+        self.assertIn("<td>1–2, 1.5 on average</td><td>at the entrance</td>", lair)  # one of two spawners at 50%
+        raider = (self.out / "creatures/Raider.html").read_text(encoding="utf-8")
+        self.assertRegex(raider, r"<th>Count</th><th>Notes</th>.*<td>1–2, 1.5 on average</td>")
         market = (self.out / "locations/market.html").read_text(encoding="utf-8")
         self.assertIn('<p>Home of <a href="traders/', market)
         self.assertFalse((self.out / "locations/ruin.html").exists())  # disabled: never placed
