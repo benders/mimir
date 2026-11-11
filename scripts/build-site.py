@@ -2900,7 +2900,7 @@ def category_heading(title: str, skill: str, stage: str = "") -> str:
 
 def block_weapons() -> str:
     """Every player weapon with a known attack cycle, by category, lowest DPS first, in the item pages' stats format at
-    quality 1 (not upgraded; tooltip damage, skill roll 1): damage per type, the primary attack's hits and seconds, then
+    quality 1 (not upgraded; tooltip damage, skill roll 1): one hit's damage (hit_damage), the primary attack's hits and seconds, then
     weapon_stats (DPS, per Stam, Secondary damage), * and † on the numbers they apply to."""
     weapons = [x for x in ITEMS.values() if x["type"] in WEAPONS and has_page("item", x["id"]) and not x.get("tamedOnly")
                and not x.get("ammoType") and any(mechanics.attack_cycle(a) for a in (x.get("attack"), x.get("secondaryAttack")))]
@@ -2913,7 +2913,8 @@ def block_weapons() -> str:
             if not vals:  # no damage at all: left out
                 continue
             cycle = mechanics.attack_cycle(a)
-            vals |= {k: num(v) for k, v in i.get("damages", {}).items()}
+            dmg = i.get("damages", {})  # one hit's, every type summed less those most creatures ignore (* = spirit)
+            vals["Damage"] = num(mechanics.hit_damage(dmg, IGNORED)) + ("*" if 1 in stats[0]["starred"] else "")
             if cycle:
                 vals |= {"Hits": num(sum(c["hits"] for c in a["chain"]) * volleys(i, a)), "Seconds": num(round(cycle, 3))}
             dps = next((st["base"] for st in stats if st["label"] == "DPS"), -1)
@@ -2922,11 +2923,10 @@ def block_weapons() -> str:
             continue
         rows.sort(key=lambda r: r[0])  # lowest DPS first
         present = {k for r in rows for k in r[2]}
-        cols = ([k for k in mechanics.DAMAGE_TYPES if k in present]
-                + [k for k in ("Hits", "Seconds", "DPS", "per Stam", "Secondary damage") if k in present])
+        cols = [k for k in ("Damage", "Hits", "Seconds", "DPS", "per Stam", "Secondary damage") if k in present]
         body = [[link("item", iid)] + [vals.get(k, "") for k in cols] for _, iid, vals in rows]
         st = group_stage("item", [iid for _, iid, _ in rows])
-        tbl = table(["Weapon"] + [esc(k.capitalize() if k in mechanics.DAMAGE_TYPES else k) for k in cols], body, "num weapons")
+        tbl = table(["Weapon"] + [esc(k) for k in cols], body, "num weapons")
         out += category_heading(title, skill, st) + tbl.replace('<div class="tw">', f'<div class="tw"{st}>', 1)
     skipped = [t for t in IGNORED if t not in mechanics.TOOL_DAMAGE]
     note = "; ".join(f"{t} damage ({n} of {total} creatures are immune to it)" for t in skipped for n, total in [IGNORED[t]])

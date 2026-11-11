@@ -28,7 +28,7 @@ freezes the animation for 0.15 s. Skills and status effects don't change attack 
   follow you, and each new one unsummons your oldest of that creature beyond the staff's quality (1–4)
 
 The tables group weapons by category, with the skill each trains, lowest DPS first, in the format of each item
-page's stats table: damage per type, then the primary attack's hits, seconds, DPS and damage per stamina, and the
+page's stats table: one hit's damage, then the primary attack's hits, seconds, DPS and damage per stamina, and the
 damage of one secondary attack. They use quality 1 (not upgraded; each item page has them per quality), a skill roll of 1 (every hit connects at full damage) and the sum of the weapon's damage
 types, leaving out any type more than half of all creatures are immune to or ignore: chop and pickaxe, and spirit,
 which is marked *. Weapons that fire several projectiles (†) count all of them hitting one target, and Dundr's time is

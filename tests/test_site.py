@@ -537,11 +537,11 @@ class Site(unittest.TestCase):
         page = (self.out / "mechanics/weapons.html").read_text(encoding="utf-8")
         # grouped by category with the skill in the heading; no secondary attacks in the group: no secondary columns
         self.assertIn('<h3 id="swords">Swords <span class="skill"><a href="mechanics/skills.html">Swords skill</a>', page)
-        # the item pages' format at quality 1: damage per type, hits, seconds, DPS, per Stam (175 / (2 x 10))
-        self.assertIn("<th>Weapon</th><th>Slash</th><th>Fire</th><th>Hits</th><th>Seconds</th><th>DPS</th><th>per Stam</th>", page)
-        self.assertIn("<td>30</td><td>5</td><td>3</td><td>1.57</td><td>111.1</td><td>8.8</td></tr>", page)
-        # spirit: * on the numbers that leave it out, not on the Spirit column; a secondary attack's damage
-        self.assertIn("<td>10</td><td>5</td><td>3</td><td>1.57</td><td>31.7*</td><td>2.5*</td><td>30*</td></tr>", page)
+        # the item pages' format at quality 1: one hit's damage (types summed), hits, seconds, DPS, per Stam (175 / (2 x 10))
+        self.assertIn("<th>Weapon</th><th>Damage</th><th>Hits</th><th>Seconds</th><th>DPS</th><th>per Stam</th>", page)
+        self.assertIn("<td>35</td><td>3</td><td>1.57</td><td>111.1</td><td>8.8</td></tr>", page)
+        # spirit 5 left out of the Mace's damage: *; a secondary attack's damage
+        self.assertIn("<td>10*</td><td>3</td><td>1.57</td><td>31.7*</td><td>2.5*</td><td>30*</td></tr>", page)
         bow = (self.out / "items/Longbow.html").read_text(encoding="utf-8")
         # 2.5 s full draw at skill 0; 0.5 s at 100, but the 1 s release animation is longer
         self.assertIn("full draw 2.5 s (0.5 s at skill 100), 2.5 s per shot (1 s at skill 100)", bow)
