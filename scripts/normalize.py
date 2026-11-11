@@ -1788,13 +1788,15 @@ def with_instances(p: dict) -> list[dict]:
 def place_chances(p: dict) -> dict[str, float]:
     """prefab -> % chance that one copy of the location or room has it, for placed instances that are all under a
     RandomSpawn rolled below 100 (RandomSpawn.Randomize: shown when Random.Range(0f, 100f) <= m_chanceToSpawn;
-    copies roll independently). Prefabs with an unconditional copy are left out. Only the nearest RandomSpawn is
-    recorded in the dump, and its biome, theme and elevation conditions are ignored."""
+    copies roll independently). Prefabs with an unconditional copy are left out, and so are those whose chance
+    rounds to 100 (22 stake walls at 66% each: 1 - 0.34^22). Only the nearest RandomSpawn is recorded in the dump,
+    and its biome, theme and elevation conditions are ignored."""
     missing = defaultdict(lambda: 1.0)
     for i in p.get("instances", []):
         if is_placed(i):
             missing[i["prefab"]] *= 1 - min(i.get("randomSpawn", {}).get("chance", 100), 100) / 100
-    return {n: int(c) if (c := round(100 * (1 - m), 1)).is_integer() else c for n, m in missing.items() if m > 0}
+    pct = {n: round(100 * (1 - m), 1) for n, m in missing.items() if m > 0}
+    return {n: int(c) if c.is_integer() else c for n, c in pct.items() if c < 100}
 
 
 @functools.cache

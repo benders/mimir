@@ -691,6 +691,10 @@ class Entities(FixtureCase):
         self.assertEqual(by["Crate"]["locations"], [{"location": "Lair", "dungeon": False, "chance": 70}])
         self.assertNotIn("chance", by["Strongbox"]["locations"][0])
         self.assertNotIn("chance", by["Strongbox"]["locations"][1])  # dungeon rooms: never recorded
+        many = {"instances": [{"prefab": "Wall", "path": f"w ({n})", "randomSpawn": {"chance": 66}} for n in range(22)]
+                 + [{"prefab": "Lamp", "path": "l", "randomSpawn": {"chance": 50}},
+                    {"prefab": "Lamp", "path": "l (1)", "randomSpawn": {"chance": 50}}]}
+        self.assertEqual(N.place_chances(many), {"Lamp": 75})  # 1 - 0.34^22 rounds to 100: always there
 
     def test_fishing(self):
         [f] = N.fishing(N.spawns())

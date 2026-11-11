@@ -2183,7 +2183,7 @@ def location_page(name: str, dungeon: bool = False) -> None:
         out = any(not x.get("dungeon") for x in at) and outside
         where = "inside and at the entrance" if inside and out else "inside" if inside else out
         chances = {x.get("chance") for x in at if not x.get("dungeon")} - {None}
-        if chances and not inside and max(chances) < 100:
+        if chances and not inside:
             where += chance_tag(max(chances)) if dungeon else f"{num(max(chances))}%"
         res.append((src["kind"] != "container", source_stage(src), source_name(src).lower(),
                     [esc(source_name(src)), esc(src["kind"]), where, " ".join(given_link(i) for i in items)]))
@@ -2205,7 +2205,7 @@ def location_page(name: str, dungeon: bool = False) -> None:
         out = any(not x.get("dungeon") for x in at) and outside
         where = "inside and at the entrance" if inside and out else "inside" if inside else out
         chances = {x.get("chance") for x in at if not x.get("dungeon")} - {None}
-        if chances and not inside and max(chances) < 100:
+        if chances and not inside:
             where += chance_tag(max(chances)) if dungeon else f"{num(max(chances))}%"
         prows[pc["id"]] = [link("piece", pc["id"]), where]
         pstages[pc["id"]] = stage_of("piece", pc["id"])

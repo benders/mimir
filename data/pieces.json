@@ -8551,8 +8551,7 @@
     "location": "Mistlands_GuardTower3_ruined_new"
    },
    {
-    "location": "Mistlands_Harbour1",
-    "chance": 100
+    "location": "Mistlands_Harbour1"
    },
    {
     "location": "Mistlands_Lighthouse1_new"
@@ -8866,8 +8865,7 @@
     "location": "Mistlands_GuardTower3_ruined_new"
    },
    {
-    "location": "Mistlands_Harbour1",
-    "chance": 100
+    "location": "Mistlands_Harbour1"
    },
    {
     "location": "Mistlands_Lighthouse1_new"
@@ -12923,8 +12921,7 @@
     "location": "Mistlands_GuardTower3_new"
    },
    {
-    "location": "Mistlands_GuardTower3_ruined_new",
-    "chance": 100
+    "location": "Mistlands_GuardTower3_ruined_new"
    }
   ],
   "stage": "Mistlands",
@@ -17667,16 +17664,13 @@
   },
   "locations": [
    {
-    "location": "CharredRuins1",
-    "chance": 100
+    "location": "CharredRuins1"
    },
    {
-    "location": "CharredTowerRuins1",
-    "chance": 100
+    "location": "CharredTowerRuins1"
    },
    {
-    "location": "CharredTowerRuins1_dvergr",
-    "chance": 100
+    "location": "CharredTowerRuins1_dvergr"
    }
   ],
   "stage": "AshLands",
