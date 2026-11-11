@@ -46,6 +46,10 @@ class Formulas(unittest.TestCase):
         self.assertEqual(M.ignored_damage(foes), {"chop": (2, 3), "spirit": (2, 3)})  # fire: 1 of 3, not most
         self.assertEqual(M.combo_damage(10, a), 10 + 2 * 10 * 2)  # the last level's two hits doubled
         self.assertEqual(M.combo_damage(10, {**a, "damageMultiplier": 1.5}), 75)
+        # stamina is charged once per chain level: 50 damage / (2 x 10)
+        self.assertEqual(M.damage_per_stamina(10, {**a, "stamina": 10}), 2.5)
+        self.assertAlmostEqual(M.damage_per_stamina(10, {**a, "stamina": 10}, skill=100), 2.5 / 0.67)
+        self.assertIsNone(M.damage_per_stamina(10, a))  # no stamina cost (bow draw, staff eitr)
         self.assertAlmostEqual(M.dps(10, a), 50 / 1.65)
         self.assertIsNone(M.dps(10, {"chain": a["chain"]}))  # no cycle, draw or reload
         self.assertIsNone(M.dps(0, a))

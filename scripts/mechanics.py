@@ -235,6 +235,15 @@ def dps(per_hit: float, attack: dict | None, skill: float = 0) -> float | None:
     return combo_damage(per_hit, attack) / cycle
 
 
+def damage_per_stamina(per_hit: float, attack: dict | None, skill: float = 0) -> float | None:
+    """Combo damage / stamina spent on it: Attack.Update charges GetAttackStamina once per attack started, so once per
+    chain level (attack_cost; no gear or status-effect modifiers). None for attacks that cost no stamina (bows drain
+    while drawing, staffs use eitr) or have no chain timing. `per_hit`: shot_damage."""
+    if not attack or not attack.get("stamina") or not attack.get("chain") or attack.get("random") or not per_hit:
+        return None
+    return combo_damage(per_hit, attack) / (len(attack["chain"]) * attack_cost(attack["stamina"], skill))
+
+
 def food_fraction(left: float, burn: float) -> float:
     """Share of a food's health/stamina/eitr still given with `left` of its `burn` seconds to go
     (Player.UpdateFood: Pow(Clamp01(m_time / m_foodBurnTime), 0.3), recomputed once per second)."""

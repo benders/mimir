@@ -267,7 +267,8 @@ def prefabs():
                                                    onlySpawnedProjectilesDealDamage=True))),  # 4 splinters, each the whole hit
         prefab("Splinter", comp("Projectile", m(damage=damages(), randomSpawnOnHit=[]))),
         item("Mace", name="$item_mace", itemType="OneHandedWeapon", icons=[S("Sword")], skillType="Clubs",
-             damages=damages(blunt=10, spirit=5), attack=attack(attackChainLevels=2)),  # spirit: left out of DPS
+             damages=damages(blunt=10, spirit=5), damagesPerLevel=damages(blunt=2), maxQuality=2, attack=attack(attackChainLevels=2),
+             secondaryAttack=attack(attackStamina=20, damageMultiplier=3)),  # spirit: left out of DPS
         item("Dart", name="$item_dart", itemType="Ammo", icons=[S("Sword")], damages=damages(pierce=10), ammoType="$ammo_dart"),
         item("DartBlunt", name="$item_dart", itemType="Ammo", icons=[S("Sword")], damages=damages(blunt=4), ammoType="$ammo_dart"),
         with_components(item("Mead", name="$item_mead", itemType="Consumable", icons=[S("Mead")], consumeStatusEffect=R("SE_Fizz")),

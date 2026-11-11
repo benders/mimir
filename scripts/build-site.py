@@ -981,16 +981,34 @@ def quality_table(i: dict) -> str:
     dmg, dpl = i.get("damages", {}), i.get("damagesPerLevel", {})
     for k in dict.fromkeys([*dmg, *dpl]):
         cols.append((k.capitalize(), dmg.get(k, 0), dpl.get(k, 0)))
-    note = ""
+    note, marks = "", {}  # marks: column index -> the qualities whose numbers get the * (they leave out damage)
     if t in WEAPONS and not i.get("tamedOnly") and not i.get("ammoType"):  # ammo: DPS depends on it
-        mark = "*" if dps_skipped(i) else ""
-        for label, a in (("DPS", i.get("attack")), ("Secondary DPS", i.get("secondaryAttack"))):
-            # a reload (Dundr) depends on skill: DPS at skill 0 and 100
-            for skill in (0, 100) if (a or {}).get("reload") else (0,):
-                if (d := weapon_dps(i, a, dmg, skill)) is not None and d > 0:
-                    lbl = label + (f" (skill {skill})" if a.get("reload") else "")
-                    cols.append((lbl + mark + volley_mark(i, a), d, weapon_dps(i, a, dpl, skill) or 0))  # linear
-                    note = (dps_note(i) if mark else "") + volley_note(i, a)
+        skipped = dps_skipped(i)
+        a, sec = i.get("attack"), i.get("secondaryAttack")
+
+        def add(label, base, per):  # every value is linear in the damage: base at quality 1, + per level
+            if skipped:
+                marks[len(cols)] = {q for q in range(1, i.get("maxQuality", 1) + 1)
+                                    if any(dmg.get(k, 0) + (q - 1) * dpl.get(k, 0) > 0 for k in skipped)}
+            cols.append((label, base, per or 0))
+
+        # a reload (Dundr) depends on skill: DPS at skill 0 and 100
+        for skill in (0, 100) if (a or {}).get("reload") else (0,):
+            if (d := weapon_dps(i, a, dmg, skill)) is not None and d > 0:
+                add("DPS" + (f" (skill {skill})" if a.get("reload") else "") + volley_mark(i, a), d,
+                    weapon_dps(i, a, dpl, skill))
+                note = volley_note(i, a)
+        hit = lambda a, d: mechanics.shot_damage(d, a, weapon_hits(i, a), IGNORED)
+        if (s := mechanics.damage_per_stamina(hit(a, dmg), a)) is not None:
+            add("per Stam" + volley_mark(i, a), s, mechanics.damage_per_stamina(hit(a, dpl), a))
+            note = volley_note(i, a)
+        # one use of the secondary attack (one hit × its multiplier when its animation timing isn't known)
+        once = lambda d: (mechanics.combo_damage(hit(sec, d), sec) if sec.get("chain")
+                          else hit(sec, d) * (sec.get("damageMultiplier") or 1))
+        if sec and (d := once(dmg)) > 0:
+            add("Secondary damage" + volley_mark(i, sec), d, once(dpl))
+        if marks and any(marks.values()):
+            note = dps_note(i) + note
     if (i.get("summons") or {}).get("perQuality"):
         cols.append(("Summons following", 1, 1))  # SpawnAbility m_setMaxInstancesFromWeaponLevel: the staff's quality
     if t in ARMOR:
@@ -1003,9 +1021,10 @@ def quality_table(i: dict) -> str:
         cols.append(("Durability", i["durability"]["max"], i["durability"].get("perLevel", 0)))
     if not cols:
         return ""
+    cell = lambda k, q, b, p: num(round(b + (q - 1) * p, 1)) + ("*" if q in marks.get(k, ()) else "")
     if mq <= 1:
-        return kv((c[0], num(round(c[1], 1))) for c in cols) + note
-    rows = [[str(q)] + [num(round(b + (q - 1) * p, 1)) for _, b, p in cols] for q in range(1, mq + 1)]
+        return kv((c[0], cell(k, 1, c[1], 0)) for k, c in enumerate(cols)) + note
+    rows = [[str(q)] + [cell(k, q, b, p) for k, (_, b, p) in enumerate(cols)] for q in range(1, mq + 1)]
     return table(["Quality"] + [esc(c[0]) for c in cols], rows, "num") + note
 
 
@@ -1045,7 +1064,7 @@ def dps_skipped(i: dict) -> list[str]:
 
 def dps_note(i: dict) -> str:
     parts = [f"{t} damage: {n} of {total} creatures are immune to it" for t in dps_skipped(i) for n, total in [IGNORED[t]]]
-    return f'<p class="note">* DPS leaves out {"; ".join(parts)}.</p>'
+    return f'<p class="note">* Leaves out {"; ".join(parts)}.</p>'
 
 
 def attack_text(a: dict) -> str:

@@ -592,11 +592,14 @@
   "icon": "Sword",
   "weight": 1.0,
   "stack": 1,
-  "maxQuality": 1,
+  "maxQuality": 2,
   "skill": "Clubs",
   "damages": {
    "blunt": 10,
    "spirit": 5
+  },
+  "damagesPerLevel": {
+   "blunt": 2
   },
   "backstab": 1,
   "parryBonus": 1,
@@ -618,6 +621,12 @@
    ],
    "lastChainMultiplier": 2,
    "cycle": 1.575
+  },
+  "secondaryAttack": {
+   "type": "Horizontal",
+   "stamina": 20,
+   "damageMultiplier": 3,
+   "adrenaline": 1
   },
   "stage": "Meadows",
   "via": {

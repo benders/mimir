@@ -377,8 +377,13 @@ class Site(unittest.TestCase):
     def test_spirit(self):
         # most fixture creatures are immune to spirit: DPS leaves it out, and creatures always show their spirit tag
         mace = (self.out / "items/Mace.html").read_text(encoding="utf-8")
-        self.assertIn("<dt>DPS*</dt><dd>31.7</dd>", mace)  # (10 + 2 hits x 10 x 2) / 1.575 s, spirit 5 left out
-        self.assertIn("* DPS leaves out spirit damage: 10 of 11 creatures are immune to it.", mace)
+        # the * marks the numbers, not the headers: (10 + 2 hits x 10 x 2) / 1.575 s, spirit 5 left out; 50 damage per
+        # 2 x 10 stamina; secondary 10 x 3; quality 2: blunt 12
+        self.assertIn("<th>DPS</th><th>per Stam</th><th>Secondary damage</th></tr>", mace)
+        self.assertIn("<tr><td>1</td><td>10</td><td>5</td><td>31.7*</td><td>2.5*</td><td>30*</td></tr>", mace)
+        self.assertIn("<tr><td>2</td><td>12</td><td>5</td><td>38.1*</td><td>3*</td><td>36*</td></tr>", mace)
+        self.assertNotIn("Secondary DPS", mace)
+        self.assertIn("* Leaves out spirit damage: 10 of 11 creatures are immune to it.", mace)
         self.assertIn("<span>spirit</span>Normal", (self.out / "creatures/Shade.html").read_text(encoding="utf-8"))
         self.assertNotIn("*", (self.out / "items/Sword.html").read_text(encoding="utf-8").split("<h2>Stats")[1][:400])
 
