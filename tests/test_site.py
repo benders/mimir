@@ -200,15 +200,46 @@ class Site(unittest.TestCase):
         idx = (self.out / "dungeons/index.html").read_text(encoding="utf-8")
         self.assertIn('<a href="dungeons/chief-s-lair.html">Chief&#x27;s Lair</a>', idx)
         self.assertNotIn("Village", idx)  # a camp: not entered
-        self.assertIn('<a href="dungeons/index.html">Dungeons</a>', idx)  # in the header
+        self.assertIn('<a href="locations/index.html">Locations</a>', idx)  # in the header
         search = json.loads((self.out / "search.json").read_text(encoding="utf-8"))
         self.assertIn(["Chief's Lair", "Lair", "dungeons/chief-s-lair.html", "", "Dungeon", 3], search)
+
+    def test_location_pages(self):
+        lair = (self.out / "dungeons/chief-s-lair.html").read_text(encoding="utf-8")
+        rules = re.search(r'<ul class="rules">(.*?)</ul>', lair).group(1)
+        self.assertIn("<li>4–100 m above sea level</li>", rules)
+        self.assertIn("<li>in forest: the forest noise between 0.5 and 1.2", rules)
+        self.assertIn("<li>ground within 20 m of the spot rising or falling at most 4 m</li>", rules)
+        self.assertIn('<li>at least 128 m from another copy</li>', rules)  # alone in its group
+        self.assertIn("vegetation between 0 and 0.8", rules)
+        self.assertIn("left out within 20 m of it", lair)  # clearArea
+        self.assertIn('<td><a class="ref" href="pieces/piece_bench.html">', lair)  # world pieces placed there
+        village = (self.out / "locations/village.html").read_text(encoding="utf-8")
+        self.assertIn("<h1>Village</h1>", village)
+        self.assertIn('<p class="sub">Location · <a href="biomes/Mountain.html">Mountain</a>', village)
+        self.assertIn('within 300 m of <a href="dungeons/chief-s-lair.html">Chief&#x27;s Lair (Lair)</a>', village)
+        self.assertIn("zones tried from the world centre outwards", village)
+        self.assertIn("at least 50% of the way from their average to the best", village)
+        self.assertIn("<td>Ore Rock</td><td>rock</td>", village)  # what is there
+        market_where = (self.out / "locations/market.html").read_text(encoding="utf-8").split("<h2>Where</h2>")[1]
+        self.assertNotIn("away from the biome", market_where.split("<ul")[0])  # Median: said in the list only
+        self.assertIn("<li>away from biome edges", market_where)
+        self.assertNotIn("<h2>Rooms</h2>", village)  # not a dungeon
+        market = (self.out / "locations/market.html").read_text(encoding="utf-8")
+        self.assertIn('<p>Home of <a href="traders/', market)
+        self.assertFalse((self.out / "locations/ruin.html").exists())  # disabled: never placed
+        idx = (self.out / "locations/index.html").read_text(encoding="utf-8")
+        self.assertRegex(idx, r'<h2 data-stage="2"><a href="biomes/Swamp.html">Swamp</a></h2><ul[^>]*><li>'
+                              r'<a href="locations/camp.html">Camp</a>')  # under its earliest biome
+        self.assertIn('<a href="dungeons/chief-s-lair.html">Chief&#x27;s Lair</a><span>dungeon</span>', idx)
+        search = json.loads((self.out / "search.json").read_text(encoding="utf-8"))
+        self.assertIn(["Village", "Village", "locations/village.html", "", "Location", 3], search)
 
     def test_container_found_in(self):
         gem = (self.out / "items/Gem.html").read_text(encoding="utf-8")  # unresolved name, only in a chest
         self.assertIn("<h2>Found in</h2>", gem)
         self.assertIn("Strongbox", gem)
-        self.assertIn('<span data-stage="2">Camp <span class="biomes">(<a href="biomes/Swamp.html">Swamp</a>, '
+        self.assertIn('<span data-stage="2"><a href="locations/camp.html">Camp</a> <span class="biomes">(<a href="biomes/Swamp.html">Swamp</a>, '
                       '<a href="biomes/Plains.html">Plains</a>)</span></span><span data-stage="3">, <a href="dungeons/chief-s-lair.html">'
                       'Chief&#x27;s Lair dungeon (Lair)</a> '
                       '<span class="biomes">(<a href="biomes/Mountain.html">Mountain</a>)</span></span>', gem)
@@ -712,7 +743,10 @@ class SiteRenders(unittest.TestCase):
         # the prefab id on its own line under the name: a long one doesn't spill into the next thumbnail
         self.assertIn('loading="lazy"><span>Chief&#x27;s Lair dungeon <span class="variant">Lair</span> <span class="biomes">', ore)
         lair = (self.out / "dungeons/chief-s-lair.html").read_text(encoding="utf-8")
-        self.assertIn('<span>Chief&#x27;s Lair <span class="variant">Lair</span></span></a>', lair)
+        self.assertIn('<figure class="render"><a href="renders/Lair.webp"><img src="renders/Lair.webp"', lair)  # large
+        idx = (self.out / "locations/index.html").read_text(encoding="utf-8")  # rendered ones as thumbnails
+        self.assertIn('<a class="place" href="dungeons/chief-s-lair.html"><img src="renders/Lair.webp"', idx)
+        self.assertIn('<span>Chief&#x27;s Lair <span class="variant">dungeon</span></span>', idx)
         self.assertIn("Village: Well", ore)  # no render: plain text
         self.assertNotIn("village_well.webp", ore)
 

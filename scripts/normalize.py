@@ -1632,13 +1632,35 @@ def location_placement(z: dict) -> dict:
     `minDistanceFromSimilar` apart; `prioritized` ones go first with more attempts; `unique`: the first one a player's
     zone actually spawns removes the others (RemoveUnplacedLocations); `iconPlaced`: on the map once spawned.
     Two pairs of fields limit the distance from the centre (m_minDistance/m_maxDistance and
-    m_minDistanceFromCenter/m_maxDistanceFromCenter, both checked): the distances are the tighter of each."""
+    m_minDistanceFromCenter/m_maxDistanceFromCenter, both checked): the distances are the tighter of each.
+    The spot's checks, in that method's order: `altitude` [min, max] (m above the 30 m water level; omitted when
+    neither end limits it: ±1000), `forest` [min, max] (WorldGenerator.GetForestFactor, only when m_inForest),
+    `terrainDelta` [min, max] (height difference within `radius`, the location's m_exteriorRadius), at least
+    `minDistanceFromSimilar` from a copy or a location of its `group`, at most `maxDistanceFromSimilar` from one of
+    `groupMax`, `vegetation` [min, max] (the heightmap's vegetation mask: 0 = none, 1 = full; omitted when 0..1),
+    `surroundCheck` {distance, layers, betterThanAverage} (m_surroundCheckVegetation: rings around the spot must hold
+    more vegetation than the average of the spots tried, by that share of the way to the best). `centerFirst`: zones
+    are tried outwards from m_minDistance. `clearArea`: vegetation within `radius` is not placed (ZoneSystem.PlaceVegetation)."""
     lo = max(z.get("m_minDistance") or 0, z.get("m_minDistanceFromCenter") or 0)
     hi = min([d for d in (z.get("m_maxDistance"), z.get("m_maxDistanceFromCenter")) if d] or [0])
+    alt = [z.get("m_minAltitude", -1000), z.get("m_maxAltitude", 1000)]
+    veg = [z.get("m_minimumVegetation", 0), z.get("m_maximumVegetation", 1)]
     return {"quantity": z.get("m_quantity"), "unique": z.get("m_unique"), "prioritized": z.get("m_prioritized"),
+            "centerFirst": z.get("m_centerFirst"),
             "biomeArea": z.get("m_biomeArea") if z.get("m_biomeArea") != "Everything" else None,
             "minDistance": lo, "maxDistance": hi,
-            "minDistanceFromSimilar": z.get("m_minDistanceFromSimilar"),
+            "altitude": alt if alt[0] > -1000 or alt[1] < 1000 else None,
+            "forest": [z.get("m_forestTresholdMin"), z.get("m_forestTresholdMax")] if z.get("m_inForest") else None,
+            "radius": z.get("m_exteriorRadius"),
+            "terrainDelta": [z.get("m_minTerrainDelta", 0), z.get("m_maxTerrainDelta", 2)],
+            "minDistanceFromSimilar": z.get("m_minDistanceFromSimilar"), "group": z.get("m_group"),
+            "maxDistanceFromSimilar": z.get("m_maxDistanceFromSimilar"),
+            "groupMax": z.get("m_groupMax") if z.get("m_maxDistanceFromSimilar") else None,
+            "vegetation": veg if veg != [0, 1] else None,
+            "surroundCheck": {"distance": z.get("m_surroundCheckDistance"), "layers": z.get("m_surroundCheckLayers"),
+                              "betterThanAverage": z.get("m_surroundBetterThanAverage")}
+            if z.get("m_surroundCheckVegetation") else None,
+            "clearArea": z.get("m_clearArea"),
             "iconPlaced": z.get("m_iconPlaced"), "iconAlways": z.get("m_iconAlways")}
 
 

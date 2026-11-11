@@ -316,24 +316,41 @@ def thumb_label(id_: str, part: str = "", after: str = "") -> str:
 
 
 # Dungeons (#89): locations players enter (an interior, or a generated underground dungeon), one page per player
-# name with its variants (Crypt2/3/4: Burial Chambers)
+# name with its variants (Crypt2/3/4: Burial Chambers). Every other location world generation places gets a page
+# under locations/ the same way (unnamed ones: one per prefab).
 DUNGEONS: dict[str, list[str]] = {}
 for _l in LOCATIONS:
     if _l.get("interior") or _l.get("dungeon"):
         DUNGEONS.setdefault(location_label(_l["id"], variant=False), []).append(_l["id"])
 DUNGEON_OF = {i: name for name, ids in DUNGEONS.items() for i in ids}
+PLACES: dict[str, list[str]] = {}
+for _l in LOCATIONS:
+    if _l["id"] not in DUNGEON_OF and (_l.get("placement") or {}).get("quantity"):
+        PLACES.setdefault(location_label(_l["id"], variant=False), []).append(_l["id"])
+
+
+def name_slug(name: str) -> str:
+    """A page name as a file name, accents dropped (Mörkhalla -> morkhalla)."""
+    return mechanics.slug(unicodedata.normalize("NFKD", name).encode("ascii", "ignore").decode())
 
 
 def dungeon_href(name: str) -> str:
-    """dungeons/<slug>.html, accents dropped (Mörkhalla -> morkhalla)."""
-    return f'dungeons/{mechanics.slug(unicodedata.normalize("NFKD", name).encode("ascii", "ignore").decode())}.html'
+    return f"dungeons/{name_slug(name)}.html"
 
+
+def place_href(name: str) -> str:
+    return f"locations/{name_slug(name)}.html"
+
+
+LOCATION_HREF = ({i: dungeon_href(n) for n, ids in DUNGEONS.items() for i in ids}
+                 | {i: place_href(n) for n, ids in PLACES.items() for i in ids})
+assert len({place_href(n) for n in PLACES}) == len(PLACES), "two location pages share a file name"
 
 
 def location_ref(id_: str, part: str = "") -> str:
-    """A location's label (location_label), linked to its dungeon page when it has one."""
+    """A location's label (location_label), linked to its page when it has one."""
     label = esc(location_label(id_, part=part))
-    return f'<a href="{dungeon_href(DUNGEON_OF[id_])}">{label}</a>' if id_ in DUNGEON_OF else label
+    return f'<a href="{LOCATION_HREF[id_]}">{label}</a>' if id_ in LOCATION_HREF else label
 
 
 def thumb(path: str, label: str, stage: int = 0, to: str = "") -> str:
@@ -371,7 +388,7 @@ def place_html(x: dict, stage: int = 0) -> list[str]:
     if "chance" in x:
         name += chance_note(x["chance"], "Rolled when the location is placed: not every copy has it")
     name += location_biomes(x["location"], linked=not render)
-    to = dungeon_href(DUNGEON_OF[x["location"]]) if x["location"] in DUNGEON_OF else ""
+    to = LOCATION_HREF.get(x["location"], "")
     return [thumb(x["location"], name, stage, to) if render else name]
 
 
@@ -769,7 +786,7 @@ STAGE_OPTIONS = "".join(f'<option value="{i}">{esc(STAGE_NAMES[s])}</option>' fo
     f'<option value="">{esc(STAGE_NAMES[STAGES[-1]])}</option>'  # the last stage: no filter
 HEADER = f"""<header class="top">
   <a class="brand" href="index.html">{esc(SITE_NAME)}</a>
-  <nav>{"".join(f'<a href="{d}/index.html">{d.capitalize()}</a>' for d in KINDS.values())}<a href="biomes/index.html">Biomes</a><a href="dungeons/index.html">Dungeons</a><a href="traders/index.html">Traders</a><a href="mechanics/index.html">Mechanics</a></nav>
+  <nav>{"".join(f'<a href="{d}/index.html">{d.capitalize()}</a>' for d in KINDS.values())}<a href="biomes/index.html">Biomes</a><a href="locations/index.html">Locations</a><a href="traders/index.html">Traders</a><a href="mechanics/index.html">Mechanics</a></nav>
   <label class="stagesel" title="Hide what you meet after this biome">Up to
   <select id="stage">{STAGE_OPTIONS}</select></label>
   <div class="search"><input id="q" type="search" placeholder="Search…  ( / )" autocomplete="off" aria-label="Search">
@@ -1912,25 +1929,76 @@ def trader_link(s: dict) -> str:
     return f'<a href="{trader_href(s)}">{esc(source_name(s))}</a>'
 
 
-def placement_text(loc_id: str, biomes: list[str], what: str) -> str:
-    """How world generation places a location (locations.json placement, ZoneSystem.GenerateLocationsTimeSliced)."""
+def altitude_text(lo, hi) -> str:
+    """A location's altitude limits (m above the water level, 30 m in world height)."""
+    def at(a):
+        return f"{num(-a)} m below sea level" if a < 0 else f"{num(a)} m above sea level" if a else "sea level"
+    if lo <= -1000:
+        return f"no higher than {at(hi)}"
+    if hi >= 1000:
+        return f"no lower than {at(lo)}"
+    if lo >= 0:
+        return f"{num(lo)}–{num(hi)} m above sea level"
+    return f"between {at(lo)} and {at(hi)}"
+
+
+def group_members(group: str, but: str) -> list[str]:
+    """The other locations sharing a ZoneSystem placement group (ZoneLocation.m_group / m_groupMax)."""
+    return [x["id"] for x in LOCATIONS if x["id"] != but and (x.get("placement") or {}).get("group") == group]
+
+
+def placement_text(loc_id: str, biomes: list[str], what: str, rules: bool = False) -> str:
+    """How world generation places a location (locations.json placement, ZoneSystem.GenerateLocationsTimeSliced);
+    `rules` adds the checks each spot must pass, as a list (the location pages)."""
     loc = LOCATION_BY_ID.get(loc_id, {})
     pl = loc.get("placement") or {}
     where = " or ".join(biome_link(b) for b in biomes)
-    if pl.get("biomeArea") == "Median":
+    if pl.get("biomeArea") == "Median" and not rules:
         where += ", away from the biome's edges"
     lo, hi = pl.get("minDistance"), pl.get("maxDistance")
     ring = (f"{num(lo)}–{num(hi)} m" if lo and hi else f"at least {num(lo)} m" if lo else f"up to {num(hi)} m"
             if hi else "")
     text = (f"World generation picks up to {num(pl.get('quantity', 1))} spots for {what} in the {where}"
             + (f", {ring} from the world centre" if ring else "")
-            + (f" and at least {num(pl['minDistanceFromSimilar'])} m apart" if pl.get("minDistanceFromSimilar") else "")
+            + (f" and at least {num(pl['minDistanceFromSimilar'])} m apart"
+               if pl.get("minDistanceFromSimilar") and not rules else "")
             + ".")
     if pl.get("unique"):
         text += " The first one to be generated, when a player comes near, removes the rest: one per world."
     if pl.get("iconPlaced"):
         text += " It shows on the map once generated."
-    return f"<p>{text}</p>"
+    if not rules:
+        return f"<p>{text}</p>"
+    out = []
+    if pl.get("biomeArea") == "Median":
+        out.append("away from biome edges: the zone's centre and points around it all in one biome")
+    if alt := pl.get("altitude"):
+        out.append(altitude_text(*alt))
+    if f := pl.get("forest"):
+        out.append(f"in forest: the forest noise between {num(f[0])} and {num(f[1])} (0–1 inside forests)")
+    if d := pl.get("terrainDelta"):
+        steep = f"at most {num(d[1])} m" + (f" and at least {num(d[0])} m" if d[0] else "")
+        out.append(f"ground within {num(pl.get('radius', 0))} m of the spot rising or falling {steep}")
+    if sim := pl.get("minDistanceFromSimilar"):
+        g = pl.get("group")
+        others = group_members(g, loc_id) if g else []
+        out.append(f"at least {num(sim)} m from another copy" + (
+            " or from " + ", ".join(location_ref(o) for o in others) + f" (group {esc(g)})" if others else ""))
+    if far := pl.get("maxDistanceFromSimilar"):
+        g = pl.get("groupMax")
+        others = group_members(g, loc_id) if g else []
+        out.append(f"within {num(far)} m of " + (", ".join(location_ref(o) for o in others) if others else "another copy"))
+    if v := pl.get("vegetation"):
+        out.append(f"the ground's vegetation between {num(v[0])} and {num(v[1])} (0 = bare, 1 = full)")
+    if sc := pl.get("surroundCheck"):
+        out.append(f"more vegetation within {num(sc['distance'])} m than most spots tried: at least "
+                   f"{pct(sc.get('betterThanAverage', 0))} of the way from their average to the best")
+    if pl.get("centerFirst"):
+        out.append("zones tried from the world centre outwards")
+    clear = (f"<p>Trees, rocks and other vegetation are left out within {num(pl.get('radius', 0))} m of it.</p>"
+             if pl.get("clearArea") else "")
+    return (f"<p>{text}</p>" + ('<p>Rules for each spot, one location per 64 m zone:</p><ul class="rules">'
+                                + "".join(f"<li>{r}</li>" for r in out) + "</ul>" if out else "") + clear)
 
 
 def trader_spawning(s: dict) -> str:
@@ -1981,7 +2049,11 @@ ROOM_ORDER = ("entrance", None, "endCap", "divider")
 
 
 def dungeon_stage(name: str) -> int:
-    return min(LOCATION_STAGE.get(i, 0) for i in DUNGEONS[name])
+    return place_stage(DUNGEONS[name])
+
+
+def place_stage(ids: list[str]) -> int:
+    return min(LOCATION_STAGE.get(i, 0) for i in ids)
 
 
 def chance_tag(c) -> str:
@@ -2039,21 +2111,36 @@ def dungeon_rooms(d: dict) -> str:
             'DungeonGenerator.GenerateDungeon, PlaceRooms, PlaceOneRoom, CheckRequiredRooms and PlaceEndCaps.</p>')
 
 
-def dungeon_page(name: str) -> None:
-    ids = DUNGEONS[name]
+def render_figure(i: str, caption: bool) -> str:
+    """A location's render, large, linking to the full image."""
+    used_renders.add(i)
+    src = f"renders/{quote(i)}.webp"
+    return (f'<figure class="render"><a href="{src}"><img src="{src}" alt="{esc(location_label(i))}" loading="lazy">'
+            f'</a>{f"<figcaption>{esc(i)}</figcaption>" if caption else ""}</figure>')
+
+
+def location_page(name: str, dungeon: bool = False) -> None:
+    """A dungeon's or other location's page: its render, where world generation places it (with every rule a spot
+    must pass), and what is there: a trader, creatures, resources, world pieces, a dungeon's rooms."""
+    ids = (DUNGEONS if dungeon else PLACES)[name]
     many = len(ids) > 1
     biomes = list(dict.fromkeys(b for i in ids for b in LOCATION_BIOMES.get(i, [])))
-    body = (f'<div class="hero"><div><h1>{esc(name)}</h1><p class="sub">Dungeon · '
+    body = (f'<div class="hero"><div><h1>{esc(name)}</h1><p class="sub">{"Dungeon" if dungeon else "Location"} · '
             f'{", ".join(biome_link(b) for b in biomes)}</p></div></div>')
     if many:
         body += f'<p class="desc">{len(ids)} variants: {", ".join(f"<code>{esc(i)}</code>" for i in ids)}.</p>'
+    elif name != ids[0]:
+        body += f'<p class="desc">Prefab <code>{esc(ids[0])}</code>.</p>'
+    if figs := [render_figure(i, many) for i in ids if i in HAVE_RENDERS]:
+        body += f'<div class="renders">{"".join(figs)}</div>'
+    traders = [s for s in TRADERS if any(x["location"] in ids for x in s.get("locations", []))]
+    if traders:
+        body += f'<p>Home of {", ".join(trader_link(s) for s in traders)}.</p>'
     where = ""
-    if thumbs := [thumb(i, thumb_label(i)) for i in ids if i in HAVE_RENDERS]:
-        where += f'<div class="places">{"".join(thumbs)}</div>'
     texts = {}
     for i in ids:
         loc = LOCATION_BY_ID[i]
-        t = placement_text(i, loc.get("biomes", []), "each variant" if many else "it")
+        t = placement_text(i, loc.get("biomes", []), "each variant" if many else "it", rules=True)
         texts.setdefault(t + (f'<p>Its door takes {link("item", loc["key"])}.</p>' if loc.get("key") else ""), []).append(i)
     for t, at in texts.items():
         where += (f"<h3>{esc(', '.join(at))}</h3>" if len(texts) > 1 else "") + t
@@ -2096,16 +2183,37 @@ def dungeon_page(name: str) -> None:
         out = any(not x.get("dungeon") for x in at) and outside
         where = "inside and at the entrance" if inside and out else "inside" if inside else out
         chances = {x.get("chance") for x in at if not x.get("dungeon")} - {None}
-        if chances and not inside:
-            where += chance_tag(max(chances))
+        if chances and not inside and max(chances) < 100:
+            where += chance_tag(max(chances)) if dungeon else f"{num(max(chances))}%"
         res.append((src["kind"] != "container", source_stage(src), source_name(src).lower(),
                     [esc(source_name(src)), esc(src["kind"]), where, " ".join(given_link(i) for i in items)]))
     res.sort(key=lambda r: r[:3])
     res = list({json.dumps(r[3]): r for r in reversed(res)}.values())[::-1]  # same-looking copies (Skeletal Remains)
-    head = ["Source", "Kind", "Where", "Gives"]
-    if not any(r[3][2] for r in res):  # a fixed interior: no inside / entrance split
+    head = ["Source", "Kind", "Where" if dungeon else "Chance", "Gives"]
+    if not any(r[3][2] for r in res):  # a fixed interior or always there: no inside / entrance split, no chance
         head, res = head[:2] + head[3:], [r[:3] + (r[3][:2] + r[3][3:],) for r in res]
-    body += section("Resources", table(head, [r[3] for r in res], "cost", stages=[r[1] for r in res]))
+    chance_note_ = ('<p class="note">Chance: the share of copies of the location that have it (RandomSpawn).</p>'
+                    if not dungeon and "Chance" in head else "")
+    body += section("Resources", table(head, [r[3] for r in res], "cost", stages=[r[1] for r in res]) + chance_note_)
+
+    prows, pstages = {}, {}
+    for pc in PIECES.values():
+        at = [x for x in pc.get("locations", []) if x.get("location") in ids]
+        if not at or not has_page("piece", pc["id"]):
+            continue
+        inside = any(x.get("dungeon") for x in at)
+        out = any(not x.get("dungeon") for x in at) and outside
+        where = "inside and at the entrance" if inside and out else "inside" if inside else out
+        chances = {x.get("chance") for x in at if not x.get("dungeon")} - {None}
+        if chances and not inside and max(chances) < 100:
+            where += chance_tag(max(chances)) if dungeon else f"{num(max(chances))}%"
+        prows[pc["id"]] = [link("piece", pc["id"]), where]
+        pstages[pc["id"]] = stage_of("piece", pc["id"])
+    order = sorted(prows, key=lambda i: name_of("piece", i).lower())
+    phead = ["Piece", "Where" if dungeon else "Chance"]
+    if not any(prows[i][1] for i in order):
+        phead, prows = phead[:1], {i: r[:1] for i, r in prows.items()}
+    body += section("Pieces", table(phead, [prows[i] for i in order], "cost", stages=[pstages[i] for i in order]))
 
     groups = {}
     for i in ids:
@@ -2116,10 +2224,40 @@ def dungeon_page(name: str) -> None:
         if len(groups) > 1:
             rooms += f"<h3>{esc(', '.join(at))}</h3>"
         rooms += dungeon_rooms(json.loads(key))
-    if not groups:
+    if not groups and dungeon:
         rooms = "<p>A fixed interior: the same in every copy, no generated rooms.</p>"
     body += section("Rooms", rooms)
-    page(dungeon_href(name), name, body, '<a href="dungeons/index.html">Dungeons</a>')
+    if dungeon:
+        page(dungeon_href(name), name, body, '<a href="dungeons/index.html">Dungeons</a>')
+    else:
+        page(place_href(name), name, body, '<a href="locations/index.html">Locations</a>')
+
+
+def locations_index() -> None:
+    """Every location with a page, under the earliest biome it is placed in; dungeons marked."""
+    groups = defaultdict(list)
+    for n, ids, d in [(n, ids, True) for n, ids in DUNGEONS.items()] + [(n, ids, False) for n, ids in PLACES.items()]:
+        first = min((b for i in ids for b in LOCATION_BIOMES.get(i, [])), key=biome_stage, default="")
+        groups[first].append((n, ids, d))
+    out = ""
+    for b in sorted(groups, key=lambda b: (biome_stage(b) if b else len(STAGES), b == "Ocean", b)):
+        rows = sorted(groups[b], key=lambda r: r[0].lower())
+        st = biome_stage(b) if b else 0
+        thumbs, plain = [], []
+        for n, ids, d in rows:
+            to = dungeon_href(n) if d else place_href(n)
+            tag = " · ".join(x for x in ["dungeon" if d else "", plural(len(ids), "variant") if len(ids) > 1 else ""] if x)
+            if r := next((i for i in ids if i in HAVE_RENDERS), None):
+                label = esc(n) + (f' <span class="variant">{tag}</span>' if tag else "")
+                thumbs.append(thumb(r, label, to=to))
+            else:
+                plain.append(f'<li><a href="{to}">{esc(n)}</a><span>{tag}</span></li>')
+        out += (f'<h2{stage_attr(st)}>{biome_link(b) if b else "Elsewhere"}</h2>'
+                + (f'<div class="places"{stage_attr(st)}>{"".join(thumbs)}</div>' if thumbs else "")
+                + (f'<ul class="mechlist"{stage_attr(st)}>{"".join(plain)}</ul>' if plain else ""))
+    page("locations/index.html", "Locations", '<h1>Locations</h1><p class="sub">Everything world generation places, '
+         'under the first biome of the progression it is found in. Dungeons also have their own '
+         f'<a href="dungeons/index.html">index</a>.</p>{out}')
 
 
 def dungeons_index() -> None:
@@ -3327,6 +3465,7 @@ def search_index() -> None:
     entries += [[BIOMES[b], b, f"biomes/{quote(b)}.html", "", "Biome", STAGES.index(b) if b in STAGES else 0] for b in BIOMES]
     entries += [[source_name(t), t["id"], trader_href(t), "", "Trader", 0] for t in TRADERS]
     entries += [[n, ids[0], dungeon_href(n), "", "Dungeon", dungeon_stage(n)] for n, ids in DUNGEONS.items()]
+    entries += [[n, ids[0], place_href(n), "", "Location", place_stage(ids)] for n, ids in PLACES.items()]
     entries += [[faction_name(f), f, f"factions/{quote(f)}.html", "", "Faction", 0] for f in FACTION_ORDER]
     entries.sort(key=lambda x: (x[0].lower(), x[2]))
     (OUT / "search.json").write_text(json.dumps(entries, ensure_ascii=False, separators=(",", ":")), encoding="utf-8")
@@ -3354,6 +3493,7 @@ DATA_FILES = {  # data/<name>.json, published at data/ (#83): a line on each for
 SITE_SECTIONS = {  # directory -> (name, what its index lists), in llms.txt order
     "items": ("Items", "by type"), "creatures": ("Creatures", "by home biome"), "pieces": ("Pieces", "by build menu tag"),
     "effects": ("Status effects", "by what gives them"), "biomes": ("Biomes", "creatures, resources, locations, raids"),
+    "locations": ("Locations", "by biome: render, placement rules, creatures, resources and pieces there"),
     "dungeons": ("Dungeons", "where they are, what is inside, the rooms they are built from"),
     "traders": ("Traders", "goods by unlock stage"), "factions": ("Factions", "who attacks whom"),
     "mechanics": ("Mechanics", "game rules checked against the game code, with formulas and tables")}
@@ -3482,8 +3622,11 @@ def main() -> int:
         trader_page(t)
     traders_index()
     for n in DUNGEONS:
-        dungeon_page(n)
+        location_page(n, dungeon=True)
     dungeons_index()
+    for n in PLACES:
+        location_page(n)
+    locations_index()
     mechanics_pages()
     index_pages()
     search_index()

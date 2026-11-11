@@ -715,6 +715,14 @@ class Entities(FixtureCase):
         self.assertIsNone(loc["Camp"]["placement"]["biomeArea"])  # Everything: no restriction
         p = loc["Lair"]["placement"]
         self.assertEqual((p["minDistance"], p["maxDistance"]), (600, 3000))
+        self.assertEqual((p["altitude"], p["terrainDelta"], p["radius"], p["group"], p["forest"], p["vegetation"],
+                          p["clearArea"]), ([4, 100], [0, 4], 20, "Lairs", [0.5, 1.2], [0, 0.8], True))
+        self.assertIsNone(p["surroundCheck"])
+        p = N.prune(loc["Village"]["placement"])
+        self.assertNotIn("altitude", p)  # -1000..1000: no limit
+        self.assertNotIn("vegetation", p)  # 0..1: no limit
+        self.assertEqual((p["centerFirst"], p["surroundCheck"], p["maxDistanceFromSimilar"], p["groupMax"]),
+                         (True, {"distance": 20, "layers": 2, "betterThanAverage": 0.5}, 300, "Lairs"))
 
     def test_dungeons(self):
         locs = N.locations()

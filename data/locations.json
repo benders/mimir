@@ -6,7 +6,18 @@
   ],
   "placement": {
    "quantity": 33,
-   "minDistanceFromSimilar": 128
+   "altitude": [
+    100,
+    1000
+   ],
+   "radius": 10.51,
+   "terrainDelta": [
+    0,
+    3
+   ],
+   "minDistanceFromSimilar": 128,
+   "group": "Abandonedcabin",
+   "clearArea": true
   }
  },
  {
@@ -16,7 +27,18 @@
   ],
   "placement": {
    "quantity": 33,
-   "minDistanceFromSimilar": 128
+   "altitude": [
+    100,
+    1000
+   ],
+   "radius": 10,
+   "terrainDelta": [
+    0,
+    3
+   ],
+   "minDistanceFromSimilar": 128,
+   "group": "Abandonedcabin",
+   "clearArea": true
   }
  },
  {
@@ -26,7 +48,18 @@
   ],
   "placement": {
    "quantity": 50,
-   "minDistanceFromSimilar": 128
+   "altitude": [
+    100,
+    1000
+   ],
+   "radius": 10,
+   "terrainDelta": [
+    0,
+    3
+   ],
+   "minDistanceFromSimilar": 128,
+   "group": "Abandonedcabin",
+   "clearArea": true
   }
  },
  {
@@ -41,7 +74,22 @@
    "prioritized": true,
    "biomeArea": "Median",
    "minDistance": 500,
+   "altitude": [
+    0,
+    5000
+   ],
+   "radius": 22,
+   "terrainDelta": [
+    0,
+    40
+   ],
    "minDistanceFromSimilar": 400,
+   "group": "AncientUpgradeStation",
+   "surroundCheck": {
+    "distance": 40,
+    "layers": 2
+   },
+   "clearArea": true,
    "iconPlaced": true
   }
  },
@@ -53,7 +101,21 @@
   "placement": {
    "quantity": 100,
    "biomeArea": "Median",
-   "minDistanceFromSimilar": 16
+   "altitude": [
+    0,
+    1000
+   ],
+   "radius": 32,
+   "terrainDelta": [
+    0,
+    4
+   ],
+   "minDistanceFromSimilar": 16,
+   "vegetation": [
+    0,
+    0.2
+   ],
+   "clearArea": true
   }
  },
  {
@@ -65,7 +127,17 @@
   "placement": {
    "quantity": 50,
    "biomeArea": "Median",
-   "minDistanceFromSimilar": 256
+   "altitude": [
+    5,
+    1000
+   ],
+   "radius": 12,
+   "terrainDelta": [
+    5,
+    10
+   ],
+   "minDistanceFromSimilar": 256,
+   "clearArea": true
   },
   "interior": true
  },
@@ -80,7 +152,21 @@
    "biomeArea": "Median",
    "minDistance": 1000,
    "maxDistance": 10000,
-   "minDistanceFromSimilar": 2000
+   "altitude": [
+    5,
+    1000
+   ],
+   "forest": [
+    0.8,
+    1
+   ],
+   "radius": 15,
+   "terrainDelta": [
+    0,
+    2
+   ],
+   "minDistanceFromSimilar": 2000,
+   "clearArea": true
   }
  },
  {
@@ -95,7 +181,17 @@
    "biomeArea": "Median",
    "minDistance": 3000,
    "maxDistance": 8000,
+   "altitude": [
+    1,
+    1000
+   ],
+   "radius": 24,
+   "terrainDelta": [
+    0,
+    2
+   ],
    "minDistanceFromSimilar": 1000,
+   "clearArea": true,
    "iconPlaced": true
   }
  },
@@ -110,7 +206,17 @@
    "biomeArea": "6",
    "minDistance": 2000,
    "maxDistance": 10000,
-   "minDistanceFromSimilar": 3000
+   "altitude": [
+    0,
+    2
+   ],
+   "radius": 19.79,
+   "terrainDelta": [
+    0,
+    4
+   ],
+   "minDistanceFromSimilar": 3000,
+   "clearArea": true
   }
  },
  {
@@ -123,7 +229,22 @@
    "quantity": 20,
    "prioritized": true,
    "biomeArea": "-1",
-   "minDistanceFromSimilar": 256
+   "altitude": [
+    20,
+    1000
+   ],
+   "radius": 32,
+   "terrainDelta": [
+    0,
+    10
+   ],
+   "minDistanceFromSimilar": 256,
+   "group": "FaderBoss",
+   "vegetation": [
+    0,
+    0.1
+   ],
+   "clearArea": true
   }
  },
  {
@@ -134,7 +255,18 @@
   "placement": {
    "quantity": 75,
    "biomeArea": "Median",
-   "minDistanceFromSimilar": 256
+   "altitude": [
+    -5,
+    1000
+   ],
+   "radius": 32,
+   "terrainDelta": [
+    0,
+    6
+   ],
+   "minDistanceFromSimilar": 256,
+   "group": "zigg",
+   "clearArea": true
   }
  },
  {
@@ -145,7 +277,17 @@
   "placement": {
    "quantity": 100,
    "biomeArea": "Median",
-   "minDistanceFromSimilar": 128
+   "altitude": [
+    -5,
+    1000
+   ],
+   "radius": 15,
+   "terrainDelta": [
+    0,
+    30
+   ],
+   "minDistanceFromSimilar": 128,
+   "clearArea": true
   }
  },
  {
@@ -156,7 +298,17 @@
   "placement": {
    "quantity": 100,
    "biomeArea": "Median",
-   "minDistanceFromSimilar": 128
+   "altitude": [
+    -5,
+    1000
+   ],
+   "radius": 12,
+   "terrainDelta": [
+    0,
+    30
+   ],
+   "minDistanceFromSimilar": 128,
+   "clearArea": true
   }
  },
  {
@@ -167,7 +319,17 @@
   "placement": {
    "quantity": 100,
    "biomeArea": "Median",
-   "minDistanceFromSimilar": 128
+   "altitude": [
+    -5,
+    1000
+   ],
+   "radius": 10,
+   "terrainDelta": [
+    0,
+    30
+   ],
+   "minDistanceFromSimilar": 128,
+   "clearArea": true
   }
  },
  {
@@ -177,7 +339,21 @@
   ],
   "placement": {
    "quantity": 300,
-   "minDistanceFromSimilar": 100
+   "altitude": [
+    0,
+    1000
+   ],
+   "radius": 20,
+   "terrainDelta": [
+    0,
+    10
+   ],
+   "minDistanceFromSimilar": 100,
+   "vegetation": [
+    0,
+    0.2
+   ],
+   "clearArea": true
   }
  },
  {
@@ -188,7 +364,22 @@
   "placement": {
    "quantity": 30,
    "biomeArea": "-1",
-   "minDistanceFromSimilar": 100
+   "altitude": [
+    0,
+    1000
+   ],
+   "radius": 22,
+   "terrainDelta": [
+    0,
+    4
+   ],
+   "minDistanceFromSimilar": 100,
+   "group": "towerruins",
+   "vegetation": [
+    0,
+    0.5
+   ],
+   "clearArea": true
   }
  },
  {
@@ -199,7 +390,22 @@
   "placement": {
    "quantity": 30,
    "biomeArea": "-1",
-   "minDistanceFromSimilar": 100
+   "altitude": [
+    0,
+    1000
+   ],
+   "radius": 22,
+   "terrainDelta": [
+    0,
+    4
+   ],
+   "minDistanceFromSimilar": 100,
+   "group": "towerruins",
+   "vegetation": [
+    0,
+    0.1
+   ],
+   "clearArea": true
   }
  },
  {
@@ -209,7 +415,21 @@
   ],
   "placement": {
    "quantity": 40,
-   "biomeArea": "-1"
+   "biomeArea": "-1",
+   "altitude": [
+    0,
+    1000
+   ],
+   "radius": 12,
+   "terrainDelta": [
+    0,
+    4
+   ],
+   "vegetation": [
+    0,
+    0.3
+   ],
+   "clearArea": true
   }
  },
  {
@@ -220,7 +440,20 @@
   "placement": {
    "quantity": 30,
    "biomeArea": "-1",
-   "minDistanceFromSimilar": 500
+   "altitude": [
+    0,
+    1000
+   ],
+   "radius": 12,
+   "terrainDelta": [
+    0,
+    4
+   ],
+   "minDistanceFromSimilar": 500,
+   "vegetation": [
+    0,
+    0.3
+   ]
   }
  },
  {
@@ -232,7 +465,21 @@
    "quantity": 5,
    "minDistance": 1500,
    "maxDistance": 10000,
-   "minDistanceFromSimilar": 2000
+   "altitude": [
+    5,
+    1000
+   ],
+   "forest": [
+    0.5,
+    1
+   ],
+   "radius": 13,
+   "terrainDelta": [
+    0,
+    1.5
+   ],
+   "minDistanceFromSimilar": 2000,
+   "clearArea": true
   }
  },
  {
@@ -244,7 +491,17 @@
   "placement": {
    "quantity": 200,
    "biomeArea": "-1",
-   "minDistanceFromSimilar": 128
+   "altitude": [
+    1,
+    1000
+   ],
+   "radius": 12,
+   "terrainDelta": [
+    0,
+    2
+   ],
+   "minDistanceFromSimilar": 128,
+   "clearArea": true
   },
   "interior": true,
   "dungeon": {
@@ -288,7 +545,17 @@
   ],
   "placement": {
    "quantity": 200,
-   "minDistanceFromSimilar": 128
+   "altitude": [
+    3,
+    1000
+   ],
+   "radius": 11,
+   "terrainDelta": [
+    0,
+    2
+   ],
+   "minDistanceFromSimilar": 128,
+   "clearArea": true
   },
   "interior": true,
   "dungeon": {
@@ -332,6 +599,15 @@
   ],
   "placement": {
    "quantity": 200,
+   "altitude": [
+    1,
+    1000
+   ],
+   "radius": 18,
+   "terrainDelta": [
+    0,
+    2
+   ],
    "minDistanceFromSimilar": 128
   },
   "interior": true,
@@ -377,7 +653,18 @@
   "placement": {
    "quantity": 3,
    "prioritized": true,
+   "altitude": [
+    80,
+    5000
+   ],
+   "radius": 32,
+   "terrainDelta": [
+    0,
+    6
+   ],
    "minDistanceFromSimilar": 1024,
+   "group": "dn_boss",
+   "clearArea": true,
    "iconPlaced": true
   },
   "interior": true
@@ -388,7 +675,17 @@
    "DeepNorth"
   ],
   "placement": {
-   "quantity": 30
+   "quantity": 30,
+   "altitude": [
+    5,
+    1000
+   ],
+   "radius": 8,
+   "terrainDelta": [
+    0,
+    10
+   ],
+   "clearArea": true
   }
  },
  {
@@ -397,7 +694,17 @@
    "DeepNorth"
   ],
   "placement": {
-   "quantity": 30
+   "quantity": 30,
+   "altitude": [
+    10,
+    1000
+   ],
+   "radius": 8,
+   "terrainDelta": [
+    0,
+    10
+   ],
+   "clearArea": true
   }
  },
  {
@@ -408,7 +715,18 @@
   "placement": {
    "quantity": 40,
    "biomeArea": "Median",
-   "minDistanceFromSimilar": 100
+   "altitude": [
+    40,
+    1000
+   ],
+   "radius": 12,
+   "terrainDelta": [
+    0,
+    4
+   ],
+   "minDistanceFromSimilar": 100,
+   "group": "northvillage",
+   "clearArea": true
   }
  },
  {
@@ -418,7 +736,16 @@
    "BlackForest"
   ],
   "placement": {
-   "quantity": 100
+   "quantity": 100,
+   "altitude": [
+    1,
+    1000
+   ],
+   "radius": 8,
+   "terrainDelta": [
+    0,
+    2
+   ]
   }
  },
  {
@@ -428,7 +755,16 @@
    "BlackForest"
   ],
   "placement": {
-   "quantity": 100
+   "quantity": 100,
+   "altitude": [
+    1,
+    1000
+   ],
+   "radius": 8,
+   "terrainDelta": [
+    0,
+    2
+   ]
   }
  },
  {
@@ -438,7 +774,16 @@
    "BlackForest"
   ],
   "placement": {
-   "quantity": 50
+   "quantity": 50,
+   "altitude": [
+    1,
+    1000
+   ],
+   "radius": 10,
+   "terrainDelta": [
+    0,
+    2
+   ]
   }
  },
  {
@@ -451,7 +796,17 @@
    "prioritized": true,
    "biomeArea": "Median",
    "maxDistance": 8000,
-   "minDistanceFromSimilar": 3000
+   "altitude": [
+    150,
+    500
+   ],
+   "radius": 12,
+   "terrainDelta": [
+    0,
+    4
+   ],
+   "minDistanceFromSimilar": 3000,
+   "clearArea": true
   }
  },
  {
@@ -461,7 +816,18 @@
   ],
   "placement": {
    "quantity": 50,
-   "minDistanceFromSimilar": 128
+   "altitude": [
+    100,
+    1000
+   ],
+   "radius": 4,
+   "terrainDelta": [
+    0,
+    3
+   ],
+   "minDistanceFromSimilar": 128,
+   "group": "Runestones",
+   "clearArea": true
   }
  },
  {
@@ -472,7 +838,17 @@
   "placement": {
    "quantity": 200,
    "maxDistance": 10000,
-   "minDistanceFromSimilar": 100
+   "altitude": [
+    100,
+    2000
+   ],
+   "radius": 5,
+   "terrainDelta": [
+    0,
+    3
+   ],
+   "minDistanceFromSimilar": 100,
+   "clearArea": true
   }
  },
  {
@@ -484,7 +860,17 @@
    "quantity": 3,
    "prioritized": true,
    "biomeArea": "Median",
-   "maxDistance": 1000
+   "maxDistance": 1000,
+   "altitude": [
+    1,
+    1000
+   ],
+   "radius": 10,
+   "terrainDelta": [
+    0,
+    3
+   ],
+   "clearArea": true
   }
  },
  {
@@ -496,7 +882,22 @@
    "quantity": 3,
    "prioritized": true,
    "biomeArea": "Median",
-   "minDistanceFromSimilar": 2048
+   "altitude": [
+    1,
+    300
+   ],
+   "radius": 32,
+   "terrainDelta": [
+    0,
+    40
+   ],
+   "minDistanceFromSimilar": 2048,
+   "group": "FaderBoss",
+   "vegetation": [
+    0,
+    0.1
+   ],
+   "clearArea": true
   }
  },
  {
@@ -507,7 +908,18 @@
   "placement": {
    "quantity": 75,
    "biomeArea": "Median",
-   "minDistanceFromSimilar": 16
+   "altitude": [
+    -1,
+    1000
+   ],
+   "radius": 5,
+   "terrainDelta": [
+    0,
+    5
+   ],
+   "minDistanceFromSimilar": 16,
+   "group": "FireHole",
+   "clearArea": true
   }
  },
  {
@@ -517,7 +929,23 @@
   ],
   "placement": {
    "quantity": 100,
-   "biomeArea": "-1"
+   "biomeArea": "-1",
+   "altitude": [
+    0,
+    1000
+   ],
+   "radius": 32,
+   "terrainDelta": [
+    0,
+    10
+   ],
+   "maxDistanceFromSimilar": 70,
+   "groupMax": "zigg",
+   "vegetation": [
+    0,
+    0.8
+   ],
+   "clearArea": true
   }
  },
  {
@@ -529,7 +957,17 @@
    "quantity": 50,
    "minDistance": 8000,
    "maxDistance": 9750,
-   "minDistanceFromSimilar": 64
+   "altitude": [
+    -15,
+    -5
+   ],
+   "radius": 10,
+   "terrainDelta": [
+    0,
+    100
+   ],
+   "minDistanceFromSimilar": 64,
+   "group": "FrozenShip"
   }
  },
  {
@@ -541,7 +979,17 @@
    "quantity": 50,
    "minDistance": 8000,
    "maxDistance": 9750,
-   "minDistanceFromSimilar": 64
+   "altitude": [
+    -15,
+    -5
+   ],
+   "radius": 16,
+   "terrainDelta": [
+    0,
+    100
+   ],
+   "minDistanceFromSimilar": 64,
+   "group": "FrozenShip"
   }
  },
  {
@@ -553,7 +1001,17 @@
    "quantity": 50,
    "minDistance": 8000,
    "maxDistance": 9750,
-   "minDistanceFromSimilar": 64
+   "altitude": [
+    -15,
+    -5
+   ],
+   "radius": 10,
+   "terrainDelta": [
+    0,
+    100
+   ],
+   "minDistanceFromSimilar": 64,
+   "group": "FrozenShip"
   }
  },
  {
@@ -567,7 +1025,17 @@
    "biomeArea": "6",
    "minDistance": 1000,
    "maxDistance": 7000,
-   "minDistanceFromSimilar": 3000
+   "altitude": [
+    1,
+    1000
+   ],
+   "radius": 25,
+   "terrainDelta": [
+    0,
+    5
+   ],
+   "minDistanceFromSimilar": 3000,
+   "clearArea": true
   }
  },
  {
@@ -578,7 +1046,17 @@
   "placement": {
    "quantity": 200,
    "biomeArea": "-1",
-   "minDistanceFromSimilar": 250
+   "altitude": [
+    2,
+    1000
+   ],
+   "radius": 30,
+   "terrainDelta": [
+    0,
+    3
+   ],
+   "minDistanceFromSimilar": 250,
+   "clearArea": true
   }
  },
  {
@@ -588,7 +1066,17 @@
   ],
   "placement": {
    "quantity": 5,
-   "biomeArea": "0"
+   "biomeArea": "0",
+   "altitude": [
+    2,
+    1000
+   ],
+   "radius": 30,
+   "terrainDelta": [
+    0,
+    3
+   ],
+   "clearArea": true
   }
  },
  {
@@ -598,7 +1086,16 @@
   ],
   "placement": {
    "quantity": 30,
-   "biomeArea": "7"
+   "biomeArea": "7",
+   "altitude": [
+    1,
+    1000
+   ],
+   "radius": 6,
+   "terrainDelta": [
+    0,
+    4
+   ]
   }
  },
  {
@@ -608,7 +1105,16 @@
   ],
   "placement": {
    "quantity": 30,
-   "biomeArea": "7"
+   "biomeArea": "7",
+   "altitude": [
+    1,
+    1000
+   ],
+   "radius": 7,
+   "terrainDelta": [
+    0,
+    4
+   ]
   }
  },
  {
@@ -618,7 +1124,16 @@
   ],
   "placement": {
    "quantity": 20,
-   "biomeArea": "7"
+   "biomeArea": "7",
+   "altitude": [
+    1,
+    1000
+   ],
+   "radius": 12,
+   "terrainDelta": [
+    0,
+    4
+   ]
   }
  },
  {
@@ -630,7 +1145,17 @@
    "quantity": 4,
    "prioritized": true,
    "biomeArea": "Median",
-   "minDistanceFromSimilar": 3000
+   "altitude": [
+    1,
+    1000
+   ],
+   "radius": 32,
+   "terrainDelta": [
+    0,
+    4
+   ],
+   "minDistanceFromSimilar": 3000,
+   "clearArea": true
   }
  },
  {
@@ -640,7 +1165,17 @@
   ],
   "placement": {
    "quantity": 200,
-   "biomeArea": "6"
+   "biomeArea": "6",
+   "altitude": [
+    0.5,
+    1000
+   ],
+   "radius": 12.04,
+   "terrainDelta": [
+    0,
+    3
+   ],
+   "clearArea": true
   }
  },
  {
@@ -651,7 +1186,17 @@
   "placement": {
    "quantity": 300,
    "biomeArea": "Median",
-   "minDistanceFromSimilar": 128
+   "altitude": [
+    1,
+    1000
+   ],
+   "radius": 10,
+   "terrainDelta": [
+    0,
+    3
+   ],
+   "minDistanceFromSimilar": 128,
+   "clearArea": true
   }
  },
  {
@@ -665,7 +1210,17 @@
    "prioritized": true,
    "minDistance": 3000,
    "maxDistance": 8000,
+   "altitude": [
+    1,
+    1000
+   ],
+   "radius": 24,
+   "terrainDelta": [
+    0,
+    2
+   ],
    "minDistanceFromSimilar": 1000,
+   "clearArea": true,
    "iconPlaced": true
   }
  },
@@ -681,7 +1236,17 @@
    "biomeArea": "Median",
    "minDistance": 1000,
    "maxDistance": 8000,
+   "altitude": [
+    200,
+    5000
+   ],
+   "radius": 15,
+   "terrainDelta": [
+    0,
+    40
+   ],
    "minDistanceFromSimilar": 2000,
+   "clearArea": true,
    "iconPlaced": true
   },
   "interior": true,
@@ -792,6 +1357,15 @@
    "biomeArea": "Median",
    "minDistance": 3000,
    "maxDistance": 8000,
+   "altitude": [
+    1,
+    1000
+   ],
+   "radius": 18,
+   "terrainDelta": [
+    0,
+    2
+   ],
    "minDistanceFromSimilar": 3000,
    "iconPlaced": true
   },
@@ -833,7 +1407,17 @@
    "quantity": 3,
    "prioritized": true,
    "biomeArea": "Median",
-   "minDistanceFromSimilar": 3000
+   "altitude": [
+    8,
+    1000
+   ],
+   "radius": 32,
+   "terrainDelta": [
+    0,
+    4
+   ],
+   "minDistanceFromSimilar": 3000,
+   "clearArea": true
   },
   "dungeon": {
    "minRooms": 256,
@@ -892,7 +1476,21 @@
   "placement": {
    "quantity": 40,
    "biomeArea": "Median",
-   "minDistanceFromSimilar": 128
+   "altitude": [
+    10,
+    200
+   ],
+   "forest": [
+    0,
+    1
+   ],
+   "radius": 20,
+   "terrainDelta": [
+    0,
+    1.5
+   ],
+   "minDistanceFromSimilar": 128,
+   "group": "icepond"
   }
  },
  {
@@ -901,7 +1499,16 @@
    "Swamp"
   ],
   "placement": {
-   "quantity": 700
+   "quantity": 700,
+   "altitude": [
+    -1,
+    1000
+   ],
+   "radius": 5,
+   "terrainDelta": [
+    0,
+    3
+   ]
   }
  },
  {
@@ -910,7 +1517,24 @@
    "AshLands"
   ],
   "placement": {
-   "quantity": 100
+   "quantity": 100,
+   "altitude": [
+    10,
+    1000
+   ],
+   "radius": 10,
+   "terrainDelta": [
+    0,
+    10
+   ],
+   "vegetation": [
+    0.6,
+    1
+   ],
+   "surroundCheck": {
+    "distance": 30,
+    "layers": 2
+   }
   }
  },
  {
@@ -921,7 +1545,22 @@
   "placement": {
    "quantity": 50,
    "biomeArea": "Median",
-   "minDistanceFromSimilar": 100
+   "altitude": [
+    4,
+    1000
+   ],
+   "forest": [
+    0,
+    1
+   ],
+   "radius": 32,
+   "terrainDelta": [
+    0,
+    3
+   ],
+   "minDistanceFromSimilar": 100,
+   "group": "thehole",
+   "clearArea": true
   }
  },
  {
@@ -934,7 +1573,18 @@
    "quantity": 5,
    "prioritized": true,
    "biomeArea": "Median",
-   "minDistanceFromSimilar": 2048
+   "altitude": [
+    1,
+    20
+   ],
+   "radius": 32,
+   "terrainDelta": [
+    0,
+    40
+   ],
+   "minDistanceFromSimilar": 2048,
+   "group": "DvergrBoss",
+   "clearArea": true
   },
   "key": "DvergrKey",
   "interior": true,
@@ -978,7 +1628,18 @@
    "quantity": 120,
    "prioritized": true,
    "biomeArea": "Median",
-   "minDistanceFromSimilar": 256
+   "altitude": [
+    12,
+    1000
+   ],
+   "radius": 20,
+   "terrainDelta": [
+    5,
+    40
+   ],
+   "minDistanceFromSimilar": 256,
+   "group": "DvergrDungeon",
+   "clearArea": true
   },
   "interior": true,
   "dungeon": {
@@ -1052,7 +1713,18 @@
    "quantity": 120,
    "prioritized": true,
    "biomeArea": "Median",
-   "minDistanceFromSimilar": 256
+   "altitude": [
+    1,
+    20
+   ],
+   "radius": 32,
+   "terrainDelta": [
+    0,
+    40
+   ],
+   "minDistanceFromSimilar": 256,
+   "group": "DvergrDungeon",
+   "clearArea": true
   },
   "interior": true,
   "dungeon": {
@@ -1124,7 +1796,18 @@
   "placement": {
    "quantity": 40,
    "biomeArea": "Median",
-   "minDistanceFromSimilar": 128
+   "altitude": [
+    4,
+    100
+   ],
+   "radius": 20,
+   "terrainDelta": [
+    0,
+    4
+   ],
+   "minDistanceFromSimilar": 128,
+   "group": "Excavation",
+   "clearArea": true
   }
  },
  {
@@ -1135,7 +1818,18 @@
   "placement": {
    "quantity": 40,
    "biomeArea": "Median",
-   "minDistanceFromSimilar": 128
+   "altitude": [
+    4,
+    100
+   ],
+   "radius": 20,
+   "terrainDelta": [
+    0,
+    4
+   ],
+   "minDistanceFromSimilar": 128,
+   "group": "Excavation",
+   "clearArea": true
   }
  },
  {
@@ -1146,7 +1840,18 @@
   "placement": {
    "quantity": 40,
    "biomeArea": "Median",
-   "minDistanceFromSimilar": 96
+   "altitude": [
+    4,
+    100
+   ],
+   "radius": 17,
+   "terrainDelta": [
+    0,
+    5
+   ],
+   "minDistanceFromSimilar": 96,
+   "group": "Excavation",
+   "clearArea": true
   }
  },
  {
@@ -1157,7 +1862,17 @@
   "placement": {
    "quantity": 250,
    "biomeArea": "Median",
-   "minDistanceFromSimilar": 180
+   "altitude": [
+    -1,
+    1000
+   ],
+   "radius": 11,
+   "terrainDelta": [
+    0,
+    3
+   ],
+   "minDistanceFromSimilar": 180,
+   "group": "Giant"
   }
  },
  {
@@ -1168,7 +1883,17 @@
   "placement": {
    "quantity": 85,
    "biomeArea": "Median",
-   "minDistanceFromSimilar": 256
+   "altitude": [
+    -1,
+    1000
+   ],
+   "radius": 10,
+   "terrainDelta": [
+    0,
+    4
+   ],
+   "minDistanceFromSimilar": 256,
+   "group": "Giant"
   }
  },
  {
@@ -1179,7 +1904,18 @@
   "placement": {
    "quantity": 75,
    "biomeArea": "Median",
-   "minDistanceFromSimilar": 128
+   "altitude": [
+    2,
+    1000
+   ],
+   "radius": 24,
+   "terrainDelta": [
+    0,
+    10
+   ],
+   "minDistanceFromSimilar": 128,
+   "group": "Dvergr",
+   "clearArea": true
   }
  },
  {
@@ -1190,7 +1926,18 @@
   "placement": {
    "quantity": 80,
    "biomeArea": "Median",
-   "minDistanceFromSimilar": 128
+   "altitude": [
+    2,
+    1000
+   ],
+   "radius": 20,
+   "terrainDelta": [
+    0,
+    10
+   ],
+   "minDistanceFromSimilar": 128,
+   "group": "Dvergr",
+   "clearArea": true
   }
  },
  {
@@ -1201,7 +1948,18 @@
   "placement": {
    "quantity": 20,
    "biomeArea": "Median",
-   "minDistanceFromSimilar": 128
+   "altitude": [
+    2,
+    1000
+   ],
+   "radius": 20,
+   "terrainDelta": [
+    0,
+    10
+   ],
+   "minDistanceFromSimilar": 128,
+   "group": "Dvergr",
+   "clearArea": true
   }
  },
  {
@@ -1212,7 +1970,18 @@
   "placement": {
    "quantity": 75,
    "biomeArea": "Median",
-   "minDistanceFromSimilar": 128
+   "altitude": [
+    4,
+    1000
+   ],
+   "radius": 24,
+   "terrainDelta": [
+    0,
+    10
+   ],
+   "minDistanceFromSimilar": 128,
+   "group": "Dvergr",
+   "clearArea": true
   }
  },
  {
@@ -1223,7 +1992,18 @@
   "placement": {
    "quantity": 50,
    "biomeArea": "Median",
-   "minDistanceFromSimilar": 128
+   "altitude": [
+    12,
+    1000
+   ],
+   "radius": 24,
+   "terrainDelta": [
+    0,
+    10
+   ],
+   "minDistanceFromSimilar": 128,
+   "group": "Dvergr",
+   "clearArea": true
   }
  },
  {
@@ -1234,7 +2014,18 @@
   "placement": {
    "quantity": 50,
    "biomeArea": "Median",
-   "minDistanceFromSimilar": 128
+   "altitude": [
+    11,
+    1000
+   ],
+   "radius": 20,
+   "terrainDelta": [
+    0,
+    10
+   ],
+   "minDistanceFromSimilar": 128,
+   "group": "Dvergr",
+   "clearArea": true
   }
  },
  {
@@ -1245,7 +2036,18 @@
   "placement": {
    "quantity": 100,
    "biomeArea": "Edge",
-   "minDistanceFromSimilar": 64
+   "altitude": [
+    -1,
+    -0.25
+   ],
+   "radius": 20,
+   "terrainDelta": [
+    2,
+    20
+   ],
+   "minDistanceFromSimilar": 64,
+   "group": "Harbour",
+   "clearArea": true
   }
  },
  {
@@ -1256,7 +2058,18 @@
   "placement": {
    "quantity": 100,
    "biomeArea": "Median",
-   "minDistanceFromSimilar": 128
+   "altitude": [
+    1,
+    20
+   ],
+   "radius": 20,
+   "terrainDelta": [
+    0,
+    40
+   ],
+   "minDistanceFromSimilar": 128,
+   "group": "Dvergr",
+   "clearArea": true
   }
  },
  {
@@ -1265,7 +2078,17 @@
    "Mistlands"
   ],
   "placement": {
-   "quantity": 500
+   "quantity": 500,
+   "altitude": [
+    1,
+    1000
+   ],
+   "radius": 6,
+   "terrainDelta": [
+    0,
+    10
+   ],
+   "clearArea": true
   }
  },
  {
@@ -1276,6 +2099,15 @@
   "placement": {
    "quantity": 200,
    "biomeArea": "Median",
+   "altitude": [
+    -10,
+    1000
+   ],
+   "radius": 4,
+   "terrainDelta": [
+    2,
+    99
+   ],
    "minDistanceFromSimilar": 60
   }
  },
@@ -1285,7 +2117,17 @@
    "Mistlands"
   ],
   "placement": {
-   "quantity": 200
+   "quantity": 200,
+   "altitude": [
+    2,
+    1000
+   ],
+   "radius": 6,
+   "terrainDelta": [
+    0,
+    10
+   ],
+   "clearArea": true
   }
  },
  {
@@ -1294,7 +2136,17 @@
    "Mistlands"
   ],
   "placement": {
-   "quantity": 200
+   "quantity": 200,
+   "altitude": [
+    2,
+    1000
+   ],
+   "radius": 6,
+   "terrainDelta": [
+    0,
+    10
+   ],
+   "clearArea": true
   }
  },
  {
@@ -1304,7 +2156,17 @@
   ],
   "placement": {
    "quantity": 200,
-   "minDistanceFromSimilar": 32
+   "altitude": [
+    2,
+    1000
+   ],
+   "radius": 16,
+   "terrainDelta": [
+    0,
+    10
+   ],
+   "minDistanceFromSimilar": 32,
+   "clearArea": true
   }
  },
  {
@@ -1315,7 +2177,18 @@
   "placement": {
    "quantity": 33,
    "biomeArea": "Median",
-   "minDistanceFromSimilar": 256
+   "altitude": [
+    -1,
+    1000
+   ],
+   "radius": 12,
+   "terrainDelta": [
+    0,
+    10
+   ],
+   "minDistanceFromSimilar": 256,
+   "group": "GiantArmor",
+   "clearArea": true
   }
  },
  {
@@ -1326,7 +2199,18 @@
   "placement": {
    "quantity": 33,
    "biomeArea": "Median",
-   "minDistanceFromSimilar": 256
+   "altitude": [
+    -1,
+    1000
+   ],
+   "radius": 12,
+   "terrainDelta": [
+    0,
+    10
+   ],
+   "minDistanceFromSimilar": 256,
+   "group": "GiantArmor",
+   "clearArea": true
   }
  },
  {
@@ -1337,7 +2221,18 @@
   "placement": {
    "quantity": 33,
    "biomeArea": "Median",
-   "minDistanceFromSimilar": 256
+   "altitude": [
+    -1,
+    1000
+   ],
+   "radius": 8,
+   "terrainDelta": [
+    0,
+    10
+   ],
+   "minDistanceFromSimilar": 256,
+   "group": "GiantArmor",
+   "clearArea": true
   }
  },
  {
@@ -1348,7 +2243,18 @@
   "placement": {
    "quantity": 100,
    "biomeArea": "Median",
-   "minDistanceFromSimilar": 128
+   "altitude": [
+    -1,
+    15
+   ],
+   "radius": 24,
+   "terrainDelta": [
+    2,
+    40
+   ],
+   "minDistanceFromSimilar": 128,
+   "group": "Harbour",
+   "clearArea": true
   }
  },
  {
@@ -1359,7 +2265,18 @@
   "placement": {
    "quantity": 150,
    "biomeArea": "Median",
-   "minDistanceFromSimilar": 64
+   "altitude": [
+    -1,
+    25
+   ],
+   "radius": 8,
+   "terrainDelta": [
+    4,
+    40
+   ],
+   "minDistanceFromSimilar": 64,
+   "group": "Harbour",
+   "clearArea": true
   }
  },
  {
@@ -1371,7 +2288,22 @@
   "placement": {
    "quantity": 40,
    "biomeArea": "Median",
-   "minDistanceFromSimilar": 300
+   "altitude": [
+    0,
+    1000
+   ],
+   "radius": 24,
+   "terrainDelta": [
+    0,
+    10
+   ],
+   "minDistanceFromSimilar": 300,
+   "group": "MorgenHole",
+   "vegetation": [
+    0,
+    0.3
+   ],
+   "clearArea": true
   },
   "interior": true
  },
@@ -1384,7 +2316,22 @@
   "placement": {
    "quantity": 40,
    "biomeArea": "Median",
-   "minDistanceFromSimilar": 200
+   "altitude": [
+    0,
+    1000
+   ],
+   "radius": 24,
+   "terrainDelta": [
+    0,
+    10
+   ],
+   "minDistanceFromSimilar": 200,
+   "group": "MorgenHole",
+   "vegetation": [
+    0,
+    0.3
+   ],
+   "clearArea": true
   },
   "interior": true
  },
@@ -1397,7 +2344,22 @@
   "placement": {
    "quantity": 40,
    "biomeArea": "Median",
-   "minDistanceFromSimilar": 200
+   "altitude": [
+    0,
+    1000
+   ],
+   "radius": 24,
+   "terrainDelta": [
+    0,
+    10
+   ],
+   "minDistanceFromSimilar": 200,
+   "group": "MorgenHole",
+   "vegetation": [
+    0,
+    0.3
+   ],
+   "clearArea": true
   },
   "interior": true
  },
@@ -1409,7 +2371,18 @@
   ],
   "placement": {
    "quantity": 40,
-   "minDistanceFromSimilar": 275
+   "altitude": [
+    30,
+    10000
+   ],
+   "radius": 30,
+   "terrainDelta": [
+    0,
+    300
+   ],
+   "minDistanceFromSimilar": 275,
+   "group": "morkborg",
+   "clearArea": true
   },
   "key": "BloodGoldKey",
   "interior": true,
@@ -1445,7 +2418,18 @@
   ],
   "placement": {
    "quantity": 120,
-   "minDistanceFromSimilar": 200
+   "altitude": [
+    100,
+    5000
+   ],
+   "radius": 15,
+   "terrainDelta": [
+    0,
+    40
+   ],
+   "minDistanceFromSimilar": 200,
+   "group": "mountaincaves",
+   "clearArea": true
   },
   "interior": true,
   "dungeon": {
@@ -1563,7 +2547,17 @@
   ],
   "placement": {
    "quantity": 100,
-   "minDistanceFromSimilar": 50
+   "altitude": [
+    100,
+    1000
+   ],
+   "radius": 3.93,
+   "terrainDelta": [
+    0,
+    2
+   ],
+   "minDistanceFromSimilar": 50,
+   "clearArea": true
   }
  },
  {
@@ -1573,6 +2567,15 @@
   ],
   "placement": {
    "quantity": 25,
+   "altitude": [
+    100,
+    1000
+   ],
+   "radius": 14,
+   "terrainDelta": [
+    0,
+    3
+   ],
    "minDistanceFromSimilar": 256
   }
  },
@@ -1584,7 +2587,18 @@
   "placement": {
    "quantity": 15,
    "biomeArea": "Median",
-   "minDistanceFromSimilar": 400
+   "altitude": [
+    2,
+    1000
+   ],
+   "radius": 25,
+   "terrainDelta": [
+    0,
+    3
+   ],
+   "minDistanceFromSimilar": 400,
+   "group": "memorialplace",
+   "clearArea": true
   }
  },
  {
@@ -1595,7 +2609,19 @@
   "placement": {
    "quantity": 135,
    "biomeArea": "Median",
-   "minDistanceFromSimilar": 70
+   "altitude": [
+    2,
+    1000
+   ],
+   "radius": 32,
+   "terrainDelta": [
+    0,
+    3
+   ],
+   "minDistanceFromSimilar": 70,
+   "maxDistanceFromSimilar": 85,
+   "groupMax": "thehole",
+   "clearArea": true
   }
  },
  {
@@ -1608,7 +2634,22 @@
    "unique": true,
    "prioritized": true,
    "biomeArea": "Median",
-   "minDistanceFromSimilar": 2048
+   "altitude": [
+    0,
+    1000
+   ],
+   "radius": 24,
+   "terrainDelta": [
+    0,
+    5
+   ],
+   "minDistanceFromSimilar": 2048,
+   "group": "PlaceofMystery",
+   "vegetation": [
+    0,
+    0.1
+   ],
+   "clearArea": true
   }
  },
  {
@@ -1621,7 +2662,22 @@
    "unique": true,
    "prioritized": true,
    "biomeArea": "Median",
-   "minDistanceFromSimilar": 2048
+   "altitude": [
+    0,
+    1000
+   ],
+   "radius": 24,
+   "terrainDelta": [
+    0,
+    5
+   ],
+   "minDistanceFromSimilar": 2048,
+   "group": "PlaceofMystery",
+   "vegetation": [
+    0,
+    0.1
+   ],
+   "clearArea": true
   }
  },
  {
@@ -1635,7 +2691,22 @@
    "unique": true,
    "prioritized": true,
    "biomeArea": "Median",
-   "minDistanceFromSimilar": 2048
+   "altitude": [
+    0,
+    1000
+   ],
+   "radius": 24,
+   "terrainDelta": [
+    0,
+    5
+   ],
+   "minDistanceFromSimilar": 2048,
+   "group": "PlaceofMystery",
+   "vegetation": [
+    0,
+    0.1
+   ],
+   "clearArea": true
   },
   "interior": true
  },
@@ -1646,7 +2717,16 @@
   ],
   "placement": {
    "quantity": 200,
-   "biomeArea": "-1"
+   "biomeArea": "-1",
+   "altitude": [
+    1,
+    1000
+   ],
+   "radius": 10.7,
+   "terrainDelta": [
+    0,
+    3
+   ]
   }
  },
  {
@@ -1656,7 +2736,17 @@
   ],
   "placement": {
    "quantity": 200,
-   "biomeArea": "-1"
+   "biomeArea": "-1",
+   "altitude": [
+    1,
+    1000
+   ],
+   "radius": 9.89,
+   "terrainDelta": [
+    0,
+    3
+   ],
+   "clearArea": true
   }
  },
  {
@@ -1667,7 +2757,18 @@
   "placement": {
    "quantity": 50,
    "biomeArea": "-1",
-   "minDistanceFromSimilar": 512
+   "altitude": [
+    1,
+    1000
+   ],
+   "radius": 10,
+   "terrainDelta": [
+    0,
+    3
+   ],
+   "minDistanceFromSimilar": 512,
+   "group": "Goblintower",
+   "clearArea": true
   }
  },
  {
@@ -1678,7 +2779,22 @@
   "placement": {
    "quantity": 70,
    "biomeArea": "-1",
-   "minDistanceFromSimilar": 128
+   "altitude": [
+    0,
+    1000
+   ],
+   "radius": 12,
+   "terrainDelta": [
+    0,
+    10
+   ],
+   "minDistanceFromSimilar": 128,
+   "group": "Runestones",
+   "vegetation": [
+    0,
+    0.1
+   ],
+   "clearArea": true
   }
  },
  {
@@ -1688,7 +2804,18 @@
   ],
   "placement": {
    "quantity": 50,
-   "minDistanceFromSimilar": 128
+   "altitude": [
+    1,
+    1000
+   ],
+   "radius": 8,
+   "terrainDelta": [
+    0,
+    3
+   ],
+   "minDistanceFromSimilar": 128,
+   "group": "Runestones",
+   "clearArea": true
   }
  },
  {
@@ -1698,7 +2825,18 @@
   ],
   "placement": {
    "quantity": 50,
-   "minDistanceFromSimilar": 128
+   "altitude": [
+    1,
+    1000
+   ],
+   "radius": 8,
+   "terrainDelta": [
+    0,
+    3
+   ],
+   "minDistanceFromSimilar": 128,
+   "group": "Runestones",
+   "clearArea": true
   }
  },
  {
@@ -1708,7 +2846,22 @@
   ],
   "placement": {
    "quantity": 70,
-   "minDistanceFromSimilar": 128
+   "altitude": [
+    0,
+    1000
+   ],
+   "radius": 12,
+   "terrainDelta": [
+    0,
+    10
+   ],
+   "minDistanceFromSimilar": 128,
+   "group": "Runestones",
+   "vegetation": [
+    0,
+    0.1
+   ],
+   "clearArea": true
   }
  },
  {
@@ -1719,7 +2872,18 @@
   "placement": {
    "quantity": 50,
    "biomeArea": "-1",
-   "minDistanceFromSimilar": 128
+   "altitude": [
+    0.5,
+    1000
+   ],
+   "radius": 8,
+   "terrainDelta": [
+    0,
+    3
+   ],
+   "minDistanceFromSimilar": 128,
+   "group": "Runestones",
+   "clearArea": true
   }
  },
  {
@@ -1731,7 +2895,18 @@
    "quantity": 25,
    "biomeArea": "7",
    "maxDistance": 2000,
-   "minDistanceFromSimilar": 128
+   "altitude": [
+    1,
+    1000
+   ],
+   "radius": 8,
+   "terrainDelta": [
+    0,
+    3
+   ],
+   "minDistanceFromSimilar": 128,
+   "group": "Runestones",
+   "clearArea": true
   }
  },
  {
@@ -1741,7 +2916,18 @@
   ],
   "placement": {
    "quantity": 100,
-   "minDistanceFromSimilar": 128
+   "altitude": [
+    1,
+    1000
+   ],
+   "radius": 8,
+   "terrainDelta": [
+    0,
+    3
+   ],
+   "minDistanceFromSimilar": 128,
+   "group": "Runestones",
+   "clearArea": true
   }
  },
  {
@@ -1751,7 +2937,18 @@
   ],
   "placement": {
    "quantity": 50,
-   "minDistanceFromSimilar": 128
+   "altitude": [
+    -1,
+    1000
+   ],
+   "radius": 12,
+   "terrainDelta": [
+    0,
+    10
+   ],
+   "minDistanceFromSimilar": 128,
+   "group": "Runestones",
+   "clearArea": true
   }
  },
  {
@@ -1761,7 +2958,18 @@
   ],
   "placement": {
    "quantity": 100,
-   "minDistanceFromSimilar": 128
+   "altitude": [
+    100,
+    1000
+   ],
+   "radius": 8,
+   "terrainDelta": [
+    0,
+    3
+   ],
+   "minDistanceFromSimilar": 128,
+   "group": "Runestones",
+   "clearArea": true
   }
  },
  {
@@ -1771,7 +2979,18 @@
   ],
   "placement": {
    "quantity": 100,
-   "minDistanceFromSimilar": 128
+   "altitude": [
+    1,
+    1000
+   ],
+   "radius": 8,
+   "terrainDelta": [
+    0,
+    3
+   ],
+   "minDistanceFromSimilar": 128,
+   "group": "Runestones",
+   "clearArea": true
   }
  },
  {
@@ -1781,7 +3000,18 @@
   ],
   "placement": {
    "quantity": 100,
-   "minDistanceFromSimilar": 128
+   "altitude": [
+    0,
+    1000
+   ],
+   "radius": 8,
+   "terrainDelta": [
+    0,
+    3
+   ],
+   "minDistanceFromSimilar": 128,
+   "group": "Runestones",
+   "clearArea": true
   }
  },
  {
@@ -1791,6 +3021,15 @@
   ],
   "placement": {
    "quantity": 100,
+   "altitude": [
+    1,
+    1000
+   ],
+   "radius": 24,
+   "terrainDelta": [
+    0,
+    3
+   ],
    "minDistanceFromSimilar": 128
   }
  },
@@ -1801,7 +3040,18 @@
   ],
   "placement": {
    "quantity": 100,
-   "minDistanceFromSimilar": 64
+   "altitude": [
+    2,
+    1000
+   ],
+   "radius": 24,
+   "terrainDelta": [
+    0,
+    2
+   ],
+   "minDistanceFromSimilar": 64,
+   "group": "shipsetting",
+   "clearArea": true
   }
  },
  {
@@ -1811,7 +3061,18 @@
   ],
   "placement": {
    "quantity": 50,
-   "minDistanceFromSimilar": 64
+   "altitude": [
+    2,
+    1000
+   ],
+   "radius": 24,
+   "terrainDelta": [
+    0,
+    2
+   ],
+   "minDistanceFromSimilar": 64,
+   "group": "shipsetting",
+   "clearArea": true
   }
  },
  {
@@ -1824,7 +3085,18 @@
   ],
   "placement": {
    "quantity": 25,
-   "minDistanceFromSimilar": 1024
+   "altitude": [
+    -1,
+    1
+   ],
+   "radius": 10,
+   "terrainDelta": [
+    0,
+    10
+   ],
+   "minDistanceFromSimilar": 1024,
+   "group": "Shipwreck",
+   "clearArea": true
   }
  },
  {
@@ -1833,7 +3105,17 @@
    "DeepNorth"
   ],
   "placement": {
-   "quantity": 170
+   "quantity": 170,
+   "altitude": [
+    -0.5,
+    0.5
+   ],
+   "radius": 10,
+   "terrainDelta": [
+    0,
+    2
+   ],
+   "clearArea": true
   }
  },
  {
@@ -1846,7 +3128,18 @@
   ],
   "placement": {
    "quantity": 25,
-   "minDistanceFromSimilar": 1024
+   "altitude": [
+    -1,
+    1
+   ],
+   "radius": 10,
+   "terrainDelta": [
+    0,
+    10
+   ],
+   "minDistanceFromSimilar": 1024,
+   "group": "Shipwreck",
+   "clearArea": true
   }
  },
  {
@@ -1855,7 +3148,17 @@
    "DeepNorth"
   ],
   "placement": {
-   "quantity": 120
+   "quantity": 120,
+   "altitude": [
+    -0.5,
+    1
+   ],
+   "radius": 10,
+   "terrainDelta": [
+    0,
+    2
+   ],
+   "clearArea": true
   }
  },
  {
@@ -1868,7 +3171,18 @@
   ],
   "placement": {
    "quantity": 25,
-   "minDistanceFromSimilar": 1024
+   "altitude": [
+    -1,
+    1
+   ],
+   "radius": 10,
+   "terrainDelta": [
+    0,
+    10
+   ],
+   "minDistanceFromSimilar": 1024,
+   "group": "Shipwreck",
+   "clearArea": true
   }
  },
  {
@@ -1881,7 +3195,18 @@
   ],
   "placement": {
    "quantity": 25,
-   "minDistanceFromSimilar": 1024
+   "altitude": [
+    -1,
+    1
+   ],
+   "radius": 14,
+   "terrainDelta": [
+    0,
+    10
+   ],
+   "minDistanceFromSimilar": 1024,
+   "group": "Shipwreck",
+   "clearArea": true
   }
  },
  {
@@ -1892,8 +3217,23 @@
   "placement": {
    "quantity": 1,
    "prioritized": true,
+   "centerFirst": true,
    "biomeArea": "Median",
    "maxDistance": 10000,
+   "altitude": [
+    3,
+    1000
+   ],
+   "forest": [
+    1,
+    5
+   ],
+   "radius": 25,
+   "terrainDelta": [
+    0,
+    3
+   ],
+   "clearArea": true,
    "iconAlways": true
   }
  },
@@ -1905,7 +3245,17 @@
   "placement": {
    "quantity": 25,
    "biomeArea": "7",
-   "minDistanceFromSimilar": 200
+   "altitude": [
+    1,
+    1000
+   ],
+   "radius": 16,
+   "terrainDelta": [
+    0,
+    3
+   ],
+   "minDistanceFromSimilar": 200,
+   "clearArea": true
   }
  },
  {
@@ -1916,7 +3266,18 @@
   "placement": {
    "quantity": 5,
    "biomeArea": "-1",
-   "minDistanceFromSimilar": 1000
+   "altitude": [
+    5,
+    1000
+   ],
+   "radius": 30,
+   "terrainDelta": [
+    0,
+    3
+   ],
+   "minDistanceFromSimilar": 1000,
+   "group": "Stonehenge",
+   "clearArea": true
   }
  },
  {
@@ -1927,7 +3288,18 @@
   "placement": {
    "quantity": 5,
    "biomeArea": "-1",
-   "minDistanceFromSimilar": 1000
+   "altitude": [
+    5,
+    1000
+   ],
+   "radius": 30,
+   "terrainDelta": [
+    0,
+    3
+   ],
+   "minDistanceFromSimilar": 1000,
+   "group": "Stonehenge",
+   "clearArea": true
   }
  },
  {
@@ -1938,7 +3310,18 @@
   "placement": {
    "quantity": 5,
    "biomeArea": "-1",
-   "minDistanceFromSimilar": 1000
+   "altitude": [
+    5,
+    1000
+   ],
+   "radius": 30,
+   "terrainDelta": [
+    0,
+    3
+   ],
+   "minDistanceFromSimilar": 1000,
+   "group": "Stonehenge",
+   "clearArea": true
   }
  },
  {
@@ -1949,7 +3332,18 @@
   "placement": {
    "quantity": 5,
    "biomeArea": "-1",
-   "minDistanceFromSimilar": 1000
+   "altitude": [
+    5,
+    1000
+   ],
+   "radius": 30,
+   "terrainDelta": [
+    0,
+    3
+   ],
+   "minDistanceFromSimilar": 1000,
+   "group": "Stonehenge",
+   "clearArea": true
   }
  },
  {
@@ -1960,7 +3354,18 @@
   "placement": {
    "quantity": 20,
    "biomeArea": "-1",
-   "minDistanceFromSimilar": 500
+   "altitude": [
+    2,
+    1000
+   ],
+   "radius": 16,
+   "terrainDelta": [
+    0,
+    3
+   ],
+   "minDistanceFromSimilar": 500,
+   "group": "Stonehenge",
+   "clearArea": true
   }
  },
  {
@@ -1971,7 +3376,18 @@
   "placement": {
    "quantity": 20,
    "biomeArea": "-1",
-   "minDistanceFromSimilar": 500
+   "altitude": [
+    2,
+    1000
+   ],
+   "radius": 16,
+   "terrainDelta": [
+    0,
+    3
+   ],
+   "minDistanceFromSimilar": 500,
+   "group": "Stonehenge",
+   "clearArea": true
   }
  },
  {
@@ -1980,7 +3396,17 @@
    "Plains"
   ],
   "placement": {
-   "biomeArea": "-1"
+   "biomeArea": "-1",
+   "altitude": [
+    1,
+    1000
+   ],
+   "radius": 6,
+   "terrainDelta": [
+    0,
+    3
+   ],
+   "clearArea": true
   }
  },
  {
@@ -1989,7 +3415,17 @@
    "Plains"
   ],
   "placement": {
-   "biomeArea": "-1"
+   "biomeArea": "-1",
+   "altitude": [
+    1,
+    1000
+   ],
+   "radius": 6,
+   "terrainDelta": [
+    0,
+    3
+   ],
+   "clearArea": true
   }
  },
  {
@@ -1999,7 +3435,16 @@
   ],
   "placement": {
    "quantity": 200,
-   "biomeArea": "-1"
+   "biomeArea": "-1",
+   "altitude": [
+    1,
+    1000
+   ],
+   "radius": 6,
+   "terrainDelta": [
+    0,
+    3
+   ]
   }
  },
  {
@@ -2009,7 +3454,16 @@
   ],
   "placement": {
    "quantity": 200,
-   "biomeArea": "-1"
+   "biomeArea": "-1",
+   "altitude": [
+    1,
+    1000
+   ],
+   "radius": 7,
+   "terrainDelta": [
+    0,
+    3
+   ]
   }
  },
  {
@@ -2018,7 +3472,17 @@
    "Plains"
   ],
   "placement": {
-   "biomeArea": "-1"
+   "biomeArea": "-1",
+   "altitude": [
+    1,
+    1000
+   ],
+   "radius": 7,
+   "terrainDelta": [
+    0,
+    3
+   ],
+   "clearArea": true
   }
  },
  {
@@ -2029,7 +3493,18 @@
   "placement": {
    "quantity": 50,
    "biomeArea": "-1",
-   "minDistanceFromSimilar": 512
+   "altitude": [
+    1,
+    1000
+   ],
+   "radius": 14,
+   "terrainDelta": [
+    0,
+    3
+   ],
+   "minDistanceFromSimilar": 512,
+   "group": "Goblintower",
+   "clearArea": true
   }
  },
  {
@@ -2040,7 +3515,18 @@
   "placement": {
    "quantity": 50,
    "biomeArea": "-1",
-   "minDistanceFromSimilar": 512
+   "altitude": [
+    1,
+    1000
+   ],
+   "radius": 14,
+   "terrainDelta": [
+    0,
+    3
+   ],
+   "minDistanceFromSimilar": 512,
+   "group": "Goblintower",
+   "clearArea": true
   }
  },
  {
@@ -2050,7 +3536,18 @@
   ],
   "placement": {
    "quantity": 80,
-   "minDistanceFromSimilar": 200
+   "altitude": [
+    2,
+    1000
+   ],
+   "radius": 9,
+   "terrainDelta": [
+    0,
+    2
+   ],
+   "minDistanceFromSimilar": 200,
+   "group": "Stonetowerruins",
+   "clearArea": true
   }
  },
  {
@@ -2060,7 +3557,18 @@
   ],
   "placement": {
    "quantity": 50,
-   "minDistanceFromSimilar": 128
+   "altitude": [
+    150,
+    1000
+   ],
+   "radius": 12.28,
+   "terrainDelta": [
+    6,
+    40
+   ],
+   "minDistanceFromSimilar": 128,
+   "group": "Mountainruin",
+   "clearArea": true
   }
  },
  {
@@ -2070,7 +3578,18 @@
   ],
   "placement": {
    "quantity": 50,
-   "minDistanceFromSimilar": 128
+   "altitude": [
+    150,
+    1000
+   ],
+   "radius": 22,
+   "terrainDelta": [
+    6,
+    40
+   ],
+   "minDistanceFromSimilar": 128,
+   "group": "Mountainruin",
+   "clearArea": true
   }
  },
  {
@@ -2080,7 +3599,17 @@
   ],
   "placement": {
    "quantity": 10,
-   "minDistanceFromSimilar": 32
+   "altitude": [
+    150,
+    1000
+   ],
+   "radius": 22,
+   "terrainDelta": [
+    0,
+    40
+   ],
+   "minDistanceFromSimilar": 32,
+   "clearArea": true
   }
  },
  {
@@ -2090,7 +3619,18 @@
   ],
   "placement": {
    "quantity": 80,
-   "minDistanceFromSimilar": 200
+   "altitude": [
+    2,
+    1000
+   ],
+   "radius": 9,
+   "terrainDelta": [
+    0,
+    2
+   ],
+   "minDistanceFromSimilar": 200,
+   "group": "Stonetowerruins",
+   "clearArea": true
   }
  },
  {
@@ -2100,7 +3640,17 @@
   ],
   "placement": {
    "quantity": 10,
-   "minDistanceFromSimilar": 50
+   "altitude": [
+    -8,
+    -2
+   ],
+   "radius": 7,
+   "terrainDelta": [
+    0,
+    4
+   ],
+   "minDistanceFromSimilar": 50,
+   "group": "Stonetowerruins_sunk"
   }
  },
  {
@@ -2110,7 +3660,18 @@
   ],
   "placement": {
    "quantity": 80,
-   "minDistanceFromSimilar": 200
+   "altitude": [
+    2,
+    1000
+   ],
+   "radius": 9,
+   "terrainDelta": [
+    0,
+    2
+   ],
+   "minDistanceFromSimilar": 200,
+   "group": "Stonetowerruins",
+   "clearArea": true
   }
  },
  {
@@ -2120,7 +3681,17 @@
   ],
   "placement": {
    "quantity": 10,
-   "minDistanceFromSimilar": 50
+   "altitude": [
+    -8,
+    -2
+   ],
+   "radius": 7,
+   "terrainDelta": [
+    0,
+    4
+   ],
+   "minDistanceFromSimilar": 50,
+   "group": "Stonetowerruins_sunk"
   }
  },
  {
@@ -2130,7 +3701,18 @@
   ],
   "placement": {
    "quantity": 80,
-   "minDistanceFromSimilar": 200
+   "altitude": [
+    2,
+    1000
+   ],
+   "radius": 7,
+   "terrainDelta": [
+    0,
+    2
+   ],
+   "minDistanceFromSimilar": 200,
+   "group": "Stonetowerruins",
+   "clearArea": true
   }
  },
  {
@@ -2140,7 +3722,17 @@
   ],
   "placement": {
    "quantity": 10,
-   "minDistanceFromSimilar": 50
+   "altitude": [
+    -8,
+    -2
+   ],
+   "radius": 7,
+   "terrainDelta": [
+    0,
+    4
+   ],
+   "minDistanceFromSimilar": 50,
+   "group": "Stonetowerruins_sunk"
   }
  },
  {
@@ -2150,7 +3742,18 @@
   ],
   "placement": {
    "quantity": 80,
-   "minDistanceFromSimilar": 200
+   "altitude": [
+    2,
+    1000
+   ],
+   "radius": 7,
+   "terrainDelta": [
+    0,
+    2
+   ],
+   "minDistanceFromSimilar": 200,
+   "group": "Stonetowerruins",
+   "clearArea": true
   }
  },
  {
@@ -2160,7 +3763,17 @@
   ],
   "placement": {
    "quantity": 10,
-   "minDistanceFromSimilar": 50
+   "altitude": [
+    -8,
+    -2
+   ],
+   "radius": 7,
+   "terrainDelta": [
+    0,
+    4
+   ],
+   "minDistanceFromSimilar": 50,
+   "group": "Stonetowerruins_sunk"
   }
  },
  {
@@ -2171,7 +3784,21 @@
   "placement": {
    "quantity": 100,
    "biomeArea": "Median",
-   "minDistanceFromSimilar": 40
+   "altitude": [
+    10,
+    1000
+   ],
+   "radius": 30,
+   "terrainDelta": [
+    0,
+    6
+   ],
+   "minDistanceFromSimilar": 40,
+   "vegetation": [
+    0,
+    0.8
+   ],
+   "clearArea": true
   }
  },
  {
@@ -2184,7 +3811,18 @@
    "quantity": 175,
    "prioritized": true,
    "biomeArea": "Median",
-   "minDistanceFromSimilar": 64
+   "altitude": [
+    0,
+    2
+   ],
+   "radius": 12,
+   "terrainDelta": [
+    0,
+    4
+   ],
+   "minDistanceFromSimilar": 64,
+   "group": "SunkenCrypt",
+   "clearArea": true
   },
   "key": "CryptKey",
   "interior": true,
@@ -2218,7 +3856,17 @@
   ],
   "placement": {
    "quantity": 50,
-   "minDistanceFromSimilar": 128
+   "altitude": [
+    -2,
+    1000
+   ],
+   "radius": 8,
+   "terrainDelta": [
+    0,
+    3
+   ],
+   "minDistanceFromSimilar": 128,
+   "group": "Swamphut"
   }
  },
  {
@@ -2227,7 +3875,16 @@
    "Swamp"
   ],
   "placement": {
-   "quantity": 50
+   "quantity": 50,
+   "altitude": [
+    -2,
+    1000
+   ],
+   "radius": 8,
+   "terrainDelta": [
+    0,
+    3
+   ]
   }
  },
  {
@@ -2237,7 +3894,17 @@
   ],
   "placement": {
    "quantity": 50,
-   "minDistanceFromSimilar": 128
+   "altitude": [
+    2,
+    1000
+   ],
+   "radius": 8,
+   "terrainDelta": [
+    0,
+    3
+   ],
+   "minDistanceFromSimilar": 128,
+   "group": "Swamphut"
   }
  },
  {
@@ -2246,7 +3913,16 @@
    "Swamp"
   ],
   "placement": {
-   "quantity": 50
+   "quantity": 50,
+   "altitude": [
+    -2,
+    1000
+   ],
+   "radius": 8,
+   "terrainDelta": [
+    0,
+    3
+   ]
   }
  },
  {
@@ -2256,7 +3932,17 @@
   ],
   "placement": {
    "quantity": 50,
-   "minDistanceFromSimilar": 128
+   "altitude": [
+    2,
+    1000
+   ],
+   "radius": 8,
+   "terrainDelta": [
+    0,
+    3
+   ],
+   "minDistanceFromSimilar": 128,
+   "group": "Swamphut"
   }
  },
  {
@@ -2265,7 +3951,16 @@
    "Swamp"
   ],
   "placement": {
-   "quantity": 50
+   "quantity": 50,
+   "altitude": [
+    -2,
+    1000
+   ],
+   "radius": 8,
+   "terrainDelta": [
+    0,
+    3
+   ]
   }
  },
  {
@@ -2275,7 +3970,17 @@
   ],
   "placement": {
    "quantity": 50,
-   "minDistanceFromSimilar": 128
+   "altitude": [
+    -1,
+    1000
+   ],
+   "radius": 8,
+   "terrainDelta": [
+    0,
+    3
+   ],
+   "minDistanceFromSimilar": 128,
+   "group": "Swamphut"
   }
  },
  {
@@ -2285,7 +3990,18 @@
   ],
   "placement": {
    "quantity": 25,
-   "minDistanceFromSimilar": 128
+   "altitude": [
+    -1,
+    1000
+   ],
+   "radius": 10,
+   "terrainDelta": [
+    0,
+    3
+   ],
+   "minDistanceFromSimilar": 128,
+   "group": "Swamphut",
+   "clearArea": true
   }
  },
  {
@@ -2296,7 +4012,17 @@
   "placement": {
    "quantity": 30,
    "biomeArea": "6",
-   "minDistanceFromSimilar": 256
+   "altitude": [
+    -0.5,
+    1000
+   ],
+   "radius": 12,
+   "terrainDelta": [
+    0,
+    3
+   ],
+   "minDistanceFromSimilar": 256,
+   "group": "SwampRuin"
   }
  },
  {
@@ -2307,7 +4033,18 @@
   "placement": {
    "quantity": 30,
    "biomeArea": "6",
-   "minDistanceFromSimilar": 256
+   "altitude": [
+    -0.5,
+    1000
+   ],
+   "radius": 10,
+   "terrainDelta": [
+    0,
+    3
+   ],
+   "minDistanceFromSimilar": 256,
+   "group": "SwampRuin",
+   "clearArea": true
   }
  },
  {
@@ -2317,6 +4054,15 @@
   ],
   "placement": {
    "quantity": 25,
+   "altitude": [
+    -1,
+    1000
+   ],
+   "radius": 10,
+   "terrainDelta": [
+    0,
+    3
+   ],
    "minDistanceFromSimilar": 1024
   }
  },
@@ -2328,7 +4074,18 @@
   "placement": {
    "quantity": 100,
    "biomeArea": "Median",
-   "minDistanceFromSimilar": 128
+   "altitude": [
+    5,
+    60
+   ],
+   "radius": 20,
+   "terrainDelta": [
+    0,
+    1.5
+   ],
+   "minDistanceFromSimilar": 128,
+   "group": "tarpit",
+   "clearArea": true
   }
  },
  {
@@ -2338,7 +4095,17 @@
   ],
   "placement": {
    "quantity": 50,
-   "biomeArea": "Median"
+   "biomeArea": "Median",
+   "altitude": [
+    3,
+    1000
+   ],
+   "radius": 20,
+   "terrainDelta": [
+    0,
+    1.5
+   ],
+   "clearArea": true
   }
  },
  {
@@ -2349,7 +4116,18 @@
   "placement": {
    "quantity": 16,
    "biomeArea": "Median",
-   "minDistanceFromSimilar": 128
+   "altitude": [
+    5,
+    60
+   ],
+   "radius": 25,
+   "terrainDelta": [
+    0,
+    1.5
+   ],
+   "minDistanceFromSimilar": 128,
+   "group": "tarpit",
+   "clearArea": true
   }
  },
  {
@@ -2359,7 +4137,17 @@
   ],
   "placement": {
    "quantity": 20,
-   "biomeArea": "Median"
+   "biomeArea": "Median",
+   "altitude": [
+    3,
+    1000
+   ],
+   "radius": 25,
+   "terrainDelta": [
+    0,
+    1.5
+   ],
+   "clearArea": true
   }
  },
  {
@@ -2370,7 +4158,18 @@
   "placement": {
    "quantity": 100,
    "biomeArea": "Median",
-   "minDistanceFromSimilar": 128
+   "altitude": [
+    5,
+    60
+   ],
+   "radius": 14,
+   "terrainDelta": [
+    0,
+    1.5
+   ],
+   "minDistanceFromSimilar": 128,
+   "group": "tarpit",
+   "clearArea": true
   }
  },
  {
@@ -2380,7 +4179,17 @@
   ],
   "placement": {
    "quantity": 100,
-   "biomeArea": "Median"
+   "biomeArea": "Median",
+   "altitude": [
+    3,
+    1000
+   ],
+   "radius": 14,
+   "terrainDelta": [
+    0,
+    1.5
+   ],
+   "clearArea": true
   }
  },
  {
@@ -2392,7 +4201,17 @@
   "placement": {
    "quantity": 40,
    "biomeArea": "Median",
-   "minDistanceFromSimilar": 256
+   "altitude": [
+    2,
+    1000
+   ],
+   "radius": 28,
+   "terrainDelta": [
+    0,
+    3
+   ],
+   "minDistanceFromSimilar": 256,
+   "clearArea": true
   },
   "interior": true,
   "dungeon": {
@@ -2450,7 +4269,17 @@
   "placement": {
    "quantity": 200,
    "biomeArea": "Median",
-   "minDistanceFromSimilar": 256
+   "altitude": [
+    3,
+    1000
+   ],
+   "radius": 12,
+   "terrainDelta": [
+    5,
+    10
+   ],
+   "minDistanceFromSimilar": 256,
+   "clearArea": true
   },
   "interior": true
  },
@@ -2465,7 +4294,17 @@
    "prioritized": true,
    "biomeArea": "Median",
    "minDistance": 1500,
+   "altitude": [
+    1,
+    1000
+   ],
+   "radius": 12,
+   "terrainDelta": [
+    0,
+    2
+   ],
    "minDistanceFromSimilar": 512,
+   "clearArea": true,
    "iconPlaced": true
   }
  },
@@ -2476,7 +4315,21 @@
   ],
   "placement": {
    "quantity": 350,
-   "minDistanceFromSimilar": 100
+   "altitude": [
+    0,
+    1000
+   ],
+   "radius": 16,
+   "terrainDelta": [
+    0,
+    5
+   ],
+   "minDistanceFromSimilar": 100,
+   "vegetation": [
+    0,
+    0.1
+   ],
+   "clearArea": true
   }
  },
  {
@@ -2485,7 +4338,17 @@
    "Mountain"
   ],
   "placement": {
-   "quantity": 50
+   "quantity": 50,
+   "altitude": [
+    100,
+    1000
+   ],
+   "radius": 3,
+   "terrainDelta": [
+    0,
+    2
+   ],
+   "clearArea": true
   }
  },
  {
@@ -2494,7 +4357,17 @@
    "Mountain"
   ],
   "placement": {
-   "quantity": 50
+   "quantity": 50,
+   "altitude": [
+    100,
+    1000
+   ],
+   "radius": 3,
+   "terrainDelta": [
+    0,
+    2
+   ],
+   "clearArea": true
   }
  },
  {
@@ -2507,7 +4380,18 @@
    "biomeArea": "7",
    "minDistance": 500,
    "maxDistance": 2000,
-   "minDistanceFromSimilar": 128
+   "altitude": [
+    1,
+    1000
+   ],
+   "radius": 32,
+   "terrainDelta": [
+    0,
+    4
+   ],
+   "minDistanceFromSimilar": 128,
+   "group": "woodvillage",
+   "clearArea": true
   }
  },
  {
@@ -2517,7 +4401,16 @@
   ],
   "placement": {
    "quantity": 20,
-   "biomeArea": "7"
+   "biomeArea": "7",
+   "altitude": [
+    1,
+    1000
+   ],
+   "radius": 8,
+   "terrainDelta": [
+    0,
+    4
+   ]
   }
  },
  {
@@ -2527,7 +4420,16 @@
   ],
   "placement": {
    "quantity": 20,
-   "biomeArea": "7"
+   "biomeArea": "7",
+   "altitude": [
+    1,
+    1000
+   ],
+   "radius": 8,
+   "terrainDelta": [
+    0,
+    4
+   ]
   }
  },
  {
@@ -2537,7 +4439,16 @@
   ],
   "placement": {
    "quantity": 20,
-   "biomeArea": "7"
+   "biomeArea": "7",
+   "altitude": [
+    1,
+    1000
+   ],
+   "radius": 8,
+   "terrainDelta": [
+    0,
+    4
+   ]
   }
  },
  {
@@ -2547,7 +4458,16 @@
   ],
   "placement": {
    "quantity": 20,
-   "biomeArea": "7"
+   "biomeArea": "7",
+   "altitude": [
+    1,
+    1000
+   ],
+   "radius": 6,
+   "terrainDelta": [
+    0,
+    4
+   ]
   }
  },
  {
@@ -2557,7 +4477,16 @@
   ],
   "placement": {
    "quantity": 20,
-   "biomeArea": "7"
+   "biomeArea": "7",
+   "altitude": [
+    1,
+    1000
+   ],
+   "radius": 9,
+   "terrainDelta": [
+    0,
+    4
+   ]
   }
  },
  {
@@ -2567,7 +4496,16 @@
   ],
   "placement": {
    "quantity": 20,
-   "biomeArea": "7"
+   "biomeArea": "7",
+   "altitude": [
+    1,
+    1000
+   ],
+   "radius": 8,
+   "terrainDelta": [
+    0,
+    4
+   ]
   }
  },
  {
@@ -2577,7 +4515,16 @@
   ],
   "placement": {
    "quantity": 20,
-   "biomeArea": "7"
+   "biomeArea": "7",
+   "altitude": [
+    1,
+    1000
+   ],
+   "radius": 10,
+   "terrainDelta": [
+    0,
+    4
+   ]
   }
  },
  {
@@ -2587,7 +4534,16 @@
   ],
   "placement": {
    "quantity": 20,
-   "biomeArea": "7"
+   "biomeArea": "7",
+   "altitude": [
+    1,
+    1000
+   ],
+   "radius": 8,
+   "terrainDelta": [
+    0,
+    4
+   ]
   }
  },
  {
@@ -2597,7 +4553,16 @@
   ],
   "placement": {
    "quantity": 20,
-   "biomeArea": "7"
+   "biomeArea": "7",
+   "altitude": [
+    1,
+    1000
+   ],
+   "radius": 8,
+   "terrainDelta": [
+    0,
+    4
+   ]
   }
  },
  {
@@ -2607,7 +4572,16 @@
   ],
   "placement": {
    "quantity": 20,
-   "biomeArea": "7"
+   "biomeArea": "7",
+   "altitude": [
+    1,
+    1000
+   ],
+   "radius": 8,
+   "terrainDelta": [
+    0,
+    4
+   ]
   }
  },
  {
@@ -2617,7 +4591,16 @@
   ],
   "placement": {
    "quantity": 20,
-   "biomeArea": "7"
+   "biomeArea": "7",
+   "altitude": [
+    1,
+    1000
+   ],
+   "radius": 8,
+   "terrainDelta": [
+    0,
+    4
+   ]
   }
  },
  {
@@ -2627,7 +4610,16 @@
   ],
   "placement": {
    "quantity": 20,
-   "biomeArea": "7"
+   "biomeArea": "7",
+   "altitude": [
+    1,
+    1000
+   ],
+   "radius": 10,
+   "terrainDelta": [
+    0,
+    4
+   ]
   }
  },
  {
@@ -2637,7 +4629,16 @@
   ],
   "placement": {
    "quantity": 20,
-   "biomeArea": "7"
+   "biomeArea": "7",
+   "altitude": [
+    1,
+    1000
+   ],
+   "radius": 8,
+   "terrainDelta": [
+    0,
+    4
+   ]
   }
  },
  {
@@ -2650,7 +4651,18 @@
    "biomeArea": "7",
    "minDistance": 2000,
    "maxDistance": 10000,
-   "minDistanceFromSimilar": 256
+   "altitude": [
+    1,
+    1000
+   ],
+   "radius": 32,
+   "terrainDelta": [
+    0,
+    4
+   ],
+   "minDistanceFromSimilar": 256,
+   "group": "woodvillage",
+   "clearArea": true
   }
  },
  {
@@ -2663,7 +4675,18 @@
    "biomeArea": "7",
    "minDistance": 2000,
    "maxDistance": 10000,
-   "minDistanceFromSimilar": 256
+   "altitude": [
+    1,
+    1000
+   ],
+   "radius": 32,
+   "terrainDelta": [
+    0,
+    4
+   ],
+   "minDistanceFromSimilar": 256,
+   "group": "woodvillage",
+   "clearArea": true
   }
  }
 ]

@@ -6,7 +6,12 @@
    "Plains"
   ],
   "placement": {
-   "quantity": 20
+   "quantity": 20,
+   "radius": 10,
+   "terrainDelta": [
+    0,
+    2
+   ]
   }
  },
  {
@@ -18,7 +23,27 @@
   "placement": {
    "quantity": 20,
    "minDistance": 600,
-   "maxDistance": 3000
+   "maxDistance": 3000,
+   "altitude": [
+    4,
+    100
+   ],
+   "forest": [
+    0.5,
+    1.2
+   ],
+   "radius": 20,
+   "terrainDelta": [
+    0,
+    4
+   ],
+   "minDistanceFromSimilar": 128,
+   "group": "Lairs",
+   "vegetation": [
+    0,
+    0.8
+   ],
+   "clearArea": true
   },
   "key": "Gem",
   "interior": true,
@@ -48,6 +73,11 @@
    "biomeArea": "Median",
    "minDistance": 1000,
    "maxDistance": 4000,
+   "radius": 10,
+   "terrainDelta": [
+    0,
+    2
+   ],
    "minDistanceFromSimilar": 500,
    "iconPlaced": true
   }
@@ -59,7 +89,12 @@
    "Meadows"
   ],
   "placement": {
-   "quantity": 20
+   "quantity": 20,
+   "radius": 10,
+   "terrainDelta": [
+    0,
+    2
+   ]
   }
  },
  {
@@ -68,7 +103,20 @@
    "Mountain"
   ],
   "placement": {
-   "quantity": 20
+   "quantity": 20,
+   "centerFirst": true,
+   "radius": 10,
+   "terrainDelta": [
+    0,
+    2
+   ],
+   "maxDistanceFromSimilar": 300,
+   "groupMax": "Lairs",
+   "surroundCheck": {
+    "distance": 20,
+    "layers": 2,
+    "betterThanAverage": 0.5
+   }
   }
  }
 ]

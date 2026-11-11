@@ -64,6 +64,13 @@ a.place { display: inline-flex; flex-direction: column; align-items: center; gap
 a.place img { width: 96px; height: 96px; object-fit: contain; border-radius: 6px; background: #fff;
   border: 1px solid var(--line); }
 a.place:hover img { outline: 2px solid var(--accent); }
+/* a location page's render, large: one per variant */
+.renders { display: flex; flex-wrap: wrap; gap: 12px; margin: 12px 0; }
+figure.render { margin: 0; flex: 1 1 320px; max-width: 512px; }
+figure.render img { display: block; width: 100%; height: auto; aspect-ratio: 1; object-fit: contain;
+  border-radius: 8px; background: #fff; border: 1px solid var(--line); }
+figure.render figcaption { color: var(--muted); font-size: 12px; text-align: center; overflow-wrap: anywhere; }
+ul.rules { margin: 4px 0 8px; padding-left: 20px; }
 .chance { color: var(--muted); font-size: 12px; }
 a.place .biomes { color: var(--muted); font-size: 12px; }
 a.place .variant { display: block; color: var(--muted); font-size: 12px; overflow-wrap: anywhere; }

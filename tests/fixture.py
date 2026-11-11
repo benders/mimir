@@ -146,7 +146,11 @@ def container(*drops, name="$piece_chest"):
 def zone_location(name, biome, enable=True, **kw):
     return {**m(name=name, prefabName=name, enable=enable, biome=biome, biomeArea="Everything", quantity=20,
                 unique=False, prioritized=False, minDistance=0, maxDistance=0, minDistanceFromSimilar=0,
-                iconPlaced=False, iconAlways=False), **m(**kw)}
+                iconPlaced=False, iconAlways=False, centerFirst=False, minAltitude=-1000, maxAltitude=1000,
+                inForest=False, forestTresholdMin=0, forestTresholdMax=1, exteriorRadius=10, minTerrainDelta=0,
+                maxTerrainDelta=2, group="", maxDistanceFromSimilar=0, groupMax="", minimumVegetation=0,
+                maximumVegetation=1, surroundCheckVegetation=False, surroundCheckDistance=20, surroundCheckLayers=2,
+                surroundBetterThanAverage=0, clearArea=False), **m(**kw)}
 
 
 def event(name, biome, *spawns, **kw):
@@ -554,12 +558,16 @@ def write_dump(raw: Path) -> Path:
         zone_location("Camp", "Swamp"),
         zone_location("Camp", "Plains"),  # same prefab placed in a second biome
         zone_location("Lair", "Mountain", minDistance=200, minDistanceFromCenter=600,
-                      maxDistanceFromCenter=3000),  # both centre-distance pairs: the tighter wins
+                      maxDistanceFromCenter=3000,  # both centre-distance pairs: the tighter wins
+                      minAltitude=4, maxAltitude=100, maxTerrainDelta=4, exteriorRadius=20, clearArea=True,
+                      group="Lairs", minDistanceFromSimilar=128, inForest=True, forestTresholdMin=0.5,
+                      forestTresholdMax=1.2, maximumVegetation=0.8),
         zone_location("Ruin", "Meadows", enable=False),
         zone_location("Market", "Meadows", biomeArea="Median", quantity=5, unique=True, prioritized=True,
                       minDistance=1000, maxDistance=4000, minDistanceFromSimilar=500, iconPlaced=True),  # a trader's camp
         zone_location("Stash", "Meadows"),
-        zone_location("Village", "Mountain"),
+        zone_location("Village", "Mountain", centerFirst=True, surroundCheckVegetation=True,
+                      surroundBetterThanAverage=0.5, maxDistanceFromSimilar=300, groupMax="Lairs"),
     ]}}])
     dump("locations/Camp.json", {"name": "Camp", "components": [comp("Location", {}), *spawners(
         ("CreatureSpawner", creature_spawner("Raider", minLevel=3, maxLevel=1)),  # swapped levels
