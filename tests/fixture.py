@@ -177,7 +177,7 @@ TRANSLATIONS = {
         ("decor", "Decor"), ("storage", "Storage"), ("transport", "Transportation"), ("food", "Food"), ("mead", "Mead"),
         ("feasts", "Feasts"), ("defense", "Defence"), ("stacks", "Piles and Stacks"), ("stairs", "Stairs"),
         ("doors", "Doors and Windows"), ("seasonal", "Seasonal Items"))}, "piece_lootchest": "Loot chest", "item_marble": "Marble", "piece_anvil": "Anvil", "piece_kiln": "Kiln",
-    "piece_bush": "Twig Bush", "piece_creeper": "Creeper", "piece_orerock": "Ore Rock", "se_fizz": "Fizzy",
+    "piece_bush": "Twig Bush", "piece_creeper": "Creeper", "piece_orerock": "Ore Rock", "piece_husk": "Husk", "se_fizz": "Fizzy",
     "enemy_pup": "Pup", "enemy_chief_p2": "Chief Risen", "enemy_imp": "Imp", "enemy_shade": "Shade", "enemy_sprite": "Sprite", "enemy_moth": "Moth", "enemy_singer": "Singer", "item_wand": "Wand", "item_rod": "Summoning Rod", "enemy_chief": "<color=orange>Chief</color>", "item_egg": "Egg", "item_saddle": "Saddle", "item_nectar": "Nectar", "item_ichor": "Ichor", "item_dust": "Dust",
     "item_hat": "Party Hat", "piece_tree": "Winter Tree", "piece_hive": "Hive", "piece_lure": "Lure", "piece_glow": "Glow", "piece_tap": "Tap", "piece_wildhive": "Wild Hive", "event_test": "Something stirs",
 }
@@ -405,6 +405,9 @@ def prefabs():
                comp("Beacon", m(range=50), path="Beacon")),  # buried in the Mountain: the Dowser finds it
         prefab("Boulder", comp("MineRock", m(name="Boulder", health=50, minToolTier=0, damageModifiers={},
                                              dropItems=drop_table()))),  # yields nothing: not a source
+        prefab("Husk", comp("Destructible", m(health=1, minToolTier=0, damages={}, spawnWhenDestroyed=R("HuskShell")))),
+        prefab("HuskShell", comp("MineRock", m(name="$piece_husk", health=5, minToolTier=0, damageModifiers={},
+                                               dropItems=drop_table(("Shard", 1, 1, 1))))),  # placed only as the Husk
         prefab("Stub", comp("Pickable", m(overrideName="$piece_bush", itemPrefab=R("Ore"), amount=1,
                                           respawnTimeMinutes=0, extraDrops=drop_table()))),
         piece("Lure", comp("WispSpawner", m(spawnInterval=20, spawnChance=0.25, maxSpawned=2, maxSpawnedArea=8,
@@ -635,7 +638,8 @@ def write_dump(raw: Path) -> Path:
                                               *spawners(("CreatureSpawner", creature_spawner("Pup", maxLevel=2)),
                                                         container(("Gem", 1, 1, 1), ("Wood", 2, 5, 3))),
                                               ], "instances": [{"prefab": "WildHive", "path": "hall/WildHive"},
-                                                               {"prefab": "Altar", "path": "hall/Altar"}]})
+                                                               {"prefab": "Altar", "path": "hall/Altar"},
+                                                               {"prefab": "Husk", "path": "hall/Husk"}]})
     dump("rooms/cave_door.json", {"name": "cave_door", "theme": 4, "enabled": True,  # the Lair's start room
                                   "components": [comp("Room", m(entrance=True, weight=1))]})
     dump("rooms/cave_off.json", {"name": "cave_off", "theme": 4, "enabled": False,

@@ -848,7 +848,12 @@
   "stage": "Mountain",
   "via": {
    "how": "source",
-   "from": "SiegeCore"
+   "from": "HuskShell",
+   "needs": [
+    {
+     "item": "Gem"
+    }
+   ]
   }
  },
  {

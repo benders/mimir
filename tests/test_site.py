@@ -258,6 +258,13 @@ class Site(unittest.TestCase):
         self.assertIn('html[data-max="3"] p.stagehint[data-later="4"]', css)
         self.assertNotIn('p.stagehint[data-later="4"],\nhtml[data-max="4"]', css)
 
+    def test_found_in_later_stage_takes_first_stage_place(self):  # HuskShell stands where the Husk does
+        shard = (self.out / "items/Shard.html").read_text(encoding="utf-8")
+        found = re.search(r"<h2>Found in</h2>(.*?)</section>", shard, re.S).group(1)
+        row = re.search(r"<tr[^>]*><td>Husk</td>.*?</tr>", found, re.S)
+        self.assertTrue(row, found)
+        self.assertIn("Lair", row.group(0))
+
     def test_piece_found_in(self):
         bench = (self.out / "pieces/piece_bench.html").read_text(encoding="utf-8")  # world copy, placed in the Lair
         self.assertIn("<h2>Found in</h2>", bench)

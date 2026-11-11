@@ -235,6 +235,14 @@ def biome_stage(b: str) -> int:
     return STAGES.index(b) if b in STAGES else 0
 
 
+def first_stage(s: dict) -> dict:
+    """The source whose placement a later stage of a multi-stage object shares (giant_brain_frac -> giant_brain):
+    walks `becomes` back while the stage has no biomes, locations or planters of its own."""
+    while not (s.get("biomes") or s.get("locations") or s.get("placedBy")) and s.get("id") in BECOMES_FROM:
+        s = BECOMES_FROM[s["id"]]
+    return s
+
+
 def place_parts(s: dict) -> tuple[list[tuple[int, str]], list[tuple[int, str]]]:
     """Where a source is found, as (stage, html) text parts and (stage, html) render thumbnails: a fish's biomes, a
     trader's locations (with biomes), or a world source's biomes, locations (dungeon rooms marked, long lists cut) and
@@ -243,6 +251,7 @@ def place_parts(s: dict) -> tuple[list[tuple[int, str]], list[tuple[int, str]]]:
         return [(LOCATION_STAGE.get(x["location"], 0),
                  f"{esc(pretty_id(x['location']))} ({', '.join(biome_link(b) for b in x['biomes'])})")
                 for x in s["locations"]], []
+    s = first_stage(s)
     places = [(biome_stage(b), biome_link(b)) for b in s.get("biomes", [])]
     if s["kind"] == "fishing":
         return places, []
@@ -1184,9 +1193,8 @@ def how_text(kind: str, id_: str) -> str:
         conv = next((c for c in PROCESSING if c["station"] == frm and c["to"] == id_), {})
         return PROCESS_LABELS.get(conv.get("kind"), "made").lower()
     if how == "source" and frm in SOURCES:
-        s = placed = SOURCES[frm]
-        while not placed.get("biomes") and not placed.get("locations") and placed["id"] in BECOMES_FROM:
-            placed = BECOMES_FROM[placed["id"]]  # a stage of a multi-stage object: where its first stage stands
+        s = SOURCES[frm]
+        placed = first_stage(s)
         where = short_places(placed.get("biomes", []), placed.get("locations", []))
         return f'{esc(s["kind"])}: {esc(source_name(s))}' + (f" ({esc(where)})" if where else "")
     if how == "fish":
