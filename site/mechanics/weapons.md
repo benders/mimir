@@ -1,7 +1,7 @@
 ---
 title: Weapons
 summary: Every weapon by category, with attack speed and damage per second.
-sources: Attack.Start; Projectile.Setup; Projectile.SpawnOnHit; Aoe.Setup; Attack.FireProjectileBurst; Attack.ProjectileAttackTriggered; Attack.UpdateProjectile; Attack.Stop; Player.PlayerAttackInput; Player.UpdateWeaponLoading; Attack.GetAttackEitr; SpawnAbility.Spawn; Character.GetRandomSkillFactor; Tameable.Command; Tameable.UnsummonMaxInstances; SpawnSystem.GetNrOfInstances; Attack.OnAttackTrigger; Player.UpdateAttackBowDraw; Player.UpdateActionQueue; Player.QueueReloadAction; Player.InMinorAction; Humanoid.GetAttackDrawPercentage; ItemData.GetWeaponLoadingTime; Attack.Update; Attack.CanStartChainAttack; Attack.ModifyDamage; Attack.DoMeleeAttack; Attack.DoAreaAttack; Humanoid.StartAttack; Player.InAttack; CharacterAnimEvent.Speed; CharacterAnimEvent.CustomFixedUpdate; Skills.GetRandomSkillFactor; Humanoid.UpdateAttack
+sources: Attack.Start; Projectile.Setup; Projectile.SpawnOnHit; Aoe.Setup; Attack.FireProjectileBurst; Attack.ProjectileAttackTriggered; Attack.UpdateProjectile; Attack.Stop; Player.PlayerAttackInput; Player.UpdateWeaponLoading; Attack.GetAttackEitr; Attack.GetAttackStamina; SpawnAbility.Spawn; Character.GetRandomSkillFactor; Tameable.Command; Tameable.UnsummonMaxInstances; SpawnSystem.GetNrOfInstances; Attack.OnAttackTrigger; Player.UpdateAttackBowDraw; Player.UpdateActionQueue; Player.QueueReloadAction; Player.InMinorAction; Humanoid.GetAttackDrawPercentage; ItemData.GetWeaponLoadingTime; Attack.Update; Attack.CanStartChainAttack; Attack.ModifyDamage; Attack.DoMeleeAttack; Attack.DoAreaAttack; Humanoid.StartAttack; Player.InAttack; CharacterAnimEvent.Speed; CharacterAnimEvent.CustomFixedUpdate; Skills.GetRandomSkillFactor; Humanoid.UpdateAttack
 ---
 
 No item field sets attack speed. The animator does: an attack fires the trigger `m_attackAnimation` + chain level and
@@ -20,14 +20,16 @@ freezes the animation for 0.15 s. Skills and status effects don't change attack 
 - each hit rolls × [n − 0.15, n + 0.15], clamped to [0, 1], n = 0.4 + 0.6 × skill / 100 (× 0.85–1 at skill 100)
 - held staff (Staff of Frost): shot time = m_burstInterval (0.2 s) after a 0.35 s wind-up, each shot paying the eitr cost; released or out of eitr, it stops
 - Dundr: shot time = fire animation + reload, as a crossbow with no "reload done"; reloading drains 25 eitr/s, so a shot costs 25 × reload
-- eitr, stamina and health cost = cost × (1 − 0.33 × skill / 100)
+- eitr, stamina and health cost = cost × (1 − 0.33 × skill / 100), paid once per attack started (each chain level)
+- per Stam = combo damage / (chain levels × stamina cost), at skill 0
 - shot damage = weapon damage × projectiles (Dundr 12) × spawned copies that carry it (Staff of Fracturing: 12 splinters)
 - summon's hit = its damage × √U(0.75, 1) × (1 + 0.02 × the staff's skill level when summoned): up to ×3 at skill 100
 - summons out: no new one while m_maxSpawned of that creature are loaded (anyone's); Dead Raiser and Spirit Caller summons
   follow you, and each new one unsummons your oldest of that creature beyond the staff's quality (1–4)
 
-The tables group weapons by category, with the skill each trains, lowest primary DPS first; a weapon's secondary
-attack is in the same row. They use quality 1 (not upgraded; each item page has DPS per quality), a skill roll of 1 (every hit connects at full damage) and the sum of the weapon's damage
+The tables group weapons by category, with the skill each trains, lowest DPS first, in the format of each item
+page's stats table: damage per type, then the primary attack's hits, seconds, DPS and damage per stamina, and the
+damage of one secondary attack. They use quality 1 (not upgraded; each item page has them per quality), a skill roll of 1 (every hit connects at full damage) and the sum of the weapon's damage
 types, leaving out any type more than half of all creatures are immune to or ignore: chop and pickaxe, and spirit,
 which is marked *. Weapons that fire several projectiles (†) count all of them hitting one target, and Dundr's time is
 at skill 0. A staff's projectile may spawn more on hit: copies that carry the weapon's damage count, objects with their

@@ -537,7 +537,11 @@ class Site(unittest.TestCase):
         page = (self.out / "mechanics/weapons.html").read_text(encoding="utf-8")
         # grouped by category with the skill in the heading; no secondary attacks in the group: no secondary columns
         self.assertIn('<h3 id="swords">Swords <span class="skill"><a href="mechanics/skills.html">Swords skill</a>', page)
-        self.assertIn("<td>3</td><td>1.57</td><td>175</td><td><b>111.1</b></td></tr>", page)  # quality 1
+        # the item pages' format at quality 1: damage per type, hits, seconds, DPS, per Stam (175 / (2 x 10))
+        self.assertIn("<th>Weapon</th><th>Slash</th><th>Fire</th><th>Hits</th><th>Seconds</th><th>DPS</th><th>per Stam</th>", page)
+        self.assertIn("<td>30</td><td>5</td><td>3</td><td>1.57</td><td>111.1</td><td>8.8</td></tr>", page)
+        # spirit: * on the numbers that leave it out, not on the Spirit column; a secondary attack's damage
+        self.assertIn("<td>10</td><td>5</td><td>3</td><td>1.57</td><td>31.7*</td><td>2.5*</td><td>30*</td></tr>", page)
         bow = (self.out / "items/Longbow.html").read_text(encoding="utf-8")
         # 2.5 s full draw at skill 0; 0.5 s at 100, but the 1 s release animation is longer
         self.assertIn("full draw 2.5 s (0.5 s at skill 100), 2.5 s per shot (1 s at skill 100)", bow)
@@ -557,7 +561,7 @@ class Site(unittest.TestCase):
         self.assertIn('75 lightning <span class="qty">chain, may spread</span>', thunder)
         cluster = (self.out / "items/ClusterRod.html").read_text(encoding="utf-8")
         self.assertIn("<dt>DPS†</dt><dd>48</dd>", cluster)  # 4 splinters x 12 fire / 1 s
-        self.assertIn("<td><b>150</b></td>", page)  # FrostRod in the weapons table
+        self.assertIn("<td>0.2</td><td>150</td>", page)  # FrostRod in the weapons table
         self.assertNotIn("ThunderRod", page.split("Bows and crossbows")[1])  # no ammo: not a ranged-speed row
         wand = (self.out / "items/Wand.html").read_text(encoding="utf-8")
         self.assertIn('<dt>Summons</dt><dd><a class="ref" href="creatures/Sprite.html"', wand)

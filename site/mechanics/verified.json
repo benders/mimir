@@ -429,6 +429,7 @@
    "Attack.DoMeleeAttack": "6f62bd9ec51aa482",
    "Attack.FireProjectileBurst": "2955e01185cf4c2e",
    "Attack.GetAttackEitr": "2b62d55e77656983",
+   "Attack.GetAttackStamina": "b4530f389ab1432d",
    "Attack.ModifyDamage": "c3fbddde58d4659a",
    "Attack.OnAttackTrigger": "6411bb4005a1049b",
    "Attack.ProjectileAttackTriggered": "a09a134a494627c4",

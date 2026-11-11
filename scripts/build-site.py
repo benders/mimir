@@ -983,32 +983,10 @@ def quality_table(i: dict) -> str:
         cols.append((k.capitalize(), dmg.get(k, 0), dpl.get(k, 0)))
     note, marks = "", {}  # marks: column index -> the qualities whose numbers get the * (they leave out damage)
     if t in WEAPONS and not i.get("tamedOnly") and not i.get("ammoType"):  # ammo: DPS depends on it
-        skipped = dps_skipped(i)
-        a, sec = i.get("attack"), i.get("secondaryAttack")
-
-        def add(label, base, per):  # every value is linear in the damage: base at quality 1, + per level
-            if skipped:
-                marks[len(cols)] = {q for q in range(1, i.get("maxQuality", 1) + 1)
-                                    if any(dmg.get(k, 0) + (q - 1) * dpl.get(k, 0) > 0 for k in skipped)}
-            cols.append((label, base, per or 0))
-
-        # a reload (Dundr) depends on skill: DPS at skill 0 and 100
-        for skill in (0, 100) if (a or {}).get("reload") else (0,):
-            if (d := weapon_dps(i, a, dmg, skill)) is not None and d > 0:
-                add("DPS" + (f" (skill {skill})" if a.get("reload") else "") + volley_mark(i, a), d,
-                    weapon_dps(i, a, dpl, skill))
-                note = volley_note(i, a)
-        hit = lambda a, d: mechanics.shot_damage(d, a, weapon_hits(i, a), IGNORED)
-        if (s := mechanics.damage_per_stamina(hit(a, dmg), a)) is not None:
-            add("per Stam" + volley_mark(i, a), s, mechanics.damage_per_stamina(hit(a, dpl), a))
-            note = volley_note(i, a)
-        # one use of the secondary attack (one hit × its multiplier when its animation timing isn't known)
-        once = lambda d: (mechanics.combo_damage(hit(sec, d), sec) if sec.get("chain")
-                          else hit(sec, d) * (sec.get("damageMultiplier") or 1))
-        if sec and (d := once(dmg)) > 0:
-            add("Secondary damage" + volley_mark(i, sec), d, once(dpl))
-        if marks and any(marks.values()):
-            note = dps_note(i) + note
+        stats, note = weapon_stats(i)
+        for st in stats:
+            marks[len(cols)] = st["starred"]
+            cols.append((st["label"] + st["mark"], st["base"], st["per"]))
     if (i.get("summons") or {}).get("perQuality"):
         cols.append(("Summons following", 1, 1))  # SpawnAbility m_setMaxInstancesFromWeaponLevel: the staff's quality
     if t in ARMOR:
@@ -1026,6 +1004,36 @@ def quality_table(i: dict) -> str:
         return kv((c[0], cell(k, 1, c[1], 0)) for k, c in enumerate(cols)) + note
     rows = [[str(q)] + [cell(k, q, b, p) for k, (_, b, p) in enumerate(cols)] for q in range(1, mq + 1)]
     return table(["Quality"] + [esc(c[0]) for c in cols], rows, "num") + note
+
+
+def weapon_stats(i: dict, reload_skills=(0, 100)) -> tuple[list[dict], str]:
+    """A weapon's attack numbers, each linear in its damage: [{label, mark (†: every projectile hitting), base
+    (quality 1), per (+ per level), starred (the qualities whose number leaves out damage, *)}] and the notes for the
+    marks. DPS (at each of `reload_skills` when a reload depends on skill: Dundr), damage per stamina of the primary
+    attack, damage of one secondary attack."""
+    dmg, dpl, mq = i.get("damages", {}), i.get("damagesPerLevel", {}), i.get("maxQuality", 1)
+    skipped, a, sec = dps_skipped(i), i.get("attack"), i.get("secondaryAttack")
+    starred = {q for q in range(1, mq + 1) if any(dmg.get(k, 0) + (q - 1) * dpl.get(k, 0) > 0 for k in skipped)}
+    stats, note = [], ""
+
+    def add(label, att, base, per):
+        nonlocal note
+        stats.append({"label": label, "mark": volley_mark(i, att), "base": base, "per": per or 0, "starred": starred})
+        note = note or volley_note(i, att)
+
+    for skill in reload_skills if (a or {}).get("reload") else (0,):
+        if (d := weapon_dps(i, a, dmg, skill)) is not None and d > 0:
+            add("DPS" + (f" (skill {skill})" if len(reload_skills) > 1 and a.get("reload") else ""), a, d,
+                weapon_dps(i, a, dpl, skill))
+    hit = lambda a, d: mechanics.shot_damage(d, a, weapon_hits(i, a), IGNORED)
+    if (s := mechanics.damage_per_stamina(hit(a, dmg), a)) is not None:
+        add("per Stam", a, s, mechanics.damage_per_stamina(hit(a, dpl), a))
+    # one use of the secondary attack (one hit × its multiplier when its animation timing isn't known)
+    once = lambda d: (mechanics.combo_damage(hit(sec, d), sec) if sec.get("chain")
+                      else hit(sec, d) * (sec.get("damageMultiplier") or 1))
+    if sec and (d := once(dmg)) > 0:
+        add("Secondary damage", sec, d, once(dpl))
+    return stats, (dps_note(i) if stats and starred else "") + note
 
 
 def weapon_hits(i: dict, a: dict | None) -> list[dict] | None:
@@ -2891,37 +2899,35 @@ def category_heading(title: str, skill: str, stage: str = "") -> str:
 
 
 def block_weapons() -> str:
-    """Every player weapon with a known attack cycle, by category, lowest primary DPS first: hits, time, combo damage
-    and DPS for the primary and secondary attack at quality 1, not upgraded (tooltip damage, skill roll 1)."""
+    """Every player weapon with a known attack cycle, by category, lowest DPS first, in the item pages' stats format at
+    quality 1 (not upgraded; tooltip damage, skill roll 1): damage per type, the primary attack's hits and seconds, then
+    weapon_stats (DPS, per Stam, Secondary damage), * and † on the numbers they apply to."""
     weapons = [x for x in ITEMS.values() if x["type"] in WEAPONS and has_page("item", x["id"]) and not x.get("tamedOnly")
                and not x.get("ammoType") and any(mechanics.attack_cycle(a) for a in (x.get("attack"), x.get("secondaryAttack")))]
     out = ""
     for title, skill, items in weapon_groups(weapons):
         rows = []
         for i in items:
-            dmg = {k: i.get("damages", {}).get(k, 0) for k in mechanics.DAMAGE_TYPES}  # quality 1, not upgraded
-            mark = "*" if dps_skipped(i) else ""
-            cells, best = [], []
-            for a in (i.get("attack"), i.get("secondaryAttack")):
-                d = weapon_dps(i, a, dmg)
-                best.append(d if d else -1)
-                hit, vm = mechanics.shot_damage(dmg, a, weapon_hits(i, a), IGNORED), volley_mark(i, a)
-                cells += (["", "", "", ""] if not d else
-                          [num(sum(c["hits"] for c in a["chain"]) * volleys(i, a)), num(round(mechanics.attack_cycle(a), 3)),
-                           num(round(mechanics.combo_damage(hit, a), 1)) + mark + vm, f"<b>{num(round(d, 1))}{mark}{vm}</b>"])
-            if max(best) >= 0:  # no DPS at all (no damage): left out
-                rows.append((best, name_of("item", i["id"]).lower(), [link("item", i["id"])] + cells))
-        rows.sort(key=lambda r: (r[0], r[1]))  # lowest DPS first
-        two = any(r[0][1] >= 0 for r in rows)  # any secondary attack: its columns
-        top = ('<tr><th rowspan="2">Weapon</th><th colspan="4">Primary</th>'
-               + ('<th colspan="4">Secondary</th>' if two else "") + "</tr>")
-        sub = "<tr>" + "<th>Hits</th><th>Seconds</th><th>Damage</th><th>DPS</th>" * (2 if two else 1) + "</tr>"
-        body = "".join("<tr>" + "".join(f"<td>{c}</td>" for c in r[2][:9 if two else 5]) + "</tr>" for r in rows)
+            a, (stats, _) = i.get("attack"), weapon_stats(i, reload_skills=(0,))
+            vals = {st["label"]: num(round(st["base"], 1)) + ("*" if 1 in st["starred"] else "") + st["mark"] for st in stats}
+            if not vals:  # no damage at all: left out
+                continue
+            cycle = mechanics.attack_cycle(a)
+            vals |= {k: num(v) for k, v in i.get("damages", {}).items()}
+            if cycle:
+                vals |= {"Hits": num(sum(c["hits"] for c in a["chain"]) * volleys(i, a)), "Seconds": num(round(cycle, 3))}
+            dps = next((st["base"] for st in stats if st["label"] == "DPS"), -1)
+            rows.append(((dps, name_of("item", i["id"]).lower()), i["id"], vals))
         if not rows:
             continue
-        st = group_stage("item", [i["id"] for i in items if any(r[1] == name_of("item", i["id"]).lower() for r in rows)])
-        out += (category_heading(title, skill, st) +
-                f'<div class="tw"{st}><table class="num weapons"><thead>{top}{sub}</thead><tbody>{body}</tbody></table></div>')
+        rows.sort(key=lambda r: r[0])  # lowest DPS first
+        present = {k for r in rows for k in r[2]}
+        cols = ([k for k in mechanics.DAMAGE_TYPES if k in present]
+                + [k for k in ("Hits", "Seconds", "DPS", "per Stam", "Secondary damage") if k in present])
+        body = [[link("item", iid)] + [vals.get(k, "") for k in cols] for _, iid, vals in rows]
+        st = group_stage("item", [iid for _, iid, _ in rows])
+        tbl = table(["Weapon"] + [esc(k.capitalize() if k in mechanics.DAMAGE_TYPES else k) for k in cols], body, "num weapons")
+        out += category_heading(title, skill, st) + tbl.replace('<div class="tw">', f'<div class="tw"{st}>', 1)
     skipped = [t for t in IGNORED if t not in mechanics.TOOL_DAMAGE]
     note = "; ".join(f"{t} damage ({n} of {total} creatures are immune to it)" for t in skipped for n, total in [IGNORED[t]])
     return (out + (f'<p class="note">* Leaves out {note}.</p>' if skipped else "")
