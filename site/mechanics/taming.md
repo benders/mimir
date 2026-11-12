@@ -68,10 +68,14 @@ within the partner range. Enough love points make it pregnant.
 {{tame-breeding}}
 
 A pen needs partners within the partner range, and the young moved out before the cap is reached. Young grow up after
-their grow time of world time since they were born, keeping their stars and tameness. Eggs hatch only while they lie
-alone, not stacked, and warm: inside a fire's heat area, and for hen eggs also under a roof. The
-time restarts whenever that stops. The hatchling is tame with the egg's quality as its level. Chicks become hens that
-start tame.
+their grow time of world time since they were born, keeping their stars and tameness. Nothing else counts: no fire,
+roof, food or company, and a young creature away from players catches up as soon as it is loaded again. Eggs are the
+only young with conditions: they hatch only while they lie alone, not stacked, and warm, inside a fire's heat area
+([areas](mechanic:player-base)), and for hen eggs also under a roof with enough cover (the egg's page gives the share). The time restarts whenever
+that stops. The hatchling is tame with the egg's quality as its level. Chicks become hens that start tame.
+
+- young: grows up when world time since spawned $>$ `m_growTime`, checked every 10 s while loaded
+- egg: hatches when it has met its conditions without a break for `m_growTime` s of world time, checked every 5 s
 
 > Inferred: dropped eggs count toward the cap. For an item, SpawnSystem.GetNrOfInstances counts objects tagged
 > `spawned`; whether a laid egg carries that tag isn't in the decompiled code.

@@ -1329,6 +1329,7 @@ def item_page(i: dict) -> None:
                                  and has_page("creature", c["id"])) + f': {mech_link("taming", "Taming")}'
          if any(((c.get("tameable") or {}).get("saddle") or {}).get("item") == i["id"] for c in CREATURES.values())
          else None),
+        ("Hatches", hatches(i)),
     ]
     combat = []
     if t in WEAPONS | {"Shield", "Tool", "Ammo", "AmmoNonEquipable"}:
@@ -1507,6 +1508,7 @@ def creature_page(c: dict) -> None:
              ("Speed", ", ".join(f"{k} {num(v)}" for k, v in sp.items())),
              ("Tameable", ("starts tame" if c["tameable"].get("startsTamed") else "yes")
               + f': {mech_link("taming", "Taming")}' if c.get("tameable") else None),
+             ("Grows up", grows_up(c)),
              ("Afraid of fire", "yes" if c.get("afraidOfFire") else None),
              ("Avoids water", "yes" if c.get("avoidWater") else None),
              ("Group", esc(c["group"]) if c.get("group") else None)]
@@ -3156,7 +3158,32 @@ def grow_text(kind: str, id_: str) -> str:
             [f"under a roof ({pct(h['cover'])} cover)"] if h.get("roof") else [])
         return f"hatches in {duration(h['time'])}, alone (not stacked)" + (", " + " and ".join(needs) if needs else "")
     t = CREATURES[id_].get("growTime")
-    return f"grows up in {duration(t)}" if t else ""
+    return f"grows up in {duration(t)}, anywhere" if t else ""
+
+
+def grows_up(c: dict) -> str | None:
+    """A young creature's Growup: the adult, after its grow time of world time since it spawned (Growup.GrowUpdate,
+    BaseAI.GetTimeSinceSpawned). Nothing about where it stands or whether it is fed counts."""
+    if not c.get("growTime"):
+        return None
+    adults = sorted({a for a, ss in spawns_of.items() for s in ss
+                     if s.get("source") == "growup" and s.get("parent") == c["id"] and has_page("creature", a)})
+    into = f'into {", ".join(link("creature", a) for a in adults)} ' if adults else ""
+    return (f'{into}after {duration(c["growTime"])} of world time, anywhere: no food, fire or shelter needed, '
+            f'keeping its stars and tameness: {mech_link("taming", "Taming")}')
+
+
+def hatches(i: dict) -> str | None:
+    """An egg's EggGrow conditions (EggGrow.CanGrow): alone, warm, maybe under a roof; the time restarts when they stop."""
+    h = i.get("hatch")
+    if not h:
+        return None
+    needs = ["lying alone (not stacked)"] + (["inside a fire's heat"] if h.get("fire") else []) + (
+        [f"under a roof with at least {pct(h['cover'])} cover"] if h.get("roof") else [])
+    into = f'into {link("creature", h["creature"])} ' if has_page("creature", h["creature"]) else ""
+    return (f'{into}after {duration(h["time"])} of world time while {", ".join(needs[:-1])} and {needs[-1]}'
+            if len(needs) > 1 else f'{into}after {duration(h["time"])} of world time while {needs[0]}') + \
+        f'; the time restarts whenever that stops: {mech_link("taming", "Taming")}'
 
 
 def block_tame_list() -> str:

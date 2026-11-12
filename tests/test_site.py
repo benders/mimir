@@ -161,6 +161,12 @@ class Site(unittest.TestCase):
         self.assertIn("<h2>Born from</h2>", pup)
         self.assertIn('href="creatures/Raider.html"', pup)
         self.assertIn('href="items/Egg.html"', pup)
+        self.assertIn("<dt>Grows up</dt>", pup)  # Growup: time only, no environment
+        self.assertIn("15 min of world time, anywhere: no food, fire or shelter needed", pup)
+        egg = (self.out / "items/Egg.html").read_text(encoding="utf-8")
+        self.assertIn("<dt>Hatches</dt>", egg)  # EggGrow.CanGrow conditions
+        self.assertIn("while lying alone (not stacked) and inside a fire's heat", egg)
+        self.assertNotIn("under a roof", egg)  # requireUnderRoof=False
         chief = (self.out / "creatures/Chief.html").read_text(encoding="utf-8")
         self.assertIn("summoned with", chief)
         self.assertIn('href="items/Ore.html"', chief)
