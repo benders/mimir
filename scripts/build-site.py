@@ -1027,6 +1027,23 @@ def page_url(path: str) -> str:
     return SITE_URL + quote(path).removesuffix("index.html")
 
 
+def breadcrumbs(path: str, title: str, body: str, kind_label: str) -> str:
+    """JSON-LD BreadcrumbList (#92, schema.org): Home, the section (the visible crumb, `kind_label`), the page, so
+    search results show the trail instead of the URL. The page's name is its <h1>; none for the home page."""
+    if path == "index.html":
+        return ""
+    h1 = re.search(r"<h1>(.*?)</h1>", body, re.S)
+    trail = [("Home", "index.html")]
+    if m := re.fullmatch(r'<a href="([^"]+)">([^<]+)</a>', kind_label or ""):
+        trail.append((html.unescape(m.group(2)), m.group(1)))
+    trail.append((html.unescape(re.sub(r"<[^>]+>", "", h1.group(1))).strip() if h1 else title, path))
+    data = {"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [
+        {"@type": "ListItem", "position": n, "name": name, "item": page_url(url)}
+        for n, (name, url) in enumerate(trail, 1)]}
+    text = json.dumps(data, ensure_ascii=False).replace("</", "<\\/")  # no "</script>" inside a name
+    return f'<script type="application/ld+json">{text}</script>\n'
+
+
 def page(path: str, title: str, body: str, kind_label: str = "", scripts=(), header: bool = True,
          kind: str = "", desc: str = "") -> None:
     """Write one page; `header` False leaves out the site header (the home page has its own search and "Up to").
@@ -1042,7 +1059,7 @@ def page(path: str, title: str, body: str, kind_label: str = "", scripts=(), hea
 <title>{esc(page_title(title, kind))}</title>
 <link rel="canonical" href="{esc(page_url(path))}">
 <meta name="description" content="{esc(meta_description(title, body, desc or INDEX_DESC.get(path, "")))}">
-<link rel="icon" href="{asset("favicon.svg")}" type="image/svg+xml">
+{breadcrumbs(path, title, body, kind_label)}<link rel="icon" href="{asset("favicon.svg")}" type="image/svg+xml">
 <link rel="preconnect" href="https://js-agent.newrelic.com" crossorigin>
 <script src="{asset("newrelic.js")}" async></script>
 <link rel="stylesheet" href="{asset("style.css")}">

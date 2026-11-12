@@ -102,6 +102,16 @@ class Site(unittest.TestCase):
         doc = sword.read_text(encoding="utf-8")
         name = titles[sword].split(" – ")[0]
         self.assertNotIn(f'alt="{name}"', doc.split("<main>")[0])
+        crumbs = json.loads(re.search(r'<script type="application/ld\+json">(.*?)</script>', doc).group(1))
+        self.assertEqual(crumbs["@type"], "BreadcrumbList")
+        self.assertEqual([(x["position"], x["name"], x["item"]) for x in crumbs["itemListElement"]],
+                         [(1, "Home", "https://mimir.slackworks.com/"),
+                          (2, "Items", "https://mimir.slackworks.com/items/"),
+                          (3, name, "https://mimir.slackworks.com/items/Sword.html")])
+        biomes = json.loads(re.search(r'<script type="application/ld\+json">(.*?)</script>',
+                                      (self.out / "biomes/index.html").read_text(encoding="utf-8")).group(1))
+        self.assertEqual([x["name"] for x in biomes["itemListElement"]], ["Home", "Biomes"])
+        self.assertNotIn("ld+json", (self.out / "index.html").read_text(encoding="utf-8"))
         hero = re.search(r'<div class="hero">(.*?)</h1>', doc).group(1)
         self.assertTrue(f'alt="{html.escape(name)}"' in hero or "noico" in hero)  # the page's own icon is named
 
