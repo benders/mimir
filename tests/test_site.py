@@ -80,9 +80,30 @@ class Site(unittest.TestCase):
             self.assertRegex(doc, r'<link rel="icon" href="favicon.svg\?v=\w+" type="image/svg\+xml">')
         home = (self.out / "index.html").read_text(encoding="utf-8")
         self.assertIn('<meta name="description" content="A Valheim reference, rebuilt from the game data', home)
-        biomes = (self.out / "biomes/index.html").read_text(encoding="utf-8")  # a short subtitle: the line on the site
-        self.assertIn('<meta name="description" content="Biomes in Valheim', biomes)
+        biomes = (self.out / "biomes/index.html").read_text(encoding="utf-8")  # an index: its own line (#92)
+        self.assertIn('<meta name="description" content="Valheim biomes in progression order', biomes)
+        self.assertIn("<title>Valheim biomes</title>", biomes)
         self.assertTrue((self.out / "favicon.svg").is_file())
+
+    def test_seo(self):  # #92: "Valheim" and what it is in every title; a search snippet from the data
+        titles, descs = {}, {}
+        for f in self.out.rglob("*.html"):
+            doc = f.read_text(encoding="utf-8")
+            titles[f] = html.unescape(re.search(r"<title>([^<]+)</title>", doc).group(1))
+            descs[f] = html.unescape(re.search(r'<meta name="description" content="([^"]+)">', doc).group(1))
+            self.assertIn("Valheim", titles[f], f)
+            self.assertIn("Valheim", descs[f], f)
+            self.assertLessEqual(len(descs[f]), 160, f)
+        sword = self.out / "items/Sword.html"
+        self.assertRegex(titles[sword], r"^\S.* – Valheim (one|two)-handed weapon$")
+        self.assertRegex(descs[sword], r": Valheim (one|two)-handed weapon, \d+ \w+")
+        self.assertIn("– Valheim creature", titles[self.out / "creatures/Raider.html"])
+        self.assertRegex(descs[self.out / "creatures/Raider.html"], r"^Raider: Valheim (\w+ )*creature, \d+ health\.")
+        doc = sword.read_text(encoding="utf-8")
+        name = titles[sword].split(" – ")[0]
+        self.assertNotIn(f'alt="{name}"', doc.split("<main>")[0])
+        hero = re.search(r'<div class="hero">(.*?)</h1>', doc).group(1)
+        self.assertTrue(f'alt="{html.escape(name)}"' in hero or "noico" in hero)  # the page's own icon is named
 
     def test_head_loads_nothing_blocking(self):  # #82: New Relic's config script is async, its origin preconnected
         doc = (self.out / "items/Sword.html").read_text(encoding="utf-8")

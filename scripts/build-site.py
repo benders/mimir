@@ -198,10 +198,11 @@ def href(kind: str, id_: str) -> str:
     return f"{KINDS[kind]}/{quote(id_)}.html"
 
 
-def icon(name, cls="ico") -> str:
+def icon(name, cls="ico", alt: str = "") -> str:
+    """`alt`: only for a page's own icon (header); next to a name it would be read twice."""
     if not name or name not in HAVE_ICONS:
         return f'<span class="{cls} noico"></span>'
-    return f'<img class="{cls}" src="icons/{quote(name)}.png" alt="" loading="lazy">'
+    return f'<img class="{cls}" src="icons/{quote(name)}.png" alt="{esc(alt)}" loading="lazy">'
 
 
 def link(kind: str, id_: str, qty=None) -> str:
@@ -795,14 +796,222 @@ HEADER = f"""<header class="top">
 """
 
 
-def meta_description(title: str, body: str) -> str:
-    """A page's meta description (#81): its entry's description (p.desc), else its subtitle (p.sub), else a line on
-    the site; plain text, at most about 160 characters."""
-    m = re.search(r'<p class="desc">(.*?)</p>', body, re.S) or re.search(r'<p class="sub">(.*?)</p>', body, re.S)
-    text = " ".join(html.unescape(re.sub(r"<[^>]+>", "", m.group(1))).split()) if m else ""
-    if len(text) < 40:  # "In progression order.", a bare type label: not a description
-        text = f"{title} in Valheim {META['gameVersion']}: {SITE_NAME}, a reference rebuilt from the game data."
-    return text if len(text) <= 160 else text[:157].rsplit(" ", 1)[0] + "…"
+DESC_MAX = 160  # what search results show of a meta description
+
+
+def meta_description(title: str, body: str, desc: str = "") -> str:
+    """A page's meta description (#81): `desc` (seo_* below, #92), else its entry's description (p.desc), else its
+    subtitle (p.sub), else a line on the site; plain text, at most about 160 characters."""
+    text = desc
+    if not text:
+        m = re.search(r'<p class="desc">(.*?)</p>', body, re.S) or re.search(r'<p class="sub">(.*?)</p>', body, re.S)
+        text = " ".join(html.unescape(re.sub(r"<[^>]+>", "", m.group(1))).split()) if m else ""
+    if len(text) < 40 and not desc:  # "In progression order.", a bare type label: not a description
+        text = f"{title} in Valheim {META['gameVersion']}, from a reference rebuilt from the game data."
+    if "valheim" not in text.lower():
+        text = f"Valheim: {text}"
+    return text if len(text) <= DESC_MAX else text[:DESC_MAX - 3].rsplit(" ", 1)[0] + "…"
+
+
+INDEX_DESC = {  # the index pages' search snippets (#92)
+    "items/index.html": "Every Valheim item: weapons, armor, food, meads, materials and trophies, with recipes, stats "
+                        "and where to find them.",
+    "creatures/index.html": "Every Valheim creature and boss by biome: health, damage, weaknesses, drops and where "
+                            "they spawn.",
+    "pieces/index.html": "Every Valheim building piece and crafting station: costs, comfort, stations and what you "
+                         "find in the world.",
+    "effects/index.html": "Every Valheim status effect: food, meads, Forsaken powers, set bonuses and debuffs, with "
+                          "their stats and durations.",
+    "biomes/index.html": "Valheim biomes in progression order: their creatures, bosses, resources, locations and raids.",
+    "locations/index.html": "Every Valheim location world generation places, with renders: where it appears, what "
+                            "spawns there and what it holds.",
+    "dungeons/index.html": "Every Valheim dungeon: where it is, its rooms, creatures, chests and resources.",
+    "traders/index.html": "Valheim traders Haldor, Hildir and the Bog Witch: what each sells, prices, unlocks and "
+                          "where to find them.",
+    "factions/index.html": "Valheim creature factions: which creatures fight each other and which leave each other "
+                           "alone.",
+    "mechanics/index.html": "How Valheim works, checked in the game's code: damage, blocking, food, skills, taming, "
+                            "raids, progression.",
+}
+
+
+def page_title(title: str, kind: str = "") -> str:
+    """The <title> (#92): the name, then "Valheim" and what kind of thing it is, the words people search with
+    ("Bronze Sword – Valheim one-handed weapon"); the kind also tells apart pages that share a name."""
+    if kind:
+        return f"{title} – Valheim {kind}"
+    return title if "valheim" in title.lower() else f"{title} – Valheim"
+
+
+# --- search snippets (#92): a page's meta description built from its data -------------------------------------
+
+def sentences(*parts: str) -> str:
+    """Join sentences while they fit in a meta description; the first always, and a long one after a short start
+    (meta_description shortens it)."""
+    out = ""
+    for p in parts:
+        p = " ".join(clean(p).split())
+        if not p:
+            continue
+        p = p if p[-1] in ".!?…" else p + "."
+        if out and len(out) + 1 + len(p) > DESC_MAX and len(out) >= 100:
+            break
+        out = f"{out} {p}" if out else p
+    return out
+
+
+def and_list(names, n: int = 3) -> str:
+    """The first `n` names, "A, B and C"."""
+    names = list(dict.fromkeys(names))[:n]
+    return ", ".join(names[:-1]) + f" and {names[-1]}" if len(names) > 1 else "".join(names)
+
+
+ITEM_KINDS = {
+    "OneHandedWeapon": "one-handed weapon", "TwoHandedWeapon": "two-handed weapon",
+    "TwoHandedWeaponLeft": "two-handed weapon", "Bow": "bow", "Ammo": "ammo", "AmmoNonEquipable": "ammo",
+    "Shield": "shield", "Helmet": "helmet", "Chest": "chest armor", "Legs": "leg armor", "Shoulder": "cape",
+    "Utility": "utility item", "Trinket": "trinket", "Tool": "tool", "Torch": "torch", "Fish": "fish",
+    "Material": "material", "Trophy": "trophy",
+}
+
+
+def item_kind(i: dict) -> str:
+    """What an item is, in the words of a search ("one-handed weapon", "food", "mead")."""
+    t = i["type"]
+    if t in ("Ammo", "AmmoNonEquipable") and "bait" in i["id"].lower():
+        return "fishing bait"
+    if t == "Bow" and i.get("skill") == "Crossbows":
+        return "crossbow"
+    if t == "Consumable":
+        return "food" if i.get("food") else "mead" if "mead" in name_of("item", i["id"]).lower() else "consumable"
+    return ITEM_KINDS.get(t, "item")
+
+
+def piece_kind(p: dict) -> str:
+    if p.get("craftingStation"):
+        return "crafting station"
+    return "world object" if world_piece(p) else "building piece"
+
+
+def creature_kind(c: dict) -> str:
+    return "boss" if c.get("boss") else "creature"
+
+
+def needs_names(needs: list, key: str, amounts: bool) -> list[str]:
+    """Names of `needs` entries of one kind: with an amount ("8 Bronze") or without (a tool, bait)."""
+    kind = {"item": "item", "piece": "piece", "creature": "creature"}[key]
+    return [(f'{num(n["amount"])} ' if amounts else "") + name_of(kind, n[key])
+            for n in needs if key in n and ("amount" in n) == amounts]
+
+
+def places_text(places: list) -> str:
+    """Where something is placed ([{location}]): the named locations, else the biomes of the unnamed ones (their
+    prettified prefab ids, "Wood farm1", mean nothing to a reader)."""
+    ids = [x["location"] for x in places]
+    named = [location_label(i, variant=False) for i in ids if LOCATION_NAMES.get(i) or LOCATION_BY_ID.get(i, {}).get("name")]
+    return and_list(named) or (f"the {and_list([BIOMES.get(b, b) for i in ids for b in LOCATION_BIOMES.get(i, [])])}"
+                               if any(LOCATION_BIOMES.get(i) for i in ids) else "")
+
+
+def via_text(e: dict) -> str:
+    """How a player first gets an item, piece or creature (its `via`), as one sentence."""
+    v = e.get("via") or {}
+    how, src, needs = v.get("how"), v.get("from"), v.get("needs", [])
+    cost = and_list(needs_names(needs, "item", True), 4)
+    stations = needs_names(needs, "piece", False)
+    if how == "craft":
+        return f"Crafted{f' at the {stations[0]}' if stations else ''}{f' from {cost}' if cost else ''}"
+    if how == "build":
+        tools = needs_names(needs, "item", False)
+        return f"Built{f' with the {tools[0]}' if tools else ''}{f' from {cost}' if cost else ''}"
+    if how == "process" and src in PIECES:
+        made = needs_names(needs, "item", False)
+        return f"Made{f' from {made[0]}' if made else ''} in the {name_of('piece', src)}"
+    if how == "drop" and src in CREATURES:
+        return f"Dropped by {name_of('creature', src)}"
+    if how == "trader" and src in SOURCES:
+        coins = next((n["amount"] for n in needs if n.get("item") == "Coins"), None)
+        return f"Sold by {source_name(SOURCES[src])}{f' for {num(coins)} coins' if coins else ''}"
+    if how == "fish":
+        bait = needs_names(needs, "item", False)
+        return f"Caught by fishing{f' with {bait[0]}' if bait else ''}"
+    if how == "produce" and src in PIECES:
+        return f"Produced by the {name_of('piece', src)}"
+    if how == "source" and src in SOURCES:
+        s = SOURCES[src]
+        where = and_list([BIOMES.get(b, b) for b in s.get("biomes", [])]) or places_text(s.get("locations", []))
+        named = s.get("name") and "$" not in s["name"]
+        what = {"rock": "Mined from", "tree": "Chopped from", "container": "Found in", "destructible": "From",
+                "pickable": "Picked from"}.get(s["kind"], "From")
+        if named:
+            return f"{what} {source_name(s)}{f' in {where}' if where else ''}".replace("Found in Chest", "Found in chests")
+        return f"Picked up in {where}" if where else ""
+    if how == "location" and src:
+        return f"Found in {places_text([{'location': src}])}"
+    if how in ("offspring", "growup", "egg", "summon", "phase") and src in CREATURES:
+        word = {"offspring": "Bred from", "growup": "Grows up from", "egg": "Hatches from", "summon": "Summoned by",
+                "phase": "Appears when defeating"}[how]
+        return f"{word} {name_of('creature', src)}"
+    return ""
+
+
+def seo_item(i: dict) -> str:
+    stats = []
+    if i.get("damages") and i["type"] in WEAPONS | {"Ammo", "AmmoNonEquipable"}:
+        stats.append(", ".join(f"{num(v)} {k}" for k, v in i["damages"].items()))
+    if i.get("armor") and i["type"] in ARMOR:
+        stats.append(f'{num(i["armor"])} armor')
+    if f := i.get("food"):
+        stats.append(", ".join(f"{num(f[k])} {k}" for k in ("health", "stamina", "eitr") if f.get(k)))
+    stage = PAGE_STAGE["item"].get(i["id"])
+    return sentences(f'{name_of("item", i["id"])}: Valheim {item_kind(i)}{"".join(", " + s for s in stats if s)}',
+                     via_text(i), f"{STAGE_NAMES[STAGES[stage]]} tier" if stage else "",
+                     i.get("description", "") if "$" not in i.get("description", "") else "")
+
+
+def seo_creature(c: dict) -> str:
+    home = home_biome(c["id"])
+    drops = [name_of("item", d["item"]) for d in sorted(c.get("drops", []), key=lambda d: -d.get("chance", 1))
+             if has_page("item", d["item"])]
+    weak = [k for k, v in (c.get("damageModifiers") or {}).items() if v in ("Weak", "VeryWeak")]
+    return sentences(f'{name_of("creature", c["id"])}: Valheim {BIOMES[home] + " " if home else ""}{creature_kind(c)}'
+                     f'{", " + num(c["health"]) + " health" if c.get("health") else ""}',
+                     f"Drops {and_list(drops, 4)}" if drops else "",
+                     f"Weak to {and_list(weak)}" if weak else "",
+                     "" if home else via_text(c))
+
+
+def seo_piece(p: dict) -> str:
+    tags = and_list([t.lower() for t in p.get("tags", []) if t.lower() not in piece_kind(p)])
+    where = places_text(p.get("locations", []))
+    return sentences(f'{name_of("piece", p["id"])}: Valheim {piece_kind(p)}{f" ({tags})" if tags else ""}',
+                     f"Found in {where}" if world_piece(p) and where else via_text(p),
+                     p.get("description", "") if "$" not in p.get("description", "") else "")
+
+
+def seo_effect(e: dict) -> str:
+    users = and_list([name_of(k, x) for k, x, _ in effect_users[e["id"]]])
+    return sentences(f'{name_of("effect", e["id"])}: Valheim status effect'
+                     f'{", " + duration(e["duration"]) if e.get("duration") else ""}',
+                     f"From {users}" if users else "",
+                     e.get("tooltip", "") if "$" not in e.get("tooltip", "") else "")
+
+
+def seo_location(name: str, ids: list, dungeon: bool) -> str:
+    biomes = and_list([BIOMES.get(b, b) for i in ids for b in LOCATION_BIOMES.get(i, [])])
+    creatures = [name_of("creature", s["creature"]) for s in SPAWNS
+                 if s.get("location") in ids and has_page("creature", s["creature"])]
+    return sentences(f'{name}: Valheim {"dungeon" if dungeon else "location"}{f" in the {biomes}" if biomes else ""}',
+                     f"Creatures: {and_list(creatures, 4)}" if creatures else "")
+
+
+def seo_biome(b: str, creatures: list) -> str:
+    st = STAGES.index(b) if b in STAGES else None
+    bosses = [name_of("creature", c) for c in creatures if CREATURES[c].get("boss")]
+    others = [name_of("creature", c) for c in creatures if not CREATURES[c].get("boss")]
+    return sentences(f'{BIOMES[b]}: Valheim biome{f", progression stage {st + 1}" if st is not None else ""}',
+                     f"Boss: {and_list(bosses)}" if bosses else "",
+                     f"Creatures: {and_list(others, 5)}" if others else "")
 
 
 @functools.cache
@@ -818,8 +1027,10 @@ def page_url(path: str) -> str:
     return SITE_URL + quote(path).removesuffix("index.html")
 
 
-def page(path: str, title: str, body: str, kind_label: str = "", scripts=(), header: bool = True) -> None:
-    """Write one page; `header` False leaves out the site header (the home page has its own search and "Up to")."""
+def page(path: str, title: str, body: str, kind_label: str = "", scripts=(), header: bool = True,
+         kind: str = "", desc: str = "") -> None:
+    """Write one page; `header` False leaves out the site header (the home page has its own search and "Up to").
+    `kind` and `desc`: what it is, for the <title>, and its search snippet (page_title, meta_description)."""
     depth = path.count("/")
     base = "../" * depth or "./"
     doc = f"""<!doctype html>
@@ -828,9 +1039,9 @@ def page(path: str, title: str, body: str, kind_label: str = "", scripts=(), hea
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <base href="{base}">
-<title>{esc(title)} · {esc(SITE_NAME)}</title>
+<title>{esc(page_title(title, kind))}</title>
 <link rel="canonical" href="{esc(page_url(path))}">
-<meta name="description" content="{esc(meta_description(title, body))}">
+<meta name="description" content="{esc(meta_description(title, body, desc or INDEX_DESC.get(path, "")))}">
 <link rel="icon" href="{asset("favicon.svg")}" type="image/svg+xml">
 <link rel="preconnect" href="https://js-agent.newrelic.com" crossorigin>
 <script src="{asset("newrelic.js")}" async></script>
@@ -906,7 +1117,7 @@ def header(e: dict, kind: str, subtitle: str, desc: str = "") -> str:
                  f'you can get it">{label}</a>')
         spoiler = (f'<p class="spoiler" data-stage="{s}">Spoiler: this is {label} content, past the stage you '
                    f'chose to see.</p>') if s else ""
-    return (f'{spoiler}<div class="hero">{icon(icon_of(kind, e), "big")}<div><h1>{esc(name_of(kind, e["id"]))}</h1>'
+    return (f'{spoiler}<div class="hero">{icon(icon_of(kind, e), "big", name_of(kind, e["id"]))}<div><h1>{esc(name_of(kind, e["id"]))}</h1>'
             f'<p class="sub">{subtitle}{badge}</p>{d}</div></div>')
 
 
@@ -1488,7 +1699,8 @@ def item_page(i: dict) -> None:
         body += staged_section("Builds", [("piece", p["id"], link("piece", p["id"])) for p in tool_pieces[i["id"]]])
     if i["id"] == TRAY:
         body += staged_section("Sets out", [("item", f, link("item", f)) for m in sorted(served_as) for f in served_as[m]])
-    page(href("item", i["id"]), name_of("item", i["id"]), body, '<a href="items/index.html">Items</a>')
+    page(href("item", i["id"]), name_of("item", i["id"]), body, '<a href="items/index.html">Items</a>',
+         kind=item_kind(i), desc=seo_item(i))
 
 
 # --- creatures ------------------------------------------------------------------------------
@@ -1549,7 +1761,8 @@ def creature_page(c: dict) -> None:
         f'<p class="note">Drops marked ×stars grow with the creature\'s stars, and low chances are pseudo-random: '
         f'{mech_link("drops", "Drops")}.</p>' if drops else ""))
     body += spawn_sections(spawns_of[c["id"]])
-    page(href("creature", c["id"]), name_of("creature", c["id"]), body, '<a href="creatures/index.html">Creatures</a>')
+    page(href("creature", c["id"]), name_of("creature", c["id"]), body, '<a href="creatures/index.html">Creatures</a>',
+         kind=creature_kind(c), desc=seo_creature(c))
 
 
 STARS_TH = mech_link("creature-levels", "Stars")
@@ -1702,7 +1915,10 @@ def faction_page(f: str) -> None:
     body += section("Creatures", "".join(
         f'<h3{group_stage("creature", ids)}>{biome_link(g) if g in BIOMES else esc(g)}</h3>{bosses_first(ids)}'
         for g, ids in groups))
-    page(f"factions/{quote(f)}.html", faction_name(f), body, '<a href="factions/index.html">Factions</a>')
+    page(f"factions/{quote(f)}.html", faction_name(f), body, '<a href="factions/index.html">Factions</a>',
+         kind="faction", desc=sentences(f"{faction_name(f)}: Valheim creature faction",
+                                        f"Members: {and_list([name_of('creature', c) for c in FACTION_MEMBERS[f]], 5)}",
+                                        f"Attacks {and_list([faction_name(x) for x in hostile], 4) or 'nobody'}"))
 
 
 FACTION_RULES = ("From BaseAI.IsEnemy, for untamed creatures. Creatures of one faction or one group never fight each "
@@ -1721,7 +1937,7 @@ def factions_index() -> None:
                 f'</span></li>' for f in cols) + '</ul>'
             f'<h2>Hostility</h2><p class="note">✕: the row\'s faction treats the column\'s as an enemy. {FACTION_RULES}</p>'
             f'<div class="tw"><table class="matrix"><thead>{head}</thead><tbody>{rows}</tbody></table></div>')
-    page("factions/index.html", "Factions", body)
+    page("factions/index.html", "Valheim creature factions", body)
 
 
 GATHERED = ("pickable", "rock", "tree", "log", "destructible")  # source kinds placed by world generation
@@ -1832,7 +2048,8 @@ def biome_page(b: str) -> None:
     locs = [mech_link(LOCATION_PAGES[i][0], n) if i in LOCATION_PAGES else location_ref(i) for n, i in locs]
     body += section("Locations", f'<p>{", ".join(locs)}</p>' if locs else "")
     body += section("Alt biomes", alt_biomes_section(b))
-    page(f"biomes/{quote(b)}.html", BIOMES[b], body, '<a href="biomes/index.html">Biomes</a>')
+    page(f"biomes/{quote(b)}.html", BIOMES[b], body, '<a href="biomes/index.html">Biomes</a>',
+         kind="biome", desc=seo_biome(b, home))
 
 
 def biomes_index() -> None:
@@ -1842,7 +2059,7 @@ def biomes_index() -> None:
         n = sum(1 for c in CREATURES if has_page("creature", c) and home_biome(c) == b)
         items += (f'<li{stage_attr(st)}><a href="biomes/{quote(b)}.html">{esc(BIOMES[b])}</a>'
                   f'<span>{plural(n, "creature")}</span></li>')
-    page("biomes/index.html", "Biomes", f'<h1>Biomes</h1><p class="sub">In progression order.</p>'
+    page("biomes/index.html", "Valheim biomes", f'<h1>Biomes</h1><p class="sub">In progression order.</p>'
                                         f'<ul class="mechlist">{items}</ul>')
 
 
@@ -2065,14 +2282,15 @@ def trader_page(s: dict) -> None:
     body += section("Takes", table(["Item", "Unlocks"], [
         [link("item", t["item"]), f'{sum(1 for o in s.get("sells", []) if (o.get("requiredKey") or "").lower() == t["setsKey"].lower())} items '
                                   f'in the list above'] for t in s.get("takes", [])]))
-    page(trader_href(s), source_name(s), stage_mech_tables(body), '<a href="traders/index.html">Traders</a>')
+    page(trader_href(s), source_name(s), stage_mech_tables(body), '<a href="traders/index.html">Traders</a>',
+         kind="trader", desc=sentences(f"{source_name(s)}: Valheim trader in the {and_list([BIOMES.get(b, b) for b in biomes])}", goods))
 
 
 def traders_index() -> None:
     items = "".join(f'<li><a href="{trader_href(s)}">{esc(source_name(s))}</a><span>'
                     f'{", ".join(BIOMES.get(b, b) for x in s.get("locations", []) for b in x["biomes"])} · '
                     f'{plural(len(s.get("sells", [])), "item")}</span></li>' for s in sorted(TRADERS, key=source_name))
-    page("traders/index.html", "Traders", f'<h1>Traders</h1><ul class="mechlist">{items}</ul>')
+    page("traders/index.html", "Valheim traders", f'<h1>Traders</h1><ul class="mechlist">{items}</ul>')
 
 
 # --- dungeons --------------------------------------------------------------------------------
@@ -2292,9 +2510,11 @@ def location_page(name: str, dungeon: bool = False) -> None:
         rooms = "<p>A fixed interior: the same in every copy, no generated rooms.</p>"
     body += section("Rooms", rooms)
     if dungeon:
-        page(dungeon_href(name), name, body, '<a href="dungeons/index.html">Dungeons</a>')
+        page(dungeon_href(name), name, body, '<a href="dungeons/index.html">Dungeons</a>',
+             kind="dungeon", desc=seo_location(name, ids, True))
     else:
-        page(place_href(name), name, body, '<a href="locations/index.html">Locations</a>')
+        page(place_href(name), name, body, '<a href="locations/index.html">Locations</a>',
+             kind="location", desc=seo_location(name, ids, False))
 
 
 def locations_index() -> None:
@@ -2319,7 +2539,7 @@ def locations_index() -> None:
         out += (f'<h2{stage_attr(st)}>{biome_link(b) if b else "Elsewhere"}</h2>'
                 + (f'<div class="places"{stage_attr(st)}>{"".join(thumbs)}</div>' if thumbs else "")
                 + (f'<ul class="mechlist"{stage_attr(st)}>{"".join(plain)}</ul>' if plain else ""))
-    page("locations/index.html", "Locations", '<h1>Locations</h1><p class="sub">Everything world generation places, '
+    page("locations/index.html", "Valheim locations", '<h1>Locations</h1><p class="sub">Everything world generation places, '
          'under the first biome of the progression it is found in. Dungeons also have their own '
          f'<a href="dungeons/index.html">index</a>.</p>{out}')
 
@@ -2330,7 +2550,7 @@ def dungeons_index() -> None:
         f'<li{stage_attr(dungeon_stage(n))}><a href="{dungeon_href(n)}">{esc(n)}</a><span>'
         f'{", ".join(dict.fromkeys(BIOMES.get(b, b) for i in DUNGEONS[n] for b in LOCATION_BIOMES.get(i, [])))}'
         f'{" · " + plural(len(DUNGEONS[n]), "variant") if len(DUNGEONS[n]) > 1 else ""}</span></li>' for n in names)
-    page("dungeons/index.html", "Dungeons", '<h1>Dungeons</h1><p class="sub">Places you go inside, in progression '
+    page("dungeons/index.html", "Valheim dungeons", '<h1>Dungeons</h1><p class="sub">Places you go inside, in progression '
          f'order.</p><ul class="mechlist">{items}</ul>')
 
 
@@ -2408,7 +2628,8 @@ def piece_page(p: dict) -> None:
     body += staged_section("Enables building", [("piece", b["id"], link("piece", b["id"])) for b in built_at[p["id"]]])
     if world:
         body += section("Found in", f'<div>{source_places({"kind": "world", "locations": p["locations"]})}</div>')
-    page(href("piece", p["id"]), name_of("piece", p["id"]), body, '<a href="pieces/index.html">Pieces</a>')
+    page(href("piece", p["id"]), name_of("piece", p["id"]), body, '<a href="pieces/index.html">Pieces</a>',
+         kind=piece_kind(p), desc=seo_piece(p))
 
 
 AREA_TEXT = {  # normalize.areas kind -> (label, what it does); the player-base mechanics page has the code refs
@@ -2519,7 +2740,8 @@ def effect_page(e: dict) -> None:
     body += section("Stats", kv((words(k), effect_value(k, v)) for k, v in (e.get("stats") or {}).items()))
     body += section("From", reflist(f'{link(k, x)} <span class=note>{esc(how)}</span>'
                                     for k, x, how in effect_users[e["id"]]))
-    page(href("effect", e["id"]), name_of("effect", e["id"]), body, '<a href="effects/index.html">Status effects</a>')
+    page(href("effect", e["id"]), name_of("effect", e["id"]), body, '<a href="effects/index.html">Status effects</a>',
+         kind="status effect", desc=seo_effect(e))
 
 
 # --- mechanics pages ------------------------------------------------------------------------
@@ -3396,7 +3618,8 @@ def mechanics_pages() -> None:
         MECH_PAGES.append({"id": f.stem, "title": title, "summary": meta.get("summary", "")})
         body = (f'<h1>{esc(title)}</h1><p class="sub">{esc(meta.get("summary", ""))}</p>{stale}'
                 f'<div class="mech">{content}</div>{cite}')
-        page(f"mechanics/{f.stem}.html", title, body, '<a href="mechanics/index.html">Mechanics</a>', ctx.scripts)
+        page(f"mechanics/{f.stem}.html", title, body, '<a href="mechanics/index.html">Mechanics</a>', ctx.scripts,
+             kind="mechanics", desc=sentences(f'Valheim {title.lower()}: {meta.get("summary", "")}'))
     MECH_PAGES.sort(key=lambda p: p["title"].lower())
     items = "".join(f'<li><a href="mechanics/{p["id"]}.html">{esc(p["title"])}</a><span>{esc(p["summary"])}</span></li>'
                     for p in MECH_PAGES)
@@ -3405,7 +3628,7 @@ def mechanics_pages() -> None:
             f'inferred rather than verified is marked. Tables and charts are generated from the same game data as the '
             f'rest of the site.</p>'
             f'<ul class="mechlist">{items}</ul>')
-    page("mechanics/index.html", "Mechanics", body)
+    page("mechanics/index.html", "Valheim game mechanics", body)
 
 
 # --- indexes, search, home ------------------------------------------------------------------
@@ -3431,7 +3654,7 @@ def index_pages() -> None:
     body = f'<h1>Items</h1><p class="toc">{toc}</p>' + "".join(
         f'<h2 id="{t}"{group_stage("item", by_type[t])}>{esc(TYPE_LABELS.get(t, t))}</h2>{grid("item", by_type[t])}'
         for t in order)
-    page("items/index.html", "Items", body)
+    page("items/index.html", "Valheim items", body)
 
     groups = defaultdict(list)
     for c in CREATURES.values():
@@ -3447,7 +3670,7 @@ def index_pages() -> None:
             f'{factions}</p>' + "".join(
                 f'<h2 id="{g}"{group_stage("creature", groups[g])}>{biome_link(g) if g in BIOMES else esc(labels[g])}</h2>'
                 f'{bosses_first(groups[g])}' for g in order))
-    page("creatures/index.html", "Creatures", body)
+    page("creatures/index.html", "Valheim creatures", body)
 
     groups, world = defaultdict(list), []  # the build menu's tags (a piece under each of its tags), then the world
     copies = {w for ws in world_copies.values() for w in ws}
@@ -3472,7 +3695,7 @@ def index_pages() -> None:
     if world:  # loot chests, ruins, props: standing in locations, not buildable
         body += (f'<h2 id="world"{group_stage("piece", world)}>Found in the world</h2><p class="note">Not buildable: '
                  f'placed in locations and dungeons.</p>{grid("piece", world)}')
-    page("pieces/index.html", "Pieces", body)
+    page("pieces/index.html", "Valheim building pieces", body)
 
     groups = defaultdict(list)
     for e in EFFECTS.values():
@@ -3484,7 +3707,7 @@ def index_pages() -> None:
     body = f'<h1>Status effects</h1><p class="toc">{toc}</p>' + "".join(
         f'<h2 id="{g}"{group_stage("effect", groups[g])}>{esc(EFFECT_GROUPS[g])}</h2>{grid("effect", groups[g])}'
         for g in order)
-    page("effects/index.html", "Status effects", body)
+    page("effects/index.html", "Valheim status effects", body)
 
     home_page(items)
 
@@ -3527,7 +3750,7 @@ def home_page(items: list) -> None:
             f'style="--tier:{well.COL[STAGES[-1]]}">{disc(last)}<span>{esc(STAGE_NAMES[STAGES[-1]])}</span></button>'
             f'<ul role="listbox" id="upto-list" aria-labelledby="upto-l" tabindex="-1" hidden>{opts}</ul></div></div>'
             f'<ul class="cards">{cards}</ul></div>{tree}')
-    page("index.html", "Valheim reference", body, scripts=("home.js", "well.js"), header=False)
+    page("index.html", "Valheim reference: items, recipes, creatures, biomes", body, scripts=("home.js", "well.js"), header=False)
 
 
 def search_index() -> None:
