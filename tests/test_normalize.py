@@ -465,6 +465,19 @@ class Entities(FixtureCase):
         self.assertEqual(N.STAGES[N.stages(*args, reach=reach, ways=ways)[0]["Ore"]], "Mountain")
         self.assertEqual(ways["item"]["Ore"]["needs"], [("item", "Bone", None), ("item", "Pick", None)])
 
+    def test_any_one_ingredient(self):
+        # a recipe that takes any one of its resources: the earliest one is enough
+        items = [{"id": "Minnow"}, {"id": "Pike"}, {"id": "Fillet"}]
+        sources = [{"id": "pond", "kind": "pickable", "biomes": ["Meadows"], "pickable": {"item": "Minnow"}},
+                   {"id": "lake", "kind": "pickable", "biomes": ["Mountain"], "pickable": {"item": "Pike"}}]
+        recipes = [{"id": "R", "item": "Fillet", "enabled": True, "anyOneIngredient": True,
+                    "resources": [{"item": "Pike", "amount": 1}, {"item": "Minnow", "amount": 1}]}]
+        args = items, [], [], recipes, [], sources, [], []
+        reach = tuple(set(d) for d in N.stages(*args))
+        ways = {}
+        self.assertEqual(N.STAGES[N.stages(*args, reach=reach, ways=ways)[0]["Fillet"]], "Meadows")
+        self.assertEqual(ways["item"]["Fillet"], {"how": "craft", "from": "R", "needs": [("item", "Minnow", 1)]})
+
     def test_usage_tags(self):
         self.assertEqual(N.usage_tags("Building, Roof"), ["Building", "Roofing"])  # the build menu's labels
         self.assertEqual(N.usage_tags(0x80 | 0x2), ["Crafting", "Furniture"])  # a number: menu order

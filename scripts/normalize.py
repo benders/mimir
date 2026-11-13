@@ -677,8 +677,9 @@ def stages(items: list, creatures: list, pieces: list, recipes: list, procs: lis
                     and not r.get("upgradeOnly")):  # upgrades one
                 # you have (InventoryGui.UpdateRecipeList: m_noCraftOnlyUpgrade), the Frost Foundry's Nord weapons
                 sv, sn = station(r.get("station"), r.get("stationLevel", 1))
-                lower(I, r["item"], max(cost(r["resources"]), sv), "craft", r.get("id"),
-                      lambda: cost_needs(r["resources"]) + sn)
+                # m_requireOnlyOneIngredient (Player.HaveRequirements): any one resource is a way of its own
+                for rs in [[x] for x in r["resources"]] if r.get("anyOneIngredient") else [r["resources"]]:
+                    lower(I, r["item"], max(cost(rs), sv), "craft", r.get("id"), lambda: cost_needs(rs) + sn)
         for s in spawn_list:
             src, c = s["source"], s["creature"]
             if src in ("world", "location", "dungeon", "raid"):

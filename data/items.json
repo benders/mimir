@@ -16734,7 +16734,7 @@
    "regen": 3
   },
   "servedFrom": "FeastOceans_Material",
-  "stage": "DeepNorth",
+  "stage": "Swamp",
   "via": {
    "how": "serve",
    "from": "FeastOceans_Material",
@@ -16757,7 +16757,7 @@
   "weight": 10,
   "stack": 5,
   "maxQuality": 1,
-  "stage": "DeepNorth",
+  "stage": "Swamp",
   "via": {
    "how": "craft",
    "from": "Recipe_FeastOceans",
@@ -17926,7 +17926,7 @@
    "duration": 1200,
    "regen": 2
   },
-  "stage": "DeepNorth",
+  "stage": "Swamp",
   "via": {
    "how": "process",
    "from": "piece_cookingstation",
@@ -17955,57 +17955,13 @@
    "duration": 600,
    "regen": 1
   },
-  "stage": "DeepNorth",
+  "stage": "Swamp",
   "via": {
    "how": "craft",
    "from": "Recipe_Fish1",
    "needs": [
     {
      "item": "Fish1",
-     "amount": 1
-    },
-    {
-     "item": "Fish2",
-     "amount": 1
-    },
-    {
-     "item": "Fish3",
-     "amount": 1
-    },
-    {
-     "item": "Fish4_cave",
-     "amount": 1
-    },
-    {
-     "item": "Fish5",
-     "amount": 1
-    },
-    {
-     "item": "Fish6",
-     "amount": 1
-    },
-    {
-     "item": "Fish7",
-     "amount": 1
-    },
-    {
-     "item": "Fish8",
-     "amount": 1
-    },
-    {
-     "item": "Fish9",
-     "amount": 1
-    },
-    {
-     "item": "Fish10",
-     "amount": 1
-    },
-    {
-     "item": "Fish11",
-     "amount": 1
-    },
-    {
-     "item": "Fish12",
      "amount": 1
     },
     {
@@ -18086,7 +18042,7 @@
    "duration": 1500,
    "regen": 4
   },
-  "stage": "DeepNorth",
+  "stage": "Plains",
   "via": {
    "how": "craft",
    "from": "Recipe_FishWraps",
@@ -18103,13 +18059,13 @@
      "piece": "piece_cauldron"
     },
     {
-     "piece": "cauldron_ext4_pots"
-    },
-    {
      "piece": "cauldron_ext1_spice"
     },
     {
      "piece": "cauldron_ext3_butchertable"
+    },
+    {
+     "piece": "cauldron_ext4_pots"
     }
    ]
   }
