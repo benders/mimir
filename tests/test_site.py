@@ -262,6 +262,18 @@ class Site(unittest.TestCase):
         self.assertNotIn("away from the biome", market_where.split("<ul")[0])  # Median: said in the list only
         self.assertIn("<li>away from biome edges", market_where)
         self.assertNotIn("<h2>Rooms</h2>", village)  # not a dungeon
+        found = lair.split("<h2>How to find it</h2>")[1].split("</section>")[0]  # #94: the stones pinning it
+        self.assertIn("The nearest copy is pinned on the map by", found)
+        self.assertRegex(found, r'<td>Vegvisir</td><td><a href="locations/village.html">Village</a>.*?</td><td>25% of copies</td>')
+        pins = village.split("<h2>Points to</h2>")[1].split("</section>")[0]
+        self.assertIn('<td>every <a href="locations/market.html">Market</a></td>', pins)
+        self.assertIn('<td>the nearest <a href="dungeons/chief-s-lair.html">', pins)
+        market = (self.out / "locations/market.html").read_text(encoding="utf-8")
+        self.assertIn("The nearest copy, or every one where marked, is pinned", market)  # one of each
+        self.assertRegex(market, r"Chief&#x27;s Lair dungeon \(Lair\)</a>.*?: A <span class=\"chance\">\(20%\)</span></td><td>per room</td>")
+        self.assertIn("<td>Map Table (every copy)</td>", market)
+        chief = (self.out / "creatures/Chief.html").read_text(encoding="utf-8")
+        self.assertIn('<h2>How to find it</h2><p>It is in <a href="dungeons/chief-s-lair.html">', chief)  # the boss's page
         camp = (self.out / "locations/camp.html").read_text(encoding="utf-8")  # how many per copy
         self.assertRegex(camp, r"<th>Count</th>")
         self.assertRegex(camp, r"Raider</span></a></td><td>[^<]*</td><td>2</td><td>respawns")

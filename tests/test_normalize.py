@@ -771,6 +771,17 @@ class Entities(FixtureCase):
         self.assertEqual([c["id"] for c in a["contains"]][:3], ["Altar", "WildHive", "Pup"])  # placed, then spawned
         self.assertTrue(a["contains"][3]["id"].startswith("container_"))  # its loot chest
 
+    def test_revealed_by(self):
+        locs = N.locations()
+        N.revealed_by(locs)
+        loc = {x["id"]: N.prune(x) for x in locs}
+        self.assertEqual(loc["Lair"]["revealedBy"], [{"name": "Vegvisir", "location": "Village", "chance": 25}])
+        self.assertEqual(loc["Market"]["revealedBy"], [
+            {"name": "Vegvisir", "location": "Lair", "dungeon": True, "rooms": [{"room": "cave_a", "chance": 20}]},
+            {"name": "Map Table", "location": "Village", "all": True}])  # every copy; always there
+        self.assertNotIn("revealedBy", loc["Village"])  # its own table pointing at itself
+        self.assertNotIn("revealedBy", loc["Camp"])
+
     def test_location_name(self):
         loc = {x["id"]: x.get("name") for x in N.locations()}
         self.assertEqual(loc["Lair"], "Chief's Lair")  # an entrance Teleport's enter text

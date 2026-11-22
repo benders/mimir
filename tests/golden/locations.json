@@ -59,7 +59,14 @@
     "cave_a",
     "cave_door"
    ]
-  }
+  },
+  "revealedBy": [
+   {
+    "name": "Vegvisir",
+    "location": "Village",
+    "chance": 25
+   }
+  ]
  },
  {
   "id": "Market",
@@ -80,7 +87,25 @@
    ],
    "minDistanceFromSimilar": 500,
    "iconPlaced": true
-  }
+  },
+  "revealedBy": [
+   {
+    "name": "Vegvisir",
+    "location": "Lair",
+    "dungeon": true,
+    "rooms": [
+     {
+      "room": "cave_a",
+      "chance": 20
+     }
+    ]
+   },
+   {
+    "name": "Map Table",
+    "location": "Village",
+    "all": true
+   }
+  ]
  },
  {
   "id": "Stash",

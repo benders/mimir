@@ -1778,8 +1778,20 @@ def creature_page(c: dict) -> None:
         f'<p class="note">Drops marked ×stars grow with the creature\'s stars, and low chances are pseudo-random: '
         f'{mech_link("drops", "Drops")}.</p>' if drops else ""))
     body += spawn_sections(spawns_of[c["id"]])
+    body += boss_finding(c["id"])
     page(href("creature", c["id"]), name_of("creature", c["id"]), body, '<a href="creatures/index.html">Creatures</a>',
          kind=creature_kind(c), desc=seo_creature(c))
+
+
+def boss_finding(cid: str) -> str:
+    """Where to find a creature that lives in a location the map can be told of (a boss's altar): that location's
+    stones (revealed_section), titled by it."""
+    locs = sorted({s["location"] for s in spawns_of[cid] if s.get("source") in ("location", "dungeon")
+                   and LOCATION_BY_ID.get(s["location"], {}).get("revealedBy")})
+    if not locs:
+        return ""
+    names = list(dict.fromkeys(location_ref(i) for i in locs))
+    return revealed_section(locs, f"<p>It is in {', '.join(names)}.</p>")
 
 
 STARS_TH = mech_link("creature-levels", "Stars")
@@ -2400,6 +2412,66 @@ def dungeon_rooms(d: dict) -> str:
             'DungeonGenerator.GenerateDungeon, PlaceRooms, PlaceOneRoom, CheckRequiredRooms and PlaceEndCaps.</p>')
 
 
+def room_name(rid: str) -> str:
+    return pretty_id(re.sub(r"^[a-z]+_", "", rid))
+
+
+def reveal_rows(entries: list[dict], targets: list[str] | None = None, mark_all: bool = False) -> list[tuple[int, list[str]]]:
+    """Rows for stones that pin a location (locations.json `revealedBy` entries): [stone, where it stands, chance]
+    (+ the location it pins, from `targets`, one per entry), with its place's stage; `mark_all` marks the stones that
+    pin every copy. Variants of one place that hold
+    the same stones share a row, linked to their page."""
+    rows = {}
+    for n, e in enumerate(entries):
+        same = {k: v for k, v in e.items() if k != "location"}
+        key = json.dumps([location_label(e["location"], variant=False), same, targets[n] if targets else ""], sort_keys=True)
+        if key in rows:
+            rows[key][0] = min(rows[key][0], LOCATION_STAGE.get(e["location"], 0))
+            continue
+        many = sum(1 for x in LOCATIONS if location_label(x["id"], variant=False) == location_label(e["location"], variant=False)) > 1
+        label = esc(location_label(e["location"], variant=not many, part="dungeon" if e.get("dungeon") else ""))
+        where = (f'<a href="{LOCATION_HREF[e["location"]]}">{label}</a>' if e["location"] in LOCATION_HREF else label)
+        where += location_biomes(e["location"])
+        if e.get("dungeon"):
+            where += ": " + ", ".join(esc(room_name(r["room"])) + chance_tag(r.get("chance")) for r in e["rooms"])
+            chance = "per room" if any("chance" in r for r in e["rooms"]) else "every copy of those rooms"
+        else:
+            chance = f'{num(e["chance"])}% of copies' if "chance" in e else "every copy"
+        row = [esc(e.get("name") or "Vegvisir") + (" (every copy)" if mark_all and e.get("all") else ""), where, chance]
+        if targets:
+            row.append(("every " if e.get("all") else "the nearest ") + location_ref(targets[n]))
+        rows[key] = [LOCATION_STAGE.get(e["location"], 0), row]
+    return [(st, row) for st, row in rows.values()]
+
+
+REVEAL_NOTE = ('<p class="note">Using the stone pins the copy of the location closest to it on the map, or every copy '
+               '(Vegvisir.Interact, Game.DiscoverClosestLocation). Chance: the share of copies of the location, or of '
+               'the dungeon room, that have one (RandomSpawn).</p>')
+
+
+def revealed_section(ids: list[str], intro: str = "") -> str:
+    """How a player finds a location: the stones (Vegvisirs) that pin it on the map, from every variant; `intro`
+    (html) goes first."""
+    entries = [e for i in ids for e in LOCATION_BY_ID.get(i, {}).get("revealedBy", [])]
+    if not entries:
+        return ""
+    order = sorted(reveal_rows(entries, mark_all=not all(e.get("all") for e in entries)), key=lambda r: (r[0], r[1][1]))
+    every = [bool(e.get("all")) for e in entries]
+    lead = intro + ("<p>Every copy is pinned on the map by:</p>" if all(every) else
+                    "<p>The nearest copy is pinned on the map by:</p>" if not any(every) else
+                    "<p>The nearest copy, or every one where marked, is pinned on the map by:</p>")
+    return section("How to find it", lead + table(["Stone", "In", "Chance"], [r for _, r in order], "cost",
+                                                   stages=[s for s, _ in order]) + REVEAL_NOTE)
+
+
+def points_to_section(ids: list[str]) -> str:
+    """The locations a stone in this one (or its dungeon) pins on the map."""
+    pairs = [(e, t["id"]) for t in LOCATIONS for e in t.get("revealedBy", []) if e["location"] in ids]
+    rows = sorted(reveal_rows([e for e, _ in pairs], [t for _, t in pairs]), key=lambda r: r[1][3])
+    return section("Points to", table(["Stone", "In", "Chance", "Pins"], [r for _, r in rows], "cost")
+                   + (REVEAL_NOTE if rows else ""))
+
+
 def render_figure(i: str, caption: bool) -> str:
     """A location's render, large, linking to the full image."""
     used_renders.add(i)
@@ -2436,6 +2508,7 @@ def location_page(name: str, dungeon: bool = False) -> None:
     keyed = any(LOCATION_BY_ID[i].get("key") for i in ids)
     body += section("Where", where + '<p class="note">From ZoneSystem.GenerateLocationsTimeSliced'
                     + ("; the door's key from Door.Interact" if keyed else "") + ".</p>")
+    body += revealed_section(ids) + points_to_section(ids)
 
     # a generated dungeon's location prefab is the entrance outside; a fixed interior's holds the inside too
     outside = "at the entrance" if any(LOCATION_BY_ID[i].get("dungeon") for i in ids) else ""

@@ -217,7 +217,34 @@
    ],
    "minDistanceFromSimilar": 3000,
    "clearArea": true
-  }
+  },
+  "revealedBy": [
+   {
+    "name": "Vegvisir",
+    "location": "SunkenCrypt4",
+    "dungeon": true,
+    "rooms": [
+     {
+      "room": "sunkencrypt_new_Corridor1",
+      "chance": 40
+     },
+     {
+      "room": "sunkencrypt_new_Room3",
+      "chance": 50
+     }
+    ]
+   },
+   {
+    "name": "Vegvisir",
+    "location": "SwampRuin1",
+    "chance": 30
+   },
+   {
+    "name": "Vegvisir",
+    "location": "SwampRuin2",
+    "chance": 30
+   }
+  ]
  },
  {
   "id": "CharredFortress",
@@ -667,7 +694,26 @@
    "clearArea": true,
    "iconPlaced": true
   },
-  "interior": true
+  "interior": true,
+  "revealedBy": [
+   {
+    "name": "Vegvisir",
+    "location": "MorkBorg",
+    "dungeon": true,
+    "rooms": [
+     {
+      "room": "morkhalla_endcap01"
+     },
+     {
+      "room": "morkhalla_endcap02"
+     }
+    ]
+   },
+   {
+    "name": "Vegvisir",
+    "location": "NorthMemorialPlace"
+   }
+  ]
  },
  {
   "id": "DN_gammeltrollFrac01",
@@ -807,7 +853,56 @@
    ],
    "minDistanceFromSimilar": 3000,
    "clearArea": true
-  }
+  },
+  "revealedBy": [
+   {
+    "name": "Vegvisir",
+    "location": "Hildir_cave",
+    "dungeon": true,
+    "rooms": [
+     {
+      "room": "cave_new_crossroads01_hole_long",
+      "chance": 25
+     },
+     {
+      "room": "cave_new_endcap_moderstone",
+      "chance": 25
+     },
+     {
+      "room": "cave_new_iceendcap_moderstone",
+      "chance": 25
+     }
+    ]
+   },
+   {
+    "name": "Vegvisir",
+    "location": "MountainCave02",
+    "dungeon": true,
+    "rooms": [
+     {
+      "room": "cave_new_crossroads01_hole_long",
+      "chance": 25
+     },
+     {
+      "room": "cave_new_crossroads01_hole_to_deeproom",
+      "chance": 25
+     },
+     {
+      "room": "cave_new_endcap_moderstone",
+      "chance": 25
+     },
+     {
+      "room": "cave_new_iceendcap_moderstone",
+      "chance": 25
+     }
+    ]
+   },
+   {
+    "name": "Vegvisir",
+    "location": "StoneTowerRuins04",
+    "chance": 63
+   }
+  ]
  },
  {
   "id": "DrakeLorestone",
@@ -871,7 +966,13 @@
     3
    ],
    "clearArea": true
-  }
+  },
+  "revealedBy": [
+   {
+    "name": "Vegvisir",
+    "location": "StartTemple"
+   }
+  ]
  },
  {
   "id": "FaderLocation",
@@ -898,7 +999,34 @@
     0.1
    ],
    "clearArea": true
-  }
+  },
+  "revealedBy": [
+   {
+    "name": "Vegvisir",
+    "location": "CharredFortress",
+    "chance": 50
+   },
+   {
+    "name": "Vegvisir",
+    "location": "CharredRuins1",
+    "chance": 4.2
+   },
+   {
+    "name": "Vegvisir",
+    "location": "CharredRuins2",
+    "chance": 2.2
+   },
+   {
+    "name": "Vegvisir",
+    "location": "CharredRuins3",
+    "chance": 2.4
+   },
+   {
+    "name": "Vegvisir",
+    "location": "CharredRuins4",
+    "chance": 3.3
+   }
+  ]
  },
  {
   "id": "FireHole",
@@ -1036,7 +1164,88 @@
    ],
    "minDistanceFromSimilar": 3000,
    "clearArea": true
-  }
+  },
+  "revealedBy": [
+   {
+    "name": "Vegvisir",
+    "location": "Crypt2",
+    "dungeon": true,
+    "rooms": [
+     {
+      "room": "forestcrypt_new_BurialChamber01",
+      "chance": 40
+     },
+     {
+      "room": "forestcrypt_new_BurialChamber02",
+      "chance": 40
+     },
+     {
+      "room": "forestcrypt_new_Burialchamber03",
+      "chance": 40
+     },
+     {
+      "room": "forestcrypt_new_Burialchamber04",
+      "chance": 40
+     }
+    ]
+   },
+   {
+    "name": "Vegvisir",
+    "location": "Crypt3",
+    "dungeon": true,
+    "rooms": [
+     {
+      "room": "forestcrypt_new_BurialChamber01",
+      "chance": 40
+     },
+     {
+      "room": "forestcrypt_new_BurialChamber02",
+      "chance": 40
+     },
+     {
+      "room": "forestcrypt_new_Burialchamber03",
+      "chance": 40
+     },
+     {
+      "room": "forestcrypt_new_Burialchamber04",
+      "chance": 40
+     }
+    ]
+   },
+   {
+    "name": "Vegvisir",
+    "location": "Crypt4",
+    "dungeon": true,
+    "rooms": [
+     {
+      "room": "forestcrypt_new_BurialChamber01",
+      "chance": 40
+     },
+     {
+      "room": "forestcrypt_new_BurialChamber02",
+      "chance": 40
+     },
+     {
+      "room": "forestcrypt_new_Burialchamber03",
+      "chance": 40
+     },
+     {
+      "room": "forestcrypt_new_Burialchamber04",
+      "chance": 40
+     }
+    ]
+   },
+   {
+    "name": "Vegvisir",
+    "location": "Ruin2",
+    "chance": 30
+   },
+   {
+    "name": "Vegvisir",
+    "location": "StoneTowerRuins03",
+    "chance": 24.5
+   }
+  ]
  },
  {
   "id": "GoblinCamp2",
@@ -1156,7 +1365,39 @@
    ],
    "minDistanceFromSimilar": 3000,
    "clearArea": true
-  }
+  },
+  "revealedBy": [
+   {
+    "name": "Vegvisir",
+    "location": "StoneHenge1",
+    "chance": 40
+   },
+   {
+    "name": "Vegvisir",
+    "location": "StoneHenge3",
+    "chance": 40
+   },
+   {
+    "name": "Vegvisir",
+    "location": "StoneHenge4",
+    "chance": 40
+   },
+   {
+    "name": "Vegvisir",
+    "location": "StoneHenge5",
+    "chance": 40
+   },
+   {
+    "name": "Vegvisir",
+    "location": "StoneTower1",
+    "chance": 25
+   },
+   {
+    "name": "Vegvisir",
+    "location": "StoneTower3",
+    "chance": 25
+   }
+  ]
  },
  {
   "id": "Grave1",
@@ -1343,7 +1584,14 @@
     "cave_shrine_start02_ice",
     "cave_shrine_start02_ice_corridor"
    ]
-  }
+  },
+  "revealedBy": [
+   {
+    "name": "Hildir's Map Table",
+    "location": "Hildir_camp",
+    "all": true
+   }
+  ]
  },
  {
   "id": "Hildir_crypt",
@@ -1395,7 +1643,14 @@
     "forestcrypt_room1",
     "forestcrypt_room_16"
    ]
-  }
+  },
+  "revealedBy": [
+   {
+    "name": "Hildir's Map Table",
+    "location": "Hildir_camp",
+    "all": true
+   }
+  ]
  },
  {
   "id": "Hildir_plainsfortress",
@@ -1466,7 +1721,14 @@
     "plainsfortress_Hildir_endcap_window_hole",
     "plainsfortress_Hildir_endcap_window_hole1"
    ]
-  }
+  },
+  "revealedBy": [
+   {
+    "name": "Hildir's Map Table",
+    "location": "Hildir_camp",
+    "all": true
+   }
+  ]
  },
  {
   "id": "IcePond1",
@@ -1616,7 +1878,87 @@
     "dvergr_new_bossroom_bottom_endcap_stair07",
     "dvergr_new_bossroom_bottom_endcap_stair08"
    ]
-  }
+  },
+  "revealedBy": [
+   {
+    "name": "Vegvisir",
+    "location": "Mistlands_DvergrTownEntrance1",
+    "dungeon": true,
+    "rooms": [
+     {
+      "room": "dvergr_room_TREASURE",
+      "chance": 10
+     },
+     {
+      "room": "dvergr_room_open01",
+      "chance": 10
+     },
+     {
+      "room": "dvergr_room_open02",
+      "chance": 10
+     },
+     {
+      "room": "dvergr_room_open03",
+      "chance": 10
+     },
+     {
+      "room": "dvergr_roombig_toStone01",
+      "chance": 5
+     },
+     {
+      "room": "dvergr_roombig_toStone02",
+      "chance": 5
+     },
+     {
+      "room": "dvergr_stone_endcap03",
+      "chance": 10
+     },
+     {
+      "room": "dvergr_stone_open01",
+      "chance": 10
+     }
+    ]
+   },
+   {
+    "name": "Vegvisir",
+    "location": "Mistlands_DvergrTownEntrance2",
+    "dungeon": true,
+    "rooms": [
+     {
+      "room": "dvergr_room_TREASURE",
+      "chance": 10
+     },
+     {
+      "room": "dvergr_room_open01",
+      "chance": 10
+     },
+     {
+      "room": "dvergr_room_open02",
+      "chance": 10
+     },
+     {
+      "room": "dvergr_room_open03",
+      "chance": 10
+     },
+     {
+      "room": "dvergr_roombig_toStone01",
+      "chance": 5
+     },
+     {
+      "room": "dvergr_roombig_toStone02",
+      "chance": 5
+     },
+     {
+      "room": "dvergr_stone_endcap03",
+      "chance": 10
+     },
+     {
+      "room": "dvergr_stone_open01",
+      "chance": 10
+     }
+    ]
+   }
+  ]
  },
  {
   "id": "Mistlands_DvergrTownEntrance1",
@@ -2650,7 +2992,24 @@
     0.1
    ],
    "clearArea": true
-  }
+  },
+  "revealedBy": [
+   {
+    "name": "Vegvisir",
+    "location": "MorgenHole1",
+    "chance": 25
+   },
+   {
+    "name": "Vegvisir",
+    "location": "MorgenHole2",
+    "chance": 25
+   },
+   {
+    "name": "Vegvisir",
+    "location": "MorgenHole3",
+    "chance": 25
+   }
+  ]
  },
  {
   "id": "PlaceofMystery2",
@@ -2678,7 +3037,13 @@
     0.1
    ],
    "clearArea": true
-  }
+  },
+  "revealedBy": [
+   {
+    "name": "Vegvisir",
+    "location": "PlaceofMystery1"
+   }
+  ]
  },
  {
   "id": "PlaceofMystery3",
@@ -2708,7 +3073,13 @@
    ],
    "clearArea": true
   },
-  "interior": true
+  "interior": true,
+  "revealedBy": [
+   {
+    "name": "Vegvisir",
+    "location": "PlaceofMystery2"
+   }
+  ]
  },
  {
   "id": "Ruin1",

@@ -15,6 +15,7 @@ Conventions in the output:
 import functools
 import hashlib
 import json
+import math
 import os
 import re
 import sys
@@ -1767,6 +1768,67 @@ def placed_in_locations():
                     yield name, where[name], r, True
 
 
+def spawn_chance(p: dict, path: str) -> float:
+    """Share (0..1) of copies of a location or room in which the object at `path` exists: the RandomSpawn chances on
+    it and its ancestors multiplied (RandomSpawn.Randomize: each shown when Random.Range(0f, 100f) <= m_chanceToSpawn;
+    a hidden ancestor hides it). Their biome, theme and elevation conditions are ignored."""
+    out = 1.0
+    for c in p.get("components", []):
+        cp = c.get("path") or ""
+        if c["type"] == "RandomSpawn" and (cp == path or path.startswith(cp + "/") or not cp):
+            out *= min(c["fields"].get("m_chanceToSpawn", 100), 100) / 100
+    return out
+
+
+def pct_or_none(share: float) -> float | int | None:
+    """A 0..1 share as a % rounded to 0.1, None when it rounds to 100."""
+    c = round(100 * share, 1)
+    return None if c >= 100 else int(c) if c.is_integer() else c
+
+
+def revealed_by(location_list: list[dict]) -> None:
+    """Record `revealedBy` on each location a Vegvisir (or Hildir's map table) points to: [{name, location, dungeon?,
+    chance?, rooms?, all?}], `name` the stone's (Vegvisir.m_name). Vegvisir.Interact calls Game.DiscoverClosestLocation for each of its m_locations: the
+    copy of that location closest to the stone is pinned on the map, or every copy with m_discoverAll (`all`).
+    `location` is where the stone stands: in the location's own prefab (`chance`: % of its copies that have one,
+    several stones rolled independently) or, with `dungeon`, in rooms its dungeon generates (`rooms` [{room,
+    chance?}]: % per copy of the room). A stone in a location pointing at that same location is left out."""
+    have = {x["id"] for x in location_list}
+    found = defaultdict(dict)  # target -> (location, dungeon) -> {room or None: [share]}
+    discover_all, names = set(), {}
+    for name, _, p, dungeon in placed_in_locations():
+        for c in p["components"]:
+            if c["type"] != "Vegvisir":
+                continue
+            share = spawn_chance(p, c.get("path") or "")
+            if c.get("inactive") and share == 1:
+                continue  # disabled in the asset and nothing re-enables it
+            for loc in c["fields"].get("m_locations", []):
+                target = loc["m_locationName"]
+                if target not in have or target == name:
+                    continue
+                names.setdefault((target, name), text(c["fields"].get("m_name")))
+                if loc.get("m_discoverAll"):
+                    discover_all.add((target, name))
+                found[target].setdefault((name, dungeon), defaultdict(list))[p["name"] if dungeon else None].append(share)
+
+    def either(shares: list[float]) -> float:
+        return 1 - math.prod(1 - s for s in shares)
+
+    for x in location_list:
+        out = []
+        for (name, dungeon), where in sorted(found.get(x["id"], {}).items()):
+            e = {"name": names[x["id"], name], "location": name, "dungeon": dungeon or None}
+            if dungeon:
+                e["rooms"] = [{"room": r} | ({"chance": c} if (c := pct_or_none(either(s))) is not None else {})
+                              for r, s in sorted(where.items())]
+            else:
+                e["chance"] = pct_or_none(either(where[None]))
+            e["all"] = (x["id"], name) in discover_all or None
+            out.append(e)
+        x["revealedBy"] = out or None
+
+
 def placed_prefabs(p: dict) -> set[str]:
     """Prefabs placed in a location or room: its hierarchy's network prefab `instances`. An `inactive` one (it or an
     ancestor is disabled in the asset) is skipped: ZoneSystem.SpawnLocation re-enables only objects enabled in the
@@ -2334,6 +2396,7 @@ def main(argv: list[str]) -> int:
     guardian_powers(items)
     location_list = locations()
     room_list = dungeons(location_list, {x["id"] for x in sources + pieces + creatures})
+    revealed_by(location_list)
     mark_stages(items, creatures, pieces, recipes, procs, sources, spawn_list, location_list)
     effects = [status_effect(e, defaults) for e in load("status_effects.json")]
     effect_stages(effects, items, creatures)

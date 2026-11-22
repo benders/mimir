@@ -372,6 +372,14 @@ def main() -> int:
     check(keys.get("SunkenCrypt4") == "CryptKey" and keys.get("Mistlands_DvergrBossEntrance1") == "DvergrKey"
           and {"item": "CryptKey"} in items["IronScrap"].get("via", {}).get("needs", []),
           "locations: Sunken Crypt and the Queen's door take their keys; scrap iron from the crypt needs the Swamp key")
+    revealed = {x["id"]: x.get("revealedBy", []) for x in load("locations.json")}
+    altars = {s["location"] for s in load("spawns.json") if s.get("summon") and creatures.get(s["creature"], {}).get("boss")}
+    check(len(altars) >= 8 and all(revealed.get(a) for a in altars)
+          and any(e["location"].startswith("Mistlands_DvergrTownEntrance") and e.get("dungeon")
+                  for e in revealed.get("Mistlands_DvergrBossEntrance1", []))
+          and all(e.get("all") for e in revealed.get("Hildir_crypt", [])),
+          f"locations: a Vegvisir pins each of the {len(altars)} boss altars (the Queen's from Infested Mine rooms); "
+          "Hildir's map table pins every copy")
     found = {s["id"]: s.get("foundWith") for s in load("sources.json")}
     check(found.get("silvervein") == ["Wishbone"] and {"item": "Wishbone"} in items["SilverOre"]["via"]["needs"]
           and not found.get("rock4_copper"), "sources: buried silver veins are found with the Wishbone, copper isn't")

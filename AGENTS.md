@@ -132,7 +132,11 @@ Wider/Deeper Pockets, once per character, `invrows` = inventory rows; the trader
 placement rules as a list, trader, creatures, resources with the share of copies that have them, world pieces), listed with
 thumbnails by earliest biome on `locations/index.html` (in the header; dungeons too); place names and thumbnails link there (`build-site.location_ref`, `LOCATION_HREF`) and its `placement`:
 quantity, unique, prioritized, centerFirst, biomeArea, min/maxDistance from the centre (the tighter of m_min/maxDistance and m_min/maxDistanceFromCenter, both checked), `altitude` [min, max] m above sea level, `forest`, `radius` + `terrainDelta` [min, max], minDistanceFromSimilar + its `group`, maxDistanceFromSimilar + `groupMax`, `vegetation`, `surroundCheck`, clearArea, iconPlaced; `normalize.location_placement`) and `key` (the item its Door takes, Door.m_keyItem: what its dungeon holds, sources, chests, pieces and
-spawns, needs it in `stages()`, a soft requirement), `raids` (RandEventSystem:
+spawns, needs it in `stages()`, a soft requirement) and `revealedBy` (#94: the Vegvisirs, or Hildir's map table, that pin it on
+the map, `normalize.revealed_by`: [{name, location, dungeon?, chance? (% of copies of that location), rooms? [{room, chance?}]
+(dungeon rooms holding one, % per room copy), all? (m_discoverAll: every copy, else the nearest)}], RandomSpawn chances on the
+stone and its ancestors multiplied; the site's "How to find it" on the location and its boss's creature page, "Points to" on
+the stone's location), `raids` (RandEventSystem:
 `intervalMin` / `chance` of the raid roll, and per enabled random event `id`, start/end `message`, `biomes`, `duration`,
 `nearBaseOnly`, `requiredGlobalKeys` / `notRequiredGlobalKeys`, and `player` {knownItems, notKnownItems, keysAny, keysAll,
 notKeys}: the conditions the player-based raids world modifier uses instead; what spawns is in `spawns`), `alt_biomes`

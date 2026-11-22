@@ -169,7 +169,7 @@ TRANSLATIONS = {
     "piece_chest": "Strongbox",
     "item_wood": "Twig", "item_wood_desc": "A stick.",
     "skill_swords": "Blades",
-    "location_lair": "Chief's Lair", "location_stash": "Hidden Stash",
+    "location_lair": "Chief's Lair", "location_stash": "Hidden Stash", "piece_vegvisir": "Vegvisir", "piece_maptable": "Map Table",
     "item_ore": "Rustore", "item_ingot": "Ingot",
     "item_buckler": "Test Buckler",
     "item_sword": "Test Sword", "item_sword_desc": "Sharp <b>enough</b>.",
@@ -638,13 +638,21 @@ def write_dump(raw: Path) -> Path:
     dump("room_themes.json", {"None": 0, "Crypt": 1, "Cave": 4, "Hamlet": 8})
     # an outdoor camp: rooms laid out in the open (CampRadial), so the room that holds an object is recorded
     dump("locations/Village.json", {"name": "Village", "components": [
-        comp("Location", {}), *spawners(("DungeonGenerator", m(themes="Hamlet", algorithm="CampRadial")))]})
+        comp("Location", {}), *spawners(("DungeonGenerator", m(themes="Hamlet", algorithm="CampRadial"))),
+        # a Vegvisir pinning the nearest Lair, under two RandomSpawns (50% x 50%); a sibling's RandomSpawn doesn't count
+        comp("RandomSpawn", m(chanceToSpawn=50), path="ruin"), comp("RandomSpawn", m(chanceToSpawn=10), path="ruin2"),
+        comp("RandomSpawn", m(chanceToSpawn=50), path="ruin/Vegvisir"),
+        comp("Vegvisir", m(name="$piece_vegvisir", locations=[m(locationName="Lair", discoverAll=False)]), path="ruin/Vegvisir"),
+        comp("Vegvisir", m(name="$piece_maptable", locations=[m(locationName="Village", discoverAll=True),  # itself: left out
+                                                               m(locationName="Market", discoverAll=True)]), path="table")]})
     dump("rooms/village_hut.json", {"name": "village_hut", "theme": 8, "enabled": True, "components": [],
                               "instances": [{"prefab": "OreRock", "path": "OreRock", "randomSpawn": {"chance": 50}}]})
     dump("rooms/village_well.json", {"name": "village_well", "theme": 8, "enabled": True, "components": [],
                               "instances": [{"prefab": "OreRock", "path": "OreRock"}]})
     dump("rooms/cave_a.json", {"name": "cave_a", "theme": 5, "enabled": True,  # Crypt|Cave: used by Lair
                                "components": [comp("Room", m(weight=3)),
+                                              comp("RandomSpawn", m(chanceToSpawn=20), path="Vegvisir"),  # a stone in the Lair's dungeon
+                                              comp("Vegvisir", m(name="$piece_vegvisir", locations=[m(locationName="Market")]), path="Vegvisir"),
                                               *spawners(("CreatureSpawner", creature_spawner("Pup", maxLevel=2)),
                                                         container(("Gem", 1, 1, 1), ("Wood", 2, 5, 3))),
                                               ], "instances": [{"prefab": "WildHive", "path": "hall/WildHive"},
